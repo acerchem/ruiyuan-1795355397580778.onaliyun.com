@@ -1,0 +1,7 @@
+.classpath
+.pmd
+.project
+.springBeans
+acerchem/acerchemcore/.settings
+*.class
+rebel.xml

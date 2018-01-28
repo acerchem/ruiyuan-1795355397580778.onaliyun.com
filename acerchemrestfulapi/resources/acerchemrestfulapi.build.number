@@ -1,0 +1,11 @@
+#Ant properties
+#Wed Aug 02 01:50:28 UTC 2017
+builddate=20170802 0150
+description=acerchemrestfulapi
+group.id=de.hybris.platform
+module.name=platform-module
+name=acerchemrestfulapi
+releasedate=20170801 1046
+vendor=hybris
+version=6.5.0.0
+version.api=6.5.0
