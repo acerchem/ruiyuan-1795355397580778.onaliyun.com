@@ -20,6 +20,8 @@
            http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd">
 
      <context:annotation-config/>
+<!-- Scan for annotation configured controller -->
+	<context:component-scan base-package="com.acerchem.core" scope-resolver="de.hybris.platform.spring.IgnoreTenantScopeMetadataResolver"  />
 
 	<!-- Spring Integration -->
 	<import resource="classpath:/acerchemcore/integration/hot-folder-store-electronics-spring.xml"/>
