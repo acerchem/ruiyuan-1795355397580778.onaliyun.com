@@ -555,4 +555,13 @@
 
 	<import resource="/acerchemcore/processes/quote/quote-post-cancellation-process-spring.xml"/>
 	
+	<!-- and by Randy -->
+	<alias name="defaultAcerchemAddToCartStrategy" alias="commerceAddToCartStrategy"/>
+	<bean id="defaultAcerchemAddToCartStrategy"
+			class="com.acerchem.core.order.impl.DefaultAcerchemAddToCartStrategy"
+			parent="defaultCommerceAddToCartStrategy">
+		
+	</bean>
+	
+	
 </beans>

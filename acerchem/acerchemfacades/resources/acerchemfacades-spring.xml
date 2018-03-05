@@ -190,4 +190,21 @@
 	</bean>
 
 	<bean id="genderData" class="com.acerchem.facades.product.data.GenderData" scope="prototype"/>
+	
+	<!-- add by randy -->
+	<alias name="defaultProductAcerchemPopulator" alias="productAcerchemPopulator"/>
+	<bean id="defaultProductAcerchemPopulator" parent="baseProductPopulator"
+			class="com.acerchem.facades.populators.ProductAcerchemPopulator">
+    </bean>
+    
+    <alias name="defaultProductAcerchemPopulatorList" alias="productBasicPopulatorList"/>
+	<bean id="defaultProductAcerchemPopulatorList" parent="defaultProductBasicPopulatorList">
+		<property name="populators">
+			<list merge="true">
+				<ref bean="productAcerchemPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+    
 </beans>
