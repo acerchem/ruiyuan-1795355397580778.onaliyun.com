@@ -207,5 +207,14 @@
 		</property>
 	</bean>
 	
+	<!-- add by alice -->
+	<alias name="yacceleratorProductPricePopulator1" alias="productPricePopulator" />
+	<bean id="yacceleratorProductPricePopulator1" parent="defaultProductPricePopulator" class="com.acerchem.facades.storefinder.populators.ProductPricePopulator1" >
+		<property name="commercePriceService" ref="commercePriceService"/>
+		<property name="priceDataFactory" ref="priceDataFactory"/>
+	</bean>
+	<!-- End -->
+	
+	
     
 </beans>
