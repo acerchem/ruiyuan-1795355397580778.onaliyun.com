@@ -19,6 +19,7 @@
     http://www.springframework.org/schema/context/spring-context.xsd">
            
     <context:annotation-config/> 
+    <context:component-scan base-package="com.acerchem.fulfilmentprocess" scope-resolver="de.hybris.platform.spring.IgnoreTenantScopeMetadataResolver"  />
 
 	<!-- Listeners -->
 	
