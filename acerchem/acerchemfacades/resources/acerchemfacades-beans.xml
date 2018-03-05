@@ -13,6 +13,8 @@
 
 	<bean class="de.hybris.platform.commercefacades.product.data.ProductData">
 		<property name="genders" type="java.util.List&lt;com.acerchem.facades.product.data.GenderData>"/>
+		<property name="chemicalInfo" type="String"/>
+		<property name="unitCalculateRato" type="String"/>
 	</bean>
 
 	<bean class="com.acerchem.facades.product.data.GenderData">

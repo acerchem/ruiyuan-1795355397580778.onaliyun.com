@@ -111,6 +111,29 @@
                 </attributes>
             </itemtype>
         </typegroup>
+        
+        <!-- add by Randy -->
+        <typegroup name="import  chemicalInfo and unitCalculateRato">
+
+			<itemtype code="Product" autocreate="false" generate="false">
+				<description>Extending the Product type from core with additional attributes.</description>
+				<attributes>
+					<attribute type="java.lang.String" qualifier="chemicalInfo">
+						<modifiers read="true" write="true" search="false" optional="true"/>
+						<persistence type="property" />
+						<description>Attribute about  chemicalInfo of Product</description>
+					</attribute>
+					<attribute type="java.lang.String" qualifier="unitCalculateRato">
+						<modifiers read="true" write="true" search="false" optional="true"/>
+						<persistence type="property" />
+						<description>Attribute about  unitCalculateRato of Product</description>
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			
+
+		</typegroup>
 
     </itemtypes>
 </items>
