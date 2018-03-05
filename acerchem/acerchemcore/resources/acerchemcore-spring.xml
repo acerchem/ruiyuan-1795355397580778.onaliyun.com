@@ -566,20 +566,20 @@
 	</bean>
 	
 	<!-- Alice:priceRow记录新建/更新监听 -->
-	<bean id="priceRowCreatedListener" class="com.acerchem.core.event.PriceRowCreatedListener" parent="abstractEventListener/>
-	<!-- End -->
-
-	<!-- Alice:PriceRow Service/Dao -->
+	<bean id="priceRowCreatedListener" class="com.acerchem.core.event.PriceRowCreatedListener" parent="abstractEventListener"/>
+	
+	<!-- Alice:PriceRow Service -->
 	<alias alias="priceRowSearchService" name="defaultPriceRowSearchService"/>
 	<bean id="defaultPriceRowSearchService" class="com.acerchem.core.suggestion.impl.DefaultPriceRowSearchService" >
 		<property name="priceRowSearchDao" ref="priceRowSearchDao"/>
 		<property name="modelService" ref="modelService"/>
 	</bean>
+	
+	<!-- Alice:PriceRow Dao -->
 	<alias alias="priceRowSearchDao" name="defaultPriceRowSearchDao"/>
 	<bean id="defaultPriceRowSearchDao" class="com.acerchem.core.suggestion.dao.impl.DefaultPriceRowSearchDao" parent="abstractItemDao" >
 		<property name="flexibleSearchService" ref="flexibleSearchService"/>
 	</bean>
-	<!-- End -->
 	
 	
 </beans>
