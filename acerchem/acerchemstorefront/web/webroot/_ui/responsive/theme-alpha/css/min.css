@@ -1,0 +1,333 @@
+*{padding:0; margin:0; list-style-type: none; box-sizing: border-box; outline: none; font-family: Tahoma, 'Geneva', sans-serif; font-style: normal; }
+h1,h2,h3,h4,b{font-weight: normal;}
+body{background:#fff;-webkit-text-size-adjust:100%;min-width: 320px;font-family: Tahoma, Geneva, sans-serif; font-size: 1.2rem;font-style: normal;font-size: 100%\9;-webkit-font-smoothing: subpixel-antialiased} 
+a{color:#333;text-decoration:none} 
+
+img{
+	max-width: 100%;
+}
+
+table{
+	border-collapse:collapse;
+	border-spacing:0;
+}
+
+input[type='checkbox']{
+	display:none;
+}
+input[type='checkbox']:checked~.checkbox:before{
+	background-color: #096735;
+}
+input[type='checkbox']:checked~.checkbox:after{
+	display:block;
+}
+
+input[type='text'], input[type='password'] ,input[type='submit'],.pitch{
+	padding-left:10px;
+	width: 100%;
+	height: 50px;
+	line-height: 50px;
+	font-size: 16px;
+	color: #999;
+	border:1px solid #ddd;
+	cursor:pointer;
+}
+
+input[type='submit']{
+	background-color: #aaa;
+	color: #fff;
+	border:none;
+}
+
+input[type='submit']:hover{
+	background-color: #096735;
+	color: #fff;
+}
+
+input[type='text']:disabled{
+	border:none;
+	background-color: #f3f3f3;
+	color: #999;
+}
+
+input[type='radio']{
+	-webkit-appearance:none;		
+	border-radius: 50%;
+	border:1px solid #ddd;
+
+}
+input[type='radio']:checked{
+	border-width: 6px;
+	border-color: #096735;
+}
+
+input[type='radio'] , .checkbox:before{
+	width: 20px;
+	height: 20px;
+}
+
+.title{
+	margin-bottom: 14px;
+	font-size: 24px;
+	color: #333;	
+}
+.maxmore_tit{float: right;}
+.maxmore_tit a{font-size:16px;border:1px solid #aaa;color:#999;padding:0px 4px 1px 4px;}
+.maxmore_tit a:hover{border:1px solid #096735;color:#096735;}
+
+*{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+:after,:before{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
+.button{border-color: #fff;}
+.button:hover{background: #096735;color: #fff;border-color: #096735;}
+.max-col{width: 100%;}
+.max-col .container{width: 90%;margin: 0 auto;}
+.maxmain .title:after{
+	content:'';
+	display: block;
+	margin-top: 20px;
+	width: 40px; 
+	height: 4px;
+	border-radius: 8px;
+	background-color: #096735;
+}
+
+
+
+.maxon_salesul{position: relative;padding-top: 4px;overflow: hidden;margin-bottom: 50px;box-sizing: border-box;-moz-box-sizing:border-box; -webkit-box-sizing:border-box; }
+.maxon_salesul .maximg{position: relative;overflow: hidden;}
+.maxon_salesul .maximg>img{width: 100%;}
+.maxon_salesul .maximgpor{position: absolute;bottom: 35%;left: 0;z-index: 1;width: 100%;}
+.maxon_salesul .old-price{text-decoration:line-through; color: #999}
+.maxon_salesul .maxtext{font-size: 14px;color: #333;padding: 10px 0;}
+.maxon_salesul .price{padding-right: 10px;font-size: 18px;color:#096735;}
+.maxtext p , .searchlist .pdlist .text span{overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;min-height: 36px;}
+/*.maxswiper_hov{position: absolute;top: 0;width: 100%;text-align: center;height: 320px;background: rgba(0,0,0,0.3);display: none;}
+.maxon_salesul li:hover .maxswiper_hov,.maxon_salesul li:hover .maximgpor a{display: block;}*/
+.maxon_salesul li:hover .maximgpor a{display: block;}
+.maxon_salesul .maximgpor a{color:#fff;font-size:20px;width: 100%;text-align: center;padding: 12px 38px;height: 66px;background: url(maxseles-but.png) no-repeat center;display: none;}
+.maxon_salesul .arrow-left{}
+.maxon_salesul .banner_btn a{width: 26px;height: 60px;display: block;}
+.maxon_salesul .banner_btn{width: 100%;position: absolute;top:50%;z-index: 2;display: block;}
+.maxon_salesul .banner_btn a:hover{background: url(maxindex-icon.png) no-repeat rgba(0,0,0,0.6);}
+.maxon_salesul .banner_btn a{
+    display: block;
+    background: url(maxindex-icon.png) no-repeat rgba(0,0,0,0.3);
+    width: 28px;
+    height: 65px;
+    position: absolute;
+    top:-32px;
+    left: 0;
+    cursor:pointer
+    }
+
+.product-table .maxmark , .maxon_salesul .maxmark , .m-prodslide .maxmark{position: absolute;top:-4px;right:-4px; z-index: 9; padding:8px;background-color: #096735;color: #fff;border-bottom-left-radius: 1rem; line-height: 1em; font-size: 16px;}
+.product-table .maxmark h3 ,.maxon_salesul .maxmark h3 , .m-prodslide .maxmark h3{font-size: 1.4rem;font-weight: normal;float: left;}
+.product-table .maxmark p , .maxon_salesul .maxmark p  , .m-prodslide .maxmark p{float: left;}
+.product-table .maxmark p em , .maxon_salesul .maxmark em  , .m-prodslide .maxmark em{display: block;margin-left: 4px; line-height: 1em;font-size: .6rem;color: #fff;}
+
+.maxon_salesul .banner_btn .arrow-right,.maxon_salesul .banner_btn .arrow-right{
+	left:auto;
+	right:22px;
+}
+.maxon_salesul .banner_btn .arrow-left,.maxon_salesul .banner_btn .arrow-left:hover{
+    background-position: -92px -184px;
+}
+.maxon_salesul .banner_btn .arrow-right,.maxon_salesul .banner_btn .arrow-right:hover{
+    background-position: -151px -184px;
+}
+.maxon_salesul .swiper-slide{padding-right:20px; width: 20%; box-sizing: border-box;}
+.maxon_salesul .swiper-slide-active{}
+.maxon_salesul .bg-box{position: relative; padding:1px;}
+.maxon_salesul ul:after{content:''; display: block; clear:both;}
+
+.maxon_sales{position: relative;}
+.maxon_sales .maxpagin_tit{position: absolute;right: 0;}
+.maxon_sales .maxpagin_tit a{font-size:16px;}
+.maxsales_but{font-size: 1rem;padding: 14px 30px;border: 3px solid #fff;display: inline-block;color: #fff;}
+/*top*/
+.maxprosi-top{background: #096735;height: 80px;position: absolute; top:-80px; left: 0;z-index: 9; }
+.maxcomment a{color: #fff;font-size: 18px;line-height:50px;}
+.maxcomment{height: 50px;width:596px;margin: 0px auto;overflow: hidden;position: relative;top: 16px;border: 1px #074d27 dashed;}
+.maxcomment ul{padding: 0 60px 0 65px;}
+.maxcomment span{display: block;height: 50px;width: 50px;background: url(maxicon.png) no-repeat;position: absolute;top: 0;}
+.maxcomment .maxicon_pr{left: 0;background-position: 9px -10px;}
+.maxcomment .maxcole{right: 0;background-position: 0px -64px;cursor:pointer;}
+.maxcomment .maxcole:hover{right: 0;background-position: 0px -112px;}
+/*menu*/
+
+/**/
+.header{background-color: #fff;}
+.maxtop-col{display: inline-table;width: 100%;}
+.maxtop{height: 80px; width: 90%;margin:auto; display: table; }
+.maxtop:after{content:''; display: block;  clear: both;}
+.maxtop .maxLogo , .maxtop .maxmenu , .maxtop_rig{display: table-cell; vertical-align: middle; padding:10px 0;}
+.maxtop .maxLogo{width:15%;}
+.maxtop .maxLogo a{display:block; }
+.maxtop .maxmenu{width: 70%; }
+.maxtop .maxmenu li{position: relative; z-index: 999; float:left;text-align:center;margin-left: 20px; }
+.maxtop .maxmenu li a{ font-size: 1rem; line-height: 60px; display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
+.maxtop .maxmenu li.hover a,.maxtop .maxmenu li:hover a{color:#096735;}
+.maxtop .maxmenu li ul{display: none; position: absolute; top: 0; left: -20px;z-index: -1;padding-top:60px; min-width: 120%; background-color: #fff;}
+.maxtop .maxmenu li:hover ul{display:block;}
+.maxtop .maxmenu li ul li{display: block; margin:0; padding:0px 20px;float:none;  padding-bottom: 8px; box-sizing: border-box;  text-align: center; }
+.maxtop .maxmenu li ul li a{line-height: 2em; text-align: left; }
+.maxtop .maxmenu li:hover ul li a , .maxtop .maxmenu li.hover ul li a{font-size: 14px;color: #333;font-weight: 500;}
+.maxtop .maxmenu li ul li:hover a{color: #096735}
+.maxtop_rig{ width:15%; text-align: right; position: relative;}
+.maxtop_rig li{display: inline-table;padding-left: 15px; position: relative;}
+.maxtop_rig a , .searchlist .btn-submit{background: url(maxicon.png);width: 30px;height: 30px;display: block;}
+.maxtop_rig a.maxicon-user{background-position: -10px -172px;}
+.maxtop_rig a.maxicon-search , .searchlist .btn-submit{background-position: -10px -227px;}
+.maxtop_rig a.maxicon-cart{background-position: -10px -283px;position: relative;}
+.maxtop_rig a.maxicon-cart em{position: absolute;font-size: 12px;width: 18px;height: 18px;line-height: 18px;text-align: center;border-radius: 50%;right: -5px;background: #096735;color: #fff;}
+
+/*searchlist*/
+.searchlist{position: absolute; top:20px; right: 42px; z-index: 9999; width: 200%; max-width: 350px; display: none;}
+.searchlist form{width: 100%;  float:right; position: relative; }
+.searchlist .lab-row{height: 40px; width:0; padding:0 10px;  background: #f3f3f3; border:none;}
+.searchlist .lab-row.now{width: 100%;}
+.searchlist .btn-submit{position: absolute; top:3px; right:10px; cursor: pointer;}
+.searchlist .pdlist{background: #fff; display: none;}
+.searchlist .pdlist li{padding:20px; border-top:1px solid #ddd;}
+.searchlist .pdlist li:first-child{border:none;}
+.searchlist .pdlist a{display: table-cell; vertical-align: middle; background: none;}
+.searchlist .pdlist li:hover{background: #f8f8f8;}
+.searchlist .pdlist .img{width:16%; }
+.searchlist .pdlist .text{width:80%; padding-left: 4%; font-size: 14px ; color:#999; text-align:left;}
+
+
+/*top end*/
+
+
+/*footer*/
+.footer{background: #222624;color: #666666;font-size: 14px;}
+.footer .container{width: 90%;margin: 0 auto;}
+.footer .maxadd{width: 36%;padding-right: 4%; float: left;}
+.footer .maxadd li{position:relative; padding-bottom: 12px; display: block; }
+.footer .maxadd i{display: block;width: 20px;h;height: 20px;position: absolute;top:0;background: url(maxicon.png);}
+.footer .maxadd i.maxadd{background-position: -13px -347px;}
+.footer .maxadd .maxfax{background-position: -13px -378px;}
+.footer .maxadd .maxphone{background-position: -13px -406px;}
+.footer .maxadd .maxemail{background-position: -13px -434px;}
+.footer .maxadd span{margin-left: 26px; display: block;}
+.footermin{padding: 60px 0 58px; position: relative;}
+.footermin .left{width: 80%;}
+.footermin .left:after{content:''; display: block; clear:both;}
+.footermin .right{width: 20%; position: absolute; top:60px; right: 0}
+.footermin h3{font-size: 20px;color: #fff;padding-bottom: 26px;}
+.footer .maxfootnav{float: left; padding-right:6%;}
+.footer .maxfootnav a{color: #666;display: block;padding-bottom: 12px;}
+.footer .maxfootnav a:hover{color:#fff;}
+
+.gotop{position: fixed; top:86%; right:10px; width:48px; height: 48px; background:rgba(9,103,53,.5); cursor: pointer;}
+.gotop:after{content:''; display: block; height: 100%;  background:url(maxicon.png) no-repeat center 72.3%;}
+.gotop:hover{background: rgb(9,103,53)}
+
+.footerbot{padding: 21px 0;border-top: 1px solid #1e211f;}
+ul.share-buttons{
+  list-style: none;
+  padding: 0;
+}
+
+ul.share-buttons li{
+  float: right;margin-left: 12px;
+}
+ul.share-buttons .sr-only{
+  position: absolute;
+  clip: rect(1px 1px 1px 1px);
+  clip: rect(1px, 1px, 1px, 1px);
+  padding: 0;
+  border: 0;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
+.share-buttons a{width: 40px;height: 40px; border-radius: 50%;display: block;overflow: hidden;background:url(share.png) no-repeat center top;}
+.share-buttons .linkedin{background-position: center bottom;}
+.share-buttons .tumblr{background-position: center 66%;}
+.share-buttons .facebook{background-position: center 33%;}
+.share-buttons a:hover{
+	background-image: url(sharecolor.png);
+}
+/*footer end*/
+
+
+/*maxon_salesul*/
+.maxpagin{
+	position: absolute;
+	right: 0px;
+	top:0;
+	font-size: 14px;
+	color: #999;
+}
+.maxpagin span{
+	display: none;
+	padding:0 5px;
+	cursor:pointer;
+	background: transparent;
+	box-shadow: 0px 1px 2px #fff inset;
+}
+.maxpagin span:first-child:before{
+	display: none;
+}
+.maxpagin span:before{
+	content:'/';
+	padding-right: 10px;
+	color: #aaa;
+}
+.swiper-active-switch{
+	color: #096735;
+}
+.maxpagin .hide{
+	display: none;
+}
+
+/*m-pagination*/
+.m-pagination{
+	margin-top: 40px;
+	font-size: 16px;
+	text-align: center;
+}
+.m-pagination a , .rigcont .m-pagination a{
+	color: #999;
+	padding-left: 6px;
+}
+
+.m-pagination .filp{
+	padding:10px;
+	font-size: 0;
+	background: url(filp.png) no-repeat center top;
+	vertical-align: middle;
+	cursor: pointer;
+	margin-left: 20px;
+}
+
+.m-pagination .prev{
+	background-position: center bottom;
+	margin-right: 20px;
+}
+
+.m-pagination .filp:hover{
+	background-image: url(filp2.png);
+}
+
+.m-pagination a:hover{
+	color:#096735;
+}
+
+.m-pagination a:after{
+	content:'/';
+	padding-left: 10px;
+	color: #aaa;
+}
+.m-pagination a:last-child:after{
+	display: none;
+}
+
+
+/*media*/
+@media screen and (max-width: 1200px) {
+    .maxtop .maxmenu li a {
+        font-size: .9rem;
+    }
+}
