@@ -86,6 +86,14 @@
 
 		<script type="text/javascript" src="${commonResourcePath}/js/_autoload.js"></script>
 		
+		
+		<%-- acerchem js file --%>
+		<script type="text/javascript" src="${commonResourcePath}/js/general.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/swiper.min.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/jquery-1.9.0.min.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/index.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/max.js"></script>
+		
 		<%-- Cms Action JavaScript files --%>
 		<c:forEach items="${cmsActionsJsFiles}" var="actionJsFile">
 		    <script type="text/javascript" src="${commonResourcePath}/js/cms/${actionJsFile}"></script>

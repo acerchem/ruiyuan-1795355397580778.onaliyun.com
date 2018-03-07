@@ -37,8 +37,9 @@
 			<a href="#skiptonavigation" class="skiptonavigation" data-role="none">${fn:escapeXml(skipToNavigation)}</a>
 
 
+<!-- 
 			<header:header hideHeaderLinks="${hideHeaderLinks}" />
-
+ -->
 
 			
 			
@@ -50,7 +51,9 @@
 				<jsp:doBody />
 			</div>
 
+            <!-- 
 			<footer:footer />
+			 -->
 		</main>
 
 	</jsp:body>
