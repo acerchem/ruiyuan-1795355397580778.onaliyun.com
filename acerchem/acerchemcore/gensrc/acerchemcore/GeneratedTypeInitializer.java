@@ -126,6 +126,10 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 				single_createattr_ElectronicsColorVariantProduct_color();
 			
+				single_createattr_Product_chemicalInfo();
+			
+				single_createattr_Product_unitCalculateRato();
+			
 
 	}
 
@@ -210,6 +214,40 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 					"localized:java.lang.String",
 					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
 					"VariantAttributeDescriptor",
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_Product_chemicalInfo() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"Product", 
+					"chemicalInfo",  
+					null,
+					"java.lang.String",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_Product_unitCalculateRato() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"Product", 
+					"unitCalculateRato",  
+					null,
+					"java.lang.String",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG,
+					null,
 					sqlColumnDefinitions
 				);
 			
@@ -307,6 +345,20 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 				}
 			
 			single_setAttributeProperties_ElectronicsColorVariantProduct_color();
+		
+				{
+				Map customPropsMap = new HashMap();
+				
+				changeMetaType(
+					"Product",
+					null,
+					customPropsMap
+				);
+				}
+			
+			single_setAttributeProperties_Product_chemicalInfo();
+		
+			single_setAttributeProperties_Product_unitCalculateRato();
 		
 				setDefaultProperties(
 					"GenderList",
@@ -438,6 +490,50 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 								true,
 								true,
 								"VariantAttributeDescriptor",
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_Product_chemicalInfo() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"Product", 
+								"chemicalInfo",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_Product_unitCalculateRato() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"Product", 
+								"unitCalculateRato",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
 								customPropsMap,
 								null
 							);

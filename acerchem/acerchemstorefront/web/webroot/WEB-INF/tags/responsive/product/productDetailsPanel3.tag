@@ -50,15 +50,17 @@
 				<!-- base -->
 				<div class="prodbase">
 					<div class="g-title">
-						<p>Hemp Seed Protein 50% Powder (50lb Bag) By Hempco</p>
+						<p>${fn:escapeXml(product.name)}</p>
 						<div class="min">
 							<span class="mintitle">This is an organic ingredient.</span>
-							<span class="sku">888888888</span>
+							<span class="sku">${fn:escapeXml(product.code)}</span>
 						</div>
 					</div>
 					<div class="priceset">
 						<span class="price">$60.00</span>
-						<span class="old-price">$67.00</span>
+						<span class="old-price">
+						<format:fromPrice priceData="${product.price}"/>
+						</span>
 					</div>
 					<div class="Summary">
 						<span><i>FREE</i>Buy 2 pieces for FREE Shipping;</span>
@@ -66,7 +68,7 @@
 						<span><i>40%</i>Buy 400 items  sales to 40% Off;</span>
 					</div>
 					<div class="specnum">
-						<div class="spec">
+						<div class="Spec">
 							<label>
 								<span class="label-title">Specifications</span>	
 								<div class="selbox">
@@ -78,45 +80,19 @@
 										<li data-val="75">75kg</li>						
 									</ul>
 								</div>	
-							</label>	
-							<label class="futday">
-								<span class="label-title">Future days</span>	
-								<div class="selbox">
-									<input type="hidden" value="" name="futday" alt="Please Select nation" id="futday">
-									<span class="pitch"></span>
-									<ul class="select">
-										<li data-val="30">30day</li>
-										<li data-val="60">60day</li>
-										<li data-val="90">90day</li>						
-									</ul>
-								</div>	
 							</label>						
 						</div>
 						<div class="invernum">
-							<span class="label-title inventory">Inventory:<i>8</i> <span class="spot">(<em>8</em>)</span></span>	
-
-							<label>
-								<input type="checkbox" name="Keep">
-								<span class="checkbox">Display future inventory</span>
-							</label>
-
-							
-						</div>
-
-						<div class="prod-sum">
+							<span class="label-title inventory">Inventory:<i>8</i></span>	
 							<div class="m-setnum">
 								<span class="set sub">-</span>
 								<input type="text" name="pdnum" class="set" value="1">
 								<span class="set add">+</span>
 							</div>
-							<i class="delintro">Delivery<em>30</em>days</i>
+							<i class="delintro">Delivery  30 days</i>
 						</div>
-
-						
 					</div>
-			
-					
-                    <div class="btn-set">							
+					<div class="btn-set">							
 							<a class="btn btn-submit" href="checkout.html">Check Out</a>
 							<a class="btn btn-cart" href="javascript:void(0)">Add to Cart</a>
 					</div>
@@ -435,200 +411,154 @@
 <script>
 inputint()
 
-var wrap = '.maxon_salesul .slide-wrap';
-maxon_salesul(wrap)
+	var wrap = '.maxon_salesul .slide-wrap';
+	maxon_salesul(wrap)
 
 
 
-// m-prodslide
-var prodslide = $('.m-prodslide'),
-minwrap = prodslide.find('.minwrap'),	
-slideparwidth = prodslide.parent().width();
-prodslide.width(slideparwidth*.5);
+	// m-prodslide
+	var prodslide = $('.m-prodslide'),
+	minwrap = prodslide.find('.minwrap'),	
+	slideparwidth = prodslide.parent().width();
+	prodslide.width(slideparwidth*.5);
 
-var flipspan = '.m-prodslide .minimg span',
-	flipbtn = $('.m-prodslide .flip span');
-var slidwrap = new Swiper('.slidewrap',{
-    wrapperClass : 'slide-item', 
-    slideClass : 'item',
-    calculateHeight : true,
-    speed: 600,        
-    pagination: '.minimg', 
-    paginationClickable :true,
-    onSwiperCreated:function(swiper){
-    	$('.m-prodslide .slide-item li').each(function(){
-	   		var aindex = $(this).index(),
-	   			aimg = $(this).html(),
-	   			aheight = swiper.height,
-	   			minimg = $(flipspan);
-	   			minimg.eq(aindex).append(aimg);
-	   			minwrap.height(aheight);
-		})
-     }      
-})
+	var flipspan = '.m-prodslide .minimg span',
+		flipbtn = $('.m-prodslide .flip span');
+	var slidwrap = new Swiper('.slidewrap',{
+        wrapperClass : 'slide-item', 
+        slideClass : 'item',
+        calculateHeight : true,
+        speed: 600,        
+        pagination: '.minimg', 
+        paginationClickable :true,
+        onSwiperCreated:function(swiper){
+        	$('.m-prodslide .slide-item li').each(function(){
+		   		var aindex = $(this).index(),
+		   			aimg = $(this).html(),
+		   			aheight = swiper.height,
+		   			minimg = $(flipspan);
+		   			minimg.eq(aindex).append(aimg);
+		   			minwrap.height(aheight);
+			})
+	     }      
+    })
 
-$(document).on('mouseover',flipspan,function(){
-	$(this).click();
-});
+	$(document).on('mouseover',flipspan,function(){
+		$(this).click();
+	});
 
-flipbtn.on('click',function(){
-	var aclass=$(this).attr('class'),
-		fwrap = $('.m-prodslide .minimg'),
-		atop = parseInt(fwrap.css('top')),
-		ahi = parseInt(fwrap.find('span').css('height')),
-		maxtop = parseInt(prodslide.find('.slidewrap .item').height())-fwrap.height(),
-		topval = 0;
+	flipbtn.on('click',function(){
+		var aclass=$(this).attr('class'),
+			fwrap = $('.m-prodslide .minimg'),
+			atop = parseInt(fwrap.css('top')),
+			ahi = parseInt(fwrap.find('span').css('height')),
+			maxtop = parseInt(prodslide.find('.slidewrap .item').height())-fwrap.height(),
+			topval = 0;
 
-	switch(aclass){
-		case 'up':
-			topval=atop-ahi;
-			if(topval<maxtop){
-				topval=atop;
-				$(this).addClass('over');
-			}
-			$(this).siblings().removeClass('over')	
-			break;
-		case 'down':
-			if(atop==0){
-				topval=0;
-				$(this).addClass('over');
-			}else{
-				topval=atop+ahi;
-			}
-			$(this).siblings().removeClass('over')	
-			break;
-	}
-	fwrap.animate({top:topval},300)
-})
-// m-prodslide end
-var shareele = $('.footermin .share-buttons');
-$('.product-right .tableshare').append(shareele.clone());
-
-// m-starlev
-function starlev(){
-	var star = $('.m-starlev');
-	star.each(function(){
-		var lv = (parseFloat($(this).attr('date-val'))/5)*100,
-		aem = $(this).find('em');
-		aem.css('width',lv+'%');
+		switch(aclass){
+			case 'up':
+				topval=atop-ahi;
+				if(topval<maxtop){
+					topval=atop;
+					$(this).addClass('over');
+				}
+				$(this).siblings().removeClass('over')	
+				break;
+			case 'down':
+				if(atop==0){
+					topval=0;
+					$(this).addClass('over');
+				}else{
+					topval=atop+ahi;
+				}
+				$(this).siblings().removeClass('over')	
+				break;
+		}
+		fwrap.animate({top:topval},300)
 	})
-	
-}
-starlev()
+	// m-prodslide end
+	var shareele = $('.footermin .share-buttons');
+	$('.product-right .tableshare').append(shareele.clone());
 
-// m-pagecard
-$('.m-pagecard span').on('click',function(){
-	var aindex= $(this).index(),
-		card = $('.m-cardwrap');
-		$(this).addClass('now').siblings().removeClass('now');
-		card.eq(aindex).show().siblings('.m-cardwrap').hide()
-})
+	// m-starlev
+	function starlev(){
+		var star = $('.m-starlev');
+		star.each(function(){
+			var lv = (parseFloat($(this).attr('date-val'))/5)*100,
+			aem = $(this).find('em');
+			aem.css('width',lv+'%');
+		})
+		
+	}
+	starlev()
 
-$('.invernum label span').on('click',function(){
-	var acked = $(this).siblings('input').prop('checked'),
-		days = $('.spec .futday'),
-		invi = $('.invernum .inventory i'),
-		spot = $('.invernum .inventory .spot'),
-		futday = parseInt($('#futday').val()),
-		setnum = $('.m-setnum input');
-	if(acked){
-		days.hide();
-		spot.hide();
-		invi.text(spot.find('em').text());
-		if(parseInt(setnum.val())>parseInt(spot.find('em').text())){
-			setnum.val(spot.find('em').text())
+	// m-pagecard
+	$('.m-pagecard span').on('click',function(){
+		var aindex= $(this).index(),
+			card = $('.m-cardwrap');
+			$(this).addClass('now').siblings().removeClass('now');
+			card.eq(aindex).show().siblings('.m-cardwrap').hide()
+	})
+
+	//m-setnum
+	$('.m-setnum span').on('click',function(){
+		var aclass=$(this).attr('class'),
+			ainp = $(this).siblings('input'),
+			maxnum =parseInt($('.invernum .inventory i').text()),
+			delin = $('.delintro'),
+			avl = null;
+		switch(aclass){
+			case 'set sub':
+				avl = parseInt(ainp.val());
+				if(avl<=1){
+					maxalert('A minimum of one piece！');
+					$(this).css('background-color','#ddd')
+					break;
+				}else{
+					delin.text('Delivery Within 30 days');
+					delin.css('color','')
+				}
+				ainp.val(avl-1);
+				break;
+			case 'set add':
+				avl = parseInt(ainp.val());
+				$(this).css('background-color','');
+				$(this).siblings('span').css('background-color','');
+				if(avl>=maxnum){
+					delin.text('Delivery Within 90 days');
+					delin.css('color','#096735')
+				}
+				ainp.val(avl+1);
+				break;	
 		}
 		
-	}else{
-		days.show();
-		spot.show();
-		invi.text(futday+parseInt(invi.text()));
-	}
-	
-})	
+	})
 
-$('.futday .select li').on('click',function(){
-	var aval = parseInt($(this).attr('data-val')),
-		invi = $('.invernum .inventory i'),
-		invem = $('.invernum .inventory em'),
-		inval = parseInt(invem.text());
-		invi.text(aval+inval);
-})
+	$('.prodbase .btn-cart').on('click',function(){
+		maxalert('Join the shopping cart successfully！');
+	})
 
-//m-setnum
-$('.m-setnum span').on('click',function(){
-	var aclass=$(this).attr('class'),
-		ainp = $(this).siblings('input'),
-		maxnum =parseInt($('.invernum .inventory i').text()),
-		delin = $('.specnum .prod-sum .delintro'),
-		avl = null;
-	switch(aclass){
-		case 'set sub':
-			avl = parseInt(ainp.val());
-			if(avl<=1){
-				maxalert('A minimum of one piece！');
-				$(this).css('background-color','#ddd')
+	// m-message
+	$(document).on('click','.product-right .btn-showlist',function(){
+		var srch = window.innerHeight;
+		$('body').css({'height':srch,'overflow':'hidden'});
+		$('.m-message').show();
+	})
+
+	$('.m-message .btn-set .btn').on('click',function(){
+		var aclass= $(this).attr('class'),
+			selbox = $(this).parents('.mes-table').find('.selbox');
+		switch(aclass){
+			case 'btn btn-line':
+				$('#message')[0].reset();
+				$('.m-message').hide();
 				break;
-			}else{
-				if(avl<30){
-					delin.find('em').text(30)
-				}else if(avl>30&&avl<60){
-					delin.find('em').text(60)
-				}else if(avl>60){
-					delin.find('em').text(90)
-				}
-			}
-			ainp.val(avl-1);
-			break;
-		case 'set add':
-			avl = parseInt(ainp.val());
-			$(this).css('background-color','');
-			$(this).siblings('span').css('background-color','');
-
-			if(avl>=maxnum){
-				maxalert("It's already the largest inventory.");
-				break;
-			}else{
-				if(avl<30){
-					delin.find('em').text(30)
-				}else if(avl>30&&avl<60){
-					delin.find('em').text(60)
-				}else if(avl>60){
-					delin.find('em').text(90)
-				}					
-			}
-			ainp.val(avl+1);
-			break;	
-	}
-	
-})
-
-$('.prodbase .btn-cart').on('click',function(){
-	maxalert('Join the shopping cart successfully！');
-})
-
-// m-message
-$(document).on('click','.product-right .btn-showlist',function(){
-	var srch = window.innerHeight;
-	$('body').css({'height':srch,'overflow':'hidden'});
-	$('.m-message').show();
-})
-
-$('.m-message .btn-set .btn').on('click',function(){
-	var aclass= $(this).attr('class'),
-		selbox = $(this).parents('.mes-table').find('.selbox');
-	switch(aclass){
-		case 'btn btn-line':
-			$('#message')[0].reset();
-			$('.m-message').hide();
-			break;
-		case 'btn btn-submit':
-			$('#message').submit();
-			break;					
-	}
-	$('body').css({'height':'','overflow':''});
-})
-
+			case 'btn btn-submit':
+				$('#message').submit();
+				break;					
+		}
+		$('body').css({'height':'','overflow':''});
+	})
 
 
 

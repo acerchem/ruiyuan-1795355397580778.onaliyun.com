@@ -23,10 +23,12 @@
 		
 	<context:annotation-config/> 
 
+<!-- 
 	<bean id="yacceleratorTestDataSystemSetup" class="com.acerchem.test.setup.TestDataSystemSetup" parent="abstractCoreSystemSetup">
 		<property name="acceleratorTestOrderData" ref="acceleratorTestOrderData"/>
-	</bean>
+	</bean> -->
 
+<!-- 
 	<bean id="acceleratorTestOrderData" class="com.acerchem.test.orders.AcceleratorTestOrderData">
 		<property name="impersonationService" ref="impersonationService"/>
 		<property name="cmsAdminSiteService" ref="cmsAdminSiteService"/>
@@ -42,6 +44,6 @@
 		<property name="i18nService" ref="commonI18NService"/>
 		<property name="ticketService" ref="ticketService"/>
 		<property name="baseSiteService" ref="baseSiteService"/>
-	</bean>
+	</bean> -->
 
 </beans>

@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at Jan 30, 2018 5:44:17 PM                     ---
+ * --- Generated at 2018-3-5 16:09:55                           ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.jalo;
@@ -11,14 +11,17 @@ import com.acerchem.core.jalo.ApparelProduct;
 import com.acerchem.core.jalo.ApparelSizeVariantProduct;
 import com.acerchem.core.jalo.ApparelStyleVariantProduct;
 import com.acerchem.core.jalo.ElectronicsColorVariantProduct;
+import de.hybris.platform.jalo.GenericItem;
 import de.hybris.platform.jalo.Item;
 import de.hybris.platform.jalo.Item.AttributeMode;
 import de.hybris.platform.jalo.JaloBusinessException;
 import de.hybris.platform.jalo.JaloSystemException;
 import de.hybris.platform.jalo.SessionContext;
 import de.hybris.platform.jalo.extension.Extension;
+import de.hybris.platform.jalo.product.Product;
 import de.hybris.platform.jalo.type.ComposedType;
 import de.hybris.platform.jalo.type.JaloGenericCreationException;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -32,6 +35,10 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	static
 	{
 		final Map<String, Map<String, AttributeMode>> ttmp = new HashMap();
+		Map<String, AttributeMode> tmp = new HashMap<String, AttributeMode>();
+		tmp.put("chemicalInfo", AttributeMode.INITIAL);
+		tmp.put("unitCalculateRato", AttributeMode.INITIAL);
+		ttmp.put("de.hybris.platform.jalo.product.Product", Collections.unmodifiableMap(tmp));
 		DEFAULT_INITIAL_ATTRIBUTES = ttmp;
 	}
 	@Override
@@ -44,6 +51,42 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 			ret.putAll(attr);
 		}
 		return ret;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Product.chemicalInfo</code> attribute.
+	 * @return the chemicalInfo - Attribute about chemicalInfo of Product
+	 */
+	public String getChemicalInfo(final SessionContext ctx, final Product item)
+	{
+		return (String)item.getProperty( ctx, AcerchemCoreConstants.Attributes.Product.CHEMICALINFO);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Product.chemicalInfo</code> attribute.
+	 * @return the chemicalInfo - Attribute about chemicalInfo of Product
+	 */
+	public String getChemicalInfo(final Product item)
+	{
+		return getChemicalInfo( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Product.chemicalInfo</code> attribute. 
+	 * @param value the chemicalInfo - Attribute about chemicalInfo of Product
+	 */
+	public void setChemicalInfo(final SessionContext ctx, final Product item, final String value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.Product.CHEMICALINFO,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Product.chemicalInfo</code> attribute. 
+	 * @param value the chemicalInfo - Attribute about chemicalInfo of Product
+	 */
+	public void setChemicalInfo(final Product item, final String value)
+	{
+		setChemicalInfo( getSession().getSessionContext(), item, value );
 	}
 	
 	public ApparelProduct createApparelProduct(final SessionContext ctx, final Map attributeValues)
@@ -154,6 +197,42 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	public String getName()
 	{
 		return AcerchemCoreConstants.EXTENSIONNAME;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Product.unitCalculateRato</code> attribute.
+	 * @return the unitCalculateRato - Attribute about unitCalculateRato of Product
+	 */
+	public String getUnitCalculateRato(final SessionContext ctx, final Product item)
+	{
+		return (String)item.getProperty( ctx, AcerchemCoreConstants.Attributes.Product.UNITCALCULATERATO);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Product.unitCalculateRato</code> attribute.
+	 * @return the unitCalculateRato - Attribute about unitCalculateRato of Product
+	 */
+	public String getUnitCalculateRato(final Product item)
+	{
+		return getUnitCalculateRato( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Product.unitCalculateRato</code> attribute. 
+	 * @param value the unitCalculateRato - Attribute about unitCalculateRato of Product
+	 */
+	public void setUnitCalculateRato(final SessionContext ctx, final Product item, final String value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.Product.UNITCALCULATERATO,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Product.unitCalculateRato</code> attribute. 
+	 * @param value the unitCalculateRato - Attribute about unitCalculateRato of Product
+	 */
+	public void setUnitCalculateRato(final Product item, final String value)
+	{
+		setUnitCalculateRato( getSession().getSessionContext(), item, value );
 	}
 	
 }

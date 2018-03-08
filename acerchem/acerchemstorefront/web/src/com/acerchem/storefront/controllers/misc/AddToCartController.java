@@ -24,6 +24,7 @@ import de.hybris.platform.commercefacades.product.ProductFacade;
 import de.hybris.platform.commercefacades.product.ProductOption;
 import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
+import de.hybris.platform.commerceservices.order.CommerceCartModificationStatus;
 import de.hybris.platform.util.Config;
 import com.acerchem.storefront.controllers.ControllerConstants;
 
@@ -100,11 +101,12 @@ public class AddToCartController extends AbstractController
 				model.addAttribute("cartCode", cartModification.getCartCode());
 				model.addAttribute("isQuote", cartFacade.getSessionCart().getQuoteData() != null ? Boolean.TRUE : Boolean.FALSE);
 
-				if (cartModification.getQuantityAdded() == 0L)
+				if (cartModification.getStatusCode().equalsIgnoreCase(CommerceCartModificationStatus.MAX_ORDER_QUANTITY_EXCEEDED))
 				{
 					model.addAttribute(ERROR_MSG_TYPE, "basket.information.quantity.noItemsAdded." + cartModification.getStatusCode());
 				}
-				else if (cartModification.getQuantityAdded() < qty)
+				
+				if (cartModification.getQuantityAdded() < qty)
 				{
 					model.addAttribute(ERROR_MSG_TYPE,
 							"basket.information.quantity.reducedNumberOfItemsAdded." + cartModification.getStatusCode());
