@@ -2443,8 +2443,7 @@ display: inline-table;
 }
 
 .prod-cont .prodbase .priceset{
-	margin-top: 20px;
-	margin-bottom: 40px;
+	margin: 20px 0;
 }
 
 .prod-cont .prodbase .priceset span{
@@ -2479,22 +2478,47 @@ display: inline-table;
 	color: #096735;
 }
 .prod-cont .prodbase .specnum{
-	padding-top: 40px;
+	position: relative;
+	padding-top: 20px;
 	border-top:1px solid #ddd;
 }
 
-.prod-cont .prodbase .selbox{
-	max-width: 50%;
+.prod-cont .prodbase .spec label{
+	float: left;
+	padding-right:20px;
+	width: 160px;
 }
-.prod-cont .prodbase .pitch , .prod-cont .prodbase .selbox li{
+.prod-cont .prodbase .spec:after{
+	content:'';
+	display: block;
+	clear: both;
+}
+
+.prod-cont .prodbase .future{
+	position: absolute;
+	top:10px;
+	right: 0
+}
+
+.prod-cont .prodbase .futday{
+	display: none;
+}
+
+.prod-cont .prodbase .pitch {
 	height: 40px;
 	line-height: 40px;
+}
+
+.prod-cont .prodbase .pitch:after{
+	top:17px;
 }
 
 .prod-cont .prodbase .selbox .select{
 	top:40px;
 }
-
+.prod-cont .prodbase .selbox li{
+	line-height: 1.5em;
+}
 .prod-cont .prodbase .label-title{
 	display: block;
 	margin-bottom: 10px;
@@ -2507,7 +2531,15 @@ display: inline-table;
 .prod-cont .prodbase .inventory{
 	margin-top: 20px;
 }
-
+.prod-cont .prodbase .inventory i{
+	margin:0 6px;
+}
+.prod-cont .prodbase .inventory .spot{
+	display: none;
+}
+.prod-cont .prodbase .prod-sum{
+	margin-top:20px;
+}
 .prod-cont .prodbase .delintro{
 	padding-left: 10px;
 	position: absolute;
