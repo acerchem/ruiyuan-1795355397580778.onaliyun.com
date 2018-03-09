@@ -10,7 +10,6 @@
 <%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/responsive/formElement"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="common" tagdir="/WEB-INF/tags/responsive/common"%>
-<template:javaScriptVariables/>
 <c:url value="/j_spring_security_check" var="loginActionUrl" />
 
 <link rel="stylesheet" type="text/css" media="all" href="${themeResourcePath}/css/style.css"/>	 
