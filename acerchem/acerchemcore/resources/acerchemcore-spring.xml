@@ -580,6 +580,16 @@
 	<bean id="defaultPriceRowSearchDao" class="com.acerchem.core.suggestion.dao.impl.DefaultPriceRowSearchDao" parent="abstractItemDao" >
 		<property name="flexibleSearchService" ref="flexibleSearchService"/>
 	</bean>
-	
+	<!--shaun添加service和dao  -->
+	<alias alias="acerchemFutureStockservice" name="defaultAcerchemFutureStockservice"/>
+	<bean id="defaultAcerchemFutureStockservice" class="com.acerchem.core.service.impl.DefaultAcerchemFutureStockservice" >
+		<property name="acerchemFutureStockDao" ref="acerchemFutureStockDao"/>
+		<property name="modelService" ref="modelService"/>
+	</bean>
+	<alias alias="acerchemFutureStockDao" name="defaultAcerchemFutureStockDao"/>
+	<bean id="defaultAcerchemFutureStockDao" class="com.acerchem.core.dao.impl.DefaultAcerchemFutureStockDao" parent="abstractItemDao" >
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+	</bean>
+	<!--shaun -->
 	
 </beans>
