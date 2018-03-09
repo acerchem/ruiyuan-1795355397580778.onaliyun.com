@@ -148,6 +148,20 @@
 		</typegroup>
 		<!-- End -->
 		
+		<!--添加字段   TODO -->
+	 <typegroup name="traning">
+			<itemtype code="StockLevel" autocreate="false" generate="false">
+				  <description>Extending the Product type from core with additional attributes.</description>
+				<attributes>
+					<attribute qualifier="preOrderReleaseDay" type="java.lang.Integer">
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+	<!-- shaun.sheng -->
+		
+		
 
     </itemtypes>
 </items>
