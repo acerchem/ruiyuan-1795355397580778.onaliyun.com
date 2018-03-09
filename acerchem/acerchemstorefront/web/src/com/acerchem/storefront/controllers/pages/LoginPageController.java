@@ -101,4 +101,11 @@ public class LoginPageController extends AbstractLoginPageController
 		getRegistrationValidator().validate(form, bindingResult);
 		return processRegisterUserRequest(referer, form, bindingResult, model, request, response, redirectModel);
 	}
+	
+	@RequestMapping(value = "/register", method = RequestMethod.GET)
+	public String getPasswordRequest(final Model model) throws CMSItemNotFoundException
+	{
+		model.addAttribute(new RegisterForm());
+		return "pages/account/accountRegisterPage";
+	}
 }
