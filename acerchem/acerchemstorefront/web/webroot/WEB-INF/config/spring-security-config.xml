@@ -295,7 +295,7 @@
 		<constructor-arg name="key" value="acerchemstorefront" />
 		<constructor-arg name="userDetailsService" ref="originalUidUserDetailsService" />
 		<property name="cookieName" value="acerchemstorefrontRememberMe" />
-		<property name="alwaysRemember" value="true" />
+		<property name="alwaysRemember" value="false" />
 		<property name="userService" ref="userService"/>
 		<property name="useSecureCookie" value="true"/>
 		<property name="customerFacade" ref="customerFacade"/>
