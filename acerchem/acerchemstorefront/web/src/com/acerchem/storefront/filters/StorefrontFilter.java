@@ -32,8 +32,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 
 
 /**
- * Filter that initializes the session for the acerchemstorefront. This is a spring configured filter that is
- * executed by the PlatformFilterChain.
+ * Filter that initializes the session for the acerchemstorefront. This is a spring configured filter that is executed
+ * by the PlatformFilterChain.
  */
 public class StorefrontFilter extends OncePerRequestFilter
 {
@@ -50,6 +50,7 @@ public class StorefrontFilter extends OncePerRequestFilter
 			final FilterChain filterChain) throws IOException, ServletException
 	{
 		final HttpSession session = request.getSession();
+
 		final String queryString = request.getQueryString();
 
 		if (isSessionNotInitialized(session, queryString))
@@ -72,6 +73,7 @@ public class StorefrontFilter extends OncePerRequestFilter
 		}
 
 		filterChain.doFilter(request, response);
+		//session.invalidate();
 	}
 
 	protected boolean isGetMethod(final HttpServletRequest httpRequest)
