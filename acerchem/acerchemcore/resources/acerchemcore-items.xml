@@ -110,6 +110,24 @@
                     </attribute>
                 </attributes>
             </itemtype>
+            
+            <!--add by Wangjh 资质文件扩展 start -->
+            <itemtype code="Document" autocreate="false" generate="false">
+				<description>Extending Document additional aliyun attributes.</description>
+				<attributes>
+					<attribute qualifier="aliyunUrl" type="java.lang.String">
+						<description>阿里云Url</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="deleteFlag" type="java.lang.Boolean">
+						<description>是否删除</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+		   </itemtype>
+		   <!--add by Wangjh 资质文件扩展  end -->
         </typegroup>
         
         <!-- add by Randy -->
@@ -162,6 +180,5 @@
 	<!-- shaun.sheng -->
 		
 		
-
     </itemtypes>
 </items>
