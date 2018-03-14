@@ -12,15 +12,15 @@
 		<link rel="stylesheet" type="text/css" media="all" href="${contextPath}/wro/addons_responsive.css" />
 	</c:when>
 	<c:otherwise>
-		<%-- Theme CSS files 
-		<link rel="stylesheet" type="text/css" media="all" href="${themeResourcePath}/css/style.css"/>--%>
+		<%-- Theme CSS files--%>
+		<link rel="stylesheet" type="text/css" media="all" href="${themeResourcePath}/css/style.css"/> 
 		
-		<%-- acerchem css file --%>
+		<%-- acerchem css file--%>
 		<link rel="stylesheet" type="text/css" media="all" href="${themeResourcePath}/css/general.css"/>
 		<link rel="stylesheet" type="text/css" media="all" href="${themeResourcePath}/css/min.css"/>
 		<link rel="stylesheet" type="text/css" media="all" href="${themeResourcePath}/css/idangerous.swiper.css"/>
 		<link rel="stylesheet" type="text/css" media="all" href="${themeResourcePath}/css/max.css"/>
-		
+		 
 		<%--  AddOn Common CSS files --%>
 		<c:forEach items="${addOnCommonCssPaths}" var="addOnCommonCss">
 			<link rel="stylesheet" type="text/css" media="all" href="${addOnCommonCss}"/>

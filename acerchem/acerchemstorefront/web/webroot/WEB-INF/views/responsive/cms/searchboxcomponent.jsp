@@ -11,27 +11,30 @@
 <spring:url value="/search/autocomplete/{/componentuid}" var="autocompleteUrl" htmlEscape="false">
      <spring:param name="componentuid"  value="${component.uid}"/>
 </spring:url>
-
-<div class="ui-front">
-	<form name="search_form_${fn:escapeXml(component.uid)}" method="get"
-		action="${searchUrl}">
-		<div class="input-group">
-			<spring:theme code="search.placeholder" var="searchPlaceholder" />
-
-			<ycommerce:testId code="header_search_input">
-				<input type="text" id="js-site-search-input"
-					class="form-control js-site-search-input" name="text" value=""
-                    maxlength="100" placeholder="${searchPlaceholder}"
-					data-options='{"autocompleteUrl" : "${autocompleteUrl}","minCharactersBeforeRequest" : "${component.minCharactersBeforeRequest}","waitTimeBeforeRequest" : "${component.waitTimeBeforeRequest}","displayProductImages" : ${component.displayProductImages}}'>
-			</ycommerce:testId>
-
-			<span class="input-group-btn"> <ycommerce:testId code="header_search_button">
-					<button class="btn btn-link js_search_button" type="submit" disabled="true">
-						<span class="glyphicon glyphicon-search"></span>
-					</button>
-				</ycommerce:testId>
-			</span>
-		</div>
+<a class="maxicon-search" href=""></a>
+<div class="searchlist">
+	<form action="" method="post" class="both" id="search">
+		<input type="text" name="key" class="lab-row" placeholder="Search">
+		<i class="btn-submit"></i>
 	</form>
+	<ul class="pdlist">
+		<li><a href="product.html" class="img"><img
+				src="images/maxsales-bg6.jpg" alt=""></a> <a href="product.html"
+			class="text"> <span>TwinTiger Glutathione (5kg Bag) by
+					Jincheng</span>
+		</a></li>
 
+		<li><a href="product.html" class="img"><img
+				src="images/maxsales-bg6.jpg" alt=""></a> <a href="product.html"
+			class="text"> <span>TwinTiger Glutathione (5kg Bag) by
+					Jincheng</span>
+		</a></li>
+
+		<li><a href="product.html" class="img"><img
+				src="images/maxsales-bg6.jpg" alt=""></a> <a href="product.html"
+			class="text"> <span>TwinTiger Glutathione (5kg Bag) by
+					Jincheng</span>
+		</a></li>
+
+	</ul>
 </div>

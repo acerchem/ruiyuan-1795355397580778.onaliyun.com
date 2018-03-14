@@ -4,7 +4,7 @@
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 
 <c:set value="${fn:escapeXml(component.styleClass)}" var="navigationClass" />
-
+<%-- 
 <c:if test="${component.visible}">
     <div class="${navigationClass} js-${navigationClass} display-none NAVcompONENT" data-title="${fn:escapeXml(component.navigationNode.title)}">
         <nav class="${navigationClass}__child-wrap display-none">
@@ -22,4 +22,4 @@
             </c:forEach>
         </nav>
     </div>
-</c:if>
+</c:if> --%>
