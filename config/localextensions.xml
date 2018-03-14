@@ -5,8 +5,11 @@
     <extension name='hmc' />
    
     <!--
+    <extension name='backoffice' />   
+    -->
+
      <extension name='mcc' />
-   -->
+  
 
     <!--
     <extension name='adaptivesearchsolr' />
@@ -14,8 +17,10 @@
     <extension name='adaptivesearchsamplesaddon' />
     -->
 
+   <!-- remove backoffice for dev
     <extension name='commerceservicesbackoffice' />
     <extension name='solrfacetsearchbackoffice' />
+   -->
     <extension name='solrserver' />
    
 
@@ -64,8 +69,11 @@
     -->
 
     <extension name='customerticketingaddon' />
+
+     <!-- remove backoffice for dev
     <extension name='customersupportbackoffice' />
-   
+     -->
+
     <!-- 用户行为分析我们一般国内用极光 友盟阿里国外用google
     <extension name='eventtrackingwsaddon' />
     <extension name='hybrisanalyticsaddon' />
@@ -93,9 +101,10 @@
     <extension name='consignmenttrackingaddon' />
    <!--
     <extension name='consignmenttrackingmock' />
-   --> 
+   -->
+ <!-- remove backoffice for dev 
    <extension name='consignmenttrackingbackoffice' />
-    
+    -->
     
     <extension name='notificationaddon' />
    

@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-3-5 16:09:55                           ---
+ * --- Generated at Mar 13, 2018 2:44:26 PM                     ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.constants;
@@ -26,8 +26,13 @@ public class GeneratedAcerchemCoreConstants
 	{
 		public static class Product
 		{
+			public static final String ANONYMOUSDISPLAYPRICE = "anonymousDisplayPrice".intern();
 			public static final String CHEMICALINFO = "chemicalInfo".intern();
 			public static final String UNITCALCULATERATO = "unitCalculateRato".intern();
+		}
+		public static class StockLevel
+		{
+			public static final String PREORDERRELEASEDAY = "preOrderReleaseDay".intern();
 		}
 	}
 	public static class Enumerations

@@ -21,4 +21,19 @@
 		<property name="code" type="String"/>
 		<property name="name" type="String"/>
 	</bean>
+	
+	<!-- shaun.sheng -->
+	<!--创建futureStockLevelData添加两个字段  -->
+	<bean class="com.acerchem.facades.product.data.FutureStockLevelData">
+		<property name="futureStockLevel" type="java.lang.Integer"/>
+		<property name="releaseDay" type="java.lang.Integer"/>
+	</bean>
+	
+	
+	<!--在stockData中添加字段(list)  -->
+	<bean class="de.hybris.platform.commercefacades.product.data.StockData">
+		<property name="futureStock" type="java.util.List&lt;com.acerchem.facades.product.data.FutureStockLevelData>"/>
+	</bean>
+	<!-- shaun.sheng -->
+	
 </beans>

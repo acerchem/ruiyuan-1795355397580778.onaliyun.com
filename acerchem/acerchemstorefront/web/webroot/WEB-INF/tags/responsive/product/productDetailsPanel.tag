@@ -85,9 +85,12 @@
 									<input type="hidden" value="" name="futday" alt="Please Select nation" id="futday">
 									<span class="pitch"></span>
 									<ul class="select">
-										<li data-val="30">30day</li>
-										<li data-val="60">60day</li>
-										<li data-val="90">90day</li>						
+										<c:forEach items="${product.stock.futureStock}" var="data" varStatus="vs">
+									 	
+											<li data-val="${data.futureStockLevel}">${data.releaseDay}</li>
+				  		 				 
+										</c:forEach>
+					
 									</ul>
 								</div>	
 							</label>						

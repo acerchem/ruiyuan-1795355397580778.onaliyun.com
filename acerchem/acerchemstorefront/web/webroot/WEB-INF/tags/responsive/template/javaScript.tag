@@ -16,6 +16,9 @@
 	  	<script type="text/javascript" src="${contextPath}/wro/addons_responsive.js"></script>
 	</c:when>
 	<c:otherwise>
+	    <%-- acerchem js file --%>
+		<script type="text/javascript" src="${commonResourcePath}/js/jquery-1.9.0.min.js"></script>
+	
 		<%-- jquery --%>
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery-2.1.1.min.js"></script>
 		
@@ -90,7 +93,6 @@
 		<%-- acerchem js file --%>
 		<script type="text/javascript" src="${commonResourcePath}/js/general.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/swiper.min.js"></script>
-		<script type="text/javascript" src="${commonResourcePath}/js/jquery-1.9.0.min.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/index.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/max.js"></script>
 		

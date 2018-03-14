@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-3-5 16:09:55                           ---
+ * --- Generated at Mar 13, 2018 2:44:26 PM                     ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.jalo;
