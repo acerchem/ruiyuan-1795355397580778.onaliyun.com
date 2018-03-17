@@ -1,4 +1,4 @@
-package com.acerchem.storefront.aliyun;
+package com.acerchem.core.web.aliyun;
 
 import java.io.IOException;
 
