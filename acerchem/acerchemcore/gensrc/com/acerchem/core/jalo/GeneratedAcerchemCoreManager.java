@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at Mar 13, 2018 2:44:26 PM                     ---
+ * --- Generated at 2018-3-18 1:19:43                           ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.jalo;
@@ -11,6 +11,7 @@ import com.acerchem.core.jalo.ApparelProduct;
 import com.acerchem.core.jalo.ApparelSizeVariantProduct;
 import com.acerchem.core.jalo.ApparelStyleVariantProduct;
 import com.acerchem.core.jalo.ElectronicsColorVariantProduct;
+import de.hybris.platform.commons.jalo.Document;
 import de.hybris.platform.jalo.GenericItem;
 import de.hybris.platform.jalo.Item;
 import de.hybris.platform.jalo.Item.AttributeMode;
@@ -18,6 +19,7 @@ import de.hybris.platform.jalo.JaloBusinessException;
 import de.hybris.platform.jalo.JaloSystemException;
 import de.hybris.platform.jalo.SessionContext;
 import de.hybris.platform.jalo.extension.Extension;
+import de.hybris.platform.jalo.media.Media;
 import de.hybris.platform.jalo.product.Product;
 import de.hybris.platform.jalo.type.ComposedType;
 import de.hybris.platform.jalo.type.JaloGenericCreationException;
@@ -37,6 +39,10 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	{
 		final Map<String, Map<String, AttributeMode>> ttmp = new HashMap();
 		Map<String, AttributeMode> tmp = new HashMap<String, AttributeMode>();
+		tmp.put("aliyunUrl", AttributeMode.INITIAL);
+		tmp.put("deleteFlag", AttributeMode.INITIAL);
+		ttmp.put("de.hybris.platform.commons.jalo.Document", Collections.unmodifiableMap(tmp));
+		tmp = new HashMap<String, AttributeMode>();
 		tmp.put("chemicalInfo", AttributeMode.INITIAL);
 		tmp.put("unitCalculateRato", AttributeMode.INITIAL);
 		tmp.put("anonymousDisplayPrice", AttributeMode.INITIAL);
@@ -56,6 +62,42 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 			ret.putAll(attr);
 		}
 		return ret;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Document.aliyunUrl</code> attribute.
+	 * @return the aliyunUrl - é¿éäºUrl
+	 */
+	public String getAliyunUrl(final SessionContext ctx, final Document item)
+	{
+		return (String)item.getProperty( ctx, AcerchemCoreConstants.Attributes.Document.ALIYUNURL);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Document.aliyunUrl</code> attribute.
+	 * @return the aliyunUrl - é¿éäºUrl
+	 */
+	public String getAliyunUrl(final Document item)
+	{
+		return getAliyunUrl( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Document.aliyunUrl</code> attribute. 
+	 * @param value the aliyunUrl - é¿éäºUrl
+	 */
+	public void setAliyunUrl(final SessionContext ctx, final Document item, final String value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.Document.ALIYUNURL,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Document.aliyunUrl</code> attribute. 
+	 * @param value the aliyunUrl - é¿éäºUrl
+	 */
+	public void setAliyunUrl(final Document item, final String value)
+	{
+		setAliyunUrl( getSession().getSessionContext(), item, value );
 	}
 	
 	/**
@@ -269,6 +311,79 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	public ElectronicsColorVariantProduct createElectronicsColorVariantProduct(final Map attributeValues)
 	{
 		return createElectronicsColorVariantProduct( getSession().getSessionContext(), attributeValues );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Document.deleteFlag</code> attribute.
+	 * @return the deleteFlag - æ¯å¦å é¤
+	 */
+	public Boolean isDeleteFlag(final SessionContext ctx, final Document item)
+	{
+		return (Boolean)item.getProperty( ctx, AcerchemCoreConstants.Attributes.Document.DELETEFLAG);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Document.deleteFlag</code> attribute.
+	 * @return the deleteFlag - æ¯å¦å é¤
+	 */
+	public Boolean isDeleteFlag(final Document item)
+	{
+		return isDeleteFlag( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Document.deleteFlag</code> attribute. 
+	 * @return the deleteFlag - æ¯å¦å é¤
+	 */
+	public boolean isDeleteFlagAsPrimitive(final SessionContext ctx, final Document item)
+	{
+		Boolean value = isDeleteFlag( ctx,item );
+		return value != null ? value.booleanValue() : false;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Document.deleteFlag</code> attribute. 
+	 * @return the deleteFlag - æ¯å¦å é¤
+	 */
+	public boolean isDeleteFlagAsPrimitive(final Document item)
+	{
+		return isDeleteFlagAsPrimitive( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Document.deleteFlag</code> attribute. 
+	 * @param value the deleteFlag - æ¯å¦å é¤
+	 */
+	public void setDeleteFlag(final SessionContext ctx, final Document item, final Boolean value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.Document.DELETEFLAG,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Document.deleteFlag</code> attribute. 
+	 * @param value the deleteFlag - æ¯å¦å é¤
+	 */
+	public void setDeleteFlag(final Document item, final Boolean value)
+	{
+		setDeleteFlag( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Document.deleteFlag</code> attribute. 
+	 * @param value the deleteFlag - æ¯å¦å é¤
+	 */
+	public void setDeleteFlag(final SessionContext ctx, final Document item, final boolean value)
+	{
+		setDeleteFlag( ctx, item, Boolean.valueOf( value ) );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Document.deleteFlag</code> attribute. 
+	 * @param value the deleteFlag - æ¯å¦å é¤
+	 */
+	public void setDeleteFlag(final Document item, final boolean value)
+	{
+		setDeleteFlag( getSession().getSessionContext(), item, value );
 	}
 	
 	@Override

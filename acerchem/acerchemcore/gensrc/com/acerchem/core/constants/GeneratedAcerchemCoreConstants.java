@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at Mar 13, 2018 2:44:26 PM                     ---
+ * --- Generated at 2018-3-18 1:19:43                           ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.constants;
@@ -24,6 +24,11 @@ public class GeneratedAcerchemCoreConstants
 	}
 	public static class Attributes
 	{
+		public static class Document
+		{
+			public static final String ALIYUNURL = "aliyunUrl".intern();
+			public static final String DELETEFLAG = "deleteFlag".intern();
+		}
 		public static class Product
 		{
 			public static final String ANONYMOUSDISPLAYPRICE = "anonymousDisplayPrice".intern();
