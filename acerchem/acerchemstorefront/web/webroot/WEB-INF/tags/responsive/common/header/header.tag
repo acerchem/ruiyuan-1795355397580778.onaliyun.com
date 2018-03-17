@@ -46,6 +46,8 @@
 	</div>
 </div>
 
-
+<cms:pageSlot position="BottomHeaderSlot" var="component" element="div"	class="container-fluid">
+	<cms:component component="${component}" />
+</cms:pageSlot>
 
 		
