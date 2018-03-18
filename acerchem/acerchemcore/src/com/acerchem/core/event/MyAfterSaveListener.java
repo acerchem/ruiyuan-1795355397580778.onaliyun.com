@@ -49,8 +49,7 @@ public class MyAfterSaveListener implements AfterSaveListener {
 										e.printStackTrace();
 									}
 									// callback logic here
-									DocumentModel doc = new DocumentModel();
-									
+									uploadImageSendProcessor();
 									
 									System.out.println(ls);
 								}
@@ -63,6 +62,10 @@ public class MyAfterSaveListener implements AfterSaveListener {
 			}
 		}
 
+	}
+	
+	private void uploadImageSendProcessor(){
+		DocumentModel doc = new DocumentModel();
 	}
 
 }
