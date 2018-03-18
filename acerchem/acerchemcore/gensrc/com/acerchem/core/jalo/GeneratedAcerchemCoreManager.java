@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-3-18 2:41:18                           ---
+ * --- Generated at 2018-3-18 17:43:24                          ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.jalo;
@@ -11,7 +11,8 @@ import com.acerchem.core.jalo.ApparelProduct;
 import com.acerchem.core.jalo.ApparelSizeVariantProduct;
 import com.acerchem.core.jalo.ApparelStyleVariantProduct;
 import com.acerchem.core.jalo.ElectronicsColorVariantProduct;
-import de.hybris.platform.commons.jalo.Document;
+import com.acerchem.core.jalo.ImageFailedRecord;
+import com.acerchem.core.jalo.ImageUploadedLog;
 import de.hybris.platform.jalo.GenericItem;
 import de.hybris.platform.jalo.Item;
 import de.hybris.platform.jalo.Item.AttributeMode;
@@ -19,6 +20,7 @@ import de.hybris.platform.jalo.JaloBusinessException;
 import de.hybris.platform.jalo.JaloSystemException;
 import de.hybris.platform.jalo.SessionContext;
 import de.hybris.platform.jalo.extension.Extension;
+import de.hybris.platform.jalo.media.AbstractMedia;
 import de.hybris.platform.jalo.media.Media;
 import de.hybris.platform.jalo.product.Product;
 import de.hybris.platform.jalo.type.ComposedType;
@@ -40,8 +42,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 		final Map<String, Map<String, AttributeMode>> ttmp = new HashMap();
 		Map<String, AttributeMode> tmp = new HashMap<String, AttributeMode>();
 		tmp.put("aliyunUrl", AttributeMode.INITIAL);
-		tmp.put("deleteFlag", AttributeMode.INITIAL);
-		ttmp.put("de.hybris.platform.commons.jalo.Document", Collections.unmodifiableMap(tmp));
+		ttmp.put("de.hybris.platform.jalo.media.Media", Collections.unmodifiableMap(tmp));
 		tmp = new HashMap<String, AttributeMode>();
 		tmp.put("chemicalInfo", AttributeMode.INITIAL);
 		tmp.put("unitCalculateRato", AttributeMode.INITIAL);
@@ -65,37 +66,37 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	}
 	
 	/**
-	 * <i>Generated method</i> - Getter of the <code>Document.aliyunUrl</code> attribute.
-	 * @return the aliyunUrl - é¿éäºUrl
+	 * <i>Generated method</i> - Getter of the <code>Media.aliyunUrl</code> attribute.
+	 * @return the aliyunUrl - é¿éäºÂUrl
 	 */
-	public String getAliyunUrl(final SessionContext ctx, final Document item)
+	public String getAliyunUrl(final SessionContext ctx, final Media item)
 	{
-		return (String)item.getProperty( ctx, AcerchemCoreConstants.Attributes.Document.ALIYUNURL);
+		return (String)item.getProperty( ctx, AcerchemCoreConstants.Attributes.Media.ALIYUNURL);
 	}
 	
 	/**
-	 * <i>Generated method</i> - Getter of the <code>Document.aliyunUrl</code> attribute.
-	 * @return the aliyunUrl - é¿éäºUrl
+	 * <i>Generated method</i> - Getter of the <code>Media.aliyunUrl</code> attribute.
+	 * @return the aliyunUrl - é¿éäºÂUrl
 	 */
-	public String getAliyunUrl(final Document item)
+	public String getAliyunUrl(final Media item)
 	{
 		return getAliyunUrl( getSession().getSessionContext(), item );
 	}
 	
 	/**
-	 * <i>Generated method</i> - Setter of the <code>Document.aliyunUrl</code> attribute. 
-	 * @param value the aliyunUrl - é¿éäºUrl
+	 * <i>Generated method</i> - Setter of the <code>Media.aliyunUrl</code> attribute. 
+	 * @param value the aliyunUrl - é¿éäºÂUrl
 	 */
-	public void setAliyunUrl(final SessionContext ctx, final Document item, final String value)
+	public void setAliyunUrl(final SessionContext ctx, final Media item, final String value)
 	{
-		item.setProperty(ctx, AcerchemCoreConstants.Attributes.Document.ALIYUNURL,value);
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.Media.ALIYUNURL,value);
 	}
 	
 	/**
-	 * <i>Generated method</i> - Setter of the <code>Document.aliyunUrl</code> attribute. 
-	 * @param value the aliyunUrl - é¿éäºUrl
+	 * <i>Generated method</i> - Setter of the <code>Media.aliyunUrl</code> attribute. 
+	 * @param value the aliyunUrl - é¿éäºÂUrl
 	 */
-	public void setAliyunUrl(final Document item, final String value)
+	public void setAliyunUrl(final Media item, final String value)
 	{
 		setAliyunUrl( getSession().getSessionContext(), item, value );
 	}
@@ -175,7 +176,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>Product.chemicalInfo</code> attribute.
-	 * @return the chemicalInfo - Attribute about ç¾hemicalInfo of Product
+	 * @return the chemicalInfo - Attribute about Ã§ÂÂ¾hemicalInfo of Product
 	 */
 	public String getChemicalInfo(final SessionContext ctx, final Product item)
 	{
@@ -184,7 +185,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>Product.chemicalInfo</code> attribute.
-	 * @return the chemicalInfo - Attribute about ç¾hemicalInfo of Product
+	 * @return the chemicalInfo - Attribute about Ã§ÂÂ¾hemicalInfo of Product
 	 */
 	public String getChemicalInfo(final Product item)
 	{
@@ -193,7 +194,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>Product.chemicalInfo</code> attribute. 
-	 * @param value the chemicalInfo - Attribute about ç¾hemicalInfo of Product
+	 * @param value the chemicalInfo - Attribute about Ã§ÂÂ¾hemicalInfo of Product
 	 */
 	public void setChemicalInfo(final SessionContext ctx, final Product item, final String value)
 	{
@@ -202,7 +203,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>Product.chemicalInfo</code> attribute. 
-	 * @param value the chemicalInfo - Attribute about ç¾hemicalInfo of Product
+	 * @param value the chemicalInfo - Attribute about Ã§ÂÂ¾hemicalInfo of Product
 	 */
 	public void setChemicalInfo(final Product item, final String value)
 	{
@@ -313,77 +314,56 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 		return createElectronicsColorVariantProduct( getSession().getSessionContext(), attributeValues );
 	}
 	
-	/**
-	 * <i>Generated method</i> - Getter of the <code>Document.deleteFlag</code> attribute.
-	 * @return the deleteFlag - æ¯å¦å é¤
-	 */
-	public Boolean isDeleteFlag(final SessionContext ctx, final Document item)
+	public ImageFailedRecord createImageFailedRecord(final SessionContext ctx, final Map attributeValues)
 	{
-		return (Boolean)item.getProperty( ctx, AcerchemCoreConstants.Attributes.Document.DELETEFLAG);
+		try
+		{
+			ComposedType type = getTenant().getJaloConnection().getTypeManager().getComposedType( AcerchemCoreConstants.TC.IMAGEFAILEDRECORD );
+			return (ImageFailedRecord)type.newInstance( ctx, attributeValues );
+		}
+		catch( JaloGenericCreationException e)
+		{
+			final Throwable cause = e.getCause();
+			throw (cause instanceof RuntimeException ?
+			(RuntimeException)cause
+			:
+			new JaloSystemException( cause, cause.getMessage(), e.getErrorCode() ) );
+		}
+		catch( JaloBusinessException e )
+		{
+			throw new JaloSystemException( e ,"error creating ImageFailedRecord : "+e.getMessage(), 0 );
+		}
 	}
 	
-	/**
-	 * <i>Generated method</i> - Getter of the <code>Document.deleteFlag</code> attribute.
-	 * @return the deleteFlag - æ¯å¦å é¤
-	 */
-	public Boolean isDeleteFlag(final Document item)
+	public ImageFailedRecord createImageFailedRecord(final Map attributeValues)
 	{
-		return isDeleteFlag( getSession().getSessionContext(), item );
+		return createImageFailedRecord( getSession().getSessionContext(), attributeValues );
 	}
 	
-	/**
-	 * <i>Generated method</i> - Getter of the <code>Document.deleteFlag</code> attribute. 
-	 * @return the deleteFlag - æ¯å¦å é¤
-	 */
-	public boolean isDeleteFlagAsPrimitive(final SessionContext ctx, final Document item)
+	public ImageUploadedLog createImageUploadedLog(final SessionContext ctx, final Map attributeValues)
 	{
-		Boolean value = isDeleteFlag( ctx,item );
-		return value != null ? value.booleanValue() : false;
+		try
+		{
+			ComposedType type = getTenant().getJaloConnection().getTypeManager().getComposedType( AcerchemCoreConstants.TC.IMAGEUPLOADEDLOG );
+			return (ImageUploadedLog)type.newInstance( ctx, attributeValues );
+		}
+		catch( JaloGenericCreationException e)
+		{
+			final Throwable cause = e.getCause();
+			throw (cause instanceof RuntimeException ?
+			(RuntimeException)cause
+			:
+			new JaloSystemException( cause, cause.getMessage(), e.getErrorCode() ) );
+		}
+		catch( JaloBusinessException e )
+		{
+			throw new JaloSystemException( e ,"error creating ImageUploadedLog : "+e.getMessage(), 0 );
+		}
 	}
 	
-	/**
-	 * <i>Generated method</i> - Getter of the <code>Document.deleteFlag</code> attribute. 
-	 * @return the deleteFlag - æ¯å¦å é¤
-	 */
-	public boolean isDeleteFlagAsPrimitive(final Document item)
+	public ImageUploadedLog createImageUploadedLog(final Map attributeValues)
 	{
-		return isDeleteFlagAsPrimitive( getSession().getSessionContext(), item );
-	}
-	
-	/**
-	 * <i>Generated method</i> - Setter of the <code>Document.deleteFlag</code> attribute. 
-	 * @param value the deleteFlag - æ¯å¦å é¤
-	 */
-	public void setDeleteFlag(final SessionContext ctx, final Document item, final Boolean value)
-	{
-		item.setProperty(ctx, AcerchemCoreConstants.Attributes.Document.DELETEFLAG,value);
-	}
-	
-	/**
-	 * <i>Generated method</i> - Setter of the <code>Document.deleteFlag</code> attribute. 
-	 * @param value the deleteFlag - æ¯å¦å é¤
-	 */
-	public void setDeleteFlag(final Document item, final Boolean value)
-	{
-		setDeleteFlag( getSession().getSessionContext(), item, value );
-	}
-	
-	/**
-	 * <i>Generated method</i> - Setter of the <code>Document.deleteFlag</code> attribute. 
-	 * @param value the deleteFlag - æ¯å¦å é¤
-	 */
-	public void setDeleteFlag(final SessionContext ctx, final Document item, final boolean value)
-	{
-		setDeleteFlag( ctx, item, Boolean.valueOf( value ) );
-	}
-	
-	/**
-	 * <i>Generated method</i> - Setter of the <code>Document.deleteFlag</code> attribute. 
-	 * @param value the deleteFlag - æ¯å¦å é¤
-	 */
-	public void setDeleteFlag(final Document item, final boolean value)
-	{
-		setDeleteFlag( getSession().getSessionContext(), item, value );
+		return createImageUploadedLog( getSession().getSessionContext(), attributeValues );
 	}
 	
 	@Override
@@ -467,7 +447,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>Product.unitCalculateRato</code> attribute.
-	 * @return the unitCalculateRato - Attribute about çnitCalculateRato of Product
+	 * @return the unitCalculateRato - Attribute about Ã§ÂÂnitCalculateRato of Product
 	 */
 	public String getUnitCalculateRato(final SessionContext ctx, final Product item)
 	{
@@ -476,7 +456,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>Product.unitCalculateRato</code> attribute.
-	 * @return the unitCalculateRato - Attribute about çnitCalculateRato of Product
+	 * @return the unitCalculateRato - Attribute about Ã§ÂÂnitCalculateRato of Product
 	 */
 	public String getUnitCalculateRato(final Product item)
 	{
@@ -485,7 +465,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>Product.unitCalculateRato</code> attribute. 
-	 * @param value the unitCalculateRato - Attribute about çnitCalculateRato of Product
+	 * @param value the unitCalculateRato - Attribute about Ã§ÂÂnitCalculateRato of Product
 	 */
 	public void setUnitCalculateRato(final SessionContext ctx, final Product item, final String value)
 	{
@@ -494,7 +474,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>Product.unitCalculateRato</code> attribute. 
-	 * @param value the unitCalculateRato - Attribute about çnitCalculateRato of Product
+	 * @param value the unitCalculateRato - Attribute about Ã§ÂÂnitCalculateRato of Product
 	 */
 	public void setUnitCalculateRato(final Product item, final String value)
 	{

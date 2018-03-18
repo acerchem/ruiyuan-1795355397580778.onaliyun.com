@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-3-18 2:41:18                           ---
+ * --- Generated at 2018-3-18 17:43:24                          ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.constants;
@@ -20,14 +20,15 @@ public class GeneratedAcerchemCoreConstants
 		public static final String APPARELSIZEVARIANTPRODUCT = "ApparelSizeVariantProduct".intern();
 		public static final String APPARELSTYLEVARIANTPRODUCT = "ApparelStyleVariantProduct".intern();
 		public static final String ELECTRONICSCOLORVARIANTPRODUCT = "ElectronicsColorVariantProduct".intern();
+		public static final String IMAGEFAILEDRECORD = "ImageFailedRecord".intern();
+		public static final String IMAGEUPLOADEDLOG = "ImageUploadedLog".intern();
 		public static final String SWATCHCOLORENUM = "SwatchColorEnum".intern();
 	}
 	public static class Attributes
 	{
-		public static class Document
+		public static class Media
 		{
 			public static final String ALIYUNURL = "aliyunUrl".intern();
-			public static final String DELETEFLAG = "deleteFlag".intern();
 		}
 		public static class Product
 		{
