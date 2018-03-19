@@ -5,9 +5,9 @@
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div class="gen-content">
-<!-- 
-	<div class="m-crumbs">
+
+
+	<!-- <div class="m-crumbs">
 		<div class="link">
 			<a href="index.html">Home</a>
 			<a href="gallery.html">Promotions </a>
@@ -17,7 +17,7 @@
 				<em></em>
 			</div>
 		</div>
-	</div> -->
+	</div>  -->
 
 	<!-- top -->
 	<div class="g-cont prod-cont">
@@ -50,15 +50,15 @@
 				<!-- base -->
 				<div class="prodbase">
 					<div class="g-title">
-						<p>Hemp Seed Protein 50% Powder (50lb Bag) By Hempco</p>
+						<p>${fn:escapeXml(product.name)}</p>
 						<div class="min">
-							<span class="mintitle">This is an organic ingredient.</span>
-							<span class="sku">888888888</span>
+							<span class="mintitle">${ycommerce:sanitizeHTML(product.summary)}</span>
+							<span class="sku">${fn:escapeXml(product.code)}</span>
 						</div>
 					</div>
 					<div class="priceset">
-						<span class="price">$60.00</span>
-						<span class="old-price">$67.00</span>
+						<span class="price"><format:fromPrice priceData="${product.price}"/></span>
+						<span class="old-price"><format:fromPrice priceData="${product.price}"/></span>
 					</div>
 					<div class="Summary">
 						<span><i>FREE</i>Buy 2 pieces for FREE Shipping;</span>
@@ -96,7 +96,7 @@
 							</label>						
 						</div>
 						<div class="invernum">
-							<span class="label-title inventory">Inventory:<i>8</i> <span class="spot">(<em>8</em>)</span></span>	
+							<span class="label-title inventory">Inventory:<i>${product.stock.stockLevel}</i> <span class="spot">(<em>${product.stock.stockLevel}</em>)</span></span>	
 
 							<label>
 								<input type="checkbox" name="Keep">
@@ -433,8 +433,6 @@
 	<!-- item end -->
 		</div>
 		<!-- down end -->
-	
-	</div>	
 <script>
 inputint()
 

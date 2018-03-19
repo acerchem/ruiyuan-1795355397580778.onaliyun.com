@@ -131,7 +131,7 @@
         </typegroup>
         
         <!-- add by Randy -->
-        <typegroup name="import 燾hemicalInfo and unitCalculateRato">
+        <typegroup name="import chemicalInfo and unitCalculateRato">
 
 			<itemtype code="Product" autocreate="false" generate="false">
 				<description>Extending the Product type from core with additional attributes.</description>
@@ -139,16 +139,92 @@
 					<attribute type="java.lang.String" qualifier="chemicalInfo">
 						<modifiers read="true" write="true" search="false" optional="true"/>
 						<persistence type="property" />
-						<description>Attribute about 燾hemicalInfo of Product</description>
+						<description>Attribute about chemicalInfo of Product</description>
 					</attribute>
 					<attribute type="java.lang.String" qualifier="unitCalculateRato">
 						<modifiers read="true" write="true" search="false" optional="true"/>
 						<persistence type="property" />
-						<description>Attribute about 爑nitCalculateRato of Product</description>
+						<description>Attribute about unitCalculateRato of Product</description>
 					</attribute>
 				</attributes>
 			</itemtype>
+			
+			<itemtype code="ProductCarouselComponent" autocreate="false"
+				generate="false">
+				<attributes>
+					<attribute qualifier="isPromotion" type="boolean">
+							<persistence type="property" />
+							<modifiers optional="false" />
+							<defaultvalue>Boolean.TRUE</defaultvalue>
+							<description>If show the promotion page </description>
+						</attribute>
+						
+						<attribute qualifier="isWell" type="boolean">
+							<persistence type="property" />
+							<modifiers optional="false" />
+							<defaultvalue>Boolean.TRUE</defaultvalue>
+							<description>If show the well sale page </description>
+						</attribute>
+						
+						<attribute qualifier="isSale" type="boolean">
+							<persistence type="property" />
+							<modifiers optional="false" />
+							<defaultvalue>Boolean.TRUE</defaultvalue>
+							<description>If show the sale page </description>
+						</attribute>
+					</attributes>
+			</itemtype>
+			
+			<itemtype code="SimpleResponsiveBannerComponent" generate="false" autocreate="false">
+			    <attributes>
+				<attribute qualifier="isFeature" type="boolean">
+							<persistence type="property" />
+							<modifiers optional="false" />
+							<defaultvalue>Boolean.TRUE</defaultvalue>
+							<description>If show the feature page </description>
+						</attribute>
+			   </attributes>
+			</itemtype>
+			
 		</typegroup>
+		
+		<!-- add by Randy -->
+		<typegroup name="import the component of fronter page">
+			<itemtype code="AbstractMultipleBannerComponent" autocreate="true" generate="true" abstract="true"
+					jaloclass="de.hybris.platform.cms2lib.components.AbstractMultipleBannerComponent"
+					extends="AbstractBannerComponent">
+				</itemtype>
+				
+				<itemtype code="FunctionButtonComponent" autocreate="true" generate="true"
+					jaloclass="de.hybris.platform.cms2lib.components.FunctionButtonComponent"
+					extends="AbstractMultipleBannerComponent">
+				</itemtype>
+				
+				<itemtype code="MultipleBannerComponent" autocreate="true" generate="true"
+					jaloclass="de.hybris.platform.cms2lib.components.MultipleBannerComponent"
+					extends="AbstractMultipleBannerComponent">
+					<attributes>
+					<attribute qualifier="loop" type="java.lang.Boolean">
+						<defaultvalue>Boolean.TRUE</defaultvalue>
+						<persistence type="property" />
+						<modifiers optional="false" />
+					</attribute>
+					
+					<attribute qualifier="displayLevel" type="java.lang.Integer">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<defaultvalue>Integer.valueOf(0)</defaultvalue>
+					</attribute>
+					
+					<attribute qualifier="classfication" type="java.lang.String">
+						<persistence type="property" />
+						<modifiers optional="false" />
+					</attribute>
+					
+				</attributes>
+			</itemtype>
+		</typegroup>
+		
 		
 		<!--Alice添加字段:匿名是否显示价格  -->
         <typegroup name="traning">
@@ -178,6 +254,9 @@
 			</itemtype>
 		</typegroup>
 	<!-- shaun.sheng -->
+	
+	
+	
 		
 		
     </itemtypes>

@@ -38,7 +38,7 @@
 
 	<%-- CSS Files Are Loaded First as they can be downloaded in parallel --%>
 	<template:styleSheets/>
-	<template:javaScript/>
+		<template:javaScript/>
 
 	<%-- Inject any additional CSS required by the page --%>
 	<jsp:invoke fragment="pageCss"/>
@@ -46,7 +46,7 @@
 	<generatedVariables:generatedVariables/>
 </head>
 
-<body class="${pageBodyCssClasses} ${cmsPageRequestContextData.liveEdit ? ' yCmsLiveEdit' : ''} language-${fn:escapeXml(currentLanguage.isocode)}">
+<body>
 
 	<%-- Inject the page body here --%>
 	<jsp:doBody/>
