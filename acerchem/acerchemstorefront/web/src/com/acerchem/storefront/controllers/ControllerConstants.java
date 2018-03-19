@@ -91,6 +91,7 @@ public interface ControllerConstants
 				String AccountEditAddressPage = "pages/account/accountEditAddressPage"; // NOSONAR
 				String AccountPaymentInfoPage = "pages/account/accountPaymentInfoPage"; // NOSONAR
 				String AccountRegisterPage = "pages/account/accountRegisterPage"; // NOSONAR
+				String AccountRegisterSuccessPage="pages/account/AccountRegisterSuccessPage";
 			}
 
 			interface Checkout // NOSONAR
@@ -203,6 +204,12 @@ public interface ControllerConstants
 				String ZoomImagesPopup = "fragments/product/zoomImagesPopup"; // NOSONAR
 				String ReviewsTab = "fragments/product/reviewsTab"; // NOSONAR
 				String StorePickupSearchResults = "fragments/product/storePickupSearchResults"; // NOSONAR
+			}
+			
+			interface Address
+			{
+				String ShipRegionsByCountry="fragments/address/shipRegionsByCountry";
+				String ContactRegionsByCountry="fragments/address/contactRegionsByCountry";
 			}
 		}
 	}
