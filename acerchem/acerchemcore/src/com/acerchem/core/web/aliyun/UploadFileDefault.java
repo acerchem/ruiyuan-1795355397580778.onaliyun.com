@@ -104,47 +104,19 @@ public class UploadFileDefault {
 	 * @param input
 	 * @throws IOException
 	 */
-	public static void uploadFile(InputStream input, String key) throws OSSException, ClientException, IOException {
+	public static boolean uploadFile(InputStream input, String key) throws IOException {
 
 		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
 
-		try {
-		// 确立bucket
-		CreateBucketExist(ossClient, bucketName);
-		// 上传
-		ossClient.putObject(bucketName, key, input);
-		} finally {
-		/*
-		 * Do not forget to shut down the client finally to release all
-		 * allocated resources.
-		 */
-		ossClient.shutdown();
-		}
-
-	}
-
-	// 上传本地文件
-	public static void uploadFile(File local, String key) throws IOException {
-
-		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
 		try {
 			// 确立bucket
 			CreateBucketExist(ossClient, bucketName);
 			// 上传
-			ossClient.putObject(bucketName, key, local);
-
+			ossClient.putObject(bucketName, key, input);
 		} catch (OSSException oe) {
-			System.out.println("Caught an OSSException, which means your request made it to OSS, "
-					+ "but was rejected with an error response for some reason.");
-			System.out.println("Error Message: " + oe.getErrorCode());
-			System.out.println("Error Code:       " + oe.getErrorCode());
-			System.out.println("Request ID:      " + oe.getRequestId());
-			System.out.println("Host ID:           " + oe.getHostId());
+			return false;
 		} catch (ClientException ce) {
-			System.out.println("Caught an ClientException, which means the client encountered "
-					+ "a serious internal problem while trying to communicate with OSS, "
-					+ "such as not being able to access the network.");
-			System.out.println("Error Message: " + ce.getMessage());
+			return false;
 
 		} finally {
 			/*
@@ -154,6 +126,33 @@ public class UploadFileDefault {
 			ossClient.shutdown();
 		}
 
+		return true;
+	}
+
+	// 上传本地文件
+	public static boolean uploadFile(File local, String key) throws IOException {
+
+		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
+		try {
+			// 确立bucket
+			CreateBucketExist(ossClient, bucketName);
+			// 上传
+			ossClient.putObject(bucketName, key, local);
+
+		} catch (OSSException oe) {
+			return false;
+		} catch (ClientException ce) {
+			return false;
+
+		} finally {
+			/*
+			 * Do not forget to shut down the client finally to release all
+			 * allocated resources.
+			 */
+			ossClient.shutdown();
+		}
+
+		return true;
 	}
 
 	private static void CreateBucketExist(OSSClient ossClient, String buketName) {

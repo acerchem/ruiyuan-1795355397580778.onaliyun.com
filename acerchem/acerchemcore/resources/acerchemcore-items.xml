@@ -31,6 +31,17 @@
 			<value code="WHITE" />
 			<value code="YELLOW" />
 		</enumtype>
+		<!-- 图像上传失败后再次上传操作类型 -->
+		<enumtype code="ImageFailedActionType" autocreate="true" generate="true" dynamic="true">
+			<description>图像再传操作类型</description>
+			<value code="ADD">
+				<description>增加</description>
+			</value>
+			<value code="DEL">
+				<description>删除</description>
+			</value>
+			
+		</enumtype>
 	</enumtypes>
 
 	<itemtypes>
@@ -144,7 +155,7 @@
 							optional="true" />
 						<persistence type="property" />
 					</attribute>
-					<attribute qualifier="actionType" type="java.lang.String">
+					<attribute qualifier="actionType" type="ImageFailedActionType">
 						<description>操作类型</description>
 						<modifiers read="true" write="true" search="true"
 							optional="true" />

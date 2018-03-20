@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-3-20 19:07:28                          ---
+ * --- Generated at 2018-3-21 2:31:50                           ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.jalo;
@@ -10,6 +10,7 @@ import com.acerchem.core.constants.AcerchemCoreConstants;
 import de.hybris.platform.jalo.GenericItem;
 import de.hybris.platform.jalo.Item.AttributeMode;
 import de.hybris.platform.jalo.SessionContext;
+import de.hybris.platform.jalo.enumeration.EnumerationValue;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -51,16 +52,16 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 	 * <i>Generated method</i> - Getter of the <code>ImageFailedRecord.actionType</code> attribute.
 	 * @return the actionType - æä½ç±»å
 	 */
-	public String getActionType(final SessionContext ctx)
+	public EnumerationValue getActionType(final SessionContext ctx)
 	{
-		return (String)getProperty( ctx, ACTIONTYPE);
+		return (EnumerationValue)getProperty( ctx, ACTIONTYPE);
 	}
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>ImageFailedRecord.actionType</code> attribute.
 	 * @return the actionType - æä½ç±»å
 	 */
-	public String getActionType()
+	public EnumerationValue getActionType()
 	{
 		return getActionType( getSession().getSessionContext() );
 	}
@@ -69,7 +70,7 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 	 * <i>Generated method</i> - Setter of the <code>ImageFailedRecord.actionType</code> attribute. 
 	 * @param value the actionType - æä½ç±»å
 	 */
-	public void setActionType(final SessionContext ctx, final String value)
+	public void setActionType(final SessionContext ctx, final EnumerationValue value)
 	{
 		setProperty(ctx, ACTIONTYPE,value);
 	}
@@ -78,7 +79,7 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 	 * <i>Generated method</i> - Setter of the <code>ImageFailedRecord.actionType</code> attribute. 
 	 * @param value the actionType - æä½ç±»å
 	 */
-	public void setActionType(final String value)
+	public void setActionType(final EnumerationValue value)
 	{
 		setActionType( getSession().getSessionContext(), value );
 	}

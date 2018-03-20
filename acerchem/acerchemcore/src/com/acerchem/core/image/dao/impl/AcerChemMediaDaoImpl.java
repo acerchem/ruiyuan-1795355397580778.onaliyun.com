@@ -30,7 +30,7 @@ public class AcerChemMediaDaoImpl implements AcerChemMediaDao {
 		FlexibleSearchQuery query = new FlexibleSearchQuery(GET_MEDIA_MODEL);
 		query.addQueryParameter("pk", pk);
 		
-		query.setResultClassList(Arrays.asList(MediaModel.class));
+		//query.setResultClassList(Arrays.asList(MediaModel.class));
 		SearchResult<MediaModel> result = flexibleSearchService.search(query);
 		List<MediaModel> list = result.getResult();
 		if(CollectionUtils.isNotEmpty(list)){

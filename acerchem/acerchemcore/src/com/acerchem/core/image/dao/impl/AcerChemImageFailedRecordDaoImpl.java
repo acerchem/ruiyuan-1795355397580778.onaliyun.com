@@ -22,18 +22,18 @@ public class AcerChemImageFailedRecordDaoImpl implements AcerChemImageFailedReco
 	public List<ImageFailedRecordModel> getImageFailedRecordByFileAttr(String fileName, String actionType) {
 		// TODO Auto-generated method stub
 		
-		String GET_IMAGEFAILEDRECORD = "SELECT PK "
+		String GET_IMAGEFAILEDRECORD = "SELECT {pk} "
 				+ " FROM {"+ImageFailedRecordModel._TYPECODE+"}"
 				+ " WHERE {"+ImageFailedRecordModel.FILENAME+"} =?fileName and {"+ImageFailedRecordModel.ACTIONTYPE+"} = ?action";
 		FlexibleSearchQuery query = new FlexibleSearchQuery(GET_IMAGEFAILEDRECORD);
 		query.addQueryParameter("fileName", fileName);
 		query.addQueryParameter("action",actionType);
-		query.setResultClassList(Arrays.asList(ImageFailedRecordModel.class));
+		
 		
 		SearchResult<ImageFailedRecordModel> result = flexibleSearchService.search(query);
-		List<ImageFailedRecordModel> list = result.getResult();
+		return result.getResult();
 		
-		return list;
+		
 	}
 
 }

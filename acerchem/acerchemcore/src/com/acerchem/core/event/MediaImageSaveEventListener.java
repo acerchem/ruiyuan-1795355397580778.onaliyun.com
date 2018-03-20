@@ -13,11 +13,10 @@ import com.acerchem.core.image.service.AcerChemImageUploadLogService;
 import com.acerchem.core.image.service.AcerChemMediaService;
 import com.acerchem.core.model.ImageUploadedLogModel;
 import com.acerchem.core.web.aliyun.UploadFileDefault;
-import com.aliyun.oss.ClientException;
-import com.aliyun.oss.OSSException;
 
 import de.hybris.platform.core.PK;
 import de.hybris.platform.core.model.media.MediaModel;
+import de.hybris.platform.jalo.media.Media;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.tx.AfterSaveEvent;
@@ -56,7 +55,10 @@ public class MediaImageSaveEventListener implements AfterSaveListener {
 					if (mediaPath.equals("images") && mediaType.equals("image")) {
 						final String ls = media.getLocation();
 
-						if (StringUtils.isNotBlank(ls)) {
+						//处理hmc发生两次图
+						String _location = ls.substring(ls.indexOf("/")+1);
+						
+						if (StringUtils.isNotBlank(ls) && (_location.indexOf("/")>0)) {
 
 							System.out.println("**********upload image to aliyun start*********");
 							uploadImageSendProcessor(media);
@@ -87,28 +89,37 @@ public class MediaImageSaveEventListener implements AfterSaveListener {
 
 			String keySuffix = file.getName().substring(file.getName().lastIndexOf(".") + 1);
 
+			//aliyun relation path>>> application/yyyymmdd/
 			String key = configurationService.getConfiguration().getString("aliyun.preffixKey") + "/" + temp_ + "/"
 					+ media.getPk().getLong().toString() + "." + keySuffix;
+			//初始化upload参数
+			String lsEndpoint = configurationService.getConfiguration().getString("aliyun.endpoint");
+			String lsAccessKeyId = configurationService.getConfiguration().getString("aliyun.accessKeyId");
+			String lsAccessKeySecret = configurationService.getConfiguration().getString("aliyun.accessKeySecret");
+			String lsBucketName = configurationService.getConfiguration().getString("aliyun.bucketName");
+			
+			UploadFileDefault.initializeParameters(lsEndpoint, lsAccessKeyId, lsAccessKeySecret, lsBucketName);
 			// upload aliyun
-			UploadFileDefault.uploadFile(file, key);
+			boolean uploadFlag = UploadFileDefault.uploadFile(file, key);
 
-			// save aliyunUrl to ImageUploadedLog
-			String aliyunUrl = configurationService.getConfiguration().getString("aliyun.domain") + "/" + key;
+			if (uploadFlag) {
+				System.out.println("****upload end>>>>synsave to server start*****");
+				// save aliyunUrl to ImageUploadedLog
+				String aliyunUrl = configurationService.getConfiguration().getString("aliyun.domain") + "/" + key;
 
-			ImageUploadedLogModel iulModel = acerChemImageUploadLogService
-					.getImageUploadedLog(media.getPk().getLong().toString());
-			if (iulModel == null) {
-				iulModel = modelService.create(ImageUploadedLogModel.class);
+				ImageUploadedLogModel iulModel = acerChemImageUploadLogService
+						.getImageUploadedLog(media.getPk().getLong().toString());
+				if (iulModel == null) {
+					iulModel = modelService.create(ImageUploadedLogModel.class);
+				}
+				iulModel.setAliyunUrl(aliyunUrl);
+				iulModel.setImagePK(media.getPk().getLong().toString());
+
+				modelService.save(iulModel);
+				System.out.println("****synsave to server end*****");
+			} else {
+				uploadFailedProccess();
 			}
-			iulModel.setAliyunUrl(aliyunUrl);
-			iulModel.setImagePK(media.getPk().getLong().toString());
-
-			modelService.save(iulModel);
-
-		} catch (OSSException oe) {
-			uploadFailedProccess();
-		} catch (ClientException ce) {
-			uploadFailedProccess();
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -118,7 +129,9 @@ public class MediaImageSaveEventListener implements AfterSaveListener {
 
 	// 上传失败处理
 	private void uploadFailedProccess() {
-
+		
+		
+		
 	}
 
 }

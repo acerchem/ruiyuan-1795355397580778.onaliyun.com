@@ -111,6 +111,11 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			null
 		);
 	
+		createEnumerationType(
+			"ImageFailedActionType",
+			null
+		);
+	
 		createCollectionType(
 			"GenderList",
 			"Gender",
@@ -302,7 +307,7 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 					"ImageFailedRecord", 
 					"actionType",  
 					null,
-					"java.lang.String",
+					"ImageFailedActionType",
 					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
 					null,
 					sqlColumnDefinitions
@@ -494,6 +499,16 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			} )
 		);
 	
+		createEnumerationValues(
+			"ImageFailedActionType",
+			true,
+			Arrays.asList( new String[] {
+			
+				"ADD",
+				"DEL"
+			} )
+		);
+	
 				{
 				Map customPropsMap = new HashMap();
 				
@@ -662,6 +677,13 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 				setDefaultProperties(
 					"SwatchColorEnum",
+					true,
+					true,
+					null
+				);
+			
+				setDefaultProperties(
+					"ImageFailedActionType",
 					true,
 					true,
 					null
