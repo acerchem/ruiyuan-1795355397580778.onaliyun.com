@@ -16,7 +16,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractRegisterPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.AddressForm;
-import de.hybris.platform.acceleratorstorefrontcommons.forms.CustomRegisterForm;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.GuestForm;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.LoginForm;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
@@ -45,6 +44,8 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.tx.Transaction;
 
 import com.acerchem.storefront.controllers.ControllerConstants;
+import com.acerchem.storefront.data.CustomRegisterForm;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
