@@ -10,10 +10,11 @@
 <%@ taglib prefix="common" tagdir="/WEB-INF/tags/responsive/common"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="address" tagdir="/WEB-INF/tags/desktop/address"%>
+<c:url value="/" var="homeUrl"/>
 
 <body class="gray">
 <div class="sign-header">
-	<a href="/acerchemstorefront">
+	<a href="${homeUrl}">
 		<img src="${themeResourcePath}/css/acerchem.png" alt="acerchem"/>
 	</a>
 </div>
@@ -162,15 +163,16 @@
 		
 		
 		<div class="link">
-			By creating an account, you agree to Acerchem <br/> <a href="/acerchemstorefront/electronics/zh/login">Conditions</a>
-		 of Use and <a href="/acerchemstorefront/electronics/zh/login">Privacy Notice</a>.
+		
+			By creating an account, you agree to Acerchem <br/> <a href="javascript:history.go(-1)">Conditions</a>
+		 of Use and <a href="javascript:history.go(-1)">Privacy Notice</a>.
 		</div>
 		</form:form>
 		<div class="btn-set">
 			<button type="submit" class="btn btn-submit">Register</button>
 		</div>
 	<div class="link">
-		Already have an account? <a href="/acerchemstorefront/electronics/zh/login">Sign in </a>
+		Already have an account? <a href="javascript:history.go(-1)">Sign in </a>
 	</div>
 </div>
 
