@@ -1,7 +1,6 @@
 package com.acerchem.storefront.checkout.steps.validation.impl;
 
 import de.hybris.platform.acceleratorstorefrontcommons.forms.AddressForm;
-import de.hybris.platform.acceleratorstorefrontcommons.forms.CustomRegisterForm;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.RegisterForm;
 
 import java.util.regex.Matcher;
@@ -11,6 +10,8 @@ import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
 import org.springframework.validation.Validator;
+
+import com.acerchem.storefront.data.CustomRegisterForm;
 
 /**
 * @author alice
