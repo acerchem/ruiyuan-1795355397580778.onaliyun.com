@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.fest.util.Collections;
 
 import com.acerchem.core.image.dao.AcerChemMediaDao;
@@ -24,7 +25,7 @@ public class AcerChemMediaDaoImpl implements AcerChemMediaDao {
 	public MediaModel getMediaByPk(String pk) {
 		// TODO Auto-generated method stub
 		
-		final String GET_MEDIA_MODEL = "select pk from {" + MediaModel._TYPECODE + "} where {" + MediaModel.PK + "} =?pk";
+		final String GET_MEDIA_MODEL = "select {pk} from {" + MediaModel._TYPECODE + "} where {" + MediaModel.PK + "} =?pk";
 		
 		FlexibleSearchQuery query = new FlexibleSearchQuery(GET_MEDIA_MODEL);
 		query.addQueryParameter("pk", pk);
@@ -32,7 +33,7 @@ public class AcerChemMediaDaoImpl implements AcerChemMediaDao {
 		query.setResultClassList(Arrays.asList(MediaModel.class));
 		SearchResult<MediaModel> result = flexibleSearchService.search(query);
 		List<MediaModel> list = result.getResult();
-		if(!Collections.isEmpty(list)){
+		if(CollectionUtils.isNotEmpty(list)){
 			return list.get(0);
 		}
 		

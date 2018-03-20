@@ -16,16 +16,14 @@ import com.acerchem.core.web.aliyun.UploadFileDefault;
 import com.aliyun.oss.ClientException;
 import com.aliyun.oss.OSSException;
 
-import de.hybris.platform.commons.model.DocumentModel;
 import de.hybris.platform.core.PK;
 import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.tx.AfterSaveEvent;
 import de.hybris.platform.tx.AfterSaveListener;
-import reactor.util.CollectionUtils;
 
-public class MyAfterSaveListener implements AfterSaveListener {
+public class MediaImageSaveEventListener implements AfterSaveListener {
 
 	@Resource
 	private ModelService modelService;
@@ -33,12 +31,12 @@ public class MyAfterSaveListener implements AfterSaveListener {
 	private ConfigurationService configurationService;
 	@Resource
 	private AcerChemImageUploadLogService acerChemImageUploadLogService;
-	@Resource   
+	@Resource
 	private AcerChemMediaService acerChemMediaService;
+
 	@Override
 	public void afterSave(Collection<AfterSaveEvent> collection) {
 		// TODO Auto-generated method stub
-
 		for (final AfterSaveEvent event : collection) {
 			final int type = event.getType();
 			if (AfterSaveEvent.UPDATE == type) {
@@ -47,33 +45,22 @@ public class MyAfterSaveListener implements AfterSaveListener {
 				if (30 == pk.getTypeCode()) {
 					System.out.println("*****Media After save event is active!********");
 					final MediaModel media = modelService.get(pk);
-					if(media == null) return;
+					if (media == null)
+						return;
 					// logic。。。。。。。。
 					// when media is images
 					String mediaPath = StringUtils.isNotBlank(media.getFolder().getPath()) ? media.getFolder().getPath()
 							: "";
 					String mediaType = media.getMime();
-					mediaType = mediaType.substring(0,mediaType.indexOf("/"));
+					mediaType = mediaType.substring(0, mediaType.indexOf("/"));
 					if (mediaPath.equals("images") && mediaType.equals("image")) {
 						final String ls = media.getLocation();
 
 						if (StringUtils.isNotBlank(ls)) {
-							// 采用一个线程调用 ----不能再开线程，发生线程穿入错误
-//							new Thread(new Runnable() {
-//								@Override
-//								public void run() {
-//									try {
-//										// 休眠100毫秒
-//										Thread.sleep(100);
-//									} catch (InterruptedException e) {
-//										e.printStackTrace();
-//									}
-									// callback logic here
-									System.out.println("**********upload image to aliyun start*********");
-									uploadImageSendProcessor(media);
 
-//								}
-//							}).start();
+							System.out.println("**********upload image to aliyun start*********");
+							uploadImageSendProcessor(media);
+
 						} else {
 							System.out.println("Media's Location is null!");
 						}
@@ -85,9 +72,6 @@ public class MyAfterSaveListener implements AfterSaveListener {
 	}
 
 	private void uploadImageSendProcessor(MediaModel media) {
-		// DocumentModel doc = new DocumentModel();
-
-		// Ttem.out.println(temp);
 
 		try {
 			// get localfile path
@@ -109,10 +93,10 @@ public class MyAfterSaveListener implements AfterSaveListener {
 			UploadFileDefault.uploadFile(file, key);
 
 			// save aliyunUrl to ImageUploadedLog
-			String aliyunUrl = configurationService.getConfiguration().getString("aliyun.domain") + "/"+key;
+			String aliyunUrl = configurationService.getConfiguration().getString("aliyun.domain") + "/" + key;
 
 			ImageUploadedLogModel iulModel = acerChemImageUploadLogService
-					.getImageUploadedLog(media.getPk().getLongValueAsString());
+					.getImageUploadedLog(media.getPk().getLong().toString());
 			if (iulModel == null) {
 				iulModel = modelService.create(ImageUploadedLogModel.class);
 			}
@@ -121,15 +105,6 @@ public class MyAfterSaveListener implements AfterSaveListener {
 
 			modelService.save(iulModel);
 
-			//test
-//			String testPk = media.getPk().getLongValueAsString();
-//			
-//			MediaModel mmm = acerChemMediaService.getMediaModelByPk(testPk);
-//			if(StringUtils.isNotBlank(mmm.getLocation())) {
-//				System.out.println("oldLocation="+media.getLocation());
-//				System.out.println("newLocation="+mmm.getLocation());
-//			}
-			
 		} catch (OSSException oe) {
 			uploadFailedProccess();
 		} catch (ClientException ce) {
@@ -139,21 +114,11 @@ public class MyAfterSaveListener implements AfterSaveListener {
 			e.printStackTrace();
 		}
 
-		// System.out.println("*****************");
-		// UploadFileDefault.setEndpoint(configurationService.getConfiguration().getString("aliyun.endpoint"));
-		// String ss = UploadFileDefault.getEndpoint();
-		// System.out.println(ss);
-		// String ls =
-		// configurationService.getConfiguration().getString("web.baseurl");
-		// System.out.println("****["+ls+"]****");
-		// System.out.println("**********upload image to aliyun end*********");
-		// modelService.save(doc);
-
 	}
-	
-	//上传失败处理
-	private void uploadFailedProccess(){
-		
+
+	// 上传失败处理
+	private void uploadFailedProccess() {
+
 	}
 
 }

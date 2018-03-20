@@ -593,20 +593,25 @@
 	<!--shaun -->
 	
 	<!-- Jayson.Wang add Image Listener -->
+	<!-- 
 	<bean id="mediaImageCreatedListener" class="com.acerchem.core.event.MediaImageCreatedListener" parent="abstractEventListener"/>
 	<bean id="myAfterSaveListener" class="com.acerchem.core.event.MyAfterSaveListener" />
+	 -->
+	<bean id="mediaImageSaveListener" class="com.acerchem.core.event.MediaImageSaveEventListener" />
 	
 	<!-- Jayson.Wang add dao -->
 	<bean id="acerChemImageFailedRecordDao" class="com.acerchem.core.image.dao.impl.AcerChemImageFailedRecordDaoImpl"  >
 	</bean>
 	<bean id="acerChemMediaDao" class="com.acerchem.core.image.dao.impl.AcerChemMediaDaoImpl"  >
 	</bean>
-	
+	<bean id="acerChemImageUploadedLogDao" class="com.acerchem.core.image.dao.impl.AcerChemImageUploadedLogDaoImpl"  >
+	</bean>
 	<!-- Jayson.Wang add service -->
 	<bean id="acerChemMediaImageService" class="com.acerchem.core.image.service.impl.AcerChemMediaImageServiceImpl"  >
 	</bean>
 	<bean id="acerChemMediaService" class="com.acerchem.core.image.service.impl.AcerChemMediaServiceImpl"  >
 	</bean>
 	
-	
+	<bean id="acerChemImageUploadLogService" class="com.acerchem.core.image.service.impl.AcerChemImageUploadLogServiceImpl"  >
+	</bean>
 </beans>

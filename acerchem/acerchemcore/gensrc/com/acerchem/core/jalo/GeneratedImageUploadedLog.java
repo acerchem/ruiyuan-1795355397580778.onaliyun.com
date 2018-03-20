@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-3-18 17:43:24                          ---
+ * --- Generated at 2018-3-20 19:07:28                          ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.jalo;
@@ -22,17 +22,56 @@ public abstract class GeneratedImageUploadedLog extends GenericItem
 {
 	/** Qualifier of the <code>ImageUploadedLog.imagePK</code> attribute **/
 	public static final String IMAGEPK = "imagePK";
+	/** Qualifier of the <code>ImageUploadedLog.aliyunUrl</code> attribute **/
+	public static final String ALIYUNURL = "aliyunUrl";
 	protected static final Map<String, AttributeMode> DEFAULT_INITIAL_ATTRIBUTES;
 	static
 	{
 		final Map<String, AttributeMode> tmp = new HashMap<String, AttributeMode>();
 		tmp.put(IMAGEPK, AttributeMode.INITIAL);
+		tmp.put(ALIYUNURL, AttributeMode.INITIAL);
 		DEFAULT_INITIAL_ATTRIBUTES = Collections.unmodifiableMap(tmp);
 	}
 	@Override
 	protected Map<String, AttributeMode> getDefaultAttributeModes()
 	{
 		return DEFAULT_INITIAL_ATTRIBUTES;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>ImageUploadedLog.aliyunUrl</code> attribute.
+	 * @return the aliyunUrl - é¿éäºURL
+	 */
+	public String getAliyunUrl(final SessionContext ctx)
+	{
+		return (String)getProperty( ctx, ALIYUNURL);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>ImageUploadedLog.aliyunUrl</code> attribute.
+	 * @return the aliyunUrl - é¿éäºURL
+	 */
+	public String getAliyunUrl()
+	{
+		return getAliyunUrl( getSession().getSessionContext() );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>ImageUploadedLog.aliyunUrl</code> attribute. 
+	 * @param value the aliyunUrl - é¿éäºURL
+	 */
+	public void setAliyunUrl(final SessionContext ctx, final String value)
+	{
+		setProperty(ctx, ALIYUNURL,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>ImageUploadedLog.aliyunUrl</code> attribute. 
+	 * @param value the aliyunUrl - é¿éäºURL
+	 */
+	public void setAliyunUrl(final String value)
+	{
+		setAliyunUrl( getSession().getSessionContext(), value );
 	}
 	
 	/**

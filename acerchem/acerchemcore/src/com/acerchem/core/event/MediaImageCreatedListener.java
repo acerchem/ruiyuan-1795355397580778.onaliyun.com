@@ -1,5 +1,7 @@
 package com.acerchem.core.event;
 
+import java.lang.reflect.Field;
+
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
@@ -54,7 +56,7 @@ public class MediaImageCreatedListener extends AbstractEventListener<AfterItemCr
 				if (media != null) {
 
 					String pkString = media.getPk().getLong().toString();
-
+					
 					String ls = media.getLocation();
 
 					System.out.println("***************AfterItemCreationEvent is active***********");
