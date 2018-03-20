@@ -17,7 +17,8 @@
 <body class="gray">
 <form:form action="${loginActionUrl}" method="post" commandName="loginForm">
 	<div class="sign-header">
-		<a href="/acerchemstorefront">
+		<c:url value="/" var="homeUrl"/>
+		<a href="${homeUrl}">
 			<img src="${themeResourcePath}/css/acerchem.png" alt="acerchem"/>
 		</a>
 	</div>
@@ -40,7 +41,8 @@
 				<button type="submit" class="btn">
 					<spring:theme code="login.login" />
 				</button>
-				<a class="btn btn-line" href="/acerchemstorefront/electronics/zh/login/register">Create your Amazon account</a>
+				<c:url value="/login/register" var="registerUrl"/>
+				<a class="btn btn-line" href="${registerUrl}">Create your Amazon account</a>
 			</div>
 		</ycommerce:testId>
 	</div>
