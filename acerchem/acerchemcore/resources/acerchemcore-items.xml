@@ -231,7 +231,7 @@
             <itemtype code="Product" autocreate="false" generate="false">
 		       <description>Extending the Product type from core with additional attributes.</description>
 		         <attributes>
-		          <attribute qualifier="anonymousDisplayPrice" type="boolean" > 
+		          <attribute qualifier="anonymousDisplayPrice" type="boolean" >
 		            <description>Anonymous whether to show the price</description>
 		            <modifiers optional="false" initial="false"/>
 					<persistence type="property" />
@@ -254,10 +254,5 @@
 			</itemtype>
 		</typegroup>
 	<!-- shaun.sheng -->
-	
-	
-	
-		
-		
     </itemtypes>
 </items>

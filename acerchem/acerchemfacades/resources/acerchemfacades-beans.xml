@@ -35,5 +35,10 @@
 		<property name="futureStock" type="java.util.List&lt;com.acerchem.facades.product.data.FutureStockLevelData>"/>
 	</bean>
 	<!-- shaun.sheng -->
-	
+
+
+	<bean class="de.hybris.platform.commercefacades.user.data.CustomerData">
+		<property name="addressDataList" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.AddressData>"/>
+	</bean>
+
 </beans>

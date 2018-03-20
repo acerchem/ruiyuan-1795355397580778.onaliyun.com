@@ -220,9 +220,25 @@
 	 <alias name="acerchemFutureStockPopulator" alias="stockPopulator"/>
 	<bean id="acerchemFutureStockPopulator" parent="defaultStockPopulator" class="com.acerchem.facades.populators.AcerchemFutureStockPopulator">
 		<property name="acerchemFutureStockservice" ref="acerchemFutureStockservice"/>
-	</bean> 
+	</bean>
 
-	
-	
-    
+	<alias name="defaultAcerchemCustomerPopulator" alias="acerchemCustomerPopulator"/>
+	<bean id="defaultAcerchemCustomerPopulator" parent="customerPopulator" class="com.acerchem.facades.populators.AcerchemCustomerPopulator">
+		<property name="addressConverter" ref="addressConverter"/>
+	</bean>
+
+	<alias name="defaultAcerchemCustomerConverter" alias="acerchemCustomerConverter"/>
+	<bean id="defaultAcerchemCustomerConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.user.data.CustomerData"/>
+		<property name="populators">
+			<list>
+				<ref bean="acerchemCustomerPopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultAcerchemCustomerFacade" alias="acerchemCustomerFacade"/>
+	<bean id="defaultAcerchemCustomerFacade" parent="customerFacade" class="com.acerchem.facades.facades.impl.DefaultAcerchemCustomerFacade" >
+		<property name="acerchemCustomerConverter" ref="acerchemCustomerConverter"/>
+	</bean>
 </beans>
