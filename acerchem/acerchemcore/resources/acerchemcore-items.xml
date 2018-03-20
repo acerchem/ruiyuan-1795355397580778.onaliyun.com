@@ -243,12 +243,25 @@
 		<!-- End -->
 		
 		<!--添加字段   TODO -->
-	 <typegroup name="traning">
+	 	<typegroup name="traning">
 			<itemtype code="StockLevel" autocreate="false" generate="false">
 				  <description>Extending the Product type from core with additional attributes.</description>
 				<attributes>
 					<attribute qualifier="preOrderReleaseDay" type="java.lang.Integer">
 						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+
+		<typegroup name="traning">
+			<itemtype code="AbstractOrderEntry" autocreate="false" generate="false">
+				<attributes>
+					<attribute qualifier="isUseFutureStock" type="java.lang.Boolean" >
+						<description>flag for futureStock</description>
+						<persistence type="property" />
+						<defaultvalue>Boolean.FALSE</defaultvalue>
+						<modifiers />
 					</attribute>
 				</attributes>
 			</itemtype>

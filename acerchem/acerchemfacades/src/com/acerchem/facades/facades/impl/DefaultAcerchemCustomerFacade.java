@@ -5,7 +5,6 @@ import de.hybris.platform.commercefacades.customer.impl.DefaultCustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
-import de.hybris.platform.servicelayer.user.UserService;
 import org.springframework.beans.factory.annotation.Required;
 
 /**
@@ -26,4 +25,5 @@ public class DefaultAcerchemCustomerFacade extends DefaultCustomerFacade impleme
     public void setAcerchemCustomerConverter(Converter<CustomerModel, CustomerData> acerchemCustomerConverter) {
         this.acerchemCustomerConverter = acerchemCustomerConverter;
     }
+
 }

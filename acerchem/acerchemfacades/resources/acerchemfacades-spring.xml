@@ -217,7 +217,6 @@
 	
 	
 	<!--shaun: 添加远期库存 -->
-	 <alias name="acerchemFutureStockPopulator" alias="stockPopulator"/>
 	<bean id="acerchemFutureStockPopulator" parent="defaultStockPopulator" class="com.acerchem.facades.populators.AcerchemFutureStockPopulator">
 		<property name="acerchemFutureStockservice" ref="acerchemFutureStockservice"/>
 	</bean>
