@@ -320,24 +320,6 @@
 		    </itemtype>
 		</typegroup>
 		<!-- End -->
-		
-		
-
-		<!--Aliceæ·»å å­æ®µ:å¿åæ¯å¦æ¾ç¤ºä»·æ ¼ -->
-		<typegroup name="traning">
-			<itemtype code="Product" autocreate="false" generate="false">
-				<description>Extending the Product type from core with additional attributes.</description>
-				<attributes>
-					<attribute qualifier="anonymousDisplayPrice" type="boolean">
-						<description>Anonymous whether to show the price</description>
-						<modifiers optional="false" initial="false" />
-						<persistence type="property" />
-						<defaultvalue>Boolean.FALSE</defaultvalue>
-					</attribute>
-				</attributes>
-			</itemtype>
-		</typegroup>
-		<!-- End -->
 
 		<!--æ·»å å­æ®µ TODO -->
 		<typegroup name="traning">
