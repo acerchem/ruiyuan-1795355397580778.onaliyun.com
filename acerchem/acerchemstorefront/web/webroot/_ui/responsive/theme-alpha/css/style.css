@@ -10611,7 +10611,7 @@ fieldset[disabled] .btn-primary.active {
   bottom: 0;
   position: absolute;
   right: 0;
-  content: "�?";
+  content: "â?";
 }
 .carousel .item .item__name:after,
 .carousel__component--carousel .item .item__name:after,
@@ -17495,7 +17495,7 @@ select[multiple].input-sm {
     width: 33.33333333%;
   }
   .col-xs-3 {
-    width: 25%;
+    width: 20%;
   }
   .col-xs-2 {
     width: 16.66666667%;
