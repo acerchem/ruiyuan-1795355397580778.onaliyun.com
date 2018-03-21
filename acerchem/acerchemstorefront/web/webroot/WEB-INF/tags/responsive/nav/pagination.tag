@@ -26,12 +26,12 @@
 <c:set var="showTotals" value="${empty showTopTotals ? true : showTopTotals}"/>
 
 <c:if test="${searchPageData.pagination.totalNumberOfResults == 0 && top && showTotals}">
-    <div class="paginationBar top clearfix">
+   <%--  <div class="paginationBar top clearfix">
         <ycommerce:testId code="searchResults_productsFound_label">
             <div class="totalResults"><spring:theme code="${themeMsgKey}.totalResults"
                                                     arguments="${searchPageData.pagination.totalNumberOfResults}"/></div>
         </ycommerce:testId>
-    </div>
+    </div> --%>
 </c:if>
 
 <c:if test="${searchPageData.pagination.totalNumberOfResults > 0}">
@@ -41,6 +41,8 @@
                 <div class="helper clearfix hidden-md hidden-lg"></div>
                 <div class="sort-refine-bar">
                     <div class="row">
+                    
+                    
                         <div class="col-xs-12 col-sm-4 col-md-4">
                             <div class="form-group">
                                 <label class="control-label " for="sortForm${top ? '1' : '2'}">
@@ -89,19 +91,24 @@
                             </div>
                         </div>
 
+
+
+
                         <div class="col-xs-12 col-sm-6 col-md-5 pagination-wrap">
                             <pagination:pageSelectionPagination searchUrl="${searchUrl}" searchPageData="${searchPageData}"
                                                                 numberPagesShown="${numberPagesShown}"
                                                                 themeMsgKey="${themeMsgKey}"/>
                         </div>
 
-                        <c:if test="${not hideRefBtn}">
+
+
+                        <%-- <c:if test="${not hideRefBtn}">
                             <div class="col-xs-12 col-sm-2 col-md-4 hidden-md hidden-lg">
                                 <ycommerce:testId code="searchResults_refine_button">
                                     <product:productRefineButton styleClass="btn btn-default js-show-facets"/>
                                 </ycommerce:testId>
                             </div>
-                        </c:if>
+                        </c:if> --%>
                     </div>
                 </div>
             </c:if>

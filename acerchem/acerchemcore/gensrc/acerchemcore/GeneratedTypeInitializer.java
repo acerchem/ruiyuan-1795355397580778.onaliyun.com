@@ -106,6 +106,36 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			false
 		);
 	
+		createItemType(
+			"AbstractMultipleBannerComponent",
+			"AbstractBannerComponent",
+			de.hybris.platform.cms2lib.components.AbstractMultipleBannerComponent.class,
+			null,
+			false,
+			null,
+			true
+		);
+	
+		createItemType(
+			"FunctionButtonComponent",
+			"AbstractMultipleBannerComponent",
+			de.hybris.platform.cms2lib.components.FunctionButtonComponent.class,
+			null,
+			false,
+			null,
+			false
+		);
+	
+		createItemType(
+			"MultipleBannerComponent",
+			"AbstractMultipleBannerComponent",
+			de.hybris.platform.cms2lib.components.MultipleBannerComponent.class,
+			null,
+			false,
+			null,
+			false
+		);
+	
 		createEnumerationType(
 			"SwatchColorEnum",
 			null
@@ -171,9 +201,25 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 				single_createattr_Product_unitCalculateRato();
 			
+				single_createattr_ProductCarouselComponent_isPromotion();
+			
+				single_createattr_ProductCarouselComponent_isWell();
+			
+				single_createattr_ProductCarouselComponent_isSale();
+			
+				single_createattr_SimpleResponsiveBannerComponent_isFeature();
+			
+				single_createattr_MultipleBannerComponent_loop();
+			
+				single_createattr_MultipleBannerComponent_displayLevel();
+			
+				single_createattr_MultipleBannerComponent_classfication();
+			
 				single_createattr_Product_anonymousDisplayPrice();
 			
 				single_createattr_StockLevel_preOrderReleaseDay();
+			
+				single_createattr_AbstractOrderEntry_isUseFutureStock();
 			
 
 	}
@@ -434,6 +480,125 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 	}
 	
+	public void single_createattr_ProductCarouselComponent_isPromotion() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"ProductCarouselComponent", 
+					"isPromotion",  
+					null,
+					"java.lang.Boolean",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.PRIMITIVE_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_ProductCarouselComponent_isWell() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"ProductCarouselComponent", 
+					"isWell",  
+					null,
+					"java.lang.Boolean",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.PRIMITIVE_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_ProductCarouselComponent_isSale() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"ProductCarouselComponent", 
+					"isSale",  
+					null,
+					"java.lang.Boolean",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.PRIMITIVE_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_SimpleResponsiveBannerComponent_isFeature() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"SimpleResponsiveBannerComponent", 
+					"isFeature",  
+					null,
+					"java.lang.Boolean",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.PRIMITIVE_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_MultipleBannerComponent_loop() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"MultipleBannerComponent", 
+					"loop",  
+					null,
+					"java.lang.Boolean",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_MultipleBannerComponent_displayLevel() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"MultipleBannerComponent", 
+					"displayLevel",  
+					null,
+					"java.lang.Integer",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_MultipleBannerComponent_classfication() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"MultipleBannerComponent", 
+					"classfication",  
+					null,
+					"java.lang.String",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
 	public void single_createattr_Product_anonymousDisplayPrice() throws JaloBusinessException
 	{
 		
@@ -461,6 +626,23 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 					"preOrderReleaseDay",  
 					null,
 					"java.lang.Integer",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_AbstractOrderEntry_isUseFutureStock() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"AbstractOrderEntry", 
+					"isUseFutureStock",  
+					null,
+					"java.lang.Boolean",
 					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
 					null,
 					sqlColumnDefinitions
@@ -641,6 +823,79 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 				Map customPropsMap = new HashMap();
 				
 				changeMetaType(
+					"ProductCarouselComponent",
+					null,
+					customPropsMap
+				);
+				}
+			
+			single_setAttributeProperties_ProductCarouselComponent_isPromotion();
+		
+			single_setAttributeProperties_ProductCarouselComponent_isWell();
+		
+			single_setAttributeProperties_ProductCarouselComponent_isSale();
+		
+				{
+				Map customPropsMap = new HashMap();
+				
+				changeMetaType(
+					"SimpleResponsiveBannerComponent",
+					null,
+					customPropsMap
+				);
+				}
+			
+			single_setAttributeProperties_SimpleResponsiveBannerComponent_isFeature();
+		
+				{
+				Map customPropsMap = new HashMap();
+				
+				setItemTypeProperties(
+					"AbstractMultipleBannerComponent",
+					false,
+					true,
+					true,
+					null,
+					customPropsMap
+				);
+				}
+			
+				{
+				Map customPropsMap = new HashMap();
+				
+				setItemTypeProperties(
+					"FunctionButtonComponent",
+					false,
+					true,
+					true,
+					null,
+					customPropsMap
+				);
+				}
+			
+				{
+				Map customPropsMap = new HashMap();
+				
+				setItemTypeProperties(
+					"MultipleBannerComponent",
+					false,
+					true,
+					true,
+					null,
+					customPropsMap
+				);
+				}
+			
+			single_setAttributeProperties_MultipleBannerComponent_loop();
+		
+			single_setAttributeProperties_MultipleBannerComponent_displayLevel();
+		
+			single_setAttributeProperties_MultipleBannerComponent_classfication();
+		
+				{
+				Map customPropsMap = new HashMap();
+				
+				changeMetaType(
 					"Product",
 					null,
 					customPropsMap
@@ -660,6 +915,18 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 				}
 			
 			single_setAttributeProperties_StockLevel_preOrderReleaseDay();
+		
+				{
+				Map customPropsMap = new HashMap();
+				
+				changeMetaType(
+					"AbstractOrderEntry",
+					null,
+					customPropsMap
+				);
+				}
+			
+			single_setAttributeProperties_AbstractOrderEntry_isUseFutureStock();
 		
 				setDefaultProperties(
 					"GenderList",
@@ -1023,6 +1290,160 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							);
 						}
 					
+						public void single_setAttributeProperties_ProductCarouselComponent_isPromotion() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"ProductCarouselComponent", 
+								"isPromotion",
+								false, 
+								Boolean.TRUE,
+								"Boolean.TRUE",
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_ProductCarouselComponent_isWell() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"ProductCarouselComponent", 
+								"isWell",
+								false, 
+								Boolean.TRUE,
+								"Boolean.TRUE",
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_ProductCarouselComponent_isSale() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"ProductCarouselComponent", 
+								"isSale",
+								false, 
+								Boolean.TRUE,
+								"Boolean.TRUE",
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_SimpleResponsiveBannerComponent_isFeature() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"SimpleResponsiveBannerComponent", 
+								"isFeature",
+								false, 
+								Boolean.TRUE,
+								"Boolean.TRUE",
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_MultipleBannerComponent_loop() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"MultipleBannerComponent", 
+								"loop",
+								false, 
+								Boolean.TRUE,
+								"Boolean.TRUE",
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_MultipleBannerComponent_displayLevel() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"MultipleBannerComponent", 
+								"displayLevel",
+								false, 
+								Integer.valueOf(0),
+								"Integer.valueOf(0)",
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_MultipleBannerComponent_classfication() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"MultipleBannerComponent", 
+								"classfication",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
 						public void single_setAttributeProperties_Product_anonymousDisplayPrice() throws JaloBusinessException
 						{
 							
@@ -1058,6 +1479,28 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 								false, 
 								null,
 								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_AbstractOrderEntry_isUseFutureStock() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"AbstractOrderEntry", 
+								"isUseFutureStock",
+								false, 
+								Boolean.FALSE,
+								"Boolean.FALSE",
 								null,
 								true,
 								true,

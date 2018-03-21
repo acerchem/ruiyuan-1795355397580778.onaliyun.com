@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-3-21 2:57:49                           ---
+ * --- Generated at 2018-3-21 14:43:28                          ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.constants;
@@ -16,17 +16,24 @@ public class GeneratedAcerchemCoreConstants
 	public static final String EXTENSIONNAME = "acerchemcore";
 	public static class TC
 	{
+		public static final String ABSTRACTMULTIPLEBANNERCOMPONENT = "AbstractMultipleBannerComponent".intern();
 		public static final String APPARELPRODUCT = "ApparelProduct".intern();
 		public static final String APPARELSIZEVARIANTPRODUCT = "ApparelSizeVariantProduct".intern();
 		public static final String APPARELSTYLEVARIANTPRODUCT = "ApparelStyleVariantProduct".intern();
 		public static final String ELECTRONICSCOLORVARIANTPRODUCT = "ElectronicsColorVariantProduct".intern();
+		public static final String FUNCTIONBUTTONCOMPONENT = "FunctionButtonComponent".intern();
 		public static final String IMAGEFAILEDACTIONTYPE = "ImageFailedActionType".intern();
 		public static final String IMAGEFAILEDRECORD = "ImageFailedRecord".intern();
 		public static final String IMAGEUPLOADEDLOG = "ImageUploadedLog".intern();
+		public static final String MULTIPLEBANNERCOMPONENT = "MultipleBannerComponent".intern();
 		public static final String SWATCHCOLORENUM = "SwatchColorEnum".intern();
 	}
 	public static class Attributes
 	{
+		public static class AbstractOrderEntry
+		{
+			public static final String ISUSEFUTURESTOCK = "isUseFutureStock".intern();
+		}
 		public static class Media
 		{
 			public static final String ALIYUNURL = "aliyunUrl".intern();
@@ -36,6 +43,16 @@ public class GeneratedAcerchemCoreConstants
 			public static final String ANONYMOUSDISPLAYPRICE = "anonymousDisplayPrice".intern();
 			public static final String CHEMICALINFO = "chemicalInfo".intern();
 			public static final String UNITCALCULATERATO = "unitCalculateRato".intern();
+		}
+		public static class ProductCarouselComponent
+		{
+			public static final String ISPROMOTION = "isPromotion".intern();
+			public static final String ISSALE = "isSale".intern();
+			public static final String ISWELL = "isWell".intern();
+		}
+		public static class SimpleResponsiveBannerComponent
+		{
+			public static final String ISFEATURE = "isFeature".intern();
 		}
 		public static class StockLevel
 		{
