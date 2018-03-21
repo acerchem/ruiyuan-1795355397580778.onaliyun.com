@@ -614,10 +614,15 @@
 	
 	<bean id="acerChemImageUploadLogService" class="com.acerchem.core.image.service.impl.AcerChemImageUploadLogServiceImpl"  >
 	</bean>
-	
+	<!-- 
 	<alias alias="mediaService" name="acerChemAlternativeMediaServiceImpl"/>
 	<bean id="acerChemAlternativeMediaServiceImpl" class="com.acerchem.core.image.service.impl.AcerChemAlternativeMediaServiceImpl" >
-		
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+		<property name="mediaDao" ref="mediaDao"/>
+		<property name="mimeService" ref="mimeService"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="sessionService" ref="sessionService"/>
+		<property name="txManager" ref="txManager"/>
 	</bean>
-	
+	 -->
 </beans>
