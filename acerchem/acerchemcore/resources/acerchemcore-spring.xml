@@ -625,4 +625,13 @@
 		<property name="txManager" ref="txManager"/>
 	</bean>
 	 -->
+	<alias name="defaultAcerchemCustomerDao" alias="acerchemCustomerDao"/>
+	<bean id="defaultAcerchemCustomerDao" parent="abstractItemDao" class="com.acerchem.core.dao.impl.DefaultAcerchemCustomerDao">
+	</bean>
+
+	<alias name="defaultAcerchemCustomerService" alias="acerchemCustomerService"/>
+	<bean id="defaultAcerchemCustomerService" class="com.acerchem.core.service.impl.DefaultAcerchemCustomerService">
+		<property name="acerchemCustomerDao" ref="acerchemCustomerDao"/>
+	</bean>
+
 </beans>

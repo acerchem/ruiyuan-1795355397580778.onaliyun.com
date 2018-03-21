@@ -217,6 +217,7 @@
 	
 	
 	<!--shaun: 添加远期库存 -->
+	<alias name="acerchemFutureStockPopulator" alias="stockPopulator"/>
 	<bean id="acerchemFutureStockPopulator" parent="defaultStockPopulator" class="com.acerchem.facades.populators.AcerchemFutureStockPopulator">
 		<property name="acerchemFutureStockservice" ref="acerchemFutureStockservice"/>
 	</bean>
@@ -239,5 +240,38 @@
 	<alias name="defaultAcerchemCustomerFacade" alias="acerchemCustomerFacade"/>
 	<bean id="defaultAcerchemCustomerFacade" parent="customerFacade" class="com.acerchem.facades.facades.impl.DefaultAcerchemCustomerFacade" >
 		<property name="acerchemCustomerConverter" ref="acerchemCustomerConverter"/>
+		<property name="acerchemCustomerService" ref="acerchemCustomerService"/>
+		<property name="countryToWarehouseConverter" ref="countryToWarehouseConverter"/>
 	</bean>
+
+	<alias name="defaultWarehousePopulator" alias="warehousePopulator"/>
+	<bean id="defaultWarehousePopulator" class="com.acerchem.facades.populators.WarehousePopulator">
+	</bean>
+
+	<alias name="defaultWarehouseConverter" alias="warehouseConverter"/>
+	<bean id="defaultWarehouseConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.acerchem.facades.product.data.WarehouseData"/>
+		<property name="populators">
+			<list>
+				<ref bean="warehousePopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultCountryToWarehousePopulator" alias="countryToWarehousePopulator"/>
+	<bean id="defaultCountryToWarehousePopulator" class="com.acerchem.facades.populators.CountryToWarehousePopulator">
+		<property name="countryConverter" ref="countryConverter"/>
+		<property name="warehouseConverter" ref="warehouseConverter"/>
+	</bean>
+
+	<alias name="defaultCountryToWarehouseConverter" alias="countryToWarehouseConverter"/>
+	<bean id="defaultCountryToWarehouseConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.acerchem.facades.product.data.CountryToWarehouseData"/>
+		<property name="populators">
+			<list>
+				<ref bean="countryToWarehousePopulator"/>
+			</list>
+		</property>
+	</bean>
+
 </beans>

@@ -13,6 +13,8 @@
 			autocreate="true" generate="true" type="list" />
 		<collectiontype code="SwatchColorSet" elementtype="SwatchColorEnum"
 			autocreate="true" generate="true" type="set" />
+		<collectiontype code="WarehouseList" elementtype="Warehouse"
+						autocreate="true" generate="true" type="list" />
 	</collectiontypes>
 
 	<enumtypes>
@@ -346,7 +348,22 @@
 					</attribute>
 				</attributes>
 			</itemtype>
+
+			<itemtype code="CountryToWarehouse" autocreate="true" generate="true"  extends="GenericItem">
+				<deployment table="CountryToWarehouse" typecode="10401"/>
+				<attributes>
+					<attribute qualifier="country" type="Country" >
+						<persistence type="property" />
+						<modifiers />
+					</attribute>
+					<attribute qualifier="warehouseList" type="WarehouseList" >
+						<persistence type="property" />
+						<modifiers />
+					</attribute>
+				</attributes>
+			</itemtype>
 		</typegroup>
+
 	<!-- shaun.sheng -->
     </itemtypes>
 

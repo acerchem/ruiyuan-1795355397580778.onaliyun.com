@@ -1,5 +1,6 @@
 package com.acerchem.facades.facades;
 
+import com.acerchem.facades.product.data.CountryToWarehouseDataList;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 
 /**
@@ -8,4 +9,6 @@ import de.hybris.platform.commercefacades.user.data.CustomerData;
 
 public interface AcerchemCustomerFacade {
     CustomerData getCurrentCustomer();
+
+    CountryToWarehouseDataList getCountryAndWarehouse();
 }
