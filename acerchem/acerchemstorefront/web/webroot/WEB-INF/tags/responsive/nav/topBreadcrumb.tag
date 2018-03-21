@@ -19,17 +19,17 @@
 				<c:url value="${breadcrumb.url}" var="breadcrumbUrl" />
 				<c:choose>
 					<c:when test="${status.last}">
-						<li class="active">${fn:escapeXml(breadcrumb.name)}</li>
+						${fn:escapeXml(breadcrumb.name)}
 					</c:when>
 					<c:when test="${breadcrumb.url eq '#'}">
-						<li>
+						
 							<a href="#">${fn:escapeXml(breadcrumb.name)}</a>
-						</li>
+						
 					</c:when>
 					<c:otherwise>
-						<li>
+						
 							<a href="${breadcrumbUrl}">${fn:escapeXml(breadcrumb.name)}</a>
-						</li>
+						
 					</c:otherwise>
 				</c:choose>
 			</c:forEach>
