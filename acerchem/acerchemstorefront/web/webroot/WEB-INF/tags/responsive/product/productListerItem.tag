@@ -12,53 +12,42 @@
 <spring:theme code="text.addToCart" var="addToCartText"/>
 <c:url value="${product.url}" var="productUrl"/>
 
-<c:set value="${not empty product.potentialPromotions}" var="hasPromotion"/>
+<%-- <c:set value="${not empty product.potentialPromotions}" var="hasPromotion"/> --%>
 
-<li class="product__list--item">
+
+<!--shaun: acerchem -->
+<!-- productDatails -->
+<li class="item">
 	<ycommerce:testId code="test_searchPage_wholeProduct">
-		
-		<a class="product__list--thumb" href="${productUrl}" title="${fn:escapeXml(product.name)}" >
-			<product:productPrimaryImage product="${product}" format="thumbnail"/>
-		</a>
-		<ycommerce:testId code="searchPage_productName_link_${product.code}">
-			<a class="product__list--name" href="${productUrl}">${fn:escapeXml(product.name)}</a>
-		</ycommerce:testId>
-
-		<div class="product__list--price-panel">
-			<c:if test="${not empty product.potentialPromotions}">
-				<div class="product__listing--promo">
-					<c:forEach items="${product.potentialPromotions}" var="promotion">
-						${ycommerce:sanitizeHTML(promotion.description)}
-					</c:forEach>
-				</div>
-			</c:if>
-
-			<ycommerce:testId code="searchPage_price_label_${product.code}">
-				<div class="product__listing--price"><product:productListerItemPrice product="${product}"/></div>
-			</ycommerce:testId>
-		</div>
-
-		<c:if test="${not empty product.summary}">
-			<div class="product__listing--description">${ycommerce:sanitizeHTML(product.summary)}</div>
-		</c:if>
-
-
-
-		<c:set var="product" value="${product}" scope="request"/>
-		<c:set var="addToCartText" value="${addToCartText}" scope="request"/>
-		<c:set var="addToCartUrl" value="${addToCartUrl}" scope="request"/>
-		<div class="addtocart">
-			<div id="actions-container-for-${fn:escapeXml(component.uid)}" class="row">
-				<action:actions element="div" parentComponent="${component}"  />
+	
+			<!-- 图片 -->
+			<div class="img">
+				<a href="${productUrl}"  >  
+					<product:productPrimaryImage product="${product}" format="thumbnail"/>
+				</a>
 			</div>
-		</div>
-
+			
+			<div class="maxtext">
+	    		<p>${fn:escapeXml(product.name)}</p>
+	    		<!-- 登录显示 -->
+	    		<span class="price"><product:productListerItemPrice product="${product}"/></span>
+	    		<!-- <br> -->
+	    		<span class="old-price"><product:productListerItemPrice product="${product}"/></span>
+	    		<!-- 登录显示 END-->
+					
+					
+				 <c:set var="product" value="${product}" scope="request"/>
+				 <c:set var="addToCartText" value="${addToCartText}" scope="request"/>
+				 <c:set var="addToCartUrl" value="${addToCartUrl}" scope="request"/> 
+				 
+				 <!-- addToCart -->
+				 <div class="addtocart">
+					<div id="actions-container-for-${fn:escapeXml(component.uid)}" class="row">
+						 <action:actions element="div" parentComponent="${component}"  /> 
+					</div>
+				 </div> 
+					
+	    	</div>
+	    	
 	</ycommerce:testId>
 </li>
-
-
-
-
-
-
-

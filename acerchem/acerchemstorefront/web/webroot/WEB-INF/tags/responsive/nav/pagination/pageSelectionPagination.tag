@@ -15,7 +15,7 @@
 <c:if test="${(searchPageData.pagination.numberOfPages > 1)}">
     <ul class="pagination">
         <c:if test="${hasPreviousPage}">
-            <li class="pagination-prev">
+            <li class="active" ><!-- shaun -->
                 <spring:url value="${searchUrl}" var="previousPageUrl" htmlEscape="true">
                     <spring:param name="page" value="${searchPageData.pagination.currentPage - 1}"/>
                 </spring:url>
@@ -26,7 +26,7 @@
         </c:if>
 
         <c:if test="${!hasPreviousPage}">
-            <li class="pagination-prev disabled"><span class="glyphicon glyphicon-chevron-left"></span></li>
+            <li class="active disabled" ><span style="font-weight: 200;" class="glyphicon glyphicon-chevron-left"></span></li>
         </c:if>
 
         <c:set var="limit" value="${numberPagesShown}"/>
@@ -100,17 +100,17 @@
                     </c:choose>
 
                     <ycommerce:testId code="pageNumber_link">
-                        <li><a class="${linkClass}" href="${pageNumberUrl}">${pageNumber}</a></li>
+                        <li class="active" ><a style="font-weight: 200;" class="${linkClass}" href="${pageNumberUrl}">${pageNumber}</a></li>
                     </ycommerce:testId>
                 </c:when>
                 <c:otherwise>
-                    <li class="active"><span>${pageNumber} <span class="sr-only">(current)</span></span></li>
+                    <li class="pagination-prev" ><span style="font-weight: 700;">${pageNumber} <span class="sr-only">(current)</span></span></li>
                 </c:otherwise>
             </c:choose>
         </c:forEach>
 
         <c:if test="${hasNextPage}">
-            <li class="pagination-next">
+            <li class="active" style="font-weight: 200;">
                 <spring:url value="${searchUrl}" var="nextPageUrl" htmlEscape="true">
                     <spring:param name="page" value="${searchPageData.pagination.currentPage + 1}"/>
                 </spring:url>
@@ -121,7 +121,7 @@
         </c:if>
 
         <c:if test="${!hasNextPage}">
-            <li class="pagination-next disabled"><span class="glyphicon glyphicon-chevron-right"></span></li>
+            <li class="active disabled" ><span style="font-weight: 200;" class="glyphicon glyphicon-chevron-right"></span></li>
         </c:if>
     </ul>
 </c:if>

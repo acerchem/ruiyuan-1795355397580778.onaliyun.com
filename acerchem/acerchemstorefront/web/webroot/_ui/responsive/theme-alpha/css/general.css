@@ -1831,17 +1831,18 @@ textarea{
 	font-weight:500;
 }
 .gal-centent .gall-left{
-	position: absolute;
+	/* position: absolute; */
 	top:0;
 	left: 0;
 	padding-left: 5%;
-	width:20%;
+	/* width:20%; */
 	padding-bottom: 40px;
 	background-color: #fff;
 }
 .gal-centent .gall-right{
 	display: block;
-	margin-left: 20%;
+	/* shaun:左边距设为0 */
+	margin-left: 0%;
 	margin-right: 5%;
 	border-left: 4px solid #f3f3f3;
 
@@ -1890,11 +1891,14 @@ textarea{
 .m-term-ri{
 	float:left;
 }
+
+/* shaun:sort by 下拉框 */
 .m-term-ri{
+	height:49px;
 	position: absolute;
 	right: 0;
 	top:0;
-	padding-left: 90px;
+	padding-left: 105px;
 	background-color: #096735;
 }
 .m-term-ri .right{

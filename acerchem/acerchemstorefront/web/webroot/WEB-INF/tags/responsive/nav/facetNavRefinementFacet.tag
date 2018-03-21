@@ -8,7 +8,8 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<c:if test="${not empty facetData.values}">
+<!--hybris originalDirectory  -->
+<%-- <c:if test="${not empty facetData.values}">
 <ycommerce:testId code="facetNav_title_${facetData.name}">
 	<div class="facet js-facet">
 		<div class="facet__name js-facet-name">
@@ -101,4 +102,4 @@
 		</div>
 	</div>
 </ycommerce:testId>
-</c:if>
+</c:if> --%>

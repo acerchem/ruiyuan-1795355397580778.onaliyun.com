@@ -614,6 +614,9 @@
 	
 	<bean id="acerChemImageUploadLogService" class="com.acerchem.core.image.service.impl.AcerChemImageUploadLogServiceImpl"  >
 	</bean>
+	
+	<bean id="acerChemImageFailedRecoredService" class="com.acerchem.core.image.service.impl.AcerChemImageFailedRecoredServiceImpl"  >
+	</bean>
 	<!-- 
 	<alias alias="mediaService" name="acerChemAlternativeMediaServiceImpl"/>
 	<bean id="acerChemAlternativeMediaServiceImpl" class="com.acerchem.core.image.service.impl.AcerChemAlternativeMediaServiceImpl" >

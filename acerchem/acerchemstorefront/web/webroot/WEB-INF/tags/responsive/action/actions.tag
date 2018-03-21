@@ -7,10 +7,9 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 
+
 <c:forEach items="${actions}" var="action" varStatus="idx">
 	<c:if test="${action.visible}">
-		<${element} class="${fn:escapeXml(parentComponent.uid)}-${fn:escapeXml(action.uid)}" data-index="${idx.index + 1}" class="${styleClass}">
 			<cms:component component="${action}" parentComponent="${parentComponent}" evaluateRestriction="true"/>
-		</${element}>
 	</c:if>
 </c:forEach>
