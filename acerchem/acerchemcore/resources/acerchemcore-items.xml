@@ -174,7 +174,7 @@
 						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="status" type="java.lang.String">
-						<description>状态</description>
+						<description>状态(初始状态为0，其他为失败次数+1)</description>
 						<modifiers read="true" write="true" search="true"
 							optional="true" />
 						<persistence type="property" />
