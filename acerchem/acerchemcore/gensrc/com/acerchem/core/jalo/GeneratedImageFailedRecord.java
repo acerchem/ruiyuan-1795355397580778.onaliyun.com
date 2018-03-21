@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-3-21 2:57:49                           ---
+ * --- Generated at 2018-3-21 11:53:23                          ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.jalo;
@@ -194,7 +194,7 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>ImageFailedRecord.status</code> attribute.
-	 * @return the status - ç¶æ
+	 * @return the status - ç¶æ(åå§ç¶æä¸º0ï¼å¶ä»ä¸ºå¤±è´¥æ¬¡æ°+1)
 	 */
 	public String getStatus(final SessionContext ctx)
 	{
@@ -203,7 +203,7 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>ImageFailedRecord.status</code> attribute.
-	 * @return the status - ç¶æ
+	 * @return the status - ç¶æ(åå§ç¶æä¸º0ï¼å¶ä»ä¸ºå¤±è´¥æ¬¡æ°+1)
 	 */
 	public String getStatus()
 	{
@@ -212,7 +212,7 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>ImageFailedRecord.status</code> attribute. 
-	 * @param value the status - ç¶æ
+	 * @param value the status - ç¶æ(åå§ç¶æä¸º0ï¼å¶ä»ä¸ºå¤±è´¥æ¬¡æ°+1)
 	 */
 	public void setStatus(final SessionContext ctx, final String value)
 	{
@@ -221,7 +221,7 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>ImageFailedRecord.status</code> attribute. 
-	 * @param value the status - ç¶æ
+	 * @param value the status - ç¶æ(åå§ç¶æä¸º0ï¼å¶ä»ä¸ºå¤±è´¥æ¬¡æ°+1)
 	 */
 	public void setStatus(final String value)
 	{
