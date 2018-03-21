@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at Mar 13, 2018 2:44:26 PM                     ---
+ * --- Generated at 2018-3-21 2:57:49                           ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.constants;
@@ -20,10 +20,17 @@ public class GeneratedAcerchemCoreConstants
 		public static final String APPARELSIZEVARIANTPRODUCT = "ApparelSizeVariantProduct".intern();
 		public static final String APPARELSTYLEVARIANTPRODUCT = "ApparelStyleVariantProduct".intern();
 		public static final String ELECTRONICSCOLORVARIANTPRODUCT = "ElectronicsColorVariantProduct".intern();
+		public static final String IMAGEFAILEDACTIONTYPE = "ImageFailedActionType".intern();
+		public static final String IMAGEFAILEDRECORD = "ImageFailedRecord".intern();
+		public static final String IMAGEUPLOADEDLOG = "ImageUploadedLog".intern();
 		public static final String SWATCHCOLORENUM = "SwatchColorEnum".intern();
 	}
 	public static class Attributes
 	{
+		public static class Media
+		{
+			public static final String ALIYUNURL = "aliyunUrl".intern();
+		}
 		public static class Product
 		{
 			public static final String ANONYMOUSDISPLAYPRICE = "anonymousDisplayPrice".intern();
@@ -37,6 +44,11 @@ public class GeneratedAcerchemCoreConstants
 	}
 	public static class Enumerations
 	{
+		public static class ImageFailedActionType
+		{
+			public static final String ADD = "ADD".intern();
+			public static final String DEL = "DEL".intern();
+		}
 		public static class SwatchColorEnum
 		{
 			public static final String BLACK = "BLACK".intern();

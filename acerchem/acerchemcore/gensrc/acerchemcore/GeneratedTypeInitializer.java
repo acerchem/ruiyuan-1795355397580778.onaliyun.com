@@ -86,8 +86,33 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			false
 		);
 	
+		createItemType(
+			"ImageFailedRecord",
+			"GenericItem",
+			com.acerchem.core.jalo.ImageFailedRecord.class,
+			"de.hybris.platform.persistence.acerchemcore_ImageFailedRecord",
+			false,
+			null,
+			false
+		);
+	
+		createItemType(
+			"ImageUploadedLog",
+			"GenericItem",
+			com.acerchem.core.jalo.ImageUploadedLog.class,
+			"de.hybris.platform.persistence.acerchemcore_ImageUploadedLog",
+			false,
+			null,
+			false
+		);
+	
 		createEnumerationType(
 			"SwatchColorEnum",
+			null
+		);
+	
+		createEnumerationType(
+			"ImageFailedActionType",
 			null
 		);
 	
@@ -125,6 +150,22 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 				single_createattr_ApparelSizeVariantProduct_size();
 			
 				single_createattr_ElectronicsColorVariantProduct_color();
+			
+				single_createattr_Media_aliyunUrl();
+			
+				single_createattr_ImageFailedRecord_fileName();
+			
+				single_createattr_ImageFailedRecord_actionType();
+			
+				single_createattr_ImageFailedRecord_aliyunUrl();
+			
+				single_createattr_ImageFailedRecord_location();
+			
+				single_createattr_ImageFailedRecord_status();
+			
+				single_createattr_ImageUploadedLog_imagePK();
+			
+				single_createattr_ImageUploadedLog_aliyunUrl();
 			
 				single_createattr_Product_chemicalInfo();
 			
@@ -218,6 +259,142 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 					"localized:java.lang.String",
 					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
 					"VariantAttributeDescriptor",
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_Media_aliyunUrl() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"Media", 
+					"aliyunUrl",  
+					null,
+					"java.lang.String",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_ImageFailedRecord_fileName() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"ImageFailedRecord", 
+					"fileName",  
+					null,
+					"java.lang.String",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_ImageFailedRecord_actionType() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"ImageFailedRecord", 
+					"actionType",  
+					null,
+					"ImageFailedActionType",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_ImageFailedRecord_aliyunUrl() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"ImageFailedRecord", 
+					"aliyunUrl",  
+					null,
+					"java.lang.String",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_ImageFailedRecord_location() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"ImageFailedRecord", 
+					"location",  
+					null,
+					"java.lang.String",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_ImageFailedRecord_status() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"ImageFailedRecord", 
+					"status",  
+					null,
+					"java.lang.String",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_ImageUploadedLog_imagePK() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"ImageUploadedLog", 
+					"imagePK",  
+					null,
+					"java.lang.String",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_ImageUploadedLog_aliyunUrl() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"ImageUploadedLog", 
+					"aliyunUrl",  
+					null,
+					"java.lang.String",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
 					sqlColumnDefinitions
 				);
 			
@@ -322,6 +499,16 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			} )
 		);
 	
+		createEnumerationValues(
+			"ImageFailedActionType",
+			true,
+			Arrays.asList( new String[] {
+			
+				"ADD",
+				"DEL"
+			} )
+		);
+	
 				{
 				Map customPropsMap = new HashMap();
 				
@@ -388,6 +575,58 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 				Map customPropsMap = new HashMap();
 				
 				changeMetaType(
+					"Media",
+					null,
+					customPropsMap
+				);
+				}
+			
+			single_setAttributeProperties_Media_aliyunUrl();
+		
+				{
+				Map customPropsMap = new HashMap();
+				
+				setItemTypeProperties(
+					"ImageFailedRecord",
+					false,
+					true,
+					true,
+					null,
+					customPropsMap
+				);
+				}
+			
+			single_setAttributeProperties_ImageFailedRecord_fileName();
+		
+			single_setAttributeProperties_ImageFailedRecord_actionType();
+		
+			single_setAttributeProperties_ImageFailedRecord_aliyunUrl();
+		
+			single_setAttributeProperties_ImageFailedRecord_location();
+		
+			single_setAttributeProperties_ImageFailedRecord_status();
+		
+				{
+				Map customPropsMap = new HashMap();
+				
+				setItemTypeProperties(
+					"ImageUploadedLog",
+					false,
+					true,
+					true,
+					null,
+					customPropsMap
+				);
+				}
+			
+			single_setAttributeProperties_ImageUploadedLog_imagePK();
+		
+			single_setAttributeProperties_ImageUploadedLog_aliyunUrl();
+		
+				{
+				Map customPropsMap = new HashMap();
+				
+				changeMetaType(
 					"Product",
 					null,
 					customPropsMap
@@ -438,6 +677,13 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 				setDefaultProperties(
 					"SwatchColorEnum",
+					true,
+					true,
+					null
+				);
+			
+				setDefaultProperties(
+					"ImageFailedActionType",
 					true,
 					true,
 					null
@@ -552,6 +798,182 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 								true,
 								true,
 								"VariantAttributeDescriptor",
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_Media_aliyunUrl() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"Media", 
+								"aliyunUrl",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_ImageFailedRecord_fileName() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"ImageFailedRecord", 
+								"fileName",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_ImageFailedRecord_actionType() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"ImageFailedRecord", 
+								"actionType",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_ImageFailedRecord_aliyunUrl() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"ImageFailedRecord", 
+								"aliyunUrl",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_ImageFailedRecord_location() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"ImageFailedRecord", 
+								"location",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_ImageFailedRecord_status() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"ImageFailedRecord", 
+								"status",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_ImageUploadedLog_imagePK() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"ImageUploadedLog", 
+								"imagePK",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_ImageUploadedLog_aliyunUrl() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"ImageUploadedLog", 
+								"aliyunUrl",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
 								customPropsMap,
 								null
 							);

@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at Mar 13, 2018 2:44:26 PM                     ---
+ * --- Generated at 2018-3-21 2:57:49                           ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.jalo;
@@ -11,6 +11,8 @@ import com.acerchem.core.jalo.ApparelProduct;
 import com.acerchem.core.jalo.ApparelSizeVariantProduct;
 import com.acerchem.core.jalo.ApparelStyleVariantProduct;
 import com.acerchem.core.jalo.ElectronicsColorVariantProduct;
+import com.acerchem.core.jalo.ImageFailedRecord;
+import com.acerchem.core.jalo.ImageUploadedLog;
 import de.hybris.platform.jalo.GenericItem;
 import de.hybris.platform.jalo.Item;
 import de.hybris.platform.jalo.Item.AttributeMode;
@@ -18,6 +20,8 @@ import de.hybris.platform.jalo.JaloBusinessException;
 import de.hybris.platform.jalo.JaloSystemException;
 import de.hybris.platform.jalo.SessionContext;
 import de.hybris.platform.jalo.extension.Extension;
+import de.hybris.platform.jalo.media.AbstractMedia;
+import de.hybris.platform.jalo.media.Media;
 import de.hybris.platform.jalo.product.Product;
 import de.hybris.platform.jalo.type.ComposedType;
 import de.hybris.platform.jalo.type.JaloGenericCreationException;
@@ -37,6 +41,9 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	{
 		final Map<String, Map<String, AttributeMode>> ttmp = new HashMap();
 		Map<String, AttributeMode> tmp = new HashMap<String, AttributeMode>();
+		tmp.put("aliyunUrl", AttributeMode.INITIAL);
+		ttmp.put("de.hybris.platform.jalo.media.Media", Collections.unmodifiableMap(tmp));
+		tmp = new HashMap<String, AttributeMode>();
 		tmp.put("chemicalInfo", AttributeMode.INITIAL);
 		tmp.put("unitCalculateRato", AttributeMode.INITIAL);
 		tmp.put("anonymousDisplayPrice", AttributeMode.INITIAL);
@@ -56,6 +63,42 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 			ret.putAll(attr);
 		}
 		return ret;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Media.aliyunUrl</code> attribute.
+	 * @return the aliyunUrl - é¿éäºÂUrl
+	 */
+	public String getAliyunUrl(final SessionContext ctx, final Media item)
+	{
+		return (String)item.getProperty( ctx, AcerchemCoreConstants.Attributes.Media.ALIYUNURL);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Media.aliyunUrl</code> attribute.
+	 * @return the aliyunUrl - é¿éäºÂUrl
+	 */
+	public String getAliyunUrl(final Media item)
+	{
+		return getAliyunUrl( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Media.aliyunUrl</code> attribute. 
+	 * @param value the aliyunUrl - é¿éäºÂUrl
+	 */
+	public void setAliyunUrl(final SessionContext ctx, final Media item, final String value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.Media.ALIYUNURL,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Media.aliyunUrl</code> attribute. 
+	 * @param value the aliyunUrl - é¿éäºÂUrl
+	 */
+	public void setAliyunUrl(final Media item, final String value)
+	{
+		setAliyunUrl( getSession().getSessionContext(), item, value );
 	}
 	
 	/**
@@ -133,7 +176,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>Product.chemicalInfo</code> attribute.
-	 * @return the chemicalInfo - Attribute about ç¾hemicalInfo of Product
+	 * @return the chemicalInfo - Attribute about Ã§ÂÂ¾hemicalInfo of Product
 	 */
 	public String getChemicalInfo(final SessionContext ctx, final Product item)
 	{
@@ -142,7 +185,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>Product.chemicalInfo</code> attribute.
-	 * @return the chemicalInfo - Attribute about ç¾hemicalInfo of Product
+	 * @return the chemicalInfo - Attribute about Ã§ÂÂ¾hemicalInfo of Product
 	 */
 	public String getChemicalInfo(final Product item)
 	{
@@ -151,7 +194,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>Product.chemicalInfo</code> attribute. 
-	 * @param value the chemicalInfo - Attribute about ç¾hemicalInfo of Product
+	 * @param value the chemicalInfo - Attribute about Ã§ÂÂ¾hemicalInfo of Product
 	 */
 	public void setChemicalInfo(final SessionContext ctx, final Product item, final String value)
 	{
@@ -160,7 +203,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>Product.chemicalInfo</code> attribute. 
-	 * @param value the chemicalInfo - Attribute about ç¾hemicalInfo of Product
+	 * @param value the chemicalInfo - Attribute about Ã§ÂÂ¾hemicalInfo of Product
 	 */
 	public void setChemicalInfo(final Product item, final String value)
 	{
@@ -271,6 +314,58 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 		return createElectronicsColorVariantProduct( getSession().getSessionContext(), attributeValues );
 	}
 	
+	public ImageFailedRecord createImageFailedRecord(final SessionContext ctx, final Map attributeValues)
+	{
+		try
+		{
+			ComposedType type = getTenant().getJaloConnection().getTypeManager().getComposedType( AcerchemCoreConstants.TC.IMAGEFAILEDRECORD );
+			return (ImageFailedRecord)type.newInstance( ctx, attributeValues );
+		}
+		catch( JaloGenericCreationException e)
+		{
+			final Throwable cause = e.getCause();
+			throw (cause instanceof RuntimeException ?
+			(RuntimeException)cause
+			:
+			new JaloSystemException( cause, cause.getMessage(), e.getErrorCode() ) );
+		}
+		catch( JaloBusinessException e )
+		{
+			throw new JaloSystemException( e ,"error creating ImageFailedRecord : "+e.getMessage(), 0 );
+		}
+	}
+	
+	public ImageFailedRecord createImageFailedRecord(final Map attributeValues)
+	{
+		return createImageFailedRecord( getSession().getSessionContext(), attributeValues );
+	}
+	
+	public ImageUploadedLog createImageUploadedLog(final SessionContext ctx, final Map attributeValues)
+	{
+		try
+		{
+			ComposedType type = getTenant().getJaloConnection().getTypeManager().getComposedType( AcerchemCoreConstants.TC.IMAGEUPLOADEDLOG );
+			return (ImageUploadedLog)type.newInstance( ctx, attributeValues );
+		}
+		catch( JaloGenericCreationException e)
+		{
+			final Throwable cause = e.getCause();
+			throw (cause instanceof RuntimeException ?
+			(RuntimeException)cause
+			:
+			new JaloSystemException( cause, cause.getMessage(), e.getErrorCode() ) );
+		}
+		catch( JaloBusinessException e )
+		{
+			throw new JaloSystemException( e ,"error creating ImageUploadedLog : "+e.getMessage(), 0 );
+		}
+	}
+	
+	public ImageUploadedLog createImageUploadedLog(final Map attributeValues)
+	{
+		return createImageUploadedLog( getSession().getSessionContext(), attributeValues );
+	}
+	
 	@Override
 	public String getName()
 	{
@@ -352,7 +447,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>Product.unitCalculateRato</code> attribute.
-	 * @return the unitCalculateRato - Attribute about çnitCalculateRato of Product
+	 * @return the unitCalculateRato - Attribute about Ã§ÂÂnitCalculateRato of Product
 	 */
 	public String getUnitCalculateRato(final SessionContext ctx, final Product item)
 	{
@@ -361,7 +456,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>Product.unitCalculateRato</code> attribute.
-	 * @return the unitCalculateRato - Attribute about çnitCalculateRato of Product
+	 * @return the unitCalculateRato - Attribute about Ã§ÂÂnitCalculateRato of Product
 	 */
 	public String getUnitCalculateRato(final Product item)
 	{
@@ -370,7 +465,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>Product.unitCalculateRato</code> attribute. 
-	 * @param value the unitCalculateRato - Attribute about çnitCalculateRato of Product
+	 * @param value the unitCalculateRato - Attribute about Ã§ÂÂnitCalculateRato of Product
 	 */
 	public void setUnitCalculateRato(final SessionContext ctx, final Product item, final String value)
 	{
@@ -379,7 +474,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>Product.unitCalculateRato</code> attribute. 
-	 * @param value the unitCalculateRato - Attribute about çnitCalculateRato of Product
+	 * @param value the unitCalculateRato - Attribute about Ã§ÂÂnitCalculateRato of Product
 	 */
 	public void setUnitCalculateRato(final Product item, final String value)
 	{

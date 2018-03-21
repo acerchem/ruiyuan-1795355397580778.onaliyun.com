@@ -1,150 +1,228 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
-<!--
- [y] hybris Platform
+<!-- [y] hybris Platform Copyright (c) 2017 SAP SE or an SAP affiliate company. 
+	All rights reserved. This software is the confidential and proprietary information 
+	of SAP ("Confidential Information"). You shall not disclose such Confidential 
+	Information and shall use it only in accordance with the terms of the license 
+	agreement you entered into with SAP. -->
 
- Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="items.xsd">
 
- This software is the confidential and proprietary information of SAP
- ("Confidential Information"). You shall not disclose such Confidential
- Information and shall use it only in accordance with the terms of the
- license agreement you entered into with SAP.
--->
+	<collectiontypes>
+		<collectiontype code="GenderList" elementtype="Gender"
+			autocreate="true" generate="true" type="list" />
+		<collectiontype code="SwatchColorSet" elementtype="SwatchColorEnum"
+			autocreate="true" generate="true" type="set" />
+	</collectiontypes>
 
-<items xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="items.xsd">
+	<enumtypes>
+		<enumtype generate="true" code="SwatchColorEnum" autocreate="true"
+			dynamic="true">
+			<value code="BLACK" />
+			<value code="BLUE" />
+			<value code="BROWN" />
+			<value code="GREEN" />
+			<value code="GREY" />
+			<value code="ORANGE" />
+			<value code="PINK" />
+			<value code="PURPLE" />
+			<value code="RED" />
+			<value code="SILVER" />
+			<value code="WHITE" />
+			<value code="YELLOW" />
+		</enumtype>
+		<!-- 图像上传失败后再次上传操作类型 -->
+		<enumtype code="ImageFailedActionType" autocreate="true" generate="true" dynamic="true">
+			<description>图像再传操作类型</description>
+			<value code="ADD">
+				<description>增加</description>
+			</value>
+			<value code="DEL">
+				<description>删除</description>
+			</value>
+			
+		</enumtype>
+	</enumtypes>
 
-    <collectiontypes>
-        <collectiontype code="GenderList" elementtype="Gender" autocreate="true" generate="true" type="list"/>
-        <collectiontype code="SwatchColorSet" elementtype="SwatchColorEnum" autocreate="true" generate="true"
-                        type="set"/>
-    </collectiontypes>
+	<itemtypes>
 
-    <enumtypes>
-        <enumtype generate="true" code="SwatchColorEnum" autocreate="true" dynamic="true">
-            <value code="BLACK"/>
-            <value code="BLUE"/>
-            <value code="BROWN"/>
-            <value code="GREEN"/>
-            <value code="GREY"/>
-            <value code="ORANGE"/>
-            <value code="PINK"/>
-            <value code="PURPLE"/>
-            <value code="RED"/>
-            <value code="SILVER"/>
-            <value code="WHITE"/>
-            <value code="YELLOW"/>
-        </enumtype>
-    </enumtypes>
-
-    <itemtypes>
-
-        <!-- Add your item definitions here -->
+		<!-- Add your item definitions here -->
 
 
-        <!-- TypeGroups are for structure of this file only -->
+		<!-- TypeGroups are for structure of this file only -->
 
-        <typegroup name="Apparel">
-            <itemtype code="ApparelProduct" extends="Product"
-                      autocreate="true" generate="true"
-                      jaloclass="com.acerchem.core.jalo.ApparelProduct">
-                <description>Base apparel product extension that contains additional attributes.</description>
-                <attributes>
-                    <attribute qualifier="genders" type="GenderList">
-                        <description>List of genders that the ApparelProduct is designed for</description>
-                        <modifiers/>
-                        <persistence type="property"/>
-                    </attribute>
-                </attributes>
-            </itemtype>
-
-            <itemtype code="ApparelStyleVariantProduct" extends="VariantProduct"
-                      autocreate="true" generate="true"
-                      jaloclass="com.acerchem.core.jalo.ApparelStyleVariantProduct">
-                <description>Apparel style variant type that contains additional attribute describing variant style.
-                </description>
-                <attributes>
-                    <attribute qualifier="style" type="localized:java.lang.String"
-                               metatype="VariantAttributeDescriptor">
-                        <description>Color/Pattern of the product.</description>
-                        <modifiers/>
-                        <persistence type="property"/>
-                    </attribute>
-
-                    <attribute qualifier="swatchColors" type="SwatchColorSet">
-                        <description>A normalized color mapping to a standardized front-end navigable name.
-                        </description>
-                        <modifiers/>
-                        <persistence type="property"/>
-                    </attribute>
-                </attributes>
-
-            </itemtype>
-
-            <itemtype code="ApparelSizeVariantProduct" extends="ApparelStyleVariantProduct"
-                      autocreate="true" generate="true"
-                      jaloclass="com.acerchem.core.jalo.ApparelSizeVariantProduct">
-                <description>Apparel size variant type that contains additional attribute describing variant size.
-                </description>
-                <attributes>
-                    <attribute qualifier="size" type="localized:java.lang.String"
-                               metatype="VariantAttributeDescriptor">
-                        <description>Size of the product.</description>
-                        <modifiers/>
-                        <persistence type="property"/>
-                    </attribute>
-                </attributes>
-            </itemtype>
-        </typegroup>
-
-        <typegroup name="Electronics">
-            <itemtype code="ElectronicsColorVariantProduct" extends="VariantProduct"
-                      autocreate="true" generate="true"
-                      jaloclass="com.acerchem.core.jalo.ElectronicsColorVariantProduct">
-                <description>Electronics color variant type that contains additional attribute describing variant color.
-                </description>
-                <attributes>
-                    <attribute qualifier="color" type="localized:java.lang.String"
-                               metatype="VariantAttributeDescriptor">
-                        <description>Color of the product.</description>
-                        <modifiers/>
-                        <persistence type="property"/>
-                    </attribute>
-                </attributes>
-            </itemtype>
-            
-            <!--add by Wangjh 资质文件扩展 start -->
-            <itemtype code="Document" autocreate="false" generate="false">
-				<description>Extending Document additional aliyun attributes.</description>
+		<typegroup name="Apparel">
+			<itemtype code="ApparelProduct" extends="Product"
+				autocreate="true" generate="true" jaloclass="com.acerchem.core.jalo.ApparelProduct">
+				<description>Base apparel product extension that contains additional attributes.</description>
 				<attributes>
-					<attribute qualifier="aliyunUrl" type="java.lang.String">
-						<description>阿里云Url</description>
-						<modifiers read="true" write="true" search="true" />
-						<persistence type="property" />
-					</attribute>
-					<attribute qualifier="deleteFlag" type="java.lang.Boolean">
-						<description>是否删除</description>
-						<modifiers read="true" write="true" search="true" />
+					<attribute qualifier="genders" type="GenderList">
+						<description>List of genders that the ApparelProduct is designed for</description>
+						<modifiers />
 						<persistence type="property" />
 					</attribute>
 				</attributes>
+			</itemtype>
+
+			<itemtype code="ApparelStyleVariantProduct" extends="VariantProduct"
+				autocreate="true" generate="true"
+				jaloclass="com.acerchem.core.jalo.ApparelStyleVariantProduct">
+				<description>Apparel style variant type that contains additional attribute describing variant style.
+                </description>
+				<attributes>
+					<attribute qualifier="style" type="localized:java.lang.String"
+						metatype="VariantAttributeDescriptor">
+						<description>Color/Pattern of the product.</description>
+						<modifiers />
+						<persistence type="property" />
+					</attribute>
+
+					<attribute qualifier="swatchColors" type="SwatchColorSet">
+						<description>A normalized color mapping to a standardized front-end navigable name.
+                        </description>
+						<modifiers />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+
+			</itemtype>
+
+			<itemtype code="ApparelSizeVariantProduct" extends="ApparelStyleVariantProduct"
+				autocreate="true" generate="true"
+				jaloclass="com.acerchem.core.jalo.ApparelSizeVariantProduct">
+				<description>Apparel size variant type that contains additional attribute describing variant size.
+                </description>
+				<attributes>
+					<attribute qualifier="size" type="localized:java.lang.String"
+						metatype="VariantAttributeDescriptor">
+						<description>Size of the product.</description>
+						<modifiers />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+
+		<typegroup name="Electronics">
+			<itemtype code="ElectronicsColorVariantProduct" extends="VariantProduct"
+				autocreate="true" generate="true"
+				jaloclass="com.acerchem.core.jalo.ElectronicsColorVariantProduct">
+				<description>Electronics color variant type that contains additional attribute describing variant color.
+                </description>
+				<attributes>
+					<attribute qualifier="color" type="localized:java.lang.String"
+						metatype="VariantAttributeDescriptor">
+						<description>Color of the product.</description>
+						<modifiers />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+		</typegroup>
+		<typegroup name="AcerChemAppend">
+			<!--add by Wangjh start -->
+			<!-- document for uploading -->
+			<!-- <itemtype code="Document" autocreate="false" generate="false"> <description>Extending 
+				Document additional aliyun attributes.</description> <attributes> <attribute 
+				qualifier="aliyunUrl" type="java.lang.String"> <description>é¿éäºUrl</description> 
+				<modifiers read="true" write="true" search="true" /> <persistence type="property" 
+				/> </attribute> <attribute qualifier="deleteFlag" type="java.lang.Boolean"> 
+				<description>æ¯å¦å é¤</description> <modifiers read="true" write="true" 
+				search="true" /> <persistence type="property" /> </attribute> </attributes> 
+				</itemtype> -->
+
+
+			<itemtype code="Media" autocreate="false" generate="false">
+				<description>Extending Media additional aliyun attributes.</description>
+				<attributes>
+					<attribute qualifier="aliyunUrl" type="java.lang.String">
+						<description>阿里云Url</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+
+				</attributes>
+			</itemtype>
+
+			<itemtype code="ImageFailedRecord" autocreate="true"
+				generate="true">
+				<deployment table="ImageFailedRecord" typecode="20101" />
+				<attributes>
+					<attribute qualifier="fileName" type="java.lang.String">
+						<description>文件名</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="actionType" type="ImageFailedActionType">
+						<description>操作类型</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="aliyunUrl" type="java.lang.String">
+						<description>阿里云Url</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="location" type="java.lang.String">
+						<description>本地路径</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="status" type="java.lang.String">
+						<description>状态</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			<itemtype code="ImageUploadedLog" autocreate="true"
+				generate="true">
+				<deployment table="ImageUploadedLog" typecode="20102" />
+				<attributes>
+					<attribute qualifier="imagePK" type="java.lang.String">
+						<description>图片PK</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="aliyunUrl" type="java.lang.String">
+						<description>阿里云URL</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+
 		   </itemtype>
-		   <!--add by Wangjh 资质文件扩展  end -->
+		   <!--add by Wangjh  end -->
         </typegroup>
         
         <!-- add by Randy -->
         <typegroup name="import chemicalInfo and unitCalculateRato">
 
+
 			<itemtype code="Product" autocreate="false" generate="false">
 				<description>Extending the Product type from core with additional attributes.</description>
 				<attributes>
 					<attribute type="java.lang.String" qualifier="chemicalInfo">
-						<modifiers read="true" write="true" search="false" optional="true"/>
+						<modifiers read="true" write="true" search="false"
+							optional="true" />
 						<persistence type="property" />
 						<description>Attribute about chemicalInfo of Product</description>
+
 					</attribute>
 					<attribute type="java.lang.String" qualifier="unitCalculateRato">
-						<modifiers read="true" write="true" search="false" optional="true"/>
+						<modifiers read="true" write="true" search="false"
+							optional="true" />
 						<persistence type="property" />
 						<description>Attribute about unitCalculateRato of Product</description>
+
 					</attribute>
 				</attributes>
 			</itemtype>
@@ -187,6 +265,7 @@
 			</itemtype>
 			
 		</typegroup>
+
 		
 		<!-- add by Randy -->
 		<typegroup name="import the component of fronter page">
@@ -242,10 +321,29 @@
 		</typegroup>
 		<!-- End -->
 		
-		<!--添加字段   TODO -->
-	 	<typegroup name="traning">
+		
+
+		<!--Aliceæ·»å å­æ®µ:å¿åæ¯å¦æ¾ç¤ºä»·æ ¼ -->
+		<typegroup name="traning">
+			<itemtype code="Product" autocreate="false" generate="false">
+				<description>Extending the Product type from core with additional attributes.</description>
+				<attributes>
+					<attribute qualifier="anonymousDisplayPrice" type="boolean">
+						<description>Anonymous whether to show the price</description>
+						<modifiers optional="false" initial="false" />
+						<persistence type="property" />
+						<defaultvalue>Boolean.FALSE</defaultvalue>
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+		<!-- End -->
+
+		<!--æ·»å å­æ®µ TODO -->
+		<typegroup name="traning">
+
 			<itemtype code="StockLevel" autocreate="false" generate="false">
-				  <description>Extending the Product type from core with additional attributes.</description>
+				<description>Extending the Product type from core with additional attributes.</description>
 				<attributes>
 					<attribute qualifier="preOrderReleaseDay" type="java.lang.Integer">
 						<persistence type="property" />
@@ -253,6 +351,7 @@
 				</attributes>
 			</itemtype>
 		</typegroup>
+
 
 		<typegroup name="traning">
 			<itemtype code="AbstractOrderEntry" autocreate="false" generate="false">
@@ -268,4 +367,5 @@
 		</typegroup>
 	<!-- shaun.sheng -->
     </itemtypes>
+
 </items>
