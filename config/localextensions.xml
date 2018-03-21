@@ -1,0 +1,141 @@
+<hybrisconfig xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance' xsi:noNamespaceSchemaLocation='../bin/platform/resources/schemas/extensions.xsd'>
+  <extensions>
+    <path dir='${HYBRIS_BIN_DIR}' autoload='false' />
+    <path dir='${HYBRIS_BIN_DIR}/custom' autoload='true' />
+    <extension name='hmc' />
+   
+    <!--
+    <extension name='backoffice' />   
+    -->
+
+     <extension name='mcc' />
+  
+
+    <!--
+    <extension name='adaptivesearchsolr' />
+    <extension name='adaptivesearchbackoffice' />
+    <extension name='adaptivesearchsamplesaddon' />
+    -->
+
+   <!-- remove backoffice for dev
+    <extension name='commerceservicesbackoffice' />
+    <extension name='solrfacetsearchbackoffice' />
+   -->
+    <extension name='solrserver' />
+   
+
+    <!--
+    <extension name='yacceleratorcockpits' />
+    <extension name='yacceleratorinitialdata' />
+    <extension name='yacceleratorfulfilmentprocess' />
+    <extension name='yacceleratorstorefront' />
+    <extension name='ycommercewebservices' />
+    <extension name='ycommercewebservicestest' />
+    -->
+
+    <extension name='electronicsstore' />
+    <!--
+    <extension name='apparelstore' />
+    -->
+    <!--
+    <extension name='captchaaddon' />
+    -->
+
+    <extension name='acceleratorwebservicesaddon' />
+
+    <!--
+    <extension name='commerceorgsamplesaddon' />
+    -->
+    <extension name='ordermanagementaddon' />
+    <extension name='orderselfserviceaddon' />
+   
+    <!-- 
+    <extension name='rulebuilderbackoffice' />
+   <extension name='droolsruleengineservices' />
+    <extension name='promotionenginesamplesaddon' />
+   --> 
+
+   <!-- 
+   <extension name='couponbackoffice' />
+   <extension name='couponfacades' />
+    -->
+
+    <!--
+    <extension name='assistedservicestorefront' />
+    <extension name='assistedservicewebservices' />
+    <extension name='assistedserviceyprofileaddon' />
+    <extension name='assistedservicecustomerinterestsaddon' />
+    <extension name='assistedservicepromotionaddon' />
+    -->
+
+    <extension name='customerticketingaddon' />
+
+     <!-- remove backoffice for dev
+    <extension name='customersupportbackoffice' />
+     -->
+
+    <!-- 用户行为分析我们一般国内用极光 友盟阿里国外用google
+    <extension name='eventtrackingwsaddon' />
+    <extension name='hybrisanalyticsaddon' />
+    <extension name='yprofileeventtrackingws' />
+    <extension name='yprofileeventadapter' />
+    <extension name='yprofileprocessadapter' />
+    <extension name='privacyoverlayeraddon' />
+    <extension name='yaasconfigurationbackoffice' />
+    -->
+   
+    <!--
+    <extension name='textfieldconfiguratortemplatebackoffice' />
+    <extension name='textfieldconfiguratortemplateaddon' />
+    -->
+    
+    <!-- 一般用户不会经常修改cms结构；程序员也用不着
+    <extension name='cmswebservices' />
+    <extension name='smarteditwebservices' />
+    <extension name='cmssmarteditwebservices' />
+    <extension name='permissionswebservices' />
+    <extension name='smarteditaddon' />
+    <extension name='cmssmartedit' />
+    -->
+
+    <extension name='consignmenttrackingaddon' />
+   <!--
+    <extension name='consignmenttrackingmock' />
+   -->
+ <!-- remove backoffice for dev 
+   <extension name='consignmenttrackingbackoffice' />
+    -->
+    
+    <extension name='notificationaddon' />
+   
+
+    <extension name='customerinterestsaddon' />
+    <extension name='stocknotificationaddon' />
+   
+    <!-- 
+    <extension name='configurablebundleaddon' />
+    <extension name='previewpersonalizationweb' />
+    <extension name='personalizationcmsweb' />
+    <extension name='personalizationsmartedit' />
+    <extension name='personalizationsampledataaddon' />
+    <extension name='personalizationyprofile' />
+    <extension name='personalizationpromotions' />
+    <extension name='personalizationpromotionsweb' />
+    <extension name='personalizationservicesbackoffice' />
+    <extension name='personalizationpromotionsbackoffice' />
+    <extension name='personalizationcmsbackoffice' />
+    <extension name='personalizationintegrationbackoffice' />
+    <extension name='assistedserviceatddtests' />
+    <extension name='promotionengineatddtests' />
+    <extension name='textfieldconfiguratortemplateatddtests' />
+    
+    <extension name='configurablebundleatddtests' />
+    <extension name='configurablebundlecockpits' />
+    -->
+ 
+   <!--
+    <extension name='pcmbackofficesamplesaddon' />
+    <extension name='b2cangularaddon' />
+    -->
+  </extensions>
+</hybrisconfig>

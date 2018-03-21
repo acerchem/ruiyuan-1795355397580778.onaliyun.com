@@ -1,0 +1,10 @@
+.pmd
+.springBeans
+acerchem/acerchemcore/.settings
+*.class
+rebel.xml
+acerchem/acerchemstorefront/.settings
+acerchemrestfulapi/.settings
+acerchem/acercheminitialdata/.settings
+acerchem/acerchemfulfilmentprocess/.settings
+acerchem/acerchemfacades/.settings
