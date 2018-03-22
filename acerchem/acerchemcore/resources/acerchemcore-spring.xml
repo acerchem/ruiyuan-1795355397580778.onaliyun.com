@@ -630,9 +630,5 @@
 		<property name="txManager" ref="txManager"/>
 		 -->
 	</bean>
-<!-- acerChemAlternativeMediaServiceImpl
-	<alias alias="mediaService" name="MymediaService"/>
-	<bean id="MymediaService" class="com.acerchem.core.image.service.impl.MymediaService">
-	</bean>
-	-->
+
 </beans>
