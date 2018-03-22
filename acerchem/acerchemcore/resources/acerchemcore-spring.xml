@@ -617,15 +617,22 @@
 	
 	<bean id="acerChemImageFailedRecoredService" class="com.acerchem.core.image.service.impl.AcerChemImageFailedRecoredServiceImpl"  >
 	</bean>
-	<!-- 
+
+
 	<alias alias="mediaService" name="acerChemAlternativeMediaServiceImpl"/>
-	<bean id="acerChemAlternativeMediaServiceImpl" class="com.acerchem.core.image.service.impl.AcerChemAlternativeMediaServiceImpl" >
+	<bean id="acerChemAlternativeMediaServiceImpl" class="com.acerchem.core.image.service.impl.AcerChemAlternativeMediaServiceImpl" parent="defaultMediaService">
+		<!-- 
 		<property name="flexibleSearchService" ref="flexibleSearchService"/>
 		<property name="mediaDao" ref="mediaDao"/>
 		<property name="mimeService" ref="mimeService"/>
 		<property name="modelService" ref="modelService"/>
 		<property name="sessionService" ref="sessionService"/>
 		<property name="txManager" ref="txManager"/>
+		 -->
 	</bean>
-	 -->
+<!-- acerChemAlternativeMediaServiceImpl
+	<alias alias="mediaService" name="MymediaService"/>
+	<bean id="MymediaService" class="com.acerchem.core.image.service.impl.MymediaService">
+	</bean>
+	-->
 </beans>
