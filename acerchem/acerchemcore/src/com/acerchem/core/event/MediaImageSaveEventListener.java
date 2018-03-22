@@ -49,7 +49,7 @@ public class MediaImageSaveEventListener implements AfterSaveListener {
 		// TODO Auto-generated method stub
 		for (final AfterSaveEvent event : collection) {
 			final int type = event.getType();
-			if (AfterSaveEvent.UPDATE == type) {
+			if (AfterSaveEvent.UPDATE == type || AfterSaveEvent.CREATE == type) {
 				final PK pk = event.getPk();
 				// 30 is media
 				if (30 == pk.getTypeCode()) {
