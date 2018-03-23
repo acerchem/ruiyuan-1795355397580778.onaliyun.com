@@ -11,6 +11,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="address" tagdir="/WEB-INF/tags/desktop/address"%>
 <c:url value="/" var="homeUrl"/>
+<c:url value="/login" var="loginUrl"/>
 
 <body class="gray">
 <div class="sign-header">
@@ -164,15 +165,15 @@
 		
 		<div class="link">
 		
-			By creating an account, you agree to Acerchem <br/> <a href="javascript:history.go(-1)">Conditions</a>
-		 of Use and <a href="javascript:history.go(-1)">Privacy Notice</a>.
+			By creating an account, you agree to Acerchem <br/> <a href="${loginUrl}">Conditions</a>
+		 of Use and <a href="${loginUrl}">Privacy Notice</a>.
 		</div>
 		</form:form>
 		<div class="btn-set">
 			<button type="submit" class="btn btn-submit">Register</button>
 		</div>
 	<div class="link">
-		Already have an account? <a href="javascript:history.go(-1)">Sign in </a>
+		Already have an account? <a href="${loginUrl}">Sign in </a>
 	</div>
 </div>
 
