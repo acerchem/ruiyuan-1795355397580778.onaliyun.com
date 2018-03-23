@@ -296,7 +296,9 @@ public class LoginPageController extends AbstractLoginPageController
 		RegionModel shipRegion=commonI18NService.getRegion(shipCountry,shipRegionIso);
 		
 		AddressModel am=modelService.create(AddressModel.class);
-		am.setContactAddress(true);
+		am.setContactAddress(false);
+		am.setShippingAddress(true);
+		am.setVisibleInAddressBook(true);
 		am.setLastname(form.getContacts());
 		am.setPhone1(form.getMobileNumber());
 		am.setCellphone(form.getMobileNumber());
@@ -310,7 +312,9 @@ public class LoginPageController extends AbstractLoginPageController
 		CountryModel contactCountry=commonI18NService.getCountry(contactCountryIso);
 		RegionModel contactRegion=commonI18NService.getRegion(contactCountry,contactRegionIso);
 		AddressModel am2=modelService.create(AddressModel.class);
-		am2.setShippingAddress(true);
+		am2.setContactAddress(true);
+		am2.setShippingAddress(false);
+		am2.setVisibleInAddressBook(false);
 		am2.setLastname(form.getContacts());
 		am2.setPhone1(form.getMobileNumber());
 		am2.setCellphone(form.getMobileNumber());
