@@ -631,4 +631,7 @@
 		 -->
 	</bean>
 
+	<bean id="myImageAfterDeletedListener" class="com.acerchem.core.event.MyImageAfterDeletedListener" />
+
+
 </beans>
