@@ -167,6 +167,8 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 				single_createattr_ImageUploadedLog_aliyunUrl();
 			
+				single_createattr_ImageUploadedLog_status();
+			
 				single_createattr_Product_chemicalInfo();
 			
 				single_createattr_Product_unitCalculateRato();
@@ -400,6 +402,23 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 	}
 	
+	public void single_createattr_ImageUploadedLog_status() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"ImageUploadedLog", 
+					"status",  
+					null,
+					"java.lang.String",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
 	public void single_createattr_Product_chemicalInfo() throws JaloBusinessException
 	{
 		
@@ -622,6 +641,8 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			single_setAttributeProperties_ImageUploadedLog_imagePK();
 		
 			single_setAttributeProperties_ImageUploadedLog_aliyunUrl();
+		
+			single_setAttributeProperties_ImageUploadedLog_status();
 		
 				{
 				Map customPropsMap = new HashMap();
@@ -967,6 +988,28 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							setAttributeProperties(
 								"ImageUploadedLog", 
 								"aliyunUrl",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_ImageUploadedLog_status() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"ImageUploadedLog", 
+								"status",
 								false, 
 								null,
 								null,

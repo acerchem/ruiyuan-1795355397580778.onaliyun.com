@@ -24,4 +24,10 @@ public class AcerChemImageFailedRecoredServiceImpl implements AcerChemImageFaile
 		return null;
 	}
 
+	@Override
+	public List<ImageFailedRecordModel> getAllImageFailedRecord() {
+		// TODO Auto-generated method stub
+		return acerChemImageFailedRecordDao.getAllImageFailedRecord();
+	}
+	
 }

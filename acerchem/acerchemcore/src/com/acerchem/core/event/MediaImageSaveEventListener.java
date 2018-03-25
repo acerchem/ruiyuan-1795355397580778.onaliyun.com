@@ -65,39 +65,57 @@ public class MediaImageSaveEventListener implements AfterSaveListener {
 						String mediaType = media.getMime();
 						if (StringUtils.isNotBlank(mediaType)) {
 							mediaType = mediaType.substring(0, mediaType.indexOf("/"));
+						} else {
+							mediaType = "";
 						}
+
+						final String ls = media.getLocation();
 						if (mediaPath.equals("images") && mediaType.equals("image")) {
-							final String ls = media.getLocation();
 
-							// 处理hmc发生两次图
-							String _location = ls.substring(ls.indexOf("/") + 1);
+							String root = configurationService.getConfiguration().getString("aliyun.preffixImageKey");
+							if (StringUtils.isNotBlank(ls)) {
+								// 处理hmc发生两次图
+								String _location = ls.substring(ls.indexOf("/") + 1);
 
-							if (StringUtils.isNotBlank(ls) && (_location.indexOf("/") > 0)) {
+								if (_location.indexOf("/") > 0) {
 
-								System.out.println("**********upload image to aliyun start*********");
-								uploadImageSendProcessor(media);
+									System.out.println("**********upload image to aliyun start*********");
+									uploadFileSendProcessor(media, root);
+								}
 
 							} else {
 								System.out.println("Media's Location is null!");
 							}
 						}
+						// 资质文件
+						else if (mediaPath.equals("documents")) {
+							String root = configurationService.getConfiguration().getString("aliyun.preffixDocKey");
+							if (StringUtils.isNotBlank(ls)) {
+								System.out.println("**********upload doc to aliyun start*********");
+								uploadFileSendProcessor(media, root);
+							}
+
+						}
 
 					} catch (ModelLoadingException me) {
-//						me.printStackTrace();
-						System.out.print("Preventing no resoure,After saved Event again,Occurring thread cross over? check it in future...");
-						
+						// me.printStackTrace();
+						System.out.print(
+								"Preventing no resoure,After saved Event again,Occurring thread cross over? check it in future...");
+
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
 				}
 
+			} else if (AfterSaveEvent.REMOVE == type) {
+				System.out.println("****After deleted saveEvent start******");
 			}
 
 		}
 
 	}
 
-	private void uploadImageSendProcessor(MediaModel media) {
+	private void uploadFileSendProcessor(final MediaModel media, final String root) {
 
 		try {
 			// get localfile path
@@ -114,8 +132,7 @@ public class MediaImageSaveEventListener implements AfterSaveListener {
 			String keySuffix = file.getName().substring(file.getName().lastIndexOf(".") + 1);
 
 			// aliyun relation path>>> application/yyyymmdd/
-			String key = configurationService.getConfiguration().getString("aliyun.preffixKey") + "/" + temp_ + "/"
-					+ media.getPk().getLong().toString() + "." + keySuffix;
+			String key = root + "/" + temp_ + "/" + media.getPk().getLong().toString() + "." + keySuffix;
 			// 初始化upload参数
 			String lsEndpoint = configurationService.getConfiguration().getString("aliyun.endpoint");
 			String lsAccessKeyId = configurationService.getConfiguration().getString("aliyun.accessKeyId");
@@ -141,7 +158,7 @@ public class MediaImageSaveEventListener implements AfterSaveListener {
 				modelService.save(iulModel);
 				System.out.println("****synsave to server end*****");
 			} else {
-				uploadFailedProccess(media, aliyunUrl, localPath);
+				uploadFailedProccess(media, key, localPath);
 			}
 
 		} catch (Exception e) {
@@ -150,7 +167,7 @@ public class MediaImageSaveEventListener implements AfterSaveListener {
 
 	}
 
-	// 上传失败处理--保存上传的文件路径和aliyun路径
+	// 上传失败处理--保存上传的文件路径和aliyun的key路径
 	private void uploadFailedProccess(MediaModel media, String aliyunPath, String path) {
 
 		ImageFailedActionType actionType = enumerationService.getEnumerationValue(ImageFailedActionType.class, "ADD");

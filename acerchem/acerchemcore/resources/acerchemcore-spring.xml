@@ -631,7 +631,8 @@
 		 -->
 	</bean>
 
-	<bean id="myImageAfterDeletedListener" class="com.acerchem.core.event.MyImageAfterDeletedListener" />
+	<bean id="myImageAfterDeletedListener" class="com.acerchem.core.event.MyImageAfterDeletedListener" parent="abstractEventListener"/>
+	
 
 
 </beans>

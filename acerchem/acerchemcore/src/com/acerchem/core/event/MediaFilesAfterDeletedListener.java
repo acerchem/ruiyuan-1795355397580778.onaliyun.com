@@ -10,7 +10,6 @@ import com.acerchem.core.model.ImageFailedRecordModel;
 import com.acerchem.core.model.ImageUploadedLogModel;
 import com.acerchem.core.web.aliyun.MediaFileManager;
 
-
 import de.hybris.platform.core.PK;
 import de.hybris.platform.enumeration.EnumerationService;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
@@ -18,9 +17,8 @@ import de.hybris.platform.servicelayer.event.events.AfterItemRemovalEvent;
 import de.hybris.platform.servicelayer.event.impl.AbstractEventListener;
 import de.hybris.platform.servicelayer.model.ModelService;
 
-public class MyImageAfterDeletedListener extends AbstractEventListener<AfterItemRemovalEvent> {
-	
-	
+public class MediaFilesAfterDeletedListener extends AbstractEventListener<AfterItemRemovalEvent> {
+
 	@Resource(name = "configurationService")
 	private ConfigurationService configurationService;
 	@Resource
@@ -106,5 +104,6 @@ public class MyImageAfterDeletedListener extends AbstractEventListener<AfterItem
 		
 		
 	}
+	
 
 }

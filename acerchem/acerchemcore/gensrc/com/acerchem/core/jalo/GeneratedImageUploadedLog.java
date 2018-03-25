@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-3-22 12:29:06                          ---
+ * --- Generated at 2018-3-25 22:36:03                          ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.jalo;
@@ -24,12 +24,15 @@ public abstract class GeneratedImageUploadedLog extends GenericItem
 	public static final String IMAGEPK = "imagePK";
 	/** Qualifier of the <code>ImageUploadedLog.aliyunUrl</code> attribute **/
 	public static final String ALIYUNURL = "aliyunUrl";
+	/** Qualifier of the <code>ImageUploadedLog.status</code> attribute **/
+	public static final String STATUS = "status";
 	protected static final Map<String, AttributeMode> DEFAULT_INITIAL_ATTRIBUTES;
 	static
 	{
 		final Map<String, AttributeMode> tmp = new HashMap<String, AttributeMode>();
 		tmp.put(IMAGEPK, AttributeMode.INITIAL);
 		tmp.put(ALIYUNURL, AttributeMode.INITIAL);
+		tmp.put(STATUS, AttributeMode.INITIAL);
 		DEFAULT_INITIAL_ATTRIBUTES = Collections.unmodifiableMap(tmp);
 	}
 	@Override
@@ -108,6 +111,42 @@ public abstract class GeneratedImageUploadedLog extends GenericItem
 	public void setImagePK(final String value)
 	{
 		setImagePK( getSession().getSessionContext(), value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>ImageUploadedLog.status</code> attribute.
+	 * @return the status - ç¶æ(0ï¼ å é¤ï¼1ï¼å¢å )
+	 */
+	public String getStatus(final SessionContext ctx)
+	{
+		return (String)getProperty( ctx, STATUS);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>ImageUploadedLog.status</code> attribute.
+	 * @return the status - ç¶æ(0ï¼ å é¤ï¼1ï¼å¢å )
+	 */
+	public String getStatus()
+	{
+		return getStatus( getSession().getSessionContext() );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>ImageUploadedLog.status</code> attribute. 
+	 * @param value the status - ç¶æ(0ï¼ å é¤ï¼1ï¼å¢å )
+	 */
+	public void setStatus(final SessionContext ctx, final String value)
+	{
+		setProperty(ctx, STATUS,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>ImageUploadedLog.status</code> attribute. 
+	 * @param value the status - ç¶æ(0ï¼ å é¤ï¼1ï¼å¢å )
+	 */
+	public void setStatus(final String value)
+	{
+		setStatus( getSession().getSessionContext(), value );
 	}
 	
 }

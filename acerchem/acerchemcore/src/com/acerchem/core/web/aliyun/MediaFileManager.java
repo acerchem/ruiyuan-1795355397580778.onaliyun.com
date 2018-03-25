@@ -84,7 +84,29 @@ public class MediaFileManager {
 		}
 	}
 
-	// 删除文件,采用简单模式，返回删除失败的文件列表
+	// 删除单个文件
+	public static boolean deleteFile(String key) throws IOException {
+		OSSClient client = new OSSClient(endpoint, accessKeyId, accessKeySecret);
+
+		try {
+			client.deleteObject(bucketName, key);
+
+		} catch (OSSException oe) {
+			return false;
+		} catch (ClientException ce) {
+			return false;
+		} finally {
+			/*
+			 * Do not forget to shut down the client finally to release all
+			 * allocated resources.
+			 */
+			client.shutdown();
+		}
+
+		return true;
+	}
+
+	// 删除批量文件,采用简单模式，返回删除失败的文件列表
 	public static List<String> deleteMediaFiles(List<String> keys) throws IOException {
 
 		OSSClient client = new OSSClient(endpoint, accessKeyId, accessKeySecret);
@@ -119,19 +141,45 @@ public class MediaFileManager {
 	}
 
 	public static void main(String[] args) {
-		/*
-		 * List<String> keys = new ArrayList<String>();
-		 * keys.add("application/20180313/6bd0795e9b004f59aa85cbf0db6e4859jpg");
-		 * keys.add("application/20180313/f2");
-		 * keys.add("application/20180313/f3"); try { List<String> results =
-		 * deleteMediaFiles(keys);
-		 * 
-		 * if (results.size() > 0) { for(String s : results){
-		 * System.out.println(s); } } }catch(Exception e){ e.printStackTrace();
-		 * }
-		 */
 
-		System.out.println("eee:" );
+		List<String> keys = new ArrayList<String>();
+		keys.add("application/20180322/8797069017118.jpg");
+		keys.add("application/20180322/8797069049886.jpg");
+		keys.add("application/20180322/8802452406302.jpg");
+		try {
+			
+			for (String key:keys){
+				boolean b = deleteFile(key);
+				if(!b){
+					System.out.println("dellete file failed!");
+				}
+			}
+//}
+//			if (results.size() > 0) {
+//				for (String s : results) {
+//					System.out.println(s);
+//				}
+//			}
+			
+		} catch (Exception e) {
+			System.out.println("WWWWWWW");
+			e.printStackTrace();
+		}
+		
+		
+
+		
+	
+		 String ls =
+		 "https://acerchem.oss-us-east-1.aliyuncs.com/application/20180322/8796936863774.jpg";
+		// String ls1 =
+		// "https://acerchem.oss-us-east-1.aliyuncs.com/application/20180322/8797059678238.jpg";
+		// String ls3 =
+		// "https://acerchem.oss-us-east-1.aliyuncs.com/application/20180322/8797059678238key.jpg";
+
+		System.out.println("eee:");
+		ls = ls.substring(ls.indexOf("application"));
+		System.out.println(ls);
 
 	}
 
