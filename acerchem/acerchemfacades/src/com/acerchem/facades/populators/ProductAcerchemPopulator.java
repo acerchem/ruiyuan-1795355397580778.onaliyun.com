@@ -23,11 +23,7 @@ public class ProductAcerchemPopulator<SOURCE extends ProductModel, TARGET extend
 	@Override
 	public void populate(final SOURCE productModel, final TARGET productData) throws ConversionException
 	{
-		System.out.println("热部署开始======" + safeToString(getProductAttribute(productModel, ProductModel.CHEMICALINFO)));
-		//productData.setSummary(safeToString(getProductAttribute(productModel, ProductModel.SUMMARY)));
-		
 		productData.setChemicalInfo(safeToString(getProductAttribute(productModel, ProductModel.CHEMICALINFO)));
-		
 		productData.setUnitCalculateRato(safeToString(getProductAttribute(productModel, ProductModel.CHEMICALINFO)));
 	}
 }
