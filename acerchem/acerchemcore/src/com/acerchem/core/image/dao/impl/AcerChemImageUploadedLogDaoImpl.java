@@ -18,6 +18,8 @@ import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
 
 public class AcerChemImageUploadedLogDaoImpl implements AcerChemImageUploadedLogDAO {
+	
+
 	@Resource(name = "flexibleSearchService")
 	private FlexibleSearchService flexibleSearchService;
 	@Resource
@@ -36,9 +38,7 @@ public class AcerChemImageUploadedLogDaoImpl implements AcerChemImageUploadedLog
 
 		final String GET_IMAGEUPLOADLOG_MODEL = "select {pk} from {" + ImageUploadedLogModel._TYPECODE + "} where {"
 				+ ImageUploadedLogModel.IMAGEPK + "} =?imagepk";
-		// FlexibleSearchQuery query = new
-		// FlexibleSearchQuery(GET_IMAGEUPLOADLOG_MODEL);
-		// query.addQueryParameter("pk", pk);
+		
 
 		final Map<String, Object> params = new HashMap<String, Object>();
 		final StringBuilder builder = new StringBuilder(GET_IMAGEUPLOADLOG_MODEL);
@@ -56,6 +56,29 @@ public class AcerChemImageUploadedLogDaoImpl implements AcerChemImageUploadedLog
 			return list.get(0);
 		}
 		return null;
+	}
+	
+	
+	@Override
+	public boolean isExistByLocation(final String location) {
+		final String SQL = "select {pk} from {" + ImageUploadedLogModel._TYPECODE + "} where {"
+				+ ImageUploadedLogModel.LOCATION + "} =?location";
+		
+		
+		final Map<String, Object> params = new HashMap<String, Object>();
+		final StringBuilder builder = new StringBuilder(SQL);
+		params.put("location", location);
+		
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(builder.toString());
+		query.addQueryParameters(params);
+		
+		SearchResult<ImageUploadedLogModel> result = flexibleSearchService.search(query);
+		
+		if (result.getCount() > 0) {
+			return true;
+		}
+		
+		return false;
 	}
 
 }

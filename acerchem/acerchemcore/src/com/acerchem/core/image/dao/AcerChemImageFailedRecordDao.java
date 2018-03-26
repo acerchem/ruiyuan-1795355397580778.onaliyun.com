@@ -7,4 +7,5 @@ import com.acerchem.core.model.ImageFailedRecordModel;
 public interface AcerChemImageFailedRecordDao {
 
 	public List<ImageFailedRecordModel> getImageFailedRecordByFileAttr(final String fileName,final String actionType);
+	public List<ImageFailedRecordModel> getAllImageFailedRecord();
 }
