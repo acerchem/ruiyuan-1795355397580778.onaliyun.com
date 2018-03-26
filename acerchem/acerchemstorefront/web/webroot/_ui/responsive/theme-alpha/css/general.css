@@ -1822,7 +1822,8 @@ textarea{
 /*gallery*/
 .gal-centent{
 	position: relative;
-	border-top:4px solid #f3f3f3;
+	/*shuan  */
+	/* border-top:4px solid #f3f3f3; */
 }
 .gal-centent .g-cont,.gal-centent .g-cartable{
 	padding-top: 0;
@@ -1835,8 +1836,8 @@ textarea{
 	top:0;
 	left: 0;
 	padding-left: 5%;
-	/* width:20%; */
-	padding-bottom: 40px;
+	width:20%;
+	/* padding-bottom: 40px; */
 	background-color: #fff;
 }
 .gal-centent .gall-right{
@@ -1850,7 +1851,8 @@ textarea{
 .gal-centent .gall-left h4{
 	font-size:24px;
 	line-height: 28px;
-	padding: 36px 0 4px 0;
+	/* shaun */
+	/* padding: 36px 0 4px 0; */
 }
 .gal-centent .gall-left h5{
 	font-size:18px;
