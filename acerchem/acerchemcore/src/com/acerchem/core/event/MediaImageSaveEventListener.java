@@ -63,32 +63,31 @@ public class MediaImageSaveEventListener implements AfterSaveListener {
 						String mediaPath = StringUtils.isNotBlank(media.getFolder().getPath())
 								? media.getFolder().getPath() : "";
 						String mediaType = media.getMime();
+						// 采用全mimep匹配，否则会因为cronJob缘故，上传zip文件
 						if (StringUtils.isNotBlank(mediaType)) {
-							mediaType = mediaType.substring(0, mediaType.indexOf("/"));
+							// mediaType = mediaType.substring(0,
+							// mediaType.indexOf("/"));
 						} else {
 							mediaType = "";
 						}
 
 						final String ls = media.getLocation();
-						if (mediaPath.equals("images") && mediaType.equals("image")) {
+						if (mediaType.equals("image/jpeg") || mediaType.equals("image/png")
+								|| mediaType.equals("image/gif") || mediaType.equals("image/bmp")) {
 
 							String root = configurationService.getConfiguration().getString("aliyun.preffixImageKey");
 							if (StringUtils.isNotBlank(ls)) {
-								// 处理hmc发生两次图
-								String _location = ls.substring(ls.indexOf("/") + 1);
 
-								if (_location.indexOf("/") > 0) {
-
-									System.out.println("**********upload image to aliyun start*********");
-									uploadFileSendProcessor(media, root);
-								}
+								System.out.println("**********upload image to aliyun start*********");
+								uploadFileSendProcessor(media, root);
 
 							} else {
 								System.out.println("Media's Location is null!");
 							}
 						}
-						// 资质文件
-						else if (mediaPath.equals("documents")) {
+						// 资质文件,暂定三种
+						else if (mediaType.equals("application/pdf") || mediaType.equals("application/msexcel")
+								|| mediaType.equals("application/msword")) {
 							String root = configurationService.getConfiguration().getString("aliyun.preffixDocKey");
 							if (StringUtils.isNotBlank(ls)) {
 								System.out.println("**********upload doc to aliyun start*********");
@@ -144,26 +143,27 @@ public class MediaImageSaveEventListener implements AfterSaveListener {
 
 			boolean uploadFlag = UploadFileDefault.uploadFile(file, key);
 
-			//if (!acerChemImageUploadLogService.isExistByLocation(localPath)) {
-				ImageUploadedLogModel iulModel = acerChemImageUploadLogService
-						.getImageUploadedLog(media.getPk().getLong().toString());
-				String aliyunUrl = configurationService.getConfiguration().getString("aliyun.domain") + "/" + key;
-				if (uploadFlag) {
-					System.out.println("****upload end>>>>synsave to server start*****");
-					// save aliyunUrl to ImageUploadedLog
-					if (iulModel == null) {
-						iulModel = modelService.create(ImageUploadedLogModel.class);
-					}
-					iulModel.setAliyunUrl(aliyunUrl);
-					iulModel.setImagePK(media.getPk().getLong().toString());
-					iulModel.setLocation(localPath);
-
-					modelService.save(iulModel);
-					System.out.println("****synsave to server end*****");
-				} else {
-					uploadFailedProccess(media, key, localPath);
+			// if (!acerChemImageUploadLogService.isExistByLocation(localPath))
+			// {
+			ImageUploadedLogModel iulModel = acerChemImageUploadLogService
+					.getImageUploadedLog(media.getPk().getLong().toString());
+			String aliyunUrl = configurationService.getConfiguration().getString("aliyun.domain") + "/" + key;
+			if (uploadFlag) {
+				System.out.println("****upload end>>>>synsave to server start*****");
+				// save aliyunUrl to ImageUploadedLog
+				if (iulModel == null) {
+					iulModel = modelService.create(ImageUploadedLogModel.class);
 				}
-			//}
+				iulModel.setAliyunUrl(aliyunUrl);
+				iulModel.setImagePK(media.getPk().getLong().toString());
+				iulModel.setLocation(localPath);
+
+				modelService.save(iulModel);
+				System.out.println("****synsave to server end*****");
+			} else {
+				uploadFailedProccess(media, key, localPath);
+			}
+			// }
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -205,6 +205,13 @@ public class MediaImageSaveEventListener implements AfterSaveListener {
 
 		modelService.save(failedRecord);
 
+	}
+	
+	//配置处理资质文件的Mime
+	private boolean isIncluding(final String mimeType){
+		
+		
+		return false;
 	}
 
 }

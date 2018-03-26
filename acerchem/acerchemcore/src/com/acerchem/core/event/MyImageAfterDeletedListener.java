@@ -69,7 +69,7 @@ public class MyImageAfterDeletedListener extends AbstractEventListener<AfterItem
 						} else {
 							deleteAliyunFileFailedProccess(iulModel, key);
 						}
-						System.out.print("*****delete aliyun file finished*****");
+						System.out.println("*****delete aliyun file finished*****");
 					}
 
 				}

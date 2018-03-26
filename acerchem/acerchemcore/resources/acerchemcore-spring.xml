@@ -633,6 +633,6 @@
 
 	<bean id="mediaFilesAfterDeletedListener" class="com.acerchem.core.event.MediaFilesAfterDeletedListener" parent="abstractEventListener"/>
 	
-	<bean id="aliyunFilesJobPerformable" class="com.acerchem.core.job.AliyunFilesJobPerformable" parent="abstractJobPerformable"/>
+	<bean id="aliyunFilesJob" class="com.acerchem.core.job.AliyunFilesJobPerformable" parent="abstractJobPerformable"/>
 
 </beans>
