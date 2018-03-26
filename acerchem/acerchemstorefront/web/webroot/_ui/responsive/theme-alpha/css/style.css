@@ -1636,7 +1636,7 @@ pre code {
   width: 33.33333333%;
 }
 .col-xs-3 {
-	/* shaun : modify 20% */
+	/* shaun */
   width: 20%;
 }
 .col-xs-2 {
@@ -9703,11 +9703,12 @@ fieldset[disabled] .btn-primary.active {
 .pagination > li.pagination-next > a,
 .pagination > li.pagination-prev > span,
 .pagination > li.pagination-next > span {
-  font-size: 20px;
+   font-size: 20px;
   background-color: transparent;
   color: #c0c0c0;
   font-weight: 500;
   /* shaun */
+
 }
 .pagination > li.pagination-prev > a:hover,
 .pagination > li.pagination-next > a:hover,
@@ -11699,9 +11700,8 @@ a.product__listing .product__listing--promo:focus {
     margin-left: -20px;
     margin-top: -20px;
   }
-  /* shaun:左边距设为0 */
   .search-list-page-right-result-list-component {
-    padding-left: 0px;
+    padding-left: 20px;
   }
   .product-list-right-slot {
     margin-left: -20px;
