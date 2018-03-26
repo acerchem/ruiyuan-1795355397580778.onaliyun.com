@@ -44,6 +44,23 @@
 		</enumtype>
 	</enumtypes>
 
+	<relations>
+		<!-- 供应商与商品之间的关系(多对多) -->
+		<relation code="AcerChemVendor2Product" generate="true"
+			localized="false" autocreate="true">
+			<deployment table="AcerChemVendor2Product" typecode="30100" />
+			<sourceElement qualifier="acerChemVendors" type="Vendor"
+				cardinality="many">
+				<modifiers read="true" write="true" search="true"
+					optional="true" />
+			</sourceElement>
+			<targetElement qualifier="acerChemProducts" type="Product"
+				cardinality="many">
+				<modifiers read="true" write="true" search="true"
+					optional="true" />
+			</targetElement>
+		</relation>
+	</relations>
 	<itemtypes>
 
 		<!-- Add your item definitions here -->
@@ -263,3 +280,4 @@
 
 	</itemtypes>
 </items>
+
