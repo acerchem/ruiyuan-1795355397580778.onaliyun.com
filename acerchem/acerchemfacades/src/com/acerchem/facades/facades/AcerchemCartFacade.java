@@ -1,0 +1,30 @@
+package com.acerchem.facades.facades;
+
+
+import de.hybris.platform.commercefacades.order.data.CartModificationData;
+import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
+
+/**
+ * Created by Jacob.Ji on 2018/3/22.
+ */
+public interface AcerchemCartFacade {
+
+    String acerchemValidateCart(String warehouseCode,String productCode,boolean isUseFutureStock);
+
+    /**
+     * Method for adding a product to cart.
+     *
+     * @param code
+     *           code of product to add
+     * @param quantity
+     *           the quantity of the product
+     * @param warehouseCode
+     *           the warehouseCode of the product
+     * @param isUseFutureStock
+     *           the warehouseCode of the product
+     * @return the cart modification data that includes a statusCode and the actual quantity added to the cart
+     * @throws CommerceCartModificationException
+     *            if the cart cannot be modified
+     */
+    CartModificationData addToCart(String code, long quantity, String warehouseCode, boolean isUseFutureStock, String storeId) throws CommerceCartModificationException;
+}

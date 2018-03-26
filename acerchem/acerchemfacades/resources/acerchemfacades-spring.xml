@@ -242,7 +242,8 @@
 		<property name="acerchemCustomerConverter" ref="acerchemCustomerConverter"/>
 		<property name="acerchemCustomerService" ref="acerchemCustomerService"/>
 		<property name="countryToWarehouseConverter" ref="countryToWarehouseConverter"/>
-	</bean>
+        <property name="baseStoreService" ref="baseStoreService"/>
+    </bean>
 
 	<alias name="defaultWarehousePopulator" alias="warehousePopulator"/>
 	<bean id="defaultWarehousePopulator" class="com.acerchem.facades.populators.WarehousePopulator">
@@ -262,6 +263,7 @@
 	<bean id="defaultCountryToWarehousePopulator" class="com.acerchem.facades.populators.CountryToWarehousePopulator">
 		<property name="countryConverter" ref="countryConverter"/>
 		<property name="warehouseConverter" ref="warehouseConverter"/>
+		<property name="userService" ref="userService"/>
 	</bean>
 
 	<alias name="defaultCountryToWarehouseConverter" alias="countryToWarehouseConverter"/>
@@ -270,6 +272,26 @@
 		<property name="populators">
 			<list>
 				<ref bean="countryToWarehousePopulator"/>
+			</list>
+		</property>
+	</bean>
+
+	<alias name="defaultAcerchemCartFacade" alias="acerchemCartFacade"/>
+	<bean id="defaultAcerchemCartFacade" parent="cartFacade" class="com.acerchem.facades.facades.impl.DefaultAcerchemCartFacade" >
+		<property name="acerchemCommerCartService" ref="acerchemCommerCartService" />
+	</bean>
+
+	<alias name="defaultAcerchemCartParameterPopulator" alias="acerchemCartParameterPopulator"/>
+	<bean id="defaultAcerchemCartParameterPopulator" class="com.acerchem.facades.populators.AcerchemCartParameterPopulator">
+	</bean>
+
+	<alias name="defaultCommerceCartParameterConverter" alias="commerceCartParameterConverter"/>
+	<bean name="defaultCommerceCartParameterConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commerceservices.service.data.CommerceCartParameter"/>
+		<property name="populators">
+			<list>
+				<ref bean="commerceCartParameterBasicPopulator"/>
+				<ref bean="acerchemCartParameterPopulator"/>
 			</list>
 		</property>
 	</bean>

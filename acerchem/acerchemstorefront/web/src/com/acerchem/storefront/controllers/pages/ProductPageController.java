@@ -153,7 +153,7 @@ public class ProductPageController extends AbstractPageController
 
         getSessionService().setAttribute("user",userService.getUserForUID("aaron.customer@hybris.com"));
         model.addAttribute("customer",acerchemCustomerFacade.getCurrentCustomer());
-        model.addAttribute("countryAndWarehouse",acerchemCustomerFacade.getCountryAndWarehouse());
+
 
 		final String metaKeywords = MetaSanitizerUtil.sanitizeKeywords(productData.getKeywords());
 		final String metaDescription = MetaSanitizerUtil.sanitizeDescription(productData.getDescription());

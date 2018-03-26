@@ -346,17 +346,7 @@
 						<defaultvalue>Boolean.FALSE</defaultvalue>
 						<modifiers />
 					</attribute>
-				</attributes>
-			</itemtype>
-
-			<itemtype code="CountryToWarehouse" autocreate="true" generate="true"  extends="GenericItem">
-				<deployment table="CountryToWarehouse" typecode="10401"/>
-				<attributes>
-					<attribute qualifier="country" type="Country" >
-						<persistence type="property" />
-						<modifiers />
-					</attribute>
-					<attribute qualifier="warehouseList" type="WarehouseList" >
+					<attribute qualifier="warehouseCode" type="java.lang.String">
 						<persistence type="property" />
 						<modifiers />
 					</attribute>

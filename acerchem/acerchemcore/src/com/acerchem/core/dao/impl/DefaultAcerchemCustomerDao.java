@@ -1,13 +1,19 @@
 package com.acerchem.core.dao.impl;
 
 import com.acerchem.core.dao.AcerchemCustomerDao;
-import com.acerchem.core.model.CountryToWarehouseModel;
 import com.acerchem.core.service.AcerchemCustomerService;
+import de.hybris.platform.commerceservices.search.flexiblesearch.PagedFlexibleSearchService;
+import de.hybris.platform.commerceservices.search.pagedata.PageableData;
+import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.servicelayer.internal.dao.AbstractItemDao;
 import de.hybris.platform.servicelayer.search.SearchResult;
+import de.hybris.platform.store.BaseStoreModel;
+import de.hybris.platform.storelocator.model.PointOfServiceModel;
 import org.apache.commons.collections.CollectionUtils;
+import org.springframework.beans.factory.annotation.Required;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -15,14 +21,18 @@ import java.util.Objects;
  */
 public class DefaultAcerchemCustomerDao extends AbstractItemDao implements AcerchemCustomerDao {
 
-    private static String GET_COUNTRY_AND_WAREHOUSE = "select {PK} from {CountryToWarehouse}";
-    @Override
-    public List<CountryToWarehouseModel> getCountryAndWarehouse() {
+    private final String GET_ALL_POINNTOFSERVICE = "select {PK} from {pointOfService} where {baseStore} = ?baseStore";
 
-        SearchResult<CountryToWarehouseModel> result= getFlexibleSearchService().search(GET_COUNTRY_AND_WAREHOUSE);
-        if (Objects.nonNull(result)&& CollectionUtils.isNotEmpty(result.getResult())){
-            return result.getResult();
-        }
-        return null;
+    private PagedFlexibleSearchService pagedFlexibleSearchService;
+
+    @Override
+    public SearchPageData<PointOfServiceModel> getAllPos(Map<String, Object> paramMap, PageableData pageableData) {
+
+        return pagedFlexibleSearchService.search(GET_ALL_POINNTOFSERVICE,paramMap,pageableData);
+    }
+
+    @Required
+    public void setPagedFlexibleSearchService(PagedFlexibleSearchService pagedFlexibleSearchService) {
+        this.pagedFlexibleSearchService = pagedFlexibleSearchService;
     }
 }
