@@ -52,13 +52,14 @@
 				</li>
 			</sec:authorize>
 							
-			  <cms:pageSlot position="HeaderLinks" var="link">
-			  
-					<cms:component component="${link}" element="li" />
-			 </cms:pageSlot>
-			 
-			 
-							 
+			<cms:pageSlot position="HeaderLinks" var="link">
+				<cms:component component="${link}" element="li" />
+			</cms:pageSlot>
+			<!-- <a class="myAccountLinksHeader js-myAccount-toggle maxicon-user" data-toggle="collapse" data-parent=".maxtop_rig" href="#accNavComponentDesktopOne" aria-expanded="true"></a> -->
+			
+			<c:url value="/my-account/update-profile" var="accUrl"/>
+			<a class="maxicon-user" href="${accUrl}"></a>
+			
 			<li><cms:pageSlot position="SearchBox" var="component">
 					<cms:component component="${component}" element="div" />
 				</cms:pageSlot></li>
@@ -88,14 +89,14 @@
 			</sec:authorize>
 	        
 		</ul>
-
+		<!-- <div class=" js-secondaryNavAccount " id="accNavComponentDesktopOne">hidden-xs hidden-sm
+			<ul class="nav__links">
+	
+			</ul>
+		</div> -->
 	</div>
 	
-	<div class="hidden-xs hidden-sm js-secondaryNavAccount collapse" id="accNavComponentDesktopOne">
-		<ul class="nav__links">
-
-		</ul>
-	</div>
+	
 </div>
 
 

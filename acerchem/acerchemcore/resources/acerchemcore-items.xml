@@ -312,7 +312,7 @@
 		</typegroup>
 		
 		
-		<!--Alice添加字段:匿名是否显示价格  -->
+		<!--add by Alice -->
         <typegroup name="traning">
             <itemtype code="Product" autocreate="false" generate="false">
 		       <description>Extending the Product type from core with additional attributes.</description>
