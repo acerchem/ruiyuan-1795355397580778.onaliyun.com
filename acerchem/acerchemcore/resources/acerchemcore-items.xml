@@ -307,7 +307,7 @@
 		</typegroup>
 		
 		
-		<!--Alice添加字段:匿名是否显示价格  -->
+		<!--add by Alice -->
         <typegroup name="traning">
             <itemtype code="Product" autocreate="false" generate="false">
 		       <description>Extending the Product type from core with additional attributes.</description>
@@ -317,6 +317,10 @@
 		            <modifiers optional="false" initial="false"/>
 					<persistence type="property" />
 					<defaultvalue>Boolean.FALSE</defaultvalue>
+		          </attribute>
+		          <attribute qualifier="promotionPrice" type="PriceRow" > 
+		            <persistence type="property" />
+		            <description>Member discount price.</description>
 		          </attribute>
 		         </attributes>
 		    </itemtype>
