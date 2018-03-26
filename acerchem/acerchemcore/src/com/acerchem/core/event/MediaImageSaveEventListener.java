@@ -141,25 +141,29 @@ public class MediaImageSaveEventListener implements AfterSaveListener {
 
 			UploadFileDefault.initializeParameters(lsEndpoint, lsAccessKeyId, lsAccessKeySecret, lsBucketName);
 			// upload aliyun
+
 			boolean uploadFlag = UploadFileDefault.uploadFile(file, key);
 
-			ImageUploadedLogModel iulModel = acerChemImageUploadLogService
-					.getImageUploadedLog(media.getPk().getLong().toString());
-			String aliyunUrl = configurationService.getConfiguration().getString("aliyun.domain") + "/" + key;
-			if (uploadFlag) {
-				System.out.println("****upload end>>>>synsave to server start*****");
-				// save aliyunUrl to ImageUploadedLog
-				if (iulModel == null) {
-					iulModel = modelService.create(ImageUploadedLogModel.class);
-				}
-				iulModel.setAliyunUrl(aliyunUrl);
-				iulModel.setImagePK(media.getPk().getLong().toString());
+			//if (!acerChemImageUploadLogService.isExistByLocation(localPath)) {
+				ImageUploadedLogModel iulModel = acerChemImageUploadLogService
+						.getImageUploadedLog(media.getPk().getLong().toString());
+				String aliyunUrl = configurationService.getConfiguration().getString("aliyun.domain") + "/" + key;
+				if (uploadFlag) {
+					System.out.println("****upload end>>>>synsave to server start*****");
+					// save aliyunUrl to ImageUploadedLog
+					if (iulModel == null) {
+						iulModel = modelService.create(ImageUploadedLogModel.class);
+					}
+					iulModel.setAliyunUrl(aliyunUrl);
+					iulModel.setImagePK(media.getPk().getLong().toString());
+					iulModel.setLocation(localPath);
 
-				modelService.save(iulModel);
-				System.out.println("****synsave to server end*****");
-			} else {
-				uploadFailedProccess(media, key, localPath);
-			}
+					modelService.save(iulModel);
+					System.out.println("****synsave to server end*****");
+				} else {
+					uploadFailedProccess(media, key, localPath);
+				}
+			//}
 
 		} catch (Exception e) {
 			e.printStackTrace();

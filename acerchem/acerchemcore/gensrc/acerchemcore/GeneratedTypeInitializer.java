@@ -167,7 +167,7 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 				single_createattr_ImageUploadedLog_aliyunUrl();
 			
-				single_createattr_ImageUploadedLog_status();
+				single_createattr_ImageUploadedLog_location();
 			
 				single_createattr_Product_chemicalInfo();
 			
@@ -402,14 +402,14 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 	}
 	
-	public void single_createattr_ImageUploadedLog_status() throws JaloBusinessException
+	public void single_createattr_ImageUploadedLog_location() throws JaloBusinessException
 	{
 		
 						Map sqlColumnDefinitions = null;
 					
 				createPropertyAttribute(
 					"ImageUploadedLog", 
-					"status",  
+					"location",  
 					null,
 					"java.lang.String",
 					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
@@ -642,7 +642,7 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 		
 			single_setAttributeProperties_ImageUploadedLog_aliyunUrl();
 		
-			single_setAttributeProperties_ImageUploadedLog_status();
+			single_setAttributeProperties_ImageUploadedLog_location();
 		
 				{
 				Map customPropsMap = new HashMap();
@@ -1000,7 +1000,7 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							);
 						}
 					
-						public void single_setAttributeProperties_ImageUploadedLog_status() throws JaloBusinessException
+						public void single_setAttributeProperties_ImageUploadedLog_location() throws JaloBusinessException
 						{
 							
 							
@@ -1009,7 +1009,7 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							
 							setAttributeProperties(
 								"ImageUploadedLog", 
-								"status",
+								"location",
 								false, 
 								null,
 								null,

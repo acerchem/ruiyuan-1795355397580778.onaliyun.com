@@ -631,8 +631,8 @@
 		 -->
 	</bean>
 
-	<bean id="myImageAfterDeletedListener" class="com.acerchem.core.event.MyImageAfterDeletedListener" parent="abstractEventListener"/>
+	<bean id="mediaFilesAfterDeletedListener" class="com.acerchem.core.event.MediaFilesAfterDeletedListener" parent="abstractEventListener"/>
 	
-
+	<bean id="aliyunFilesJobPerformable" class="com.acerchem.core.job.AliyunFilesJobPerformable" parent="abstractJobPerformable"/>
 
 </beans>

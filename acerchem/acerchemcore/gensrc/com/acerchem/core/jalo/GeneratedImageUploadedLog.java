@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-3-25 22:36:03                          ---
+ * --- Generated at 2018-3-26 8:48:09                           ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.jalo;
@@ -24,15 +24,15 @@ public abstract class GeneratedImageUploadedLog extends GenericItem
 	public static final String IMAGEPK = "imagePK";
 	/** Qualifier of the <code>ImageUploadedLog.aliyunUrl</code> attribute **/
 	public static final String ALIYUNURL = "aliyunUrl";
-	/** Qualifier of the <code>ImageUploadedLog.status</code> attribute **/
-	public static final String STATUS = "status";
+	/** Qualifier of the <code>ImageUploadedLog.location</code> attribute **/
+	public static final String LOCATION = "location";
 	protected static final Map<String, AttributeMode> DEFAULT_INITIAL_ATTRIBUTES;
 	static
 	{
 		final Map<String, AttributeMode> tmp = new HashMap<String, AttributeMode>();
 		tmp.put(IMAGEPK, AttributeMode.INITIAL);
 		tmp.put(ALIYUNURL, AttributeMode.INITIAL);
-		tmp.put(STATUS, AttributeMode.INITIAL);
+		tmp.put(LOCATION, AttributeMode.INITIAL);
 		DEFAULT_INITIAL_ATTRIBUTES = Collections.unmodifiableMap(tmp);
 	}
 	@Override
@@ -114,39 +114,39 @@ public abstract class GeneratedImageUploadedLog extends GenericItem
 	}
 	
 	/**
-	 * <i>Generated method</i> - Getter of the <code>ImageUploadedLog.status</code> attribute.
-	 * @return the status - ç¶æ(0ï¼ å é¤ï¼1ï¼å¢å )
+	 * <i>Generated method</i> - Getter of the <code>ImageUploadedLog.location</code> attribute.
+	 * @return the location - æ¬å°è·¯å¾
 	 */
-	public String getStatus(final SessionContext ctx)
+	public String getLocation(final SessionContext ctx)
 	{
-		return (String)getProperty( ctx, STATUS);
+		return (String)getProperty( ctx, LOCATION);
 	}
 	
 	/**
-	 * <i>Generated method</i> - Getter of the <code>ImageUploadedLog.status</code> attribute.
-	 * @return the status - ç¶æ(0ï¼ å é¤ï¼1ï¼å¢å )
+	 * <i>Generated method</i> - Getter of the <code>ImageUploadedLog.location</code> attribute.
+	 * @return the location - æ¬å°è·¯å¾
 	 */
-	public String getStatus()
+	public String getLocation()
 	{
-		return getStatus( getSession().getSessionContext() );
+		return getLocation( getSession().getSessionContext() );
 	}
 	
 	/**
-	 * <i>Generated method</i> - Setter of the <code>ImageUploadedLog.status</code> attribute. 
-	 * @param value the status - ç¶æ(0ï¼ å é¤ï¼1ï¼å¢å )
+	 * <i>Generated method</i> - Setter of the <code>ImageUploadedLog.location</code> attribute. 
+	 * @param value the location - æ¬å°è·¯å¾
 	 */
-	public void setStatus(final SessionContext ctx, final String value)
+	public void setLocation(final SessionContext ctx, final String value)
 	{
-		setProperty(ctx, STATUS,value);
+		setProperty(ctx, LOCATION,value);
 	}
 	
 	/**
-	 * <i>Generated method</i> - Setter of the <code>ImageUploadedLog.status</code> attribute. 
-	 * @param value the status - ç¶æ(0ï¼ å é¤ï¼1ï¼å¢å )
+	 * <i>Generated method</i> - Setter of the <code>ImageUploadedLog.location</code> attribute. 
+	 * @param value the location - æ¬å°è·¯å¾
 	 */
-	public void setStatus(final String value)
+	public void setLocation(final String value)
 	{
-		setStatus( getSession().getSessionContext(), value );
+		setLocation( getSession().getSessionContext(), value );
 	}
 	
 }

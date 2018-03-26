@@ -6,4 +6,5 @@ public interface AcerChemImageUploadedLogDAO {
 
 	public void saveImageUploadedLog(final ImageUploadedLogModel model);
 	public ImageUploadedLogModel getImageUploadedLog(final String pk);
+	public boolean isExistByLocation(final String location);
 }

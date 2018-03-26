@@ -197,12 +197,13 @@
 							optional="true" />
 						<persistence type="property" />
 					</attribute>
-					<attribute qualifier="status" type="java.lang.String">
-						<description>状态(0， 删除；1，增加)</description>
+					<attribute qualifier="location" type="java.lang.String">
+						<description>本地路径</description>
 						<modifiers read="true" write="true" search="true"
 							optional="true" />
 						<persistence type="property" />
 					</attribute>
+					
 				</attributes>
 			</itemtype>
 			<!--add by Wangjh end -->

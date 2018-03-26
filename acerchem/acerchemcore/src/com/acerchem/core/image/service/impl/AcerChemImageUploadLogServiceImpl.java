@@ -8,6 +8,8 @@ import com.acerchem.core.model.ImageUploadedLogModel;
 
 public class AcerChemImageUploadLogServiceImpl implements AcerChemImageUploadLogService {
 
+	
+
 	@Resource
 	private AcerChemImageUploadedLogDAO acerChemImageUploadedLogDao; 
 										
@@ -18,5 +20,13 @@ public class AcerChemImageUploadLogServiceImpl implements AcerChemImageUploadLog
 		return acerChemImageUploadedLogDao.getImageUploadedLog(pk);
 		
 	}
+	
+	
+	@Override
+	public boolean isExistByLocation(final String location) {
+		// TODO Auto-generated method stub
+		return acerChemImageUploadedLogDao.isExistByLocation(location);
+	}
+
 
 }
