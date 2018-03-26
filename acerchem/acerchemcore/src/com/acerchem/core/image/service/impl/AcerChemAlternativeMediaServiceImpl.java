@@ -7,6 +7,7 @@ import com.acerchem.core.model.ImageUploadedLogModel;
 
 import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.media.services.MimeService;
+import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.media.impl.DefaultMediaService;
 import de.hybris.platform.servicelayer.media.impl.MediaDao;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;

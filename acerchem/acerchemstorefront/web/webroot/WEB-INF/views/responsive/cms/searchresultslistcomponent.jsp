@@ -19,9 +19,9 @@
 
 	 <div class="m-term-bor">
 		<div class="m-term">
-				<!-- <ul class="m-term-le">
-					
-				</ul> -->
+					<!-- shaun:Selected conditions -->
+					<nav:facetNavAppliedFilters pageData="${searchPageData}"/>
+				
 				<div class="m-term-ri" >
 					
 					<div class="m-pagination right">

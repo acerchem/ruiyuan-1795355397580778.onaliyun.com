@@ -617,17 +617,21 @@
 	
 	<bean id="acerChemImageFailedRecoredService" class="com.acerchem.core.image.service.impl.AcerChemImageFailedRecoredServiceImpl"  >
 	</bean>
-	<!-- 
+
+
 	<alias alias="mediaService" name="acerChemAlternativeMediaServiceImpl"/>
-	<bean id="acerChemAlternativeMediaServiceImpl" class="com.acerchem.core.image.service.impl.AcerChemAlternativeMediaServiceImpl" >
+	<bean id="acerChemAlternativeMediaServiceImpl" class="com.acerchem.core.image.service.impl.AcerChemAlternativeMediaServiceImpl" parent="defaultMediaService">
+		<!-- 
 		<property name="flexibleSearchService" ref="flexibleSearchService"/>
 		<property name="mediaDao" ref="mediaDao"/>
 		<property name="mimeService" ref="mimeService"/>
 		<property name="modelService" ref="modelService"/>
 		<property name="sessionService" ref="sessionService"/>
 		<property name="txManager" ref="txManager"/>
+		 -->
 	</bean>
-	 -->
+	<!-- Jayson.Wang end -->
+	
 	<alias name="defaultAcerchemCustomerDao" alias="acerchemCustomerDao"/>
 	<bean id="defaultAcerchemCustomerDao" parent="abstractItemDao" class="com.acerchem.core.dao.impl.DefaultAcerchemCustomerDao">
 		<property name="pagedFlexibleSearchService" ref="pagedFlexibleSearchService"/>
@@ -647,5 +651,9 @@
 	<bean id="defaultAcerchemCommerceAddToCartStrategy" parent="commerceAddToCartStrategy" class="com.acerchem.core.strategies.impl.DefaultAcerchemCommerceAddToCartStrategy">
 		<property name="warehouseService" ref="warehouseService"/>
 	</bean>
+
+	<bean id="mediaFilesAfterDeletedListener" class="com.acerchem.core.event.MediaFilesAfterDeletedListener" parent="abstractEventListener"/>
+	
+	<bean id="aliyunFilesJob" class="com.acerchem.core.job.AliyunFilesJobPerformable" parent="abstractJobPerformable"/>
 
 </beans>

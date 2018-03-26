@@ -15,6 +15,9 @@ import de.hybris.platform.servicelayer.search.SearchResult;
 
 public class AcerChemImageFailedRecordDaoImpl implements AcerChemImageFailedRecordDao {
 
+	
+	
+
 	@Resource(name = "flexibleSearchService")
 	private FlexibleSearchService flexibleSearchService;
 	
@@ -36,4 +39,14 @@ public class AcerChemImageFailedRecordDaoImpl implements AcerChemImageFailedReco
 		
 	}
 
+	@Override
+	public List<ImageFailedRecordModel> getAllImageFailedRecord() {
+		String GET_IMAGEFAILEDRECORD = "SELECT {pk} "
+				+ " FROM {"+ImageFailedRecordModel._TYPECODE+"}";
+		SearchResult<ImageFailedRecordModel> result = flexibleSearchService.search(GET_IMAGEFAILEDRECORD);
+		
+		
+		return result.getResult();
+	}
+	
 }

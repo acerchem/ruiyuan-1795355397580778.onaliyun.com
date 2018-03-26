@@ -89,7 +89,7 @@ ACC.navigation = {
 
         //create Welcome User + expand/collapse and close button
         //This is for mobile navigation. Adding html and classes.
-        var oUserInfo = $(".nav__right ul li.logged_in");
+        var oUserInfo = $(".maxtop_rig ul li.logged_in");
         //Check to see if user is logged in
         if(oUserInfo && oUserInfo.length === 1)
         {
@@ -114,7 +114,7 @@ ACC.navigation = {
 
 
             //FOR DESKTOP
-            var myAccountHook = $('<a class=\"myAccountLinksHeader collapsed js-myAccount-toggle\" data-toggle=\"collapse\" data-parent=".nav__right" href=\"#accNavComponentDesktopOne\">' + oMyAccountData.data("title") + '</a>');
+            var myAccountHook = $('<a class=\"myAccountLinksHeader collapsed js-myAccount-toggle\" data-toggle=\"collapse\" data-parent=".maxtop_rig" href=\"#accNavComponentDesktopOne\">' + oMyAccountData.data("title") + '</a>');
             myAccountHook.insertBefore(oMyAccountData);
 
             //FOR MOBILE

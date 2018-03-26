@@ -104,7 +104,7 @@
                     </ycommerce:testId>
                 </c:when>
                 <c:otherwise>
-                    <li class="pagination-prev" ><span style="font-weight: 700;">${pageNumber} <span class="sr-only">(current)</span></span></li>
+                    <li class="active act " ><span style="font-weight: 700;">${pageNumber} <span class="sr-only">(current)</span></span></li>
                 </c:otherwise>
             </c:choose>
         </c:forEach>

@@ -149,9 +149,16 @@
 							<a href="#" >Allergen Statement</a>
 						</li>
 					</ul>
+					
+					
+					<!--shaun:consulte  -->
 					<div class="btn-set line-setbtn">							
 						<a class="btn btn-showlist" href="javascript:void(0)">Message Consultation</a>
 					</div>		
+					
+					
+					
+					
 				</div>
 				<div class="tableshare">
 					<div class="title">Share with a Friend</div>
@@ -433,6 +440,98 @@
 	<!-- item end -->
 		</div>
 		<!-- down end -->
+		
+		
+		<!--shaun  -->
+		<!-- message -->
+					<div class="m-message">
+						<div class="indwrap">
+							<div class="mes-table">
+								<div class="title">Message consultation</div>
+								<form action="" method="post" class="solid-form both" id="message">				
+									<div class="left">
+										<label>
+											<span class="label-title">Your Name</span>	
+											<input type="text" name="name" class="required" alt="Please Enter Your Name">
+										</label>
+					
+										<label>
+											<span class="label-title">Telephone / Mobile Phone</span>	
+											<input type="text" name="mobile" class="required" alt="Please Enter Telephone / Mobile Phone">
+										</label>
+					
+										<label>
+											<span class="label-title">Email</span>	
+											<input type="text" name="email" class="required" alt="Please Enter Your Email">
+										</label>
+					
+										<label>
+											<span class='label-title'>Shipping Address</span>	
+												<div class="flex-wrap">
+													<div class="flex">					
+														<div class="selbox">
+															<input type="hidden" disabled="disabled" value="" name='nation' class="required" alt='Please Select Shipping nation'>
+															<span class="pitch"><i></i></span>
+															<ul class="select">
+																<li>Nation</li>
+																<li data-val="USA">U.S.A</li>
+																<li data-val="EL">England</li>
+																<li data-val="ITA">Repubblica Italiana</li>
+																<li data-val="SUI">Swiss Confederation</li>
+																<li data-val="MEX">The United States of Mexico</li>
+																<li data-val="FRA">French Republic</li>
+															</ul>
+														</div>	
+													</div>
+													<div class="flex">
+														<div class="selbox ">
+															<input type="hidden" disabled="disabled" value="" name='city' class="required" alt='Please Select Shipping city'>
+															<span class="pitch"><i></i></span>
+															<ul class="select">
+																<li>City</li>
+																<li data-val="NY">New York</li>
+																<li data-val="LA">Los Angeles</li>
+																<li data-val="CI">Chicago</li>
+															</ul>
+														</div>	
+													</div>				
+												</div>
+										</label>
+					
+										<label>						
+											<input type="text" name='shipadd' class="required" placeholder="Detailed address" alt='Please Enter Shipping Detailed Address'>
+										</label>				
+									</div>
+									<div class="right">	
+										<label>
+											<span class="label-title">Product ID</span>	
+											<input type="text" name="prodid" class="required" alt="Please Enter Product ID">
+										</label>
+										<label>
+											<span class="label-title">Product Name</span>	
+											<input type="text" name="prodname" class="required" alt="Please Enter Product Name">
+										</label>
+										<label>
+											<span class="label-title">message</span>	
+											<textarea name="message" id="" ></textarea>
+										</label>
+									</div>				
+								</form>
+								<div class="btn-set">
+									<a class="btn btn-line" href="javascript:void(0)">Cancel</a>				
+									<a class="btn btn-submit" href="javascript:void(0)">Confirm</a>
+								</div>
+							</div>
+						</div>
+					</div>
+<!-- message end -->
+		
+		
+		
+		
+		
+		
+		
 <script>
 inputint()
 
@@ -567,7 +666,7 @@ $('.m-setnum span').on('click',function(){
 		case 'set sub':
 			avl = parseInt(ainp.val());
 			if(avl<=1){
-				maxalert('A minimum of one piece！');
+				maxalert('A minimum of one piece!');
 				$(this).css('background-color','#ddd')
 				break;
 			}else{
@@ -605,7 +704,7 @@ $('.m-setnum span').on('click',function(){
 })
 
 $('.prodbase .btn-cart').on('click',function(){
-	maxalert('Join the shopping cart successfully！');
+	maxalert('Join the shopping cart successfully!');
 })
 
 // m-message
@@ -634,3 +733,4 @@ $('.m-message .btn-set .btn').on('click',function(){
 
 
 </script>
+
