@@ -22,6 +22,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMe
 import de.hybris.platform.acceleratorstorefrontcommons.forms.AddressForm;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.UpdateEmailForm;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.UpdatePasswordForm;
+import de.hybris.platform.acceleratorstorefrontcommons.forms.UpdateProfileForm;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.validation.AddressValidator;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.validation.EmailValidator;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.validation.PasswordValidator;
@@ -849,6 +850,14 @@ public class AccountPageController extends AbstractSearchPageController
 		return REDIRECT_TO_PAYMENT_INFO_PAGE;
 	}
 	
+	@RequestMapping(value = "/update-profile-old", method = RequestMethod.POST)
+	@RequireHardLogIn
+	public String updateProfile(final UpdateProfileForm updateProfileForm, final BindingResult bindingResult, final Model model,
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	{
+		return null;
+	}
+	
 	/*add by alice*/
 	@Resource(name = "cmsPageService")
 	private CMSPageService cmsPageService;
@@ -867,7 +876,7 @@ public class AccountPageController extends AbstractSearchPageController
 	
 	@RequestMapping(value = "/update-profile",method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String accountInfo(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	public String editProfile(final Model model) throws CMSItemNotFoundException
 	{
 		model.addAttribute("countryData", checkoutFacade.getDeliveryCountries());
 		final AbstractPageModel cmsPage = cmsPageService.getPageForLabelOrId("add-edit-address");
@@ -925,7 +934,7 @@ public class AccountPageController extends AbstractSearchPageController
 	
 	@RequestMapping(value = "/update-profile",method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String accountChange(final CustomRegisterForm form,final BindingResult bindingResult, final Model model) 
+	public String updateProfile(final CustomRegisterForm form,final BindingResult bindingResult, final Model model,final RedirectAttributes redirectAttributes) 
 			throws CMSItemNotFoundException
 	{
 		personalInfoValidator.validate(form, bindingResult);
