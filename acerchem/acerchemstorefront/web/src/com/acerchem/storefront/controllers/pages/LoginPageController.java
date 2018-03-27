@@ -294,6 +294,7 @@ public class LoginPageController extends AbstractLoginPageController
 		String shipRegionIso=form.getShipAddress().getRegionIso();
 		CountryModel shipCountry=commonI18NService.getCountry(shipCountryIso);
 		RegionModel shipRegion=commonI18NService.getRegion(shipCountry,shipRegionIso);
+		
 		AddressModel am=modelService.create(AddressModel.class);
 		am.setContactAddress(false);
 		am.setShippingAddress(true);

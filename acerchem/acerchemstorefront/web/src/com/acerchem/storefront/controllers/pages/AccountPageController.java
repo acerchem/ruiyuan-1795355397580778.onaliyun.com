@@ -12,6 +12,7 @@ package com.acerchem.storefront.controllers.pages;
 
 import de.hybris.platform.acceleratorfacades.ordergridform.OrderGridFormFacade;
 import de.hybris.platform.acceleratorfacades.product.data.ReadOnlyOrderGridData;
+import de.hybris.platform.acceleratorservices.storefront.data.MetaElementData;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.Breadcrumb;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
@@ -29,6 +30,9 @@ import de.hybris.platform.acceleratorstorefrontcommons.forms.validation.ProfileV
 import de.hybris.platform.acceleratorstorefrontcommons.forms.verification.AddressVerificationResultHandler;
 import de.hybris.platform.acceleratorstorefrontcommons.util.AddressDataUtil;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.cms2.model.pages.AbstractPageModel;
+import de.hybris.platform.cms2.model.pages.ContentPageModel;
+import de.hybris.platform.cms2.servicelayer.services.CMSPageService;
 import de.hybris.platform.commercefacades.address.AddressVerificationFacade;
 import de.hybris.platform.commercefacades.address.data.AddressVerificationResult;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
@@ -37,11 +41,9 @@ import de.hybris.platform.commercefacades.order.CheckoutFacade;
 import de.hybris.platform.commercefacades.order.OrderFacade;
 import de.hybris.platform.commercefacades.order.data.CCPaymentInfoData;
 import de.hybris.platform.commercefacades.order.data.OrderData;
-import de.hybris.platform.commercefacades.order.data.OrderEntryData;
 import de.hybris.platform.commercefacades.order.data.OrderHistoryData;
 import de.hybris.platform.commercefacades.product.ProductFacade;
 import de.hybris.platform.commercefacades.product.ProductOption;
-import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commercefacades.user.UserFacade;
 import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.commercefacades.user.data.CountryData;
@@ -53,16 +55,27 @@ import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.commerceservices.util.ResponsiveUtils;
+import de.hybris.platform.core.PK;
+import de.hybris.platform.core.model.c2l.CountryModel;
+import de.hybris.platform.core.model.c2l.RegionModel;
+import de.hybris.platform.core.model.user.AddressModel;
+import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
+import de.hybris.platform.servicelayer.i18n.CommonI18NService;
+import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.util.Config;
+
 import com.acerchem.storefront.controllers.ControllerConstants;
+import com.acerchem.storefront.data.CustomRegisterForm;
+
 
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -76,13 +89,13 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
 
 /**
  * Controller for home page
@@ -267,7 +280,7 @@ public class AccountPageController extends AbstractSearchPageController
 		model.addAttribute(REGIONS_ATTR, getI18NFacade().getRegionsForCountryIso(countryIsoCode));
 		model.addAttribute(COUNTRY_ATTR, countryIsoCode);
 	}
-
+	
 	@RequestMapping(method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String account(final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
@@ -283,7 +296,10 @@ public class AccountPageController extends AbstractSearchPageController
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 		return getViewForPage(model);
 	}
-
+	
+	
+	
+	
 	@RequestMapping(value = "/orders", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String orders(@RequestParam(value = "page", defaultValue = "0") final int page,
@@ -458,82 +474,12 @@ public class AccountPageController extends AbstractSearchPageController
 		return getViewForPage(model);
 	}
 
-
-	@RequestMapping(value = "/update-profile", method = RequestMethod.GET)
-	@RequireHardLogIn
-	public String editProfile(final Model model) throws CMSItemNotFoundException
-	{
-		model.addAttribute(TITLE_DATA_ATTR, userFacade.getTitles());
-
-		final CustomerData customerData = customerFacade.getCurrentCustomer();
-		final UpdateProfileForm updateProfileForm = new UpdateProfileForm();
-
-		updateProfileForm.setTitleCode(customerData.getTitleCode());
-		updateProfileForm.setFirstName(customerData.getFirstName());
-		updateProfileForm.setLastName(customerData.getLastName());
-
-		model.addAttribute("updateProfileForm", updateProfileForm);
-
-		storeCmsPageInModel(model, getContentPageForLabelOrId(UPDATE_PROFILE_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(UPDATE_PROFILE_CMS_PAGE));
-
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
-		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
-		return getViewForPage(model);
-	}
-
-	@RequestMapping(value = "/update-profile", method = RequestMethod.POST)
-	@RequireHardLogIn
-	public String updateProfile(final UpdateProfileForm updateProfileForm, final BindingResult bindingResult, final Model model,
-			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
-	{
-		getProfileValidator().validate(updateProfileForm, bindingResult);
-
-		String returnAction = REDIRECT_TO_UPDATE_PROFILE;
-		final CustomerData currentCustomerData = customerFacade.getCurrentCustomer();
-		final CustomerData customerData = new CustomerData();
-		customerData.setTitleCode(updateProfileForm.getTitleCode());
-		customerData.setFirstName(updateProfileForm.getFirstName());
-		customerData.setLastName(updateProfileForm.getLastName());
-		customerData.setUid(currentCustomerData.getUid());
-		customerData.setDisplayUid(currentCustomerData.getDisplayUid());
-
-		model.addAttribute(TITLE_DATA_ATTR, userFacade.getTitles());
-
-		storeCmsPageInModel(model, getContentPageForLabelOrId(UPDATE_PROFILE_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(UPDATE_PROFILE_CMS_PAGE));
-
-		if (bindingResult.hasErrors())
-		{
-			returnAction = setErrorMessagesAndCMSPage(model, UPDATE_PROFILE_CMS_PAGE);
-		}
-		else
-		{
-			try
-			{
-				customerFacade.updateProfile(customerData);
-				GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.CONF_MESSAGES_HOLDER,
-						"text.account.profile.confirmationUpdated", null);
-
-			}
-			catch (final DuplicateUidException e)
-			{
-				bindingResult.rejectValue("email", "registration.error.account.exists.title");
-				returnAction = setErrorMessagesAndCMSPage(model, UPDATE_PROFILE_CMS_PAGE);
-			}
-		}
-
-
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
-		return returnAction;
-	}
-
 	@RequestMapping(value = "/update-password", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String updatePassword(final Model model) throws CMSItemNotFoundException
 	{
 		final UpdatePasswordForm updatePasswordForm = new UpdatePasswordForm();
-
+		model.addAttribute("nowPage", "update-password");
 		model.addAttribute("updatePasswordForm", updatePasswordForm);
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(UPDATE_PASSWORD_CMS_PAGE));
@@ -549,6 +495,7 @@ public class AccountPageController extends AbstractSearchPageController
 	public String updatePassword(final UpdatePasswordForm updatePasswordForm, final BindingResult bindingResult,
 			final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
+		model.addAttribute("nowPage", "update-password");
 		getPasswordValidator().validate(updatePasswordForm, bindingResult);
 		if (!bindingResult.hasErrors())
 		{
@@ -576,7 +523,7 @@ public class AccountPageController extends AbstractSearchPageController
 			GlobalMessages.addErrorMessage(model, FORM_GLOBAL_ERROR);
 			storeCmsPageInModel(model, getContentPageForLabelOrId(UPDATE_PASSWORD_CMS_PAGE));
 			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(UPDATE_PASSWORD_CMS_PAGE));
-
+			
 			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs("text.account.profile.updatePasswordForm"));
 			return getViewForPage(model);
 		}
@@ -660,8 +607,7 @@ public class AccountPageController extends AbstractSearchPageController
 			newAddress.setDefaultAddress(addressForm.getDefaultAddress() != null && addressForm.getDefaultAddress().booleanValue());
 		}		
 		
-		final AddressVerificationResult<AddressVerificationDecision> verificationResult = getAddressVerificationFacade()
-				.verifyAddressData(newAddress);
+		final AddressVerificationResult<AddressVerificationDecision> verificationResult = getAddressVerificationFacade().verifyAddressData(newAddress);
 		final boolean addressRequiresReview = getAddressVerificationResultHandler().handleResult(verificationResult, newAddress,
 				model, redirectModel, bindingResult, getAddressVerificationFacade().isCustomerAllowedToIgnoreAddressSuggestions(),
 				"checkout.multi.address.added");
@@ -785,8 +731,7 @@ public class AccountPageController extends AbstractSearchPageController
 			newAddress.setDefaultAddress(true);
 		}
 
-		final AddressVerificationResult<AddressVerificationDecision> verificationResult = getAddressVerificationFacade()
-				.verifyAddressData(newAddress);
+		final AddressVerificationResult<AddressVerificationDecision> verificationResult = getAddressVerificationFacade().verifyAddressData(newAddress);
 		final boolean addressRequiresReview = getAddressVerificationResultHandler().handleResult(verificationResult, newAddress,
 				model, redirectModel, bindingResult, getAddressVerificationFacade().isCustomerAllowedToIgnoreAddressSuggestions(),
 				"checkout.multi.address.updated");
@@ -902,4 +847,142 @@ public class AccountPageController extends AbstractSearchPageController
 				"text.account.profile.paymentCart.removed");
 		return REDIRECT_TO_PAYMENT_INFO_PAGE;
 	}
+	
+	@RequestMapping(value = "/update-profile-old", method = RequestMethod.POST)
+	@RequireHardLogIn
+	public String updateProfile(final UpdateProfileForm updateProfileForm, final BindingResult bindingResult, final Model model,
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	{
+		return null;
+	}
+	
+	/*add by alice*/
+	@Resource(name = "cmsPageService")
+	private CMSPageService cmsPageService;
+	
+	@Resource
+	private UserService userService;
+	
+	@Resource(name = "personalInfoValidator")
+	private Validator personalInfoValidator;
+	
+	@Resource(name = "modelService")
+	private ModelService modelService;
+
+	@Resource(name = "commonI18NService")
+	private CommonI18NService commonI18NService;
+	
+	@RequestMapping(value = "/update-profile",method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String editProfile(final Model model) throws CMSItemNotFoundException
+	{
+		model.addAttribute("countryData", checkoutFacade.getDeliveryCountries());
+		final AbstractPageModel cmsPage = cmsPageService.getPageForLabelOrId("add-edit-address");
+		if (model != null && cmsPage != null)
+		{
+			model.addAttribute("cmsPage", cmsPage);
+			if (cmsPage instanceof ContentPageModel)
+			{
+				model.addAttribute("pageTitle", getPageTitleResolver().resolveContentPageTitle(cmsPage.getTitle()));
+			}
+		}
+		final List<MetaElementData> metadata = new LinkedList<>();
+		metadata.add(createMetaElement("keywords", cmsPageService.getPageForLabelOrId("add-edit-address").getKeywords()));
+		metadata.add(createMetaElement("description", cmsPageService.getPageForLabelOrId("add-edit-address").getDescription()));
+		model.addAttribute("metatags", metadata);
+		
+		final CustomRegisterForm CustomRegisterForm = new CustomRegisterForm();
+		final CustomerData customerData = customerFacade.getCurrentCustomer();
+		CustomRegisterForm.setName(customerData.getName());
+		CustomRegisterForm.setEmail(customerData.getUid());;
+		CustomRegisterForm.setLanguage(customerData.getLanguage().getIsocode());
+		CustomRegisterForm.setCurrency(customerData.getCurrency().getIsocode());
+		
+		final UserModel user = userService.getCurrentUser();
+		final Collection<AddressModel> amlist = user.getAddresses();
+		if(amlist!=null&&amlist.size()>0)
+		{
+			for(AddressModel am:amlist)
+			{
+				if(!am.getVisibleInAddressBook())
+				{
+					AddressForm address=new AddressForm();
+					address.setCountryIso(am.getCountry().getIsocode());
+					address.setRegionIso(am.getRegion().getIsocode());
+					address.setAddressId(am.getPk().toString());
+					address.setTownCity(am.getTown());
+					CustomRegisterForm.setContactAddress(address);
+					CustomRegisterForm.setContacts(am.getLastname());
+					model.addAttribute("regions", i18NFacade.getRegionsForCountryIso(am.getCountry().getIsocode()));
+				}
+			}
+		}
+		if(CustomRegisterForm.getContactAddress()==null)
+		{
+			CustomRegisterForm.setContactAddress(new AddressForm());
+		}
+		CustomRegisterForm.setShipAddress(new AddressForm());
+		model.addAttribute(CustomRegisterForm);
+		model.addAttribute("nowPage", "update-profile");
+		storeCmsPageInModel(model, getContentPageForLabelOrId(UPDATE_PROFILE_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(UPDATE_PROFILE_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+		return getViewForPage(model);
+	}
+	
+	@RequestMapping(value = "/update-profile",method = RequestMethod.POST)
+	@RequireHardLogIn
+	public String updateProfile(final CustomRegisterForm form,final BindingResult bindingResult, final Model model,final RedirectAttributes redirectAttributes) 
+			throws CMSItemNotFoundException
+	{
+		personalInfoValidator.validate(form, bindingResult);
+		if (bindingResult.hasErrors())
+		{
+			GlobalMessages.addErrorMessage(model, "form.global.error");
+			model.addAttribute("regions", i18NFacade.getRegionsForCountryIso(form.getContactAddress().getCountryIso()));
+			model.addAttribute("CustomRegisterForm",form);
+			model.addAttribute("nowPage", "update-profile");
+			storeCmsPageInModel(model, getContentPageForLabelOrId("update-profile"));
+			return getViewForPage(model);
+		}
+		try
+		{	
+			String contactCountryIso=form.getContactAddress().getCountryIso();
+			String contactRegionIso=form.getContactAddress().getRegionIso();
+			CountryModel contactCountry=commonI18NService.getCountry(contactCountryIso);
+			RegionModel contactRegion=commonI18NService.getRegion(contactCountry,contactRegionIso);
+			
+			AddressModel am2=modelService.get(PK.fromLong(Long.valueOf(form.getContactAddress().getAddressId())));
+			am2.setLastname(form.getContacts());
+			am2.setCountry(contactCountry);
+			am2.setRegion(contactRegion);
+			am2.setTown(form.getContactAddress().getTownCity());
+			
+			final UserModel user = userService.getCurrentUser();
+			user.setSessionLanguage(commonI18NService.getLanguage(form.getLanguage()));
+			user.setSessionCurrency(commonI18NService.getCurrency(form.getCurrency()));
+			user.setName(form.getName());
+			
+			modelService.saveAll(user,am2);
+			
+			GlobalMessages.addInfoMessage(model, "form.global.success");
+			model.addAttribute("regions", i18NFacade.getRegionsForCountryIso(form.getContactAddress().getCountryIso()));
+			model.addAttribute("CustomRegisterForm",form);
+			model.addAttribute("nowPage", "update-profile");
+			storeCmsPageInModel(model, getContentPageForLabelOrId("update-profile"));
+			return getViewForPage(model);
+		}
+		catch(Exception exception)
+		{
+			model.addAttribute("regions", i18NFacade.getRegionsForCountryIso(form.getContactAddress().getCountryIso()));
+			model.addAttribute("CustomRegisterForm",form);
+			model.addAttribute("nowPage", "update-profile");
+			storeCmsPageInModel(model, getContentPageForLabelOrId("update-profile"));
+			GlobalMessages.addErrorMessage(model, "fail to edit: " + exception);
+			return getViewForPage(model);
+		}
+	}
+	
+	
 }
