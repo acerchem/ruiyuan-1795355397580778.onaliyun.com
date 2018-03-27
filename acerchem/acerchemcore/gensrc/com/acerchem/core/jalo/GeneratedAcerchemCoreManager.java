@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-3-26 16:39:36                          ---
+ * --- Generated at 2018-3-27 21:41:16                          ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.jalo;
@@ -20,14 +20,19 @@ import de.hybris.platform.jalo.JaloBusinessException;
 import de.hybris.platform.jalo.JaloSystemException;
 import de.hybris.platform.jalo.SessionContext;
 import de.hybris.platform.jalo.extension.Extension;
+import de.hybris.platform.jalo.link.Link;
 import de.hybris.platform.jalo.media.AbstractMedia;
 import de.hybris.platform.jalo.media.Media;
 import de.hybris.platform.jalo.product.Product;
 import de.hybris.platform.jalo.type.ComposedType;
 import de.hybris.platform.jalo.type.JaloGenericCreationException;
 import de.hybris.platform.ordersplitting.jalo.StockLevel;
+import de.hybris.platform.ordersplitting.jalo.Vendor;
+import de.hybris.platform.util.Utilities;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -36,6 +41,11 @@ import java.util.Map;
 @SuppressWarnings({"deprecation","unused","cast","PMD"})
 public abstract class GeneratedAcerchemCoreManager extends Extension
 {
+	/** Relation ordering override parameter constants for AcerChemVendor2Product from ((acerchemcore))*/
+	protected static String ACERCHEMVENDOR2PRODUCT_SRC_ORDERED = "relation.AcerChemVendor2Product.source.ordered";
+	protected static String ACERCHEMVENDOR2PRODUCT_TGT_ORDERED = "relation.AcerChemVendor2Product.target.ordered";
+	/** Relation disable markmodifed parameter constants for AcerChemVendor2Product from ((acerchemcore))*/
+	protected static String ACERCHEMVENDOR2PRODUCT_MARKMODIFIED = "relation.AcerChemVendor2Product.markmodified";
 	protected static final Map<String, Map<String, AttributeMode>> DEFAULT_INITIAL_ATTRIBUTES;
 	static
 	{
@@ -63,6 +73,254 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 			ret.putAll(attr);
 		}
 		return ret;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Vendor.acerChemProducts</code> attribute.
+	 * @return the acerChemProducts
+	 */
+	public Collection<Product> getAcerChemProducts(final SessionContext ctx, final Vendor item)
+	{
+		final List<Product> items = item.getLinkedItems( 
+			ctx,
+			true,
+			AcerchemCoreConstants.Relations.ACERCHEMVENDOR2PRODUCT,
+			"Product",
+			null,
+			false,
+			false
+		);
+		return items;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Vendor.acerChemProducts</code> attribute.
+	 * @return the acerChemProducts
+	 */
+	public Collection<Product> getAcerChemProducts(final Vendor item)
+	{
+		return getAcerChemProducts( getSession().getSessionContext(), item );
+	}
+	
+	public long getAcerChemProductsCount(final SessionContext ctx, final Vendor item)
+	{
+		return item.getLinkedItemsCount(
+			ctx,
+			true,
+			AcerchemCoreConstants.Relations.ACERCHEMVENDOR2PRODUCT,
+			"Product",
+			null
+		);
+	}
+	
+	public long getAcerChemProductsCount(final Vendor item)
+	{
+		return getAcerChemProductsCount( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Vendor.acerChemProducts</code> attribute. 
+	 * @param value the acerChemProducts
+	 */
+	public void setAcerChemProducts(final SessionContext ctx, final Vendor item, final Collection<Product> value)
+	{
+		item.setLinkedItems( 
+			ctx,
+			true,
+			AcerchemCoreConstants.Relations.ACERCHEMVENDOR2PRODUCT,
+			null,
+			value,
+			false,
+			false,
+			Utilities.getMarkModifiedOverride(ACERCHEMVENDOR2PRODUCT_MARKMODIFIED)
+		);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Vendor.acerChemProducts</code> attribute. 
+	 * @param value the acerChemProducts
+	 */
+	public void setAcerChemProducts(final Vendor item, final Collection<Product> value)
+	{
+		setAcerChemProducts( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Adds <code>value</code> to acerChemProducts. 
+	 * @param value the item to add to acerChemProducts
+	 */
+	public void addToAcerChemProducts(final SessionContext ctx, final Vendor item, final Product value)
+	{
+		item.addLinkedItems( 
+			ctx,
+			true,
+			AcerchemCoreConstants.Relations.ACERCHEMVENDOR2PRODUCT,
+			null,
+			Collections.singletonList(value),
+			false,
+			false,
+			Utilities.getMarkModifiedOverride(ACERCHEMVENDOR2PRODUCT_MARKMODIFIED)
+		);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Adds <code>value</code> to acerChemProducts. 
+	 * @param value the item to add to acerChemProducts
+	 */
+	public void addToAcerChemProducts(final Vendor item, final Product value)
+	{
+		addToAcerChemProducts( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Removes <code>value</code> from acerChemProducts. 
+	 * @param value the item to remove from acerChemProducts
+	 */
+	public void removeFromAcerChemProducts(final SessionContext ctx, final Vendor item, final Product value)
+	{
+		item.removeLinkedItems( 
+			ctx,
+			true,
+			AcerchemCoreConstants.Relations.ACERCHEMVENDOR2PRODUCT,
+			null,
+			Collections.singletonList(value),
+			false,
+			false,
+			Utilities.getMarkModifiedOverride(ACERCHEMVENDOR2PRODUCT_MARKMODIFIED)
+		);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Removes <code>value</code> from acerChemProducts. 
+	 * @param value the item to remove from acerChemProducts
+	 */
+	public void removeFromAcerChemProducts(final Vendor item, final Product value)
+	{
+		removeFromAcerChemProducts( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Product.acerChemVendors</code> attribute.
+	 * @return the acerChemVendors
+	 */
+	public Collection<Vendor> getAcerChemVendors(final SessionContext ctx, final Product item)
+	{
+		final List<Vendor> items = item.getLinkedItems( 
+			ctx,
+			false,
+			AcerchemCoreConstants.Relations.ACERCHEMVENDOR2PRODUCT,
+			"Vendor",
+			null,
+			false,
+			false
+		);
+		return items;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Product.acerChemVendors</code> attribute.
+	 * @return the acerChemVendors
+	 */
+	public Collection<Vendor> getAcerChemVendors(final Product item)
+	{
+		return getAcerChemVendors( getSession().getSessionContext(), item );
+	}
+	
+	public long getAcerChemVendorsCount(final SessionContext ctx, final Product item)
+	{
+		return item.getLinkedItemsCount(
+			ctx,
+			false,
+			AcerchemCoreConstants.Relations.ACERCHEMVENDOR2PRODUCT,
+			"Vendor",
+			null
+		);
+	}
+	
+	public long getAcerChemVendorsCount(final Product item)
+	{
+		return getAcerChemVendorsCount( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Product.acerChemVendors</code> attribute. 
+	 * @param value the acerChemVendors
+	 */
+	public void setAcerChemVendors(final SessionContext ctx, final Product item, final Collection<Vendor> value)
+	{
+		item.setLinkedItems( 
+			ctx,
+			false,
+			AcerchemCoreConstants.Relations.ACERCHEMVENDOR2PRODUCT,
+			null,
+			value,
+			false,
+			false,
+			Utilities.getMarkModifiedOverride(ACERCHEMVENDOR2PRODUCT_MARKMODIFIED)
+		);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Product.acerChemVendors</code> attribute. 
+	 * @param value the acerChemVendors
+	 */
+	public void setAcerChemVendors(final Product item, final Collection<Vendor> value)
+	{
+		setAcerChemVendors( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Adds <code>value</code> to acerChemVendors. 
+	 * @param value the item to add to acerChemVendors
+	 */
+	public void addToAcerChemVendors(final SessionContext ctx, final Product item, final Vendor value)
+	{
+		item.addLinkedItems( 
+			ctx,
+			false,
+			AcerchemCoreConstants.Relations.ACERCHEMVENDOR2PRODUCT,
+			null,
+			Collections.singletonList(value),
+			false,
+			false,
+			Utilities.getMarkModifiedOverride(ACERCHEMVENDOR2PRODUCT_MARKMODIFIED)
+		);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Adds <code>value</code> to acerChemVendors. 
+	 * @param value the item to add to acerChemVendors
+	 */
+	public void addToAcerChemVendors(final Product item, final Vendor value)
+	{
+		addToAcerChemVendors( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Removes <code>value</code> from acerChemVendors. 
+	 * @param value the item to remove from acerChemVendors
+	 */
+	public void removeFromAcerChemVendors(final SessionContext ctx, final Product item, final Vendor value)
+	{
+		item.removeLinkedItems( 
+			ctx,
+			false,
+			AcerchemCoreConstants.Relations.ACERCHEMVENDOR2PRODUCT,
+			null,
+			Collections.singletonList(value),
+			false,
+			false,
+			Utilities.getMarkModifiedOverride(ACERCHEMVENDOR2PRODUCT_MARKMODIFIED)
+		);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Removes <code>value</code> from acerChemVendors. 
+	 * @param value the item to remove from acerChemVendors
+	 */
+	public void removeFromAcerChemVendors(final Product item, final Vendor value)
+	{
+		removeFromAcerChemVendors( getSession().getSessionContext(), item, value );
 	}
 	
 	/**

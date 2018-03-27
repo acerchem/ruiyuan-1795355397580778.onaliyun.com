@@ -1,12 +1,11 @@
-package com.acerchem.core.dao;
+package com.acerchem.core.service;
 
 import java.util.List;
 
 import de.hybris.platform.core.model.product.ProductModel;
-import de.hybris.platform.ordersplitting.model.VendorModel;
 
-public interface AcerChemProductDao {
-	
+public interface AcerChemProductService {
+
 	/**
 	 * 通过模糊匹配供应商名称，获得商品列表
 	 * @param vendorName
@@ -28,7 +27,4 @@ public interface AcerChemProductDao {
 	 * @return
 	 */
 	public boolean isExistProductWithVendor(final String productCode,final String vendorCode);
-	
-	
-
 }

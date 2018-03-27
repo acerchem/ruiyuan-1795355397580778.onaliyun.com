@@ -606,6 +606,12 @@
 	</bean>
 	<bean id="acerChemImageUploadedLogDao" class="com.acerchem.core.image.dao.impl.AcerChemImageUploadedLogDaoImpl"  >
 	</bean>
+	
+	<bean id="acerChemProductDao" class="com.acerchem.core.dao.impl.AcerChemProductDaoImpl"  >
+	</bean>
+	<bean id="acerChemVendorDao" class="com.acerchem.core.dao.impl.AcerChemVendorDaoImpl"  >
+	</bean>
+	
 	<!-- Jayson.Wang add service -->
 	<bean id="acerChemMediaImageService" class="com.acerchem.core.image.service.impl.AcerChemMediaImageServiceImpl"  >
 	</bean>
@@ -630,6 +636,12 @@
 		<property name="txManager" ref="txManager"/>
 		 -->
 	</bean>
+	
+	<bean id="acerChemProductService" class="com.acerchem.core.service.impl.AcerChemProductServiceImpl"  >
+	</bean>
+	<bean id="acerChemVendorService" class="com.acerchem.core.service.impl.AcerChemVendorServiceImpl"  >
+	</bean>
+	
 
 	<bean id="mediaFilesAfterDeletedListener" class="com.acerchem.core.event.MediaFilesAfterDeletedListener" parent="abstractEventListener"/>
 	
