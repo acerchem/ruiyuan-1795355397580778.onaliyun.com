@@ -73,6 +73,8 @@ public class DefaultAcerchemCommerceAddToCartStrategy extends DefaultCommerceAdd
             {
                 // We are allowed to add items to the cart
                 final CartEntryModel entryModel = addCartEntry(parameter, actualAllowedQuantityChange);
+                entryModel.setWarehouseCode(parameter.getWarehouseCode());
+                entryModel.setIsUseFutureStock(parameter.getIsUseFutureStock());
                 getModelService().save(entryModel);
 
                 final String statusCode = getStatusCodeAllowedQuantityChange(actualAllowedQuantityChange, maxOrderQuantity,
@@ -124,7 +126,7 @@ public class DefaultAcerchemCommerceAddToCartStrategy extends DefaultCommerceAdd
             stockLevel = productModel.getStockLevels().stream()
                     .filter(stockLevelModel -> warehouseCode.equals(stockLevelModel.getWarehouse().getCode()))
                     .collect(Collectors.toList()).stream()
-                    .findFirst().get().getMaxPreOrder();
+                    .findFirst().get().getPreOrder();
         }else {
             stockLevel = getAvailableStockLevel(productModel, pointOfServiceModel);
         }

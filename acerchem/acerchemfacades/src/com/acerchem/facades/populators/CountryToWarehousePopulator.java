@@ -23,6 +23,7 @@ public class CountryToWarehousePopulator implements Populator<PointOfServiceMode
 	@Override
 	public void populate(PointOfServiceModel source, CountryToWarehouseData target) throws ConversionException {
 
+		target.setStoreId(source.getName());
 		if (Objects.nonNull(source.getAddress()) && Objects.nonNull(source.getAddress().getCountry())) {
 			target.setCountryData(countryConverter.convert(source.getAddress().getCountry()));
 		}

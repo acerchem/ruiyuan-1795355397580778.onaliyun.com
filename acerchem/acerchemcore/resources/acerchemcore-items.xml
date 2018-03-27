@@ -355,6 +355,10 @@
 						<persistence type="property" />
 						<modifiers />
 					</attribute>
+					<attribute qualifier="shipDate" type="java.util.Date">
+						<persistence type="property" />
+						<modifiers />
+					</attribute>
 				</attributes>
 			</itemtype>
 		</typegroup>
