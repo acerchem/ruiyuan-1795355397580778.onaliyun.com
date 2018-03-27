@@ -29,12 +29,12 @@ public class AcerchemAddToCartForm
 		this.storeId = storeId;
 	}
 
-	public boolean isUseFutureStock() {
+	public boolean getIsUseFutureStock() {
 		return isUseFutureStock;
 	}
 
-	public void setUseFutureStock(boolean useFutureStock) {
-		isUseFutureStock = useFutureStock;
+	public void setIsUseFutureStock(boolean isUseFutureStock) {
+		this.isUseFutureStock = isUseFutureStock;
 	}
 
 	public String getWarehouseCode() {

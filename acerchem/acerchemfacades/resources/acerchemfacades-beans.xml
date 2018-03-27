@@ -28,6 +28,7 @@
 	<bean class="com.acerchem.facades.product.data.FutureStockLevelData">
 		<property name="futureStockLevel" type="java.lang.Integer"/>
 		<property name="releaseDay" type="java.lang.Integer"/>
+		<property name="warehouseCode" type="java.lang.String"/>
 	</bean>
 	
 	

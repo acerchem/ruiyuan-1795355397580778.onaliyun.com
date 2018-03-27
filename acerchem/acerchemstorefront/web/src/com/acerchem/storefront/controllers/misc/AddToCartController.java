@@ -105,7 +105,7 @@ public class AddToCartController extends AbstractController
 		{
 			try
 			{
-				final CartModificationData cartModification = acerchemCartFacade.addToCart(code, qty,form.getWarehouseCode(),form.isUseFutureStock(),form.getStoreId());
+    				final CartModificationData cartModification = acerchemCartFacade.addToCart(code, qty,form.getWarehouseCode(),form.getIsUseFutureStock(),form.getStoreId());
 				model.addAttribute(QUANTITY_ATTR, Long.valueOf(cartModification.getQuantityAdded()));
 				model.addAttribute("entry", cartModification.getEntry());
 				model.addAttribute("cartCode", cartModification.getCartCode());

@@ -32,7 +32,8 @@
 			<value code="YELLOW" />
 		</enumtype>
 		<!-- 图像上传失败后再次上传操作类型 -->
-		<enumtype code="ImageFailedActionType" autocreate="true" generate="true" dynamic="true">
+		<enumtype code="ImageFailedActionType" autocreate="true"
+			generate="true" dynamic="true">
 			<description>图像再传操作类型</description>
 			<value code="ADD">
 				<description>增加</description>
@@ -40,7 +41,7 @@
 			<value code="DEL">
 				<description>删除</description>
 			</value>
-			
+
 		</enumtype>
 	</enumtypes>
 
@@ -61,6 +62,8 @@
 			</targetElement>
 		</relation>
 	</relations>
+	
+	
 	<itemtypes>
 
 		<!-- Add your item definitions here -->
@@ -220,7 +223,7 @@
 							optional="true" />
 						<persistence type="property" />
 					</attribute>
-					
+
 				</attributes>
 			</itemtype>
 			<!--add by Wangjh end -->
@@ -246,83 +249,87 @@
 					</attribute>
 				</attributes>
 			</itemtype>
-			
+
 			<itemtype code="ProductCarouselComponent" autocreate="false"
 				generate="false">
 				<attributes>
 					<attribute qualifier="isPromotion" type="boolean">
-							<persistence type="property" />
-							<modifiers optional="false" />
-							<defaultvalue>Boolean.TRUE</defaultvalue>
-							<description>If show the promotion page </description>
-						</attribute>
-						
-						<attribute qualifier="isWell" type="boolean">
-							<persistence type="property" />
-							<modifiers optional="false" />
-							<defaultvalue>Boolean.TRUE</defaultvalue>
-							<description>If show the well sale page </description>
-						</attribute>
-						
-						<attribute qualifier="isSale" type="boolean">
-							<persistence type="property" />
-							<modifiers optional="false" />
-							<defaultvalue>Boolean.TRUE</defaultvalue>
-							<description>If show the sale page </description>
-						</attribute>
-					</attributes>
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<defaultvalue>Boolean.TRUE</defaultvalue>
+						<description>If show the promotion page </description>
+					</attribute>
+
+					<attribute qualifier="isWell" type="boolean">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<defaultvalue>Boolean.TRUE</defaultvalue>
+						<description>If show the well sale page </description>
+					</attribute>
+
+					<attribute qualifier="isSale" type="boolean">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<defaultvalue>Boolean.TRUE</defaultvalue>
+						<description>If show the sale page </description>
+					</attribute>
+				</attributes>
 			</itemtype>
-			<itemtype code="SimpleResponsiveBannerComponent" generate="false" autocreate="false">
-			    <attributes>
-				<attribute qualifier="isFeature" type="boolean">
-							<persistence type="property" />
-							<modifiers optional="false" />
-							<defaultvalue>Boolean.TRUE</defaultvalue>
-							<description>If show the feature page </description>
-						</attribute>
-			   </attributes>
+			<itemtype code="SimpleResponsiveBannerComponent" generate="false"
+				autocreate="false">
+				<attributes>
+					<attribute qualifier="isFeature" type="boolean">
+						<persistence type="property" />
+						<modifiers optional="false" />
+						<defaultvalue>Boolean.TRUE</defaultvalue>
+						<description>If show the feature page </description>
+					</attribute>
+				</attributes>
 			</itemtype>
-			
-			
-			
+
+
+
 		</typegroup>
 		<!-- add by Randy -->
 		<typegroup name="import the component of fronter page">
-			<itemtype code="AbstractMultipleBannerComponent" autocreate="true" generate="true" abstract="true"
-					jaloclass="de.hybris.platform.cms2lib.components.AbstractMultipleBannerComponent"
-					extends="AbstractBannerComponent">
-				</itemtype>
-				
-				<itemtype code="FunctionButtonComponent" autocreate="true" generate="true"
-					jaloclass="de.hybris.platform.cms2lib.components.FunctionButtonComponent"
-					extends="AbstractMultipleBannerComponent">
-				</itemtype>
-				
-				<itemtype code="MultipleBannerComponent" autocreate="true" generate="true"
-					jaloclass="de.hybris.platform.cms2lib.components.MultipleBannerComponent"
-					extends="AbstractMultipleBannerComponent">
-					<attributes>
+			<itemtype code="AbstractMultipleBannerComponent" autocreate="true"
+				generate="true" abstract="true"
+				jaloclass="de.hybris.platform.cms2lib.components.AbstractMultipleBannerComponent"
+				extends="AbstractBannerComponent">
+			</itemtype>
+
+			<itemtype code="FunctionButtonComponent" autocreate="true"
+				generate="true"
+				jaloclass="de.hybris.platform.cms2lib.components.FunctionButtonComponent"
+				extends="AbstractMultipleBannerComponent">
+			</itemtype>
+
+			<itemtype code="MultipleBannerComponent" autocreate="true"
+				generate="true"
+				jaloclass="de.hybris.platform.cms2lib.components.MultipleBannerComponent"
+				extends="AbstractMultipleBannerComponent">
+				<attributes>
 					<attribute qualifier="loop" type="java.lang.Boolean">
 						<defaultvalue>Boolean.TRUE</defaultvalue>
 						<persistence type="property" />
 						<modifiers optional="false" />
 					</attribute>
-					
+
 					<attribute qualifier="displayLevel" type="java.lang.Integer">
 						<persistence type="property" />
 						<modifiers optional="false" />
 						<defaultvalue>Integer.valueOf(0)</defaultvalue>
 					</attribute>
-					
+
 					<attribute qualifier="classfication" type="java.lang.String">
 						<persistence type="property" />
 						<modifiers optional="false" />
 					</attribute>
-					
+
 				</attributes>
 			</itemtype>
 		</typegroup>
-		
+
 
 		<!--add by Alice -->
 		<typegroup name="traning">
@@ -351,11 +358,12 @@
 				</attributes>
 			</itemtype>
 		</typegroup>
-		
+
 		<typegroup name="traning">
-			<itemtype code="AbstractOrderEntry" autocreate="false" generate="false">
+			<itemtype code="AbstractOrderEntry" autocreate="false"
+				generate="false">
 				<attributes>
-					<attribute qualifier="isUseFutureStock" type="java.lang.Boolean" >
+					<attribute qualifier="isUseFutureStock" type="java.lang.Boolean">
 						<description>flag for futureStock</description>
 						<persistence type="property" />
 						<defaultvalue>Boolean.FALSE</defaultvalue>
@@ -372,7 +380,7 @@
 				</attributes>
 			</itemtype>
 		</typegroup>
-		
+
 		<!-- shaun.sheng -->
 
 
