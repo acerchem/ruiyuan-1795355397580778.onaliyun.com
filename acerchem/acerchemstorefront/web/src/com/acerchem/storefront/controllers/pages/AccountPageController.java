@@ -607,8 +607,7 @@ public class AccountPageController extends AbstractSearchPageController
 			newAddress.setDefaultAddress(addressForm.getDefaultAddress() != null && addressForm.getDefaultAddress().booleanValue());
 		}		
 		
-		final AddressVerificationResult<AddressVerificationDecision> verificationResult = getAddressVerificationFacade()
-				.verifyAddressData(newAddress);
+		final AddressVerificationResult<AddressVerificationDecision> verificationResult = getAddressVerificationFacade().verifyAddressData(newAddress);
 		final boolean addressRequiresReview = getAddressVerificationResultHandler().handleResult(verificationResult, newAddress,
 				model, redirectModel, bindingResult, getAddressVerificationFacade().isCustomerAllowedToIgnoreAddressSuggestions(),
 				"checkout.multi.address.added");
@@ -732,8 +731,7 @@ public class AccountPageController extends AbstractSearchPageController
 			newAddress.setDefaultAddress(true);
 		}
 
-		final AddressVerificationResult<AddressVerificationDecision> verificationResult = getAddressVerificationFacade()
-				.verifyAddressData(newAddress);
+		final AddressVerificationResult<AddressVerificationDecision> verificationResult = getAddressVerificationFacade().verifyAddressData(newAddress);
 		final boolean addressRequiresReview = getAddressVerificationResultHandler().handleResult(verificationResult, newAddress,
 				model, redirectModel, bindingResult, getAddressVerificationFacade().isCustomerAllowedToIgnoreAddressSuggestions(),
 				"checkout.multi.address.updated");
@@ -925,11 +923,12 @@ public class AccountPageController extends AbstractSearchPageController
 		}
 		CustomRegisterForm.setShipAddress(new AddressForm());
 		model.addAttribute(CustomRegisterForm);
-		model.addAttribute("breadcrumbs", accountBreadcrumbBuilder.getBreadcrumbs("null"));
-		model.addAttribute("metaRobots","noindex,nofollow");
 		model.addAttribute("nowPage", "update-profile");
-		storeCmsPageInModel(model, getContentPageForLabelOrId("update-profile"));//update-profile
-		return ControllerConstants.Views.Pages.Account.AccountPersonalInformation;
+		storeCmsPageInModel(model, getContentPageForLabelOrId(UPDATE_PROFILE_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(UPDATE_PROFILE_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_PROFILE));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+		return getViewForPage(model);
 	}
 	
 	@RequestMapping(value = "/update-profile",method = RequestMethod.POST)
@@ -945,7 +944,7 @@ public class AccountPageController extends AbstractSearchPageController
 			model.addAttribute("CustomRegisterForm",form);
 			model.addAttribute("nowPage", "update-profile");
 			storeCmsPageInModel(model, getContentPageForLabelOrId("update-profile"));
-			return ControllerConstants.Views.Pages.Account.AccountPersonalInformation;
+			return getViewForPage(model);
 		}
 		try
 		{	
@@ -972,7 +971,7 @@ public class AccountPageController extends AbstractSearchPageController
 			model.addAttribute("CustomRegisterForm",form);
 			model.addAttribute("nowPage", "update-profile");
 			storeCmsPageInModel(model, getContentPageForLabelOrId("update-profile"));
-			return ControllerConstants.Views.Pages.Account.AccountPersonalInformation;
+			return getViewForPage(model);
 		}
 		catch(Exception exception)
 		{
@@ -981,7 +980,7 @@ public class AccountPageController extends AbstractSearchPageController
 			model.addAttribute("nowPage", "update-profile");
 			storeCmsPageInModel(model, getContentPageForLabelOrId("update-profile"));
 			GlobalMessages.addErrorMessage(model, "fail to edit: " + exception);
-			return ControllerConstants.Views.Pages.Account.AccountPersonalInformation;
+			return getViewForPage(model);
 		}
 	}
 	
