@@ -1636,7 +1636,8 @@ pre code {
   width: 33.33333333%;
 }
 .col-xs-3 {
-  width: 25%;
+/* shaun */
+  width: 20%;
 }
 .col-xs-2 {
   width: 16.66666667%;

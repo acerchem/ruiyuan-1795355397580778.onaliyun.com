@@ -1,0 +1,43 @@
+package com.acerchem.core.service;
+
+
+import de.hybris.platform.commerceservices.order.CommerceCartModification;
+import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
+import de.hybris.platform.commerceservices.service.data.CommerceCartParameter;
+import de.hybris.platform.core.model.order.CartModel;
+import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.core.model.product.UnitModel;
+
+import java.util.List;
+
+/**
+ * Created by Jacob.Ji on 2018/3/21.
+ */
+public interface AcerchemCommerCartService {
+
+    /**
+     * Adds to the (existing) {@link CartModel} the (existing) {@link ProductModel} in the given {@link UnitModel} and
+     * with the given <code>quantity</code>. If in the cart already an entry with the given product and given unit exists
+     * the given <code>quantity</code> is added to the the quantity of this cart entry unless <code>forceNewEntry</code>
+     * is set to true. After this the cart is calculated.
+     *
+     * @param parameter
+     *           - A parameter object containing all attributes needed for add to cart
+     *           <P>
+     *           {@link CommerceCartParameter#cart} - The user's cart in session
+     *           {@link CommerceCartParameter#pointOfService} - The store object for pick up in store items (only needs
+     *           to be passed in if you are adding an item to pick up {@link CommerceCartParameter#product} - The
+     *           {@link ProductModel} to add {@link CommerceCartParameter#quantity} - The quantity to add
+     *           {@link CommerceCartParameter#unit} - The UnitModel of the product @see
+     *           {@link de.hybris.platform.core.model.product.ProductModel#getUnit()}
+     *           {@link CommerceCartParameter#createNewEntry} - The flag for creating a new
+     *           {@link de.hybris.platform.core.model.order.CartEntryModel}
+     *           </P>
+     * @return the cart modification data that includes a statusCode and the actual quantity added to the cart
+     * @throws CommerceCartModificationException
+     *            if the <code>product</code> is a base product OR the quantity is less than 1 or no usable unit was
+     *            found (only when given <code>unit</code> is also <code>null</code>) or any other reason the cart could
+     *            not be modified.
+     */
+    CommerceCartModification addToCart(final CommerceCartParameter parameter) throws CommerceCartModificationException;
+}

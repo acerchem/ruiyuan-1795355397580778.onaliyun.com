@@ -636,15 +636,40 @@
 		<property name="txManager" ref="txManager"/>
 		 -->
 	</bean>
+
 	
 	<bean id="acerChemProductService" class="com.acerchem.core.service.impl.AcerChemProductServiceImpl"  >
 	</bean>
 	<bean id="acerChemVendorService" class="com.acerchem.core.service.impl.AcerChemVendorServiceImpl"  >
 	</bean>
 	
-
 	<bean id="mediaFilesAfterDeletedListener" class="com.acerchem.core.event.MediaFilesAfterDeletedListener" parent="abstractEventListener"/>
 	
 	<bean id="aliyunFilesJob" class="com.acerchem.core.job.AliyunFilesJobPerformable" parent="abstractJobPerformable"/>
+	
 
+	<!-- Jayson.Wang end -->
+	
+	<alias name="defaultAcerchemCustomerDao" alias="acerchemCustomerDao"/>
+	<bean id="defaultAcerchemCustomerDao" parent="abstractItemDao" class="com.acerchem.core.dao.impl.DefaultAcerchemCustomerDao">
+		<property name="pagedFlexibleSearchService" ref="pagedFlexibleSearchService"/>
+	</bean>
+
+	<alias name="defaultAcerchemCustomerService" alias="acerchemCustomerService"/>
+	<bean id="defaultAcerchemCustomerService" class="com.acerchem.core.service.impl.DefaultAcerchemCustomerService">
+		<property name="acerchemCustomerDao" ref="acerchemCustomerDao"/>
+	</bean>
+
+	<alias name="defaultAcerchemCommerCartService" alias="acerchemCommerCartService"/>
+	<bean id="defaultAcerchemCommerCartService" parent="commerceCartService" class="com.acerchem.core.service.impl.DefaultAcerchemCommerCartService">
+		<property name="acerchemCommerceAddToCartStrategy" ref="acerchemCommerceAddToCartStrategy"/>
+	</bean>
+
+	<alias name="defaultAcerchemCommerceAddToCartStrategy"  alias="acerchemCommerceAddToCartStrategy"/>
+	<bean id="defaultAcerchemCommerceAddToCartStrategy" parent="commerceAddToCartStrategy" class="com.acerchem.core.strategies.impl.DefaultAcerchemCommerceAddToCartStrategy">
+		<property name="warehouseService" ref="warehouseService"/>
+	</bean>
+
+
+	
 </beans>

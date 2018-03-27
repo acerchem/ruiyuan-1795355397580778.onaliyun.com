@@ -15,6 +15,7 @@
 		<property name="genders" type="java.util.List&lt;com.acerchem.facades.product.data.GenderData>"/>
 		<property name="chemicalInfo" type="String"/>
 		<property name="unitCalculateRato" type="String"/>
+		<property name="promotionPrice" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
 	</bean>
 
 	<bean class="com.acerchem.facades.product.data.GenderData">
@@ -35,5 +36,41 @@
 		<property name="futureStock" type="java.util.List&lt;com.acerchem.facades.product.data.FutureStockLevelData>"/>
 	</bean>
 	<!-- shaun.sheng -->
-	
+
+	<bean class="de.hybris.platform.commercefacades.order.data.OrderEntryData">
+		<property name="warehouseCode" type="java.lang.String"/>
+		<property name="isUseFutureStock" type="java.lang.Boolean"/>
+	</bean>
+
+
+	<bean class="de.hybris.platform.commercefacades.user.data.CustomerData">
+		<property name="addressDataList" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.AddressData>"/>
+	</bean>
+
+
+    <bean class="com.acerchem.facades.product.data.WarehouseData">
+        <property name="code" type="String"/>
+        <property name="name" type="String"/>
+    </bean>
+
+	<bean class="com.acerchem.facades.product.data.CountryToWarehouseData">
+		<property name="storeId" type="String"/>
+		<property name="countryData" type="de.hybris.platform.commercefacades.user.data.CountryData"/>
+		<property name="warehouseList" type="java.util.List&lt;com.acerchem.facades.product.data.WarehouseData>"/>
+	</bean>
+
+    <bean class="com.acerchem.facades.product.data.CountryToWarehouseDataList">
+        <property name="countryToWarehouseDataList" type="java.util.List&lt;com.acerchem.facades.product.data.CountryToWarehouseData>"/>
+    </bean>
+
+	<bean class="de.hybris.platform.commercefacades.order.data.AddToCartParams">
+		<property name="warehouseCode" type="String"/>
+		<property name="isUseFutureStock" type="Boolean"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commerceservices.service.data.CommerceCartParameter">
+		<property name="warehouseCode" type="String"/>
+		<property name="isUseFutureStock" type="Boolean"/>
+	</bean>
+
 </beans>

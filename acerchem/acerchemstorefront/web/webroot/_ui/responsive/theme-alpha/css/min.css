@@ -22,7 +22,7 @@ input[type='checkbox']:checked~.checkbox:after{
 	display:block;
 }
 
-input[type='text'], input[type='password'] ,input[type='submit'],.pitch{
+input[type='text'], input[type='password'] ,input[type='submit'],select,.pitch{
 	padding-left:10px;
 	width: 100%;
 	height: 50px;
@@ -71,6 +71,7 @@ button{
 	width: 100%;
 	cursor: pointer;
 }
+
 
 .title{
 	margin-bottom: 14px;

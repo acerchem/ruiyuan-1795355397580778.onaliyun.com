@@ -13,44 +13,73 @@
 		<spring:param name="configuratorType" value="${configuratorType}" />
 	</spring:url>
 
-	<form:form id="addToCartForm${fn:escapeXml(product.code)}" action="${addToCartUrl}" method="post" class="add_to_cart_form">
 
-        <ycommerce:testId code="addToCartButton">
-            <input type="hidden" name="productCodePost" value="${fn:escapeXml(product.code)}"/>
-            <input type="hidden" name="productNamePost" value="${fn:escapeXml(product.name)}"/>
-            <input type="hidden" name="productPostPrice" value="${product.price.value}"/>
+		<form:form id="addToCartForm${fn:escapeXml(product.code)}" action="${addToCartUrl}" method="post" class="add_to_cart_form">
+		<!--shaun:hybris cartButton  -->
+	        <ycommerce:testId code="addToCartButton">
+	            <input type="hidden" name="productCodePost" value="${fn:escapeXml(product.code)}"/>
+	            <input type="hidden" name="productNamePost" value="${fn:escapeXml(product.name)}"/> 
+	            <input type="hidden" name="productPostPrice" value="${product.price.value}"/>
+					<!--buttonChangeToDiv -->
+	           		  <c:choose>
+				                <c:when test="${product.stock.stockLevelStatus.code eq 'outOfStock' }">
+				                    <div class="g-cart" id="addToCartDiv${fn:escapeXml(product.code)}">
+					                    <i>
+					                    
+					                    </i>
+				                    </div>
+				                </c:when>
+				                <c:otherwise>
+				                    <div class="g-cart " id="addToCartDiv${fn:escapeXml(product.code)}" >
+					                    <i>
+					                    	
+					                    </i>
+				                    </div>
+				                </c:otherwise>
+				      </c:choose> 
+	        </ycommerce:testId>
+	     </form:form>
 
-            <c:choose>
-                <c:when test="${product.stock.stockLevelStatus.code eq 'outOfStock' }">
-                    <button type="submit" class="btn btn-primary btn-block glyphicon glyphicon-shopping-cart"
-                            aria-disabled="true" disabled="disabled">
-                    </button>
-                </c:when>
-                <c:otherwise>
-                    <button type="submit" class="btn btn-primary btn-block glyphicon glyphicon-shopping-cart js-enable-btn"
-                            disabled="disabled">
-                    </button>
-                </c:otherwise>
-            </c:choose>
-        </ycommerce:testId>
-    </form:form>
 
-    <form:form id="configureForm${fn:escapeXml(product.code)}" action="${configureProductUrl}" method="get" class="configure_form">
+
+	 <!--hybris弹出式购物车  -->
+    <form:form id="configureForm${fn:escapeXml(product.code)}" action="${configureProductUrl}" method="get" class="configure_form" name="pro">
         <c:if test="${product.configurable}">
             <c:choose>
                 <c:when test="${product.stock.stockLevelStatus.code eq 'outOfStock' }">
-                    <button id="configureProduct" type="button" class="btn btn-primary btn-block"
+                
+                   <button id="configureProduct" type="button" class="btn btn-primary btn-block"
                             disabled="disabled">
                         <spring:theme code="basket.configure.product"/>
-                    </button>
+                    </button> 
+                    
+                    
                 </c:when>
                 <c:otherwise>
-                    <button id="configureProduct" type="button" class="btn btn-primary btn-block js-enable-btn" disabled="disabled"
-                            onclick="location.href='${configureProductUrl}'">
-                        <spring:theme code="basket.configure.product"/>
-                    </button>
+                
                 </c:otherwise>
             </c:choose>
         </c:if>
-    </form:form>
+    </form:form> 
+    
+    
+ 
+    
+    
 </c:if>
+
+
+<script>	
+	/* submit the form of add to cart  */
+	$("#addToCartDiv"+${fn:escapeXml(product.code)}).on('click',function(){
+		
+		var formData = $("#addToCartForm"+${fn:escapeXml(product.code)});
+		formData.submit();
+			
+	})
+</script>
+
+
+
+
+

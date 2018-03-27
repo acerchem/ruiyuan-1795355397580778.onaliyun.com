@@ -10,37 +10,46 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
+	<c:url value="${product.url}" var="entryProductUrl"/>
+	<!--shaun  -->
+	<ul>
+		<li class="item">
+			<!--image  -->	
+    		<div class="img">
+    			<a href="${entryProductUrl}">
+    		  		<product:productPrimaryImage product="${entry.product}" format="cartIcon"/>
+    		  	</a>
+    		</div>
+    		
+    		<div class="maxtext">
+    		  <!--name  -->
+	    		<p><a class="name" href="${entryProductUrl}">${fn:escapeXml(product.name)}</a></p>
+	    	  <!-- qty -->
+	    	  <div class="qty">
+		    	<p class="maxtext-note">
+		    		<span><spring:theme code="popup.cart.quantity.added"/></span>&nbsp;<em>1</em>
+		    	</p>
+		      </div>
+		    	
+			    	<div class="maxdel"></div> 
+			    	<div class="pt-num-but">
+				    	<span class="price"><format:price priceData="${entry.basePrice}"/></span>
+	    				<span class="old-price"><format:price priceData="${entry.basePrice}"/></span>
+	    				
+					    	<div class="m-setnum">
+						    	<span class="set sub">-</span>
+						    	<input type="text" name="pdnum" class="set" value="1">
+						    	<span class="set add">+</span>
+					    	</div>
+				   </div>
+		   </div>
+    	</li>
+	</ul>
 
-<div class="add-to-cart-item">
-		<c:url value="${product.url}" var="entryProductUrl"/>
-		<div class="thumb">
-			<a href="${entryProductUrl}">
-				<product:productPrimaryImage product="${entry.product}" format="cartIcon"/>
-			</a>
-		</div>
-		<div class="details">
-			<a class="name" href="${entryProductUrl}">${fn:escapeXml(product.name)}</a>
-			<div class="qty"><span><spring:theme code="popup.cart.quantity.added"/></span>&nbsp;${quantity}</div>
-			<c:forEach items="${product.baseOptions}" var="baseOptions">
-				<c:forEach items="${baseOptions.selected.variantOptionQualifiers}" var="baseOptionQualifier">
-					<c:set var="baseOptionQualifierValue" value="${fn:escapeXml(baseOptionQualifier.value)}"/>
-					<c:if test="${baseOptionQualifier.qualifier eq 'style' and not empty baseOptionQualifier.image.url}">
-						<div class="itemColor">
-							<span class="label"><spring:theme code="product.variants.colour"/></span>
-							<img src="${baseOptionQualifier.image.url}"  alt="${baseOptionQualifierValue}" title="${baseOptionQualifierValue}"/>
-						</div>
-					</c:if>
-					<c:if test="${baseOptionQualifier.qualifier eq 'size'}">
-						<div class="itemSize">
-							<span class="label"><spring:theme code="product.variants.size"/></span>
-								${baseOptionQualifierValue}
-						</div>
-					</c:if>
-				</c:forEach>
-			</c:forEach>
-			<c:if test="${not empty entry.deliveryPointOfService.name}">
-				<div class="itemPickup"><span class="itemPickupLabel"><spring:theme code="popup.cart.pickup"/></span>&nbsp;${fn:escapeXml(entry.deliveryPointOfService.name)}</div>
-			</c:if>
-			<div class="price"><format:price priceData="${entry.basePrice}"/></div>
-		</div>
-    </div>
+
+
+
+
+
+
+

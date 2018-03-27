@@ -10,9 +10,13 @@
  */
 package com.acerchem.storefront.controllers.misc;
 
+import com.acerchem.facades.facades.AcerchemCartFacade;
+import com.acerchem.facades.facades.AcerchemCustomerFacade;
+import com.acerchem.facades.product.data.CountryToWarehouseData;
+import com.acerchem.storefront.controllers.ControllerConstants;
+import com.acerchem.storefront.data.AcerchemAddToCartForm;
 import de.hybris.platform.acceleratorfacades.product.data.ProductWrapperData;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.AbstractController;
-import de.hybris.platform.acceleratorstorefrontcommons.forms.AddToCartForm;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.AddToCartOrderForm;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.AddToEntryGroupForm;
 import de.hybris.platform.commercefacades.order.CartFacade;
@@ -25,19 +29,9 @@ import de.hybris.platform.commercefacades.product.ProductOption;
 import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationStatus;
+import de.hybris.platform.commerceservices.search.pagedata.PageableData;
+import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.util.Config;
-import com.acerchem.storefront.controllers.ControllerConstants;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-
-import javax.annotation.Resource;
-import javax.validation.Valid;
-
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -46,10 +40,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
+import javax.validation.Valid;
+import java.util.*;
 
 
 /**
@@ -75,16 +70,31 @@ public class AddToCartController extends AbstractController
 	@Resource(name = "groupCartModificationListPopulator")
 	private GroupCartModificationListPopulator groupCartModificationListPopulator;
 
+	@Resource(name = "acerchemCartFacade")
+	private AcerchemCartFacade acerchemCartFacade;
+
+	@Resource(name = "acerchemCustomerFacade")
+	private AcerchemCustomerFacade acerchemCustomerFacade;
+
 	@RequestMapping(value = "/cart/add", method = RequestMethod.POST, produces = "application/json")
 	public String addToCart(@RequestParam("productCodePost") final String code, final Model model,
-			@Valid final AddToCartForm form, final BindingResult bindingErrors)
+							@Valid final AcerchemAddToCartForm form, final BindingResult bindingErrors)
 	{
 		if (bindingErrors.hasErrors())
 		{
 			return getViewWithBindingErrorMessages(model, bindingErrors);
 		}
 
+		//each cartEntry warehouse must be same
+//		final String warehouseCode = form.getWarehouseCode();
+//		final boolean isUseFutureStock = form.isUseFutureStock();
+//		String errorMsg = acerchemCartFacade.acerchemValidateCart(warehouseCode,code,isUseFutureStock);
+//		if (Objects.nonNull(errorMsg)) {
+//			model.addAttribute(ERROR_MSG_TYPE, errorMsg);
+//		}
+
 		final long qty = form.getQty();
+
 
 		if (qty <= 0)
 		{
@@ -95,7 +105,7 @@ public class AddToCartController extends AbstractController
 		{
 			try
 			{
-				final CartModificationData cartModification = cartFacade.addToCart(code, qty);
+				final CartModificationData cartModification = acerchemCartFacade.addToCart(code, qty,form.getWarehouseCode(),form.isUseFutureStock(),form.getStoreId());
 				model.addAttribute(QUANTITY_ATTR, Long.valueOf(cartModification.getQuantityAdded()));
 				model.addAttribute("entry", cartModification.getEntry());
 				model.addAttribute("cartCode", cartModification.getCartCode());
@@ -105,7 +115,7 @@ public class AddToCartController extends AbstractController
 				{
 					model.addAttribute(ERROR_MSG_TYPE, "basket.information.quantity.noItemsAdded." + cartModification.getStatusCode());
 				}
-				
+
 				if (cartModification.getQuantityAdded() < qty)
 				{
 					model.addAttribute(ERROR_MSG_TYPE,
@@ -277,6 +287,20 @@ public class AddToCartController extends AbstractController
 		return REDIRECT_PREFIX + "/cart";
 	}
 
+	@RequestMapping(value = "/stores", method = RequestMethod.GET)
+	@ResponseBody
+	public SearchPageData<CountryToWarehouseData> locationSearch(@RequestParam(required = false) final String query,
+																		@RequestParam(required = false, defaultValue = "0") final int currentPage,
+																		@RequestParam(required = false, defaultValue = "100") final int pageSize,
+																		@RequestParam(required = false, defaultValue = "asc") final String sort)
+	{
+		final PageableData pageableData = createPagaable(currentPage, pageSize, sort);
+
+		SearchPageData<CountryToWarehouseData> result = acerchemCustomerFacade.getAllPointOfServices(pageableData);
+
+		return result;
+	}
+
 	protected ProductWrapperData createProductWrapperData(final String sku, final String errorMsg)
 	{
 		final ProductWrapperData productWrapperData = new ProductWrapperData();
@@ -331,5 +355,14 @@ public class AddToCartController extends AbstractController
 	protected boolean isValidQuantity(final OrderEntryData cartEntry)
 	{
 		return cartEntry.getQuantity() != null && cartEntry.getQuantity().longValue() >= 1L;
+	}
+
+	protected PageableData createPagaable(final int page, final int pageSize, final String sort)
+	{
+		final PageableData pageableData = new PageableData();
+		pageableData.setCurrentPage(page);
+		pageableData.setPageSize(pageSize);
+		pageableData.setSort(sort);
+		return pageableData;
 	}
 }

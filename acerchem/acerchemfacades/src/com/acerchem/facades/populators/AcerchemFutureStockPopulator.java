@@ -21,7 +21,7 @@ public class AcerchemFutureStockPopulator<SOURCE extends StockLevelModel, TARGET
 	
 	@Override
 	public void populate(ProductModel source, StockData stockData) throws ConversionException {
-		
+		super.populate(source,stockData);
 		try {
 			
 			

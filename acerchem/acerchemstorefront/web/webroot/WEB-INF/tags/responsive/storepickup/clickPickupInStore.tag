@@ -21,6 +21,7 @@
 
 
 			<a href="javascript:void(0)"
+				style="visibility: hidden"
 			   class="btn btn-default btn-block js-pickup-in-store-button"
 			   id="product_${fn:escapeXml(product.code)}${entryNumber}" disabled="disabled"
 				data-productcart='${fn:escapeXml(product.price.formattedValue)}'
@@ -50,7 +51,7 @@
 			</a>
 		</c:when>
 		<c:when test="${searchResultsPage}">
-			<button class="btn btn-default btn-block js-pickup-in-store-button glyphicon glyphicon-map-marker" disabled="disabled" id="product_${fn:escapeXml(product.code)}${entryNumber}" type="button submit"
+			<%-- <button style="visibility: hidden" class="btn btn-default btn-block js-pickup-in-store-button glyphicon glyphicon-map-marker" disabled="disabled" id="product_${fn:escapeXml(product.code)}${entryNumber}" type="button submit"
 
 			data-productcart='${fn:escapeXml(product.price.formattedValue)}'
 			data-productcart-variants='{
@@ -65,7 +66,7 @@
 
 			data-img='<product:productPrimaryImage product="${product}" format="thumbnail"/>' data-productname="${fn:escapeXml(product.name)}" data-cartpage="false" data-entryNumber="0" data-actionurl="${pickUpInStoreFormAction}" data-value="1">
 
-			</button>
+			</button> --%>
 		</c:when>
 		<c:otherwise>
 			<button class="btn btn-default btn-block js-pickup-in-store-button glyphicon-map-marker btn-icon" disabled="disabled" id="product_${fn:escapeXml(product.code)}${entryNumber}" type="submit" data-productavailable="${product.availableForPickup}"
@@ -87,5 +88,4 @@
 		</c:otherwise>
 	</c:choose>
 </ycommerce:testId>
-
 

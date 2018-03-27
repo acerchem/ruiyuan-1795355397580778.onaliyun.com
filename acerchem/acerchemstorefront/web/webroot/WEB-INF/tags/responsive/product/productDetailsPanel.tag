@@ -5,9 +5,9 @@
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<div class="gen-content">
-<!-- 
-	<div class="m-crumbs">
+
+
+	<!-- <div class="m-crumbs">
 		<div class="link">
 			<a href="index.html">Home</a>
 			<a href="gallery.html">Promotions </a>
@@ -17,7 +17,7 @@
 				<em></em>
 			</div>
 		</div>
-	</div> -->
+	</div>  -->
 
 	<!-- top -->
 	<div class="g-cont prod-cont">
@@ -50,15 +50,15 @@
 				<!-- base -->
 				<div class="prodbase">
 					<div class="g-title">
-						<p>Hemp Seed Protein 50% Powder (50lb Bag) By Hempco</p>
+						<p>${fn:escapeXml(product.name)}</p>
 						<div class="min">
-							<span class="mintitle">This is an organic ingredient.</span>
-							<span class="sku">888888888</span>
+							<span class="mintitle">${ycommerce:sanitizeHTML(product.summary)}</span>
+							<span class="sku">${fn:escapeXml(product.code)}</span>
 						</div>
 					</div>
 					<div class="priceset">
-						<span class="price">$60.00</span>
-						<span class="old-price">$67.00</span>
+						<span class="price"><format:fromPrice priceData="${product.price}"/></span>
+						<span class="old-price"><format:fromPrice priceData="${product.price}"/></span>
 					</div>
 					<div class="Summary">
 						<span><i>FREE</i>Buy 2 pieces for FREE Shipping;</span>
@@ -96,7 +96,7 @@
 							</label>						
 						</div>
 						<div class="invernum">
-							<span class="label-title inventory">Inventory:<i>8</i> <span class="spot">(<em>8</em>)</span></span>	
+							<span class="label-title inventory">Inventory:<i>${product.stock.stockLevel}</i> <span class="spot">(<em>${product.stock.stockLevel}</em>)</span></span>	
 
 							<label>
 								<input type="checkbox" name="Keep">
@@ -149,9 +149,16 @@
 							<a href="#" >Allergen Statement</a>
 						</li>
 					</ul>
+					
+					
+					<!--shaun:consulte  -->
 					<div class="btn-set line-setbtn">							
 						<a class="btn btn-showlist" href="javascript:void(0)">Message Consultation</a>
 					</div>		
+					
+					
+					
+					
 				</div>
 				<div class="tableshare">
 					<div class="title">Share with a Friend</div>
@@ -433,8 +440,98 @@
 	<!-- item end -->
 		</div>
 		<!-- down end -->
-	
-	</div>	
+		
+		
+		<!--shaun  -->
+		<!-- message -->
+					<div class="m-message">
+						<div class="indwrap">
+							<div class="mes-table">
+								<div class="title">Message consultation</div>
+								<form action="" method="post" class="solid-form both" id="message">				
+									<div class="left">
+										<label>
+											<span class="label-title">Your Name</span>	
+											<input type="text" name="name" class="required" alt="Please Enter Your Name">
+										</label>
+					
+										<label>
+											<span class="label-title">Telephone / Mobile Phone</span>	
+											<input type="text" name="mobile" class="required" alt="Please Enter Telephone / Mobile Phone">
+										</label>
+					
+										<label>
+											<span class="label-title">Email</span>	
+											<input type="text" name="email" class="required" alt="Please Enter Your Email">
+										</label>
+					
+										<label>
+											<span class='label-title'>Shipping Address</span>	
+												<div class="flex-wrap">
+													<div class="flex">					
+														<div class="selbox">
+															<input type="hidden" disabled="disabled" value="" name='nation' class="required" alt='Please Select Shipping nation'>
+															<span class="pitch"><i></i></span>
+															<ul class="select">
+																<li>Nation</li>
+																<li data-val="USA">U.S.A</li>
+																<li data-val="EL">England</li>
+																<li data-val="ITA">Repubblica Italiana</li>
+																<li data-val="SUI">Swiss Confederation</li>
+																<li data-val="MEX">The United States of Mexico</li>
+																<li data-val="FRA">French Republic</li>
+															</ul>
+														</div>	
+													</div>
+													<div class="flex">
+														<div class="selbox ">
+															<input type="hidden" disabled="disabled" value="" name='city' class="required" alt='Please Select Shipping city'>
+															<span class="pitch"><i></i></span>
+															<ul class="select">
+																<li>City</li>
+																<li data-val="NY">New York</li>
+																<li data-val="LA">Los Angeles</li>
+																<li data-val="CI">Chicago</li>
+															</ul>
+														</div>	
+													</div>				
+												</div>
+										</label>
+					
+										<label>						
+											<input type="text" name='shipadd' class="required" placeholder="Detailed address" alt='Please Enter Shipping Detailed Address'>
+										</label>				
+									</div>
+									<div class="right">	
+										<label>
+											<span class="label-title">Product ID</span>	
+											<input type="text" name="prodid" class="required" alt="Please Enter Product ID">
+										</label>
+										<label>
+											<span class="label-title">Product Name</span>	
+											<input type="text" name="prodname" class="required" alt="Please Enter Product Name">
+										</label>
+										<label>
+											<span class="label-title">message</span>	
+											<textarea name="message" id="" ></textarea>
+										</label>
+									</div>				
+								</form>
+								<div class="btn-set">
+									<a class="btn btn-line" href="javascript:void(0)">Cancel</a>				
+									<a class="btn btn-submit" href="javascript:void(0)">Confirm</a>
+								</div>
+							</div>
+						</div>
+					</div>
+<!-- message end -->
+		
+		
+		
+		
+		
+		
+		
 <script>
 inputint()
 
@@ -569,7 +666,7 @@ $('.m-setnum span').on('click',function(){
 		case 'set sub':
 			avl = parseInt(ainp.val());
 			if(avl<=1){
-				maxalert('A minimum of one piece！');
+				maxalert('A minimum of one piece!');
 				$(this).css('background-color','#ddd')
 				break;
 			}else{
@@ -607,7 +704,7 @@ $('.m-setnum span').on('click',function(){
 })
 
 $('.prodbase .btn-cart').on('click',function(){
-	maxalert('Join the shopping cart successfully！');
+	maxalert('Join the shopping cart successfully!');
 })
 
 // m-message
@@ -636,3 +733,4 @@ $('.m-message .btn-set .btn').on('click',function(){
 
 
 </script>
+

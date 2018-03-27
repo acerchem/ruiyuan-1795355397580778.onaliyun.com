@@ -6,48 +6,17 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/responsive/formElement"%>
 
-<div class="account-section-header">
-	<div class="row">
-		<div class="container-lg col-md-6">
-			<spring:theme code="text.account.profile.updatePasswordForm"/>
+<div class="title">Modify The Password</div>
+<div class="rigcont">
+	<form:form action="${action}" method="post" commandName="updatePasswordForm" id="password" class="keep">
+		<span class='label-title'>Used Password</span>	
+		<formElement:formPasswordBox idKey="currentPassword" labelKey="" path="currentPassword" inputCSS="form-control" mandatory="true" />
+		<span class='label-title'>New Password</span>	
+		<formElement:formPasswordBox idKey="newPassword" labelKey="" path="newPassword" inputCSS="form-control" mandatory="true" />
+		<span class='label-title'>Confirm Password</span>
+		<formElement:formPasswordBox idKey="checkNewPassword" labelKey="" path="checkNewPassword" inputCSS="form-control" mandatory="true" />
+		<div class="btn-set">				
+			<button type="submit" class="btn btn-primary btn-block">Confirm</button>
 		</div>
-	</div>
-</div>
-<div class="row">
-	<div class="container-lg col-md-6">
-		<div class="account-section-content">
-			<div class="account-section-form">
-				<form:form action="${action}" method="post" commandName="updatePasswordForm">
-
-					<formElement:formPasswordBox idKey="currentPassword"
-												 labelKey="profile.currentPassword" path="currentPassword" inputCSS="form-control"
-												 mandatory="true" />
-					<formElement:formPasswordBox idKey="newPassword"
-												 labelKey="profile.newPassword" path="newPassword" inputCSS="form-control"
-												 mandatory="true" />
-					<formElement:formPasswordBox idKey="checkNewPassword"
-												 labelKey="profile.checkNewPassword" path="checkNewPassword" inputCSS="form-control"
-												 mandatory="true" />
-
-
-					<div class="row">
-						<div class="col-sm-6 col-sm-push-6">
-							<div class="accountActions">
-								<button type="submit" class="btn btn-primary btn-block">
-									<spring:theme code="updatePwd.submit" text="Update Password" />
-								</button>
-							</div>
-						</div>
-						<div class="col-sm-6 col-sm-pull-6">
-							<div class="accountActions">
-								<button type="button" class="btn btn-default btn-block backToHome">
-									<spring:theme code="text.button.cancel" text="Cancel" />
-								</button>
-							</div>
-						</div>
-					</div>
-				</form:form>
-			</div>
-		</div>
-	</div>
+	</form:form>
 </div>
