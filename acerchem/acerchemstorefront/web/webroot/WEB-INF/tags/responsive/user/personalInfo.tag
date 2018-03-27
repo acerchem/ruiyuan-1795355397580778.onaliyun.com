@@ -19,7 +19,7 @@
 
 	<div class="memberlist">
 		<ul>
-			<li class="${nowPage=='orders'?'now':''}"><a href="${ordersUrl}" class="icons order-icons">Order History <i>4</i></a></li>
+			<li class="${nowPage=='orders'?'now':''}"><a href="${ordersUrl}" class="icons order-icons">Order History <i>${searchPageData.pagination.totalNumberOfResults}</i></a></li>
 			<li class="${nowPage=='update-profile'?'now':''}"><a href="${infoUrl}" class="icons personal-icons">Personal Information</a></li>
 			<li class="${nowPage=='address-book'?'now':''}"><a href="${addressBookUrl}" class="icons address-icons">Address Book</a></li>
 			<li class="${nowPage=='update-password'?'now':''}"><a href="${updatePasswordUrl}" class="icons modify-icons">Modify The Password</a></li>
