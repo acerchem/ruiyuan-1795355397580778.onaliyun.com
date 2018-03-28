@@ -32,7 +32,7 @@ public class AcerChemVendorDaoImpl implements AcerChemVendorDao {
 	                                                                          																																					
 		final Map<String, Object> params = new HashMap<String, Object>();
 		final StringBuilder builder = new StringBuilder(SQL);
-		params.put("prodName", "%"+ productName + "%");
+		params.put("prodName", "'%"+ productName + "%'");
 		
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(builder.toString());
 		query.addQueryParameters(params);
