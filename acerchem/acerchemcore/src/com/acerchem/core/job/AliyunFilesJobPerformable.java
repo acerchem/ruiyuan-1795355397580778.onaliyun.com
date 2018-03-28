@@ -1,6 +1,7 @@
 package com.acerchem.core.job;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -14,12 +15,15 @@ import com.acerchem.core.model.ImageUploadedLogModel;
 import com.acerchem.core.web.aliyun.MediaFileManager;
 import com.acerchem.core.web.aliyun.UploadFileDefault;
 
+import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.cronjob.enums.CronJobResult;
 import de.hybris.platform.cronjob.enums.CronJobStatus;
 import de.hybris.platform.cronjob.model.CronJobModel;
+import de.hybris.platform.jalo.media.MediaManager;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.cronjob.AbstractJobPerformable;
 import de.hybris.platform.servicelayer.cronjob.PerformResult;
+import de.hybris.platform.servicelayer.media.impl.ModelMediaSource;
 
 public class AliyunFilesJobPerformable extends AbstractJobPerformable<CronJobModel> {
 
@@ -53,10 +57,12 @@ public class AliyunFilesJobPerformable extends AbstractJobPerformable<CronJobMod
 					String key = model.getAliyunUrl();
 					if ("ADD".equals(action)) {
 						
-						String location = model.getLocation();
-						File file = new File(location);
+//						String location = model.getLocation();
+//						File file = new File(location);
 
-						if (UploadFileDefault.uploadFile(file, key)) {
+						MediaModel media = model.getMediaData();
+						InputStream input = MediaManager.getInstance().getMediaAsStream(new ModelMediaSource(media));
+						if (UploadFileDefault.uploadFile(input, key)) {
 
 							modelService.remove(model);
 						}

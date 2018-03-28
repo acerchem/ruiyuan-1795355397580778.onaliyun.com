@@ -43,6 +43,24 @@
 			</value>
 
 		</enumtype>
+		<!-- 客户等级代码 -->
+		<enumtype code="CustomerLevelClassification" autocreate="true"
+			generate="true" dynamic="true">
+			<description>客户等级</description>
+			<value code="A" />
+			<value code="B" />
+			<value code="C" />
+			<value code="D" />
+			<value code="E" />
+			<value code="F" />
+			<value code="G" />
+			<value code="H" />
+			<value code="I" />
+			<value code="J" />
+			<value code="K" />
+			<value code="L" />
+
+		</enumtype>
 	</enumtypes>
 
 	<relations>
@@ -165,6 +183,7 @@
 				</attributes>
 			</itemtype>
 
+			<!--Failed records to upload aliyun -->
 			<itemtype code="ImageFailedRecord" autocreate="true"
 				generate="true">
 				<deployment table="ImageFailedRecord" typecode="20101" />
@@ -199,8 +218,16 @@
 							optional="true" />
 						<persistence type="property" />
 					</attribute>
+					<attribute qualifier="mediaData" type="Media">
+						<description>mediaData</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
 				</attributes>
 			</itemtype>
+			
+			<!-- Log for uploading aliyun -->
 			<itemtype code="ImageUploadedLog" autocreate="true"
 				generate="true">
 				<deployment table="ImageUploadedLog" typecode="20102" />
@@ -223,9 +250,39 @@
 							optional="true" />
 						<persistence type="property" />
 					</attribute>
+					
 
 				</attributes>
 			</itemtype>
+			
+			<!-- Customer Level -->
+			<itemtype code="CustomerLevel" autocreate="true"
+				generate="true">
+				<deployment table="CustomerLevel" typecode="20103" />
+				<attributes>
+					<attribute qualifier="levelName" type="java.lang.String">
+						<description>等级名称</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="levelCode" type="CustomerLevelClassification">
+						<description>等级代码</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="discount" type="java.lang.Double">
+						<description>折扣</description>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+					</attribute>
+
+				</attributes>
+			</itemtype>
+			
+			
 			<!--add by Wangjh end -->
 		</typegroup>
 
