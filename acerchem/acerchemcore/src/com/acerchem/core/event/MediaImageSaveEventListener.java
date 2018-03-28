@@ -1,6 +1,7 @@
 package com.acerchem.core.event;
 
 import java.io.File;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
 import java.util.Date;
@@ -21,8 +22,10 @@ import de.hybris.platform.core.PK;
 import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.enumeration.EnumerationService;
 import de.hybris.platform.jalo.media.Media;
+import de.hybris.platform.jalo.media.MediaManager;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.exceptions.ModelLoadingException;
+import de.hybris.platform.servicelayer.media.impl.ModelMediaSource;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.tx.AfterSaveEvent;
 import de.hybris.platform.tx.AfterSaveListener;
@@ -118,17 +121,18 @@ public class MediaImageSaveEventListener implements AfterSaveListener {
 
 		try {
 			// get localfile path
-			String localPath = configurationService.getConfiguration().getString("upload.path");
-			localPath += media.getLocation();
+			//String localPath = configurationService.getConfiguration().getString("upload.path");
+			String localPath = media.getLocation();
 
+			InputStream input = MediaManager.getInstance().getMediaAsStream(new ModelMediaSource(media));
 			System.out.println(localPath);
-			File file = new File(localPath);
+			//File file = new File(localPath);
 
 			// aliyun path
 			SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
 			String temp_ = df.format(new Date());
 
-			String keySuffix = file.getName().substring(file.getName().lastIndexOf(".") + 1);
+			String keySuffix = localPath.substring(localPath.lastIndexOf(".") + 1);
 
 			// aliyun relation path>>> application/yyyymmdd/
 			String key = root + "/" + temp_ + "/" + media.getPk().getLong().toString() + "." + keySuffix;
@@ -141,7 +145,7 @@ public class MediaImageSaveEventListener implements AfterSaveListener {
 			UploadFileDefault.initializeParameters(lsEndpoint, lsAccessKeyId, lsAccessKeySecret, lsBucketName);
 			// upload aliyun
 
-			boolean uploadFlag = UploadFileDefault.uploadFile(file, key);
+			boolean uploadFlag = UploadFileDefault.uploadFile(input, key);
 
 			// if (!acerChemImageUploadLogService.isExistByLocation(localPath))
 			// {
@@ -175,11 +179,11 @@ public class MediaImageSaveEventListener implements AfterSaveListener {
 	private void uploadFailedProccess(MediaModel media, String aliyunPath, String path) {
 
 		ImageFailedActionType actionType = enumerationService.getEnumerationValue(ImageFailedActionType.class, "ADD");
-		String fileName = media.getLocation();
-		if (fileName == null)
-			return;
+//		String fileName = media.getLocation();
+//		if (fileName == null)
+//			return;
 
-		fileName = fileName.substring(fileName.lastIndexOf("/") + 1);
+		String fileName = aliyunPath.substring(aliyunPath.lastIndexOf("/") + 1);
 
 		String status = "0";
 		ImageFailedRecordModel failedRecord = acerChemImageFailedRecoredService.getImageFailedRecordByFileAttr(fileName,
@@ -192,6 +196,7 @@ public class MediaImageSaveEventListener implements AfterSaveListener {
 			failedRecord.setAliyunUrl(aliyunPath);
 			failedRecord.setLocation(path);
 			failedRecord.setStatus(status);
+			failedRecord.setMediaData(media);
 
 		} else {
 			failedRecord = modelService.create(ImageFailedRecordModel.class);
@@ -200,6 +205,7 @@ public class MediaImageSaveEventListener implements AfterSaveListener {
 			failedRecord.setAliyunUrl(aliyunPath);
 			failedRecord.setLocation(path);
 			failedRecord.setStatus(status);
+			failedRecord.setMediaData(media);
 
 		}
 
