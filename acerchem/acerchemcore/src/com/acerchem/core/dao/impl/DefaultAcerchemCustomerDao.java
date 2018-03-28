@@ -21,7 +21,7 @@ import java.util.Objects;
  */
 public class DefaultAcerchemCustomerDao extends AbstractItemDao implements AcerchemCustomerDao {
 
-    private final String GET_ALL_POINNTOFSERVICE = "select {PK} from {pointOfService} where {baseStore} = ?baseStore";
+    private final String GET_ALL_POINNTOFSERVICE = "select {PK} from {pointOfService} where {baseStore} = ?baseStore and {type}=?type";
 
     private PagedFlexibleSearchService pagedFlexibleSearchService;
 

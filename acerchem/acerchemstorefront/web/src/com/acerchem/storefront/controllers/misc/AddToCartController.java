@@ -86,12 +86,12 @@ public class AddToCartController extends AbstractController
 		}
 
 		//each cartEntry warehouse must be same
-//		final String warehouseCode = form.getWarehouseCode();
-//		final boolean isUseFutureStock = form.isUseFutureStock();
-//		String errorMsg = acerchemCartFacade.acerchemValidateCart(warehouseCode,code,isUseFutureStock);
-//		if (Objects.nonNull(errorMsg)) {
-//			model.addAttribute(ERROR_MSG_TYPE, errorMsg);
-//		}
+		final String warehouseCode = form.getWarehouseCode();
+		final boolean isUseFutureStock = form.getIsUseFutureStock();
+		String errorMsg = acerchemCartFacade.acerchemValidateCart(warehouseCode,code,isUseFutureStock);
+		if (Objects.nonNull(errorMsg)) {
+			model.addAttribute(ERROR_MSG_TYPE, errorMsg);
+		}
 
 		final long qty = form.getQty();
 
@@ -287,20 +287,6 @@ public class AddToCartController extends AbstractController
 		return REDIRECT_PREFIX + "/cart";
 	}
 
-	@RequestMapping(value = "/stores", method = RequestMethod.GET)
-	@ResponseBody
-	public SearchPageData<CountryToWarehouseData> locationSearch(@RequestParam(required = false) final String query,
-																		@RequestParam(required = false, defaultValue = "0") final int currentPage,
-																		@RequestParam(required = false, defaultValue = "100") final int pageSize,
-																		@RequestParam(required = false, defaultValue = "asc") final String sort)
-	{
-		final PageableData pageableData = createPagaable(currentPage, pageSize, sort);
-
-		SearchPageData<CountryToWarehouseData> result = acerchemCustomerFacade.getAllPointOfServices(pageableData);
-
-		return result;
-	}
-
 	protected ProductWrapperData createProductWrapperData(final String sku, final String errorMsg)
 	{
 		final ProductWrapperData productWrapperData = new ProductWrapperData();
@@ -355,14 +341,5 @@ public class AddToCartController extends AbstractController
 	protected boolean isValidQuantity(final OrderEntryData cartEntry)
 	{
 		return cartEntry.getQuantity() != null && cartEntry.getQuantity().longValue() >= 1L;
-	}
-
-	protected PageableData createPagaable(final int page, final int pageSize, final String sort)
-	{
-		final PageableData pageableData = new PageableData();
-		pageableData.setCurrentPage(page);
-		pageableData.setPageSize(pageSize);
-		pageableData.setSort(sort);
-		return pageableData;
 	}
 }

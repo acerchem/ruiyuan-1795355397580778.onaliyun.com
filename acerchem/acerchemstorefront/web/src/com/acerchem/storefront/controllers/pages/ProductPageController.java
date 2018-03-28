@@ -11,6 +11,7 @@
 package com.acerchem.storefront.controllers.pages;
 
 import com.acerchem.facades.facades.AcerchemCustomerFacade;
+import com.acerchem.facades.product.data.CountryToWarehouseData;
 import de.hybris.platform.acceleratorfacades.futurestock.FutureStockFacade;
 import de.hybris.platform.acceleratorservices.controllers.page.PageType;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.impl.ProductBreadcrumbBuilder;
@@ -35,6 +36,8 @@ import de.hybris.platform.commercefacades.product.data.ImageData;
 import de.hybris.platform.commercefacades.product.data.ImageDataType;
 import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commercefacades.product.data.ReviewData;
+import de.hybris.platform.commerceservices.search.pagedata.PageableData;
+import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.commerceservices.url.UrlResolver;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.product.ProductService;
@@ -393,6 +396,20 @@ public class ProductPageController extends AbstractPageController
 		return result;
 	}
 
+	@RequestMapping(value = "/stores", method = RequestMethod.GET)
+	@ResponseBody
+	public SearchPageData<CountryToWarehouseData> locationSearch(@RequestParam(required = false) final String query,
+																 @RequestParam(required = false, defaultValue = "0") final int currentPage,
+																 @RequestParam(required = false, defaultValue = "100") final int pageSize,
+																 @RequestParam(required = false, defaultValue = "asc") final String sort)
+	{
+		final PageableData pageableData = createPagaable(currentPage, pageSize, sort);
+
+		SearchPageData<CountryToWarehouseData> result = acerchemCustomerFacade.getAllPointOfServices(pageableData);
+
+		return result;
+	}
+
 	@ExceptionHandler(UnknownIdentifierException.class)
 	public String handleUnknownIdentifierException(final UnknownIdentifierException exception, final HttpServletRequest request)
 	{
@@ -526,5 +543,14 @@ public class ProductPageController extends AbstractPageController
 	{
 		final ProductModel productModel = productService.getProductForCode(productCode);
 		return cmsPageService.getPageForProduct(productModel);
+	}
+
+	protected PageableData createPagaable(final int page, final int pageSize, final String sort)
+	{
+		final PageableData pageableData = new PageableData();
+		pageableData.setCurrentPage(page);
+		pageableData.setPageSize(pageSize);
+		pageableData.setSort(sort);
+		return pageableData;
 	}
 }
