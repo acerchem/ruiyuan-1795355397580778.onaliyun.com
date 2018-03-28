@@ -65,64 +65,17 @@
 						<span><i>10% off</i>All goods Sales to 10% Off; </span>
 						<span><i>40%</i>Buy 400 items  sales to 40% Off;</span>
 					</div>
-					<div class="specnum">
-						<div class="spec">
-							<label>
-								<span class="label-title">Specifications</span>	
-								<div class="selbox">
-									<input type="hidden" class="required" value="" name="spec" alt="Please Select nation">
-									<span class="pitch"></span>
-									<ul class="select">
-										<li data-val="25">25kg</li>
-										<li data-val="50">50kg</li>
-										<li data-val="75">75kg</li>						
-									</ul>
-								</div>	
-							</label>	
-							<label class="futday">
-								<span class="label-title">Future days</span>	
-								<div class="selbox">
-									<input type="hidden" value="" name="futday" alt="Please Select nation" id="futday">
-									<span class="pitch"></span>
-									<ul class="select">
-										<c:forEach items="${product.stock.futureStock}" var="data" varStatus="vs">
-									 	
-											<li data-val="${data.futureStockLevel}">${data.releaseDay}</li>
-				  		 				 
-										</c:forEach>
 					
-									</ul>
-								</div>	
-							</label>						
-						</div>
-						<div class="invernum">
-							<span class="label-title inventory">Inventory:<i>${product.stock.stockLevel}</i> <span class="spot">(<em>${product.stock.stockLevel}</em>)</span></span>	
-
-							<label>
-								<input type="checkbox" name="Keep">
-								<span class="checkbox">Display future inventory</span>
-							</label>
-
-							
-						</div>
-
-						<div class="prod-sum">
-							<div class="m-setnum">
-								<span class="set sub">-</span>
-								<input type="text" name="pdnum" class="set" value="1">
-								<span class="set add">+</span>
-							</div>
-							<i class="delintro">Delivery<em>30</em>days</i>
-						</div>
-
-						
-					</div>
+					<cms:pageSlot position="AddToCart" var="component" >
+						<cms:component component="${component}" />
+					</cms:pageSlot>
+					
 			
-					
+					<!-- 
                     <div class="btn-set">							
 							<a class="btn btn-submit" href="checkout.html">Check Out</a>
 							<a class="btn btn-cart" href="javascript:void(0)">Add to Cart</a>
-					</div>
+					</div> -->
 
 				</div>
 				<!-- b end -->
@@ -533,6 +486,7 @@
 		
 		
 <script>
+
 inputint()
 
 var wrap = '.maxon_salesul .slide-wrap';
@@ -666,7 +620,7 @@ $('.m-setnum span').on('click',function(){
 		case 'set sub':
 			avl = parseInt(ainp.val());
 			if(avl<=1){
-				maxalert('A minimum of one piece!');
+				maxalert('A minimum of one piece！');
 				$(this).css('background-color','#ddd')
 				break;
 			}else{
@@ -703,8 +657,28 @@ $('.m-setnum span').on('click',function(){
 	
 })
 
-$('.prodbase .btn-cart').on('click',function(){
-	maxalert('Join the shopping cart successfully!');
+$('.prodbase .btn-cart').on('click',function(){//加入购物车
+	var srch = window.innerHeight;
+	$('.maxfixed').show();
+	$('body').css({'height':srch,'overflow':'hidden'});
+
+	var maxfixed = $('.maxfixed .product-table ul'),
+		thisele = $('.prodbase'),
+		thisimg = $('.slidewrap .item').first().html(), 
+		thistit = thisele.find('.g-title p').text(),				
+		goodsnum = $('input[name="pdnum"]').val(),
+		price = thisele.find('.price').text(),
+		oldprice = thisele.find('.old-price').text(),
+		fications = $('input[name="spec"]').val(),
+		newele = '<li class="item"><div class="img">'+thisimg+'</div><div class="maxtext"><p class="in-title">'+thistit+'</p><p class="spec">Specifications:<i>'+fications+'</i></p><div class="spset"><span class="price">'+price+'</span><span class="old-price">'+oldprice+'</span><span class="num">'+goodsnum+'</span></div></div></li>';			
+		maxfixed.append(newele);
+		console.log(thisimg)
+		totalprice()
+})
+
+$(".btn-continue").on('click',function(){
+	$('.maxfixed').hide();
+	$('body').css({'height':'','overflow':''});
 })
 
 // m-message
@@ -731,6 +705,7 @@ $('.m-message .btn-set .btn').on('click',function(){
 
 
 
+</script>
 
 </script>
 

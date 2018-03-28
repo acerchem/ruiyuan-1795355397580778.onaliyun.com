@@ -2,52 +2,81 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <%@ taglib prefix="action" tagdir="/WEB-INF/tags/responsive/action" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<c:set var="isForceInStock" value="${product.stock.stockLevelStatus.code eq 'inStock' and empty product.stock.stockLevel}"/>
-<c:choose> 
-  <c:when test="${isForceInStock}">
-    <c:set var="maxQty" value="FORCE_IN_STOCK"/>
-  </c:when>
-  <c:otherwise>
-    <c:set var="maxQty" value="${product.stock.stockLevel}"/>
-  </c:otherwise>
-</c:choose>
 
-<c:set var="qtyMinus" value="1" />
+<div class="specnum">
+<div class="spec">
+	<label>
+		<span class="label-title">Specifications</span>	
+		<div class="selbox">
+			<input type="hidden" class="required" value="" name="spec" alt="Please Select nation">
+			<span class="pitch"></span>
+			<ul class="select">
+				<li data-val="25">25kg</li>
+				<li data-val="50">50kg</li>
+				<li data-val="75">75kg</li>						
+			</ul>
+		</div>	
+	</label>	
+	<label class="futday">
+		<span class="label-title">Future days</span>	
+		<div class="selbox">
+			<input type="hidden" value="" name="futday" alt="Please Select nation" id="futday">
+			<span class="pitch"></span>
+			<ul class="select">
+				<c:forEach items="${product.stock.futureStock}" var="data" varStatus="vs">
+	 	
+			<li data-val="${data.futureStockLevel}">${data.releaseDay}</li>
+ 				 
+		</c:forEach>
 
-<div class="addtocart-component">
-		<c:if test="${empty showAddToCart ? true : showAddToCart}">
-		<div class="qty-selector input-group js-qty-selector">
-			<span class="input-group-btn">
-				<button class="btn btn-default js-qty-selector-minus" type="button" <c:if test="${qtyMinus <= 1}"><c:out value="disabled='disabled'"/></c:if> ><span class="glyphicon glyphicon-minus" aria-hidden="true" ></span></button>
-			</span>
-				<input type="text" maxlength="3" class="form-control js-qty-selector-input" size="1" value="${qtyMinus}" data-max="${maxQty}" data-min="1" name="pdpAddtoCartInput"  id="pdpAddtoCartInput" />
-			<span class="input-group-btn">
-				<button class="btn btn-default js-qty-selector-plus" type="button"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
-			</span>
+			</ul>
+		</div>	
+	</label>						
+</div>
+<div class="invernum">
+	<span class="label-title inventory">Inventory:<i>${product.stock.stockLevel}</i> <span class="spot">(<em>${product.stock.stockLevel}</em>)</span></span>	
+
+		<label>
+			<input type="checkbox" name="Keep">
+			<span class="checkbox">Display future inventory</span>
+		</label>
+
+		
+	</div>
+	
+	<div class="delivery flex-wrap">
+		<span class="label-title">Delivery to</span>
+		<div class="flex">
+			<select>
+			 <c:forEach items="${countrys}" var="data" varStatus="vs">
+			  <option value ="${data.countryData.isocode}">${data.countryData.name}</option>
+			 </c:forEach>
+			</select>
 		</div>
-		</c:if>
-		<c:if test="${product.stock.stockLevel gt 0}">
-			<c:set var="productStockLevel">${product.stock.stockLevel}&nbsp;
-				<spring:theme code="product.variants.in.stock"/>
-			</c:set>
-		</c:if>
-		<c:if test="${product.stock.stockLevelStatus.code eq 'lowStock'}">
-			<c:set var="productStockLevel">
-				<spring:theme code="product.variants.only.left" arguments="${product.stock.stockLevel}"/>
-			</c:set>
-		</c:if>
-		<c:if test="${isForceInStock}">
-			<c:set var="productStockLevel">
-				<spring:theme code="product.variants.available"/>
-			</c:set>
-		</c:if>
-		<div class="stock-wrapper clearfix">
-			${productStockLevel}
+		<!-- <div class="flex">
+			<select>
+			  <option value ="NY">New York</option>
+			  <option value ="LA">Los Angeles</option>
+			  <option value="CI">Chicago</option>
+			</select>
+		</div> -->
+	</div>
+
+	<div class="prod-sum">
+		<div class="m-setnum">
+			<span class="set sub">-</span>
+			<input type="text" class="" name="pdpAddtoCartInput" class="set" value="1"  id="pdpAddtoCartInput">
+			<span class="set add">+</span>
 		</div>
-		 <div class="actions">
+		<i class="delintro">Delivery<em>30</em>days</i>
+	</div>
+	
+	 <%-- <div class="actions">
         <c:if test="${multiDimensionalProduct}" >
                 <c:url value="${product.url}/orderForm" var="productOrderFormUrl"/>
                 <a href="${productOrderFormUrl}" class="btn btn-default btn-block btn-icon js-add-to-cart glyphicon-list-alt">
@@ -56,4 +85,7 @@
         </c:if>
         <action:actions element="div"  parentComponent="${component}"/>
     </div>
+	 --%>
+
 </div>
+

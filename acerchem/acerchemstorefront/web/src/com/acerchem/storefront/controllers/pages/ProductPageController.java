@@ -156,6 +156,10 @@ public class ProductPageController extends AbstractPageController
 
         getSessionService().setAttribute("user",userService.getUserForUID("aaron.customer@hybris.com"));
         model.addAttribute("customer",acerchemCustomerFacade.getCurrentCustomer());
+        
+        final PageableData pageableData = createPagaable(0, 100, "asc");
+        
+        model.addAttribute("countrys",acerchemCustomerFacade.getAllPointOfServices(pageableData));
 
 
 		final String metaKeywords = MetaSanitizerUtil.sanitizeKeywords(productData.getKeywords());
@@ -396,7 +400,7 @@ public class ProductPageController extends AbstractPageController
 		return result;
 	}
 
-	@RequestMapping(value = "/stores", method = RequestMethod.GET)
+	/*@RequestMapping(value = "/stores", method = RequestMethod.GET)
 	@ResponseBody
 	public SearchPageData<CountryToWarehouseData> locationSearch(@RequestParam(required = false) final String query,
 																 @RequestParam(required = false, defaultValue = "0") final int currentPage,
@@ -408,7 +412,7 @@ public class ProductPageController extends AbstractPageController
 		SearchPageData<CountryToWarehouseData> result = acerchemCustomerFacade.getAllPointOfServices(pageableData);
 
 		return result;
-	}
+	}*/
 
 	@ExceptionHandler(UnknownIdentifierException.class)
 	public String handleUnknownIdentifierException(final UnknownIdentifierException exception, final HttpServletRequest request)
