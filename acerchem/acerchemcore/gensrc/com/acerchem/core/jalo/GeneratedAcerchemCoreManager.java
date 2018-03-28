@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-3-28 0:33:53                           ---
+ * --- Generated at 2018-3-28 14:38:31                          ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.jalo;
@@ -10,6 +10,7 @@ import com.acerchem.core.constants.AcerchemCoreConstants;
 import com.acerchem.core.jalo.ApparelProduct;
 import com.acerchem.core.jalo.ApparelSizeVariantProduct;
 import com.acerchem.core.jalo.ApparelStyleVariantProduct;
+import com.acerchem.core.jalo.CustomerLevel;
 import com.acerchem.core.jalo.ElectronicsColorVariantProduct;
 import com.acerchem.core.jalo.ImageFailedRecord;
 import com.acerchem.core.jalo.ImageUploadedLog;
@@ -565,6 +566,32 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	public ApparelStyleVariantProduct createApparelStyleVariantProduct(final Map attributeValues)
 	{
 		return createApparelStyleVariantProduct( getSession().getSessionContext(), attributeValues );
+	}
+	
+	public CustomerLevel createCustomerLevel(final SessionContext ctx, final Map attributeValues)
+	{
+		try
+		{
+			ComposedType type = getTenant().getJaloConnection().getTypeManager().getComposedType( AcerchemCoreConstants.TC.CUSTOMERLEVEL );
+			return (CustomerLevel)type.newInstance( ctx, attributeValues );
+		}
+		catch( JaloGenericCreationException e)
+		{
+			final Throwable cause = e.getCause();
+			throw (cause instanceof RuntimeException ?
+			(RuntimeException)cause
+			:
+			new JaloSystemException( cause, cause.getMessage(), e.getErrorCode() ) );
+		}
+		catch( JaloBusinessException e )
+		{
+			throw new JaloSystemException( e ,"error creating CustomerLevel : "+e.getMessage(), 0 );
+		}
+	}
+	
+	public CustomerLevel createCustomerLevel(final Map attributeValues)
+	{
+		return createCustomerLevel( getSession().getSessionContext(), attributeValues );
 	}
 	
 	public ElectronicsColorVariantProduct createElectronicsColorVariantProduct(final SessionContext ctx, final Map attributeValues)

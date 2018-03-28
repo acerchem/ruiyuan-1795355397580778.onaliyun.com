@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-3-28 0:33:53                           ---
+ * --- Generated at 2018-3-28 14:38:31                          ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.jalo;
@@ -11,6 +11,7 @@ import de.hybris.platform.jalo.GenericItem;
 import de.hybris.platform.jalo.Item.AttributeMode;
 import de.hybris.platform.jalo.SessionContext;
 import de.hybris.platform.jalo.enumeration.EnumerationValue;
+import de.hybris.platform.jalo.media.Media;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +32,8 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 	public static final String LOCATION = "location";
 	/** Qualifier of the <code>ImageFailedRecord.status</code> attribute **/
 	public static final String STATUS = "status";
+	/** Qualifier of the <code>ImageFailedRecord.mediaData</code> attribute **/
+	public static final String MEDIADATA = "mediaData";
 	protected static final Map<String, AttributeMode> DEFAULT_INITIAL_ATTRIBUTES;
 	static
 	{
@@ -40,6 +43,7 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 		tmp.put(ALIYUNURL, AttributeMode.INITIAL);
 		tmp.put(LOCATION, AttributeMode.INITIAL);
 		tmp.put(STATUS, AttributeMode.INITIAL);
+		tmp.put(MEDIADATA, AttributeMode.INITIAL);
 		DEFAULT_INITIAL_ATTRIBUTES = Collections.unmodifiableMap(tmp);
 	}
 	@Override
@@ -190,6 +194,42 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 	public void setLocation(final String value)
 	{
 		setLocation( getSession().getSessionContext(), value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>ImageFailedRecord.mediaData</code> attribute.
+	 * @return the mediaData - mediaData
+	 */
+	public Media getMediaData(final SessionContext ctx)
+	{
+		return (Media)getProperty( ctx, MEDIADATA);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>ImageFailedRecord.mediaData</code> attribute.
+	 * @return the mediaData - mediaData
+	 */
+	public Media getMediaData()
+	{
+		return getMediaData( getSession().getSessionContext() );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>ImageFailedRecord.mediaData</code> attribute. 
+	 * @param value the mediaData - mediaData
+	 */
+	public void setMediaData(final SessionContext ctx, final Media value)
+	{
+		setProperty(ctx, MEDIADATA,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>ImageFailedRecord.mediaData</code> attribute. 
+	 * @param value the mediaData - mediaData
+	 */
+	public void setMediaData(final Media value)
+	{
+		setMediaData( getSession().getSessionContext(), value );
 	}
 	
 	/**

@@ -107,6 +107,16 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 		);
 	
 		createItemType(
+			"CustomerLevel",
+			"GenericItem",
+			com.acerchem.core.jalo.CustomerLevel.class,
+			"de.hybris.platform.persistence.acerchemcore_CustomerLevel",
+			false,
+			null,
+			false
+		);
+	
+		createItemType(
 			"AbstractMultipleBannerComponent",
 			"AbstractBannerComponent",
 			de.hybris.platform.cms2lib.components.AbstractMultipleBannerComponent.class,
@@ -149,6 +159,11 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 	
 		createEnumerationType(
 			"ImageFailedActionType",
+			null
+		);
+	
+		createEnumerationType(
+			"CustomerLevelClassification",
 			null
 		);
 	
@@ -199,11 +214,19 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 				single_createattr_ImageFailedRecord_status();
 			
+				single_createattr_ImageFailedRecord_mediaData();
+			
 				single_createattr_ImageUploadedLog_imagePK();
 			
 				single_createattr_ImageUploadedLog_aliyunUrl();
 			
 				single_createattr_ImageUploadedLog_location();
+			
+				single_createattr_CustomerLevel_levelName();
+			
+				single_createattr_CustomerLevel_levelCode();
+			
+				single_createattr_CustomerLevel_discount();
 			
 				single_createattr_Product_chemicalInfo();
 			
@@ -444,6 +467,23 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 	}
 	
+	public void single_createattr_ImageFailedRecord_mediaData() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"ImageFailedRecord", 
+					"mediaData",  
+					null,
+					"Media",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
 	public void single_createattr_ImageUploadedLog_imagePK() throws JaloBusinessException
 	{
 		
@@ -488,6 +528,57 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 					"location",  
 					null,
 					"java.lang.String",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_CustomerLevel_levelName() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"CustomerLevel", 
+					"levelName",  
+					null,
+					"java.lang.String",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_CustomerLevel_levelCode() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"CustomerLevel", 
+					"levelCode",  
+					null,
+					"CustomerLevelClassification",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_CustomerLevel_discount() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"CustomerLevel", 
+					"discount",  
+					null,
+					"java.lang.Double",
 					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
 					null,
 					sqlColumnDefinitions
@@ -774,6 +865,26 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			} )
 		);
 	
+		createEnumerationValues(
+			"CustomerLevelClassification",
+			true,
+			Arrays.asList( new String[] {
+			
+				"A",
+				"B",
+				"C",
+				"D",
+				"E",
+				"F",
+				"G",
+				"H",
+				"I",
+				"J",
+				"K",
+				"L"
+			} )
+		);
+	
 		single_setRelAttributeProperties_AcerChemVendor2Product_source();
 	
 		single_setRelAttributeProperties_AcerChemVendor2Product_target();
@@ -890,6 +1001,8 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 		
 			single_setAttributeProperties_ImageFailedRecord_status();
 		
+			single_setAttributeProperties_ImageFailedRecord_mediaData();
+		
 				{
 				Map customPropsMap = new HashMap();
 				
@@ -908,6 +1021,25 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			single_setAttributeProperties_ImageUploadedLog_aliyunUrl();
 		
 			single_setAttributeProperties_ImageUploadedLog_location();
+		
+				{
+				Map customPropsMap = new HashMap();
+				
+				setItemTypeProperties(
+					"CustomerLevel",
+					false,
+					true,
+					true,
+					null,
+					customPropsMap
+				);
+				}
+			
+			single_setAttributeProperties_CustomerLevel_levelName();
+		
+			single_setAttributeProperties_CustomerLevel_levelCode();
+		
+			single_setAttributeProperties_CustomerLevel_discount();
 		
 				{
 				Map customPropsMap = new HashMap();
@@ -1059,6 +1191,13 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 				setDefaultProperties(
 					"ImageFailedActionType",
+					true,
+					true,
+					null
+				);
+			
+				setDefaultProperties(
+					"CustomerLevelClassification",
 					true,
 					true,
 					null
@@ -1310,6 +1449,28 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							);
 						}
 					
+						public void single_setAttributeProperties_ImageFailedRecord_mediaData() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"ImageFailedRecord", 
+								"mediaData",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
 						public void single_setAttributeProperties_ImageUploadedLog_imagePK() throws JaloBusinessException
 						{
 							
@@ -1364,6 +1525,72 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							setAttributeProperties(
 								"ImageUploadedLog", 
 								"location",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_CustomerLevel_levelName() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"CustomerLevel", 
+								"levelName",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_CustomerLevel_levelCode() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"CustomerLevel", 
+								"levelCode",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_CustomerLevel_discount() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"CustomerLevel", 
+								"discount",
 								false, 
 								null,
 								null,

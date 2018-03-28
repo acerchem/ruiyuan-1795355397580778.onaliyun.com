@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-3-28 0:33:53                           ---
+ * --- Generated at 2018-3-28 14:38:31                          ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.constants;
@@ -20,6 +20,8 @@ public class GeneratedAcerchemCoreConstants
 		public static final String APPARELPRODUCT = "ApparelProduct".intern();
 		public static final String APPARELSIZEVARIANTPRODUCT = "ApparelSizeVariantProduct".intern();
 		public static final String APPARELSTYLEVARIANTPRODUCT = "ApparelStyleVariantProduct".intern();
+		public static final String CUSTOMERLEVEL = "CustomerLevel".intern();
+		public static final String CUSTOMERLEVELCLASSIFICATION = "CustomerLevelClassification".intern();
 		public static final String ELECTRONICSCOLORVARIANTPRODUCT = "ElectronicsColorVariantProduct".intern();
 		public static final String FUNCTIONBUTTONCOMPONENT = "FunctionButtonComponent".intern();
 		public static final String IMAGEFAILEDACTIONTYPE = "ImageFailedActionType".intern();
@@ -68,6 +70,21 @@ public class GeneratedAcerchemCoreConstants
 	}
 	public static class Enumerations
 	{
+		public static class CustomerLevelClassification
+		{
+			public static final String A = "A".intern();
+			public static final String B = "B".intern();
+			public static final String C = "C".intern();
+			public static final String D = "D".intern();
+			public static final String E = "E".intern();
+			public static final String F = "F".intern();
+			public static final String G = "G".intern();
+			public static final String H = "H".intern();
+			public static final String I = "I".intern();
+			public static final String J = "J".intern();
+			public static final String K = "K".intern();
+			public static final String L = "L".intern();
+		}
 		public static class ImageFailedActionType
 		{
 			public static final String ADD = "ADD".intern();

@@ -59,7 +59,7 @@ public class MediaFilesAfterDeletedListener extends AbstractEventListener<AfterI
 						MediaFileManager.initializeParameters(lsEndpoint, lsAccessKeyId, lsAccessKeySecret,
 								lsBucketName);
 
-						System.out.print("*****delete aliyun file starting*****");
+						System.out.println("*****delete aliyun file starting*****");
 						// delete aliyun file
 						boolean b = MediaFileManager.deleteFile(key);
 
