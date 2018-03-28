@@ -13,28 +13,8 @@
 
 <spring:htmlEscape defaultHtmlEscape="true"/>
 
-<table>
-    <c:if test="${entryGroup.groupType.code != 'STANDALONE'}">
-        <tr class="entry-group-header">
-            <th>
-                <div class="row">
-                    <div class="col-md-10 col-lg-11 col-sm-9 left-align">
-                            ${fn:escapeXml(entryGroup.label)}
-                    </div>
-                    <div class="col-md-2 col-lg-1 col-sm-3">
-                        <c:if test="${entryGroup.groupNumber != null}">
-                            <c:url value="/cart/entrygroups/${entryGroup.groupNumber}" var="removeGroupAction"/>
-                            <form:form id="removeGroup${entryGroup.groupNumber}"
-                                       action="${removeGroupAction}" method="post">
-                                <a class=item__remove" onclick="$(this).closest('form').submit()"
-                                   style="cursor: pointer"><spring:theme code="cart.groups.remove"/></a>
-                            </form:form>
-                        </c:if>
-                    </div>
-                </div>
-            </th>
-        </tr>
-    </c:if>
+<table class="list">
+    
     <c:choose>
         <c:when test="${not empty entryGroup.children}">
             <c:forEach items="${entryGroup.children}" var="group" varStatus="loop">
@@ -44,11 +24,9 @@
         <c:otherwise>
             <c:if test="${not empty entryGroup.orderEntries}">
                 <c:forEach items="${entryGroup.orderEntries}" var="entry">
-                    <tr>
-                        <td>
-                            <cart:cartItem cartData="${cartData}" entry="${entry}" index="${entryGroup.groupNumber}"/>
-                        </td>
-                    </tr>
+                   
+                  <cart:cartItem cartData="${cartData}" entry="${entry}" index="${entryGroup.groupNumber}"/>
+                     
                 </c:forEach>
             </c:if>
         </c:otherwise>
