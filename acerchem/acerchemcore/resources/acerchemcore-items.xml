@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="ISO-8859-1"?>
+<?xml version="1.0" encoding="utf-8"?>
 <!-- [y] hybris Platform Copyright (c) 2017 SAP SE or an SAP affiliate company. 
 	All rights reserved. This software is the confidential and proprietary information 
 	of SAP ("Confidential Information"). You shall not disclose such Confidential 
@@ -63,24 +63,34 @@
 		</enumtype>
 	</enumtypes>
 
+
 	<relations>
-		<!-- 供应商与商品之间的关系(多对多) -->
+		<!-- 供应商和商品一对多关系 -->
 		<relation code="AcerChemVendor2Product" generate="true"
 			localized="false" autocreate="true">
-			<deployment table="AcerChemVendor2Product" typecode="30100" />
-			<sourceElement qualifier="acerChemVendors" type="Vendor"
-				cardinality="many">
+			<sourceElement qualifier="acerChemVendor" type="Vendor" cardinality="one">
 				<modifiers read="true" write="true" search="true"
 					optional="true" />
 			</sourceElement>
-			<targetElement qualifier="acerChemProducts" type="Product"
-				cardinality="many">
+			<targetElement qualifier="acerChemProducts" type="Product" cardinality="many" collectiontype="list" ordered="true" >
+				<modifiers read="true" write="true" search="true"
+					optional="true" />
+			</targetElement>
+		</relation>
+		
+		<!-- 用户等级和用户一对多关系 -->
+		<relation code="AcerChemCustomerLevel2User" generate="true"
+			localized="false" autocreate="true">
+			<sourceElement qualifier="customerLevel" type="CustomerLevel" cardinality="one">
+				<modifiers read="true" write="true" search="true"
+					optional="true" />
+			</sourceElement>
+			<targetElement qualifier="customers" type="User" cardinality="many" collectiontype="list" ordered="true" >
 				<modifiers read="true" write="true" search="true"
 					optional="true" />
 			</targetElement>
 		</relation>
 	</relations>
-	
 	
 	<itemtypes>
 
@@ -183,7 +193,7 @@
 				</attributes>
 			</itemtype>
 
-			<!--Failed records to upload aliyun -->
+			<!--上传阿里云时的失败记录 -->
 			<itemtype code="ImageFailedRecord" autocreate="true"
 				generate="true">
 				<deployment table="ImageFailedRecord" typecode="20101" />
@@ -227,7 +237,7 @@
 				</attributes>
 			</itemtype>
 			
-			<!-- Log for uploading aliyun -->
+			<!-- 上传阿里云记录日志 -->
 			<itemtype code="ImageUploadedLog" autocreate="true"
 				generate="true">
 				<deployment table="ImageUploadedLog" typecode="20102" />
@@ -255,7 +265,7 @@
 				</attributes>
 			</itemtype>
 			
-			<!-- Customer Level -->
+			<!-- 客户等级 -->
 			<itemtype code="CustomerLevel" autocreate="true"
 				generate="true">
 				<deployment table="CustomerLevel" typecode="20103" />
@@ -404,7 +414,7 @@
 		</typegroup>
 		<!-- End -->
 
-		<!--æ·»å å­æ®µ TODO -->
+		<!--TODO -->
 		<typegroup name="traning">
 			<itemtype code="StockLevel" autocreate="false" generate="false">
 				<description>Extending the Product type from core with additional attributes.</description>
