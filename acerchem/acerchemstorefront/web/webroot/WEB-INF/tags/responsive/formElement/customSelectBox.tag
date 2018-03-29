@@ -15,7 +15,7 @@
 <%@ attribute name="mandatory" required="false" type="java.lang.Boolean" %>
 <%@ attribute name="selectCSSClass" required="false" type="java.lang.String" %>
 
-<form:select id="${fn:escapeXml(idKey)}" path="${fn:escapeXml(path)}" tabindex="${fn:escapeXml(tabindex)}">
+<form:select id="${fn:escapeXml(idKey)}" path="${fn:escapeXml(path)}" tabindex="${fn:escapeXml(tabindex)}" class="required">
 	<c:if test="${skipBlank == null || skipBlank == false}">
 		<option value="" disabled="disabled" ${empty selectedValue ? 'selected="selected"' : ''}>
 			<spring:theme code='${skipBlankMessageKey}'/>
