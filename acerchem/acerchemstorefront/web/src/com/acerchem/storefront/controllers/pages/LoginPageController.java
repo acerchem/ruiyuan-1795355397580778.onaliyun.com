@@ -32,14 +32,18 @@ import de.hybris.platform.commerceservices.customer.CustomerAccountService;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.core.model.c2l.CountryModel;
 import de.hybris.platform.core.model.c2l.RegionModel;
+import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.mobileservices.enums.PhoneType;
 import de.hybris.platform.mobileservices.model.text.PhoneNumberModel;
 import de.hybris.platform.mobileservices.model.text.UserPhoneNumberModel;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
+import de.hybris.platform.servicelayer.exceptions.ModelSavingException;
 import de.hybris.platform.servicelayer.i18n.CommonI18NService;
 import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.platform.servicelayer.search.FlexibleSearchService;
+import de.hybris.platform.servicelayer.search.SearchResult;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.tx.Transaction;
 
@@ -229,43 +233,50 @@ public class LoginPageController extends AbstractLoginPageController
 	@Resource(name = "customRegistrationValidator")
 	private Validator customRegistrationValidator;
 	
+	@Resource
+	private FlexibleSearchService flexibleSearchService;
+	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String doRegister(final CustomRegisterForm form,
 			@RequestHeader(value = "referer", required = false) final String referer, 
 			final BindingResult bindingResult, final Model model, final HttpServletRequest request,
 			final HttpServletResponse response, final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
-		customRegistrationValidator.validate(form, bindingResult);
-		if (bindingResult.hasErrors())
-		{
-			model.addAttribute("CustomRegisterForm",form);
-			GlobalMessages.addErrorMessage(model, "form.global.error");
-			storeCmsPageInModel(model, getCmsPage());
-			return ControllerConstants.Views.Pages.Account.AccountRegisterPage;
-		}
-		
 		final Transaction tx = Transaction.current();
 		tx.begin();
-
 		boolean success = false;
 		try
 		{	
-			CustomerModel user=RegisterCustomerService(form,model);
-			userService.setCurrentUser(user);
-			customerAccountService.register(user, form.getPwd());
-			getAutoLoginStrategy().login(form.getEmail().toLowerCase(), form.getPwd(), request, response);
-			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER,"registration.confirmation.message.title");
-			success=true;
+			customRegistrationValidator.validate(form, bindingResult);
 			
-			storeCmsPageInModel(model, getCmsPage());
-			return ControllerConstants.Views.Pages.Account.AccountRegisterSuccessPage;
+			final String REF_QUERY_PRODUCTROW_START = "SELECT PK FROM {"+CustomerModel._TYPECODE+"} WHERE {"+CustomerModel.UID+"} =?email ";
+			final Map<String, Object> params = new HashMap<String, Object>();
+			final StringBuilder builder = new StringBuilder(REF_QUERY_PRODUCTROW_START);
+			params.put("email", form.getEmail());
+			final SearchResult<CustomerModel> emailUser = flexibleSearchService.search(builder.toString(),params);
+			
+			if(emailUser.getResult().size()>0)
+			{
+				GlobalMessages.addErrorMessage(model, "register.failed: The user already exists. Do not double register!");
+			}
+			else if(bindingResult.hasErrors())
+			{
+				GlobalMessages.addErrorMessage(model, "form.global.error");
+			}
+			else
+			{
+				CustomerModel user=RegisterCustomerService(form,model);
+				userService.setCurrentUser(user);
+				customerAccountService.register(user, form.getPwd());
+				getAutoLoginStrategy().login(form.getEmail().toLowerCase(), form.getPwd(), request, response);
+				GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER,"registration.confirmation.message.title");
+				success=true;
+			}
 		}
 		catch(Exception exception)
 		{
-			model.addAttribute(form);
-			GlobalMessages.addErrorMessage(model, "register.failed: " + exception);
-			storeCmsPageInModel(model, getCmsPage());
-			return ControllerConstants.Views.Pages.Account.AccountRegisterPage;
+			GlobalMessages.addErrorMessage(model, "register.failed: Please confirm whether the information you filled in is correct!");
+			System.out.print("register exception==="+exception);
 		}
 		finally
 		{
@@ -277,6 +288,20 @@ public class LoginPageController extends AbstractLoginPageController
 			{
 				tx.rollback();
 			}
+		}
+		
+		if(success)
+		{
+			storeCmsPageInModel(model, getCmsPage());
+			return ControllerConstants.Views.Pages.Account.AccountRegisterSuccessPage;
+		}
+		else
+		{
+			model.addAttribute("regions", i18NFacade.getRegionsForCountryIso(form.getContactAddress().getCountryIso()));
+			model.addAttribute("CustomRegisterForm",form);
+			GlobalMessages.addErrorMessage(model, "form.global.error");
+			storeCmsPageInModel(model, getCmsPage());
+			return ControllerConstants.Views.Pages.Account.AccountRegisterPage;
 		}
 		
 	}
