@@ -148,8 +148,14 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 	
 		createRelationType(
 			"AcerChemVendor2Product",
-			"de.hybris.platform.persistence.link.acerchemcore_AcerChemVendor2Product",
-			false
+			null,
+			true
+		);
+	
+		createRelationType(
+			"AcerChemCustomerLevel2User",
+			null,
+			true
 		);
 	
 		createEnumerationType(
@@ -260,11 +266,11 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			"AcerChemVendor2Product", 
 			false, 
 
-			"acerChemVendors", 
+			"acerChemVendor", 
 			"Vendor", 
 			true,
 			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
-			true,
+			false,
 			false,
 			CollectionType.COLLECTION,
 			"acerChemProducts", 
@@ -272,8 +278,28 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			true,
 			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
 			true,
+			true,
+			CollectionType.LIST
+		);
+	
+		createRelationAttributes(
+			"AcerChemCustomerLevel2User", 
+			false, 
+
+			"customerLevel", 
+			"CustomerLevel", 
+			true,
+			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
 			false,
-			CollectionType.COLLECTION
+			false,
+			CollectionType.COLLECTION,
+			"customers", 
+			"User", 
+			true,
+			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
+			true,
+			true,
+			CollectionType.LIST
 		);
 	
 
@@ -887,17 +913,36 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 	
 		single_setRelAttributeProperties_AcerChemVendor2Product_source();
 	
+		single_setRelAttributeProperties_AcerChemCustomerLevel2User_source();
+	
 		single_setRelAttributeProperties_AcerChemVendor2Product_target();
+	
+		single_setRelAttributeProperties_AcerChemCustomerLevel2User_target();
 	
 		connectRelation(
 			"AcerChemVendor2Product", 
 			false, 
-			"acerChemVendors", 
+			"acerChemVendor", 
 			"Vendor", 
 			true,
 			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
 			"acerChemProducts", 
 			"Product", 
+			true,
+			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
+			true,
+			true
+		);
+	
+		connectRelation(
+			"AcerChemCustomerLevel2User", 
+			false, 
+			"customerLevel", 
+			"CustomerLevel", 
+			true,
+			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
+			"customers", 
+			"User", 
 			true,
 			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
 			true,
@@ -1919,7 +1964,7 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 
 									setAttributeProperties(
 										"Product", 
-										"acerChemVendors",
+										"acerChemVendor",
 										false, 
 										null,
 										null,
@@ -1941,6 +1986,48 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 									setAttributeProperties(
 										"Vendor", 
 										"acerChemProducts",
+										false, 
+										null,
+										null,
+										null,
+										true,
+										true,
+										null,
+										customPropsMap,
+										null
+									);
+								}
+							
+								public void single_setRelAttributeProperties_AcerChemCustomerLevel2User_source() throws JaloBusinessException
+								{
+									
+									Map customPropsMap = new HashMap();
+									
+
+									setAttributeProperties(
+										"User", 
+										"customerLevel",
+										false, 
+										null,
+										null,
+										null,
+										true,
+										true,
+										null,
+										customPropsMap,
+										null
+									);
+								}
+							
+								public void single_setRelAttributeProperties_AcerChemCustomerLevel2User_target() throws JaloBusinessException
+								{
+									
+									Map customPropsMap = new HashMap();
+									
+
+									setAttributeProperties(
+										"CustomerLevel", 
+										"customers",
 										false, 
 										null,
 										null,

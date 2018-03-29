@@ -1,18 +1,23 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-3-28 14:38:31                          ---
+ * --- Generated at 2018-3-29 15:20:33                          ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.jalo;
 
 import com.acerchem.core.constants.AcerchemCoreConstants;
+import de.hybris.platform.constants.CoreConstants;
 import de.hybris.platform.jalo.GenericItem;
 import de.hybris.platform.jalo.Item.AttributeMode;
 import de.hybris.platform.jalo.SessionContext;
 import de.hybris.platform.jalo.enumeration.EnumerationValue;
+import de.hybris.platform.jalo.type.CollectionType;
+import de.hybris.platform.jalo.user.User;
+import de.hybris.platform.util.OneToManyHandler;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -27,6 +32,20 @@ public abstract class GeneratedCustomerLevel extends GenericItem
 	public static final String LEVELCODE = "levelCode";
 	/** Qualifier of the <code>CustomerLevel.discount</code> attribute **/
 	public static final String DISCOUNT = "discount";
+	/** Qualifier of the <code>CustomerLevel.customers</code> attribute **/
+	public static final String CUSTOMERS = "customers";
+	/**
+	* {@link OneToManyHandler} for handling 1:n CUSTOMERS's relation attributes from 'many' side.
+	**/
+	protected static final OneToManyHandler<User> CUSTOMERSHANDLER = new OneToManyHandler<User>(
+	CoreConstants.TC.USER,
+	false,
+	"customerLevel",
+	"customerLevelPOS",
+	true,
+	true,
+	CollectionType.LIST
+	);
 	protected static final Map<String, AttributeMode> DEFAULT_INITIAL_ATTRIBUTES;
 	static
 	{
@@ -43,8 +62,80 @@ public abstract class GeneratedCustomerLevel extends GenericItem
 	}
 	
 	/**
+	 * <i>Generated method</i> - Getter of the <code>CustomerLevel.customers</code> attribute.
+	 * @return the customers
+	 */
+	public List<User> getCustomers(final SessionContext ctx)
+	{
+		return (List<User>)CUSTOMERSHANDLER.getValues( ctx, this );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>CustomerLevel.customers</code> attribute.
+	 * @return the customers
+	 */
+	public List<User> getCustomers()
+	{
+		return getCustomers( getSession().getSessionContext() );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>CustomerLevel.customers</code> attribute. 
+	 * @param value the customers
+	 */
+	public void setCustomers(final SessionContext ctx, final List<User> value)
+	{
+		CUSTOMERSHANDLER.setValues( ctx, this, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>CustomerLevel.customers</code> attribute. 
+	 * @param value the customers
+	 */
+	public void setCustomers(final List<User> value)
+	{
+		setCustomers( getSession().getSessionContext(), value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Adds <code>value</code> to customers. 
+	 * @param value the item to add to customers
+	 */
+	public void addToCustomers(final SessionContext ctx, final User value)
+	{
+		CUSTOMERSHANDLER.addValue( ctx, this, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Adds <code>value</code> to customers. 
+	 * @param value the item to add to customers
+	 */
+	public void addToCustomers(final User value)
+	{
+		addToCustomers( getSession().getSessionContext(), value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Removes <code>value</code> from customers. 
+	 * @param value the item to remove from customers
+	 */
+	public void removeFromCustomers(final SessionContext ctx, final User value)
+	{
+		CUSTOMERSHANDLER.removeValue( ctx, this, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Removes <code>value</code> from customers. 
+	 * @param value the item to remove from customers
+	 */
+	public void removeFromCustomers(final User value)
+	{
+		removeFromCustomers( getSession().getSessionContext(), value );
+	}
+	
+	/**
 	 * <i>Generated method</i> - Getter of the <code>CustomerLevel.discount</code> attribute.
-	 * @return the discount - ææ£
+	 * @return the discount - 折扣
 	 */
 	public Double getDiscount(final SessionContext ctx)
 	{
@@ -53,7 +144,7 @@ public abstract class GeneratedCustomerLevel extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>CustomerLevel.discount</code> attribute.
-	 * @return the discount - ææ£
+	 * @return the discount - 折扣
 	 */
 	public Double getDiscount()
 	{
@@ -62,7 +153,7 @@ public abstract class GeneratedCustomerLevel extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>CustomerLevel.discount</code> attribute. 
-	 * @return the discount - ææ£
+	 * @return the discount - 折扣
 	 */
 	public double getDiscountAsPrimitive(final SessionContext ctx)
 	{
@@ -72,7 +163,7 @@ public abstract class GeneratedCustomerLevel extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>CustomerLevel.discount</code> attribute. 
-	 * @return the discount - ææ£
+	 * @return the discount - 折扣
 	 */
 	public double getDiscountAsPrimitive()
 	{
@@ -81,7 +172,7 @@ public abstract class GeneratedCustomerLevel extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>CustomerLevel.discount</code> attribute. 
-	 * @param value the discount - ææ£
+	 * @param value the discount - 折扣
 	 */
 	public void setDiscount(final SessionContext ctx, final Double value)
 	{
@@ -90,7 +181,7 @@ public abstract class GeneratedCustomerLevel extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>CustomerLevel.discount</code> attribute. 
-	 * @param value the discount - ææ£
+	 * @param value the discount - 折扣
 	 */
 	public void setDiscount(final Double value)
 	{
@@ -99,7 +190,7 @@ public abstract class GeneratedCustomerLevel extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>CustomerLevel.discount</code> attribute. 
-	 * @param value the discount - ææ£
+	 * @param value the discount - 折扣
 	 */
 	public void setDiscount(final SessionContext ctx, final double value)
 	{
@@ -108,7 +199,7 @@ public abstract class GeneratedCustomerLevel extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>CustomerLevel.discount</code> attribute. 
-	 * @param value the discount - ææ£
+	 * @param value the discount - 折扣
 	 */
 	public void setDiscount(final double value)
 	{
@@ -117,7 +208,7 @@ public abstract class GeneratedCustomerLevel extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>CustomerLevel.levelCode</code> attribute.
-	 * @return the levelCode - ç­çº§ä»£ç 
+	 * @return the levelCode - 等级代码
 	 */
 	public EnumerationValue getLevelCode(final SessionContext ctx)
 	{
@@ -126,7 +217,7 @@ public abstract class GeneratedCustomerLevel extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>CustomerLevel.levelCode</code> attribute.
-	 * @return the levelCode - ç­çº§ä»£ç 
+	 * @return the levelCode - 等级代码
 	 */
 	public EnumerationValue getLevelCode()
 	{
@@ -135,7 +226,7 @@ public abstract class GeneratedCustomerLevel extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>CustomerLevel.levelCode</code> attribute. 
-	 * @param value the levelCode - ç­çº§ä»£ç 
+	 * @param value the levelCode - 等级代码
 	 */
 	public void setLevelCode(final SessionContext ctx, final EnumerationValue value)
 	{
@@ -144,7 +235,7 @@ public abstract class GeneratedCustomerLevel extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>CustomerLevel.levelCode</code> attribute. 
-	 * @param value the levelCode - ç­çº§ä»£ç 
+	 * @param value the levelCode - 等级代码
 	 */
 	public void setLevelCode(final EnumerationValue value)
 	{
@@ -153,7 +244,7 @@ public abstract class GeneratedCustomerLevel extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>CustomerLevel.levelName</code> attribute.
-	 * @return the levelName - ç­çº§åç§°
+	 * @return the levelName - 等级名称
 	 */
 	public String getLevelName(final SessionContext ctx)
 	{
@@ -162,7 +253,7 @@ public abstract class GeneratedCustomerLevel extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>CustomerLevel.levelName</code> attribute.
-	 * @return the levelName - ç­çº§åç§°
+	 * @return the levelName - 等级名称
 	 */
 	public String getLevelName()
 	{
@@ -171,7 +262,7 @@ public abstract class GeneratedCustomerLevel extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>CustomerLevel.levelName</code> attribute. 
-	 * @param value the levelName - ç­çº§åç§°
+	 * @param value the levelName - 等级名称
 	 */
 	public void setLevelName(final SessionContext ctx, final String value)
 	{
@@ -180,7 +271,7 @@ public abstract class GeneratedCustomerLevel extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>CustomerLevel.levelName</code> attribute. 
-	 * @param value the levelName - ç­çº§åç§°
+	 * @param value the levelName - 等级名称
 	 */
 	public void setLevelName(final String value)
 	{

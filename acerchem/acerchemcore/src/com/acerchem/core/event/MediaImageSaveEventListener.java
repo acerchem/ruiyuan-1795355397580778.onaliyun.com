@@ -8,6 +8,7 @@ import java.util.Date;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.acerchem.core.enums.ImageFailedActionType;
@@ -17,6 +18,7 @@ import com.acerchem.core.image.service.AcerChemMediaService;
 import com.acerchem.core.model.ImageFailedRecordModel;
 import com.acerchem.core.model.ImageUploadedLogModel;
 import com.acerchem.core.web.aliyun.UploadFileDefault;
+import com.google.common.base.Preconditions;
 
 import de.hybris.platform.core.PK;
 import de.hybris.platform.core.model.media.MediaModel;
@@ -25,8 +27,10 @@ import de.hybris.platform.jalo.media.Media;
 import de.hybris.platform.jalo.media.MediaManager;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.exceptions.ModelLoadingException;
+import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.media.impl.ModelMediaSource;
 import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.platform.servicelayer.util.ServicesUtil;
 import de.hybris.platform.tx.AfterSaveEvent;
 import de.hybris.platform.tx.AfterSaveListener;
 
@@ -46,6 +50,8 @@ public class MediaImageSaveEventListener implements AfterSaveListener {
 
 	@Resource
 	private AcerChemImageFailedRecoredService acerChemImageFailedRecoredService;
+	@Resource
+	private MediaService mediaService;
 
 	@Override
 	public void afterSave(Collection<AfterSaveEvent> collection) {
@@ -124,7 +130,16 @@ public class MediaImageSaveEventListener implements AfterSaveListener {
 			//String localPath = configurationService.getConfiguration().getString("upload.path");
 			String localPath = media.getLocation();
 
+			System.out.println("****hihi********");
+			
+			//Preconditions.checkState(!modelService.isNew(media), "media must be persisted to do binary operations");
+			// ServicesUtil.validateParameterNotNull(media, "Argument media cannot be null");
+			boolean b = mediaService.hasData(media);
+			if (b){
+				System.out.println("*****NB*****");
+			}
 			InputStream input = MediaManager.getInstance().getMediaAsStream(new ModelMediaSource(media));
+			
 			System.out.println(localPath);
 			//File file = new File(localPath);
 

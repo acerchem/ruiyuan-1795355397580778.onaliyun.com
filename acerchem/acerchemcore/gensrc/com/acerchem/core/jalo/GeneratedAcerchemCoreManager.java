@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-3-28 14:38:31                          ---
+ * --- Generated at 2018-3-29 15:20:33                          ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.jalo;
@@ -20,6 +20,7 @@ import de.hybris.platform.cms2.jalo.contents.components.SimpleCMSComponent;
 import de.hybris.platform.cms2lib.components.FunctionButtonComponent;
 import de.hybris.platform.cms2lib.components.MultipleBannerComponent;
 import de.hybris.platform.cms2lib.components.ProductCarouselComponent;
+import de.hybris.platform.constants.CoreConstants;
 import de.hybris.platform.jalo.GenericItem;
 import de.hybris.platform.jalo.Item;
 import de.hybris.platform.jalo.Item.AttributeMode;
@@ -27,17 +28,18 @@ import de.hybris.platform.jalo.JaloBusinessException;
 import de.hybris.platform.jalo.JaloSystemException;
 import de.hybris.platform.jalo.SessionContext;
 import de.hybris.platform.jalo.extension.Extension;
-import de.hybris.platform.jalo.link.Link;
 import de.hybris.platform.jalo.media.AbstractMedia;
 import de.hybris.platform.jalo.media.Media;
 import de.hybris.platform.jalo.order.AbstractOrderEntry;
 import de.hybris.platform.jalo.product.Product;
+import de.hybris.platform.jalo.security.Principal;
+import de.hybris.platform.jalo.type.CollectionType;
 import de.hybris.platform.jalo.type.ComposedType;
 import de.hybris.platform.jalo.type.JaloGenericCreationException;
+import de.hybris.platform.jalo.user.User;
 import de.hybris.platform.ordersplitting.jalo.StockLevel;
 import de.hybris.platform.ordersplitting.jalo.Vendor;
-import de.hybris.platform.util.Utilities;
-import java.util.Collection;
+import de.hybris.platform.util.OneToManyHandler;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -50,11 +52,18 @@ import java.util.Map;
 @SuppressWarnings({"deprecation","unused","cast","PMD"})
 public abstract class GeneratedAcerchemCoreManager extends Extension
 {
-	/** Relation ordering override parameter constants for AcerChemVendor2Product from ((acerchemcore))*/
-	protected static String ACERCHEMVENDOR2PRODUCT_SRC_ORDERED = "relation.AcerChemVendor2Product.source.ordered";
-	protected static String ACERCHEMVENDOR2PRODUCT_TGT_ORDERED = "relation.AcerChemVendor2Product.target.ordered";
-	/** Relation disable markmodifed parameter constants for AcerChemVendor2Product from ((acerchemcore))*/
-	protected static String ACERCHEMVENDOR2PRODUCT_MARKMODIFIED = "relation.AcerChemVendor2Product.markmodified";
+	/**
+	* {@link OneToManyHandler} for handling 1:n ACERCHEMPRODUCTS's relation attributes from 'many' side.
+	**/
+	protected static final OneToManyHandler<Product> ACERCHEMVENDOR2PRODUCTACERCHEMPRODUCTSHANDLER = new OneToManyHandler<Product>(
+	CoreConstants.TC.PRODUCT,
+	false,
+	"acerChemVendor",
+	"acerChemVendorPOS",
+	true,
+	true,
+	CollectionType.LIST
+	);
 	protected static final Map<String, Map<String, AttributeMode>> DEFAULT_INITIAL_ATTRIBUTES;
 	static
 	{
@@ -66,6 +75,8 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 		tmp.put("chemicalInfo", AttributeMode.INITIAL);
 		tmp.put("unitCalculateRato", AttributeMode.INITIAL);
 		tmp.put("anonymousDisplayPrice", AttributeMode.INITIAL);
+		tmp.put("acerChemVendorPOS", AttributeMode.INITIAL);
+		tmp.put("acerChemVendor", AttributeMode.INITIAL);
 		ttmp.put("de.hybris.platform.jalo.product.Product", Collections.unmodifiableMap(tmp));
 		tmp = new HashMap<String, AttributeMode>();
 		tmp.put("isPromotion", AttributeMode.INITIAL);
@@ -83,6 +94,10 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 		tmp.put("warehouseCode", AttributeMode.INITIAL);
 		tmp.put("shipDate", AttributeMode.INITIAL);
 		ttmp.put("de.hybris.platform.jalo.order.AbstractOrderEntry", Collections.unmodifiableMap(tmp));
+		tmp = new HashMap<String, AttributeMode>();
+		tmp.put("customerLevelPOS", AttributeMode.INITIAL);
+		tmp.put("customerLevel", AttributeMode.INITIAL);
+		ttmp.put("de.hybris.platform.jalo.user.User", Collections.unmodifiableMap(tmp));
 		DEFAULT_INITIAL_ATTRIBUTES = ttmp;
 	}
 	@Override
@@ -101,68 +116,34 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	 * <i>Generated method</i> - Getter of the <code>Vendor.acerChemProducts</code> attribute.
 	 * @return the acerChemProducts
 	 */
-	public Collection<Product> getAcerChemProducts(final SessionContext ctx, final Vendor item)
+	public List<Product> getAcerChemProducts(final SessionContext ctx, final Vendor item)
 	{
-		final List<Product> items = item.getLinkedItems( 
-			ctx,
-			true,
-			AcerchemCoreConstants.Relations.ACERCHEMVENDOR2PRODUCT,
-			"Product",
-			null,
-			false,
-			false
-		);
-		return items;
+		return (List<Product>)ACERCHEMVENDOR2PRODUCTACERCHEMPRODUCTSHANDLER.getValues( ctx, item );
 	}
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>Vendor.acerChemProducts</code> attribute.
 	 * @return the acerChemProducts
 	 */
-	public Collection<Product> getAcerChemProducts(final Vendor item)
+	public List<Product> getAcerChemProducts(final Vendor item)
 	{
 		return getAcerChemProducts( getSession().getSessionContext(), item );
 	}
 	
-	public long getAcerChemProductsCount(final SessionContext ctx, final Vendor item)
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Vendor.acerChemProducts</code> attribute. 
+	 * @param value the acerChemProducts
+	 */
+	public void setAcerChemProducts(final SessionContext ctx, final Vendor item, final List<Product> value)
 	{
-		return item.getLinkedItemsCount(
-			ctx,
-			true,
-			AcerchemCoreConstants.Relations.ACERCHEMVENDOR2PRODUCT,
-			"Product",
-			null
-		);
-	}
-	
-	public long getAcerChemProductsCount(final Vendor item)
-	{
-		return getAcerChemProductsCount( getSession().getSessionContext(), item );
+		ACERCHEMVENDOR2PRODUCTACERCHEMPRODUCTSHANDLER.setValues( ctx, item, value );
 	}
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>Vendor.acerChemProducts</code> attribute. 
 	 * @param value the acerChemProducts
 	 */
-	public void setAcerChemProducts(final SessionContext ctx, final Vendor item, final Collection<Product> value)
-	{
-		item.setLinkedItems( 
-			ctx,
-			true,
-			AcerchemCoreConstants.Relations.ACERCHEMVENDOR2PRODUCT,
-			null,
-			value,
-			false,
-			false,
-			Utilities.getMarkModifiedOverride(ACERCHEMVENDOR2PRODUCT_MARKMODIFIED)
-		);
-	}
-	
-	/**
-	 * <i>Generated method</i> - Setter of the <code>Vendor.acerChemProducts</code> attribute. 
-	 * @param value the acerChemProducts
-	 */
-	public void setAcerChemProducts(final Vendor item, final Collection<Product> value)
+	public void setAcerChemProducts(final Vendor item, final List<Product> value)
 	{
 		setAcerChemProducts( getSession().getSessionContext(), item, value );
 	}
@@ -173,16 +154,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	 */
 	public void addToAcerChemProducts(final SessionContext ctx, final Vendor item, final Product value)
 	{
-		item.addLinkedItems( 
-			ctx,
-			true,
-			AcerchemCoreConstants.Relations.ACERCHEMVENDOR2PRODUCT,
-			null,
-			Collections.singletonList(value),
-			false,
-			false,
-			Utilities.getMarkModifiedOverride(ACERCHEMVENDOR2PRODUCT_MARKMODIFIED)
-		);
+		ACERCHEMVENDOR2PRODUCTACERCHEMPRODUCTSHANDLER.addValue( ctx, item, value );
 	}
 	
 	/**
@@ -200,16 +172,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	 */
 	public void removeFromAcerChemProducts(final SessionContext ctx, final Vendor item, final Product value)
 	{
-		item.removeLinkedItems( 
-			ctx,
-			true,
-			AcerchemCoreConstants.Relations.ACERCHEMVENDOR2PRODUCT,
-			null,
-			Collections.singletonList(value),
-			false,
-			false,
-			Utilities.getMarkModifiedOverride(ACERCHEMVENDOR2PRODUCT_MARKMODIFIED)
-		);
+		ACERCHEMVENDOR2PRODUCTACERCHEMPRODUCTSHANDLER.removeValue( ctx, item, value );
 	}
 	
 	/**
@@ -222,132 +185,117 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	}
 	
 	/**
-	 * <i>Generated method</i> - Getter of the <code>Product.acerChemVendors</code> attribute.
-	 * @return the acerChemVendors
+	 * <i>Generated method</i> - Getter of the <code>Product.acerChemVendor</code> attribute.
+	 * @return the acerChemVendor
 	 */
-	public Collection<Vendor> getAcerChemVendors(final SessionContext ctx, final Product item)
+	public Vendor getAcerChemVendor(final SessionContext ctx, final Product item)
 	{
-		final List<Vendor> items = item.getLinkedItems( 
-			ctx,
-			false,
-			AcerchemCoreConstants.Relations.ACERCHEMVENDOR2PRODUCT,
-			"Vendor",
-			null,
-			false,
-			false
-		);
-		return items;
+		return (Vendor)item.getProperty( ctx, AcerchemCoreConstants.Attributes.Product.ACERCHEMVENDOR);
 	}
 	
 	/**
-	 * <i>Generated method</i> - Getter of the <code>Product.acerChemVendors</code> attribute.
-	 * @return the acerChemVendors
+	 * <i>Generated method</i> - Getter of the <code>Product.acerChemVendor</code> attribute.
+	 * @return the acerChemVendor
 	 */
-	public Collection<Vendor> getAcerChemVendors(final Product item)
+	public Vendor getAcerChemVendor(final Product item)
 	{
-		return getAcerChemVendors( getSession().getSessionContext(), item );
-	}
-	
-	public long getAcerChemVendorsCount(final SessionContext ctx, final Product item)
-	{
-		return item.getLinkedItemsCount(
-			ctx,
-			false,
-			AcerchemCoreConstants.Relations.ACERCHEMVENDOR2PRODUCT,
-			"Vendor",
-			null
-		);
-	}
-	
-	public long getAcerChemVendorsCount(final Product item)
-	{
-		return getAcerChemVendorsCount( getSession().getSessionContext(), item );
+		return getAcerChemVendor( getSession().getSessionContext(), item );
 	}
 	
 	/**
-	 * <i>Generated method</i> - Setter of the <code>Product.acerChemVendors</code> attribute. 
-	 * @param value the acerChemVendors
+	 * <i>Generated method</i> - Setter of the <code>Product.acerChemVendor</code> attribute. 
+	 * @param value the acerChemVendor
 	 */
-	public void setAcerChemVendors(final SessionContext ctx, final Product item, final Collection<Vendor> value)
+	public void setAcerChemVendor(final SessionContext ctx, final Product item, final Vendor value)
 	{
-		item.setLinkedItems( 
-			ctx,
-			false,
-			AcerchemCoreConstants.Relations.ACERCHEMVENDOR2PRODUCT,
-			null,
-			value,
-			false,
-			false,
-			Utilities.getMarkModifiedOverride(ACERCHEMVENDOR2PRODUCT_MARKMODIFIED)
-		);
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.Product.ACERCHEMVENDOR,value);
 	}
 	
 	/**
-	 * <i>Generated method</i> - Setter of the <code>Product.acerChemVendors</code> attribute. 
-	 * @param value the acerChemVendors
+	 * <i>Generated method</i> - Setter of the <code>Product.acerChemVendor</code> attribute. 
+	 * @param value the acerChemVendor
 	 */
-	public void setAcerChemVendors(final Product item, final Collection<Vendor> value)
+	public void setAcerChemVendor(final Product item, final Vendor value)
 	{
-		setAcerChemVendors( getSession().getSessionContext(), item, value );
+		setAcerChemVendor( getSession().getSessionContext(), item, value );
 	}
 	
 	/**
-	 * <i>Generated method</i> - Adds <code>value</code> to acerChemVendors. 
-	 * @param value the item to add to acerChemVendors
+	 * <i>Generated method</i> - Getter of the <code>Product.acerChemVendorPOS</code> attribute.
+	 * @return the acerChemVendorPOS
 	 */
-	public void addToAcerChemVendors(final SessionContext ctx, final Product item, final Vendor value)
+	 Integer getAcerChemVendorPOS(final SessionContext ctx, final Product item)
 	{
-		item.addLinkedItems( 
-			ctx,
-			false,
-			AcerchemCoreConstants.Relations.ACERCHEMVENDOR2PRODUCT,
-			null,
-			Collections.singletonList(value),
-			false,
-			false,
-			Utilities.getMarkModifiedOverride(ACERCHEMVENDOR2PRODUCT_MARKMODIFIED)
-		);
+		return (Integer)item.getProperty( ctx, AcerchemCoreConstants.Attributes.Product.ACERCHEMVENDORPOS);
 	}
 	
 	/**
-	 * <i>Generated method</i> - Adds <code>value</code> to acerChemVendors. 
-	 * @param value the item to add to acerChemVendors
+	 * <i>Generated method</i> - Getter of the <code>Product.acerChemVendorPOS</code> attribute.
+	 * @return the acerChemVendorPOS
 	 */
-	public void addToAcerChemVendors(final Product item, final Vendor value)
+	 Integer getAcerChemVendorPOS(final Product item)
 	{
-		addToAcerChemVendors( getSession().getSessionContext(), item, value );
+		return getAcerChemVendorPOS( getSession().getSessionContext(), item );
 	}
 	
 	/**
-	 * <i>Generated method</i> - Removes <code>value</code> from acerChemVendors. 
-	 * @param value the item to remove from acerChemVendors
+	 * <i>Generated method</i> - Getter of the <code>Product.acerChemVendorPOS</code> attribute. 
+	 * @return the acerChemVendorPOS
 	 */
-	public void removeFromAcerChemVendors(final SessionContext ctx, final Product item, final Vendor value)
+	 int getAcerChemVendorPOSAsPrimitive(final SessionContext ctx, final Product item)
 	{
-		item.removeLinkedItems( 
-			ctx,
-			false,
-			AcerchemCoreConstants.Relations.ACERCHEMVENDOR2PRODUCT,
-			null,
-			Collections.singletonList(value),
-			false,
-			false,
-			Utilities.getMarkModifiedOverride(ACERCHEMVENDOR2PRODUCT_MARKMODIFIED)
-		);
+		Integer value = getAcerChemVendorPOS( ctx,item );
+		return value != null ? value.intValue() : 0;
 	}
 	
 	/**
-	 * <i>Generated method</i> - Removes <code>value</code> from acerChemVendors. 
-	 * @param value the item to remove from acerChemVendors
+	 * <i>Generated method</i> - Getter of the <code>Product.acerChemVendorPOS</code> attribute. 
+	 * @return the acerChemVendorPOS
 	 */
-	public void removeFromAcerChemVendors(final Product item, final Vendor value)
+	 int getAcerChemVendorPOSAsPrimitive(final Product item)
 	{
-		removeFromAcerChemVendors( getSession().getSessionContext(), item, value );
+		return getAcerChemVendorPOSAsPrimitive( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Product.acerChemVendorPOS</code> attribute. 
+	 * @param value the acerChemVendorPOS
+	 */
+	 void setAcerChemVendorPOS(final SessionContext ctx, final Product item, final Integer value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.Product.ACERCHEMVENDORPOS,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Product.acerChemVendorPOS</code> attribute. 
+	 * @param value the acerChemVendorPOS
+	 */
+	 void setAcerChemVendorPOS(final Product item, final Integer value)
+	{
+		setAcerChemVendorPOS( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Product.acerChemVendorPOS</code> attribute. 
+	 * @param value the acerChemVendorPOS
+	 */
+	 void setAcerChemVendorPOS(final SessionContext ctx, final Product item, final int value)
+	{
+		setAcerChemVendorPOS( ctx, item, Integer.valueOf( value ) );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Product.acerChemVendorPOS</code> attribute. 
+	 * @param value the acerChemVendorPOS
+	 */
+	 void setAcerChemVendorPOS(final Product item, final int value)
+	{
+		setAcerChemVendorPOS( getSession().getSessionContext(), item, value );
 	}
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>Media.aliyunUrl</code> attribute.
-	 * @return the aliyunUrl - é¿éäºÂUrl
+	 * @return the aliyunUrl - 阿里云Url
 	 */
 	public String getAliyunUrl(final SessionContext ctx, final Media item)
 	{
@@ -356,7 +304,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>Media.aliyunUrl</code> attribute.
-	 * @return the aliyunUrl - é¿éäºÂUrl
+	 * @return the aliyunUrl - 阿里云Url
 	 */
 	public String getAliyunUrl(final Media item)
 	{
@@ -365,7 +313,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>Media.aliyunUrl</code> attribute. 
-	 * @param value the aliyunUrl - é¿éäºÂUrl
+	 * @param value the aliyunUrl - 阿里云Url
 	 */
 	public void setAliyunUrl(final SessionContext ctx, final Media item, final String value)
 	{
@@ -374,7 +322,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>Media.aliyunUrl</code> attribute. 
-	 * @param value the aliyunUrl - é¿éäºÂUrl
+	 * @param value the aliyunUrl - 阿里云Url
 	 */
 	public void setAliyunUrl(final Media item, final String value)
 	{
@@ -456,7 +404,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>Product.chemicalInfo</code> attribute.
-	 * @return the chemicalInfo - Attribute about Ã§ÂÂ¾hemicalInfo of Product
+	 * @return the chemicalInfo - Attribute about ç¾hemicalInfo of Product
 	 */
 	public String getChemicalInfo(final SessionContext ctx, final Product item)
 	{
@@ -465,7 +413,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>Product.chemicalInfo</code> attribute.
-	 * @return the chemicalInfo - Attribute about Ã§ÂÂ¾hemicalInfo of Product
+	 * @return the chemicalInfo - Attribute about ç¾hemicalInfo of Product
 	 */
 	public String getChemicalInfo(final Product item)
 	{
@@ -474,7 +422,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>Product.chemicalInfo</code> attribute. 
-	 * @param value the chemicalInfo - Attribute about Ã§ÂÂ¾hemicalInfo of Product
+	 * @param value the chemicalInfo - Attribute about ç¾hemicalInfo of Product
 	 */
 	public void setChemicalInfo(final SessionContext ctx, final Product item, final String value)
 	{
@@ -483,7 +431,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>Product.chemicalInfo</code> attribute. 
-	 * @param value the chemicalInfo - Attribute about Ã§ÂÂ¾hemicalInfo of Product
+	 * @param value the chemicalInfo - Attribute about ç¾hemicalInfo of Product
 	 */
 	public void setChemicalInfo(final Product item, final String value)
 	{
@@ -722,6 +670,115 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	public MultipleBannerComponent createMultipleBannerComponent(final Map attributeValues)
 	{
 		return createMultipleBannerComponent( getSession().getSessionContext(), attributeValues );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>User.customerLevel</code> attribute.
+	 * @return the customerLevel
+	 */
+	public CustomerLevel getCustomerLevel(final SessionContext ctx, final User item)
+	{
+		return (CustomerLevel)item.getProperty( ctx, AcerchemCoreConstants.Attributes.User.CUSTOMERLEVEL);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>User.customerLevel</code> attribute.
+	 * @return the customerLevel
+	 */
+	public CustomerLevel getCustomerLevel(final User item)
+	{
+		return getCustomerLevel( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>User.customerLevel</code> attribute. 
+	 * @param value the customerLevel
+	 */
+	public void setCustomerLevel(final SessionContext ctx, final User item, final CustomerLevel value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.User.CUSTOMERLEVEL,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>User.customerLevel</code> attribute. 
+	 * @param value the customerLevel
+	 */
+	public void setCustomerLevel(final User item, final CustomerLevel value)
+	{
+		setCustomerLevel( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>User.customerLevelPOS</code> attribute.
+	 * @return the customerLevelPOS
+	 */
+	 Integer getCustomerLevelPOS(final SessionContext ctx, final User item)
+	{
+		return (Integer)item.getProperty( ctx, AcerchemCoreConstants.Attributes.User.CUSTOMERLEVELPOS);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>User.customerLevelPOS</code> attribute.
+	 * @return the customerLevelPOS
+	 */
+	 Integer getCustomerLevelPOS(final User item)
+	{
+		return getCustomerLevelPOS( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>User.customerLevelPOS</code> attribute. 
+	 * @return the customerLevelPOS
+	 */
+	 int getCustomerLevelPOSAsPrimitive(final SessionContext ctx, final User item)
+	{
+		Integer value = getCustomerLevelPOS( ctx,item );
+		return value != null ? value.intValue() : 0;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>User.customerLevelPOS</code> attribute. 
+	 * @return the customerLevelPOS
+	 */
+	 int getCustomerLevelPOSAsPrimitive(final User item)
+	{
+		return getCustomerLevelPOSAsPrimitive( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>User.customerLevelPOS</code> attribute. 
+	 * @param value the customerLevelPOS
+	 */
+	 void setCustomerLevelPOS(final SessionContext ctx, final User item, final Integer value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.User.CUSTOMERLEVELPOS,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>User.customerLevelPOS</code> attribute. 
+	 * @param value the customerLevelPOS
+	 */
+	 void setCustomerLevelPOS(final User item, final Integer value)
+	{
+		setCustomerLevelPOS( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>User.customerLevelPOS</code> attribute. 
+	 * @param value the customerLevelPOS
+	 */
+	 void setCustomerLevelPOS(final SessionContext ctx, final User item, final int value)
+	{
+		setCustomerLevelPOS( ctx, item, Integer.valueOf( value ) );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>User.customerLevelPOS</code> attribute. 
+	 * @param value the customerLevelPOS
+	 */
+	 void setCustomerLevelPOS(final User item, final int value)
+	{
+		setCustomerLevelPOS( getSession().getSessionContext(), item, value );
 	}
 	
 	@Override
@@ -1206,7 +1263,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>Product.unitCalculateRato</code> attribute.
-	 * @return the unitCalculateRato - Attribute about Ã§ÂÂnitCalculateRato of Product
+	 * @return the unitCalculateRato - Attribute about çnitCalculateRato of Product
 	 */
 	public String getUnitCalculateRato(final SessionContext ctx, final Product item)
 	{
@@ -1215,7 +1272,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>Product.unitCalculateRato</code> attribute.
-	 * @return the unitCalculateRato - Attribute about Ã§ÂÂnitCalculateRato of Product
+	 * @return the unitCalculateRato - Attribute about çnitCalculateRato of Product
 	 */
 	public String getUnitCalculateRato(final Product item)
 	{
@@ -1224,7 +1281,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>Product.unitCalculateRato</code> attribute. 
-	 * @param value the unitCalculateRato - Attribute about Ã§ÂÂnitCalculateRato of Product
+	 * @param value the unitCalculateRato - Attribute about çnitCalculateRato of Product
 	 */
 	public void setUnitCalculateRato(final SessionContext ctx, final Product item, final String value)
 	{
@@ -1233,7 +1290,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>Product.unitCalculateRato</code> attribute. 
-	 * @param value the unitCalculateRato - Attribute about Ã§ÂÂnitCalculateRato of Product
+	 * @param value the unitCalculateRato - Attribute about çnitCalculateRato of Product
 	 */
 	public void setUnitCalculateRato(final Product item, final String value)
 	{

@@ -611,6 +611,8 @@
 	</bean>
 	<bean id="acerChemVendorDao" class="com.acerchem.core.dao.impl.AcerChemVendorDaoImpl"  >
 	</bean>
+	<bean id="acerChemCustomerLevelDao" class="com.acerchem.core.customerlevel.dao.impl.AcerChemCustomerLevelDaoImpl"  >
+	</bean>
 	
 	<!-- Jayson.Wang add service -->
 	<bean id="acerChemMediaImageService" class="com.acerchem.core.image.service.impl.AcerChemMediaImageServiceImpl"  >
@@ -642,6 +644,9 @@
 	</bean>
 	<bean id="acerChemVendorService" class="com.acerchem.core.service.impl.AcerChemVendorServiceImpl"  >
 	</bean>
+	<bean id="acerChemCustomerLevelService" class="com.acerchem.core.customerlevel.service.impl.AcerChemCustomerLevelServiceImpl"  >
+	</bean>
+	
 	
 	<bean id="mediaFilesAfterDeletedListener" class="com.acerchem.core.event.MediaFilesAfterDeletedListener" parent="abstractEventListener"/>
 	

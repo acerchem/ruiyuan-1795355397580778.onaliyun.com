@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-3-28 14:38:31                          ---
+ * --- Generated at 2018-3-29 15:20:33                          ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.constants;
@@ -44,7 +44,8 @@ public class GeneratedAcerchemCoreConstants
 		}
 		public static class Product
 		{
-			public static final String ACERCHEMVENDORS = "acerChemVendors".intern();
+			public static final String ACERCHEMVENDOR = "acerChemVendor".intern();
+			public static final String ACERCHEMVENDORPOS = "acerChemVendorPOS".intern();
 			public static final String ANONYMOUSDISPLAYPRICE = "anonymousDisplayPrice".intern();
 			public static final String CHEMICALINFO = "chemicalInfo".intern();
 			public static final String UNITCALCULATERATO = "unitCalculateRato".intern();
@@ -62,6 +63,11 @@ public class GeneratedAcerchemCoreConstants
 		public static class StockLevel
 		{
 			public static final String PREORDERRELEASEDAY = "preOrderReleaseDay".intern();
+		}
+		public static class User
+		{
+			public static final String CUSTOMERLEVEL = "customerLevel".intern();
+			public static final String CUSTOMERLEVELPOS = "customerLevelPOS".intern();
 		}
 		public static class Vendor
 		{
@@ -108,6 +114,7 @@ public class GeneratedAcerchemCoreConstants
 	}
 	public static class Relations
 	{
+		public static final String ACERCHEMCUSTOMERLEVEL2USER = "AcerChemCustomerLevel2User".intern();
 		public static final String ACERCHEMVENDOR2PRODUCT = "AcerChemVendor2Product".intern();
 	}
 	

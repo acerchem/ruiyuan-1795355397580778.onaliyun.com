@@ -64,6 +64,7 @@ public class MediaImageCreatedListener extends AbstractEventListener<AfterItemCr
 						System.out.println(ls);
 					} else {
 						System.out.println("location is null");
+						System.out.println("location is null");
 					}
 
 					System.out.println("***************调用service");
