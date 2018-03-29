@@ -28,12 +28,20 @@
     float: left;
 }*/
 
+.maxlatest .sign-content{position:  absolute; top:50%; z-index: 9; right:10%; padding:30px; width: 440px; transform: translate(0,-50%); }
+.maxlatest .sign-content .text-section{margin-bottom: 16px;}
+.maxlatest .sign-content .btn-set{margin-top: 20px;}
+.maxlatest .sign-content input[type="text"],.maxlatest .sign-content input[type="password"],.maxlatest .sign-content .btn{height: 40px; line-height: 40px;}
 
-
+.maxlatest .bansearch{position: absolute; top:50%; left: 10%; width: 520px; color: #fff; transform: translate(0,-50%);}
+.maxlatest .bansearch form{position: relative;  margin: 20px 0;}
+.maxlatest .bansearch .maxicon-search{background-position: 0 -218px; position: absolute; top:0; right: 0; height: 50px; width: 50px;}
+.maxlatest .bansearch p{font-size: 42px; text-transform: uppercase; font-weight: bold; line-height: 1.0em;}
+.maxlatest .bansearch span{font-size: 16px;line-height: 1.5em;}
 
 /*main*/
-.maxfactory{margin: 60px 0;width: 100%;}
-.maxfactory:after{content:''; display: block; clear:both;}
+.maxfactory,.maxmean{margin: 60px 0;width: 100%;}
+.maxfactory:after,.maxmean:after{content:''; display: block; clear:both;}
 .maxfactory li{position: relative; background: #6fa742;color: #fff; width: 23.5%; float: left; margin-left: 2%; padding: 20px;}
 .maxfactory .maxitem4{background: #096735;margin-right:0;}
 .maxfactory .maxitem1{margin-left:0;}
@@ -41,6 +49,34 @@
 .maxfactory li img{width: 30%;}
 .maxfactory li p{display:-webkit-box; position: absolute; top:50%; right:20px; width:calc(70% - 20px) ; transform:translate(0,-50%); padding-left:20px; line-height: 1em; font-size: 1.4rem; color:#fff; overflow:hidden;text-overflow:ellipsis;-webkit-box-orient:vertical;-webkit-line-clamp:2; }
 
+.maxmean li{display: table-cell;  color: #fff; width:20%;  font-size: 0; margin-left: 1.5%; vertical-align: top; }
+.maxmean li a{display: block; margin-right:5%; position: relative; line-height: 1em;}
+
+.maxmean div{position: absolute; top:0; left: 0; width: 100%; height: 100%; color: #fff; font-size: 16px; line-height: 1.5em;}
+.maxmean p{font-size: 20px; font-weight: bolder;}
+.maxmean span{display: block; margin-top: 8px; line-height: 1.5em;}
+.maxmean .meansale{padding:20px; text-align: center; color: #333 ;}
+.maxmean .meansale p{font-size: 32px; text-transform: uppercase;}
+.maxmean .meansale em , .maxmean .meansale i{display: block;  border-radius: 50%; padding:5px;}
+.maxmean .meansale em{ position: absolute; top:45%; left: 65%; line-height: 1.5em; color: #fff; background: #096735;}
+.maxmean .meansale i{border:2px solid #0b4928; }
+.maxmean .meansale label{display: block; position: absolute; top:0; left: 0; padding:0 8px 8px 0;  border-bottom-right-radius: 80px; background: #f24805; color: #fff; font-size: 12px; }
+.maxmean .meansale label i{border:none; display: inline; font-size: 32px; vertical-align:-webkit-baseline-middle;}
+
+.maxmean .text{top:auto; bottom:0; padding:20px; height: auto; 
+background:-webkit-linear-gradient(top,rgba(0,0,0,0) 20%,rgba(0,0,0,.9) 100%);}
+
+.maxmean .textmessge{ color: #333; text-align: center; padding:52% 16% 0 16%; }
+.maxmean .textmessge p{font-weight: normal;}
+.maxmean .textmessge span{display: block; width: 70%; padding:10px 0; margin: 25px auto; background: #096735; color: #fff;}
+
+.maxmean .formtext{background: #096735; padding:20px;}
+.maxmean .formtext div{position: static; font-size: 14px; color: #5fc48f}
+.maxmean .formtext p{ font-weight: normal; color: #fff }
+.maxmean .formtext input{background: #0c4e2b url(maxmeanicon.png) no-repeat left center; border:none; color: #fff; margin-top: 30px; padding-left:30px; font-size: .8rem;}
+.maxmean .formtext input::-webkit-input-placeholder{color: #64cb94}
+.maxmean .formtext input[type="number"]{background-image:url(maxmeanicon2.png);}
+.maxmean .formtext button{display: block; margin-top: 30px; background: #70a644; color: #fff; border:none; width: 60%; height:50px ;line-height: 50px;  font-size: 18px;   text-transform: capitalize;  text-align: center;}
 
 /*maxsales*/
 .maxsales li{width: 33.33%;position: relative;}
@@ -126,6 +162,71 @@
 
 
 /*media*/
+
+@media screen and (max-width: 1680px) {
+   .maxmean .formtext input ,.maxmean .formtext button{
+        margin-top: 20px;
+    }
+    .maxmean .formtext input ,.maxmean .formtext button{
+        height: 40px;
+        line-height: 40px;
+    }
+    
+}
+
+
+@media screen and (max-width: 1440px) {
+    .maxmean .formtext input ,.maxmean .formtext button{
+        height: 30px;
+        line-height: 30px;
+        margin-top: 14px;
+    }
+    .maxlatest .sign-content{
+        padding:20px;
+    }
+    .maxlatest .sign-content input[type="text"], .maxlatest .sign-content input[type="password"], .maxlatest .sign-content .btn{
+        height: 30px;
+        line-height: 30px;
+        margin-top:10px;
+    }
+
+    .maxlatest .sign-content .text-section{
+        font-size: 12px;
+        
+    }
+    .sign-content label, .gen-content .g-cartable .solid-form label{
+        margin-bottom: 10px;
+    }
+    
+
+    
+}
+
+@media screen and (max-width: 1366px) {
+    .maxmean div , .maxmean .formtext div{
+        font-size: 12px
+    }
+    .maxmean .formtext button{
+        font-size: 14px;
+    }
+    .maxmean .meansale p,.maxmean p,.maxmean .textmessge p{
+        font-size: 18px;
+    }
+    .maxmean .meansale label i{
+        font-size: 28px;
+    }
+    .maxmean .formtext input ,.maxmean .formtext button{
+        height: 30px;
+        line-height: 30px;
+        margin-top: 14px;
+    }
+    .maxmean span{
+        margin-top: 4px;
+    }
+
+    
+}
+
 @media screen and (max-width: 1200px) {
     .swiper-slide .maxtite_ban h2 {
         font-size: 2rem;
@@ -157,8 +258,22 @@
     .maxlatest_main .maxmark-con em{
         line-height: .9em;
     }
+    .maxmean .meansale p,.maxmean p,.maxmean .textmessge p{
+        font-size: 14px;
+    }
+    .maxmean .textmessge span{
+        margin:16px auto;
+    }
+    .maxmean .formtext{
+        padding:14px;
+    }
+    .maxmean .formtext input ,.maxmean .formtext button{
+        margin-top: 12px;
+    }
+    .maxlatest .sign-content .title{
+        margin:0;
+    }
 }
-
 
 
 

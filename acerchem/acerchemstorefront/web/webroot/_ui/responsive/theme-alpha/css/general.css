@@ -1437,11 +1437,11 @@ textarea{
 	margin-top: 0;
 }
 
-
-
 .g-cartable .g-table .text{
 	width: 100%;
 }
+
+
 
 /*checkout*/
 .gen-content .maxon_salesul{
@@ -1822,8 +1822,7 @@ textarea{
 /*gallery*/
 .gal-centent{
 	position: relative;
-	/*shuan  */
-	/* border-top:4px solid #f3f3f3; */
+	border-top:4px solid #f3f3f3;
 }
 .gal-centent .g-cont,.gal-centent .g-cartable{
 	padding-top: 0;
@@ -1832,18 +1831,17 @@ textarea{
 	font-weight:500;
 }
 .gal-centent .gall-left{
-	/* position: absolute; */
+	position: absolute;
 	top:0;
 	left: 0;
 	padding-left: 5%;
 	width:20%;
-	/* padding-bottom: 40px; */
+	padding-bottom: 40px;
 	background-color: #fff;
 }
 .gal-centent .gall-right{
 	display: block;
-	/* shaun:左边距设为0 */
-	margin-left: 0%;
+	margin-left: 20%;
 	margin-right: 5%;
 	border-left: 4px solid #f3f3f3;
 
@@ -1851,8 +1849,7 @@ textarea{
 .gal-centent .gall-left h4{
 	font-size:24px;
 	line-height: 28px;
-	/* shaun */
-	/* padding: 36px 0 4px 0; */
+	padding: 36px 0 4px 0;
 }
 .gal-centent .gall-left h5{
 	font-size:18px;
@@ -1884,8 +1881,7 @@ textarea{
 	position: relative;
 	min-height: 50px;
 	width: 75%;
-	/* shaun*/
-	margin:0 5% 0 5%;
+	margin:0 5% 0 20%;
 }
 .gal-centent .g-cont{
 	padding-bottom: 0;
@@ -1894,14 +1890,11 @@ textarea{
 .m-term-ri{
 	float:left;
 }
-
-/* shaun:sort by 下拉框 */
 .m-term-ri{
-	height:49px;
 	position: absolute;
 	right: 0;
 	top:0;
-	padding-left: 105px;
+	padding-left: 90px;
 	background-color: #096735;
 }
 .m-term-ri .right{
@@ -2148,8 +2141,19 @@ display: inline-table;
     width: auto;
 }
 .maxfixed .maxtext{
+	width:100%;
 	padding: 0;
-	padding-right: 12%;
+	padding-left: 12px;
+	position: relative;
+}
+.maxfixed .maxtext .in-title{
+	min-height: auto;
+	max-height: 36px;
+}
+.maxfixed .maxtext .spec{
+	color: #999;
+}
+.maxfixed .spset{
 	position: relative;
 }
 .maxfixed .price {
@@ -2161,7 +2165,6 @@ display: inline-table;
 }
 .maxfixed .old-price{
 	color: #999;
-	display: none;
 	float: left;
 	line-height: 30px;
 	position: relative;
@@ -2177,6 +2180,22 @@ display: inline-table;
     left: 0;
     background-color: #999;
 }
+.maxfixed .num{
+	position: absolute;
+	top:0;
+	right: 0;
+	font-size: 18px;
+	line-height: 1.5em;
+	color: #333;
+}
+.maxfixed .num:before{
+	content:'x';
+	color: #999;
+	font-size: 12px;
+	margin-right: 4px;
+}
+
+
 .maxfixed .m-setnum{
 	position: absolute;
 	right: 0;
@@ -2191,10 +2210,7 @@ display: inline-table;
 .maxfixed ul .item:hover .old-price{
 	display:block;
 }
-.maxfixed .img {
-	width: 30%;
-    padding-right: 2%;
-    }
+
 .maxtext-note{
 	color: #999;
 	margin-top: 2px;
@@ -2245,13 +2261,8 @@ display: inline-table;
 	background-position: -10px -79px;
 }
 .maxfixed-over{
-	width: 436px;
 	overflow: hidden;
 	margin-top: -5px;
-}
-.maxfixed-over ul{
-	width: 436px;
-	padding-right: 10px;
 }
 
 .maxfixed-bg{
@@ -2595,6 +2606,21 @@ display: inline-table;
 	background: url(maxicon.png) no-repeat center -576px;
 }
 
+.prod-cont .prodbase .delivery{
+	margin:20px auto;
+}
+.prod-cont .prodbase .delivery:after{
+	display: block;
+	content: ''; 
+	clear: both;
+}
+.prod-cont .prodbase .delivery .flex{
+	float: left;
+	width: 160px;
+	padding-right: 20px;
+}
+
+
 /*right*/
 .prod-cont .product-right{
 	padding-left:40px;
@@ -2835,6 +2861,12 @@ display: inline-table;
 .maxstatu{
 	text-align: center;
 }
+
+.maxstatu h3{
+	font-size: 1.4rem;
+	color: #096735;
+	margin-bottom: 20px;
+}
 .maxstatu img{
 	padding: 10px 0  33px 0;
 }
@@ -2845,6 +2877,26 @@ display: inline-table;
 	border: 2px solid #096735;
 	border-radius: 50%;
 	margin: 0 auto;
+}
+
+.maxstatu b{
+	color: #096735
+}
+
+.maxstatu .tipslist{
+	width: 60%;
+	margin:auto;
+	margin-top: 40px;
+	padding-top: 20px;
+	padding-left: 20px;
+	border-top:1px dashed #ddd;
+	text-align: left;
+	color: #999;
+}
+.maxstatu .tipslist li{
+	list-style-type: disc;
+
+	margin-bottom: 14px;
 }
 
 

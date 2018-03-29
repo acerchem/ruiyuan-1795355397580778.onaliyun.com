@@ -29,21 +29,20 @@
 	<jsp:body>
 		
 			<header:header hideHeaderLinks="${hideHeaderLinks}" />
+			
+			<!--
             <a id="skip-to-content"></a>
-		
-				<div class="gen-content">
-				
+		 
+			 	<div class="gen-content">
+				  -->
         		<common:globalMessages />
 				<cart:cartRestoration />
 				<jsp:doBody />
-		       </div>
-
+               <!--  </div> -->
            
 			<footer:footer />
 			
 			 
-		</main>
-
 	</jsp:body>
 
 </template:master>

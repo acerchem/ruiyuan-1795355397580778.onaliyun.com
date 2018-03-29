@@ -50,7 +50,7 @@
 	</div>
 	
 	<div class="delivery flex-wrap">
-		<span class="label-title">Delivery to</span>
+		<span class="label-title">Delivery to &nbsp &nbsp &nbsp &nbsp Warehouse</span>
 		<div class="flex">
 			<select>
 			 <c:forEach items="${countrys}" var="data" varStatus="vs">
@@ -58,13 +58,13 @@
 			 </c:forEach>
 			</select>
 		</div>
-		<!-- <div class="flex">
+		 <div class="flex">
 			<select>
 			  <option value ="NY">New York</option>
 			  <option value ="LA">Los Angeles</option>
 			  <option value="CI">Chicago</option>
 			</select>
-		</div> -->
+		</div>
 	</div>
 
 	<div class="prod-sum">

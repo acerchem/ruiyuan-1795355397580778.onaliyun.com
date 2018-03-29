@@ -22,7 +22,7 @@ input[type='checkbox']:checked~.checkbox:after{
 	display:block;
 }
 
-input[type='text'], input[type='password'] ,input[type='submit'],select,.pitch{
+input[type='text'],input[type='number'], input[type='password'] ,input[type='submit'],select,.pitch{
 	padding-left:10px;
 	width: 100%;
 	height: 50px;
@@ -182,11 +182,14 @@ button{
 .maxtop .maxmenu li ul li:hover a{color: #096735}
 .maxtop_rig{ width:15%; text-align: right; position: relative;}
 .maxtop_rig li{display: inline-table;padding-left: 15px; position: relative;}
-.maxtop_rig a , .searchlist .btn-submit{background: url(maxicon.png);width: 30px;height: 30px;display: block;}
+.maxtop_rig a , .searchlist .btn-submit , .maxlatest .bansearch .maxicon-search{border:none; background: url(maxicon.png);width: 30px;height: 30px;display: block;}
 .maxtop_rig a.maxicon-user{background-position: -10px -172px;}
 .maxtop_rig a.maxicon-search , .searchlist .btn-submit{background-position: -10px -227px;}
 .maxtop_rig a.maxicon-cart{background-position: -10px -283px;position: relative;}
 .maxtop_rig a.maxicon-cart em{position: absolute;font-size: 12px;width: 18px;height: 18px;line-height: 18px;text-align: center;border-radius: 50%;right: -5px;background: #096735;color: #fff;}
+.maxtop_rig .userintro{position: absolute; left: -70px; color: #999; font-size: 14px; }
+.maxtop_rig .userintro button{color: #096735; display: inline; border:none; background: transparent; text-align: right; font-size: 14px; }
+.maxtop_rig .userintro button:after{content:''; display: block; position: absolute; bottom:-2px; right: 0; width: 20px; border-top:1px solid #096735; }
 
 /*searchlist*/
 .searchlist{position: absolute; top:20px; right: 42px; z-index: 9999; width: 200%; max-width: 350px; display: none;}
