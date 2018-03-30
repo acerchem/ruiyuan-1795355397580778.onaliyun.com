@@ -28,6 +28,7 @@
 	</div>
 	
 	<form:form method="post" commandName="customRegisterForm" name="customRegisterForm" class="both" action="${action}">
+	
 		<label>
 			<span class='label-title'>Email</span>	
 			<input id="email" type="text" name='email' value="${customRegisterForm.email}"  alt='Please Enter Email' class="required">
@@ -227,85 +228,11 @@ $(document).on("change",'#selectContactCountry select', function (){
 			});
 })
 	
-	inputint()	
-	$('.btn-submit').on('click',function(){
-		var req = $('#login form');
-		verification(req);
-	})
-	
-function verification(wrap){
-	var req = wrap.find('.required');
- 	req.each(function(){
-		var aval = $(this).val(),
-			aname = $(this).attr('name'),
-			thistext = $(this).attr('alt');
-		
-		var mymail = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;	
-		var mobile = /^\d{0,4}[-]?\d{8,12}$/;
-		
-		if(aval)
-		{		
-			if(aname=='email'&&!mymail.test(aval)){				
-				maxalert('Please enter a valid mailbox!')
-				return false;
-			}
-			
-			if(aname=='pwd' && (aval.length<6 || aval.length>16))
-			{
-				maxalert('Password should be between 6-16 in length!')
-				return false;
-			}
-			
-			if(aname=='pwd' && aval!=document.getElementById('checkPwd').value)//pwd.value
-			{
-				maxalert('Two passwords are inconsistent!')
-				return false;
-			}
-			
-			if(aname=='mobileNumber' && !mobile.test(aval))
-			{
-				maxalert('Please confirm the Mobile Number is 8-12 numbers!')
-				return false;
-			}
-			
-			if(aname=='telephone' && !mobile.test(aval))
-			{
-				maxalert('Please confirm the Telephone is 8-12 numbers!')
-				return false;
-			}
-			 
-			$(this).addClass('tg');
-			if($('.tg').length==req.length){
-				maxalert(thistext)
-				wrap.submit();
-				return false;	
-			}
-		}
-		else
-		{
-			if(aname=='shipAddress.countryIso'){				
-				maxalert('Please Select Shipping country!')
-				return false;
-			}
-			else if(aname=='shipAddress.regionIso'){				
-				maxalert('Please Select Shipping region!')
-				return false;
-			}
-			else if(aname=='contactAddress.countryIso'){				
-				maxalert('Please Select Contact country!')
-				return false;
-			}
-			else if(aname=='contactAddress.regionIso'){				
-				maxalert('Please Select Contact region!')
-				return false;
-			}
-			else
-			{
-				maxalert(thistext)
-				return false;
-			}
-		}
-	})	
-}
+inputint()	
+$('.btn-submit').on('click',function(){
+	var req = $('#login form');
+	verification(req);
+})
+
 </script>
 </body>

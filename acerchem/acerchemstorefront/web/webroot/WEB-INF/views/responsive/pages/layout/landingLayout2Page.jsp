@@ -6,9 +6,25 @@
 <template:page pageTitle="${pageTitle}">
     
  <div class="col-fun maxlatest" >
-	  <cms:pageSlot position="Section1" var="feature">     
-	     <cms:component component="${feature}" />
-	  </cms:pageSlot>
+	
+	<div class="banner">
+		<div class="device">
+			<div class="banner_btn">
+				<a class="arrow-left" href="#"></a> <a class="arrow-right" href="#"></a>
+			</div>
+			<div class="swiper-container">
+				<div class="swiper-wrapper">
+				
+				  <cms:pageSlot position="Section1" var="component">     
+				     <cms:component component="${component}" />
+				  </cms:pageSlot>
+	 
+		
+		</div>
+	  </div>
+	         <div class="pagination"></div>
+		</div>
+	</div>
 	  
 	  <!-- search compent banner -->
 	<cms:pageSlot position="Section3" var="component">
@@ -16,41 +32,35 @@
 	</cms:pageSlot>
 	  
 	  
-	  <!-- login compent banner 
+	  <!-- login compent banner -->
 	<cms:pageSlot position="Section4" var="feature">
 		<cms:component component="${feature}" />
 	</cms:pageSlot>
-	-->
-  <div class="maxmain max-col">
+	
+
+  </div>
+  
+    <div class="maxmain max-col">
 	<div class="container">
 		<div class="maxmean">
-		
-		 <ul>
-		 
-		 <cms:pageSlot position="Section2A" var="component">
-			<cms:component component="${component}" />
-		</cms:pageSlot>
-		 
-		  <cms:pageSlot position="Section2B" var="component">
-			<cms:component component="${component}" />
-		</cms:pageSlot> 
-		
-		  <cms:pageSlot position="Section2B" var="component">
-			<cms:component component="${component}" />
-		</cms:pageSlot> 
-		
-		<cms:pageSlot position="Section2C" var="feature">
-			<cms:component component="${feature}" />
-		</cms:pageSlot> 
-		
+			<ul>
 		<cms:pageSlot position="Section5" var="component">
 			<cms:component component="${component}" />
 		</cms:pageSlot>
-		 
-		 </ul>
+		
+			</ul>
 		</div>
+					
 	</div>
-  </div>
+	<%-- 
+	<div class="maxon_sales maxleft page2">
+    
+	      <cms:pageSlot position="Section2A" var="feature" >
+		        <cms:component component="${feature}" />
+		   </cms:pageSlot>
+    </div>
+     --%>
+		 
   
  </div>
 
