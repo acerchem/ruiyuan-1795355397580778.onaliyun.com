@@ -80,21 +80,13 @@ public class AddToCartController extends AbstractController
 	public String addToCart(@RequestParam("productCodePost") final String code, final Model model,
 							@Valid final AcerchemAddToCartForm form, final BindingResult bindingErrors)
 	{
+
 		if (bindingErrors.hasErrors())
 		{
 			return getViewWithBindingErrorMessages(model, bindingErrors);
 		}
 
-		//each cartEntry warehouse must be same
-		final String warehouseCode = form.getWarehouseCode();
-		final boolean isUseFutureStock = form.getIsUseFutureStock();
-		String errorMsg = acerchemCartFacade.acerchemValidateCart(warehouseCode,code,isUseFutureStock);
-		if (Objects.nonNull(errorMsg)) {
-			model.addAttribute(ERROR_MSG_TYPE, errorMsg);
-		}
-
-		final long qty = form.getQty();
-
+		long qty = form.getQty();
 
 		if (qty <= 0)
 		{
@@ -103,30 +95,43 @@ public class AddToCartController extends AbstractController
 		}
 		else
 		{
-			try
-			{
-    				final CartModificationData cartModification = acerchemCartFacade.addToCart(code, qty,form.getWarehouseCode(),form.getIsUseFutureStock(),form.getStoreId());
-				model.addAttribute(QUANTITY_ATTR, Long.valueOf(cartModification.getQuantityAdded()));
-				model.addAttribute("entry", cartModification.getEntry());
-				model.addAttribute("cartCode", cartModification.getCartCode());
-				model.addAttribute("isQuote", cartFacade.getSessionCart().getQuoteData() != null ? Boolean.TRUE : Boolean.FALSE);
 
-				if (cartModification.getStatusCode().equalsIgnoreCase(CommerceCartModificationStatus.MAX_ORDER_QUANTITY_EXCEEDED))
-				{
-					model.addAttribute(ERROR_MSG_TYPE, "basket.information.quantity.noItemsAdded." + cartModification.getStatusCode());
-				}
+			//each cartEntry warehouse must be same
+			final String warehouseCode = form.getWarehouseCode();
+			final boolean isUseFutureStock = form.getIsUseFutureStock();
+			String storeId = form.getStoreId();
+			String errorMsg = acerchemCartFacade.acerchemValidateCart(warehouseCode,code,isUseFutureStock,storeId);
 
-				if (cartModification.getQuantityAdded() < qty)
+			if (errorMsg!=null){
+				model.addAttribute(ERROR_MSG_TYPE, errorMsg);
+			}else{
+				try
 				{
-					model.addAttribute(ERROR_MSG_TYPE,
-							"basket.information.quantity.reducedNumberOfItemsAdded." + cartModification.getStatusCode());
+
+					String availableDate = form.getAvailableDate();
+					final CartModificationData cartModification = acerchemCartFacade.addToCart(code, qty,warehouseCode,isUseFutureStock,storeId,availableDate);
+					model.addAttribute(QUANTITY_ATTR, Long.valueOf(cartModification.getQuantityAdded()));
+					model.addAttribute("entry", cartModification.getEntry());
+					model.addAttribute("cartCode", cartModification.getCartCode());
+					model.addAttribute("isQuote", cartFacade.getSessionCart().getQuoteData() != null ? Boolean.TRUE : Boolean.FALSE);
+
+					if (cartModification.getStatusCode().equalsIgnoreCase(CommerceCartModificationStatus.MAX_ORDER_QUANTITY_EXCEEDED))
+					{
+						model.addAttribute(ERROR_MSG_TYPE, "basket.information.quantity.noItemsAdded." + cartModification.getStatusCode());
+					}
+
+					if (cartModification.getQuantityAdded() < qty)
+					{
+						model.addAttribute(ERROR_MSG_TYPE,
+								"basket.information.quantity.reducedNumberOfItemsAdded." + cartModification.getStatusCode());
+					}
 				}
-			}
-			catch (final CommerceCartModificationException ex)
-			{
-				logDebugException(ex);
-				model.addAttribute(ERROR_MSG_TYPE, "basket.error.occurred");
-				model.addAttribute(QUANTITY_ATTR, Long.valueOf(0L));
+				catch (final CommerceCartModificationException ex)
+				{
+					logDebugException(ex);
+					model.addAttribute(ERROR_MSG_TYPE, "basket.error.occurred");
+					model.addAttribute(QUANTITY_ATTR, Long.valueOf(0L));
+				}
 			}
 		}
 

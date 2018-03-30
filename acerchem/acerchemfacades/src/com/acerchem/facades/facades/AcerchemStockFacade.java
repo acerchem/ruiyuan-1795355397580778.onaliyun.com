@@ -11,9 +11,7 @@ import de.hybris.platform.core.model.product.ProductModel;
  * Created by Jacob.Ji on 2018/3/20.
  */
 
-public interface AcerchemCustomerFacade {
-    CustomerData getCurrentCustomer();
-
-    SearchPageData<CountryToWarehouseData> getAllPointOfServices(PageableData pageableData);
+public interface AcerchemStockFacade {
+    StockDataList getAllStockDataByProduct(String productCode);
 }
 

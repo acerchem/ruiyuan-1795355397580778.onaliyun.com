@@ -23,6 +23,7 @@ public class AcerchemCartParameterPopulator implements Populator<AddToCartParams
 	{
 		target.setWarehouseCode(source.getWarehouseCode());
 		target.setIsUseFutureStock(source.getIsUseFutureStock());
+		target.setAvailableDate(source.getAvailableDate());
 	}
 
 }

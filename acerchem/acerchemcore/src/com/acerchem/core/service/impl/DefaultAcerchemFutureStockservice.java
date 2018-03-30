@@ -3,6 +3,7 @@ package com.acerchem.core.service.impl;
 import java.util.List;
 
 
+import de.hybris.platform.store.BaseStoreModel;
 import org.springframework.stereotype.Component;
 
 import com.acerchem.core.dao.impl.AcerchemFutureStockDao;
@@ -19,9 +20,9 @@ public class DefaultAcerchemFutureStockservice implements AcerchemFutureStockser
 	
 	
 	
-	public List<StockLevelModel> getStockLevelModel(String product_pk){
+	public List<StockLevelModel> getStockLevelModel(String productPK ,BaseStoreModel baseStore){
 		
-		List<StockLevelModel> stocklevel = acerchemFutureStockDao.findAcerChemFutureStock(product_pk);
+		List<StockLevelModel> stocklevel = acerchemFutureStockDao.findAcerChemFutureStock(productPK,baseStore);
 		
 		return stocklevel;
 		

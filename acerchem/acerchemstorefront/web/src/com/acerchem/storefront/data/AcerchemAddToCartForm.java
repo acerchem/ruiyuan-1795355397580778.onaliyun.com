@@ -3,6 +3,7 @@ package com.acerchem.storefront.data;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 
 /**
@@ -20,6 +21,16 @@ public class AcerchemAddToCartForm
 	private String warehouseCode;
 
 	private String storeId;
+
+	private String availableDate;
+
+	public String getAvailableDate() {
+		return availableDate;
+	}
+
+	public void setAvailableDate(String availableDate) {
+		this.availableDate = availableDate;
+	}
 
 	public String getStoreId() {
 		return storeId;

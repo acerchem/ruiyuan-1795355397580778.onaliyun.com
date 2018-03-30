@@ -48,12 +48,6 @@ public class DefaultAcerchemCommerceAddToCartStrategy extends DefaultCommerceAdd
         PointOfServiceModel deliveryPointOfService = parameter.getPointOfService();
 
         final String warehouseCode = parameter.getWarehouseCode();
-//        final WarehouseModel warehouseModel = warehouseService.getWarehouseForCode(warehouseCode);
-//
-//        if (CollectionUtils.isNotEmpty(warehouseModel.getPointsOfService())){
-//            deliveryPointOfService = warehouseModel.getPointsOfService().iterator().next();
-//        }
-
 
         final boolean isUseFutureStock = parameter.getIsUseFutureStock();
 
@@ -75,6 +69,7 @@ public class DefaultAcerchemCommerceAddToCartStrategy extends DefaultCommerceAdd
                 final CartEntryModel entryModel = addCartEntry(parameter, actualAllowedQuantityChange);
                 entryModel.setWarehouseCode(parameter.getWarehouseCode());
                 entryModel.setIsUseFutureStock(parameter.getIsUseFutureStock());
+                entryModel.setAvailableDate(parameter.getAvailableDate());
                 getModelService().save(entryModel);
 
                 final String statusCode = getStatusCodeAllowedQuantityChange(actualAllowedQuantityChange, maxOrderQuantity,

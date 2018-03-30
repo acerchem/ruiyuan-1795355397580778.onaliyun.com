@@ -422,6 +422,9 @@
 					<attribute qualifier="preOrderReleaseDay" type="java.lang.Integer">
 						<persistence type="property" />
 					</attribute>
+					<attribute qualifier="avaPreOrderReleaseDay" type="java.lang.Integer">
+						<persistence type="property" />
+					</attribute>
 				</attributes>
 			</itemtype>
 		</typegroup>
@@ -440,7 +443,7 @@
 						<persistence type="property" />
 						<modifiers />
 					</attribute>
-					<attribute qualifier="shipDate" type="java.util.Date">
+					<attribute qualifier="availableDate" type="java.util.Date">
 						<persistence type="property" />
 						<modifiers />
 					</attribute>
