@@ -30,7 +30,7 @@
 		<formElement:formInputBox idKey="j_username" labelKey="login.email" path="j_username" mandatory="true" />
 		<formElement:formPasswordBox idKey="j_password" labelKey="login.password" path="j_password" inputCSS="form-control" mandatory="true" />
 		<label>
-			<input type="checkbox" name="Keep">
+			<input type="checkbox" name="remember-me">
 			<span class="checkbox">Keep me signed in</span><!-- alice: need update -->
 			<a  href="#" data-link="<c:url value='/login/pw/request'/>" class="js-password-forgotten" data-cbox-title="<spring:theme code="forgottenPwd.title"/>">
 				<spring:theme code="login.link.forgottenPwd" />
