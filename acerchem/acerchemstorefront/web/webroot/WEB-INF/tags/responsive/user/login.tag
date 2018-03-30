@@ -42,7 +42,7 @@
 					<spring:theme code="login.login" />
 				</button>
 				<c:url value="/login/register" var="registerUrl"/>
-				<a class="btn btn-line" href="${registerUrl}">Create your Amazon account</a>
+				<a class="btn btn-line" href="${registerUrl}">Create your Account</a>
 			</div>
 		</ycommerce:testId>
 	</div>
