@@ -13,11 +13,8 @@ package com.acerchem.storefront.controllers.pages;
 import de.hybris.platform.acceleratorservices.storefront.data.MetaElementData;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractLoginPageController;
-import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractRegisterPageController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.AddressForm;
-import de.hybris.platform.acceleratorstorefrontcommons.forms.GuestForm;
-import de.hybris.platform.acceleratorstorefrontcommons.forms.LoginForm;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.cms2.model.pages.ContentPageModel;
@@ -29,17 +26,14 @@ import de.hybris.platform.commercefacades.user.UserFacade;
 import de.hybris.platform.commercefacades.user.data.CountryData;
 import de.hybris.platform.commercefacades.user.data.RegionData;
 import de.hybris.platform.commerceservices.customer.CustomerAccountService;
-import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.core.model.c2l.CountryModel;
 import de.hybris.platform.core.model.c2l.RegionModel;
-import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.mobileservices.enums.PhoneType;
 import de.hybris.platform.mobileservices.model.text.PhoneNumberModel;
 import de.hybris.platform.mobileservices.model.text.UserPhoneNumberModel;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
-import de.hybris.platform.servicelayer.exceptions.ModelSavingException;
 import de.hybris.platform.servicelayer.i18n.CommonI18NService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
@@ -61,7 +55,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -143,24 +136,12 @@ public class LoginPageController extends AbstractLoginPageController
 	
 	@Resource(name = "modelService")
 	private ModelService modelService;
-	protected ModelService getModelService()
-	{
-		return modelService;
-	}
 	
 	@Resource(name = "commonI18NService")
 	private CommonI18NService commonI18NService;
-	protected CommonI18NService getCommonI18NService()
-	{
-		return commonI18NService;
-	}
 	
 	@Resource(name = "customerAccountService")
 	private CustomerAccountService customerAccountService;
-	protected CustomerAccountService getCustomerAccountService()
-	{
-		return customerAccountService;
-	}
 	
 	@Resource(name = "countryConverter")
 	private Converter<CountryModel, CountryData> countryConverter;
@@ -248,7 +229,6 @@ public class LoginPageController extends AbstractLoginPageController
 		try
 		{	
 			customRegistrationValidator.validate(form, bindingResult);
-			
 			final String REF_QUERY_PRODUCTROW_START = "SELECT PK FROM {"+CustomerModel._TYPECODE+"} WHERE {"+CustomerModel.UID+"} =?email ";
 			final Map<String, Object> params = new HashMap<String, Object>();
 			final StringBuilder builder = new StringBuilder(REF_QUERY_PRODUCTROW_START);
@@ -259,13 +239,39 @@ public class LoginPageController extends AbstractLoginPageController
 			{
 				GlobalMessages.addErrorMessage(model, "register.failed: The user already exists. Do not double register!");
 			}
-			else if(bindingResult.hasErrors())
+			if(bindingResult.hasErrors())
 			{
 				GlobalMessages.addErrorMessage(model, "form.global.error");
 			}
 			else
 			{
-				CustomerModel user=RegisterCustomerService(form,model);
+				PhoneNumberModel phone=modelService.create(PhoneNumberModel.class);
+				phone.setNumber(form.getMobileNumber());
+				
+				PhoneNumberModel tel=modelService.create(PhoneNumberModel.class);
+				tel.setNumber(form.getTelephone());
+				
+				try
+				{
+					modelService.save(phone);
+				}
+				catch(Exception e)
+				{
+					GlobalMessages.addErrorMessage(model, "form.global.error");
+					bindingResult.rejectValue("mobileNumber", "register.phone.invalid");
+				}
+				
+				try
+				{
+					modelService.save(tel);
+				}
+				catch(Exception e)
+				{
+					GlobalMessages.addErrorMessage(model, "form.global.error");
+					bindingResult.rejectValue("telephone", "register.phone.invalid");
+				}
+				
+				CustomerModel user=RegisterCustomerService(form,model,phone,tel);
 				userService.setCurrentUser(user);
 				customerAccountService.register(user, form.getPwd());
 				getAutoLoginStrategy().login(form.getEmail().toLowerCase(), form.getPwd(), request, response);
@@ -299,14 +305,13 @@ public class LoginPageController extends AbstractLoginPageController
 		{
 			model.addAttribute("regions", i18NFacade.getRegionsForCountryIso(form.getContactAddress().getCountryIso()));
 			model.addAttribute("CustomRegisterForm",form);
-			GlobalMessages.addErrorMessage(model, "form.global.error");
 			storeCmsPageInModel(model, getCmsPage());
 			return ControllerConstants.Views.Pages.Account.AccountRegisterPage;
 		}
 		
 	}
 	
-	public CustomerModel RegisterCustomerService(final CustomRegisterForm form,final Model model)
+	public CustomerModel RegisterCustomerService(final CustomRegisterForm form,final Model model,final PhoneNumberModel phone,final PhoneNumberModel tel)
 	{
 		
 		final CustomerModel user = new CustomerModel();
@@ -352,16 +357,10 @@ public class LoginPageController extends AbstractLoginPageController
 		amlist.add(am);
 		amlist.add(am2);
 		
-		PhoneNumberModel phone=modelService.create(PhoneNumberModel.class);
-		phone.setNumber(form.getMobileNumber());
-		
 		UserPhoneNumberModel pn=modelService.create(UserPhoneNumberModel.class);
 		pn.setPhoneNumber(phone);
 		pn.setType(PhoneType.valueOf("MOBILE"));//HOME\OFFICE\MOBILE
 		pn.setDefault(true);
-		
-		PhoneNumberModel tel=modelService.create(PhoneNumberModel.class);
-		tel.setNumber(form.getTelephone());
 		
 		UserPhoneNumberModel pn2=modelService.create(UserPhoneNumberModel.class);
 		pn2.setPhoneNumber(tel);
@@ -374,13 +373,13 @@ public class LoginPageController extends AbstractLoginPageController
 		
 		user.setOriginalUid(form.getEmail());
 		
-		user.setSessionLanguage(getCommonI18NService().getLanguage(form.getLanguage()));
-		user.setSessionCurrency(getCommonI18NService().getCurrency(form.getCurrency()));
+		user.setSessionLanguage(commonI18NService.getLanguage(form.getLanguage()));
+		user.setSessionCurrency(commonI18NService.getCurrency(form.getCurrency()));
 		user.setAddresses(amlist);
 		user.setPhoneNumbers(phoneNumbers);
 		user.setPassword(form.getPwd());
 		
-		modelService.saveAll(user,pn2,tel,pn,phone,am2,am);
+		modelService.saveAll(user,pn2,pn,am2,am);
 		return user;
 	}
 	
