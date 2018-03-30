@@ -33,7 +33,7 @@
 .maxlatest .sign-content .btn-set{margin-top: 20px;}
 .maxlatest .sign-content input[type="text"],.maxlatest .sign-content input[type="password"],.maxlatest .sign-content .btn{height: 40px; line-height: 40px;}
 
-.maxlatest .bansearch{position: absolute; top:50%; left: 10%; width: 520px; color: #fff; transform: translate(0,-50%);}
+.maxlatest .bansearch{position: absolute; top:50%; left: 10%; z-index: 999; width: 520px; color: #fff; transform: translate(0,-50%);}
 .maxlatest .bansearch form{position: relative;  margin: 20px 0;}
 .maxlatest .bansearch .maxicon-search{background-position: 0 -218px; position: absolute; top:0; right: 0; height: 50px; width: 50px;}
 .maxlatest .bansearch p{font-size: 42px; text-transform: uppercase; font-weight: bold; line-height: 1.0em;}
