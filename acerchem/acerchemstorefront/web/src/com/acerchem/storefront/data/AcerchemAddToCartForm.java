@@ -18,8 +18,6 @@ public class AcerchemAddToCartForm
 
 	private boolean isUseFutureStock;
 
-	private String warehouseCode;
-
 	private String storeId;
 
 	private String availableDate;
@@ -46,14 +44,6 @@ public class AcerchemAddToCartForm
 
 	public void setIsUseFutureStock(boolean isUseFutureStock) {
 		this.isUseFutureStock = isUseFutureStock;
-	}
-
-	public String getWarehouseCode() {
-		return warehouseCode;
-	}
-
-	public void setWarehouseCode(String warehouseCode) {
-		this.warehouseCode = warehouseCode;
 	}
 
 	public void setQty(final long quantity)

@@ -1,6 +1,7 @@
 package com.acerchem.core.strategies.impl;
 
 import com.acerchem.core.strategies.AcerchemCommerceAddToCartStrategy;
+import de.hybris.platform.basecommerce.enums.InStockStatus;
 import de.hybris.platform.commerceservices.order.CommerceCartModification;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationStatus;
@@ -47,7 +48,7 @@ public class DefaultAcerchemCommerceAddToCartStrategy extends DefaultCommerceAdd
 
         PointOfServiceModel deliveryPointOfService = parameter.getPointOfService();
 
-        final String warehouseCode = parameter.getWarehouseCode();
+        final String warehouseCode = deliveryPointOfService.getWarehouses().stream().findFirst().get().getCode();
 
         final boolean isUseFutureStock = parameter.getIsUseFutureStock();
 
@@ -67,7 +68,6 @@ public class DefaultAcerchemCommerceAddToCartStrategy extends DefaultCommerceAdd
             {
                 // We are allowed to add items to the cart
                 final CartEntryModel entryModel = addCartEntry(parameter, actualAllowedQuantityChange);
-                entryModel.setWarehouseCode(parameter.getWarehouseCode());
                 entryModel.setIsUseFutureStock(parameter.getIsUseFutureStock());
                 entryModel.setAvailableDate(parameter.getAvailableDate());
                 getModelService().save(entryModel);
@@ -118,10 +118,23 @@ public class DefaultAcerchemCommerceAddToCartStrategy extends DefaultCommerceAdd
 
         long stockLevel = 0L;
         if (isUseFuturnStock){
-            stockLevel = productModel.getStockLevels().stream()
-                    .filter(stockLevelModel -> warehouseCode.equals(stockLevelModel.getWarehouse().getCode()))
-                    .collect(Collectors.toList()).stream()
-                    .findFirst().get().getPreOrder();
+            for (StockLevelModel stockLevelModel : productModel.getStockLevels())
+            {
+                // If any stock level is flagged as FORCEINSTOCK then return null to indicate in stock
+                if (InStockStatus.FORCEINSTOCK.equals(stockLevelModel.getInStockStatus()))
+                {
+
+                }
+                // If any stock level is flagged as FORCEOUTOFSTOCK then we skip over it
+                if (!InStockStatus.FORCEOUTOFSTOCK.equals(stockLevelModel.getInStockStatus()))
+                {
+                    final long availableToSellQuantity = stockLevelModel.getPreOrder();
+                    if (availableToSellQuantity > 0 || !stockLevelModel.isTreatNegativeAsZero())
+                    {
+                        stockLevel += availableToSellQuantity;
+                    }
+                }
+            }
         }else {
             stockLevel = getAvailableStockLevel(productModel, pointOfServiceModel);
         }

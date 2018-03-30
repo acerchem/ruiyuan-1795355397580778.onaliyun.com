@@ -12,7 +12,7 @@ import java.util.Date;
  */
 public interface AcerchemCartFacade {
 
-    String acerchemValidateCart(String warehouseCode,String productCode,boolean isUseFutureStock,String storeId);
+    String acerchemValidateCart(String productCode,boolean isUseFutureStock,String storeId);
 
     /**
      * Method for adding a product to cart.
@@ -29,5 +29,5 @@ public interface AcerchemCartFacade {
      * @throws CommerceCartModificationException
      *            if the cart cannot be modified
      */
-    CartModificationData addToCart(String code, long quantity, String warehouseCode, boolean isUseFutureStock, String storeId, String availableDate) throws CommerceCartModificationException;
+    CartModificationData addToCart(String code, long quantity, boolean isUseFutureStock, String storeId, String availableDate) throws CommerceCartModificationException;
 }

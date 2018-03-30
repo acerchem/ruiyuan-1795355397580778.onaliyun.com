@@ -97,10 +97,9 @@ public class AddToCartController extends AbstractController
 		{
 
 			//each cartEntry warehouse must be same
-			final String warehouseCode = form.getWarehouseCode();
 			final boolean isUseFutureStock = form.getIsUseFutureStock();
 			String storeId = form.getStoreId();
-			String errorMsg = acerchemCartFacade.acerchemValidateCart(warehouseCode,code,isUseFutureStock,storeId);
+			String errorMsg = acerchemCartFacade.acerchemValidateCart(code,isUseFutureStock,storeId);
 
 			if (errorMsg!=null){
 				model.addAttribute(ERROR_MSG_TYPE, errorMsg);
@@ -109,7 +108,7 @@ public class AddToCartController extends AbstractController
 				{
 
 					String availableDate = form.getAvailableDate();
-					final CartModificationData cartModification = acerchemCartFacade.addToCart(code, qty,warehouseCode,isUseFutureStock,storeId,availableDate);
+					final CartModificationData cartModification = acerchemCartFacade.addToCart(code, qty,isUseFutureStock,storeId,availableDate);
 					model.addAttribute(QUANTITY_ATTR, Long.valueOf(cartModification.getQuantityAdded()));
 					model.addAttribute("entry", cartModification.getEntry());
 					model.addAttribute("cartCode", cartModification.getCartCode());

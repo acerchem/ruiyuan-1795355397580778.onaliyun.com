@@ -439,16 +439,32 @@
 						<defaultvalue>Boolean.FALSE</defaultvalue>
 						<modifiers />
 					</attribute>
-					<attribute qualifier="warehouseCode" type="java.lang.String">
-						<persistence type="property" />
-						<modifiers />
-					</attribute>
 					<attribute qualifier="availableDate" type="java.util.Date">
 						<persistence type="property" />
 						<modifiers />
 					</attribute>
 				</attributes>
 			</itemtype>
+
+			<itemtype code="CountryTrayFareConf" autocreate="true" generate="true" jaloclass="com.acerchem.core.jalo.CountryTrayFareConf">
+				<description>country to unitCalculateRato Configuration</description>
+				<deployment table="CountryTrayFareConf" typecode="20201"/>
+				<attributes>
+					<attribute qualifier="country" type="Country">
+						<persistence type="property" />
+						<modifiers />
+					</attribute>
+					<attribute qualifier="trayAmount" type="java.lang.Integer">
+						<persistence type="property" />
+						<modifiers />
+					</attribute>
+					<attribute qualifier="price" type="java.lang.Double">
+						<persistence type="property" />
+						<modifiers />
+					</attribute>
+				</attributes>
+			</itemtype>
+
 		</typegroup>
 
 		<!-- shaun.sheng -->

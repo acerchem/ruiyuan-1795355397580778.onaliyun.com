@@ -62,13 +62,11 @@
     </bean>
 
 	<bean class="de.hybris.platform.commercefacades.order.data.AddToCartParams">
-		<property name="warehouseCode" type="String"/>
 		<property name="isUseFutureStock" type="Boolean"/>
 		<property name="availableDate" type="java.util.Date"/>
 	</bean>
 
 	<bean class="de.hybris.platform.commerceservices.service.data.CommerceCartParameter">
-		<property name="warehouseCode" type="String"/>
 		<property name="isUseFutureStock" type="Boolean"/>
 		<property name="availableDate" type="java.util.Date"/>
 	</bean>
