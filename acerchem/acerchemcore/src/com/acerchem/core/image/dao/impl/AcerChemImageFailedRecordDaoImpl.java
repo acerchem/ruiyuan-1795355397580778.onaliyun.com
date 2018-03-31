@@ -8,7 +8,9 @@ import javax.annotation.Resource;
 import com.acerchem.core.image.dao.AcerChemImageFailedRecordDao;
 import com.acerchem.core.model.ImageFailedRecordModel;
 
+import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.ordersplitting.model.StockLevelModel;
+import de.hybris.platform.ordersplitting.model.VendorModel;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
@@ -16,8 +18,6 @@ import de.hybris.platform.servicelayer.search.SearchResult;
 public class AcerChemImageFailedRecordDaoImpl implements AcerChemImageFailedRecordDao {
 
 	
-	
-
 	@Resource(name = "flexibleSearchService")
 	private FlexibleSearchService flexibleSearchService;
 	
@@ -43,10 +43,27 @@ public class AcerChemImageFailedRecordDaoImpl implements AcerChemImageFailedReco
 	public List<ImageFailedRecordModel> getAllImageFailedRecord() {
 		String GET_IMAGEFAILEDRECORD = "SELECT {pk} "
 				+ " FROM {"+ImageFailedRecordModel._TYPECODE+"}";
-		SearchResult<ImageFailedRecordModel> result = flexibleSearchService.search(GET_IMAGEFAILEDRECORD);
-		
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(GET_IMAGEFAILEDRECORD );
+		final SearchResult<ImageFailedRecordModel> result = flexibleSearchService.search(query);
 		
 		return result.getResult();
 	}
+
+	
+
+	/* (non-Javadoc)
+	 * @see com.acerchem.core.image.dao.AcerChemImageFailedRecordDao#getMediaWithImageFailedRecord()
+	 */
+	@Override
+	public List<MediaModel> getMediaWithImageFailedRecord() {
+		String SQL = "select {m.pk} from {" + MediaModel._TYPECODE + " as m JOIN " + ImageFailedRecordModel._TYPECODE + 
+				" as i ON { i." +  ImageFailedRecordModel.MEDIADATA + "} = {m." + MediaModel.PK + "} } ";
+		
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(SQL );
+		final SearchResult<MediaModel> result = flexibleSearchService.search(query);
+		
+		return result.getResult();
+	}
+
 	
 }
