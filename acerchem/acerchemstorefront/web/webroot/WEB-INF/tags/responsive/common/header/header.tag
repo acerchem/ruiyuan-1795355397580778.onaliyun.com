@@ -37,17 +37,17 @@
 		<li>
 	 		
 	 			
-			<sec:authorize access="hasAnyRole('ROLE_ANONYMOUS')" >
+			<%-- <sec:authorize access="hasAnyRole('ROLE_ANONYMOUS')" >
 			<span class="userintro"><br/>
-					<%-- <a href="<c:url value='/login'/>">
+					<a href="<c:url value='/login'/>">
 						login
-					</a> --%>
+					</a>
 					
 					<button onclick="login()">login</button>
 				</span>
 			
 			</sec:authorize>
-			
+			 --%>
 			<sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')" >
 			
 			<c:set var="maxNumberChars" value="25" />
