@@ -8,8 +8,12 @@ import com.acerchem.core.image.dao.AcerChemImageFailedRecordDao;
 import com.acerchem.core.image.service.AcerChemImageFailedRecoredService;
 import com.acerchem.core.model.ImageFailedRecordModel;
 
+import de.hybris.platform.core.model.media.MediaModel;
+
 public class AcerChemImageFailedRecoredServiceImpl implements AcerChemImageFailedRecoredService {
 	
+	
+
 	@Resource
 	private AcerChemImageFailedRecordDao acerChemImageFailedRecordDao;
 
@@ -30,4 +34,12 @@ public class AcerChemImageFailedRecoredServiceImpl implements AcerChemImageFaile
 		return acerChemImageFailedRecordDao.getAllImageFailedRecord();
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.acerchem.core.image.service.AcerChemImageFailedRecoredService#getMediaWithImageFailedRecord()
+	 */
+	@Override
+	public List<MediaModel> getMediaWithImageFailedRecord() {
+		// TODO Auto-generated method stub
+		return acerChemImageFailedRecordDao.getMediaWithImageFailedRecord();
+	}
 }

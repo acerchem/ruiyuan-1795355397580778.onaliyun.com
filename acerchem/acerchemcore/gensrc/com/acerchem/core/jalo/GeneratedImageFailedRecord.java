@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-3-29 15:20:33                          ---
+ * --- Generated at 2018-3-31 13:56:05                          ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.jalo;
@@ -34,6 +34,8 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 	public static final String STATUS = "status";
 	/** Qualifier of the <code>ImageFailedRecord.mediaData</code> attribute **/
 	public static final String MEDIADATA = "mediaData";
+	/** Qualifier of the <code>ImageFailedRecord.mediaPK</code> attribute **/
+	public static final String MEDIAPK = "mediaPK";
 	protected static final Map<String, AttributeMode> DEFAULT_INITIAL_ATTRIBUTES;
 	static
 	{
@@ -44,6 +46,7 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 		tmp.put(LOCATION, AttributeMode.INITIAL);
 		tmp.put(STATUS, AttributeMode.INITIAL);
 		tmp.put(MEDIADATA, AttributeMode.INITIAL);
+		tmp.put(MEDIAPK, AttributeMode.INITIAL);
 		DEFAULT_INITIAL_ATTRIBUTES = Collections.unmodifiableMap(tmp);
 	}
 	@Override
@@ -230,6 +233,42 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 	public void setMediaData(final Media value)
 	{
 		setMediaData( getSession().getSessionContext(), value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>ImageFailedRecord.mediaPK</code> attribute.
+	 * @return the mediaPK - mediaPk
+	 */
+	public String getMediaPK(final SessionContext ctx)
+	{
+		return (String)getProperty( ctx, MEDIAPK);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>ImageFailedRecord.mediaPK</code> attribute.
+	 * @return the mediaPK - mediaPk
+	 */
+	public String getMediaPK()
+	{
+		return getMediaPK( getSession().getSessionContext() );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>ImageFailedRecord.mediaPK</code> attribute. 
+	 * @param value the mediaPK - mediaPk
+	 */
+	public void setMediaPK(final SessionContext ctx, final String value)
+	{
+		setProperty(ctx, MEDIAPK,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>ImageFailedRecord.mediaPK</code> attribute. 
+	 * @param value the mediaPK - mediaPk
+	 */
+	public void setMediaPK(final String value)
+	{
+		setMediaPK( getSession().getSessionContext(), value );
 	}
 	
 	/**

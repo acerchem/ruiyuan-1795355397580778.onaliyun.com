@@ -20,46 +20,40 @@ public class AcerChemVendorDaoImpl implements AcerChemVendorDao {
 
 	@Resource
 	private FlexibleSearchService flexibleSearchService;
-	
+
 	@Override
 	public List<VendorModel> getVendorsByProductName(String productName) {
-		final String SQL = "select {v.pk} from {" + VendorModel._TYPECODE + 
-				" as v JOIN AcerChemVendor2Product as p2v"+ 
-	            " ON {p2v.source} = {v."+VendorModel.PK+"}"+
-				" JOIN " + ProductModel._TYPECODE + " as p" +
-	            " ON {p2v.target} = {p." + ProductModel.PK + "} }" +
-				" where {p." + ProductModel.NAME + "} like ?prodName" ;
-	                                                                          																																					
+		final String SQL = "select {v.pk} from {" + VendorModel._TYPECODE + " as v JOIN " + ProductModel._TYPECODE
+				+ " as p" + " ON {p." + ProductModel.ACERCHEMVENDOR + "} = {v." + VendorModel.PK + "} }" + " where {p."
+				+ ProductModel.NAME + "} like ?prodName";
+
 		final Map<String, Object> params = new HashMap<String, Object>();
 		final StringBuilder builder = new StringBuilder(SQL);
-		params.put("prodName", "'%"+ productName + "%'");
-		
+		params.put("prodName", "'%" + productName + "%'");
+
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(builder.toString());
 		query.addQueryParameters(params);
-		
+
 		final SearchResult<VendorModel> result = flexibleSearchService.search(query);
 		return result.getResult();
 	}
 
 	@Override
 	public VendorModel getVendorByProductCode(String productCode) {
-		final String SQL = "select {v.pk} from {" + VendorModel._TYPECODE + 
-				" as v JOIN AcerChemVendor2Product as p2v"+ 
-	            " ON {p2v.source} = {v."+VendorModel.PK+"}"+
-				" JOIN " + ProductModel._TYPECODE + " as p" +
-	            " ON {p2v.target} = {p." + ProductModel.PK + "} }" +
-				" where {p." + ProductModel.NAME + "} = ?prodCode" ;
-	                                                                          																																					
+		final String SQL = "select {v.pk} from {" + VendorModel._TYPECODE + " as v JOIN " + ProductModel._TYPECODE
+				+ " as p" + " ON {p." + ProductModel.ACERCHEMVENDOR + "} = {v." + VendorModel.PK + "} }" + " where {p."
+				+ ProductModel.CODE + "} = ?prodCode";
+
 		final Map<String, Object> params = new HashMap<String, Object>();
 		final StringBuilder builder = new StringBuilder(SQL);
-		params.put("prodCode",  productCode );
-		
+		params.put("prodCode", productCode);
+
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(builder.toString());
 		query.addQueryParameters(params);
-		
+
 		final SearchResult<VendorModel> result = flexibleSearchService.search(query);
-		
-		if(result.getCount() > 0){
+
+		if (result.getCount() > 0) {
 			return result.getResult().get(0);
 		}
 		return null;

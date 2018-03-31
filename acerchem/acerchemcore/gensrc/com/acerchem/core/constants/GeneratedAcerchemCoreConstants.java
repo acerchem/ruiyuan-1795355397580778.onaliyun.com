@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-3-29 15:20:33                          ---
+ * --- Generated at 2018-3-31 13:56:05                          ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.constants;

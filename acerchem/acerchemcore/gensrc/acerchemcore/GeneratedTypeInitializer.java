@@ -222,6 +222,8 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 				single_createattr_ImageFailedRecord_mediaData();
 			
+				single_createattr_ImageFailedRecord_mediaPK();
+			
 				single_createattr_ImageUploadedLog_imagePK();
 			
 				single_createattr_ImageUploadedLog_aliyunUrl();
@@ -503,6 +505,23 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 					"mediaData",  
 					null,
 					"Media",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_ImageFailedRecord_mediaPK() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"ImageFailedRecord", 
+					"mediaPK",  
+					null,
+					"java.lang.String",
 					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
 					null,
 					sqlColumnDefinitions
@@ -1048,6 +1067,8 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 		
 			single_setAttributeProperties_ImageFailedRecord_mediaData();
 		
+			single_setAttributeProperties_ImageFailedRecord_mediaPK();
+		
 				{
 				Map customPropsMap = new HashMap();
 				
@@ -1504,6 +1525,28 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							setAttributeProperties(
 								"ImageFailedRecord", 
 								"mediaData",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_ImageFailedRecord_mediaPK() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"ImageFailedRecord", 
+								"mediaPK",
 								false, 
 								null,
 								null,

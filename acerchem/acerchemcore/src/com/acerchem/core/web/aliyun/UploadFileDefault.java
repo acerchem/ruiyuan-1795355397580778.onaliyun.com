@@ -98,15 +98,19 @@ public class UploadFileDefault {
 		return bucketName;
 	}
 
+	public static OSSClient openClient() {
+		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
+		return ossClient;
+	}
 	/**
 	 * 上传流文件
 	 * 
 	 * @param input
 	 * @throws IOException
 	 */
-	public static boolean uploadFile(InputStream input, String key) throws IOException {
+	public static boolean uploadFile(InputStream input, String key,OSSClient  ossClient) throws IOException {
 
-		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
+		//OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
 
 		try {
 			// 确立bucket
@@ -114,47 +118,57 @@ public class UploadFileDefault {
 			// 上传
 			ossClient.putObject(bucketName, key, input);
 		} catch (OSSException oe) {
+			
+//			ossClient.shutdown();
 			return false;
 		} catch (ClientException ce) {
+//			ossClient.shutdown();
 			return false;
 
-		} finally {
-			/*
-			 * Do not forget to shut down the client finally to release all
-			 * allocated resources.
-			 */
-			ossClient.shutdown();
+//		} finally {
+//			/*
+//			 * Do not forget to shut down the client finally to release all
+//			 * allocated resources.
+//			 */
+//			ossClient.shutdown();
 		}
 
 		return true;
 	}
 
 	// 上传本地文件
-	public static boolean uploadFile(File local, String key) throws IOException {
+	public static boolean uploadFile(File local, String key,OSSClient client) throws IOException {
 
-		OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
+		//OSSClient ossClient = new OSSClient(endpoint, accessKeyId, accessKeySecret);
+		//OSSClient Client = ossClient;
 		try {
 			// 确立bucket
-			CreateBucketExist(ossClient, bucketName);
+			CreateBucketExist(client, bucketName);
 			// 上传
-			ossClient.putObject(bucketName, key, local);
+			client.putObject(bucketName, key, local);
 
 		} catch (OSSException oe) {
+//			ossClient.shutdown();
 			return false;
 		} catch (ClientException ce) {
+//			ossClient.shutdown();
 			return false;
 
-		} finally {
-			/*
-			 * Do not forget to shut down the client finally to release all
-			 * allocated resources.
-			 */
-			ossClient.shutdown();
+//		} finally {
+//			/*
+//			 * Do not forget to shut down the client finally to release all
+//			 * allocated resources.
+//			 */
+//			ossClient.shutdown();
 		}
 
 		return true;
 	}
 
+	public static void closeClient(OSSClient client){
+		client.shutdown();
+	}
+	
 	private static void CreateBucketExist(OSSClient ossClient, String buketName) {
 
 		/*
@@ -314,12 +328,17 @@ public class UploadFileDefault {
 		File file = new File("E:/company/image/59ddcd8cN50a50637.jpg");
 
 		String suffixKey = file.getName().substring(file.getName().lastIndexOf(".") + 1);
+		System.out.println(file.getAbsolutePath());
 		// 计算下上传文件时间
 		long startTime = System.currentTimeMillis();
+		OSSClient client = UploadFileDefault.openClient();
 		try {
-			uploadFile(file, key + suffixKey);
+			uploadFile(file, key + suffixKey,client);
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		finally{
+			UploadFileDefault.closeClient(client);
 		}
 
 		long endTime = System.currentTimeMillis();
