@@ -44,7 +44,7 @@
 
 		</enumtype>
 		<!-- 客户等级代码 -->
-		<enumtype code="CustomerLevelClassification" autocreate="true"
+		<enumtype code="UserLevelClassification" autocreate="true"
 			generate="true" dynamic="true">
 			<description>客户等级</description>
 			<value code="A" />
@@ -81,7 +81,7 @@
 		<!-- 用户等级和用户一对多关系 -->
 		<relation code="AcerChemCustomerLevel2User" generate="true"
 			localized="false" autocreate="true">
-			<sourceElement qualifier="customerLevel" type="CustomerLevel" cardinality="one">
+			<sourceElement qualifier="userLevel" type="UserLevel" cardinality="one">
 				<modifiers read="true" write="true" search="true"
 					optional="true" />
 			</sourceElement>
@@ -272,9 +272,9 @@
 			</itemtype>
 			
 			<!-- 客户等级 -->
-			<itemtype code="CustomerLevel" autocreate="true"
-				generate="true">
-				<deployment table="CustomerLevel" typecode="20103" />
+			<itemtype code="UserLevel" autocreate="true"
+				generate="true" extends="UserGroup">
+				<deployment table="UserLevel" typecode="20104" />
 				<attributes>
 					<attribute qualifier="levelName" type="java.lang.String">
 						<description>等级名称</description>
@@ -282,7 +282,7 @@
 							optional="true" />
 						<persistence type="property" />
 					</attribute>
-					<attribute qualifier="levelCode" type="CustomerLevelClassification">
+					<attribute qualifier="levelCode" type="UserLevelClassification">
 						<description>等级代码</description>
 						<modifiers read="true" write="true" search="true"
 							optional="true" />

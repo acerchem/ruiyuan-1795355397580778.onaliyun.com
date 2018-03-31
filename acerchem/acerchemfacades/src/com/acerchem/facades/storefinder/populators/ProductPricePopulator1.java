@@ -1,5 +1,6 @@
 package com.acerchem.facades.storefinder.populators;
 
+import com.acerchem.core.model.UserLevelModel;
 import de.hybris.platform.commercefacades.product.PriceDataFactory;
 import de.hybris.platform.commercefacades.product.converters.populator.AbstractProductPopulator;
 import de.hybris.platform.commercefacades.product.converters.populator.ProductPricePopulator;
@@ -76,6 +77,27 @@ public class ProductPricePopulator1<SOURCE extends ProductModel, TARGET extends 
 			final PriceData priceData = getPriceDataFactory().create(priceType, BigDecimal.valueOf(info.getPriceValue().getValue()),
 					info.getPriceValue().getCurrencyIso());
 			productData.setPrice(priceData);
+
+            //====================================================================
+            //新增折扣价格转换
+            UserLevelModel userLevel = user.getUserLevel();
+
+            if(userLevel!=null){
+
+                Double discount = userLevel.getDiscount();
+
+                if(discount!=null&&userLevel!=null){
+                    BigDecimal promotion = BigDecimal.valueOf(info.getPriceValue().getValue()).multiply(BigDecimal.valueOf(discount));
+
+                    final PriceData promotionPrice = getPriceDataFactory().create(priceType, promotion,info.getPriceValue().getCurrencyIso());
+                    productData.setPrice(promotionPrice);
+                }
+            }
+
+
+
+            //====================================================================
+
 		}
 		else
 		{
