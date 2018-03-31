@@ -5,126 +5,93 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-
 <c:set var="noBorder" value=""/>
 <c:if test="${not empty addressData}">
     <c:set var="noBorder" value="no-border"/>
 </c:if>
 
-<div class="account-section-header ${noBorder}">
-    <spring:theme code="text.account.addressBook"/>
+<div class="title">Address Book</div>
+<c:if test="${empty addressData}">
+	<div class="account-section-content content-empty">No Saved Addresses Found</div>
+</c:if>
 
-        <ycommerce:testId code="addressBook_addNewAddress_button">
-            <div class="account-section-header-add pull-right">
-                <a href="add-address">
-                    <spring:theme code="text.account.addressBook.addAddress"/>
-                </a>
-            </div>
-        </ycommerce:testId>
-    </div>
-</div>
-
-<div class="account-addressbook account-list">
-    <c:if test="${empty addressData}">
-		<div class="account-section-content content-empty">
-			<spring:theme code="text.account.addressBook.noSavedAddresses" />
-		</div>
-    </c:if>
-
-    <c:if test="${not empty addressData}">
-	    <div class="account-cards card-select">
-			<div class="row">
-				<c:forEach items="${addressData}" var="address">
-					<div class="col-xs-12 col-sm-6 col-md-4 card">
-						<ul class="pull-left">
-							<li>
-								<strong>${fn:escapeXml(address.title)}&nbsp;${fn:escapeXml(address.firstName)}&nbsp;${fn:escapeXml(address.lastName)}
-									<c:if test="${address.defaultAddress}">
-										(<spring:theme code="text.default"/>)
-									</c:if>
-								</strong>
-							</li>
-							<li>${fn:escapeXml(address.line1)}</li>
-							<c:if test="${not empty fn:escapeXml(address.line2)}">
-								<li>${fn:escapeXml(address.line2)}</li>
-							</c:if>
-							<li>${fn:escapeXml(address.town)}&nbsp;${fn:escapeXml(address.region.name)}</li>
-							<li> ${fn:escapeXml(address.country.name)}&nbsp;${fn:escapeXml(address.postalCode)}</li>
-							<li>${fn:escapeXml(address.phone)}</li>
-						</ul>
-
-						<c:if test="${not address.defaultAddress}">
-							<ycommerce:testId code="addressBook_isDefault_button">
-								<a class="account-set-default-address" href="set-default-address/${fn:escapeXml(address.id)}">
-									<spring:theme code="text.setDefault"/>
-								</a>
-							</ycommerce:testId>
-						</c:if>
-						<div class="account-cards-actions pull-left">
-							<ycommerce:testId code="addressBook_editAddress_button">
-								<a class="action-links" href="edit-address/${fn:escapeXml(address.id)}">
-									<span class="glyphicon glyphicon-pencil"></span>
-								</a>
-							</ycommerce:testId>
-							<ycommerce:testId code="addressBook_removeAddress_button">
-								<a href="#" class="action-links removeAddressFromBookButton" data-address-id="${fn:escapeXml(address.id)}" data-popup-title="<spring:theme code="text.address.delete.popup.title" />">
-									<span class="glyphicon glyphicon-remove"></span>
-								</a>
-							</ycommerce:testId>
-						</div>
-					</div>
-				</c:forEach>
-			</div>
-			
+<c:if test="${not empty addressData}">    
+	<div class="rigcont">
+		<div class="addbook">
 			<c:forEach items="${addressData}" var="address">
-		        <div class="display-none">
-		       	 	<div id="popup_confirm_address_removal_${fn:escapeXml(address.id)}" class="account-address-removal-popup">
-		        		<div class="addressItem">
-		        			<spring:theme code="text.address.remove.following" />
-		       				
-		       				<div class="address">
-						        <strong>
-						        ${fn:escapeXml(address.title)}&nbsp;
-						        ${fn:escapeXml(address.firstName)}&nbsp;
-						        ${fn:escapeXml(address.lastName)}
-						        </strong>
-						        <br>
-						        ${fn:escapeXml(address.line1)}&nbsp;
-						        ${fn:escapeXml(address.line2)}
-						        <br>
-						        ${fn:escapeXml(address.town)}&nbsp;
-						        <c:if test="${not empty address.region.name }">
-						            ${fn:escapeXml(address.region.name)}&nbsp;
+				<ul>
+					<li ${address.defaultAddress==true?'class="def"':'class="row"'}>
+						<div class="row">
+							<span class="row-left name">${fn:escapeXml(address.title)}&nbsp;${fn:escapeXml(address.firstName)}&nbsp;${fn:escapeXml(address.lastName)}</span>
+							<a href="set-default-address/${fn:escapeXml(address.id)}">
+								<span class="row-left setdef">default</span>
+							</a>
+						</div>
+						<div class="row alone">
+							<span class="text">
+								<c:if test="${not empty address.line1}">
+						            ${fn:escapeXml(address.line1)},
 						        </c:if>
-						        <br>
-						        ${fn:escapeXml(address.country.name)}&nbsp;
-						        ${fn:escapeXml(address.postalCode)}
-						        <br/>
-						
-						
-						        ${fn:escapeXml(address.phone)}
-		       				</div>
-					        
-					        <div class="modal-actions">
-                                <div class="row">
-                                    <ycommerce:testId code="addressRemove_delete_button">
-                                        <div class="col-xs-12 col-sm-6 col-sm-push-6">
-                                            <a class="btn btn-primary btn-block" data-address-id="${fn:escapeXml(address.id)}" href="remove-address/${fn:escapeXml(address.id)}">
-                                                <spring:theme code="text.address.delete" />
-                                            </a>
-                                        </div>
-                                    </ycommerce:testId>
-                                    <div class="col-xs-12 col-sm-6 col-sm-pull-6">
-                                        <a class="btn btn-default btn-block closeColorBox" data-address-id="${fn:escapeXml(address.id)}">
-                                            <spring:theme code="text.button.cancel"/>
-                                        </a>
-                                    </div>
-					       	    </div>
-					       	</div>
-		        		</div>
-		        	</div>
-		        </div>
-		    </c:forEach>
-	    </div>
-    </c:if>
-</div>
+						        <c:if test="${not empty address.line2}">
+						            ${fn:escapeXml(address.line2)},
+						        </c:if>
+								<c:if test="${not empty address.town}">
+						            ${fn:escapeXml(address.town)},
+						        </c:if>
+						        <c:if test="${not empty address.region.name}">
+						            ${fn:escapeXml(address.region.name)},
+						        </c:if>
+								<c:if test="${not empty address.postalCode}">
+						            ${fn:escapeXml(address.postalCode)},
+						        </c:if>
+						        <c:if test="${not empty address.country.name}">
+						            ${fn:escapeXml(address.country.name)}
+						        </c:if>
+							</span>
+							<span class="phone">${fn:escapeXml(address.phone)}</span>
+						</div>
+						<div class="row operate">
+							<a href="edit-address/${fn:escapeXml(address.id)}">
+								<i class="icons edit-icon"></i>
+							</a>
+							<a href="#" class="action-links removeAddressFromBookButton" data-address-id="${fn:escapeXml(address.id)}" data-popup-title="<spring:theme code="text.address.delete.popup.title" />">
+								<i class="icons del-icon"></i>
+							</a>
+						</div>
+					</li>
+				</ul>
+			</c:forEach>
+		</div>
+		<div class="btn-set">	
+	        <a href="add-address" class="btn btn-newadd">
+	            New Address
+	        </a>
+		</div>
+	</div>
+</c:if>
+
+<c:forEach items="${addressData}" var="address">
+	<div class="display-none">
+    	<div id="popup_confirm_address_removal_${fn:escapeXml(address.id)}" class="account-address-removal-popup">
+     		<div class="text">Whether to delete this address ?</div>
+     		<br/>
+     		<div class="modal-actions">
+            	<div class="row">
+                	<ycommerce:testId code="addressRemove_delete_button">
+                    	<div class="col-xs-12 col-sm-6 col-sm-push-6">
+                        	<a class="btn btn-primary btn-block" data-address-id="${fn:escapeXml(address.id)}" href="remove-address/${fn:escapeXml(address.id)}">
+                                <spring:theme code="text.address.delete" />
+                            </a>
+                        </div>
+                    </ycommerce:testId>
+	                <div class="col-xs-12 col-sm-6 col-sm-pull-6">
+		                <a class="btn btn-default btn-block closeColorBox" data-address-id="${fn:escapeXml(address.id)}">
+		                    <spring:theme code="text.button.cancel"/>
+		                </a>
+		             </div>
+	       	  	</div>
+       		</div>
+     	</div>
+    </div>
+</c:forEach>
+			
