@@ -22,21 +22,18 @@
 		<property name="code" type="String"/>
 		<property name="name" type="String"/>
 	</bean>
-	
-	<!-- shaun.sheng -->
-	<!--创建futureStockLevelData添加两个字段  -->
-	<bean class="com.acerchem.facades.product.data.FutureStockLevelData">
-		<property name="futureStockLevel" type="java.lang.Integer"/>
-		<property name="releaseDay" type="java.lang.Integer"/>
-		<property name="warehouseCode" type="java.lang.String"/>
-	</bean>
-	
-	
-	<!--在stockData中添加字段(list)  -->
+
 	<bean class="de.hybris.platform.commercefacades.product.data.StockData">
-		<property name="futureStock" type="java.util.List&lt;com.acerchem.facades.product.data.FutureStockLevelData>"/>
+		<property name="futureStockLevel" type="java.lang.Long"/>
+		<property name="futureReleaseDay" type="java.lang.Integer"/>
+		<property name="warehouseCode" type="java.lang.String"/>
+		<property name="avaReleaseDay" type="java.lang.Integer"/>
 	</bean>
-	<!-- shaun.sheng -->
+
+	<bean class="com.acerchem.facades.product.data.StockDataList">
+		<property name="stockDataList" type="java.util.List&lt;de.hybris.platform.commercefacades.product.data.StockData>"/>
+	</bean>
+
 
 	<bean class="de.hybris.platform.commercefacades.order.data.OrderEntryData">
 		<property name="warehouseCode" type="java.lang.String"/>
@@ -65,13 +62,13 @@
     </bean>
 
 	<bean class="de.hybris.platform.commercefacades.order.data.AddToCartParams">
-		<property name="warehouseCode" type="String"/>
 		<property name="isUseFutureStock" type="Boolean"/>
+		<property name="availableDate" type="java.util.Date"/>
 	</bean>
 
 	<bean class="de.hybris.platform.commerceservices.service.data.CommerceCartParameter">
-		<property name="warehouseCode" type="String"/>
 		<property name="isUseFutureStock" type="Boolean"/>
+		<property name="availableDate" type="java.util.Date"/>
 	</bean>
 
 </beans>

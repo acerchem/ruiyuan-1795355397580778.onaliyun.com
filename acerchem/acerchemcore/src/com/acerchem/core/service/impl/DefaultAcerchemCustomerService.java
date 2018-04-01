@@ -24,6 +24,7 @@ public class DefaultAcerchemCustomerService implements AcerchemCustomerService {
     public SearchPageData<PointOfServiceModel> getAllPos(final BaseStoreModel baseStore, final PageableData pageableData) {
         Map<String, Object> paramMap = new HashMap<String, Object>();
         paramMap.put("baseStore", baseStore);
+        paramMap.put("type",PointOfServiceTypeEnum.POS);
 
         final SearchPageData<PointOfServiceModel> posResults = acerchemCustomerDao.getAllPos(paramMap, pageableData);
 

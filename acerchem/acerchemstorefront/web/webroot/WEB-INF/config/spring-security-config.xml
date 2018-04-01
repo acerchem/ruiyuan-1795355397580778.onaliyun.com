@@ -151,6 +151,7 @@
 		<property name="cookieSecure" value="true" />
 		<property name="cookieName" value="acceleratorSecureGUID" />
 		<property name="httpOnly" value="true"/>
+		<property name="cookieMaxAge" value="1209600"/>		
 	</bean>
 
 	<bean id="autoLoginStrategy" class="com.acerchem.storefront.security.impl.DefaultAutoLoginStrategy" >

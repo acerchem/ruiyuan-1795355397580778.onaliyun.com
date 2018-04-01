@@ -107,10 +107,10 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 		);
 	
 		createItemType(
-			"CustomerLevel",
-			"GenericItem",
-			com.acerchem.core.jalo.CustomerLevel.class,
-			"de.hybris.platform.persistence.acerchemcore_CustomerLevel",
+			"UserLevel",
+			"UserGroup",
+			com.acerchem.core.jalo.UserLevel.class,
+			"de.hybris.platform.persistence.acerchemcore_UserLevel",
 			false,
 			null,
 			false
@@ -146,6 +146,16 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			false
 		);
 	
+		createItemType(
+			"CountryTrayFareConf",
+			"GenericItem",
+			com.acerchem.core.jalo.CountryTrayFareConf.class,
+			"de.hybris.platform.persistence.acerchemcore_CountryTrayFareConf",
+			false,
+			null,
+			false
+		);
+	
 		createRelationType(
 			"AcerChemVendor2Product",
 			null,
@@ -169,7 +179,7 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 		);
 	
 		createEnumerationType(
-			"CustomerLevelClassification",
+			"UserLevelClassification",
 			null
 		);
 	
@@ -230,11 +240,11 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 				single_createattr_ImageUploadedLog_location();
 			
-				single_createattr_CustomerLevel_levelName();
+				single_createattr_UserLevel_levelName();
 			
-				single_createattr_CustomerLevel_levelCode();
+				single_createattr_UserLevel_levelCode();
 			
-				single_createattr_CustomerLevel_discount();
+				single_createattr_UserLevel_discount();
 			
 				single_createattr_Product_chemicalInfo();
 			
@@ -258,11 +268,17 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 				single_createattr_StockLevel_preOrderReleaseDay();
 			
+				single_createattr_StockLevel_avaPreOrderReleaseDay();
+			
 				single_createattr_AbstractOrderEntry_isUseFutureStock();
 			
-				single_createattr_AbstractOrderEntry_warehouseCode();
+				single_createattr_AbstractOrderEntry_availableDate();
 			
-				single_createattr_AbstractOrderEntry_shipDate();
+				single_createattr_CountryTrayFareConf_country();
+			
+				single_createattr_CountryTrayFareConf_trayAmount();
+			
+				single_createattr_CountryTrayFareConf_price();
 			
 		createRelationAttributes(
 			"AcerChemVendor2Product", 
@@ -288,8 +304,8 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			"AcerChemCustomerLevel2User", 
 			false, 
 
-			"customerLevel", 
-			"CustomerLevel", 
+			"userLevel", 
+			"UserLevel", 
 			true,
 			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
 			false,
@@ -580,13 +596,13 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 	}
 	
-	public void single_createattr_CustomerLevel_levelName() throws JaloBusinessException
+	public void single_createattr_UserLevel_levelName() throws JaloBusinessException
 	{
 		
 						Map sqlColumnDefinitions = null;
 					
 				createPropertyAttribute(
-					"CustomerLevel", 
+					"UserLevel", 
 					"levelName",  
 					null,
 					"java.lang.String",
@@ -597,16 +613,16 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 	}
 	
-	public void single_createattr_CustomerLevel_levelCode() throws JaloBusinessException
+	public void single_createattr_UserLevel_levelCode() throws JaloBusinessException
 	{
 		
 						Map sqlColumnDefinitions = null;
 					
 				createPropertyAttribute(
-					"CustomerLevel", 
+					"UserLevel", 
 					"levelCode",  
 					null,
-					"CustomerLevelClassification",
+					"UserLevelClassification",
 					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
 					null,
 					sqlColumnDefinitions
@@ -614,13 +630,13 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 	}
 	
-	public void single_createattr_CustomerLevel_discount() throws JaloBusinessException
+	public void single_createattr_UserLevel_discount() throws JaloBusinessException
 	{
 		
 						Map sqlColumnDefinitions = null;
 					
 				createPropertyAttribute(
-					"CustomerLevel", 
+					"UserLevel", 
 					"discount",  
 					null,
 					"java.lang.Double",
@@ -818,6 +834,23 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 	}
 	
+	public void single_createattr_StockLevel_avaPreOrderReleaseDay() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"StockLevel", 
+					"avaPreOrderReleaseDay",  
+					null,
+					"java.lang.Integer",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
 	public void single_createattr_AbstractOrderEntry_isUseFutureStock() throws JaloBusinessException
 	{
 		
@@ -835,16 +868,16 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 	}
 	
-	public void single_createattr_AbstractOrderEntry_warehouseCode() throws JaloBusinessException
+	public void single_createattr_AbstractOrderEntry_availableDate() throws JaloBusinessException
 	{
 		
 						Map sqlColumnDefinitions = null;
 					
 				createPropertyAttribute(
 					"AbstractOrderEntry", 
-					"warehouseCode",  
+					"availableDate",  
 					null,
-					"java.lang.String",
+					"java.util.Date",
 					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
 					null,
 					sqlColumnDefinitions
@@ -852,16 +885,50 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 	}
 	
-	public void single_createattr_AbstractOrderEntry_shipDate() throws JaloBusinessException
+	public void single_createattr_CountryTrayFareConf_country() throws JaloBusinessException
 	{
 		
 						Map sqlColumnDefinitions = null;
 					
 				createPropertyAttribute(
-					"AbstractOrderEntry", 
-					"shipDate",  
+					"CountryTrayFareConf", 
+					"country",  
 					null,
-					"java.util.Date",
+					"Country",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_CountryTrayFareConf_trayAmount() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"CountryTrayFareConf", 
+					"trayAmount",  
+					null,
+					"java.lang.Integer",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_CountryTrayFareConf_price() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"CountryTrayFareConf", 
+					"price",  
+					null,
+					"java.lang.Double",
 					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
 					null,
 					sqlColumnDefinitions
@@ -911,7 +978,7 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 		);
 	
 		createEnumerationValues(
-			"CustomerLevelClassification",
+			"UserLevelClassification",
 			true,
 			Arrays.asList( new String[] {
 			
@@ -956,8 +1023,8 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 		connectRelation(
 			"AcerChemCustomerLevel2User", 
 			false, 
-			"customerLevel", 
-			"CustomerLevel", 
+			"userLevel", 
+			"UserLevel", 
 			true,
 			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
 			"customers", 
@@ -1092,7 +1159,7 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 				Map customPropsMap = new HashMap();
 				
 				setItemTypeProperties(
-					"CustomerLevel",
+					"UserLevel",
 					false,
 					true,
 					true,
@@ -1101,11 +1168,11 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 				);
 				}
 			
-			single_setAttributeProperties_CustomerLevel_levelName();
+			single_setAttributeProperties_UserLevel_levelName();
 		
-			single_setAttributeProperties_CustomerLevel_levelCode();
+			single_setAttributeProperties_UserLevel_levelCode();
 		
-			single_setAttributeProperties_CustomerLevel_discount();
+			single_setAttributeProperties_UserLevel_discount();
 		
 				{
 				Map customPropsMap = new HashMap();
@@ -1218,6 +1285,8 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 			single_setAttributeProperties_StockLevel_preOrderReleaseDay();
 		
+			single_setAttributeProperties_StockLevel_avaPreOrderReleaseDay();
+		
 				{
 				Map customPropsMap = new HashMap();
 				
@@ -1230,9 +1299,26 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 			single_setAttributeProperties_AbstractOrderEntry_isUseFutureStock();
 		
-			single_setAttributeProperties_AbstractOrderEntry_warehouseCode();
+			single_setAttributeProperties_AbstractOrderEntry_availableDate();
 		
-			single_setAttributeProperties_AbstractOrderEntry_shipDate();
+				{
+				Map customPropsMap = new HashMap();
+				
+				setItemTypeProperties(
+					"CountryTrayFareConf",
+					false,
+					true,
+					true,
+					null,
+					customPropsMap
+				);
+				}
+			
+			single_setAttributeProperties_CountryTrayFareConf_country();
+		
+			single_setAttributeProperties_CountryTrayFareConf_trayAmount();
+		
+			single_setAttributeProperties_CountryTrayFareConf_price();
 		
 				setDefaultProperties(
 					"GenderList",
@@ -1263,7 +1349,7 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 				);
 			
 				setDefaultProperties(
-					"CustomerLevelClassification",
+					"UserLevelClassification",
 					true,
 					true,
 					null
@@ -1625,7 +1711,7 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							);
 						}
 					
-						public void single_setAttributeProperties_CustomerLevel_levelName() throws JaloBusinessException
+						public void single_setAttributeProperties_UserLevel_levelName() throws JaloBusinessException
 						{
 							
 							
@@ -1633,7 +1719,7 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							Map customPropsMap = new HashMap();
 							
 							setAttributeProperties(
-								"CustomerLevel", 
+								"UserLevel", 
 								"levelName",
 								false, 
 								null,
@@ -1647,7 +1733,7 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							);
 						}
 					
-						public void single_setAttributeProperties_CustomerLevel_levelCode() throws JaloBusinessException
+						public void single_setAttributeProperties_UserLevel_levelCode() throws JaloBusinessException
 						{
 							
 							
@@ -1655,7 +1741,7 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							Map customPropsMap = new HashMap();
 							
 							setAttributeProperties(
-								"CustomerLevel", 
+								"UserLevel", 
 								"levelCode",
 								false, 
 								null,
@@ -1669,7 +1755,7 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							);
 						}
 					
-						public void single_setAttributeProperties_CustomerLevel_discount() throws JaloBusinessException
+						public void single_setAttributeProperties_UserLevel_discount() throws JaloBusinessException
 						{
 							
 							
@@ -1677,7 +1763,7 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							Map customPropsMap = new HashMap();
 							
 							setAttributeProperties(
-								"CustomerLevel", 
+								"UserLevel", 
 								"discount",
 								false, 
 								null,
@@ -1933,6 +2019,28 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							);
 						}
 					
+						public void single_setAttributeProperties_StockLevel_avaPreOrderReleaseDay() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"StockLevel", 
+								"avaPreOrderReleaseDay",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
 						public void single_setAttributeProperties_AbstractOrderEntry_isUseFutureStock() throws JaloBusinessException
 						{
 							
@@ -1955,7 +2063,7 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							);
 						}
 					
-						public void single_setAttributeProperties_AbstractOrderEntry_warehouseCode() throws JaloBusinessException
+						public void single_setAttributeProperties_AbstractOrderEntry_availableDate() throws JaloBusinessException
 						{
 							
 							
@@ -1964,7 +2072,7 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							
 							setAttributeProperties(
 								"AbstractOrderEntry", 
-								"warehouseCode",
+								"availableDate",
 								false, 
 								null,
 								null,
@@ -1977,7 +2085,7 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							);
 						}
 					
-						public void single_setAttributeProperties_AbstractOrderEntry_shipDate() throws JaloBusinessException
+						public void single_setAttributeProperties_CountryTrayFareConf_country() throws JaloBusinessException
 						{
 							
 							
@@ -1985,8 +2093,52 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							Map customPropsMap = new HashMap();
 							
 							setAttributeProperties(
-								"AbstractOrderEntry", 
-								"shipDate",
+								"CountryTrayFareConf", 
+								"country",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_CountryTrayFareConf_trayAmount() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"CountryTrayFareConf", 
+								"trayAmount",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_CountryTrayFareConf_price() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"CountryTrayFareConf", 
+								"price",
 								false, 
 								null,
 								null,
@@ -2049,7 +2201,7 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 
 									setAttributeProperties(
 										"User", 
-										"customerLevel",
+										"userLevel",
 										false, 
 										null,
 										null,
@@ -2069,7 +2221,7 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 									
 
 									setAttributeProperties(
-										"CustomerLevel", 
+										"UserLevel", 
 										"customers",
 										false, 
 										null,

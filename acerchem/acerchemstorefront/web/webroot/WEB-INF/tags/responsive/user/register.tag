@@ -28,39 +28,40 @@
 	</div>
 	
 	<form:form method="post" commandName="customRegisterForm" name="customRegisterForm" class="both" action="${action}">
+	
 		<label>
 			<span class='label-title'>Email</span>	
-			<input id="register.email" type="text" name='email' value=""  alt='Please Enter Email' class="required">
+			<input id="email" type="text" name='email' value="${customRegisterForm.email}"  alt='Please Enter Email' class="required">
 			<div style="color:#F00"><form:errors path="email"/></div>
 		</label>
 
 		<label>
-			<span class='label-title'>Contacts</span>	
-			<input id="register.contacts" type="text" name='contacts' value="" alt='Please Enter Contacts Name'>
+			<span class='label-title'>Name</span>	
+			<input id="contacts" type="text" name='contacts' value="${customRegisterForm.contacts}" alt='Please Enter Contacts Name' class="required">
 			<div style="color:#F00"><form:errors path="contacts"/></div>
 		</label>
 		
 		<label>
 			<span class='label-title'>password</span>	
-			<input id="pwd" type="password" name='pwd'  alt='Please Enter Password' value="" autocomplete="off"/>
+			<input id="pwd" type="password" name='pwd'  alt='Please Enter Password' value="${customRegisterForm.pwd}" autocomplete="off" class="required"/>
 			<div style="color:#F00"><form:errors path="pwd"/></div>
 		</label>
 		
 		<label>
 			<span class='label-title'>checkPwd</span>	
-			<input id="register.checkPwd" type="password" name='checkPwd' autocomplete="off" value="" alt='Please Enter checkPwd'/>
+			<input id="checkPwd" type="password" name='checkPwd' autocomplete="off" value="${customRegisterForm.checkPwd}" alt='Please Enter checkPwd' class="required"/>
 			<div style="color:#F00"><form:errors path="checkPwd"/></div>
 		</label>
 		
 		<label>
-			<span class='label-title'>Your Name</span>	
-			<input id="register.name" type="text" name='name' value=""  alt='Please Enter Your Name'>
+			<span class='label-title'>Nickname</span>	
+			<input id="name" type="text" name='name' value="${customRegisterForm.name}"  alt='Please Enter Your Name' class="required"/>
 			<div style="color:#F00"><form:errors path="name"/></div>
 		</label>
 
 		<label>
 			<span class='label-title'>Telephone</span>	
-			<input id="register.telephone" type="text" name='telephone' value="" alt='Please Enter Telephone'>
+			<input id="telephone" type="text" name='telephone' value="${customRegisterForm.telephone}" alt='Please Enter Telephone' class="required"/>
 			<div style="color:#F00"><form:errors path="telephone"/></div>
 		</label>
 		
@@ -69,9 +70,9 @@
 				<div class="flex">
 					<span class='label-title'>Currency</span>	
 					<div class="selbox">
-							<select name="currency" id="register.currency">
+							<select name="currency" id="currency">
 								<c:forEach items="${currencies}" var="curr">
-									<option value="${curr.isocode}" ${curr.isocode == currentCurrency.isocode ? 'selected="selected"' : ''}>
+									<option value="${curr.isocode}" ${(customRegisterForm.currency!=null&&curr.isocode == customRegisterForm.currency)||(customRegisterForm.currency==null&&curr.isocode == currentCurrency.isocode) ? 'selected="selected"' : ''}>
 										<c:out value="${curr.symbol} ${curr.isocode}"/>
 									</option>
 								</c:forEach>
@@ -82,10 +83,10 @@
 				<div class="flex">
 					<span class='label-title'>Language</span>	
 					<div class="selbox">
-							<select name="language" id="register.language">
+							<select name="language" id="language">
 								<c:forEach items="${languages}" var="lang">
 									<c:choose>
-										<c:when test="${lang.isocode == currentLanguage.isocode}">
+										<c:when test="${(customRegisterForm.language==null&&lang.isocode == currentLanguage.isocode)||(customRegisterForm.language!=null&&lang.isocode == customRegisterForm.language)}">
 											<option value="${lang.isocode}" selected="selected" lang="${lang.isocode}">
 												${lang.nativeName}
 											</option>
@@ -98,7 +99,7 @@
 									</c:choose>
 								</c:forEach>
 							</select>
-							<div style="color:#F00"><form:errors path=""/></div>
+							<div style="color:#F00"><form:errors path="language"/></div>
 					</div>	
 				</div>
 			</div>
@@ -106,10 +107,9 @@
 
 		<label>
 			<span class='label-title'>Mobile Number</span>	
-			<input type="text" name='mobileNumber' id="register.mobileNumber" value="" alt='Please Enter Mobile Phone'>
+			<input type="text" name='mobileNumber' id="mobileNumber" value="${customRegisterForm.mobileNumber}" alt='Please Enter Mobile Phone' class="required"/>
 			<div style="color:#F00"><form:errors path="mobileNumber"/></div>
 		</label>
-		
 		
 		<label>
 			<span class='label-title'>Shipping Address</span>	
@@ -117,7 +117,7 @@
 				<div class="flex">					
 					<div class="selbox">
 						<div id="selectShipCountry" data-address-code="${fn:escapeXml(addressData.id)}" data-country-iso-code="${fn:escapeXml(addressData.country.isocode)}" class="form-group">
-							<formElement:customSelectBox idKey="register.shipAddressCountry" labelKey="address.country" path="shipAddress.countryIso" mandatory="true" skipBlank="false" skipBlankMessageKey="address.country" items="${countries}" itemValue="isocode" selectedValue="${register.shipAddress.countryIso}"/>
+							<formElement:customSelectBox idKey="shipAddress.countryIso" labelKey="address.country" path="shipAddress.countryIso" mandatory="true" skipBlank="false" skipBlankMessageKey="address.country" items="${countries}" itemValue="isocode" selectedValue="${customRegisterForm.shipAddress.countryIso}"/>
 							<div style="color:#F00"><form:errors path="shipAddress.countryIso"/></div>
 						</div>
 					</div>
@@ -125,13 +125,13 @@
 				<div class="flex">					
 					<div class="selbox">	
 						<div id="showShipRegions" class="showShipRegions">
-							<formElement:customSelectBox idKey="register.shipAddressRegion" labelKey="address.province" path="shipAddress.regionIso" mandatory="true" skipBlank="false" skipBlankMessageKey="address.selectProvince" items="${regions}" itemValue="${useShortRegionIso ? 'isocodeShort' : 'isocode'}" selectedValue="${register.shipAddress.regionIso}"/>
+							<formElement:customSelectBox idKey="shipAddress.regionIso" labelKey="address.province" path="shipAddress.regionIso" mandatory="true" skipBlank="false" skipBlankMessageKey="address.selectProvince" items="${regions}" itemValue="${useShortRegionIso ? 'isocodeShort' : 'isocode'}" selectedValue="${customRegisterForm.shipAddress.regionIso}"/>
 							<div style="color:#F00"><form:errors path="shipAddress.regionIso"/></div>
 						</div>
 					</div>	
 				</div>
 			</div>
-			<input type="text" id="register.shipAddress.townCity" name='shipAddress.townCity' value="" class="lab-row" placeholder="Detailed address" alt='Please Enter Shipping Detailed Address'/>
+			<input type="text" id="shipAddress.townCity" name='shipAddress.townCity' value="${customRegisterForm.shipAddress.townCity}" placeholder="Detailed address" alt='Please Enter Shipping Detailed Address' class="lab-row required"/>
 			<div style="color:#F00"><form:errors path="shipAddress.townCity"/></div>
 		</label>
 
@@ -141,7 +141,7 @@
 				<div class="flex">					
 					<div class="selbox">
 						<div id="selectContactCountry" data-address-code="${fn:escapeXml(addressData.id)}" data-country-iso-code="${fn:escapeXml(addressData.country.isocode)}" class="form-group">
-							<formElement:customSelectBox idKey="register.contactAddressCountry" labelKey="address.country" path="contactAddress.countryIso" mandatory="true" skipBlank="false" skipBlankMessageKey="address.country" items="${countries}" itemValue="isocode" selectedValue="${register.contactAddress.countryIso}"/>
+							<formElement:customSelectBox idKey="contactAddress.countryIso" labelKey="address.country" path="contactAddress.countryIso" mandatory="true" skipBlank="false" skipBlankMessageKey="address.country" items="${countries}" itemValue="isocode" selectedValue="${customRegisterForm.contactAddress.countryIso}" />
 							<div style="color:#F00"><form:errors path="contactAddress.countryIso"/></div>
 						</div>
 					</div>
@@ -149,13 +149,13 @@
 				<div class="flex">					
 					<div class="selbox">	
 						<div id="showContactRegions" class="showContactRegions">
-							<formElement:customSelectBox idKey="register.contactAddressRegion" labelKey="address.province" path="contactAddress.regionIso" mandatory="true" skipBlank="false" skipBlankMessageKey="address.selectProvince" items="${regions}" itemValue="${useShortRegionIso ? 'isocodeShort' : 'isocode'}" selectedValue="${register.contactAddress.regionIso}"/>
+							<formElement:customSelectBox idKey="contactAddress.regionIso" labelKey="address.province" path="contactAddress.regionIso" mandatory="true" skipBlank="false" skipBlankMessageKey="address.selectProvince" items="${regions}" itemValue="${useShortRegionIso ? 'isocodeShort' : 'isocode'}" selectedValue="${customRegisterForm.contactAddress.regionIso}"/>
 							<div style="color:#F00"><form:errors path="contactAddress.regionIso"/></div>
 						</div>
 					</div>	
 				</div>
 			</div>
-			<input type="text" id="register.contactAddressDetail" name='contactAddress.townCity' value="" class="lab-row" placeholder="Detailed address" alt='Please Enter Contact Detailed Address'/>
+			<input type="text" id="contactAddress.townCity" name='contactAddress.townCity' value="${customRegisterForm.contactAddress.townCity}" class="lab-row required" placeholder="Detailed address" alt='Please Enter Contact Detailed Address'/>
 			<div style="color:#F00"><form:errors path="contactAddress.townCity"/></div>
 		</label>
 		
@@ -228,11 +228,11 @@ $(document).on("change",'#selectContactCountry select', function (){
 			});
 })
 	
-	inputint()	
-	$('.btn-submit').on('click',function(){
-		var req = $('#login form');
-		//required(req);
-		req.submit();
-	})
+inputint()	
+$('.btn-submit').on('click',function(){
+	var req = $('#login form');
+	verification(req);
+})
+
 </script>
 </body>

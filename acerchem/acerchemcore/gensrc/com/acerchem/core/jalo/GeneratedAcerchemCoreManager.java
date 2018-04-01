@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-3-31 13:56:05                          ---
+ * --- Generated at 2018-4-1 16:12:00                           ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.jalo;
@@ -10,10 +10,11 @@ import com.acerchem.core.constants.AcerchemCoreConstants;
 import com.acerchem.core.jalo.ApparelProduct;
 import com.acerchem.core.jalo.ApparelSizeVariantProduct;
 import com.acerchem.core.jalo.ApparelStyleVariantProduct;
-import com.acerchem.core.jalo.CustomerLevel;
+import com.acerchem.core.jalo.CountryTrayFareConf;
 import com.acerchem.core.jalo.ElectronicsColorVariantProduct;
 import com.acerchem.core.jalo.ImageFailedRecord;
 import com.acerchem.core.jalo.ImageUploadedLog;
+import com.acerchem.core.jalo.UserLevel;
 import de.hybris.platform.acceleratorcms.jalo.components.AbstractResponsiveBannerComponent;
 import de.hybris.platform.acceleratorcms.jalo.components.SimpleResponsiveBannerComponent;
 import de.hybris.platform.cms2.jalo.contents.components.SimpleCMSComponent;
@@ -88,15 +89,15 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 		ttmp.put("de.hybris.platform.acceleratorcms.jalo.components.SimpleResponsiveBannerComponent", Collections.unmodifiableMap(tmp));
 		tmp = new HashMap<String, AttributeMode>();
 		tmp.put("preOrderReleaseDay", AttributeMode.INITIAL);
+		tmp.put("avaPreOrderReleaseDay", AttributeMode.INITIAL);
 		ttmp.put("de.hybris.platform.ordersplitting.jalo.StockLevel", Collections.unmodifiableMap(tmp));
 		tmp = new HashMap<String, AttributeMode>();
 		tmp.put("isUseFutureStock", AttributeMode.INITIAL);
-		tmp.put("warehouseCode", AttributeMode.INITIAL);
-		tmp.put("shipDate", AttributeMode.INITIAL);
+		tmp.put("availableDate", AttributeMode.INITIAL);
 		ttmp.put("de.hybris.platform.jalo.order.AbstractOrderEntry", Collections.unmodifiableMap(tmp));
 		tmp = new HashMap<String, AttributeMode>();
-		tmp.put("customerLevelPOS", AttributeMode.INITIAL);
-		tmp.put("customerLevel", AttributeMode.INITIAL);
+		tmp.put("userLevelPOS", AttributeMode.INITIAL);
+		tmp.put("userLevel", AttributeMode.INITIAL);
 		ttmp.put("de.hybris.platform.jalo.user.User", Collections.unmodifiableMap(tmp));
 		DEFAULT_INITIAL_ATTRIBUTES = ttmp;
 	}
@@ -403,6 +404,115 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	}
 	
 	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrderEntry.availableDate</code> attribute.
+	 * @return the availableDate
+	 */
+	public Date getAvailableDate(final SessionContext ctx, final AbstractOrderEntry item)
+	{
+		return (Date)item.getProperty( ctx, AcerchemCoreConstants.Attributes.AbstractOrderEntry.AVAILABLEDATE);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrderEntry.availableDate</code> attribute.
+	 * @return the availableDate
+	 */
+	public Date getAvailableDate(final AbstractOrderEntry item)
+	{
+		return getAvailableDate( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrderEntry.availableDate</code> attribute. 
+	 * @param value the availableDate
+	 */
+	public void setAvailableDate(final SessionContext ctx, final AbstractOrderEntry item, final Date value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.AbstractOrderEntry.AVAILABLEDATE,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrderEntry.availableDate</code> attribute. 
+	 * @param value the availableDate
+	 */
+	public void setAvailableDate(final AbstractOrderEntry item, final Date value)
+	{
+		setAvailableDate( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>StockLevel.avaPreOrderReleaseDay</code> attribute.
+	 * @return the avaPreOrderReleaseDay
+	 */
+	public Integer getAvaPreOrderReleaseDay(final SessionContext ctx, final StockLevel item)
+	{
+		return (Integer)item.getProperty( ctx, AcerchemCoreConstants.Attributes.StockLevel.AVAPREORDERRELEASEDAY);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>StockLevel.avaPreOrderReleaseDay</code> attribute.
+	 * @return the avaPreOrderReleaseDay
+	 */
+	public Integer getAvaPreOrderReleaseDay(final StockLevel item)
+	{
+		return getAvaPreOrderReleaseDay( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>StockLevel.avaPreOrderReleaseDay</code> attribute. 
+	 * @return the avaPreOrderReleaseDay
+	 */
+	public int getAvaPreOrderReleaseDayAsPrimitive(final SessionContext ctx, final StockLevel item)
+	{
+		Integer value = getAvaPreOrderReleaseDay( ctx,item );
+		return value != null ? value.intValue() : 0;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>StockLevel.avaPreOrderReleaseDay</code> attribute. 
+	 * @return the avaPreOrderReleaseDay
+	 */
+	public int getAvaPreOrderReleaseDayAsPrimitive(final StockLevel item)
+	{
+		return getAvaPreOrderReleaseDayAsPrimitive( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>StockLevel.avaPreOrderReleaseDay</code> attribute. 
+	 * @param value the avaPreOrderReleaseDay
+	 */
+	public void setAvaPreOrderReleaseDay(final SessionContext ctx, final StockLevel item, final Integer value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.StockLevel.AVAPREORDERRELEASEDAY,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>StockLevel.avaPreOrderReleaseDay</code> attribute. 
+	 * @param value the avaPreOrderReleaseDay
+	 */
+	public void setAvaPreOrderReleaseDay(final StockLevel item, final Integer value)
+	{
+		setAvaPreOrderReleaseDay( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>StockLevel.avaPreOrderReleaseDay</code> attribute. 
+	 * @param value the avaPreOrderReleaseDay
+	 */
+	public void setAvaPreOrderReleaseDay(final SessionContext ctx, final StockLevel item, final int value)
+	{
+		setAvaPreOrderReleaseDay( ctx, item, Integer.valueOf( value ) );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>StockLevel.avaPreOrderReleaseDay</code> attribute. 
+	 * @param value the avaPreOrderReleaseDay
+	 */
+	public void setAvaPreOrderReleaseDay(final StockLevel item, final int value)
+	{
+		setAvaPreOrderReleaseDay( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
 	 * <i>Generated method</i> - Getter of the <code>Product.chemicalInfo</code> attribute.
 	 * @return the chemicalInfo - Attribute about ç¾hemicalInfo of Product
 	 */
@@ -516,12 +626,12 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 		return createApparelStyleVariantProduct( getSession().getSessionContext(), attributeValues );
 	}
 	
-	public CustomerLevel createCustomerLevel(final SessionContext ctx, final Map attributeValues)
+	public CountryTrayFareConf createCountryTrayFareConf(final SessionContext ctx, final Map attributeValues)
 	{
 		try
 		{
-			ComposedType type = getTenant().getJaloConnection().getTypeManager().getComposedType( AcerchemCoreConstants.TC.CUSTOMERLEVEL );
-			return (CustomerLevel)type.newInstance( ctx, attributeValues );
+			ComposedType type = getTenant().getJaloConnection().getTypeManager().getComposedType( AcerchemCoreConstants.TC.COUNTRYTRAYFARECONF );
+			return (CountryTrayFareConf)type.newInstance( ctx, attributeValues );
 		}
 		catch( JaloGenericCreationException e)
 		{
@@ -533,13 +643,13 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 		}
 		catch( JaloBusinessException e )
 		{
-			throw new JaloSystemException( e ,"error creating CustomerLevel : "+e.getMessage(), 0 );
+			throw new JaloSystemException( e ,"error creating CountryTrayFareConf : "+e.getMessage(), 0 );
 		}
 	}
 	
-	public CustomerLevel createCustomerLevel(final Map attributeValues)
+	public CountryTrayFareConf createCountryTrayFareConf(final Map attributeValues)
 	{
-		return createCustomerLevel( getSession().getSessionContext(), attributeValues );
+		return createCountryTrayFareConf( getSession().getSessionContext(), attributeValues );
 	}
 	
 	public ElectronicsColorVariantProduct createElectronicsColorVariantProduct(final SessionContext ctx, final Map attributeValues)
@@ -672,113 +782,30 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 		return createMultipleBannerComponent( getSession().getSessionContext(), attributeValues );
 	}
 	
-	/**
-	 * <i>Generated method</i> - Getter of the <code>User.customerLevel</code> attribute.
-	 * @return the customerLevel
-	 */
-	public CustomerLevel getCustomerLevel(final SessionContext ctx, final User item)
+	public UserLevel createUserLevel(final SessionContext ctx, final Map attributeValues)
 	{
-		return (CustomerLevel)item.getProperty( ctx, AcerchemCoreConstants.Attributes.User.CUSTOMERLEVEL);
+		try
+		{
+			ComposedType type = getTenant().getJaloConnection().getTypeManager().getComposedType( AcerchemCoreConstants.TC.USERLEVEL );
+			return (UserLevel)type.newInstance( ctx, attributeValues );
+		}
+		catch( JaloGenericCreationException e)
+		{
+			final Throwable cause = e.getCause();
+			throw (cause instanceof RuntimeException ?
+			(RuntimeException)cause
+			:
+			new JaloSystemException( cause, cause.getMessage(), e.getErrorCode() ) );
+		}
+		catch( JaloBusinessException e )
+		{
+			throw new JaloSystemException( e ,"error creating UserLevel : "+e.getMessage(), 0 );
+		}
 	}
 	
-	/**
-	 * <i>Generated method</i> - Getter of the <code>User.customerLevel</code> attribute.
-	 * @return the customerLevel
-	 */
-	public CustomerLevel getCustomerLevel(final User item)
+	public UserLevel createUserLevel(final Map attributeValues)
 	{
-		return getCustomerLevel( getSession().getSessionContext(), item );
-	}
-	
-	/**
-	 * <i>Generated method</i> - Setter of the <code>User.customerLevel</code> attribute. 
-	 * @param value the customerLevel
-	 */
-	public void setCustomerLevel(final SessionContext ctx, final User item, final CustomerLevel value)
-	{
-		item.setProperty(ctx, AcerchemCoreConstants.Attributes.User.CUSTOMERLEVEL,value);
-	}
-	
-	/**
-	 * <i>Generated method</i> - Setter of the <code>User.customerLevel</code> attribute. 
-	 * @param value the customerLevel
-	 */
-	public void setCustomerLevel(final User item, final CustomerLevel value)
-	{
-		setCustomerLevel( getSession().getSessionContext(), item, value );
-	}
-	
-	/**
-	 * <i>Generated method</i> - Getter of the <code>User.customerLevelPOS</code> attribute.
-	 * @return the customerLevelPOS
-	 */
-	 Integer getCustomerLevelPOS(final SessionContext ctx, final User item)
-	{
-		return (Integer)item.getProperty( ctx, AcerchemCoreConstants.Attributes.User.CUSTOMERLEVELPOS);
-	}
-	
-	/**
-	 * <i>Generated method</i> - Getter of the <code>User.customerLevelPOS</code> attribute.
-	 * @return the customerLevelPOS
-	 */
-	 Integer getCustomerLevelPOS(final User item)
-	{
-		return getCustomerLevelPOS( getSession().getSessionContext(), item );
-	}
-	
-	/**
-	 * <i>Generated method</i> - Getter of the <code>User.customerLevelPOS</code> attribute. 
-	 * @return the customerLevelPOS
-	 */
-	 int getCustomerLevelPOSAsPrimitive(final SessionContext ctx, final User item)
-	{
-		Integer value = getCustomerLevelPOS( ctx,item );
-		return value != null ? value.intValue() : 0;
-	}
-	
-	/**
-	 * <i>Generated method</i> - Getter of the <code>User.customerLevelPOS</code> attribute. 
-	 * @return the customerLevelPOS
-	 */
-	 int getCustomerLevelPOSAsPrimitive(final User item)
-	{
-		return getCustomerLevelPOSAsPrimitive( getSession().getSessionContext(), item );
-	}
-	
-	/**
-	 * <i>Generated method</i> - Setter of the <code>User.customerLevelPOS</code> attribute. 
-	 * @param value the customerLevelPOS
-	 */
-	 void setCustomerLevelPOS(final SessionContext ctx, final User item, final Integer value)
-	{
-		item.setProperty(ctx, AcerchemCoreConstants.Attributes.User.CUSTOMERLEVELPOS,value);
-	}
-	
-	/**
-	 * <i>Generated method</i> - Setter of the <code>User.customerLevelPOS</code> attribute. 
-	 * @param value the customerLevelPOS
-	 */
-	 void setCustomerLevelPOS(final User item, final Integer value)
-	{
-		setCustomerLevelPOS( getSession().getSessionContext(), item, value );
-	}
-	
-	/**
-	 * <i>Generated method</i> - Setter of the <code>User.customerLevelPOS</code> attribute. 
-	 * @param value the customerLevelPOS
-	 */
-	 void setCustomerLevelPOS(final SessionContext ctx, final User item, final int value)
-	{
-		setCustomerLevelPOS( ctx, item, Integer.valueOf( value ) );
-	}
-	
-	/**
-	 * <i>Generated method</i> - Setter of the <code>User.customerLevelPOS</code> attribute. 
-	 * @param value the customerLevelPOS
-	 */
-	 void setCustomerLevelPOS(final User item, final int value)
-	{
-		setCustomerLevelPOS( getSession().getSessionContext(), item, value );
+		return createUserLevel( getSession().getSessionContext(), attributeValues );
 	}
 	
 	@Override
@@ -1226,42 +1253,6 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	}
 	
 	/**
-	 * <i>Generated method</i> - Getter of the <code>AbstractOrderEntry.shipDate</code> attribute.
-	 * @return the shipDate
-	 */
-	public Date getShipDate(final SessionContext ctx, final AbstractOrderEntry item)
-	{
-		return (Date)item.getProperty( ctx, AcerchemCoreConstants.Attributes.AbstractOrderEntry.SHIPDATE);
-	}
-	
-	/**
-	 * <i>Generated method</i> - Getter of the <code>AbstractOrderEntry.shipDate</code> attribute.
-	 * @return the shipDate
-	 */
-	public Date getShipDate(final AbstractOrderEntry item)
-	{
-		return getShipDate( getSession().getSessionContext(), item );
-	}
-	
-	/**
-	 * <i>Generated method</i> - Setter of the <code>AbstractOrderEntry.shipDate</code> attribute. 
-	 * @param value the shipDate
-	 */
-	public void setShipDate(final SessionContext ctx, final AbstractOrderEntry item, final Date value)
-	{
-		item.setProperty(ctx, AcerchemCoreConstants.Attributes.AbstractOrderEntry.SHIPDATE,value);
-	}
-	
-	/**
-	 * <i>Generated method</i> - Setter of the <code>AbstractOrderEntry.shipDate</code> attribute. 
-	 * @param value the shipDate
-	 */
-	public void setShipDate(final AbstractOrderEntry item, final Date value)
-	{
-		setShipDate( getSession().getSessionContext(), item, value );
-	}
-	
-	/**
 	 * <i>Generated method</i> - Getter of the <code>Product.unitCalculateRato</code> attribute.
 	 * @return the unitCalculateRato - Attribute about çnitCalculateRato of Product
 	 */
@@ -1298,39 +1289,112 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	}
 	
 	/**
-	 * <i>Generated method</i> - Getter of the <code>AbstractOrderEntry.warehouseCode</code> attribute.
-	 * @return the warehouseCode
+	 * <i>Generated method</i> - Getter of the <code>User.userLevel</code> attribute.
+	 * @return the userLevel
 	 */
-	public String getWarehouseCode(final SessionContext ctx, final AbstractOrderEntry item)
+	public UserLevel getUserLevel(final SessionContext ctx, final User item)
 	{
-		return (String)item.getProperty( ctx, AcerchemCoreConstants.Attributes.AbstractOrderEntry.WAREHOUSECODE);
+		return (UserLevel)item.getProperty( ctx, AcerchemCoreConstants.Attributes.User.USERLEVEL);
 	}
 	
 	/**
-	 * <i>Generated method</i> - Getter of the <code>AbstractOrderEntry.warehouseCode</code> attribute.
-	 * @return the warehouseCode
+	 * <i>Generated method</i> - Getter of the <code>User.userLevel</code> attribute.
+	 * @return the userLevel
 	 */
-	public String getWarehouseCode(final AbstractOrderEntry item)
+	public UserLevel getUserLevel(final User item)
 	{
-		return getWarehouseCode( getSession().getSessionContext(), item );
+		return getUserLevel( getSession().getSessionContext(), item );
 	}
 	
 	/**
-	 * <i>Generated method</i> - Setter of the <code>AbstractOrderEntry.warehouseCode</code> attribute. 
-	 * @param value the warehouseCode
+	 * <i>Generated method</i> - Setter of the <code>User.userLevel</code> attribute. 
+	 * @param value the userLevel
 	 */
-	public void setWarehouseCode(final SessionContext ctx, final AbstractOrderEntry item, final String value)
+	public void setUserLevel(final SessionContext ctx, final User item, final UserLevel value)
 	{
-		item.setProperty(ctx, AcerchemCoreConstants.Attributes.AbstractOrderEntry.WAREHOUSECODE,value);
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.User.USERLEVEL,value);
 	}
 	
 	/**
-	 * <i>Generated method</i> - Setter of the <code>AbstractOrderEntry.warehouseCode</code> attribute. 
-	 * @param value the warehouseCode
+	 * <i>Generated method</i> - Setter of the <code>User.userLevel</code> attribute. 
+	 * @param value the userLevel
 	 */
-	public void setWarehouseCode(final AbstractOrderEntry item, final String value)
+	public void setUserLevel(final User item, final UserLevel value)
 	{
-		setWarehouseCode( getSession().getSessionContext(), item, value );
+		setUserLevel( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>User.userLevelPOS</code> attribute.
+	 * @return the userLevelPOS
+	 */
+	 Integer getUserLevelPOS(final SessionContext ctx, final User item)
+	{
+		return (Integer)item.getProperty( ctx, AcerchemCoreConstants.Attributes.User.USERLEVELPOS);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>User.userLevelPOS</code> attribute.
+	 * @return the userLevelPOS
+	 */
+	 Integer getUserLevelPOS(final User item)
+	{
+		return getUserLevelPOS( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>User.userLevelPOS</code> attribute. 
+	 * @return the userLevelPOS
+	 */
+	 int getUserLevelPOSAsPrimitive(final SessionContext ctx, final User item)
+	{
+		Integer value = getUserLevelPOS( ctx,item );
+		return value != null ? value.intValue() : 0;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>User.userLevelPOS</code> attribute. 
+	 * @return the userLevelPOS
+	 */
+	 int getUserLevelPOSAsPrimitive(final User item)
+	{
+		return getUserLevelPOSAsPrimitive( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>User.userLevelPOS</code> attribute. 
+	 * @param value the userLevelPOS
+	 */
+	 void setUserLevelPOS(final SessionContext ctx, final User item, final Integer value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.User.USERLEVELPOS,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>User.userLevelPOS</code> attribute. 
+	 * @param value the userLevelPOS
+	 */
+	 void setUserLevelPOS(final User item, final Integer value)
+	{
+		setUserLevelPOS( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>User.userLevelPOS</code> attribute. 
+	 * @param value the userLevelPOS
+	 */
+	 void setUserLevelPOS(final SessionContext ctx, final User item, final int value)
+	{
+		setUserLevelPOS( ctx, item, Integer.valueOf( value ) );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>User.userLevelPOS</code> attribute. 
+	 * @param value the userLevelPOS
+	 */
+	 void setUserLevelPOS(final User item, final int value)
+	{
+		setUserLevelPOS( getSession().getSessionContext(), item, value );
 	}
 	
 }

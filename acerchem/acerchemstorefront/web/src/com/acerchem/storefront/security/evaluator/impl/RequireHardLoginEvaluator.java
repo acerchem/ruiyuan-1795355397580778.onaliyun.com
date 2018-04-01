@@ -14,7 +14,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.constants.WebConstants;
 import de.hybris.platform.order.CartService;
 import de.hybris.platform.servicelayer.session.SessionService;
 import de.hybris.platform.servicelayer.user.UserService;
-import com.acerchem.storefront.security.evaluator.SecurityTraitEvaluator;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -23,7 +22,12 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.security.authentication.RememberMeAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.util.CookieGenerator;
+
+import com.acerchem.storefront.security.evaluator.SecurityTraitEvaluator;
 
 
 public class RequireHardLoginEvaluator implements SecurityTraitEvaluator
@@ -84,6 +88,10 @@ public class RequireHardLoginEvaluator implements SecurityTraitEvaluator
 	@Override
 	public boolean evaluate(final HttpServletRequest request, final HttpServletResponse response)
 	{
+		if (hasRememberMeAuthenticated())
+		{
+			return false;
+		}
 		final String guid = (String) request.getSession().getAttribute(SECURE_GUID_SESSION_KEY);
 		boolean result = true;
 
@@ -99,6 +107,16 @@ public class RequireHardLoginEvaluator implements SecurityTraitEvaluator
 		}
 
 		return result;
+	}
+
+	protected boolean hasRememberMeAuthenticated()
+	{
+		final Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth != null && auth instanceof RememberMeAuthenticationToken)
+		{
+			return true;
+		}
+		return false;
 	}
 
 	protected boolean checkForGUIDCookie(final HttpServletRequest request, final HttpServletResponse response, final String guid)

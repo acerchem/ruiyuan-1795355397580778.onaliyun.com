@@ -80,21 +80,13 @@ public class AddToCartController extends AbstractController
 	public String addToCart(@RequestParam("productCodePost") final String code, final Model model,
 							@Valid final AcerchemAddToCartForm form, final BindingResult bindingErrors)
 	{
+
 		if (bindingErrors.hasErrors())
 		{
 			return getViewWithBindingErrorMessages(model, bindingErrors);
 		}
 
-		//each cartEntry warehouse must be same
-//		final String warehouseCode = form.getWarehouseCode();
-//		final boolean isUseFutureStock = form.isUseFutureStock();
-//		String errorMsg = acerchemCartFacade.acerchemValidateCart(warehouseCode,code,isUseFutureStock);
-//		if (Objects.nonNull(errorMsg)) {
-//			model.addAttribute(ERROR_MSG_TYPE, errorMsg);
-//		}
-
-		final long qty = form.getQty();
-
+		long qty = form.getQty();
 
 		if (qty <= 0)
 		{
@@ -103,30 +95,42 @@ public class AddToCartController extends AbstractController
 		}
 		else
 		{
-			try
-			{
-    				final CartModificationData cartModification = acerchemCartFacade.addToCart(code, qty,form.getWarehouseCode(),form.getIsUseFutureStock(),form.getStoreId());
-				model.addAttribute(QUANTITY_ATTR, Long.valueOf(cartModification.getQuantityAdded()));
-				model.addAttribute("entry", cartModification.getEntry());
-				model.addAttribute("cartCode", cartModification.getCartCode());
-				model.addAttribute("isQuote", cartFacade.getSessionCart().getQuoteData() != null ? Boolean.TRUE : Boolean.FALSE);
 
-				if (cartModification.getStatusCode().equalsIgnoreCase(CommerceCartModificationStatus.MAX_ORDER_QUANTITY_EXCEEDED))
-				{
-					model.addAttribute(ERROR_MSG_TYPE, "basket.information.quantity.noItemsAdded." + cartModification.getStatusCode());
-				}
+			//each cartEntry warehouse must be same
+			final boolean isUseFutureStock = form.getIsUseFutureStock();
+			String storeId = form.getStoreId();
+			String errorMsg = acerchemCartFacade.acerchemValidateCart(code,isUseFutureStock,storeId);
 
-				if (cartModification.getQuantityAdded() < qty)
+			if (errorMsg!=null){
+				model.addAttribute(ERROR_MSG_TYPE, errorMsg);
+			}else{
+				try
 				{
-					model.addAttribute(ERROR_MSG_TYPE,
-							"basket.information.quantity.reducedNumberOfItemsAdded." + cartModification.getStatusCode());
+
+					String availableDate = form.getAvailableDate();
+					final CartModificationData cartModification = acerchemCartFacade.addToCart(code, qty,isUseFutureStock,storeId,availableDate);
+					model.addAttribute(QUANTITY_ATTR, Long.valueOf(cartModification.getQuantityAdded()));
+					model.addAttribute("entry", cartModification.getEntry());
+					model.addAttribute("cartCode", cartModification.getCartCode());
+					model.addAttribute("isQuote", cartFacade.getSessionCart().getQuoteData() != null ? Boolean.TRUE : Boolean.FALSE);
+
+					if (cartModification.getStatusCode().equalsIgnoreCase(CommerceCartModificationStatus.MAX_ORDER_QUANTITY_EXCEEDED))
+					{
+						model.addAttribute(ERROR_MSG_TYPE, "basket.information.quantity.noItemsAdded." + cartModification.getStatusCode());
+					}
+
+					if (cartModification.getQuantityAdded() < qty)
+					{
+						model.addAttribute(ERROR_MSG_TYPE,
+								"basket.information.quantity.reducedNumberOfItemsAdded." + cartModification.getStatusCode());
+					}
 				}
-			}
-			catch (final CommerceCartModificationException ex)
-			{
-				logDebugException(ex);
-				model.addAttribute(ERROR_MSG_TYPE, "basket.error.occurred");
-				model.addAttribute(QUANTITY_ATTR, Long.valueOf(0L));
+				catch (final CommerceCartModificationException ex)
+				{
+					logDebugException(ex);
+					model.addAttribute(ERROR_MSG_TYPE, "basket.error.occurred");
+					model.addAttribute(QUANTITY_ATTR, Long.valueOf(0L));
+				}
 			}
 		}
 
@@ -287,20 +291,6 @@ public class AddToCartController extends AbstractController
 		return REDIRECT_PREFIX + "/cart";
 	}
 
-	@RequestMapping(value = "/stores", method = RequestMethod.GET)
-	@ResponseBody
-	public SearchPageData<CountryToWarehouseData> locationSearch(@RequestParam(required = false) final String query,
-																		@RequestParam(required = false, defaultValue = "0") final int currentPage,
-																		@RequestParam(required = false, defaultValue = "100") final int pageSize,
-																		@RequestParam(required = false, defaultValue = "asc") final String sort)
-	{
-		final PageableData pageableData = createPagaable(currentPage, pageSize, sort);
-
-		SearchPageData<CountryToWarehouseData> result = acerchemCustomerFacade.getAllPointOfServices(pageableData);
-
-		return result;
-	}
-
 	protected ProductWrapperData createProductWrapperData(final String sku, final String errorMsg)
 	{
 		final ProductWrapperData productWrapperData = new ProductWrapperData();
@@ -355,14 +345,5 @@ public class AddToCartController extends AbstractController
 	protected boolean isValidQuantity(final OrderEntryData cartEntry)
 	{
 		return cartEntry.getQuantity() != null && cartEntry.getQuantity().longValue() >= 1L;
-	}
-
-	protected PageableData createPagaable(final int page, final int pageSize, final String sort)
-	{
-		final PageableData pageableData = new PageableData();
-		pageableData.setCurrentPage(page);
-		pageableData.setPageSize(pageSize);
-		pageableData.setSort(sort);
-		return pageableData;
 	}
 }

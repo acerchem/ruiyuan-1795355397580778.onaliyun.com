@@ -10,73 +10,178 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<div class="js-cart-totals row">
-    <div class="col-xs-6 cart-totals-left"><spring:theme code="basket.page.totals.subtotal"/></div>
-    <div class="col-xs-6 cart-totals-right text-right"><ycommerce:testId code="Order_Totals_Subtotal"><format:price priceData="${cartData.subTotal}"/></ycommerce:testId></div>
+<c:url value="${continueUrl}" var="continueShoppingUrl" scope="session"/>
 
+<div class="g-cell cart-right">
+			<div class="cart-total">
+				<div class="title">Subtotal</div>
 
-    <c:if test="${not empty cartData.deliveryCost}">
-        <div class="col-xs-6 cart-totals-left"><spring:theme code="basket.page.totals.delivery"/></div>
-        <div class="col-xs-6 cart-totals-right text-right"><format:price priceData="${cartData.deliveryCost}" displayFreeForZero="TRUE"/></div>
-     </c:if>
+				<div class="m-Coupon">
+					<form action="" id="coupon">
+						<input type="text" placeholder="Enter Coupon Code" class="code">
+						<input type="submit" value="Apply" class="btn-submit">
+					</form>
+				</div>
+				
+				<div class="g-table">	
+					<form action="">		
+						<div class="Summary">
+							<span>Part of your order qualifies for FREE Shipping;</span>
+							<span>span.Buy 2 items  sales to 10% Off; </span>
+						</div>
+						<div class="list">
+							<div class="item">
+								<div class="item-row">
+									<span>Total Sum (<em>${cartData.totalUnitCount}</em> items)</span>
+									<span class="row"> <format:price priceData="${cartData.totalPrice}"/></span>
+								</div>
 
+								<div class="item-row">
+									<span>Discount Amount</span>
+									
+									 <c:choose>
+						                <c:when test="${cartData.totalDiscounts.value > 0}">
+						                    <span class="row">-$0.00</span>
+						                </c:when>
+						                <c:otherwise>
+						                     <span class="row">-$0.00</span>
+						                </c:otherwise>
+						            </c:choose>
+									
+								</div>
 
-    <c:if test="${cartData.net && cartData.totalTax.value > 0 && showTax}">
-        <div class="col-xs-6 cart-totals-left"><spring:theme code="basket.page.totals.netTax"/></div>
-        <div class="col-xs-6 cart-totals-right text-right"><format:price priceData="${cartData.totalTax}"/></div>
-    </c:if>
-    
-	<c:if test="${not empty cartData.quoteData}">
-		<quote:quoteDiscounts cartData="${cartData}"/>
-	</c:if>
+								<div class="item-row">
+									<span>Order Total</span>
+									
+									<c:choose>
+						                <c:when test="${cartData.totalDiscounts.value > 0}">
+						                    <span class="row total">-$0.00</span>
+						                </c:when>
+						                <c:otherwise>
+						                     <span class="row total"><format:price priceData="${cartData.totalPrice}"/></span>
+						                </c:otherwise>
+						            </c:choose>
+									
+								</div>
+							</div>					
+						</div>
+						<label>
+							<input type="checkbox" name="" id="setexpress">
+							<span class="checkbox">I Would Like To Express Checkout</span>
+						</label>
+						<div class="btn-set">							
+							<a class="btn btn-submit" href="checkout.html">Check Out</a>
+							<a class="btn btn-line" href="${continueUrl}">Continue Shopping</a>
+						</div>
+					</form>					
+				</div>
+			</div>
+
+			<!--  -->
+			<div class="g-table">
+				<div class="g-title">
+					<span>Express Checkout</span>
+				</div>
+				<div class="text">
+					<p>
+					Benefit form a faster Checkout By:
+					</p>
+					<ul>
+						<li>setting a default delivery address in your account or when you checkout.</li>
+						<li>setting a default Payment Details when you checkout.</li>
+						<li>using a default shipping method</li>
+					</ul>
+				</div>				
+			</div>
+		</div>
+		
+		<!-- 
+<script>
+	var wrap = '.maxon_salesul .slide-wrap';
+	maxon_salesul(wrap)	
+
+	// 金额计算
+	function adnum(wrap,ainp){
+			var atr = $('.product-table .list tr').length,
+			aptext = wrap.parents('tr').find('td').eq(1).text(),
+			nowavl = parseInt(ainp.val()),
+			aprval = (parseFloat(aptext.slice(1))*nowavl).toFixed(2),
+			atot = wrap.parents('tr').find('td').eq(3).find('em'),
+			aold = parseFloat(wrap.parents('tr').find('.old-price i').text().slice(1)),
+			aunlt = wrap.parents('tr').find('.old-price i').text().slice(0,1),
+			anold = wrap.parents('tr').find('td').eq(3).find('i');
+
+			atot.text(aunlt+aprval);
+			anold.text(aunlt+(aold*nowavl).toFixed(2));
+
+		var totsum = null, totprice = null,
+			aitem = $('.cart-total .item-row'),
+			amount = parseFloat($('.cart-total .item-row').eq(1).find('.row').text().slice(2))
+			
+		for(var i = 0; i<atr; i++){
+			var sum = parseInt($('.product-table .m-setnum').eq(i).find('input').val()),
+				alltot = parseFloat($('.product-table .list .tot').eq(i).find('em').text().slice(1));
+			
+			totsum = totsum+sum;
+			totprice = totprice+alltot;
+		}
+
+		if(atr==0){
+			totsum=totprice=0;
+		}
+
+		aitem.first().find('em').text(totsum);
+		aitem.first().find('.row').text(aunlt+totprice.toFixed(2));
+		aitem.find('.total').text(aunlt+(totprice-amount).toFixed(2));	
+	}
+
+	var cnum = $('.product-table .m-setnum span'),
+		cinput = $('.product-table .m-setnum input');
+
+	cnum.on('click',function(){
+		var aclass=$(this).attr('class'),
+			ainp = $(this).siblings('input'),
+			avl = null;
+		switch(aclass){
+			case 'set sub':
+				avl = parseInt(ainp.val());
+				if(avl<=1){
+					maxalert('A minimum of one piece！');
+					$(this).css('background-color','#ddd')
+					break;
+				}
+				ainp.val(avl-1);
+				break;
+			case 'set add':
+				avl = parseInt(ainp.val());
+				cnum.css('background-color','')
+				ainp.val(avl+1);
+				break;	
+		}
+		adnum($(this),ainp)
+	})
+
+	cinput.on('blur',function(){
+		adnum($(this),$(this))
+	})
 	
-	<c:if test="${cartData.quoteDiscounts.value > 0}">
-		<div class="col-xs-6 cart-totals-left discount">
-			<spring:theme code="basket.page.quote.discounts" />
-		</div>
-		<div class="col-xs-6 cart-totals-right text-right discount">
-			<ycommerce:testId code="Quote_Totals_Savings">
-				<format:price priceData="${cartData.quoteDiscounts}" displayNegationForDiscount="true" />
-			</ycommerce:testId>
-		</div>
-	</c:if>
+		
+	
+	$(".product-table .del-icon").on('click',function(){
+		var aele = $(this).parents('tr');
+		var mess = 'Do you delete this product ?';
+		
+		$('.newadd').hide();
+		delele(aele,mess)
+		
+	})
 
-	<c:if test="${cartData.totalDiscounts.value > 0}">
-		<div class="col-xs-6 cart-totals-left discount">
-			<spring:theme code="basket.page.totals.discounts"/>
-		</div>
-		<div class="col-xs-6 cart-totals-right text-right discount">
-			<ycommerce:testId code="Order_Totals_Savings">
-				<format:price priceData="${cartData.totalDiscounts}" displayNegationForDiscount="true" />
-			</ycommerce:testId>
-		</div>
-	</c:if>
-
-    <div class="col-xs-6 cart-totals-left grand-total"><spring:theme code="basket.page.totals.total"/></div>
-    <div class="col-xs-6 cart-totals-right text-right grand-total">
-        <ycommerce:testId code="cart_totalPrice_label">
-            <c:choose>
-                <c:when test="${showTax}">
-                    <format:price priceData="${cartData.totalPriceWithTax}"/>
-                </c:when>
-                <c:otherwise>
-                    <format:price priceData="${cartData.totalPrice}"/>
-                </c:otherwise>
-            </c:choose>
-        </ycommerce:testId>
-    </div>
+	$(document).on('click','.delpop .btn-del',function(){
+		var oneinput = $('.product-table .m-setnum input').first();
+		adnum(oneinput,oneinput)
+	})
+	// 金额计算 END
 
 
-    <c:if test="${not cartData.net}">
-        <div class="cart-totals-taxes text-right">
-            <ycommerce:testId code="cart_taxes_label"><spring:theme code="basket.page.totals.grossTax" arguments="${cartData.totalTax.formattedValue}" argumentSeparator="!!!!"/></ycommerce:testId>
-         </div>
-    </c:if>
-
-
-    <c:if test="${cartData.net && not showTax }">
-        <div class="cart-totals-taxes text-right">
-            <ycommerce:testId code="cart_taxes_label"><spring:theme code="basket.page.totals.noNetTax"/></ycommerce:testId>
-        </div>
-    </c:if>
-</div>
+	
+</script> -->

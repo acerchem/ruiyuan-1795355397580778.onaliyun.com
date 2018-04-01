@@ -21,8 +21,8 @@ public class AcerchemCartParameterPopulator implements Populator<AddToCartParams
 	@Override
 	public void populate(final AddToCartParams source, final CommerceCartParameter target) throws ConversionException
 	{
-		target.setWarehouseCode(source.getWarehouseCode());
 		target.setIsUseFutureStock(source.getIsUseFutureStock());
+		target.setAvailableDate(source.getAvailableDate());
 	}
 
 }

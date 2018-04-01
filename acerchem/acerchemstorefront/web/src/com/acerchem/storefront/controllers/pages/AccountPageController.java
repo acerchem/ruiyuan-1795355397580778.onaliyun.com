@@ -41,9 +41,13 @@ import de.hybris.platform.commercefacades.order.CheckoutFacade;
 import de.hybris.platform.commercefacades.order.OrderFacade;
 import de.hybris.platform.commercefacades.order.data.CCPaymentInfoData;
 import de.hybris.platform.commercefacades.order.data.OrderData;
+import de.hybris.platform.commercefacades.order.data.OrderEntryData;
 import de.hybris.platform.commercefacades.order.data.OrderHistoryData;
 import de.hybris.platform.commercefacades.product.ProductFacade;
 import de.hybris.platform.commercefacades.product.ProductOption;
+import de.hybris.platform.commercefacades.product.data.ImageData;
+import de.hybris.platform.commercefacades.product.data.PriceData;
+import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commercefacades.user.UserFacade;
 import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.commercefacades.user.data.CountryData;
@@ -52,24 +56,36 @@ import de.hybris.platform.commercefacades.user.data.TitleData;
 import de.hybris.platform.commercefacades.user.exceptions.PasswordMismatchException;
 import de.hybris.platform.commerceservices.address.AddressVerificationDecision;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
+import de.hybris.platform.commerceservices.search.flexiblesearch.PagedFlexibleSearchService;
+import de.hybris.platform.commerceservices.search.flexiblesearch.data.SortQueryData;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
+import de.hybris.platform.commerceservices.search.pagedata.PaginationData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
+import de.hybris.platform.commerceservices.search.pagedata.SortData;
 import de.hybris.platform.commerceservices.util.ResponsiveUtils;
+import de.hybris.platform.converters.Converters;
 import de.hybris.platform.core.PK;
 import de.hybris.platform.core.model.c2l.CountryModel;
 import de.hybris.platform.core.model.c2l.RegionModel;
+import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.AddressModel;
+import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.core.model.user.UserModel;
+import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.servicelayer.i18n.CommonI18NService;
 import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
+import de.hybris.platform.servicelayer.search.FlexibleSearchService;
+import de.hybris.platform.servicelayer.search.SearchResult;
 import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.platform.store.services.BaseStoreService;
 import de.hybris.platform.util.Config;
 
 import com.acerchem.storefront.controllers.ControllerConstants;
 import com.acerchem.storefront.data.CustomRegisterForm;
 
-
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -297,28 +313,6 @@ public class AccountPageController extends AbstractSearchPageController
 		return getViewForPage(model);
 	}
 	
-	
-	
-	
-	@RequestMapping(value = "/orders", method = RequestMethod.GET)
-	@RequireHardLogIn
-	public String orders(@RequestParam(value = "page", defaultValue = "0") final int page,
-			@RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode,
-			@RequestParam(value = "sort", required = false) final String sortCode, final Model model)
-			throws CMSItemNotFoundException
-	{
-		// Handle paged search results
-		final PageableData pageableData = createPageableData(page, 5, sortCode, showMode);
-		final SearchPageData<OrderHistoryData> searchPageData = orderFacade.getPagedOrderHistoryForStatuses(pageableData);
-		populateModel(model, searchPageData, showMode);
-
-		storeCmsPageInModel(model, getContentPageForLabelOrId(ORDER_HISTORY_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ORDER_HISTORY_CMS_PAGE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs("text.account.orderHistory"));
-		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
-		return getViewForPage(model);
-	}
-
 	@RequestMapping(value = "/order/" + ORDER_CODE_PATH_VARIABLE_PATTERN, method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String order(@PathVariable("orderCode") final String orderCode, final Model model,
@@ -328,8 +322,7 @@ public class AccountPageController extends AbstractSearchPageController
 		{
 			final OrderData orderDetails = orderFacade.getOrderDetailsForCode(orderCode);
 			model.addAttribute("orderData", orderDetails);
-
-			final List<Breadcrumb> breadcrumbs = accountBreadcrumbBuilder.getBreadcrumbs(null);
+            final List<Breadcrumb> breadcrumbs = accountBreadcrumbBuilder.getBreadcrumbs(null);
 			breadcrumbs.add(new Breadcrumb("/my-account/orders", getMessageSource().getMessage("text.account.orderHistory", null,
 					getI18nService().getCurrentLocale()), null));
 			breadcrumbs.add(new Breadcrumb("#", getMessageSource().getMessage("text.account.order.orderBreadcrumb", new Object[]
@@ -346,7 +339,7 @@ public class AccountPageController extends AbstractSearchPageController
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ORDER_DETAIL_CMS_PAGE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ORDER_DETAIL_CMS_PAGE));
-		return getViewForPage(model);
+		return "/pages/account/orderPageNew";
 	}
 
 	@RequestMapping(value = "/order/" + ORDER_CODE_PATH_VARIABLE_PATTERN + "/getReadOnlyProductVariantMatrix", method = RequestMethod.GET)
@@ -474,80 +467,6 @@ public class AccountPageController extends AbstractSearchPageController
 		return getViewForPage(model);
 	}
 
-	@RequestMapping(value = "/update-password", method = RequestMethod.GET)
-	@RequireHardLogIn
-	public String updatePassword(final Model model) throws CMSItemNotFoundException
-	{
-		final UpdatePasswordForm updatePasswordForm = new UpdatePasswordForm();
-		model.addAttribute("nowPage", "update-password");
-		model.addAttribute("updatePasswordForm", updatePasswordForm);
-
-		storeCmsPageInModel(model, getContentPageForLabelOrId(UPDATE_PASSWORD_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(UPDATE_PASSWORD_CMS_PAGE));
-
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs("text.account.profile.updatePasswordForm"));
-		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
-		return getViewForPage(model);
-	}
-
-	@RequestMapping(value = "/update-password", method = RequestMethod.POST)
-	@RequireHardLogIn
-	public String updatePassword(final UpdatePasswordForm updatePasswordForm, final BindingResult bindingResult,
-			final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
-	{
-		model.addAttribute("nowPage", "update-password");
-		getPasswordValidator().validate(updatePasswordForm, bindingResult);
-		if (!bindingResult.hasErrors())
-		{
-			if (updatePasswordForm.getNewPassword().equals(updatePasswordForm.getCheckNewPassword()))
-			{
-				try
-				{
-					customerFacade.changePassword(updatePasswordForm.getCurrentPassword(), updatePasswordForm.getNewPassword());
-				}
-				catch (final PasswordMismatchException localException)
-				{
-					bindingResult.rejectValue("currentPassword", PROFILE_CURRENT_PASSWORD_INVALID, new Object[] {},
-							PROFILE_CURRENT_PASSWORD_INVALID);
-				}
-			}
-			else
-			{
-				bindingResult.rejectValue("checkNewPassword", "validation.checkPwd.equals", new Object[] {},
-						"validation.checkPwd.equals");
-			}
-		}
-
-		if (bindingResult.hasErrors())
-		{
-			GlobalMessages.addErrorMessage(model, FORM_GLOBAL_ERROR);
-			storeCmsPageInModel(model, getContentPageForLabelOrId(UPDATE_PASSWORD_CMS_PAGE));
-			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(UPDATE_PASSWORD_CMS_PAGE));
-			
-			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs("text.account.profile.updatePasswordForm"));
-			return getViewForPage(model);
-		}
-		else
-		{
-			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.CONF_MESSAGES_HOLDER,
-					"text.account.confirmation.password.updated", null);
-			return REDIRECT_TO_PASSWORD_UPDATE_PAGE;
-		}
-	}
-
-	@RequestMapping(value = "/address-book", method = RequestMethod.GET)
-	@RequireHardLogIn
-	public String getAddressBook(final Model model) throws CMSItemNotFoundException
-	{
-		model.addAttribute(ADDRESS_DATA_ATTR, userFacade.getAddressBook());
-
-		storeCmsPageInModel(model, getContentPageForLabelOrId(ADDRESS_BOOK_CMS_PAGE));
-		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ADDRESS_BOOK_CMS_PAGE));
-		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_ADDRESS_BOOK));
-		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
-		return getViewForPage(model);
-	}
-
 	@RequestMapping(value = "/add-address", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String addAddress(final Model model) throws CMSItemNotFoundException
@@ -622,13 +541,8 @@ public class AccountPageController extends AbstractSearchPageController
 			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
 			return getViewForPage(model);
 		}
-
 		userFacade.addAddress(newAddress);
-
-
-		GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER, "account.confirmation.address.added",
-				null);
-
+		GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER, "account.confirmation.address.added", null);
 		return REDIRECT_TO_EDIT_ADDRESS_PAGE + newAddress.getId();
 	}
 
@@ -856,6 +770,16 @@ public class AccountPageController extends AbstractSearchPageController
 		return null;
 	}
 	
+	@RequestMapping(value = "/orders-old", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String orders(@RequestParam(value = "page", defaultValue = "0") final int page,
+			@RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode,
+			@RequestParam(value = "sort", required = false) final String sortCode,final Model model)
+			throws CMSItemNotFoundException
+	{
+		return null;
+	}
+	
 	/*add by alice*/
 	@Resource(name = "cmsPageService")
 	private CMSPageService cmsPageService;
@@ -984,5 +908,184 @@ public class AccountPageController extends AbstractSearchPageController
 		}
 	}
 	
+	@RequestMapping(value = "/update-password", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String updatePassword(final Model model) throws CMSItemNotFoundException
+	{
+		final UpdatePasswordForm updatePasswordForm = new UpdatePasswordForm();
+		model.addAttribute("nowPage", "update-password");
+		model.addAttribute("updatePasswordForm", updatePasswordForm);
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(UPDATE_PASSWORD_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(UPDATE_PASSWORD_CMS_PAGE));
+
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs("text.account.profile.updatePasswordForm"));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+		return getViewForPage(model);
+	}
+
+	@RequestMapping(value = "/update-password", method = RequestMethod.POST)
+	@RequireHardLogIn
+	public String updatePassword(final UpdatePasswordForm updatePasswordForm, final BindingResult bindingResult,
+			final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+	{
+		model.addAttribute("nowPage", "update-password");
+		getPasswordValidator().validate(updatePasswordForm, bindingResult);
+		if (!bindingResult.hasErrors())
+		{
+			if (updatePasswordForm.getNewPassword().equals(updatePasswordForm.getCheckNewPassword()))
+			{
+				try
+				{
+					customerFacade.changePassword(updatePasswordForm.getCurrentPassword(), updatePasswordForm.getNewPassword());
+				}
+				catch (final PasswordMismatchException localException)
+				{
+					bindingResult.rejectValue("currentPassword", PROFILE_CURRENT_PASSWORD_INVALID, new Object[] {},
+							PROFILE_CURRENT_PASSWORD_INVALID);
+				}
+			}
+			else
+			{
+				bindingResult.rejectValue("checkNewPassword", "validation.checkPwd.equals", new Object[] {},
+						"validation.checkPwd.equals");
+			}
+		}
+
+		if (bindingResult.hasErrors())
+		{
+			GlobalMessages.addErrorMessage(model, FORM_GLOBAL_ERROR);
+			storeCmsPageInModel(model, getContentPageForLabelOrId(UPDATE_PASSWORD_CMS_PAGE));
+			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(UPDATE_PASSWORD_CMS_PAGE));
+			
+			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs("text.account.profile.updatePasswordForm"));
+			return getViewForPage(model);
+		}
+		else
+		{
+			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.CONF_MESSAGES_HOLDER,
+					"text.account.confirmation.password.updated", null);
+			return REDIRECT_TO_PASSWORD_UPDATE_PAGE;
+		}
+	}
 	
+	
+	
+	@Resource
+	private BaseStoreService baseStoreService;
+	@Resource
+	private Converter<OrderModel, OrderHistoryData> orderHistoryConverter;
+	@Resource
+	private PagedFlexibleSearchService pagedFlexibleSearchService;
+	@Resource
+	private FlexibleSearchService flexibleSearchService;
+	
+	
+	@RequestMapping(value = "/orders", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String orders(@RequestParam(value = "page", defaultValue = "0") final int page,
+			@RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode,
+			@RequestParam(value = "sort", required = false) final String sortCode, 
+			@RequestParam(value = "key", required = false) final String key,final Model model)
+			throws CMSItemNotFoundException
+	{
+		final PageableData pageableData = createPageableData(page, 10, sortCode, showMode);
+		final Map<String, Object> queryParams = new HashMap<String, Object>();
+		queryParams.put("customer", (CustomerModel) userService.getCurrentUser());
+		queryParams.put("store", baseStoreService.getCurrentBaseStore());
+
+		String FIND_ORDERS_BY_CUSTOMER_STORE_QUERY = "SELECT {" + OrderModel.PK + "},{"
+				+ OrderModel.CREATIONTIME + "}, {" + OrderModel.CODE + "} FROM {" + OrderModel._TYPECODE + "} WHERE {" + OrderModel.USER
+				+ "} = ?customer AND {" + OrderModel.VERSIONID + "} IS NULL AND {" + OrderModel.STORE + "} = ?store ";
+		
+		if(key!=null)
+		{
+			FIND_ORDERS_BY_CUSTOMER_STORE_QUERY +=" AND {" + OrderModel.CODE + "} like '%" + key + "%' ";
+		}
+		
+		if(sortCode!=null&&sortCode.equals("total"))
+		{
+			FIND_ORDERS_BY_CUSTOMER_STORE_QUERY+=" ORDER BY {" + OrderModel.TOTALPRICE + "} DESC,{" + OrderModel.CREATIONTIME + "} DESC, {" + OrderModel.PK + "}";
+		}
+		else if(sortCode!=null&&sortCode.equals("status"))
+		{
+			FIND_ORDERS_BY_CUSTOMER_STORE_QUERY+=" ORDER BY {" + OrderModel.STATUSINFO + "},{" + OrderModel.CREATIONTIME + "} DESC, {" + OrderModel.PK + "}";
+		}
+		else if(sortCode!=null&&sortCode.equals("code"))
+		{
+			FIND_ORDERS_BY_CUSTOMER_STORE_QUERY+=" ORDER BY {" + OrderModel.CODE + "},{" + OrderModel.CREATIONTIME + "} DESC, {" + OrderModel.PK + "}";
+		}
+		else
+		{
+			FIND_ORDERS_BY_CUSTOMER_STORE_QUERY+=" ORDER BY {" + OrderModel.CREATIONTIME + "} DESC, {" + OrderModel.PK + "}";
+		}
+		
+		final StringBuilder queryBuilder = new StringBuilder(FIND_ORDERS_BY_CUSTOMER_STORE_QUERY);
+		final SortQueryData result1 = new SortQueryData();
+		result1.setQuery(queryBuilder.toString());
+		SortQueryData selectedSortQuery = null;
+		final List<SortQueryData> sortQueries = Arrays.asList(result1);
+		for (final SortQueryData sortQueryData : sortQueries)
+		{
+			selectedSortQuery = sortQueryData;
+		}
+
+		final String query=selectedSortQuery.getQuery();
+		final FlexibleSearchQuery searchQuery = new FlexibleSearchQuery(query);
+		searchQuery.addQueryParameters(queryParams);
+		searchQuery.setNeedTotal(true);
+		searchQuery.setStart(pageableData.getCurrentPage() * pageableData.getPageSize());
+		searchQuery.setCount(pageableData.getPageSize());
+		final SearchResult<OrderModel> searchResult = flexibleSearchService.search(searchQuery);
+		final SearchPageData<OrderModel> orderResults = new SearchPageData<OrderModel>();
+		orderResults.setResults(searchResult.getResult());
+		final PaginationData paginationData = new PaginationData();
+		paginationData.setPageSize(pageableData.getPageSize());
+		paginationData.setSort(pageableData.getSort());
+		paginationData.setTotalNumberOfResults(searchResult.getTotalCount());
+		paginationData.setNumberOfPages((int) Math.ceil(((double) paginationData.getTotalNumberOfResults()) / paginationData.getPageSize()));
+		paginationData.setCurrentPage(Math.max(0, Math.min(paginationData.getNumberOfPages(), pageableData.getCurrentPage())));
+		orderResults.setPagination(paginationData);
+		orderResults.getPagination().setSort(selectedSortQuery.getSortCode());
+		final String selectedSortCode=selectedSortQuery.getSortCode();
+		final List<SortData> result = new ArrayList<SortData>(sortQueries.size());
+		for (final SortQueryData sortQuery : sortQueries)
+		{
+			final SortData sortData = new SortData();
+			sortData.setCode(sortQuery.getSortCode());
+			sortData.setName(sortQuery.getSortName());
+			sortData.setSelected(selectedSortCode != null && selectedSortCode.equals(sortQuery.getSortCode()));
+			result.add(sortData);
+		}
+		orderResults.setSorts(result);
+		
+		final SearchPageData<OrderHistoryData> searchPageData = new SearchPageData<OrderHistoryData>();
+		searchPageData.setPagination(orderResults.getPagination());
+		searchPageData.setSorts(orderResults.getSorts());
+		searchPageData.setResults(Converters.convertAll(orderResults.getResults(), orderHistoryConverter));
+		
+		populateModel(model, searchPageData, showMode);
+		storeCmsPageInModel(model, getContentPageForLabelOrId(ORDER_HISTORY_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ORDER_HISTORY_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs("text.account.orderHistory"));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+		model.addAttribute("nowPage", "orders");
+		model.addAttribute("sort",sortCode);
+		return getViewForPage(model);
+	}
+	
+	@RequestMapping(value = "/address-book", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String getAddressBook(final Model model) throws CMSItemNotFoundException
+	{
+		model.addAttribute("nowPage", "address-book");
+		model.addAttribute(ADDRESS_DATA_ATTR, userFacade.getAddressBook());
+		storeCmsPageInModel(model, getContentPageForLabelOrId(ADDRESS_BOOK_CMS_PAGE));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ADDRESS_BOOK_CMS_PAGE));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_ADDRESS_BOOK));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+		return getViewForPage(model);
+	}
+
+
 }

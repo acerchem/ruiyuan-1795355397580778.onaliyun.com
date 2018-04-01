@@ -12,7 +12,11 @@ import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.CartModel;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
+import org.springframework.util.ObjectUtils;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.stream.Collectors;
 
 /**
@@ -23,11 +27,14 @@ public class DefaultAcerchemCartFacade extends DefaultCartFacade implements Acer
     private AcerchemCommerCartService acerchemCommerCartService;
 
     @Override
-    public String acerchemValidateCart(String warehouseCode,String productCode,boolean isUseFutureStock) {
+    public String  acerchemValidateCart(String productCode,boolean isUseFutureStock,String storeId) {
         if (hasSessionCart()){
             CartModel cartModel = getCartService().getSessionCart();
-            if(acerchemValidateWarehouse(warehouseCode,cartModel)){
-                return "basket.error.warehouse.different";
+            if (ObjectUtils.isEmpty(storeId)){
+                return "basket.error.storeId.empty";
+            }
+            if(!acerchemValidatePointOfService(storeId,cartModel)){
+                return "basket.error.storeId.different";
             }
             if (!acerchemValidateProduct(isUseFutureStock,cartModel,productCode)){
                 return "basket.error.product.stock.different";
@@ -39,13 +46,20 @@ public class DefaultAcerchemCartFacade extends DefaultCartFacade implements Acer
 
 
     @Override
-    public CartModificationData addToCart(String code, long quantity, String warehouseCode, boolean isUseFutureStock,String storeId) throws CommerceCartModificationException {
+    public CartModificationData addToCart(String code, long quantity, boolean isUseFutureStock,String storeId,String availableDate) throws CommerceCartModificationException{
         final AddToCartParams params = new AddToCartParams();
         params.setProductCode(code);
         params.setQuantity(quantity);
-        params.setWarehouseCode(warehouseCode);
         params.setIsUseFutureStock(isUseFutureStock);
         params.setStoreId(storeId);
+        if (availableDate!=null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-DD");
+            try {
+                params.setAvailableDate(sdf.parse(availableDate));
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+        }
 
         return addToCart(params);
     }
@@ -59,12 +73,14 @@ public class DefaultAcerchemCartFacade extends DefaultCartFacade implements Acer
         return getCartModificationConverter().convert(modification);
     }
 
-    private boolean acerchemValidateWarehouse(String warehouseCode, CartModel cartModel){
-        boolean isSameWarehouse = true;
+    private boolean acerchemValidatePointOfService(String storeId, CartModel cartModel){
+        boolean isSamePOS = false;
         if (CollectionUtils.isNotEmpty(cartModel.getEntries())){
-            isSameWarehouse = warehouseCode .equals(cartModel.getEntries().stream().findFirst().get().getWarehouseCode());
+            isSamePOS = storeId.equals(cartModel.getEntries().stream().findFirst().get().getDeliveryPointOfService().getName());
+        }else{
+            isSamePOS = true;
         }
-        return isSameWarehouse;
+        return isSamePOS;
     }
 
     private boolean acerchemValidateProduct(boolean isUseFutureStock, CartModel cartModel,String productCode){

@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-3-31 13:56:05                          ---
+ * --- Generated at 2018-4-1 16:12:00                           ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.constants;
@@ -20,8 +20,7 @@ public class GeneratedAcerchemCoreConstants
 		public static final String APPARELPRODUCT = "ApparelProduct".intern();
 		public static final String APPARELSIZEVARIANTPRODUCT = "ApparelSizeVariantProduct".intern();
 		public static final String APPARELSTYLEVARIANTPRODUCT = "ApparelStyleVariantProduct".intern();
-		public static final String CUSTOMERLEVEL = "CustomerLevel".intern();
-		public static final String CUSTOMERLEVELCLASSIFICATION = "CustomerLevelClassification".intern();
+		public static final String COUNTRYTRAYFARECONF = "CountryTrayFareConf".intern();
 		public static final String ELECTRONICSCOLORVARIANTPRODUCT = "ElectronicsColorVariantProduct".intern();
 		public static final String FUNCTIONBUTTONCOMPONENT = "FunctionButtonComponent".intern();
 		public static final String IMAGEFAILEDACTIONTYPE = "ImageFailedActionType".intern();
@@ -29,14 +28,15 @@ public class GeneratedAcerchemCoreConstants
 		public static final String IMAGEUPLOADEDLOG = "ImageUploadedLog".intern();
 		public static final String MULTIPLEBANNERCOMPONENT = "MultipleBannerComponent".intern();
 		public static final String SWATCHCOLORENUM = "SwatchColorEnum".intern();
+		public static final String USERLEVEL = "UserLevel".intern();
+		public static final String USERLEVELCLASSIFICATION = "UserLevelClassification".intern();
 	}
 	public static class Attributes
 	{
 		public static class AbstractOrderEntry
 		{
+			public static final String AVAILABLEDATE = "availableDate".intern();
 			public static final String ISUSEFUTURESTOCK = "isUseFutureStock".intern();
-			public static final String SHIPDATE = "shipDate".intern();
-			public static final String WAREHOUSECODE = "warehouseCode".intern();
 		}
 		public static class Media
 		{
@@ -62,12 +62,13 @@ public class GeneratedAcerchemCoreConstants
 		}
 		public static class StockLevel
 		{
+			public static final String AVAPREORDERRELEASEDAY = "avaPreOrderReleaseDay".intern();
 			public static final String PREORDERRELEASEDAY = "preOrderReleaseDay".intern();
 		}
 		public static class User
 		{
-			public static final String CUSTOMERLEVEL = "customerLevel".intern();
-			public static final String CUSTOMERLEVELPOS = "customerLevelPOS".intern();
+			public static final String USERLEVEL = "userLevel".intern();
+			public static final String USERLEVELPOS = "userLevelPOS".intern();
 		}
 		public static class Vendor
 		{
@@ -76,21 +77,6 @@ public class GeneratedAcerchemCoreConstants
 	}
 	public static class Enumerations
 	{
-		public static class CustomerLevelClassification
-		{
-			public static final String A = "A".intern();
-			public static final String B = "B".intern();
-			public static final String C = "C".intern();
-			public static final String D = "D".intern();
-			public static final String E = "E".intern();
-			public static final String F = "F".intern();
-			public static final String G = "G".intern();
-			public static final String H = "H".intern();
-			public static final String I = "I".intern();
-			public static final String J = "J".intern();
-			public static final String K = "K".intern();
-			public static final String L = "L".intern();
-		}
 		public static class ImageFailedActionType
 		{
 			public static final String ADD = "ADD".intern();
@@ -110,6 +96,21 @@ public class GeneratedAcerchemCoreConstants
 			public static final String SILVER = "SILVER".intern();
 			public static final String WHITE = "WHITE".intern();
 			public static final String YELLOW = "YELLOW".intern();
+		}
+		public static class UserLevelClassification
+		{
+			public static final String A = "A".intern();
+			public static final String B = "B".intern();
+			public static final String C = "C".intern();
+			public static final String D = "D".intern();
+			public static final String E = "E".intern();
+			public static final String F = "F".intern();
+			public static final String G = "G".intern();
+			public static final String H = "H".intern();
+			public static final String I = "I".intern();
+			public static final String J = "J".intern();
+			public static final String K = "K".intern();
+			public static final String L = "L".intern();
 		}
 	}
 	public static class Relations

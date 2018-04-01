@@ -24,8 +24,10 @@ public class AcerChemProductDaoImpl implements AcerChemProductDao {
 	@Override
 	public List<ProductModel> getProductByVendorName(String vendorName) {
 		final String SQL = "select {p.pk} from {" + ProductModel._TYPECODE + 
-				" as p JOIN " + VendorModel._TYPECODE + " as v" +
-	            " ON {p." + ProductModel.ACERCHEMVENDOR+ "} = {v." + VendorModel.PK + "} }" +
+				" as p JOIN AcerChemVendor2Product as p2v"+ 
+	            " ON {p2v.target} = {p."+ProductModel.PK+"}"+
+				" JOIN " + VendorModel._TYPECODE + " as v" +
+	            " ON {p2v.source} = {v." + VendorModel.PK + "} }" +
 				" where {v." + VendorModel.NAME + "} like ?vendorName" ;
 	                                                                          																																					
 		final Map<String, Object> params = new HashMap<String, Object>();

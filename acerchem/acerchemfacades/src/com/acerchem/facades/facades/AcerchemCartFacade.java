@@ -4,12 +4,15 @@ package com.acerchem.facades.facades;
 import de.hybris.platform.commercefacades.order.data.CartModificationData;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
 
+import java.text.ParseException;
+import java.util.Date;
+
 /**
  * Created by Jacob.Ji on 2018/3/22.
  */
 public interface AcerchemCartFacade {
 
-    String acerchemValidateCart(String warehouseCode,String productCode,boolean isUseFutureStock);
+    String acerchemValidateCart(String productCode,boolean isUseFutureStock,String storeId);
 
     /**
      * Method for adding a product to cart.
@@ -26,5 +29,5 @@ public interface AcerchemCartFacade {
      * @throws CommerceCartModificationException
      *            if the cart cannot be modified
      */
-    CartModificationData addToCart(String code, long quantity, String warehouseCode, boolean isUseFutureStock, String storeId) throws CommerceCartModificationException;
+    CartModificationData addToCart(String code, long quantity, boolean isUseFutureStock, String storeId, String availableDate) throws CommerceCartModificationException;
 }

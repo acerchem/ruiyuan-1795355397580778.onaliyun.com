@@ -3,6 +3,7 @@ package com.acerchem.storefront.data;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import java.util.Date;
 
 
 /**
@@ -17,9 +18,17 @@ public class AcerchemAddToCartForm
 
 	private boolean isUseFutureStock;
 
-	private String warehouseCode;
-
 	private String storeId;
+
+	private String availableDate;
+
+	public String getAvailableDate() {
+		return availableDate;
+	}
+
+	public void setAvailableDate(String availableDate) {
+		this.availableDate = availableDate;
+	}
 
 	public String getStoreId() {
 		return storeId;
@@ -35,14 +44,6 @@ public class AcerchemAddToCartForm
 
 	public void setIsUseFutureStock(boolean isUseFutureStock) {
 		this.isUseFutureStock = isUseFutureStock;
-	}
-
-	public String getWarehouseCode() {
-		return warehouseCode;
-	}
-
-	public void setWarehouseCode(String warehouseCode) {
-		this.warehouseCode = warehouseCode;
 	}
 
 	public void setQty(final long quantity)
