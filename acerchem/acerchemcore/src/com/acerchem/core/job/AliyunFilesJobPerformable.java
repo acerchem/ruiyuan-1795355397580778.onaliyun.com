@@ -1,6 +1,7 @@
 package com.acerchem.core.job;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
@@ -42,99 +43,105 @@ public class AliyunFilesJobPerformable extends AbstractJobPerformable<CronJobMod
 	@Resource
 	private AcerChemImageUploadLogService acerChemImageUploadLogService;
 
+	private static final Integer MAX_COUNT = 20;
+
 	@Override
 	public PerformResult perform(CronJobModel cronJob) {
 		// TODO Auto-generated method stub
 		System.out.println("****cronJob  Scheduling***");
-		List<ImageFailedRecordModel> list = acerChemImageFailedRecoredService.getAllImageFailedRecord();
+		try {
+			List<ImageFailedRecordModel> list = acerChemImageFailedRecoredService.getAllImageFailedRecord();
 
-		// List<MediaModel> list =
-		// acerChemImageFailedRecoredService.getMediaWithImageFailedRecord();
-		if (list.size() > 0) {
+			// List<MediaModel> list =
+			// acerChemImageFailedRecoredService.getMediaWithImageFailedRecord();
+			if (list.size() > 0) {
 
-			// 初始化aliyun参数
-			String lsEndpoint = configurationService.getConfiguration().getString("aliyun.endpoint");
-			String lsAccessKeyId = configurationService.getConfiguration().getString("aliyun.accessKeyId");
-			String lsAccessKeySecret = configurationService.getConfiguration().getString("aliyun.accessKeySecret");
-			String lsBucketName = configurationService.getConfiguration().getString("aliyun.bucketName");
-			String lsDomain = configurationService.getConfiguration().getString("aliyun.domain");
-			MediaFileManager.initializeParameters(lsEndpoint, lsAccessKeyId, lsAccessKeySecret, lsBucketName);
-			UploadFileDefault.initializeParameters(lsEndpoint, lsAccessKeyId, lsAccessKeySecret, lsBucketName);
+				// 初始化aliyun参数
+				String lsEndpoint = configurationService.getConfiguration().getString("aliyun.endpoint");
+				String lsAccessKeyId = configurationService.getConfiguration().getString("aliyun.accessKeyId");
+				String lsAccessKeySecret = configurationService.getConfiguration().getString("aliyun.accessKeySecret");
+				String lsBucketName = configurationService.getConfiguration().getString("aliyun.bucketName");
+				String lsDomain = configurationService.getConfiguration().getString("aliyun.domain");
+				MediaFileManager.initializeParameters(lsEndpoint, lsAccessKeyId, lsAccessKeySecret, lsBucketName);
+				UploadFileDefault.initializeParameters(lsEndpoint, lsAccessKeyId, lsAccessKeySecret, lsBucketName);
 
-			OSSClient client = UploadFileDefault.openClient();
-			int iCount = 0;
-			Tenant currentTenant = Registry.getCurrentTenant();
-			if (currentTenant == null) {
-				Registry.activateMasterTenant();
-			}
-			try {
+				OSSClient client = UploadFileDefault.openClient();
+				int iCount = 0;
+				Tenant currentTenant = Registry.getCurrentTenant();
+				if (currentTenant == null) {
+					Registry.activateMasterTenant();
+				}
+				try {
 
-				for (ImageFailedRecordModel model : list) {
-					String ls = model.getLocation();
-					String mediaPK = model.getMediaPK();
+					for (ImageFailedRecordModel model : list) {
+						String ls = model.getLocation();
+						String mediaPK = model.getMediaPK();
 
-					// System.out.println(ls);
-					String action = model.getActionType().toString();
-					System.out.println("***" + action + "***");
-					String key = model.getAliyunUrl();
-					if (StringUtils.isNotBlank(key)) {
-						// 处理后来增加的字段没有的值
-						if (StringUtils.isBlank(mediaPK)) {
-							mediaPK = key.substring(key.lastIndexOf("/") + 1);
-							mediaPK = mediaPK.substring(0, mediaPK.indexOf("."));
-						}
+						// System.out.println(ls);
+						String action = model.getActionType().toString();
+						System.out.println("***" + action + "***");
+						String key = model.getAliyunUrl();
+						if (StringUtils.isNotBlank(key)) {
+							// 处理后来增加的字段没有的值
+							if (StringUtils.isBlank(mediaPK)) {
+								mediaPK = key.substring(key.lastIndexOf("/") + 1);
+								mediaPK = mediaPK.substring(0, mediaPK.indexOf("."));
+							}
 
-						if ("ADD".equals(action) && iCount < 5) {
-							File mainDataDir = MediaUtil.getLocalStorageDataDir();
+							if ("ADD".equals(action) && iCount < MAX_COUNT.intValue()) {
+								File mainDataDir = MediaUtil.getLocalStorageDataDir();
 
-							if (StringUtils.isNotBlank(ls)) {
-								File file = MediaUtil.composeOrGetParent(mainDataDir, ls);
-								if (file.exists()) {
-									System.out.println(file.getAbsolutePath());
+								if (StringUtils.isNotBlank(ls)) {
+									File file = MediaUtil.composeOrGetParent(mainDataDir, ls);
+									if (file.exists()) {
+										System.out.println(file.getAbsolutePath());
 
-									// InputStream input =
-									// MediaManager.getInstance().getMediaAsStream(new
-									// ModelMediaSource(media));
-									System.out.println("*****start upload to aliyun*****");
+										// InputStream input =
+										// MediaManager.getInstance().getMediaAsStream(new
+										// ModelMediaSource(media));
+										System.out.println("*****start upload to aliyun*****");
 
-									boolean success = (UploadFileDefault.uploadFile(file, key, client));
-									if (success) {
+										boolean success = (UploadFileDefault.uploadFile(file, key, client));
+										if (success) {
 
-										modelService.remove(model);
+											modelService.remove(model);
 
-										iCount++;
-										System.out.println("*****uploading count (" + iCount + ") *****");
-										// sync to save imageUploadedLog
-										String aliyunUrl = lsDomain + "/" + key;
-										saveUploadLog(mediaPK, aliyunUrl, ls);
+											iCount++;
+											System.out.println("*****uploading count (" + iCount + ") *****");
+											// sync to save imageUploadedLog
+											String aliyunUrl = lsDomain + "/" + key;
+											saveUploadLog(mediaPK, aliyunUrl, ls);
+										}
 									}
 								}
-							}
-						} else if ("DEL".equals(action)) {
+							} else if ("DEL".equals(action)) {
 
-							if (MediaFileManager.deleteFile(key)) {
+								if (MediaFileManager.deleteFile(key)) {
 
-								modelService.remove(model);
+									modelService.remove(model);
 
-								// delete log
+									// delete log
 
-								ImageUploadedLogModel iulModel = acerChemImageUploadLogService
-										.getImageUploadedLog(mediaPK);
-								if (iulModel != null) {
-									modelService.remove(iulModel);
+									ImageUploadedLogModel iulModel = acerChemImageUploadLogService
+											.getImageUploadedLog(mediaPK);
+									if (iulModel != null) {
+										modelService.remove(iulModel);
+									}
+
 								}
-
 							}
 						}
-					}
 
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				} finally {
+					System.out.println("*****upload finished*****");
+					UploadFileDefault.closeClient(client);
 				}
-			} catch (Exception e) {
-				e.printStackTrace();
-			} finally {
-				System.out.println("*****upload finished*****");
-				UploadFileDefault.closeClient(client);
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 
 		return new PerformResult(CronJobResult.SUCCESS, CronJobStatus.FINISHED);
