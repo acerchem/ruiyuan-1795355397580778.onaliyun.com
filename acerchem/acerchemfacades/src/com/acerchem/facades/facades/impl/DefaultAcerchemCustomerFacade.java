@@ -1,8 +1,5 @@
 package com.acerchem.facades.facades.impl;
 
-import com.acerchem.core.service.AcerchemCustomerService;
-import com.acerchem.facades.facades.AcerchemCustomerFacade;
-import com.acerchem.facades.product.data.CountryToWarehouseData;
 import de.hybris.platform.commercefacades.customer.impl.DefaultCustomerFacade;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
@@ -15,103 +12,91 @@ import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.store.BaseStoreModel;
 import de.hybris.platform.store.services.BaseStoreService;
 import de.hybris.platform.storelocator.model.PointOfServiceModel;
-import org.apache.commons.collections.CollectionUtils;
-import org.springframework.beans.factory.annotation.Required;
-import org.springframework.util.ObjectUtils;
 
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import javax.annotation.Resource;
+
+import org.apache.commons.collections.CollectionUtils;
+import org.springframework.util.ObjectUtils;
+
+import com.acerchem.core.service.AcerchemCustomerService;
+import com.acerchem.facades.facades.AcerchemCustomerFacade;
+import com.acerchem.facades.product.data.CountryToWarehouseData;
+
+
 /**
  * Created by Jacob.Ji on 2018/3/20.
  */
-public class DefaultAcerchemCustomerFacade extends DefaultCustomerFacade implements AcerchemCustomerFacade {
+public class DefaultAcerchemCustomerFacade extends DefaultCustomerFacade implements AcerchemCustomerFacade
+{
 
-    private Converter<CustomerModel,CustomerData> acerchemCustomerConverter;
+	@Resource
+	private Converter<CustomerModel, CustomerData> acerchemCustomerConverter;
+	@Resource
+	private Converter<WarehouseModel, CountryToWarehouseData> countryToWarehouseConverter;
+	@Resource
+	private AcerchemCustomerService acerchemCustomerService;
+	@Resource
+	private BaseStoreService baseStoreService;
+	@Resource
+	private ProductService productService;
 
-    private Converter<WarehouseModel,CountryToWarehouseData> countryToWarehouseConverter;
+	@Override
+	public CustomerData getCurrentCustomer()
+	{
+		final CustomerModel customerModel = (CustomerModel) getCurrentUser();
+		final CustomerData customerData = acerchemCustomerConverter.convert(customerModel);
+		return customerData;
+	}
 
-    private AcerchemCustomerService acerchemCustomerService;
+	@Override
+	public SearchPageData<CountryToWarehouseData> getAllPointOfServices(final PageableData pageableData)
+	{
 
-    private BaseStoreService baseStoreService;
+		final BaseStoreModel currentBaseStore = baseStoreService.getCurrentBaseStore();
+		final SearchPageData<PointOfServiceModel> result = acerchemCustomerService.getAllPos(currentBaseStore, pageableData);
 
-    private ProductService productService;
+		final List<CountryToWarehouseData> dataList = null;
+		if (!ObjectUtils.isEmpty(result) && result.getResults() != null)
+		{
+			//需求变动
+			//            dataList = countryToWarehouseConverter.convertAll(result.getResults());
+		}
 
-    @Override
-    public CustomerData getCurrentCustomer() {
-        CustomerModel customerModel = (CustomerModel) getCurrentUser();
-        CustomerData customerData =  acerchemCustomerConverter.convert(customerModel);
-        return customerData;
-    }
+		final SearchPageData<CountryToWarehouseData> searchPageData = new SearchPageData<>();
 
-    @Override
-    public SearchPageData<CountryToWarehouseData> getAllPointOfServices(PageableData pageableData) {
+		searchPageData.setResults(dataList);
 
-        final BaseStoreModel currentBaseStore = getBaseStoreService().getCurrentBaseStore();
-        SearchPageData<PointOfServiceModel> result = acerchemCustomerService.getAllPos(currentBaseStore,pageableData);
+		return searchPageData;
+	}
 
-        List<CountryToWarehouseData> dataList =null;
-        if (!ObjectUtils.isEmpty(result) && result.getResults()!=null){
-            //需求变动
-//            dataList = countryToWarehouseConverter.convertAll(result.getResults());
-        }
+	@Override
+	public List<CountryToWarehouseData> getAllWarehouses(final String productCode)
+	{
+		final BaseStoreModel baseStoreModel = baseStoreService.getCurrentBaseStore();
 
-        SearchPageData<CountryToWarehouseData> searchPageData = new SearchPageData<>();
+		List<CountryToWarehouseData> dataList = null;
+		final ProductModel productModel = productService.getProductForCode(productCode);
+		if (CollectionUtils.isNotEmpty(productModel.getStockLevels()))
+		{
+			final List<WarehouseModel> warehouseModelList = productModel
+					.getStockLevels()
+					.stream()
+					.filter(stockLevelModel -> stockLevelModel.getWarehouse() != null)
+					.flatMap(stockLevelModel -> Stream.of(stockLevelModel.getWarehouse()))
+					.filter(
+							warehouseModel -> warehouseModel.getBaseStores() != null
+									&& warehouseModel.getBaseStores().contains(baseStoreModel)).collect(Collectors.toList());
+			if (warehouseModelList != null)
+			{
+				dataList = countryToWarehouseConverter.convertAll(warehouseModelList);
+			}
+		}
 
-        searchPageData.setResults(dataList);
+		return dataList;
+	}
 
-        return searchPageData;
-    }
-
-    @Override
-    public List<CountryToWarehouseData> getAllWarehouses(String productCode) {
-        BaseStoreModel baseStoreModel = getBaseStoreService().getCurrentBaseStore();
-
-        List<CountryToWarehouseData> dataList =null;
-        ProductModel productModel = productService.getProductForCode(productCode);
-        if (CollectionUtils.isNotEmpty(productModel.getStockLevels())) {
-            List<WarehouseModel> warehouseModelList = productModel.getStockLevels().stream()
-                    .filter(stockLevelModel -> stockLevelModel.getWarehouse()!=null)
-                    .flatMap(stockLevelModel -> Stream.of(stockLevelModel.getWarehouse()))
-                    .filter(warehouseModel -> warehouseModel.getBaseStores()!=null
-                            && warehouseModel.getBaseStores().contains(baseStoreModel))
-                    .collect(Collectors.toList());
-            if (warehouseModelList!=null){
-                dataList = countryToWarehouseConverter.convertAll(warehouseModelList);
-            }
-        }
-
-        return dataList;
-    }
-
-    @Required
-    public void setProductService(ProductService productService) {
-        this.productService = productService;
-    }
-
-    @Required
-    public void setCountryToWarehouseConverter(Converter<WarehouseModel, CountryToWarehouseData> countryToWarehouseConverter) {
-        this.countryToWarehouseConverter = countryToWarehouseConverter;
-    }
-
-    @Required
-    public void setAcerchemCustomerConverter(Converter<CustomerModel, CustomerData> acerchemCustomerConverter) {
-        this.acerchemCustomerConverter = acerchemCustomerConverter;
-    }
-
-    @Required
-    public void setAcerchemCustomerService(AcerchemCustomerService acerchemCustomerService) {
-        this.acerchemCustomerService = acerchemCustomerService;
-    }
-
-    public BaseStoreService getBaseStoreService() {
-        return baseStoreService;
-    }
-
-    @Required
-    public void setBaseStoreService(BaseStoreService baseStoreService) {
-        this.baseStoreService = baseStoreService;
-    }
 }
-

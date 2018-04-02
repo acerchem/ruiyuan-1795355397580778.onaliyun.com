@@ -99,76 +99,9 @@
 
 		<!-- TypeGroups are for structure of this file only -->
 
-		<typegroup name="Apparel">
-			<itemtype code="ApparelProduct" extends="Product"
-				autocreate="true" generate="true" jaloclass="com.acerchem.core.jalo.ApparelProduct">
-				<description>Base apparel product extension that contains additional attributes.</description>
-				<attributes>
-					<attribute qualifier="genders" type="GenderList">
-						<description>List of genders that the ApparelProduct is designed for</description>
-						<modifiers />
-						<persistence type="property" />
-					</attribute>
-				</attributes>
-			</itemtype>
+		
 
-			<itemtype code="ApparelStyleVariantProduct" extends="VariantProduct"
-				autocreate="true" generate="true"
-				jaloclass="com.acerchem.core.jalo.ApparelStyleVariantProduct">
-				<description>Apparel style variant type that contains additional attribute describing variant style.
-                </description>
-				<attributes>
-					<attribute qualifier="style" type="localized:java.lang.String"
-						metatype="VariantAttributeDescriptor">
-						<description>Color/Pattern of the product.</description>
-						<modifiers />
-						<persistence type="property" />
-					</attribute>
-
-					<attribute qualifier="swatchColors" type="SwatchColorSet">
-						<description>A normalized color mapping to a standardized front-end navigable name.
-                        </description>
-						<modifiers />
-						<persistence type="property" />
-					</attribute>
-				</attributes>
-
-			</itemtype>
-
-			<itemtype code="ApparelSizeVariantProduct" extends="ApparelStyleVariantProduct"
-				autocreate="true" generate="true"
-				jaloclass="com.acerchem.core.jalo.ApparelSizeVariantProduct">
-				<description>Apparel size variant type that contains additional attribute describing variant size.
-                </description>
-				<attributes>
-					<attribute qualifier="size" type="localized:java.lang.String"
-						metatype="VariantAttributeDescriptor">
-						<description>Size of the product.</description>
-						<modifiers />
-						<persistence type="property" />
-					</attribute>
-				</attributes>
-			</itemtype>
-		</typegroup>
-
-		<typegroup name="Electronics">
-			<itemtype code="ElectronicsColorVariantProduct" extends="VariantProduct"
-				autocreate="true" generate="true"
-				jaloclass="com.acerchem.core.jalo.ElectronicsColorVariantProduct">
-				<description>Electronics color variant type that contains additional attribute describing variant color.
-                </description>
-				<attributes>
-					<attribute qualifier="color" type="localized:java.lang.String"
-						metatype="VariantAttributeDescriptor">
-						<description>Color of the product.</description>
-						<modifiers />
-						<persistence type="property" />
-					</attribute>
-				</attributes>
-			</itemtype>
-
-		</typegroup>
-		<typegroup name="AcerChemAppend">
+		<typegroup name="Acerchem">
 			<!--add by Wangjh start -->
 			<!-- document for uploading -->
 			<!-- <itemtype code="Document" autocreate="false" generate="false"> <description>Extending 
@@ -300,11 +233,10 @@
 			
 			
 			<!--add by Wangjh end -->
-		</typegroup>
+	
 
 		<!-- add by Randy -->
-		<typegroup name="import ç¾hemicalInfo and unitCalculateRato">
-
+	
 			<itemtype code="Product" autocreate="false" generate="false">
 				<description>Extending the Product type from core with additional attributes.</description>
 				<attributes>
@@ -361,10 +293,7 @@
 			</itemtype>
 
 
-
-		</typegroup>
 		<!-- add by Randy -->
-		<typegroup name="import the component of fronter page">
 			<itemtype code="AbstractMultipleBannerComponent" autocreate="true"
 				generate="true" abstract="true"
 				jaloclass="de.hybris.platform.cms2lib.components.AbstractMultipleBannerComponent"
@@ -401,11 +330,9 @@
 
 				</attributes>
 			</itemtype>
-		</typegroup>
 
 
 		<!--add by Alice -->
-		<typegroup name="traning">
 			<itemtype code="Product" autocreate="false" generate="false">
 				<description>Extending the Product type from core with additional attributes.</description>
 				<attributes>
@@ -417,11 +344,9 @@
 					</attribute>
 				</attributes>
 			</itemtype>
-		</typegroup>
 		<!-- End -->
 
 		<!--TODO -->
-		<typegroup name="traning">
 			<itemtype code="StockLevel" autocreate="false" generate="false">
 				<description>Extending the Product type from core with additional attributes.</description>
 				<attributes>
@@ -433,9 +358,7 @@
 					</attribute>
 				</attributes>
 			</itemtype>
-		</typegroup>
 
-		<typegroup name="traning">
 			<itemtype code="AbstractOrderEntry" autocreate="false"
 				generate="false">
 				<attributes>

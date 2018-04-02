@@ -23,7 +23,7 @@ $jarResourceCms=jar:com.acerchem.initialdata.constants.AcerchemInitialDataConsta
 $media=media(code, $contentCV);
 $productResource=jar:com.acerchem.initialdata.constants.AcerchemInitialDataConstants&/acercheminitialdata/import/sampledata/productCatalogs/$productCatalog
 $section=jar:com.acerchem.initialdata.constants.AcerchemInitialDataConstants&/acercheminitialdata/import/sampledata/contentCatalogs/acerchemContentCatalog
-$acerchemimagesResource=jar:com.acerchem.initialdata.constants.acercheminitialdataConstants&/acercheminitialdata/import/sampledata/contentCatalogs/acerchemContentCatalog/acerchemimages
+$acerchemimagesResource=jar:com.acerchem.initialdata.constants.AcerchemInitialDataConstants&/acercheminitialdata/import/sampledata/contentCatalogs/acerchemContentCatalog/acerchemimages
 
 
 # CMS Site Settings
