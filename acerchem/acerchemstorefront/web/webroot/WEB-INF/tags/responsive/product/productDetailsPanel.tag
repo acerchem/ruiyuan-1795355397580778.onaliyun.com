@@ -2,25 +2,10 @@
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/responsive/product"%>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
-<%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
-	<!-- <div class="m-crumbs">
-		<div class="link">
-			<a href="index.html">Home</a>
-			<a href="gallery.html">Promotions </a>
-			<span>Hemp Seed Protein 50% Powder (50lb Bag) by Hempco</span>
-			<div class="m-starlev" date-val="2">
-				<i></i>
-				<em></em>
-			</div>
-		</div>
-	</div>  -->
-
-	<!-- top -->
-	<div class="g-cont prod-cont">
+<div class="g-cont prod-cont">
 			<!-- left -->
 			<div class="g-cell">
 				<!-- slide -->
@@ -39,7 +24,7 @@
 			    			<p><em class="">%</em><em>OFF</em></p>
 			    		</div>
 						<ul class="slide-item">
-						   <c:forEach items="${galleryImages}" var="container" varStatus="varStatus">
+							 <c:forEach items="${galleryImages}" var="container" varStatus="varStatus">
 							<li class="item"><img src="${container.product.url}"  alt=""></li>
 							
 							</c:forEach>
@@ -57,8 +42,8 @@
 						</div>
 					</div>
 					<div class="priceset">
-						<span class="price"><format:fromPrice priceData="${product.price}"/></span>
-						<span class="old-price"><format:fromPrice priceData="${product.price}"/></span>
+						<span class="price">$60.00</span>
+						<span class="old-price">${product.price}</span>
 					</div>
 					<div class="Summary">
 						<span><i>FREE</i>Buy 2 pieces for FREE Shipping;</span>
@@ -66,17 +51,83 @@
 						<span><i>40%</i>Buy 400 items  sales to 40% Off;</span>
 					</div>
 					
+					
+					<div class="specnum">
+						<div class="spec">
+							<label>
+								<span class="label-title">Specifications</span>	
+								<div class="selbox">
+									<input type="hidden" class="required" value="" name="spec" alt="Please Select nation">
+									<span class="pitch"></span>
+									<ul class="select">
+										<li data-val="25">25kg</li>
+										<li data-val="50">50kg</li>
+										<li data-val="75">75kg</li>						
+									</ul>
+								</div>	
+							</label>	
+							<label class="futday">
+								<span class="label-title">Future days</span>	
+								<div class="selbox">
+									<input type="hidden" value="" name="futday" alt="Please Select nation" id="futday">
+									<span class="pitch"></span>
+									<ul class="select">
+										<li data-val="30">30day</li>
+										<li data-val="60">60day</li>
+										<li data-val="90">90day</li>						
+									</ul>
+								</div>	
+							</label>						
+						</div>
+						<div class="invernum">
+							<span class="label-title inventory">Inventory:<i>8</i> <span class="spot">(<em>8</em>)</span></span>	
+
+							<label>
+								<input type="checkbox" name="Keep">
+								<span class="checkbox">Display future inventory</span>
+							</label>							
+						</div>
+						<div class="delivery flex-wrap">
+							<span class="label-title">Delivery to</span>
+							<div class="flex">
+								<select>
+								  <option value ="USA">U.S.A</option>
+								  <option value ="EL">England</option>
+								  <option value="ITA">Repubblica Italiana</option>
+								  <option value="SUI">Swiss Confederation</option>
+								</select>
+							</div>
+							<div class="flex">
+								<select>
+								  <option value ="NY">New York</option>
+								  <option value ="LA">Los Angeles</option>
+								  <option value="CI">Chicago</option>
+								</select>
+							</div>
+						</div>
+
+						<div class="prod-sum">
+							<div class="m-setnum">
+								<span class="set sub">-</span>
+								<input type="text" name="pdnum" class="set" value="1">
+								<span class="set add">+</span>
+							</div>
+							<i class="delintro">Delivery<em>30</em>days</i>
+						</div>
+
+						
+					</div>
+			
+					
 					<cms:pageSlot position="AddToCart" var="component" >
 						<cms:component component="${component}" />
 					</cms:pageSlot>
 					
-			
-					<!-- 
-                    <div class="btn-set">							
-							<a class="btn btn-submit" href="checkout.html">Check Out</a>
-							<a class="btn btn-cart" href="javascript:void(0)">Add to Cart</a>
-					</div> -->
-
+					<!-- <div class="btn-set">
+						<button class="btn btn-submit">Check Out</button>
+						<button class="btn btn-cart">Add to Cart</button>							
+					</div> 
+ -->
 				</div>
 				<!-- b end -->
 			</div>
@@ -102,16 +153,9 @@
 							<a href="#" >Allergen Statement</a>
 						</li>
 					</ul>
-					
-					
-					<!--shaun:consulte  -->
 					<div class="btn-set line-setbtn">							
 						<a class="btn btn-showlist" href="javascript:void(0)">Message Consultation</a>
 					</div>		
-					
-					
-					
-					
 				</div>
 				<div class="tableshare">
 					<div class="title">Share with a Friend</div>
@@ -128,7 +172,7 @@
 			</div>
 		</div>
 		<!-- down -->
-		<div class="g-cont prod-cont down-cont">
+<div class="g-cont prod-cont down-cont">
 			<div class="g-proudtable">
 				<div class="g-cell">					
 					<!-- descr -->
@@ -255,7 +299,7 @@
 							<li class="both">
 								<div class="img">
 					    			<a href="product.html">
-					    		  		<img src="" alt="">
+					    		  		<img src="images/maxsales-bg10.jpg" alt="">
 					    		  	</a>
 					    		</div>
 					    		<div class="maxtext">
@@ -268,7 +312,7 @@
 							<li class="both">
 								<div class="img">
 					    			<a href="product.html">
-					    		  		<img src="" alt="">
+					    		  		<img src="images/maxsales-bg9.jpg" alt="">
 					    		  	</a>
 					    		</div>
 					    		<div class="maxtext">
@@ -281,7 +325,7 @@
 							<li class="both">
 								<div class="img">
 					    			<a href="product.html">
-					    		  		<img src="" alt="">
+					    		  		<img src="images/maxsales-bg8.jpg" alt="">
 					    		  	</a>
 					    		</div>
 					    		<div class="maxtext">
@@ -294,7 +338,7 @@
 							<li class="both">
 								<div class="img">
 					    			<a href="product.html">
-					    		  		<img src="" alt="">
+					    		  		<img src="images/maxsales-bg7.jpg" alt="">
 					    		  	</a>
 					    		</div>
 					    		<div class="maxtext">
@@ -307,7 +351,7 @@
 							<li class="both">
 								<div class="img">
 					    			<a href="product.html">
-					    		  		<img src="" alt="">
+					    		  		<img src="images/maxsales-bg6.jpg" alt="">
 					    		  	</a>
 					    		</div>
 					    		<div class="maxtext">
@@ -320,7 +364,7 @@
 							<li class="both">
 								<div class="img">
 					    			<a href="product.html">
-					    		  		<img src="" alt="">
+					    		  		<img src="images/maxsales-bg5.jpg" alt="">
 					    		  	</a>
 					    		</div>
 					    		<div class="maxtext">
@@ -333,7 +377,7 @@
 							<li class="both">
 								<div class="img">
 					    			<a href="product.html">
-					    		  		<img src="" alt="">
+					    		  		<img src="images/maxsales-bg4.jpg" alt="">
 					    		  	</a>
 					    		</div>
 					    		<div class="maxtext">
@@ -346,7 +390,7 @@
 							<li class="both">
 								<div class="img">
 					    			<a href="product.html">
-					    		  		<img src="" alt="">
+					    		  		<img src="images/maxsales-bg3.jpg" alt="">
 					    		  	</a>
 					    		</div>
 					    		<div class="maxtext">
@@ -359,7 +403,7 @@
 							<li class="both">
 								<div class="img">
 					    			<a href="product.html">
-					    		  		<img src="" alt="">
+					    		  		<img src="images/maxsales-bg2.jpg" alt="">
 					    		  	</a>
 					    		</div>
 					    		<div class="maxtext">
@@ -372,7 +416,7 @@
 							<li class="both">
 								<div class="img">
 					    			<a href="product.html">
-					    		  		<img src="" alt="">
+					    		  		<img src="images/maxsales-bg1.jpg" alt="">
 					    		  	</a>
 					    		</div>
 					    		<div class="maxtext">
@@ -383,329 +427,462 @@
 						    	</div>
 							</li>
 
+
+						
 					</ul>	
 					</div>
 				</div>
 				<!-- r edn -->
 			</div>
 			<!-- item -->
-	
+	<div class="maxon_salesul">
+		<div class="title">
+			Promotion Item
+			<div class="maxpagin">				
+			</div>	
+		</div>
+		<div class="banner_btn"> 
+    		<span class="arrow-left"></span> 
+			<span class="arrow-right"></span>
+	    </div>
+	    <div class="slide-wrap">
+		    <div class="slide-item both">
+		    	<div class="item">	    		
+		    		<div class="img">
+		    			<a href="product.html">
+		    		  		<img src="images/maxsales-bg6.jpg" alt="">
+		    		  	</a>
+		    		</div>
+		    		<div class="maxtext">
+			    		<p>TwinTiger Glutathione (5kg Bag) by Jincheng</p>
+			    		<!-- 登录显示 -->
+			    		<span class="price"><i>$68.00</i></span>
+			    		<span class="old-price"><i>$98.00</i></span>
+			    		<!-- 登录显示 END-->
+			    	</div>
+		    	</div>
+		    	<div class="item">	    		
+		    		<div class="img">
+		    			<a href="product.html">
+		    		  		<img src="images/maxsales-bg7.jpg" alt="">
+		    		  	</a>
+		    		</div>
+		    		<div class="maxtext">
+			    		<p>Acetyl L-Carnitine HCL (25kg Drum) By Chengda</p>
+			    		<!-- 登录显示 -->
+			    		<span class="price"><i>$68.00</i></span>
+			    		<span class="old-price"><i>$98.00</i></span>
+			    		<!-- 登录显示 END-->
+			    	</div>
+		    	</div>
+		    	<div class="item">	    		
+		    		<div class="img">
+		    			<a href="product.html">
+		    		  		<img src="images/maxsales-bg8.jpg" alt="">
+		    		  	</a>
+		    		</div>
+		    		<div class="maxtext">
+			    		<p>Chondroitin Sulfate USP 90% (O.D.B) by CPC and 72% (As is) by E-HPLC (25kg Drum) by Greentech</p>
+			    		<!-- 登录显示 -->
+			    		<span class="price"><i>$68.00</i></span>
+			    		<span class="old-price"><i>$98.00</i></span>
+			    		<!-- 登录显示 END-->
+			    	</div>
+		    	</div>
+		    	<div class="item">	    		
+		    		<div class="img">
+		    			<a href="product.html">
+		    		  		<img src="images/maxsales-bg9.jpg" alt="">
+		    		  	</a>
+		    		</div>
+		    		<div class="maxtext">
+			    		<p>Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
+			    		<!-- 登录显示 -->
+			    		<span class="price"><i>$68.00</i></span>
+			    		<span class="old-price"><i>$98.00</i></span>
+			    		<!-- 登录显示 END-->
+			    	</div>
+		    	</div>
+		    	<div class="item">	    		
+		    		<div class="img">
+		    			<a href="product.html">
+		    		  		<img src="images/maxsales-bg10.jpg" alt="">
+		    		  	</a>
+		    		</div>
+		    		<div class="maxtext">
+			    		<p>Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
+			    		<!-- 登录显示 -->
+			    		<span class="price"><i>$68.00</i></span>
+			    		<span class="old-price"><i>$98.00</i></span>
+			    		<!-- 登录显示 END-->
+			    	</div>
+		    	</div>
+		    	<div class="item">	    		
+		    		<div class="img">
+		    			<a href="product.html">
+		    		  		<img src="images/maxsales-bg6.jpg" alt="">
+		    		  	</a>
+		    		</div>
+		    		<div class="maxtext">
+			    		<p>TwinTiger Glutathione (5kg Bag) by Jincheng</p>
+			    		<!-- 登录显示 -->
+			    		<span class="price"><i>$68.00</i></span>
+			    		<span class="old-price"><i>$98.00</i></span>
+			    		<!-- 登录显示 END-->
+			    	</div>
+		    	</div>
+		    	<div class="item">	    		
+		    		<div class="img">
+		    			<a href="product.html">
+		    		  		<img src="images/maxsales-bg7.jpg" alt="">
+		    		  	</a>
+		    		</div>
+		    		<div class="maxtext">
+			    		<p>Acetyl L-Carnitine HCL (25kg Drum) By Chengda</p>
+			    		<!-- 登录显示 -->
+			    		<span class="price"><i>$68.00</i></span>
+			    		<span class="old-price"><i>$98.00</i></span>
+			    		<!-- 登录显示 END-->
+			    	</div>
+		    	</div>
+		    	<div class="item">	    		
+		    		<div class="img">
+		    			<a href="product.html">
+		    		  		<img src="images/maxsales-bg8.jpg" alt="">
+		    		  	</a>
+		    		</div>
+		    		<div class="maxtext">
+			    		<p>Chondroitin Sulfate USP 90% (O.D.B) by CPC and 72% (As is) by E-HPLC (25kg Drum) by Greentech</p>
+			    		<!-- 登录显示 -->
+			    		<span class="price"><i>$68.00</i></span>
+			    		<span class="old-price"><i>$98.00</i></span>
+			    		<!-- 登录显示 END-->
+			    	</div>
+		    	</div>
+		    	<div class="item">	    		
+		    		<div class="img">
+		    			<a href="product.html">
+		    		  		<img src="images/maxsales-bg9.jpg" alt="">
+		    		  	</a>
+		    		</div>
+		    		<div class="maxtext">
+			    		<p>Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
+			    		<!-- 登录显示 -->
+			    		<span class="price"><i>$68.00</i></span>
+			    		<span class="old-price"><i>$98.00</i></span>
+			    		<!-- 登录显示 END-->
+			    	</div>
+		    	</div>
+		    	<div class="item">	    		
+		    		<div class="img">
+		    			<a href="product.html">
+		    		  		<img src="images/maxsales-bg10.jpg" alt="">
+		    		  	</a>
+		    		</div>
+		    		<div class="maxtext">
+			    		<p>Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
+			    		<!-- 登录显示 -->
+			    		<span class="price"><i>$68.00</i></span>
+			    		<span class="old-price"><i>$98.00</i></span>
+			    		<!-- 登录显示 END-->
+			    	</div>
+		    	</div>
+		    	<div class="item">	    		
+		    		<div class="img">
+		    			<a href="product.html">
+		    		  		<img src="images/maxsales-bg6.jpg" alt="">
+		    		  	</a>
+		    		</div>
+		    		<div class="maxtext">
+			    		<p>TwinTiger Glutathione (5kg Bag) by Jincheng</p>
+			    		<!-- 登录显示 -->
+			    		<span class="price"><i>$68.00</i></span>
+			    		<span class="old-price"><i>$98.00</i></span>
+			    		<!-- 登录显示 END-->
+			    	</div>
+		    	</div>
+		    	<div class="item">	    		
+		    		<div class="img">
+		    			<a href="product.html">
+		    		  		<img src="images/maxsales-bg7.jpg" alt="">
+		    		  	</a>
+		    		</div>
+		    		<div class="maxtext">
+			    		<p>Acetyl L-Carnitine HCL (25kg Drum) By Chengda</p>
+			    		<!-- 登录显示 -->
+			    		<span class="price"><i>$68.00</i></span>
+			    		<span class="old-price"><i>$98.00</i></span>
+			    		<!-- 登录显示 END-->
+			    	</div>
+		    	</div>
+		    	<div class="item">	    		
+		    		<div class="img">
+		    			<a href="product.html">
+		    		  		<img src="images/maxsales-bg8.jpg" alt="">
+		    		  	</a>
+		    		</div>
+		    		<div class="maxtext">
+			    		<p>Chondroitin Sulfate USP 90% (O.D.B) by CPC and 72% (As is) by E-HPLC (25kg Drum) by Greentech</p>
+			    		<!-- 登录显示 -->
+			    		<span class="price"><i>$68.00</i></span>
+			    		<span class="old-price"><i>$98.00</i></span>
+			    		<!-- 登录显示 END-->
+			    	</div>
+		    	</div>
+		    	<div class="item">	    		
+		    		<div class="img">
+		    			<a href="product.html">
+		    		  		<img src="images/maxsales-bg9.jpg" alt="">
+		    		  	</a>
+		    		</div>
+		    		<div class="maxtext">
+			    		<p>Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
+			    		<!-- 登录显示 -->
+			    		<span class="price"><i>$68.00</i></span>
+			    		<span class="old-price"><i>$98.00</i></span>
+			    		<!-- 登录显示 END-->
+			    	</div>
+		    	</div>
+		    	<div class="item">	    		
+		    		<div class="img">
+		    			<a href="product.html">
+		    		  		<img src="images/maxsales-bg10.jpg" alt="">
+		    		  	</a>
+		    		</div>
+		    		<div class="maxtext">
+			    		<p>Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
+			    		<!-- 登录显示 -->
+			    		<span class="price"><i>$68.00</i></span>
+			    		<span class="old-price"><i>$98.00</i></span>
+			    		<!-- 登录显示 END-->
+			    	</div>
+		    	</div>
+			</div>
+
+	    </div>
+	</div>
 	<!-- item end -->
 		</div>
-		<!-- down end -->
 		
-		
-		<!--shaun  -->
-		<!-- message -->
-					<div class="m-message">
-						<div class="indwrap">
-							<div class="mes-table">
-								<div class="title">Message consultation</div>
-								<form action="" method="post" class="solid-form both" id="message">				
-									<div class="left">
-										<label>
-											<span class="label-title">Your Name</span>	
-											<input type="text" name="name" class="required" alt="Please Enter Your Name">
-										</label>
-					
-										<label>
-											<span class="label-title">Telephone / Mobile Phone</span>	
-											<input type="text" name="mobile" class="required" alt="Please Enter Telephone / Mobile Phone">
-										</label>
-					
-										<label>
-											<span class="label-title">Email</span>	
-											<input type="text" name="email" class="required" alt="Please Enter Your Email">
-										</label>
-					
-										<label>
-											<span class='label-title'>Shipping Address</span>	
-												<div class="flex-wrap">
-													<div class="flex">					
-														<div class="selbox">
-															<input type="hidden" disabled="disabled" value="" name='nation' class="required" alt='Please Select Shipping nation'>
-															<span class="pitch"><i></i></span>
-															<ul class="select">
-																<li>Nation</li>
-																<li data-val="USA">U.S.A</li>
-																<li data-val="EL">England</li>
-																<li data-val="ITA">Repubblica Italiana</li>
-																<li data-val="SUI">Swiss Confederation</li>
-																<li data-val="MEX">The United States of Mexico</li>
-																<li data-val="FRA">French Republic</li>
-															</ul>
-														</div>	
-													</div>
-													<div class="flex">
-														<div class="selbox ">
-															<input type="hidden" disabled="disabled" value="" name='city' class="required" alt='Please Select Shipping city'>
-															<span class="pitch"><i></i></span>
-															<ul class="select">
-																<li>City</li>
-																<li data-val="NY">New York</li>
-																<li data-val="LA">Los Angeles</li>
-																<li data-val="CI">Chicago</li>
-															</ul>
-														</div>	
-													</div>				
-												</div>
-										</label>
-					
-										<label>						
-											<input type="text" name='shipadd' class="required" placeholder="Detailed address" alt='Please Enter Shipping Detailed Address'>
-										</label>				
-									</div>
-									<div class="right">	
-										<label>
-											<span class="label-title">Product ID</span>	
-											<input type="text" name="prodid" class="required" alt="Please Enter Product ID">
-										</label>
-										<label>
-											<span class="label-title">Product Name</span>	
-											<input type="text" name="prodname" class="required" alt="Please Enter Product Name">
-										</label>
-										<label>
-											<span class="label-title">message</span>	
-											<textarea name="message" id="" ></textarea>
-										</label>
-									</div>				
-								</form>
-								<div class="btn-set">
-									<a class="btn btn-line" href="javascript:void(0)">Cancel</a>				
-									<a class="btn btn-submit" href="javascript:void(0)">Confirm</a>
-								</div>
-							</div>
-						</div>
-					</div>
-<!-- message end -->
-		
-		
-		
-		
-		
-		
-		
-<script>
+		<script>
+	inputint()
 
-inputint()
-
-var wrap = '.maxon_salesul .slide-wrap';
-maxon_salesul(wrap)
+	var wrap = '.maxon_salesul .slide-wrap';
+	maxon_salesul(wrap)
 
 
 
-// m-prodslide
-var prodslide = $('.m-prodslide'),
-minwrap = prodslide.find('.minwrap'),	
-slideparwidth = prodslide.parent().width();
-prodslide.width(slideparwidth*.5);
+	// m-prodslide
+	var prodslide = $('.m-prodslide'),
+	minwrap = prodslide.find('.minwrap'),	
+	slideparwidth = prodslide.parent().width();
+	prodslide.width(slideparwidth*.5);
 
-var flipspan = '.m-prodslide .minimg span',
-	flipbtn = $('.m-prodslide .flip span');
-var slidwrap = new Swiper('.slidewrap',{
-    wrapperClass : 'slide-item', 
-    slideClass : 'item',
-    calculateHeight : true,
-    speed: 600,        
-    pagination: '.minimg', 
-    paginationClickable :true,
-    onSwiperCreated:function(swiper){
-    	$('.m-prodslide .slide-item li').each(function(){
-	   		var aindex = $(this).index(),
-	   			aimg = $(this).html(),
-	   			aheight = swiper.height,
-	   			minimg = $(flipspan);
-	   			minimg.eq(aindex).append(aimg);
-	   			minwrap.height(aheight);
-		})
-     }      
-})
+	var flipspan = '.m-prodslide .minimg span',
+		flipbtn = $('.m-prodslide .flip span');
+	var slidwrap = new Swiper('.slidewrap',{
+        wrapperClass : 'slide-item', 
+        slideClass : 'item',
+        calculateHeight : true,
+        speed: 600,        
+        pagination: '.minimg', 
+        paginationClickable :true,
+        onSwiperCreated:function(swiper){
+        	$('.m-prodslide .slide-item li').each(function(){
+		   		var aindex = $(this).index(),
+		   			aimg = $(this).html(),
+		   			aheight = swiper.height,
+		   			minimg = $(flipspan);
+		   			minimg.eq(aindex).append(aimg);
+		   			minwrap.height(aheight);
+			})
+	     }      
+    })
 
-$(document).on('mouseover',flipspan,function(){
-	$(this).click();
-});
+	$(document).on('mouseover',flipspan,function(){
+		$(this).click();
+	});
 
-flipbtn.on('click',function(){
-	var aclass=$(this).attr('class'),
-		fwrap = $('.m-prodslide .minimg'),
-		atop = parseInt(fwrap.css('top')),
-		ahi = parseInt(fwrap.find('span').css('height')),
-		maxtop = parseInt(prodslide.find('.slidewrap .item').height())-fwrap.height(),
-		topval = 0;
+	flipbtn.on('click',function(){
+		var aclass=$(this).attr('class'),
+			fwrap = $('.m-prodslide .minimg'),
+			atop = parseInt(fwrap.css('top')),
+			ahi = parseInt(fwrap.find('span').css('height')),
+			maxtop = parseInt(prodslide.find('.slidewrap .item').height())-fwrap.height(),
+			topval = 0;
 
-	switch(aclass){
-		case 'up':
-			topval=atop-ahi;
-			if(topval<maxtop){
-				topval=atop;
-				$(this).addClass('over');
-			}
-			$(this).siblings().removeClass('over')	
-			break;
-		case 'down':
-			if(atop==0){
-				topval=0;
-				$(this).addClass('over');
-			}else{
-				topval=atop+ahi;
-			}
-			$(this).siblings().removeClass('over')	
-			break;
-	}
-	fwrap.animate({top:topval},300)
-})
-// m-prodslide end
-var shareele = $('.footermin .share-buttons');
-$('.product-right .tableshare').append(shareele.clone());
-
-// m-starlev
-function starlev(){
-	var star = $('.m-starlev');
-	star.each(function(){
-		var lv = (parseFloat($(this).attr('date-val'))/5)*100,
-		aem = $(this).find('em');
-		aem.css('width',lv+'%');
+		switch(aclass){
+			case 'up':
+				topval=atop-ahi;
+				if(topval<maxtop){
+					topval=atop;
+					$(this).addClass('over');
+				}
+				$(this).siblings().removeClass('over')	
+				break;
+			case 'down':
+				if(atop==0){
+					topval=0;
+					$(this).addClass('over');
+				}else{
+					topval=atop+ahi;
+				}
+				$(this).siblings().removeClass('over')	
+				break;
+		}
+		fwrap.animate({top:topval},300)
 	})
-	
-}
-starlev()
+	// m-prodslide end
+	var shareele = $('.footermin .share-buttons');
+	$('.product-right .tableshare').append(shareele.clone());
 
-// m-pagecard
-$('.m-pagecard span').on('click',function(){
-	var aindex= $(this).index(),
-		card = $('.m-cardwrap');
-		$(this).addClass('now').siblings().removeClass('now');
-		card.eq(aindex).show().siblings('.m-cardwrap').hide()
-})
+	// m-starlev
+	function starlev(){
+		var star = $('.m-starlev');
+		star.each(function(){
+			var lv = (parseFloat($(this).attr('date-val'))/5)*100,
+			aem = $(this).find('em');
+			aem.css('width',lv+'%');
+		})
+		
+	}
+	starlev()
 
-$('.invernum label span').on('click',function(){
-	var acked = $(this).siblings('input').prop('checked'),
-		days = $('.spec .futday'),
-		invi = $('.invernum .inventory i'),
-		spot = $('.invernum .inventory .spot'),
-		futday = parseInt($('#futday').val()),
-		setnum = $('.m-setnum input');
-	if(acked){
-		days.hide();
-		spot.hide();
-		invi.text(spot.find('em').text());
-		if(parseInt(setnum.val())>parseInt(spot.find('em').text())){
-			setnum.val(spot.find('em').text())
+	// m-pagecard
+	$('.m-pagecard span').on('click',function(){
+		var aindex= $(this).index(),
+			card = $('.m-cardwrap');
+			$(this).addClass('now').siblings().removeClass('now');
+			card.eq(aindex).show().siblings('.m-cardwrap').hide()
+	})
+
+	$('.invernum label span').on('click',function(){
+		var acked = $(this).siblings('input').prop('checked'),
+			days = $('.spec .futday'),
+			invi = $('.invernum .inventory i'),
+			spot = $('.invernum .inventory .spot'),
+			futday = parseInt($('#futday').val()),
+			setnum = $('.m-setnum input');
+		if(acked){
+			days.hide();
+			spot.hide();
+			invi.text(spot.find('em').text());
+			if(parseInt(setnum.val())>parseInt(spot.find('em').text())){
+				setnum.val(spot.find('em').text())
+			}
+			
+		}else{
+			days.show();
+			spot.show();
+			invi.text(futday+parseInt(invi.text()));
 		}
 		
-	}else{
-		days.show();
-		spot.show();
-		invi.text(futday+parseInt(invi.text()));
-	}
-	
-})	
+	})	
 
-$('.futday .select li').on('click',function(){
-	var aval = parseInt($(this).attr('data-val')),
-		invi = $('.invernum .inventory i'),
-		invem = $('.invernum .inventory em'),
-		inval = parseInt(invem.text());
-		invi.text(aval+inval);
-})
+	$('.futday .select li').on('click',function(){
+		var aval = parseInt($(this).attr('data-val')),
+			invi = $('.invernum .inventory i'),
+			invem = $('.invernum .inventory em'),
+			inval = parseInt(invem.text());
+			invi.text(aval+inval);
+	})
 
-//m-setnum
-$('.m-setnum span').on('click',function(){
-	var aclass=$(this).attr('class'),
-		ainp = $(this).siblings('input'),
-		maxnum =parseInt($('.invernum .inventory i').text()),
-		delin = $('.specnum .prod-sum .delintro'),
-		avl = null;
-	switch(aclass){
-		case 'set sub':
-			avl = parseInt(ainp.val());
-			if(avl<=1){
-				maxalert('A minimum of one piece！');
-				$(this).css('background-color','#ddd')
-				break;
-			}else{
-				if(avl<30){
-					delin.find('em').text(30)
-				}else if(avl>30&&avl<60){
-					delin.find('em').text(60)
-				}else if(avl>60){
-					delin.find('em').text(90)
+	//m-setnum
+	$('.m-setnum span').on('click',function(){
+		var aclass=$(this).attr('class'),
+			ainp = $(this).siblings('input'),
+			maxnum =parseInt($('.invernum .inventory i').text()),
+			delin = $('.specnum .prod-sum .delintro'),
+			avl = null;
+		switch(aclass){
+			case 'set sub':
+				avl = parseInt(ainp.val());
+				if(avl<=1){
+					maxalert('A minimum of one piece！');
+					$(this).css('background-color','#ddd')
+					break;
+				}else{
+					if(avl<30){
+						delin.find('em').text(30)
+					}else if(avl>30&&avl<60){
+						delin.find('em').text(60)
+					}else if(avl>60){
+						delin.find('em').text(90)
+					}
 				}
-			}
-			ainp.val(avl-1);
-			break;
-		case 'set add':
-			avl = parseInt(ainp.val());
-			$(this).css('background-color','');
-			$(this).siblings('span').css('background-color','');
-
-			if(avl>=maxnum){
-				maxalert("It's already the largest inventory.");
+				ainp.val(avl-1);
 				break;
-			}else{
-				if(avl<30){
-					delin.find('em').text(30)
-				}else if(avl>30&&avl<60){
-					delin.find('em').text(60)
-				}else if(avl>60){
-					delin.find('em').text(90)
-				}					
-			}
-			ainp.val(avl+1);
-			break;	
-	}
-	
-})
+			case 'set add':
+				avl = parseInt(ainp.val());
+				$(this).css('background-color','');
+				$(this).siblings('span').css('background-color','');
 
-$('.prodbase .btn-cart').on('click',function(){//加入购物车
-	var srch = window.innerHeight;
-	$('.maxfixed').show();
-	$('body').css({'height':srch,'overflow':'hidden'});
+				if(avl>=maxnum){
+					maxalert("It's already the largest inventory.");
+					break;
+				}else{
+					if(avl<30){
+						delin.find('em').text(30)
+					}else if(avl>30&&avl<60){
+						delin.find('em').text(60)
+					}else if(avl>60){
+						delin.find('em').text(90)
+					}					
+				}
+				ainp.val(avl+1);
+				break;	
+		}
+		
+	})
 
-	var maxfixed = $('.maxfixed .product-table ul'),
-		thisele = $('.prodbase'),
-		thisimg = $('.slidewrap .item').first().html(), 
-		thistit = thisele.find('.g-title p').text(),				
-		goodsnum = $('input[name="pdnum"]').val(),
-		price = thisele.find('.price').text(),
-		oldprice = thisele.find('.old-price').text(),
-		fications = $('input[name="spec"]').val(),
-		newele = '<li class="item"><div class="img">'+thisimg+'</div><div class="maxtext"><p class="in-title">'+thistit+'</p><p class="spec">Specifications:<i>'+fications+'</i></p><div class="spset"><span class="price">'+price+'</span><span class="old-price">'+oldprice+'</span><span class="num">'+goodsnum+'</span></div></div></li>';			
-		maxfixed.append(newele);
-		console.log(thisimg)
-		totalprice()
-})
+	$('.prodbase .btn-cart').on('click',function(){//加入购物车
+		var srch = window.innerHeight;
+		$('.maxfixed').show();
+		$('body').css({'height':srch,'overflow':'hidden'});
 
-$(".btn-continue").on('click',function(){
-	$('.maxfixed').hide();
-	$('body').css({'height':'','overflow':''});
-})
+		var maxfixed = $('.maxfixed .product-table ul'),
+			thisele = $('.prodbase'),
+			thisimg = $('.slidewrap .item').first().html(), 
+			thistit = thisele.find('.g-title p').text(),				
+			goodsnum = $('input[name="pdnum"]').val(),
+			price = thisele.find('.price').text(),
+			oldprice = thisele.find('.old-price').text(),
+			fications = $('input[name="spec"]').val(),
+			newele = '<li class="item"><div class="img">'+thisimg+'</div><div class="maxtext"><p class="in-title">'+thistit+'</p><p class="spec">Specifications:<i>'+fications+'</i></p><div class="spset"><span class="price">'+price+'</span><span class="old-price">'+oldprice+'</span><span class="num">'+goodsnum+'</span></div></div></li>';			
+			maxfixed.append(newele);
+			console.log(thisimg)
+			//totalprice()
+	})
 
-// m-message
-$(document).on('click','.product-right .btn-showlist',function(){
-	var srch = window.innerHeight;
-	$('body').css({'height':srch,'overflow':'hidden'});
-	$('.m-message').show();
-})
+	$(".btn-continue").on('click',function(){
+		$('.maxfixed').hide();
+		$('body').css({'height':'','overflow':''});
+	})
 
-$('.m-message .btn-set .btn').on('click',function(){
-	var aclass= $(this).attr('class'),
-		selbox = $(this).parents('.mes-table').find('.selbox');
-	switch(aclass){
-		case 'btn btn-line':
-			$('#message')[0].reset();
-			$('.m-message').hide();
-			break;
-		case 'btn btn-submit':
-			$('#message').submit();
-			break;					
-	}
-	$('body').css({'height':'','overflow':''});
-})
+	// m-message
+	$(document).on('click','.product-right .btn-showlist',function(){
+		var srch = window.innerHeight;
+		$('body').css({'height':srch,'overflow':'hidden'});
+		$('.m-message').show();
+	})
+
+	$('.m-message .btn-set .btn').on('click',function(){
+		var aclass= $(this).attr('class'),
+			selbox = $(this).parents('.mes-table').find('.selbox');
+		switch(aclass){
+			case 'btn btn-line':
+				$('#message')[0].reset();
+				$('.m-message').hide();
+				break;
+			case 'btn btn-submit':
+				$('#message').submit();
+				break;					
+		}
+		$('body').css({'height':'','overflow':''});
+	})
 
 
 
 </script>
-
-</script>
+		
 
