@@ -11,7 +11,6 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 
 
-
 <link rel="stylesheet" type="text/css" href="https://electronics.local:9002/acerchemstorefront/_ui/desktop/common/css/orderCSS/general.css" />
 <link rel="stylesheet" type="text/css" href="https://electronics.local:9002/acerchemstorefront/_ui/desktop/common/css/orderCSS/min.css" />
 
@@ -79,28 +78,23 @@
                             <span>Ship To</span>
                         </div>
                         <div class="text">
-                          <%--  ${orderData.paymentInfo.billingAddress.title}<br/>
-                                ${fn:escapeXml(orderData.paymentInfo.billingAddress.line1)}&nbsp;${fn:escapeXml(orderData.paymentInfo.billingAddress.town)}&nbsp;${fn:escapeXml(orderData.paymentInfo.billingAddress.region.name)}&nbsp;${fn:escapeXml(orderData.paymentInfo.billingAddress.country.name)}&nbsp;${fn:escapeXml(orderData.paymentInfo.billingAddress.postalCode)}<br/>
-                                ${fn:escapeXml(orderData.paymentInfo.billingAddress.phone)}--%>
-                              <c:if test="${not storeAddress }">
-                                  <c:if test="${not empty orderData.paymentInfo.billingAddress.title}">
-                                      ${fn:escapeXml(orderData.paymentInfo.billingAddress.title)}&nbsp;
-                                  </c:if>
-                                  ${fn:escapeXml(orderData.paymentInfo.billingAddress.firstName)}&nbsp;${fn:escapeXml(orderData.paymentInfo.billingAddress.lastName)}
-                                  <br>
-                              </c:if>
-                                  ${fn:escapeXml(orderData.paymentInfo.billingAddress.line1)}
-                              <c:if test="${not empty orderData.paymentInfo.billingAddress.line2}">
-                                  &nbsp;
-                                  ${fn:escapeXml(orderData.paymentInfo.billingAddress.line2)}
-                              </c:if>
-                              &nbsp;
-                                  ${fn:escapeXml(orderData.paymentInfo.billingAddress.town)}&nbsp;${fn:escapeXml(orderData.paymentInfo.billingAddress.region.name)}
-                              &nbsp;
-                                  ${fn:escapeXml(orderData.paymentInfo.billingAddress.country.name)}&nbsp;${fn:escapeXml(orderData.paymentInfo.billingAddress.postalCode)}
-                              <br/>
-                                  ${fn:escapeXml(orderData.paymentInfo.billingAddress.phone)}
 
+                              <c:if test="${not empty orderData.deliveryAddress.title}">
+                                  ${fn:escapeXml(orderData.deliveryAddress.title)}&nbsp;
+                              </c:if>
+                                  ${fn:escapeXml(orderData.deliveryAddress.firstName)}&nbsp;${fn:escapeXml(orderData.deliveryAddress.lastName)}
+                              <br>
+                                  ${fn:escapeXml(orderData.deliveryAddress.line1)}
+                              <c:if test="${not empty orderData.deliveryAddress.line2}">
+                                  &nbsp;
+                                  ${fn:escapeXml(orderData.deliveryAddress.line2)}
+                              </c:if>
+                              &nbsp;
+                                  ${fn:escapeXml(orderData.deliveryAddress.town)}&nbsp;${fn:escapeXml(orderData.deliveryAddress.region.name)}
+                              &nbsp;
+                                  ${fn:escapeXml(orderData.deliveryAddress.country.name)}&nbsp;${fn:escapeXml(orderData.deliveryAddress.postalCode)}
+                              <br/>
+                                  ${fn:escapeXml(orderData.deliveryAddress.phone)}
 
                         </div>
                     </div>
@@ -135,17 +129,19 @@
                                         <span class="minflex text">
 									<span class="in-title">${fn:escapeXml(orderEntries.product.name)}</span>
 									<span class="spec">Specifications:<i>50kg</i></span>
-									<span class="old-price">price:<i><format:price priceData="${orderEntries.product.price}" displayFreeForZero="true" /></i></span>
+									<span class="old-price">price:<i><format:price priceData="${orderEntries.basePrice}" displayFreeForZero="true" /></i></span>
 								</span>
                                     </div>
                                 </td>
-                                <td><format:price priceData="${orderEntries.product.promotionPrice}" displayFreeForZero="true" /></td>
+                                <td><format:price priceData="${orderEntries.basePrice}" displayFreeForZero="true" /></td>
                                 <td> ${orderEntries.quantity}</td>
-                                <td>${orderEntry.product.code}</td>
+                                <td>
+                                        ${fn:escapeXml(orderEntries.product.code)}
+                                </td>
                                 <td>
                                     <div class="tot">
-                                        <em><format:price priceData="${orderEntry.product.price}" displayFreeForZero="true" /></em>
-                                        <i> <format:price priceData="${orderEntry.product.totalPrice}" displayFreeForZero="true"/></i>
+                                        <em><format:price priceData="${orderEntries.basePrice}" displayFreeForZero="true" /></em>
+                                        <i> <format:price priceData="${orderEntries.totalPrice}" displayFreeForZero="true"/></i>
                                     </div>
                                 </td>
                             </tr>
@@ -230,36 +226,6 @@
                     </div>
                     <!-- end -->
 
-                    <!-- Document Download -->
-                    <div class="g-table">
-                        <div class="g-title">
-                            <span>Document Download</span>
-                        </div>
-                        <ul class="donlist">
-                            <!-- 自提使用 -->
-                            <li>
-                                <span>Release Note</span>
-                                <a href="/acerchemstorefront/electronics/en/my-account/order/detail?code=${orderData.code}" class="icons view-icon"></a>
-                                <a href="#" class="icons load-icon"></a>
-                            </li>
-                            <!-- end -->
-                            <li>
-                                <span>Delivery Note</span>
-                                <a href="order-view.html" class="icons view-icon"></a>
-                                <a href="#" class="icons load-icon"></a>
-                            </li>
-                            <li>
-                                <span>Invoice</span>
-                                <a href="order-view.html" class="icons view-icon"></a>
-                                <a href="#" class="icons load-icon"></a>
-                            </li>
-                            <li>
-                                <span>Packing List</span>
-                                <a href="order-view.html" class="icons view-icon"></a>
-                                <a href="#" class="icons load-icon"></a>
-                            </li>
-                        </ul>
-                    </div>
                     <!-- end -->
                     <div class="btn-set">
                         <a class="btn btn-back" href="javascript:window.history.back()">Back</a>
