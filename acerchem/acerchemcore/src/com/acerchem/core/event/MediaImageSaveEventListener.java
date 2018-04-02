@@ -1,6 +1,7 @@
 package com.acerchem.core.event;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Collection;
@@ -20,7 +21,6 @@ import com.acerchem.core.model.ImageUploadedLogModel;
 import com.acerchem.core.web.aliyun.UploadFileDefault;
 import com.aliyun.oss.OSSClient;
 import com.google.common.base.Preconditions;
-
 
 import de.hybris.platform.core.PK;
 import de.hybris.platform.core.Registry;
@@ -63,13 +63,6 @@ public class MediaImageSaveEventListener implements AfterSaveListener {
 	public void afterSave(Collection<AfterSaveEvent> collection) {
 		// TODO Auto-generated method stub
 
-		final String imageRoot = configurationService.getConfiguration().getString("aliyun.preffixImageKey");
-		final String docRoot = configurationService.getConfiguration().getString("aliyun.preffixDocKey");
-		final String asyncFlag = configurationService.getConfiguration().getString("aliyun.async");
-		// get dir of key
-		SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
-		String temp_ = df.format(new Date());
-
 		for (final AfterSaveEvent event : collection) {
 			final int type = event.getType();
 			if (AfterSaveEvent.CREATE == type) {
@@ -95,6 +88,12 @@ public class MediaImageSaveEventListener implements AfterSaveListener {
 							mediaType = "";
 						}
 
+						final String imageRoot = configurationService.getConfiguration().getString("aliyun.preffixImageKey");
+						final String docRoot = configurationService.getConfiguration().getString("aliyun.preffixDocKey");
+						final String asyncFlag = configurationService.getConfiguration().getString("aliyun.async");
+						// get dir of key
+						final SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+						final String temp_ = df.format(new Date());
 						final String localPath = media.getLocation();
 						if (mediaType.equals("image/jpeg") || mediaType.equals("image/png")
 								|| mediaType.equals("image/gif") || mediaType.equals("image/bmp")) {
@@ -109,7 +108,7 @@ public class MediaImageSaveEventListener implements AfterSaveListener {
 											+ keySuffix;
 									uploadFailedProccess(media, key);
 
-//								
+									//
 								} else if (asyncFlag.equals("no")) {
 									System.out.println("**********upload image to aliyun start*********");
 									// System.out.println(media.getRemovable());
@@ -153,85 +152,90 @@ public class MediaImageSaveEventListener implements AfterSaveListener {
 
 	private void uploadFileSendProcessor(final MediaModel media, final String root) {
 
-		// 初始化upload参数
-		String lsEndpoint = configurationService.getConfiguration().getString("aliyun.endpoint");
-		String lsAccessKeyId = configurationService.getConfiguration().getString("aliyun.accessKeyId");
-		String lsAccessKeySecret = configurationService.getConfiguration().getString("aliyun.accessKeySecret");
-		String lsBucketName = configurationService.getConfiguration().getString("aliyun.bucketName");
-
-		UploadFileDefault.initializeParameters(lsEndpoint, lsAccessKeyId, lsAccessKeySecret, lsBucketName);
-
-		OSSClient client = UploadFileDefault.openClient();
 		try {
-			// get localfile path
-			// String localPath =
-			// configurationService.getConfiguration().getString("upload.path");
-			String localPath = media.getLocation();
+			// 初始化upload参数
+			String lsEndpoint = configurationService.getConfiguration().getString("aliyun.endpoint");
+			String lsAccessKeyId = configurationService.getConfiguration().getString("aliyun.accessKeyId");
+			String lsAccessKeySecret = configurationService.getConfiguration().getString("aliyun.accessKeySecret");
+			String lsBucketName = configurationService.getConfiguration().getString("aliyun.bucketName");
 
-			System.out.println(localPath);
-			// String mainDataDir =
-			// get parent fileDir
-			File mainDataDir = MediaUtil.getLocalStorageDataDir();
-			// get local file
-			File file = MediaUtil.composeOrGetParent(mainDataDir, localPath);
+			UploadFileDefault.initializeParameters(lsEndpoint, lsAccessKeyId, lsAccessKeySecret, lsBucketName);
 
-			System.out.println(file.getAbsolutePath());
+			OSSClient client = UploadFileDefault.openClient();
+			try {
+				// get localfile path
+				// String localPath =
+				// configurationService.getConfiguration().getString("upload.path");
+				String localPath = media.getLocation();
 
-			// Preconditions.checkState(!modelService.isNew(media), "media must
-			// be persisted to do binary operations");
-			// ServicesUtil.validateParameterNotNull(media, "Argument media
-			// cannot be null");
-			// boolean b = mediaService.hasData(media);
-			// if (b) {
-			// Registry.activateMasterTenant();
-			// System.out.println("*****NB*****");
-			// InputStream input =
-			// MediaManager.getInstance().getMediaAsStream(new
-			// ModelMediaSource(media));
+				System.out.println(localPath);
+				// String mainDataDir =
+				// get parent fileDir
+				File mainDataDir = MediaUtil.getLocalStorageDataDir();
+				// get local file
+				File file = MediaUtil.composeOrGetParent(mainDataDir, localPath);
 
-			// File file = new File(localPath);
+				System.out.println(file.getAbsolutePath());
 
-			// aliyun path
-			SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
-			String temp_ = df.format(new Date());
+				// Preconditions.checkState(!modelService.isNew(media), "media
+				// must
+				// be persisted to do binary operations");
+				// ServicesUtil.validateParameterNotNull(media, "Argument media
+				// cannot be null");
+				// boolean b = mediaService.hasData(media);
+				// if (b) {
+				// Registry.activateMasterTenant();
+				// System.out.println("*****NB*****");
+				// InputStream input =
+				// MediaManager.getInstance().getMediaAsStream(new
+				// ModelMediaSource(media));
 
-			String keySuffix = localPath.substring(localPath.lastIndexOf(".") + 1);
+				// File file = new File(localPath);
 
-			// aliyun relation path>>> application/yyyymmdd/
-			String key = root + "/" + temp_ + "/" + media.getPk().getLong().toString() + "." + keySuffix;
+				// aliyun path
+				SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+				String temp_ = df.format(new Date());
 
-			// upload aliyun
+				String keySuffix = localPath.substring(localPath.lastIndexOf(".") + 1);
 
-			boolean uploadFlag = UploadFileDefault.uploadFile(file, key, client);
+				// aliyun relation path>>> application/yyyymmdd/
+				String key = root + "/" + temp_ + "/" + media.getPk().getLong().toString() + "." + keySuffix;
 
-			// if
-			// (!acerChemImageUploadLogService.isExistByLocation(localPath))
-			// {
-			ImageUploadedLogModel iulModel = acerChemImageUploadLogService
-					.getImageUploadedLog(media.getPk().getLong().toString());
-			String aliyunUrl = configurationService.getConfiguration().getString("aliyun.domain") + "/" + key;
-			if (uploadFlag) {
-				System.out.println("****upload end>>>>synsave to server start*****");
-				// save aliyunUrl to ImageUploadedLog
-				if (iulModel == null) {
-					iulModel = modelService.create(ImageUploadedLogModel.class);
+				// upload aliyun
+
+				boolean uploadFlag = UploadFileDefault.uploadFile(file, key, client);
+
+				// if
+				// (!acerChemImageUploadLogService.isExistByLocation(localPath))
+				// {
+				ImageUploadedLogModel iulModel = acerChemImageUploadLogService
+						.getImageUploadedLog(media.getPk().getLong().toString());
+				String aliyunUrl = configurationService.getConfiguration().getString("aliyun.domain") + "/" + key;
+				if (uploadFlag) {
+					System.out.println("****upload end>>>>synsave to server start*****");
+					// save aliyunUrl to ImageUploadedLog
+					if (iulModel == null) {
+						iulModel = modelService.create(ImageUploadedLogModel.class);
+					}
+					iulModel.setAliyunUrl(aliyunUrl);
+					iulModel.setImagePK(media.getPk().getLong().toString());
+					iulModel.setLocation(localPath);
+
+					modelService.save(iulModel);
+					System.out.println("****synsave to server end*****");
+				} else {
+					uploadFailedProccess(media, key);
 				}
-				iulModel.setAliyunUrl(aliyunUrl);
-				iulModel.setImagePK(media.getPk().getLong().toString());
-				iulModel.setLocation(localPath);
+				// }
+				// }
 
-				modelService.save(iulModel);
-				System.out.println("****synsave to server end*****");
-			} else {
-				uploadFailedProccess(media, key);
+			} catch (IOException e) {
+				e.printStackTrace();
+			} finally {
+				UploadFileDefault.closeClient(client);
 			}
-			// }
-			// }
-
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-			UploadFileDefault.closeClient(client);
 		}
 
 	}
