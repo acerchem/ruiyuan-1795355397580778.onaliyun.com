@@ -44,6 +44,10 @@ public class AcerChemImageFailedRecordDaoImpl implements AcerChemImageFailedReco
 		String GET_IMAGEFAILEDRECORD = "SELECT {pk} "
 				+ " FROM {"+ImageFailedRecordModel._TYPECODE+"}";
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(GET_IMAGEFAILEDRECORD );
+		query.setNeedTotal(true);
+		query.setCount(3);
+		query.setStart(0);
+		
 		final SearchResult<ImageFailedRecordModel> result = flexibleSearchService.search(query);
 		
 		return result.getResult();
