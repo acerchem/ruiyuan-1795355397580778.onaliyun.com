@@ -253,6 +253,7 @@
 		<property name="acerchemCustomerService" ref="acerchemCustomerService"/>
 		<property name="countryToWarehouseConverter" ref="countryToWarehouseConverter"/>
         <property name="baseStoreService" ref="baseStoreService"/>
+        <property name="productService" ref="productService"/>
     </bean>
 
 	<alias name="defaultWarehousePopulator" alias="warehousePopulator"/>

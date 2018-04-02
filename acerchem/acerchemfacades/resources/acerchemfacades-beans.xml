@@ -52,10 +52,14 @@
     </bean>
 
 	<bean class="com.acerchem.facades.product.data.CountryToWarehouseData">
-		<property name="storeId" type="String"/>
-		<property name="countryData" type="de.hybris.platform.commercefacades.user.data.CountryData"/>
-		<property name="warehouseList" type="java.util.List&lt;com.acerchem.facades.product.data.WarehouseData>"/>
+		<property name="warehouseData" type="com.acerchem.facades.product.data.WarehouseData"/>
+		<property name="countryDataList" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.CountryData>"/>
 	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.user.data.CountryData">
+		<property name="storeId" type="String"/>
+	</bean>
+
 
     <bean class="com.acerchem.facades.product.data.CountryToWarehouseDataList">
         <property name="countryToWarehouseDataList" type="java.util.List&lt;com.acerchem.facades.product.data.CountryToWarehouseData>"/>

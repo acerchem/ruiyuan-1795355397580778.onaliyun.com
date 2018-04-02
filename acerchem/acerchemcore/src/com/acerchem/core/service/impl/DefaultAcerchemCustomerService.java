@@ -3,7 +3,6 @@ package com.acerchem.core.service.impl;
 import com.acerchem.core.dao.AcerchemCustomerDao;
 import com.acerchem.core.service.AcerchemCustomerService;
 import de.hybris.platform.basecommerce.enums.PointOfServiceTypeEnum;
-import de.hybris.platform.commerceservices.search.dao.PagedGenericDao;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.store.BaseStoreModel;

@@ -12,23 +12,38 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.storelocator.model.PointOfServiceModel;
 import org.springframework.beans.factory.annotation.Required;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-public class CountryToWarehousePopulator implements Populator<PointOfServiceModel, CountryToWarehouseData>
+public class CountryToWarehousePopulator implements Populator<WarehouseModel, CountryToWarehouseData>
 {
 	private Converter<CountryModel,CountryData> countryConverter;
 	private Converter<WarehouseModel,WarehouseData> warehouseConverter;
 	private UserService userService;
 
 	@Override
-	public void populate(PointOfServiceModel source, CountryToWarehouseData target) throws ConversionException {
+	public void populate(WarehouseModel source, CountryToWarehouseData target) throws ConversionException {
 
-		target.setStoreId(source.getName());
-		if (Objects.nonNull(source.getAddress()) && Objects.nonNull(source.getAddress().getCountry())) {
-			target.setCountryData(countryConverter.convert(source.getAddress().getCountry()));
+
+		if (source!=null){
+			target.setWarehouseData(warehouseConverter.convert(source));
 		}
-		if (Objects.nonNull(source.getWarehouses())){
-			target.setWarehouseList(warehouseConverter.convertAll(source.getWarehouses()));
+		if (source.getPointsOfService()!=null){
+			//get add all pos CountryData
+			List<CountryData> countryDataList = new ArrayList<>();
+			for (PointOfServiceModel pos :source.getPointsOfService()){
+				if (pos.getAddress()!=null){
+					CountryData countryData = new CountryData();
+					countryData = countryConverter.convert(pos.getAddress().getCountry());
+					countryData.setStoreId(pos.getName());
+					countryDataList.add(countryData);
+				}
+			}
+			target.setCountryDataList(countryDataList);
 		}
 	}
 

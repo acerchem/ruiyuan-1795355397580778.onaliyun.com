@@ -142,7 +142,7 @@ public class ProductPageController extends AbstractPageController
         
         final PageableData pageableData = createPagaable(0, 100, "asc");
         
-        model.addAttribute("countrys",acerchemCustomerFacade.getAllPointOfServices(pageableData));
+        model.addAttribute("countrys",acerchemCustomerFacade.getAllWarehouses(productCode));
 
         model.addAttribute("stocks",acerchemStockFacade.getAllStockDataByProduct(productCode));
 
