@@ -34,27 +34,22 @@ import de.hybris.platform.cms2.model.pages.AbstractPageModel;
 import de.hybris.platform.cms2.model.pages.ContentPageModel;
 import de.hybris.platform.cms2.servicelayer.services.CMSPageService;
 import de.hybris.platform.commercefacades.address.AddressVerificationFacade;
-import de.hybris.platform.commercefacades.address.data.AddressVerificationResult;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.i18n.I18NFacade;
 import de.hybris.platform.commercefacades.order.CheckoutFacade;
 import de.hybris.platform.commercefacades.order.OrderFacade;
 import de.hybris.platform.commercefacades.order.data.CCPaymentInfoData;
 import de.hybris.platform.commercefacades.order.data.OrderData;
-import de.hybris.platform.commercefacades.order.data.OrderEntryData;
 import de.hybris.platform.commercefacades.order.data.OrderHistoryData;
 import de.hybris.platform.commercefacades.product.ProductFacade;
 import de.hybris.platform.commercefacades.product.ProductOption;
-import de.hybris.platform.commercefacades.product.data.ImageData;
-import de.hybris.platform.commercefacades.product.data.PriceData;
-import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commercefacades.user.UserFacade;
 import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.commercefacades.user.data.CountryData;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.commercefacades.user.data.TitleData;
 import de.hybris.platform.commercefacades.user.exceptions.PasswordMismatchException;
-import de.hybris.platform.commerceservices.address.AddressVerificationDecision;
+import de.hybris.platform.commerceservices.customer.CustomerAccountService;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.commerceservices.search.flexiblesearch.PagedFlexibleSearchService;
 import de.hybris.platform.commerceservices.search.flexiblesearch.data.SortQueryData;
@@ -62,8 +57,10 @@ import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.PaginationData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.commerceservices.search.pagedata.SortData;
+import de.hybris.platform.commerceservices.strategies.CheckoutCustomerStrategy;
 import de.hybris.platform.commerceservices.util.ResponsiveUtils;
 import de.hybris.platform.converters.Converters;
+import de.hybris.platform.converters.Populator;
 import de.hybris.platform.core.PK;
 import de.hybris.platform.core.model.c2l.CountryModel;
 import de.hybris.platform.core.model.c2l.RegionModel;
@@ -84,6 +81,8 @@ import de.hybris.platform.util.Config;
 
 import com.acerchem.storefront.controllers.ControllerConstants;
 import com.acerchem.storefront.data.CustomRegisterForm;
+
+import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -185,6 +184,9 @@ public class AccountPageController extends AbstractSearchPageController
 
 	@Resource(name = "addressValidator")
 	private AddressValidator addressValidator;
+	
+	@Resource(name = "customAddressValidator")
+	private Validator customAddressValidator;
 
 	@Resource(name = "profileValidator")
 	private ProfileValidator profileValidator;
@@ -471,6 +473,7 @@ public class AccountPageController extends AbstractSearchPageController
 	@RequireHardLogIn
 	public String addAddress(final Model model) throws CMSItemNotFoundException
 	{
+		model.addAttribute("nowPage", "address-book");
 		model.addAttribute(COUNTRY_DATA_ATTR, checkoutFacade.getDeliveryCountries());
 		model.addAttribute(TITLE_DATA_ATTR, userFacade.getTitles());
 		final AddressForm addressForm = getPreparedAddressForm();
@@ -499,13 +502,15 @@ public class AccountPageController extends AbstractSearchPageController
 		addressForm.setTitleCode(currentCustomerData.getTitleCode());
 		return addressForm;
 	}
-
+	
 	@RequestMapping(value = "/add-address", method = RequestMethod.POST)
 	@RequireHardLogIn
 	public String addAddress(final AddressForm addressForm, final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
-		getAddressValidator().validate(addressForm, bindingResult);
+		
+		model.addAttribute("nowPage", "address-book");
+		customAddressValidator.validate(addressForm, bindingResult);
 		if (bindingResult.hasErrors())
 		{
 			GlobalMessages.addErrorMessage(model, FORM_GLOBAL_ERROR);
@@ -516,7 +521,6 @@ public class AccountPageController extends AbstractSearchPageController
 		}
 
 		final AddressData newAddress = addressDataUtil.convertToVisibleAddressData(addressForm);
-
 		if (userFacade.isAddressBookEmpty())
 		{
 			newAddress.setDefaultAddress(true);
@@ -526,22 +530,25 @@ public class AccountPageController extends AbstractSearchPageController
 			newAddress.setDefaultAddress(addressForm.getDefaultAddress() != null && addressForm.getDefaultAddress().booleanValue());
 		}		
 		
-		final AddressVerificationResult<AddressVerificationDecision> verificationResult = getAddressVerificationFacade().verifyAddressData(newAddress);
-		final boolean addressRequiresReview = getAddressVerificationResultHandler().handleResult(verificationResult, newAddress,
-				model, redirectModel, bindingResult, getAddressVerificationFacade().isCustomerAllowedToIgnoreAddressSuggestions(),
-				"checkout.multi.address.added");
-
 		populateModelRegionAndCountry(model, addressForm.getCountryIso());
 		model.addAttribute("edit", Boolean.TRUE);
 		model.addAttribute(IS_DEFAULT_ADDRESS_ATTR, Boolean.valueOf(isDefaultAddress(addressForm.getAddressId())));
 
-		if (addressRequiresReview)
+		validateParameterNotNullStandardMessage("addressData", newAddress);
+		final CustomerModel currentCustomer = checkoutCustomerStrategy.getCurrentUserForCheckout();
+		final boolean makeThisAddressTheDefault = newAddress.isDefaultAddress()
+				|| (currentCustomer.getDefaultShipmentAddress() == null && newAddress.isVisibleInAddressBook());
+		
+		final AddressModel Address =modelService.create(AddressModel.class);
+		addressReversePopulator.populate(newAddress, Address);
+		Address.setPhone2(addressForm.getLine1());
+		Address.setLine1(null);
+		customerAccountService.saveAddressEntry(currentCustomer, Address);
+		newAddress.setId(Address.getPk().toString());
+		if (makeThisAddressTheDefault)
 		{
-			storeCmsPageInModel(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
-			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
-			return getViewForPage(model);
+			customerAccountService.setDefaultAddressEntry(currentCustomer, Address);
 		}
-		userFacade.addAddress(newAddress);
 		GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER, "account.confirmation.address.added", null);
 		return REDIRECT_TO_EDIT_ADDRESS_PAGE + newAddress.getId();
 	}
@@ -563,13 +570,16 @@ public class AccountPageController extends AbstractSearchPageController
 	public String editAddress(@PathVariable("addressCode") final String addressCode, final Model model)
 			throws CMSItemNotFoundException
 	{
+		model.addAttribute("nowPage", "address-book");
 		final AddressForm addressForm = new AddressForm();
 		model.addAttribute(COUNTRY_DATA_ATTR, checkoutFacade.getDeliveryCountries());
 		model.addAttribute(TITLE_DATA_ATTR, userFacade.getTitles());
 		model.addAttribute(ADDRESS_FORM_ATTR, addressForm);
+		
+		final CustomerModel currentCustomer = checkoutCustomerStrategy.getCurrentUserForCheckout();
 		final List<AddressData> addressBook = userFacade.getAddressBook();
+		
 		model.addAttribute(ADDRESS_BOOK_EMPTY_ATTR, Boolean.valueOf(CollectionUtils.isEmpty(addressBook)));
-
 
 		for (final AddressData addressData : addressBook)
 		{
@@ -577,6 +587,10 @@ public class AccountPageController extends AbstractSearchPageController
 			{
 				model.addAttribute(REGIONS_ATTR, getI18NFacade().getRegionsForCountryIso(addressData.getCountry().getIsocode()));
 				model.addAttribute(COUNTRY_ATTR, addressData.getCountry().getIsocode());
+				
+				final AddressModel addressModel = customerAccountService.getAddressForCode(currentCustomer, addressData.getId());
+				addressData.setLine1(addressModel.getPhone2());
+				
 				model.addAttribute(ADDRESS_DATA_ATTR, addressData);
 				addressDataUtil.convert(addressData, addressForm);
 
@@ -620,13 +634,21 @@ public class AccountPageController extends AbstractSearchPageController
 		final AddressData defaultAddress = userFacade.getDefaultAddress();
 		return defaultAddress != null && defaultAddress.getId() != null && defaultAddress.getId().equals(addressId);
 	}
-
+	
+	@Resource
+	private CheckoutCustomerStrategy checkoutCustomerStrategy;
+	@Resource
+	private CustomerAccountService customerAccountService;
+	@Resource
+	private Populator<AddressData, AddressModel> addressReversePopulator;
+	
 	@RequestMapping(value = "/edit-address/" + ADDRESS_CODE_PATH_VARIABLE_PATTERN, method = RequestMethod.POST)
 	@RequireHardLogIn
 	public String editAddress(final AddressForm addressForm, final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
-		getAddressValidator().validate(addressForm, bindingResult);
+		model.addAttribute("nowPage", "address-book");
+		customAddressValidator.validate(addressForm, bindingResult);
 		if (bindingResult.hasErrors())
 		{
 			GlobalMessages.addErrorMessage(model, FORM_GLOBAL_ERROR);
@@ -639,34 +661,48 @@ public class AccountPageController extends AbstractSearchPageController
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		final AddressData newAddress = addressDataUtil.convertToVisibleAddressData(addressForm);
-
 		if (Boolean.TRUE.equals(addressForm.getDefaultAddress()) || userFacade.getAddressBook().size() <= 1)
 		{
 			newAddress.setDefaultAddress(true);
 		}
-
-		final AddressVerificationResult<AddressVerificationDecision> verificationResult = getAddressVerificationFacade().verifyAddressData(newAddress);
-		final boolean addressRequiresReview = getAddressVerificationResultHandler().handleResult(verificationResult, newAddress,
-				model, redirectModel, bindingResult, getAddressVerificationFacade().isCustomerAllowedToIgnoreAddressSuggestions(),
-				"checkout.multi.address.updated");
-
 		model.addAttribute(REGIONS_ATTR, getI18NFacade().getRegionsForCountryIso(addressForm.getCountryIso()));
 		model.addAttribute(COUNTRY_ATTR, addressForm.getCountryIso());
 		model.addAttribute("edit", Boolean.TRUE);
 		model.addAttribute(IS_DEFAULT_ADDRESS_ATTR, Boolean.valueOf(isDefaultAddress(addressForm.getAddressId())));
-
-		if (addressRequiresReview)
+		
+		validateParameterNotNullStandardMessage("addressData", newAddress);
+		final CustomerModel currentCustomer = checkoutCustomerStrategy.getCurrentUserForCheckout();
+		final AddressModel addressModel = customerAccountService.getAddressForCode(currentCustomer, newAddress.getId());
+		addressModel.setRegion(null);
+		addressReversePopulator.populate(newAddress, addressModel);
+		
+		addressModel.setPhone2(addressForm.getLine1());
+		addressModel.setLine1(null);
+		
+		customerAccountService.saveAddressEntry(currentCustomer, addressModel);
+		if (newAddress.isDefaultAddress())
 		{
-			storeCmsPageInModel(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
-			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ADD_EDIT_ADDRESS_CMS_PAGE));
-			return getViewForPage(model);
+			customerAccountService.setDefaultAddressEntry(currentCustomer, addressModel);
 		}
-
-		userFacade.editAddress(newAddress);
-
-		GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER, "account.confirmation.address.updated",
-				null);
+		else if (addressModel.equals(currentCustomer.getDefaultShipmentAddress()))
+		{
+			customerAccountService.clearDefaultAddressEntry(currentCustomer);
+		}
+		
+		GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER, "account.confirmation.address.updated",null);
 		return REDIRECT_TO_EDIT_ADDRESS_PAGE + newAddress.getId();
+	}
+	
+	@RequestMapping(value = "/getAddressRegions", method = RequestMethod.GET)
+	public String getAddressRegions(@RequestParam("addressCode") final String addressCode,
+			@RequestParam("countryIsoCode") final String countryIsoCode, final Model model)
+	{
+		model.addAttribute("supportedCountries", getCountries());
+		model.addAttribute("regions", i18NFacade.getRegionsForCountryIso(countryIsoCode));
+		model.addAttribute("country", countryIsoCode);
+		final AddressForm AddressForm = new AddressForm();
+		model.addAttribute(AddressForm);
+		return ControllerConstants.Views.Fragments.Address.AddressFormByCountry;
 	}
 
 	@RequestMapping(value = "/select-suggested-address", method = RequestMethod.POST)
@@ -1086,6 +1122,5 @@ public class AccountPageController extends AbstractSearchPageController
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 		return getViewForPage(model);
 	}
-
 
 }
