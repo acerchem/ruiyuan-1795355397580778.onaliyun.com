@@ -817,7 +817,7 @@ INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=d
 #;widescreen;Elec_1400x401_ErrorPage_1400W.svg;$siteResource/images/banners/site/Elec_1400x401_ErrorPage_EN_1400W.svg;Elec_1400x401_ErrorPage_EN_1400W.svg;"Page not found";
 
 INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
-;acerchem-errorpage-pagenotfound;Elec_480x170_ErrorPage_480W.svg,Elec_770x221_ErrorPage_770W.svg,Elec_960x275_ErrorPage_960W.svg,Elec_1400x401_ErrorPage_1400W.svg
+#;acerchem-errorpage-pagenotfound;Elec_480x170_ErrorPage_480W.svg,Elec_770x221_ErrorPage_770W.svg,Elec_960x275_ErrorPage_960W.svg,Elec_1400x401_ErrorPage_1400W.svg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;$mediaContainer
 ;;acerchemErrorpageBannerComponent;acerchem Error Page Banner Component;acerchemErrorpageBannerComponent;acerchem-errorpage-pagenotfound
