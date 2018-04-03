@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-3-21 14:43:28                          ---
+ * --- Generated at 2018-4-3 15:48:11                           ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.jalo;
@@ -24,12 +24,15 @@ public abstract class GeneratedImageUploadedLog extends GenericItem
 	public static final String IMAGEPK = "imagePK";
 	/** Qualifier of the <code>ImageUploadedLog.aliyunUrl</code> attribute **/
 	public static final String ALIYUNURL = "aliyunUrl";
+	/** Qualifier of the <code>ImageUploadedLog.location</code> attribute **/
+	public static final String LOCATION = "location";
 	protected static final Map<String, AttributeMode> DEFAULT_INITIAL_ATTRIBUTES;
 	static
 	{
 		final Map<String, AttributeMode> tmp = new HashMap<String, AttributeMode>();
 		tmp.put(IMAGEPK, AttributeMode.INITIAL);
 		tmp.put(ALIYUNURL, AttributeMode.INITIAL);
+		tmp.put(LOCATION, AttributeMode.INITIAL);
 		DEFAULT_INITIAL_ATTRIBUTES = Collections.unmodifiableMap(tmp);
 	}
 	@Override
@@ -40,7 +43,7 @@ public abstract class GeneratedImageUploadedLog extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>ImageUploadedLog.aliyunUrl</code> attribute.
-	 * @return the aliyunUrl - é¿éäºURL
+	 * @return the aliyunUrl - 阿里云URL
 	 */
 	public String getAliyunUrl(final SessionContext ctx)
 	{
@@ -49,7 +52,7 @@ public abstract class GeneratedImageUploadedLog extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>ImageUploadedLog.aliyunUrl</code> attribute.
-	 * @return the aliyunUrl - é¿éäºURL
+	 * @return the aliyunUrl - 阿里云URL
 	 */
 	public String getAliyunUrl()
 	{
@@ -58,7 +61,7 @@ public abstract class GeneratedImageUploadedLog extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>ImageUploadedLog.aliyunUrl</code> attribute. 
-	 * @param value the aliyunUrl - é¿éäºURL
+	 * @param value the aliyunUrl - 阿里云URL
 	 */
 	public void setAliyunUrl(final SessionContext ctx, final String value)
 	{
@@ -67,7 +70,7 @@ public abstract class GeneratedImageUploadedLog extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>ImageUploadedLog.aliyunUrl</code> attribute. 
-	 * @param value the aliyunUrl - é¿éäºURL
+	 * @param value the aliyunUrl - 阿里云URL
 	 */
 	public void setAliyunUrl(final String value)
 	{
@@ -76,7 +79,7 @@ public abstract class GeneratedImageUploadedLog extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>ImageUploadedLog.imagePK</code> attribute.
-	 * @return the imagePK - å¾çPK
+	 * @return the imagePK - 图片PK
 	 */
 	public String getImagePK(final SessionContext ctx)
 	{
@@ -85,7 +88,7 @@ public abstract class GeneratedImageUploadedLog extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>ImageUploadedLog.imagePK</code> attribute.
-	 * @return the imagePK - å¾çPK
+	 * @return the imagePK - 图片PK
 	 */
 	public String getImagePK()
 	{
@@ -94,7 +97,7 @@ public abstract class GeneratedImageUploadedLog extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>ImageUploadedLog.imagePK</code> attribute. 
-	 * @param value the imagePK - å¾çPK
+	 * @param value the imagePK - 图片PK
 	 */
 	public void setImagePK(final SessionContext ctx, final String value)
 	{
@@ -103,11 +106,47 @@ public abstract class GeneratedImageUploadedLog extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>ImageUploadedLog.imagePK</code> attribute. 
-	 * @param value the imagePK - å¾çPK
+	 * @param value the imagePK - 图片PK
 	 */
 	public void setImagePK(final String value)
 	{
 		setImagePK( getSession().getSessionContext(), value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>ImageUploadedLog.location</code> attribute.
+	 * @return the location - 本地路径
+	 */
+	public String getLocation(final SessionContext ctx)
+	{
+		return (String)getProperty( ctx, LOCATION);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>ImageUploadedLog.location</code> attribute.
+	 * @return the location - 本地路径
+	 */
+	public String getLocation()
+	{
+		return getLocation( getSession().getSessionContext() );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>ImageUploadedLog.location</code> attribute. 
+	 * @param value the location - 本地路径
+	 */
+	public void setLocation(final SessionContext ctx, final String value)
+	{
+		setProperty(ctx, LOCATION,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>ImageUploadedLog.location</code> attribute. 
+	 * @param value the location - 本地路径
+	 */
+	public void setLocation(final String value)
+	{
+		setLocation( getSession().getSessionContext(), value );
 	}
 	
 }

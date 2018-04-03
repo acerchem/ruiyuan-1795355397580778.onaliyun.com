@@ -47,46 +47,6 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 	
 	
 		createItemType(
-			"ApparelProduct",
-			"Product",
-			com.acerchem.core.jalo.ApparelProduct.class,
-			null,
-			false,
-			null,
-			false
-		);
-	
-		createItemType(
-			"ApparelStyleVariantProduct",
-			"VariantProduct",
-			com.acerchem.core.jalo.ApparelStyleVariantProduct.class,
-			null,
-			false,
-			null,
-			false
-		);
-	
-		createItemType(
-			"ApparelSizeVariantProduct",
-			"ApparelStyleVariantProduct",
-			com.acerchem.core.jalo.ApparelSizeVariantProduct.class,
-			null,
-			false,
-			null,
-			false
-		);
-	
-		createItemType(
-			"ElectronicsColorVariantProduct",
-			"VariantProduct",
-			com.acerchem.core.jalo.ElectronicsColorVariantProduct.class,
-			null,
-			false,
-			null,
-			false
-		);
-	
-		createItemType(
 			"ImageFailedRecord",
 			"GenericItem",
 			com.acerchem.core.jalo.ImageFailedRecord.class,
@@ -101,6 +61,16 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			"GenericItem",
 			com.acerchem.core.jalo.ImageUploadedLog.class,
 			"de.hybris.platform.persistence.acerchemcore_ImageUploadedLog",
+			false,
+			null,
+			false
+		);
+	
+		createItemType(
+			"UserLevel",
+			"UserGroup",
+			com.acerchem.core.jalo.UserLevel.class,
+			"de.hybris.platform.persistence.acerchemcore_UserLevel",
 			false,
 			null,
 			false
@@ -136,6 +106,60 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			false
 		);
 	
+		createItemType(
+			"CountryTrayFareConf",
+			"GenericItem",
+			com.acerchem.core.jalo.CountryTrayFareConf.class,
+			"de.hybris.platform.persistence.acerchemcore_CountryTrayFareConf",
+			false,
+			null,
+			false
+		);
+	
+		createItemType(
+			"CustomerCreditAccount",
+			"GenericItem",
+			com.acerchem.core.jalo.CustomerCreditAccount.class,
+			"de.hybris.platform.persistence.acerchemcore_CustomerCreditAccount",
+			false,
+			null,
+			false
+		);
+	
+		createItemType(
+			"CreditTransaction",
+			"GenericItem",
+			com.acerchem.core.jalo.CreditTransaction.class,
+			"de.hybris.platform.persistence.acerchemcore_CreditTransaction",
+			false,
+			null,
+			false
+		);
+	
+		createRelationType(
+			"AcerChemVendor2Product",
+			null,
+			true
+		);
+	
+		createRelationType(
+			"AcerChemCustomerLevel2User",
+			null,
+			true
+		);
+	
+		createRelationType(
+			"Receptionist2Customer",
+			null,
+			true
+		);
+	
+		createRelationType(
+			"Transactions2CreditAccount",
+			null,
+			true
+		);
+	
 		createEnumerationType(
 			"SwatchColorEnum",
 			null
@@ -143,6 +167,16 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 	
 		createEnumerationType(
 			"ImageFailedActionType",
+			null
+		);
+	
+		createEnumerationType(
+			"UserLevelClassification",
+			null
+		);
+	
+		createEnumerationType(
+			"CreditAccountStatusEnum",
 			null
 		);
 	
@@ -171,16 +205,6 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 
 	
 	
-				single_createattr_ApparelProduct_genders();
-			
-				single_createattr_ApparelStyleVariantProduct_style();
-			
-				single_createattr_ApparelStyleVariantProduct_swatchColors();
-			
-				single_createattr_ApparelSizeVariantProduct_size();
-			
-				single_createattr_ElectronicsColorVariantProduct_color();
-			
 				single_createattr_Media_aliyunUrl();
 			
 				single_createattr_ImageFailedRecord_fileName();
@@ -193,9 +217,21 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 				single_createattr_ImageFailedRecord_status();
 			
+				single_createattr_ImageFailedRecord_mediaData();
+			
+				single_createattr_ImageFailedRecord_mediaPK();
+			
 				single_createattr_ImageUploadedLog_imagePK();
 			
 				single_createattr_ImageUploadedLog_aliyunUrl();
+			
+				single_createattr_ImageUploadedLog_location();
+			
+				single_createattr_UserLevel_levelName();
+			
+				single_createattr_UserLevel_levelCode();
+			
+				single_createattr_UserLevel_discount();
 			
 				single_createattr_Product_chemicalInfo();
 			
@@ -219,96 +255,119 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 				single_createattr_StockLevel_preOrderReleaseDay();
 			
+				single_createattr_StockLevel_avaPreOrderReleaseDay();
+			
 				single_createattr_AbstractOrderEntry_isUseFutureStock();
 			
+				single_createattr_AbstractOrderEntry_availableDate();
+			
+				single_createattr_CountryTrayFareConf_country();
+			
+				single_createattr_CountryTrayFareConf_trayAmount();
+			
+				single_createattr_CountryTrayFareConf_price();
+			
+				single_createattr_CustomerCreditAccount_billingInterval();
+			
+				single_createattr_CustomerCreditAccount_creaditRemainedAmount();
+			
+				single_createattr_CustomerCreditAccount_creditTotalAmount();
+			
+				single_createattr_CustomerCreditAccount_status();
+			
+				single_createattr_CreditTransaction_creaditUsedAmount();
+			
+				single_createattr_CreditTransaction_isPayback();
+			
+				single_createattr_CreditTransaction_paybackTime();
+			
+				single_createattr_CreditTransaction_requestId();
+			
+				single_createattr_Customer_creditAccount();
+			
+		createRelationAttributes(
+			"AcerChemVendor2Product", 
+			false, 
+
+			"acerChemVendor", 
+			"Vendor", 
+			true,
+			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
+			false,
+			false,
+			CollectionType.COLLECTION,
+			"acerChemProducts", 
+			"Product", 
+			true,
+			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
+			true,
+			true,
+			CollectionType.LIST
+		);
+	
+		createRelationAttributes(
+			"AcerChemCustomerLevel2User", 
+			false, 
+
+			"userLevel", 
+			"UserLevel", 
+			true,
+			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
+			false,
+			false,
+			CollectionType.COLLECTION,
+			"customers", 
+			"User", 
+			true,
+			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
+			true,
+			true,
+			CollectionType.LIST
+		);
+	
+		createRelationAttributes(
+			"Receptionist2Customer", 
+			false, 
+
+			"relatedCustomer", 
+			"Employee", 
+			true,
+			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
+			false,
+			false,
+			CollectionType.COLLECTION,
+			"receptionist", 
+			"Customer", 
+			true,
+			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
+			true,
+			true,
+			CollectionType.LIST
+		);
+	
+		createRelationAttributes(
+			"Transactions2CreditAccount", 
+			false, 
+
+			"transactions", 
+			"CreditTransaction", 
+			true,
+			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
+			false,
+			false,
+			CollectionType.COLLECTION,
+			"creditAccount", 
+			"CustomerCreditAccount", 
+			true,
+			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
+			true,
+			true,
+			CollectionType.LIST
+		);
+	
 
 	}
 
-	
-	public void single_createattr_ApparelProduct_genders() throws JaloBusinessException
-	{
-		
-						Map sqlColumnDefinitions = null;
-					
-				createPropertyAttribute(
-					"ApparelProduct", 
-					"genders",  
-					null,
-					"GenderList",
-					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
-					null,
-					sqlColumnDefinitions
-				);
-			
-	}
-	
-	public void single_createattr_ApparelStyleVariantProduct_style() throws JaloBusinessException
-	{
-		
-						Map sqlColumnDefinitions = null;
-					
-				createPropertyAttribute(
-					"ApparelStyleVariantProduct", 
-					"style",  
-					null,
-					"localized:java.lang.String",
-					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
-					"VariantAttributeDescriptor",
-					sqlColumnDefinitions
-				);
-			
-	}
-	
-	public void single_createattr_ApparelStyleVariantProduct_swatchColors() throws JaloBusinessException
-	{
-		
-						Map sqlColumnDefinitions = null;
-					
-				createPropertyAttribute(
-					"ApparelStyleVariantProduct", 
-					"swatchColors",  
-					null,
-					"SwatchColorSet",
-					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
-					null,
-					sqlColumnDefinitions
-				);
-			
-	}
-	
-	public void single_createattr_ApparelSizeVariantProduct_size() throws JaloBusinessException
-	{
-		
-						Map sqlColumnDefinitions = null;
-					
-				createPropertyAttribute(
-					"ApparelSizeVariantProduct", 
-					"size",  
-					null,
-					"localized:java.lang.String",
-					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
-					"VariantAttributeDescriptor",
-					sqlColumnDefinitions
-				);
-			
-	}
-	
-	public void single_createattr_ElectronicsColorVariantProduct_color() throws JaloBusinessException
-	{
-		
-						Map sqlColumnDefinitions = null;
-					
-				createPropertyAttribute(
-					"ElectronicsColorVariantProduct", 
-					"color",  
-					null,
-					"localized:java.lang.String",
-					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
-					"VariantAttributeDescriptor",
-					sqlColumnDefinitions
-				);
-			
-	}
 	
 	public void single_createattr_Media_aliyunUrl() throws JaloBusinessException
 	{
@@ -412,6 +471,40 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 	}
 	
+	public void single_createattr_ImageFailedRecord_mediaData() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"ImageFailedRecord", 
+					"mediaData",  
+					null,
+					"Media",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_ImageFailedRecord_mediaPK() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"ImageFailedRecord", 
+					"mediaPK",  
+					null,
+					"java.lang.String",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
 	public void single_createattr_ImageUploadedLog_imagePK() throws JaloBusinessException
 	{
 		
@@ -439,6 +532,74 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 					"aliyunUrl",  
 					null,
 					"java.lang.String",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_ImageUploadedLog_location() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"ImageUploadedLog", 
+					"location",  
+					null,
+					"java.lang.String",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_UserLevel_levelName() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"UserLevel", 
+					"levelName",  
+					null,
+					"java.lang.String",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_UserLevel_levelCode() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"UserLevel", 
+					"levelCode",  
+					null,
+					"UserLevelClassification",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_UserLevel_discount() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"UserLevel", 
+					"discount",  
+					null,
+					"java.lang.Double",
 					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
 					null,
 					sqlColumnDefinitions
@@ -633,6 +794,23 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 	}
 	
+	public void single_createattr_StockLevel_avaPreOrderReleaseDay() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"StockLevel", 
+					"avaPreOrderReleaseDay",  
+					null,
+					"java.lang.Integer",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
 	public void single_createattr_AbstractOrderEntry_isUseFutureStock() throws JaloBusinessException
 	{
 		
@@ -643,6 +821,227 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 					"isUseFutureStock",  
 					null,
 					"java.lang.Boolean",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_AbstractOrderEntry_availableDate() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"AbstractOrderEntry", 
+					"availableDate",  
+					null,
+					"java.util.Date",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_CountryTrayFareConf_country() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"CountryTrayFareConf", 
+					"country",  
+					null,
+					"Country",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_CountryTrayFareConf_trayAmount() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"CountryTrayFareConf", 
+					"trayAmount",  
+					null,
+					"java.lang.Integer",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_CountryTrayFareConf_price() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"CountryTrayFareConf", 
+					"price",  
+					null,
+					"java.lang.Double",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_CustomerCreditAccount_billingInterval() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"CustomerCreditAccount", 
+					"billingInterval",  
+					null,
+					"java.lang.Integer",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_CustomerCreditAccount_creaditRemainedAmount() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"CustomerCreditAccount", 
+					"creaditRemainedAmount",  
+					null,
+					"java.lang.long",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_CustomerCreditAccount_creditTotalAmount() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"CustomerCreditAccount", 
+					"creditTotalAmount",  
+					null,
+					"java.lang.long",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_CustomerCreditAccount_status() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"CustomerCreditAccount", 
+					"status",  
+					null,
+					"CreditAccountStatusEnum",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_CreditTransaction_creaditUsedAmount() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"CreditTransaction", 
+					"creaditUsedAmount",  
+					null,
+					"java.lang.long",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_CreditTransaction_isPayback() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"CreditTransaction", 
+					"isPayback",  
+					null,
+					"java.lang.Boolean",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_CreditTransaction_paybackTime() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"CreditTransaction", 
+					"paybackTime",  
+					null,
+					"java.lang.long",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_CreditTransaction_requestId() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"CreditTransaction", 
+					"requestId",  
+					null,
+					"java.lang.String",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_Customer_creditAccount() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"Customer", 
+					"creditAccount",  
+					null,
+					"CustomerCreditAccount",
 					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
 					null,
 					sqlColumnDefinitions
@@ -691,68 +1090,112 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			} )
 		);
 	
-				{
-				Map customPropsMap = new HashMap();
-				
-				setItemTypeProperties(
-					"ApparelProduct",
-					false,
-					true,
-					true,
-					null,
-					customPropsMap
-				);
-				}
+		createEnumerationValues(
+			"UserLevelClassification",
+			true,
+			Arrays.asList( new String[] {
 			
-			single_setAttributeProperties_ApparelProduct_genders();
-		
-				{
-				Map customPropsMap = new HashMap();
-				
-				setItemTypeProperties(
-					"ApparelStyleVariantProduct",
-					false,
-					true,
-					true,
-					null,
-					customPropsMap
-				);
-				}
+				"A",
+				"B",
+				"C",
+				"D",
+				"E",
+				"F",
+				"G",
+				"H",
+				"I",
+				"J",
+				"K",
+				"L"
+			} )
+		);
+	
+		createEnumerationValues(
+			"CreditAccountStatusEnum",
+			true,
+			Arrays.asList( new String[] {
 			
-			single_setAttributeProperties_ApparelStyleVariantProduct_style();
-		
-			single_setAttributeProperties_ApparelStyleVariantProduct_swatchColors();
-		
-				{
-				Map customPropsMap = new HashMap();
-				
-				setItemTypeProperties(
-					"ApparelSizeVariantProduct",
-					false,
-					true,
-					true,
-					null,
-					customPropsMap
-				);
-				}
-			
-			single_setAttributeProperties_ApparelSizeVariantProduct_size();
-		
-				{
-				Map customPropsMap = new HashMap();
-				
-				setItemTypeProperties(
-					"ElectronicsColorVariantProduct",
-					false,
-					true,
-					true,
-					null,
-					customPropsMap
-				);
-				}
-			
-			single_setAttributeProperties_ElectronicsColorVariantProduct_color();
-		
+				"LOCKED",
+				"NORMAL"
+			} )
+		);
+	
+		single_setRelAttributeProperties_AcerChemVendor2Product_source();
+	
+		single_setRelAttributeProperties_AcerChemCustomerLevel2User_source();
+	
+		single_setRelAttributeProperties_Receptionist2Customer_source();
+	
+		single_setRelAttributeProperties_Transactions2CreditAccount_source();
+	
+		single_setRelAttributeProperties_AcerChemVendor2Product_target();
+	
+		single_setRelAttributeProperties_AcerChemCustomerLevel2User_target();
+	
+		single_setRelAttributeProperties_Receptionist2Customer_target();
+	
+		single_setRelAttributeProperties_Transactions2CreditAccount_target();
+	
+		connectRelation(
+			"AcerChemVendor2Product", 
+			false, 
+			"acerChemVendor", 
+			"Vendor", 
+			true,
+			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
+			"acerChemProducts", 
+			"Product", 
+			true,
+			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
+			true,
+			true
+		);
+	
+		connectRelation(
+			"AcerChemCustomerLevel2User", 
+			false, 
+			"userLevel", 
+			"UserLevel", 
+			true,
+			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
+			"customers", 
+			"User", 
+			true,
+			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
+			true,
+			true
+		);
+	
+		connectRelation(
+			"Receptionist2Customer", 
+			false, 
+			"relatedCustomer", 
+			"Employee", 
+			true,
+			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
+			"receptionist", 
+			"Customer", 
+			true,
+			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
+			true,
+			true
+		);
+	
+		connectRelation(
+			"Transactions2CreditAccount", 
+			false, 
+			"transactions", 
+			"CreditTransaction", 
+			true,
+			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
+			"creditAccount", 
+			"CustomerCreditAccount", 
+			true,
+			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
+			true,
+			true
+		);
+	
 				{
 				Map customPropsMap = new HashMap();
 				
@@ -788,6 +1231,10 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 		
 			single_setAttributeProperties_ImageFailedRecord_status();
 		
+			single_setAttributeProperties_ImageFailedRecord_mediaData();
+		
+			single_setAttributeProperties_ImageFailedRecord_mediaPK();
+		
 				{
 				Map customPropsMap = new HashMap();
 				
@@ -804,6 +1251,27 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			single_setAttributeProperties_ImageUploadedLog_imagePK();
 		
 			single_setAttributeProperties_ImageUploadedLog_aliyunUrl();
+		
+			single_setAttributeProperties_ImageUploadedLog_location();
+		
+				{
+				Map customPropsMap = new HashMap();
+				
+				setItemTypeProperties(
+					"UserLevel",
+					false,
+					true,
+					true,
+					null,
+					customPropsMap
+				);
+				}
+			
+			single_setAttributeProperties_UserLevel_levelName();
+		
+			single_setAttributeProperties_UserLevel_levelCode();
+		
+			single_setAttributeProperties_UserLevel_discount();
 		
 				{
 				Map customPropsMap = new HashMap();
@@ -916,6 +1384,8 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 			single_setAttributeProperties_StockLevel_preOrderReleaseDay();
 		
+			single_setAttributeProperties_StockLevel_avaPreOrderReleaseDay();
+		
 				{
 				Map customPropsMap = new HashMap();
 				
@@ -927,6 +1397,81 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 				}
 			
 			single_setAttributeProperties_AbstractOrderEntry_isUseFutureStock();
+		
+			single_setAttributeProperties_AbstractOrderEntry_availableDate();
+		
+				{
+				Map customPropsMap = new HashMap();
+				
+				setItemTypeProperties(
+					"CountryTrayFareConf",
+					false,
+					true,
+					true,
+					null,
+					customPropsMap
+				);
+				}
+			
+			single_setAttributeProperties_CountryTrayFareConf_country();
+		
+			single_setAttributeProperties_CountryTrayFareConf_trayAmount();
+		
+			single_setAttributeProperties_CountryTrayFareConf_price();
+		
+				{
+				Map customPropsMap = new HashMap();
+				
+				setItemTypeProperties(
+					"CustomerCreditAccount",
+					false,
+					true,
+					true,
+					null,
+					customPropsMap
+				);
+				}
+			
+			single_setAttributeProperties_CustomerCreditAccount_billingInterval();
+		
+			single_setAttributeProperties_CustomerCreditAccount_creaditRemainedAmount();
+		
+			single_setAttributeProperties_CustomerCreditAccount_creditTotalAmount();
+		
+			single_setAttributeProperties_CustomerCreditAccount_status();
+		
+				{
+				Map customPropsMap = new HashMap();
+				
+				setItemTypeProperties(
+					"CreditTransaction",
+					false,
+					true,
+					true,
+					null,
+					customPropsMap
+				);
+				}
+			
+			single_setAttributeProperties_CreditTransaction_creaditUsedAmount();
+		
+			single_setAttributeProperties_CreditTransaction_isPayback();
+		
+			single_setAttributeProperties_CreditTransaction_paybackTime();
+		
+			single_setAttributeProperties_CreditTransaction_requestId();
+		
+				{
+				Map customPropsMap = new HashMap();
+				
+				changeMetaType(
+					"Customer",
+					null,
+					customPropsMap
+				);
+				}
+			
+			single_setAttributeProperties_Customer_creditAccount();
 		
 				setDefaultProperties(
 					"GenderList",
@@ -956,120 +1501,24 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 					null
 				);
 			
+				setDefaultProperties(
+					"UserLevelClassification",
+					true,
+					true,
+					null
+				);
+			
+				setDefaultProperties(
+					"CreditAccountStatusEnum",
+					true,
+					true,
+					null
+				);
+			
 	}
 
 
 		
-						public void single_setAttributeProperties_ApparelProduct_genders() throws JaloBusinessException
-						{
-							
-							
-							
-							Map customPropsMap = new HashMap();
-							
-							setAttributeProperties(
-								"ApparelProduct", 
-								"genders",
-								false, 
-								null,
-								null,
-								null,
-								true,
-								true,
-								null,
-								customPropsMap,
-								null
-							);
-						}
-					
-						public void single_setAttributeProperties_ApparelStyleVariantProduct_style() throws JaloBusinessException
-						{
-							
-							
-							
-							Map customPropsMap = new HashMap();
-							
-							setAttributeProperties(
-								"ApparelStyleVariantProduct", 
-								"style",
-								false, 
-								null,
-								null,
-								null,
-								true,
-								true,
-								"VariantAttributeDescriptor",
-								customPropsMap,
-								null
-							);
-						}
-					
-						public void single_setAttributeProperties_ApparelStyleVariantProduct_swatchColors() throws JaloBusinessException
-						{
-							
-							
-							
-							Map customPropsMap = new HashMap();
-							
-							setAttributeProperties(
-								"ApparelStyleVariantProduct", 
-								"swatchColors",
-								false, 
-								null,
-								null,
-								null,
-								true,
-								true,
-								null,
-								customPropsMap,
-								null
-							);
-						}
-					
-						public void single_setAttributeProperties_ApparelSizeVariantProduct_size() throws JaloBusinessException
-						{
-							
-							
-							
-							Map customPropsMap = new HashMap();
-							
-							setAttributeProperties(
-								"ApparelSizeVariantProduct", 
-								"size",
-								false, 
-								null,
-								null,
-								null,
-								true,
-								true,
-								"VariantAttributeDescriptor",
-								customPropsMap,
-								null
-							);
-						}
-					
-						public void single_setAttributeProperties_ElectronicsColorVariantProduct_color() throws JaloBusinessException
-						{
-							
-							
-							
-							Map customPropsMap = new HashMap();
-							
-							setAttributeProperties(
-								"ElectronicsColorVariantProduct", 
-								"color",
-								false, 
-								null,
-								null,
-								null,
-								true,
-								true,
-								"VariantAttributeDescriptor",
-								customPropsMap,
-								null
-							);
-						}
-					
 						public void single_setAttributeProperties_Media_aliyunUrl() throws JaloBusinessException
 						{
 							
@@ -1202,6 +1651,50 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							);
 						}
 					
+						public void single_setAttributeProperties_ImageFailedRecord_mediaData() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"ImageFailedRecord", 
+								"mediaData",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_ImageFailedRecord_mediaPK() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"ImageFailedRecord", 
+								"mediaPK",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
 						public void single_setAttributeProperties_ImageUploadedLog_imagePK() throws JaloBusinessException
 						{
 							
@@ -1234,6 +1727,94 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							setAttributeProperties(
 								"ImageUploadedLog", 
 								"aliyunUrl",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_ImageUploadedLog_location() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"ImageUploadedLog", 
+								"location",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_UserLevel_levelName() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"UserLevel", 
+								"levelName",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_UserLevel_levelCode() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"UserLevel", 
+								"levelCode",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_UserLevel_discount() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"UserLevel", 
+								"discount",
 								false, 
 								null,
 								null,
@@ -1488,6 +2069,28 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							);
 						}
 					
+						public void single_setAttributeProperties_StockLevel_avaPreOrderReleaseDay() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"StockLevel", 
+								"avaPreOrderReleaseDay",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
 						public void single_setAttributeProperties_AbstractOrderEntry_isUseFutureStock() throws JaloBusinessException
 						{
 							
@@ -1510,6 +2113,460 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							);
 						}
 					
+						public void single_setAttributeProperties_AbstractOrderEntry_availableDate() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"AbstractOrderEntry", 
+								"availableDate",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_CountryTrayFareConf_country() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"CountryTrayFareConf", 
+								"country",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_CountryTrayFareConf_trayAmount() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"CountryTrayFareConf", 
+								"trayAmount",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_CountryTrayFareConf_price() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"CountryTrayFareConf", 
+								"price",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_CustomerCreditAccount_billingInterval() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"CustomerCreditAccount", 
+								"billingInterval",
+								false, 
+								0,
+								"0",
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_CustomerCreditAccount_creaditRemainedAmount() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"CustomerCreditAccount", 
+								"creaditRemainedAmount",
+								false, 
+								0,
+								"0",
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_CustomerCreditAccount_creditTotalAmount() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"CustomerCreditAccount", 
+								"creditTotalAmount",
+								false, 
+								0,
+								"0",
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_CustomerCreditAccount_status() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"CustomerCreditAccount", 
+								"status",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_CreditTransaction_creaditUsedAmount() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"CreditTransaction", 
+								"creaditUsedAmount",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_CreditTransaction_isPayback() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"CreditTransaction", 
+								"isPayback",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_CreditTransaction_paybackTime() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"CreditTransaction", 
+								"paybackTime",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_CreditTransaction_requestId() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"CreditTransaction", 
+								"requestId",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_Customer_creditAccount() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"Customer", 
+								"creditAccount",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+								public void single_setRelAttributeProperties_AcerChemVendor2Product_source() throws JaloBusinessException
+								{
+									
+									Map customPropsMap = new HashMap();
+									
+
+									setAttributeProperties(
+										"Product", 
+										"acerChemVendor",
+										false, 
+										null,
+										null,
+										null,
+										true,
+										true,
+										null,
+										customPropsMap,
+										null
+									);
+								}
+							
+								public void single_setRelAttributeProperties_AcerChemVendor2Product_target() throws JaloBusinessException
+								{
+									
+									Map customPropsMap = new HashMap();
+									
+
+									setAttributeProperties(
+										"Vendor", 
+										"acerChemProducts",
+										false, 
+										null,
+										null,
+										null,
+										true,
+										true,
+										null,
+										customPropsMap,
+										null
+									);
+								}
+							
+								public void single_setRelAttributeProperties_AcerChemCustomerLevel2User_source() throws JaloBusinessException
+								{
+									
+									Map customPropsMap = new HashMap();
+									
+
+									setAttributeProperties(
+										"User", 
+										"userLevel",
+										false, 
+										null,
+										null,
+										null,
+										true,
+										true,
+										null,
+										customPropsMap,
+										null
+									);
+								}
+							
+								public void single_setRelAttributeProperties_AcerChemCustomerLevel2User_target() throws JaloBusinessException
+								{
+									
+									Map customPropsMap = new HashMap();
+									
+
+									setAttributeProperties(
+										"UserLevel", 
+										"customers",
+										false, 
+										null,
+										null,
+										null,
+										true,
+										true,
+										null,
+										customPropsMap,
+										null
+									);
+								}
+							
+								public void single_setRelAttributeProperties_Receptionist2Customer_source() throws JaloBusinessException
+								{
+									
+									Map customPropsMap = new HashMap();
+									
+
+									setAttributeProperties(
+										"Customer", 
+										"relatedCustomer",
+										false, 
+										null,
+										null,
+										null,
+										true,
+										true,
+										null,
+										customPropsMap,
+										null
+									);
+								}
+							
+								public void single_setRelAttributeProperties_Receptionist2Customer_target() throws JaloBusinessException
+								{
+									
+									Map customPropsMap = new HashMap();
+									
+
+									setAttributeProperties(
+										"Employee", 
+										"receptionist",
+										false, 
+										null,
+										null,
+										null,
+										true,
+										true,
+										null,
+										customPropsMap,
+										null
+									);
+								}
+							
+								public void single_setRelAttributeProperties_Transactions2CreditAccount_source() throws JaloBusinessException
+								{
+									
+									Map customPropsMap = new HashMap();
+									
+
+									setAttributeProperties(
+										"CustomerCreditAccount", 
+										"transactions",
+										false, 
+										null,
+										null,
+										null,
+										true,
+										true,
+										null,
+										customPropsMap,
+										null
+									);
+								}
+							
+								public void single_setRelAttributeProperties_Transactions2CreditAccount_target() throws JaloBusinessException
+								{
+									
+									Map customPropsMap = new HashMap();
+									
+
+									setAttributeProperties(
+										"CreditTransaction", 
+										"creditAccount",
+										false, 
+										null,
+										null,
+										null,
+										true,
+										true,
+										null,
+										customPropsMap,
+										null
+									);
+								}
+							
 }
 
 	

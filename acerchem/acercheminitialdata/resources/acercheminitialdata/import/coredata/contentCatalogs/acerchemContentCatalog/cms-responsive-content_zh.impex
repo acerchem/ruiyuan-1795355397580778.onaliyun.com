@@ -9,7 +9,7 @@
 # license agreement you entered into with SAP.
 # -----------------------------------------------------------------------
 #
-# Import CMS content for the Electronics site
+# Import CMS content for the Acerchem site
 #
 
 $contentCatalog=acerchemContentCatalog
