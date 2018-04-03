@@ -2,9 +2,14 @@ package com.acerchem.storefront.checkout.steps.validation.impl;
 
 import de.hybris.platform.acceleratorstorefrontcommons.forms.AddressForm;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.RegisterForm;
+import de.hybris.platform.commercefacades.i18n.I18NFacade;
+import de.hybris.platform.commercefacades.user.data.RegionData;
 
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
@@ -20,6 +25,8 @@ import com.acerchem.storefront.data.CustomRegisterForm;
 @Component("customRegistrationValidator")
 public class CustomRegistrationValidator implements Validator
 {
+	@Resource(name = "i18NFacade")
+	private I18NFacade i18NFacade;
 	public static final Pattern EMAIL_REGEX = Pattern.compile("\\b[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}\\b");
 
 	@Override
@@ -52,8 +59,13 @@ public class CustomRegistrationValidator implements Validator
 		else
 		{
 			validateNullValue(errors, shipCountry.getCountryIso(), "shipAddress.countryIso", "register.shipAddress.countryIso.invalid");
-			validateNullValue(errors, shipCountry.getRegionIso(), "shipAddress.regionIso", "register.shipAddress.regionIso.invalid");
 			validateNullValue(errors, shipCountry.getTownCity(), "shipAddress.townCity", "register.shipAddress.townCity.invalid");
+			
+			List<RegionData> regions=i18NFacade.getRegionsForCountryIso(shipCountry.getCountryIso());
+			if(regions.size()>0)
+			{
+				validateNullValue(errors, shipCountry.getRegionIso(), "shipAddress.regionIso", "register.shipAddress.regionIso.invalid");
+			}
 		}
 			
 		if(contactCountry==null)
@@ -63,8 +75,13 @@ public class CustomRegistrationValidator implements Validator
 		else
 		{
 			validateNullValue(errors, contactCountry.getCountryIso(), "contactAddress.countryIso", "register.contactAddress.countryIso.invalid");
-			validateNullValue(errors, contactCountry.getRegionIso(), "contactAddress.regionIso", "register.contactAddress.regionIso.invalid");
 			validateNullValue(errors, contactCountry.getTownCity(), "contactAddress.townCity", "register.contactAddress.townCity.invalid");
+			
+			List<RegionData> regions=i18NFacade.getRegionsForCountryIso(contactCountry.getCountryIso());
+			if(regions.size()>0)
+			{
+				validateNullValue(errors, contactCountry.getRegionIso(), "contactAddress.regionIso", "register.contactAddress.regionIso.invalid");
+			}
 		}
 		
 		validateEmail(errors, email);
