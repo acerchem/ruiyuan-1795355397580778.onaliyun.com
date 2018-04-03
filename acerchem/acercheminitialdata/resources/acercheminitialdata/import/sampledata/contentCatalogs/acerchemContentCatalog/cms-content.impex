@@ -242,7 +242,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents
 ;;TabsSlot;TabPanelContainer
 ;;FooterSlot;FooterComponent
 ;;HeaderLinksSlot;ContactInfo
-;;SearchBoxSlot;SearchBox,LangCurrencyComponent
+;;SearchBoxSlot;AcerchemIndexSearchBoxComponent
 ;;VariantSelectorSlot;VariantSelector
 ;;AddToCartSlot;AddToCart
 ;;UpSellingSlot;Similar
@@ -250,9 +250,9 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents
 ;;ProductLeftRefinements;RefinementFacetComponent
 
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];folder(qualifier)[default='images']
-;;CamerasPagePreview;text/png;CamerasPage.png;$jarResourceCms/preview-images/acerchem/CamerasPage.png
-;;DigitalCamerasPagePreview;text/png;DigitalCamerasPage.png;$jarResourceCms/preview-images/acerchem/DigitalCamerasPage.png
-;;CameraAccessoriesPagePreview;text/png;CameraAccessoriesPage.png;$jarResourceCms/preview-images/acerchem/CameraAccessoriesPage.png
+;;CamerasPagePreview;text/png;CamerasPage.png;
+;;DigitalCamerasPagePreview;text/png;DigitalCamerasPage.png;
+;;CameraAccessoriesPagePreview;text/png;CameraAccessoriesPage.png;
 
 # Category Pages
 INSERT_UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved'];previewImage(code, $contentCV)
@@ -314,31 +314,31 @@ INSERT_UPDATE FooterComponent;$contentCV[unique=true];uid[unique=true];navigatio
 
 # Preview Image for use in the CMS Cockpit for special ContentPages
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];folder(qualifier)[default='images']
-;;accountPagePreview;text/png;AccountPage.png;$jarResourceCms/preview-images/acerchem/AccountPage.png
-;;addEditAddressPagePreview;text/png;AddEditAddressPage.png;$jarResourceCms/preview-images/acerchem/AddEditAddressPage.png
-;;addressBookPagePreview;text/png;AddressBook.png;$jarResourceCms/preview-images/acerchem/AddressBookPage.png
-;;cartPagePreview;text/png;CartPage.png;$jarResourceCms/preview-images/acerchem/CartPage.png
-;;checkoutLoginPagePreview;text/png;CheckoutLoginPage.png;$jarResourceCms/preview-images/acerchem/CheckoutLoginPage.png
-;;multiStepCheckoutSummaryPagePreview;text/png;MultiStepCheckoutSummaryPage.png;$jarResourceCms/preview-images/acerchem/MultiStepCheckoutSummaryPage.png
-;;frequentlyAskedQuestionsPage;text/png;FrequentlyAskedQuestionsPage.png;$jarResourceCms/preview-images/acerchem/FrequentlyAskedQuestionsPage.png;;;
-;;termsAndConditionsPage;text/png;TermsAndConditionsPage.png;$jarResourceCms/preview-images/acerchem/TermsAndConditionsPage.png;;;
-;;homepagePreview;text/png;Homepage.png;$jarResourceCms/preview-images/acerchem/Homepage.png
-;;loginPagePreview;text/png;LoginPage.png;$jarResourceCms/preview-images/acerchem/LoginPage.png
-;;notFoundPagePreview;text/png;NotFoundPage.png;$jarResourceCms/preview-images/acerchem/NotFoundPage.png
-;;orderConfirmationPagePreview;text/png;OrderConfirmationPage.png;$jarResourceCms/preview-images/acerchem/OrderConfirmationPage.png
-;;orderDetailsPagePreview;text/png;OrderDetailsPage.png;$jarResourceCms/preview-images/acerchem/OrderDetailsPage.png
-;;orderHistoryPagePreview;text/png;OrderHistoryPage.png;$jarResourceCms/preview-images/acerchem/OrderHistoryPage.png
-;;paymentDetailsPagePreview;text/png;PaymentDetailsPage.png;$jarResourceCms/preview-images/acerchem/PaymentDetailsPage.png
-;;productDetailsPagePreview;text/png;ProductDetailsPage.png;$jarResourceCms/preview-images/acerchem/ProductDetailsPage.png
-;;productListPagePreview;text/png;ProductListPage.png;$jarResourceCms/preview-images/acerchem/ProductListPage.png
-;;profilePagePreview;text/png;ProfilePage.png;$jarResourceCms/preview-images/acerchem/ProfilePage.png
-;;searchResultsEmptyPagePreview;text/png;SearchResultsEmptyPage.png;$jarResourceCms/preview-images/acerchem/SearchResultsEmptyPage.png
-;;searchResultsPagePreview;text/png;SearchResultsPage.png;$jarResourceCms/preview-images/acerchem/SearchResultsPage.png
-;;storefinderPagePreview;text/png;StoreFinderPage.png;$jarResourceCms/preview-images/acerchem/StoreFinderPage.png
-;;updateForgottenPasswordPagePreview;text/png;UpdateForgottenPasswordPage.png;$jarResourceCms/preview-images/acerchem/UpdateForgottenPasswordPage.png
-;;productGridPagePreview;text/png;ProductGridPage.png;$jarResourceCms/preview-images/acerchem/ProductGridPage.png
-;;defaultCategoryPagePreview;text/png;DefaultCategoryPage.png;$jarResourceCms/preview-images/acerchem/DefaultCategoryPage.png
-;;orderExpiredPagePreview;text/png;OrderExpiredPage.png;$jarResourceCms/preview-images/acerchem/OrderExpiredPage.png;;;
+;;accountPagePreview;text/png;AccountPage.png;
+;;addEditAddressPagePreview;text/png;AddEditAddressPage.png;
+;;addressBookPagePreview;text/png;AddressBook.png;
+;;cartPagePreview;text/png;CartPage.png;
+;;checkoutLoginPagePreview;text/png;CheckoutLoginPage.png;
+;;multiStepCheckoutSummaryPagePreview;text/png;MultiStepCheckoutSummaryPage.png;
+;;frequentlyAskedQuestionsPage;text/png;FrequentlyAskedQuestionsPage.png;;;;
+;;termsAndConditionsPage;text/png;TermsAndConditionsPage.png;;;;
+;;homepagePreview;text/png;Homepage.png;
+;;loginPagePreview;text/png;LoginPage.png;
+;;notFoundPagePreview;text/png;NotFoundPage.png;
+;;orderConfirmationPagePreview;text/png;OrderConfirmationPage.png;
+;;orderDetailsPagePreview;text/png;OrderDetailsPage.png;
+;;orderHistoryPagePreview;text/png;OrderHistoryPage.png;
+;;paymentDetailsPagePreview;text/png;PaymentDetailsPage.png;
+;;productDetailsPagePreview;text/png;ProductDetailsPage.png;
+;;productListPagePreview;text/png;ProductListPage.png;
+;;profilePagePreview;text/png;ProfilePage.png;
+;;searchResultsEmptyPagePreview;text/png;SearchResultsEmptyPage.png;
+;;searchResultsPagePreview;text/png;SearchResultsPage.png;
+;;storefinderPagePreview;text/png;StoreFinderPage.png;
+;;updateForgottenPasswordPagePreview;text/png;UpdateForgottenPasswordPage.png;
+;;productGridPagePreview;text/png;ProductGridPage.png;
+;;defaultCategoryPagePreview;text/png;DefaultCategoryPage.png;
+;;orderExpiredPagePreview;text/png;OrderExpiredPage.png;;;;
 
 # Site-wide Homepage
 UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];previewImage(code, $contentCV);linkComponents(&linkRef)
@@ -350,8 +350,8 @@ UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];previewImage(code, $
 ;;orderConfirmationPage;orderConfirmationPagePreview
 ;;cartPage;cartPagePreview
 ;;search;searchResultsPagePreview
-;;account;accountPagePreview
-;;profile;profilePagePreview
+#;;account;accountPagePreview
+#;;profile;profilePagePreview
 ;;address-book;addressBookPagePreview
 ;;add-edit-address;addEditAddressPagePreview
 ;;payment-details;paymentDetailsPagePreview
@@ -651,8 +651,8 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 
 # ContentSlotForPage
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='account'];contentSlot(uid,$contentCV)[unique=true];;;
-;;SideContent-Account;SideContent;;SideContent-Account;;;
-;;BodyContent-Account;BodyContent;;BodyContent-Account;;;
+#;;SideContent-Account;SideContent;;SideContent-Account;;;
+#;;BodyContent-Account;BodyContent;;BodyContent-Account;;;
 
 ###### Account Profile
 # ContentSlot
@@ -662,8 +662,8 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 
 # ContentSlotForPage
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='profile'];contentSlot(uid,$contentCV)[unique=true];;;
-;;SideContent-profile;SideContent;;SideContent-profile;;;
-;;BodyContent-profile;BodyContent;;BodyContent-profile;;;
+#;;SideContent-profile;SideContent;;SideContent-profile;;;
+#;;BodyContent-profile;BodyContent;;BodyContent-profile;;;
 
 ###### Account Address Book
 # ContentSlot

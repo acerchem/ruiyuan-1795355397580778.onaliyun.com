@@ -16,6 +16,7 @@ $productCatalogName=acerchem Product Catalog
 $productCV=catalogVersion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
 $siteResource=jar:com.acerchem.initialdata.constants.AcerchemInitialDataConstants&/acercheminitialdata/import/sampledata/contentCatalogs/$contentCatalog
 $medias=medias(code, $contentCV);
+$picture=media(code, $contentCV);
 $mediaContainer=media(qualifier, $contentCV);
 $product=product(code, $productCV)
 $category=category(code, $productCV)
@@ -23,7 +24,8 @@ $jarResourceCms=jar:com.acerchem.initialdata.constants.AcerchemInitialDataConsta
 $media=media(code, $contentCV);
 $productResource=jar:com.acerchem.initialdata.constants.AcerchemInitialDataConstants&/acercheminitialdata/import/sampledata/productCatalogs/$productCatalog
 $section=jar:com.acerchem.initialdata.constants.AcerchemInitialDataConstants&/acercheminitialdata/import/sampledata/contentCatalogs/acerchemContentCatalog
-
+# Language
+$lang=en
 
 # CMS Site Settings
 UPDATE CMSSite;uid[unique=true];defaultPreviewCategory(code, $productCV);defaultPreviewProduct(code, $productCV)
@@ -185,7 +187,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents
 ;;TabsSlot;TabPanelContainer
 ;;FooterSlot;
 ;;HeaderLinksSlot;
-;;SearchBoxSlot;SearchBox,LangCurrencyComponent
+;;SearchBoxSlot;AcerchemIndexSearchBoxComponent
 ;;VariantSelectorSlot;VariantSelector
 ;;AddToCartSlot;AddToCart
 ;;UpSellingSlot;Similar
@@ -193,9 +195,9 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents
 ;;ProductLeftRefinements;RefinementFacetComponent
 
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];folder(qualifier)[default='images']
-;;CamerasPagePreview;text/png;CamerasPage.png;$jarResourceCms/preview-images/acerchem/CamerasPage.png
-;;DigitalCamerasPagePreview;text/png;DigitalCamerasPage.png;$jarResourceCms/preview-images/acerchem/DigitalCamerasPage.png
-;;CameraAccessoriesPagePreview;text/png;CameraAccessoriesPage.png;$jarResourceCms/preview-images/acerchem/CameraAccessoriesPage.png
+;;CamerasPagePreview;text/png;CamerasPage.png;
+;;DigitalCamerasPagePreview;text/png;DigitalCamerasPage.png;
+;;CameraAccessoriesPagePreview;text/png;CameraAccessoriesPage.png;
 
 # Category Pages
 INSERT_UPDATE CategoryPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved'];previewImage(code, $contentCV)
@@ -235,29 +237,29 @@ INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;pa
 
 # Preview Image for use in the CMS Cockpit for special ContentPages
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];folder(qualifier)[default='images']
-;;addEditAddressPagePreview;text/png;AddEditAddressPage.png;$jarResourceCms/preview-images/acerchem/AddEditAddressPage.png
-;;addressBookPagePreview;text/png;AddressBook.png;$jarResourceCms/preview-images/acerchem/AddressBookPage.png
-;;cartPagePreview;text/png;CartPage.png;$jarResourceCms/preview-images/acerchem/CartPage.png
-;;checkoutLoginPagePreview;text/png;CheckoutLoginPage.png;$jarResourceCms/preview-images/acerchem/CheckoutLoginPage.png
-;;multiStepCheckoutSummaryPagePreview;text/png;MultiStepCheckoutSummaryPage.png;$jarResourceCms/preview-images/acerchem/MultiStepCheckoutSummaryPage.png
-;;frequentlyAskedQuestionsPage;text/png;FrequentlyAskedQuestionsPage.png;$jarResourceCms/preview-images/acerchem/FrequentlyAskedQuestionsPage.png;;;
-;;termsAndConditionsPage;text/png;TermsAndConditionsPage.png;$jarResourceCms/preview-images/acerchem/TermsAndConditionsPage.png;;;
-;;homepagePreview;text/png;Homepage.png;$jarResourceCms/preview-images/acerchem/Homepage.png
-;;loginPagePreview;text/png;LoginPage.png;$jarResourceCms/preview-images/acerchem/LoginPage.png
-;;notFoundPagePreview;text/png;NotFoundPage.png;$jarResourceCms/preview-images/acerchem/NotFoundPage.png
-;;orderConfirmationPagePreview;text/png;OrderConfirmationPage.png;$jarResourceCms/preview-images/acerchem/OrderConfirmationPage.png
-;;orderDetailsPagePreview;text/png;OrderDetailsPage.png;$jarResourceCms/preview-images/acerchem/OrderDetailsPage.png
-;;orderHistoryPagePreview;text/png;OrderHistoryPage.png;$jarResourceCms/preview-images/acerchem/OrderHistoryPage.png
-;;paymentDetailsPagePreview;text/png;PaymentDetailsPage.png;$jarResourceCms/preview-images/acerchem/PaymentDetailsPage.png
-;;productDetailsPagePreview;text/png;ProductDetailsPage.png;$jarResourceCms/preview-images/acerchem/ProductDetailsPage.png
-;;productListPagePreview;text/png;ProductListPage.png;$jarResourceCms/preview-images/acerchem/ProductListPage.png
-;;searchResultsEmptyPagePreview;text/png;SearchResultsEmptyPage.png;$jarResourceCms/preview-images/acerchem/SearchResultsEmptyPage.png
-;;searchResultsPagePreview;text/png;SearchResultsPage.png;$jarResourceCms/preview-images/acerchem/SearchResultsPage.png
-;;storefinderPagePreview;text/png;StoreFinderPage.png;$jarResourceCms/preview-images/acerchem/StoreFinderPage.png
-;;updateForgottenPasswordPagePreview;text/png;UpdateForgottenPasswordPage.png;$jarResourceCms/preview-images/acerchem/UpdateForgottenPasswordPage.png
-;;productGridPagePreview;text/png;ProductGridPage.png;$jarResourceCms/preview-images/acerchem/ProductGridPage.png
-;;defaultCategoryPagePreview;text/png;DefaultCategoryPage.png;$jarResourceCms/preview-images/acerchem/DefaultCategoryPage.png
-;;orderExpiredPagePreview;text/png;OrderExpiredPage.png;$jarResourceCms/preview-images/acerchem/OrderExpiredPage.png;;;
+;;addEditAddressPagePreview;text/png;AddEditAddressPage.png;
+;;addressBookPagePreview;text/png;AddressBook.png;
+;;cartPagePreview;text/png;CartPage.png;
+;;checkoutLoginPagePreview;text/png;CheckoutLoginPage.png;
+;;multiStepCheckoutSummaryPagePreview;text/png;MultiStepCheckoutSummaryPage.png;
+;;frequentlyAskedQuestionsPage;text/png;FrequentlyAskedQuestionsPage.png;;;;
+;;termsAndConditionsPage;text/png;TermsAndConditionsPage.png;;;;
+;;homepagePreview;text/png;Homepage.png;
+;;loginPagePreview;text/png;LoginPage.png;
+;;notFoundPagePreview;text/png;NotFoundPage.png;
+;;orderConfirmationPagePreview;text/png;OrderConfirmationPage.png;
+;;orderDetailsPagePreview;text/png;OrderDetailsPage.png;
+;;orderHistoryPagePreview;text/png;OrderHistoryPage.png;
+;;paymentDetailsPagePreview;text/png;PaymentDetailsPage.png;
+;;productDetailsPagePreview;text/png;ProductDetailsPage.png;
+;;productListPagePreview;text/png;ProductListPage.png;
+;;searchResultsEmptyPagePreview;text/png;SearchResultsEmptyPage.png;
+;;searchResultsPagePreview;text/png;SearchResultsPage.png;
+;;storefinderPagePreview;text/png;StoreFinderPage.png;
+;;updateForgottenPasswordPagePreview;text/png;UpdateForgottenPasswordPage.png;
+;;productGridPagePreview;text/png;ProductGridPage.png;
+;;defaultCategoryPagePreview;text/png;DefaultCategoryPage.png;
+;;orderExpiredPagePreview;text/png;OrderExpiredPage.png;;;;
 
 # Site-wide Homepage
 UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];previewImage(code, $contentCV);linkComponents(&linkRef)
@@ -341,7 +343,7 @@ INSERT_UPDATE ProductCarouselComponent;$contentCV[unique=true];uid[unique=true];
 ;;acerchemHomepageProductCarouselComponent;acerchem Homepage Product Carousel;300938,358639,553637,816802,1934793,1382080,1981415,816780,1934406,1986316,592506;allVisible;false;acerchemHomepageProductCarouselComponent
 
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];folder(qualifier)[default='images']
-;;BannerComponent;text/jpg;maxbanner-bg.jpg;$section/acerchemimages/maxbanner-bg.jpg
+;;BannerComponent;text/jpg;maxbanner-bg.jpg;$siteResource/acerchemimages/maxbanner-bg.jpg
 
 #body
 INSERT_UPDATE MultipleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;displayLevel;classfication
@@ -808,10 +810,10 @@ INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@medi
 ###  Responsive Error page #######
 
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/svg+xml'];$contentCV[unique=true];folder(qualifier)[default=images]
-;mobile;Elec_480x170_ErrorPage_480W.svg;$siteResource/images/banners/site/Elec_1400x401_ErrorPage_EN_1400W.svg;Elec_1400x401_ErrorPage_EN_1400W.svg;"Page not found";
-;tablet;Elec_770x221_ErrorPage_770W.svg;$siteResource/images/banners/site/Elec_1400x401_ErrorPage_EN_1400W.svg;Elec_1400x401_ErrorPage_EN_1400W.svg;"Page not found";
-;desktop;Elec_960x275_ErrorPage_960W.svg;$siteResource/images/banners/site/Elec_1400x401_ErrorPage_EN_1400W.svg;Elec_1400x401_ErrorPage_EN_1400W.svg;"Page not found";
-;widescreen;Elec_1400x401_ErrorPage_1400W.svg;$siteResource/images/banners/site/Elec_1400x401_ErrorPage_EN_1400W.svg;Elec_1400x401_ErrorPage_EN_1400W.svg;"Page not found";
+#;mobile;Elec_480x170_ErrorPage_480W.svg;$siteResource/images/banners/site/Elec_1400x401_ErrorPage_EN_1400W.svg;Elec_1400x401_ErrorPage_EN_1400W.svg;"Page not found";
+#;tablet;Elec_770x221_ErrorPage_770W.svg;$siteResource/images/banners/site/Elec_1400x401_ErrorPage_EN_1400W.svg;Elec_1400x401_ErrorPage_EN_1400W.svg;"Page not found";
+#;desktop;Elec_960x275_ErrorPage_960W.svg;$siteResource/images/banners/site/Elec_1400x401_ErrorPage_EN_1400W.svg;Elec_1400x401_ErrorPage_EN_1400W.svg;"Page not found";
+#;widescreen;Elec_1400x401_ErrorPage_1400W.svg;$siteResource/images/banners/site/Elec_1400x401_ErrorPage_EN_1400W.svg;Elec_1400x401_ErrorPage_EN_1400W.svg;"Page not found";
 
 INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
 ;acerchem-errorpage-pagenotfound;Elec_480x170_ErrorPage_480W.svg,Elec_770x221_ErrorPage_770W.svg,Elec_960x275_ErrorPage_960W.svg,Elec_1400x401_ErrorPage_1400W.svg
@@ -1039,7 +1041,7 @@ INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;
 ;;ImportCSVSavedCartComponent;Import CSV as Saved Cart Component;csv/importCSVSavedCartPage.jsp;;ImportCSVSavedCartComponent
 
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];folder(qualifier)[default='images']
-;;importCSVSavedCartPagePreview;text/png;OrderHistoryPage.png;$jarResourceCms/preview-images/acerchem/OrderHistoryPage.png
+;;importCSVSavedCartPagePreview;text/png;OrderHistoryPage.png;
 
 UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];previewImage(code, $contentCV)
 ;;importCSVSavedCartPage;importCSVSavedCartPagePreview
@@ -1065,7 +1067,7 @@ INSERT_UPDATE JspIncludeComponent;$contentCV[unique=true];uid[unique=true];name;
 
 # Preview image
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];folder(qualifier)[default='images']
-;;savedCartDetailsPagePreview;text/png;SavedCartDetailsPage.png;$jarResourceCms/preview-images/acerchem/SavedCartDetailsPage.png
+;;savedCartDetailsPagePreview;text/png;SavedCartDetailsPage.png;
 
 UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];previewImage(code, $contentCV)
 ;;savedCartDetailsPage;savedCartDetailsPagePreview
@@ -1075,7 +1077,7 @@ UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];previewImage(code, $
 ######## Account Saved Carts Page Start #######
 
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];folder(qualifier)[default='images']
-;;savedCartsPagePreview;text/png;SavedCartsPage.png;$jarResourceCms/preview-images/acerchem/SavedCartsPage.png
+;;savedCartsPagePreview;text/png;SavedCartsPage.png;
 
 UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];previewImage(code, $contentCV)
 ;;saved-carts;savedCartsPagePreview
