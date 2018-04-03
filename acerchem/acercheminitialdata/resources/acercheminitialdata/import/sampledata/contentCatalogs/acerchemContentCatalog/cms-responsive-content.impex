@@ -23,7 +23,6 @@ $jarResourceCms=jar:com.acerchem.initialdata.constants.AcerchemInitialDataConsta
 $media=media(code, $contentCV);
 $productResource=jar:com.acerchem.initialdata.constants.AcerchemInitialDataConstants&/acercheminitialdata/import/sampledata/productCatalogs/$productCatalog
 $section=jar:com.acerchem.initialdata.constants.AcerchemInitialDataConstants&/acercheminitialdata/import/sampledata/contentCatalogs/acerchemContentCatalog
-$acerchemimagesResource=jar:com.acerchem.initialdata.constants.AcerchemInitialDataConstants&/acercheminitialdata/import/sampledata/contentCatalogs/$contentCatalog/acerchemimages
 
 
 # CMS Site Settings
@@ -32,8 +31,13 @@ UPDATE CMSSite;uid[unique=true];defaultPreviewCategory(code, $productCV);default
 
 # Site Logo
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];altText;folder(qualifier)[default='images']
-;;/acerchemimages/acerchem.png;acerchem.png;$acerchemimagesResource/acerchem.png;image/png;hybris Accelerator;
-;;/acerchemimages/acerchem.png;acerchem.png;$acerchemimagesResource/acerchem.png;image/png;hybris Accelerator;
+;;/acerchemimages/acerchem.png;acerchem.png;$siteResource/acerchemimages/acerchem.png;image/png;hybris Accelerator;
+;;/acerchemimages/acerchem.png;acerchem.png;$siteResource/acerchemimages/acerchem.png;image/png;hybris Accelerator;
+;;/acerchemimages/maxbanner-bg.jpg;maxbanner-bg.jpg;$siteResource/acerchemimages/maxbanner-bg.jpg;image/jpeg;;
+;;maxmean1Preview;maxbanner-bg.jpg;$siteResource/acerchemimages/maxmean1.jpg;image/jpeg;;
+;;maxmean2Preview;maxbanner-bg.jpg;$siteResource/acerchemimages/maxmean2.jpg;image/jpeg;;
+;;maxmean3Preview;maxbanner-bg.jpg;$siteResource/acerchemimages/maxmean3.jpg;image/jpeg;;
+;;maxmean4Preview;maxbanner-bg.jpg;$siteResource/acerchemimages/maxmean4.jpg;image/jpeg;;
 
 # Site Logo Component
 INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
@@ -341,13 +345,13 @@ INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;
 
 #body
 INSERT_UPDATE MultipleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;displayLevel;classfication
-;;HomepageSwiperOneBannerComponent;Acerchem Homepage SwiperOneBanner;HomepageSwiperOneBannerComponent;81;BannerComponent
+;;HomepageSwiperOneBannerComponent;Acerchem Homepage SwiperOneBanner;HomepageSwiperOneBannerComponent;81;1
 
 INSERT_UPDATE MultipleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;displayLevel;classfication
-;;HomepageSwiperTwoBannerComponent;Acerchem Homepage SwiperTwoBanner;HomepageSwiperTwoBannerComponent;82;BannerComponent
+;;HomepageSwiperTwoBannerComponent;Acerchem Homepage SwiperTwoBanner;HomepageSwiperTwoBannerComponent;82;2
 
 INSERT_UPDATE MultipleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;displayLevel;classfication
-;;HomepageSwiperThreeBannerComponent;Acerchem Homepage SwiperThreeBanner;HomepageSwiperThreeBannerComponent;83;BannerComponent
+;;HomepageSwiperThreeBannerComponent;Acerchem Homepage SwiperThreeBanner;HomepageSwiperThreeBannerComponent;83;3
 
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
@@ -714,7 +718,7 @@ INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique
 ;;acerchemHompageDiscountBannerComponent;acerchem Homepage Discount Banner Component;/Open-Catalogue/Cameras/Camera-Accessories-%26-Supplies/c/585;acerchemHompageDiscountBannerComponent
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
-;;Section1Slot-Homepage;true;acerchemHompageSplashBannerComponent,acerchemHompageDiscountBannerComponent
+;;Section1Slot-Homepage;true;HomepageSwiperOneBannerComponent,HomepageSwiperTwoBannerComponent,HomepageSwiperThreeBannerComponent
 
 ###  Home page slot 2A  ####
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef
@@ -747,7 +751,7 @@ INSERT_UPDATE ProductCarouselComponent;$contentCV[unique=true];uid[unique=true];
 ;;NewacerchemHomepageProductCarouselComponent;What's New acerchem Homepage Product Carousel;2278102,1992693,1981415,1934796,1776948,1641905,1532809,932577;allVisible;false;NewacerchemHomepageProductCarouselComponent
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
-;;Section3Slot-Homepage;acerchemHomepageProductCarouselComponent,NewacerchemHomepageProductCarouselComponent
+;;Section3Slot-Homepage;AcerchemIndexSearchBoxComponent
 
 #### Section 4
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef
@@ -757,14 +761,14 @@ INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique
 ;;acerchemHompageServiceBannerComponent;acerchem Homepage Service Banner Component;/Open-Catalogue/Cameras/CameraAccessories-%26-Supplies/CameraFlashes/Light-HVL-20DW2/p/289540;acerchemHompageServiceBannerComponent
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
-;;Section4Slot-Homepage;true;acerchemHompageSmDiscountBannerComponent,acerchemHompageShopBannerComponent,acerchemHompageShipmentBannerComponent,acerchemHompageServiceBannerComponent
+;;Section4Slot-Homepage;true;
 
 ### Section 5
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;urlLink;&componentRef
 ;;acerchemHompageFreeDelBannerComponent;acerchem Homepage Free Delivery Banner Component;/faq;acerchemHompageFreeDelBannerComponent
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
-;;Section5Slot-Homepage;true;acerchemHompageFreeDelBannerComponent
+;;Section5Slot-Homepage;true;OneBannerComponent,TwoBannerComponent,ThreeBannerComponent,FourBannerComponent,FiveBannerComponent
 
 #################    HOME PAGE END       #################
 
@@ -797,8 +801,9 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 ;;TopContent-cartPage;Top Slot for Cart Page;true;CartComponent
 
 # Site Logo
-INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/svg+xml'];altText;folder(qualifier)[default='images']
-;;/images/theme/logo_hybris_responsive.svg;logo_hybris_responsive.svg;$siteResource/images/theme/logo_hybris_responsive.svg;image/svg+xml;hybris Accelerator;
+INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/png'];altText;folder(qualifier)[default='images']
+#;;/images/theme/acerchem.svg;acerchem.svg;$siteResource/images/theme/acerchem.svg;image/svg+xml;hybris Accelerator;
+;;/acerchemimages/acerchem.png;acerchem.png;$siteResource/acerchemimages/acerchem.png;image/png;hybris Accelerator;
 
 ###  Responsive Error page #######
 
@@ -867,7 +872,7 @@ INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique
 ;;acerchemSaveBigDLSRBannerComponent;acerchem Save Big DSLR Banner Component;/Open-Catalogue/Cameras/Camera-Accessories-%26-Supplies/c/585;acerchemSaveBigDLSRBannerComponent
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
-;;Section3Slot-SLRCameras;true;acerchemSaveBigDLSRBannerComponent,acerchemHompageFreeDelBannerComponent
+;;Section3Slot-SLRCameras;true;AcerchemIndexSearchBoxComponent
 
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='SLRCamerasCategoryPage'];contentSlot(uid,$contentCV)[unique=true]
 ;;Section1-SLRCameras;Section1;;Section1Slot-SLRCameras
@@ -938,7 +943,7 @@ INSERT_UPDATE NavigationComponent;$contentCV[unique=true];uid[unique=true];name;
 
 # Content Slots
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(uid, $contentCV)
-;;MiniCartSlot;OrderComponent,MiniCart
+;;MiniCartSlot;MiniCart
 
 # create a user restriction
 INSERT_UPDATE CMSUserRestriction;$contentCV[unique=true];&userRestriction;name;uid[unique=true];users(uid)
@@ -1250,24 +1255,26 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ###### Footer Component Refactor End ######
 
 #===shaun
-INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];folder(qualifier)[default='images']
-;;maxmean1Preview;text/jpg;maxmean1.jpg;$acerchemimagesResource/maxmean1.jpg
-;;maxmean2Preview;text/jpg;maxmean2.jpg;$acerchemimagesResource/maxmean2.jpg
-;;maxmean3Preview;text/jpg;maxmean3.jpg;$acerchemimagesResource/maxmean3.jpg
-;;maxmean4Preview;text/jpg;maxmean4.jpg;$acerchemimagesResource/maxmean4.jpg
-
-#===shaun
 INSERT_UPDATE MultipleBannerComponent;$contentCV[unique=true];displayLevel;uid[unique=true];name;&componentRef;classfication
-;;1;OneBannerComponent;One Banner Component;OneBannerComponent;maxmean1Preview
+;;1;OneBannerComponent;One Banner Component;OneBannerComponent;1
 
 INSERT_UPDATE MultipleBannerComponent;$contentCV[unique=true];displayLevel;uid[unique=true];name;&componentRef;classfication
-;;2;TwoBannerComponent;Two Banner Component;TwoBannerComponent;maxmean2Preview
+;;2;TwoBannerComponent;Two Banner Component;TwoBannerComponent;2
 
 INSERT_UPDATE MultipleBannerComponent;$contentCV[unique=true];displayLevel;uid[unique=true];name;&componentRef;classfication
-;;3;ThreeBannerComponent;Three Banner Component;ThreeBannerComponent;maxmean3Preview
+;;3;ThreeBannerComponent;Three Banner Component;ThreeBannerComponent;3
 
 INSERT_UPDATE MultipleBannerComponent;$contentCV[unique=true];displayLevel;uid[unique=true];name;&componentRef;classfication
-;;4;FourBannerComponent;Four Banner Component;FourBannerComponent;maxmean4Preview
+;;4;FourBannerComponent;Four Banner Component;FourBannerComponent;4
 
 INSERT_UPDATE MultipleBannerComponent;$contentCV[unique=true];displayLevel;uid[unique=true];name;&componentRef;classfication
-;;5;FiveBannerComponent;FiveBannerComponent;FiveBannerComponent;maxmean4Preview
+;;5;FiveBannerComponent;FiveBannerComponent;FiveBannerComponent;5
+
+UPDATE MultipleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+;;HomepageSwiperOneBannerComponent;/acerchemimages/maxbanner-bg.jpg
+;;HomepageSwiperTwoBannerComponent;/acerchemimages/maxbanner-bg.jpg
+;;HomepageSwiperThreeBannerComponent;/acerchemimages/maxbanner-bg.jpg
+;;OneBannerComponent;maxmean1Preview
+;;TwoBannerComponent;maxmean2Preview
+;;ThreeBannerComponent;maxmean3Preview
+;;FourBannerComponent;maxmean4Preview
