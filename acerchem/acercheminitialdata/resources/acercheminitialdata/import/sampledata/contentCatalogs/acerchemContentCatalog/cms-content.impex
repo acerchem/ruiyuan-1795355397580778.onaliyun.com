@@ -25,21 +25,17 @@ $siteResource=jar:com.acerchem.initialdata.constants.AcerchemInitialDataConstant
 $productResource=jar:com.acerchem.initialdata.constants.AcerchemInitialDataConstants&/acercheminitialdata/import/sampledata/productCatalogs/$productCatalog
 $jarResourceCms=jar:com.acerchem.initialdata.constants.AcerchemInitialDataConstants&/acercheminitialdata/import/sampledata/cockpits/cmscockpit
 $section=jar:com.acerchem.initialdata.constants.AcerchemInitialDataConstants&/acercheminitialdata/import/sampledata/contentCatalogs/acerchemContentCatalog
-$acerchemimagesResource=jar:com.acerchem.initialdata.constants.AcerchemInitialDataConstants&/acercheminitialdata/import/sampledata/contentCatalogs/acerchemContentCatalog/acerchemimages
+$acerchemimagesResource=jar:com.acerchem.initialdata.constants.AcerchemInitialDataConstants&/acercheminitialdata/import/sampledata/contentCatalogs/$contentCatalog/acerchemimages
 
 # CMS Site Settings
 #UPDATE CMSSite;uid[unique=true];defaultPreviewCategory(code, $productCV);defaultPreviewProduct(code, $productCV)
 #;acerchem;575;2053367
 
-# Site Logo
-#INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];altText;folder(qualifier)[default='images']
-#;;/images/theme/logo-hybris.png;logo-hybris.png;$siteResource/images/theme/logo-hybris.png;image/png;hybris Accelerator;
-#;;/images/theme/logo-hybris_zh.png;logo-hybris_zh.png;$siteResource/images/theme/logo-hybris_zh.png;image/png;hybris Accelerator;
 
 # Site Logo
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];altText;folder(qualifier)[default='images']
-;;/acerchemimages/acerchem.png;acerchem.png;$acerchemimagesResource/acerchem.png;image/png;hybris Accelerator;
-;;/acerchemimages/acerchem.png;acerchem.png;$acerchemimagesResource/acerchem.png;image/png;hybris Accelerator;
+;;/images/theme/acerchem.png;acerchem.png;$siteResource/images/theme/acerchem.png;image/png;hybris Accelerator;
+;;/images/theme/acerchem.png;acerchem.png;$siteResource/images/theme/acerchem.png;image/png;hybris Accelerator;
 
 
 # Site Logo Component
