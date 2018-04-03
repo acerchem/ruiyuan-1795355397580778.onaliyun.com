@@ -31,8 +31,6 @@
 	<div class="rigcont" id="address">
 		<div style="background: #f3f3f3;padding: 40px;margin-top: 40px;">
 			<form:form method="post" commandName="addressForm" class="both" id="newadd" action="${action}">
-				<form:hidden path="addressId" class="add_edit_delivery_address_id" status="${not empty suggestedAddresses ? 'hasSuggestedAddresses' : ''}" />
-				<input type="hidden" name="bill_state" id="address.billstate" />
 				
 				<label>
 					<span class='label-title'>Contacts</span>	
@@ -84,7 +82,12 @@
 					<span class='label-title'>&nbsp;</span>			
 					<input type="text" name='townCity' value="${addressForm.townCity}" placeholder="Detailed address" class="required" alt='Please Enter Detailed Address'>
 					<div style="color:#F00"><span>&nbsp;</span><form:errors path="townCity"/></div>
-				</label>					
+				</label>		
+				
+				<form:hidden path="addressId" class="add_edit_delivery_address_id" status="${not empty suggestedAddresses ? 'hasSuggestedAddresses' : ''}" />
+				<input type="hidden" name="bill_state" id="address.billstate" />
+				<input type="hidden" name="defaultAddress" value="${addressForm.defaultAddress}" />
+				
 			</form:form>
 			<div class="btn-set">				
 				<a class="btn btn-line" href="${addressBookUrl}">Cancel</a>
