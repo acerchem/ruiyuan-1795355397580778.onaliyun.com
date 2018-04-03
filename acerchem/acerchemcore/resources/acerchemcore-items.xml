@@ -61,6 +61,12 @@
 			<value code="L" />
 
 		</enumtype>
+
+        <enumtype code="CreditAccountStatusEnum" autocreate="true"
+                  generate="true" dynamic="true">
+            <value code="LOCKED" />
+            <value code="NORMAL" />
+        </enumtype>
 	</enumtypes>
 
 
@@ -90,12 +96,39 @@
 					optional="true" />
 			</targetElement>
 		</relation>
+
+        <!-- 信用等级和用户一对多关系 -->
+        <relation code="Receptionist2Customer" generate="true"
+                  localized="false" autocreate="true">
+            <sourceElement qualifier="relatedCustomer" type="Employee" cardinality="one">
+                <modifiers read="true" write="true" search="true"
+                           optional="true" />
+            </sourceElement>
+            <targetElement qualifier="receptionist" type="Customer" cardinality="many" collectiontype="list" ordered="true" >
+                <modifiers read="true" write="true" search="true"
+                           optional="true" />
+            </targetElement>
+        </relation>
+
+        <!-- 流水记录和信用账户一对多关系 -->
+        <relation code="Transactions2CreditAccount" generate="true"
+                  localized="false" autocreate="true">
+            <sourceElement qualifier="transactions" type="CreditTransaction" cardinality="one">
+                <modifiers read="true" write="true" search="true"
+                           optional="true" />
+            </sourceElement>
+            <targetElement qualifier="creditAccount" type="CustomerCreditAccount" cardinality="many" collectiontype="list" ordered="true" >
+                <modifiers read="true" write="true" search="true"
+                           optional="true" />
+            </targetElement>
+        </relation>
+
+
 	</relations>
 	
 	<itemtypes>
 
 		<!-- Add your item definitions here -->
-
 
 		<!-- TypeGroups are for structure of this file only -->
 
@@ -394,9 +427,75 @@
 				</attributes>
 			</itemtype>
 
-		</typegroup>
+            <itemtype code="CustomerCreditAccount" autocreate="true" generate="true">
+                <description>信用账户</description>
+                <deployment table="customerCreditAccount" typecode="20202" />
+                <attributes>
+                    <attribute qualifier="billingInterval" type="java.lang.Integer">
+                        <description>账期时间</description>
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                        <defaultvalue>0</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="creaditRemainedAmount" type="java.lang.long">
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                        <defaultvalue>0</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="creditTotalAmount" type="java.lang.long">
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                        <defaultvalue>0</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="status" type="CreditAccountStatusEnum">
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="CreditTransaction" autocreate="true" generate="true">
+                <description>流水记录</description>
+                <deployment table="creditTransaction" typecode="20203" />
+                <attributes>
+                    <attribute qualifier="creaditUsedAmount" type="java.lang.long">
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="isPayback" type="java.lang.Boolean">
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="paybackTime" type="java.lang.long">
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="requestId" type="java.lang.String">
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="Customer" autocreate="false" generate="false">
+                <attributes>
+                    <attribute qualifier="creditAccount" type="CustomerCreditAccount">
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+
+
+
+
+
+
+        </typegroup>
 
 		<!-- shaun.sheng -->
+
 
 
 	</itemtypes>
