@@ -160,8 +160,7 @@ function addressVerification(wrap){//address verification
 				return false;
 			}
 			else if(aname=='regionIso'){				
-				maxalert('Please Select Shipping region!')
-				return false;
+				$(this).addClass('tg');
 			}
 			else
 			{
