@@ -1,6 +1,13 @@
 package com.acerchem.storefront.checkout.steps.validation.impl;
 
 import de.hybris.platform.acceleratorstorefrontcommons.forms.AddressForm;
+import de.hybris.platform.commercefacades.i18n.I18NFacade;
+import de.hybris.platform.commercefacades.user.data.RegionData;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -13,6 +20,8 @@ import org.springframework.validation.Validator;
 @Component("customAddressValidator")
 public class CustomAddressValidator implements Validator
 {
+	@Resource(name = "i18NFacade")
+	private I18NFacade i18NFacade;
 	private static final int MAX_FIELD_LENGTH = 255;
 	private static final int MAX_POSTCODE_LENGTH = 10;
 	
@@ -31,7 +40,12 @@ public class CustomAddressValidator implements Validator
 		validateStringField(addressForm.getLastName(), AddressField.LASTNAME, MAX_FIELD_LENGTH, errors);
 		validateStringField(addressForm.getTownCity(), AddressField.TOWN, MAX_FIELD_LENGTH, errors);
 		validateStringField(addressForm.getPostcode(), AddressField.POSTCODE, MAX_POSTCODE_LENGTH, errors);
-		validateFieldNotNull(addressForm.getRegionIso(), AddressField.REGION, errors);
+		
+		List<RegionData> regions=i18NFacade.getRegionsForCountryIso(addressForm.getCountryIso());
+		if(regions.size()>0)
+		{
+			validateFieldNotNull(addressForm.getRegionIso(), AddressField.REGION, errors);
+		}
 		validateStringField(addressForm.getPhone(), AddressField.PHONE, 15, errors);
 	}
 
