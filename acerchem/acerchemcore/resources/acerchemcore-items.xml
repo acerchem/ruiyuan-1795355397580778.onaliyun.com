@@ -97,7 +97,7 @@
 			</targetElement>
 		</relation>
 
-        <!-- 信用等级和用户一对多关系 -->
+        <!-- 员工和用户一对多关系 -->
         <relation code="Receptionist2Customer" generate="true"
                   localized="false" autocreate="true">
             <sourceElement qualifier="relatedCustomer" type="Employee" cardinality="one">
@@ -110,14 +110,14 @@
             </targetElement>
         </relation>
 
-        <!-- 流水记录和信用账户一对多关系 -->
+        <!-- 信用账户和流水记录一对多关系 -->
         <relation code="Transactions2CreditAccount" generate="true"
                   localized="false" autocreate="true">
-            <sourceElement qualifier="transactions" type="CreditTransaction" cardinality="one">
+            <sourceElement qualifier="creditAccount" type="CustomerCreditAccount" cardinality="one">
                 <modifiers read="true" write="true" search="true"
                            optional="true" />
             </sourceElement>
-            <targetElement qualifier="creditAccount" type="CustomerCreditAccount" cardinality="many" collectiontype="list" ordered="true" >
+            <targetElement qualifier="transactions" type="CreditTransaction" cardinality="many" collectiontype="list" ordered="true" >
                 <modifiers read="true" write="true" search="true"
                            optional="true" />
             </targetElement>
