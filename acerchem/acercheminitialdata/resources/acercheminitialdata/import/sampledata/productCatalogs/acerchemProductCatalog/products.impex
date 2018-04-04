@@ -187,7 +187,7 @@ INSERT_UPDATE Product;code[unique=true];$supercategories;manufacturerName;manufa
 ;1934795;576, brand_10;Canon;3475B013AA;pieces;8714574533193
 ;1934796;576, brand_10;Canon;3474B013AA;pieces;8714574533353
 ;1978431;576, brand_5;Sony;DSC-T90T;pieces;4905524591071
-;1978440;576, brand_5;Sony;DSC-H20;pieces;4905524593235;acerchemColorVariantProduct
+;1978440;576, brand_5;Sony;DSC-H20;pieces;4905524593235;
 ;1981412;576, brand_26;Samsung;EC-PL60ZBBP/GB;pieces;8806386905746
 ;1981413;576, brand_26;Samsung;EC-PL60ZABP/GB;pieces;8806386912775
 ;1981414;576, brand_26;Samsung;EC-PL60ZPBP/GB;pieces;8806386912782
@@ -285,8 +285,5 @@ INSERT_UPDATE Product;code[unique=true];$supercategories;manufacturerName;manufa
 ;5864583;576, brand_88;Kodak;1763259;pieces;0041771763251
 ;5897548;578, brand_10;Canon;3820B104AA;pieces;
 
-INSERT_UPDATE acerchemColorVariantProduct;code[unique=true];$baseProduct;ean;unit(code);color;$supercategories;approvalstatus(code)[default='approved'];$catalogVersion
-;1978440_red;1978440;4905524593235;pieces;Red;
-;1978440_green;1978440;4905524593235;pieces;Green;
-;1978440_blue;1978440;4905524593235;pieces;Blue;
+
 

@@ -14,7 +14,7 @@
 $productCatalog=acerchemProductCatalog
 $productCatalogName=acerchem Product Catalog
 $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
-$vendor=electro
+$vendor=default
 
 INSERT_UPDATE Warehouse;code[unique=true];name[lang=en];name[lang=de];vendor(code)[default=$vendor];default
 ;warehouse_s;Warehouse South;Warehouse South;;true

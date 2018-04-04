@@ -1822,7 +1822,8 @@ textarea{
 /*gallery*/
 .gal-centent{
 	position: relative;
-	border-top:4px solid #f3f3f3;
+	/* shaun */
+	/* border-top:4px solid #f3f3f3; */
 }
 .gal-centent .g-cont,.gal-centent .g-cartable{
 	padding-top: 0;
@@ -1831,17 +1832,20 @@ textarea{
 	font-weight:500;
 }
 .gal-centent .gall-left{
-	position: absolute;
+	/*shaun  */
+	/* position: absolute; */
 	top:0;
 	left: 0;
 	padding-left: 5%;
 	width:20%;
-	padding-bottom: 40px;
+	/* padding-bottom: 40px; */
 	background-color: #fff;
 }
 .gal-centent .gall-right{
 	display: block;
-	margin-left: 20%;
+	/* shaun:左边距设为0 */
+	/* margin-left: 20%; */
+	margin-left: 0%;
 	margin-right: 5%;
 	border-left: 4px solid #f3f3f3;
 
@@ -1849,7 +1853,8 @@ textarea{
 .gal-centent .gall-left h4{
 	font-size:24px;
 	line-height: 28px;
-	padding: 36px 0 4px 0;
+	/* shaun */
+	/* padding: 36px 0 4px 0; */
 }
 .gal-centent .gall-left h5{
 	font-size:18px;
@@ -1881,7 +1886,9 @@ textarea{
 	position: relative;
 	min-height: 50px;
 	width: 75%;
-	margin:0 5% 0 20%;
+	/* margin:0 5% 0 20%; */
+	/* shaun*/
+	margin:0 5% 0 5%;
 }
 .gal-centent .g-cont{
 	padding-bottom: 0;
@@ -1890,12 +1897,21 @@ textarea{
 .m-term-ri{
 	float:left;
 }
+
+/* shaun:sort by select box */
 .m-term-ri{
-	position: absolute;
+	/* position: absolute;
 	right: 0;
 	top:0;
 	padding-left: 90px;
+	background-color: #096735; */
+	height:49px;
+	position: absolute;
+	right: 0;
+	top:0;
+	padding-left: 105px;
 	background-color: #096735;
+	
 }
 .m-term-ri .right{
 	float: right;

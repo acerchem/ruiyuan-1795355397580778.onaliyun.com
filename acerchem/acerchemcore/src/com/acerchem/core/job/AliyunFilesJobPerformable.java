@@ -77,6 +77,9 @@ public class AliyunFilesJobPerformable extends AbstractJobPerformable<CronJobMod
 						String ls = model.getLocation();
 						String mediaPK = model.getMediaPK();
 
+						if( iCount == MAX_COUNT.intValue()){
+							break;
+						}
 						// System.out.println(ls);
 						String action = model.getActionType().toString();
 						System.out.println("***" + action + "***");
@@ -88,7 +91,7 @@ public class AliyunFilesJobPerformable extends AbstractJobPerformable<CronJobMod
 								mediaPK = mediaPK.substring(0, mediaPK.indexOf("."));
 							}
 
-							if ("ADD".equals(action) && iCount < MAX_COUNT.intValue()) {
+							if ("ADD".equals(action) ) {
 								File mainDataDir = MediaUtil.getLocalStorageDataDir();
 
 								if (StringUtils.isNotBlank(ls)) {

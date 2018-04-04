@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-3-21 14:43:28                          ---
+ * --- Generated at 2018-4-3 15:48:11                           ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.jalo;
@@ -11,6 +11,7 @@ import de.hybris.platform.jalo.GenericItem;
 import de.hybris.platform.jalo.Item.AttributeMode;
 import de.hybris.platform.jalo.SessionContext;
 import de.hybris.platform.jalo.enumeration.EnumerationValue;
+import de.hybris.platform.jalo.media.Media;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
@@ -31,6 +32,10 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 	public static final String LOCATION = "location";
 	/** Qualifier of the <code>ImageFailedRecord.status</code> attribute **/
 	public static final String STATUS = "status";
+	/** Qualifier of the <code>ImageFailedRecord.mediaData</code> attribute **/
+	public static final String MEDIADATA = "mediaData";
+	/** Qualifier of the <code>ImageFailedRecord.mediaPK</code> attribute **/
+	public static final String MEDIAPK = "mediaPK";
 	protected static final Map<String, AttributeMode> DEFAULT_INITIAL_ATTRIBUTES;
 	static
 	{
@@ -40,6 +45,8 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 		tmp.put(ALIYUNURL, AttributeMode.INITIAL);
 		tmp.put(LOCATION, AttributeMode.INITIAL);
 		tmp.put(STATUS, AttributeMode.INITIAL);
+		tmp.put(MEDIADATA, AttributeMode.INITIAL);
+		tmp.put(MEDIAPK, AttributeMode.INITIAL);
 		DEFAULT_INITIAL_ATTRIBUTES = Collections.unmodifiableMap(tmp);
 	}
 	@Override
@@ -50,7 +57,7 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>ImageFailedRecord.actionType</code> attribute.
-	 * @return the actionType - æä½ç±»å
+	 * @return the actionType - 操作类型
 	 */
 	public EnumerationValue getActionType(final SessionContext ctx)
 	{
@@ -59,7 +66,7 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>ImageFailedRecord.actionType</code> attribute.
-	 * @return the actionType - æä½ç±»å
+	 * @return the actionType - 操作类型
 	 */
 	public EnumerationValue getActionType()
 	{
@@ -68,7 +75,7 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>ImageFailedRecord.actionType</code> attribute. 
-	 * @param value the actionType - æä½ç±»å
+	 * @param value the actionType - 操作类型
 	 */
 	public void setActionType(final SessionContext ctx, final EnumerationValue value)
 	{
@@ -77,7 +84,7 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>ImageFailedRecord.actionType</code> attribute. 
-	 * @param value the actionType - æä½ç±»å
+	 * @param value the actionType - 操作类型
 	 */
 	public void setActionType(final EnumerationValue value)
 	{
@@ -86,7 +93,7 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>ImageFailedRecord.aliyunUrl</code> attribute.
-	 * @return the aliyunUrl - é¿éäºÂUrl
+	 * @return the aliyunUrl - 阿里云Url
 	 */
 	public String getAliyunUrl(final SessionContext ctx)
 	{
@@ -95,7 +102,7 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>ImageFailedRecord.aliyunUrl</code> attribute.
-	 * @return the aliyunUrl - é¿éäºÂUrl
+	 * @return the aliyunUrl - 阿里云Url
 	 */
 	public String getAliyunUrl()
 	{
@@ -104,7 +111,7 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>ImageFailedRecord.aliyunUrl</code> attribute. 
-	 * @param value the aliyunUrl - é¿éäºÂUrl
+	 * @param value the aliyunUrl - 阿里云Url
 	 */
 	public void setAliyunUrl(final SessionContext ctx, final String value)
 	{
@@ -113,7 +120,7 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>ImageFailedRecord.aliyunUrl</code> attribute. 
-	 * @param value the aliyunUrl - é¿éäºÂUrl
+	 * @param value the aliyunUrl - 阿里云Url
 	 */
 	public void setAliyunUrl(final String value)
 	{
@@ -122,7 +129,7 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>ImageFailedRecord.fileName</code> attribute.
-	 * @return the fileName - æä»¶å
+	 * @return the fileName - 文件名
 	 */
 	public String getFileName(final SessionContext ctx)
 	{
@@ -131,7 +138,7 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>ImageFailedRecord.fileName</code> attribute.
-	 * @return the fileName - æä»¶å
+	 * @return the fileName - 文件名
 	 */
 	public String getFileName()
 	{
@@ -140,7 +147,7 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>ImageFailedRecord.fileName</code> attribute. 
-	 * @param value the fileName - æä»¶å
+	 * @param value the fileName - 文件名
 	 */
 	public void setFileName(final SessionContext ctx, final String value)
 	{
@@ -149,7 +156,7 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>ImageFailedRecord.fileName</code> attribute. 
-	 * @param value the fileName - æä»¶å
+	 * @param value the fileName - 文件名
 	 */
 	public void setFileName(final String value)
 	{
@@ -158,7 +165,7 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>ImageFailedRecord.location</code> attribute.
-	 * @return the location - æ¬å°è·¯å¾
+	 * @return the location - 本地路径
 	 */
 	public String getLocation(final SessionContext ctx)
 	{
@@ -167,7 +174,7 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>ImageFailedRecord.location</code> attribute.
-	 * @return the location - æ¬å°è·¯å¾
+	 * @return the location - 本地路径
 	 */
 	public String getLocation()
 	{
@@ -176,7 +183,7 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>ImageFailedRecord.location</code> attribute. 
-	 * @param value the location - æ¬å°è·¯å¾
+	 * @param value the location - 本地路径
 	 */
 	public void setLocation(final SessionContext ctx, final String value)
 	{
@@ -185,7 +192,7 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>ImageFailedRecord.location</code> attribute. 
-	 * @param value the location - æ¬å°è·¯å¾
+	 * @param value the location - 本地路径
 	 */
 	public void setLocation(final String value)
 	{
@@ -193,8 +200,80 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 	}
 	
 	/**
+	 * <i>Generated method</i> - Getter of the <code>ImageFailedRecord.mediaData</code> attribute.
+	 * @return the mediaData - mediaData
+	 */
+	public Media getMediaData(final SessionContext ctx)
+	{
+		return (Media)getProperty( ctx, MEDIADATA);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>ImageFailedRecord.mediaData</code> attribute.
+	 * @return the mediaData - mediaData
+	 */
+	public Media getMediaData()
+	{
+		return getMediaData( getSession().getSessionContext() );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>ImageFailedRecord.mediaData</code> attribute. 
+	 * @param value the mediaData - mediaData
+	 */
+	public void setMediaData(final SessionContext ctx, final Media value)
+	{
+		setProperty(ctx, MEDIADATA,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>ImageFailedRecord.mediaData</code> attribute. 
+	 * @param value the mediaData - mediaData
+	 */
+	public void setMediaData(final Media value)
+	{
+		setMediaData( getSession().getSessionContext(), value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>ImageFailedRecord.mediaPK</code> attribute.
+	 * @return the mediaPK - mediaPk
+	 */
+	public String getMediaPK(final SessionContext ctx)
+	{
+		return (String)getProperty( ctx, MEDIAPK);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>ImageFailedRecord.mediaPK</code> attribute.
+	 * @return the mediaPK - mediaPk
+	 */
+	public String getMediaPK()
+	{
+		return getMediaPK( getSession().getSessionContext() );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>ImageFailedRecord.mediaPK</code> attribute. 
+	 * @param value the mediaPK - mediaPk
+	 */
+	public void setMediaPK(final SessionContext ctx, final String value)
+	{
+		setProperty(ctx, MEDIAPK,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>ImageFailedRecord.mediaPK</code> attribute. 
+	 * @param value the mediaPK - mediaPk
+	 */
+	public void setMediaPK(final String value)
+	{
+		setMediaPK( getSession().getSessionContext(), value );
+	}
+	
+	/**
 	 * <i>Generated method</i> - Getter of the <code>ImageFailedRecord.status</code> attribute.
-	 * @return the status - ç¶æ(åå§ç¶æä¸º0ï¼å¶ä»ä¸ºå¤±è´¥æ¬¡æ°+1)
+	 * @return the status - 状态(初始状态为0，其他为失败次数+1)
 	 */
 	public String getStatus(final SessionContext ctx)
 	{
@@ -203,7 +282,7 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>ImageFailedRecord.status</code> attribute.
-	 * @return the status - ç¶æ(åå§ç¶æä¸º0ï¼å¶ä»ä¸ºå¤±è´¥æ¬¡æ°+1)
+	 * @return the status - 状态(初始状态为0，其他为失败次数+1)
 	 */
 	public String getStatus()
 	{
@@ -212,7 +291,7 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>ImageFailedRecord.status</code> attribute. 
-	 * @param value the status - ç¶æ(åå§ç¶æä¸º0ï¼å¶ä»ä¸ºå¤±è´¥æ¬¡æ°+1)
+	 * @param value the status - 状态(初始状态为0，其他为失败次数+1)
 	 */
 	public void setStatus(final SessionContext ctx, final String value)
 	{
@@ -221,7 +300,7 @@ public abstract class GeneratedImageFailedRecord extends GenericItem
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>ImageFailedRecord.status</code> attribute. 
-	 * @param value the status - ç¶æ(åå§ç¶æä¸º0ï¼å¶ä»ä¸ºå¤±è´¥æ¬¡æ°+1)
+	 * @param value the status - 状态(初始状态为0，其他为失败次数+1)
 	 */
 	public void setStatus(final String value)
 	{

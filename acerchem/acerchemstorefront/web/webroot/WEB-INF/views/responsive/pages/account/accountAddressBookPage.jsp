@@ -22,7 +22,7 @@
 				<ul>
 					<li ${address.defaultAddress==true?'class="def"':'class="row"'}>
 						<div class="row">
-							<span class="row-left name">${fn:escapeXml(address.title)}&nbsp;${fn:escapeXml(address.firstName)}&nbsp;${fn:escapeXml(address.lastName)}</span>
+							<span class="row-left name">${fn:escapeXml(address.title)}${fn:escapeXml(address.firstName)}${fn:escapeXml(address.lastName)}</span>
 							<a href="set-default-address/${fn:escapeXml(address.id)}">
 								<span class="row-left setdef">default</span>
 							</a>

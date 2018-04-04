@@ -70,15 +70,14 @@
 	 	</li>
 	 	
 	 	<li><cms:pageSlot position="SearchBox" var="component">
-					<cms:component component="${component}" element="div" />
+					<cms:component component="${component}"/>
 				</cms:pageSlot>
 		</li>
 			
 			<li>
 			
-			<cms:pageSlot position="MiniCart" var="cart" element="div"
-					class="componentContainer">
-					<cms:component component="${cart}" element="div" />
+			<cms:pageSlot position="MiniCart" var="cart" >
+					<cms:component component="${cart}"/>
 				</cms:pageSlot>
 			</li>
 

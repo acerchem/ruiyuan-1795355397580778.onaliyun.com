@@ -124,16 +124,14 @@ function verification(wrap){//register verification
 				return false;
 			}
 			else if(aname=='shipAddress.regionIso'){				
-				maxalert('Please Select Shipping region!')
-				return false;
+				$(this).addClass('tg');
 			}
 			else if(aname=='contactAddress.countryIso'){				
 				maxalert('Please Select Contact country!')
 				return false;
 			}
 			else if(aname=='contactAddress.regionIso'){				
-				maxalert('Please Select Contact region!')
-				return false;
+				$(this).addClass('tg');
 			}
 			else
 			{

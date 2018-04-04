@@ -14,7 +14,7 @@
 $productCatalog=acerchemProductCatalog
 $productCatalogName=acerchem Product Catalog
 $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
-$vendor=electro
+$vendor=default
 
 
 # Create some Warehouses for the Vendor
@@ -8455,6 +8455,7 @@ INSERT_UPDATE StockLevel;available;warehouse(code)[default='Kawasaki Pearl Hotel
 ;10;;;0;0;5103712;0
 ;7;;;0;0;5473115;0
 ;6;;;0;0;5864583;0
+
 INSERT_UPDATE StockLevel;available;warehouse(code)[default='Kawasaki Grand Hotel',unique=true];inStockStatus(code)[default='notSpecified'];overSelling;preOrder;productCode[unique=true];reserved
 ;3;;;0;0;23355;0
 ;12;;;0;0;280916;0
