@@ -437,12 +437,14 @@
                         <persistence type="property" />
                         <defaultvalue>0</defaultvalue>
                     </attribute>
-                    <attribute qualifier="creaditRemainedAmount" type="java.lang.long">
+                    <attribute qualifier="creaditRemainedAmount" type="java.math.BigDecimal">
+                        <description>可用额度</description>
                         <modifiers read="true" write="true" search="true" />
                         <persistence type="property" />
                         <defaultvalue>0</defaultvalue>
                     </attribute>
-                    <attribute qualifier="creditTotalAmount" type="java.lang.long">
+                    <attribute qualifier="creditTotalAmount" type="java.math.BigDecimal">
+                        <description>总额度</description>
                         <modifiers read="true" write="true" search="true" />
                         <persistence type="property" />
                         <defaultvalue>0</defaultvalue>
@@ -454,23 +456,36 @@
                 </attributes>
             </itemtype>
 
-            <itemtype code="CreditTransaction" autocreate="true" generate="true">
+            <itemtype code="CreditTransaction" autocreate="true" generate="true" extends="Item">
                 <description>流水记录</description>
                 <deployment table="creditTransaction" typecode="20203" />
                 <attributes>
-                    <attribute qualifier="creaditUsedAmount" type="java.lang.long">
+                    <attribute qualifier="creaditUsedAmount" type="java.math.BigDecimal">
+                        <description>消费金额</description>
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="paybackAmount" type="java.math.BigDecimal">
+                        <description>还款金额</description>
                         <modifiers read="true" write="true" search="true" />
                         <persistence type="property" />
                     </attribute>
                     <attribute qualifier="isPayback" type="java.lang.Boolean">
+                        <description>是否已还款</description>
                         <modifiers read="true" write="true" search="true" />
                         <persistence type="property" />
                     </attribute>
                     <attribute qualifier="paybackTime" type="java.lang.long">
+                        <description>实际还款日期</description>
                         <modifiers read="true" write="true" search="true" />
                         <persistence type="property" />
                     </attribute>
-                    <attribute qualifier="requestId" type="java.lang.String">
+                    <attribute qualifier="shouldPaybackTime" type="java.lang.long">
+                        <description>还款日</description>
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="cransactionId" type="java.lang.String">
                         <modifiers read="true" write="true" search="true" />
                         <persistence type="property" />
                     </attribute>
