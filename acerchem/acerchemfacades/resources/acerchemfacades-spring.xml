@@ -303,5 +303,7 @@
     <bean id="defaultAcerchemCheckoutFacade" class="com.acerchem.facades.facades.impl.DefaultAcerchemCheckoutFacade" >
     </bean>
 
+	  <bean id="defaultCustomerCreditAccountService" class="com.acerchem.service.customercreditaccount.impl.DefaultCustomerCreditAccountServiceImpl" />
+	
 </beans>
 
