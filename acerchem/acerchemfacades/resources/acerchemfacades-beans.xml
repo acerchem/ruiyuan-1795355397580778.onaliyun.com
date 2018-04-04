@@ -43,8 +43,30 @@
 
 	<bean class="de.hybris.platform.commercefacades.user.data.CustomerData">
 		<property name="addressDataList" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.AddressData>"/>
+		<property name="creditAccount" type="de.hybris.platform.commercefacades.user.data.CustomerCreditAccountData"/>
 	</bean>
-
+	
+	<!-- alice :信用账户-->
+	<bean class="de.hybris.platform.commercefacades.user.data.CustomerCreditAccountData">
+		<property name="billingInterval" type="java.lang.Integer"/><!-- 账期时间  -->
+		<property name="creaditRemainedAmount" type="java.math.BigDecimal"/><!-- 当前可用额度 -->
+		<property name="creditTotalAmount" type="java.math.BigDecimal"/><!-- 总额度 -->
+		<property name="status" type="String"/><!-- LOCKED/NORMAL -->
+		<property name="transactions" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.CreditTransactionData>"/><!-- 流水记录 -->
+	</bean>
+	<!-- end -->
+	
+	<!-- alice :信用流水-->
+	<bean class="de.hybris.platform.commercefacades.user.data.CreditTransactionData">
+		<property name="creaditUsedAmount" type="java.math.BigDecimal"/><!-- 消费金额 -->
+		<property name="paybackAmount" type="java.math.BigDecimal"/><!-- 还款金额 -->
+		<property name="isPayback" type="java.lang.Boolean"/><!-- 是否已还款 -->
+		<property name="paybackTime" type="java.lang.long"/><!-- 实际还款日期 -->
+		<property name="shouldPaybackTime" type="java.lang.long"/><!-- 还款日 -->
+		<property name="cransactionId" type="java.lang.String"/>
+		<property name="creditAccount" type="de.hybris.platform.commercefacades.user.data.CustomerCreditAccountData"/><!-- 信用账户 -->
+	</bean>
+	<!-- end -->
 
     <bean class="com.acerchem.facades.product.data.WarehouseData">
         <property name="code" type="String"/>
