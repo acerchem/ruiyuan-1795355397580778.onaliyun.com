@@ -50,6 +50,20 @@
         <property name="code" type="String"/>
         <property name="name" type="String"/>
     </bean>
+    
+    
+    <!-- -add by Randy   the store info of the page product detail  -->
+     <bean class="com.acerchem.facades.product.data.StoreOfProductData">
+        <property name="storeId" type="String"/>
+        <property name="StoreName" type="String"/>
+        <property name="countryDataList" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.CountryData>"/>
+        <property name="Inventory" type="java.lang.Integer"/>
+        <property name="avaReleaseDay" type="java.lang.Integer"/>
+        <property name="isUseFutureStock" type="Boolean"/>
+        <property name="FutureAvailableDate" type="java.util.Date"/>
+         <property name="FutureInventory" type="java.lang.Integer"/>
+    </bean>
+    
 
 	<bean class="com.acerchem.facades.product.data.CountryToWarehouseData">
 		<property name="warehouseData" type="com.acerchem.facades.product.data.WarehouseData"/>

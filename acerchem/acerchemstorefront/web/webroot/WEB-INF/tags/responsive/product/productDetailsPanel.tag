@@ -91,10 +91,13 @@
 							<span class="label-title">Delivery to</span>
 							<div class="flex">
 								<select>
-								  <option value ="USA">U.S.A</option>
-								  <option value ="EL">England</option>
-								  <option value="ITA">Repubblica Italiana</option>
-								  <option value="SUI">Swiss Confederation</option>
+								 <%-- <c:forEach items="${countrys}" var="data"  varStatus="vs">
+								 
+									  <c:forEach items="${data.countryToWarehouseData}" var="data1" varStatus="vs">
+									        <option value ="${data1.countryData.isocode}">${data1.countryData.name}</option>
+									  </c:forEach>
+								 
+								 </c:forEach> --%>
 								</select>
 							</div>
 							<div class="flex">

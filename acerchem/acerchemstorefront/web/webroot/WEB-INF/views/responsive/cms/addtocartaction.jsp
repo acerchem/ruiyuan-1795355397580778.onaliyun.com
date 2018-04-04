@@ -18,26 +18,30 @@
     <input type="hidden" name="productCodePost" value="${fn:escapeXml(product.code)}"/>
     
     
-
+<div class="btn-set">
+	    <button class="btn btn-submit">Check Out</button>
 <c:if test="${empty showAddToCart ? true : showAddToCart}">
 	<c:set var="buttonType">button</c:set>
 	<c:if test="${product.stock.stockLevelStatus.code ne 'outOfStock' }">
 		<c:set var="buttonType">submit</c:set>
 	</c:if>
 	<c:choose>
+	
 		<c:when test="${fn:contains(buttonType, 'button')}">
 			<button type="${buttonType}" class="btn btn-cart" disabled="disabled">
-				<spring:theme code="product.variants.out.of.stock"/>
+				Add to Cart
 			</button>
 		</c:when>
 		<c:otherwise>
 			<ycommerce:testId code="addToCartButton">
 				<button id="addToCartButton" type="${buttonType}" class="btn btn-cart" >
-					<spring:theme code="basket.add.to.basket"/>
+					Add to Cart
 				</button>
 			</ycommerce:testId>
 		</c:otherwise>
+	
 	</c:choose>
 </c:if>
+	</div>
 </form:form>
 
