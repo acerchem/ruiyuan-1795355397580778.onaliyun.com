@@ -819,8 +819,8 @@ INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=d
 INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=true]
 #;acerchem-errorpage-pagenotfound;Elec_480x170_ErrorPage_480W.svg,Elec_770x221_ErrorPage_770W.svg,Elec_960x275_ErrorPage_960W.svg,Elec_1400x401_ErrorPage_1400W.svg
 
-INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;$mediaContainer
-;;acerchemErrorpageBannerComponent;acerchem Error Page Banner Component;acerchemErrorpageBannerComponent;acerchem-errorpage-pagenotfound
+INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef
+;;acerchemErrorpageBannerComponent;acerchem Error Page Banner Component;acerchemErrorpageBannerComponent
 
 # Create ContentSlots
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef);;;
@@ -1115,10 +1115,10 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 
 
 INSERT_UPDATE CategoryNavigationComponent;$contentCV[unique=true];uid[unique=true];name;styleClass;&componentRef;navigationNode(&nodeRef);wrapAfter
-;;acerchemCategoryNavComponent;Category Navigation Component;;acerchemCategoryNavComponent;acerchemCategoryNavNode;10
+#;;acerchemCategoryNavComponent;Category Navigation Component;;acerchemCategoryNavComponent;acerchemCategoryNavNode;10
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(uid, $contentCV)
-;;NavigationBarSlot;acerchemCategoryNavComponent
+#;;NavigationBarSlot;acerchemCategoryNavComponent
 
 ## level 1. SiteRoot ##
 ## level 2. children of SiteRoot ## 
