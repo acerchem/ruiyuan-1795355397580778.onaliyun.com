@@ -2,27 +2,21 @@ package com.acerchem.facades.facades.impl;
 
 import com.acerchem.facades.facades.AcerchemCheckoutFacade;
 import com.acerchem.facades.facades.AcerchemOrderException;
-import com.acerchem.facades.facades.AcerchemStockFacade;
-import com.acerchem.facades.product.data.StockDataList;
-import de.hybris.platform.commercefacades.product.data.StockData;
 import de.hybris.platform.commercefacades.user.data.CountryData;
+import de.hybris.platform.core.model.c2l.CountryModel;
 import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
-import de.hybris.platform.core.model.order.CartEntryModel;
 import de.hybris.platform.core.model.order.CartModel;
-import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.order.CartService;
-import de.hybris.platform.ordersplitting.model.StockLevelModel;
-import de.hybris.platform.product.ProductService;
-import de.hybris.platform.servicelayer.dto.converter.Converter;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
 
-import java.util.List;
+import javax.annotation.Resource;
 
 
 public class DefaultAcerchemCheckoutFacade implements AcerchemCheckoutFacade {
 
+    @Resource
     private CartService cartService;
 
     @Override
@@ -30,21 +24,20 @@ public class DefaultAcerchemCheckoutFacade implements AcerchemCheckoutFacade {
         //1.cartEntry's pos address match current address
         CartModel cartModel = cartService.getSessionCart();
 
+        String countryIsoCode = countryData.getIsocode();
         if (CollectionUtils.isNotEmpty(cartModel.getEntries())){
             for (AbstractOrderEntryModel aoe : cartModel.getEntries()){
                 AddressModel aoeAddress = aoe.getDeliveryPointOfService().getAddress();
-
-                if (aoe.getDeliveryPointOfService().getAddress() == null){
-                    throw new AcerchemOrderException("当前提货点未配置地址");
+                if (aoeAddress == null){
+                    throw new AcerchemOrderException("当前提货点未配置地址.");
                 }else{
-
+                    CountryModel countryModel = aoeAddress.getCountry();
+                    if (!countryIsoCode.equals(countryModel.getIsocode())){
+                        throw new AcerchemOrderException("当前选择地址与购物车内配送地区不一致,请重新选择地址或重新添加商品.");
+                    }
                 }
-
             }
         }
-
     }
-
-
 }
 

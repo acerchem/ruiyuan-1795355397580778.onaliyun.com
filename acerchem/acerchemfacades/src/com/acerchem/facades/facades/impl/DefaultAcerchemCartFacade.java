@@ -73,6 +73,26 @@ public class DefaultAcerchemCartFacade extends DefaultCartFacade implements Acer
         return getCartModificationConverter().convert(modification);
     }
 
+    @Override
+    public CartModificationData updateCartEntry(long entryNumber, String storeId, boolean isUseFutureStock) throws CommerceCartModificationException {
+        final AddToCartParams dto = new AddToCartParams();
+        dto.setStoreId(storeId);
+        dto.setIsUseFutureStock(isUseFutureStock);
+        final CommerceCartParameter parameter = getCommerceCartParameterConverter().convert(dto);
+        parameter.setEnableHooks(true);
+        parameter.setEntryNumber(entryNumber);
+        CommerceCartModification commerceCartModification = null;
+        if (parameter.getPointOfService() == null)
+        {
+//            commerceCartModification = getCommerceCartService().updateToShippingModeForCartEntry(parameter);
+        }
+        else
+        {
+        commerceCartModification = acerchemCommerCartService.updatePointOfServiceForCartEntry(parameter);
+        }
+        return getCartModificationConverter().convert(commerceCartModification);
+    }
+
     private boolean acerchemValidatePointOfService(String storeId, CartModel cartModel){
         boolean isSamePOS = false;
         if (CollectionUtils.isNotEmpty(cartModel.getEntries())){

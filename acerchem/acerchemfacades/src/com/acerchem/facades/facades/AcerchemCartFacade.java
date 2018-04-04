@@ -21,8 +21,6 @@ public interface AcerchemCartFacade {
      *           code of product to add
      * @param quantity
      *           the quantity of the product
-     * @param warehouseCode
-     *           the warehouseCode of the product
      * @param isUseFutureStock
      *           the warehouseCode of the product
      * @return the cart modification data that includes a statusCode and the actual quantity added to the cart
@@ -30,4 +28,6 @@ public interface AcerchemCartFacade {
      *            if the cart cannot be modified
      */
     CartModificationData addToCart(String code, long quantity, boolean isUseFutureStock, String storeId, String availableDate) throws CommerceCartModificationException;
+
+    CartModificationData updateCartEntry(long entryNumber, String storeId ,boolean isUseFutureStock) throws CommerceCartModificationException;
 }

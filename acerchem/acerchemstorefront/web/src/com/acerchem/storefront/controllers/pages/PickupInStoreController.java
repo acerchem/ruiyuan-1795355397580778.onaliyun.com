@@ -10,6 +10,7 @@
  */
 package com.acerchem.storefront.controllers.pages;
 
+import com.acerchem.facades.facades.AcerchemCartFacade;
 import de.hybris.platform.acceleratorfacades.customerlocation.CustomerLocationFacade;
 import de.hybris.platform.acceleratorservices.store.data.UserLocationData;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractSearchPageController;
@@ -85,6 +86,9 @@ public class PickupInStoreController extends AbstractSearchPageController
 
 	@Resource(name = "configurationService")
 	private ConfigurationService configurationService;
+
+	@Resource(name = "acerchemCartFacade")
+	private AcerchemCartFacade acerchemCartFacade;
 
 	@ModelAttribute("googleApiVersion")
 	public String getGoogleApiVersion()
@@ -316,9 +320,10 @@ public class PickupInStoreController extends AbstractSearchPageController
 	@RequestMapping(value = "/cart/update", method = RequestMethod.POST, produces = "application/json")
 	public String updateCartQuantities(@RequestParam("storeNamePost") final String storeId,
 			@RequestParam("entryNumber") final long entryNumber, @RequestParam("hiddenPickupQty") final long quantity,
-			final RedirectAttributes redirectModel) throws CommerceCartModificationException
+									   @RequestParam("isUseFutureStock")final boolean isUseFutureStock,
+									   final RedirectAttributes redirectModel) throws CommerceCartModificationException
 	{
-		final CartModificationData cartModificationData = cartFacade.updateCartEntry(entryNumber, storeId);
+		final CartModificationData cartModificationData = acerchemCartFacade.updateCartEntry(entryNumber, storeId,isUseFutureStock);
 
 		if (entryNumber == cartModificationData.getEntry().getEntryNumber().intValue())
 		{

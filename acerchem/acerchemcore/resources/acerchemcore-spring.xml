@@ -663,6 +663,7 @@
 	<alias name="defaultAcerchemCommerCartService" alias="acerchemCommerCartService"/>
 	<bean id="defaultAcerchemCommerCartService" parent="commerceCartService" class="com.acerchem.core.service.impl.DefaultAcerchemCommerCartService">
 		<property name="acerchemCommerceAddToCartStrategy" ref="acerchemCommerceAddToCartStrategy"/>
+		<property name="acerchemCommerceUpdateCartEntryStrategy" ref="acerchemCommerceUpdateCartEntryStrategy"/>
 	</bean>
 
 	<alias name="defaultAcerchemCommerceAddToCartStrategy"  alias="acerchemCommerceAddToCartStrategy"/>
@@ -671,5 +672,22 @@
 	</bean>
 
 
-	
+	<alias name="defaultAcerchemCommerceUpdateCartEntryStrategy"  alias="acerchemCommerceUpdateCartEntryStrategy"/>
+	<bean id="defaultAcerchemCommerceUpdateCartEntryStrategy" parent="commerceUpdateCartEntryStrategy" class="com.acerchem.core.strategies.impl.DefaultAcerchemCommerceUpdateCartEntryStrategy">
+	</bean>
+
+	<alias name="defaultAcerchemCountryTrayFareDao"  alias="acerchemCountryTrayFareDao"/>
+	<bean id="defaultAcerchemCountryTrayFareDao" parent="abstractItemDao" class="com.acerchem.core.dao.impl.DefaultAcerchemCountryTrayFareDao">
+	</bean>
+
+
+	<alias name="defaultAcerchemCommercePlaceOrderStrategy" alias="commercePlaceOrderStrategy"/>
+	<bean id="defaultAcerchemCommercePlaceOrderStrategy" parent="defaultCommercePlaceOrderStrategy" class="com.acerchem.core.strategies.impl.DefaultAcerchemCommercePlaceOrderStrategy">
+		<property name="acerchemStockService" ref="acerchemStockService"/>
+	</bean>
+
+
+	<alias name="defaultAcerchemStockService" alias="acerchemStockService"/>
+	<bean id="defaultAcerchemStockService" parent="stockService" class="com.acerchem.core.service.impl.DefaultAcerchemStockService">
+	</bean>
 </beans>

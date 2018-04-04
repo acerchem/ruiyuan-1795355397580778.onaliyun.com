@@ -10,6 +10,8 @@
  */
 package com.acerchem.storefront.controllers.pages.checkout.steps;
 
+import com.acerchem.facades.facades.AcerchemCheckoutFacade;
+import com.acerchem.facades.facades.AcerchemOrderException;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.PreValidateCheckoutStep;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.PreValidateQuoteCheckoutStep;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
@@ -52,6 +54,9 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 
 	@Resource(name = "addressDataUtil")
 	private AddressDataUtil addressDataUtil;
+
+	@Resource(name = "acerchemCheckoutFacade")
+	private AcerchemCheckoutFacade acerchemCheckoutFacade;
 
 	@Override
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
@@ -309,8 +314,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	@RequestMapping(value = "/select", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String doSelectDeliveryAddress(@RequestParam("selectedAddressCode") final String selectedAddressCode,
-			final RedirectAttributes redirectAttributes)
-	{
+			final RedirectAttributes redirectAttributes) throws AcerchemOrderException {
 		final ValidationResults validationResults = getCheckoutStep().validate(redirectAttributes);
 		if (getCheckoutStep().checkIfValidationErrors(validationResults))
 		{
@@ -322,6 +326,8 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 			final boolean hasSelectedAddressData = selectedAddressData != null;
 			if (hasSelectedAddressData)
 			{
+//				CountryData countryData = selectedAddressData.getCountry();
+//				acerchemCheckoutFacade.validateCartAddress(countryData);
 				setDeliveryAddress(selectedAddressData);
 			}
 		}
