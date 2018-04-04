@@ -246,7 +246,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents
 ;;TabsSlot;TabPanelContainer
 ;;FooterSlot;FooterComponent
 ;;HeaderLinksSlot;ContactInfo
-;;SearchBoxSlot;AcerchemIndexSearchBoxComponent,SearchBox
+;;SearchBoxSlot;SearchBox
 ;;VariantSelectorSlot;VariantSelector
 ;;AddToCartSlot;AddToCart
 ;;UpSellingSlot;Similar
