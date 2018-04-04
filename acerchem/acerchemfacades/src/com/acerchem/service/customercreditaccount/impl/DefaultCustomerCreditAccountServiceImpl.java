@@ -9,7 +9,6 @@ import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
-import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
@@ -18,7 +17,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
-@Service
 @Transactional
 public class DefaultCustomerCreditAccountServiceImpl implements DefaultCustomerCreditAccountService {
 
