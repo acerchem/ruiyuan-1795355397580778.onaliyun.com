@@ -2,19 +2,16 @@ package com.acerchem.service.price;
 
 
 import com.acerchem.core.model.UserLevelModel;
-import de.hybris.platform.commercefacades.order.data.OrderData;
 import de.hybris.platform.commercefacades.product.PriceDataFactory;
 import de.hybris.platform.commercefacades.product.data.PriceData;
 import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.product.impl.DefaultPriceService;
 import de.hybris.platform.servicelayer.user.UserService;
 import org.apache.log4j.Logger;
-import org.jvnet.hk2.annotations.Service;
-import org.springframework.beans.factory.annotation.Required;
+import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
-import java.util.List;
 
 @Service
 public class DefaultAcerchemPriceService extends DefaultPriceService {
