@@ -456,7 +456,7 @@
                 </attributes>
             </itemtype>
 
-            <itemtype code="CreditTransaction" autocreate="true" generate="true" extends="Item">
+            <itemtype code="CreditTransaction" autocreate="true" generate="true" extends="GenericItem">
                 <description>流水记录</description>
                 <deployment table="creditTransaction" typecode="20203" />
                 <attributes>
