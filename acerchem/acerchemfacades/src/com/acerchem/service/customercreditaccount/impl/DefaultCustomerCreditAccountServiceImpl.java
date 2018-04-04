@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.UUID;
 
 @Service
+@Transactional
 public class DefaultCustomerCreditAccountServiceImpl implements DefaultCustomerCreditAccountService {
 
     @Resource
@@ -54,7 +55,6 @@ public class DefaultCustomerCreditAccountServiceImpl implements DefaultCustomerC
     }
 
     @Override
-    @Transactional
     public CustomerCreditAccountModel updateCustomerCreditAccountConsume(BigDecimal money) {
 
         if (money != null && money.compareTo(BigDecimal.ZERO) > 0) {
@@ -105,7 +105,6 @@ public class DefaultCustomerCreditAccountServiceImpl implements DefaultCustomerC
     }
 
     @Override
-    @Transactional
     public CustomerCreditAccountModel updateCustomerCreditAccountRepayment(String cransactionId, BigDecimal money) {
 
         if (money != null && money.compareTo(BigDecimal.ZERO) > 0 && StringUtils.isNotBlank(cransactionId)) {
