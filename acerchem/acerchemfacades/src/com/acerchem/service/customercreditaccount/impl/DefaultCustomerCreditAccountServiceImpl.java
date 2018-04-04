@@ -21,7 +21,7 @@ import java.util.UUID;
 @Service
 public class DefaultCustomerCreditAccountServiceImpl implements DefaultCustomerCreditAccountService {
 
-    @Resource()
+    @Resource
     private UserService userService;
 
     @Resource
@@ -114,7 +114,7 @@ public class DefaultCustomerCreditAccountServiceImpl implements DefaultCustomerC
                 BigDecimal creaditRemainedAmount = customerCreditAccount.getCreaditRemainedAmount();
                 //更新信用账户可用额度
                 customerCreditAccount.setCreaditRemainedAmount(creaditRemainedAmount.add(money));
-                //更新流水
+                //开始更新流水
                 List<CreditTransactionModel> transactions = customerCreditAccount.getTransactions();
                 //流水不为空
                 if (transactions != null) {
