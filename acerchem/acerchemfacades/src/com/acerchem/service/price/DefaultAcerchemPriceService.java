@@ -13,8 +13,8 @@ import org.springframework.stereotype.Service;
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 
-@Service
-public class DefaultAcerchemPriceService extends DefaultPriceService {
+@Service("defaultAcerchemPriceService")
+public class DefaultAcerchemPriceService {
 
     @Resource
     private UserService userService;
@@ -23,7 +23,6 @@ public class DefaultAcerchemPriceService extends DefaultPriceService {
 
     @Resource
     private PriceDataFactory priceDataFactory;
-
 
     /**
      * 通过商品价格计算并返回折扣价格

@@ -19,7 +19,7 @@
         http://www.springframework.org/schema/context/spring-context.xsd">
 		
 	<context:annotation-config/> 
-    <context:component-scan base-package="com.acerchem.facades" scope-resolver="de.hybris.platform.spring.IgnoreTenantScopeMetadataResolver"  />
+    <context:component-scan base-package="com.acerchem" scope-resolver="de.hybris.platform.spring.IgnoreTenantScopeMetadataResolver"  />
 
 	<alias alias="simpleSuggestionFacade" name="defaultSimpleSuggestionFacade"/>
 	<bean id="defaultSimpleSuggestionFacade" class="com.acerchem.facades.suggestion.impl.DefaultSimpleSuggestionFacade" >
@@ -303,7 +303,9 @@
     <bean id="defaultAcerchemCheckoutFacade" class="com.acerchem.facades.facades.impl.DefaultAcerchemCheckoutFacade" >
     </bean>
 
-	  <bean id="defaultCustomerCreditAccountService" class="com.acerchem.service.customercreditaccount.impl.DefaultCustomerCreditAccountServiceImpl" />
-	
+	<!--  <bean id="defaultCustomerCreditAccountService" class="com.acerchem.service.customercreditaccount.impl.DefaultCustomerCreditAccountServiceImpl" />
+
+	  <bean id="defaultAcerchemPriceService" class="com.acerchem.service.price.DefaultAcerchemPriceService" />-->
+
 </beans>
 
