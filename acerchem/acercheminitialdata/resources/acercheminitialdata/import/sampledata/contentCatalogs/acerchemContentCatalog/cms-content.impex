@@ -234,7 +234,7 @@ INSERT_UPDATE SearchResultsGridComponent;$contentCV[unique=true];uid[unique=true
 ;;SearchResultsGrid;Search Result Grid Component;ListPickUpInStoreAction,ListAddToCartAction;SearchResultsGrid
 
 INSERT_UPDATE CategoryNavigationComponent;$contentCV[unique=true];uid[unique=true];name;styleClass;&componentRef;navigationNode(&nodeRef);wrapAfter
-#;;acerchemCategoryNavComponent;Category Navigation Component;;acerchemCategoryNavComponent;acerchemCategoryNavNode;10
+;;acerchemCategoryNavComponent;Category Navigation Component;;acerchemCategoryNavComponent;acerchemCategoryNavNode;10
 
 
 # Content Slots
@@ -242,7 +242,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents
 ;;SiteLogoSlot;SiteLogoComponent
 ;;HomepageNavLinkSlot;HomepageNavLink
 ;;MiniCartSlot;MiniCart
-;;NavigationBarSlot;NavBarComponent
+;;NavigationBarSlot;acerchemCategoryNavComponent
 ;;TabsSlot;TabPanelContainer
 ;;FooterSlot;FooterComponent
 ;;HeaderLinksSlot;ContactInfo
