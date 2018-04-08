@@ -79,6 +79,7 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.store.services.BaseStoreService;
 import de.hybris.platform.util.Config;
 
+import com.acerchem.service.customercreditaccount.DefaultCustomerCreditAccountService;
 import com.acerchem.storefront.controllers.ControllerConstants;
 import com.acerchem.storefront.data.CustomRegisterForm;
 
@@ -1121,6 +1122,22 @@ public class AccountPageController extends AbstractSearchPageController
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_ADDRESS_BOOK));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 		return getViewForPage(model);
+	}
+	
+	@Resource
+	private DefaultCustomerCreditAccountService defaultCustomerCreditAccountService;
+	
+	@RequestMapping(value = "/credit", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String getCreditAccount(final Model model) throws CMSItemNotFoundException
+	{
+		model.addAttribute("nowPage", "credit");
+		model.addAttribute("customerCreditAccountData", defaultCustomerCreditAccountService.getCustomerCreditAccount());
+		storeCmsPageInModel(model, getContentPageForLabelOrId("address-book"));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId("address-book"));
+		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_ADDRESS_BOOK));
+		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+		return "/pages/account/accountCreditPage";
 	}
 
 }
