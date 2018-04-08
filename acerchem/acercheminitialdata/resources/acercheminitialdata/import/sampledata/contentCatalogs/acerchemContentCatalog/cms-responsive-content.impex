@@ -1123,7 +1123,7 @@ INSERT_UPDATE NavigationBarCollectionComponent;$contentCV[unique=true];uid[uniqu
 
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(uid, $contentCV)
-#;;NavigationBarSlot;NavBarComponent
+;;NavigationBarSlot;NavBarComponent
 
 ## level 1. SiteRoot ##
 ## level 2. children of SiteRoot ## 
