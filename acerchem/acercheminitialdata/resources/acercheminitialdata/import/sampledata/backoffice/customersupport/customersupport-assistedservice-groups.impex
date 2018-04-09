@@ -11,22 +11,63 @@
 #
 # Grant assisted service role to customer support
 #
+
+#shaun
+INSERT_UPDATE BackofficeRole;UID[unique=true];backOfficeLoginDisabled;authorities
+;customersupportadministratorrole;FALSE;customersupportadministratorrole
+;customersupportmanagerrole;FALSE;customersupportmanagerrole
+;customersupportagentrole;FALSE;customersupportagentrole
+;;;;;
+
+#shaun
+INSERT_UPDATE UserGroup;UID[unique=true];description
+;customersupportadministratorgroup;The Customer Support Administrator Group has access to the Customer Support Backoffice's Customer Support Administrator Group and Customer Support Agent Group views AND/OR the Assisted Service Module.
+
+
+#shaun
+INSERT_UPDATE CsAgentGroup;UID[unique=true];description
+;customersupportmanagergroup;The Customer Support Manager Group has access to the Customer Support Backoffice's Customer Support Manager Group and Customer Support Agent Group views AND/OR the Assisted Service Module.
+;customersupportagentgroup;The Customer Support Agent Group has access to the Customer Support Backoffice's Customer Support Agent Group views and AND/OR the Assisted Service Module.
+
+#shaun
+INSERT_UPDATE PrincipalGroupRelation;source(uid)[unique=true];target(uid)[unique=true]
+;customersupportadministratorrole;employeegroup
+;customersupportmanagerrole;employeegroup
+;customersupportagentrole;employeegroup
+;customersupportadministratorgroup;backofficeadmingroup
+;customersupportadministratorgroup;customersupportadministratorrole
+;customersupportadministratorgroup;customersupportmanagerrole
+;customersupportadministratorgroup;customersupportagentrole
+;customersupportadministratorgroup;csagentmanagergroup
+;customersupportmanagergroup;employeegroup
+;customersupportmanagergroup;customersupportmanagerrole
+;customersupportmanagergroup;customersupportagentrole
+;customersupportmanagergroup;csagentmanagergroup
+;customersupportagentgroup;employeegroup
+;customersupportagentgroup;customersupportagentrole
+
+
+#shaun:	C.O.andGroup
 INSERT_UPDATE UserGroup;UID[unique=true];groups(uid)[mode=append];locname[lang=en];description
 ;asagentgroup;;"Common Assisted Service Agent Group";
 ;asagentsalesgroup;asagentgroup;"Assisted Service Customer Support Agent Group";"The ASM CS Support Agent can provide sales and service support to a customer, but may be restricted, so that they cannot checkout a customer's cart, or authorise a customer's quote request for example."
 ;asagentsalesmanagergroup;asagentsalesgroup;"Assisted Service Customer Support Manager Group";"The ASM CS Support Manager can do everything an 'ASM CS Support Agent' can do, and more, such as authorising a customer's quote request for example." 
 
-INSERT_UPDATE CsAgentGroup;UID[unique=true];groups(uid)[mode=append];locname[lang=en];description
-;customersupportmanagergroup;customersupportmanagerrole,customersupportagentrole,asagentsalesmanagergroup,csagentgroup,csagentmanagergroup;Customer Support Manager Group;The Customer Support Manager Group has access to the Customer Support Backoffice's Customer Support Manager Group and Customer Support Agent Group views AND/OR the Assisted Service Module.
-;customersupportagentgroup;customersupportagentrole,asagentsalesgroup,csagentgroup;Customer Support Agent Group;The Customer Support Agent Group has access to the Customer Support Backoffice's Customer Support Agent Group views and AND/OR the Assisted Service Module.
-
-#shaun
-INSERT_UPDATE UserGroup;UID[unique=true];groups(uid)[mode=append];locname[lang=en];description
 ;acerchem;;"Acerchem Group";
-;Basic management;acerchem;"Basic product information maintenance, add, modify";
-;Sales;acerchem;"Valet orders";
-;Logistics;acerchem;"Inventory import, order delivery and logistics information maintenance";
-;Finance;acerchem;"Reports";
+;Basic management;acerchem,employeegroup;"Basic product information maintenance, add, modify";
+;Sales;acerchem,employeegroup;"Valet orders";
+;Logistics;acerchem,employeegroup;"Inventory import, order delivery and logistics information maintenance";
+;Finance;acerchem,employeegroup;"Reports";
 
+
+#shaun:Group permissions
+INSERT_UPDATE CsAgentGroup;UID[unique=true];groups(uid)[mode=append];locname[lang=en];description
+;customersupportmanagergroup;customersupportmanagerrole,customersupportagentrole,asagentsalesmanagergroup,csagentmanagergroup;Customer Support Manager Group;The Customer Support Manager Group has access to the Customer Support Backoffice's Customer Support Manager Group and Customer Support Agent Group views AND/OR the Assisted Service Module.
+;customersupportagentgroup;customersupportagentrole,asagentsalesgroup;Customer Support Agent Group;The Customer Support Agent Group has access to the Customer Support Backoffice's Customer Support Agent Group views and AND/OR the Assisted Service Module.
+
+;Basic management;customersupportmanagerrole,customersupportagentrole,csagentmanagergroup;Basic Management Group;The Basic Management Group
+;Sales;customersupportagentrole,asagentsalesgroup,asagentsalesmanagergroup;Sales Group;The Sales Group 
+;Logistics;customersupportmanagerrole,customersupportagentrole;Logistics Group;The Logistics Group 
+;Finance;customersupportmanagerrole,customersupportagentrole;Finance Group;The Finance Group 
 
 
