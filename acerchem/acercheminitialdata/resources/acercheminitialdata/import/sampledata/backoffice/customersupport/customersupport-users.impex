@@ -12,6 +12,7 @@
 # Creating Employees
 #
 INSERT_UPDATE Employee;UID[unique=true];name;groups(uid);description;password
+
 ;CustomerSupportAdministrator;Customer Support Administrator;customersupportadministratorgroup;This generic Customer Support Administrator User is assigned and has access to the Backoffice Administrator, Customer Support Manager and Customer Support Agent Group views - to provide administrative support to these later users.;1234
 ;CustomerSupportManager;Customer Support Manager;customersupportmanagergroup;This generic Customer Support Manager User is assigned and has access to the Backoffice Customer Support Manager and Customer Support Agent Group views and ASM - to provide restricted Backoffice and ASM customer sales and service manager support.;1234
 ;CustomerSupportAgent;Customer Support Agent;customersupportagentgroup;This generic Customer Support Agent is assigned and has access to the Backoffice Customer Support Agent Group views and ASM - to provide restricted Backoffice and ASM customer sales and service manager support.;1234
@@ -23,3 +24,13 @@ INSERT_UPDATE Employee;UID[unique=true];name;groups(uid);description;password
 ;customer.support.6@sap.com;Customer Support 6;customersupportagentgroup;This generic Customer Support Agent is assigned and has access to the Backoffice Customer Support Agent Group views and ASM - to provide restricted Backoffice and ASM customer sales and service manager support.;1234
 ;customer.support.7@sap.com;Customer Support 7;customersupportagentgroup;This generic Customer Support Agent is assigned and has access to the Backoffice Customer Support Agent Group views and ASM - to provide restricted Backoffice and ASM customer sales and service manager support.;1234
 ;customer.support.8@sap.com;Customer Support 8;customersupportagentgroup;This generic Customer Support Agent is assigned and has access to the Backoffice Customer Support Agent Group views and ASM - to provide restricted Backoffice and ASM customer sales and service manager support.;1234
+
+;Kevin@acerchem.com;Kevin;acerchem,Logistics,Basic management,employeegroup;Basic product information maintenance addition modification and inventory import;123456
+;Frence@acerchem.com;Frence;acerchem,Logistics,Basic management,employeegroup;Product storage and order shipment logistics information maintenance;123456
+;Winter@acerchem.com;Winter;acerchem,Sales,Basic management,employeegroup;Product price maintenance customer level discount review;123456
+;Donald@acerchem.com;Donald;acerchem,Finance,employeegroup;Reports;123456
+;Lulu@acerchem.com;Lulu;acerchem,Sales,employeegroup;Valet orders;123456
+
+
+
+
