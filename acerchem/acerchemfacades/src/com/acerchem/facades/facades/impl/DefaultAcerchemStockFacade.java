@@ -3,7 +3,6 @@ package com.acerchem.facades.facades.impl;
 import com.acerchem.core.service.AcerchemCustomerService;
 import com.acerchem.facades.facades.AcerchemCustomerFacade;
 import com.acerchem.facades.facades.AcerchemStockFacade;
-import com.acerchem.facades.product.data.CountryToWarehouseData;
 import com.acerchem.facades.product.data.StockDataList;
 import de.hybris.platform.commercefacades.customer.impl.DefaultCustomerFacade;
 import de.hybris.platform.commercefacades.product.data.StockData;

@@ -156,19 +156,14 @@ public class ProductPageController extends AbstractPageController
 		model.addAttribute("pageType", PageType.PRODUCT.name());
 		model.addAttribute("futureStockEnabled", Boolean.valueOf(Config.getBoolean(FUTURE_STOCK_ENABLED, false)));
 
-		//        getSessionService().setAttribute("user",userService.getUserForUID("aaron.customer@hybris.com"));
-		//        model.addAttribute("customer",acerchemCustomerFacade.getCurrentCustomer());
 
-		//final PageableData pageableData = createPagaable(0, 100, "asc");
-
-		model.addAttribute("countrys", acerchemCustomerFacade.getAllWarehouses(productCode));
+		model.addAttribute("countrys", acerchemCustomerFacade.getAllPos(productCode));
 
 		model.addAttribute("stocks", acerchemStockFacade.getAllStockDataByProduct(productCode));
 
 		final String metaKeywords = MetaSanitizerUtil.sanitizeKeywords(productData.getKeywords());
 		final String metaDescription = MetaSanitizerUtil.sanitizeDescription(productData.getDescription());
-		setUpMetaData(model, metaKeywords, metaDescription);
-		return getViewForPage(model);
+		setUpMetaData(model, metaKeywords, metaDescription);return getViewForPage(model);
 	}
 
 	@RequestMapping(value = PRODUCT_CODE_PATH_VARIABLE_PATTERN + "/orderForm", method = RequestMethod.GET)

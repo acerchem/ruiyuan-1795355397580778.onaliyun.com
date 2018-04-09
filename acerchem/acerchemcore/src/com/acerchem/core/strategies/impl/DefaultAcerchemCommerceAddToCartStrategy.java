@@ -48,8 +48,6 @@ public class DefaultAcerchemCommerceAddToCartStrategy extends DefaultCommerceAdd
 
         PointOfServiceModel deliveryPointOfService = parameter.getPointOfService();
 
-        final String warehouseCode = deliveryPointOfService.getWarehouses().stream().findFirst().get().getCode();
-
         final boolean isUseFutureStock = parameter.getIsUseFutureStock();
 
         this.beforeAddToCart(parameter);
@@ -59,7 +57,7 @@ public class DefaultAcerchemCommerceAddToCartStrategy extends DefaultCommerceAdd
         {
             // So now work out what the maximum allowed to be added is (note that this may be negative!)
             final long actualAllowedQuantityChange = this.getAllowedCartAdjustmentForProduct(cartModel, productModel, quantityToAdd,
-                    deliveryPointOfService, isUseFutureStock,warehouseCode);
+                    deliveryPointOfService, isUseFutureStock);
             final Integer maxOrderQuantity = productModel.getMaxOrderQuantity();
             final long cartLevel = checkCartLevel(productModel, cartModel, deliveryPointOfService);
             final long cartLevelAfterQuantityChange = actualAllowedQuantityChange + cartLevel;
@@ -112,7 +110,7 @@ public class DefaultAcerchemCommerceAddToCartStrategy extends DefaultCommerceAdd
      */
     protected long getAllowedCartAdjustmentForProduct(final CartModel cartModel, final ProductModel productModel,
                                                       final long quantityToAdd, final PointOfServiceModel pointOfServiceModel,
-                                                      final boolean isUseFuturnStock, final String warehouseCode)
+                                                      final boolean isUseFuturnStock)
     {
         final long cartLevel = checkCartLevel(productModel, cartModel, pointOfServiceModel);
 

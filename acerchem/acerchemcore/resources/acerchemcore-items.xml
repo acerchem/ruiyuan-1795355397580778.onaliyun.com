@@ -501,7 +501,15 @@
                 </attributes>
             </itemtype>
 
-
+			<itemtype code="PointOfService" autocreate="false" generate="false">
+				<attributes>
+					<attribute qualifier="zone" type="Zone">
+						<description>提货点配送范围</description>
+						<modifiers />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
 
 
 

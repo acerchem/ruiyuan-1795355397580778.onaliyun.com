@@ -6,7 +6,7 @@ import de.hybris.platform.core.model.c2l.CountryModel;
 /**
  * Created by Jacob.Ji on 2018/4/2.
  */
-public interface AcerchemCountryTrayFareDao {
+public interface AcerchemTrayDao {
 
-    CountryTrayFareConfModel getCouTrayFareConf(int quantity, CountryModel countryModel);
+    CountryTrayFareConfModel getCouTrayFareConf(CountryModel countryModel,int quantity);
 }

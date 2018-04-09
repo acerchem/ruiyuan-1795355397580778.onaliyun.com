@@ -242,37 +242,6 @@
 	<bean id="defaultAcerchemCustomerFacade" parent="customerFacade" class="com.acerchem.facades.facades.impl.DefaultAcerchemCustomerFacade" >
     </bean>
 
-	<alias name="defaultWarehousePopulator" alias="warehousePopulator"/>
-	<bean id="defaultWarehousePopulator" class="com.acerchem.facades.populators.WarehousePopulator">
-	</bean>
-
-	<alias name="defaultWarehouseConverter" alias="warehouseConverter"/>
-	<bean id="defaultWarehouseConverter" parent="abstractPopulatingConverter">
-		<property name="targetClass" value="com.acerchem.facades.product.data.WarehouseData"/>
-		<property name="populators">
-			<list>
-				<ref bean="warehousePopulator"/>
-			</list>
-		</property>
-	</bean>
-
-	<alias name="defaultCountryToWarehousePopulator" alias="countryToWarehousePopulator"/>
-	<bean id="defaultCountryToWarehousePopulator" class="com.acerchem.facades.populators.CountryToWarehousePopulator">
-		<property name="countryConverter" ref="countryConverter"/>
-		<property name="warehouseConverter" ref="warehouseConverter"/>
-		<property name="userService" ref="userService"/>
-	</bean>
-
-	<alias name="defaultCountryToWarehouseConverter" alias="countryToWarehouseConverter"/>
-	<bean id="defaultCountryToWarehouseConverter" parent="abstractPopulatingConverter">
-		<property name="targetClass" value="com.acerchem.facades.product.data.CountryToWarehouseData"/>
-		<property name="populators">
-			<list>
-				<ref bean="countryToWarehousePopulator"/>
-			</list>
-		</property>
-	</bean>
-
 	<alias name="defaultAcerchemCartFacade" alias="acerchemCartFacade"/>
 	<bean id="defaultAcerchemCartFacade" parent="cartFacade" class="com.acerchem.facades.facades.impl.DefaultAcerchemCartFacade" >
 		<property name="acerchemCommerCartService" ref="acerchemCommerCartService" />

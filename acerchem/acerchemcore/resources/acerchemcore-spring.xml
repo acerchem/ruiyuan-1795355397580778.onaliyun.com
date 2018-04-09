@@ -596,8 +596,8 @@
 	<bean id="defaultAcerchemCommerceUpdateCartEntryStrategy" parent="commerceUpdateCartEntryStrategy" class="com.acerchem.core.strategies.impl.DefaultAcerchemCommerceUpdateCartEntryStrategy">
 	</bean>
 
-	<alias name="defaultAcerchemCountryTrayFareDao"  alias="acerchemCountryTrayFareDao"/>
-	<bean id="defaultAcerchemCountryTrayFareDao" parent="abstractItemDao" class="com.acerchem.core.dao.impl.DefaultAcerchemCountryTrayFareDao">
+	<alias name="defaultAcerchemTrayDao"  alias="acerchemTrayDao"/>
+	<bean id="defaultAcerchemTrayDao" parent="abstractItemDao" class="com.acerchem.core.dao.impl.DefaultAcerchemTrayDao">
 	</bean>
 
 
