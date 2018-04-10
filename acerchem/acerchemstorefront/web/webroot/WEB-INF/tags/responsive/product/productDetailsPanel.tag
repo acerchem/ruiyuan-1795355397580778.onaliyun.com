@@ -4,6 +4,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 
 <div class="g-cont prod-cont">
 			<!-- left -->
@@ -42,8 +43,8 @@
 						</div>
 					</div>
 					<div class="priceset">
-						<span class="price">$60.00</span>
-						<span class="old-price">${product.price}</span>
+						<span class="price"><format:fromPrice priceData="${product.price}"/></span>
+						<span class="old-price"><format:fromPrice priceData="${product.promotionPrice}"/></span>
 					</div>
 					<div class="Summary">
 						<span><i>FREE</i>Buy 2 pieces for FREE Shipping;</span>
@@ -65,60 +66,70 @@
 										<li data-val="75">75kg</li>						
 									</ul>
 								</div>	
-							</label>	
+							</label>
+							
+							<c:forEach items="${countrys}" var="data"  varStatus="id"  >
+						<c:if test="${id.index==0}">	
 							<label class="futday">
 								<span class="label-title">Future days</span>	
 								<div class="selbox">
 									<input type="hidden" value="" name="futday" alt="Please Select nation" id="futday">
 									<span class="pitch"></span>
 									<ul class="select">
-										<li data-val="30">30day</li>
-										<li data-val="60">60day</li>
-										<li data-val="90">90day</li>						
+										<li data-val="${data.futureInventory}">${data.futureAvailableDate}</li>
+														
 									</ul>
 								</div>	
-							</label>						
+							</label>	
+							</c:if>	
+                        </c:forEach>					
 						</div>
+						
 						<div class="invernum">
-							<span class="label-title inventory">Inventory:<i>8</i> <span class="spot">(<em>8</em>)</span></span>	
-
+						
+						<c:forEach items="${countrys}" var="data"  varStatus="id"  >
+						<c:if test="${id.index==0}">
+							<span class="label-title inventory">Inventory:<i>${data.inventory}</i> <span class="spot">(<em>${data.inventory}</em>)</span></span>
+							</c:if>	
+                        </c:forEach>
+							
 							<label>
 								<input type="checkbox" name="Keep">
 								<span class="checkbox">Display future inventory</span>
 							</label>							
 						</div>
+					 
 						<div class="delivery flex-wrap">
 							<span class="label-title">Delivery to</span>
 							<div class="flex">
-								<select>
-								 <%-- <c:forEach items="${countrys}" var="data"  varStatus="vs">
-								 
-									  <c:forEach items="${data.countryToWarehouseData}" var="data1" varStatus="vs">
-									        <option value ="${data1.countryData.isocode}">${data1.countryData.name}</option>
-									  </c:forEach>
-								 
-								 </c:forEach> --%>
+							
+								<select id="storeMulId">
+								<c:forEach items="${countrys}" var="data"  >
+								<option value ="${data.storeId}">${data.storeName}</option>
+								    </c:forEach>
 								</select>
+								
 							</div>
-							<div class="flex">
-								<select>
-								  <option value ="NY">New York</option>
-								  <option value ="LA">Los Angeles</option>
-								  <option value="CI">Chicago</option>
-								</select>
-							</div>
+						
 						</div>
+						
 
 						<div class="prod-sum">
 							<div class="m-setnum">
-								<span class="set sub">-</span>
-								<input type="text" name="pdnum" class="set" value="1">
+							<span class="set sub">-</span>
+                              <input type="text" name="pdnum" class="set" value="1">								
 								<span class="set add">+</span>
+								
 							</div>
-							<i class="delintro">Delivery<em>30</em>days</i>
-						</div>
+							<%-- <c:forEach var="${countrys}" var="data1" begin="0" end="1"> --%>
+						<c:forEach items="${countrys}" var="data"  varStatus="id"  >
+						<c:if test="${id.index==0}">
+							    <i class="delintro">Delivery<em>${data.avaReleaseDay}</em>days</i>
+						</c:if>	
+                        </c:forEach>
+							
+ 						</div>
 
-						
 					</div>
 			
 					
@@ -295,375 +306,29 @@
 				<!-- right -->
 				<div class="g-cell product-right">
 					<div class="g-table qclist">
-						<div class="g-title">
-							Everyone is Buying
-						</div>
-						<ul class="pdlist">
-							<li class="both">
-								<div class="img">
-					    			<a href="product.html">
-					    		  		<img src="images/maxsales-bg10.jpg" alt="">
-					    		  	</a>
-					    		</div>
-					    		<div class="maxtext">
-						    		<p class="in-title">Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
-						    		<div class="spset">
-						    			<span class="price">$68.00</span>
-						    		</div>
-						    	</div>
-							</li>
-							<li class="both">
-								<div class="img">
-					    			<a href="product.html">
-					    		  		<img src="images/maxsales-bg9.jpg" alt="">
-					    		  	</a>
-					    		</div>
-					    		<div class="maxtext">
-						    		<p class="in-title">Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
-						    		<div class="spset">
-						    			<span class="price">$68.00</span>
-						    		</div>
-						    	</div>
-							</li>
-							<li class="both">
-								<div class="img">
-					    			<a href="product.html">
-					    		  		<img src="images/maxsales-bg8.jpg" alt="">
-					    		  	</a>
-					    		</div>
-					    		<div class="maxtext">
-						    		<p class="in-title">Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
-						    		<div class="spset">
-						    			<span class="price">$68.00</span>
-						    		</div>
-						    	</div>
-							</li>
-							<li class="both">
-								<div class="img">
-					    			<a href="product.html">
-					    		  		<img src="images/maxsales-bg7.jpg" alt="">
-					    		  	</a>
-					    		</div>
-					    		<div class="maxtext">
-						    		<p class="in-title">Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
-						    		<div class="spset">
-						    			<span class="price">$68.00</span>
-						    		</div>
-						    	</div>
-							</li>
-							<li class="both">
-								<div class="img">
-					    			<a href="product.html">
-					    		  		<img src="images/maxsales-bg6.jpg" alt="">
-					    		  	</a>
-					    		</div>
-					    		<div class="maxtext">
-						    		<p class="in-title">Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
-						    		<div class="spset">
-						    			<span class="price">$68.00</span>
-						    		</div>
-						    	</div>
-							</li>
-							<li class="both">
-								<div class="img">
-					    			<a href="product.html">
-					    		  		<img src="images/maxsales-bg5.jpg" alt="">
-					    		  	</a>
-					    		</div>
-					    		<div class="maxtext">
-						    		<p class="in-title">Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
-						    		<div class="spset">
-						    			<span class="price">$68.00</span>
-						    		</div>
-						    	</div>
-							</li>
-							<li class="both">
-								<div class="img">
-					    			<a href="product.html">
-					    		  		<img src="images/maxsales-bg4.jpg" alt="">
-					    		  	</a>
-					    		</div>
-					    		<div class="maxtext">
-						    		<p class="in-title">Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
-						    		<div class="spset">
-						    			<span class="price">$68.00</span>
-						    		</div>
-						    	</div>
-							</li>
-							<li class="both">
-								<div class="img">
-					    			<a href="product.html">
-					    		  		<img src="images/maxsales-bg3.jpg" alt="">
-					    		  	</a>
-					    		</div>
-					    		<div class="maxtext">
-						    		<p class="in-title">Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
-						    		<div class="spset">
-						    			<span class="price">$68.00</span>
-						    		</div>
-						    	</div>
-							</li>
-							<li class="both">
-								<div class="img">
-					    			<a href="product.html">
-					    		  		<img src="images/maxsales-bg2.jpg" alt="">
-					    		  	</a>
-					    		</div>
-					    		<div class="maxtext">
-						    		<p class="in-title">Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
-						    		<div class="spset">
-						    			<span class="price">$68.00</span>
-						    		</div>
-						    	</div>
-							</li>
-							<li class="both">
-								<div class="img">
-					    			<a href="product.html">
-					    		  		<img src="images/maxsales-bg1.jpg" alt="">
-					    		  	</a>
-					    		</div>
-					    		<div class="maxtext">
-						    		<p class="in-title">Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
-						    		<div class="spset">
-						    			<span class="price">$68.00</span>
-						    		</div>
-						    	</div>
-							</li>
-
-
+					
+					
+					<cms:pageSlot position="SaleWellProductListSlot" var="component" >
+					
+						<cms:component component="${component}" />
+					</cms:pageSlot>
 						
-					</ul>	
 					</div>
 				</div>
 				<!-- r edn -->
 			</div>
 			<!-- item -->
 	<div class="maxon_salesul">
-		<div class="title">
-			Promotion Item
-			<div class="maxpagin">				
-			</div>	
-		</div>
-		<div class="banner_btn"> 
-    		<span class="arrow-left"></span> 
-			<span class="arrow-right"></span>
-	    </div>
-	    <div class="slide-wrap">
-		    <div class="slide-item both">
-		    	<div class="item">	    		
-		    		<div class="img">
-		    			<a href="product.html">
-		    		  		<img src="images/maxsales-bg6.jpg" alt="">
-		    		  	</a>
-		    		</div>
-		    		<div class="maxtext">
-			    		<p>TwinTiger Glutathione (5kg Bag) by Jincheng</p>
-			    		<!-- 登录显示 -->
-			    		<span class="price"><i>$68.00</i></span>
-			    		<span class="old-price"><i>$98.00</i></span>
-			    		<!-- 登录显示 END-->
-			    	</div>
-		    	</div>
-		    	<div class="item">	    		
-		    		<div class="img">
-		    			<a href="product.html">
-		    		  		<img src="images/maxsales-bg7.jpg" alt="">
-		    		  	</a>
-		    		</div>
-		    		<div class="maxtext">
-			    		<p>Acetyl L-Carnitine HCL (25kg Drum) By Chengda</p>
-			    		<!-- 登录显示 -->
-			    		<span class="price"><i>$68.00</i></span>
-			    		<span class="old-price"><i>$98.00</i></span>
-			    		<!-- 登录显示 END-->
-			    	</div>
-		    	</div>
-		    	<div class="item">	    		
-		    		<div class="img">
-		    			<a href="product.html">
-		    		  		<img src="images/maxsales-bg8.jpg" alt="">
-		    		  	</a>
-		    		</div>
-		    		<div class="maxtext">
-			    		<p>Chondroitin Sulfate USP 90% (O.D.B) by CPC and 72% (As is) by E-HPLC (25kg Drum) by Greentech</p>
-			    		<!-- 登录显示 -->
-			    		<span class="price"><i>$68.00</i></span>
-			    		<span class="old-price"><i>$98.00</i></span>
-			    		<!-- 登录显示 END-->
-			    	</div>
-		    	</div>
-		    	<div class="item">	    		
-		    		<div class="img">
-		    			<a href="product.html">
-		    		  		<img src="images/maxsales-bg9.jpg" alt="">
-		    		  	</a>
-		    		</div>
-		    		<div class="maxtext">
-			    		<p>Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
-			    		<!-- 登录显示 -->
-			    		<span class="price"><i>$68.00</i></span>
-			    		<span class="old-price"><i>$98.00</i></span>
-			    		<!-- 登录显示 END-->
-			    	</div>
-		    	</div>
-		    	<div class="item">	    		
-		    		<div class="img">
-		    			<a href="product.html">
-		    		  		<img src="images/maxsales-bg10.jpg" alt="">
-		    		  	</a>
-		    		</div>
-		    		<div class="maxtext">
-			    		<p>Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
-			    		<!-- 登录显示 -->
-			    		<span class="price"><i>$68.00</i></span>
-			    		<span class="old-price"><i>$98.00</i></span>
-			    		<!-- 登录显示 END-->
-			    	</div>
-		    	</div>
-		    	<div class="item">	    		
-		    		<div class="img">
-		    			<a href="product.html">
-		    		  		<img src="images/maxsales-bg6.jpg" alt="">
-		    		  	</a>
-		    		</div>
-		    		<div class="maxtext">
-			    		<p>TwinTiger Glutathione (5kg Bag) by Jincheng</p>
-			    		<!-- 登录显示 -->
-			    		<span class="price"><i>$68.00</i></span>
-			    		<span class="old-price"><i>$98.00</i></span>
-			    		<!-- 登录显示 END-->
-			    	</div>
-		    	</div>
-		    	<div class="item">	    		
-		    		<div class="img">
-		    			<a href="product.html">
-		    		  		<img src="images/maxsales-bg7.jpg" alt="">
-		    		  	</a>
-		    		</div>
-		    		<div class="maxtext">
-			    		<p>Acetyl L-Carnitine HCL (25kg Drum) By Chengda</p>
-			    		<!-- 登录显示 -->
-			    		<span class="price"><i>$68.00</i></span>
-			    		<span class="old-price"><i>$98.00</i></span>
-			    		<!-- 登录显示 END-->
-			    	</div>
-		    	</div>
-		    	<div class="item">	    		
-		    		<div class="img">
-		    			<a href="product.html">
-		    		  		<img src="images/maxsales-bg8.jpg" alt="">
-		    		  	</a>
-		    		</div>
-		    		<div class="maxtext">
-			    		<p>Chondroitin Sulfate USP 90% (O.D.B) by CPC and 72% (As is) by E-HPLC (25kg Drum) by Greentech</p>
-			    		<!-- 登录显示 -->
-			    		<span class="price"><i>$68.00</i></span>
-			    		<span class="old-price"><i>$98.00</i></span>
-			    		<!-- 登录显示 END-->
-			    	</div>
-		    	</div>
-		    	<div class="item">	    		
-		    		<div class="img">
-		    			<a href="product.html">
-		    		  		<img src="images/maxsales-bg9.jpg" alt="">
-		    		  	</a>
-		    		</div>
-		    		<div class="maxtext">
-			    		<p>Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
-			    		<!-- 登录显示 -->
-			    		<span class="price"><i>$68.00</i></span>
-			    		<span class="old-price"><i>$98.00</i></span>
-			    		<!-- 登录显示 END-->
-			    	</div>
-		    	</div>
-		    	<div class="item">	    		
-		    		<div class="img">
-		    			<a href="product.html">
-		    		  		<img src="images/maxsales-bg10.jpg" alt="">
-		    		  	</a>
-		    		</div>
-		    		<div class="maxtext">
-			    		<p>Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
-			    		<!-- 登录显示 -->
-			    		<span class="price"><i>$68.00</i></span>
-			    		<span class="old-price"><i>$98.00</i></span>
-			    		<!-- 登录显示 END-->
-			    	</div>
-		    	</div>
-		    	<div class="item">	    		
-		    		<div class="img">
-		    			<a href="product.html">
-		    		  		<img src="images/maxsales-bg6.jpg" alt="">
-		    		  	</a>
-		    		</div>
-		    		<div class="maxtext">
-			    		<p>TwinTiger Glutathione (5kg Bag) by Jincheng</p>
-			    		<!-- 登录显示 -->
-			    		<span class="price"><i>$68.00</i></span>
-			    		<span class="old-price"><i>$98.00</i></span>
-			    		<!-- 登录显示 END-->
-			    	</div>
-		    	</div>
-		    	<div class="item">	    		
-		    		<div class="img">
-		    			<a href="product.html">
-		    		  		<img src="images/maxsales-bg7.jpg" alt="">
-		    		  	</a>
-		    		</div>
-		    		<div class="maxtext">
-			    		<p>Acetyl L-Carnitine HCL (25kg Drum) By Chengda</p>
-			    		<!-- 登录显示 -->
-			    		<span class="price"><i>$68.00</i></span>
-			    		<span class="old-price"><i>$98.00</i></span>
-			    		<!-- 登录显示 END-->
-			    	</div>
-		    	</div>
-		    	<div class="item">	    		
-		    		<div class="img">
-		    			<a href="product.html">
-		    		  		<img src="images/maxsales-bg8.jpg" alt="">
-		    		  	</a>
-		    		</div>
-		    		<div class="maxtext">
-			    		<p>Chondroitin Sulfate USP 90% (O.D.B) by CPC and 72% (As is) by E-HPLC (25kg Drum) by Greentech</p>
-			    		<!-- 登录显示 -->
-			    		<span class="price"><i>$68.00</i></span>
-			    		<span class="old-price"><i>$98.00</i></span>
-			    		<!-- 登录显示 END-->
-			    	</div>
-		    	</div>
-		    	<div class="item">	    		
-		    		<div class="img">
-		    			<a href="product.html">
-		    		  		<img src="images/maxsales-bg9.jpg" alt="">
-		    		  	</a>
-		    		</div>
-		    		<div class="maxtext">
-			    		<p>Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
-			    		<!-- 登录显示 -->
-			    		<span class="price"><i>$68.00</i></span>
-			    		<span class="old-price"><i>$98.00</i></span>
-			    		<!-- 登录显示 END-->
-			    	</div>
-		    	</div>
-		    	<div class="item">	    		
-		    		<div class="img">
-		    			<a href="product.html">
-		    		  		<img src="images/maxsales-bg10.jpg" alt="">
-		    		  	</a>
-		    		</div>
-		    		<div class="maxtext">
-			    		<p>Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
-			    		<!-- 登录显示 -->
-			    		<span class="price"><i>$68.00</i></span>
-			    		<span class="old-price"><i>$98.00</i></span>
-			    		<!-- 登录显示 END-->
-			    	</div>
-		    	</div>
-			</div>
+	
+		
+		<cms:pageSlot position="PromotionProductListSlot" var="component" >
+		
+			<cms:component component="${component}" />
+		</cms:pageSlot>
 
-	    </div>
-	</div>
+   </div>
+
+
 	<!-- item end -->
 		</div>
 		
@@ -814,6 +479,7 @@
 					}
 				}
 				ainp.val(avl-1);
+				$('#qty').val(avl-1);
 				break;
 			case 'set add':
 				avl = parseInt(ainp.val());
@@ -833,6 +499,7 @@
 					}					
 				}
 				ainp.val(avl+1);
+				$('#qty').val(avl+1);
 				break;	
 		}
 		
@@ -884,7 +551,9 @@
 		$('body').css({'height':'','overflow':''});
 	})
 
-
+	$("#storeMulId").change(function(){
+	    $('#storeId').val($("#storeMulId").val());
+	});
 
 </script>
 		
