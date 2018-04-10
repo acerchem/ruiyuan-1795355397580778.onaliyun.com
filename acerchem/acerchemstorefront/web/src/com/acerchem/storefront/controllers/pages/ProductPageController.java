@@ -163,7 +163,8 @@ public class ProductPageController extends AbstractPageController
 
 		final String metaKeywords = MetaSanitizerUtil.sanitizeKeywords(productData.getKeywords());
 		final String metaDescription = MetaSanitizerUtil.sanitizeDescription(productData.getDescription());
-		setUpMetaData(model, metaKeywords, metaDescription);return getViewForPage(model);
+		setUpMetaData(model, metaKeywords, metaDescription);
+		return getViewForPage(model);
 	}
 
 	@RequestMapping(value = PRODUCT_CODE_PATH_VARIABLE_PATTERN + "/orderForm", method = RequestMethod.GET)
@@ -399,19 +400,19 @@ public class ProductPageController extends AbstractPageController
 
 	/*
 	 * @RequestMapping(value = "/stores", method = RequestMethod.GET)
-	 * 
+	 *
 	 * @ResponseBody public SearchPageData<CountryToWarehouseData> locationSearch(@RequestParam(required = false) final
 	 * String query,
-	 * 
+	 *
 	 * @RequestParam(required = false, defaultValue = "0") final int currentPage,
-	 * 
+	 *
 	 * @RequestParam(required = false, defaultValue = "100") final int pageSize,
-	 * 
+	 *
 	 * @RequestParam(required = false, defaultValue = "asc") final String sort) { final PageableData pageableData =
 	 * createPagaable(currentPage, pageSize, sort);
-	 * 
+	 *
 	 * SearchPageData<CountryToWarehouseData> result = acerchemCustomerFacade.getAllPointOfServices(pageableData);
-	 * 
+	 *
 	 * return result; }
 	 */
 

@@ -67,7 +67,7 @@ public class DefaultAcerchemTrayFacade implements AcerchemTrayFacade {
                 //托盘数量
                 BigDecimal entryTrayAmount = BigDecimal.valueOf(quantity).divide(new BigDecimal(unitCalculateRato),BigDecimal.ROUND_HALF_UP,BigDecimal.ROUND_DOWN);
 
-                totalTrayAmount.add(entryTrayAmount);
+                totalTrayAmount =totalTrayAmount.add(entryTrayAmount);
             }
         }
 
