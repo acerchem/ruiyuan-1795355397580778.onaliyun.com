@@ -115,15 +115,16 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 		electronicsImportData.setStoreNames(Arrays.asList(ACERCHEM));
 		importData.add(electronicsImportData);
 
-		getCoreDataImportService().execute(this, context, importData);
-//		getSetupImpexService().importImpexFile(String.format("/%s/import/coredata/common/essential-data.impex", context.getExtensionName()),false);
+	getCoreDataImportService().execute(this, context, importData);
+			getSetupImpexService().importImpexFile(String.format("/%s/import/coredata/common/user-level.impex", context.getExtensionName()),false);
 		getEventService().publishEvent(new CoreDataImportedEvent(context, importData));
-
+		
 		getSampleDataImportService().execute(this, context, importData);
-		getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/productCatalogs/acerchemProductCatalog/acerchemProduct.impex", context.getExtensionName()), false);
+			getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/productCatalogs/acerchemProductCatalog/acerchemProduct.impex", context.getExtensionName()), false);
+			getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/backoffice/customersupport/cscockpit-access-rights.impex", context.getExtensionName()), false);
 		getEventService().publishEvent(new SampleDataImportedEvent(context, importData));
 		
-
+	 
 	}
 
 	public CoreDataImportService getCoreDataImportService()
