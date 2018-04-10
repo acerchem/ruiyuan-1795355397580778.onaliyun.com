@@ -11,95 +11,56 @@
 
 <c:if test="${component.isSale}">
 
-<div class="title">
-		${fn:escapeXml(title)}
-	<div class="maxpagin"></div>
-</div>
-
-<div class="swiper-container2 maxon_salesul">
-
-	<div class="banner_btn"> 
-   		<a class="arrow-left" href="#"></a> 
-		<a class="arrow-right" href="#"></a>
-    </div>
-    
-	  <ul class="swiper-wrapper">
-	  <c:forEach items="${productData}" var="product">
-	   <li class="swiper-slide">
-	    	<div class="swiper-slide-bg">
-	    		<div class="bg-box">
-	    		<div class="maxmark">
-	    			<h3>10</h3>
-	    			<p><em class="">%</em><em>OFF</em></p>
-	    		</div>
-		    	<div class="maximg">
-		    	
-		    	<c:url value="${product.url}" var="productUrl"/>
-		    	
-		    		<a href="${productUrl}">
-		    		<product:productPrimaryImage product="${product}" format="product"/>
-			    		</a>
-	    	
-		    		
-		    		<div class="maximgpor">
-		    			<a href="">Buy Now</a><!--未登录时-->
-		    		</div>
-		    	</div>
-		    	<div class="maxtext">
-		    		<p>TwinTiger Glutathione (5kg Bag) by Jincheng</p>
-		    		<!-- 登录显示 -->
-		    		<!-- <span class="price">$68.00</span>
-		    		<span class="old-price">$98.00</span> -->
-		    		<!-- 登录显示 END-->
-		    	</div>
-		    	</div>
-	    	</div>
-	    </li>
-	    </c:forEach>
-	  </ul>
-</div>	
+<div class="g-title">
+		Everyone is Buying
+	</div>
+<ul class="pdlist">
+ <c:forEach items="${productData}" var="product">
+	<li class="both">
+		<div class="img">
+   			<product:productPrimaryImage product="${product}" format="product"/>
+   		</div>
+   		<div class="maxtext">
+    		<p class="in-title">Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
+    		<div class="spset">
+    			<span class="price">$68.00</span>
+    		</div>
+    	</div>
+	</li>
+	</c:forEach>
+</ul>	
 </c:if>	
 
 <c:if test="${component.isPromotion}">
 
-<div class="title">
-		${fn:escapeXml(title)}
-	<div class="maxpagin"></div>
-</div>
-
-<div class="swiper-container3 maxon_salesul">
-
-	<div class="banner_btn"> 
-   		<a class="arrow-left" href="#"></a> 
-		<a class="arrow-right" href="#"></a>
-    </div>
-    
-	  <ul class="swiper-wrapper">
-	  <c:forEach items="${productData}" var="product">
-	   <li class="swiper-slide">
-	    	<div class="swiper-slide-bg">
-	    		<div class="bg-box">
-	    		
-		    	<div class="maximg">
-		    	<product:productPrimaryImage product="${product}" format="product"/>
-			    	
-		    		<div class="maximgpor">
-		    			<a href="">Buy Now</a><!--未登录时-->
+	<div class="title">
+			Promotion Item
+			<div class="maxpagin">				
+			</div>	
+		</div>
+		<div class="banner_btn"> 
+    		<span class="arrow-left"></span> 
+			<span class="arrow-right"></span>
+	    </div>
+	    <div class="slide-wrap">
+		    <div class="slide-item both">
+		     <c:forEach items="${productData}" var="product">
+		    	<div class="item">	    		
+		    		<div class="img">
+		    			<product:productPrimaryImage product="${product}" format="product"/>
 		    		</div>
+		    		<div class="maxtext">
+			    		<p>TwinTiger Glutathione (5kg Bag) by Jincheng</p>
+			    		<!-- 登录显示 -->
+			    		<span class="price"><i>$68.00</i></span>
+			    		<span class="old-price"><i>$98.00</i></span>
+			    		<!-- 登录显示 END-->
+			    	</div>
 		    	</div>
-		    	<div class="maxtext">
-		    		<p>TwinTiger Glutathione (5kg Bag) by Jincheng</p>
-		    		<!-- 登录显示 -->
-		    		<!-- <span class="price">$68.00</span>
-		    		<span class="old-price">$98.00</span> -->
-		    		<!-- 登录显示 END-->
+		    	</c:forEach>
 		    	</div>
+		    	
 		    	</div>
-	    	</div>
-	    </li>
-	    </c:forEach>
-	  </ul>
-</div>	
 
 </c:if>	    
 

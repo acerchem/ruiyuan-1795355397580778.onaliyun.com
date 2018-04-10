@@ -213,8 +213,8 @@ INSERT_UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];name;masterTemp
 ;;ReadyForPickupEmail;Ready For Pickup Email;ReadyForPickupEmailTemplate;true;
 ;;OrderCancelledEmail;Order Cancelled Email;OrderCancelledEmailTemplate;true;
 ;;OrderRefundEmail;Order Refund Email;OrderRefundEmailTemplate;true;
-;;OrderCollectionReminderEmail;Order Collection Reminder Email;OrderCollectionReminderEmailTemplate;true;;customerservices@hybris.com;Customer Services Team
-;;OrderMoveToCsEmail;Order Move To CS Email;OrderMoveToCsEmailTemplate;true;;customerservices@hybris.com;Customer Services Team
+;;OrderCollectionReminderEmail;Order Collection Reminder Email;OrderCollectionReminderEmailTemplate;true;;customerservices@acerchem.com;Customer Services Team
+;;OrderMoveToCsEmail;Order Move To CS Email;OrderMoveToCsEmailTemplate;true;;customerservices@acerchem.com;Customer Services Team
 ;;OrderPartiallyCanceledEmail;Order Partially Canceled Email;OrderPartiallyCanceledEmailTemplate;true;
 ;;OrderPartiallyRefundedEmail;Order Partially Refunded Email;OrderPartiallyRefundedEmailTemplate;true;
 ;;NotPickedUpConsignmentCanceledEmail;Not Picked Up Consignment Canceled Email;NotPickedUpConsignmentCanceledEmailTemplate;true;

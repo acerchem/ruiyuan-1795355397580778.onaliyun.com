@@ -1,0 +1,196 @@
+
+# Macros / Replacement Parameter definitions
+$productCatalog=acerchemProductCatalog
+$productCatalogName=acerchem Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$supercategories=supercategories(code, $catalogVersion)
+$baseProduct=baseProduct(code,$catalogVersion)
+$approved=approvalstatus(code)[default='approved']
+$thumbnail=thumbnail(code, $catalogVersion)
+$thumbnails=thumbnails(code, $catalogVersion)
+$picture=picture(code, $catalogVersion)
+$detail=detail(code, $catalogVersion)
+$normal=normal(code, $catalogVersion)
+$others=others(code, $catalogVersion)
+$data_sheet=data_sheet(code, $catalogVersion)
+$medias=medias(code, $catalogVersion)
+$galleryImages=galleryImages(qualifier, $catalogVersion)
+$siteResource=jar:com.acerchem.initialdata.constants.AcerchemInitialDataConstants&/acercheminitialdata/import/sampledata/productCatalogs/$productCatalog
+$clAttrModifiers=system='acerchemClassification',version='1.0',translator=de.hybris.platform.catalog.jalo.classification.impex.ClassificationAttributeTranslator,lang=en
+$vendor=default
+$catalog-Online=Online
+$product-catalog=acerchemProductCatalog
+$productCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$product-catalog]),CatalogVersion.version[default=$catalog-Online])[default=$product-catalog:$catalog-Online]
+$lang=en
+
+INSERT_UPDATE Warehouse;code[unique=true];name[lang=en];name[lang=de];vendor(code)[default=$vendor];default
+;warehouse_s;Warehouse South;Warehouse South;;true
+;warehouse_e;Warehouse East;Warehouse East;;true
+;warehouse_w;Warehouse West;Warehouse West;;true
+;warehouse_n;Warehouse North;Warehouse North;;true
+
+
+INSERT_UPDATE Product;code[unique=true];$supercategories;manufacturerName;manufacturerAID;unit(code);ean;variantType(code);$catalogVersion;$approved
+;000001;576, brand_1;HP;zhangyin;pieces;
+;AC05080;576, brand_1;HP;Coenzyme Q10 98% HPLC;pieces;
+;AC03131;576, brand_1;HP;Tribulus 90% UV THC FREE;pieces;
+;AC01361;576, brand_1;HP;Vitamin C Powder;pieces;
+;AC01710;576, brand_1;HP;Alpha Lipoic Acid;pieces;
+
+
+# Insert Product References
+INSERT_UPDATE ProductReference;source(code,$catalogVersion)[unique=true];target(code,$catalogVersion)[unique=true];referenceType(code);active;preselected
+;358639;000001;ACCESSORIES;true;false
+;358639;AC05080;ACCESSORIES;true;false
+;358639;AC03131;ACCESSORIES;true;false
+;358639;AC01361;ACCESSORIES;true;false
+;358639;AC01710;ACCESSORIES;true;false
+
+
+INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];reserved
+;29;warehouse_s;notSpecified;1;0;0;0;000001;0
+;30;warehouse_s;notSpecified;1;0;0;0;AC05080;0
+;3;warehouse_s;notSpecified;1;0;0;0;AC03131;0
+;10;warehouse_s;notSpecified;1;0;0;0;AC01361;0
+;20;warehouse_s;notSpecified;1;0;0;0;AC01710;0
+ 
+UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehouse(code));vendors(code)
+;000001;;000001:warehouse_s;
+;AC05080;;AC05080:warehouse_s;
+;AC03131;;AC03131:warehouse_s;
+;AC01361;;AC01361:warehouse_s;
+;AC01710;;AC01710:warehouse_s;
+
+ # Update allProducts with localisations
+UPDATE Product;code[unique=true];$catalogVersion;name[lang=$lang];summary[lang=$lang];description[lang=$lang]
+;000001;;one;one;这不是一个杯子，请注意<br/><br/><b>Includes:</b><br/>- Rechargeable info-lithium Battery.<br/>- Charger.<br/>- Carry Case.
+;AC05080;;Coenzyme Q10 98% HPLC;Coenzyme Q10 98% HPLC;Heart & Cardiovascular<br/><br/><b>Includes:</b><br/>- Vitamin <br/>- C59H90O4<br/>- EP/USP
+;AC03131;;Tribulus 90% UV THC FREE;Tribulus 90% UV THC FREE;Sports Nutrition<br/><br/><b>Includes:</b><br/>- Plant Extract <br/>- 22153-44-2<br/>- Enterprise Standard
+;AC01361;;Vitamin C Powder;Vitamin C Powder;Sports Nutrition<br/><br/><b>Includes:</b><br/>- Vitamin <br/>- C6H8O6 <br/>- EP/USP
+;AC01710;;Vitamin C Powder;Vitamin C Powder;Sports Nutrition<br/><br/><b>Includes:</b><br/>- Vitamin <br/>- C6H8O6 <br/>- EP/USP
+
+
+INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];$catalogVersion;folder(qualifier)
+;1200Wx1200H;/1200Wx1200H/zhangyin.jpg;$siteResource/images/1200Wx1200H/zhangyin.jpg;;;images
+;515Wx515H;/515Wx515H/zhangyin.jpg;$siteResource/images/515Wx515H/zhangyin.jpg;;;images
+;300Wx300H;/300Wx300H/zhangyin.jpg;$siteResource/images/300Wx300H/zhangyin.jpg;;;images
+;96Wx96H;/96Wx96H/zhangyin.jpg;$siteResource/images/96Wx96H/zhangyin.jpg;;;images
+;65Wx65H;/65Wx65H/zhangyin.jpg;$siteResource/images/65Wx65H/zhangyin.jpg;;;images
+;30Wx30H;/30Wx30H/zhangyin.jpg;$siteResource/images/30Wx30H/zhangyin.jpg;;;images
+
+;1200Wx1200H;/1200Wx1200H/11.png;$siteResource/images/1200Wx1200H/11.png;;;images
+;515Wx515H;/515Wx515H/11.png;$siteResource/images/515Wx515H/11.png;;;images
+;300Wx300H;/300Wx300H/11.png;$siteResource/images/300Wx300H/11.png;;;images
+;96Wx96H;/96Wx96H/11.png;$siteResource/images/96Wx96H/11.png;;;images
+;65Wx65H;/65Wx65H/11.png;$siteResource/images/65Wx65H/11.png;;;images
+;30Wx30H;/30Wx30H/11.png;$siteResource/images/30Wx30H/11.png;;;images
+
+;1200Wx1200H;/1200Wx1200H/12.png;$siteResource/images/1200Wx1200H/12.png;;;images
+;515Wx515H;/515Wx515H/12.png;$siteResource/images/515Wx515H/12.png;;;images
+;300Wx300H;/300Wx300H/12.png;$siteResource/images/300Wx300H/12.png;;;images
+;96Wx96H;/96Wx96H/12.png;$siteResource/images/96Wx96H/12.png;;;images
+;65Wx65H;/65Wx65H/12.png;$siteResource/images/65Wx65H/12.png;;;images
+;30Wx30H;/30Wx30H/12.png;$siteResource/images/30Wx30H/12.png;;;images
+
+;1200Wx1200H;/1200Wx1200H/13.png;$siteResource/images/1200Wx1200H/13.png;;;images
+;515Wx515H;/515Wx515H/13.png;$siteResource/images/515Wx515H/13.png;;;images
+;300Wx300H;/300Wx300H/13.png;$siteResource/images/300Wx300H/13.png;;;images
+;96Wx96H;/96Wx96H/13.png;$siteResource/images/96Wx96H/13.png;;;images
+;65Wx65H;/65Wx65H/13.png;$siteResource/images/65Wx65H/13.png;;;images
+;30Wx30H;/30Wx30H/13.png;$siteResource/images/30Wx30H/13.png;;;images
+
+;1200Wx1200H;/1200Wx1200H/14.png;$siteResource/images/1200Wx1200H/14.png;;;images
+;515Wx515H;/515Wx515H/14.png;$siteResource/images/515Wx515H/14.png;;;images
+;300Wx300H;/300Wx300H/14.png;$siteResource/images/300Wx300H/14.png;;;images
+;96Wx96H;/96Wx96H/14.png;$siteResource/images/96Wx96H/14.png;;;images
+;65Wx65H;/65Wx65H/14.png;$siteResource/images/65Wx65H/14.png;;;images
+;30Wx30H;/30Wx30H/14.png;$siteResource/images/30Wx30H/14.png;;;images
+
+
+INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion
+;zhangyin;/1200Wx1200H/zhangyin.jpg,/515Wx515H/zhangyin.jpg,/300Wx300H/zhangyin.jpg,/96Wx96H/zhangyin.jpg,/65Wx65H/zhangyin.jpg,/30Wx30H/zhangyin.jpg;
+;Coenzyme Q10 98% HPLC;/1200Wx1200H/11.png,/515Wx515H/11.png,/300Wx300H/11.png,/96Wx96H/11.png,/65Wx65H/11.png,/30Wx30H/11.png;
+;Tribulus 90% UV THC FREE;/1200Wx1200H/12.png,/515Wx515H/12.png,/300Wx300H/12.png,/96Wx96H/12.png,/65Wx65H/12.png,/30Wx30H/12.png;
+;Vitamin C Powder;/1200Wx1200H/13.png,/515Wx515H/13.png,/300Wx300H/13.png,/96Wx96H/13.png,/65Wx65H/13.png,/30Wx30H/13.png;
+;Alpha Lipoic Acid;/1200Wx1200H/14.png,/515Wx515H/14.png,/300Wx300H/14.png,/96Wx96H/14.png,/65Wx65H/14.png,/30Wx30H/14.png;
+
+
+UPDATE Product;code[unique=true];$picture;$thumbnail;$detail;$others;$normal;$thumbnails;$galleryImages;$catalogVersion
+;000001;/300Wx300H/zhangyin.jpg;/96Wx96H/zhangyin.jpg;/1200Wx1200H/zhangyin.jpg;/515Wx515H/zhangyin.jpg,/65Wx65H/zhangyin.jpg,/30Wx30H/zhangyin.jpg;/300Wx300H/zhangyin.jpg;/96Wx96H/zhangyin.jpg;zhangyin;
+;AC05080;/300Wx300H/11.png;/96Wx96H/11.png;/1200Wx1200H/11.png;/515Wx515H/11.png,/65Wx65H/11.png,/30Wx30H/11.png;/300Wx300H/11.png;/96Wx96H/11.png;Coenzyme Q10 98% HPLC;
+;AC03131;/300Wx300H/12.png;/96Wx96H/12.png;/1200Wx1200H/12.png;/515Wx515H/12.png,/65Wx65H/12.png,/30Wx30H/12.png;/300Wx300H/12.png;/96Wx96H/12.png;Tribulus 90% UV THC FREE;
+;AC01361;/300Wx300H/13.png;/96Wx96H/13.png;/1200Wx1200H/13.png;/515Wx515H/13.png,/65Wx65H/13.png,/30Wx30H/13.png;/300Wx300H/13.png;/96Wx96H/13.png;Vitamin C Powder;
+;AC01710;/300Wx300H/14.png;/96Wx96H/14.png;/1200Wx1200H/14.png;/515Wx515H/14.png,/65Wx65H/14.png,/30Wx30H/14.png;/300Wx300H/14.png;/96Wx96H/14.png;Alpha Lipoic Acid;
+
+# Classification: Technical details (643)
+$feature1=@Tape size, 1446[$clAttrModifiers];  # Tape size in millimeter (mm)
+$feature2=@Coercive force, 2150[$clAttrModifiers];  # Coercive force in kiloAmper/metre (kA/m)
+$feature3=@Tape type, 2217[$clAttrModifiers];  # Tape type
+$feature5=@Source data-sheet, 6617[$clAttrModifiers];  # Source data-sheet
+$feature6=@Tape thickness, 2137[$clAttrModifiers];  # Tape thickness in micron (µm)
+INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature5;$feature6;$catalogVersion;
+ ;000001;<ignore>;<ignore>;MiniDV;ICEcat.biz;<ignore>;
+ ;AC05080;<ignore>;<ignore>;MiniDV;ICEcat.biz;<ignore>;
+ ;AC03131;<ignore>;<ignore>;MiniDV;ICEcat.biz;<ignore>;
+ ;AC01361;<ignore>;<ignore>;MiniDV;ICEcat.biz;<ignore>;
+ ;AC01710;<ignore>;<ignore>;MiniDV;ICEcat.biz;<ignore>;
+
+
+UPDATE Product;code[unique=true];$approved;$catalogVersion;
+;000001
+;AC05080
+;AC03131
+;AC01361
+;AC01710
+
+INSERT_UPDATE PriceRow;productId[unique=true];unit(code[unique=true,default=pieces]);currency(isocode)[unique=true];price;minqtd;unitFactor;net
+;000001;pieces;USD;15888;1;1;false
+;AC05080;pieces;USD;18786;1;1;false
+;AC03131;pieces;USD;23333;1;1;false
+;AC01361;pieces;USD;66321;1;1;false
+;AC01710;pieces;USD;58124;1;1;false
+
+
+
+
+
+
+
+
+
+
+
+
+INSERT_UPDATE StockLevel;available;warehouse(code)[default='Shinbashi',unique=true];inStockStatus(code)[default='notSpecified'];overSelling;preOrder;productCode[unique=true];reserved
+#;8;;;0;0;000001;0
+
+INSERT_UPDATE StockLevel;available;warehouse(code)[default='Nakano',unique=true];inStockStatus(code)[default='notSpecified'];overSelling;preOrder;productCode[unique=true];reserved
+#;7;;;0;0;000001;0
+ 
+INSERT_UPDATE StockLevel;available;warehouse(code)[default='Misato',unique=true];inStockStatus(code)[default='notSpecified'];overSelling;preOrder;productCode[unique=true];reserved
+#;3;;;0;0;000001;0
+
+INSERT_UPDATE StockLevel;available;warehouse(code)[default='Ichikawa',unique=true];inStockStatus(code)[default='notSpecified'];overSelling;preOrder;productCode[unique=true];reserved
+#;7;;;0;0;000001;0
+
+INSERT_UPDATE StockLevel;available;warehouse(code)[default='Chiba',unique=true];inStockStatus(code)[default='notSpecified'];overSelling;preOrder;productCode[unique=true];reserved
+#;12;;;0;0;000001;0
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
