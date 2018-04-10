@@ -597,6 +597,52 @@
                         <modifiers read="true" write="true" search="true" />
                         <persistence type="property" />
                     </attribute>
+                    
+                    <!-- add by alice -->
+					<attribute qualifier="companyType" type="java.lang.String">
+						<modifiers read="true" write="true" search="true" optional="true" />
+						<persistence type="property" />
+						<description>Type of Company</description>
+					</attribute>
+					<attribute qualifier="establishedIn" type="java.lang.String">
+                        <description>Established in</description>
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="revenue" type="java.math.BigDecimal">
+                        <description>Revenue</description>
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="employeesNo" type="java.lang.Integer">
+                        <description>No. of Employees</description>
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="limitCreditAmount" type="java.math.BigDecimal">
+                        <description>The credit limit you will need for your business</description>
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="vatNo" type="java.lang.String">
+                        <description>VAT No.</description>
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="haveFinancialReport" type="java.lang.Boolean">
+                        <description>Do you have public financial report?If so, please send to customerservice@acerchem.com</description>
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    
+					<attribute qualifier="provideTradeReference" type="java.lang.Boolean">
+						<description>Can you provide any trade reference for Acerchem?</description>
+						<modifiers optional="false" initial="false" />
+						<persistence type="property" />
+						<defaultvalue>Boolean.FALSE</defaultvalue>
+					</attribute>
+					<!-- end -->
+                    
                 </attributes>
             </itemtype>
 
