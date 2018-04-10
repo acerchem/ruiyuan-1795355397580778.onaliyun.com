@@ -36,10 +36,10 @@ public class DeliveryMethodCheckoutStepController extends AbstractCheckoutStepCo
 	private static final String DELIVERY_METHOD = "delivery-method";
 
 	@RequestMapping(value = "/choose", method = RequestMethod.GET)
-	@RequireHardLogIn
-	@Override
-	@PreValidateQuoteCheckoutStep
-	@PreValidateCheckoutStep(checkoutStep = DELIVERY_METHOD)
+//	@RequireHardLogIn
+//	@Override
+//	@PreValidateQuoteCheckoutStep
+//	@PreValidateCheckoutStep(checkoutStep = DELIVERY_METHOD)
 	public String enterStep(final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		// Try to set default delivery mode

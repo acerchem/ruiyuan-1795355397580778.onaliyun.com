@@ -1,0 +1,21 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+#
+# Import User Level
+# Full country list conforming to ISO 3166-1 alpha-2
+#
+
+INSERT_UPDATE UserLevel;UID[unique=true];NAME;levelName;levelCode(code);discount;customers
+;D;Silver;"Silver";D;"0.95";
+;C;Gold;"Gold";C;"0.9";
+;B;Platinum;"Platinum";B;"0.85";
+;A;Diamonds;"Diamonds";A;"0.8";
+

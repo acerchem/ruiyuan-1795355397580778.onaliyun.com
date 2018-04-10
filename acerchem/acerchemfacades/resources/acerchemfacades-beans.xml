@@ -67,12 +67,6 @@
 		<property name="creditAccount" type="de.hybris.platform.commercefacades.user.data.CustomerCreditAccountData"/><!-- 信用账户 -->
 	</bean>
 	<!-- end -->
-
-    <bean class="com.acerchem.facades.product.data.WarehouseData">
-        <property name="code" type="String"/>
-        <property name="name" type="String"/>
-    </bean>
-    
     
     <!-- -add by Randy   the store info of the page product detail  -->
      <bean class="com.acerchem.facades.product.data.StoreOfProductData">
@@ -87,20 +81,6 @@
     </bean>
     
 
-	<bean class="com.acerchem.facades.product.data.CountryToWarehouseData">
-		<property name="warehouseData" type="com.acerchem.facades.product.data.WarehouseData"/>
-		<property name="countryDataList" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.CountryData>"/>
-	</bean>
-
-	<bean class="de.hybris.platform.commercefacades.user.data.CountryData">
-		<property name="storeId" type="String"/>
-	</bean>
-
-
-    <bean class="com.acerchem.facades.product.data.CountryToWarehouseDataList">
-        <property name="countryToWarehouseDataList" type="java.util.List&lt;com.acerchem.facades.product.data.CountryToWarehouseData>"/>
-    </bean>
-
 	<bean class="de.hybris.platform.commercefacades.order.data.AddToCartParams">
 		<property name="isUseFutureStock" type="Boolean"/>
 		<property name="availableDate" type="java.util.Date"/>
@@ -110,5 +90,4 @@
 		<property name="isUseFutureStock" type="Boolean"/>
 		<property name="availableDate" type="java.util.Date"/>
 	</bean>
-
 </beans>
