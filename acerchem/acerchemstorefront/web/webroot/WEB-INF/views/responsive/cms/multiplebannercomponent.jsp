@@ -27,7 +27,7 @@
 
 		<c:if test='${level eq 1}'>
 			<li class="item1">
-				<a href="">
+				<a href="${contextPath}${urlLink}">
 					<div class="meansale">
 						<p>promo</p>
 						<span>Sodium Hyaluronate 1% Solution (25kg Drum) </span>
@@ -41,7 +41,7 @@
 			</c:if>
 			<c:if test='${level eq 2}'>
 			<li class="item2">
-				<a href="">
+				<a href="${contextPath}${urlLink}">
 					<div class="text">
 						<p>Essential Nutrients for sports</p>
 						<span>View the details</span>
@@ -52,7 +52,7 @@
 			</c:if>
 			<c:if test='${level eq 3}'>
 			<li class="item3">
-				<a href="">
+				<a href="${contextPath}${urlLink}">
 					<div class="text">
 						<p>Factory examination record</p>
 						<span>View the details</span>
@@ -63,7 +63,7 @@
 			</c:if>
 			<c:if test='${level eq 4}'>
 			<li class="item4">
-				<a href="">
+				<a href="${contextPath}${urlLink}">
 				<div class="textmessge">
 					<p>If you have an opinion or advice </p>
 					<span>Send message</span>
@@ -79,7 +79,7 @@
 					<p>Let's contact you</p>
 					<span>Let's contact you to get more information</span>
 				</div>
-				<form action="">
+				<form action="${contextPath}${urlLink}">
 					<input type="text" placeholder="Your Emaill Address" class="text-inp">
 					<input type="number" placeholder="Your Phone" class="text-inp">
 				</form>
