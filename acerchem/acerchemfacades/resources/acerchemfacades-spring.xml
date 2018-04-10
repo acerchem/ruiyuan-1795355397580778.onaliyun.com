@@ -269,7 +269,7 @@
 	</bean>
 
     <alias name="defaultAcerchemCheckoutFacade" alias="acerchemCheckoutFacade"/>
-    <bean id="defaultAcerchemCheckoutFacade" class="com.acerchem.facades.facades.impl.DefaultAcerchemCheckoutFacade" >
+    <bean id="defaultAcerchemCheckoutFacade" parent="checkoutFacade" class="com.acerchem.facades.facades.impl.DefaultAcerchemCheckoutFacade" >
     </bean>
 
 	<!--  <bean id="defaultCustomerCreditAccountService" class="com.acerchem.service.customercreditaccount.impl.DefaultCustomerCreditAccountServiceImpl" />

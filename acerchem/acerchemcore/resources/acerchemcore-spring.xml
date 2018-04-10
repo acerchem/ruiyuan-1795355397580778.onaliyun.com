@@ -610,4 +610,8 @@
 	<alias name="defaultAcerchemStockService" alias="acerchemStockService"/>
 	<bean id="defaultAcerchemStockService" parent="stockService" class="com.acerchem.core.service.impl.DefaultAcerchemStockService">
 	</bean>
+
+	<alias name="defaultAcerchemDeliveryService" alias="acerchemDeliveryService"/>
+	<bean id="defaultAcerchemDeliveryService" parent="deliveryService" class="com.acerchem.core.service.impl.DefaultAcerchemDeliveryService">
+	</bean>
 </beans>

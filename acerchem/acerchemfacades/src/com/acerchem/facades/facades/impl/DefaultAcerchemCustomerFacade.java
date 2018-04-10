@@ -79,8 +79,8 @@ public class DefaultAcerchemCustomerFacade extends DefaultCustomerFacade impleme
 				storeOfProductData.setFutureInventory(stockLevelModel.getPreOrder());
 //				storeOfProductData.setIsUseFutureStock(Boolean.FALSE);
 				//配送范围
-				if (pos.getZone()!=null&&pos.getZone().getCountries()!=null){
-					storeOfProductData.setCountryDataList(countryConverter.convertAll(pos.getZone().getCountries()));
+				if (pos.getDeliveryZone()!=null&&pos.getDeliveryZone().getCountries()!=null){
+					storeOfProductData.setCountryDataList(countryConverter.convertAll(pos.getDeliveryZone().getCountries()));
 				}
 				dataList.add(storeOfProductData);
 			}

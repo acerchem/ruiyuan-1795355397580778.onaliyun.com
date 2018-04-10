@@ -28,11 +28,11 @@ public class DefaultAcerchemCartFacade extends DefaultCartFacade implements Acer
 
     @Override
     public String  acerchemValidateCart(String productCode,boolean isUseFutureStock,String storeId) {
+        if (ObjectUtils.isEmpty(storeId)){
+            return "basket.error.storeId.empty";
+        }
         if (hasSessionCart()){
             CartModel cartModel = getCartService().getSessionCart();
-            if (ObjectUtils.isEmpty(storeId)){
-                return "basket.error.storeId.empty";
-            }
             if(!acerchemValidatePointOfService(storeId,cartModel)){
                 return "basket.error.storeId.different";
             }
