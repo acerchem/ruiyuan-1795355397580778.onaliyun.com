@@ -15,7 +15,7 @@ import java.util.Map;
  */
 public class DefaultAcerchemTrayDao extends AbstractItemDao implements AcerchemTrayDao {
 
-    private final String GET_COUNTRY_TRAY_FARE_CONF = "select {PK} from {countryFare} where {country}=?country and {trayAmount} =?trayAmount";
+    private final String GET_COUNTRY_TRAY_FARE_CONF = "select {PK} from {CountryTrayFareConf} where {country}=?country and {trayAmount} =?trayAmount";
 
     @Override
     public CountryTrayFareConfModel getCouTrayFareConf(CountryModel country, int trayAmount) {
