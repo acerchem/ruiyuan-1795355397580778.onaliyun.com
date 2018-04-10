@@ -28,12 +28,12 @@
     float: left;
 }*/
 
-.maxlatest .sign-content{position:  absolute; top:50%; z-index: 9; right:10%; padding:30px; width: 440px; transform: translate(0,-50%); }
+.maxlatest .sign-content{position:  absolute; top:50%; z-index: 9; right:10%; padding:30px; width:25%; max-width: 400px; min-width: 330px; transform: translate(0,-50%); }
 .maxlatest .sign-content .text-section{margin-bottom: 16px;}
 .maxlatest .sign-content .btn-set{margin-top: 20px;}
 .maxlatest .sign-content input[type="text"],.maxlatest .sign-content input[type="password"],.maxlatest .sign-content .btn{height: 40px; line-height: 40px;}
 
-.maxlatest .bansearch{position: absolute; top:50%; left: 10%; z-index: 999; width: 520px; color: #fff; transform: translate(0,-50%);}
+.maxlatest .bansearch{position: absolute; top:50%; left: 10%; z-index: 3; width: 40%; max-width: 500px; color: #fff; transform: translate(0,-50%);}
 .maxlatest .bansearch form{position: relative;  margin: 20px 0;}
 .maxlatest .bansearch .maxicon-search{background-position: 0 -218px; position: absolute; top:0; right: 0; height: 50px; width: 50px;}
 .maxlatest .bansearch p{font-size: 42px; text-transform: uppercase; font-weight: bold; line-height: 1.0em;}
@@ -157,123 +157,6 @@ background:-webkit-linear-gradient(top,rgba(0,0,0,0) 20%,rgba(0,0,0,.9) 100%);}
 .maxfeatured li:hover .maxhov{display: block;}
 
 /* .maxfeatured li:after{content:'';display: block;width: 1px;height: 100%;position: absolute;bottom: 0;right: 0;background-color: #eeeeee;} */
-
-
-
-
-/*media*/
-
-@media screen and (max-width: 1680px) {
-   .maxmean .formtext input ,.maxmean .formtext button{
-        margin-top: 20px;
-    }
-    .maxmean .formtext input ,.maxmean .formtext button{
-        height: 40px;
-        line-height: 40px;
-    }
-    
-}
-
-
-@media screen and (max-width: 1440px) {
-    .maxmean .formtext input ,.maxmean .formtext button{
-        height: 30px;
-        line-height: 30px;
-        margin-top: 14px;
-    }
-    .maxlatest .sign-content{
-        padding:20px;
-    }
-    .maxlatest .sign-content input[type="text"], .maxlatest .sign-content input[type="password"], .maxlatest .sign-content .btn{
-        height: 30px;
-        line-height: 30px;
-        margin-top:10px;
-    }
-
-    .maxlatest .sign-content .text-section{
-        font-size: 12px;
-        
-    }
-    .sign-content label, .gen-content .g-cartable .solid-form label{
-        margin-bottom: 10px;
-    }
-    
-
-    
-}
-
-@media screen and (max-width: 1366px) {
-    .maxmean div , .maxmean .formtext div{
-        font-size: 12px
-    }
-    .maxmean .formtext button{
-        font-size: 14px;
-    }
-    .maxmean .meansale p,.maxmean p,.maxmean .textmessge p{
-        font-size: 18px;
-    }
-    .maxmean .meansale label i{
-        font-size: 28px;
-    }
-    .maxmean .formtext input ,.maxmean .formtext button{
-        height: 30px;
-        line-height: 30px;
-        margin-top: 14px;
-    }
-    .maxmean span{
-        margin-top: 4px;
-    }
-
-    
-}
-
-@media screen and (max-width: 1200px) {
-    .swiper-slide .maxtite_ban h2 {
-        font-size: 2rem;
-    }
-    .maxfactory li p , .maxlatest_main .maxtite_ban p{
-        font-size: 1.2rem;
-    }
-    .maxsales .maximgp {
-        font-size: 1rem;
-    }
-    .maxsales_but{
-        font-size: .8rem;
-    }
-    .maxmark-con h3{
-        font-size: 4rem;
-    }
-    .maxmark-con p{
-        margin-top: 1.8rem;
-    }
-    .maxmark-con{
-        margin-left: 20%;
-    }
-    .maxlatest_main .maxmark-con h3{
-        font-size: 5rem;
-    }
-    .maxlatest_main .maxmark-con h4 span , .maxlatest_main .maxmark-con p{
-        font-size: 2rem;
-    }
-    .maxlatest_main .maxmark-con em{
-        line-height: .9em;
-    }
-    .maxmean .meansale p,.maxmean p,.maxmean .textmessge p{
-        font-size: 14px;
-    }
-    .maxmean .textmessge span{
-        margin:16px auto;
-    }
-    .maxmean .formtext{
-        padding:14px;
-    }
-    .maxmean .formtext input ,.maxmean .formtext button{
-        margin-top: 12px;
-    }
-    .maxlatest .sign-content .title{
-        margin:0;
-    }
-}
 
 
 

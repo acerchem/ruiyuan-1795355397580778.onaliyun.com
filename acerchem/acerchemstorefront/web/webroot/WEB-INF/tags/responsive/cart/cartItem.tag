@@ -68,66 +68,26 @@
 					</div>
 				</td>
 				<td>
-				<!-- 
+			
 					<div class="oper">
-						<i class="icons del-icon"></i>
+						 <c:forEach var="entryAction" items="${entry.supportedActions}">
+                                <c:url value="/cart/entry/execute/${entryAction}" var="entryActionUrl"/>
+                                
+                                 <form:form id="removeCartForm${fn:escapeXml(entry.product.code)}" action="${entryActionUrl}" method="post" >
+                                 
+                                   <input type="hidden" name="entryNumbers" value="${entry.entryNumber}"/>
+                                   <input type="hidden" name="productCode" value="${fn:escapeXml(entry.product.code)}"/>
+                                    <input type="hidden" name="initialQuantity" value="${entry.quantity}"/>
+					             <button id="removeCartBtn" type="submit" class="btn btn-cart" >
+								Remove
+							</button> 
+                                 </form:form>
+                                
+                          </c:forEach>
 					</div>
 					
-					 -->
-					 
-					  <div class="item__menu">
-                <c:if test="${entry.updateable}" >
-                    <div class="btn-group">
-                        <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" id="editEntry_${entryNumber}">
-                            <span class="glyphicon glyphicon-option-vertical"></span>
-                        </button>
-                        <ul class="dropdown-menu dropdown-menu-right">
-                            <c:if test="${not empty cartData.quoteData}">
-                                <c:choose>
-                                    <c:when test="${not entry.product.multidimensional}">
-                                        <li>
-                                            <a href="#entryCommentDiv_${entry.entryNumber}" data-toggle="collapse" >
-                                                <spring:theme code="basket.page.comment.menu"/>
-                                            </a>
-                                        </li>
-                                    </c:when>
-                                    <c:otherwise>
-                                        <li>
-                                            <a href="#entryCommentDiv_${entry.entries.get(0).entryNumber}" data-toggle="collapse" >
-                                                <spring:theme code="basket.page.comment.menu"/>
-                                            </a>
-                                        </li>
-                                    </c:otherwise>
-                                </c:choose>
-                            </c:if>
-                            <form:form id="cartEntryActionForm" action="" method="post" />
-                             <%-- Build entry numbers string for execute action -- Start --%>
-                            <c:choose>
-					            <c:when test="${entry.entryNumber eq -1}"> <%-- for multid entry --%>
-					                <c:forEach items="${entry.entries}" var="subEntry" varStatus="stat">
-						    			<c:set var="actionFormEntryNumbers" value="${stat.first ? '' : actionFormEntryNumbers.concat(';')}${subEntry.entryNumber}" />
-						    		</c:forEach>
-					            </c:when>
-					            <c:otherwise>
-					                <c:set var="actionFormEntryNumbers" value="${entry.entryNumber}" />
-					            </c:otherwise>
-					        </c:choose>
-					        <%-- Build entry numbers string for execute action -- End --%>
-                            <c:forEach var="entryAction" items="${entry.supportedActions}">
-                                <c:url value="/cart/entry/execute/${entryAction}" var="entryActionUrl"/>
-                                <li class="js-execute-entry-action-button" id="actionEntry_${fn:escapeXml(entryNumber)}"
-                                    data-entry-action-url="${entryActionUrl}"
-                                    data-entry-action="${fn:escapeXml(entryAction)}"
-                                    data-entry-product-code="${fn:escapeXml(entry.product.code)}"
-                                    data-entry-initial-quantity="${entry.quantity}"
-                                    data-action-entry-numbers="${actionFormEntryNumbers}">
-                                    <a href="#"><spring:theme code="basket.page.entry.action.${entryAction}"/></a>
-                                </li>
-                            </c:forEach>
-                        </ul>
-                    </div>
-                </c:if>
-            </div>
+				
 				</td>
 			</tr>
  </c:if>
+ 

@@ -346,12 +346,19 @@
 	slideparwidth = prodslide.parent().width();
 	prodslide.width(slideparwidth*.5);
 
+	/*resize*/
+	$(window).resize(function(){
+	  	slideparwidth = prodslide.parent().width();
+	  	prodslide.width(slideparwidth*.5);
+	})	
+
 	var flipspan = '.m-prodslide .minimg span',
 		flipbtn = $('.m-prodslide .flip span');
 	var slidwrap = new Swiper('.slidewrap',{
         wrapperClass : 'slide-item', 
         slideClass : 'item',
         calculateHeight : true,
+        resizeReInit : true,
         speed: 600,        
         pagination: '.minimg', 
         paginationClickable :true,
@@ -366,6 +373,7 @@
 			})
 	     }      
     })
+
 
 	$(document).on('mouseover',flipspan,function(){
 		$(this).click();
