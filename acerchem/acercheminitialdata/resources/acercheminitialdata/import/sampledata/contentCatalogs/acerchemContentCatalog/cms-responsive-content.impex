@@ -1263,20 +1263,12 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 ###### Footer Component Refactor End ######
 
 #===shaun
-INSERT_UPDATE MultipleBannerComponent;$contentCV[unique=true];displayLevel;uid[unique=true];name;&componentRef;classfication
-;;1;OneBannerComponent;One Banner Component;OneBannerComponent;1
-
-INSERT_UPDATE MultipleBannerComponent;$contentCV[unique=true];displayLevel;uid[unique=true];name;&componentRef;classfication
-;;2;TwoBannerComponent;Two Banner Component;TwoBannerComponent;2
-
-INSERT_UPDATE MultipleBannerComponent;$contentCV[unique=true];displayLevel;uid[unique=true];name;&componentRef;classfication
-;;3;ThreeBannerComponent;Three Banner Component;ThreeBannerComponent;3
-
-INSERT_UPDATE MultipleBannerComponent;$contentCV[unique=true];displayLevel;uid[unique=true];name;&componentRef;classfication
-;;4;FourBannerComponent;Four Banner Component;FourBannerComponent;4
-
-INSERT_UPDATE MultipleBannerComponent;$contentCV[unique=true];displayLevel;uid[unique=true];name;&componentRef;classfication
-;;5;FiveBannerComponent;FiveBannerComponent;FiveBannerComponent;5
+INSERT_UPDATE MultipleBannerComponent;$contentCV[unique=true];displayLevel;uid[unique=true];name;&componentRef;classfication;urlLink
+;;1;OneBannerComponent;One Banner Component;OneBannerComponent;1;/Open-Catalogue/Cameras/c/571
+;;2;TwoBannerComponent;Two Banner Component;TwoBannerComponent;2;/Open-Catalogue/Components/c/106
+;;3;ThreeBannerComponent;Three Banner Component;ThreeBannerComponent;3;/Open-Catalogue/Cameras/Digital-Cameras/c/575
+;;4;FourBannerComponent;Four Banner Component;FourBannerComponent;4;/Open-Catalogue/Cameras/Film-Cameras/c/574
+;;5;FiveBannerComponent;FiveBannerComponent;FiveBannerComponent;5;/Open-Catalogue/Data-storage/Flash-Memory/c/902
 
 UPDATE MultipleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
 ;;HomepageSwiperOneBannerComponent;/acerchemimages/maxbanner-bg.jpg
