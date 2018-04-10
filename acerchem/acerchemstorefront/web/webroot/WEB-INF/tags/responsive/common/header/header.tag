@@ -107,7 +107,7 @@
 	
 	
 </div>
-	<header:search/>
+	
 <script type="text/javascript">
 
 function logout(){
