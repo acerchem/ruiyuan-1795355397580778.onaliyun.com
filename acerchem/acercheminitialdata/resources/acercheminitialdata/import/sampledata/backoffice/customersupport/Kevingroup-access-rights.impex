@@ -1,0 +1,86 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+#
+# Import Access Rights for CS Cockpit
+# 
+$START_USERRIGHTS
+Type;UID;MemberOfGroups;Password;Target;read;change;create;remove;change_perm
+
+
+## Kevingroup access rights
+UserGroup;Kevingroup;employeegroup;;;;;;;
+# Corrections for other groups;;;;;;;;;
+
+;;;;Website;-;-;-;-;-
+;;;;AbstractCMSItem;-;-;-;-;-
+
+# Access Rights for Products & Catalog;;;;;;;;
+;;;;ItemSyncTimestamp;+;;;
+;;;;SyncItemJob;+;;;
+;;;;Type;+;;;
+;;;;Product;+;+;+;+;+;
+;;;;Category;+;+;+;+;+;
+;;;;variantType;+;+;+;+;+;
+;;;;Catalog;+;;;
+;;;;CatalogVersion;+;+;+;+;+;
+;;;;ClassificationAttributeUnit;+;;;
+;;;;Media;+;+;+;+;+;
+;;;;MediaContainer;+;+;+;+;+;
+;;;;MediaFormat;+;+;+;+;+;
+;;;;MediaFolder;+;+;+;+;+;
+;;;;Vendor;+;+;+;+;+;
+;;;;Tax;+;+;+;+;+;
+;;;;TaxRow;+;+;+;+;+;
+;;;;PriceRow;+;+;+;+;+;
+;;;;ProductFeature;+;+;+;+;+;
+;;;;ProductReference;+;+;+;+;+;
+;;;;Warehouse;+;+;+;+;+;
+;;;;ProductTaxCode;+;+;+;+;+;
+;;;;ProductOrderLimit;+;+;+;+;+;
+;;;;AcerChemVendor2Product;+;+;+;+;+;
+;;;;CMSProductListComponent;+;+;+;+;+;
+;;;;CMSProductRestriction;+;+;+;+;+;
+;;;;AbstractOrderEntryProductInfo;+;+;+;+;+;
+;;;;CategoryProductRelation;+;+;+;+;+;
+;;;;Product2KeywordRelation;+;+;+;+;+;
+;;;;ProductAddToCartComponent;+;+;+;+;+;
+;;;;ProductDetailComponent;+;+;+;+;+;
+;;;;ProductFeature;+;+;+;+;+;
+;;;;ProductFeatureComponent;+;+;+;+;+;
+;;;;ProductGridComponent;+;+;+;+;+;
+;;;;ProductInfoStatus;+;+;+;+;+;
+;;;;ProductListComponent;+;+;+;+;+;
+
+#stock right
+;;;;BaseStore2WarehouseRel;+;+;+;+;+;
+;;;;ConsignmentWarehouseRelation;+;+;+;+;+;
+;;;;PoS2WarehouseRel;+;+;+;+;+;
+;;;;VendorWarehouseRelation;+;+;+;+;+;
+;;;;Warehouse;+;+;+;+;+;
+;;;;WarehouseConsignmentState;+;+;+;+;+;
+;;;;InStockStatus;+;+;+;+;+;
+;;;;StockAlertAction;+;+;+;+;+;
+;;;;StockLevel;+;+;+;+;+;
+;;;;StockLevelHistoryEntry;+;+;+;+;+;
+;;;;StockLevelProductRelation;+;+;+;+;+;
+;;;;StockLevelStatus;+;+;+;+;+;
+;;;;StockLevelStockLevelHistoryEntryRelation;+;+;+;+;+;
+;;;;StockLevelUpdateType;+;+;+;+;+;
+;;;;StockLevelWarehouseRelation;+;+;+;+;+;
+;;;;StockNotificationProcess;+;+;+;+;+;
+;;;;BaseStore2PointOfServiceRelation;+;+;+;+;+;
+;;;;PointOfService;+;+;+;+;+;
+;;;;PointOfServiceTypeEnum;+;+;+;+;+;
+
+
+
+
+$END_USERRIGHTS

@@ -1,0 +1,85 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+#
+# Import Access Rights for CS Cockpit
+# 
+$START_USERRIGHTS
+Type;UID;MemberOfGroups;Password;Target;read;change;create;remove;change_perm
+
+
+## Frencegroup access rights
+UserGroup;Frencegroup;employeegroup;;;;;;;
+# Corrections for other groups;;;;;;;;;
+
+;;;;Website;-;-;-;-;-
+;;;;AbstractCMSItem;-;-;-;-;-
+
+# Access Rights for Products & Catalog;;;;;;;;
+;;;;ItemSyncTimestamp;+;;;
+;;;;SyncItemJob;+;;;
+;;;;Type;+;;;
+
+;;;;Product;+;-;-;-;-;
+
+#stock right
+;;;;BaseStore2WarehouseRel;+;+;+;+;+;
+;;;;ConsignmentWarehouseRelation;+;+;+;+;+;
+;;;;PoS2WarehouseRel;+;+;+;+;+;
+;;;;StockLevelWarehouseRelation;+;+;+;+;+;
+;;;;VendorWarehouseRelation;+;+;+;+;+;
+;;;;Warehouse;+;+;+;+;+;
+;;;;WarehouseConsignmentState;+;+;+;+;+;
+;;;;InStockStatus;+;+;+;+;+;
+;;;;StockAlertAction;+;+;+;+;+;
+;;;;StockLevel;+;+;+;+;+;
+;;;;StockLevelHistoryEntry;+;+;+;+;+;
+;;;;StockLevelProductRelation;+;+;+;+;+;
+;;;;StockLevelStatus;+;+;+;+;+;
+;;;;StockLevelStockLevelHistoryEntryRelation;+;+;+;+;+;
+;;;;StockLevelUpdateType;+;+;+;+;+;
+;;;;StockLevelWarehouseRelation;+;+;+;+;+;
+;;;;StockNotificationProcess;+;+;+;+;+;
+;;;;BaseStore2PointOfServiceRelation;+;+;+;+;+;
+;;;;PointOfService;+;+;+;+;+;
+;;;;PointOfServiceTypeEnum;+;+;+;+;+;
+
+#order
+;;;;AbstractOrder;+;+;+;+;+;
+;;;;AbstractOrder2AbstractOrderEntry;+;+;+;+;+;
+;;;;AbstractOrderEntry;+;+;+;+;+;
+;;;;AbstractOrderEntry2AbstractOrderEntryProductInfoRelation;+;+;+;+;+;
+;;;;AbstractOrderEntryProductInfo;+;+;+;+;+;
+;;;;BaseSite2UncollectedOrdersCronJob;+;+;+;+;+;
+;;;;Order;+;+;+;+;+;
+;;;;OrderProcess;+;+;+;+;+;
+
+
+# delivery
+;;;;BaseStore2DeliveryModeRel;+;+;+;+;+;
+;;;;CachedPromotionOrderChangeDeliveryModeAction;+;+;+;+;+;
+;;;;DeliveryAddresss2CartToOrderCronJob;+;+;+;+;+;
+;;;;DeliveryMode;+;+;+;+;+;
+;;;;DeliveryStatus;+;+;+;+;+;
+;;;;OrderThresholdChangeDeliveryModePromotion;+;+;+;+;+;
+;;;;PickUpDeliveryMode;+;+;+;+;+;
+;;;;ProductDeliveryModeRelation;+;+;+;+;+;
+;;;;PromotionOrderChangeDeliveryModeAction;+;+;+;+;+;
+;;;;RuleBasedOrderChangeDeliveryModeAction;+;+;+;+;+;
+;;;;ZoneDeliveryMode;+;+;+;+;+;
+;;;;ZoneDeliveryModeValue;+;+;+;+;+;
+
+
+
+
+
+
+
+$END_USERRIGHTS
