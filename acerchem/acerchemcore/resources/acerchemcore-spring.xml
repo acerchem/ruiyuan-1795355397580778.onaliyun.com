@@ -60,6 +60,18 @@
 		<!-- 'brands' is the root of the brands hierarchy -->
 	</bean>
 
+    <bean id="apparelCategorySource" parent="abstractCategorySource">
+		<property name="rootCategory" value="categories"/>
+		<!-- 'categories' is the root apparel category -->
+	</bean>
+	<bean id="apparelBrandCategorySource" parent="abstractCategorySource">
+		<property name="rootCategory" value="brands"/>
+		<!-- 'brands' is the root of the brands hierarchy -->
+	</bean>
+	<bean id="apparelCollectionCategorySource" parent="abstractCategorySource">
+		<property name="rootCategory" value="collections"/> <!-- 'collections' is the root of the collections hierarchy -->
+	</bean>
+    
 	<bean id="abstractCategoryCodeValueProvider" abstract="true"
 	      class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.CategoryCodeValueProvider"
 	      parent="abstractPropertyFieldValueProvider" >
