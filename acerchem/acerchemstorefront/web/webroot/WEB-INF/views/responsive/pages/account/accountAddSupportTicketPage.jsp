@@ -84,7 +84,7 @@
 				<div class="accountActions">
 					<div class="row">
 						<div class="col-sm-6 col-sm-push-6 accountButtons">
-							<button class="btn-submit btn btn-primary btn-block" type="submit"><!--   -->
+							<button class="btn-submit btn btn-primary btn-block" type="submit">
 								<spring:theme code="text.account.supporttickets.createTicket.submit" text="Submit" />
 							</button>
 						</div>
@@ -151,7 +151,7 @@ $('.btn-submit').on('click',function(){
 		if(aval){		
 			var mymail = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;		
 			if(aname=='email'&&!mymail.test(aval)){				
-				maxalert('Please enter a valid mailboxï¼')
+				maxalert('Please enter a valid mailbox!')
 				return false;
 			}
 
