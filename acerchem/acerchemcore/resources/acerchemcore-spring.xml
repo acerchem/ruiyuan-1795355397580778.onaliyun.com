@@ -343,6 +343,11 @@
 		<property name="cmsSiteService" ref="cmsSiteService"/>
 	</bean>
 
+    <!-- lz ↓ -->
+	<alias name="ticketDaoImpl" alias="ticketDaoImpl" /> 
+	<bean id="ticketDaoImpl" parent="ticketBusinessService" class="com.acerchem.core.service.impl.AcerChemSupportTicketServiceImpl" >
+	</bean>
+	<!-- lz ↑ -->
 
 	<!-- checkout flow configuration -->
 
