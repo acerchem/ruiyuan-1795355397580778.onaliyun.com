@@ -16,7 +16,7 @@
 	<cms:component component="${component}" />
 </cms:pageSlot>
 
-
+<!-- 
 <div class="maxprosi-top max-col">
 			<div class="maxcomment">
 				<span class="maxicon_pr"></span>
@@ -25,7 +25,7 @@
 			    </ul>
 		    	<span class="maxcole"></span>
 			</div>
-		</div>
+		</div> -->
 	<div class="maxtop">
 	 <div class="maxLogo">
 	     <cms:pageSlot position="SiteLogo" var="logo" limit="1">
