@@ -276,10 +276,9 @@
 	<alias name="ticketFacadeImpl" alias="defaultTicketFacade" /> 
 	<bean id="ticketFacadeImpl" parent="defaultCustomerTicketingFacade" class="com.acerchem.facade.supportticket.facade.impl.AcerchemFacadeTicketFacadeImpl" />
 	<!-- lz ↑-->
+	<bean id="defaultCustomerCreditAccountService" class="com.acerchem.service.customercreditaccount.impl.DefaultCustomerCreditAccountServiceImpl" />
 	
-	<!--  <bean id="defaultCustomerCreditAccountService" class="com.acerchem.service.customercreditaccount.impl.DefaultCustomerCreditAccountServiceImpl" />
-
-	  <bean id="defaultAcerchemPriceService" class="com.acerchem.service.price.DefaultAcerchemPriceService" />-->
+	<!--  <bean id="defaultAcerchemPriceService" class="com.acerchem.service.price.DefaultAcerchemPriceService" />-->
 
 </beans>
 
