@@ -87,7 +87,14 @@
 						
 						<div class="invernum">
 						
+						<select id="inventoryId" style="display: none;">
 						<c:forEach items="${countrys}" var="data"  varStatus="id"  >
+						<option value ="${data.storeId}">${data.inventory}</option>
+						
+                        </c:forEach>
+                        </select> 
+                        
+                       <c:forEach items="${countrys}" var="data"  varStatus="id"  >
 						<c:if test="${id.index==0}">
 							<span class="label-title inventory">Inventory:<i>${data.inventory}</i> <span class="spot">(<em>${data.inventory}</em>)</span></span>
 							</c:if>	
@@ -100,7 +107,7 @@
 						</div>
 					 
 						<div class="delivery flex-wrap">
-							<span class="label-title">Delivery to</span>
+							<span class="label-title">Delivery to:</span>
 							<div class="flex">
 							
 								<select id="storeMulId">
@@ -110,6 +117,30 @@
 								</select>
 								
 							</div>
+						
+						</div>
+						
+						<div class="delivery flex-wrap">
+						
+						<select id="countryId" style="display: none;">
+							<c:forEach items="${countrys}" var="data"  varStatus="id"  >
+									    
+							        <option value ="${data.storeId}">${data.countryDataList}</option>
+		                        </c:forEach>
+	                    </select>     
+                        
+							
+						<c:forEach items="${countrys}" var="data"  varStatus="id"  >
+							<c:if test="${id.index==0}">
+							    <c:forEach items="${data.countryDataList}" var="country"  varStatus="vs"  >
+							    
+							      <c:set var="myVar" value="${stat.first ? '' : myVar} ${country.name}" />
+							    
+							    </c:forEach>
+					        </c:if>	
+	                       </c:forEach>
+                        
+							<span class="label-title">Delivery scope: <em>${myVar}</em></span>
 						
 						</div>
 						
@@ -124,9 +155,16 @@
 							<%-- <c:forEach var="${countrys}" var="data1" begin="0" end="1"> --%>
 						<c:forEach items="${countrys}" var="data"  varStatus="id"  >
 						<c:if test="${id.index==0}">
-							    <i class="delintro">Delivery<em>${data.avaReleaseDay}</em>days</i>
+							    <i class="delintro">Delivery &nbsp<em>${data.avaReleaseDay}</em>&nbsp days</i>
 						</c:if>	
                         </c:forEach>
+                        
+                        <select id="avaReleaseDayId" style="display: none;">
+						<c:forEach items="${countrys}" var="data"  varStatus="id"  >
+						<option value ="${data.storeId}">${data.avaReleaseDay}</option>
+						
+                        </c:forEach>
+                        </select> 
 							
  						</div>
 
@@ -560,7 +598,17 @@
 	})
 
 	$("#storeMulId").change(function(){
-	    $('#storeId').val($("#storeMulId").val());
+		 /*库存信息*/
+		invi = $('.invernum .inventory i')
+		invi.text($("#inventoryId option[value='"+$("#storeMulId").val()+"']").text());
+		
+		 /*先期库存天数*/ 
+		emvi = $('.prod-sum i em')
+		
+		emvi.text($("#avaReleaseDayId option[value='"+$("#storeMulId").val()+"']").text());
+	//	var data =$("#countryId option[value='"+$("#storeMulId").val()+"']").text();
+		
+        $('#storeId').val($("#storeMulId").val());
 	});
 
 </script>

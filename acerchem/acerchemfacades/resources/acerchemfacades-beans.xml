@@ -95,7 +95,7 @@
         <property name="inventory" type="java.lang.Integer"/>
         <property name="avaReleaseDay" type="java.lang.Integer"/>
         <property name="isUseFutureStock" type="Boolean"/>
-        <property name="futureAvailableDate" type="java.util.Date"/>
+        <property name="futureAvailableDate" type="java.lang.Integer"/>
          <property name="futureInventory" type="java.lang.Integer"/>
     </bean>
     
