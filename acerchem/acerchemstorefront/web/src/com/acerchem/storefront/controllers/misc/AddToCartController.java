@@ -11,6 +11,7 @@
 package com.acerchem.storefront.controllers.misc;
 
 import com.acerchem.facades.facades.AcerchemCartFacade;
+import com.acerchem.facades.facades.AcerchemCheckoutFacade;
 import com.acerchem.facades.facades.AcerchemCustomerFacade;
 import com.acerchem.storefront.controllers.ControllerConstants;
 import com.acerchem.storefront.data.AcerchemAddToCartForm;
@@ -22,6 +23,7 @@ import de.hybris.platform.commercefacades.order.CartFacade;
 import de.hybris.platform.commercefacades.order.converters.populator.GroupCartModificationListPopulator;
 import de.hybris.platform.commercefacades.order.data.AddToCartParams;
 import de.hybris.platform.commercefacades.order.data.CartModificationData;
+import de.hybris.platform.commercefacades.order.data.DeliveryModeData;
 import de.hybris.platform.commercefacades.order.data.OrderEntryData;
 import de.hybris.platform.commercefacades.product.ProductFacade;
 import de.hybris.platform.commercefacades.product.ProductOption;
@@ -76,10 +78,15 @@ public class AddToCartController extends AbstractController
 	@Resource(name = "acerchemCustomerFacade")
 	private AcerchemCustomerFacade acerchemCustomerFacade;
 
+	@Resource(name = "acerchemCheckoutFacade")
+	private AcerchemCheckoutFacade acerchemCheckoutFacade;
+
 	@RequestMapping(value = "/cart/add", method = RequestMethod.POST, produces = "application/json")
 	public String addToCart(@RequestParam("productCodePost") final String code, final Model model,
 							@Valid final AcerchemAddToCartForm form, final BindingResult bindingErrors)
 	{
+//		List<? extends DeliveryModeData> dataList =acerchemCheckoutFacade.getSupportedDeliveryModes();
+//		model.addAttribute("dataList",dataList);
 		if (bindingErrors.hasErrors())
 		{
 			return getViewWithBindingErrorMessages(model, bindingErrors);
