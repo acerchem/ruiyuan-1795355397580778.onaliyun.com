@@ -40,10 +40,11 @@ import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.tx.Transaction;
-
+import com.acerchem.core.enums.CreditAccountStatusEnum;
+import com.acerchem.core.model.CustomerCreditAccountModel;
 import com.acerchem.storefront.controllers.ControllerConstants;
 import com.acerchem.storefront.data.CustomRegisterForm;
-
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -375,14 +376,21 @@ public class LoginPageController extends AbstractLoginPageController
 		phoneNumbers.add(pn);
 		phoneNumbers.add(pn2);
 		
+		CustomerCreditAccountModel ca=modelService.create(CustomerCreditAccountModel.class);
+		ca.setCreaditRemainedAmount(BigDecimal.valueOf(0));
+		ca.setCreditTotalAmount(BigDecimal.valueOf(0));;
+		ca.setStatus(CreditAccountStatusEnum.LOCKED);
+		ca.setBillingInterval(1);
+		
 		user.setOriginalUid(form.getEmail());
 		user.setSessionLanguage(commonI18NService.getLanguage(form.getLanguage()));
 		user.setSessionCurrency(commonI18NService.getCurrency(form.getCurrency()));
 		user.setAddresses(amlist);
 		user.setPhoneNumbers(phoneNumbers);
 		user.setPassword(form.getPwd());
+		user.setCreditAccount(ca);
 		
-		modelService.saveAll(user,pn2,pn,am2,am);
+		modelService.saveAll(user,pn2,pn,am2,am,ca);
 		return user;
 	}
 	
