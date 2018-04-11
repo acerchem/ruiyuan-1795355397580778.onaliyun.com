@@ -12,6 +12,8 @@
 
 <c:url value="${continueUrl}" var="continueShoppingUrl" scope="session"/>
 
+<c:url value="/cart/checkout" var="checkoutUrl" scope="session"/>
+
 <div class="g-cell cart-right">
 			<div class="cart-total">
 				<div class="title">Subtotal</div>
@@ -70,8 +72,9 @@
 							<span class="checkbox">I Would Like To Express Checkout</span>
 						</label>
 						<div class="btn-set">							
-							<a class="btn btn-submit" href="checkout.html">Check Out</a>
-							<a class="btn btn-line" href="${continueUrl}">Continue Shopping</a>
+							<!-- <a class="btn btn-submit" href="checkout.html">Check Out</a> -->
+							<button class="btn btn-primary btn-block btn--continue-checkout js-continue-checkout-button" data-checkout-url="${checkoutUrl}">Check Out</button>
+							<a class="btn btn-line" href="${continueShoppingUrl}">Continue Shopping</a>
 						</div>
 					</form>					
 				</div>

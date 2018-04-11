@@ -487,8 +487,10 @@
 			
 		}else{
 			days.show();
-			spot.show();
-			invi.text(futday+parseInt(invi.text()));
+			//spot.show();
+			/* invi.text(futday+parseInt(invi.text())); */
+			
+			invi.text(futday);
 		}
 		
 	})	
