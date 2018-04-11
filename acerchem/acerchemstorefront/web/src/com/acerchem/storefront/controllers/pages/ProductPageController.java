@@ -28,17 +28,26 @@ import de.hybris.platform.acceleratorstorefrontcommons.util.XSSFilterUtil;
 import de.hybris.platform.acceleratorstorefrontcommons.variants.VariantSortStrategy;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
+
 import de.hybris.platform.cms2.servicelayer.services.CMSPageService;
 import de.hybris.platform.commercefacades.order.data.ConfigurationInfoData;
 import de.hybris.platform.commercefacades.product.ProductFacade;
 import de.hybris.platform.commercefacades.product.ProductOption;
 import de.hybris.platform.commercefacades.product.data.*;
+import de.hybris.platform.commerceservices.customer.CustomerAccountService;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.url.UrlResolver;
+import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.orderprocessing.model.OrderProcessModel;
+import de.hybris.platform.processengine.BusinessProcessService;
 import de.hybris.platform.product.ProductService;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
+import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.platform.store.BaseStoreModel;
+import de.hybris.platform.store.services.BaseStoreService;
 import de.hybris.platform.util.Config;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -149,6 +158,9 @@ public class ProductPageController extends AbstractPageController
 		final String metaKeywords = MetaSanitizerUtil.sanitizeKeywords(productData.getKeywords());
 		final String metaDescription = MetaSanitizerUtil.sanitizeDescription(productData.getDescription());
 		setUpMetaData(model, metaKeywords, metaDescription);
+		
+		testOrderProcess();
+		
 		return getViewForPage(model);
 	}
 
@@ -541,4 +553,29 @@ public class ProductPageController extends AbstractPageController
 		pageableData.setSort(sort);
 		return pageableData;
 	}
+	
+	/********test process email using********/
+	@Resource
+	 private CustomerAccountService customerAccountService;
+	 @Resource
+	 private BaseStoreService baseStoreService;
+	 @Resource
+	 BusinessProcessService businessProcessService;
+	 @Resource
+	 ModelService modelService;
+
+	 private void testOrderProcess()
+	 {
+	  final BaseStoreModel baseStoreModel = baseStoreService.getCurrentBaseStore();
+	  final OrderModel orderModel = customerAccountService.getOrderForCode((CustomerModel) userService.getCurrentUser(), "123",
+	    baseStoreModel);
+
+
+	  final OrderProcessModel orderProcessModel = (OrderProcessModel) businessProcessService.createProcess(
+	    "orderConfirmationEmailProcess-" + orderModel.getCode() + "-" + System.currentTimeMillis(),
+	    "orderConfirmationEmailProcess");
+	  orderProcessModel.setOrder(orderModel);
+	  modelService.save(orderProcessModel);
+	  businessProcessService.startProcess(orderProcessModel);
+	 }
 }
