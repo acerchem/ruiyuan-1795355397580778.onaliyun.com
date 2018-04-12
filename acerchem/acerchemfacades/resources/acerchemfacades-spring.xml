@@ -143,13 +143,32 @@
 		parent="abstractEmailContext" scope="prototype">
 		<property name="orderConverter" ref="orderConverter" />
 	</bean>
-	<!-- test
-	<bean id="myOrderNotificationEmailContext"
-		class="com.acerchem.facades.process.email.context.MyOrderNotificationEmailContext"
+	
+	<bean id="acerChemContractEmailContext"
+		class="com.acerchem.facades.process.email.context.AcerChemContractEmailContext"
 		parent="abstractEmailContext" scope="prototype">
 		<property name="orderConverter" ref="orderConverter" />
 	</bean>
- -->
+	
+	<bean id="acerChemDeliveryNoteEmailContext"
+		class="com.acerchem.facades.process.email.context.AcerChemDeliveryNoteEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="orderConverter" ref="orderConverter" />
+	</bean>
+	
+	<bean id="acerChemInvoiceEmailContext"
+		class="com.acerchem.facades.process.email.context.AcerChemInvoiceEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="orderConverter" ref="orderConverter" />
+	</bean>
+	
+	<bean id="acerChemReleaseNoteEmailContext"
+		class="com.acerchem.facades.process.email.context.AcerChemReleaseNoteEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="orderConverter" ref="orderConverter" />
+	</bean>
+	
+ 
 	<bean id="quoteNotificationEmailContext"
 		class="com.acerchem.facades.process.email.context.QuoteNotificationEmailContext"
 		parent="abstractEmailContext" scope="prototype">

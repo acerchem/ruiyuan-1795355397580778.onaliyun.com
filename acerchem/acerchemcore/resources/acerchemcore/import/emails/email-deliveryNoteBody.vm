@@ -51,22 +51,19 @@ Mar 09, 2018</font></font></b></font></p>
 12029</font></font></b></font></p>
 <p align="justify" style="text-indent: 2.01in"><font size="6" style="font-size: 22pt"><b><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt">INVOICE
 NO.:</font></font><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt">
-</font></font><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt">UK201802280788-1</font></font></b></font></p>
+</font></font><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt">${ctx.order.code}-1</font></font></b></font></p>
 <p align="justify" style="text-indent: 2.01in"><font size="6" style="font-size: 22pt"><b><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt">Shipping:
 </font></font><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt">RTST004180121</font></font></b></font></p>
 <p align="justify" style="text-indent: 2.01in"><font size="6" style="font-size: 22pt"><b><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt">Consignee:
-</font></font><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt">Alion
-GmbH/</font></font><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt">BEST
-SORTIMENTS, s.r.o.         </font></font></b></font>
+</font></font><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt">${ctx.customer.name}</font></font></b></font>
 </p>
 <p align="justify" style="text-indent: 2.01in"><br/>
 
 </p>
 <p class="western" align="left" style="text-indent: 2.01in"><font size="2" style="font-size: 10pt"><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt"><span lang="en-GB"><b>Delivery
-address: </b></span></font></font></font>
+address: ${ctx.order.deliveryAddress.formattedAddress}</b></span></font></font></font>
 </p>
-<p align="justify" style="text-indent: 2.01in"><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt"><b>BEST
-SORTIMENTS, s.r.o. </b></font></font>
+<p align="justify" style="text-indent: 2.01in"><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt"><b></b></font></font>
 </p>
 <p align="justify" style="text-indent: 2.01in"><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt"><b>Ing.
 Michal Hlinka </b></font></font>
@@ -100,80 +97,100 @@ Farkas</b></font></font></p>
 
 </p>
 <center>
+	 #if ($ctx.append.productLists.size() > 0)
 	<table width="638" cellpadding="7" cellspacing="0">
 		<col width="67">
-		<col width="194">
-		<col width="83">
-		<col width="55">
-		<col width="79">
-		<col width="74">
+		<col width="206">
+		<col width="82">
+		<col width="51">
+		<col width="58">
+		<col width="88">
 		<tr>
-			<td width="67" height="37" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" style="margin-right: -0.05in"><a name="OLE_LINK2"></a><a name="OLE_LINK1"></a>
-				<font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>AC
-				Code</b></font></font></p>
+			<td width="67" height="7" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+				<p class="western" align="center" style="margin-right: -0.05in"><font size="2" style="font-size: 10pt"><font color="#000000"><font face="Calibri, sans-serif"><b>Product
+				</b></font></font><font color="#000000"><font face="Calibri, sans-serif"><b>Code</b></font></font></font></p>
 			</td>
-			<td width="194" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+			<td width="206" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
 				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>Product
 				name</b></font></font></p>
 			</td>
-			<td width="83" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+			<td width="82" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
 				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>Batch
 				No.</b></font></font></p>
 			</td>
-			<td width="55" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+			<td width="51" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
 				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>Quantity</b></font></font></p>
-				<p class="western" align="center" style="margin-right: -0.05in"><font size="2" style="font-size: 10pt"><font color="#000000"><font face="Calibri, sans-serif"><b>(</b></font></font><font color="#000000"><font face="Calibri, sans-serif"><b>DRUMS)</b></font></font></font></p>
+				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>(Drum)</b></font></font></p>
 			</td>
-			<td width="79" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font size="2" style="font-size: 10pt"><font color="#000000"><font face="Calibri, sans-serif"><b>Net</b></font></font><font color="#000000"><font face="Calibri, sans-serif"><b>
-				Weight</b></font></font></font></p>
+			<td width="58" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>Net
+				weight</b></font></font></p>
 				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>(KGS)</b></font></font></p>
 			</td>
-			<td width="74" style="border: 1px solid #000000; padding: 0in 0.08in">
+			<td width="88" style="border: 1px solid #000000; padding: 0in 0.08in">
 				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>Gross
 				Weight</b></font></font></p>
 				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>(KGS)</b></font></font></p>
 			</td>
 		</tr>
-		<tr>
-			<td width="67" height="38" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font size="2" style="font-size: 10pt"><font color="#000000"><font face="Calibri, sans-serif"><b>AC02048</b></font></font></font></p>
-			</td>
-			<td width="194" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font size="2" style="font-size: 10pt"><font color="#000000"><font face="Calibri, sans-serif"><b>L-Carnitine
-				L-Tartrate</b></font></font></font></p>
-			</td>
-			<td width="83" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>20171120</b></font></font></p>
-			</td>
-			<td width="55" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>40</b></font></font></p>
-			</td>
-			<td width="79" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font size="2" style="font-size: 10pt"><font color="#000000"><font face="Calibri, sans-serif"><b>1000</b></font></font></font></p>
-			</td>
-			<td width="74" style="border: 1px solid #000000; padding: 0in 0.08in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>1120</b></font></font></p>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="3" width="371" height="37" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>TOTAL
-				</b></font></font>
-				</p>
-			</td>
-			<td width="55" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>40</b></font></font></p>
-			</td>
-			<td width="79" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>1000</b></font></font></p>
-			</td>
-			<td width="74" style="border: 1px solid #000000; padding: 0in 0.08in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>1120</b></font></font></p>
-			</td>
-		</tr>
+		 #foreach( $item in ${ctx.append.productLists} )
+			#if (! $item.isTotal )
+			<tr>
+				<td width="67" height="7" valign="top" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+					<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">${item.productCode}</font></font></p>
+				</td>
+				<td width="206" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+					<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">${item.productName}</font></font></p>
+				</td>
+				<td width="82" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+					<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">${item.batchNo}</font></font></p>
+				</td>
+				<td width="51" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+					<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">${item.quantity}</font></font></p>
+				</td>
+				<td width="58" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+					<p class="western" align="center" style="margin-right: -0.05in"><font size="2" style="font-size: 10pt"><font color="#000000"><font face="Calibri, sans-serif">${item.netWeight}</font></font></font></p>
+				</td>
+				<td width="88" style="border: 1px solid #000000; padding: 0in 0.08in">
+					<p class="western" align="center" style="margin-right: -0.05in"><font size="2" style="font-size: 10pt"><font color="#000000"><font face="Calibri, sans-serif">${item.grossWeight}</font></font></font></p>
+				</td>
+			</tr>
+			#else
+			<tr>
+				<td colspan="3" width="383" height="3" valign="top" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+					<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>Total</b></font></font></p>
+				</td>
+				<td width="51" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+					<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>${item.quantity}</b></font></font></p>
+				</td>
+				<td width="58" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+					<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>${item.netWeight}</b></font></font></p>
+				</td>
+				<td width="88" style="border: 1px solid #000000; padding: 0in 0.08in">
+					<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>${item.grossWeight}</b></font></font></p>
+				</td>
+			</tr>
+			#end
+		#end
+		#if(${ctx.append.totalData})
+			<tr>
+				<td colspan="3" width="383" height="27" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+					<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>TOTAL
+					AMOUNT</b></font></font></p>
+				</td>
+				<td width="51" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+					<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>${ctx.append.totalData.quantity}</b></font></font></p>
+				</td>
+				<td width="58" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+					<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>${ctx.append.totalData.netWeight}</b></font></font></p>
+				</td>
+				<td width="88" style="border: 1px solid #000000; padding: 0in 0.08in">
+					<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>${ctx.append.totalData.grossWeight}</b></font></font></p>
+				</td>
+			</tr>
+		#end
 	</table>
+	#end
 </center>
 <p class="western"><br/>
 

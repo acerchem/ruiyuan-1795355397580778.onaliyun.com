@@ -123,6 +123,7 @@ Kevin van Rij</b></font></font></p>
 
 </p>
 <center>
+	 #if ($ctx.append.productLists.size() > 0)
 	<table width="638" cellpadding="7" cellspacing="0">
 		<col width="67">
 		<col width="206">
@@ -158,429 +159,64 @@ Kevin van Rij</b></font></font></p>
 				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>(KGS)</b></font></font></p>
 			</td>
 		</tr>
-		<tr>
-			<td width="67" height="7" valign="top" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font size="2" style="font-size: 10pt"><font color="#000000"><font face="Calibri, sans-serif">AC02270</font></font></font></p>
-			</td>
-			<td width="206" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">L-Valine</font></font></p>
-			</td>
-			<td width="82" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">S171002</font></font></p>
-			</td>
-			<td width="51" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">40</font></font></p>
-			</td>
-			<td width="58" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">1,000</font></font></p>
-			</td>
-			<td width="88" style="border: 1px solid #000000; padding: 0in 0.08in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font size="2" style="font-size: 10pt"><font color="#000000"><font face="Calibri, sans-serif">1,120</font></font></font></p>
-			</td>
-		</tr>
-		<tr>
-			<td width="67" height="7" valign="top" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">AC02270</font></font></p>
-			</td>
-			<td width="206" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">L-Valine</font></font></p>
-			</td>
-			<td width="82" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">S171003</font></font></p>
-			</td>
-			<td width="51" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">40</font></font></p>
-			</td>
-			<td width="58" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">1,000</font></font></p>
-			</td>
-			<td width="88" style="border: 1px solid #000000; padding: 0in 0.08in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">1,120</font></font></p>
-			</td>
-		</tr>
-		<tr>
-			<td width="67" height="7" valign="top" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">AC02270</font></font></p>
-			</td>
-			<td width="206" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">L-Valine</font></font></p>
-			</td>
-			<td width="82" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">S171004</font></font></p>
-			</td>
-			<td width="51" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">40</font></font></p>
-			</td>
-			<td width="58" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">1,000</font></font></p>
-			</td>
-			<td width="88" style="border: 1px solid #000000; padding: 0in 0.08in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">1,120</font></font></p>
-			</td>
-		</tr>
-		<tr>
-			<td width="67" height="7" valign="top" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">AC02270</font></font></p>
-			</td>
-			<td width="206" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">L-Valine</font></font></p>
-			</td>
-			<td width="82" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">S171005</font></font></p>
-			</td>
-			<td width="51" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">40</font></font></p>
-			</td>
-			<td width="58" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font size="2" style="font-size: 10pt"><font color="#000000"><font face="Calibri, sans-serif">1,000</font></font></font></p>
-			</td>
-			<td width="88" style="border: 1px solid #000000; padding: 0in 0.08in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font size="2" style="font-size: 10pt"><font color="#000000"><font face="Calibri, sans-serif">1,120</font></font></font></p>
-			</td>
-		</tr>
-		<tr>
-			<td width="67" height="7" valign="top" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">AC02270</font></font></p>
-			</td>
-			<td width="206" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">L-Valine</font></font></p>
-			</td>
-			<td width="82" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">S171006</font></font></p>
-			</td>
-			<td width="51" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">40</font></font></p>
-			</td>
-			<td width="58" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">1,000</font></font></p>
-			</td>
-			<td width="88" style="border: 1px solid #000000; padding: 0in 0.08in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">1,120</font></font></p>
-			</td>
-		</tr>
-		<tr>
-			<td width="67" height="7" valign="top" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">AC02270</font></font></p>
-			</td>
-			<td width="206" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">L-Valine</font></font></p>
-			</td>
-			<td width="82" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">S171007</font></font></p>
-			</td>
-			<td width="51" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">40</font></font></p>
-			</td>
-			<td width="58" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">1,000</font></font></p>
-			</td>
-			<td width="88" style="border: 1px solid #000000; padding: 0in 0.08in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">1,120</font></font></p>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="3" width="383" height="3" valign="top" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>Total</b></font></font></p>
-			</td>
-			<td width="51" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>240</b></font></font></p>
-			</td>
-			<td width="58" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>6,000</b></font></font></p>
-			</td>
-			<td width="88" style="border: 1px solid #000000; padding: 0in 0.08in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>6,720</b></font></font></p>
-			</td>
-		</tr>
-		<tr>
-			<td width="67" height="7" valign="top" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">AC02342</font></font></p>
-			</td>
-			<td width="206" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">D-Glucosamine
-				sulfate 2kcl 80 mesh</font></font></p>
-			</td>
-			<td width="82" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">K1711019</font></font></p>
-			</td>
-			<td width="51" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">40</font></font></p>
-			</td>
-			<td width="58" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">1,000</font></font></p>
-			</td>
-			<td width="88" style="border: 1px solid #000000; padding: 0in 0.08in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">1,120</font></font></p>
-			</td>
-		</tr>
-		<tr>
-			<td width="67" height="7" valign="top" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">AC02342</font></font></p>
-			</td>
-			<td width="206" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">D-Glucosamine
-				sulfate 2kcl 80 mesh</font></font></p>
-			</td>
-			<td width="82" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">K1711020</font></font></p>
-			</td>
-			<td width="51" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">40</font></font></p>
-			</td>
-			<td width="58" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">1,000</font></font></p>
-			</td>
-			<td width="88" style="border: 1px solid #000000; padding: 0in 0.08in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">1,120</font></font></p>
-			</td>
-		</tr>
-		<tr>
-			<td width="67" height="7" valign="top" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">AC02342</font></font></p>
-			</td>
-			<td width="206" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">D-Glucosamine
-				sulfate 2kcl 80 mesh</font></font></p>
-			</td>
-			<td width="82" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">K1711021</font></font></p>
-			</td>
-			<td width="51" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">40</font></font></p>
-			</td>
-			<td width="58" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">1,000</font></font></p>
-			</td>
-			<td width="88" style="border: 1px solid #000000; padding: 0in 0.08in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">1,120</font></font></p>
-			</td>
-		</tr>
-		<tr>
-			<td width="67" height="7" valign="top" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">AC02342</font></font></p>
-			</td>
-			<td width="206" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">D-Glucosamine
-				sulfate 2kcl 80 mesh</font></font></p>
-			</td>
-			<td width="82" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">K1711022</font></font></p>
-			</td>
-			<td width="51" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">40</font></font></p>
-			</td>
-			<td width="58" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">1,000</font></font></p>
-			</td>
-			<td width="88" style="border: 1px solid #000000; padding: 0in 0.08in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">1,120</font></font></p>
-			</td>
-		</tr>
-		<tr>
-			<td width="67" height="7" valign="top" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">AC02342</font></font></p>
-			</td>
-			<td width="206" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">D-Glucosamine
-				sulfate 2kcl 80 mesh</font></font></p>
-			</td>
-			<td width="82" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">K1711023</font></font></p>
-			</td>
-			<td width="51" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">40</font></font></p>
-			</td>
-			<td width="58" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">1,000</font></font></p>
-			</td>
-			<td width="88" style="border: 1px solid #000000; padding: 0in 0.08in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">1,120</font></font></p>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="3" width="383" height="3" valign="top" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>Total</b></font></font></p>
-			</td>
-			<td width="51" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>200</b></font></font></p>
-			</td>
-			<td width="58" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>5,000</b></font></font></p>
-			</td>
-			<td width="88" style="border: 1px solid #000000; padding: 0in 0.08in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>5,600</b></font></font></p>
-			</td>
-		</tr>
-		<tr>
-			<td width="67" valign="top" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">AC02233</font></font></p>
-			</td>
-			<td width="206" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">Creatine
-				monohydrate 200 mesh</font></font></p>
-			</td>
-			<td width="82" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">CM20171106</font></font></p>
-			</td>
-			<td width="51" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">42</font></font></p>
-			</td>
-			<td width="58" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">1,050</font></font></p>
-			</td>
-			<td width="88" style="border: 1px solid #000000; padding: 0in 0.08in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">1,176</font></font></p>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="3" width="383" valign="top" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>Total</b></font></font></p>
-			</td>
-			<td width="51" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>42</b></font></font></p>
-			</td>
-			<td width="58" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>1,050</b></font></font></p>
-			</td>
-			<td width="88" style="border: 1px solid #000000; padding: 0in 0.08in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>1,176</b></font></font></p>
-			</td>
-		</tr>
-		<tr>
-			<td width="67" valign="top" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">AC02048</font></font></p>
-			</td>
-			<td width="206" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">L-Carnitine
-				L-Tartrate</font></font></p>
-			</td>
-			<td width="82" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">DY0661700095</font></font></p>
-			</td>
-			<td width="51" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">40</font></font></p>
-			</td>
-			<td width="58" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">1,000</font></font></p>
-			</td>
-			<td width="88" style="border: 1px solid #000000; padding: 0in 0.08in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">1,120</font></font></p>
-			</td>
-		</tr>
-		<tr>
-			<td width="67" valign="top" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">AC02048</font></font></p>
-			</td>
-			<td width="206" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">L-Carnitine
-				L-Tartrate</font></font></p>
-			</td>
-			<td width="82" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">DY0661700096</font></font></p>
-			</td>
-			<td width="51" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">40</font></font></p>
-			</td>
-			<td width="58" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">1,000</font></font></p>
-			</td>
-			<td width="88" style="border: 1px solid #000000; padding: 0in 0.08in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">1,120</font></font></p>
-			</td>
-		</tr>
-		<tr>
-			<td width="67" valign="top" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">AC02048</font></font></p>
-			</td>
-			<td width="206" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">L-Carnitine
-				L-Tartrate</font></font></p>
-			</td>
-			<td width="82" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">DY0661700097</font></font></p>
-			</td>
-			<td width="51" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">40</font></font></p>
-			</td>
-			<td width="58" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">1,000</font></font></p>
-			</td>
-			<td width="88" style="border: 1px solid #000000; padding: 0in 0.08in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">1,120</font></font></p>
-			</td>
-		</tr>
-		<tr>
-			<td width="67" valign="top" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">AC02048</font></font></p>
-			</td>
-			<td width="206" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">L-Carnitine
-				L-Tartrate</font></font></p>
-			</td>
-			<td width="82" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">DY0661700098</font></font></p>
-			</td>
-			<td width="51" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">40</font></font></p>
-			</td>
-			<td width="58" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">1,000</font></font></p>
-			</td>
-			<td width="88" style="border: 1px solid #000000; padding: 0in 0.08in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">1,120</font></font></p>
-			</td>
-		</tr>
-		<tr>
-			<td width="67" valign="top" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">AC02048</font></font></p>
-			</td>
-			<td width="206" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">L-Carnitine
-				L-Tartrate</font></font></p>
-			</td>
-			<td width="82" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">DY0661700099</font></font></p>
-			</td>
-			<td width="51" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">40</font></font></p>
-			</td>
-			<td width="58" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">1,000</font></font></p>
-			</td>
-			<td width="88" style="border: 1px solid #000000; padding: 0in 0.08in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">1,120</font></font></p>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="3" width="383" valign="top" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>Total</b></font></font></p>
-			</td>
-			<td width="51" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>200</b></font></font></p>
-			</td>
-			<td width="58" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>5,000</b></font></font></p>
-			</td>
-			<td width="88" style="border: 1px solid #000000; padding: 0in 0.08in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>5,600</b></font></font></p>
-			</td>
-		</tr>
-		<tr>
-			<td colspan="3" width="383" height="27" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>TOTAL
-				AMOUNT</b></font></font></p>
-			</td>
-			<td width="51" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>682</b></font></font></p>
-			</td>
-			<td width="58" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>17,050</b></font></font></p>
-			</td>
-			<td width="88" style="border: 1px solid #000000; padding: 0in 0.08in">
-				<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>19,096</b></font></font></p>
-			</td>
-		</tr>
+		 #foreach( $item in ${ctx.append.productLists} )
+			#if (! $item.isTotal )
+			<tr>
+				<td width="67" height="7" valign="top" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+					<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">${item.productCode}</font></font></p>
+				</td>
+				<td width="206" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+					<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">${item.productName}</font></font></p>
+				</td>
+				<td width="82" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+					<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">${item.batchNo}</font></font></p>
+				</td>
+				<td width="51" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+					<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">${item.quantity}</font></font></p>
+				</td>
+				<td width="58" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+					<p class="western" align="center" style="margin-right: -0.05in"><font size="2" style="font-size: 10pt"><font color="#000000"><font face="Calibri, sans-serif">${item.netWeight}</font></font></font></p>
+				</td>
+				<td width="88" style="border: 1px solid #000000; padding: 0in 0.08in">
+					<p class="western" align="center" style="margin-right: -0.05in"><font size="2" style="font-size: 10pt"><font color="#000000"><font face="Calibri, sans-serif">${item.grossWeight}</font></font></font></p>
+				</td>
+			</tr>
+			#else
+			<tr>
+				<td colspan="3" width="383" height="3" valign="top" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+					<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>Total</b></font></font></p>
+				</td>
+				<td width="51" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+					<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>${item.quantity}</b></font></font></p>
+				</td>
+				<td width="58" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+					<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>${item.netWeight}</b></font></font></p>
+				</td>
+				<td width="88" style="border: 1px solid #000000; padding: 0in 0.08in">
+					<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>${item.grossWeight}</b></font></font></p>
+				</td>
+			</tr>
+			#end
+		#end
+		#if(${ctx.append.totalData})
+			<tr>
+				<td colspan="3" width="383" height="27" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+					<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>TOTAL
+					AMOUNT</b></font></font></p>
+				</td>
+				<td width="51" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+					<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>${ctx.append.totalData.quantity}</b></font></font></p>
+				</td>
+				<td width="58" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+					<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>${ctx.append.totalData.netWeight}</b></font></font></p>
+				</td>
+				<td width="88" style="border: 1px solid #000000; padding: 0in 0.08in">
+					<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt"><b>${ctx.append.totalData.grossWeight}</b></font></font></p>
+				</td>
+			</tr>
+		#end
 	</table>
+	#end
 </center>
 <p class="western" style="margin-right: -0.05in"><br/>
 
