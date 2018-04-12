@@ -12,13 +12,13 @@
     <form:form method="post" commandName="customRegisterForm" class="both" id="personal" action="${action}">
 		<label>
 			<span class='label-title' style="font-weight:normal;">Email</span>	
-			<input type="text" value="${customRegisterForm.email}"  alt='Please Enter Email' disabled="disabled"/>
+			<input type="text" value="${customRegisterForm.email}"  alt='Please Enter Email' disabled="disabled" class="required"/>
 			<div style="color:#F00"><form:errors path="email"/></div>
 		</label>
 		
 		<label>
 			<span class='label-title' style="font-weight:normal;">Your Name</span>	
-			<input id="register.name" type="text" name='name' value="${customRegisterForm.name}"  alt='Please Enter Your Name'>
+			<input id="register.name" type="text" name='name' value="${customRegisterForm.name}"  alt='Please Enter Your Name' class="required"/>
 			<div style="color:#F00"><form:errors path="name"/></div>
 		</label>
 		
@@ -64,7 +64,7 @@
 		
 		<label>
 			<span class='label-title' style="font-weight:normal;">Contacts</span>	
-			<input id="register.contacts" type="text" name='contacts' value="${customRegisterForm.contacts}" alt='Please Enter Contacts Name'>
+			<input id="register.contacts" type="text" name='contacts' value="${customRegisterForm.contacts}" alt='Please Enter Contacts Name' class="required"/>
 			<div style="color:#F00"><form:errors path="contacts"/></div>
 		</label>
 		
@@ -88,10 +88,63 @@
 		</label>
 		
 		<label>
-			<span class='label-title'></span>	
-			<input type="text" id="register.contactAddressDetail" name='contactAddress.townCity' value="${customRegisterForm.contactAddress.townCity}" class="lab-row" placeholder="Detailed address" alt='Please Enter Contact Detailed Address'/>
+			<span class='label-title'></span>
+			<input type="text" id="register.contactAddressDetail" name='contactAddress.townCity' value="${customRegisterForm.contactAddress.townCity}" class="lab-row required" placeholder="Detailed address" alt='Please Enter Contact Detailed Address'/>
 			<div style="color:#F00"><form:errors path="contactAddress.townCity"/></div>
 		</label>	
+		
+		
+		
+		<label>
+			<span class='label-title' style="font-size:large;">Company Information</span>	
+		</label>
+		<label>
+			<span class='label-title'>&nbsp;</span>	
+		</label>
+		<label>
+			<span class='label-title' style="font-weight:normal;">Type of Company</span>	
+			<input id="register.companyType" type="text" name='companyType' value="${customRegisterForm.companyType}"/>
+			<div style="color:#F00"><form:errors path="companyType"/></div>
+		</label>
+		
+		<label>
+			<span class='label-title' style="font-weight:normal;">Established in</span>	
+			<input id="register.establishedIn" type="text" name='establishedIn' value="${customRegisterForm.establishedIn}"/>
+			<div style="color:#F00"><form:errors path="establishedIn"/></div>
+		</label>
+		
+		<label>
+			<span class='label-title' style="font-weight:normal;">Revenue</span>	
+			<input id="register.revenue" type="text" name='revenue' value="${customRegisterForm.revenue}"/>
+			<div style="color:#F00"><form:errors path="revenue"/></div>
+		</label>
+		
+		<label>
+			<span class='label-title' style="font-weight:normal;">No. of Employees</span>	
+			<input id="register.employeesNo" type="text" name='employeesNo' value="${customRegisterForm.employeesNo}"/>
+			<div style="color:#F00"><form:errors path="employeesNo"/></div>
+		</label>
+		
+		<label>
+			<span class='label-title' style="font-weight:normal;">The credit limit you will need for your business</span>	
+			<input id="register.limitCreditAmount" type="text" name='limitCreditAmount' value="${customRegisterForm.limitCreditAmount}"/>
+			<div style="color:#F00"><form:errors path="limitCreditAmount"/></div>
+		</label>
+		
+		<label>
+			<span class='label-title' style="font-weight:normal;">VAT No.</span>	
+			<input id="register.vatNo" type="text" name='vatNo' value="${customRegisterForm.vatNo}"/>
+			<div style="color:#F00"><form:errors path="vatNo"/></div>
+		</label>
+		
+		<label>
+			<input type="checkbox" name="aidField" value="provideTradeReference" ${customRegisterForm.provideTradeReference?'checked="checked"':''}/>
+			<span class="checkbox">Can you provide any trade reference for Acerchem?</span>
+		</label>
+		<label>
+			<input type="checkbox" name="aidField" value="haveFinancialReport" ${customRegisterForm.haveFinancialReport?'checked="checked"':''} />
+			<span class="checkbox">Do you have public financial report?If so, please send to customerservice@acerchem.com</span>
+		</label>
 		
 		<input type="hidden" name='email' value="${customRegisterForm.email}"/>
 		<input type="hidden" name="contactAddress.addressId" value="${customRegisterForm.contactAddress.addressId}" />
@@ -100,11 +153,11 @@
 		<button type="submit" class="btn-submit btn">Confirm</button>
 	</div>
 </div>
-	
+
 <script type="text/javascript">
 $('.btn-submit').on('click',function(){
 	var req = $('#personal');
-	req.submit();
+	verification(req);
 })
 
 $(document).on("change",'#selectContactCountry select', function (){
