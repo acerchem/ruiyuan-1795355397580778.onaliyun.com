@@ -52,7 +52,7 @@ public class CustomRegistrationValidator implements Validator
 		final AddressForm shipCountry = registerForm.getShipAddress();
 		final AddressForm contactCountry = registerForm.getContactAddress();
 		
-		if(shipCountry==null)
+		if(shipCountry==null||shipCountry.getCountryIso()==null)
 		{
 			errors.rejectValue("shipAddress.countryIso", "register.shipAddress.invalid");
 		}
