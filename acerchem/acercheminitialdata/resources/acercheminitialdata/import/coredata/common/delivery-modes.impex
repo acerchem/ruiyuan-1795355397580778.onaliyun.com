@@ -19,6 +19,10 @@ $jpCurrency=JPY
 $usCurrency=USD
 $europeCurrency=EUR
 
+#支付方式
+INSERT_UPDATE PaymentMode;code[unique=true];name[[lang=en]];paymentInfoType(code);active[default=true]
+;one;one;InvoicePaymentInfo
+
 # Delivery Zones
 INSERT_UPDATE Zone                  ; code[unique=true]               ; countries(isocode)
                                     ; uk                              ; GB,GG,IM,JE
@@ -29,14 +33,14 @@ INSERT_UPDATE Zone                  ; code[unique=true]               ; countrie
                                     ; china                           ; CN
 
 # Zone Delivery Modes
-INSERT_UPDATE ZoneDeliveryMode      ; code[unique=true]               ; net                                                                                                                                             ; active[default=true]
-                                    ; premium-net                     ; true
-                                    ; standard-net                    ; true
-                                    ; premium-gross                   ; false
-                                    ; standard-gross                  ; false
-                                    ; free-standard-shipping          ; true                                                                                                                                            ; false                          ;
-									; DELIVERY_MENTION				  ; true
-									; DELIVERY_GROSS				  ; true
+INSERT_UPDATE ZoneDeliveryMode      ; code[unique=true]               ; net                   ;supportedPaymentModes(code)                                                                                                                                 ; active[default=true]
+                                    ; premium-net                     ; true				  ;
+                                    ; standard-net                    ; true				  ;
+                                    ; premium-gross                   ; false				  ;
+                                    ; standard-gross                  ; false				  ;
+                                    ; free-standard-shipping          ; true				  ;                                                                                                                                            ; false                          ;
+									; DELIVERY_MENTION				  ; true				  ; one
+									; DELIVERY_GROSS				  ; true				  ; one
 
 # UK
 INSERT_UPDATE ZoneDeliveryModeValue ; deliveryMode(code)[unique=true] ; zone(code)[default='uk'][unique=true]                                                                                                           ; currency(isocode)[unique=true] ; value  ; minimum[unique=true]
@@ -138,7 +142,9 @@ INSERT_UPDATE ZoneDeliveryModeValue ; deliveryMode(code)[unique=true] ; zone(cod
 
 # Pickup Delivery Mode
 INSERT_UPDATE PickUpDeliveryMode    ; code[unique=true]               ; active[default=true]                                                                                                                            ; supportedMode(code)
-                                    ; pickup                          ;                                                                                                                                                 ; BUY_AND_COLLECT
-                                                                                                                                       ; CN
+                                    ; pickup                          ;                                                                                                                                                 ; BUY_AND_COLLECT                                                                                                                                   ; CN
 
+#支付方式
+INSERT_UPDATE PaymentMode;code[unique=true];supportedDeliveryModes(code)
+;one;DELIVERY_MENTION,DELIVERY_GROSS
 
