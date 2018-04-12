@@ -78,7 +78,7 @@ public class AddToCartController extends AbstractController
 	@Resource(name = "acerchemCustomerFacade")
 	private AcerchemCustomerFacade acerchemCustomerFacade;
 
-	@Resource(name = "acerchemCheckoutFacade")
+	@Resource(name = "defaultAcerchemCheckoutFacade")
 	private AcerchemCheckoutFacade acerchemCheckoutFacade;
 
 	@RequestMapping(value = "/cart/add", method = RequestMethod.POST, produces = "application/json")

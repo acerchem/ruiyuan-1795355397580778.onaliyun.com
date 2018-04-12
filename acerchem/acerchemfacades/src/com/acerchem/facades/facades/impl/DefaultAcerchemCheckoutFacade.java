@@ -9,6 +9,7 @@ import de.hybris.platform.commercefacades.order.data.ZoneDeliveryModeData;
 import de.hybris.platform.commercefacades.order.impl.DefaultCheckoutFacade;
 import de.hybris.platform.commercefacades.product.data.PriceDataType;
 import de.hybris.platform.commercefacades.user.data.CountryData;
+import de.hybris.platform.commerceservices.service.data.CommerceCheckoutParameter;
 import de.hybris.platform.core.model.c2l.CountryModel;
 import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.CartModel;
@@ -19,14 +20,20 @@ import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.storelocator.model.PointOfServiceModel;
 import de.hybris.platform.util.PriceValue;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.logging.Log;
+import org.apache.log4j.Logger;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
+
 
 public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade implements AcerchemCheckoutFacade {
+
+    private static final Logger LOG = Logger.getLogger(DefaultAcerchemCheckoutFacade.class);
 
     //自提
     private final String DELIVERY_MENTION = "DELIVERY_MENTION";
@@ -144,6 +151,31 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
             return null;
         }
         return getDeliveryModeConverter().convert(deliveryModeModel);
+    }
+
+    @Override
+    public boolean hasShippingItems()
+    {   
+        return true;
+    }
+
+    @Override
+    public boolean setDeliveryMode(final String deliveryModeCode)
+    {
+        validateParameterNotNullStandardMessage("deliveryModeCode", deliveryModeCode);
+
+        final CartModel cartModel = getCart();
+        if (cartModel != null)
+        {
+            final DeliveryModeModel deliveryModeModel = getDeliveryService().getDeliveryModeForCode(deliveryModeCode);
+            if (deliveryModeModel != null)
+            {
+                final CommerceCheckoutParameter parameter = createCommerceCheckoutParameter(cartModel, true);
+                parameter.setDeliveryMode(deliveryModeModel);
+                return getCommerceCheckoutService().setDeliveryMode(parameter);
+            }
+        }
+        return false;
     }
 }
 

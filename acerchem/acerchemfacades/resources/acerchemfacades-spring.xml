@@ -268,8 +268,8 @@
 		</property>
 	</bean>
 
-    <alias name="defaultAcerchemCheckoutFacade" alias="acerchemCheckoutFacade"/>
-    <bean id="defaultAcerchemCheckoutFacade" parent="checkoutFacade" class="com.acerchem.facades.facades.impl.DefaultAcerchemCheckoutFacade" >
+    <alias name="defaultAcerchemCheckoutFacade" alias="checkoutFacade"/>
+    <bean id="defaultAcerchemCheckoutFacade" parent="defaultCheckoutFacade" class="com.acerchem.facades.facades.impl.DefaultAcerchemCheckoutFacade" >
     </bean>
     
     <!-- lz ↓-->
@@ -279,6 +279,10 @@
 	<bean id="defaultCustomerCreditAccountService" class="com.acerchem.service.customercreditaccount.impl.DefaultCustomerCreditAccountServiceImpl" />
 	
 	<!--  <bean id="defaultAcerchemPriceService" class="com.acerchem.service.price.DefaultAcerchemPriceService" />-->
+
+	<alias name="defaultAcerchemDeliveryOrderEntryGroupPopulator" alias="deliveryOrderEntryGroupPopulator"/>
+	<bean id="defaultAcerchemDeliveryOrderEntryGroupPopulator" parent="defaultDeliveryOrderEntryGroupPopulator" class="com.acerchem.facades.populators.AcerchemDeliveryOrderEntryGroupPopulator">
+	</bean>
 
 </beans>
 

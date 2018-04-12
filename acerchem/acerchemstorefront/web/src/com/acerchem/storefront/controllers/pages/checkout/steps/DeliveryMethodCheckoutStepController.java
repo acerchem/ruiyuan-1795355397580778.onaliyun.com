@@ -38,7 +38,7 @@ public class DeliveryMethodCheckoutStepController extends AbstractCheckoutStepCo
 {
 	private static final String DELIVERY_METHOD = "delivery-method";
 
-	@Resource
+	@Resource(name = "defaultAcerchemCheckoutFacade")
 	private AcerchemCheckoutFacade acerchemCheckoutFacade;
 
 	@RequestMapping(value = "/choose", method = RequestMethod.GET)
