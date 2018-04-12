@@ -98,7 +98,7 @@
 			</div>
 		<!-- r end -->
 				
-				<!-- æç´¢åå®¹ä¸ºç©ºæ¶æ¾ç¤º -->
+				
 				<div class="g-cell gall-right" style="display: none;">
 					<div class="maxon_salesul gall-right-no">
 						<h4>Sorry ~ Not found and found ' goods '</h4>
@@ -110,13 +110,13 @@
 						</p>
 					</div>
 				</div>
-				<!-- æç´¢åå®¹ä¸ºç©ºæ¶æ¾ç¤º  end-->
+				
 		</div>
 	</div>
 	
 </div>
 
-<!--å¼¹åºæ¡-->
+
 <div class="g-cartable maxfixed maxfixed-bg">
 	<div class="indwrap">
 		<div class="cart-total">
@@ -127,11 +127,11 @@
 						
 					</ul>
 				</div>
-				<!-- å¤æ­ä¼æ  -->
+				
 				<div class="Summary">
 					<span>Part of your order qualifies for FREE Shipping. </span>
 				</div>
-				<!-- å¤æ­ä¼æ  end-->
+				
 				<div class="list">
 					<div class="item-row">
 						<span>Total (<em>4</em> items)</span>
@@ -155,12 +155,12 @@
 	var wrap = '.maxon_prom .slide-wrap';
 	maxon_salesul(wrap)
 
-	//å¼¹æ¡æ¾ç¤ºé
+	
 	$(".btn-continue").on('click',function(){
 		$('.maxfixed').hide();
 		$('body').css({'height':'','overflow':''});
 	})
-	//å¼¹çªæ¾ç¤ºéèend
+	
 	
 	
 	 $(".maxfixed-over").on('click','.maxdel',function(){
@@ -190,7 +190,7 @@
 		
 	})
 
-	// éé¢è®¡ç®
+	
 	function totalprice(){
 		var fixedli = $('.maxfixed .product-table li'),
 			atot = $('.maxfixed .total'),
@@ -231,10 +231,10 @@
 
 
 		
-	// éé¢è®¡ç® END
+	
 
 
-	 function screen(){// èåç­é
+	 function screen(){
 		var adl = $('.g-cartable .gall-left dl');
 		adl.each(function(){
 			$('.m-term-le').append('<li>')
