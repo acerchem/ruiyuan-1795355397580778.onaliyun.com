@@ -94,6 +94,7 @@ INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=
 ;BottomHeaderSlot;;;wide
 ;PlaceholderContentSlot;;;
 
+
 # Product List / Grid are two layouts for Category Browsing pages
 
 # Product List Page Template
@@ -470,6 +471,8 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 ;;TopHeaderSlot-ProductDetails;TopHeaderSlot;;TopHeaderSlot;true
 ;;BottomHeaderSlot-ProductDetails;BottomHeaderSlot;;BottomHeaderSlot;true
 ;;PlaceholderContentSlot-ProductDetails;PlaceholderContentSlot;;PlaceholderContentSlot;true
+;;SaleWellProductListSlot-ProductDetails;SaleWellProductListSlot;;SaleWellProductListSlot;true
+;;PromotionProductListSlot-ProductDetails;PromotionProductListSlot;;PromotionProductListSlot;true
 
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='SearchResultsListPageTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-SearchResultsList;SiteLogo;;SiteLogoSlot;true
