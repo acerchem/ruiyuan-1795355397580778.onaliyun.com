@@ -20,8 +20,28 @@ UPDATE GenericItem[processor=de.hybris.platform.commerceservices.impex.impl.Conf
 $jarResourceCms=$config-jarResourceCmsValue
 $emailPackageName=$config-emailContextPackageName
 
-# Email page Template
+
+#shaun
+# Document page Template 
+INSERT_UPDATE DocumentPageTemplate;$contentCV[unique=true];uid[unique=true];name;active;frontendTemplateName;htmlTemplate(code);restrictedPageTypes(code)
+#;;ReturnShippingLabelDocumentTemplate;Return Shipping Label Document Template;true;returnshippingLabel;return-shipping-label-template;DocumentPage
+
+#shaun
+# Templates for CMS Cockpit Page Edit 
+UPDATE DocumentPageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+#;;ReturnShippingLabelDocumentTemplate;jar:/yacceleratorordermanagement/test/impex/structure_returnShippingLayout.vm
+
+
+
+
+# Email page Template shaun
 INSERT_UPDATE EmailPageTemplate;$contentCV[unique=true];uid[unique=true];name;active;frontendTemplateName;subject(code);htmlTemplate(code);restrictedPageTypes(code)
+#shaun
+;;AcerchemContractEmailTemplate;Acerchem  Contract Email Template;true;ContractEmail;acerchem_Email_Contract_Subject;acerchem_Email_Contract_Body;EmailPage
+;;AcerchemDeliveryNoteEmailTemplate;Acerchem Delivery Note Email Template;true;DeliveryNoteEmail;acerchem_Email_Delivery_Note_Subject;acerchem_Email_Delivery_Note_Body;EmailPage
+;;AcerchemInvoiceEmailTemplate;Acerchem Invoice Email Template;true;InvoiceEmail;acerchem_Email_Invoice_Subject;acerchem_Email_Invoice_Body;EmailPage
+;;AcerchemProformaInvoiceEmailTemplate;Acerchem Proforma Invoice Email Template;true;ProformaInvoiceEmail;acerchem_Email_Proforma_Invoice_Subject;acerchem_Email_Proforma_Invoice_Body;EmailPage
+;;AcerchemReleaseNoteEmailTemplate;Acerchem Release Note Email Template;true;ReleaseNoteEmail;acerchem_Email_Release_Note_Subject;acerchem_Email_Release_Note_Body;EmailPage
 ;;CustomerRegistrationEmailTemplate;Customer Registration Email Template;true;customerRegistrationEmail;acerchem_Email_Customer_Registration_Subject;acerchem_Email_Customer_Registration_Body;EmailPage
 ;;ForgottenPasswordEmailTemplate;Forgotten Password Email Template;true;forgottenPasswordEmail;acerchem_Email_Forgotten_Password_Subject;acerchem_Email_Forgotten_Password_Body;EmailPage
 ;;OrderConfirmationEmailTemplate;Order Confirmation Email Template;true;orderConfirmationEmail;acerchem_Email_Order_Confirmation_Subject;acerchem_Email_Order_Confirmation_Body;EmailPage
@@ -129,10 +149,12 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active
 ;;EmailSiteLogoSlot;Default Email Site Slot;true
 
 # Bind Content Slots to Email Page Templates
+
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='CustomerRegistrationEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-CustomerRegistrationEmail;SiteLogo;;EmailSiteLogoSlot;true
 ;;TopContent-CustomerRegistrationEmail;TopContent;;EmailTopSlot;true
 ;;BottomContent-CustomerRegistrationEmail;BottomContent;;EmailBottomSlot;true
+
 
 INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='ForgottenPasswordEmailTemplate'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
 ;;SiteLogo-ForgottenPasswordEmail;SiteLogo;;EmailSiteLogoSlot;true
@@ -206,6 +228,14 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 
 # Email Pages
 INSERT_UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved']
+#shaun
+;;ContractEmail;Contract Email;AcerchemContractEmailTemplate;true;
+;;DeliveryNoteEmail;Delivery Note Email;AcerchemDeliveryNoteEmailTemplate;true;
+;;InvoiceEmail;Invoice Email;AcerchemInvoiceEmailTemplate;true;
+;;ProformaInvoiceEmail;Proforma Invoice Email;AcerchemProformaInvoiceEmailTemplate;true;
+;;ReleaseNoteEmail;Release Note Email;AcerchemReleaseNoteEmailTemplate;true;
+
+
 ;;CustomerRegistrationEmail;Customer Registration Email;CustomerRegistrationEmailTemplate;true;
 ;;ForgottenPasswordEmail;Forgotten Password Email;ForgottenPasswordEmailTemplate;true;
 ;;OrderConfirmationEmail;Order Confirmation Email;OrderConfirmationEmailTemplate;true;
@@ -223,7 +253,7 @@ INSERT_UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];name;masterTemp
 
 
 
-# CMS components velocity templates
+# CMS components velocity templates shaun
 INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;rendererType(code)[default='velocity']
 ;acerchem-CMSImageComponent-template;java.util.Map
 ;acerchem-BannerComponent-template;java.util.Map
@@ -231,8 +261,23 @@ INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;rendererType(code)
 ;acerchem-CMSLinkComponent-template;java.util.Map
 ;acerchem-CMSParagraphComponent-template;java.util.Map
 
-# Email velocity templates
+
+# Email velocity templates shaun
 INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;rendererType(code)[default='velocity']
+
+#shaun
+;acerchem_Email_Contract_Body;$emailPackageName.AcerChemContractEmailContext
+;acerchem_Email_Contract_Subject;$emailPackageName.AcerChemContractEmailContext
+;acerchem_Email_Delivery_Note_Body;$emailPackageName.AcerChemDeliveryNoteEmailContext
+;acerchem_Email_Delivery_Note_Subject;$emailPackageName.AcerChemDeliveryNoteEmailContext
+;acerchem_Email_Invoice_Body;$emailPackageName.AcerChemInvoiceEmailContext
+;acerchem_Email_Invoice_Subject;$emailPackageName.AcerChemInvoiceEmailContext
+;acerchem_Email_Proforma_Invoice_Body;$emailPackageName.AcerChemInvoiceEmailContext
+;acerchem_Email_Proforma_Invoice_Subject;$emailPackageName.AcerChemInvoiceEmailContext
+;acerchem_Email_Release_Note_Body;$emailPackageName.AcerChemReleaseNoteEmailContext
+;acerchem_Email_Release_Note_Subject;$emailPackageName.AcerChemReleaseNoteEmailContext
+
+
 ;acerchem_Email_Customer_Registration_Body;$emailPackageName.CustomerEmailContext
 ;acerchem_Email_Forgotten_Password_Body;$emailPackageName.ForgottenPasswordEmailContext
 ;acerchem_Email_Order_Confirmation_Body;$emailPackageName.OrderNotificationEmailContext
