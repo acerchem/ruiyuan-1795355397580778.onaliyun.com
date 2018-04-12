@@ -15,10 +15,10 @@ $productCatalog=acerchemProductCatalog
 $productCatalogName=acerchem Product Catalog
 $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
 $vendor=default
-
+$storeUid=acerchem
 
 # Create some Warehouses for the Vendor
-INSERT_UPDATE Warehouse;code[unique=true];vendor(code)[default=$vendor];default[default='false']
+INSERT_UPDATE Warehouse;code[unique=true];vendor(code)[default=$vendor];default[default='false'];baseStores(uid)[default=$storeUid]
 ;USA
 ;United Kingdom
 ;Holland

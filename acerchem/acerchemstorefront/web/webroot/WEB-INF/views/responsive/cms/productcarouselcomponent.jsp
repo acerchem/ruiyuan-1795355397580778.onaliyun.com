@@ -65,7 +65,7 @@
 </c:if>	    
 
 
-<c:if test="${component.isWell}">
+<!--<c:if test="${component.isWell}">
 	<div class="title">
 		${fn:escapeXml(title)}
 	<div class="maxmore_tit">
@@ -82,7 +82,7 @@
 			    	<div class="maximg">
 			    		<product:productPrimaryImage product="${product}" format="product"/>
 			    		<div class="maximgpor">
-			    			<a href="">Buy Now</a><!--未登录时-->
+			    			<a href="">Buy Now</a><!--未登录时
 			    		</div>
 			    		
 			    	</div>
@@ -96,5 +96,5 @@
 		 </ul>
 	</div>
 
-</c:if>
+</c:if>-->
 
