@@ -22,27 +22,13 @@
     		</div>
     		
     		<div class="maxtext">
-    		  <!--name  -->
-	    		<p><a class="name" href="${entryProductUrl}">${fn:escapeXml(product.name)}</a></p>
-	    	  <!-- qty -->
-	    	  <div class="qty">
-		    	<p class="maxtext-note">
-		    		<span><spring:theme code="popup.cart.quantity.added"/></span>&nbsp;<em>1</em>
-		    	</p>
-		      </div>
-		    	
-			    	<div class="maxdel"></div> 
-			    	<div class="pt-num-but">
-				    	<span class="price"><format:price priceData="${entry.basePrice}"/></span>
-	    				<span class="old-price"><format:price priceData="${entry.basePrice}"/></span>
-	    				
-					    	<div class="m-setnum">
-						    	<span class="set sub">-</span>
-						    	<input type="text" name="pdnum" class="set" value="1">
-						    	<span class="set add">+</span>
-					    	</div>
-				   </div>
-		   </div>
+    		<p class="in-title"><a href="${entryProductUrl}">${fn:escapeXml(product.name)}</a></p>
+				<p class="spec">Specifications:<i>25kg</i></p>
+				<div class="spset"><span class="price"><format:fromPrice priceData="${entry.basePrice}"/></span>
+				<span class="old-price"><format:fromPrice priceData="${entry.basePrice}"/></span>
+				<span class="num">${quantity}</span>
+				</div>
+			</div>
     	</li>
 	</ul>
 

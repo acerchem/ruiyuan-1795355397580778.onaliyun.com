@@ -12,30 +12,37 @@
 
 <product:addToCartTitle/>
 
-<form:form method="post" id="addToCartForm" class="add_to_cart_form" action="${addToCartUrl}">
-	<input type="hidden" maxlength="3" size="1" id="qty" name="qty" class="qty js-qty-selector-input" value="1">
-
-<input type="hidden" name="productCodePost" value="${fn:escapeXml(product.code)}"/>
-
+<form:form id="addToCartForm" method="post"  class="add_to_cart_form" action="${addToCartUrl}">
+	
+	<input type="hidden" maxlength="3" size="1" id="qty" name="qty"  value="1">
+    <input type="hidden" name="productCodePost" value="${fn:escapeXml(product.code)}"/>
+     <input type="hidden" name="storeId"  id="storeId"  value=""/>
+    
+    
+<div class="btn-set">
+	    <button class="btn btn-submit">Check Out</button>
 <c:if test="${empty showAddToCart ? true : showAddToCart}">
 	<c:set var="buttonType">button</c:set>
 	<c:if test="${product.stock.stockLevelStatus.code ne 'outOfStock' }">
 		<c:set var="buttonType">submit</c:set>
 	</c:if>
 	<c:choose>
+	
 		<c:when test="${fn:contains(buttonType, 'button')}">
-			<button type="${buttonType}" class="btn btn-primary btn-block js-add-to-cart btn-icon glyphicon-shopping-cart outOfStock" disabled="disabled">
-				<spring:theme code="product.variants.out.of.stock"/>
+			<button type="${buttonType}" class="btn btn-cart" disabled="disabled">
+				Add to Cart
 			</button>
 		</c:when>
 		<c:otherwise>
 			<ycommerce:testId code="addToCartButton">
-				<button id="addToCartButton" type="${buttonType}" class="btn btn-primary btn-block js-add-to-cart js-enable-btn btn-icon glyphicon-shopping-cart" disabled="disabled">
-					<spring:theme code="basket.add.to.basket"/>
+				<button id="addToCartButton" type="${buttonType}" class="btn btn-cart" >
+					Add to Cart
 				</button>
 			</ycommerce:testId>
 		</c:otherwise>
+	
 	</c:choose>
 </c:if>
+	</div>
 </form:form>
 

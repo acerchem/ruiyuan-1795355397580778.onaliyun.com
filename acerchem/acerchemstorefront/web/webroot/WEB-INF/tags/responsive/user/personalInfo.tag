@@ -5,6 +5,7 @@
 <spring:url value="/my-account/address-book" var="addressBookUrl"/>
 <spring:url value="/my-account/update-password" var="updatePasswordUrl"/>
 <%-- <spring:url value="/my-account/payment-details" var="paymentDetailsUrl"/> --%>
+<spring:url value="/my-account/credit" var="creditUrl"/>
 
 <div class="g-left">
 	<div class="base">
@@ -24,6 +25,7 @@
 			<li class="${nowPage=='address-book'?'now':''}"><a href="${addressBookUrl}" class="icons address-icons">Address Book</a></li>
 			<li class="${nowPage=='update-password'?'now':''}"><a href="${updatePasswordUrl}" class="icons modify-icons">Modify The Password</a></li>
 			<%-- <li class="${nowPage=='payment-details'?'now':''}"><a href="${paymentDetailsUrl}" class="icons modify-icons">Payment Details</a></li> --%>
+			<li class="${nowPage=='credit'?'now':''}"><a href="${creditUrl}" class="icons modify-icons">Credit Account</a></li>
 		</ul>
 	</div>
 

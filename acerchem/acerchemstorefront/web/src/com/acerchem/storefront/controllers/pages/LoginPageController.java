@@ -40,10 +40,11 @@ import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.tx.Transaction;
-
+import com.acerchem.core.enums.CreditAccountStatusEnum;
+import com.acerchem.core.model.CustomerCreditAccountModel;
 import com.acerchem.storefront.controllers.ControllerConstants;
 import com.acerchem.storefront.data.CustomRegisterForm;
-
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
@@ -323,7 +324,6 @@ public class LoginPageController extends AbstractLoginPageController
 		String shipCountryIso=form.getShipAddress().getCountryIso();
 		String shipRegionIso=form.getShipAddress().getRegionIso();
 		CountryModel shipCountry=commonI18NService.getCountry(shipCountryIso);
-		RegionModel shipRegion=commonI18NService.getRegion(shipCountry,shipRegionIso);
 		
 		AddressModel am=modelService.create(AddressModel.class);
 		am.setContactAddress(false);
@@ -333,14 +333,16 @@ public class LoginPageController extends AbstractLoginPageController
 		am.setPhone1(form.getMobileNumber());
 		am.setCellphone(form.getMobileNumber());
 		am.setCountry(shipCountry);
-		am.setRegion(shipRegion);
+		if(shipRegionIso!=null)
+		{
+			am.setRegion(commonI18NService.getRegion(shipCountry,shipRegionIso));
+		}
 		am.setTown(form.getShipAddress().getTownCity());
 		am.setOwner(user);
 		
 		String contactCountryIso=form.getContactAddress().getCountryIso();
 		String contactRegionIso=form.getContactAddress().getRegionIso();
 		CountryModel contactCountry=commonI18NService.getCountry(contactCountryIso);
-		RegionModel contactRegion=commonI18NService.getRegion(contactCountry,contactRegionIso);
 		AddressModel am2=modelService.create(AddressModel.class);
 		am2.setContactAddress(true);
 		am2.setShippingAddress(false);
@@ -349,7 +351,10 @@ public class LoginPageController extends AbstractLoginPageController
 		am2.setPhone1(form.getMobileNumber());
 		am2.setCellphone(form.getMobileNumber());
 		am2.setCountry(contactCountry);
-		am2.setRegion(contactRegion);
+		if(contactRegionIso!=null)
+		{
+			am2.setRegion(commonI18NService.getRegion(contactCountry,contactRegionIso));
+		}
 		am2.setTown(form.getContactAddress().getTownCity());
 		am2.setOwner(user);
 		
@@ -371,15 +376,21 @@ public class LoginPageController extends AbstractLoginPageController
 		phoneNumbers.add(pn);
 		phoneNumbers.add(pn2);
 		
-		user.setOriginalUid(form.getEmail());
+		CustomerCreditAccountModel ca=modelService.create(CustomerCreditAccountModel.class);
+		ca.setCreaditRemainedAmount(BigDecimal.valueOf(0));
+		ca.setCreditTotalAmount(BigDecimal.valueOf(0));;
+		ca.setStatus(CreditAccountStatusEnum.LOCKED);
+		ca.setBillingInterval(1);
 		
+		user.setOriginalUid(form.getEmail());
 		user.setSessionLanguage(commonI18NService.getLanguage(form.getLanguage()));
 		user.setSessionCurrency(commonI18NService.getCurrency(form.getCurrency()));
 		user.setAddresses(amlist);
 		user.setPhoneNumbers(phoneNumbers);
 		user.setPassword(form.getPwd());
+		user.setCreditAccount(ca);
 		
-		modelService.saveAll(user,pn2,pn,am2,am);
+		modelService.saveAll(user,pn2,pn,am2,am,ca);
 		return user;
 	}
 	

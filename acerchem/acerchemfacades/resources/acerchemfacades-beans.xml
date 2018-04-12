@@ -29,6 +29,25 @@
 		<property name="warehouseCode" type="java.lang.String"/>
 		<property name="avaReleaseDay" type="java.lang.Integer"/>
 	</bean>
+	
+	<!-- add by alice -->
+	<bean class="de.hybris.platform.customerticketingfacades.data.TicketData">
+		<property name="productId" type="java.lang.String"/>
+		<property name="productName" type="java.lang.String"/>
+		<property name="yourname" type="java.lang.String"/>
+		<property name="telephone" type="java.lang.String"/>
+		<property name="address" type="java.lang.String"/>
+		<property name="Email" type="java.lang.String"/>
+	</bean>
+	<bean class="de.hybris.platform.ticketsystem.data.CsTicketParameter">
+		<property name="productId" type="java.lang.String"/>
+		<property name="productName" type="java.lang.String"/>
+		<property name="yourname" type="java.lang.String"/>
+		<property name="telephone" type="java.lang.String"/>
+		<property name="address" type="java.lang.String"/>
+		<property name="Email" type="java.lang.String"/>
+	</bean>
+	<!-- end -->
 
 	<bean class="com.acerchem.facades.product.data.StockDataList">
 		<property name="stockDataList" type="java.util.List&lt;de.hybris.platform.commercefacades.product.data.StockData>"/>
@@ -43,23 +62,43 @@
 
 	<bean class="de.hybris.platform.commercefacades.user.data.CustomerData">
 		<property name="addressDataList" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.AddressData>"/>
+		<property name="creditAccount" type="de.hybris.platform.commercefacades.user.data.CustomerCreditAccountData"/>
 	</bean>
-
-
-    <bean class="com.acerchem.facades.product.data.WarehouseData">
-        <property name="code" type="String"/>
-        <property name="name" type="String"/>
-    </bean>
-
-	<bean class="com.acerchem.facades.product.data.CountryToWarehouseData">
-		<property name="storeId" type="String"/>
-		<property name="countryData" type="de.hybris.platform.commercefacades.user.data.CountryData"/>
-		<property name="warehouseList" type="java.util.List&lt;com.acerchem.facades.product.data.WarehouseData>"/>
+	
+	<!-- alice :信用账户-->
+	<bean class="de.hybris.platform.commercefacades.user.data.CustomerCreditAccountData">
+		<property name="billingInterval" type="java.lang.Integer"/><!-- 账期时间  -->
+		<property name="creaditRemainedAmount" type="java.math.BigDecimal"/><!-- 当前可用额度 -->
+		<property name="creditTotalAmount" type="java.math.BigDecimal"/><!-- 总额度 -->
+		<property name="status" type="String"/><!-- LOCKED/NORMAL -->
+		<property name="transactions" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.CreditTransactionData>"/><!-- 流水记录 -->
 	</bean>
-
-    <bean class="com.acerchem.facades.product.data.CountryToWarehouseDataList">
-        <property name="countryToWarehouseDataList" type="java.util.List&lt;com.acerchem.facades.product.data.CountryToWarehouseData>"/>
+	<!-- end -->
+	
+	<!-- alice :信用流水-->
+	<bean class="de.hybris.platform.commercefacades.user.data.CreditTransactionData">
+		<property name="creaditUsedAmount" type="java.math.BigDecimal"/><!-- 消费金额 -->
+		<property name="paybackAmount" type="java.math.BigDecimal"/><!-- 还款金额 -->
+		<property name="isPayback" type="java.lang.Boolean"/><!-- 是否已还款 -->
+		<property name="paybackTime" type="java.lang.long"/><!-- 实际还款日期 -->
+		<property name="shouldPaybackTime" type="java.lang.long"/><!-- 还款日 -->
+		<property name="cransactionId" type="java.lang.String"/>
+		<property name="creditAccount" type="de.hybris.platform.commercefacades.user.data.CustomerCreditAccountData"/><!-- 信用账户 -->
+	</bean>
+	<!-- end -->
+    
+    <!-- -add by Randy   the store info of the page product detail  -->
+     <bean class="com.acerchem.facades.product.data.StoreOfProductData">
+        <property name="storeId" type="String"/>
+        <property name="storeName" type="String"/>
+        <property name="countryDataList" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.CountryData>"/>
+        <property name="inventory" type="java.lang.Integer"/>
+        <property name="avaReleaseDay" type="java.lang.Integer"/>
+        <property name="isUseFutureStock" type="Boolean"/>
+        <property name="futureAvailableDate" type="java.lang.Integer"/>
+         <property name="futureInventory" type="java.lang.Integer"/>
     </bean>
+    
 
 	<bean class="de.hybris.platform.commercefacades.order.data.AddToCartParams">
 		<property name="isUseFutureStock" type="Boolean"/>
@@ -70,5 +109,4 @@
 		<property name="isUseFutureStock" type="Boolean"/>
 		<property name="availableDate" type="java.util.Date"/>
 	</bean>
-
 </beans>

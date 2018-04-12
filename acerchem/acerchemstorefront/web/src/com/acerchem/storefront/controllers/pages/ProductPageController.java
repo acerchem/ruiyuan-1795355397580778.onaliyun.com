@@ -10,10 +10,6 @@
  */
 package com.acerchem.storefront.controllers.pages;
 
-import com.acerchem.facades.facades.AcerchemCustomerFacade;
-import com.acerchem.facades.facades.AcerchemStockFacade;
-import com.acerchem.storefront.controllers.ControllerConstants;
-import com.google.common.collect.Maps;
 import de.hybris.platform.acceleratorfacades.futurestock.FutureStockFacade;
 import de.hybris.platform.acceleratorservices.controllers.page.PageType;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.impl.ProductBreadcrumbBuilder;
@@ -28,12 +24,16 @@ import de.hybris.platform.acceleratorstorefrontcommons.util.XSSFilterUtil;
 import de.hybris.platform.acceleratorstorefrontcommons.variants.VariantSortStrategy;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
-
 import de.hybris.platform.cms2.servicelayer.services.CMSPageService;
 import de.hybris.platform.commercefacades.order.data.ConfigurationInfoData;
 import de.hybris.platform.commercefacades.product.ProductFacade;
 import de.hybris.platform.commercefacades.product.ProductOption;
-import de.hybris.platform.commercefacades.product.data.*;
+import de.hybris.platform.commercefacades.product.data.BaseOptionData;
+import de.hybris.platform.commercefacades.product.data.FutureStockData;
+import de.hybris.platform.commercefacades.product.data.ImageData;
+import de.hybris.platform.commercefacades.product.data.ImageDataType;
+import de.hybris.platform.commercefacades.product.data.ProductData;
+import de.hybris.platform.commercefacades.product.data.ReviewData;
 import de.hybris.platform.commerceservices.customer.CustomerAccountService;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.url.UrlResolver;
@@ -49,6 +49,20 @@ import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.store.BaseStoreModel;
 import de.hybris.platform.store.services.BaseStoreService;
 import de.hybris.platform.util.Config;
+
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -56,14 +70,18 @@ import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.io.UnsupportedEncodingException;
-import java.util.*;
+import com.acerchem.facades.facades.AcerchemCustomerFacade;
+import com.acerchem.facades.facades.AcerchemStockFacade;
+import com.acerchem.storefront.controllers.ControllerConstants;
+import com.google.common.collect.Maps;
 
 
 /**
@@ -123,8 +141,8 @@ public class ProductPageController extends AbstractPageController
 
 	@RequestMapping(value = PRODUCT_CODE_PATH_VARIABLE_PATTERN, method = RequestMethod.GET)
 	public String productDetail(@PathVariable("productCode") final String productCode, final Model model,
-			final HttpServletRequest request, final HttpServletResponse response)
-			throws CMSItemNotFoundException, UnsupportedEncodingException
+			final HttpServletRequest request, final HttpServletResponse response) throws CMSItemNotFoundException,
+			UnsupportedEncodingException
 	{
 		final List<ProductOption> extraOptions = Arrays.asList(ProductOption.VARIANT_MATRIX_BASE, ProductOption.VARIANT_MATRIX_URL,
 				ProductOption.VARIANT_MATRIX_MEDIA);
@@ -146,21 +164,17 @@ public class ProductPageController extends AbstractPageController
 		model.addAttribute("pageType", PageType.PRODUCT.name());
 		model.addAttribute("futureStockEnabled", Boolean.valueOf(Config.getBoolean(FUTURE_STOCK_ENABLED, false)));
 
-        getSessionService().setAttribute("user",userService.getUserForUID("aaron.customer@hybris.com"));
-        model.addAttribute("customer",acerchemCustomerFacade.getCurrentCustomer());
-        
-        final PageableData pageableData = createPagaable(0, 100, "asc");
-        
-        model.addAttribute("countrys",acerchemCustomerFacade.getAllPointOfServices(pageableData));
 
-        model.addAttribute("stocks",acerchemStockFacade.getAllStockDataByProduct(productCode));
+		model.addAttribute("countrys", acerchemCustomerFacade.getAllPos(productCode));
+
+		model.addAttribute("stocks", acerchemStockFacade.getAllStockDataByProduct(productCode));
 
 		final String metaKeywords = MetaSanitizerUtil.sanitizeKeywords(productData.getKeywords());
 		final String metaDescription = MetaSanitizerUtil.sanitizeDescription(productData.getDescription());
 		setUpMetaData(model, metaKeywords, metaDescription);
 		
 		testOrderProcess();
-		
+
 		return getViewForPage(model);
 	}
 
@@ -216,10 +230,10 @@ public class ProductPageController extends AbstractPageController
 			final HttpServletRequest request)
 	{
 		final ProductModel productModel = productService.getProductForCode(productCode);
-		final ProductData productData = productFacade.getProductForCodeAndOptions(productCode,
-				Arrays.asList(ProductOption.BASIC, ProductOption.PRICE, ProductOption.SUMMARY, ProductOption.DESCRIPTION,
-						ProductOption.CATEGORIES, ProductOption.PROMOTIONS, ProductOption.STOCK, ProductOption.REVIEW,
-						ProductOption.VARIANT_FULL, ProductOption.DELIVERY_MODE_AVAILABILITY));
+		final ProductData productData = productFacade.getProductForCodeAndOptions(productCode, Arrays.asList(ProductOption.BASIC,
+				ProductOption.PRICE, ProductOption.SUMMARY, ProductOption.DESCRIPTION, ProductOption.CATEGORIES,
+				ProductOption.PROMOTIONS, ProductOption.STOCK, ProductOption.REVIEW, ProductOption.VARIANT_FULL,
+				ProductOption.DELIVERY_MODE_AVAILABILITY));
 
 		sortVariantOptionData(productData);
 		populateProductData(productData, model);
@@ -258,8 +272,7 @@ public class ProductPageController extends AbstractPageController
 		return REDIRECT_PREFIX + productDataUrlResolver.resolve(productData);
 	}
 
-	@RequestMapping(value = PRODUCT_CODE_PATH_VARIABLE_PATTERN + "/reviewhtml/"
-			+ REVIEWS_PATH_VARIABLE_PATTERN, method = RequestMethod.GET)
+	@RequestMapping(value = PRODUCT_CODE_PATH_VARIABLE_PATTERN + "/reviewhtml/" + REVIEWS_PATH_VARIABLE_PATTERN, method = RequestMethod.GET)
 	public String reviewHtml(@PathVariable("productCode") final String productCode,
 			@PathVariable("numberOfReviews") final String numberOfReviews, final Model model, final HttpServletRequest request)
 	{
@@ -274,8 +287,8 @@ public class ProductPageController extends AbstractPageController
 		}
 		else
 		{
-			final int reviewCount = Math.min(Integer.parseInt(numberOfReviews),
-					productData.getNumberOfReviews() == null ? 0 : productData.getNumberOfReviews().intValue());
+			final int reviewCount = Math.min(Integer.parseInt(numberOfReviews), productData.getNumberOfReviews() == null ? 0
+					: productData.getNumberOfReviews().intValue());
 			reviews = productFacade.getReviews(productCode, Integer.valueOf(reviewCount));
 		}
 
@@ -374,8 +387,8 @@ public class ProductPageController extends AbstractPageController
 		Map<String, Object> result = new HashMap<>();
 		if (futureStockEnabled && CollectionUtils.isNotEmpty(skus) && StringUtils.isNotBlank(productCode))
 		{
-			final Map<String, List<FutureStockData>> futureStockData = futureStockFacade
-					.getFutureAvailabilityForSelectedVariants(productCode, skus);
+			final Map<String, List<FutureStockData>> futureStockData = futureStockFacade.getFutureAvailabilityForSelectedVariants(
+					productCode, skus);
 
 			if (futureStockData == null)
 			{
@@ -396,19 +409,23 @@ public class ProductPageController extends AbstractPageController
 		return result;
 	}
 
-	/*@RequestMapping(value = "/stores", method = RequestMethod.GET)
-	@ResponseBody
-	public SearchPageData<CountryToWarehouseData> locationSearch(@RequestParam(required = false) final String query,
-																 @RequestParam(required = false, defaultValue = "0") final int currentPage,
-																 @RequestParam(required = false, defaultValue = "100") final int pageSize,
-																 @RequestParam(required = false, defaultValue = "asc") final String sort)
-	{
-		final PageableData pageableData = createPagaable(currentPage, pageSize, sort);
-
-		SearchPageData<CountryToWarehouseData> result = acerchemCustomerFacade.getAllPointOfServices(pageableData);
-
-		return result;
-	}*/
+	/*
+	 * @RequestMapping(value = "/stores", method = RequestMethod.GET)
+	 *
+	 * @ResponseBody public SearchPageData<CountryToWarehouseData> locationSearch(@RequestParam(required = false) final
+	 * String query,
+	 *
+	 * @RequestParam(required = false, defaultValue = "0") final int currentPage,
+	 *
+	 * @RequestParam(required = false, defaultValue = "100") final int pageSize,
+	 *
+	 * @RequestParam(required = false, defaultValue = "asc") final String sort) { final PageableData pageableData =
+	 * createPagaable(currentPage, pageSize, sort);
+	 *
+	 * SearchPageData<CountryToWarehouseData> result = acerchemCustomerFacade.getAllPointOfServices(pageableData);
+	 *
+	 * return result; }
+	 */
 
 	@ExceptionHandler(UnknownIdentifierException.class)
 	public String handleUnknownIdentifierException(final UnknownIdentifierException exception, final HttpServletRequest request)
@@ -554,7 +571,6 @@ public class ProductPageController extends AbstractPageController
 		return pageableData;
 	}
 	
-	/********test process email using********/
 	@Resource
 	 private CustomerAccountService customerAccountService;
 	 @Resource

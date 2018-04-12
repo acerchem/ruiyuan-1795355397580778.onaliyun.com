@@ -416,8 +416,8 @@
 	</tr>
 </table>
 	#set ($mailToUrl = "mailto:${ctx.messages.contactUsEmailAddress}")
-	#if(${ctx.baseSite.Uid} == "electronics")
-		#set ( $paragraphContactUs = ${ctx.messages.getMessage('paragraphContactUs_electronics', "#genHtmlLinkStartTag(${ctx.messages.contactUsPage})", "#genHtmlLinkEndTag()", "#genHtmlLink($mailToUrl '#666666' ${ctx.messages.contactUsEmailAddress})")} )
+	#if(${ctx.baseSite.Uid} == "acerchem")
+		#set ( $paragraphContactUs = ${ctx.messages.getMessage('paragraphContactUs_acerchem', "#genHtmlLinkStartTag(${ctx.messages.contactUsPage})", "#genHtmlLinkEndTag()", "#genHtmlLink($mailToUrl '#666666' ${ctx.messages.contactUsEmailAddress})")} )
 	#else
 		#set ($faqPage = "${ctx.baseUrl}/faq")
 		#set ( $paragraphContactUs = ${ctx.messages.getMessage('paragraphContactUs', "#genHtmlLinkStartTag($faqPage)", "#genHtmlLinkEndTag()", "#genHtmlLinkStartTag(${ctx.messages.contactUsPage})", "#genHtmlLinkEndTag()", "#genHtmlLink($mailToUrl '#666666' ${ctx.messages.contactUsEmailAddress})")} )

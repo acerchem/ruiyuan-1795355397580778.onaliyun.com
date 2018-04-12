@@ -61,6 +61,12 @@
 			<value code="L" />
 
 		</enumtype>
+
+        <enumtype code="CreditAccountStatusEnum" autocreate="true"
+                  generate="true" dynamic="true">
+            <value code="LOCKED" />
+            <value code="NORMAL" />
+        </enumtype>
 	</enumtypes>
 
 
@@ -90,16 +96,73 @@
 					optional="true" />
 			</targetElement>
 		</relation>
+
+        <!-- 员工和用户一对多关系 -->
+        <relation code="Receptionist2Customer" generate="true"
+                  localized="false" autocreate="true">
+            <sourceElement qualifier="relatedCustomer" type="Employee" cardinality="one">
+                <modifiers read="true" write="true" search="true"
+                           optional="true" />
+            </sourceElement>
+            <targetElement qualifier="receptionist" type="Customer" cardinality="many" collectiontype="list" ordered="true" >
+                <modifiers read="true" write="true" search="true"
+                           optional="true" />
+            </targetElement>
+        </relation>
+
+        <!-- 信用账户和流水记录一对多关系 -->
+        <relation code="Transactions2CreditAccount" generate="true"
+                  localized="false" autocreate="true">
+            <sourceElement qualifier="creditAccount" type="CustomerCreditAccount" cardinality="one">
+                <modifiers read="true" write="true" search="true"
+                           optional="true" />
+            </sourceElement>
+            <targetElement qualifier="transactions" type="CreditTransaction" cardinality="many" collectiontype="list" ordered="true" >
+                <modifiers read="true" write="true" search="true"
+                           optional="true" />
+            </targetElement>
+        </relation>
+
+
 	</relations>
 	
 	<itemtypes>
 
 		<!-- Add your item definitions here -->
 
-
 		<!-- TypeGroups are for structure of this file only -->
 
+        <!-- add by alice -->
 		<typegroup name="Apparel">
+			<itemtype code="CsTicket"  autocreate="false" generate="false">
+				<attributes>
+					<attribute type="java.lang.String" qualifier="productId">
+						<modifiers read="true" write="true" search="true" optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="productName">
+						<modifiers read="true" write="true" search="true" optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="yourname">
+						<modifiers read="true" write="true" search="true" optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="telephone">
+						<modifiers read="true" write="true" search="true" optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="Email">
+						<modifiers read="true" write="true" search="true" optional="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute type="java.lang.String" qualifier="address">
+						<modifiers read="true" write="true" search="true" optional="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype> 
+		
 			<itemtype code="ApparelProduct" extends="Product"
 				autocreate="true" generate="true" jaloclass="com.acerchem.core.jalo.ApparelProduct">
 				<description>Base apparel product extension that contains additional attributes.</description>
@@ -150,7 +213,7 @@
 				</attributes>
 			</itemtype>
 		</typegroup>
-
+		
 		<typegroup name="Electronics">
 			<itemtype code="ElectronicsColorVariantProduct" extends="VariantProduct"
 				autocreate="true" generate="true"
@@ -166,9 +229,11 @@
 					</attribute>
 				</attributes>
 			</itemtype>
-
 		</typegroup>
-		<typegroup name="AcerChemAppend">
+		<!-- end -->
+		
+
+		<typegroup name="Acerchem">
 			<!--add by Wangjh start -->
 			<!-- document for uploading -->
 			<!-- <itemtype code="Document" autocreate="false" generate="false"> <description>Extending 
@@ -300,11 +365,10 @@
 			
 			
 			<!--add by Wangjh end -->
-		</typegroup>
+	
 
 		<!-- add by Randy -->
-		<typegroup name="import ç¾hemicalInfo and unitCalculateRato">
-
+	
 			<itemtype code="Product" autocreate="false" generate="false">
 				<description>Extending the Product type from core with additional attributes.</description>
 				<attributes>
@@ -361,10 +425,7 @@
 			</itemtype>
 
 
-
-		</typegroup>
 		<!-- add by Randy -->
-		<typegroup name="import the component of fronter page">
 			<itemtype code="AbstractMultipleBannerComponent" autocreate="true"
 				generate="true" abstract="true"
 				jaloclass="de.hybris.platform.cms2lib.components.AbstractMultipleBannerComponent"
@@ -401,11 +462,9 @@
 
 				</attributes>
 			</itemtype>
-		</typegroup>
 
 
 		<!--add by Alice -->
-		<typegroup name="traning">
 			<itemtype code="Product" autocreate="false" generate="false">
 				<description>Extending the Product type from core with additional attributes.</description>
 				<attributes>
@@ -417,11 +476,9 @@
 					</attribute>
 				</attributes>
 			</itemtype>
-		</typegroup>
 		<!-- End -->
 
 		<!--TODO -->
-		<typegroup name="traning">
 			<itemtype code="StockLevel" autocreate="false" generate="false">
 				<description>Extending the Product type from core with additional attributes.</description>
 				<attributes>
@@ -433,9 +490,7 @@
 					</attribute>
 				</attributes>
 			</itemtype>
-		</typegroup>
 
-		<typegroup name="traning">
 			<itemtype code="AbstractOrderEntry" autocreate="false"
 				generate="false">
 				<attributes>
@@ -471,9 +526,144 @@
 				</attributes>
 			</itemtype>
 
-		</typegroup>
+            <itemtype code="CustomerCreditAccount" autocreate="true" generate="true">
+                <description>信用账户</description>
+                <deployment table="customerCreditAccount" typecode="20202" />
+                <attributes>
+                    <attribute qualifier="billingInterval" type="java.lang.Integer">
+                        <description>账期时间</description>
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                        <defaultvalue>0</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="creaditRemainedAmount" type="java.math.BigDecimal">
+                        <description>可用额度</description>
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                        <defaultvalue>0</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="creditTotalAmount" type="java.math.BigDecimal">
+                        <description>总额度</description>
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                        <defaultvalue>0</defaultvalue>
+                    </attribute>
+                    <attribute qualifier="status" type="CreditAccountStatusEnum">
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="CreditTransaction" autocreate="true" generate="true" extends="GenericItem">
+                <description>流水记录</description>
+                <deployment table="creditTransaction" typecode="20203" />
+                <attributes>
+                    <attribute qualifier="creaditUsedAmount" type="java.math.BigDecimal">
+                        <description>消费金额</description>
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="paybackAmount" type="java.math.BigDecimal">
+                        <description>还款金额</description>
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="isPayback" type="java.lang.Boolean">
+                        <description>是否已还款</description>
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="paybackTime" type="java.lang.long">
+                        <description>实际还款日期</description>
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="shouldPaybackTime" type="java.lang.long">
+                        <description>还款日</description>
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="cransactionId" type="java.lang.String">
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                    </attribute>
+                </attributes>
+            </itemtype>
+
+            <itemtype code="Customer" autocreate="false" generate="false">
+                <attributes>
+                    <attribute qualifier="creditAccount" type="CustomerCreditAccount">
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    
+                    <!-- add by alice -->
+					<attribute qualifier="companyType" type="java.lang.String">
+						<modifiers read="true" write="true" search="true" optional="true" />
+						<persistence type="property" />
+						<description>Type of Company</description>
+					</attribute>
+					<attribute qualifier="establishedIn" type="java.lang.String">
+                        <description>Established in</description>
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="revenue" type="java.math.BigDecimal">
+                        <description>Revenue</description>
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="employeesNo" type="java.lang.Integer">
+                        <description>No. of Employees</description>
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="limitCreditAmount" type="java.math.BigDecimal">
+                        <description>The credit limit you will need for your business</description>
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="vatNo" type="java.lang.String">
+                        <description>VAT No.</description>
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    <attribute qualifier="haveFinancialReport" type="java.lang.Boolean">
+                        <description>Do you have public financial report?If so, please send to customerservice@acerchem.com</description>
+                        <modifiers read="true" write="true" search="true" />
+                        <persistence type="property" />
+                    </attribute>
+                    
+					<attribute qualifier="provideTradeReference" type="java.lang.Boolean">
+						<description>Can you provide any trade reference for Acerchem?</description>
+						<modifiers optional="false" initial="false" />
+						<persistence type="property" />
+						<defaultvalue>Boolean.FALSE</defaultvalue>
+					</attribute>
+					<!-- end -->
+                    
+                </attributes>
+            </itemtype>
+
+			<itemtype code="PointOfService" autocreate="false" generate="false">
+				<attributes>
+					<attribute qualifier="deliveryZone" type="Zone">
+						<description>提货点配送范围</description>
+						<modifiers />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+
+
+
+
+        </typegroup>
 
 		<!-- shaun.sheng -->
+
 
 
 	</itemtypes>

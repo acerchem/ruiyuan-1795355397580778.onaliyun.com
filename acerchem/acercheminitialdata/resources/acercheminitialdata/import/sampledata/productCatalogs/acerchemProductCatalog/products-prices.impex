@@ -13,12 +13,12 @@
 
 $productCatalog=acerchemProductCatalog
 $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default='$productCatalog:Staged']
-$taxGroup=Europe1PriceFactory_PTG(code)[default=jp-vat-full]
+
 
 # Set product approval status to Approved only for those products that have prices.
 $approved=approvalstatus(code)[default='approved']
 
-UPDATE Product;code[unique=true];$approved;$catalogVersion;$taxGroup
+UPDATE Product;code[unique=true];$approved;$catalogVersion;
 ;107701
 ;266899
 ;325234
@@ -42,9 +42,9 @@ UPDATE Product;code[unique=true];$approved;$catalogVersion;$taxGroup
 ;1451546
 ;1715477
 ;1978440
-;1978440_red
-;1978440_green
-;1978440_blue
+#;1978440_red
+#;1978440_green
+#;1978440_blue
 ;1986316
 ;1990255
 ;1992693

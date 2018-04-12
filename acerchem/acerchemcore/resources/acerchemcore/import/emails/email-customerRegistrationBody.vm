@@ -50,8 +50,8 @@
 									#set ($secureAccountUrl = "${ctx.secureBaseUrl}/my-account")
 									#set ($securePswdResetUrl = "${ctx.secureBaseUrl}/login/pw/request/external")
 									#set ($mailToUrl = "mailto:${ctx.messages.contactUsEmailAddress}")
-									#if(${ctx.baseSite.Uid} == "electronics")
-									#set ( $instructionsContactUs = ${ctx.messages.getMessage('instructionsContactUs_electronics', "#genHtmlLinkStartTag(${ctx.messages.contactUsPage})", "#genHtmlLinkEndTag()", "#genHtmlLink($mailToUrl '#666666' ${ctx.messages.contactUsEmailAddress})")} )
+									#if(${ctx.baseSite.Uid} == "acerchem")
+									#set ( $instructionsContactUs = ${ctx.messages.getMessage('instructionsContactUs_acerchem', "#genHtmlLinkStartTag(${ctx.messages.contactUsPage})", "#genHtmlLinkEndTag()", "#genHtmlLink($mailToUrl '#666666' ${ctx.messages.contactUsEmailAddress})")} )
 									#else
 									#set ($faqPage = "${ctx.baseUrl}/faq")
 									#set ( $instructionsContactUs = ${ctx.messages.getMessage('instructionsContactUs', "#genHtmlLinkStartTag($faqPage)", "#genHtmlLinkEndTag()", "#genHtmlLinkStartTag(${ctx.messages.contactUsPage})", "#genHtmlLinkEndTag()", "#genHtmlLink($mailToUrl '#666666' ${ctx.messages.contactUsEmailAddress})")} )

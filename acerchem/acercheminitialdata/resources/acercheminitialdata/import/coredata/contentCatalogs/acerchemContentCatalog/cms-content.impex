@@ -51,28 +51,6 @@ INSERT_UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];name;fronten
 # Add Velocity templates that are in the CMS Cockpit. These give a better layout for editing pages
 # The FileLoaderValueTranslator loads a File into a String property. The templates could also be inserted in-line in this file.
 UPDATE PageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
-;;ProductDetailsPageTemplate;$jarResourceCms/structure-view/structure_productDetails2PageTemplate.vm
-;;ProductListPageTemplate   ;$jarResourceCms/structure-view/structure_productListPageTemplate.vm
-;;ProductGridPageTemplate   ;$jarResourceCms/structure-view/structure_productGridPageTemplate.vm
-;;CategoryPageTemplate      ;$jarResourceCms/structure-view/structure_categoryPageTemplate.vm
-;;LandingPage1Template      ;$jarResourceCms/structure-view/structure_landingPage1Template.vm
-;;LandingPage2Template      ;$jarResourceCms/structure-view/structure_landingPage2Template.vm
-;;LandingPage3Template      ;$jarResourceCms/structure-view/structure_landingPage3Template.vm
-;;LandingPage4Template      ;$jarResourceCms/structure-view/structure_landingPage4Template.vm
-;;LandingPage5Template      ;$jarResourceCms/structure-view/structure_landingPage5Template.vm
-;;LandingPage6Template      ;$jarResourceCms/structure-view/structure_landingPage6Template.vm
-;;ContentPage1Template      ;$jarResourceCms/structure-view/structure_contentPage1Template.vm
-#;;SearchResultsListPageTemplate ;$jarResourceCms/structure-view/structure_searchResultsPageTemplate.vm
-#;;SearchResultsGridPageTemplate ;$jarResourceCms/structure-view/structure_searchResultsPageTemplate.vm
-;;CartPageTemplate 		    ;$jarResourceCms/structure-view/structure_cartPageTemplate.vm
-;;AccountPageTemplate 		;$jarResourceCms/structure-view/structure_accountPageTemplate.vm
-;;StoreFinderPageTemplate	;$jarResourceCms/structure-view/structure_storefinderSearchTemplate.vm
-;;ErrorPageTemplate			;$jarResourceCms/structure-view/structure_errorPageTemplate.vm
-;;SearchResultsEmptyPageTemplate;$jarResourceCms/structure-view/structure_errorPageTemplate.vm
-;;MultiStepCheckoutSummaryPageTemplate   ;$jarResourceCms/structure-view/structure_multiStepCheckoutSummaryPageTemplate.vm
-;;OrderConfirmationPageTemplate;$jarResourceCms/structure-view/structure_orderConfirmationPageTemplate.vm
-;;LoginPageTemplate         ;$jarResourceCms/structure-view/structure_loginPageTemplate.vm
-;;CheckoutLoginPageTemplate ;$jarResourceCms/structure-view/structure_checkoutLoginPageTemplate.vm
 
 # Create ContentSlotNames
 # Each PageTemplate has a number of ContentSlotNames, with a list of valid components for the slot.
@@ -770,16 +748,13 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='true']
 ;;homepage;Homepage;LandingPage2Template;homepage
 
-# Preview Image for use in the CMS Cockpit for special ContentPages
-INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true]
-;;ContentPageModel__function_preview;text/gif;ContentPageModel__function_preview.gif;$jarResourceCms/preview-images/ContentPageModel__function_preview.gif
 
 # Functional Content Pages
-INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false'];previewImage(code, $contentCV)[default='ContentPageModel__function_preview']
+INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
 ;;multiStepCheckoutSummaryPage;Multi Checkout Summary Page;MultiStepCheckoutSummaryPageTemplate;multiStepCheckoutSummary
 ;;orderConfirmationPage;Order Confirmation Page;OrderConfirmationPageTemplate;orderConfirmation
 ;;cartPage;Cart Page;CartPageTemplate;cart
-;;search;Search Results Page;SearchResultsGridPageTemplate;search
+;;search;Search Results Page;SearchResultsListPageTemplate;search
 ;;account;Account Page;AccountPageTemplate;account
 ;;profile;Profile Page;AccountPageTemplate;profile
 ;;address-book;Address Book Page;AccountPageTemplate;address-book

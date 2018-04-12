@@ -2,81 +2,90 @@ package com.acerchem.facades.facades.impl;
 
 import com.acerchem.core.service.AcerchemCustomerService;
 import com.acerchem.facades.facades.AcerchemCustomerFacade;
-import com.acerchem.facades.product.data.CountryToWarehouseData;
+import com.acerchem.facades.product.data.StoreOfProductData;
 import de.hybris.platform.commercefacades.customer.impl.DefaultCustomerFacade;
+import de.hybris.platform.commercefacades.user.data.CountryData;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.commerceservices.search.pagedata.PageableData;
-import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
+import de.hybris.platform.core.model.c2l.CountryModel;
+import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.ordersplitting.model.StockLevelModel;
+import de.hybris.platform.ordersplitting.model.WarehouseModel;
+import de.hybris.platform.product.ProductService;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
-import de.hybris.platform.store.BaseStoreModel;
+import de.hybris.platform.stock.StockService;
 import de.hybris.platform.store.services.BaseStoreService;
 import de.hybris.platform.storelocator.model.PointOfServiceModel;
-import org.springframework.beans.factory.annotation.Required;
-import org.springframework.util.ObjectUtils;
+import de.hybris.platform.storelocator.pos.PointOfServiceService;
 
-import java.util.List;
+import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
 
 /**
  * Created by Jacob.Ji on 2018/3/20.
  */
-public class DefaultAcerchemCustomerFacade extends DefaultCustomerFacade implements AcerchemCustomerFacade {
+public class DefaultAcerchemCustomerFacade extends DefaultCustomerFacade implements AcerchemCustomerFacade
+{
 
-    private Converter<CustomerModel,CustomerData> acerchemCustomerConverter;
+	@Resource
+	private Converter<CustomerModel, CustomerData> acerchemCustomerConverter;
+	@Resource
+	private AcerchemCustomerService acerchemCustomerService;
+	@Resource
+	private BaseStoreService baseStoreService;
+	@Resource
+	private ProductService productService;
+	@Resource
+	private PointOfServiceService pointOfServiceService;
+	@Resource
+	private StockService stockService;
+	@Resource
+	private Converter<CountryModel, CountryData> countryConverter;
 
-    private Converter<PointOfServiceModel,CountryToWarehouseData> countryToWarehouseConverter;
+	@Override
+	public CustomerData getCurrentCustomer()
+	{
+		final CustomerModel customerModel = (CustomerModel) getCurrentUser();
+		final CustomerData customerData = acerchemCustomerConverter.convert(customerModel);
+		return customerData;
+	}
 
-    private AcerchemCustomerService acerchemCustomerService;
+	@Override
+	public List<StoreOfProductData> getAllPos(String productCode)
+	{
+		List<StoreOfProductData> dataList = new ArrayList<>();
+		final ProductModel productModel = productService.getProductForCode(productCode);
 
-    private BaseStoreService baseStoreService;
+		Collection<StockLevelModel> stockLevels = stockService.getAllStockLevels(productModel);
 
-    @Override
-    public CustomerData getCurrentCustomer() {
-        CustomerModel customerModel = (CustomerModel) getCurrentUser();
-        CustomerData customerData =  acerchemCustomerConverter.convert(customerModel);
-        return customerData;
-    }
+		for (StockLevelModel stockLevelModel : stockLevels){
+			WarehouseModel warehouseModel = stockLevelModel.getWarehouse();
+			for (PointOfServiceModel pos : warehouseModel.getPointsOfService()){
+				StoreOfProductData storeOfProductData = new StoreOfProductData();
 
-    @Override
-    public SearchPageData<CountryToWarehouseData> getAllPointOfServices(PageableData pageableData) {
+				storeOfProductData.setStoreId(pos.getName());
+				storeOfProductData.setStoreName(pos.getDisplayName());
+				//杩戞湡搴撳瓨澶╂暟鍜岃繙鏈熷簱瀛樺ぉ鏁�
+				storeOfProductData.setAvaReleaseDay(stockLevelModel.getAvaPreOrderReleaseDay());
 
-        final BaseStoreModel currentBaseStore = getBaseStoreService().getCurrentBaseStore();
-        SearchPageData<PointOfServiceModel> result = acerchemCustomerService.getAllPos(currentBaseStore,pageableData);
+				int num = stockLevelModel.getPreOrderReleaseDay()!=null?stockLevelModel.getPreOrderReleaseDay():0;
+//				Calendar ca = Calendar.getInstance();
+//				ca.add(Calendar.DATE, num);// num涓哄鍔犵殑澶╂暟
+				storeOfProductData.setFutureAvailableDate(num);
+				//搴撳瓨
+				storeOfProductData.setInventory(stockLevelModel.getAvailable());
+				storeOfProductData.setFutureInventory(stockLevelModel.getPreOrder());
+//				storeOfProductData.setIsUseFutureStock(Boolean.FALSE);
+				//閰嶉�佽寖鍥�
+				if (pos.getDeliveryZone()!=null&&pos.getDeliveryZone().getCountries()!=null){
+					storeOfProductData.setCountryDataList(countryConverter.convertAll(pos.getDeliveryZone().getCountries()));
+				}
+				dataList.add(storeOfProductData);
+			}
+		}
+		return dataList;
+	}
 
-        List<CountryToWarehouseData> dataList =null;
-        if (!ObjectUtils.isEmpty(result) && result.getResults()!=null){
-            dataList = countryToWarehouseConverter.convertAll(result.getResults());
-        }
-
-        SearchPageData<CountryToWarehouseData> searchPageData = new SearchPageData<>();
-
-        searchPageData.setResults(dataList);
-
-        return searchPageData;
-    }
-
-    @Required
-    public void setCountryToWarehouseConverter(Converter<PointOfServiceModel, CountryToWarehouseData> countryToWarehouseConverter) {
-        this.countryToWarehouseConverter = countryToWarehouseConverter;
-    }
-
-    @Required
-    public void setAcerchemCustomerConverter(Converter<CustomerModel, CustomerData> acerchemCustomerConverter) {
-        this.acerchemCustomerConverter = acerchemCustomerConverter;
-    }
-
-    @Required
-    public void setAcerchemCustomerService(AcerchemCustomerService acerchemCustomerService) {
-        this.acerchemCustomerService = acerchemCustomerService;
-    }
-
-    public BaseStoreService getBaseStoreService() {
-        return baseStoreService;
-    }
-
-    @Required
-    public void setBaseStoreService(BaseStoreService baseStoreService) {
-        this.baseStoreService = baseStoreService;
-    }
 }
-

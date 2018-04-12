@@ -210,6 +210,7 @@ public interface ControllerConstants
 			{
 				String ShipRegionsByCountry="fragments/address/shipRegionsByCountry";
 				String ContactRegionsByCountry="fragments/address/contactRegionsByCountry";
+				String AddressFormByCountry="fragments/address/addressFormByCountry";
 			}
 		}
 	}

@@ -10,30 +10,29 @@
 
 <div class="g-cell">
 			<!-- product Item -->
-			<form action="" id="cartitem">
-				<div class="g-table product-table">
-				<div class="g-title">
-					<table>
-						<tr>
-							<td><div class="intro">Item <em class="min">(style number)</em></div></td>
-							<td>Price</td>
-							<td>Qty</td>
-							<td>Total</td>
-							<td><div class="tot">Operate</div></td>
-						</tr>
-					</table>
-				</div>	
+	<form action="" id="cartitem">
+		<div class="g-table product-table">
+		<div class="g-title">
+			<table>
+				<tr>
+					<td><div class="intro">Item <em class="min">(style number)</em></div></td>
+					<td>Price</td>
+					<td>Qty</td>
+					<td>Total</td>
+					<td><div class="tot">Operate</div></td>
+				</tr>
+			</table>
+		</div>	
+		
+		<c:forEach items="${cartData.rootGroups}" var="group" varStatus="loop">
+	    	<cart:rootEntryGroup cartData="${cartData}" entryGroup="${group}"/>
+	        <p></p>
+	    </c:forEach>			
 				
-				<c:forEach items="${cartData.rootGroups}" var="group" varStatus="loop">
-			    	<cart:rootEntryGroup cartData="${cartData}" entryGroup="${group}"/>
-			        <p></p>
-			    </c:forEach>			
-						
-			</div>
-			</form>
-			
-			<cart:exportCart/>
+	</div>
+	</form>
+	
+	<cart:exportCart/>
+</div>
 
-			
-			<!-- end -->
-		</div>
+		

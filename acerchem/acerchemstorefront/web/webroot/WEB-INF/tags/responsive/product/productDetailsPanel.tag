@@ -2,25 +2,11 @@
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/responsive/product"%>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
-<%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 
-
-	<!-- <div class="m-crumbs">
-		<div class="link">
-			<a href="index.html">Home</a>
-			<a href="gallery.html">Promotions </a>
-			<span>Hemp Seed Protein 50% Powder (50lb Bag) by Hempco</span>
-			<div class="m-starlev" date-val="2">
-				<i></i>
-				<em></em>
-			</div>
-		</div>
-	</div>  -->
-
-	<!-- top -->
-	<div class="g-cont prod-cont">
+<div class="g-cont prod-cont">
 			<!-- left -->
 			<div class="g-cell">
 				<!-- slide -->
@@ -39,7 +25,7 @@
 			    			<p><em class="">%</em><em>OFF</em></p>
 			    		</div>
 						<ul class="slide-item">
-						   <c:forEach items="${galleryImages}" var="container" varStatus="varStatus">
+							 <c:forEach items="${galleryImages}" var="container" varStatus="varStatus">
 							<li class="item"><img src="${container.product.url}"  alt=""></li>
 							
 							</c:forEach>
@@ -58,7 +44,7 @@
 					</div>
 					<div class="priceset">
 						<span class="price"><format:fromPrice priceData="${product.price}"/></span>
-						<span class="old-price"><format:fromPrice priceData="${product.price}"/></span>
+						<span class="old-price"><format:fromPrice priceData="${product.promotionPrice}"/></span>
 					</div>
 					<div class="Summary">
 						<span><i>FREE</i>Buy 2 pieces for FREE Shipping;</span>
@@ -66,17 +52,134 @@
 						<span><i>40%</i>Buy 400 items  sales to 40% Off;</span>
 					</div>
 					
+					
+					<div class="specnum">
+						<div class="spec">
+							<label>
+								<span class="label-title">Specifications</span>	
+								<div class="selbox">
+									<input type="hidden" class="required" value="" name="spec" alt="Please Select nation">
+									<span class="pitch"></span>
+									<ul class="select">
+										<li data-val="25">25kg</li>
+										<li data-val="50">50kg</li>
+										<li data-val="75">75kg</li>						
+									</ul>
+								</div>	
+							</label>
+							
+							<c:forEach items="${countrys}" var="data"  varStatus="id"  >
+						<c:if test="${id.index==0}">	
+							<label class="futday">
+								<span class="label-title">Future days</span>	
+								<div class="selbox">
+									<input type="hidden" value="" name="futday" alt="Please Select nation" id="futday">
+									<span class="pitch"></span>
+									<ul class="select">
+										<li data-val="${data.futureInventory}">${data.futureAvailableDate}</li>
+														
+									</ul>
+								</div>	
+							</label>	
+							</c:if>	
+                        </c:forEach>					
+						</div>
+						
+						<div class="invernum">
+						
+						<select id="inventoryId" style="display: none;">
+						<c:forEach items="${countrys}" var="data"  varStatus="id"  >
+						<option value ="${data.storeId}">${data.inventory}</option>
+						
+                        </c:forEach>
+                        </select> 
+                        
+                       <c:forEach items="${countrys}" var="data"  varStatus="id"  >
+						<c:if test="${id.index==0}">
+							<span class="label-title inventory">Inventory:<i>${data.inventory}</i> <span class="spot">(<em>${data.inventory}</em>)</span></span>
+							</c:if>	
+                        </c:forEach>
+							
+							<label>
+								<input type="checkbox" name="Keep">
+								<span class="checkbox">Display future inventory</span>
+							</label>							
+						</div>
+					 
+						<div class="delivery flex-wrap">
+							<span class="label-title">Delivery to:</span>
+							<div class="flex">
+							
+								<select id="storeMulId">
+								<c:forEach items="${countrys}" var="data"  >
+								<option value ="${data.storeId}">${data.storeName}</option>
+								    </c:forEach>
+								</select>
+								
+							</div>
+						
+						</div>
+						
+						<div class="delivery flex-wrap">
+						
+						<select id="countryId" style="display: none;">
+							<c:forEach items="${countrys}" var="data"  varStatus="id"  >
+									    
+							        <option value ="${data.storeId}">${data.countryDataList}</option>
+		                        </c:forEach>
+	                    </select>     
+                        
+							
+						<c:forEach items="${countrys}" var="data"  varStatus="id"  >
+							<c:if test="${id.index==0}">
+							    <c:forEach items="${data.countryDataList}" var="country"  varStatus="vs"  >
+							    
+							      <c:set var="myVar" value="${stat.first ? '' : myVar} ${country.name}" />
+							    
+							    </c:forEach>
+					        </c:if>	
+	                       </c:forEach>
+                        
+							<span class="label-title">Delivery scope: <em>${myVar}</em></span>
+						
+						</div>
+						
+
+						<div class="prod-sum">
+							<div class="m-setnum">
+							<span class="set sub">-</span>
+                              <input type="text" name="pdnum" class="set" value="1">								
+								<span class="set add">+</span>
+								
+							</div>
+							<%-- <c:forEach var="${countrys}" var="data1" begin="0" end="1"> --%>
+						<c:forEach items="${countrys}" var="data"  varStatus="id"  >
+						<c:if test="${id.index==0}">
+							    <i class="delintro">Delivery &nbsp<em>${data.avaReleaseDay}</em>&nbsp days</i>
+						</c:if>	
+                        </c:forEach>
+                        
+                        <select id="avaReleaseDayId" style="display: none;">
+						<c:forEach items="${countrys}" var="data"  varStatus="id"  >
+						<option value ="${data.storeId}">${data.avaReleaseDay}</option>
+						
+                        </c:forEach>
+                        </select> 
+							
+ 						</div>
+
+					</div>
+			
+					
 					<cms:pageSlot position="AddToCart" var="component" >
 						<cms:component component="${component}" />
 					</cms:pageSlot>
 					
-			
-					<!-- 
-                    <div class="btn-set">							
-							<a class="btn btn-submit" href="checkout.html">Check Out</a>
-							<a class="btn btn-cart" href="javascript:void(0)">Add to Cart</a>
-					</div> -->
-
+					<!-- <div class="btn-set">
+						<button class="btn btn-submit">Check Out</button>
+						<button class="btn btn-cart">Add to Cart</button>							
+					</div> 
+ -->
 				</div>
 				<!-- b end -->
 			</div>
@@ -102,16 +205,9 @@
 							<a href="#" >Allergen Statement</a>
 						</li>
 					</ul>
-					
-					
-					<!--shaun:consulte  -->
-					<div class="btn-set line-setbtn">							
-						<a class="btn btn-showlist" href="javascript:void(0)">Message Consultation</a>
-					</div>		
-					
-					
-					
-					
+					<div class="btn-set line-setbtn">       
+					      <a class="click_pop btn btn-showlist" href="javascript:void(0)">Message Consultation</a>
+					</div> 		
 				</div>
 				<div class="tableshare">
 					<div class="title">Share with a Friend</div>
@@ -128,7 +224,7 @@
 			</div>
 		</div>
 		<!-- down -->
-		<div class="g-cont prod-cont down-cont">
+<div class="g-cont prod-cont down-cont">
 			<div class="g-proudtable">
 				<div class="g-cell">					
 					<!-- descr -->
@@ -248,464 +344,286 @@
 				<!-- right -->
 				<div class="g-cell product-right">
 					<div class="g-table qclist">
-						<div class="g-title">
-							Everyone is Buying
-						</div>
-						<ul class="pdlist">
-							<li class="both">
-								<div class="img">
-					    			<a href="product.html">
-					    		  		<img src="" alt="">
-					    		  	</a>
-					    		</div>
-					    		<div class="maxtext">
-						    		<p class="in-title">Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
-						    		<div class="spset">
-						    			<span class="price">$68.00</span>
-						    		</div>
-						    	</div>
-							</li>
-							<li class="both">
-								<div class="img">
-					    			<a href="product.html">
-					    		  		<img src="" alt="">
-					    		  	</a>
-					    		</div>
-					    		<div class="maxtext">
-						    		<p class="in-title">Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
-						    		<div class="spset">
-						    			<span class="price">$68.00</span>
-						    		</div>
-						    	</div>
-							</li>
-							<li class="both">
-								<div class="img">
-					    			<a href="product.html">
-					    		  		<img src="" alt="">
-					    		  	</a>
-					    		</div>
-					    		<div class="maxtext">
-						    		<p class="in-title">Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
-						    		<div class="spset">
-						    			<span class="price">$68.00</span>
-						    		</div>
-						    	</div>
-							</li>
-							<li class="both">
-								<div class="img">
-					    			<a href="product.html">
-					    		  		<img src="" alt="">
-					    		  	</a>
-					    		</div>
-					    		<div class="maxtext">
-						    		<p class="in-title">Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
-						    		<div class="spset">
-						    			<span class="price">$68.00</span>
-						    		</div>
-						    	</div>
-							</li>
-							<li class="both">
-								<div class="img">
-					    			<a href="product.html">
-					    		  		<img src="" alt="">
-					    		  	</a>
-					    		</div>
-					    		<div class="maxtext">
-						    		<p class="in-title">Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
-						    		<div class="spset">
-						    			<span class="price">$68.00</span>
-						    		</div>
-						    	</div>
-							</li>
-							<li class="both">
-								<div class="img">
-					    			<a href="product.html">
-					    		  		<img src="" alt="">
-					    		  	</a>
-					    		</div>
-					    		<div class="maxtext">
-						    		<p class="in-title">Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
-						    		<div class="spset">
-						    			<span class="price">$68.00</span>
-						    		</div>
-						    	</div>
-							</li>
-							<li class="both">
-								<div class="img">
-					    			<a href="product.html">
-					    		  		<img src="" alt="">
-					    		  	</a>
-					    		</div>
-					    		<div class="maxtext">
-						    		<p class="in-title">Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
-						    		<div class="spset">
-						    			<span class="price">$68.00</span>
-						    		</div>
-						    	</div>
-							</li>
-							<li class="both">
-								<div class="img">
-					    			<a href="product.html">
-					    		  		<img src="" alt="">
-					    		  	</a>
-					    		</div>
-					    		<div class="maxtext">
-						    		<p class="in-title">Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
-						    		<div class="spset">
-						    			<span class="price">$68.00</span>
-						    		</div>
-						    	</div>
-							</li>
-							<li class="both">
-								<div class="img">
-					    			<a href="product.html">
-					    		  		<img src="" alt="">
-					    		  	</a>
-					    		</div>
-					    		<div class="maxtext">
-						    		<p class="in-title">Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
-						    		<div class="spset">
-						    			<span class="price">$68.00</span>
-						    		</div>
-						    	</div>
-							</li>
-							<li class="both">
-								<div class="img">
-					    			<a href="product.html">
-					    		  		<img src="" alt="">
-					    		  	</a>
-					    		</div>
-					    		<div class="maxtext">
-						    		<p class="in-title">Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
-						    		<div class="spset">
-						    			<span class="price">$68.00</span>
-						    		</div>
-						    	</div>
-							</li>
-
-					</ul>	
+					
+					
+					<cms:pageSlot position="SaleWellProductListSlot" var="component" >
+					
+						<cms:component component="${component}" />
+					</cms:pageSlot>
+						
 					</div>
 				</div>
 				<!-- r edn -->
 			</div>
 			<!-- item -->
+	<div class="maxon_salesul">
 	
+		
+		<cms:pageSlot position="PromotionProductListSlot" var="component" >
+		
+			<cms:component component="${component}" />
+		</cms:pageSlot>
+
+   </div>
+
+
 	<!-- item end -->
 		</div>
-		<!-- down end -->
 		
-		
-		<!--shaun  -->
-		<!-- message -->
-					<div class="m-message">
-						<div class="indwrap">
-							<div class="mes-table">
-								<div class="title">Message consultation</div>
-								<form action="" method="post" class="solid-form both" id="message">				
-									<div class="left">
-										<label>
-											<span class="label-title">Your Name</span>	
-											<input type="text" name="name" class="required" alt="Please Enter Your Name">
-										</label>
-					
-										<label>
-											<span class="label-title">Telephone / Mobile Phone</span>	
-											<input type="text" name="mobile" class="required" alt="Please Enter Telephone / Mobile Phone">
-										</label>
-					
-										<label>
-											<span class="label-title">Email</span>	
-											<input type="text" name="email" class="required" alt="Please Enter Your Email">
-										</label>
-					
-										<label>
-											<span class='label-title'>Shipping Address</span>	
-												<div class="flex-wrap">
-													<div class="flex">					
-														<div class="selbox">
-															<input type="hidden" disabled="disabled" value="" name='nation' class="required" alt='Please Select Shipping nation'>
-															<span class="pitch"><i></i></span>
-															<ul class="select">
-																<li>Nation</li>
-																<li data-val="USA">U.S.A</li>
-																<li data-val="EL">England</li>
-																<li data-val="ITA">Repubblica Italiana</li>
-																<li data-val="SUI">Swiss Confederation</li>
-																<li data-val="MEX">The United States of Mexico</li>
-																<li data-val="FRA">French Republic</li>
-															</ul>
-														</div>	
-													</div>
-													<div class="flex">
-														<div class="selbox ">
-															<input type="hidden" disabled="disabled" value="" name='city' class="required" alt='Please Select Shipping city'>
-															<span class="pitch"><i></i></span>
-															<ul class="select">
-																<li>City</li>
-																<li data-val="NY">New York</li>
-																<li data-val="LA">Los Angeles</li>
-																<li data-val="CI">Chicago</li>
-															</ul>
-														</div>	
-													</div>				
-												</div>
-										</label>
-					
-										<label>						
-											<input type="text" name='shipadd' class="required" placeholder="Detailed address" alt='Please Enter Shipping Detailed Address'>
-										</label>				
-									</div>
-									<div class="right">	
-										<label>
-											<span class="label-title">Product ID</span>	
-											<input type="text" name="prodid" class="required" alt="Please Enter Product ID">
-										</label>
-										<label>
-											<span class="label-title">Product Name</span>	
-											<input type="text" name="prodname" class="required" alt="Please Enter Product Name">
-										</label>
-										<label>
-											<span class="label-title">message</span>	
-											<textarea name="message" id="" ></textarea>
-										</label>
-									</div>				
-								</form>
-								<div class="btn-set">
-									<a class="btn btn-line" href="javascript:void(0)">Cancel</a>				
-									<a class="btn btn-submit" href="javascript:void(0)">Confirm</a>
-								</div>
-							</div>
-						</div>
-					</div>
-<!-- message end -->
-		
-		
-		
-		
-		
-		
-		
-<script>
+		<script>
+	inputint()
 
-inputint()
-
-var wrap = '.maxon_salesul .slide-wrap';
-maxon_salesul(wrap)
+	var wrap = '.maxon_salesul .slide-wrap';
+	maxon_salesul(wrap)
 
 
 
-// m-prodslide
-var prodslide = $('.m-prodslide'),
-minwrap = prodslide.find('.minwrap'),	
-slideparwidth = prodslide.parent().width();
-prodslide.width(slideparwidth*.5);
+	// m-prodslide
+	var prodslide = $('.m-prodslide'),
+	minwrap = prodslide.find('.minwrap'),	
+	slideparwidth = prodslide.parent().width();
+	prodslide.width(slideparwidth*.5);
 
-var flipspan = '.m-prodslide .minimg span',
-	flipbtn = $('.m-prodslide .flip span');
-var slidwrap = new Swiper('.slidewrap',{
-    wrapperClass : 'slide-item', 
-    slideClass : 'item',
-    calculateHeight : true,
-    speed: 600,        
-    pagination: '.minimg', 
-    paginationClickable :true,
-    onSwiperCreated:function(swiper){
-    	$('.m-prodslide .slide-item li').each(function(){
-	   		var aindex = $(this).index(),
-	   			aimg = $(this).html(),
-	   			aheight = swiper.height,
-	   			minimg = $(flipspan);
-	   			minimg.eq(aindex).append(aimg);
-	   			minwrap.height(aheight);
-		})
-     }      
-})
+	/*resize*/
+	$(window).resize(function(){
+	  	slideparwidth = prodslide.parent().width();
+	  	prodslide.width(slideparwidth*.5);
+	})	
 
-$(document).on('mouseover',flipspan,function(){
-	$(this).click();
-});
+	var flipspan = '.m-prodslide .minimg span',
+		flipbtn = $('.m-prodslide .flip span');
+	var slidwrap = new Swiper('.slidewrap',{
+        wrapperClass : 'slide-item', 
+        slideClass : 'item',
+        calculateHeight : true,
+        resizeReInit : true,
+        speed: 600,        
+        pagination: '.minimg', 
+        paginationClickable :true,
+        onSwiperCreated:function(swiper){
+        	$('.m-prodslide .slide-item li').each(function(){
+		   		var aindex = $(this).index(),
+		   			aimg = $(this).html(),
+		   			aheight = swiper.height,
+		   			minimg = $(flipspan);
+		   			minimg.eq(aindex).append(aimg);
+		   			minwrap.height(aheight);
+			})
+	     }      
+    })
 
-flipbtn.on('click',function(){
-	var aclass=$(this).attr('class'),
-		fwrap = $('.m-prodslide .minimg'),
-		atop = parseInt(fwrap.css('top')),
-		ahi = parseInt(fwrap.find('span').css('height')),
-		maxtop = parseInt(prodslide.find('.slidewrap .item').height())-fwrap.height(),
-		topval = 0;
 
-	switch(aclass){
-		case 'up':
-			topval=atop-ahi;
-			if(topval<maxtop){
-				topval=atop;
-				$(this).addClass('over');
-			}
-			$(this).siblings().removeClass('over')	
-			break;
-		case 'down':
-			if(atop==0){
-				topval=0;
-				$(this).addClass('over');
-			}else{
-				topval=atop+ahi;
-			}
-			$(this).siblings().removeClass('over')	
-			break;
-	}
-	fwrap.animate({top:topval},300)
-})
-// m-prodslide end
-var shareele = $('.footermin .share-buttons');
-$('.product-right .tableshare').append(shareele.clone());
+	$(document).on('mouseover',flipspan,function(){
+		$(this).click();
+	});
 
-// m-starlev
-function starlev(){
-	var star = $('.m-starlev');
-	star.each(function(){
-		var lv = (parseFloat($(this).attr('date-val'))/5)*100,
-		aem = $(this).find('em');
-		aem.css('width',lv+'%');
+	flipbtn.on('click',function(){
+		var aclass=$(this).attr('class'),
+			fwrap = $('.m-prodslide .minimg'),
+			atop = parseInt(fwrap.css('top')),
+			ahi = parseInt(fwrap.find('span').css('height')),
+			maxtop = parseInt(prodslide.find('.slidewrap .item').height())-fwrap.height(),
+			topval = 0;
+
+		switch(aclass){
+			case 'up':
+				topval=atop-ahi;
+				if(topval<maxtop){
+					topval=atop;
+					$(this).addClass('over');
+				}
+				$(this).siblings().removeClass('over')	
+				break;
+			case 'down':
+				if(atop==0){
+					topval=0;
+					$(this).addClass('over');
+				}else{
+					topval=atop+ahi;
+				}
+				$(this).siblings().removeClass('over')	
+				break;
+		}
+		fwrap.animate({top:topval},300)
 	})
-	
-}
-starlev()
+	// m-prodslide end
+	var shareele = $('.footermin .share-buttons');
+	$('.product-right .tableshare').append(shareele.clone());
 
-// m-pagecard
-$('.m-pagecard span').on('click',function(){
-	var aindex= $(this).index(),
-		card = $('.m-cardwrap');
-		$(this).addClass('now').siblings().removeClass('now');
-		card.eq(aindex).show().siblings('.m-cardwrap').hide()
-})
+	// m-starlev
+	function starlev(){
+		var star = $('.m-starlev');
+		star.each(function(){
+			var lv = (parseFloat($(this).attr('date-val'))/5)*100,
+			aem = $(this).find('em');
+			aem.css('width',lv+'%');
+		})
+		
+	}
+	starlev()
 
-$('.invernum label span').on('click',function(){
-	var acked = $(this).siblings('input').prop('checked'),
-		days = $('.spec .futday'),
-		invi = $('.invernum .inventory i'),
-		spot = $('.invernum .inventory .spot'),
-		futday = parseInt($('#futday').val()),
-		setnum = $('.m-setnum input');
-	if(acked){
-		days.hide();
-		spot.hide();
-		invi.text(spot.find('em').text());
-		if(parseInt(setnum.val())>parseInt(spot.find('em').text())){
-			setnum.val(spot.find('em').text())
+	// m-pagecard
+	$('.m-pagecard span').on('click',function(){
+		var aindex= $(this).index(),
+			card = $('.m-cardwrap');
+			$(this).addClass('now').siblings().removeClass('now');
+			card.eq(aindex).show().siblings('.m-cardwrap').hide()
+	})
+
+	$('.invernum label span').on('click',function(){
+		var acked = $(this).siblings('input').prop('checked'),
+			days = $('.spec .futday'),
+			invi = $('.invernum .inventory i'),
+			spot = $('.invernum .inventory .spot'),
+			futday = parseInt($('#futday').val()),
+			setnum = $('.m-setnum input');
+		if(acked){
+			days.hide();
+			spot.hide();
+			invi.text(spot.find('em').text());
+			if(parseInt(setnum.val())>parseInt(spot.find('em').text())){
+				setnum.val(spot.find('em').text())
+			}
+			
+		}else{
+			days.show();
+			//spot.show();
+			/* invi.text(futday+parseInt(invi.text())); */
+			
+			invi.text(futday);
 		}
 		
-	}else{
-		days.show();
-		spot.show();
-		invi.text(futday+parseInt(invi.text()));
-	}
-	
-})	
+	})	
 
-$('.futday .select li').on('click',function(){
-	var aval = parseInt($(this).attr('data-val')),
-		invi = $('.invernum .inventory i'),
-		invem = $('.invernum .inventory em'),
-		inval = parseInt(invem.text());
-		invi.text(aval+inval);
-})
+	$('.futday .select li').on('click',function(){
+		var aval = parseInt($(this).attr('data-val')),
+			invi = $('.invernum .inventory i'),
+			invem = $('.invernum .inventory em'),
+			inval = parseInt(invem.text());
+			invi.text(aval+inval);
+	})
 
-//m-setnum
-$('.m-setnum span').on('click',function(){
-	var aclass=$(this).attr('class'),
-		ainp = $(this).siblings('input'),
-		maxnum =parseInt($('.invernum .inventory i').text()),
-		delin = $('.specnum .prod-sum .delintro'),
-		avl = null;
-	switch(aclass){
-		case 'set sub':
-			avl = parseInt(ainp.val());
-			if(avl<=1){
-				maxalert('A minimum of one piece！');
-				$(this).css('background-color','#ddd')
-				break;
-			}else{
-				if(avl<30){
-					delin.find('em').text(30)
-				}else if(avl>30&&avl<60){
-					delin.find('em').text(60)
-				}else if(avl>60){
-					delin.find('em').text(90)
+	//m-setnum
+	$('.m-setnum span').on('click',function(){
+		var aclass=$(this).attr('class'),
+			ainp = $(this).siblings('input'),
+			maxnum =parseInt($('.invernum .inventory i').text()),
+			delin = $('.specnum .prod-sum .delintro'),
+			avl = null;
+		switch(aclass){
+			case 'set sub':
+				avl = parseInt(ainp.val());
+				if(avl<=1){
+					maxalert('A minimum of one piece！');
+					$(this).css('background-color','#ddd')
+					break;
+				}else{
+					if(avl<30){
+						delin.find('em').text(30)
+					}else if(avl>30&&avl<60){
+						delin.find('em').text(60)
+					}else if(avl>60){
+						delin.find('em').text(90)
+					}
 				}
-			}
-			ainp.val(avl-1);
-			break;
-		case 'set add':
-			avl = parseInt(ainp.val());
-			$(this).css('background-color','');
-			$(this).siblings('span').css('background-color','');
-
-			if(avl>=maxnum){
-				maxalert("It's already the largest inventory.");
+				ainp.val(avl-1);
+				$('#qty').val(avl-1);
 				break;
-			}else{
-				if(avl<30){
-					delin.find('em').text(30)
-				}else if(avl>30&&avl<60){
-					delin.find('em').text(60)
-				}else if(avl>60){
-					delin.find('em').text(90)
-				}					
-			}
-			ainp.val(avl+1);
-			break;	
-	}
-	
-})
+			case 'set add':
+				avl = parseInt(ainp.val());
+				$(this).css('background-color','');
+				$(this).siblings('span').css('background-color','');
 
-$('.prodbase .btn-cart').on('click',function(){//加入购物车
-	var srch = window.innerHeight;
-	$('.maxfixed').show();
-	$('body').css({'height':srch,'overflow':'hidden'});
+				if(avl>=maxnum){
+					maxalert("It's already the largest inventory.");
+					break;
+				}else{
+					if(avl<30){
+						delin.find('em').text(30)
+					}else if(avl>30&&avl<60){
+						delin.find('em').text(60)
+					}else if(avl>60){
+						delin.find('em').text(90)
+					}					
+				}
+				ainp.val(avl+1);
+				$('#qty').val(avl+1);
+				break;	
+		}
+		
+	})
 
-	var maxfixed = $('.maxfixed .product-table ul'),
-		thisele = $('.prodbase'),
-		thisimg = $('.slidewrap .item').first().html(), 
-		thistit = thisele.find('.g-title p').text(),				
-		goodsnum = $('input[name="pdnum"]').val(),
-		price = thisele.find('.price').text(),
-		oldprice = thisele.find('.old-price').text(),
-		fications = $('input[name="spec"]').val(),
-		newele = '<li class="item"><div class="img">'+thisimg+'</div><div class="maxtext"><p class="in-title">'+thistit+'</p><p class="spec">Specifications:<i>'+fications+'</i></p><div class="spset"><span class="price">'+price+'</span><span class="old-price">'+oldprice+'</span><span class="num">'+goodsnum+'</span></div></div></li>';			
-		maxfixed.append(newele);
-		console.log(thisimg)
-		totalprice()
-})
+	$('.prodbase .btn-cart').on('click',function(){//加入购物车
+		var srch = window.innerHeight;
+		$('.maxfixed').show();
+		$('body').css({'height':srch,'overflow':'hidden'});
 
-$(".btn-continue").on('click',function(){
-	$('.maxfixed').hide();
-	$('body').css({'height':'','overflow':''});
-})
+		var maxfixed = $('.maxfixed .product-table ul'),
+			thisele = $('.prodbase'),
+			thisimg = $('.slidewrap .item').first().html(), 
+			thistit = thisele.find('.g-title p').text(),				
+			goodsnum = $('input[name="pdnum"]').val(),
+			price = thisele.find('.price').text(),
+			oldprice = thisele.find('.old-price').text(),
+			fications = $('input[name="spec"]').val(),
+			newele = '<li class="item"><div class="img">'+thisimg+'</div><div class="maxtext"><p class="in-title">'+thistit+'</p><p class="spec">Specifications:<i>'+fications+'</i></p><div class="spset"><span class="price">'+price+'</span><span class="old-price">'+oldprice+'</span><span class="num">'+goodsnum+'</span></div></div></li>';			
+			maxfixed.append(newele);
+			console.log(thisimg)
+			//totalprice()
+	})
 
-// m-message
-$(document).on('click','.product-right .btn-showlist',function(){
-	var srch = window.innerHeight;
-	$('body').css({'height':srch,'overflow':'hidden'});
-	$('.m-message').show();
-})
+	$(".btn-continue").on('click',function(){
+		$('.maxfixed').hide();
+		$('body').css({'height':'','overflow':''});
+	})
 
-$('.m-message .btn-set .btn').on('click',function(){
-	var aclass= $(this).attr('class'),
-		selbox = $(this).parents('.mes-table').find('.selbox');
-	switch(aclass){
-		case 'btn btn-line':
-			$('#message')[0].reset();
-			$('.m-message').hide();
-			break;
-		case 'btn btn-submit':
-			$('#message').submit();
-			break;					
-	}
-	$('body').css({'height':'','overflow':''});
-})
+	// m-message
+	$(document).on('click','.product-right .btn-showlist',function(){
+		var srch = window.innerHeight;
+		$('body').css({'height':srch,'overflow':'hidden'});
+		$('.m-message').show();
+	})
 
+	$('.m-message .btn-set .btn').on('click',function(){
+		var aclass= $(this).attr('class'),
+			selbox = $(this).parents('.mes-table').find('.selbox');
+		switch(aclass){
+			case 'btn btn-line':
+				$('#message')[0].reset();
+				$('.m-message').hide();
+				break;
+			case 'btn btn-submit':
+				$('#message').submit();
+				break;					
+		}
+		$('body').css({'height':'','overflow':''});
+	})
 
-
+	$("#storeMulId").change(function(){
+		 /*库存信息*/
+		invi = $('.invernum .inventory i')
+		invi.text($("#inventoryId option[value='"+$("#storeMulId").val()+"']").text());
+		
+		 /*先期库存天数*/ 
+		emvi = $('.prod-sum i em')
+		
+		emvi.text($("#avaReleaseDayId option[value='"+$("#storeMulId").val()+"']").text());
+	//	var data =$("#countryId option[value='"+$("#storeMulId").val()+"']").text();
+		
+        $('#storeId').val($("#storeMulId").val());
+	});
+    
+    //send message
+    $(document).ready(function () {
+        $('.click_pop').click(function () {
+        var openUrl = ACC.config.encodedContextPath + "/account/add-support-ticket?productId=${product.code}&productName=${product.name}";//弹出窗口的url
+         var iWidth=600; //弹出窗口的宽度;
+         var iHeight=600; //弹出窗口的高度;
+         var iTop = (window.screen.availHeight-30-iHeight)/2; //获得窗口的垂直位置;
+         var iLeft = (window.screen.availWidth-10-iWidth)/2; //获得窗口的水平位置;
+         window.open(openUrl,"","height="+iHeight+", width="+iWidth+", top="+iTop+",scrollbars=yes,resizable=yes,toolbar=no,location=no, left="+iLeft); 
+        });
+    })
 </script>
-
-</script>
+		
 

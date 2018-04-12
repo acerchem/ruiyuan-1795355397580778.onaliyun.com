@@ -24,9 +24,8 @@
 	<context:component-scan base-package="com.acerchem.core" scope-resolver="de.hybris.platform.spring.IgnoreTenantScopeMetadataResolver"  />
 
 	<!-- Spring Integration -->
-	<import resource="classpath:/acerchemcore/integration/hot-folder-store-electronics-spring.xml"/>
-	<import resource="classpath:/acerchemcore/integration/hot-folder-store-apparel-spring.xml"/>
-	<import resource="classpath:/acerchemcore/integration/hot-folder-common-spring.xml"/>
+	<!-- <import resource="classpath:/acerchemcore/integration/hot-folder-store-electronics-spring.xml"/> -->
+	
 
 	<!-- SystemSetup for the AcerchemCore -->
 	<bean id="acceleratorCoreSystemSetup" class="com.acerchem.core.setup.CoreSystemSetup"
@@ -52,16 +51,16 @@
     </bean>
 
 
-	<bean id="electronicsCategorySource" parent="abstractCategorySource">
+	<bean id="acerchemCategorySource" parent="abstractCategorySource">
 		<property name="rootCategory" value="1"/>
 		<!-- '1' is the root icecat category -->
 	</bean>
-	<bean id="electronicsBrandCategorySource" parent="abstractCategorySource">
+	<bean id="acerchemBrandCategorySource" parent="abstractCategorySource">
 		<property name="rootCategory" value="brands"/>
 		<!-- 'brands' is the root of the brands hierarchy -->
 	</bean>
 
-	<bean id="apparelCategorySource" parent="abstractCategorySource">
+    <bean id="apparelCategorySource" parent="abstractCategorySource">
 		<property name="rootCategory" value="categories"/>
 		<!-- 'categories' is the root apparel category -->
 	</bean>
@@ -72,7 +71,7 @@
 	<bean id="apparelCollectionCategorySource" parent="abstractCategorySource">
 		<property name="rootCategory" value="collections"/> <!-- 'collections' is the root of the collections hierarchy -->
 	</bean>
-
+    
 	<bean id="abstractCategoryCodeValueProvider" abstract="true"
 	      class="de.hybris.platform.commerceservices.search.solrfacetsearch.provider.impl.CategoryCodeValueProvider"
 	      parent="abstractPropertyFieldValueProvider" >
@@ -86,37 +85,20 @@
 		<property name="commonI18NService" ref="commonI18NService"/>
 	</bean>
 
-	<bean id="electronicsCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
-		<property name="categorySource" ref="electronicsCategorySource"/>
+	<bean id="acerchemCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+		<property name="categorySource" ref="acerchemCategorySource"/>
 	</bean>
-	<bean id="electronicsBrandCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
-		<property name="categorySource" ref="electronicsBrandCategorySource"/>
+	<bean id="acerchemBrandCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+		<property name="categorySource" ref="acerchemBrandCategorySource"/>
 	</bean>
-	<bean id="electronicsCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
-		<property name="categorySource" ref="electronicsCategorySource"/>
+	<bean id="acerchemCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+		<property name="categorySource" ref="acerchemCategorySource"/>
 	</bean>
-	<bean id="electronicsBrandCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
-		<property name="categorySource" ref="electronicsBrandCategorySource"/>
+	<bean id="acerchemBrandCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+		<property name="categorySource" ref="acerchemBrandCategorySource"/>
 	</bean>
 
-	<bean id="apparelCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
-		<property name="categorySource" ref="apparelCategorySource"/>
-	</bean>
-	<bean id="apparelBrandCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
-		<property name="categorySource" ref="apparelBrandCategorySource"/>
-	</bean>
-	<bean id="apparelCollectionCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
-		<property name="categorySource" ref="apparelCollectionCategorySource"/>
-	</bean>
-	<bean id="apparelCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
-		<property name="categorySource" ref="apparelCategorySource"/>
-	</bean>
-	<bean id="apparelBrandCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
-		<property name="categorySource" ref="apparelBrandCategorySource"/>
-	</bean>
-	<bean id="apparelCollectionCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
-		<property name="categorySource" ref="apparelCollectionCategorySource"/>
-	</bean>
+	
 
 	<bean id="image515ValueProvider" parent="abstractImageValueProvider" >
 		<property name="mediaFormat" value="515Wx515H"/>
@@ -157,45 +139,13 @@
 		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
 	</bean>
 
-	<bean id="colorFacetValueProvider"
-	      class="com.acerchem.core.search.solrfacetsearch.provider.impl.ColorFacetValueProvider"
-	       parent="abstractPropertyFieldValueProvider">
-		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
-	</bean>
-
-	<bean id="colorFacetDisplayNameProvider"
-	      class="com.acerchem.core.search.solrfacetsearch.provider.impl.ColorFacetDisplayNameProvider"
-	      >
-		<property name="enumerationService" ref="enumerationService"/>
-		<property name="i18nService" ref="i18nService"/>
-		<property name="commonI18NService" ref="commonI18NService"/>
-	</bean>
-
-	<bean id="apparelPointOfServiceFacetDisplayNameProvider"
+	<bean id="acerchemPointOfServiceFacetDisplayNameProvider"
 	      class="com.acerchem.core.search.solrfacetsearch.provider.impl.PointOfServiceFacetDisplayNameProvider"
 	      >
 		<property name="pointOfServiceService" ref="pointOfServiceService"/>
 	</bean>
 
-	<bean id="electronicsPointOfServiceFacetDisplayNameProvider"
-	      class="com.acerchem.core.search.solrfacetsearch.provider.impl.PointOfServiceFacetDisplayNameProvider"
-	      >
-		<property name="pointOfServiceService" ref="pointOfServiceService"/>
-	</bean>
-
-	<bean id="genderValueProvider"
-	      class="com.acerchem.core.search.solrfacetsearch.provider.impl.GenderValueProvider"
-	       parent="abstractPropertyFieldValueProvider">
-		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
-	</bean>
-
-	<bean id="genderFacetDisplayNameProvider"
-	      class="com.acerchem.core.search.solrfacetsearch.provider.impl.GenderFacetDisplayNameProvider"
-	      >
-		<property name="enumerationService" ref="enumerationService"/>
-		<property name="i18nService" ref="i18nService"/>
-		<property name="commonI18NService" ref="commonI18NService"/>
-	</bean>
+	
 
 	<!--
 		Event listeners are singletons, therefore the dependency for a bean in tenant-scope
@@ -393,6 +343,11 @@
 		<property name="cmsSiteService" ref="cmsSiteService"/>
 	</bean>
 
+    <!-- lz ↓ -->
+	<alias name="ticketDaoImpl" alias="ticketDaoImpl" /> 
+	<bean id="ticketDaoImpl" parent="ticketBusinessService" class="com.acerchem.core.service.impl.AcerChemSupportTicketServiceImpl" >
+	</bean>
+	<!-- lz ↑ -->
 
 	<!-- checkout flow configuration -->
 
@@ -408,10 +363,7 @@
 		<property name="cmsSiteService" ref="cmsSiteService"/>
 		<property name="siteMappings">
 			<map>
-				<entry key="electronics" value-ref="newCustomerCheckoutFlowStrategy"/>
-				<entry key="apparel-de" value-ref="multiStepCheckoutFlowStrategy"/>
-				<entry key="apparel-uk" value-ref="multiStepCheckoutFlowStrategy"/>
-				<entry key="powertoolsstore" value-ref="multiStepCheckoutFlowStrategy"/>
+				<entry key="acerchem" value-ref="newCustomerCheckoutFlowStrategy"/>			
 			</map>
 		</property>
 		<!-- Default to SINGLE step checkout -->
@@ -427,22 +379,7 @@
 		<property name="newCustomerStrategy" ref="multiStepCheckoutFlowStrategy"/>
 	</bean>
 
-	<!-- Product Reference Lookup Strategies-->
-	<alias name="apparelCrossSellingProductReferenceTargetStrategy" alias="crossSellingProductReferenceTargetStrategy"/>
-	<bean id="apparelCrossSellingProductReferenceTargetStrategy"
-	      parent="defaultCrossSellingProductReferenceTargetStrategy">
-		<property name="productReferenceTargetStrategies">
-			<list merge="true">
-				<ref bean="apparelSizeProductReferenceTargetStrategy"/>
-			</list>
-		</property>
-	</bean>
-
-	<bean id="apparelSizeProductReferenceTargetStrategy"
-	      class="com.acerchem.core.strategies.impl.ApparelSizeProductReferenceTargetStrategy">
-		<property name="commerceCategoryService" ref="commerceCategoryService"/>
-		<property name="rootCategoryCode" value="categories"/>
-	</bean>
+	
 
 	<!-- Sales quote process actions -->
 
@@ -663,6 +600,7 @@
 	<alias name="defaultAcerchemCommerCartService" alias="acerchemCommerCartService"/>
 	<bean id="defaultAcerchemCommerCartService" parent="commerceCartService" class="com.acerchem.core.service.impl.DefaultAcerchemCommerCartService">
 		<property name="acerchemCommerceAddToCartStrategy" ref="acerchemCommerceAddToCartStrategy"/>
+		<property name="acerchemCommerceUpdateCartEntryStrategy" ref="acerchemCommerceUpdateCartEntryStrategy"/>
 	</bean>
 
 	<alias name="defaultAcerchemCommerceAddToCartStrategy"  alias="acerchemCommerceAddToCartStrategy"/>
@@ -671,5 +609,26 @@
 	</bean>
 
 
-	
+	<alias name="defaultAcerchemCommerceUpdateCartEntryStrategy"  alias="acerchemCommerceUpdateCartEntryStrategy"/>
+	<bean id="defaultAcerchemCommerceUpdateCartEntryStrategy" parent="commerceUpdateCartEntryStrategy" class="com.acerchem.core.strategies.impl.DefaultAcerchemCommerceUpdateCartEntryStrategy">
+	</bean>
+
+	<alias name="defaultAcerchemTrayDao"  alias="acerchemTrayDao"/>
+	<bean id="defaultAcerchemTrayDao" parent="abstractItemDao" class="com.acerchem.core.dao.impl.DefaultAcerchemTrayDao">
+	</bean>
+
+
+	<alias name="defaultAcerchemCommercePlaceOrderStrategy" alias="commercePlaceOrderStrategy"/>
+	<bean id="defaultAcerchemCommercePlaceOrderStrategy" parent="defaultCommercePlaceOrderStrategy" class="com.acerchem.core.strategies.impl.DefaultAcerchemCommercePlaceOrderStrategy">
+		<property name="acerchemStockService" ref="acerchemStockService"/>
+	</bean>
+
+
+	<alias name="defaultAcerchemStockService" alias="acerchemStockService"/>
+	<bean id="defaultAcerchemStockService" parent="stockService" class="com.acerchem.core.service.impl.DefaultAcerchemStockService">
+	</bean>
+
+	<alias name="defaultAcerchemDeliveryService" alias="acerchemDeliveryService"/>
+	<bean id="defaultAcerchemDeliveryService" parent="deliveryService" class="com.acerchem.core.service.impl.DefaultAcerchemDeliveryService">
+	</bean>
 </beans>

@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-4-12 9:55:35                           ---
+ * --- Generated at 2018-4-12 14:56:48                          ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.constants;
@@ -21,6 +21,9 @@ public class GeneratedAcerchemCoreConstants
 		public static final String APPARELSIZEVARIANTPRODUCT = "ApparelSizeVariantProduct".intern();
 		public static final String APPARELSTYLEVARIANTPRODUCT = "ApparelStyleVariantProduct".intern();
 		public static final String COUNTRYTRAYFARECONF = "CountryTrayFareConf".intern();
+		public static final String CREDITACCOUNTSTATUSENUM = "CreditAccountStatusEnum".intern();
+		public static final String CREDITTRANSACTION = "CreditTransaction".intern();
+		public static final String CUSTOMERCREDITACCOUNT = "CustomerCreditAccount".intern();
 		public static final String ELECTRONICSCOLORVARIANTPRODUCT = "ElectronicsColorVariantProduct".intern();
 		public static final String FUNCTIONBUTTONCOMPONENT = "FunctionButtonComponent".intern();
 		public static final String IMAGEFAILEDACTIONTYPE = "ImageFailedActionType".intern();
@@ -38,9 +41,40 @@ public class GeneratedAcerchemCoreConstants
 			public static final String AVAILABLEDATE = "availableDate".intern();
 			public static final String ISUSEFUTURESTOCK = "isUseFutureStock".intern();
 		}
+		public static class CsTicket
+		{
+			public static final String ADDRESS = "address".intern();
+			public static final String EMAIL = "Email".intern();
+			public static final String PRODUCTID = "productId".intern();
+			public static final String PRODUCTNAME = "productName".intern();
+			public static final String TELEPHONE = "telephone".intern();
+			public static final String YOURNAME = "yourname".intern();
+		}
+		public static class Customer
+		{
+			public static final String COMPANYTYPE = "companyType".intern();
+			public static final String CREDITACCOUNT = "creditAccount".intern();
+			public static final String EMPLOYEESNO = "employeesNo".intern();
+			public static final String ESTABLISHEDIN = "establishedIn".intern();
+			public static final String HAVEFINANCIALREPORT = "haveFinancialReport".intern();
+			public static final String LIMITCREDITAMOUNT = "limitCreditAmount".intern();
+			public static final String PROVIDETRADEREFERENCE = "provideTradeReference".intern();
+			public static final String RELATEDCUSTOMER = "relatedCustomer".intern();
+			public static final String RELATEDCUSTOMERPOS = "relatedCustomerPOS".intern();
+			public static final String REVENUE = "revenue".intern();
+			public static final String VATNO = "vatNo".intern();
+		}
+		public static class Employee
+		{
+			public static final String RECEPTIONIST = "receptionist".intern();
+		}
 		public static class Media
 		{
 			public static final String ALIYUNURL = "aliyunUrl".intern();
+		}
+		public static class PointOfService
+		{
+			public static final String DELIVERYZONE = "deliveryZone".intern();
 		}
 		public static class Product
 		{
@@ -77,6 +111,11 @@ public class GeneratedAcerchemCoreConstants
 	}
 	public static class Enumerations
 	{
+		public static class CreditAccountStatusEnum
+		{
+			public static final String LOCKED = "LOCKED".intern();
+			public static final String NORMAL = "NORMAL".intern();
+		}
 		public static class ImageFailedActionType
 		{
 			public static final String ADD = "ADD".intern();
@@ -117,6 +156,8 @@ public class GeneratedAcerchemCoreConstants
 	{
 		public static final String ACERCHEMCUSTOMERLEVEL2USER = "AcerChemCustomerLevel2User".intern();
 		public static final String ACERCHEMVENDOR2PRODUCT = "AcerChemVendor2Product".intern();
+		public static final String RECEPTIONIST2CUSTOMER = "Receptionist2Customer".intern();
+		public static final String TRANSACTIONS2CREDITACCOUNT = "Transactions2CreditAccount".intern();
 	}
 	
 	protected GeneratedAcerchemCoreConstants()

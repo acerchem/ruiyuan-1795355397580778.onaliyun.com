@@ -13,19 +13,24 @@ package com.acerchem.initialdata.setup;
 import de.hybris.platform.commerceservices.dataimport.impl.CoreDataImportService;
 import de.hybris.platform.commerceservices.dataimport.impl.SampleDataImportService;
 import de.hybris.platform.commerceservices.setup.AbstractSystemSetup;
+import de.hybris.platform.commerceservices.setup.data.ImportData;
+import de.hybris.platform.commerceservices.setup.events.CoreDataImportedEvent;
+import de.hybris.platform.commerceservices.setup.events.SampleDataImportedEvent;
 import de.hybris.platform.core.initialization.SystemSetup;
 import de.hybris.platform.core.initialization.SystemSetup.Process;
 import de.hybris.platform.core.initialization.SystemSetup.Type;
 import de.hybris.platform.core.initialization.SystemSetupContext;
 import de.hybris.platform.core.initialization.SystemSetupParameter;
 import de.hybris.platform.core.initialization.SystemSetupParameterMethod;
-import com.acerchem.initialdata.constants.AcerchemInitialDataConstants;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
+
+import com.acerchem.initialdata.constants.AcerchemInitialDataConstants;
 
 
 /**
@@ -40,6 +45,7 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 	private static final String IMPORT_CORE_DATA = "importCoreData";
 	private static final String IMPORT_SAMPLE_DATA = "importSampleData";
 	private static final String ACTIVATE_SOLR_CRON_JOBS = "activateSolrCronJobs";
+	public static final String ACERCHEM = "acerchem";
 
 	private CoreDataImportService coreDataImportService;
 	private SampleDataImportService sampleDataImportService;
@@ -64,7 +70,7 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 	/**
 	 * Implement this method to create initial objects. This method will be called by system creator during
 	 * initialization and system update. Be sure that this method can be called repeatedly.
-	 * 
+	 *
 	 * @param context
 	 *           the context provides the selected parameters and values
 	 */
@@ -80,7 +86,7 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 	 * Add import data for each site you have configured
 	 *
 	 * <pre>
-	 * final List<ImportData> importData = new ArrayList<ImportData>();
+	 * final List&lt;ImportData&gt; importData = new ArrayList&lt;ImportData&gt;();
 	 *
 	 * final ImportData sampleImportData = new ImportData();
 	 * sampleImportData.setProductCatalogName(SAMPLE_PRODUCT_CATALOG_NAME);
@@ -101,9 +107,30 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 	@SystemSetup(type = Type.PROJECT, process = Process.ALL)
 	public void createProjectData(final SystemSetupContext context)
 	{
-		/*
-		 * Add import data for each site you have configured
-		 */
+		final List<ImportData> importData = new ArrayList<ImportData>();
+
+		final ImportData electronicsImportData = new ImportData();
+		electronicsImportData.setProductCatalogName(ACERCHEM);
+		electronicsImportData.setContentCatalogNames(Arrays.asList(ACERCHEM));
+		electronicsImportData.setStoreNames(Arrays.asList(ACERCHEM));
+		importData.add(electronicsImportData);
+
+	getCoreDataImportService().execute(this, context, importData);
+			getSetupImpexService().importImpexFile(String.format("/%s/import/coredata/common/user-level.impex", context.getExtensionName()),false);
+		getEventService().publishEvent(new CoreDataImportedEvent(context, importData));
+		
+		getSampleDataImportService().execute(this, context, importData);
+			getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/productCatalogs/acerchemProductCatalog/acerchemProduct.impex", context.getExtensionName()), false);
+			getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/backoffice/customersupport/cscockpit-access-rights.impex", context.getExtensionName()), false);
+			getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/backoffice/customersupport/Catherinegroup-access-rights.impex", context.getExtensionName()), false);
+			getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/backoffice/customersupport/Frencegroup-access-rights.impex", context.getExtensionName()), false);
+			getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/backoffice/customersupport/Kevingroup-access-rights.impex", context.getExtensionName()), false);
+			getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/backoffice/customersupport/Lulugroup-access-rights.impex", context.getExtensionName()), false);
+			getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/backoffice/customersupport/Wintergroup-access-rights.impex", context.getExtensionName()), false);
+			
+		getEventService().publishEvent(new SampleDataImportedEvent(context, importData));
+		
+	 
 	}
 
 	public CoreDataImportService getCoreDataImportService()

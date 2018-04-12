@@ -41,10 +41,10 @@ INSERT_UPDATE SiteMapLanguageCurrency;&siteMapLanguageCurrency;language(isoCode)
 ;zhJpy;zh;JPY
 
 INSERT_UPDATE CatalogUnawareMedia;&siteMapMediaId;code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='text/plain']
-;$siteUid-siteMapMedia;$siteUid-siteMapMedia;siteMapTemplate.vm;$jarResource/site-siteMapTemplate.vm;
+#;$siteUid-siteMapMedia;$siteUid-siteMapMedia;siteMapTemplate.vm;$jarResource/site-siteMapTemplate.vm;
 
 INSERT_UPDATE RendererTemplate;&siteMapRenderer;code[unique=true];content(&siteMapMediaId);contextClass;rendererType(code)[default='velocity'];
-;$siteUid-siteMapTemplate;$siteUid-siteMapTemplate;$siteUid-siteMapMedia;de.hybris.platform.acceleratorservices.sitemap.renderer.SiteMapContext;
+#;$siteUid-siteMapTemplate;$siteUid-siteMapTemplate;$siteUid-siteMapMedia;de.hybris.platform.acceleratorservices.sitemap.renderer.SiteMapContext;
 
 INSERT_UPDATE SiteMapPage;&siteMapPage;code(code)[unique=true];frequency(code)[unique=true];priority[unique=true];active[default=true]
 ;Homepage;Homepage;daily;1.0;;
@@ -56,7 +56,7 @@ INSERT_UPDATE SiteMapPage;&siteMapPage;code(code)[unique=true];frequency(code)[u
 ;Custom;Custom;daily;1.0;;
 
 INSERT_UPDATE SiteMapConfig;&siteMapConfigId;configId[unique=true];siteMapLanguageCurrencies(&siteMapLanguageCurrency);siteMapPages(&siteMapPage);siteMapTemplate(&siteMapRenderer)[unique=true];customUrls;
-;$siteUidSiteMapConfig;$siteUidSiteMapConfig;$siteMapLangCur;$siteMapPage;$siteUid-siteMapTemplate;$customSiteMapUrls;
+#;$siteUidSiteMapConfig;$siteUidSiteMapConfig;$siteMapLangCur;$siteMapPage;$siteUid-siteMapTemplate;$customSiteMapUrls;
 
 # Do not remove this until we completely get rid of black and blue for all user experience
 INSERT_UPDATE SiteTheme;code[unique=true]
@@ -64,7 +64,7 @@ INSERT_UPDATE SiteTheme;code[unique=true]
 
 # CMS Site
 INSERT_UPDATE CMSSite;uid[unique=true];theme(code);channel(code);stores(uid);contentCatalogs(id);defaultCatalog(id);defaultLanguage(isoCode);siteMapConfig(&siteMapConfigId);urlPatterns;active;previewURL;startingPage(uid,$contentCV);urlEncodingAttributes;defaultPromotionGroup(Identifier)[default=acerchemPromoGrp]
-;$siteUid;blue;B2C;$storeUid;$contentCatalog;$productCatalog;$defaultLanguage;$siteUidSiteMapConfig;(?i)^https?://[^/]+(/[^?]*)?\?(.*\&)?(site=$siteUid)(|\&.*)$,(?i)^https?://$siteUid\.[^/]+(|/.*|\?.*)$,(?i)^https?://api\.hybrisdev\.com(:[\d]+)?/rest/.*$,(?i)^https?://localhost(:[\d]+)?/rest/.*$;true;$storefrontContextRoot/?site=$siteUid;homepage;storefront,language
+;$siteUid;blue;B2C;$storeUid;$contentCatalog;$productCatalog;$defaultLanguage;;(?i)^https?://[^/]+(/[^?]*)?\?(.*\&)?(site=$siteUid)(|\&.*)$,(?i)^https?://$siteUid\.[^/]+(|/.*|\?.*)$,(?i)^https?://api\.hybrisdev\.com(:[\d]+)?/rest/.*$,(?i)^https?://localhost(:[\d]+)?/rest/.*$;true;$storefrontContextRoot/?site=$siteUid;homepage;storefront,language
 
 # Cart Cleanup CronJobs
 INSERT_UPDATE CartRemovalCronJob;code[unique=true];job(code)[default=cartRemovalJob];sites(uid)[default=$siteUid];sessionLanguage(isoCode)[default=en]

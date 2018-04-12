@@ -14,7 +14,6 @@
 <spring:htmlEscape defaultHtmlEscape="true"/>
 
 <table class="list">
-    
     <c:choose>
         <c:when test="${not empty entryGroup.children}">
             <c:forEach items="${entryGroup.children}" var="group" varStatus="loop">

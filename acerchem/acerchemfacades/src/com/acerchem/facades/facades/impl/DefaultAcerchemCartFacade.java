@@ -28,11 +28,11 @@ public class DefaultAcerchemCartFacade extends DefaultCartFacade implements Acer
 
     @Override
     public String  acerchemValidateCart(String productCode,boolean isUseFutureStock,String storeId) {
+        if (ObjectUtils.isEmpty(storeId)){
+            return "basket.error.storeId.empty";
+        }
         if (hasSessionCart()){
             CartModel cartModel = getCartService().getSessionCart();
-            if (ObjectUtils.isEmpty(storeId)){
-                return "basket.error.storeId.empty";
-            }
             if(!acerchemValidatePointOfService(storeId,cartModel)){
                 return "basket.error.storeId.different";
             }
@@ -71,6 +71,26 @@ public class DefaultAcerchemCartFacade extends DefaultCartFacade implements Acer
         final CommerceCartModification modification = acerchemCommerCartService.addToCart(parameter);
 
         return getCartModificationConverter().convert(modification);
+    }
+
+    @Override
+    public CartModificationData updateCartEntry(long entryNumber, String storeId, boolean isUseFutureStock) throws CommerceCartModificationException {
+        final AddToCartParams dto = new AddToCartParams();
+        dto.setStoreId(storeId);
+        dto.setIsUseFutureStock(isUseFutureStock);
+        final CommerceCartParameter parameter = getCommerceCartParameterConverter().convert(dto);
+        parameter.setEnableHooks(true);
+        parameter.setEntryNumber(entryNumber);
+        CommerceCartModification commerceCartModification = null;
+        if (parameter.getPointOfService() == null)
+        {
+//            commerceCartModification = getCommerceCartService().updateToShippingModeForCartEntry(parameter);
+        }
+        else
+        {
+        commerceCartModification = acerchemCommerCartService.updatePointOfServiceForCartEntry(parameter);
+        }
+        return getCartModificationConverter().convert(commerceCartModification);
     }
 
     private boolean acerchemValidatePointOfService(String storeId, CartModel cartModel){

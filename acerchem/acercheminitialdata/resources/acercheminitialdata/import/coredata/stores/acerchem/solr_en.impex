@@ -13,7 +13,7 @@
 #
 
 # Index Type
-$solrIndexedType=electronicsProductType
+$solrIndexedType=acerchemProductType
 
 # Language
 $lang=en

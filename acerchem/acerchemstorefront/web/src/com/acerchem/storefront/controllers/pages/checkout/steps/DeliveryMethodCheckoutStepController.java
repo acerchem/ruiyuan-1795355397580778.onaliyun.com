@@ -10,6 +10,7 @@
  */
 package com.acerchem.storefront.controllers.pages.checkout.steps;
 
+import com.acerchem.facades.facades.AcerchemCheckoutFacade;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.PreValidateCheckoutStep;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.PreValidateQuoteCheckoutStep;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
@@ -28,12 +29,17 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import javax.annotation.Resource;
+
 
 @Controller
 @RequestMapping(value = "/checkout/multi/delivery-method")
 public class DeliveryMethodCheckoutStepController extends AbstractCheckoutStepController
 {
 	private static final String DELIVERY_METHOD = "delivery-method";
+
+	@Resource
+	private AcerchemCheckoutFacade acerchemCheckoutFacade;
 
 	@RequestMapping(value = "/choose", method = RequestMethod.GET)
 	@RequireHardLogIn
@@ -47,7 +53,7 @@ public class DeliveryMethodCheckoutStepController extends AbstractCheckoutStepCo
 
 		final CartData cartData = getCheckoutFacade().getCheckoutCart();
 		model.addAttribute("cartData", cartData);
-		model.addAttribute("deliveryMethods", getCheckoutFacade().getSupportedDeliveryModes());
+		model.addAttribute("deliveryMethods", acerchemCheckoutFacade.getSupportedDeliveryModes());
 		this.prepareDataForPage(model);
 		storeCmsPageInModel(model, getContentPageForLabelOrId(MULTI_CHECKOUT_SUMMARY_CMS_PAGE_LABEL));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(MULTI_CHECKOUT_SUMMARY_CMS_PAGE_LABEL));
