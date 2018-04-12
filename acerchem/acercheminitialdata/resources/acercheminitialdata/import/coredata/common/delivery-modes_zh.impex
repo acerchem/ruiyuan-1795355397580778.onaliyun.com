@@ -21,3 +21,5 @@ UPDATE ZoneDeliveryMode;code[unique=true];name[lang=$lang];description[lang=$lan
  ;premium-net;"高级送货";"1-2 工作日"
  ;standard-gross;"标准送货";"3-5 工作日"
  ;standard-net;"标准送货";"3-5 工作日"
+ ;DELIVERY_MENTION;"自提";"3-5 工作日"
+ ;DELIVERY_GROSS;"送货";"3-5 工作日"
