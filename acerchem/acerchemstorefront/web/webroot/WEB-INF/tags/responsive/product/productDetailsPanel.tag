@@ -205,9 +205,9 @@
 							<a href="#" >Allergen Statement</a>
 						</li>
 					</ul>
-					<div class="btn-set line-setbtn">							
-						<a class="btn btn-showlist" href="javascript:void(0)">Message Consultation</a>
-					</div>		
+					<div class="btn-set line-setbtn">       
+					      <a class="click_pop btn btn-showlist" href="javascript:void(0)">Message Consultation</a>
+					</div> 		
 				</div>
 				<div class="tableshare">
 					<div class="title">Share with a Friend</div>
@@ -612,7 +612,18 @@
 		
         $('#storeId').val($("#storeMulId").val());
 	});
-
+    
+    //send message
+    $(document).ready(function () {
+        $('.click_pop').click(function () {
+        var openUrl = ACC.config.encodedContextPath + "/account/add-support-ticket?productId=${product.code}&productName=${product.name}";//弹出窗口的url
+         var iWidth=600; //弹出窗口的宽度;
+         var iHeight=600; //弹出窗口的高度;
+         var iTop = (window.screen.availHeight-30-iHeight)/2; //获得窗口的垂直位置;
+         var iLeft = (window.screen.availWidth-10-iWidth)/2; //获得窗口的水平位置;
+         window.open(openUrl,"","height="+iHeight+", width="+iWidth+", top="+iTop+",scrollbars=yes,resizable=yes,toolbar=no,location=no, left="+iLeft); 
+        });
+    })
 </script>
 		
 
