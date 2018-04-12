@@ -39,8 +39,8 @@
 					
 					<label> 
 						<span class='label-title'>Product ID</span> 
-						<input type="text" value="${supportTicketForm.productId==null?'':supportTicketForm.productId }" disabled="disabled"><!--   -->
-						<input type="hidden" name='supportTicketForm.productId' value="${supportTicketForm.productId==null?'':supportTicketForm.productId }">
+						<input type="text" value="${supportTicketForm.productId}" disabled="disabled">
+						<input type="hidden" name='productId' value="${supportTicketForm.productId}">
 						<div style="color: #F00"><form:errors path="productId" /></div> 
 					</label>
 					
@@ -52,8 +52,8 @@
 					
 					<label> 
 						<span class='label-title'>Product Name</span> 
-						<input type="text" value="${supportTicketForm.productName==null?'':supportTicketForm.productName}" disabled="disabled">
-						<input type="hidden" name='supportTicketForm.productName' value="${supportTicketForm.productName==null?'':supportTicketForm.productName}">
+						<input type="text" value="${supportTicketForm.productName}" disabled="disabled">
+						<input type="hidden" name='productName' value="${supportTicketForm.productName}">
 						<div style="color: #F00">
 							<form:errors path="productName" />
 						</div>
@@ -84,7 +84,7 @@
 				<div class="accountActions">
 					<div class="row">
 						<div class="col-sm-6 col-sm-push-6 accountButtons">
-							<button class="btn-submit btn btn-primary btn-block" type="submit"><!--   -->
+							<button class="btn-submit btn btn-primary btn-block" type="submit">
 								<spring:theme code="text.account.supporttickets.createTicket.submit" text="Submit" />
 							</button>
 						</div>
@@ -151,7 +151,7 @@ $('.btn-submit').on('click',function(){
 		if(aval){		
 			var mymail = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;		
 			if(aname=='email'&&!mymail.test(aval)){				
-				maxalert('Please enter a valid mailbox！')
+				maxalert('Please enter a valid mailbox!')
 				return false;
 			}
 

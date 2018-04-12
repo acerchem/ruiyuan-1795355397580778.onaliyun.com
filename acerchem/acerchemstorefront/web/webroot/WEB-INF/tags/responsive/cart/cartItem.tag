@@ -78,9 +78,9 @@
                                    <input type="hidden" name="entryNumbers" value="${entry.entryNumber}"/>
                                    <input type="hidden" name="productCode" value="${fn:escapeXml(entry.product.code)}"/>
                                     <input type="hidden" name="initialQuantity" value="${entry.quantity}"/>
-					             <button id="removeCartBtn" type="submit" class="btn btn-cart" >
-								Remove
-							</button> 
+							          <button id="removeCartBtn" type="submit" class="btn btn-cart" >
+										Remove
+									</button> 
                                  </form:form>
                                 
                           </c:forEach>

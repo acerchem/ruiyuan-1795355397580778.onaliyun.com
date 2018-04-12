@@ -1636,7 +1636,8 @@ pre code {
   width: 33.33333333%;
 }
 .col-xs-3 {
-  width: 25%;
+	/* shaun */
+  width: 20%;
 }
 .col-xs-2 {
   width: 16.66666667%;
@@ -9702,7 +9703,12 @@ fieldset[disabled] .btn-primary.active {
 .pagination > li.pagination-next > a,
 .pagination > li.pagination-prev > span,
 .pagination > li.pagination-next > span {
-  font-size: 11px;
+   font-size: 20px;
+  background-color: transparent;
+  color: #c0c0c0;
+  font-weight: 500;
+  /* shaun */
+
 }
 .pagination > li.pagination-prev > a:hover,
 .pagination > li.pagination-next > a:hover,
@@ -10611,7 +10617,7 @@ fieldset[disabled] .btn-primary.active {
   bottom: 0;
   position: absolute;
   right: 0;
-  content: "â€?";
+  content: "ï¿½?";
 }
 .carousel .item .item__name:after,
 .carousel__component--carousel .item .item__name:after,

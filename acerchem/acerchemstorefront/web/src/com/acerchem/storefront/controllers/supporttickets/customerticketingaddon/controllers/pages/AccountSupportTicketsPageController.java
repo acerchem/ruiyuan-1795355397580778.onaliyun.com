@@ -396,7 +396,7 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 		status.setId(supportTicketForm.getStatus());
 		ticketData.setStatus(status);
 		ticketData.setCustomerId(customerFacade.getCurrentCustomerUid());
-		ticketData.setSubject(supportTicketForm.getProductId()==""?"Home Advisory":supportTicketForm.getProductId());
+		ticketData.setSubject((supportTicketForm.getProductId()==""||supportTicketForm.getProductId()==null)?"Home Advisory":supportTicketForm.getProductId());
 		ticketData.setMessage(supportTicketForm.getMessage());
 		ticketData.setAssociatedTo(supportTicketForm.getAssociatedTo());
 		ticketData.setTicketCategory(supportTicketForm.getTicketCategory());

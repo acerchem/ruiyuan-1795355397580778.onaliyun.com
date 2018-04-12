@@ -129,11 +129,11 @@ INSERT_UPDATE ListPickUpInStoreAction;$contentCV[unique=true];uid[unique=true];u
 ;;ListPickUpInStoreAction;/store-pickup/{productCode}/pointOfServices;Pickup in Store Action;ActionRestriction;ListPickUpInStoreAction
 
 # CMS PickUpInStoreAction Action
-INSERT_UPDATE PickUpInStoreAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
+INSERT_UPDATE PickUpInStoreAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef;visible[default='false']
 ;;PickUpInStoreAction;/store-pickup/{productCode}/pointOfServices;Pickup in Store Action;ActionRestriction;PickUpInStoreAction
 
 # CMS ShareOnSocialNetwork Action
-INSERT_UPDATE ShareOnSocialNetworkAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef
+INSERT_UPDATE ShareOnSocialNetworkAction;$contentCV[unique=true];uid[unique=true];url;name;restrictions(uid,$contentCV);&actionRef;visible[default='false']
 ;;ShareOnSocialNetworkAction;/;Share On Social Network Action;ActionRestriction;ShareOnSocialNetworkAction
 
 # CMS Action Restrictions
@@ -340,8 +340,11 @@ INSERT_UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];name;&com
 INSERT_UPDATE RotatingImagesComponent;$contentCV[unique=true];uid[unique=true];name;banners(&componentRef);&componentRef
 ;;acerchemHomepageCarouselComponent;acerchem Homepage Carousel;CarouselCyberBanner,CarouselCamcorderBanner,CarouselFunBanner;acerchemHomepageCarouselComponent
 
-INSERT_UPDATE ProductCarouselComponent;$contentCV[unique=true];uid[unique=true];name;products(code,$productCV);scroll(code);popup;&componentRef
-;;acerchemHomepageProductCarouselComponent;acerchem Homepage Product Carousel;300938,358639,553637,816802,1934793,1382080,1981415,816780,1934406,1986316,592506;allVisible;false;acerchemHomepageProductCarouselComponent
+
+INSERT_UPDATE ProductCarouselComponent;$contentCV[unique=true];uid[unique=true];name;products(code,$productCV);scroll(code);popup;&componentRef;isSale;isPromotion
+;;acerchemHomepageProductCarouselComponent;acerchem Homepage Product Carousel;300938,358639,553637,816802,1934793,1382080,1981415,816780,1934406,1986316,592506;allVisible;false;acerchemHomepageProductCarouselComponent;false;false
+;;SaleWellProductCarousel;SaleWellProductCarousel;300938,358639,553637,816802,1934793,1382080,1981415,816780,1934406,1986316,592506;allVisible;false;SaleWellProductCarousel;true;false
+;;PromotionProductCarousel;PromotionProductCarousel;300938,358639,553637,816802,1934793,1382080,1981415,816780,1934406,1986316,592506;allVisible;false;PromotionProductCarousel;false;true
 
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];folder(qualifier)[default='images']
 ;;BannerComponent;text/jpg;maxbanner-bg.jpg;$siteResource/acerchemimages/maxbanner-bg.jpg
@@ -365,6 +368,10 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 ;;Section3Slot-Homepage;Section3 Slot for Homepage;true;AcerchemIndexSearchBoxComponent
 ;;Section4Slot-Homepage;Section4 Slot for Homepage;true;ReturningCustomerLoginComponent
 ;;Section5Slot-Homepage;Section5 Slot for Homepage;true;OneBannerComponent,TwoBannerComponent,ThreeBannerComponent,FourBannerComponent,FiveBannerComponent
+;;SaleWellProductListSlot;SaleWellProductListSlot for Homepage;true;SaleWellProductCarousel
+;;PromotionProductListSlot;PromotionProductListSlot for Homepage;true;PromotionProductCarousel
+
+
 
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true]
 ;;Section1-Homepage;Section1;;Section1Slot-Homepage
@@ -374,6 +381,8 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 ;;Section3-Homepage;Section3;;Section3Slot-Homepage
 ;;Section4-Homepage;Section4;;Section4Slot-Homepage
 ;;Section5-Homepage;Section5;;Section5Slot-Homepage
+;;SaleWellProductList-Homepage;SaleWellProductListSlot;;SaleWellProductListSlot
+;;PromotionProductList-Homepage;PromotionProductListSlot;;PromotionProductListSlot
 
 ###### acerchem Camera Accessories and Supplies Category Landing Page ######
 

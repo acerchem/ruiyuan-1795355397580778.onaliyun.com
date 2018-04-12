@@ -122,6 +122,12 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 		getSampleDataImportService().execute(this, context, importData);
 			getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/productCatalogs/acerchemProductCatalog/acerchemProduct.impex", context.getExtensionName()), false);
 			getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/backoffice/customersupport/cscockpit-access-rights.impex", context.getExtensionName()), false);
+			getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/backoffice/customersupport/Catherinegroup-access-rights.impex", context.getExtensionName()), false);
+			getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/backoffice/customersupport/Frencegroup-access-rights.impex", context.getExtensionName()), false);
+			getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/backoffice/customersupport/Kevingroup-access-rights.impex", context.getExtensionName()), false);
+			getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/backoffice/customersupport/Lulugroup-access-rights.impex", context.getExtensionName()), false);
+			getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/backoffice/customersupport/Wintergroup-access-rights.impex", context.getExtensionName()), false);
+			
 		getEventService().publishEvent(new SampleDataImportedEvent(context, importData));
 		
 	 

@@ -155,7 +155,7 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
 
     @Override
     public boolean hasShippingItems()
-    {   
+    {
         return true;
     }
 
