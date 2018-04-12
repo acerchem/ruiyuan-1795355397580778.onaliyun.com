@@ -234,7 +234,10 @@ INSERT_UPDATE SearchResultsGridComponent;$contentCV[unique=true];uid[unique=true
 ;;SearchResultsGrid;Search Result Grid Component;ListPickUpInStoreAction,ListAddToCartAction;SearchResultsGrid
 
 INSERT_UPDATE CategoryNavigationComponent;$contentCV[unique=true];uid[unique=true];name;styleClass;&componentRef;navigationNode(&nodeRef);wrapAfter
-#;;acerchemCategoryNavComponent;Category Navigation Component;;acerchemCategoryNavComponent;acerchemCategoryNavNode;10
+;;acerchemCategoryNavComponent;Category Navigation Component;;acerchemCategoryNavComponent;acerchemCategoryNavNode;10
+
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);&nodeRef;children(uid,$contentCV)
+;acerchemCategoryNavNode;;Categories;acerchemNavNode;acerchemCategoryNavNode;DigitalCamerasNavNode,FilmCamerasNavNode,HandheldCamcordersNavNode,WebcamsNavNode
 
 
 # Content Slots
