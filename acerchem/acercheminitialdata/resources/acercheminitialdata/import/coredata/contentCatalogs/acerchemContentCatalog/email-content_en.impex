@@ -80,3 +80,16 @@ UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];fromEmail[lang=$lang];
  ;;OrderPartiallyRefundedEmail;"customerservice@acerchem.com";"Customer Services Team"
  ;;OrderRefundEmail;"customerservice@acerchem.com";"Customer Services Team"
  ;;ReadyForPickupEmail;"customerservice@acerchem.com";"Customer Services Team"
+ 
+ #shaun
+ ;;ContractEmail;"customerservice@acerchem.com";"Customer Services Team"
+ ;;DeliveryNoteEmail;"customerservice@acerchem.com";"Customer Services Team"
+ ;;InvoiceEmail;"customerservice@acerchem.com";"Customer Services Team"
+ ;;ProformaInvoiceEmail;"customerservice@acerchem.com";"Customer Services Team"
+ ;;ReleaseNoteEmail;"customerservice@acerchem.com";"Customer Services Team"
+ 
+ 
+ 
+ 
+ 
+ 
