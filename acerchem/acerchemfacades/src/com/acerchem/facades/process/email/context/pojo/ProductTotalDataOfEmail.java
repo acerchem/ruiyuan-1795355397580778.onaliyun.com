@@ -11,6 +11,7 @@ public class ProductTotalDataOfEmail {
 	private String shippingMarks;
 	private String poNo;
 	
+	private String amountTotal;//总计金额
 	
 	public String getQuantity() {
 		return quantity;
@@ -53,6 +54,18 @@ public class ProductTotalDataOfEmail {
 	}
 	public void setPoNo(String poNo) {
 		this.poNo = poNo;
+	}
+	/**
+	 * @return the amountTotal
+	 */
+	public String getAmountTotal() {
+		return amountTotal;
+	}
+	/**
+	 * @param amountTotal the amountTotal to set
+	 */
+	public void setAmountTotal(String amountTotal) {
+		this.amountTotal = amountTotal;
 	}
 	
 	

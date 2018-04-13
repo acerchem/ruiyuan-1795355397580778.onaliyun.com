@@ -1,1 +1,1 @@
-﻿${ctx.messages.getMessage('emailSubject', ${ctx.orderCode})}
+Delivery Note Email
