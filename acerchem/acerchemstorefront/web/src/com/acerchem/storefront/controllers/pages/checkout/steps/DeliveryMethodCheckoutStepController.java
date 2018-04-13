@@ -49,7 +49,7 @@ public class DeliveryMethodCheckoutStepController extends AbstractCheckoutStepCo
 	public String enterStep(final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		// Try to set default delivery mode
-		getCheckoutFacade().setDeliveryModeIfAvailable();
+//		getCheckoutFacade().setDeliveryModeIfAvailable();
 
 		final CartData cartData = getCheckoutFacade().getCheckoutCart();
 		model.addAttribute("cartData", cartData);
@@ -79,7 +79,7 @@ public class DeliveryMethodCheckoutStepController extends AbstractCheckoutStepCo
 	{
 		if (StringUtils.isNotEmpty(selectedDeliveryMethod))
 		{
-			getCheckoutFacade().setDeliveryMode(selectedDeliveryMethod);
+			acerchemCheckoutFacade.setDeliveryMode(selectedDeliveryMethod);
 		}
 
 		return getCheckoutStep().nextStep();

@@ -11,5 +11,7 @@ public interface AcerchemCheckoutFacade {
 
     List<? extends DeliveryModeData> getSupportedDeliveryModes();
 
+    boolean setDeliveryMode(final String deliveryModeCode);
+
 }
 

@@ -96,18 +96,30 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
     }
 
     protected DeliveryModeData convert(final DeliveryModeModel deliveryModeModel){
+
+        final CartModel cartModel = getCart();
         if (deliveryModeModel instanceof ZoneDeliveryModeModel)
         {
             final ZoneDeliveryModeModel zoneDeliveryModeModel = (ZoneDeliveryModeModel) deliveryModeModel;
-            final CartModel cartModel = getCart();
             if (cartModel != null)
             {
                 final ZoneDeliveryModeData zoneDeliveryModeData = getZoneDeliveryModeConverter().convert(zoneDeliveryModeModel);
 
+                PriceValue deliveryCost  = getDeliveryService().getDeliveryCostForDeliveryModeAndAbstractOrder(
+                        deliveryModeModel, cartModel);;
+                if (deliveryCost != null)
+                {
+                    zoneDeliveryModeData.setDeliveryCost(getPriceDataFactory().create(PriceDataType.BUY,
+                            BigDecimal.valueOf(deliveryCost.getValue()), deliveryCost.getCurrencyIso()));
+                }
+                return zoneDeliveryModeData;
+            }
+        }else{
+            if (cartModel != null)
+            {
+                DeliveryModeData deliveryModeData = getDeliveryModeConverter().convert(deliveryModeModel);
                 double orderTotalPrice  = cartModel.getTotalPrice();
-
                 String orderStandardFee = configurationService.getConfiguration().getString(ORDER_STANDARD_CRITICAL_FEE,defaultOrderStandardFee);
-
                 BigDecimal operationFee = BigDecimal.ZERO;
                 if (orderTotalPrice <= Double.valueOf(orderStandardFee)){
                     String orderOperationFee = configurationService.getConfiguration().getString(ORDER_OPERATION_FEE,defaultOrderOperationFee);
@@ -136,17 +148,14 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                         e.printStackTrace();
                     }
                     deliveryCost = new PriceValue(cartModel.getCurrency().getIsocode(), fee.doubleValue(), true);
-                }else{
-                    deliveryCost = getDeliveryService().getDeliveryCostForDeliveryModeAndAbstractOrder(
-                            deliveryModeModel, cartModel);
                 }
 
                 if (deliveryCost != null)
                 {
-                    zoneDeliveryModeData.setDeliveryCost(getPriceDataFactory().create(PriceDataType.BUY,
+                    deliveryModeData.setDeliveryCost(getPriceDataFactory().create(PriceDataType.BUY,
                             BigDecimal.valueOf(deliveryCost.getValue()), deliveryCost.getCurrencyIso()));
                 }
-                return zoneDeliveryModeData;
+                return deliveryModeData;
             }
             return null;
         }

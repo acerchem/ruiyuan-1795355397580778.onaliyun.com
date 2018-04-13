@@ -220,7 +220,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		}
 
 		getUserFacade().editAddress(newAddress);
-		getCheckoutFacade().setDeliveryModeIfAvailable();
+//		getCheckoutFacade().setDeliveryModeIfAvailable();
 		getCheckoutFacade().setDeliveryAddress(newAddress);
 
 		return getCheckoutStep().nextStep();

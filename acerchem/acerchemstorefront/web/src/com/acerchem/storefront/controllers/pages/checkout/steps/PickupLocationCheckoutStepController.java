@@ -44,7 +44,7 @@ public class PickupLocationCheckoutStepController extends AbstractCheckoutStepCo
 	public String enterStep(final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		// Try to set default delivery mode
-		getCheckoutFacade().setDeliveryModeIfAvailable();
+//		getCheckoutFacade().setDeliveryModeIfAvailable();
 
 		model.addAttribute("cartData", getCheckoutFacade().getCheckoutCart());
 		model.addAttribute("pickupConsolidationOptions", getCheckoutFacade().getConsolidatedPickupOptions());

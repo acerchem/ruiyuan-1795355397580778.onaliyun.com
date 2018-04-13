@@ -308,6 +308,6 @@
 		parent="abstractEmailContext" scope="prototype">
 		<property name="orderConverter" ref="orderConverter" />
 	</bean>
-	
+
 </beans>
 
