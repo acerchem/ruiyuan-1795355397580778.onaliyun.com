@@ -632,12 +632,13 @@
                     <attribute qualifier="haveFinancialReport" type="java.lang.Boolean">
                         <description>Do you have public financial report?If so, please send to customerservice@acerchem.com</description>
                         <modifiers read="true" write="true" search="true" />
+                        <defaultvalue>Boolean.FALSE</defaultvalue>
                         <persistence type="property" />
                     </attribute>
                     
 					<attribute qualifier="provideTradeReference" type="java.lang.Boolean">
 						<description>Can you provide any trade reference for Acerchem?</description>
-						<modifiers optional="false" initial="false" />
+						<modifiers read="true" write="true" search="true"/>
 						<persistence type="property" />
 						<defaultvalue>Boolean.FALSE</defaultvalue>
 					</attribute>

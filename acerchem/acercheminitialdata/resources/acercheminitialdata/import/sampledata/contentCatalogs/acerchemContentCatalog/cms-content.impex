@@ -236,6 +236,9 @@ INSERT_UPDATE SearchResultsGridComponent;$contentCV[unique=true];uid[unique=true
 INSERT_UPDATE CategoryNavigationComponent;$contentCV[unique=true];uid[unique=true];name;styleClass;&componentRef;navigationNode(&nodeRef);wrapAfter
 ;;acerchemCategoryNavComponent;Category Navigation Component;;acerchemCategoryNavComponent;acerchemCategoryNavNode;10
 
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);&nodeRef;children(uid,$contentCV)
+;acerchemCategoryNavNode;;Categories;acerchemNavNode;acerchemCategoryNavNode;DigitalCamerasNavNode,FilmCamerasNavNode,HandheldCamcordersNavNode,WebcamsNavNode
+
 
 # Content Slots
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
@@ -449,6 +452,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 ;;Section4Slot-Homepage;Section4 Slot for Homepage;true;ReturningCustomerLoginComponent
 ;;Section5Slot-Homepage;Section5 Slot for Homepage;true;OneBannerComponent,TwoBannerComponent,ThreeBannerComponent,FourBannerComponent,FiveBannerComponent
 
+
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true]
 ;;Section1-Homepage;Section1;;Section1Slot-Homepage
 ;;Section2A-Homepage;Section2A;;Section2ASlot-Homepage
@@ -457,6 +461,7 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 ;;Section3-Homepage;Section3;;Section3Slot-Homepage
 ;;Section4-Homepage;Section4;;Section4Slot-Homepage
 ;;Section5-Homepage;Section5;;Section5Slot-Homepage
+
 
 ###### acerchem Camera Accessories and Supplies Category Landing Page ######
 

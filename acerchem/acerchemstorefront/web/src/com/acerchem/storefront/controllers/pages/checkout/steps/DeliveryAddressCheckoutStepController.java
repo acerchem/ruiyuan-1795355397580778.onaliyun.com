@@ -56,7 +56,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	@Resource(name = "addressDataUtil")
 	private AddressDataUtil addressDataUtil;
 
-	@Resource(name = "acerchemCheckoutFacade")
+	@Resource(name = "defaultAcerchemCheckoutFacade")
 	private AcerchemCheckoutFacade acerchemCheckoutFacade;
 
 	@Override

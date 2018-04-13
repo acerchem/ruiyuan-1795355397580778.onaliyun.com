@@ -24,6 +24,19 @@ $lang=en
 
 # CMS components and Email velocity templates
 UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang,translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
+#shaun
+ ;acerchem_Email_Contract_Body;"Contract Body";$emailResource/email-contractBody.vm
+ ;acerchem_Email_Contract_Subject;"Contract Subject";$emailResource/email-contractSubject.vm
+ ;acerchem_Email_Delivery_Note_Body;"Delivery Note Body";$emailResource/email-deliveryNoteBody.vm
+ ;acerchem_Email_Delivery_Note_Subject;"Delivery Note Subject";$emailResource/email-deliveryNoteSubject.vm
+ ;acerchem_Email_Invoice_Body;"Invoice Body";$emailResource/email-invoiceBody.vm
+ ;acerchem_Email_Invoice_Subject;"Invoice Subject";$emailResource/email-invoiceSubject.vm
+ ;acerchem_Email_Proforma_Invoice_Body;"Proforma Invoice Body";$emailResource/email-proforma-invoiceBody.vm
+ ;acerchem_Email_Proforma_Invoice_Subject;"Proforma Invoice Subject";$emailResource/email-proforma-invoiceSubject.vm
+ ;acerchem_Email_Release_Note_Body;"Release Note Body";$emailResource/email-releaseNoteBody.vm
+ ;acerchem_Email_Release_Note_Subject;"Release Note Subject";$emailResource/email-releaseNoteSubject.vm
+
+
  ;acerchem-BannerComponent-template;"CMSBannerComponent Template";$emailResource/email-bannerComponentTemplate.vm
  ;acerchem-CMSImageComponent-template;"CMSImageComponent Template";$emailResource/email-cmsImageComponentTemplate.vm
  ;acerchem-CMSLinkComponent-template;"CMSLinkComponent Template";$emailResource/email-cmsLinkComponentTemplate.vm

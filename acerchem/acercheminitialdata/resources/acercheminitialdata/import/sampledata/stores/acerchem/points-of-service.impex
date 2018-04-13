@@ -82,10 +82,10 @@ INSERT_UPDATE Zone;code[unique=true];countries(isocode)
 
 
 
-INSERT_UPDATE PointOfService;deliveryZone(code);name[unique=true];type(code);address(&addrID);latitude;longitude;geocodeTimestamp[dateformat=dd-MM-yyyy];$storeImage;openingSchedule(code);baseStore(uid)[default=$storeUid];features(code)
-;US;USA;STORE;addr1;;;29-04-2025;acerchem_store_01;$standardHours;$storeUid
-;GB;United Kingdom;STORE;addr2;;;29-04-2025;acerchem_store_02;$standardHours;$storeUid
-;NL;Holland;STORE;addr3;;;29-04-2025;acerchem_store_03;$standardHours;$storeUid
+INSERT_UPDATE PointOfService;deliveryZone(code);name[unique=true];type(code);address(&addrID);latitude;longitude;geocodeTimestamp[dateformat=dd-MM-yyyy];$storeImage;openingSchedule(code);baseStore(uid)[default=$storeUid];displayName;features(code)
+;US;USA;STORE;addr1;;;29-04-2025;acerchem_store_01;$standardHours;$storeUid;USA
+;GB;United Kingdom;STORE;addr2;;;29-04-2025;acerchem_store_02;$standardHours;$storeUid;United Kingdom
+;NL;Holland;STORE;addr3;;;29-04-2025;acerchem_store_03;$standardHours;$storeUid;Holland
 
 
 INSERT_UPDATE Address;&addrID;streetname;streetnumber;postalcode[unique=true];town[unique=true];country(isocode);region(isocode);phone1;owner(PointOfService.name)[unique=true]
