@@ -109,7 +109,7 @@
 				</div>
 				  <ycommerce:testId code="checkoutLinkInPopup">
 				<div class="btn-set">							
-					<a class="btn btn-submit" href="checkout.html">Check Out</a>
+					<a class="btn btn-submit" href="${cartUrl}">Check Out</a>
 					<a class="btn btn-continue" href="">Continue Shopping</a>
 				</div>
 				 </ycommerce:testId>

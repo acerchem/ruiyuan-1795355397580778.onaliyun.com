@@ -1,6 +1,13 @@
 package com.acerchem.storefront.checkout.steps.validation.impl;
 
 import de.hybris.platform.acceleratorstorefrontcommons.forms.AddressForm;
+import de.hybris.platform.commercefacades.i18n.I18NFacade;
+import de.hybris.platform.commercefacades.user.data.RegionData;
+
+import java.util.List;
+
+import javax.annotation.Resource;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -14,6 +21,9 @@ import com.acerchem.storefront.data.CustomRegisterForm;
 @Component("personalInfoValidator")
 public class PersonalInfoValidator implements Validator
 {
+	@Resource(name = "i18NFacade")
+	private I18NFacade i18NFacade;
+	
 	@Override
 	public boolean supports(final Class<?> aClass)
 	{
@@ -30,15 +40,19 @@ public class PersonalInfoValidator implements Validator
 		final String contacts = registerForm.getContacts();
 		final AddressForm contactCountry = registerForm.getContactAddress();
 		
-		if(contactCountry==null)
+		if(contactCountry==null||contactCountry.getCountryIso()==null)
 		{
 			errors.rejectValue("contactAddress.countryIso", "register.contactAddress.invalid");
 		}
 		else
 		{
 			validateNullValue(errors, contactCountry.getCountryIso(), "contactAddress.countryIso", "register.contactAddress.countryIso.invalid");
-			validateNullValue(errors, contactCountry.getRegionIso(), "contactAddress.regionIso", "register.contactAddress.regionIso.invalid");
 			validateNullValue(errors, contactCountry.getTownCity(), "contactAddress.townCity", "register.contactAddress.townCity.invalid");
+			List<RegionData> regions=i18NFacade.getRegionsForCountryIso(contactCountry.getCountryIso());
+			if(regions.size()>0)
+			{
+				validateNullValue(errors, contactCountry.getRegionIso(), "contactAddress.regionIso", "register.contactAddress.regionIso.invalid");
+			}
 		}
 		
 		validateNullValue(errors, name, "name", "register.name.invalid");

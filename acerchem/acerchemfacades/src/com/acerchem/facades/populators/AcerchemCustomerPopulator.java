@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Required;
 
 import com.acerchem.core.model.CustomerCreditAccountModel;
 
+import java.math.BigDecimal;
 import java.util.Objects;
 
 public class AcerchemCustomerPopulator extends CustomerPopulator implements Populator<CustomerModel, CustomerData>
@@ -30,6 +31,14 @@ public class AcerchemCustomerPopulator extends CustomerPopulator implements Popu
 		{
 			target.setCreditAccount(creditAccount.convert(source.getCreditAccount()));
 		}
+		target.setCompanyType(source.getCompanyType());
+		target.setEstablishedIn(source.getEstablishedIn());
+		target.setRevenue(source.getRevenue());
+		target.setEmployeesNo(source.getEmployeesNo());
+		target.setLimitCreditAmount(source.getLimitCreditAmount());
+		target.setVatNo(source.getVatNo());
+		target.setHaveFinancialReport(source.getHaveFinancialReport());
+		target.setProvideTradeReference(source.getProvideTradeReference());
 		
 	}
 

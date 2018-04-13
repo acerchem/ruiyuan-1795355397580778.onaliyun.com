@@ -16,7 +16,14 @@
 	
 	<input type="hidden" maxlength="3" size="1" id="qty" name="qty"  value="1">
     <input type="hidden" name="productCodePost" value="${fn:escapeXml(product.code)}"/>
-     <input type="hidden" name="storeId"  id="storeId"  value=""/>
+    
+    <c:forEach items="${countrys}" var="data"  varStatus="id"  >
+		<c:if test="${id.index==0}">
+			    <input type="hidden" name="storeId"  id="storeId"  value="${data.storeId}"/>
+		</c:if>	
+    </c:forEach>
+                        
+    
     
     
 <div class="btn-set">

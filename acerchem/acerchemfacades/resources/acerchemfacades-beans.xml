@@ -63,6 +63,14 @@
 	<bean class="de.hybris.platform.commercefacades.user.data.CustomerData">
 		<property name="addressDataList" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.AddressData>"/>
 		<property name="creditAccount" type="de.hybris.platform.commercefacades.user.data.CustomerCreditAccountData"/>
+		<property name="companyType" type="java.lang.String"/>
+		<property name="establishedIn" type="java.lang.String"/>
+		<property name="vatNo" type="java.lang.String"/>
+		<property name="haveFinancialReport" type="java.lang.Boolean"/>
+		<property name="provideTradeReference" type="java.lang.Boolean"/>
+		<property name="employeesNo" type="java.lang.Integer"/>
+		<property name="limitCreditAmount" type="java.math.BigDecimal"/>
+		<property name="revenue" type="java.math.BigDecimal"/>
 	</bean>
 	
 	<!-- alice :信用账户-->

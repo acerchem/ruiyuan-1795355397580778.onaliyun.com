@@ -24,11 +24,13 @@ $productCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$product-cat
 $lang=en
 
 INSERT_UPDATE Warehouse;code[unique=true];name[lang=en];name[lang=de];vendor(code)[default=$vendor];default
-;warehouse_s;Warehouse South;Warehouse South;;true
-;warehouse_e;Warehouse East;Warehouse East;;true
-;warehouse_w;Warehouse West;Warehouse West;;true
-;warehouse_n;Warehouse North;Warehouse North;;true
-
+#;warehouse_s;Warehouse South;Warehouse South;;true
+#;warehouse_e;Warehouse East;Warehouse East;;true
+#;warehouse_w;Warehouse West;Warehouse West;;true
+#;warehouse_n;Warehouse North;Warehouse North;;true
+;USA;USA;;true
+;United Kingdom;United Kingdom;;true
+;Holland;Holland;;true
 
 INSERT_UPDATE Product;code[unique=true];$supercategories;manufacturerName;manufacturerAID;unit(code);ean;variantType(code);$catalogVersion;$approved
 ;000001;576, brand_1;HP;zhangyin;pieces;
@@ -48,18 +50,18 @@ INSERT_UPDATE ProductReference;source(code,$catalogVersion)[unique=true];target(
 
 
 INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];reserved
-;29;warehouse_s;notSpecified;1;0;0;0;000001;0
-;30;warehouse_s;notSpecified;1;0;0;0;AC05080;0
-;3;warehouse_s;notSpecified;1;0;0;0;AC03131;0
-;10;warehouse_s;notSpecified;1;0;0;0;AC01361;0
-;20;warehouse_s;notSpecified;1;0;0;0;AC01710;0
+;29;USA;notSpecified;1;0;0;0;000001;0
+;30;USA;notSpecified;1;0;0;0;AC05080;0
+;3;USA;notSpecified;1;0;0;0;AC03131;0
+;10;USA;notSpecified;1;0;0;0;AC01361;0
+;20;USA;notSpecified;1;0;0;0;AC01710;0
  
 UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehouse(code));vendors(code)
-;000001;;000001:warehouse_s;
-;AC05080;;AC05080:warehouse_s;
-;AC03131;;AC03131:warehouse_s;
-;AC01361;;AC01361:warehouse_s;
-;AC01710;;AC01710:warehouse_s;
+;000001;;000001:USA;
+;AC05080;;AC05080:USA;
+;AC03131;;AC03131:USA;
+;AC01361;;AC01361:USA;
+;AC01710;;AC01710:USA;
 
  # Update allProducts with localisations
 UPDATE Product;code[unique=true];$catalogVersion;name[lang=$lang];summary[lang=$lang];description[lang=$lang]

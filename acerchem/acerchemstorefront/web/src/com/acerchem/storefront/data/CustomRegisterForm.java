@@ -1,6 +1,7 @@
 package com.acerchem.storefront.data;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 import de.hybris.platform.acceleratorstorefrontcommons.forms.AddressForm;
 
@@ -20,7 +21,81 @@ public class CustomRegisterForm implements Serializable
 	private String contacts;
 	private AddressForm shipAddress;
 	private AddressForm contactAddress;
+	
+	private String companyType;
+	private String establishedIn;
+	private BigDecimal revenue;
+	private Integer employeesNo;
+	private BigDecimal limitCreditAmount;
+	private String vatNo;
+	private boolean haveFinancialReport;
+	private boolean provideTradeReference;
+	
+	public String getCompanyType() {
+		return companyType;
+	}
 
+	public void setCompanyType(String companyType) {
+		this.companyType = companyType;
+	}
+
+	public String getEstablishedIn() {
+		return establishedIn;
+	}
+
+	public void setEstablishedIn(String establishedIn) {
+		this.establishedIn = establishedIn;
+	}
+
+	public BigDecimal getRevenue() {
+		return revenue;
+	}
+
+	public void setRevenue(BigDecimal revenue) {
+		this.revenue = revenue;
+	}
+
+	public Integer getEmployeesNo() {
+		return employeesNo;
+	}
+
+	public void setEmployeesNo(Integer employeesNo) {
+		this.employeesNo = employeesNo;
+	}
+
+	public BigDecimal getLimitCreditAmount() {
+		return limitCreditAmount;
+	}
+
+	public void setLimitCreditAmount(BigDecimal limitCreditAmount) {
+		this.limitCreditAmount = limitCreditAmount;
+	}
+
+	public String getVatNo() {
+		return vatNo;
+	}
+
+	public void setVatNo(String vatNo) {
+		this.vatNo = vatNo;
+	}
+
+
+	public boolean getHaveFinancialReport() {
+		return haveFinancialReport;
+	}
+
+	public void setHaveFinancialReport(boolean haveFinancialReport) {
+		this.haveFinancialReport = haveFinancialReport;
+	}
+	
+	public boolean getProvideTradeReference() {
+		return provideTradeReference;
+	}
+
+	public void setProvideTradeReference(boolean provideTradeReference) {
+		this.provideTradeReference = provideTradeReference;
+	}
+	
 	public AddressForm getShipAddress()
 	{
 		return shipAddress;

@@ -53,11 +53,14 @@ INSERT_UPDATE Vendor;code[unique=true];name
 
 # Warehouse
 INSERT_UPDATE Warehouse;code[unique=true];name;vendor(code)[default=default];default[default=true]
-;default;Default Warehouse;
-;warehouse_s;Warehouse South;
-;warehouse_e;Warehouse East;
-;warehouse_w;Warehouse West;
-;warehouse_n;Warehouse North;
+#;default;Default Warehouse;
+#;warehouse_s;Warehouse South;
+#;warehouse_e;Warehouse East;
+#;warehouse_w;Warehouse West;
+#;warehouse_n;Warehouse North;
+;USA;USA
+;United Kingdom;United Kingdom
+;Holland;Holland
 
 # Disable preview for email pages
 UPDATE CMSPageType;code[unique=true];previewDisabled

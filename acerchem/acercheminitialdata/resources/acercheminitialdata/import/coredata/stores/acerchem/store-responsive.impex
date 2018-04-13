@@ -39,9 +39,5 @@ INSERT_UPDATE BaseStore;uid[unique=true];catalogs(id);currencies(isocode);net;st
 ;$storeUid;$productCatalog,$classificationCatalog;$currencies;$net;km;$defaultCurrency;$languages;$defaultLanguage;$deliveryCountries;$orderProcessCode;$pickupInStoreMode;$customerAllowedToIgnoreSuggestions;$paymentProvider;$expressCheckoutEnabled;300;$checkoutFlowGroup;$returnProcessCode;
 
 INSERT_UPDATE BaseStore2DeliveryModeRel;source(uid)[unique=true];target(code)[unique=true]
-;acerchem;premium-net
-;acerchem;standard-net
-;acerchem;premium-gross
-;acerchem;standard-gross
-;acerchem;pickup
-;acerchem;free-standard-shipping
+;acerchem;DELIVERY_MENTION
+;acerchem;DELIVERY_GROSS

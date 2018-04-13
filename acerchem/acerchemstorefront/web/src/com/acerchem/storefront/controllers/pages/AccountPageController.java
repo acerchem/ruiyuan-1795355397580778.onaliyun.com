@@ -85,6 +85,7 @@ import com.acerchem.storefront.data.CustomRegisterForm;
 
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -853,14 +854,24 @@ public class AccountPageController extends AbstractSearchPageController
 		model.addAttribute("metatags", metadata);
 		
 		final CustomRegisterForm CustomRegisterForm = new CustomRegisterForm();
+		
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
-		CustomRegisterForm.setName(customerData.getName());
-		CustomRegisterForm.setEmail(customerData.getUid());;
 		CustomRegisterForm.setLanguage(customerData.getLanguage().getIsocode());
 		CustomRegisterForm.setCurrency(customerData.getCurrency().getIsocode());
 		
-		final UserModel user = userService.getCurrentUser();
-		final Collection<AddressModel> amlist = user.getAddresses();
+		final CustomerModel customer = (CustomerModel) userService.getCurrentUser();
+		CustomRegisterForm.setName(customer.getName());
+		CustomRegisterForm.setEmail(customer.getUid());;
+		CustomRegisterForm.setCompanyType(customer.getCompanyType());
+		CustomRegisterForm.setEstablishedIn(customer.getEstablishedIn());
+		CustomRegisterForm.setRevenue(customer.getRevenue());
+		CustomRegisterForm.setEmployeesNo(customer.getEmployeesNo());
+		CustomRegisterForm.setLimitCreditAmount(customer.getLimitCreditAmount());
+		CustomRegisterForm.setVatNo(customer.getVatNo());
+		CustomRegisterForm.setHaveFinancialReport(customer.getHaveFinancialReport()!=null?customer.getHaveFinancialReport():false);
+		CustomRegisterForm.setProvideTradeReference(customer.getProvideTradeReference()!=null?customer.getProvideTradeReference():false);
+
+		final Collection<AddressModel> amlist = customer.getAddresses();
 		if(amlist!=null&&amlist.size()>0)
 		{
 			for(AddressModel am:amlist)
@@ -894,14 +905,17 @@ public class AccountPageController extends AbstractSearchPageController
 	
 	@RequestMapping(value = "/update-profile",method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String updateProfile(final CustomRegisterForm form,final BindingResult bindingResult, final Model model,final RedirectAttributes redirectAttributes) 
+	public String updateProfile(final CustomRegisterForm form,final BindingResult bindingResult, final Model model,final RedirectAttributes redirectAttributes,final String aidField) 
 			throws CMSItemNotFoundException
 	{
 		personalInfoValidator.validate(form, bindingResult);
 		if (bindingResult.hasErrors())
 		{
 			GlobalMessages.addErrorMessage(model, "form.global.error");
-			model.addAttribute("regions", i18NFacade.getRegionsForCountryIso(form.getContactAddress().getCountryIso()));
+			if(form.getContactAddress().getCountryIso()!=null)
+			{
+				model.addAttribute("regions", i18NFacade.getRegionsForCountryIso(form.getContactAddress().getCountryIso()));
+			}
 			model.addAttribute("CustomRegisterForm",form);
 			model.addAttribute("nowPage", "update-profile");
 			storeCmsPageInModel(model, getContentPageForLabelOrId("update-profile"));
@@ -909,21 +923,53 @@ public class AccountPageController extends AbstractSearchPageController
 		}
 		try
 		{	
+			if(aidField==null)
+			{
+				form.setHaveFinancialReport(false);
+				form.setProvideTradeReference(false);
+			}
+			else
+			{
+				form.setHaveFinancialReport(aidField.indexOf("haveFinancialReport")!=-1);
+				form.setProvideTradeReference(aidField.indexOf("provideTradeReference")!=-1);
+			}
+			
 			String contactCountryIso=form.getContactAddress().getCountryIso();
 			String contactRegionIso=form.getContactAddress().getRegionIso();
 			CountryModel contactCountry=commonI18NService.getCountry(contactCountryIso);
-			RegionModel contactRegion=commonI18NService.getRegion(contactCountry,contactRegionIso);
 			
-			AddressModel am2=modelService.get(PK.fromLong(Long.valueOf(form.getContactAddress().getAddressId())));
+			final CustomerModel user = (CustomerModel) userService.getCurrentUser();
+			
+			AddressModel am2;
+			if(form.getContactAddress().getAddressId()!=null&&form.getContactAddress().getAddressId()!="")
+			{
+				am2=modelService.get(PK.fromLong(Long.valueOf(form.getContactAddress().getAddressId())));
+			}
+			else
+			{
+				am2=modelService.create(AddressModel.class);
+				am2.setOwner(user);
+				am2.setVisibleInAddressBook(false);
+			}
 			am2.setLastname(form.getContacts());
 			am2.setCountry(contactCountry);
-			am2.setRegion(contactRegion);
+			if(contactRegionIso!=null&&contactRegionIso!="")
+			{
+				am2.setRegion(commonI18NService.getRegion(contactCountry,contactRegionIso));
+			}
 			am2.setTown(form.getContactAddress().getTownCity());
 			
-			final UserModel user = userService.getCurrentUser();
 			user.setSessionLanguage(commonI18NService.getLanguage(form.getLanguage()));
 			user.setSessionCurrency(commonI18NService.getCurrency(form.getCurrency()));
 			user.setName(form.getName());
+			user.setCompanyType(form.getCompanyType());
+			user.setEstablishedIn(form.getEstablishedIn());
+			user.setRevenue(form.getRevenue());
+			user.setEmployeesNo(form.getEmployeesNo());
+			user.setLimitCreditAmount(form.getLimitCreditAmount());
+			user.setVatNo(form.getVatNo());
+			user.setHaveFinancialReport(form.getHaveFinancialReport());
+			user.setProvideTradeReference(form.getProvideTradeReference());
 			
 			modelService.saveAll(user,am2);
 			
