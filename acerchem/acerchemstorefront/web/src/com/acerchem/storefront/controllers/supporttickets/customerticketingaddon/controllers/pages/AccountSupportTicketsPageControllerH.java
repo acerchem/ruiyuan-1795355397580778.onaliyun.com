@@ -66,8 +66,8 @@ import de.hybris.platform.commercefacades.user.data.CustomerData;
  */
 @Controller
 @RequestMapping("/account")
-public class AccountSupportTicketsPageController extends AbstractSearchPageController {
-	private static final Logger LOG = Logger.getLogger(AccountSupportTicketsPageController.class);
+public class AccountSupportTicketsPageControllerH extends AbstractSearchPageController {
+	private static final Logger LOG = Logger.getLogger(AccountSupportTicketsPageControllerH.class);
 
 	// CMS Pages
 	private static final String SUPPORT_TICKET_CODE_PATH_VARIABLE_PATTERN = "{ticketId:.*}";
