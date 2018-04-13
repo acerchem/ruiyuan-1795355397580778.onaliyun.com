@@ -33,14 +33,14 @@ INSERT_UPDATE Zone                  ; code[unique=true]               ; countrie
                                     ; china                           ; CN
 
 # Zone Delivery Modes
-INSERT_UPDATE DeliveryMode      	; code[unique=true]               ; net                   ;supportedPaymentModes(code)                                                                                                                                 ; active[default=true]
-									; DELIVERY_MENTION				  ; true				  ; one
+INSERT_UPDATE DeliveryMode      	; code[unique=true]               ; net                   ;supportedPaymentModes(code)           ;name[lang=en]                                                                                                                      ; active[default=true]
+									; DELIVERY_MENTION				  ; true				  ; one									 ;DELIVERY_MENTION Delivery
 									
 
 
 # Pickup Delivery Mode
-INSERT_UPDATE PickUpDeliveryMode    ; code[unique=true]               ; active[default=true]       ;supportedPaymentModes(code)                                                                                                                     ; supportedMode(code)
-                                    ; DELIVERY_GROSS				  ; true				  	   ;one                                                                                                                                                 ; BUY_AND_COLLECT                                                                                                                                   ; CN
+INSERT_UPDATE PickUpDeliveryMode    ; code[unique=true]               ; active[default=true]       ;supportedPaymentModes(code)      ;name[lang=en]                                                                                                               ; supportedMode(code)
+                                    ; DELIVERY_GROSS				  ; true				  	   ;one                              ;DELIVERY_GROSS Delivery                                                                                                                 ; BUY_AND_COLLECT                                                                                                                                   ; CN
 
 #支付方式
 INSERT_UPDATE PaymentMode;code[unique=true];supportedDeliveryModes(code)

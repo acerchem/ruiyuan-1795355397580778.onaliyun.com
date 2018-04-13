@@ -16,7 +16,8 @@
 $lang=zh
 
 # Zone Delivery Modes
-UPDATE ZoneDeliveryMode;code[unique=true];name[lang=$lang];description[lang=$lang]
- ;DELIVERY_MENTION;"自提";"1-2 工作日"
+UPDATE DeliveryMode;code[unique=true];name[lang=$lang];description[lang=$lang]
+ ;DELIVERY_MENTION;自提;"1-2 工作日"
 
-z
+UPDATE PickUpDeliveryMode;code[unique=true];name[lang=$lang];description[lang=$lang]
+; DELIVERY_GROSS;送货;"1-2 工作日"

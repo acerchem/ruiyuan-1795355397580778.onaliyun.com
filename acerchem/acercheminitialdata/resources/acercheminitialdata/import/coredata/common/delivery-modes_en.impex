@@ -16,7 +16,8 @@
 $lang=en
 
 # Zone Delivery Modes
-UPDATE ZoneDeliveryMode;code[unique=true];name[lang=$lang];description[lang=$lang]
- ;DELIVERY_MENTION;"DELIVERY_MENTION Delivery";"1-2 business days"
+UPDATE DeliveryMode;code[unique=true];name[lang=$lang];description[lang=$lang]
+; DELIVERY_MENTION;DELIVERY_MENTION Delivery;"1-2 business days"
 
- 
+UPDATE PickUpDeliveryMode;code[unique=true];name[lang=$lang];description[lang=$lang]
+; DELIVERY_GROSS;DELIVERY_GROSS Delivery;"1-2 business days" 
