@@ -19,7 +19,7 @@
            http://www.springframework.org/schema/context/spring-context.xsd">
            
     <context:annotation-config/>
-
+	
 	<!-- Consignment Process Actions -->
 
 	<bean id="sendConsignmentToWarehouseAction" class="com.acerchem.fulfilmentprocess.actions.consignment.SendConsignmentToWarehouseAction"  parent="abstractAction">
@@ -55,5 +55,31 @@
 	<bean id="allowShipmentAction" class="com.acerchem.fulfilmentprocess.actions.consignment.AllowShipmentAction"  parent="abstractAction">
 		<property name="process2WarehouseAdapter" ref="process2WarehouseAdapter"/>
 	</bean>
-
+	
+		<bean id="generateDeliveryEmailAction"  parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="OrderConfirmationEmailTemplate"/>
+		</bean>
+		
+		<bean id="generateDeliveryByShelfEmailAction"  parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="OrderConfirmationEmailTemplate"/>
+		</bean>
+		
+		<bean id="sendEmail"
+	      class="de.hybris.platform.acceleratorservices.process.email.actions.SendEmailAction"
+	      parent="abstractAction">
+			<property name="emailService" ref="emailService"/>
+		</bean>
+		
+		<bean id="generateOfficialInvoiceEmailAction"  parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="OrderConfirmationEmailTemplate"/>
+		</bean>
+		
+		<bean id="recordConfignmentInfo" class="com.acerchem.fulfilmentprocess.actions.consignment.RecordConfignmentInfoAction"  parent="abstractAction"/>
+		<bean id="deliveryByOtherAction" class="com.acerchem.fulfilmentprocess.actions.consignment.DeliveryByOtherAction"  parent="abstractAction"/>
+		<bean id="deliveryByshelfAction" class="com.acerchem.fulfilmentprocess.actions.consignment.DeliveryByshelfAction"  parent="abstractAction"/>
+		<bean id="customerConsigmentConfirmAction" class="com.acerchem.fulfilmentprocess.actions.consignment.CustomerConsigmentConfirmAction"  parent="abstractAction"/>
+		<bean id="employeeConsigmentConfirmAction" class="com.acerchem.fulfilmentprocess.actions.consignment.EmployeeConsigmentConfirmAction"  parent="abstractAction"/>
+		<bean id="waitConsignMentConfirmAction" class="com.acerchem.fulfilmentprocess.actions.consignment.WaitConsignMentConfirmAction"  parent="abstractAction"/>
+		
+		
 </beans>

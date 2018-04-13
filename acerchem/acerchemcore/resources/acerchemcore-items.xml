@@ -67,6 +67,10 @@
             <value code="LOCKED" />
             <value code="NORMAL" />
         </enumtype>
+        <enumtype code="PaymentTransactionType" autocreate="false" generate="false"
+			dynamic="false">
+	         <value code="LINE"/>
+		</enumtype>
 	</enumtypes>
 
 
@@ -657,15 +661,64 @@
 				</attributes>
 			</itemtype>
 
+			<itemtype code="AbstractOrder" autocreate="false"
+				generate="false">
+				<attributes>
+					<attribute qualifier="deliveryConfirm" type="java.lang.Boolean">
+						<description>flag for deliveryConfrim</description>
+						<persistence type="property" />
+						<defaultvalue>Boolean.FALSE</defaultvalue>
+						<modifiers />
+					</attribute>
+					<attribute qualifier="payConfirm" type="java.lang.Boolean">
+						<description>flag for payConfirm</description>
+						<persistence type="property" />
+						<defaultvalue>Boolean.FALSE</defaultvalue>
+						<modifiers />
+					</attribute>
+					<attribute qualifier="customerConfirmPay" type="java.lang.Boolean">
+						<description>flag for customerConfrim</description>
+						<persistence type="property" />
+						<defaultvalue>Boolean.FALSE</defaultvalue>
+						<modifiers />
+					</attribute>
+					<attribute qualifier="employeeConfirmPay" type="java.lang.Boolean">
+						<description>flag for employeeConfirm</description>
+						<persistence type="property" />
+						<defaultvalue>Boolean.FALSE</defaultvalue>
+						<modifiers />
+					</attribute>
+					<attribute qualifier="customerConfirmDelivery" type="java.lang.Boolean">
+						<description>flag for customerConfrim</description>
+						<persistence type="property" />
+						<defaultvalue>Boolean.FALSE</defaultvalue>
+						<modifiers />
+					</attribute>
+					<attribute qualifier="employeeConfirmDelivery" type="java.lang.Boolean">
+						<description>flag for employeeConfirm</description>
+						<persistence type="property" />
+						<defaultvalue>Boolean.FALSE</defaultvalue>
+						<modifiers />
+					</attribute>
+				</attributes>
+				
+			</itemtype>
 
-
-
+			
 
         </typegroup>
 
 		<!-- shaun.sheng -->
 
-
+		<typegroup name="Payment">
+			<itemtype code="CreditPaymentInfo" extends="PaymentInfo" generate="true" singleton="false" jaloonly="false" autocreate="true">
+						<deployment table="ImageFailedRecord" typecode="20103" />
+			<attributes>
+				
+			</attributes>
+			
+			</itemtype> 
+		</typegroup>
 
 	</itemtypes>
 </items>
