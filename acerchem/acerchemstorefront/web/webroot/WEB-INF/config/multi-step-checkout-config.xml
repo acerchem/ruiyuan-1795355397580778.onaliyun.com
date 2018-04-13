@@ -32,7 +32,7 @@
 	<alias name="defaultMultiStepCheckout" alias="multiStepCheckout" />
 	<bean id="defaultMultiStepCheckout" parent="checkoutStep">
 		<property name="checkoutGroup" ref="defaultCheckoutGroup"/>
-		<property name="checkoutStepValidator" ref="defaultMultiStepCheckoutValidator"/>
+		<!-- <property name="checkoutStepValidator" ref="defaultMultiStepCheckoutValidator"/> -->
 		<property name="transitions">
 			<map>
 				<entry key="previous" value-ref="REDIRECT_TO_CART"/>
@@ -46,7 +46,7 @@
 	<alias name="defaultDeliveryAddressCheckoutStep" alias="deliveryAddressCheckoutStep" />
 	<bean id="defaultDeliveryAddressCheckoutStep" parent="checkoutStep">
 		<property name="checkoutGroup" ref="defaultCheckoutGroup"/>
-		<property name="checkoutStepValidator" ref="deliveryAddressCheckoutValidator"/>
+	<!-- 	<property name="checkoutStepValidator" ref="deliveryAddressCheckoutValidator"/> -->
 		<property name="transitions">
 			<map merge="true">
 				<entry key="previous" value-ref="REDIRECT_TO_CART"/>
@@ -60,7 +60,7 @@
 	<alias name="defaultDeliveryMethodCheckoutStep" alias="deliveryMethodCheckoutStep" />
 	<bean id="defaultDeliveryMethodCheckoutStep"  parent="checkoutStep">
 		<property name="checkoutGroup" ref="defaultCheckoutGroup"/>
-		<property name="checkoutStepValidator" ref="deliveryMethodCheckoutValidator"/>
+		<!-- <property name="checkoutStepValidator" ref="deliveryMethodCheckoutValidator"/> -->
 		<property name="transitions">
 			<map merge="true">
 				<entry key="previous" value-ref="REDIRECT_TO_DELIVERY_ADDRESS"/>
@@ -74,7 +74,7 @@
 	<alias name="defaultPickupLocationCheckoutStep" alias="pickupLocationCheckoutStep" />
 	<bean id="defaultPickupLocationCheckoutStep" parent="checkoutStep">
 		<property name="checkoutGroup" ref="defaultCheckoutGroup"/>
-		<property name="checkoutStepValidator" ref="defaultPickupCheckoutValidator"/>
+	<!-- 	<property name="checkoutStepValidator" ref="defaultPickupCheckoutValidator"/> -->
 		<property name="transitions">
 			<map merge="true">
 				<entry key="previous" value-ref="REDIRECT_TO_DELIVERY_METHOD"/>
@@ -88,7 +88,7 @@
 	<alias name="defaultPaymentMethodCheckoutStep" alias="paymentMethodCheckoutStep" />
 	<bean id="defaultPaymentMethodCheckoutStep" parent="checkoutStep">
 		<property name="checkoutGroup" ref="defaultCheckoutGroup"/>
-		<property name="checkoutStepValidator" ref="defaultPaymentMethodCheckoutValidator"/>
+		<!-- <property name="checkoutStepValidator" ref="defaultPaymentMethodCheckoutValidator"/> -->
 		<property name="transitions">
 			<map merge="true">
 				<entry key="previous" value-ref="REDIRECT_TO_DELIVERY_METHOD"/>
@@ -102,7 +102,7 @@
 	<alias name="defaultSummaryCheckoutStep" alias="summaryCheckoutStep" />
 	<bean id="defaultSummaryCheckoutStep"  parent="checkoutStep">
 		<property name="checkoutGroup" ref="defaultCheckoutGroup"/>
-		<property name="checkoutStepValidator" ref="defaultSummaryCheckoutValidator"/>
+		<!-- <property name="checkoutStepValidator" ref="defaultSummaryCheckoutValidator"/> -->
 		<property name="transitions">
 			<map merge="true">
 				<entry key="previous" value-ref="REDIRECT_TO_PAYMENT_METHOD"/>
@@ -118,12 +118,12 @@
 	<alias name="defaultResponsiveMultiStepCheckout" alias="responsiveMultiStepCheckout" />
 	<bean id="defaultResponsiveMultiStepCheckout" parent="checkoutStep">
 		<property name="checkoutGroup" ref="responsiveCheckoutGroup"/>
-		<property name="checkoutStepValidator" ref="defaultResponsiveMultiStepCheckoutValidator"/>
+		<!-- <property name="checkoutStepValidator" ref="defaultResponsiveMultiStepCheckoutValidator"/> -->
 		<property name="transitions">
 			<map>
 				<entry key="previous" value-ref="REDIRECT_TO_CART"/>
 				<entry key="current" value-ref="REDIRECT_MULTI_STEP_CHECKOUT"/>
-				<entry key="next" value-ref="REDIRECT_TO_DELIVERY_ADDRESS"/>
+				<entry key="next" value-ref="REDIRECT_TO_DELIVERY_METHOD"/>
 			</map>
 		</property>
 		<property name="progressBarId" value="multi"/>
@@ -132,12 +132,12 @@
 	<alias name="defaultResponsiveDeliveryAddressCheckoutStep" alias="responsiveDeliveryAddressCheckoutStep" />
 	<bean id="defaultResponsiveDeliveryAddressCheckoutStep" parent="checkoutStep">
 		<property name="checkoutGroup" ref="responsiveCheckoutGroup"/>
-		<property name="checkoutStepValidator" ref="defaultResponsiveDeliveryAddressCheckoutValidator"/>
+		<!-- <property name="checkoutStepValidator" ref="defaultResponsiveDeliveryAddressCheckoutValidator"/> -->
 		<property name="transitions">
 			<map merge="true">
 				<entry key="previous" value-ref="REDIRECT_TO_CART"/>
 				<entry key="current" value-ref="REDIRECT_TO_DELIVERY_ADDRESS"/>
-				<entry key="next" value-ref="REDIRECT_TO_DELIVERY_METHOD"/>
+				<entry key="next" value-ref="REDIRECT_TO_PAYMENT_METHOD"/>
 			</map>
 		</property>
 		<property name="progressBarId" value="deliveryAddress"/>
@@ -146,12 +146,12 @@
 	<alias name="defaultResponsiveDeliveryMethodCheckoutStep" alias="responsiveDeliveryMethodCheckoutStep" />
 	<bean id="defaultResponsiveDeliveryMethodCheckoutStep"  parent="checkoutStep">
 		<property name="checkoutGroup" ref="responsiveCheckoutGroup"/>
-		<property name="checkoutStepValidator" ref="defaultResponsiveDeliveryMethodCheckoutValidator"/>
+		<!-- <property name="checkoutStepValidator" ref="defaultResponsiveDeliveryMethodCheckoutValidator"/> -->
 		<property name="transitions">
 			<map merge="true">
 				<entry key="previous" value-ref="REDIRECT_TO_DELIVERY_ADDRESS"/>
 				<entry key="current" value-ref="REDIRECT_TO_DELIVERY_METHOD"/>
-				<entry key="next" value-ref="REDIRECT_TO_PAYMENT_METHOD"/>
+				<entry key="next" value-ref="REDIRECT_TO_DELIVERY_ADDRESS"/>
 			</map>
 		</property>
 		<property name="progressBarId" value="deliveryMethod"/>
@@ -160,7 +160,7 @@
 	<alias name="defaultResponsivePaymentMethodCheckoutStep" alias="responsivePaymentMethodCheckoutStep" />
 	<bean id="defaultResponsivePaymentMethodCheckoutStep" parent="checkoutStep">
 		<property name="checkoutGroup" ref="responsiveCheckoutGroup"/>
-		<property name="checkoutStepValidator" ref="defaultResponsivePaymentMethodCheckoutValidator"/>
+		<!-- <property name="checkoutStepValidator" ref="defaultResponsivePaymentMethodCheckoutValidator"/> -->
 		<property name="transitions">
 			<map merge="true">
 				<entry key="previous" value-ref="REDIRECT_TO_DELIVERY_METHOD"/>
@@ -174,7 +174,7 @@
 	<alias name="defaultResponsiveSummaryCheckoutStep" alias="responsiveSummaryCheckoutStep" />
 	<bean id="defaultResponsiveSummaryCheckoutStep"  parent="checkoutStep">
 		<property name="checkoutGroup" ref="responsiveCheckoutGroup"/>
-		<property name="checkoutStepValidator" ref="defaultResponsiveSummaryCheckoutValidator"/>
+	<!-- 	<property name="checkoutStepValidator" ref="defaultResponsiveSummaryCheckoutValidator"/> -->
 		<property name="transitions">
 			<map merge="true">
 				<entry key="previous" value-ref="REDIRECT_TO_PAYMENT_METHOD"/>
