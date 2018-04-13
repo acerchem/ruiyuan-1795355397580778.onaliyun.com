@@ -14,10 +14,10 @@
 	
 	<action id="waitBeforeTransmission" bean="waitBeforeTransmissionAction">
 		<transition name="NOK" to="waitBeforeTransmission"/>
-		<transition name="OK" to="recordConfignmentInfo"/>
+		<transition name="OK" to="recordConsignmentInfo"/>
 	</action>
 	
-	<action id="recordConfignmentInfo" bean="recordConfignmentInfoAction">
+	<action id="recordConsignmentInfo" bean="recordConsignmentInfoAction">
 		<transition name="OK" to="splitDeliveryMode"/>
 	</action>
 	

@@ -664,6 +664,18 @@
 			<itemtype code="AbstractOrder" autocreate="false"
 				generate="false">
 				<attributes>
+					<attribute qualifier="customerConfirm" type="java.lang.Boolean">
+						<description>flag for deliveryConfrim</description>
+						<persistence type="property" />
+						<defaultvalue>Boolean.FALSE</defaultvalue>
+						<modifiers />
+					</attribute>
+					<attribute qualifier="employeeConfirm" type="java.lang.Boolean">
+						<description>flag for payConfirm</description>
+						<persistence type="property" />
+						<defaultvalue>Boolean.FALSE</defaultvalue>
+						<modifiers />
+					</attribute>
 					<attribute qualifier="deliveryConfirm" type="java.lang.Boolean">
 						<description>flag for deliveryConfrim</description>
 						<persistence type="property" />

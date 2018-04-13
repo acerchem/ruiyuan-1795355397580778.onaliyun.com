@@ -74,7 +74,7 @@
 		<property name="frontendTemplateName" value="OrderConfirmationEmailTemplate"/>
 		</bean>
 		
-		<bean id="recordConfignmentInfo" class="com.acerchem.fulfilmentprocess.actions.consignment.RecordConfignmentInfoAction"  parent="abstractAction"/>
+		<bean id="recordConsignmentInfoAction" class="com.acerchem.fulfilmentprocess.actions.consignment.RecordConfignmentInfoAction"  parent="abstractAction"/>
 		<bean id="deliveryByOtherAction" class="com.acerchem.fulfilmentprocess.actions.consignment.DeliveryByOtherAction"  parent="abstractAction"/>
 		<bean id="deliveryByshelfAction" class="com.acerchem.fulfilmentprocess.actions.consignment.DeliveryByshelfAction"  parent="abstractAction"/>
 		<bean id="customerConsigmentConfirmAction" class="com.acerchem.fulfilmentprocess.actions.consignment.CustomerConsigmentConfirmAction"  parent="abstractAction"/>
