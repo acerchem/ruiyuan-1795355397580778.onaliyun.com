@@ -756,6 +756,12 @@ INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTe
 
 # Functional Content Pages
 INSERT_UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);label;defaultPage[default='true'];approvalStatus(code)[default='approved'];homepage[default='false']
+#shaun
+;;support-tickets;Support Tickets Page;AccountPageTemplate;support-tickets
+;;add-support-ticket;Add Support Ticket Page;AccountPageTemplate;add-support-ticket
+;;update-support-ticket;Update Support Ticket Page;AccountPageTemplate;update-support-ticket
+
+
 ;;multiStepCheckoutSummaryPage;Multi Checkout Summary Page;MultiStepCheckoutSummaryPageTemplate;multiStepCheckoutSummary
 ;;orderConfirmationPage;Order Confirmation Page;OrderConfirmationPageTemplate;orderConfirmation
 ;;cartPage;Cart Page;CartPageTemplate;cart
