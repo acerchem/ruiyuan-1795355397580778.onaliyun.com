@@ -28,7 +28,6 @@ import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
 import de.hybris.platform.order.InvalidCartException;
 import de.hybris.platform.payment.AdapterException;
-import com.acerchem.storefront.controllers.ControllerConstants;
 
 import java.util.Arrays;
 
@@ -42,6 +41,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.acerchem.storefront.controllers.ControllerConstants;
 
 
 @Controller
@@ -66,8 +67,10 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 			for (final OrderEntryData entry : cartData.getEntries())
 			{
 				final String productCode = entry.getProduct().getCode();
-				final ProductData product = getProductFacade().getProductForCodeAndOptions(productCode, Arrays.asList(
-						ProductOption.BASIC, ProductOption.PRICE, ProductOption.VARIANT_MATRIX_BASE, ProductOption.PRICE_RANGE));
+				final ProductData product = getProductFacade().getProductForCodeAndOptions(
+						productCode,
+						Arrays.asList(ProductOption.BASIC, ProductOption.PRICE, ProductOption.VARIANT_MATRIX_BASE,
+								ProductOption.PRICE_RANGE));
 				entry.setProduct(product);
 			}
 		}
@@ -196,19 +199,19 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 		}
 		final CartData cartData = getCheckoutFacade().getCheckoutCart();
 
-		if (!getCheckoutFacade().containsTaxValues())
-		{
-			LOGGER.error(String.format(
-					"Cart %s does not have any tax values, which means the tax cacluation was not properly done, placement of order can't continue",
-					cartData.getCode()));
-			GlobalMessages.addErrorMessage(model, "checkout.error.tax.missing");
-			invalid = true;
-		}
+		//		if (!getCheckoutFacade().containsTaxValues())
+		//		{
+		//			LOGGER.error(String.format(
+		//					"Cart %s does not have any tax values, which means the tax cacluation was not properly done, placement of order can't continue",
+		//					cartData.getCode()));
+		//			GlobalMessages.addErrorMessage(model, "checkout.error.tax.missing");
+		//			invalid = true;
+		//		}
 
 		if (!cartData.isCalculated())
 		{
-			LOGGER.error(
-					String.format("Cart %s has a calculated flag of FALSE, placement of order can't continue", cartData.getCode()));
+			LOGGER.error(String.format("Cart %s has a calculated flag of FALSE, placement of order can't continue",
+					cartData.getCode()));
 			GlobalMessages.addErrorMessage(model, "checkout.error.cart.notcalculated");
 			invalid = true;
 		}
