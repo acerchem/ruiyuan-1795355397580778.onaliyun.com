@@ -1,15 +1,20 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-4-3 15:48:11                           ---
+ * --- Generated at 2018-4-14 9:51:32                           ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.jalo;
 
 import com.acerchem.core.constants.AcerchemCoreConstants;
+import com.acerchem.core.jalo.ApparelProduct;
+import com.acerchem.core.jalo.ApparelSizeVariantProduct;
+import com.acerchem.core.jalo.ApparelStyleVariantProduct;
 import com.acerchem.core.jalo.CountryTrayFareConf;
+import com.acerchem.core.jalo.CreditPaymentInfo;
 import com.acerchem.core.jalo.CreditTransaction;
 import com.acerchem.core.jalo.CustomerCreditAccount;
+import com.acerchem.core.jalo.ElectronicsColorVariantProduct;
 import com.acerchem.core.jalo.ImageFailedRecord;
 import com.acerchem.core.jalo.ImageUploadedLog;
 import com.acerchem.core.jalo.UserLevel;
@@ -20,6 +25,7 @@ import de.hybris.platform.cms2lib.components.FunctionButtonComponent;
 import de.hybris.platform.cms2lib.components.MultipleBannerComponent;
 import de.hybris.platform.cms2lib.components.ProductCarouselComponent;
 import de.hybris.platform.constants.CoreConstants;
+import de.hybris.platform.deliveryzone.jalo.Zone;
 import de.hybris.platform.jalo.GenericItem;
 import de.hybris.platform.jalo.Item;
 import de.hybris.platform.jalo.Item.AttributeMode;
@@ -29,6 +35,7 @@ import de.hybris.platform.jalo.SessionContext;
 import de.hybris.platform.jalo.extension.Extension;
 import de.hybris.platform.jalo.media.AbstractMedia;
 import de.hybris.platform.jalo.media.Media;
+import de.hybris.platform.jalo.order.AbstractOrder;
 import de.hybris.platform.jalo.order.AbstractOrderEntry;
 import de.hybris.platform.jalo.product.Product;
 import de.hybris.platform.jalo.security.Principal;
@@ -40,7 +47,10 @@ import de.hybris.platform.jalo.user.Employee;
 import de.hybris.platform.jalo.user.User;
 import de.hybris.platform.ordersplitting.jalo.StockLevel;
 import de.hybris.platform.ordersplitting.jalo.Vendor;
+import de.hybris.platform.storelocator.jalo.PointOfService;
+import de.hybris.platform.ticket.jalo.CsTicket;
 import de.hybris.platform.util.OneToManyHandler;
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -82,11 +92,25 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	{
 		final Map<String, Map<String, AttributeMode>> ttmp = new HashMap();
 		Map<String, AttributeMode> tmp = new HashMap<String, AttributeMode>();
+		tmp.put("productId", AttributeMode.INITIAL);
+		tmp.put("productName", AttributeMode.INITIAL);
+		tmp.put("yourname", AttributeMode.INITIAL);
+		tmp.put("telephone", AttributeMode.INITIAL);
+		tmp.put("Email", AttributeMode.INITIAL);
+		tmp.put("address", AttributeMode.INITIAL);
+		ttmp.put("de.hybris.platform.ticket.jalo.CsTicket", Collections.unmodifiableMap(tmp));
+		tmp = new HashMap<String, AttributeMode>();
 		tmp.put("aliyunUrl", AttributeMode.INITIAL);
 		ttmp.put("de.hybris.platform.jalo.media.Media", Collections.unmodifiableMap(tmp));
 		tmp = new HashMap<String, AttributeMode>();
 		tmp.put("chemicalInfo", AttributeMode.INITIAL);
 		tmp.put("unitCalculateRato", AttributeMode.INITIAL);
+		tmp.put("packageWeight", AttributeMode.INITIAL);
+		tmp.put("packageType", AttributeMode.INITIAL);
+		tmp.put("netWeight", AttributeMode.INITIAL);
+		tmp.put("grossWeight", AttributeMode.INITIAL);
+		tmp.put("specification", AttributeMode.INITIAL);
+		tmp.put("CAS", AttributeMode.INITIAL);
 		tmp.put("anonymousDisplayPrice", AttributeMode.INITIAL);
 		tmp.put("acerChemVendorPOS", AttributeMode.INITIAL);
 		tmp.put("acerChemVendor", AttributeMode.INITIAL);
@@ -109,9 +133,30 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 		ttmp.put("de.hybris.platform.jalo.order.AbstractOrderEntry", Collections.unmodifiableMap(tmp));
 		tmp = new HashMap<String, AttributeMode>();
 		tmp.put("creditAccount", AttributeMode.INITIAL);
+		tmp.put("companyType", AttributeMode.INITIAL);
+		tmp.put("establishedIn", AttributeMode.INITIAL);
+		tmp.put("revenue", AttributeMode.INITIAL);
+		tmp.put("employeesNo", AttributeMode.INITIAL);
+		tmp.put("limitCreditAmount", AttributeMode.INITIAL);
+		tmp.put("vatNo", AttributeMode.INITIAL);
+		tmp.put("haveFinancialReport", AttributeMode.INITIAL);
+		tmp.put("provideTradeReference", AttributeMode.INITIAL);
 		tmp.put("relatedCustomerPOS", AttributeMode.INITIAL);
 		tmp.put("relatedCustomer", AttributeMode.INITIAL);
 		ttmp.put("de.hybris.platform.jalo.user.Customer", Collections.unmodifiableMap(tmp));
+		tmp = new HashMap<String, AttributeMode>();
+		tmp.put("deliveryZone", AttributeMode.INITIAL);
+		ttmp.put("de.hybris.platform.storelocator.jalo.PointOfService", Collections.unmodifiableMap(tmp));
+		tmp = new HashMap<String, AttributeMode>();
+		tmp.put("customerConfirm", AttributeMode.INITIAL);
+		tmp.put("employeeConfirm", AttributeMode.INITIAL);
+		tmp.put("deliveryConfirm", AttributeMode.INITIAL);
+		tmp.put("payConfirm", AttributeMode.INITIAL);
+		tmp.put("customerConfirmPay", AttributeMode.INITIAL);
+		tmp.put("employeeConfirmPay", AttributeMode.INITIAL);
+		tmp.put("customerConfirmDelivery", AttributeMode.INITIAL);
+		tmp.put("employeeConfirmDelivery", AttributeMode.INITIAL);
+		ttmp.put("de.hybris.platform.jalo.order.AbstractOrder", Collections.unmodifiableMap(tmp));
 		tmp = new HashMap<String, AttributeMode>();
 		tmp.put("userLevelPOS", AttributeMode.INITIAL);
 		tmp.put("userLevel", AttributeMode.INITIAL);
@@ -309,6 +354,42 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	 void setAcerChemVendorPOS(final Product item, final int value)
 	{
 		setAcerChemVendorPOS( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>CsTicket.address</code> attribute.
+	 * @return the address
+	 */
+	public String getAddress(final SessionContext ctx, final CsTicket item)
+	{
+		return (String)item.getProperty( ctx, AcerchemCoreConstants.Attributes.CsTicket.ADDRESS);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>CsTicket.address</code> attribute.
+	 * @return the address
+	 */
+	public String getAddress(final CsTicket item)
+	{
+		return getAddress( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>CsTicket.address</code> attribute. 
+	 * @param value the address
+	 */
+	public void setAddress(final SessionContext ctx, final CsTicket item, final String value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.CsTicket.ADDRESS,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>CsTicket.address</code> attribute. 
+	 * @param value the address
+	 */
+	public void setAddress(final CsTicket item, final String value)
+	{
+		setAddress( getSession().getSessionContext(), item, value );
 	}
 	
 	/**
@@ -530,6 +611,42 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	}
 	
 	/**
+	 * <i>Generated method</i> - Getter of the <code>Product.CAS</code> attribute.
+	 * @return the CAS - CAS
+	 */
+	public String getCAS(final SessionContext ctx, final Product item)
+	{
+		return (String)item.getProperty( ctx, AcerchemCoreConstants.Attributes.Product.CAS);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Product.CAS</code> attribute.
+	 * @return the CAS - CAS
+	 */
+	public String getCAS(final Product item)
+	{
+		return getCAS( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Product.CAS</code> attribute. 
+	 * @param value the CAS - CAS
+	 */
+	public void setCAS(final SessionContext ctx, final Product item, final String value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.Product.CAS,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Product.CAS</code> attribute. 
+	 * @param value the CAS - CAS
+	 */
+	public void setCAS(final Product item, final String value)
+	{
+		setCAS( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
 	 * <i>Generated method</i> - Getter of the <code>Product.chemicalInfo</code> attribute.
 	 * @return the chemicalInfo - Attribute about ç¾hemicalInfo of Product
 	 */
@@ -565,6 +682,120 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 		setChemicalInfo( getSession().getSessionContext(), item, value );
 	}
 	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.companyType</code> attribute.
+	 * @return the companyType - Type of Company
+	 */
+	public String getCompanyType(final SessionContext ctx, final Customer item)
+	{
+		return (String)item.getProperty( ctx, AcerchemCoreConstants.Attributes.Customer.COMPANYTYPE);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.companyType</code> attribute.
+	 * @return the companyType - Type of Company
+	 */
+	public String getCompanyType(final Customer item)
+	{
+		return getCompanyType( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.companyType</code> attribute. 
+	 * @param value the companyType - Type of Company
+	 */
+	public void setCompanyType(final SessionContext ctx, final Customer item, final String value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.Customer.COMPANYTYPE,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.companyType</code> attribute. 
+	 * @param value the companyType - Type of Company
+	 */
+	public void setCompanyType(final Customer item, final String value)
+	{
+		setCompanyType( getSession().getSessionContext(), item, value );
+	}
+	
+	public ApparelProduct createApparelProduct(final SessionContext ctx, final Map attributeValues)
+	{
+		try
+		{
+			ComposedType type = getTenant().getJaloConnection().getTypeManager().getComposedType( AcerchemCoreConstants.TC.APPARELPRODUCT );
+			return (ApparelProduct)type.newInstance( ctx, attributeValues );
+		}
+		catch( JaloGenericCreationException e)
+		{
+			final Throwable cause = e.getCause();
+			throw (cause instanceof RuntimeException ?
+			(RuntimeException)cause
+			:
+			new JaloSystemException( cause, cause.getMessage(), e.getErrorCode() ) );
+		}
+		catch( JaloBusinessException e )
+		{
+			throw new JaloSystemException( e ,"error creating ApparelProduct : "+e.getMessage(), 0 );
+		}
+	}
+	
+	public ApparelProduct createApparelProduct(final Map attributeValues)
+	{
+		return createApparelProduct( getSession().getSessionContext(), attributeValues );
+	}
+	
+	public ApparelSizeVariantProduct createApparelSizeVariantProduct(final SessionContext ctx, final Map attributeValues)
+	{
+		try
+		{
+			ComposedType type = getTenant().getJaloConnection().getTypeManager().getComposedType( AcerchemCoreConstants.TC.APPARELSIZEVARIANTPRODUCT );
+			return (ApparelSizeVariantProduct)type.newInstance( ctx, attributeValues );
+		}
+		catch( JaloGenericCreationException e)
+		{
+			final Throwable cause = e.getCause();
+			throw (cause instanceof RuntimeException ?
+			(RuntimeException)cause
+			:
+			new JaloSystemException( cause, cause.getMessage(), e.getErrorCode() ) );
+		}
+		catch( JaloBusinessException e )
+		{
+			throw new JaloSystemException( e ,"error creating ApparelSizeVariantProduct : "+e.getMessage(), 0 );
+		}
+	}
+	
+	public ApparelSizeVariantProduct createApparelSizeVariantProduct(final Map attributeValues)
+	{
+		return createApparelSizeVariantProduct( getSession().getSessionContext(), attributeValues );
+	}
+	
+	public ApparelStyleVariantProduct createApparelStyleVariantProduct(final SessionContext ctx, final Map attributeValues)
+	{
+		try
+		{
+			ComposedType type = getTenant().getJaloConnection().getTypeManager().getComposedType( AcerchemCoreConstants.TC.APPARELSTYLEVARIANTPRODUCT );
+			return (ApparelStyleVariantProduct)type.newInstance( ctx, attributeValues );
+		}
+		catch( JaloGenericCreationException e)
+		{
+			final Throwable cause = e.getCause();
+			throw (cause instanceof RuntimeException ?
+			(RuntimeException)cause
+			:
+			new JaloSystemException( cause, cause.getMessage(), e.getErrorCode() ) );
+		}
+		catch( JaloBusinessException e )
+		{
+			throw new JaloSystemException( e ,"error creating ApparelStyleVariantProduct : "+e.getMessage(), 0 );
+		}
+	}
+	
+	public ApparelStyleVariantProduct createApparelStyleVariantProduct(final Map attributeValues)
+	{
+		return createApparelStyleVariantProduct( getSession().getSessionContext(), attributeValues );
+	}
+	
 	public CountryTrayFareConf createCountryTrayFareConf(final SessionContext ctx, final Map attributeValues)
 	{
 		try
@@ -589,6 +820,32 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	public CountryTrayFareConf createCountryTrayFareConf(final Map attributeValues)
 	{
 		return createCountryTrayFareConf( getSession().getSessionContext(), attributeValues );
+	}
+	
+	public CreditPaymentInfo createCreditPaymentInfo(final SessionContext ctx, final Map attributeValues)
+	{
+		try
+		{
+			ComposedType type = getTenant().getJaloConnection().getTypeManager().getComposedType( AcerchemCoreConstants.TC.CREDITPAYMENTINFO );
+			return (CreditPaymentInfo)type.newInstance( ctx, attributeValues );
+		}
+		catch( JaloGenericCreationException e)
+		{
+			final Throwable cause = e.getCause();
+			throw (cause instanceof RuntimeException ?
+			(RuntimeException)cause
+			:
+			new JaloSystemException( cause, cause.getMessage(), e.getErrorCode() ) );
+		}
+		catch( JaloBusinessException e )
+		{
+			throw new JaloSystemException( e ,"error creating CreditPaymentInfo : "+e.getMessage(), 0 );
+		}
+	}
+	
+	public CreditPaymentInfo createCreditPaymentInfo(final Map attributeValues)
+	{
+		return createCreditPaymentInfo( getSession().getSessionContext(), attributeValues );
 	}
 	
 	public CreditTransaction createCreditTransaction(final SessionContext ctx, final Map attributeValues)
@@ -641,6 +898,32 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	public CustomerCreditAccount createCustomerCreditAccount(final Map attributeValues)
 	{
 		return createCustomerCreditAccount( getSession().getSessionContext(), attributeValues );
+	}
+	
+	public ElectronicsColorVariantProduct createElectronicsColorVariantProduct(final SessionContext ctx, final Map attributeValues)
+	{
+		try
+		{
+			ComposedType type = getTenant().getJaloConnection().getTypeManager().getComposedType( AcerchemCoreConstants.TC.ELECTRONICSCOLORVARIANTPRODUCT );
+			return (ElectronicsColorVariantProduct)type.newInstance( ctx, attributeValues );
+		}
+		catch( JaloGenericCreationException e)
+		{
+			final Throwable cause = e.getCause();
+			throw (cause instanceof RuntimeException ?
+			(RuntimeException)cause
+			:
+			new JaloSystemException( cause, cause.getMessage(), e.getErrorCode() ) );
+		}
+		catch( JaloBusinessException e )
+		{
+			throw new JaloSystemException( e ,"error creating ElectronicsColorVariantProduct : "+e.getMessage(), 0 );
+		}
+	}
+	
+	public ElectronicsColorVariantProduct createElectronicsColorVariantProduct(final Map attributeValues)
+	{
+		return createElectronicsColorVariantProduct( getSession().getSessionContext(), attributeValues );
 	}
 	
 	public FunctionButtonComponent createFunctionButtonComponent(final SessionContext ctx, final Map attributeValues)
@@ -809,10 +1092,811 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 		setCreditAccount( getSession().getSessionContext(), item, value );
 	}
 	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.customerConfirm</code> attribute.
+	 * @return the customerConfirm - flag for deliveryConfrim
+	 */
+	public Boolean isCustomerConfirm(final SessionContext ctx, final AbstractOrder item)
+	{
+		return (Boolean)item.getProperty( ctx, AcerchemCoreConstants.Attributes.AbstractOrder.CUSTOMERCONFIRM);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.customerConfirm</code> attribute.
+	 * @return the customerConfirm - flag for deliveryConfrim
+	 */
+	public Boolean isCustomerConfirm(final AbstractOrder item)
+	{
+		return isCustomerConfirm( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.customerConfirm</code> attribute. 
+	 * @return the customerConfirm - flag for deliveryConfrim
+	 */
+	public boolean isCustomerConfirmAsPrimitive(final SessionContext ctx, final AbstractOrder item)
+	{
+		Boolean value = isCustomerConfirm( ctx,item );
+		return value != null ? value.booleanValue() : false;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.customerConfirm</code> attribute. 
+	 * @return the customerConfirm - flag for deliveryConfrim
+	 */
+	public boolean isCustomerConfirmAsPrimitive(final AbstractOrder item)
+	{
+		return isCustomerConfirmAsPrimitive( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.customerConfirm</code> attribute. 
+	 * @param value the customerConfirm - flag for deliveryConfrim
+	 */
+	public void setCustomerConfirm(final SessionContext ctx, final AbstractOrder item, final Boolean value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.AbstractOrder.CUSTOMERCONFIRM,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.customerConfirm</code> attribute. 
+	 * @param value the customerConfirm - flag for deliveryConfrim
+	 */
+	public void setCustomerConfirm(final AbstractOrder item, final Boolean value)
+	{
+		setCustomerConfirm( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.customerConfirm</code> attribute. 
+	 * @param value the customerConfirm - flag for deliveryConfrim
+	 */
+	public void setCustomerConfirm(final SessionContext ctx, final AbstractOrder item, final boolean value)
+	{
+		setCustomerConfirm( ctx, item, Boolean.valueOf( value ) );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.customerConfirm</code> attribute. 
+	 * @param value the customerConfirm - flag for deliveryConfrim
+	 */
+	public void setCustomerConfirm(final AbstractOrder item, final boolean value)
+	{
+		setCustomerConfirm( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.customerConfirmDelivery</code> attribute.
+	 * @return the customerConfirmDelivery - flag for customerConfrim
+	 */
+	public Boolean isCustomerConfirmDelivery(final SessionContext ctx, final AbstractOrder item)
+	{
+		return (Boolean)item.getProperty( ctx, AcerchemCoreConstants.Attributes.AbstractOrder.CUSTOMERCONFIRMDELIVERY);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.customerConfirmDelivery</code> attribute.
+	 * @return the customerConfirmDelivery - flag for customerConfrim
+	 */
+	public Boolean isCustomerConfirmDelivery(final AbstractOrder item)
+	{
+		return isCustomerConfirmDelivery( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.customerConfirmDelivery</code> attribute. 
+	 * @return the customerConfirmDelivery - flag for customerConfrim
+	 */
+	public boolean isCustomerConfirmDeliveryAsPrimitive(final SessionContext ctx, final AbstractOrder item)
+	{
+		Boolean value = isCustomerConfirmDelivery( ctx,item );
+		return value != null ? value.booleanValue() : false;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.customerConfirmDelivery</code> attribute. 
+	 * @return the customerConfirmDelivery - flag for customerConfrim
+	 */
+	public boolean isCustomerConfirmDeliveryAsPrimitive(final AbstractOrder item)
+	{
+		return isCustomerConfirmDeliveryAsPrimitive( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.customerConfirmDelivery</code> attribute. 
+	 * @param value the customerConfirmDelivery - flag for customerConfrim
+	 */
+	public void setCustomerConfirmDelivery(final SessionContext ctx, final AbstractOrder item, final Boolean value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.AbstractOrder.CUSTOMERCONFIRMDELIVERY,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.customerConfirmDelivery</code> attribute. 
+	 * @param value the customerConfirmDelivery - flag for customerConfrim
+	 */
+	public void setCustomerConfirmDelivery(final AbstractOrder item, final Boolean value)
+	{
+		setCustomerConfirmDelivery( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.customerConfirmDelivery</code> attribute. 
+	 * @param value the customerConfirmDelivery - flag for customerConfrim
+	 */
+	public void setCustomerConfirmDelivery(final SessionContext ctx, final AbstractOrder item, final boolean value)
+	{
+		setCustomerConfirmDelivery( ctx, item, Boolean.valueOf( value ) );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.customerConfirmDelivery</code> attribute. 
+	 * @param value the customerConfirmDelivery - flag for customerConfrim
+	 */
+	public void setCustomerConfirmDelivery(final AbstractOrder item, final boolean value)
+	{
+		setCustomerConfirmDelivery( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.customerConfirmPay</code> attribute.
+	 * @return the customerConfirmPay - flag for customerConfrim
+	 */
+	public Boolean isCustomerConfirmPay(final SessionContext ctx, final AbstractOrder item)
+	{
+		return (Boolean)item.getProperty( ctx, AcerchemCoreConstants.Attributes.AbstractOrder.CUSTOMERCONFIRMPAY);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.customerConfirmPay</code> attribute.
+	 * @return the customerConfirmPay - flag for customerConfrim
+	 */
+	public Boolean isCustomerConfirmPay(final AbstractOrder item)
+	{
+		return isCustomerConfirmPay( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.customerConfirmPay</code> attribute. 
+	 * @return the customerConfirmPay - flag for customerConfrim
+	 */
+	public boolean isCustomerConfirmPayAsPrimitive(final SessionContext ctx, final AbstractOrder item)
+	{
+		Boolean value = isCustomerConfirmPay( ctx,item );
+		return value != null ? value.booleanValue() : false;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.customerConfirmPay</code> attribute. 
+	 * @return the customerConfirmPay - flag for customerConfrim
+	 */
+	public boolean isCustomerConfirmPayAsPrimitive(final AbstractOrder item)
+	{
+		return isCustomerConfirmPayAsPrimitive( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.customerConfirmPay</code> attribute. 
+	 * @param value the customerConfirmPay - flag for customerConfrim
+	 */
+	public void setCustomerConfirmPay(final SessionContext ctx, final AbstractOrder item, final Boolean value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.AbstractOrder.CUSTOMERCONFIRMPAY,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.customerConfirmPay</code> attribute. 
+	 * @param value the customerConfirmPay - flag for customerConfrim
+	 */
+	public void setCustomerConfirmPay(final AbstractOrder item, final Boolean value)
+	{
+		setCustomerConfirmPay( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.customerConfirmPay</code> attribute. 
+	 * @param value the customerConfirmPay - flag for customerConfrim
+	 */
+	public void setCustomerConfirmPay(final SessionContext ctx, final AbstractOrder item, final boolean value)
+	{
+		setCustomerConfirmPay( ctx, item, Boolean.valueOf( value ) );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.customerConfirmPay</code> attribute. 
+	 * @param value the customerConfirmPay - flag for customerConfrim
+	 */
+	public void setCustomerConfirmPay(final AbstractOrder item, final boolean value)
+	{
+		setCustomerConfirmPay( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.deliveryConfirm</code> attribute.
+	 * @return the deliveryConfirm - flag for deliveryConfrim
+	 */
+	public Boolean isDeliveryConfirm(final SessionContext ctx, final AbstractOrder item)
+	{
+		return (Boolean)item.getProperty( ctx, AcerchemCoreConstants.Attributes.AbstractOrder.DELIVERYCONFIRM);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.deliveryConfirm</code> attribute.
+	 * @return the deliveryConfirm - flag for deliveryConfrim
+	 */
+	public Boolean isDeliveryConfirm(final AbstractOrder item)
+	{
+		return isDeliveryConfirm( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.deliveryConfirm</code> attribute. 
+	 * @return the deliveryConfirm - flag for deliveryConfrim
+	 */
+	public boolean isDeliveryConfirmAsPrimitive(final SessionContext ctx, final AbstractOrder item)
+	{
+		Boolean value = isDeliveryConfirm( ctx,item );
+		return value != null ? value.booleanValue() : false;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.deliveryConfirm</code> attribute. 
+	 * @return the deliveryConfirm - flag for deliveryConfrim
+	 */
+	public boolean isDeliveryConfirmAsPrimitive(final AbstractOrder item)
+	{
+		return isDeliveryConfirmAsPrimitive( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.deliveryConfirm</code> attribute. 
+	 * @param value the deliveryConfirm - flag for deliveryConfrim
+	 */
+	public void setDeliveryConfirm(final SessionContext ctx, final AbstractOrder item, final Boolean value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.AbstractOrder.DELIVERYCONFIRM,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.deliveryConfirm</code> attribute. 
+	 * @param value the deliveryConfirm - flag for deliveryConfrim
+	 */
+	public void setDeliveryConfirm(final AbstractOrder item, final Boolean value)
+	{
+		setDeliveryConfirm( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.deliveryConfirm</code> attribute. 
+	 * @param value the deliveryConfirm - flag for deliveryConfrim
+	 */
+	public void setDeliveryConfirm(final SessionContext ctx, final AbstractOrder item, final boolean value)
+	{
+		setDeliveryConfirm( ctx, item, Boolean.valueOf( value ) );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.deliveryConfirm</code> attribute. 
+	 * @param value the deliveryConfirm - flag for deliveryConfrim
+	 */
+	public void setDeliveryConfirm(final AbstractOrder item, final boolean value)
+	{
+		setDeliveryConfirm( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>PointOfService.deliveryZone</code> attribute.
+	 * @return the deliveryZone - 提货点配送范围
+	 */
+	public Zone getDeliveryZone(final SessionContext ctx, final PointOfService item)
+	{
+		return (Zone)item.getProperty( ctx, AcerchemCoreConstants.Attributes.PointOfService.DELIVERYZONE);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>PointOfService.deliveryZone</code> attribute.
+	 * @return the deliveryZone - 提货点配送范围
+	 */
+	public Zone getDeliveryZone(final PointOfService item)
+	{
+		return getDeliveryZone( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>PointOfService.deliveryZone</code> attribute. 
+	 * @param value the deliveryZone - 提货点配送范围
+	 */
+	public void setDeliveryZone(final SessionContext ctx, final PointOfService item, final Zone value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.PointOfService.DELIVERYZONE,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>PointOfService.deliveryZone</code> attribute. 
+	 * @param value the deliveryZone - 提货点配送范围
+	 */
+	public void setDeliveryZone(final PointOfService item, final Zone value)
+	{
+		setDeliveryZone( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>CsTicket.Email</code> attribute.
+	 * @return the Email
+	 */
+	public String getEmail(final SessionContext ctx, final CsTicket item)
+	{
+		return (String)item.getProperty( ctx, AcerchemCoreConstants.Attributes.CsTicket.EMAIL);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>CsTicket.Email</code> attribute.
+	 * @return the Email
+	 */
+	public String getEmail(final CsTicket item)
+	{
+		return getEmail( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>CsTicket.Email</code> attribute. 
+	 * @param value the Email
+	 */
+	public void setEmail(final SessionContext ctx, final CsTicket item, final String value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.CsTicket.EMAIL,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>CsTicket.Email</code> attribute. 
+	 * @param value the Email
+	 */
+	public void setEmail(final CsTicket item, final String value)
+	{
+		setEmail( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.employeeConfirm</code> attribute.
+	 * @return the employeeConfirm - flag for payConfirm
+	 */
+	public Boolean isEmployeeConfirm(final SessionContext ctx, final AbstractOrder item)
+	{
+		return (Boolean)item.getProperty( ctx, AcerchemCoreConstants.Attributes.AbstractOrder.EMPLOYEECONFIRM);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.employeeConfirm</code> attribute.
+	 * @return the employeeConfirm - flag for payConfirm
+	 */
+	public Boolean isEmployeeConfirm(final AbstractOrder item)
+	{
+		return isEmployeeConfirm( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.employeeConfirm</code> attribute. 
+	 * @return the employeeConfirm - flag for payConfirm
+	 */
+	public boolean isEmployeeConfirmAsPrimitive(final SessionContext ctx, final AbstractOrder item)
+	{
+		Boolean value = isEmployeeConfirm( ctx,item );
+		return value != null ? value.booleanValue() : false;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.employeeConfirm</code> attribute. 
+	 * @return the employeeConfirm - flag for payConfirm
+	 */
+	public boolean isEmployeeConfirmAsPrimitive(final AbstractOrder item)
+	{
+		return isEmployeeConfirmAsPrimitive( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.employeeConfirm</code> attribute. 
+	 * @param value the employeeConfirm - flag for payConfirm
+	 */
+	public void setEmployeeConfirm(final SessionContext ctx, final AbstractOrder item, final Boolean value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.AbstractOrder.EMPLOYEECONFIRM,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.employeeConfirm</code> attribute. 
+	 * @param value the employeeConfirm - flag for payConfirm
+	 */
+	public void setEmployeeConfirm(final AbstractOrder item, final Boolean value)
+	{
+		setEmployeeConfirm( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.employeeConfirm</code> attribute. 
+	 * @param value the employeeConfirm - flag for payConfirm
+	 */
+	public void setEmployeeConfirm(final SessionContext ctx, final AbstractOrder item, final boolean value)
+	{
+		setEmployeeConfirm( ctx, item, Boolean.valueOf( value ) );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.employeeConfirm</code> attribute. 
+	 * @param value the employeeConfirm - flag for payConfirm
+	 */
+	public void setEmployeeConfirm(final AbstractOrder item, final boolean value)
+	{
+		setEmployeeConfirm( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.employeeConfirmDelivery</code> attribute.
+	 * @return the employeeConfirmDelivery - flag for employeeConfirm
+	 */
+	public Boolean isEmployeeConfirmDelivery(final SessionContext ctx, final AbstractOrder item)
+	{
+		return (Boolean)item.getProperty( ctx, AcerchemCoreConstants.Attributes.AbstractOrder.EMPLOYEECONFIRMDELIVERY);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.employeeConfirmDelivery</code> attribute.
+	 * @return the employeeConfirmDelivery - flag for employeeConfirm
+	 */
+	public Boolean isEmployeeConfirmDelivery(final AbstractOrder item)
+	{
+		return isEmployeeConfirmDelivery( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.employeeConfirmDelivery</code> attribute. 
+	 * @return the employeeConfirmDelivery - flag for employeeConfirm
+	 */
+	public boolean isEmployeeConfirmDeliveryAsPrimitive(final SessionContext ctx, final AbstractOrder item)
+	{
+		Boolean value = isEmployeeConfirmDelivery( ctx,item );
+		return value != null ? value.booleanValue() : false;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.employeeConfirmDelivery</code> attribute. 
+	 * @return the employeeConfirmDelivery - flag for employeeConfirm
+	 */
+	public boolean isEmployeeConfirmDeliveryAsPrimitive(final AbstractOrder item)
+	{
+		return isEmployeeConfirmDeliveryAsPrimitive( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.employeeConfirmDelivery</code> attribute. 
+	 * @param value the employeeConfirmDelivery - flag for employeeConfirm
+	 */
+	public void setEmployeeConfirmDelivery(final SessionContext ctx, final AbstractOrder item, final Boolean value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.AbstractOrder.EMPLOYEECONFIRMDELIVERY,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.employeeConfirmDelivery</code> attribute. 
+	 * @param value the employeeConfirmDelivery - flag for employeeConfirm
+	 */
+	public void setEmployeeConfirmDelivery(final AbstractOrder item, final Boolean value)
+	{
+		setEmployeeConfirmDelivery( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.employeeConfirmDelivery</code> attribute. 
+	 * @param value the employeeConfirmDelivery - flag for employeeConfirm
+	 */
+	public void setEmployeeConfirmDelivery(final SessionContext ctx, final AbstractOrder item, final boolean value)
+	{
+		setEmployeeConfirmDelivery( ctx, item, Boolean.valueOf( value ) );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.employeeConfirmDelivery</code> attribute. 
+	 * @param value the employeeConfirmDelivery - flag for employeeConfirm
+	 */
+	public void setEmployeeConfirmDelivery(final AbstractOrder item, final boolean value)
+	{
+		setEmployeeConfirmDelivery( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.employeeConfirmPay</code> attribute.
+	 * @return the employeeConfirmPay - flag for employeeConfirm
+	 */
+	public Boolean isEmployeeConfirmPay(final SessionContext ctx, final AbstractOrder item)
+	{
+		return (Boolean)item.getProperty( ctx, AcerchemCoreConstants.Attributes.AbstractOrder.EMPLOYEECONFIRMPAY);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.employeeConfirmPay</code> attribute.
+	 * @return the employeeConfirmPay - flag for employeeConfirm
+	 */
+	public Boolean isEmployeeConfirmPay(final AbstractOrder item)
+	{
+		return isEmployeeConfirmPay( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.employeeConfirmPay</code> attribute. 
+	 * @return the employeeConfirmPay - flag for employeeConfirm
+	 */
+	public boolean isEmployeeConfirmPayAsPrimitive(final SessionContext ctx, final AbstractOrder item)
+	{
+		Boolean value = isEmployeeConfirmPay( ctx,item );
+		return value != null ? value.booleanValue() : false;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.employeeConfirmPay</code> attribute. 
+	 * @return the employeeConfirmPay - flag for employeeConfirm
+	 */
+	public boolean isEmployeeConfirmPayAsPrimitive(final AbstractOrder item)
+	{
+		return isEmployeeConfirmPayAsPrimitive( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.employeeConfirmPay</code> attribute. 
+	 * @param value the employeeConfirmPay - flag for employeeConfirm
+	 */
+	public void setEmployeeConfirmPay(final SessionContext ctx, final AbstractOrder item, final Boolean value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.AbstractOrder.EMPLOYEECONFIRMPAY,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.employeeConfirmPay</code> attribute. 
+	 * @param value the employeeConfirmPay - flag for employeeConfirm
+	 */
+	public void setEmployeeConfirmPay(final AbstractOrder item, final Boolean value)
+	{
+		setEmployeeConfirmPay( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.employeeConfirmPay</code> attribute. 
+	 * @param value the employeeConfirmPay - flag for employeeConfirm
+	 */
+	public void setEmployeeConfirmPay(final SessionContext ctx, final AbstractOrder item, final boolean value)
+	{
+		setEmployeeConfirmPay( ctx, item, Boolean.valueOf( value ) );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.employeeConfirmPay</code> attribute. 
+	 * @param value the employeeConfirmPay - flag for employeeConfirm
+	 */
+	public void setEmployeeConfirmPay(final AbstractOrder item, final boolean value)
+	{
+		setEmployeeConfirmPay( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.employeesNo</code> attribute.
+	 * @return the employeesNo - No. of Employees
+	 */
+	public Integer getEmployeesNo(final SessionContext ctx, final Customer item)
+	{
+		return (Integer)item.getProperty( ctx, AcerchemCoreConstants.Attributes.Customer.EMPLOYEESNO);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.employeesNo</code> attribute.
+	 * @return the employeesNo - No. of Employees
+	 */
+	public Integer getEmployeesNo(final Customer item)
+	{
+		return getEmployeesNo( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.employeesNo</code> attribute. 
+	 * @return the employeesNo - No. of Employees
+	 */
+	public int getEmployeesNoAsPrimitive(final SessionContext ctx, final Customer item)
+	{
+		Integer value = getEmployeesNo( ctx,item );
+		return value != null ? value.intValue() : 0;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.employeesNo</code> attribute. 
+	 * @return the employeesNo - No. of Employees
+	 */
+	public int getEmployeesNoAsPrimitive(final Customer item)
+	{
+		return getEmployeesNoAsPrimitive( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.employeesNo</code> attribute. 
+	 * @param value the employeesNo - No. of Employees
+	 */
+	public void setEmployeesNo(final SessionContext ctx, final Customer item, final Integer value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.Customer.EMPLOYEESNO,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.employeesNo</code> attribute. 
+	 * @param value the employeesNo - No. of Employees
+	 */
+	public void setEmployeesNo(final Customer item, final Integer value)
+	{
+		setEmployeesNo( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.employeesNo</code> attribute. 
+	 * @param value the employeesNo - No. of Employees
+	 */
+	public void setEmployeesNo(final SessionContext ctx, final Customer item, final int value)
+	{
+		setEmployeesNo( ctx, item, Integer.valueOf( value ) );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.employeesNo</code> attribute. 
+	 * @param value the employeesNo - No. of Employees
+	 */
+	public void setEmployeesNo(final Customer item, final int value)
+	{
+		setEmployeesNo( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.establishedIn</code> attribute.
+	 * @return the establishedIn - Established in
+	 */
+	public String getEstablishedIn(final SessionContext ctx, final Customer item)
+	{
+		return (String)item.getProperty( ctx, AcerchemCoreConstants.Attributes.Customer.ESTABLISHEDIN);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.establishedIn</code> attribute.
+	 * @return the establishedIn - Established in
+	 */
+	public String getEstablishedIn(final Customer item)
+	{
+		return getEstablishedIn( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.establishedIn</code> attribute. 
+	 * @param value the establishedIn - Established in
+	 */
+	public void setEstablishedIn(final SessionContext ctx, final Customer item, final String value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.Customer.ESTABLISHEDIN,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.establishedIn</code> attribute. 
+	 * @param value the establishedIn - Established in
+	 */
+	public void setEstablishedIn(final Customer item, final String value)
+	{
+		setEstablishedIn( getSession().getSessionContext(), item, value );
+	}
+	
 	@Override
 	public String getName()
 	{
 		return AcerchemCoreConstants.EXTENSIONNAME;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Product.grossWeight</code> attribute.
+	 * @return the grossWeight - 毛重
+	 */
+	public String getGrossWeight(final SessionContext ctx, final Product item)
+	{
+		return (String)item.getProperty( ctx, AcerchemCoreConstants.Attributes.Product.GROSSWEIGHT);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Product.grossWeight</code> attribute.
+	 * @return the grossWeight - 毛重
+	 */
+	public String getGrossWeight(final Product item)
+	{
+		return getGrossWeight( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Product.grossWeight</code> attribute. 
+	 * @param value the grossWeight - 毛重
+	 */
+	public void setGrossWeight(final SessionContext ctx, final Product item, final String value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.Product.GROSSWEIGHT,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Product.grossWeight</code> attribute. 
+	 * @param value the grossWeight - 毛重
+	 */
+	public void setGrossWeight(final Product item, final String value)
+	{
+		setGrossWeight( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.haveFinancialReport</code> attribute.
+	 * @return the haveFinancialReport - Do you have public financial report?If so, please send to customerservice@acerchem.com
+	 */
+	public Boolean isHaveFinancialReport(final SessionContext ctx, final Customer item)
+	{
+		return (Boolean)item.getProperty( ctx, AcerchemCoreConstants.Attributes.Customer.HAVEFINANCIALREPORT);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.haveFinancialReport</code> attribute.
+	 * @return the haveFinancialReport - Do you have public financial report?If so, please send to customerservice@acerchem.com
+	 */
+	public Boolean isHaveFinancialReport(final Customer item)
+	{
+		return isHaveFinancialReport( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.haveFinancialReport</code> attribute. 
+	 * @return the haveFinancialReport - Do you have public financial report?If so, please send to customerservice@acerchem.com
+	 */
+	public boolean isHaveFinancialReportAsPrimitive(final SessionContext ctx, final Customer item)
+	{
+		Boolean value = isHaveFinancialReport( ctx,item );
+		return value != null ? value.booleanValue() : false;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.haveFinancialReport</code> attribute. 
+	 * @return the haveFinancialReport - Do you have public financial report?If so, please send to customerservice@acerchem.com
+	 */
+	public boolean isHaveFinancialReportAsPrimitive(final Customer item)
+	{
+		return isHaveFinancialReportAsPrimitive( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.haveFinancialReport</code> attribute. 
+	 * @param value the haveFinancialReport - Do you have public financial report?If so, please send to customerservice@acerchem.com
+	 */
+	public void setHaveFinancialReport(final SessionContext ctx, final Customer item, final Boolean value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.Customer.HAVEFINANCIALREPORT,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.haveFinancialReport</code> attribute. 
+	 * @param value the haveFinancialReport - Do you have public financial report?If so, please send to customerservice@acerchem.com
+	 */
+	public void setHaveFinancialReport(final Customer item, final Boolean value)
+	{
+		setHaveFinancialReport( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.haveFinancialReport</code> attribute. 
+	 * @param value the haveFinancialReport - Do you have public financial report?If so, please send to customerservice@acerchem.com
+	 */
+	public void setHaveFinancialReport(final SessionContext ctx, final Customer item, final boolean value)
+	{
+		setHaveFinancialReport( ctx, item, Boolean.valueOf( value ) );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.haveFinancialReport</code> attribute. 
+	 * @param value the haveFinancialReport - Do you have public financial report?If so, please send to customerservice@acerchem.com
+	 */
+	public void setHaveFinancialReport(final Customer item, final boolean value)
+	{
+		setHaveFinancialReport( getSession().getSessionContext(), item, value );
 	}
 	
 	/**
@@ -1181,6 +2265,223 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	}
 	
 	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.limitCreditAmount</code> attribute.
+	 * @return the limitCreditAmount - The credit limit you will need for your business
+	 */
+	public BigDecimal getLimitCreditAmount(final SessionContext ctx, final Customer item)
+	{
+		return (BigDecimal)item.getProperty( ctx, AcerchemCoreConstants.Attributes.Customer.LIMITCREDITAMOUNT);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.limitCreditAmount</code> attribute.
+	 * @return the limitCreditAmount - The credit limit you will need for your business
+	 */
+	public BigDecimal getLimitCreditAmount(final Customer item)
+	{
+		return getLimitCreditAmount( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.limitCreditAmount</code> attribute. 
+	 * @param value the limitCreditAmount - The credit limit you will need for your business
+	 */
+	public void setLimitCreditAmount(final SessionContext ctx, final Customer item, final BigDecimal value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.Customer.LIMITCREDITAMOUNT,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.limitCreditAmount</code> attribute. 
+	 * @param value the limitCreditAmount - The credit limit you will need for your business
+	 */
+	public void setLimitCreditAmount(final Customer item, final BigDecimal value)
+	{
+		setLimitCreditAmount( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Product.netWeight</code> attribute.
+	 * @return the netWeight - 净重
+	 */
+	public String getNetWeight(final SessionContext ctx, final Product item)
+	{
+		return (String)item.getProperty( ctx, AcerchemCoreConstants.Attributes.Product.NETWEIGHT);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Product.netWeight</code> attribute.
+	 * @return the netWeight - 净重
+	 */
+	public String getNetWeight(final Product item)
+	{
+		return getNetWeight( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Product.netWeight</code> attribute. 
+	 * @param value the netWeight - 净重
+	 */
+	public void setNetWeight(final SessionContext ctx, final Product item, final String value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.Product.NETWEIGHT,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Product.netWeight</code> attribute. 
+	 * @param value the netWeight - 净重
+	 */
+	public void setNetWeight(final Product item, final String value)
+	{
+		setNetWeight( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Product.packageType</code> attribute.
+	 * @return the packageType - 包装形式
+	 */
+	public String getPackageType(final SessionContext ctx, final Product item)
+	{
+		return (String)item.getProperty( ctx, AcerchemCoreConstants.Attributes.Product.PACKAGETYPE);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Product.packageType</code> attribute.
+	 * @return the packageType - 包装形式
+	 */
+	public String getPackageType(final Product item)
+	{
+		return getPackageType( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Product.packageType</code> attribute. 
+	 * @param value the packageType - 包装形式
+	 */
+	public void setPackageType(final SessionContext ctx, final Product item, final String value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.Product.PACKAGETYPE,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Product.packageType</code> attribute. 
+	 * @param value the packageType - 包装形式
+	 */
+	public void setPackageType(final Product item, final String value)
+	{
+		setPackageType( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Product.packageWeight</code> attribute.
+	 * @return the packageWeight - 包装重量
+	 */
+	public String getPackageWeight(final SessionContext ctx, final Product item)
+	{
+		return (String)item.getProperty( ctx, AcerchemCoreConstants.Attributes.Product.PACKAGEWEIGHT);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Product.packageWeight</code> attribute.
+	 * @return the packageWeight - 包装重量
+	 */
+	public String getPackageWeight(final Product item)
+	{
+		return getPackageWeight( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Product.packageWeight</code> attribute. 
+	 * @param value the packageWeight - 包装重量
+	 */
+	public void setPackageWeight(final SessionContext ctx, final Product item, final String value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.Product.PACKAGEWEIGHT,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Product.packageWeight</code> attribute. 
+	 * @param value the packageWeight - 包装重量
+	 */
+	public void setPackageWeight(final Product item, final String value)
+	{
+		setPackageWeight( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.payConfirm</code> attribute.
+	 * @return the payConfirm - flag for payConfirm
+	 */
+	public Boolean isPayConfirm(final SessionContext ctx, final AbstractOrder item)
+	{
+		return (Boolean)item.getProperty( ctx, AcerchemCoreConstants.Attributes.AbstractOrder.PAYCONFIRM);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.payConfirm</code> attribute.
+	 * @return the payConfirm - flag for payConfirm
+	 */
+	public Boolean isPayConfirm(final AbstractOrder item)
+	{
+		return isPayConfirm( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.payConfirm</code> attribute. 
+	 * @return the payConfirm - flag for payConfirm
+	 */
+	public boolean isPayConfirmAsPrimitive(final SessionContext ctx, final AbstractOrder item)
+	{
+		Boolean value = isPayConfirm( ctx,item );
+		return value != null ? value.booleanValue() : false;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.payConfirm</code> attribute. 
+	 * @return the payConfirm - flag for payConfirm
+	 */
+	public boolean isPayConfirmAsPrimitive(final AbstractOrder item)
+	{
+		return isPayConfirmAsPrimitive( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.payConfirm</code> attribute. 
+	 * @param value the payConfirm - flag for payConfirm
+	 */
+	public void setPayConfirm(final SessionContext ctx, final AbstractOrder item, final Boolean value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.AbstractOrder.PAYCONFIRM,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.payConfirm</code> attribute. 
+	 * @param value the payConfirm - flag for payConfirm
+	 */
+	public void setPayConfirm(final AbstractOrder item, final Boolean value)
+	{
+		setPayConfirm( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.payConfirm</code> attribute. 
+	 * @param value the payConfirm - flag for payConfirm
+	 */
+	public void setPayConfirm(final SessionContext ctx, final AbstractOrder item, final boolean value)
+	{
+		setPayConfirm( ctx, item, Boolean.valueOf( value ) );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.payConfirm</code> attribute. 
+	 * @param value the payConfirm - flag for payConfirm
+	 */
+	public void setPayConfirm(final AbstractOrder item, final boolean value)
+	{
+		setPayConfirm( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
 	 * <i>Generated method</i> - Getter of the <code>StockLevel.preOrderReleaseDay</code> attribute.
 	 * @return the preOrderReleaseDay
 	 */
@@ -1251,6 +2552,151 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	public void setPreOrderReleaseDay(final StockLevel item, final int value)
 	{
 		setPreOrderReleaseDay( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>CsTicket.productId</code> attribute.
+	 * @return the productId
+	 */
+	public String getProductId(final SessionContext ctx, final CsTicket item)
+	{
+		return (String)item.getProperty( ctx, AcerchemCoreConstants.Attributes.CsTicket.PRODUCTID);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>CsTicket.productId</code> attribute.
+	 * @return the productId
+	 */
+	public String getProductId(final CsTicket item)
+	{
+		return getProductId( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>CsTicket.productId</code> attribute. 
+	 * @param value the productId
+	 */
+	public void setProductId(final SessionContext ctx, final CsTicket item, final String value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.CsTicket.PRODUCTID,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>CsTicket.productId</code> attribute. 
+	 * @param value the productId
+	 */
+	public void setProductId(final CsTicket item, final String value)
+	{
+		setProductId( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>CsTicket.productName</code> attribute.
+	 * @return the productName
+	 */
+	public String getProductName(final SessionContext ctx, final CsTicket item)
+	{
+		return (String)item.getProperty( ctx, AcerchemCoreConstants.Attributes.CsTicket.PRODUCTNAME);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>CsTicket.productName</code> attribute.
+	 * @return the productName
+	 */
+	public String getProductName(final CsTicket item)
+	{
+		return getProductName( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>CsTicket.productName</code> attribute. 
+	 * @param value the productName
+	 */
+	public void setProductName(final SessionContext ctx, final CsTicket item, final String value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.CsTicket.PRODUCTNAME,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>CsTicket.productName</code> attribute. 
+	 * @param value the productName
+	 */
+	public void setProductName(final CsTicket item, final String value)
+	{
+		setProductName( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.provideTradeReference</code> attribute.
+	 * @return the provideTradeReference - Can you provide any trade reference for Acerchem?
+	 */
+	public Boolean isProvideTradeReference(final SessionContext ctx, final Customer item)
+	{
+		return (Boolean)item.getProperty( ctx, AcerchemCoreConstants.Attributes.Customer.PROVIDETRADEREFERENCE);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.provideTradeReference</code> attribute.
+	 * @return the provideTradeReference - Can you provide any trade reference for Acerchem?
+	 */
+	public Boolean isProvideTradeReference(final Customer item)
+	{
+		return isProvideTradeReference( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.provideTradeReference</code> attribute. 
+	 * @return the provideTradeReference - Can you provide any trade reference for Acerchem?
+	 */
+	public boolean isProvideTradeReferenceAsPrimitive(final SessionContext ctx, final Customer item)
+	{
+		Boolean value = isProvideTradeReference( ctx,item );
+		return value != null ? value.booleanValue() : false;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.provideTradeReference</code> attribute. 
+	 * @return the provideTradeReference - Can you provide any trade reference for Acerchem?
+	 */
+	public boolean isProvideTradeReferenceAsPrimitive(final Customer item)
+	{
+		return isProvideTradeReferenceAsPrimitive( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.provideTradeReference</code> attribute. 
+	 * @param value the provideTradeReference - Can you provide any trade reference for Acerchem?
+	 */
+	public void setProvideTradeReference(final SessionContext ctx, final Customer item, final Boolean value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.Customer.PROVIDETRADEREFERENCE,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.provideTradeReference</code> attribute. 
+	 * @param value the provideTradeReference - Can you provide any trade reference for Acerchem?
+	 */
+	public void setProvideTradeReference(final Customer item, final Boolean value)
+	{
+		setProvideTradeReference( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.provideTradeReference</code> attribute. 
+	 * @param value the provideTradeReference - Can you provide any trade reference for Acerchem?
+	 */
+	public void setProvideTradeReference(final SessionContext ctx, final Customer item, final boolean value)
+	{
+		setProvideTradeReference( ctx, item, Boolean.valueOf( value ) );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.provideTradeReference</code> attribute. 
+	 * @param value the provideTradeReference - Can you provide any trade reference for Acerchem?
+	 */
+	public void setProvideTradeReference(final Customer item, final boolean value)
+	{
+		setProvideTradeReference( getSession().getSessionContext(), item, value );
 	}
 	
 	/**
@@ -1435,6 +2881,114 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	}
 	
 	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.revenue</code> attribute.
+	 * @return the revenue - Revenue
+	 */
+	public BigDecimal getRevenue(final SessionContext ctx, final Customer item)
+	{
+		return (BigDecimal)item.getProperty( ctx, AcerchemCoreConstants.Attributes.Customer.REVENUE);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.revenue</code> attribute.
+	 * @return the revenue - Revenue
+	 */
+	public BigDecimal getRevenue(final Customer item)
+	{
+		return getRevenue( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.revenue</code> attribute. 
+	 * @param value the revenue - Revenue
+	 */
+	public void setRevenue(final SessionContext ctx, final Customer item, final BigDecimal value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.Customer.REVENUE,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.revenue</code> attribute. 
+	 * @param value the revenue - Revenue
+	 */
+	public void setRevenue(final Customer item, final BigDecimal value)
+	{
+		setRevenue( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Product.specification</code> attribute.
+	 * @return the specification - 质量标准
+	 */
+	public String getSpecification(final SessionContext ctx, final Product item)
+	{
+		return (String)item.getProperty( ctx, AcerchemCoreConstants.Attributes.Product.SPECIFICATION);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Product.specification</code> attribute.
+	 * @return the specification - 质量标准
+	 */
+	public String getSpecification(final Product item)
+	{
+		return getSpecification( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Product.specification</code> attribute. 
+	 * @param value the specification - 质量标准
+	 */
+	public void setSpecification(final SessionContext ctx, final Product item, final String value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.Product.SPECIFICATION,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Product.specification</code> attribute. 
+	 * @param value the specification - 质量标准
+	 */
+	public void setSpecification(final Product item, final String value)
+	{
+		setSpecification( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>CsTicket.telephone</code> attribute.
+	 * @return the telephone
+	 */
+	public String getTelephone(final SessionContext ctx, final CsTicket item)
+	{
+		return (String)item.getProperty( ctx, AcerchemCoreConstants.Attributes.CsTicket.TELEPHONE);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>CsTicket.telephone</code> attribute.
+	 * @return the telephone
+	 */
+	public String getTelephone(final CsTicket item)
+	{
+		return getTelephone( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>CsTicket.telephone</code> attribute. 
+	 * @param value the telephone
+	 */
+	public void setTelephone(final SessionContext ctx, final CsTicket item, final String value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.CsTicket.TELEPHONE,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>CsTicket.telephone</code> attribute. 
+	 * @param value the telephone
+	 */
+	public void setTelephone(final CsTicket item, final String value)
+	{
+		setTelephone( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
 	 * <i>Generated method</i> - Getter of the <code>Product.unitCalculateRato</code> attribute.
 	 * @return the unitCalculateRato - Attribute about çnitCalculateRato of Product
 	 */
@@ -1577,6 +3131,78 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	 void setUserLevelPOS(final User item, final int value)
 	{
 		setUserLevelPOS( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.vatNo</code> attribute.
+	 * @return the vatNo - VAT No.
+	 */
+	public String getVatNo(final SessionContext ctx, final Customer item)
+	{
+		return (String)item.getProperty( ctx, AcerchemCoreConstants.Attributes.Customer.VATNO);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.vatNo</code> attribute.
+	 * @return the vatNo - VAT No.
+	 */
+	public String getVatNo(final Customer item)
+	{
+		return getVatNo( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.vatNo</code> attribute. 
+	 * @param value the vatNo - VAT No.
+	 */
+	public void setVatNo(final SessionContext ctx, final Customer item, final String value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.Customer.VATNO,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.vatNo</code> attribute. 
+	 * @param value the vatNo - VAT No.
+	 */
+	public void setVatNo(final Customer item, final String value)
+	{
+		setVatNo( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>CsTicket.yourname</code> attribute.
+	 * @return the yourname
+	 */
+	public String getYourname(final SessionContext ctx, final CsTicket item)
+	{
+		return (String)item.getProperty( ctx, AcerchemCoreConstants.Attributes.CsTicket.YOURNAME);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>CsTicket.yourname</code> attribute.
+	 * @return the yourname
+	 */
+	public String getYourname(final CsTicket item)
+	{
+		return getYourname( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>CsTicket.yourname</code> attribute. 
+	 * @param value the yourname
+	 */
+	public void setYourname(final SessionContext ctx, final CsTicket item, final String value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.CsTicket.YOURNAME,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>CsTicket.yourname</code> attribute. 
+	 * @param value the yourname
+	 */
+	public void setYourname(final CsTicket item, final String value)
+	{
+		setYourname( getSession().getSessionContext(), item, value );
 	}
 	
 }
