@@ -55,7 +55,7 @@
 					
 					<div class="specnum">
 						<div class="spec">
-							<label>
+							<!-- <label>
 								<span class="label-title">Specifications</span>	
 								<div class="selbox">
 									<input type="hidden" class="required" value="" name="spec" alt="Please Select nation">
@@ -67,7 +67,7 @@
 									</ul>
 								</div>	
 							</label>
-							
+							 -->
 							<c:forEach items="${countrys}" var="data"  varStatus="id"  >
 						<c:if test="${id.index==0}">	
 							<label class="futday">

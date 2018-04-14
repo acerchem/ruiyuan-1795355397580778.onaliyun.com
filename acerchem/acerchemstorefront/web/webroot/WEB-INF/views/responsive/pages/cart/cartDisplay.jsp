@@ -10,7 +10,6 @@
 
 <div class="g-cell">
 			<!-- product Item -->
-	<form action="" id="cartitem">
 		<div class="g-table product-table">
 		<div class="g-title">
 			<table>
@@ -30,7 +29,6 @@
 	    </c:forEach>			
 				
 	</div>
-	</form>
 	
 	<cart:exportCart/>
 </div>

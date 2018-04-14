@@ -20,6 +20,11 @@ $lang=zh
 
 # Content Pages
 UPDATE ContentPage;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
+#shaun
+ ;;add-support-ticket;"Supportanfrage hinzufügen"
+ ;;support-tickets;"Liste der Supportanfragen"
+ ;;update-support-ticket;"Supportanfrage aktualisieren"
+
  ;;add-edit-address;"添加/编辑地址"
  ;;address-book;"地址簿"
  ;;cartPage;"您的购物车"

@@ -12,7 +12,7 @@ table{
 	border-spacing:0;
 }
 
-input[type='checkbox']{
+/* input[type='checkbox']{
 	display:none;
 }
 input[type='checkbox']:checked~.checkbox:before{
@@ -20,7 +20,7 @@ input[type='checkbox']:checked~.checkbox:before{
 }
 input[type='checkbox']:checked~.checkbox:after{
 	display:block;
-}
+} */
 
 input[type='text'],input[type='number'], input[type='password'] ,input[type='submit'],select,.pitch{
 	padding-left:10px;

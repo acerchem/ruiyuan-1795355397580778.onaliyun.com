@@ -4,6 +4,8 @@ import com.acerchem.core.service.AcerchemDeliveryService;
 import com.acerchem.facades.facades.AcerchemCheckoutFacade;
 import com.acerchem.facades.facades.AcerchemOrderException;
 import com.acerchem.facades.facades.AcerchemTrayFacade;
+import de.hybris.platform.commercefacades.order.converters.populator.PaymentCardTypePopulator;
+import de.hybris.platform.commercefacades.order.data.CardTypeData;
 import de.hybris.platform.commercefacades.order.data.DeliveryModeData;
 import de.hybris.platform.commercefacades.order.data.ZoneDeliveryModeData;
 import de.hybris.platform.commercefacades.order.impl.DefaultCheckoutFacade;
@@ -14,8 +16,10 @@ import de.hybris.platform.core.model.c2l.CountryModel;
 import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.order.delivery.DeliveryModeModel;
+import de.hybris.platform.core.model.order.payment.PaymentModeModel;
 import de.hybris.platform.deliveryzone.model.ZoneDeliveryModeModel;
 import de.hybris.platform.order.CartService;
+import de.hybris.platform.order.DeliveryModeService;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.storelocator.model.PointOfServiceModel;
 import de.hybris.platform.util.PriceValue;
@@ -57,6 +61,8 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
     private ConfigurationService configurationService;
     @Resource
     private AcerchemTrayFacade acerchemTrayFacade;
+    @Resource
+    private DeliveryModeService deliveryModeService;
 
     @Override
     public void validateCartAddress(CountryData countryData) throws AcerchemOrderException{
@@ -96,18 +102,30 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
     }
 
     protected DeliveryModeData convert(final DeliveryModeModel deliveryModeModel){
+
+        final CartModel cartModel = getCart();
         if (deliveryModeModel instanceof ZoneDeliveryModeModel)
         {
             final ZoneDeliveryModeModel zoneDeliveryModeModel = (ZoneDeliveryModeModel) deliveryModeModel;
-            final CartModel cartModel = getCart();
             if (cartModel != null)
             {
                 final ZoneDeliveryModeData zoneDeliveryModeData = getZoneDeliveryModeConverter().convert(zoneDeliveryModeModel);
 
+                PriceValue deliveryCost  = getDeliveryService().getDeliveryCostForDeliveryModeAndAbstractOrder(
+                        deliveryModeModel, cartModel);;
+                if (deliveryCost != null)
+                {
+                    zoneDeliveryModeData.setDeliveryCost(getPriceDataFactory().create(PriceDataType.BUY,
+                            BigDecimal.valueOf(deliveryCost.getValue()), deliveryCost.getCurrencyIso()));
+                }
+                return zoneDeliveryModeData;
+            }
+        }else{
+            if (cartModel != null)
+            {
+                DeliveryModeData deliveryModeData = getDeliveryModeConverter().convert(deliveryModeModel);
                 double orderTotalPrice  = cartModel.getTotalPrice();
-
                 String orderStandardFee = configurationService.getConfiguration().getString(ORDER_STANDARD_CRITICAL_FEE,defaultOrderStandardFee);
-
                 BigDecimal operationFee = BigDecimal.ZERO;
                 if (orderTotalPrice <= Double.valueOf(orderStandardFee)){
                     String orderOperationFee = configurationService.getConfiguration().getString(ORDER_OPERATION_FEE,defaultOrderOperationFee);
@@ -136,17 +154,14 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                         e.printStackTrace();
                     }
                     deliveryCost = new PriceValue(cartModel.getCurrency().getIsocode(), fee.doubleValue(), true);
-                }else{
-                    deliveryCost = getDeliveryService().getDeliveryCostForDeliveryModeAndAbstractOrder(
-                            deliveryModeModel, cartModel);
                 }
 
                 if (deliveryCost != null)
                 {
-                    zoneDeliveryModeData.setDeliveryCost(getPriceDataFactory().create(PriceDataType.BUY,
+                    deliveryModeData.setDeliveryCost(getPriceDataFactory().create(PriceDataType.BUY,
                             BigDecimal.valueOf(deliveryCost.getValue()), deliveryCost.getCurrencyIso()));
                 }
-                return zoneDeliveryModeData;
+                return deliveryModeData;
             }
             return null;
         }
@@ -176,6 +191,24 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
             }
         }
         return false;
+    }
+
+    @Override
+    public List<CardTypeData> getSupportedCardTypes(String selectedDeliveryModeCode)
+    {
+        List<CardTypeData> cardTypeDataList = new ArrayList<>();
+        if (selectedDeliveryModeCode!=null){
+            DeliveryModeModel deliveryModeModel = deliveryModeService.getDeliveryModeForCode(selectedDeliveryModeCode);
+           if (deliveryModeModel!=null&&deliveryModeModel.getSupportedPaymentModes()!=null){
+               for (PaymentModeModel paymentModeModel : deliveryModeModel.getSupportedPaymentModes()){
+                   CardTypeData cardTypeData = new CardTypeData();
+                   cardTypeData.setCode(paymentModeModel.getCode());
+                   cardTypeData.setName(paymentModeModel.getName());
+                   cardTypeDataList.add(cardTypeData);
+               }
+           }
+        }
+        return cardTypeDataList;
     }
 }
 

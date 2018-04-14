@@ -97,6 +97,30 @@
 	<bean id="notifyCustomerAboutFraudAction" class="com.acerchem.fulfilmentprocess.actions.order.NotifyCustomerAboutFraudAction"  parent="abstractAction">
 		<property name="eventService" ref="eventService"/>
 	</bean>
-
-
+	
+	<!-- 添加新的订单流程处理 -->
+	<bean id="waitForCustomerConfirmAction" class="com.acerchem.fulfilmentprocess.actions.order.WaitForCustomerConfirmAction"  parent="abstractAction">
+	</bean>
+	<bean id="waitForEmployeeConfirmAction" class="com.acerchem.fulfilmentprocess.actions.order.WaitForEmployeeConfirmAction"  parent="abstractAction">
+	</bean>
+	<bean id="waitForConfirmAction" class="com.acerchem.fulfilmentprocess.actions.order.WaitForConfirmAction"  parent="abstractAction"/>
+	<bean id="generateContactEmailAction"   parent="abstractGenerateEmailAction">
+			<property name="frontendTemplateName" value="OrderConfirmationEmailTemplate"/>
+	</bean>
+	<bean id="creditPayModeAction" class="com.acerchem.fulfilmentprocess.actions.order.CreditPayModeAction"  parent="abstractAction"/>
+	<bean id="linePayModeAction" class="com.acerchem.fulfilmentprocess.actions.order.LinePayModeAction"  parent="abstractAction"/>
+	<bean id="generateFormInvoiceEmailAction"  parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="OrderConfirmationEmailTemplate"/>
+	</bean>
+	<!-- <bean id="sendFormInvoiceEmailAction" class="com.acerchem.fulfilmentprocess.actions.order.SendFormInvoiceEmailAction"  parent="abstractAction">
+		<property name="emailService" ref="emailService"/>
+	</bean> -->
+	<bean id="waitCustomerCofirmPayAction" class="com.acerchem.fulfilmentprocess.actions.order.WaitCustomerCofirmPayAction"  parent="abstractAction"/>
+	<bean id="waitEmployeeConfirmPayAction" class="com.acerchem.fulfilmentprocess.actions.order.WaitEmployeeConfirmPayAction"  parent="abstractAction"/>
+	<bean id="waitForConfirmPayAction" class="com.acerchem.fulfilmentprocess.actions.order.WaitForConfirmPayAction"  parent="abstractAction"/>
+	<bean id="sendEmail"
+	      class="de.hybris.platform.acceleratorservices.process.email.actions.SendEmailAction"
+	      parent="abstractAction">
+		<property name="emailService" ref="emailService"/>
+	</bean>
 </beans>

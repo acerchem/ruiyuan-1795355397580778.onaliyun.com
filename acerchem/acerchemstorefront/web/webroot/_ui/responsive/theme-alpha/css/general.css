@@ -80,7 +80,7 @@ textarea{
 	z-index: 99;
 }
 
-.checkbox{
+/* .checkbox{
 	position: relative;
 	display: block;
 	padding-left: 30px;
@@ -114,7 +114,7 @@ textarea{
 	border-top:none;
 	border-left:none;
 	transform:rotate(45deg);
-}
+} */
 
 .submit{
 	width: 250px;

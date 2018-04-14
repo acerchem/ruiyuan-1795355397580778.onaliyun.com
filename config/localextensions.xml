@@ -33,8 +33,9 @@
     <extension name='ycommercewebservicestest' />
     -->
 
-    <extension name='electronicsstore' />
     <!--
+    <extension name='electronicsstore' />
+    
     <extension name='apparelstore' />
     -->
     <!--

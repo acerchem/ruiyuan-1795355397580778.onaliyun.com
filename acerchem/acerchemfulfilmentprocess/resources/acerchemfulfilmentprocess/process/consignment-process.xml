@@ -10,68 +10,95 @@
  license agreement you entered into with SAP.
 -->
 <process xmlns="http://www.hybris.de/xsd/processdefinition" start="waitBeforeTransmission" name="consignment-process" processClass="de.hybris.platform.ordersplitting.model.ConsignmentProcessModel">
-
+	
+	
 	<action id="waitBeforeTransmission" bean="waitBeforeTransmissionAction">
 		<transition name="NOK" to="waitBeforeTransmission"/>
-		<transition name="OK" to="sendConsignmentToWarehouse"/>
-	</action>
-
-	<action id="sendConsignmentToWarehouse" bean="sendConsignmentToWarehouseAction">
-		<transition name="OK" to="waitForWarehouse"/>
-	</action>
-
-	<wait id="waitForWarehouse" then="receiveConsignmentStatus" prependProcessCode="false">
-		<event>${process.code}_WaitForWarehouse</event>
-	</wait>
-
-	<action id="receiveConsignmentStatus" bean="receiveConsignmentStatusAction">
-		<transition name="OK" to="allowShipment"/>
-		<transition name="CANCEL" to="cancelConsignment"/>
-		<transition name="ERROR" to="error"/>
-	</action>
-
-	<action id="allowShipment" bean="allowShipmentAction">
-		<transition name="DELIVERY" to="sendDeliveryMessage"/>
-		<transition name="PICKUP" to="sendReadyForPickupMessage"/>
-		<transition name="ERROR" to="error"/>
-		<transition name="CANCEL" to="cancelConsignment"/>
-	</action>
-
-	<action id="sendDeliveryMessage" bean="sendDeliveryMessageAction">
-		<transition name="OK" to="subprocessEnd"/>
+		<transition name="OK" to="recordConsignmentInfo"/>
 	</action>
 	
-	<action id="sendReadyForPickupMessage" bean="sendReadyForPickupMessageAction">
-		<transition name="OK" to="waitForPickup"/>
+	<action id="recordConsignmentInfo" bean="recordConsignmentInfoAction">
+		<transition name="OK" to="splitDeliveryMode"/>
 	</action>
-
-	<action id="cancelConsignment" bean="cancelConsignmentAction">
-		<transition name="OK" to="sendCancelMessage"/>
+	
+	<split id="splitDeliveryMode">
+		<targetNode name="deliveryByOther"/>
+		<targetNode name="deliveryByshelf"/>
+	</split>
+	
+	<action id="deliveryByOther" bean="deliveryByOtherAction">
+		<transition name="OK" to="generateDeliveryEmail"/>
 	</action>
-
-	<action id="sendCancelMessage" bean="sendCancelMessageAction">
-		<transition name="OK" to="subprocessEnd"/>
+	
+	<action id="deliveryByshelf" bean="deliveryByshelfAction">
+		<transition name="OK" to="generateDeliveryByShelfEmail"/>
 	</action>
-
-	<wait id="waitForPickup" then="confirmConsignmentPickup" prependProcessCode="false">
-		<event>${process.code}_ConsignmentPickup</event>
+	
+	<action id="generateDeliveryEmail" bean="generateDeliveryEmailAction">
+		<transition name="OK" to="sendDeliveryEmail"/>
+		<transition name="NOK" to="error"/>
+	</action>
+	
+	<action id="generateDeliveryByShelfEmail" bean="generateDeliveryByShelfEmailAction">
+		<transition name="OK" to="sendDeliveryByShelfEmail"/>
+		<transition name="NOK" to="error"/>
+	</action>
+	
+	<action id="sendDeliveryEmail" bean="sendEmail">
+		<transition name="OK" to="waitUpdateConsignmentStatus"/>
+	</action>
+	
+	<action id="sendDeliveryByShelfEmail" bean="sendEmail">
+		<transition name="OK" to="waitUpdateConsignmentStatus"/>
+	</action>
+	
+	<wait id="waitUpdateConsignmentStatus" then="splitConsigmentConfirm" prependProcessCode="false">
+  		<event>${process.order.code}_WaitUpdateConsignmentStatus</event>
 	</wait>
 	
-	<action id="confirmConsignmentPickup" bean="confirmConsignmentPickupAction">
-		<transition name="OK" to="sendPickedUpMessage"/>
-		<transition name="CANCEL" to="cancelConsignment"/>
-		<transition name="ERROR" to="error"/>
+	<split id="splitConsigmentConfirm">
+		<targetNode name="customerConsigmentConfirm"/>
+		<targetNode name="employeeConsigmentConfirm"/>
+	</split>
+	
+	<action id="customerConsigmentConfirm" bean="customerConsigmentConfirmAction">
+		<transition name="OK" to="waitConsignMentConfirm"/>
+		<transition name="NOK" to="error"/>
+		<transition name="WAIT" to="waitForCustomerConsignMentConfirmDecision"/>
 	</action>
 	
-	<action id="sendPickedUpMessage" bean="sendPickedUpMessageAction">
-		<transition name="OK" to="subprocessEnd"/>
+	<wait id="waitForCustomerConsignMentConfirmDecision" then="customerConsigmentConfirm" prependProcessCode="false">
+  		<event>${process.order.code}_WaitForCustomerConsignMentConfirmDecision</event>
+	</wait>
+	
+	
+	<action id="employeeConsigmentConfirm" bean="employeeConsigmentConfirmAction">
+		<transition name="OK" to="waitConsignMentConfirm"/>
+		<transition name="NOK" to="error"/>
+		<transition name="WAIT" to="waitForEmployeeConsignMentConfirmDecision"/>
 	</action>
-
-	<action id="subprocessEnd" bean="subprocessEndAction">
+	
+	
+	<wait id="waitForEmployeeConsignMentConfirmDecision" then="employeeConsigmentConfirm" prependProcessCode="false">
+  		<event>${process.order.code}_WaitForCustomerConsignMentConfirmDecision</event>
+	</wait>
+	
+	<action id="waitConsignMentConfirm" bean="waitConsignMentConfirmAction">
+		<transition name="OK" to="generateOfficialInvoiceEmail"/>
+		<transition name="NOK" to="waitConsignMentConfirm"/>
+	</action>
+	
+	<action id="generateOfficialInvoiceEmail" bean="generateOfficialInvoiceEmailAction">
+		<transition name="OK" to="sendOfficialInvoiceEmail"/>
+		<transition name="NOK" to="error"/>
+	</action>
+	
+	<action id="sendOfficialInvoiceEmail" bean="sendEmail">
 		<transition name="OK" to="success"/>
 	</action>
-
+	
 	<end id="error" state="ERROR">All went wrong.</end>
 	<end id="failed" state="FAILED">Order not placed.</end>
 	<end id="success" state="SUCCEEDED">Order placed.</end>
+	
 </process>

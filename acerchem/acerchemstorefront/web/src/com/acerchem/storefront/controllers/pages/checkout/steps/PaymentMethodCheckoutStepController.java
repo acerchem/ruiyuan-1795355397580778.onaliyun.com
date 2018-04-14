@@ -138,7 +138,7 @@ public class PaymentMethodCheckoutStepController extends AbstractCheckoutStepCon
 	@PreValidateCheckoutStep(checkoutStep = PAYMENT_METHOD)
 	public String enterStep(final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
-		getCheckoutFacade().setDeliveryModeIfAvailable();
+//		getCheckoutFacade().setDeliveryModeIfAvailable();
 		setupAddPaymentPage(model);
 
 		// Use the checkout PCI strategy for getting the URL for creating new subscriptions.

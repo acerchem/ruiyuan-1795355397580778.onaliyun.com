@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-4-13 20:17:00                          ---
+ * --- Generated at 2018-4-14 9:51:32                           ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.constants;
@@ -22,6 +22,7 @@ public class GeneratedAcerchemCoreConstants
 		public static final String APPARELSTYLEVARIANTPRODUCT = "ApparelStyleVariantProduct".intern();
 		public static final String COUNTRYTRAYFARECONF = "CountryTrayFareConf".intern();
 		public static final String CREDITACCOUNTSTATUSENUM = "CreditAccountStatusEnum".intern();
+		public static final String CREDITPAYMENTINFO = "CreditPaymentInfo".intern();
 		public static final String CREDITTRANSACTION = "CreditTransaction".intern();
 		public static final String CUSTOMERCREDITACCOUNT = "CustomerCreditAccount".intern();
 		public static final String ELECTRONICSCOLORVARIANTPRODUCT = "ElectronicsColorVariantProduct".intern();
@@ -36,6 +37,17 @@ public class GeneratedAcerchemCoreConstants
 	}
 	public static class Attributes
 	{
+		public static class AbstractOrder
+		{
+			public static final String CUSTOMERCONFIRM = "customerConfirm".intern();
+			public static final String CUSTOMERCONFIRMDELIVERY = "customerConfirmDelivery".intern();
+			public static final String CUSTOMERCONFIRMPAY = "customerConfirmPay".intern();
+			public static final String DELIVERYCONFIRM = "deliveryConfirm".intern();
+			public static final String EMPLOYEECONFIRM = "employeeConfirm".intern();
+			public static final String EMPLOYEECONFIRMDELIVERY = "employeeConfirmDelivery".intern();
+			public static final String EMPLOYEECONFIRMPAY = "employeeConfirmPay".intern();
+			public static final String PAYCONFIRM = "payConfirm".intern();
+		}
 		public static class AbstractOrderEntry
 		{
 			public static final String AVAILABLEDATE = "availableDate".intern();
@@ -81,7 +93,13 @@ public class GeneratedAcerchemCoreConstants
 			public static final String ACERCHEMVENDOR = "acerChemVendor".intern();
 			public static final String ACERCHEMVENDORPOS = "acerChemVendorPOS".intern();
 			public static final String ANONYMOUSDISPLAYPRICE = "anonymousDisplayPrice".intern();
+			public static final String CAS = "CAS".intern();
 			public static final String CHEMICALINFO = "chemicalInfo".intern();
+			public static final String GROSSWEIGHT = "grossWeight".intern();
+			public static final String NETWEIGHT = "netWeight".intern();
+			public static final String PACKAGETYPE = "packageType".intern();
+			public static final String PACKAGEWEIGHT = "packageWeight".intern();
+			public static final String SPECIFICATION = "specification".intern();
 			public static final String UNITCALCULATERATO = "unitCalculateRato".intern();
 		}
 		public static class ProductCarouselComponent
@@ -120,6 +138,10 @@ public class GeneratedAcerchemCoreConstants
 		{
 			public static final String ADD = "ADD".intern();
 			public static final String DEL = "DEL".intern();
+		}
+		public static class PaymentTransactionType
+		{
+			public static final String LINE = "LINE".intern();
 		}
 		public static class SwatchColorEnum
 		{

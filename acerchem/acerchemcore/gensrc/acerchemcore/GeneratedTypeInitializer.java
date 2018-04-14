@@ -176,6 +176,16 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			false
 		);
 	
+		createItemType(
+			"CreditPaymentInfo",
+			"PaymentInfo",
+			com.acerchem.core.jalo.CreditPaymentInfo.class,
+			"de.hybris.platform.persistence.acerchemcore_CreditPaymentInfo",
+			false,
+			null,
+			false
+		);
+	
 		createRelationType(
 			"AcerChemVendor2Product",
 			null,
@@ -299,6 +309,18 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 				single_createattr_Product_unitCalculateRato();
 			
+				single_createattr_Product_packageWeight();
+			
+				single_createattr_Product_packageType();
+			
+				single_createattr_Product_netWeight();
+			
+				single_createattr_Product_grossWeight();
+			
+				single_createattr_Product_specification();
+			
+				single_createattr_Product_CAS();
+			
 				single_createattr_ProductCarouselComponent_isPromotion();
 			
 				single_createattr_ProductCarouselComponent_isWell();
@@ -368,6 +390,22 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 				single_createattr_Customer_provideTradeReference();
 			
 				single_createattr_PointOfService_deliveryZone();
+			
+				single_createattr_AbstractOrder_customerConfirm();
+			
+				single_createattr_AbstractOrder_employeeConfirm();
+			
+				single_createattr_AbstractOrder_deliveryConfirm();
+			
+				single_createattr_AbstractOrder_payConfirm();
+			
+				single_createattr_AbstractOrder_customerConfirmPay();
+			
+				single_createattr_AbstractOrder_employeeConfirmPay();
+			
+				single_createattr_AbstractOrder_customerConfirmDelivery();
+			
+				single_createattr_AbstractOrder_employeeConfirmDelivery();
 			
 		createRelationAttributes(
 			"AcerChemVendor2Product", 
@@ -903,6 +941,108 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 				createPropertyAttribute(
 					"Product", 
 					"unitCalculateRato",  
+					null,
+					"java.lang.String",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_Product_packageWeight() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"Product", 
+					"packageWeight",  
+					null,
+					"java.lang.String",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_Product_packageType() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"Product", 
+					"packageType",  
+					null,
+					"java.lang.String",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_Product_netWeight() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"Product", 
+					"netWeight",  
+					null,
+					"java.lang.String",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_Product_grossWeight() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"Product", 
+					"grossWeight",  
+					null,
+					"java.lang.String",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_Product_specification() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"Product", 
+					"specification",  
+					null,
+					"java.lang.String",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_Product_CAS() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"Product", 
+					"CAS",  
 					null,
 					"java.lang.String",
 					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG,
@@ -1507,6 +1647,142 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 	}
 	
+	public void single_createattr_AbstractOrder_customerConfirm() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"AbstractOrder", 
+					"customerConfirm",  
+					null,
+					"java.lang.Boolean",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_AbstractOrder_employeeConfirm() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"AbstractOrder", 
+					"employeeConfirm",  
+					null,
+					"java.lang.Boolean",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_AbstractOrder_deliveryConfirm() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"AbstractOrder", 
+					"deliveryConfirm",  
+					null,
+					"java.lang.Boolean",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_AbstractOrder_payConfirm() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"AbstractOrder", 
+					"payConfirm",  
+					null,
+					"java.lang.Boolean",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_AbstractOrder_customerConfirmPay() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"AbstractOrder", 
+					"customerConfirmPay",  
+					null,
+					"java.lang.Boolean",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_AbstractOrder_employeeConfirmPay() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"AbstractOrder", 
+					"employeeConfirmPay",  
+					null,
+					"java.lang.Boolean",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_AbstractOrder_customerConfirmDelivery() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"AbstractOrder", 
+					"customerConfirmDelivery",  
+					null,
+					"java.lang.Boolean",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_AbstractOrder_employeeConfirmDelivery() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"AbstractOrder", 
+					"employeeConfirmDelivery",  
+					null,
+					"java.lang.Boolean",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
 
 
 	/**
@@ -1575,6 +1851,15 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 				"LOCKED",
 				"NORMAL"
+			} )
+		);
+	
+		createEnumerationValues(
+			"PaymentTransactionType",
+			false,
+			Arrays.asList( new String[] {
+			
+				"LINE"
 			} )
 		);
 	
@@ -1829,6 +2114,18 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 		
 			single_setAttributeProperties_Product_unitCalculateRato();
 		
+			single_setAttributeProperties_Product_packageWeight();
+		
+			single_setAttributeProperties_Product_packageType();
+		
+			single_setAttributeProperties_Product_netWeight();
+		
+			single_setAttributeProperties_Product_grossWeight();
+		
+			single_setAttributeProperties_Product_specification();
+		
+			single_setAttributeProperties_Product_CAS();
+		
 				{
 				Map customPropsMap = new HashMap();
 				
@@ -2047,6 +2344,45 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 			single_setAttributeProperties_PointOfService_deliveryZone();
 		
+				{
+				Map customPropsMap = new HashMap();
+				
+				changeMetaType(
+					"AbstractOrder",
+					null,
+					customPropsMap
+				);
+				}
+			
+			single_setAttributeProperties_AbstractOrder_customerConfirm();
+		
+			single_setAttributeProperties_AbstractOrder_employeeConfirm();
+		
+			single_setAttributeProperties_AbstractOrder_deliveryConfirm();
+		
+			single_setAttributeProperties_AbstractOrder_payConfirm();
+		
+			single_setAttributeProperties_AbstractOrder_customerConfirmPay();
+		
+			single_setAttributeProperties_AbstractOrder_employeeConfirmPay();
+		
+			single_setAttributeProperties_AbstractOrder_customerConfirmDelivery();
+		
+			single_setAttributeProperties_AbstractOrder_employeeConfirmDelivery();
+		
+				{
+				Map customPropsMap = new HashMap();
+				
+				setItemTypeProperties(
+					"CreditPaymentInfo",
+					false,
+					true,
+					true,
+					null,
+					customPropsMap
+				);
+				}
+			
 				setDefaultProperties(
 					"GenderList",
 					true,
@@ -2086,6 +2422,12 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 					"CreditAccountStatusEnum",
 					true,
 					true,
+					null
+				);
+			
+				changeMetaType(
+					"PaymentTransactionType",
+					null,
 					null
 				);
 			
@@ -2675,6 +3017,138 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							setAttributeProperties(
 								"Product", 
 								"unitCalculateRato",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_Product_packageWeight() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"Product", 
+								"packageWeight",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_Product_packageType() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"Product", 
+								"packageType",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_Product_netWeight() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"Product", 
+								"netWeight",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_Product_grossWeight() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"Product", 
+								"grossWeight",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_Product_specification() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"Product", 
+								"specification",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_Product_CAS() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"Product", 
+								"CAS",
 								false, 
 								null,
 								null,
@@ -3448,6 +3922,182 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 								false, 
 								null,
 								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_AbstractOrder_customerConfirm() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"AbstractOrder", 
+								"customerConfirm",
+								false, 
+								Boolean.FALSE,
+								"Boolean.FALSE",
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_AbstractOrder_employeeConfirm() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"AbstractOrder", 
+								"employeeConfirm",
+								false, 
+								Boolean.FALSE,
+								"Boolean.FALSE",
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_AbstractOrder_deliveryConfirm() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"AbstractOrder", 
+								"deliveryConfirm",
+								false, 
+								Boolean.FALSE,
+								"Boolean.FALSE",
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_AbstractOrder_payConfirm() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"AbstractOrder", 
+								"payConfirm",
+								false, 
+								Boolean.FALSE,
+								"Boolean.FALSE",
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_AbstractOrder_customerConfirmPay() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"AbstractOrder", 
+								"customerConfirmPay",
+								false, 
+								Boolean.FALSE,
+								"Boolean.FALSE",
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_AbstractOrder_employeeConfirmPay() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"AbstractOrder", 
+								"employeeConfirmPay",
+								false, 
+								Boolean.FALSE,
+								"Boolean.FALSE",
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_AbstractOrder_customerConfirmDelivery() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"AbstractOrder", 
+								"customerConfirmDelivery",
+								false, 
+								Boolean.FALSE,
+								"Boolean.FALSE",
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_AbstractOrder_employeeConfirmDelivery() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"AbstractOrder", 
+								"employeeConfirmDelivery",
+								false, 
+								Boolean.FALSE,
+								"Boolean.FALSE",
 								null,
 								true,
 								true,

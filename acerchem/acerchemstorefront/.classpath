@@ -20,6 +20,5 @@
 	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/jdom-1.1.jar"/>
 	<classpathentry kind="src" output="eclipsebin/web/classes" path="web/src"/>
 	<classpathentry kind="src" output="eclipsebin/web/classes" path="web/testsrc"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/customerticketingfacades"/>
 	<classpathentry kind="output" path="eclipsebin/notused"/>
 </classpath>

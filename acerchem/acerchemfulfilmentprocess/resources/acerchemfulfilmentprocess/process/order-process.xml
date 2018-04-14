@@ -12,99 +12,102 @@
 <process xmlns="http://www.hybris.de/xsd/processdefinition" start="checkOrder" name="order-process" processClass="de.hybris.platform.orderprocessing.model.OrderProcessModel">
 
 	<action id="checkOrder" bean="checkOrderAction">
-		<transition name="OK" to="checkAuthorizeOrderPayment"/>
+		<transition name="OK" to="split"/>
 		<transition name="NOK" to="error"/>
 	</action>
+	
+	<split id="split">
+		<targetNode name="waitForCustomerConfirm"/>
+		<targetNode name="waitForEmployeeConfirm"/>
+	</split>
 
-	<action id="checkAuthorizeOrderPayment" bean="checkAuthorizeOrderPaymentAction">
-		<transition name="OK" to="reserveAmount"/>
-		<transition name="NOK" to="authorizationFailedNotification"/>
-	</action>
-
-	<action id="reserveAmount" bean="reserveOrderAmountAction">
-		<transition name="OK" to="checkTransactionReviewStatus"/>
-		<transition name="NOK" to="sendPaymentFailedNotification"/>
-	</action>
-
-	<action id="checkTransactionReviewStatus" bean="checkTransactionReviewStatusAction">
-		<transition name="OK" to="fraudCheck"/>
-		<transition name="NOK" to="notifyCustomer"/>
-		<transition name="WAIT" to="waitForReviewDecision"/>
-	</action>
-
-	<wait id="waitForReviewDecision" then="checkTransactionReviewStatus" prependProcessCode="false">
-  		<event>${process.order.code}_ReviewDecision</event>
-	</wait>
-
-	<action id="fraudCheck" bean="fraudCheckOrderInternalAction">
-		<transition name="OK" to="sendOrderPlacedNotification"/>
-		<transition name="POTENTIAL" to="manualOrderCheckCSA" />
-		<transition name="FRAUD" to="notifyCustomer" />
+	<action id="waitForCustomerConfirm" bean="waitForCustomerConfirmAction">
+		<transition name="OK" to="waitForConfirm"/>
+		<transition name="NOK" to="error"/>
+		<transition name="WAIT" to="waitForCustomerDecision"/>
 	</action>
 	
-	<action id="manualOrderCheckCSA" bean="prepareOrderForManualCheckAction">
-		<transition name="OK" to="waitForManualOrderCheckCSA"/>
-	</action>
-
-	<wait id="waitForManualOrderCheckCSA" then="orderManualChecked" prependProcessCode="false" >
-		<event>${process.code}_CSAOrderVerified</event>
+	<wait id="waitForCustomerDecision" then="waitForCustomerConfirm" prependProcessCode="false">
+  		<event>${process.order.code}_WaitForCustomerDecision</event>
 	</wait>
 	
-	<action id="orderManualChecked" bean="orderManualCheckedAction">
-		<transition name="OK" to="sendOrderPlacedNotification"/>
-		<transition name="NOK" to="waitForCleanUp"/>
-		<transition name="UNDEFINED" to="waitForManualOrderCheckCSA"/>
+	
+	<action id="waitForEmployeeConfirm" bean="waitForEmployeeConfirmAction">
+		<transition name="OK" to="waitForConfirm"/>
+		<transition name="NOK" to="error"/>
+		<transition name="WAIT" to="waitForEmployeeDecision"/>
 	</action>
 	
-	<action id="notifyCustomer" bean="notifyCustomerAboutFraudAction">
-		<transition name="OK" to="waitForCleanUp"/>
-	</action>
-	
-	<wait id="waitForCleanUp" then="scheduleForCleanUp" prependProcessCode="false">
-		<event>${process.code}_CleanUpEvent</event>
+	<wait id="waitForEmployeeDecision" then="waitForEmployeeConfirm" prependProcessCode="false">
+  		<event>${process.order.code}_WaitForEmployeeDecision</event>
 	</wait>
 	
-	<action id="scheduleForCleanUp" bean="scheduleForCleanUpAction">
-		<transition name="OK" to="cancelOrder"/>
-		<transition name="NOK" to="orderManualChecked" /> 
+	<action id="waitForConfirm" bean="waitForConfirmAction">
+		<transition name="OK" to="generateContactEmail"/>
+		<transition name="NOK" to="waitForConfirm"/>
 	</action>
-
-	<action id="sendOrderPlacedNotification" bean="sendOrderPlacedNotificationAction">
-		<transition name="OK" to="takePayment"/>
+	 
+	<action id="generateContactEmail" bean="generateContactEmailAction">
+		<transition name="OK" to="sendContactEmail"/>
+		<transition name="NOK" to="error"/>
 	</action>
 	
-	<action id="takePayment" bean="takePaymentAction">
-		<transition name="OK" to="splitOrder"/>
-		<transition name="NOK" to="sendPaymentFailedNotification"/>
+	<action id="sendContactEmail" bean="sendEmail">
+		<transition name="OK" to="splitPayMode"/>
 	</action>
-
-	<action id="cancelOrder" bean="cancelWholeOrderAuthorizationAction">
-		<transition name="OK" to="failed"/>
-	</action>
-
-	<action id="authorizationFailedNotification" bean="sendAuthorizationFailedNotificationAction">
-		<transition name="OK" to="failed"/>
-	</action>
-
-	<action id="sendPaymentFailedNotification" bean="sendPaymentFailedNotificationAction">
-		<transition name="OK" to="failed"/>
-	</action>
-
-	<action id="splitOrder" bean="splitOrderAction">
-		<transition name="OK" to="waitForWarehouseSubprocessEnd"/>
-	</action>
-
-	<wait id="waitForWarehouseSubprocessEnd" then="isProcessCompleted" prependProcessCode="false" >
-		<event>${process.code}_ConsignmentSubprocessEnd</event>
-	</wait>
-
-	<action id="isProcessCompleted" bean="subprocessesCompletedAction">
-		<transition name="OK" to="sendOrderCompletedNotification"/>
-		<transition name="NOK" to="waitForWarehouseSubprocessEnd"/>
-	</action>
-
-	<action id="sendOrderCompletedNotification" bean="sendOrderCompletedNotificationAction">
+	
+	<split id="splitPayMode">
+		<targetNode name="creditPayMode"/>
+		<targetNode name="linePayMode"/>
+	</split>
+	
+	<action id="creditPayMode" bean="creditPayModeAction">
 		<transition name="OK" to="success"/>
+	</action>
+	
+	<action id="linePayMode" bean="linePayModeAction">
+		<transition name="OK" to="generateFormInvoiceEmail"/>
+		<transition name="NOK" to="creditPayMode"/>
+	</action>
+	
+	
+	<action id="generateFormInvoiceEmail" bean="generateFormInvoiceEmailAction">
+		<transition name="OK" to="sendFormInvoiceEmail"/>
+		<transition name="NOK" to="error"/>
+	</action>
+	
+	<action id="sendFormInvoiceEmail" bean="sendEmail">
+		<transition name="OK" to="splitPayConfrim"/>
+	</action>
+	
+	<split id="splitPayConfrim">
+		<targetNode name="customerCofirmPay"/>
+		<targetNode name="employeeConfirmPay"/>
+	</split>
+	
+	<action id="customerCofirmPay" bean="waitCustomerCofirmPayAction">
+		<transition name="OK" to="waitForConfirmPay"/>
+		<transition name="NOK" to="error"/>
+		<transition name="WAIT" to="waitForCustomerConfirmPayDecision"/>
+	</action>
+	
+	<wait id="waitForCustomerConfirmPayDecision" then="customerCofirmPay" prependProcessCode="false">
+  		<event>${process.order.code}_WaitForCustomerConfirmPayDecision</event>
+	</wait>
+	
+	<action id="employeeConfirmPay" bean="waitEmployeeConfirmPayAction">
+		<transition name="OK" to="waitForConfirmPay"/>
+		<transition name="NOK" to="error"/>
+		<transition name="WAIT" to="waitForEmployeeConfirmPayDecision"/>
+	</action>
+	
+	<wait id="waitForEmployeeConfirmPayDecision" then="employeeConfirmPay" prependProcessCode="false">
+  		<event>${process.order.code}_WaitForEmployeeConfirmPayDecision</event>
+	</wait>
+	
+	<action id="waitForConfirmPay" bean="waitForConfirmPayAction">
+		<transition name="OK" to="success"/>
+		<transition name="NOK" to="waitForConfirmPay"/>
 	</action>
 
 	<end id="error" state="ERROR">All went wrong.</end>

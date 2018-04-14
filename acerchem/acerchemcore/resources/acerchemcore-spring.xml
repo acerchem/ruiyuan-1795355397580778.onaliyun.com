@@ -631,4 +631,8 @@
 	<alias name="defaultAcerchemDeliveryService" alias="acerchemDeliveryService"/>
 	<bean id="defaultAcerchemDeliveryService" parent="deliveryService" class="com.acerchem.core.service.impl.DefaultAcerchemDeliveryService">
 	</bean>
+
+	<alias name="defaultAcerchemFindDeliveryCostStrategy" alias="findDeliveryCostStrategy"/>
+	<bean id="defaultAcerchemFindDeliveryCostStrategy" parent="defaultFindDeliveryCostStrategy" class="com.acerchem.core.strategies.impl.DefaultAcerchemFindDeliveryCostStrategy">
+	</bean>
 </beans>

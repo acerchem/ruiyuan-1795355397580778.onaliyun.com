@@ -109,7 +109,7 @@
 			<br/><br/>
         </div>
 		<br/>
-        <div class="cts-msg-history">
+        <div class="cts-msg-history" id="support">
             <div style="display:none" id="ct-overlay-title">
                 <div class="headline"><span class="headline-text"><spring:theme code="text.account.supporttickets.updateTicket.addMessage" text="Add Message" /></span></div>
             </div>
@@ -174,6 +174,8 @@ $('#updateTicket').on('click',function(){
 		 maxalert('Please enter a message!');
 		return false;
 	}
+	var wrap = $('#support form');
+    wrap.submit();
 })
 
 </script> 
