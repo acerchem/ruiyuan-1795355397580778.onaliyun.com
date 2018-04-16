@@ -71,7 +71,7 @@ INSERT_UPDATE UserGroup;UID[unique=true];groups(uid)[mode=append];locname[lang=e
 
 
 
-;acerchemgroup;employeegroup;;"Acerchem Group"
+;acerchemgroup;employeegroup,acerchemrole;;"Acerchem Group"
 ;Kevingroup;employeegroup;;"Kevin Group"
 ;Frencegroup;employeegroup;;"Frence Group"
 ;Wintergroup;employeegroup;;"Winter Group"
