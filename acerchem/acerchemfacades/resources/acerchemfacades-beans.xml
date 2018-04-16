@@ -16,6 +16,7 @@
 		<property name="chemicalInfo" type="String"/>
 		<property name="unitCalculateRato" type="String"/>
 		<property name="promotionPrice" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+	    <property name="isAnonymousDisplayPrice" type="java.lang.Boolean"/>
 	</bean>
 
 	<bean class="com.acerchem.facades.product.data.GenderData">
