@@ -11,22 +11,72 @@
 #
 
 
+#shaun
+INSERT_UPDATE BackofficeRole;UID[unique=true];backOfficeLoginDisabled;authorities
+;customersupportadministratorrole;FALSE;customersupportadministratorrole
+;customersupportmanagerrole;FALSE;customersupportmanagerrole
+;customersupportagentrole;FALSE;customersupportagentrole
+;acerchemrole;FALSE;acerchemrole
+;;;;;
+
+#shaun
+INSERT_UPDATE UserGroup;UID[unique=true];description
+;customersupportadministratorgroup;The Customer Support Administrator Group has access to the Customer Support Backoffice's Customer Support Administrator Group and Customer Support Agent Group views AND/OR the Assisted Service Module.
+;acerchemsupportgroup;The acerchem support group has access to the Customer Support Backoffice's acerchem support group views and AND/OR the Assisted Service Module.
+
+
+#shaun
+INSERT_UPDATE CsAgentGroup;UID[unique=true];description
+;customersupportmanagergroup;The Customer Support Manager Group has access to the Customer Support Backoffice's Customer Support Manager Group and Customer Support Agent Group views AND/OR the Assisted Service Module.
+;customersupportagentgroup;The Customer Support Agent Group has access to the Customer Support Backoffice's Customer Support Agent Group views and AND/OR the Assisted Service Module.
+
+
+#shaun
+INSERT_UPDATE PrincipalGroupRelation;source(uid)[unique=true];target(uid)[unique=true]
+;customersupportadministratorrole;employeegroup
+;acerchemrole;employeegroup
+;customersupportmanagerrole;employeegroup
+;customersupportagentrole;employeegroup
+
+;customersupportadministratorgroup;backofficeadmingroup
+;customersupportadministratorgroup;customersupportadministratorrole
+;customersupportadministratorgroup;customersupportmanagerrole
+;customersupportadministratorgroup;acerchemrole
+;customersupportadministratorgroup;customersupportagentrole
+;customersupportadministratorgroup;csagentmanagergroup
+
+;acerchemsupportgroup;backofficeadmingroup
+;acerchemsupportgroup;customersupportadministratorrole
+;acerchemsupportgroup;customersupportmanagerrole
+;acerchemsupportgroup;acerchemrole
+;acerchemsupportgroup;customersupportagentrole
+;acerchemsupportgroup;csagentmanagergroup
+
+;customersupportmanagergroup;employeegroup
+;customersupportmanagergroup;customersupportmanagerrole
+;customersupportmanagergroup;acerchemrole
+;customersupportmanagergroup;customersupportagentrole
+;customersupportmanagergroup;csagentmanagergroup
+;customersupportagentgroup;employeegroup
+;customersupportagentgroup;customersupportagentrole
+;customersupportagentgroup;acerchemrole
+
+
+
+
 INSERT_UPDATE UserGroup;UID[unique=true];groups(uid)[mode=append];locname[lang=en];description
 ;asagentgroup;;"Common Assisted Service Agent Group";
 ;asagentsalesgroup;asagentgroup;"Assisted Service Customer Support Agent Group";"The ASM CS Support Agent can provide sales and service support to a customer, but may be restricted, so that they cannot checkout a customer's cart, or authorise a customer's quote request for example."
 ;asagentsalesmanagergroup;asagentsalesgroup;"Assisted Service Customer Support Manager Group";"The ASM CS Support Manager can do everything an 'ASM CS Support Agent' can do, and more, such as authorising a customer's quote request for example." 
 
 #shaun
-;acerchemgroup;employeegroup;;"Acerchem Group"
+;acerchemgroup;employeegroup,acerchemrole;;"Acerchem Group"
 ;Kevingroup;employeegroup;;"Kevin Group"
 ;Frencegroup;employeegroup;;"Frence Group"
 ;Wintergroup;employeegroup;;"Winter Group"
 ;Lulugroup;employeegroup;;"Lulu Group"
 ;Catherinegroup;employeegroup;;"Catherine Group"
 
-;Basicmanagementgroup;acerchemrole,acerchemgroup;;"Basic product information maintenance, add, modify"
-;Salesgroup;acerchemrole,acerchemgroup;;"Valet orders"
-;Logisticsgroup;acerchemrole,acerchemgroup;;"Inventory import, order delivery and logistics information maintenance"
 
 
 
@@ -51,12 +101,12 @@ INSERT_UPDATE Employee;UID[unique=true];name;groups(uid);description;password
 ;customer.support.7@sap.com;Customer Support 7;customersupportagentgroup;This generic Customer Support Agent is assigned and has access to the Backoffice Customer Support Agent Group views and ASM - to provide restricted Backoffice and ASM customer sales and service manager support.;1234
 ;customer.support.8@sap.com;Customer Support 8;customersupportagentgroup;This generic Customer Support Agent is assigned and has access to the Backoffice Customer Support Agent Group views and ASM - to provide restricted Backoffice and ASM customer sales and service manager support.;1234
 
-;Kevin@acerchem.com;Kevin;Kevingroup,employeegroup,acerchemgroup,Logisticsgroup,Basicmanagementgroup,warehouseadministratorgroup;Basic product information maintenance addition modification and inventory import;123456
-;Frence@acerchem.com;Frence;Frencegroup,employeegroup,acerchemgroup,Logisticsgroup,Basicmanagementgroup,warehouseagentgroup;Product storage and order shipment logistics information maintenance;123456
-;Winter@acerchem.com;Winter;Wintergroup,employeegroup,acerchemgroup,Salesgroup,Basicmanagementgroup;Product price maintenance customer level discount review;123456
-;Donald@acerchem.com;Donald;acerchemrole,employeegroup,acerchemgroup;Reports;123456
-;Lulu@acerchem.com;Lulu;Lulugroup,employeegroup,acerchemgroup,Salesgroup;Valet orders;123456
-;Catherine@acerchem.com;Catherine;Catherinegroup,employeegroup,acerchemgroup,Salesgroup;Valet orders;123456
+;Kevin@acerchem.com;Kevin;Kevingroup,employeegroup,acerchemgroup;Basic product information maintenance addition modification and inventory import;123456
+;Frence@acerchem.com;Frence;Frencegroup,employeegroup,acerchemgroup;Product storage and order shipment logistics information maintenance;123456
+;Winter@acerchem.com;Winter;Wintergroup,employeegroup,acerchemgroup;Product price maintenance customer level discount review;123456
+;Donald@acerchem.com;Donald;employeegroup,acerchemgroup;Reports;123456
+;Lulu@acerchem.com;Lulu;Lulugroup,employeegroup,acerchemgroup;Valet orders;123456
+;Catherine@acerchem.com;Catherine;Catherinegroup,employeegroup,acerchemgroup;Valet orders;123456
 
 
 
