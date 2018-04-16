@@ -9,6 +9,32 @@
 # license agreement you entered into with SAP.
 # -----------------------------------------------------------------------
 #
+
+
+INSERT_UPDATE UserGroup;UID[unique=true];groups(uid)[mode=append];locname[lang=en];description
+;asagentgroup;;"Common Assisted Service Agent Group";
+;asagentsalesgroup;asagentgroup;"Assisted Service Customer Support Agent Group";"The ASM CS Support Agent can provide sales and service support to a customer, but may be restricted, so that they cannot checkout a customer's cart, or authorise a customer's quote request for example."
+;asagentsalesmanagergroup;asagentsalesgroup;"Assisted Service Customer Support Manager Group";"The ASM CS Support Manager can do everything an 'ASM CS Support Agent' can do, and more, such as authorising a customer's quote request for example." 
+
+#shaun
+;acerchemgroup;employeegroup;;"Acerchem Group"
+;Kevingroup;employeegroup;;"Kevin Group"
+;Frencegroup;employeegroup;;"Frence Group"
+;Wintergroup;employeegroup;;"Winter Group"
+;Lulugroup;employeegroup;;"Lulu Group"
+;Catherinegroup;employeegroup;;"Catherine Group"
+
+;Basicmanagementgroup;acerchemrole,acerchemgroup;;"Basic product information maintenance, add, modify"
+;Salesgroup;acerchemrole,acerchemgroup;;"Valet orders"
+;Logisticsgroup;acerchemrole,acerchemgroup;;"Inventory import, order delivery and logistics information maintenance"
+
+
+
+
+
+
+
+
 # Creating Employees
 #
 INSERT_UPDATE Employee;UID[unique=true];name;groups(uid);description;password
