@@ -5,18 +5,25 @@ import com.acerchem.facades.facades.AcerchemCartFacade;
 import de.hybris.platform.commercefacades.order.data.AddToCartParams;
 import de.hybris.platform.commercefacades.order.data.CartModificationData;
 import de.hybris.platform.commercefacades.order.impl.DefaultCartFacade;
+import de.hybris.platform.commercefacades.product.ProductOption;
+import de.hybris.platform.commercefacades.product.data.PriceData;
+import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commerceservices.order.CommerceCartModification;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
 import de.hybris.platform.commerceservices.service.data.CommerceCartParameter;
 import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.CartModel;
+import de.hybris.platform.core.model.product.ProductModel;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.util.ObjectUtils;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -91,6 +98,22 @@ public class DefaultAcerchemCartFacade extends DefaultCartFacade implements Acer
         commerceCartModification = acerchemCommerCartService.updatePointOfServiceForCartEntry(parameter);
         }
         return getCartModificationConverter().convert(commerceCartModification);
+    }
+
+    @Override
+    public double getAddToCartPrice(String productCode, Long qty) {
+
+        final List<ProductOption> extraOptions = Arrays.asList(ProductOption.VARIANT_MATRIX_BASE, ProductOption.VARIANT_MATRIX_URL,
+                ProductOption.VARIANT_MATRIX_MEDIA,ProductOption.PRICE);
+
+        BigDecimal cartEntryTotalPrice = BigDecimal.ZERO;
+        ProductData productData =  getProductFacade().getProductForCodeAndOptions(productCode, extraOptions);
+        PriceData priceData = productData.getPrice();
+        if (priceData!=null){
+            BigDecimal basePrice = priceData.getValue();
+            cartEntryTotalPrice = basePrice.multiply(BigDecimal.valueOf(qty));
+        }
+        return cartEntryTotalPrice.doubleValue();
     }
 
     private boolean acerchemValidatePointOfService(String storeId, CartModel cartModel){

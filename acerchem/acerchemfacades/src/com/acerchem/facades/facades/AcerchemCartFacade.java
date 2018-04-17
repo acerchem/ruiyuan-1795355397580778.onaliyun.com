@@ -30,4 +30,6 @@ public interface AcerchemCartFacade {
     CartModificationData addToCart(String code, long quantity, boolean isUseFutureStock, String storeId, String availableDate) throws CommerceCartModificationException;
 
     CartModificationData updateCartEntry(long entryNumber, String storeId ,boolean isUseFutureStock) throws CommerceCartModificationException;
+
+    double getAddToCartPrice(String productCode,Long qty);
 }

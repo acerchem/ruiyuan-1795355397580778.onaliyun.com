@@ -4,7 +4,6 @@ import com.acerchem.core.service.AcerchemDeliveryService;
 import com.acerchem.facades.facades.AcerchemCheckoutFacade;
 import com.acerchem.facades.facades.AcerchemOrderException;
 import com.acerchem.facades.facades.AcerchemTrayFacade;
-import de.hybris.platform.commercefacades.order.converters.populator.PaymentCardTypePopulator;
 import de.hybris.platform.commercefacades.order.data.CardTypeData;
 import de.hybris.platform.commercefacades.order.data.DeliveryModeData;
 import de.hybris.platform.commercefacades.order.data.ZoneDeliveryModeData;
@@ -20,16 +19,19 @@ import de.hybris.platform.core.model.order.payment.PaymentModeModel;
 import de.hybris.platform.deliveryzone.model.ZoneDeliveryModeModel;
 import de.hybris.platform.order.CartService;
 import de.hybris.platform.order.DeliveryModeService;
+import de.hybris.platform.order.PaymentModeService;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.storelocator.model.PointOfServiceModel;
 import de.hybris.platform.util.PriceValue;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.logging.Log;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
@@ -47,7 +49,7 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
     private final String ORDER_OPERATION_FEE ="order.operation.fee";
     private final String ORDER_STANDARD_CRITICAL_FEE ="order.standard.critical.price";
     //默认存储费
-    private final String defaultStorageFee = "0";
+    private final String defaultStorageFee = "30";
     private final String defaultOrderOperationFee = "100";
     private final String defaultOrderStandardFee = "10000";
 
@@ -63,6 +65,8 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
     private AcerchemTrayFacade acerchemTrayFacade;
     @Resource
     private DeliveryModeService deliveryModeService;
+    @Resource
+    private PaymentModeService paymentModeService;
 
     @Override
     public void validateCartAddress(CountryData countryData) throws AcerchemOrderException{
@@ -209,6 +213,25 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
            }
         }
         return cardTypeDataList;
+    }
+
+    @Override
+    public boolean setPaymentDetails(final String paymentInfoId)
+    {
+        validateParameterNotNullStandardMessage("paymentInfoId", paymentInfoId);
+
+        if (StringUtils.isNotBlank(paymentInfoId))
+        {
+            PaymentModeModel paymentModeModel = paymentModeService.getPaymentModeForCode(paymentInfoId);
+            final CartModel cartModel = getCart();
+            if (paymentModeModel != null)
+            {
+               cartModel.setPaymentMode(paymentModeModel);
+               getModelService().save(cartModel);
+               return true;
+            }
+        }
+        return false;
     }
 }
 

@@ -73,6 +73,7 @@
 		                        <c:set var="product" value="${modification.entry.product}" />
 		                        <c:set var="entry" value="${modification.entry}" />
 		                        <c:set var="quantity" value="${modification.quantityAdded}" />
+								<c:set var="cartEntryPrice" value="${modification.cartEntryPrice}" />
 		                        <cart:popupCartItems entry="${entry}" product="${product}" quantity="${quantity}"/>
 		                    </c:forEach>
 		                </c:when>
@@ -95,13 +96,13 @@
 		                <c:when test="${modifications ne null}">
 		                   
 		                        <span>Total (<em>${modifications.quantityAdded}</em> items)</span>
-						        <span class="row total"><format:fromPrice priceData="${modifications.entry.totalPrice}"/></span>
-		                   
+						        <span class="row total">${cartEntryPrice}</span>
+
 		                </c:when>
 		                <c:otherwise>
 		
 		                   <span>Total (<em>${quantity}</em> items)</span>
-						   <span class="row total"><format:fromPrice priceData="${entry.totalPrice}"/></span>
+						   <span class="row total">${cartEntryPrice}</span>
 		                </c:otherwise>
 		            </c:choose>
 						

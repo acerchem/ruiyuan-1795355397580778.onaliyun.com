@@ -9,10 +9,12 @@ import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.core.model.c2l.CountryModel;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.ordersplitting.model.StockLevelModel;
 import de.hybris.platform.ordersplitting.model.WarehouseModel;
 import de.hybris.platform.product.ProductService;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
+import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.stock.StockService;
 import de.hybris.platform.store.services.BaseStoreService;
 import de.hybris.platform.storelocator.model.PointOfServiceModel;
@@ -88,4 +90,9 @@ public class DefaultAcerchemCustomerFacade extends DefaultCustomerFacade impleme
 		return dataList;
 	}
 
+	@Override
+	public boolean isAnonymousUser() {
+		UserModel userModel = getUserService().getCurrentUser();
+		return getUserService().isAnonymousUser(userModel);
+	}
 }

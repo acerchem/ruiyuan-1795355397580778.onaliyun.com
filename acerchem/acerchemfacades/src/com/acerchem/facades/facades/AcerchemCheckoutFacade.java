@@ -18,5 +18,14 @@ public interface AcerchemCheckoutFacade {
 
     List<CardTypeData> getSupportedCardTypes(String selectedDeliveryModeCode);
 
+    /**
+     * Set Payment Details on the cart
+     *
+     * @param paymentInfoId
+     *           the ID of the payment info to set as the default payment
+     * @return true if operation succeeded
+     */
+    boolean setPaymentDetails(String paymentInfoId)
+
 }
 

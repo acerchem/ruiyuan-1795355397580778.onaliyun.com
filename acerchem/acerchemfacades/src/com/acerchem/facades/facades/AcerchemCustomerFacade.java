@@ -13,5 +13,7 @@ public interface AcerchemCustomerFacade {
     CustomerData getCurrentCustomer();
 
     List<StoreOfProductData> getAllPos(String productCode);
+
+    boolean isAnonymousUser();
 }
 

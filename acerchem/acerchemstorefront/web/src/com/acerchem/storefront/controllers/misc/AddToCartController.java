@@ -142,6 +142,8 @@ public class AddToCartController extends AbstractController
 
 		model.addAttribute("product", productFacade.getProductForCodeAndOptions(code, Arrays.asList(ProductOption.BASIC)));
 
+		model.addAttribute("cartEntryPrice", acerchemCartFacade.getAddToCartPrice(code,qty));
+
 		return ControllerConstants.Views.Fragments.Cart.AddToCartPopup;
 	}
 

@@ -320,7 +320,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	@RequireHardLogIn
 	public String doSelectDeliveryAddress(@RequestParam("selectedAddressCode" ) final String selectedAddressCode,
 										  final Model model, final RedirectAttributes redirectAttributes
-										,@RequestParam("selectedDeliveryModeCode" ) final String selectedDeliveryModeCode) {
+										,@RequestParam(required = false) final String selectedDeliveryModeCode) {
 //		final ValidationResults validationResults = getCheckoutStep().validate(redirectAttributes);
 //		if (getCheckoutStep().checkIfValidationErrors(validationResults))
 //		{
@@ -342,8 +342,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 				setDeliveryAddress(selectedAddressData);
 			}
 		}
-		model.addAttribute("paymentInfos",getUserFacade().getCCPaymentInfos(true));
-		model.addAttribute("paymentModes", acerchemCheckoutFacade.getSupportedCardTypes(selectedDeliveryModeCode));
+		model.addAttribute("paymentInfos", acerchemCheckoutFacade.getSupportedCardTypes(selectedDeliveryModeCode));
 		return getCheckoutStep().nextStep();
 	}
 
