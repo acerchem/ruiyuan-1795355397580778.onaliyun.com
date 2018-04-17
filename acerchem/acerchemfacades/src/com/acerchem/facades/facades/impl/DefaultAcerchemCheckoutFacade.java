@@ -29,7 +29,10 @@ import org.apache.log4j.Logger;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -229,6 +232,24 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                cartModel.setPaymentMode(paymentModeModel);
                getModelService().save(cartModel);
                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean savePickUpDateForOrder(String pickUpDate) {
+        if (StringUtils.isNotBlank(pickUpDate))
+        {
+            final CartModel cartModel = getCart();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-DD");
+            try {
+                Date date=  sdf.parse(pickUpDate);
+                cartModel.setPickUpDate(date);
+                getModelService().save(cartModel);
+                return true;
+            } catch (ParseException e) {
+                LOG.error("parse time error : " +e.getMessage());
             }
         }
         return false;
