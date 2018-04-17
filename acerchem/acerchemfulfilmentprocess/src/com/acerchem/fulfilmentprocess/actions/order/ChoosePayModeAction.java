@@ -14,10 +14,8 @@ import de.hybris.platform.core.enums.OrderStatus;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 import de.hybris.platform.processengine.action.AbstractSimpleDecisionAction;
-import com.acerchem.fulfilmentprocess.CheckOrderService;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Required;
 
 
 /**
@@ -30,20 +28,21 @@ import org.springframework.beans.factory.annotation.Required;
 public class ChoosePayModeAction extends AbstractSimpleDecisionAction<OrderProcessModel>
 {
 	private static final Logger LOG = Logger.getLogger(ChoosePayModeAction.class);
-
-
+	
+	private static final String CREDIT_PAYMENT_INFO = "CreditPaymentInfo";
+	
 	@Override
 	public Transition executeAction(final OrderProcessModel process)
 	{
 		final OrderModel order = process.getOrder();
-
+		//setOrderStatus(order, OrderStatus.CONTRACT_SENT);
 		if (order == null)
 		{
 			LOG.error("Missing the order, exiting the process");
 			return Transition.NOK;
 		}
 
-		if (order.getEmployeeConfirmPay() && order.getCustomerConfirmPay())
+		if (order.getPaymentMode().getPaymentInfoType().getCode().equals(CREDIT_PAYMENT_INFO))
 		{
 			return Transition.OK;
 		}

@@ -71,6 +71,13 @@
 			generate="false" dynamic="false">
 			<value code="LINE" />
 		</enumtype>
+		
+		<enumtype code="OrderStatus" autocreate="false" generate="true"
+			dynamic="true">
+			<value code="CONFIRMED" />
+			<value code="DELIVERED" />
+			<value code="PAIED" />
+		</enumtype>
 	</enumtypes>
 
 
@@ -279,7 +286,7 @@
 			<!--上传阿里云时的失败记录 -->
 			<itemtype code="ImageFailedRecord" autocreate="true"
 				generate="true">
-				<deployment table="ImageFailedRecord" typecode="20101" />
+				<deployment table="ImageFailedRecord" typecode="30000" />
 				<attributes>
 					<attribute qualifier="fileName" type="java.lang.String">
 						<description>文件名</description>
@@ -791,7 +798,7 @@
 		<typegroup name="Payment">
 			<itemtype code="CreditPaymentInfo" extends="PaymentInfo"
 				generate="true" singleton="false" jaloonly="false" autocreate="true">
-				<deployment table="ImageFailedRecord" typecode="20103" />
+				<deployment table="CreditPaymentInfo" typecode="30001" />
 				<attributes>
 
 				</attributes>

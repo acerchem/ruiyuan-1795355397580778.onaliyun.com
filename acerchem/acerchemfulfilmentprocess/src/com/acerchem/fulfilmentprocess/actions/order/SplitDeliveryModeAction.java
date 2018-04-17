@@ -8,7 +8,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with SAP.
  */
-package com.acerchem.fulfilmentprocess.actions.consignment;
+package com.acerchem.fulfilmentprocess.actions.order;
 
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
@@ -24,11 +24,13 @@ import org.apache.log4j.Logger;
  * order (a typical case), it is recommended to use the OrderProcess as a parentClass instead of the plain
  * BusinessProcess.
  */
-public class WaitConsignMentConfirmAction extends AbstractSimpleDecisionAction<OrderProcessModel>
+public class SplitDeliveryModeAction extends AbstractSimpleDecisionAction<OrderProcessModel>
 {
-	private static final Logger LOG = Logger.getLogger(WaitConsignMentConfirmAction.class);
+	private static final Logger LOG = Logger.getLogger(SplitDeliveryModeAction.class);
 
+	private static final String DELIVERY_GROSS = "DELIVERY_GROSS";
 
+	
 	@Override
 	public Transition executeAction(final OrderProcessModel process)
 	{
@@ -40,7 +42,7 @@ public class WaitConsignMentConfirmAction extends AbstractSimpleDecisionAction<O
 			return Transition.NOK;
 		}
 
-		if (order.getEmployeeConfirmDelivery() && order.getCustomerConfirmDelivery())
+		if (order.getDeliveryMode().getCode().equals(DELIVERY_GROSS))
 		{
 			return Transition.OK;
 		}

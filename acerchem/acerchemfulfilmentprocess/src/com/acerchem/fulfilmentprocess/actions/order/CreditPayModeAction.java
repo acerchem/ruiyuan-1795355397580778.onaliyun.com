@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 
 import com.acerchem.core.model.CreditPaymentInfoModel;
 
+import de.hybris.platform.core.enums.OrderStatus;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 import de.hybris.platform.processengine.action.AbstractProceduralAction;
@@ -40,6 +41,8 @@ public class CreditPayModeAction extends AbstractProceduralAction<OrderProcessMo
 		if(order != null){
 			if (order.getPaymentInfo() instanceof CreditPaymentInfoModel)
 			{
+				//支付成功后,改变orderStatus
+				setOrderStatus(order, OrderStatus.PAIED);
 				return;
 			}
 		}

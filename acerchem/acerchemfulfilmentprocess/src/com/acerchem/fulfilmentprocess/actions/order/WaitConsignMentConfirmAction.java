@@ -8,8 +8,9 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with SAP.
  */
-package com.acerchem.fulfilmentprocess.actions.consignment;
+package com.acerchem.fulfilmentprocess.actions.order;
 
+import de.hybris.platform.core.enums.OrderStatus;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 import de.hybris.platform.processengine.action.AbstractSimpleDecisionAction;
@@ -24,23 +25,23 @@ import org.apache.log4j.Logger;
  * order (a typical case), it is recommended to use the OrderProcess as a parentClass instead of the plain
  * BusinessProcess.
  */
-public class SplitDeliveryModeAction extends AbstractSimpleDecisionAction<OrderProcessModel>
+public class WaitConsignMentConfirmAction extends AbstractSimpleDecisionAction<OrderProcessModel>
 {
-	private static final Logger LOG = Logger.getLogger(SplitDeliveryModeAction.class);
+	private static final Logger LOG = Logger.getLogger(WaitConsignMentConfirmAction.class);
 
 
 	@Override
 	public Transition executeAction(final OrderProcessModel process)
 	{
 		final OrderModel order = process.getOrder();
-
+		setOrderStatus(order, OrderStatus.DELIVERED);
 		if (order == null)
 		{
 			LOG.error("Missing the order, exiting the process");
 			return Transition.NOK;
 		}
 
-		if (order.getDeliveryMode().getCode().equals("здЬс"))
+		if (order.getEmployeeConfirmDelivery() || order.getCustomerConfirmDelivery())
 		{
 			return Transition.OK;
 		}
