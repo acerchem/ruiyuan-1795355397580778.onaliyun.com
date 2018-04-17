@@ -66,6 +66,7 @@
     
 	<action id="waitConsignMentConfirm" bean="waitConsignMentConfirmAction">
 		<transition name="OK" to="generateOfficialInvoiceEmail"/>
+		<transition name="NOK" to="waitForAllConsignmentConfirm"/>
 	</action>
 	
 	<action id="generateOfficialInvoiceEmail" bean="generateOfficialInvoiceEmailAction">
