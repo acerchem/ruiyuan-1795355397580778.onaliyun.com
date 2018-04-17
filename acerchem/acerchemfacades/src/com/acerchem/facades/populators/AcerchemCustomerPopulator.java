@@ -4,32 +4,31 @@ import de.hybris.platform.commercefacades.user.converters.populator.CustomerPopu
 import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.commercefacades.user.data.CustomerCreditAccountData;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
+import de.hybris.platform.commercefacades.user.data.UserLevelData;
 import de.hybris.platform.converters.Populator;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 import org.springframework.beans.factory.annotation.Required;
-
 import com.acerchem.core.model.CustomerCreditAccountModel;
-
-import java.math.BigDecimal;
-import java.util.Objects;
+import com.acerchem.core.model.UserLevelModel;
 
 public class AcerchemCustomerPopulator extends CustomerPopulator implements Populator<CustomerModel, CustomerData>
 {
 	private Converter<AddressModel,AddressData> addressConverter;
-	private Converter<CustomerCreditAccountModel,CustomerCreditAccountData> creditAccount;
+	private Converter<CustomerCreditAccountModel,CustomerCreditAccountData> creditAccountConverter;
+	private Converter<UserLevelModel,UserLevelData> userLevelConverter;
 	
 	@Override
 	public void populate(CustomerModel source, CustomerData target) throws ConversionException {
 		super.populate(source,target);
-		if (Objects.nonNull(source.getAddresses())) {
+		if (source.getAddresses()!=null) {
 			target.setAddressDataList(addressConverter.convertAll(source.getAddresses()));
 		}
 		if (source.getCreditAccount() != null)
 		{
-			target.setCreditAccount(creditAccount.convert(source.getCreditAccount()));
+			target.setCreditAccount(creditAccountConverter.convert(source.getCreditAccount()));
 		}
 		target.setCompanyType(source.getCompanyType());
 		target.setEstablishedIn(source.getEstablishedIn());
@@ -39,7 +38,10 @@ public class AcerchemCustomerPopulator extends CustomerPopulator implements Popu
 		target.setVatNo(source.getVatNo());
 		target.setHaveFinancialReport(source.getHaveFinancialReport());
 		target.setProvideTradeReference(source.getProvideTradeReference());
-		
+		if (source.getUserLevel() != null)
+		{
+			target.setUserLevel(userLevelConverter.convert(source.getUserLevel()));
+		}
 	}
 
 	@Required
@@ -47,6 +49,15 @@ public class AcerchemCustomerPopulator extends CustomerPopulator implements Popu
 		this.addressConverter = addressConverter;
 	}
 	
+	@Required
+	public void setCreditAccountConverter(Converter<CustomerCreditAccountModel, CustomerCreditAccountData> creditAccountConverter) {
+		this.creditAccountConverter = creditAccountConverter;
+	}
+	
+	@Required
+	public void setUserLevelConverter(Converter<UserLevelModel, UserLevelData> userLevelConverter) {
+		this.userLevelConverter = userLevelConverter;
+	}
 	
 }
 
