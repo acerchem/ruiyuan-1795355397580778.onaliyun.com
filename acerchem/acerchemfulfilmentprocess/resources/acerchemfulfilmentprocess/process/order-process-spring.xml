@@ -99,22 +99,22 @@
 	</bean>
 	
 	<!-- 添加新的订单流程处理 -->
-	<bean id="waitForCustomerConfirmAction" class="com.acerchem.fulfilmentprocess.actions.order.WaitForCustomerConfirmAction"  parent="abstractAction">
+	<!-- <bean id="waitForCustomerConfirmAction" class="com.acerchem.fulfilmentprocess.actions.order.WaitForCustomerConfirmAction"  parent="abstractAction">
 	</bean>
 	<bean id="waitForEmployeeConfirmAction" class="com.acerchem.fulfilmentprocess.actions.order.WaitForEmployeeConfirmAction"  parent="abstractAction">
 	</bean>
 	<bean id="waitForConfirmAction" class="com.acerchem.fulfilmentprocess.actions.order.WaitForConfirmAction"  parent="abstractAction"/>
 	<bean id="generateContactEmailAction"   parent="abstractGenerateEmailAction">
-			<property name="frontendTemplateName" value="OrderConfirmationEmailTemplate"/>
+			<property name="frontendTemplateName" value="AcerchemContractEmailTemplate"/>
 	</bean>
 	<bean id="creditPayModeAction" class="com.acerchem.fulfilmentprocess.actions.order.CreditPayModeAction"  parent="abstractAction"/>
 	<bean id="linePayModeAction" class="com.acerchem.fulfilmentprocess.actions.order.LinePayModeAction"  parent="abstractAction"/>
 	<bean id="generateFormInvoiceEmailAction"  parent="abstractGenerateEmailAction">
-		<property name="frontendTemplateName" value="OrderConfirmationEmailTemplate"/>
+		<property name="frontendTemplateName" value="AcerchemProformaInvoiceEmailTemplate"/>
 	</bean>
-	<!-- <bean id="sendFormInvoiceEmailAction" class="com.acerchem.fulfilmentprocess.actions.order.SendFormInvoiceEmailAction"  parent="abstractAction">
+	<bean id="sendFormInvoiceEmailAction" class="com.acerchem.fulfilmentprocess.actions.order.SendFormInvoiceEmailAction"  parent="abstractAction">
 		<property name="emailService" ref="emailService"/>
-	</bean> -->
+	</bean>
 	<bean id="waitCustomerCofirmPayAction" class="com.acerchem.fulfilmentprocess.actions.order.WaitCustomerCofirmPayAction"  parent="abstractAction"/>
 	<bean id="waitEmployeeConfirmPayAction" class="com.acerchem.fulfilmentprocess.actions.order.WaitEmployeeConfirmPayAction"  parent="abstractAction"/>
 	<bean id="waitForConfirmPayAction" class="com.acerchem.fulfilmentprocess.actions.order.WaitForConfirmPayAction"  parent="abstractAction"/>
@@ -122,5 +122,36 @@
 	      class="de.hybris.platform.acceleratorservices.process.email.actions.SendEmailAction"
 	      parent="abstractAction">
 		<property name="emailService" ref="emailService"/>
+	</bean> -->
+	
+	<bean id="generateContactEmailAction"   parent="abstractGenerateEmailAction">
+			<property name="frontendTemplateName" value="AcerchemContractEmailTemplate"/>
 	</bean>
+	<bean id="generateFormInvoiceEmailAction"  parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="AcerchemProformaInvoiceEmailTemplate"/>
+	</bean>
+	
+	<bean id="generateDeliveryEmailAction"  parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="AcerchemDeliveryNoteEmailTemplate"/>
+		</bean>
+		
+		<bean id="generateDeliveryByShelfEmailAction"  parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="AcerchemReleaseNoteEmailTemplate"/>
+		</bean>
+		
+		<bean id="generateOfficialInvoiceEmailAction"  parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="AcerchemInvoiceEmailTemplate"/>
+		</bean>
+	
+	<bean id="sendEmail"
+	      class="de.hybris.platform.acceleratorservices.process.email.actions.SendEmailAction"
+	      parent="abstractAction">
+		<property name="emailService" ref="emailService"/>
+	</bean>
+	
+	<bean id="waitForConfirmAction" class="com.acerchem.fulfilmentprocess.actions.order.WaitForConfirmAction"  parent="abstractAction"/>
+	<bean id="creditPayModeAction" class="com.acerchem.fulfilmentprocess.actions.order.CreditPayModeAction"  parent="abstractAction"/>
+	<bean id="linePayModeAction" class="com.acerchem.fulfilmentprocess.actions.order.LinePayModeAction"  parent="abstractAction"/>
+	<bean id="waitForConfirmPayAction" class="com.acerchem.fulfilmentprocess.actions.order.WaitForConfirmPayAction"  parent="abstractAction"/>
+	<bean id="choosePayModeAction" class="com.acerchem.fulfilmentprocess.actions.order.ChoosePayModeAction"  parent="abstractAction"/>
 </beans>

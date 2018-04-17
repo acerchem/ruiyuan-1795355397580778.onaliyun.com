@@ -56,30 +56,28 @@
 		<property name="process2WarehouseAdapter" ref="process2WarehouseAdapter"/>
 	</bean>
 	
+		<bean id="recordConsignmentInfoAction" class="com.acerchem.fulfilmentprocess.actions.consignment.RecordConfignmentInfoAction"  parent="abstractAction"/>
+		<bean id="splitDeliveryModeAction" class="com.acerchem.fulfilmentprocess.actions.consignment.RecordConfignmentInfoAction"  parent="abstractAction"/>
+		<bean id="deliveryByOtherAction" class="com.acerchem.fulfilmentprocess.actions.consignment.DeliveryByOtherAction"  parent="abstractAction"/>
+		<bean id="deliveryByshelfAction" class="com.acerchem.fulfilmentprocess.actions.consignment.DeliveryByshelfAction"  parent="abstractAction"/>
+		<bean id="waitConsignMentConfirmAction" class="com.acerchem.fulfilmentprocess.actions.consignment.WaitConsignMentConfirmAction"  parent="abstractAction"/>
+		
 		<bean id="generateDeliveryEmailAction"  parent="abstractGenerateEmailAction">
-		<property name="frontendTemplateName" value="OrderConfirmationEmailTemplate"/>
+		<property name="frontendTemplateName" value="AcerchemDeliveryNoteEmailTemplate"/>
 		</bean>
 		
 		<bean id="generateDeliveryByShelfEmailAction"  parent="abstractGenerateEmailAction">
-		<property name="frontendTemplateName" value="OrderConfirmationEmailTemplate"/>
-		</bean>
-		
-		<bean id="sendEmail"
-	      class="de.hybris.platform.acceleratorservices.process.email.actions.SendEmailAction"
-	      parent="abstractAction">
-			<property name="emailService" ref="emailService"/>
+		<property name="frontendTemplateName" value="AcerchemReleaseNoteEmailTemplate"/>
 		</bean>
 		
 		<bean id="generateOfficialInvoiceEmailAction"  parent="abstractGenerateEmailAction">
-		<property name="frontendTemplateName" value="OrderConfirmationEmailTemplate"/>
+		<property name="frontendTemplateName" value="AcerchemInvoiceEmailTemplate"/>
 		</bean>
-		
-		<bean id="recordConsignmentInfoAction" class="com.acerchem.fulfilmentprocess.actions.consignment.RecordConfignmentInfoAction"  parent="abstractAction"/>
-		<bean id="deliveryByOtherAction" class="com.acerchem.fulfilmentprocess.actions.consignment.DeliveryByOtherAction"  parent="abstractAction"/>
-		<bean id="deliveryByshelfAction" class="com.acerchem.fulfilmentprocess.actions.consignment.DeliveryByshelfAction"  parent="abstractAction"/>
-		<bean id="customerConsigmentConfirmAction" class="com.acerchem.fulfilmentprocess.actions.consignment.CustomerConsigmentConfirmAction"  parent="abstractAction"/>
-		<bean id="employeeConsigmentConfirmAction" class="com.acerchem.fulfilmentprocess.actions.consignment.EmployeeConsigmentConfirmAction"  parent="abstractAction"/>
-		<bean id="waitConsignMentConfirmAction" class="com.acerchem.fulfilmentprocess.actions.consignment.WaitConsignMentConfirmAction"  parent="abstractAction"/>
-		
+	
+	<bean id="sendEmail"
+	      class="de.hybris.platform.acceleratorservices.process.email.actions.SendEmailAction"
+	      parent="abstractAction">
+		<property name="emailService" ref="emailService"/>
+	</bean>
 		
 </beans>
