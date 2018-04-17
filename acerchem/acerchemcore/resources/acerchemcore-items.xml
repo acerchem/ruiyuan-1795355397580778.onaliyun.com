@@ -61,6 +61,13 @@
 			<value code="L" />
 
 		</enumtype>
+		
+		<!-- 用户区域:上线前再配置-->
+		<enumtype code="CustomerArea" autocreate="true" generate="true" dynamic="true">
+			<description>用户区域</description>
+			<value code="North_America" />
+			<value code="South_America" />
+		</enumtype>
 
 		<enumtype code="CreditAccountStatusEnum" autocreate="true"
 			generate="true" dynamic="true">
@@ -70,6 +77,13 @@
 		<enumtype code="PaymentTransactionType" autocreate="false"
 			generate="false" dynamic="false">
 			<value code="LINE" />
+		</enumtype>
+		
+		<enumtype code="OrderStatus" autocreate="false" generate="true"
+			dynamic="true">
+			<value code="CONFIRMED" />
+			<value code="DELIVERED" />
+			<value code="PAIED" />
 		</enumtype>
 	</enumtypes>
 
@@ -279,7 +293,7 @@
 			<!--上传阿里云时的失败记录 -->
 			<itemtype code="ImageFailedRecord" autocreate="true"
 				generate="true">
-				<deployment table="ImageFailedRecord" typecode="20101" />
+				<deployment table="ImageFailedRecord" typecode="30000" />
 				<attributes>
 					<attribute qualifier="fileName" type="java.lang.String">
 						<description>文件名</description>
@@ -662,6 +676,11 @@
 						<modifiers read="true" write="true" search="true" />
 						<persistence type="property" />
 					</attribute>
+					<attribute qualifier="area" type="CustomerArea">
+						<description>用户区域</description>
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<persistence type="property" />
+					</attribute>
 
 					<!-- add by alice -->
 					<attribute qualifier="companyType" type="java.lang.String">
@@ -791,7 +810,7 @@
 		<typegroup name="Payment">
 			<itemtype code="CreditPaymentInfo" extends="PaymentInfo"
 				generate="true" singleton="false" jaloonly="false" autocreate="true">
-				<deployment table="ImageFailedRecord" typecode="20103" />
+				<deployment table="CreditPaymentInfo" typecode="30001" />
 				<attributes>
 
 				</attributes>

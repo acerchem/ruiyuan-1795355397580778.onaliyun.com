@@ -11,7 +11,7 @@
 	<div class="base">
 		<div class="top both">
 			<span><img src="${themeResourcePath}/css/vip.png"></span>
-			<span>Regular<br/>Member====need modify</span>
+			<span>${user.userLevel.levelName}<br/>Member</span>
 		</div>
 		<div class="name">Hello,${user.name}</div>
 		<a href="/acerchemstorefront/electronics/en/logout"><i class="icons out-icon"></i></a>

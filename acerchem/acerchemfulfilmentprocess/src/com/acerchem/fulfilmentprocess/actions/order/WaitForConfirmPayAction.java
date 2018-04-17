@@ -45,6 +45,7 @@ public class WaitForConfirmPayAction extends AbstractSimpleDecisionAction<OrderP
 
 		if (order.getEmployeeConfirmPay() && order.getCustomerConfirmPay())
 		{
+			setOrderStatus(order, OrderStatus.PAIED);
 			return Transition.OK;
 		}
 		else

@@ -8,7 +8,7 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with SAP.
  */
-package com.acerchem.fulfilmentprocess.actions.consignment;
+package com.acerchem.fulfilmentprocess.actions.order;
 
 import de.hybris.platform.ordersplitting.model.ConsignmentProcessModel;
 import de.hybris.platform.processengine.action.AbstractProceduralAction;
@@ -18,14 +18,18 @@ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
 
-public class DeliveryByshelfAction extends AbstractProceduralAction<ConsignmentProcessModel>
+public class RecordConfignmentInfoAction extends AbstractProceduralAction<ConsignmentProcessModel>
 {
-	private static final Logger LOG = Logger.getLogger(DeliveryByshelfAction.class);
+	private static final Logger LOG = Logger.getLogger(RecordConfignmentInfoAction.class);
 
 
 	@Override
 	public void executeAction(final ConsignmentProcessModel process)
 	{
-		
+//		getProcess2WarehouseAdapter().prepareConsignment(process.getConsignment());
+//		process.setWaitingForConsignment(true);
+//		getModelService().save(process);
+//		LOG.info("Setting waitForConsignment to true");
 	}
+
 }
