@@ -27,5 +27,7 @@ public interface AcerchemCheckoutFacade {
      */
     boolean setPaymentDetails(String paymentInfoId);
 
+    boolean savePickUpDateForOrder(String pickUpDate);
+
 }
 

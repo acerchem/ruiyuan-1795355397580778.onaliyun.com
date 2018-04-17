@@ -69,18 +69,17 @@ public class DefaultAcerchemCustomerFacade extends DefaultCustomerFacade impleme
 
 				storeOfProductData.setStoreId(pos.getName());
 				storeOfProductData.setStoreName(pos.getDisplayName());
-				//杩戞湡搴撳瓨澶╂暟鍜岃繙鏈熷簱瀛樺ぉ鏁�
-				storeOfProductData.setAvaReleaseDay(stockLevelModel.getAvaPreOrderReleaseDay());
 
+				storeOfProductData.setAvaReleaseDay(stockLevelModel.getAvaPreOrderReleaseDay());
 				int num = stockLevelModel.getPreOrderReleaseDay()!=null?stockLevelModel.getPreOrderReleaseDay():0;
-//				Calendar ca = Calendar.getInstance();
-//				ca.add(Calendar.DATE, num);// num涓哄鍔犵殑澶╂暟
 				storeOfProductData.setFutureAvailableDate(num);
-				//搴撳瓨
-				storeOfProductData.setInventory(stockLevelModel.getAvailable());
+				
+				int actualAmount = stockLevelModel.getAvailable() - stockLevelModel.getReserved();
+				storeOfProductData.setInventory(actualAmount);
+
 				storeOfProductData.setFutureInventory(stockLevelModel.getPreOrder());
 //				storeOfProductData.setIsUseFutureStock(Boolean.FALSE);
-				//閰嶉�佽寖鍥�
+
 				if (pos.getDeliveryZone()!=null&&pos.getDeliveryZone().getCountries()!=null){
 					storeOfProductData.setCountryDataList(countryConverter.convertAll(pos.getDeliveryZone().getCountries()));
 				}

@@ -316,6 +316,7 @@ public class PaymentMethodCheckoutStepController extends AbstractCheckoutStepCon
 	{
 		if (StringUtils.isNotBlank(selectedPaymentMethodId))
 		{
+//			getCheckoutFacade().setPaymentDetails(selectedPaymentMethodId);
 			acerchemCheckoutFacade.setPaymentDetails(selectedPaymentMethodId);
 		}
 		return getCheckoutStep().nextStep();

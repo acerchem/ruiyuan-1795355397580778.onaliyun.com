@@ -773,6 +773,11 @@
 						<defaultvalue>Boolean.FALSE</defaultvalue>
 						<modifiers />
 					</attribute>
+					<attribute qualifier="pickUpDate" type="java.util.Date">
+						<description>date for pickUp</description>
+						<persistence type="property" />
+						<modifiers />
+					</attribute>
 				</attributes>
 
 			</itemtype>
