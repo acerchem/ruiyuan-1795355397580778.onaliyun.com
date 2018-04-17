@@ -21,10 +21,10 @@
 		<transition name="OK" to="splitDeliveryMode"/>
 	</action>
 	
-	<split id="splitDeliveryMode">
-		<targetNode name="deliveryByOther"/>
-		<targetNode name="deliveryByshelf"/>
-	</split>
+	<action id="splitDeliveryMode" bean="splitDeliveryModeAction">
+		<transition name="OK" to="deliveryByOther"/>
+		<transition name="NOK" to="deliveryByshelf"/>
+	</action>
 	
 	<action id="deliveryByOther" bean="deliveryByOtherAction">
 		<transition name="OK" to="generateDeliveryEmail"/>
@@ -52,40 +52,20 @@
 		<transition name="OK" to="waitUpdateConsignmentStatus"/>
 	</action>
 	
-	<wait id="waitUpdateConsignmentStatus" then="splitConsigmentConfirm" prependProcessCode="false">
+	<wait id="waitUpdateConsignmentStatus" then="waitForAllConsignmentConfirm" prependProcessCode="false">
   		<event>${process.order.code}_WaitUpdateConsignmentStatus</event>
 	</wait>
 	
-	<split id="splitConsigmentConfirm">
-		<targetNode name="customerConsigmentConfirm"/>
-		<targetNode name="employeeConsigmentConfirm"/>
-	</split>
 	
-	<action id="customerConsigmentConfirm" bean="customerConsigmentConfirmAction">
-		<transition name="OK" to="waitConsignMentConfirm"/>
-		<transition name="NOK" to="error"/>
-		<transition name="WAIT" to="waitForCustomerConsignMentConfirmDecision"/>
-	</action>
-	
-	<wait id="waitForCustomerConsignMentConfirmDecision" then="customerConsigmentConfirm" prependProcessCode="false">
-  		<event>${process.order.code}_WaitForCustomerConsignMentConfirmDecision</event>
-	</wait>
-	
-	
-	<action id="employeeConsigmentConfirm" bean="employeeConsigmentConfirmAction">
-		<transition name="OK" to="waitConsignMentConfirm"/>
-		<transition name="NOK" to="error"/>
-		<transition name="WAIT" to="waitForEmployeeConsignMentConfirmDecision"/>
-	</action>
-	
-	
-	<wait id="waitForEmployeeConsignMentConfirmDecision" then="employeeConsigmentConfirm" prependProcessCode="false">
-  		<event>${process.order.code}_WaitForCustomerConsignMentConfirmDecision</event>
-	</wait>
-	
+	<wait id="waitForAllConsignmentConfirm" prependProcessCode="true" then="failed">
+        <case event="ConfirmConsignmentActionEvent">
+            <choice id="waitForCustomerConfirmConsignment" then="waitConsignMentConfirm"/>
+            <choice id="waitForEmployeeConfirmConsignment" then="waitConsignMentConfirm"/>
+        </case>
+    </wait> 
+    
 	<action id="waitConsignMentConfirm" bean="waitConsignMentConfirmAction">
 		<transition name="OK" to="generateOfficialInvoiceEmail"/>
-		<transition name="NOK" to="waitConsignMentConfirm"/>
 	</action>
 	
 	<action id="generateOfficialInvoiceEmail" bean="generateOfficialInvoiceEmailAction">
@@ -95,7 +75,7 @@
 	
 	<action id="sendOfficialInvoiceEmail" bean="sendEmail">
 		<transition name="OK" to="success"/>
-	</action>
+	</action> 
 	
 	<end id="error" state="ERROR">All went wrong.</end>
 	<end id="failed" state="FAILED">Order not placed.</end>
