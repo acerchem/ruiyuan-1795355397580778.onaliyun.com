@@ -39,7 +39,7 @@
 	
 	<action id="choosePayMode" bean="choosePayModeAction">
 		<transition name="OK" to="creditPayMode"/>
-		<transition name="NOK" to="error"/>
+		<transition name="NOK" to="linePayMode"/>
 	</action>
 	
 	<action id="creditPayMode" bean="creditPayModeAction">
