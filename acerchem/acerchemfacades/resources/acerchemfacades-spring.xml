@@ -204,6 +204,11 @@
 		<property name="commercePriceService" ref="commercePriceService"/>
 		<property name="priceDataFactory" ref="priceDataFactory"/>
 	</bean>
+	
+	<alias name="customSearchResultProductPricePopulator" alias="commerceSearchResultProductPopulator"/>
+	<bean id="customSearchResultProductPricePopulator" parent="variantCommerceSearchResultProductPopulator" class="com.acerchem.facades.storefinder.populators.SearchResultProductPricePopulator">
+        <property name="priceDataFactory" ref="priceDataFactory"/>
+    </bean>
 	<!-- End -->
 	
 	
