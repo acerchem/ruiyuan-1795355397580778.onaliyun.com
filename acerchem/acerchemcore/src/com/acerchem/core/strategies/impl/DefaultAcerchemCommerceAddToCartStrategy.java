@@ -22,6 +22,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
 
 import javax.annotation.Nonnull;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
@@ -41,7 +42,7 @@ public class DefaultAcerchemCommerceAddToCartStrategy extends DefaultCommerceAdd
         getCommerceCartCalculationStrategy().calculateCart(parameter);
         afterAddToCart(parameter, modification);
         // Here the entry is fully populated, so we can search for a similar one and merge.
-        mergeEntry(modification, parameter);
+        this.mergeEntry(modification, parameter);
         return modification;
     }
 
@@ -204,9 +205,19 @@ public class DefaultAcerchemCommerceAddToCartStrategy extends DefaultCommerceAdd
                     Long.valueOf(modification.getEntry().getQuantity().longValue() + mergeTarget.getQuantity().longValue()));
             entryQuantities.put(modification.getEntry().getEntryNumber(), Long.valueOf(0L));
             getCartService().updateQuantities(parameter.getCart(), entryQuantities);
+            calculateCartPrice(parameter.getCart());
             modification.setEntry(mergeTarget);
         }
 
+    }
+
+    private void calculateCartPrice(CartModel cartModel){
+        for (AbstractOrderEntryModel aoe: cartModel.getEntries()){
+            BigDecimal basePrice = BigDecimal.valueOf(aoe.getBasePrice());
+            BigDecimal totalPrice = basePrice.multiply(BigDecimal.valueOf(aoe.getQuantity()));
+            aoe.setTotalPrice(totalPrice.doubleValue());
+        }
+        getModelService().saveAll(cartModel.getEntries());
     }
 
     @Required
