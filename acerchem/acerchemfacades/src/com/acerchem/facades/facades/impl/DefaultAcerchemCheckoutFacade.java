@@ -4,6 +4,8 @@ import com.acerchem.core.service.AcerchemDeliveryService;
 import com.acerchem.facades.facades.AcerchemCheckoutFacade;
 import com.acerchem.facades.facades.AcerchemOrderException;
 import com.acerchem.facades.facades.AcerchemTrayFacade;
+import com.acerchem.facades.product.data.PaymentModeData;
+
 import de.hybris.platform.commercefacades.order.data.CardTypeData;
 import de.hybris.platform.commercefacades.order.data.DeliveryModeData;
 import de.hybris.platform.commercefacades.order.data.ZoneDeliveryModeData;
@@ -21,6 +23,7 @@ import de.hybris.platform.order.CartService;
 import de.hybris.platform.order.DeliveryModeService;
 import de.hybris.platform.order.PaymentModeService;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
+import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.storelocator.model.PointOfServiceModel;
 import de.hybris.platform.util.PriceValue;
 import org.apache.commons.collections.CollectionUtils;
@@ -44,14 +47,14 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
 
     private static final Logger LOG = Logger.getLogger(DefaultAcerchemCheckoutFacade.class);
 
-    //自提
+    //鑷彁
     private final String DELIVERY_MENTION = "DELIVERY_MENTION";
-    //送货
+    //閫佽揣
     private final String DELIVERY_GROSS = "DELIVERY_GROSS";
     private final String DELIVERY_MENTION_FEE ="delivery.mention.storage.fee";
     private final String ORDER_OPERATION_FEE ="order.operation.fee";
     private final String ORDER_STANDARD_CRITICAL_FEE ="order.standard.critical.price";
-    //默认存储费
+    //榛樿瀛樺偍璐�
     private final String defaultStorageFee = "30";
     private final String defaultOrderOperationFee = "100";
     private final String defaultOrderStandardFee = "10000";
@@ -81,13 +84,13 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
             for (AbstractOrderEntryModel aoe : cartModel.getEntries()){
                 PointOfServiceModel pos = aoe.getDeliveryPointOfService();
                 if (pos == null){
-                    throw new AcerchemOrderException("当前提货点为空.");
+                    throw new AcerchemOrderException("褰撳墠鎻愯揣鐐逛负绌�.");
                 }
                 if (pos.getDeliveryZone()!=null&&pos.getDeliveryZone().getCountries()!=null) {
                     Set<CountryModel> countrys = pos.getDeliveryZone().getCountries();
                     boolean isContains = countrys.stream().filter(countryModel -> countryIsoCode.equals(countryModel.getIsocode())).collect(Collectors.toList()).size()>0;
                     if (!isContains){
-                        throw new AcerchemOrderException("当前地址不在配送范围内.");
+                        throw new AcerchemOrderException("褰撳墠鍦板潃涓嶅湪閰嶉�佽寖鍥村唴.");
                     }
                 }
             }
@@ -140,12 +143,12 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                 }
 
                 PriceValue deliveryCost = null;
-                //自提运费和存储费用改造
+                //鑷彁杩愯垂鍜屽瓨鍌ㄨ垂鐢ㄦ敼閫�
                 if (DELIVERY_MENTION.equals(deliveryModeModel.getCode())){
-                    //自提费
+                    //鑷彁璐�
                     String deliveryMetionPrice = configurationService.getConfiguration().getString(DELIVERY_MENTION_FEE,defaultStorageFee);
 
-                    //操作费+自提费
+                    //鎿嶄綔璐�+鑷彁璐�
                     BigDecimal fee = operationFee.add(BigDecimal.valueOf(Double.valueOf(deliveryMetionPrice)));
 
                     deliveryCost = new PriceValue(cartModel.getCurrency().getIsocode(), fee.doubleValue(), true);
@@ -153,9 +156,9 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                 }else if (DELIVERY_GROSS.equals(deliveryModeModel.getCode())){
                     BigDecimal fee = BigDecimal.valueOf(0.0d);
                     try {
-                        //托盘运输费
+                        //鎵樼洏杩愯緭璐�
                         fee =  BigDecimal.valueOf(acerchemTrayFacade.getTotalPriceForCart());
-                        //操作费+托盘运输费
+                        //鎿嶄綔璐�+鎵樼洏杩愯緭璐�
                         fee = operationFee.add(fee);
                     } catch (AcerchemOrderException e) {
                         e.printStackTrace();
@@ -254,5 +257,21 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
         }
         return false;
     }
+
+
+	@Override
+	public PaymentModeData getPaymentModeData() {
+		final CartModel cartModel = getCart();
+		PaymentModeData paymentModeData = new PaymentModeData();
+		PaymentModeModel paymentModeModel = cartModel.getPaymentMode();
+		if(paymentModeModel!=null){
+			paymentModeData .setCode(paymentModeModel.getCode());
+			paymentModeData .setName(paymentModeModel.getName());
+		}
+		
+		return paymentModeData;
+	}
+    
+    
 }
 

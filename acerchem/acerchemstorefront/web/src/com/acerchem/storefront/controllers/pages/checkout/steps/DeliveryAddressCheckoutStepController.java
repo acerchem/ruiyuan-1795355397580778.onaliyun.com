@@ -399,6 +399,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	{
 		model.addAttribute("cartData", cartData);
 		model.addAttribute("addressForm", addressForm);
+		model.addAttribute("paymentInfos", acerchemCheckoutFacade.getSupportedCardTypes(cartData.getDeliveryMode().getCode()));
 		model.addAttribute("deliveryAddresses", getDeliveryAddresses(cartData.getDeliveryAddress()));
 		model.addAttribute("noAddress", Boolean.valueOf(getCheckoutFlowFacade().hasNoDeliveryAddress()));
 		model.addAttribute("addressFormEnabled", Boolean.valueOf(getCheckoutFacade().isNewAddressEnabledForCart()));
