@@ -73,7 +73,7 @@ public class DefaultAcerchemCustomerFacade extends DefaultCustomerFacade impleme
 				storeOfProductData.setAvaReleaseDay(stockLevelModel.getAvaPreOrderReleaseDay());
 				int num = stockLevelModel.getPreOrderReleaseDay()!=null?stockLevelModel.getPreOrderReleaseDay():0;
 				storeOfProductData.setFutureAvailableDate(num);
-				
+
 				int actualAmount = stockLevelModel.getAvailable() - stockLevelModel.getReserved();
 				storeOfProductData.setInventory(actualAmount);
 

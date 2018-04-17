@@ -7,7 +7,7 @@
 	<c:if test='${level eq 81}'>
 			<div class="swiper-slide">
 				<img src="${media.url}" />
-	
+					<a href="/acerchemstorefront/Open-Catalogue/Cameras/c/571">
 				
 			</div>
 		</c:if>
@@ -15,13 +15,14 @@
 		<c:if test='${level eq 82}'>
 			<div class="swiper-slide">
 				<img src="${media.url}" />
-	
+					<a href="/acerchemstorefront/Open-Catalogue/Components/c/106">
 				</div>
 		</c:if>
 		
 		<c:if test='${level eq 83}'>
 			<div class="swiper-slide">
 				<img src="${media.url}" />
+				<a href="/acerchemstorefront/Open-Catalogue/Cameras/Digital-Cameras/c/575">
 				</div>
 		</c:if>
 
