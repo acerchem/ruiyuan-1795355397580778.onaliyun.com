@@ -67,6 +67,14 @@ UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript
 
 # Email Pages
 UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];fromEmail[lang=$lang];fromName[lang=$lang]
+#shaun
+ ;;ContractEmail;"customerservice@acerchem.com";"Customer Services Team"
+ ;;DeliveryNoteEmail;"customerservice@acerchem.com";"Customer Services Team"
+ ;;InvoiceEmail;"customerservice@acerchem.com";"Customer Services Team"
+ ;;ProformaInvoiceEmail;"customerservice@acerchem.com";"Customer Services Team"
+ ;;ReleaseNoteEmail;"customerservice@acerchem.com";"Customer Services Team"
+ 
+
  ;;CustomerRegistrationEmail;"customerservice@acerchem.com";"客服团队"
  ;;DeliverySentEmail;"customerservice@acerchem.com";"客服团队"
  ;;ForgottenPasswordEmail;"customerservice@acerchem.com";"客服团队"

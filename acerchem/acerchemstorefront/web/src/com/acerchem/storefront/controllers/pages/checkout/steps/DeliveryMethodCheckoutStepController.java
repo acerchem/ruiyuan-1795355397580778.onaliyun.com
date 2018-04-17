@@ -75,11 +75,12 @@ public class DeliveryMethodCheckoutStepController extends AbstractCheckoutStepCo
 	 */
 	@RequestMapping(value = "/select", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String doSelectDeliveryMode(@RequestParam("delivery_method") final String selectedDeliveryMethod)
+	public String doSelectDeliveryMode(@RequestParam("delivery_method") final String selectedDeliveryMethod,final Model model)
 	{
 		if (StringUtils.isNotEmpty(selectedDeliveryMethod))
 		{
 			acerchemCheckoutFacade.setDeliveryMode(selectedDeliveryMethod);
+			model.addAttribute("paymentModes", acerchemCheckoutFacade.getSupportedCardTypes(selectedDeliveryMethod));
 		}
 
 		return getCheckoutStep().nextStep();

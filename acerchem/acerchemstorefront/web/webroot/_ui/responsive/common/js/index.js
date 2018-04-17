@@ -1,15 +1,15 @@
 
-setTimeout(function(){  
-  $('.maxtop').animate({'padding-top':80});
-  $(".maxprosi-top.max-col").animate({top:0});
-},1000)
-
-//点击关闭顶部广告
-$(".maxprosi-top .maxcole").click(function(){
-  $('.maxtop').animate({'padding-top':0});
-  $(".maxprosi-top.max-col").animate({top:-80});
-  $(".maxprosi-top.max-col").remove();
-});
+//setTimeout(function(){  
+//  $('.maxtop').animate({'padding-top':80});
+//  $(".maxprosi-top.max-col").animate({top:0});
+//},1000)
+//
+////点击关闭顶部广告
+//$(".maxprosi-top .maxcole").click(function(){
+//  $('.maxtop').animate({'padding-top':0});
+//  $(".maxprosi-top.max-col").animate({top:-80});
+//  $(".maxprosi-top.max-col").remove();
+//});
 
 
 

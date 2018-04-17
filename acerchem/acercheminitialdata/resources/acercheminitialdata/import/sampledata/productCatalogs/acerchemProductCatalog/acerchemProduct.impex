@@ -32,12 +32,15 @@ INSERT_UPDATE Warehouse;code[unique=true];name[lang=en];name[lang=de];vendor(cod
 ;United Kingdom;United Kingdom;;true
 ;Holland;Holland;;true
 
-INSERT_UPDATE Product;unitCalculateRato;code[unique=true];$supercategories;manufacturerName;manufacturerAID;unit(code);ean;variantType(code);$catalogVersion;$approved
-;1;000001;576, brand_1;HP;zhangyin;pieces;
-;3;AC05080;576, brand_1;HP;Coenzyme Q10 98% HPLC;pieces;
-;5;AC03131;576, brand_1;HP;Tribulus 90% UV THC FREE;pieces;
-;2;AC01361;576, brand_1;HP;Vitamin C Powder;pieces;
-;7;AC01710;576, brand_1;HP;Alpha Lipoic Acid;pieces;
+INSERT_UPDATE Unit;code[unique=true];name[lang=en];unitType
+;kg;kg;kg
+
+INSERT_UPDATE Product;packageWeight;packageType;netWeight;grossWeight;specification;CAS;unitCalculateRato;code[unique=true];$supercategories;manufacturerName;manufacturerAID;unit(code);ean;variantType(code);$catalogVersion;$approved
+;10;Carton;5;8;EP/USP;303-98-0;1;000001;576, brand_1;HP;zhangyin;kg;
+;20;Drum;12;8;Enterprise Standard;2420-56-6;3;AC05080;576, brand_1;HP;Coenzyme Q10 98% HPLC;kg;
+;25;Bag;15;18;USP;50-81-7;5;AC03131;576, brand_1;HP;Tribulus 90% UV THC FREE;kg;
+;25;Carton;14;16;EP/USP;2420-56-6;2;AC01361;576, brand_1;HP;Vitamin C Powder;kg;
+;10;Drum;6;8;Enterprise Standard;5949-29-10;7;AC01710;576, brand_1;HP;Alpha Lipoic Acid;kg;
 
 
 # Insert Product References
@@ -145,12 +148,12 @@ UPDATE Product;code[unique=true];$approved;$catalogVersion;
 ;AC01361
 ;AC01710
 
-INSERT_UPDATE PriceRow;productId[unique=true];unit(code[unique=true,default=pieces]);currency(isocode)[unique=true];price;minqtd;unitFactor;net
-;000001;pieces;USD;15888;1;1;false
-;AC05080;pieces;USD;18786;1;1;false
-;AC03131;pieces;USD;23333;1;1;false
-;AC01361;pieces;USD;66321;1;1;false
-;AC01710;pieces;USD;58124;1;1;false
+INSERT_UPDATE PriceRow;productId[unique=true];unit(code[unique=true,default=kg]);currency(isocode)[unique=true];price;minqtd;unitFactor;net
+;000001;kg;USD;15888;1;1;false
+;AC05080;kg;USD;18786;1;1;false
+;AC03131;kg;USD;23333;1;1;false
+;AC01361;kg;USD;66321;1;1;false
+;AC01710;kg;USD;58124;1;1;false
 
 
 

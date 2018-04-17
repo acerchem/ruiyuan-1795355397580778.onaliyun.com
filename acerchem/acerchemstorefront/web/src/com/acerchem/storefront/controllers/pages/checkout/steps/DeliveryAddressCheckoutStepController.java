@@ -24,6 +24,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.forms.AddressForm;
 import de.hybris.platform.acceleratorstorefrontcommons.util.AddressDataUtil;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.address.data.AddressVerificationResult;
+import de.hybris.platform.commercefacades.order.data.CardTypeData;
 import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.commercefacades.user.data.CountryData;
@@ -32,6 +33,9 @@ import de.hybris.platform.deliveryzone.model.ZoneModel;
 import de.hybris.platform.util.Config;
 import com.acerchem.storefront.controllers.ControllerConstants;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -262,7 +266,8 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 
 	@RequestMapping(value = "/select", method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String doSelectSuggestedAddress(final AddressForm addressForm, final RedirectAttributes redirectModel)
+	public String doSelectSuggestedAddress(final AddressForm addressForm, final RedirectAttributes redirectModel,
+										   @RequestParam(required = false) final String pickUpDate)
 	{
 		final Set<String> resolveCountryRegions = org.springframework.util.StringUtils
 				.commaDelimitedListToSet(Config.getParameter("resolve.country.regions"));
@@ -299,6 +304,9 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 
 		GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER, "checkout.multi.address.added");
 
+		//保存收货时间
+		acerchemCheckoutFacade.savePickUpDateForOrder(pickUpDate);
+
 		return getCheckoutStep().nextStep();
 	}
 
@@ -314,24 +322,36 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	 */
 	@RequestMapping(value = "/select", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String doSelectDeliveryAddress(@RequestParam("selectedAddressCode") final String selectedAddressCode,
-			final RedirectAttributes redirectAttributes) throws AcerchemOrderException {
-		final ValidationResults validationResults = getCheckoutStep().validate(redirectAttributes);
-		if (getCheckoutStep().checkIfValidationErrors(validationResults))
-		{
-			return getCheckoutStep().onValidation(validationResults);
-		}
+	public String doSelectDeliveryAddress(@RequestParam("selectedAddressCode" ) final String selectedAddressCode,
+										  final Model model, final RedirectAttributes redirectAttributes,
+										 @RequestParam(required = false) final String selectedDeliveryModeCode,
+										  @RequestParam(required = false) final String pickUpDate) {
+//		final ValidationResults validationResults = getCheckoutStep().validate(redirectAttributes);
+//		if (getCheckoutStep().checkIfValidationErrors(validationResults))
+//		{
+//			return getCheckoutStep().onValidation(validationResults);
+//		}
 		if (StringUtils.isNotBlank(selectedAddressCode))
 		{
 			final AddressData selectedAddressData = getCheckoutFacade().getDeliveryAddressForCode(selectedAddressCode);
 			final boolean hasSelectedAddressData = selectedAddressData != null;
 			if (hasSelectedAddressData)
 			{
-				CountryData countryData = selectedAddressData.getCountry();
-				acerchemCheckoutFacade.validateCartAddress(countryData);
+				try {
+					CountryData countryData = selectedAddressData.getCountry();
+					acerchemCheckoutFacade.validateCartAddress(countryData);
+				}catch (AcerchemOrderException e){
+					model.addAttribute("errorMsg",e.getMessage());
+				}
+
 				setDeliveryAddress(selectedAddressData);
 			}
 		}
+
+		//保存收货时间
+		acerchemCheckoutFacade.savePickUpDateForOrder(pickUpDate);
+
+		model.addAttribute("paymentInfos", acerchemCheckoutFacade.getSupportedCardTypes(selectedDeliveryModeCode));
 		return getCheckoutStep().nextStep();
 	}
 
@@ -396,5 +416,4 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(MULTI_CHECKOUT_SUMMARY_CMS_PAGE_LABEL));
 		setCheckoutStepLinksForModel(model, getCheckoutStep());
 	}
-
 }

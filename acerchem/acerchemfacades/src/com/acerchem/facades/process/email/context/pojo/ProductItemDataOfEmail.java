@@ -9,6 +9,11 @@ public class ProductItemDataOfEmail {
 	private String grossWeight; 
 	private boolean isTotal;
 	
+	private String weightUnit;
+	private String price; //单价
+	private String amount;//单种产品的价格小计 =price*quantity
+	private String packageWeight;//单种产品的包裹重量
+	
 	public String getProductCode() {
 		return productCode;
 	}
@@ -50,6 +55,54 @@ public class ProductItemDataOfEmail {
 	}
 	public void setTotal(boolean isTotal) {
 		this.isTotal = isTotal;
+	}
+	/**
+	 * @return the weightUnit
+	 */
+	public String getWeightUnit() {
+		return weightUnit;
+	}
+	/**
+	 * @param weightUnit the weightUnit to set
+	 */
+	public void setWeightUnit(String weightUnit) {
+		this.weightUnit = weightUnit;
+	}
+	/**
+	 * @return the price
+	 */
+	public String getPrice() {
+		return price;
+	}
+	/**
+	 * @param price the price to set
+	 */
+	public void setPrice(String price) {
+		this.price = price;
+	}
+	/**
+	 * @return the amount
+	 */
+	public String getAmount() {
+		return amount;
+	}
+	/**
+	 * @param amount the amount to set
+	 */
+	public void setAmount(String amount) {
+		this.amount = amount;
+	}
+	/**
+	 * @return the packageWeight
+	 */
+	public String getPackageWeight() {
+		return packageWeight;
+	}
+	/**
+	 * @param packageWeight the packageWeight to set
+	 */
+	public void setPackageWeight(String packageWeight) {
+		this.packageWeight = packageWeight;
 	}
 	
 	

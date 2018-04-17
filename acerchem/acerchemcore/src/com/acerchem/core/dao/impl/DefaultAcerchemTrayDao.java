@@ -5,6 +5,7 @@ import com.acerchem.core.model.CountryTrayFareConfModel;
 import de.hybris.platform.core.model.c2l.CountryModel;
 import de.hybris.platform.servicelayer.internal.dao.AbstractItemDao;
 import de.hybris.platform.servicelayer.search.SearchResult;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -25,7 +26,7 @@ public class DefaultAcerchemTrayDao extends AbstractItemDao implements AcerchemT
         params.put("country",country);
         params.put("trayAmount",trayAmount);
         final SearchResult<CountryTrayFareConfModel> result = getFlexibleSearchService().search(builder.toString(),params);
-        if (result!=null && result.getResult()!=null){
+        if (result!=null && CollectionUtils.isNotEmpty(result.getResult())){
             return result.getResult().get(0);
         }
         return null;
