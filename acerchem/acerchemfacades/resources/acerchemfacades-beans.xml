@@ -72,6 +72,13 @@
 		<property name="employeesNo" type="java.lang.Integer"/>
 		<property name="limitCreditAmount" type="java.math.BigDecimal"/>
 		<property name="revenue" type="java.math.BigDecimal"/>
+		<property name="userLevel" type="de.hybris.platform.commercefacades.user.data.UserLevelData"/>
+	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.user.data.UserLevelData">
+		<property name="levelName" type="java.lang.String"/>
+		<property name="levelCode" type="java.lang.String"/>
+		<property name="discount" type="java.lang.Double"/>
 	</bean>
 	
 	<!-- alice :信用账户-->
