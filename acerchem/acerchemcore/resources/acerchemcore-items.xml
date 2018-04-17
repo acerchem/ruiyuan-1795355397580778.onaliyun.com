@@ -61,6 +61,13 @@
 			<value code="L" />
 
 		</enumtype>
+		
+		<!-- 用户区域:上线前再配置-->
+		<enumtype code="CustomerArea" autocreate="true" generate="true" dynamic="true">
+			<description>用户区域</description>
+			<value code="North_America" />
+			<value code="South_America" />
+		</enumtype>
 
 		<enumtype code="CreditAccountStatusEnum" autocreate="true"
 			generate="true" dynamic="true">
@@ -660,6 +667,11 @@
 				<attributes>
 					<attribute qualifier="creditAccount" type="CustomerCreditAccount">
 						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="area" type="CustomerArea">
+						<description>用户区域</description>
+						<modifiers read="true" write="true" search="true" optional="true"/>
 						<persistence type="property" />
 					</attribute>
 
