@@ -1,10 +1,11 @@
 *{padding:0; margin:0; list-style-type: none; box-sizing: border-box; outline: none; font-family: Tahoma, 'Geneva', sans-serif; font-style: normal; }
 h1,h2,h3,h4,b{font-weight: normal;}
-body{background:#fff;-webkit-text-size-adjust:100%;min-width: 1200px;font-family: Tahoma, Geneva, sans-serif; font-size: 1.2rem;font-style: normal;font-size: 100%\9;-webkit-font-smoothing: subpixel-antialiased} 
+body{background:#fff;-webkit-text-size-adjust:100%;min-width: 1200px; max-width: 1920px; margin:auto; font-family: Tahoma, Geneva, sans-serif; font-size: 1.1rem;font-style: normal;font-size: 100%\9;-webkit-font-smoothing: subpixel-antialiased} 
 a{color:#333;text-decoration:none} 
 
 img{
 	max-width: 100%;
+	max-height: 100%;
 }
 
 table{
@@ -12,7 +13,7 @@ table{
 	border-spacing:0;
 }
 
-/* input[type='checkbox']{
+input[type='checkbox']{
 	display:none;
 }
 input[type='checkbox']:checked~.checkbox:before{
@@ -20,7 +21,7 @@ input[type='checkbox']:checked~.checkbox:before{
 }
 input[type='checkbox']:checked~.checkbox:after{
 	display:block;
-} */
+}
 
 input[type='text'],input[type='number'], input[type='password'] ,input[type='submit'],select,.pitch{
 	padding-left:10px;
@@ -127,8 +128,8 @@ button{
     cursor:pointer
     }
 
-.product-table .maxmark , .maxon_salesul .maxmark , .m-prodslide .maxmark{position: absolute;top:-4px;right:-4px; z-index: 9; padding:8px;background-color: #096735;color: #fff;border-bottom-left-radius: 1rem; line-height: 1em; font-size: 16px;}
-.product-table .maxmark h3 ,.maxon_salesul .maxmark h3 , .m-prodslide .maxmark h3{font-size: 1.4rem;font-weight: normal;float: left;}
+.product-table .maxmark , .maxon_salesul .maxmark , .m-prodslide .maxmark{position: absolute;top:-4px;right:-4px; z-index: 9; padding:8px;background-color: #096735;color: #fff;border-bottom-left-radius: 1.6rem; line-height: 1em; font-size: 16px;}
+.product-table .maxmark h3 ,.maxon_salesul .maxmark h3 , .m-prodslide .maxmark h3{margin:0; font-size: 1.4rem;font-weight: normal;float: left;}
 .product-table .maxmark p , .maxon_salesul .maxmark p  , .m-prodslide .maxmark p{float: left;}
 .product-table .maxmark p em , .maxon_salesul .maxmark em  , .m-prodslide .maxmark em{display: block;margin-left: 4px; line-height: 1em;font-size: .6rem;color: #fff;}
 
@@ -152,7 +153,7 @@ button{
 .maxon_sales .maxpagin_tit a{font-size:16px;}
 .maxsales_but{font-size: 1rem;padding: 14px 30px;border: 3px solid #fff;display: inline-block;color: #fff;}
 /*top*/
-.maxprosi-top{background: #096735;height: 80px;position: absolute; top:-80px; left: 0;z-index: 9; }
+.maxprosi-top{background: #096735;height: 80px;position: relative; z-index: 9; transition:all 500ms; overflow:hidden;}
 .maxcomment a{color: #fff;font-size: 18px;line-height:50px;}
 .maxcomment{height: 50px;width:596px;margin: 0px auto;overflow: hidden;position: relative;top: 16px;border: 1px #074d27 dashed;}
 .maxcomment ul{padding: 0 60px 0 65px;}
@@ -171,6 +172,7 @@ button{
 .maxtop .maxLogo{width:15%;}
 .maxtop .maxLogo a{display:block; }
 .maxtop .maxmenu{width: 70%; }
+.maxtop .maxmenu ul:after{content:''; display: block; clear:both;}
 .maxtop .maxmenu li{position: relative; z-index: 999; float:left;text-align:center;margin-left: 20px; }
 .maxtop .maxmenu li a{ font-size: 1rem; line-height: 60px; display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
 .maxtop .maxmenu li.hover a,.maxtop .maxmenu li:hover a{color:#096735;}
