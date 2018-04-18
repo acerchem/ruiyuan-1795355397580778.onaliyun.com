@@ -27,11 +27,6 @@
 	<div class="maxtop_rig">
 		<ul>
 		<li>
-			<cms:pageSlot position="SearchBox" var="component">	
-					<cms:component component="${component}"/>
-				</cms:pageSlot>
-		</li>
-		<li>
 			<sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')" >
 			
 			<c:set var="maxNumberChars" value="25" />

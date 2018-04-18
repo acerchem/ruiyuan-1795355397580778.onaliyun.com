@@ -28,7 +28,7 @@
 
 	<jsp:body>
 		
-			<header:header hideHeaderLinks="${hideHeaderLinks}" />
+			<header:headerForSearch hideHeaderLinks="${hideHeaderLinks}" />
 			
 			<!--
             <a id="skip-to-content"></a>
