@@ -15,7 +15,7 @@
 <div class="checkout-order-summary">
     <multi-checkout:deliveryCartItems cartData="${cartData}" showDeliveryAddress="${showDeliveryAddress}" />
 
-    <c:forEach items="${cartData.pickupOrderGroups}" var="groupData" varStatus="status">
+   <%--  <c:forEach items="${cartData.pickupOrderGroups}" var="groupData" varStatus="status">
         <multi-checkout:pickupCartItems cartData="${cartData}" groupData="${groupData}" showHead="true" />
     </c:forEach>
 
@@ -23,5 +23,5 @@
 
     <multi-checkout:paymentInfo cartData="${cartData}" paymentInfo="${cartData.paymentInfo}" showPaymentInfo="${showPaymentInfo}" />
 
-    <multi-checkout:orderTotals cartData="${cartData}" showTaxEstimate="${showTaxEstimate}" showTax="${showTax}" />
+    <multi-checkout:orderTotals cartData="${cartData}" showTaxEstimate="${showTaxEstimate}" showTax="${showTax}" /> --%>
 </div>

@@ -125,4 +125,9 @@
 		<property name="isUseFutureStock" type="Boolean"/>
 		<property name="availableDate" type="java.util.Date"/>
 	</bean>
+	
+	<bean class="com.acerchem.facades.product.data.PaymentModeData">
+		<property name="code" type="String"/>
+		<property name="name" type="String"/>
+	</bean>
 </beans>

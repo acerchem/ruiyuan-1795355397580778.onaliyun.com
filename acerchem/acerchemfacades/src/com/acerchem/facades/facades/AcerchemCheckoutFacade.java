@@ -5,8 +5,11 @@ import de.hybris.platform.commercefacades.order.data.DeliveryModeData;
 import de.hybris.platform.commercefacades.user.data.CountryData;
 import de.hybris.platform.core.model.order.delivery.DeliveryModeModel;
 
+
 import java.util.Collection;
 import java.util.List;
+
+import com.acerchem.facades.product.data.PaymentModeData;
 
 public interface AcerchemCheckoutFacade {
 
@@ -28,6 +31,8 @@ public interface AcerchemCheckoutFacade {
     boolean setPaymentDetails(String paymentInfoId);
 
     boolean savePickUpDateForOrder(String pickUpDate);
+    
+    PaymentModeData getPaymentModeData();
 
 }
 

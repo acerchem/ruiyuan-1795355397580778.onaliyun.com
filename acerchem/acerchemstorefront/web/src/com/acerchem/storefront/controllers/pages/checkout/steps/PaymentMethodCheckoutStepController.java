@@ -71,8 +71,8 @@ public class PaymentMethodCheckoutStepController extends AbstractCheckoutStepCon
 	@Resource(name = "addressDataUtil")
 	private AddressDataUtil addressDataUtil;
 
-	@Resource
-	private AcerchemCheckoutFacade acerchemCheckoutFacade;
+	 @Resource(name = "defaultAcerchemCheckoutFacade")
+	 private AcerchemCheckoutFacade acerchemCheckoutFacade;
 
 	@ModelAttribute("billingCountries")
 	public Collection<CountryData> getBillingCountries()
