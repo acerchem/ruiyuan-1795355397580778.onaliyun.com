@@ -18,6 +18,7 @@ input[type='checkbox']{
 }
 input[type='checkbox']:checked~.checkbox:before{
 	background-color: #096735;
+	border:none;
 }
 input[type='checkbox']:checked~.checkbox:after{
 	display:block;
@@ -171,7 +172,7 @@ button{
 .maxtop .maxLogo , .maxtop .maxmenu , .maxtop_rig{display: table-cell; vertical-align: middle; padding:10px 0;}
 .maxtop .maxLogo{width:15%;}
 .maxtop .maxLogo a{display:block; }
-.maxtop .maxmenu{width: 70%; }
+.maxtop .maxmenu{width: 65%; }
 .maxtop .maxmenu ul:after{content:''; display: block; clear:both;}
 .maxtop .maxmenu li{position: relative; z-index: 999; float:left;text-align:center;margin-left: 20px; }
 .maxtop .maxmenu li a{ font-size: 1rem; line-height: 60px; display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
@@ -182,8 +183,8 @@ button{
 .maxtop .maxmenu li ul li a{line-height: 2em; text-align: left; }
 .maxtop .maxmenu li:hover ul li a , .maxtop .maxmenu li.hover ul li a{font-size: 14px;color: #333;font-weight: 500;}
 .maxtop .maxmenu li ul li:hover a{color: #096735}
-.maxtop_rig{ width:15%; text-align: right; position: relative;}
-.maxtop_rig li{display: inline-table;padding-left: 15px; position: relative;}
+.maxtop_rig{ width:20%; text-align: right; position: relative;}
+.maxtop_rig li{display: inline-table; padding-left: 15px; min-height: 30px; min-width: 30px; position: relative;vertical-align: top; }
 .maxtop_rig a , .searchlist .btn-submit , .maxlatest .bansearch .maxicon-search{border:none; background: url(maxicon.png);width: 30px;height: 30px;display: block;}
 .maxtop_rig a.maxicon-user{background-position: -10px -172px;}
 .maxtop_rig a.maxicon-search , .searchlist .btn-submit{background-position: -10px -227px;}
@@ -192,6 +193,9 @@ button{
 .maxtop_rig .userintro{position: absolute; left: -70px; color: #999; font-size: 14px; }
 .maxtop_rig .userintro button{color: #096735; display: inline; border:none; background: transparent; text-align: right; font-size: 14px; }
 .maxtop_rig .userintro button:after{content:''; display: block; position: absolute; bottom:-2px; right: 0; width: 20px; border-top:1px solid #096735; }
+.maxtop_rig .bansearch{position: absolute; top:0; right: 0; background:#eee; width: 200px; }
+.maxtop_rig .bansearch .form-control{height: 30px; line-height: 30px; background: transparent; border:none; box-shadow: none; font-size: 12px; }
+.maxtop_rig .bansearch .input-group-btn .btn{padding:0; width: 40px; height: 30px; color: #999}
 
 /*searchlist*/
 .searchlist{position: absolute; top:20px; right: 42px; z-index: 9999; width: 200%; max-width: 350px; display: none;}
@@ -214,7 +218,8 @@ button{
 /*footer*/
 .footer{background: #222624;color: #666666;font-size: 14px;}
 .footer .container{width: 90%;margin: 0 auto;}
-.footer .maxadd{width: 36%;padding-right: 4%; float: left;}
+.footer .maxadd{width: 27%; float: left;}
+.footer .maxadd ul{padding:0;}
 .footer .maxadd li{position:relative; padding-bottom: 12px; display: block; }
 .footer .maxadd i{display: block;width: 20px;h;height: 20px;position: absolute;top:0;background: url(maxicon.png);}
 .footer .maxadd i.maxadd{background-position: -13px -347px;}
@@ -222,12 +227,16 @@ button{
 .footer .maxadd .maxphone{background-position: -13px -406px;}
 .footer .maxadd .maxemail{background-position: -13px -434px;}
 .footer .maxadd span{margin-left: 26px; display: block;}
-.footermin{padding: 60px 0 58px; position: relative;}
-.footermin .left{width: 80%;}
+.footermin{padding:80px 0 58px; position: relative;}
+.footermin .left{width: 92%; margin:auto;}
 .footermin .left:after{content:''; display: block; clear:both;}
-.footermin .right{width: 20%; position: absolute; top:60px; right: 0}
+.footermin .right{width: 100%; position: absolute; top:30px; left:0}
 .footermin h3{font-size: 20px;color: #fff;padding-bottom: 26px;}
-.footer .maxfootnav{float: left; padding-right:6%;}
+.footer .maxfootnav{float: left; }
+.footer .maxfootnav{
+	padding-left:15%;
+}
+.footer .maxfootnav ul{padding:0;}
 .footer .maxfootnav a{color: #666;display: block;padding-bottom: 12px;}
 .footer .maxfootnav a:hover{color:#fff;}
 
@@ -235,14 +244,16 @@ button{
 .gotop:after{content:''; display: block; height: 100%;  background:url(maxicon.png) no-repeat center 72.3%;}
 .gotop:hover{background: rgb(9,103,53)}
 
-.footerbot{padding: 21px 0;border-top: 1px solid #1e211f;}
+.footerbot{padding: 21px 0;border-top: 1px solid #1e211f; text-align: center;}
 ul.share-buttons{
   list-style: none;
   padding: 0;
+  text-align: center;
 }
 
 ul.share-buttons li{
-  float: right;margin-left: 12px;
+   display: inline-block;
+   margin:0 6px;
 }
 ul.share-buttons .sr-only{
   position: absolute;
