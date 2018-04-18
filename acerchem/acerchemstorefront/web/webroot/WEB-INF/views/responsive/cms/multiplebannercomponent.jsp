@@ -6,29 +6,28 @@
 
 	<c:if test='${level eq 81}'>
 			<div class="swiper-slide">
-				<img src="${media.url}" />
-					<a href="/acerchemstorefront/Open-Catalogue/Cameras/c/571">
-				
+				<a href="${contextPath}${urlLink}"><img src="${media.url}" /></a>
 			</div>
 		</c:if>
 		
 		<c:if test='${level eq 82}'>
 			<div class="swiper-slide">
-				<img src="${media.url}" />
-					<a href="/acerchemstorefront/Open-Catalogue/Components/c/106">
+				
+				<a href="${contextPath}${urlLink}"><img src="${media.url}" /></a>
 				</div>
 		</c:if>
 		
 		<c:if test='${level eq 83}'>
 			<div class="swiper-slide">
-				<img src="${media.url}" />
-				<a href="/acerchemstorefront/Open-Catalogue/Cameras/Digital-Cameras/c/575">
+				
+				<a href="${contextPath}${urlLink}"><img src="${media.url}" /></a>
 				</div>
 		</c:if>
 
 		<c:if test='${level eq 1}'>
 			<li class="item1">
 				<a href="${contextPath}${urlLink}">
+				
 					<div class="meansale">
 						<p>promo</p>
 						<span>Sodium Hyaluronate 1% Solution (25kg Drum) </span>
@@ -43,6 +42,7 @@
 			<c:if test='${level eq 2}'>
 			<li class="item2">
 				<a href="${contextPath}${urlLink}">
+				
 					<div class="text">
 						<p>Essential Nutrients for sports</p>
 						<span>View the details</span>
@@ -54,6 +54,7 @@
 			<c:if test='${level eq 3}'>
 			<li class="item3">
 				<a href="${contextPath}${urlLink}">
+				
 					<div class="text">
 						<p>Factory examination record</p>
 						<span>View the details</span>
