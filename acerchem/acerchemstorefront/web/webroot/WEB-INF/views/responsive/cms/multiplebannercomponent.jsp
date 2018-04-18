@@ -81,11 +81,27 @@
 					<p>Let's contact you</p>
 					<span>Let's contact you to get more information</span>
 				</div>
-				<form action="${contextPath}${urlLink}">
-					<input type="text" placeholder="Your Emaill Address" class="text-inp">
-					<input type="number" placeholder="Your Phone" class="text-inp">
+				<form action="${contextPath}/account/add-support-ticket">
+					<input type="text" id="email" placeholder="Your Emaill Address" class="text-inp">
+					<input type="number" id="telephone" placeholder="Your Phone" class="text-inp">
 				</form>
-				<button class="btn">Subscribe</button>
+				<button class="btn click_pop">Subscribe</button>
 			</li>
 			</c:if>
+			
+<script>
+    $(document).ready(function () {
+        $('.click_pop').click(function () {
+        	var email=$("#email").val();
+        	var telephone=$("#telephone").val();
+        	
+        	var openUrl = ACC.config.encodedContextPath + '/account/add-support-ticket?email='+email+'&telephone='+telephone;//弹出窗口的url
+        	var iWidth=600; //弹出窗口的宽度;
+        	var iHeight=600; //弹出窗口的高度;
+        	var iTop = (window.screen.availHeight-30-iHeight)/2; //获得窗口的垂直位置;
+        	var iLeft = (window.screen.availWidth-10-iWidth)/2; //获得窗口的水平位置;
+        	window.open(openUrl,"","height="+iHeight+", width="+iWidth+", top="+iTop+",scrollbars=yes,resizable=yes,toolbar=no,location=no, left="+iLeft); 
+        });
+    })
+</script>
 	
