@@ -169,6 +169,7 @@ background:-webkit-linear-gradient(top,rgba(0,0,0,0) 20%,rgba(0,0,0,.9) 100%);}
    body{
     font-size: 1rem;
    }
+
    .maxmean .formtext input ,.maxmean .formtext button{
         margin-top: 20px;
     }
@@ -184,6 +185,9 @@ background:-webkit-linear-gradient(top,rgba(0,0,0,0) 20%,rgba(0,0,0,.9) 100%);}
 @media screen and (max-width: 1580px) {
     body{
     font-size: .9rem;
+   }
+   label{
+    font-size: 13px;
    }
    .sign-content .label-title{
     font-size: 14px;
@@ -234,6 +238,9 @@ background:-webkit-linear-gradient(top,rgba(0,0,0,0) 20%,rgba(0,0,0,.9) 100%);}
 }
 
 @media screen and (max-width: 1366px) {
+    label{
+    font-size: 12px;
+   }
     .maxmean div , .maxmean .formtext div{
         font-size: 12px
     }
