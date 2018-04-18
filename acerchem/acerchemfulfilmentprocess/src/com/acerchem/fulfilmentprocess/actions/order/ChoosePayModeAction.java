@@ -42,7 +42,7 @@ public class ChoosePayModeAction extends AbstractSimpleDecisionAction<OrderProce
 			return Transition.NOK;
 		}
 
-		if (order.getPaymentMode().getPaymentInfoType().getCode().equals(CREDIT_PAYMENT_INFO))
+		if (order.getPaymentMode().getCode().equals(CREDIT_PAYMENT_INFO))
 		{
 			return Transition.OK;
 		}

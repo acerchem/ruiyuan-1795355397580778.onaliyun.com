@@ -16,14 +16,15 @@ import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 import de.hybris.platform.processengine.action.AbstractProceduralAction;
 
 
-public class DeliveryByshelfAction extends AbstractProceduralAction<OrderProcessModel>
+public class RecordConsignmentInfoAction extends AbstractProceduralAction<OrderProcessModel>
 {
-	private static final Logger LOG = Logger.getLogger(DeliveryByshelfAction.class);
+	private static final Logger LOG = Logger.getLogger(RecordConsignmentInfoAction.class);
 
 
 	@Override
 	public void executeAction(final OrderProcessModel process)
 	{
-		
+			
 	}
+
 }

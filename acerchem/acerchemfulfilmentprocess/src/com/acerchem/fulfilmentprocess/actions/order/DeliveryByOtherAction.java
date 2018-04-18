@@ -10,26 +10,23 @@
  */
 package com.acerchem.fulfilmentprocess.actions.order;
 
-import de.hybris.platform.ordersplitting.model.ConsignmentModel;
-import de.hybris.platform.ordersplitting.model.ConsignmentProcessModel;
-import de.hybris.platform.processengine.action.AbstractProceduralAction;
-import de.hybris.platform.warehouse.Process2WarehouseAdapter;
-
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Required;
+
+import de.hybris.platform.core.model.order.OrderModel;
+import de.hybris.platform.orderprocessing.model.OrderProcessModel;
+import de.hybris.platform.processengine.action.AbstractProceduralAction;
 
 
-public class DeliveryByOtherAction extends AbstractProceduralAction<ConsignmentProcessModel>
+public class DeliveryByOtherAction extends AbstractProceduralAction<OrderProcessModel>
 {
 	private static final Logger LOG = Logger.getLogger(DeliveryByOtherAction.class);
 
 
 	@Override
-	public void executeAction(final ConsignmentProcessModel process)
+	public void executeAction(final OrderProcessModel process)
 	{
-		final ConsignmentModel consignment = process.getConsignment();
-		
-		if(consignment != null){
+		final OrderModel order = process.getOrder();
+		if(order != null){
 				
 		}
 	}	

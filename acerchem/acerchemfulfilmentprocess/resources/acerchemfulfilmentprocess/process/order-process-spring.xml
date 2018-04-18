@@ -129,7 +129,7 @@
 	<bean id="linePayModeAction" class="com.acerchem.fulfilmentprocess.actions.order.LinePayModeAction"  parent="abstractAction"/>
 	<bean id="waitForConfirmPayAction" class="com.acerchem.fulfilmentprocess.actions.order.WaitForConfirmPayAction"  parent="abstractAction"/>
 	<bean id="choosePayModeAction" class="com.acerchem.fulfilmentprocess.actions.order.ChoosePayModeAction"  parent="abstractAction"/>
-	<bean id="recordConsignmentInfoAction" class="com.acerchem.fulfilmentprocess.actions.order.RecordConfignmentInfoAction"  parent="abstractAction"/>
+	<bean id="recordConsignmentInfoAction" class="com.acerchem.fulfilmentprocess.actions.order.RecordConsignmentInfoAction"  parent="abstractAction"/>
 	<bean id="splitDeliveryModeAction" class="com.acerchem.fulfilmentprocess.actions.order.SplitDeliveryModeAction"  parent="abstractAction"/>
 	<bean id="deliveryByOtherAction" class="com.acerchem.fulfilmentprocess.actions.order.DeliveryByOtherAction"  parent="abstractAction"/>
 	<bean id="deliveryByshelfAction" class="com.acerchem.fulfilmentprocess.actions.order.DeliveryByshelfAction"  parent="abstractAction"/>

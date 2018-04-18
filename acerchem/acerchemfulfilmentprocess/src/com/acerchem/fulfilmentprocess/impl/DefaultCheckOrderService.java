@@ -34,11 +34,11 @@ public class DefaultCheckOrderService implements CheckOrderService
 			// Order must have some lines
 			return false;
 		}
-		else if (order.getPaymentInfo() == null)
+		/*else if (order.getPaymentInfo() == null)
 		{
 			// Order must have some payment info to use in the process
 			return false;
-		}
+		}*/
 		else
 		{
 			// Order delivery options must be valid
