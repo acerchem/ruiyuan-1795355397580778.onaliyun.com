@@ -43,9 +43,15 @@
 				 <!-- addToCart -->
 				 <div class="addtocart">
 					<div id="actions-container-for-${fn:escapeXml(component.uid)}" class="row">
-						 <action:actions element="div" parentComponent="${component}"  /> 
-					</div>
-				 </div> 
+						<%-- <action:actions element="div" parentComponent="${component}"/> --%>
+						<a href="${productUrl}">
+           		  			<div class="g-cart " id="addToCartDiv1451563" >
+				            	<i></i>
+			                </div>
+						</a>
+				 	</div> 
+				 </div>
+				 <!-- end addToCart -->
 					
 	    	</div>
 	    	
