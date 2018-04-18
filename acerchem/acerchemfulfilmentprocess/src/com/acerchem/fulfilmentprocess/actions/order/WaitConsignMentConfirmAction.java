@@ -43,6 +43,7 @@ public class WaitConsignMentConfirmAction extends AbstractSimpleDecisionAction<O
 
 		if (order.getEmployeeConfirmDelivery() || order.getCustomerConfirmDelivery())
 		{
+			setOrderStatus(order, OrderStatus.COMPLETED);
 			return Transition.OK;
 		}
 		else

@@ -81,7 +81,6 @@
 		
 		<enumtype code="OrderStatus" autocreate="false" generate="true"
 			dynamic="true">
-			<value code="CONFIRMED" />
 			<value code="DELIVERED" />
 			<value code="PAIED" />
 		</enumtype>
