@@ -132,7 +132,7 @@ public class ProductPageController extends AbstractPageController
 	private AcerchemStockFacade acerchemStockFacade;
 
 	@RequestMapping(value = PRODUCT_CODE_PATH_VARIABLE_PATTERN, method = RequestMethod.GET)
-	@RequireHardLogIn
+	//@RequireHardLogIn
 	public String productDetail(@PathVariable("productCode") final String productCode, final Model model,
 			final HttpServletRequest request, final HttpServletResponse response) throws CMSItemNotFoundException,
 			UnsupportedEncodingException

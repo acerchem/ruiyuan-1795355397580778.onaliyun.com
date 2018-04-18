@@ -59,7 +59,7 @@
 
 							</c:forEach>
 						</ul>
-						<div class="get-text">
+						<!-- <div class="get-text">
 							<label class="available">
 								<input type="checkbox" name="available">
 								<span class="checkbox">Since Mentioning</span>
@@ -67,7 +67,7 @@
 
 							<span class="black">Items will ship as soon as they are available.<br/>
 							see order summary for more information.</span>
-						</div>			
+						</div>		 -->	
 					</div>
 				</div>
 				<!-- end -->

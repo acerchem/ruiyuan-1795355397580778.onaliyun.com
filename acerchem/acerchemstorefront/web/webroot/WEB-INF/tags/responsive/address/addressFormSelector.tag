@@ -13,90 +13,102 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
+<div class="form both">
+<form:form id="addressAddForm" method="post" commandName="addressForm" >
+								
+<form:hidden path="addressId" class="add_edit_delivery_address_id"
+	status="${not empty suggestedAddresses ? 'hasSuggestedAddresses' : ''}" />
+<input type="hidden" name="bill_state" id="address.billstate" />
 
-<c:if test="${not empty deliveryAddresses}">
-	<button type="button" class="btn btn-default btn-block js-address-book">
-		<spring:theme code="checkout.checkout.multi.deliveryAddress.viewAddressBook" />
-	</button>
-	<br>
-</c:if>
-
-<c:if test="${empty addressFormEnabled or addressFormEnabled}">
-	<form:form method="post" commandName="addressForm">
-		<form:hidden path="addressId" class="add_edit_delivery_address_id"
-			status="${not empty suggestedAddresses ? 'hasSuggestedAddresses' : ''}" />
-		<input type="hidden" name="bill_state" id="address.billstate" />
+	<label>
+		<span class="label-title">FIRST NAME</span>	
+		<input type="text" name="firstName"  alt="Please Enter Contacts" class="required rep">
+	</label>
+	<label>
+		<span class="label-title">LAST NAME</span>	
+		<input type="text" name="lastName"  alt="Please Enter Contacts" class="required rep">
+	</label>
 	
-		<div id="countrySelector" data-address-code="${fn:escapeXml(addressData.id)}"
-			data-country-iso-code="${fn:escapeXml(addressData.country.isocode)}"
-			class="form-group">
-			<formElement:formSelectBox idKey="address.country"
-				labelKey="address.country" path="countryIso" mandatory="true"
-				skipBlank="false" skipBlankMessageKey="address.country"
-				items="${supportedCountries}" itemValue="isocode"
-				selectedValue="${addressForm.countryIso}"
-				selectCSSClass="form-control" />
-		</div>
-		<div id="i18nAddressForm" class="i18nAddressForm">
-			<c:if test="${not empty country}">
-				<address:addressFormElements regions="${regions}"
-					country="${country}" />
-			</c:if>
-		</div>
-		<sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')">
-			<div class="checkbox">
-				<c:choose>
-					<c:when test="${showSaveToAddressBook}">
-						<formElement:formCheckbox idKey="saveAddressInMyAddressBook"
-							labelKey="checkout.summary.deliveryAddress.saveAddressInMyAddressBook"
-							path="saveInAddressBook" inputCSS="add-address-left-input"
-							labelCSS="add-address-left-label" mandatory="true" />
-					</c:when>
-					<c:when test="${not addressBookEmpty && not isDefaultAddress}">
-						<ycommerce:testId code="editAddress_defaultAddress_box">
-							<formElement:formCheckbox idKey="defaultAddress"
-								labelKey="address.default" path="defaultAddress"
-								inputCSS="add-address-left-input"
-								labelCSS="add-address-left-label" mandatory="true" />
-						</ycommerce:testId>
-					</c:when>
-				</c:choose>
+	<label>
+	<span class="label-title">Title</span>	
+		<div class="flex-wrap">
+			<div class="flex">					
+				<div class="selbox">
+					<input type="hidden"  value="" name="titleCode" alt="Please Select Shipping nation" class="required">
+					<span class="pitch"></span>
+					<ul class="select">
+						<li data-val="mrs">Mrs.</li>
+						<li data-val="miss">Miss</li>
+						<li data-val="ms">Ms.</li>
+						<li data-val="mr">Mr.</li>
+						<li data-val="dr">Dr.</li>
+						<li data-val="rev">Rev.</li>
+					</ul>
+				</div>	
 			</div>
-		</sec:authorize>
-		<div id="addressform_button_panel" class="form-actions">
-			<c:choose>
-				<c:when test="${edit eq true && not addressBook}">
-					<ycommerce:testId code="multicheckout_saveAddress_button">
-						<button
-							class="positive right change_address_button show_processing_message"
-							type="submit">
-							<spring:theme code="checkout.multi.saveAddress" />
-						</button>
-					</ycommerce:testId>
-				</c:when>
-				<c:when test="${addressBook eq true}">
-					<div class="accountActions">
-						<div class="row">
-							<div class="col-sm-6 col-sm-push-6 accountButtons">
-								<ycommerce:testId code="editAddress_saveAddress_button">
-									<button class="btn btn-primary btn-block change_address_button show_processing_message"
-											type="submit">
-										<spring:theme code="text.button.save" />
-									</button>
-								</ycommerce:testId>
-							</div>
-							<div class="col-sm-6 col-sm-pull-6 accountButtons">
-								<ycommerce:testId code="editAddress_cancelAddress_button">
-									<c:url value="${cancelUrl}" var="cancel"/>
-									<a class="btn btn-block btn-default" href="${cancel}">
-										<spring:theme code="text.button.cancel" />
-									</a>
-								</ycommerce:testId>
-							</div>
-						</div>
-					</div>
-				</c:when>
-			</c:choose>
+				
 		</div>
-	</form:form>
-</c:if>
+	</label>
+	
+	<label>
+		<span class="label-title">Telephone</span>	
+		<input type="text" name="line1"  alt="Please Enter Telephone">
+	</label>
+	<label>
+		<span class="label-title">Mobile Phone</span>	
+		<input type="text" name="phone"  alt="Please Enter Mobile Phone" class="required">
+	</label>
+	<label>
+		<span class="label-title">Zip Code</span>	
+		<input type="text" name="postcode" alt="Please Enter Zip Code" class="required">
+	</label>
+
+	<label>
+	<span class="label-title">Shipping Address</span>	
+		<div class="flex-wrap">
+			<div class="flex">					
+				<div class="selbox">
+					<input type="hidden"  value="" name="countryIso" alt="Please Select Shipping nation" class="required">
+					<span class="pitch"></span>
+					<ul class="select">
+						<li>Nation</li>
+						<li data-val="US">U.S.A</li>
+						<li data-val="GB">England</li>
+						<li data-val="ITA">Repubblica Italiana</li>
+						<li data-val="SUI">Swiss Confederation</li>
+						<li data-val="MEX">The United States of Mexico</li>
+						<li data-val="FRA">French Republic</li>
+					</ul>
+				</div>	
+			</div>
+			<div class="flex">
+				<div class="selbox ">
+					<input type="hidden" value="" name="regionIso" alt="Please Select Shipping city" class="required">
+					<span class="pitch"></span>
+					<ul class="select">
+						<li>City</li>
+						<li data-val="US-NY">New York</li>
+						<li data-val="LA">Los Angeles</li>
+						<li data-val="CI">Chicago</li>
+					</ul>
+				</div>	
+			</div>				
+		</div>
+	</label>
+
+	<label>						
+		<input type="text" name="townCity" class="lab-row required" placeholder="Detailed address" alt="Please Enter Shipping Detailed Address">
+	</label>
+	
+	<!-- <div class="btn-set">
+	<a class="btn btn-line" href="javascript:void(0)">Cancel</a>
+		<button type="submit" class="btn btn-submit">Confirm</button>
+		
+		</div> -->
+ </form:form>	
+ </div>
+ <div class="btn-set">				
+	<a class="btn btn-line" href="javascript:void(0)">Cancel</a>
+	<a class="btn btn-submit" href="javascript:void(0)">Confirm</a>
+</div>
+

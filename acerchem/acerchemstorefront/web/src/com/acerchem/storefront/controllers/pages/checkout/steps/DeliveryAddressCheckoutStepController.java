@@ -396,9 +396,18 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	protected void populateCommonModelAttributes(final Model model, final CartData cartData, final AddressForm addressForm)
 			throws CMSItemNotFoundException
 	{
+		
+		try {
+			model.addAttribute("deliveryMethods", acerchemCheckoutFacade.getAllDeliveryModes());
+		} catch (AcerchemOrderException e) {
+//			model.addAttribute("errorMsg",e.getMessage());
+			GlobalMessages.addErrorMessage(model, e.getMessage());
+		}
+		
+		
 		model.addAttribute("cartData", cartData);
 		model.addAttribute("addressForm", addressForm);
-//		model.addAttribute("paymentInfos", acerchemCheckoutFacade.getSupportedCardTypes(cartData.getDeliveryMode().getCode()));
+		model.addAttribute("paymentInfos", acerchemCheckoutFacade.getSupportedCardTypes(cartData.getDeliveryMode().getCode()));
 		model.addAttribute("deliveryAddresses", getDeliveryAddresses(cartData.getDeliveryAddress()));
 		model.addAttribute("noAddress", Boolean.valueOf(getCheckoutFlowFacade().hasNoDeliveryAddress()));
 		model.addAttribute("addressFormEnabled", Boolean.valueOf(getCheckoutFacade().isNewAddressEnabledForCart()));

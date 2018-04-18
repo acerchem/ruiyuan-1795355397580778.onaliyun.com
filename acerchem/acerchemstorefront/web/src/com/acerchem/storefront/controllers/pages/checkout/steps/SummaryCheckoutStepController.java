@@ -44,6 +44,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.acerchem.facades.facades.AcerchemCheckoutFacade;
+import com.acerchem.facades.facades.AcerchemOrderException;
 import com.acerchem.storefront.controllers.ControllerConstants;
 
 
@@ -80,6 +81,15 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 				entry.setProduct(product);
 			}
 		}
+		
+		
+		try {
+			model.addAttribute("deliveryMethods", acerchemCheckoutFacade.getAllDeliveryModes());
+		} catch (AcerchemOrderException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		model.addAttribute("paymentInfos", acerchemCheckoutFacade.getSupportedCardTypes(cartData.getDeliveryMode().getCode()));
 
 		model.addAttribute("cartData", cartData);
 		model.addAttribute("allItems", cartData.getEntries());

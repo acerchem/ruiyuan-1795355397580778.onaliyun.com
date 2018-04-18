@@ -47,16 +47,39 @@
 										<input type="radio" name="shipmethod"  checked="checked"  value="${deliveryMode.code}">
 									</div>
 									<div class="into">
-										<p><format:fromPrice priceData="${deliveryMode.deliveryCost}"/></p>
+										<p><format:fromPrice priceData="${cartData.deliveryCost}"/></p>
 										<em>${deliveryMode.name}</em>
 										<span>${deliveryMode.description}</span>
 									</div>	
 								</label>
 							</li>
  							</c:if>
+ 							
+ 							<c:forEach items="${deliveryMethods}" var="data" >
+						
+						<c:if test="${not empty data.deliveryCost}">
+						<c:if test="${data.code=='DELIVERY_GROSS'||data.code=='DELIVERY_MENTION'}">
+						<c:if test="${data.code!=deliveryMode.code}">
+						<li class="now">
+								<label>
+									<div class="into int">
+										<input type="radio" name="shipmethod"   value="${data.code}"/>
+									</div>
+									<div class="into">
+										<p><format:fromPrice priceData="${data.deliveryCost}"/></p>
+										<em>${data.name}</em>
+										<span>${data.description}</span>
+									</div>	
+								</label>
+							</li>
+							</c:if>
+ 							</c:if>
+							</c:if>
+
+							</c:forEach>
 
 						</ul>
-						<div class="get-text">
+					<!-- 	<div class="get-text">
 							<label class="available">
 								<input type="checkbox" name="available">
 								<span class="checkbox">Since Mentioning</span>
@@ -64,7 +87,7 @@
 
 							<span class="black">Items will ship as soon as they are available.<br/>
 							see order summary for more information.</span>
-						</div>			
+						</div>		 -->	
 					</div>
 				</div>
 				<!-- end -->
@@ -185,7 +208,27 @@
 								</li>
 	 														
 							    </c:if>
+							    
+							    	<c:forEach items="${paymentInfos}" var="data" >
+										
+										<c:if test="${data.code!=paymentModeData.code}">
+										<li class="now">
+											<label>
+										<div class="into int">
+											<input type="radio" name="paymentmethod"   value="${data.code}">
+										</div>
+										<div class="into">
+											<em>${data.name}</em>
+										</div>	
+									</label>
+									</li>
+									</c:if>
+ 						
+						
+
+							</c:forEach>
 							</ul>
+							
 							
 				   </div>
 				<!-- end -->
