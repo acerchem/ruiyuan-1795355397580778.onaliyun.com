@@ -66,7 +66,7 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 	public String enterStep(final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException, // NOSONAR
 			CommerceCartModificationException
 	{
-		final CartData cartData = getCheckoutFacade().getCheckoutCart();
+		final CartData cartData = acerchemCheckoutFacade.getCheckoutCart();
 		
 		if (cartData.getEntries() != null && !cartData.getEntries().isEmpty())
 		{
@@ -86,7 +86,7 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 		model.addAttribute("deliveryAddress", cartData.getDeliveryAddress());
 		model.addAttribute("deliveryMode", cartData.getDeliveryMode());
 		model.addAttribute("paymentInfo", cartData.getPaymentInfo());
-		model.addAttribute("paymentModeData", acerchemCheckoutFacade.getPaymentModeData());
+		model.addAttribute("paymentModeData", cartData.getPaymentModeData());
 
 		// Only request the security code if the SubscriptionPciOption is set to Default.
 		final boolean requestSecurityCode = CheckoutPciOptionEnum.DEFAULT

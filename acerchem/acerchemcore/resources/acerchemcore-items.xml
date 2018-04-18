@@ -580,6 +580,16 @@
 						<persistence type="property" />
 						<modifiers />
 					</attribute>
+					<attribute qualifier="baseRealPrice" type="java.lang.Double">
+						<description>分摊之前的单价</description>
+						<persistence type="property" />
+						<modifiers />
+					</attribute>
+					<attribute qualifier="totalRealPrice" type="java.lang.Double">
+						<description>分摊之前的总价</description>
+						<persistence type="property" />
+						<modifiers />
+					</attribute>
 				</attributes>
 			</itemtype>
 

@@ -5,8 +5,8 @@ import com.acerchem.facades.facades.AcerchemCheckoutFacade;
 import com.acerchem.facades.facades.AcerchemOrderException;
 import com.acerchem.facades.facades.AcerchemTrayFacade;
 import com.acerchem.facades.product.data.PaymentModeData;
-
 import de.hybris.platform.commercefacades.order.data.CardTypeData;
+import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.commercefacades.order.data.DeliveryModeData;
 import de.hybris.platform.commercefacades.order.data.ZoneDeliveryModeData;
 import de.hybris.platform.commercefacades.order.impl.DefaultCheckoutFacade;
@@ -23,12 +23,12 @@ import de.hybris.platform.order.CartService;
 import de.hybris.platform.order.DeliveryModeService;
 import de.hybris.platform.order.PaymentModeService;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
-import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.storelocator.model.PointOfServiceModel;
 import de.hybris.platform.util.PriceValue;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
@@ -84,13 +84,13 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
             for (AbstractOrderEntryModel aoe : cartModel.getEntries()){
                 PointOfServiceModel pos = aoe.getDeliveryPointOfService();
                 if (pos == null){
-                    throw new AcerchemOrderException("褰撳墠鎻愯揣鐐逛负绌�.");
+                    throw new AcerchemOrderException("current pos Address is null");
                 }
                 if (pos.getDeliveryZone()!=null&&pos.getDeliveryZone().getCountries()!=null) {
                     Set<CountryModel> countrys = pos.getDeliveryZone().getCountries();
                     boolean isContains = countrys.stream().filter(countryModel -> countryIsoCode.equals(countryModel.getIsocode())).collect(Collectors.toList()).size()>0;
                     if (!isContains){
-                        throw new AcerchemOrderException("褰撳墠鍦板潃涓嶅湪閰嶉�佽寖鍥村唴.");
+                        throw new AcerchemOrderException("The current address is not within the scope of delivery.");
                     }
                 }
             }
@@ -98,20 +98,20 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
     }
 
 
-    public List<? extends DeliveryModeData> getSupportedDeliveryModes() {
+    public List<? extends DeliveryModeData> getAllDeliveryModes() throws AcerchemOrderException {
         final List<DeliveryModeData> result = new ArrayList<DeliveryModeData>();
         final CartModel cartModel = getCart();
         if (cartModel != null)
         {
             for (final DeliveryModeModel deliveryModeModel : acerchemDeliveryService.getSupportedDeliveryModeListForOrder())
             {
-                result.add(this.convert(deliveryModeModel));
+                result.add(this.convertDeliveyMode(deliveryModeModel));
             }
         }
         return result;
     }
 
-    protected DeliveryModeData convert(final DeliveryModeModel deliveryModeModel){
+    protected DeliveryModeData convertDeliveyMode(final DeliveryModeModel deliveryModeModel) throws AcerchemOrderException{
 
         final CartModel cartModel = getCart();
         if (deliveryModeModel instanceof ZoneDeliveryModeModel)
@@ -143,26 +143,16 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                 }
 
                 PriceValue deliveryCost = null;
-                //鑷彁杩愯垂鍜屽瓨鍌ㄨ垂鐢ㄦ敼閫�
                 if (DELIVERY_MENTION.equals(deliveryModeModel.getCode())){
-                    //鑷彁璐�
                     String deliveryMetionPrice = configurationService.getConfiguration().getString(DELIVERY_MENTION_FEE,defaultStorageFee);
-
-                    //鎿嶄綔璐�+鑷彁璐�
                     BigDecimal fee = operationFee.add(BigDecimal.valueOf(Double.valueOf(deliveryMetionPrice)));
 
                     deliveryCost = new PriceValue(cartModel.getCurrency().getIsocode(), fee.doubleValue(), true);
 
                 }else if (DELIVERY_GROSS.equals(deliveryModeModel.getCode())){
                     BigDecimal fee = BigDecimal.valueOf(0.0d);
-                    try {
-                        //鎵樼洏杩愯緭璐�
-                        fee =  BigDecimal.valueOf(acerchemTrayFacade.getTotalPriceForCart());
-                        //鎿嶄綔璐�+鎵樼洏杩愯緭璐�
-                        fee = operationFee.add(fee);
-                    } catch (AcerchemOrderException e) {
-                        e.printStackTrace();
-                    }
+                    fee =  BigDecimal.valueOf(acerchemTrayFacade.getTotalPriceForCart());
+                    fee = operationFee.add(fee);
                     deliveryCost = new PriceValue(cartModel.getCurrency().getIsocode(), fee.doubleValue(), true);
                 }
 
@@ -259,6 +249,20 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
     }
 
 
+    @Override
+    public CartData getCheckoutCart()
+    {
+        final CartData cartData = getCartFacade().getSessionCart();
+        if (cartData != null)
+        {
+            cartData.setDeliveryAddress(getDeliveryAddress());
+            cartData.setDeliveryMode(getDeliveryMode());
+            cartData.setPaymentModeData(getPaymentModeData());
+            cartData.setPaymentInfo(getPaymentDetails());
+        }
+        return cartData;
+    }
+
 	@Override
 	public PaymentModeData getPaymentModeData() {
 		final CartModel cartModel = getCart();
@@ -271,6 +275,13 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
 		
 		return paymentModeData;
 	}
+
+	//分摊价格
+	public void ApportionmentCartPrice(CartModel cartModel){
+        if (!ObjectUtils.isEmpty(cartModel)){
+
+        }
+    }
     
     
 }

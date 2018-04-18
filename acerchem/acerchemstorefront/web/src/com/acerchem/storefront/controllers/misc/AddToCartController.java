@@ -17,6 +17,7 @@ import com.acerchem.storefront.controllers.ControllerConstants;
 import com.acerchem.storefront.data.AcerchemAddToCartForm;
 import de.hybris.platform.acceleratorfacades.product.data.ProductWrapperData;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.AbstractController;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.AddToCartOrderForm;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.AddToEntryGroupForm;
 import de.hybris.platform.commercefacades.order.CartFacade;
@@ -85,8 +86,6 @@ public class AddToCartController extends AbstractController
 	public String addToCart(@RequestParam("productCodePost") final String code, final Model model,
 							@Valid final AcerchemAddToCartForm form, final BindingResult bindingErrors)
 	{
-//		List<? extends DeliveryModeData> dataList =acerchemCheckoutFacade.getSupportedDeliveryModes();
-//		model.addAttribute("dataList",dataList);
 		if (bindingErrors.hasErrors())
 		{
 			return getViewWithBindingErrorMessages(model, bindingErrors);
@@ -108,6 +107,7 @@ public class AddToCartController extends AbstractController
 			String errorMsg = acerchemCartFacade.acerchemValidateCart(code,isUseFutureStock,storeId);
 
 			if (errorMsg!=null){
+				GlobalMessages.addErrorMessage(model, errorMsg);
 				model.addAttribute(ERROR_MSG_TYPE, errorMsg);
 			}else{
 				try

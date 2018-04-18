@@ -130,4 +130,14 @@
 		<property name="code" type="String"/>
 		<property name="name" type="String"/>
 	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.order.data.OrderEntryData">
+		<property name="baseRealPrice" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+		<property name="totalRealPrice" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.order.data.AbstractOrderData">
+		<property name="paymentModeData" type="com.acerchem.facades.product.data.PaymentModeData"/>
+	</bean>
+
 </beans>
