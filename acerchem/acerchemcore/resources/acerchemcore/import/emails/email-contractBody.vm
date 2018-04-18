@@ -121,7 +121,7 @@ Contract</b></font></font></p>
 </div>
 <p lang="en-GB" class="western" style="margin-bottom: 0in; line-height: 100%">
 <div style="height:100px; width:100%">
-#if ($ctx.order.entries.size() > 0)
+#if ($ctx.append.productLists.size() > 0)
 	<table dir="ltr" align="center" width="700" hspace="12" cellpadding="7" cellspacing="0">
 		<col width="80">
 		<col width="147">
@@ -154,62 +154,67 @@ Contract</b></font></font></p>
 				<p lang="en-GB" class="western" align="center"><font face="Arial, Arial, sans-serif"><font size="2" style="font-size: 10pt">Package</font></font></p>
 			</td>
 		</tr>
-		 #foreach( $entry in ${ctx.order.entries} )
-			<tr>
-				<td width="80" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-					<p lang="en-GB" class="western" align="center"><font face="Arial, Arial, sans-serif"><font size="2" style="font-size: 10pt">${entry.product.code}</font></font></p>
-				</td>
-				<td width="147" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-					<p lang="de-DE" class="western" align="center"><font face="Arial, Arial, sans-serif"><font size="2" style="font-size: 10pt"><span lang="en-GB">${entry.product.name}</span></font></font></p>
-				</td>
-				<td width="62" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-					<p lang="en-GB" class="western" align="center"><font face="Arial, Arial, sans-serif"><font size="2" style="font-size: 10pt">kg</font></font></p>
-				</td>
-				<td width="71" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-					<p lang="en-GB" class="western" align="center"><font face="Arial, Arial, sans-serif"><font size="2" style="font-size: 10pt">${entry.quantity}</font></font></p>
-				</td>
-				<td width="72" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-					<p lang="en-GB" class="western" align="center"><font face="Arial, Arial, sans-serif"><font size="2" style="font-size: 10pt">18.00</font></font></p>
-				</td>
-				<td width="91" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-					<p lang="en-GB" class="western" align="center"><font face="Arial, Arial, sans-serif"><font size="2" style="font-size: 10pt">1800.00</font></font></p>
-				</td>
-				<td width="79" style="border: 1px solid #000000; padding: 0in 0.08in">
-					<p lang="en-GB" class="western" align="center"><font face="Arial, Arial, sans-serif"><font size="2" style="font-size: 10pt">25kg/drum</font></font></p>
-				</td>
-			</tr>
+		 #foreach( $Item in ${ctx.append.productLists} )
+			#if (! $item.isTotal )
+			
+				<tr>
+					<td width="80" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+						<p lang="en-GB" class="western" align="center"><font face="Arial, Arial, sans-serif"><font size="2" style="font-size: 10pt">${item.productCode}</font></font></p>
+					</td>
+					<td width="147" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+						<p lang="de-DE" class="western" align="center"><font face="Arial, Arial, sans-serif"><font size="2" style="font-size: 10pt"><span lang="en-GB">${item.productName}</span></font></font></p>
+					</td>
+					<td width="62" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+						<p lang="en-GB" class="western" align="center"><font face="Arial, Arial, sans-serif"><font size="2" style="font-size: 10pt">${item.unitName}</font></font></p>
+					</td>
+					<td width="71" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+						<p lang="en-GB" class="western" align="center"><font face="Arial, Arial, sans-serif"><font size="2" style="font-size: 10pt">${item.quantity}</font></font></p>
+					</td>
+					<td width="72" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+						<p lang="en-GB" class="western" align="center"><font face="Arial, Arial, sans-serif"><font size="2" style="font-size: 10pt">${item.price}</font></font></p>
+					</td>
+					<td width="91" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+						<p lang="en-GB" class="western" align="center"><font face="Arial, Arial, sans-serif"><font size="2" style="font-size: 10pt">${item.amount}</font></font></p>
+					</td>
+					<td width="79" style="border: 1px solid #000000; padding: 0in 0.08in">
+						<p lang="en-GB" class="western" align="center"><font face="Arial, Arial, sans-serif"><font size="2" style="font-size: 10pt">${item.packageWeight}</font></font></p>
+					</td>
+				</tr>
+			#else
+				<tr>
+					<td width="80" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+						<p lang="en-GB" class="western" align="center"><font face="Arial, Arial, sans-serif"><font size="2" style="font-size: 10pt">Total:</font></font></p>
+					</td>
+					<td width="147" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+						<p lang="en-GB" class="western" align="center"><br/>
+
+						</p>
+					</td>
+					<td width="62" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+						<p lang="en-GB" class="western" align="center"><br/>
+
+						</p>
+					</td>
+					<td width="71" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+						<p lang="en-GB" class="western" align="center"><font face="Arial, Arial, sans-serif"><font size="2" style="font-size: 10pt">${item.quantity}</font></font></p>
+					</td>
+					<td width="72" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+						<p lang="en-GB" class="western" align="center"><br/>
+
+						</p>
+					</td>
+					<td width="91" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
+						<p lang="de-DE" class="western" align="center"><font face="Arial, Arial, sans-serif"><font size="2" style="font-size: 10pt"><span lang="en-GB">${item.amount}</span></font></font></p>
+					</td>
+					<td width="79" style="border: 1px solid #000000; padding: 0in 0.08in">
+						<p lang="en-GB" class="western" align="center"><br/>
+
+						</p>
+					</td>
+				</tr>
+			#end
 		#end
-		<tr>
-			<td width="80" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p lang="en-GB" class="western" align="center"><font face="Arial, Arial, sans-serif"><font size="2" style="font-size: 10pt">Total:</font></font></p>
-			</td>
-			<td width="147" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p lang="en-GB" class="western" align="center"><br/>
-
-				</p>
-			</td>
-			<td width="62" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p lang="en-GB" class="western" align="center"><br/>
-
-				</p>
-			</td>
-			<td width="71" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p lang="en-GB" class="western" align="center"><font face="Arial, Arial, sans-serif"><font size="2" style="font-size: 10pt">100.000</font></font></p>
-			</td>
-			<td width="72" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p lang="en-GB" class="western" align="center"><br/>
-
-				</p>
-			</td>
-			<td width="91" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
-				<p lang="de-DE" class="western" align="center"><font face="Arial, Arial, sans-serif"><font size="2" style="font-size: 10pt"><span lang="en-GB">1800.00</span></font></font></p>
-			</td>
-			<td width="79" style="border: 1px solid #000000; padding: 0in 0.08in">
-				<p lang="en-GB" class="western" align="center"><br/>
-
-				</p>
-			</td>
-		</tr>
+	
 	</table>     
 #end
 </div>
@@ -217,7 +222,7 @@ Contract</b></font></font></p>
 
 <p class="western" style="margin-bottom: 0in; line-height: 100%; orphans: 0; widows: 0; text-indent:2.1in">
 <font face="Calibri, Calibri, sans-serif"><font size="3" style="font-size: 11pt">TOTAL:
-SAY US DOLLARS ONE THOUSAND EIGHT HUNDRED ONLY</font></font></p>
+${ctx.append.totalData.amountTotal}</font></font></p>
 <p class="western" style="margin-bottom: 0in; line-height: 100%; orphans: 0; widows: 0">
 <br/>
 </p>
@@ -226,17 +231,17 @@ SAY US DOLLARS ONE THOUSAND EIGHT HUNDRED ONLY</font></font></p>
 PriceTerms: DDP</font></font></p>
 <p class="western" style="margin-bottom: 0in; line-height: 100%; orphans: 0; widows: 0; text-indent:2.1in">
 <font face="Calibri, Calibri, sans-serif"><font size="3" style="font-size: 11pt">2.
-Delivery Date: ${ctx.deliveryDate}</font></font></p>
+Delivery Date: </font></font></p>
 <p class="western" style="margin-bottom: 0in; line-height: 100%; orphans: 0; widows: 0; text-indent:2.1in">
 <font face="Calibri, Calibri, sans-serif"><font size="3" style="font-size: 11pt">3.
-Deliver from: ${ctx.order.store} to:  ${ctx.order.deliveryAddress.formattedAddress}</font></font></p>
+Deliver from: ${ctx.wareHouse} to:  ${ctx.order.deliveryAddress.formattedAddress}</font></font></p>
 <p class="western" style="margin-bottom: 0in; line-height: 100%; orphans: 0; widows: 0; text-indent:2.1in">
 <font face="Calibri, Calibri, sans-serif"><font size="3" style="font-size: 11pt">4.
 Marks: Product name,batch no,NW,GW,manufacture date,expira&nbsp;on
 date</font></font></p>
 <p class="western" style="margin-bottom: 0in; line-height: 100%; orphans: 0; widows: 0; text-indent:2.1in">
 <font face="Calibri, Calibri, sans-serif"><font size="3" style="font-size: 11pt">5.
-Payment terms: T/T 30 DAYS AFTER SHIPPING DOCUMENTS</font></font></p>
+Payment terms: ${ctx.paymentTerms}</font></font></p>
 <p lang="de-DE" class="western" style="text-indent: 0.14in; margin-bottom: 0in; line-height: 100%; orphans: 0; widows: 0; text-indent:2.25in">
 <font face="Calibri, Calibri, sans-serif"><font size="2" style="font-size: 10pt"><span lang="en-US">Payment can only be made on the bank account on the invoice. Unless agreed in writing by the 
 legal representatives of both parties. 

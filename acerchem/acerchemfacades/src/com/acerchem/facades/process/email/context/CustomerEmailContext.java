@@ -36,6 +36,7 @@ public class CustomerEmailContext extends AbstractEmailContext<StoreFrontCustome
 	{
 		super.init(storeFrontCustomerProcessModel, emailPageModel);
 		customerData = getCustomerConverter().convert(getCustomer(storeFrontCustomerProcessModel));
+		//super.setMessages(messages);
 	}
 
 	@Override

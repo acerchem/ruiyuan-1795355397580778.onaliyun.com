@@ -13,6 +13,7 @@ public class ProductItemDataOfEmail {
 	private String price; //单价
 	private String amount;//单种产品的价格小计 =price*quantity
 	private String packageWeight;//单种产品的包裹重量
+	private String unitName;
 	
 	public String getProductCode() {
 		return productCode;
@@ -103,6 +104,18 @@ public class ProductItemDataOfEmail {
 	 */
 	public void setPackageWeight(String packageWeight) {
 		this.packageWeight = packageWeight;
+	}
+	/**
+	 * @return the unitName
+	 */
+	public String getUnitName() {
+		return unitName;
+	}
+	/**
+	 * @param unitName the unitName to set
+	 */
+	public void setUnitName(String unitName) {
+		this.unitName = unitName;
 	}
 	
 	

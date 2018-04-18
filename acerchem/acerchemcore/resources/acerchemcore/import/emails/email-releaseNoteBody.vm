@@ -65,22 +65,17 @@ note</font></b></font></p>
 <p align="center" style="margin-right: -0.05in">                     
                         
 </p>
-<p align="justify" style="text-indent: 2.01in"><font size="6" style="font-size: 22pt"><b><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt">PO
-NO.:</font></font><font face="Arial, sans-serif"><font size="2" style="font-size: 10pt">
-</font></font><font face="Arial, sans-serif"><font size="2" style="font-size: 10pt">nr
-ZZ-604/17/MAPSG</font></font><font face="Arial, sans-serif"><font size="2" style="font-size: 10pt">&amp;</font></font></b></font></p>
-<p align="justify" style="text-indent: 2.01in">        <font size="6" style="font-size: 22pt"><b><font face="Arial, sans-serif"><font size="2" style="font-size: 10pt">nr
-ZZ-726/17/MAPSG</font></font><font face="Arial, sans-serif"><font size="2" style="font-size: 10pt">&amp;</font></font></b></font></p>
-<p align="justify" style="text-indent: 2.01in">
-<font size="6" style="font-size: 22pt"><b><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt">nr
-ZZ-735/17/MAPSG</font></font><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt">&amp;</font></font></b></font></p>
-<p align="justify" style="text-indent: 2.01in">
-<font size="6" style="font-size: 22pt"><b><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt">nr
-ZZ-750/17/MAPSG</font></font><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt">&amp;</font></font></b></font></p>
-<p align="justify" style="text-indent: 2.01in">
-<font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt"><b>nr
-ZZ-90/18/MAPSG</b></font></font></p>
-<p align="justify" style="margin-right: -0.05in"><br/>
+	<p align="justify" style="text-indent: 2.01in"><font size="6" style="font-size: 22pt"><b>
+		<font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt">PO NO.:</font></font></b></font></p>
+	<p align="justify" style="text-indent: 2.01in"><font size="6" style="font-size: 22pt"><b>
+		<font face="Arial, sans-serif"><font size="2" style="font-size: 10pt"></font></font></b></font></p>
+	<p align="justify" style="text-indent: 2.01in"><font size="6" style="font-size: 22pt"><b>
+		<font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt"></font></font></b></font></p>
+	<p align="justify" style="text-indent: 2.01in"><font size="6" style="font-size: 22pt"><b>
+		<font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt"></font></font></b></font></p>
+	<p align="justify" style="text-indent: 2.01in"><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt">
+		<b></b></font></font></p>
+	<p align="justify" style="margin-right: -0.05in"><br/>
 
 </p>
 	<p align="justify" style="text-indent: 2.01in"><font size="3" face="Calibri, sans-serif" ><b>INVOICE NO.: ${ctx.order.code}</b></font></p>

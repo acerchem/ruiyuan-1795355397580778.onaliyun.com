@@ -16,6 +16,11 @@
 		<property name="chemicalInfo" type="String"/>
 		<property name="unitCalculateRato" type="String"/>
 		<property name="promotionPrice" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+		<property name="packageWeight" type="String"/>
+		<property name="packageType" type="String"/>
+		<property name="netWeight" type="String"/>
+		<property name="grossWeight" type="String"/>
+		<property name="unitName" type="String"/>
 	</bean>
 
 	<bean class="com.acerchem.facades.product.data.GenderData">
@@ -116,5 +121,9 @@
 	<bean class="de.hybris.platform.commerceservices.service.data.CommerceCartParameter">
 		<property name="isUseFutureStock" type="Boolean"/>
 		<property name="availableDate" type="java.util.Date"/>
+	</bean>
+	<bean class="de.hybris.platform.commercefacades.order.data.OrderData">
+		<property name="currency" type="String"/>
+		<property name="paymentMode" type="String"/>
 	</bean>
 </beans>

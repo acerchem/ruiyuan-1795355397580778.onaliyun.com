@@ -37,6 +37,8 @@ public class AcerChemReleaseNoteEmailContext extends AbstractEmailContext<OrderP
 
 	private String customerAddress;
 	private ReleaseNoteEmailContextPoJo append;
+	
+	private CustomerModel customerModel;  
 
 	@Override
 	public void init(final OrderProcessModel orderProcessModel, final EmailPageModel emailPageModel) {
@@ -51,6 +53,7 @@ public class AcerChemReleaseNoteEmailContext extends AbstractEmailContext<OrderP
 
 		initCustomerAddress(orderProcessModel);
 		initAppend();
+		customerModel = getCustomer(orderProcessModel);
 	}
 
 	@Override
@@ -119,6 +122,7 @@ public class AcerChemReleaseNoteEmailContext extends AbstractEmailContext<OrderP
 		long itemNet = 0;
 		long itemGross = 0;
 
+		int batchNum = 0;
 		if (CollectionUtils.isNotEmpty(consignments)) {
 			for (ConsignmentData consignment : consignments) {
 
@@ -135,7 +139,7 @@ public class AcerChemReleaseNoteEmailContext extends AbstractEmailContext<OrderP
 							if (!tempName.equals(product.getName())) {
 								ProductItemDataOfEmail totalPie = new ProductItemDataOfEmail();
 
-								totalPie.setProductName("Total");
+								totalPie.setProductName("subTotal");
 								totalPie.setGrossWeight(String.valueOf(itemGross));
 								totalPie.setNetWeight(String.valueOf(itemNet));
 								totalPie.setQuantity(String.valueOf(itemQuantity));
@@ -145,6 +149,8 @@ public class AcerChemReleaseNoteEmailContext extends AbstractEmailContext<OrderP
 								itemQuantity = 0;
 								itemNet = 0;
 								itemGross = 0;
+								
+								batchNum ++;
 							}
 						}
 
@@ -152,23 +158,43 @@ public class AcerChemReleaseNoteEmailContext extends AbstractEmailContext<OrderP
 						pie.setProductCode(product.getCode());
 						pie.setProductName(product.getName());
 						pie.setQuantity(consignEntry.getQuantity().toString());
-						pie.setBatchNo("DY0661700095");
-						pie.setNetWeight("1000");
-						pie.setGrossWeight("1120");
+						pie.setBatchNo(" ");
+						String tempNet = StringUtils.defaultString(product.getNetWeight(),"0");
+						String tempGross = StringUtils.defaultString(product.getGrossWeight(),"0");
+						if(!StringUtils.isNumeric(tempNet)){
+							tempNet = "0";
+						}
+						if(!StringUtils.isNumeric(tempGross)){
+							tempGross = "0";
+						}
+						pie.setNetWeight(tempNet);
+						pie.setGrossWeight(tempGross);
 						pie.setTotal(false);
 
 						quantity += consignEntry.getQuantity();
-						net += 1000;
-						gross += 1120;
+						net += Long.parseLong(tempNet);
+						gross += Long.parseLong(tempGross);
 						itemQuantity += consignEntry.getQuantity();
-						itemNet += 1000;
-						itemGross += 1120;
+						itemNet += Long.parseLong(tempNet);
+						itemGross += Long.parseLong(tempGross);
 						list.add(pie);
 
 					}
 
 				}
-				System.out.println("");
+				
+			}
+			//add last item project
+			if (batchNum > 1){
+				ProductItemDataOfEmail lastPie = new ProductItemDataOfEmail();
+
+				lastPie.setProductName("subTotal");
+				lastPie.setGrossWeight(String.valueOf(itemGross));
+				lastPie.setNetWeight(String.valueOf(itemNet));
+				lastPie.setQuantity(String.valueOf(itemQuantity));
+				lastPie.setTotal(true);
+
+				list.add(lastPie);
 			}
 		}
 
@@ -193,6 +219,13 @@ public class AcerChemReleaseNoteEmailContext extends AbstractEmailContext<OrderP
 
 	public void setAppend(ReleaseNoteEmailContextPoJo append) {
 		this.append = append;
+	}
+
+	/**
+	 * @return the customerModel
+	 */
+	public CustomerModel getCustomer() {
+		return customerModel;
 	}
 
 }
