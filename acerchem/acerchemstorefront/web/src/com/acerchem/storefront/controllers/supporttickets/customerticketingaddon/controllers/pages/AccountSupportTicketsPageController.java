@@ -58,7 +58,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.google.common.collect.Maps;
 import com.sap.security.core.server.csi.XSSEncoder;
-import com.acerchem.storefront.data.CustomRegisterForm;
 import de.hybris.platform.commercefacades.user.data.CustomerData;
 
 /**
@@ -213,14 +212,15 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 	}
 
 	private String getAddView(Model model,String productId,String productName,String email,String telephone,SupportTicketForm SupportTicketForm) throws CMSItemNotFoundException {
-		final CustomRegisterForm CustomRegisterForm = new CustomRegisterForm();
+		
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
-		if (customerData.getUid().equals(null)||customerData.getUid().trim()=="") {
+		/*final CustomRegisterForm CustomRegisterForm = new CustomRegisterForm();
+		if (customerData.getUid()!=null) {
 			CustomRegisterForm.setEmail(customerData.getUid());
 			CustomRegisterForm.setLanguage(customerData.getLanguage().getIsocode());
 			CustomRegisterForm.setCurrency(customerData.getCurrency().getIsocode());
-		}
-
+		}*/
+		
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CustomerticketingaddonConstants.ADD_SUPPORT_TICKET_PAGE));
 		setUpMetaDataForContentPage(model,
 				getContentPageForLabelOrId(CustomerticketingaddonConstants.ADD_SUPPORT_TICKET_PAGE));
@@ -236,13 +236,8 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 		else
 		{
 			SupportTicketForm stf = new SupportTicketForm();
-			if (customerData.getUid().equals(null)||customerData.getUid().trim()=="") {
-				stf.setProductId("");
-				stf.setProductName("");
-				stf.setYourname(customerData.getName() == null ? "" : customerData.getName());
-				stf.setEmail(customerData.getUid() == null ? "" : customerData.getUid());
-			}
-			
+			stf.setYourname(customerData.getName() == null ? "" : customerData.getName());
+			stf.setEmail(customerData.getUid() == null ? "" : customerData.getUid());
 			stf.setProductId(productId==null||productId.equals("")?"":productId);
 			stf.setProductName(productName==null||productName.equals("")?"":productName);
 			if(telephone!=null&&!telephone.equals(""))
@@ -253,8 +248,6 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 			{
 				stf.setEmail(email);
 			}
-			
-			
 			model.addAttribute(CustomerticketingaddonConstants.SUPPORT_TICKET_FORM, stf);
 		}
 		model.addAttribute(CustomerticketingaddonConstants.MAX_UPLOAD_SIZE, Long.valueOf(maxUploadSizeValue));
