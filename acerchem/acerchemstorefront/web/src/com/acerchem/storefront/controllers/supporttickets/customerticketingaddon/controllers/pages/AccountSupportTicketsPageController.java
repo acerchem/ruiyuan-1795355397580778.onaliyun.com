@@ -140,8 +140,8 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 	 * @throws CMSItemNotFoundException
 	 */
 	@RequestMapping(value = "/add-support-ticket", method = RequestMethod.GET)
-	public String addSupportTicket(final Model model,String productId,String productName) throws CMSItemNotFoundException {
-		return getAddView(model,productId,productName,null);
+	public String addSupportTicket(final Model model,String productId,String productName,String email,String telephone) throws CMSItemNotFoundException {
+		return getAddView(model,productId,productName,email,telephone,null);
 	}
 
 	/**
@@ -165,7 +165,7 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 			final List<Map<String, String>> list = buildErrorMessagesMap(bindingResult);
 			list.add(buildMessageMap(CustomerticketingaddonConstants.FORM_GLOBAL_ERROR_KEY,CustomerticketingaddonConstants.FORM_GLOBAL_ERROR));
 
-			return getAddView(model,supportTicketForm.getProductId(),supportTicketForm.getProductName(),supportTicketForm);
+			return getAddView(model,supportTicketForm.getProductId(),supportTicketForm.getProductName(),null,null,supportTicketForm);
 		}
 
 		try {
@@ -178,7 +178,7 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 					getMessageSource().getMessage(
 							CustomerticketingaddonConstants.TEXT_SUPPORT_TICKETING_ATTACHMENT_BLOCK_LISTED,
 							new Object[] { allowedUploadedFormats }, getI18nService().getCurrentLocale()));
-			return getAddView(model,supportTicketForm.getProductId(),supportTicketForm.getProductName(),supportTicketForm);
+			return getAddView(model,supportTicketForm.getProductId(),supportTicketForm.getProductName(),null,null,supportTicketForm);
 		} catch (final RuntimeException rEX) {
 			final Map<String, String> map = Maps.newHashMap();
 			LOG.error(rEX.getMessage(), rEX);
@@ -186,7 +186,7 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 			map.put(CustomerticketingaddonConstants.SUPPORT_TICKET_TRY_LATER,
 					getMessageSource().getMessage(CustomerticketingaddonConstants.TEXT_SUPPORT_TICKETING_TRY_LATER,
 							null, getI18nService().getCurrentLocale()));
-			return getAddView(model,supportTicketForm.getProductId(),supportTicketForm.getProductName(),supportTicketForm);
+			return getAddView(model,supportTicketForm.getProductId(),supportTicketForm.getProductName(),null,null,supportTicketForm);
 		}
 		return getListView(pageNumber, showMode, sortCode, ticketAdded, model);
 	}
@@ -212,7 +212,7 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 		return "pages/account/accountSupportTicketsPage";
 	}
 
-	private String getAddView(Model model,String productId,String productName,SupportTicketForm SupportTicketForm) throws CMSItemNotFoundException {
+	private String getAddView(Model model,String productId,String productName,String email,String telephone,SupportTicketForm SupportTicketForm) throws CMSItemNotFoundException {
 		final CustomRegisterForm CustomRegisterForm = new CustomRegisterForm();
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		if (customerData.getUid().equals(null)||customerData.getUid().trim()=="") {
@@ -245,6 +245,15 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 			
 			stf.setProductId(productId==null||productId.equals("")?"":productId);
 			stf.setProductName(productName==null||productName.equals("")?"":productName);
+			if(telephone!=null&&!telephone.equals(""))
+			{
+				stf.setTelephone(telephone);
+			}
+			if(email!=null&&!email.equals(""))
+			{
+				stf.setEmail(email);
+			}
+			
 			
 			model.addAttribute(CustomerticketingaddonConstants.SUPPORT_TICKET_FORM, stf);
 		}
