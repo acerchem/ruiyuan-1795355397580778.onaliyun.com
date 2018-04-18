@@ -434,14 +434,14 @@ INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;
 ;;BannerComponent;text/jpg;maxbanner-bg.jpg;$section/acerchemimages/maxbanner-bg.jpg
 
 #body
-INSERT_UPDATE MultipleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;displayLevel;classfication
-;;HomepageSwiperOneBannerComponent;Acerchem Homepage SwiperOneBanner;HomepageSwiperOneBannerComponent;81;1
+INSERT_UPDATE MultipleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;displayLevel;classfication;urlLink
+;;HomepageSwiperOneBannerComponent;Acerchem Homepage SwiperOneBanner;HomepageSwiperOneBannerComponent;81;1;/Open-Catalogue/Cameras/c/571
 
-INSERT_UPDATE MultipleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;displayLevel;classfication
-;;HomepageSwiperTwoBannerComponent;Acerchem Homepage SwiperTwoBanner;HomepageSwiperTwoBannerComponent;82;2
+INSERT_UPDATE MultipleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;displayLevel;classfication;urlLink
+;;HomepageSwiperTwoBannerComponent;Acerchem Homepage SwiperTwoBanner;HomepageSwiperTwoBannerComponent;82;2;/Open-Catalogue/Components/c/106
 
-INSERT_UPDATE MultipleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;displayLevel;classfication
-;;HomepageSwiperThreeBannerComponent;Acerchem Homepage SwiperThreeBanner;HomepageSwiperThreeBannerComponent;83;3
+INSERT_UPDATE MultipleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;displayLevel;classfication;urlLink
+;;HomepageSwiperThreeBannerComponent;Acerchem Homepage SwiperThreeBanner;HomepageSwiperThreeBannerComponent;83;3;/Open-Catalogue/Cameras/Digital-Cameras/c/575
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;cmsComponents(&componentRef)
 ;;Section1Slot-Homepage;Section1 Slot for Homepage;true;HomepageSwiperOneBannerComponent,HomepageSwiperTwoBannerComponent,HomepageSwiperThreeBannerComponent
@@ -744,6 +744,10 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='updatePassword'];contentSlot(uid,$contentCV)[unique=true];;;
 ;;SideContent-updatePassword;SideContent;;SideContent-updatePassword;;;
 ;;BodyContent-updatePassword;BodyContent;;BodyContent-updatePassword;;;
+
+INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];active;cmsComponents(&componentRef)
+;;Section1Slot-Homepage;true;HomepageSwiperOneBannerComponent,HomepageSwiperTwoBannerComponent,HomepageSwiperThreeBannerComponent
+
 
 ###### Account Update Profile
 # ContentSlot
