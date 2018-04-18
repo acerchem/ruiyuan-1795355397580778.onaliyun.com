@@ -33,7 +33,7 @@
 .maxlatest .sign-content .btn-set{margin-top: 20px;}
 .maxlatest .sign-content input[type="text"],.maxlatest .sign-content input[type="password"],.maxlatest .sign-content .btn{height: 40px; line-height: 40px; padding:0;}
 
-.maxlatest .bansearch{position: absolute; top:50%; left: 10%; z-index: 3; width: 40%; max-width: 500px; color: #fff; transform: translate(0,-50%);}
+.maxlatest .bansearch{position: absolute; top:50%; left: 10%; z-index: 3; width: 40%; max-width: 450px; color: #fff; transform: translate(0,-50%);}
 .maxlatest .bansearch form{position: relative;  margin: 20px 0;}
 .maxlatest .bansearch .maxicon-search{background-position: 0 -218px; position: absolute; top:0; right: 0; height: 50px; width: 50px;}
 .maxlatest .bansearch p{font-size: 42px; text-transform: uppercase; font-weight: bold; line-height: 1.0em;}
@@ -169,7 +169,6 @@ background:-webkit-linear-gradient(top,rgba(0,0,0,0) 20%,rgba(0,0,0,.9) 100%);}
    body{
     font-size: 1rem;
    }
-
    .maxmean .formtext input ,.maxmean .formtext button{
         margin-top: 20px;
     }
@@ -185,9 +184,6 @@ background:-webkit-linear-gradient(top,rgba(0,0,0,0) 20%,rgba(0,0,0,.9) 100%);}
 @media screen and (max-width: 1580px) {
     body{
     font-size: .9rem;
-   }
-   label{
-    font-size: 13px;
    }
    .sign-content .label-title{
     font-size: 14px;
@@ -232,15 +228,15 @@ background:-webkit-linear-gradient(top,rgba(0,0,0,0) 20%,rgba(0,0,0,.9) 100%);}
     .maxlatest .sign-content{
         right: 5%
     }
+    .maxlatest .bansearch{
+        left: 7%;
+    }
     
 
     
 }
 
 @media screen and (max-width: 1366px) {
-    label{
-    font-size: 12px;
-   }
     .maxmean div , .maxmean .formtext div{
         font-size: 12px
     }
@@ -347,6 +343,9 @@ background:-webkit-linear-gradient(top,rgba(0,0,0,0) 20%,rgba(0,0,0,.9) 100%);}
     }
     .footer .maxfootnav{
         padding-left: 10%;
+   }
+   .maxlatest .bansearch{
+      max-width: 400px;
    }
 
 }
