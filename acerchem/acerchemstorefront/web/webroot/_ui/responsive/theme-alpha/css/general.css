@@ -80,14 +80,15 @@ textarea{
 	z-index: 99;
 }
 
-/* .checkbox{
+ .checkbox{
 	position: relative;
-	display: block;
+	display: initial;
 	padding-left: 30px;
 	line-height: 22px;
 	color: #666;
 	cursor: pointer;
 	font-size: 14px;
+	font-weight: normal;
 }
 
 .checkbox:hover{
@@ -114,7 +115,7 @@ textarea{
 	border-top:none;
 	border-left:none;
 	transform:rotate(45deg);
-} */
+} 
 
 .submit{
 	width: 250px;
@@ -143,6 +144,7 @@ textarea{
 
 .text-section{
 	margin-bottom: 30px;
+	color: #666;
 }
 
 .btn-set{
@@ -195,6 +197,7 @@ textarea{
 
 .maxon_salesul .title{
 	position: relative;
+	padding:20px 0;
 }
 
 .maxon_salesul .maxpagin{
@@ -1826,7 +1829,8 @@ textarea{
 
 /*gallery*/
 .col-md-9{
-	width: 78%;
+	width: 80%;
+	padding:0
 }
 #product-facet.gall-left{
 	border-top:4px solid #f3f3f3; 
@@ -1901,6 +1905,13 @@ textarea{
 }
 .m-term-ri{
 	float:left;
+}
+.gall-left .gall-left label span{
+	font-weight: normal;
+}
+.gall-left .gall-left span:hover , .gall-left .gall-left a:hover{
+	color: #096735;
+	cursor: pointer;
 }
 
 /* shaun:sort by 下拉框 */
@@ -2009,10 +2020,17 @@ textarea{
 }
 
 .m-term-ri .pagination  span , .m-term-ri .pagination  a , .m-term-ri .pagination .active a{
-	color: #fff;
 	font-size: 1rem;
 }
+.m-term-ri .pagination .act span,.m-term-ri .pagination a:hover{
+	color: #fff;
+	cursor: pointer;
+	font-weight: normal;
+}
+.m-term-ri .pagination > .disabled > span{
+   color: #085e2f;
 
+}
 .gal-centent .maxon_salesul{
 	margin-top: 0;
 	padding-left: 0;
