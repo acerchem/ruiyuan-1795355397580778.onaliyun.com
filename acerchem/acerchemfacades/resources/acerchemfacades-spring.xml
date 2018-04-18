@@ -360,6 +360,13 @@
 		parent="abstractEmailContext" scope="prototype">
 		<property name="orderConverter" ref="orderConverter" />
 	</bean>
+	
+	<bean id="acerchemOrderOfEmailContextPopuulator" class="com.acerchem.facades.populators.AcerchemOrderOfEmailContextPopuulator" >
+	</bean>
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="orderConverter"/>
+		<property name="add" ref="acerchemOrderOfEmailContextPopuulator"/>
+	</bean>
 
 </beans>
 

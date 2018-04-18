@@ -47,48 +47,33 @@ note</b></font></font></p>
 <p align="center" style="text-indent: 10.01in">                     
                           <font size="6" style="font-size: 22pt"><b><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">Date:</font></font><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">
 Mar 09, 2018</font></font></b></font></p>
-<p align="justify" style="text-indent: 2.01in"><font size="6" style="font-size: 22pt"><b><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt">PO:
-12029</font></font></b></font></p>
-<p align="justify" style="text-indent: 2.01in"><font size="6" style="font-size: 22pt"><b><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt">INVOICE
-NO.:</font></font><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt">
-</font></font><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt">${ctx.order.code}-1</font></font></b></font></p>
-<p align="justify" style="text-indent: 2.01in"><font size="6" style="font-size: 22pt"><b><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt">Shipping:
-</font></font><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt">RTST004180121</font></font></b></font></p>
-<p align="justify" style="text-indent: 2.01in"><font size="6" style="font-size: 22pt"><b><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt">Consignee:
-</font></font><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt">${ctx.customer.name}</font></font></b></font>
-</p>
-<p align="justify" style="text-indent: 2.01in"><br/>
+	<p align="justify" style="text-indent: 2.01in"><font size="6" style="font-size: 22pt"><b><font face="Calibri, sans-serif">
+		<font size="3" style="font-size: 12pt">PO: </font></font></b></font></p>
+	<p align="justify" style="text-indent: 2.01in"><font size="6" style="font-size: 22pt"><b><font face="Calibri, sans-serif">
+		<font size="3" style="font-size: 12pt">INVOICE NO.:${ctx.order.code}</font></font></b></font></p>
+	<p align="justify" style="text-indent: 2.01in"><font size="6" style="font-size: 22pt"><b><font face="Calibri, sans-serif">
+		<font size="3" style="font-size: 12pt">Shipping: </font></font></b></font></p>
+	<p align="justify" style="text-indent: 2.01in"><font size="6" style="font-size: 22pt"><b><font face="Calibri, sans-serif">
+		<font size="3" style="font-size: 12pt">Consignee:${ctx.customer.name}</font></font></b></font></p>
+	<p align="justify" style="text-indent: 2.01in"><br/>
+	</p>
+	
+	<p class="western" align="left" style="text-indent: 2.01in"><font size="2" style="font-size: 10pt"><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt"><span lang="en-GB"><b>Delivery address: ${ctx.order.deliveryAddress.formattedAddress}</b></span></font></font></font></p>
+	
+	<p align="justify" style="text-indent: 2.01in"><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt"><b></b></font></font></p>
+
+	<p align="justify" style="text-indent: 2.01in"><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt">
+		<b>I&#268;O:45 513 996  </b></font></font></p>
+	<p align="justify" style="text-indent: 2.01in"><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt"><b>VAT-DI&#268;:${ctx.customer.vatNo}</b></font></font></p>
+	<p align="justify"  style="text-indent: 2.01in"><br/>
 
 </p>
-<p class="western" align="left" style="text-indent: 2.01in"><font size="2" style="font-size: 10pt"><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt"><span lang="en-GB"><b>Delivery
-address: ${ctx.order.deliveryAddress.formattedAddress}</b></span></font></font></font>
-</p>
-<p align="justify" style="text-indent: 2.01in"><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt"><b></b></font></font>
-</p>
-<p align="justify" style="text-indent: 2.01in"><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt"><b>Ing.
-Michal Hlinka </b></font></font>
-</p>
-<p align="justify" style="text-indent: 2.01in"><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt"><b>Okru&#382;n&aacute;
-32 </b></font></font>
-</p>
-<p align="justify" style="text-indent: 2.01in"><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt"><b>064
-01 Star&aacute; &#317;ubov&#328;a </b></font></font>
-</p>
-<p align="justify" style="text-indent: 2.01in"><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt"><b>Slovakia</b></font></font></p>
-<p align="justify" style="text-indent: 2.01in"><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt"><b>I&#268;O:
-45 513 996  </b></font></font>
-</p>
-<p align="justify" style="text-indent: 2.01in"><font face="Calibri, sans-serif"><font size="3" style="font-size: 12pt"><b>VAT-DI&#268;:
-SK2023022111</b></font></font></p>
-<p align="justify"  style="text-indent: 2.01in"><br/>
 
-</p>
-<p class="western" align="left"  style="text-indent: 2.01in"><font face="Arial, sans-serif"><font size="2" style="font-size: 10pt"><b>CONTACT:
-</b></font></font><font face="Arial, sans-serif"><font size="2" style="font-size: 10pt"><b>Judit
-Farkas</b></font></font></p>
-<p class="western" align="left"  style="text-indent: 2.01in">
-<font face="Arial, sans-serif"><font size="2" style="font-size: 10pt"><b>TEL:</b></font></font><font face="Arial, sans-serif"><font size="2" style="font-size: 10pt"><b>
-+43 1 6063525</b></font></font></p>
+	<p class="western" align="left"  style="text-indent: 2.01in"><font face="Arial, sans-serif"><font size="2" style="font-size: 10pt">
+		<b>CONTACT:${ctx.contactUser}</b></font></font></p>
+	<p class="western" align="left"  style="text-indent: 2.01in">
+		<font face="Arial, sans-serif"><font size="2" style="font-size: 10pt">
+		<b>TEL:${ctx.contactMobile}</b></font></font></p>
 <p align="justify" style="margin-right: -0.05in; font-weight: normal">
 <br/>
 

@@ -1,9 +1,14 @@
 package com.acerchem.facades.process.email.context;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import javax.annotation.Resource;
+
+import java.text.DecimalFormat;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -11,7 +16,6 @@ import org.springframework.beans.factory.annotation.Required;
 
 import com.acerchem.facades.process.email.context.pojo.AcerChemEmailContextUtils;
 import com.acerchem.facades.process.email.context.pojo.ContractEmailContextPoJo;
-import com.acerchem.facades.process.email.context.pojo.DeliveryNoteEmailContextPoJo;
 import com.acerchem.facades.process.email.context.pojo.ProductItemDataOfEmail;
 import com.acerchem.facades.process.email.context.pojo.ProductTotalDataOfEmail;
 
@@ -19,16 +23,17 @@ import de.hybris.platform.acceleratorservices.model.cms2.pages.EmailPageModel;
 import de.hybris.platform.acceleratorservices.process.email.context.AbstractEmailContext;
 import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.commercefacades.coupon.data.CouponData;
-import de.hybris.platform.commercefacades.order.data.ConsignmentData;
-import de.hybris.platform.commercefacades.order.data.ConsignmentEntryData;
 import de.hybris.platform.commercefacades.order.data.OrderData;
 import de.hybris.platform.commercefacades.order.data.OrderEntryData;
+import de.hybris.platform.commercefacades.product.data.PriceData;
 import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.core.model.c2l.LanguageModel;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
+import de.hybris.platform.ordersplitting.WarehouseService;
+import de.hybris.platform.ordersplitting.model.WarehouseModel;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 
 public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProcessModel> {
@@ -39,6 +44,12 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 
 	private String customerAddress;
 	private ContractEmailContextPoJo append;
+	private String wareHouse;
+	private String paymentTerms;
+	private CustomerModel customerModel;  
+
+	@Resource
+	private WarehouseService warehouseService;
 
 	@Override
 	public void init(final OrderProcessModel orderProcessModel, final EmailPageModel emailPageModel) {
@@ -55,6 +66,9 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 
 		initCustomerAddress(orderProcessModel);
 		initAppend();
+		initPaymentTerms(orderProcessModel);
+		
+		customerModel = getCustomer(orderProcessModel);
 	}
 
 	@Override
@@ -121,14 +135,12 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 		// add list
 		List<ProductItemDataOfEmail> list = new ArrayList<ProductItemDataOfEmail>();
 		List<OrderEntryData> orderEntries = orderData.getEntries();
-		String tempName = "";
+		String tempCode = "";
 
 		long quantity = 0;
-		long net = 0;
-		long gross = 0;
-		long itemQuantity = 0;
-		long itemNet = 0;
-		long itemGross = 0;
+		double totalAmount = 0;
+		long subQuantity = 0;
+		double subAmount = 0;
 
 		if (CollectionUtils.isNotEmpty(orderEntries)) {
 			for (OrderEntryData orderData : orderEntries) {
@@ -137,39 +149,70 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 
 				ProductItemDataOfEmail pie = new ProductItemDataOfEmail();
 
-				if (StringUtils.isNotBlank(tempName)) {
-					if (!tempName.equals(product.getName())) {
-						ProductItemDataOfEmail totalPie = new ProductItemDataOfEmail();
+				if (StringUtils.isNotBlank(tempCode)) {
+					if (!tempCode.equals(product.getCode())) {
+						ProductItemDataOfEmail subtotalPie = new ProductItemDataOfEmail();
 
-						totalPie.setProductName("Total");
-						totalPie.setGrossWeight(String.valueOf(itemGross));
-						totalPie.setNetWeight(String.valueOf(itemNet));
-						totalPie.setQuantity(String.valueOf(itemQuantity));
-						totalPie.setTotal(true);
+						subtotalPie.setProductName("Total");
 
-						list.add(totalPie);
-						itemQuantity = 0;
-						itemNet = 0;
-						itemGross = 0;
+						String formatDouble = new DecimalFormat("0.00").format(subAmount);
+						subtotalPie.setQuantity(String.valueOf(subQuantity));
+						subtotalPie.setAmount(formatDouble);
+						subtotalPie.setTotal(true);
+
+						list.add(subtotalPie);
+						
+						subQuantity = 0;
+						subAmount = 0;
 					}
 				}
 
-				tempName = product.getName();
-				pie.setProductCode(product.getCode());
+				tempCode = product.getCode();
+				pie.setProductCode(tempCode);
 				pie.setProductName(product.getName());
-				pie.setQuantity(orderData.getQuantity().toString());
-				pie.setBatchNo("DY0661700095");
-				pie.setNetWeight("1000");
-				pie.setGrossWeight("1120");
+				pie.setUnitName(product.getUnitName());
+
+				long longQuantity = orderData.getQuantity();
+				pie.setQuantity(String.valueOf(longQuantity));
+
+				PriceData priceData = orderData.getBasePrice();
+				BigDecimal amount = new BigDecimal(0);
+				if (priceData != null) {
+					pie.setPrice(priceData.getFormattedValue());
+					BigDecimal dPrice = priceData.getValue();
+					amount = dPrice.multiply(new BigDecimal(longQuantity));
+					pie.setAmount(amount.toString());
+				} else {
+					pie.setPrice("0.00");
+					pie.setAmount("0.00");
+				}
+
+				// pie.setPackageWeight(priceData);
+				if (StringUtils.isNotBlank(product.getPackageWeight())) {
+					pie.setPackageWeight(product.getPackageWeight() + "/" + product.getPackageType());
+				} else {
+					pie.setPackageWeight("");
+				}
+
 				pie.setTotal(false);
 
 				quantity += orderData.getQuantity();
-				net += 1000;
-				gross += 1120;
-				itemQuantity += orderData.getQuantity();
-				itemNet += 1000;
-				itemGross += 1120;
+				subQuantity += orderData.getQuantity();
+				totalAmount += amount.doubleValue();
+				subAmount += amount.doubleValue();
 				list.add(pie);
+
+				// warehouse
+				if (StringUtils.isBlank(wareHouse)) {
+					String warehouseCode = orderData.getWarehouseCode();
+					if (StringUtils.isNotBlank(warehouseCode)) {
+						WarehouseModel whModel = warehouseService.getWarehouseForCode(warehouseCode);
+						if (whModel != null) {
+							wareHouse = whModel.getName();
+							pojo.setWarehouse(wareHouse);
+						}
+					}
+				}
 
 			}
 		}
@@ -178,14 +221,24 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 
 		// add total
 
-		ProductTotalDataOfEmail totalData = new ProductTotalDataOfEmail();
+		 ProductTotalDataOfEmail totalData = new ProductTotalDataOfEmail();
 		totalData.setQuantity(String.valueOf(quantity));
-		totalData.setNetWeight(String.valueOf(net));
-		totalData.setGrossWeight(String.valueOf(gross));
-		pojo.setTotalData(totalData);
+		totalData.setAmountTotal(new DecimalFormat("0.00").format(totalAmount));
+		// totalData.setNetWeight(String.valueOf(net));
+		// totalData.setGrossWeight(String.valueOf(gross));
+		 pojo.setTotalData(totalData);
+
+		// add paymentTerms
 
 		setAppend(pojo);
 
+	}
+
+	public void initPaymentTerms(final OrderProcessModel orderProcessModel) {
+		
+		String paymentMode = orderData.getPaymentMode();
+		String terms = AcerChemEmailContextUtils.getPaymementTerms(orderProcessModel, paymentMode);
+		this.setPaymentTerms(terms);
 	}
 
 	public ContractEmailContextPoJo getAppend() {
@@ -194,6 +247,32 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 
 	public void setAppend(ContractEmailContextPoJo append) {
 		this.append = append;
+	}
+
+	public String getWareHouse() {
+		return wareHouse;
+	}
+
+	/**
+	 * @return the paymentTerms
+	 */
+	public String getPaymentTerms() {
+		return paymentTerms;
+	}
+
+	/**
+	 * @param paymentTerms
+	 *            the paymentTerms to set
+	 */
+	public void setPaymentTerms(String paymentTerms) {
+		this.paymentTerms = paymentTerms;
+	}
+
+	/**
+	 * @return the customerModel
+	 */
+	public CustomerModel getCustomer() {
+		return customerModel;
 	}
 
 }
