@@ -412,11 +412,11 @@ a,button , .maxtop .maxmenu li a{
 #customer-ticketing-buttons{
     margin:60px auto;
 }
-.btn-primary{
+.forgotten-password .btn-primary{
     background: #096735;
     border:1px solid transparent;
 }
-.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary , .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default{
+.forgotten-password .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary , .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default{
     background:#0c7f44;
     border-color:transparent;
 }
@@ -463,6 +463,22 @@ a,button , .maxtop .maxmenu li a{
     margin-left: 3px;
     cursor: pointer;
 }
+
+.global-alerts .alert-danger{
+    text-align: center;
+    background:#7ead94;
+    border:none;
+    color: #fff;
+}
+.alert-dismissable .close:hover, .alert-dismissible .close:hover{
+    color: #fff;
+}
+
+#cboxContent .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary{
+    background:#0c7f44;
+    border-color: transparent;
+}
+
 @media (min-width: 1024px){
     .product-list-right-component{
         padding:0; 
