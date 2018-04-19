@@ -367,6 +367,14 @@
 		<property name="list" ref="orderConverter"/>
 		<property name="add" ref="acerchemOrderOfEmailContextPopuulator"/>
 	</bean>
-
+    
+    <alias name="customOrderPopulator" alias="orderPopulator" />
+	<bean id="customOrderPopulator" parent="defaultOrderPopulator" class="com.acerchem.facades.populators.AcerchemOrderPopulator" >
+	</bean>
+	
+	<alias name="customOrderHistoryPopulator" alias="orderHistoryPopulator" />
+	<bean id="customOrderHistoryPopulator" parent="defaultOrderHistoryPopulator" class="com.acerchem.facades.populators.AcerchemOrderHistoryPopulator" >
+	</bean>
+	
 </beans>
 
