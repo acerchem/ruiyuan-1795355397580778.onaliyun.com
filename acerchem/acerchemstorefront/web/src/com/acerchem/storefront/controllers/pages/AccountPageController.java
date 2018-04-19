@@ -66,6 +66,7 @@ import de.hybris.platform.core.model.c2l.CountryModel;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 import de.hybris.platform.processengine.BusinessProcessEvent;
 import de.hybris.platform.processengine.BusinessProcessService;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
@@ -1218,10 +1219,14 @@ public class AccountPageController extends AbstractSearchPageController
 	{
 		final BaseStoreModel baseStoreModel = baseStoreService.getCurrentBaseStore();
 		final OrderModel order =  customerAccountService.getOrderForCode((CustomerModel) userService.getCurrentUser(), orderCode,baseStoreModel);
-		BaseStoreModel store = order.getStore();
-		if (store != null)
+		Collection<OrderProcessModel> orderProcessList = order.getOrderProcess();
+		if (orderProcessList != null)
 		{
-			final String fulfilmentProcessDefinitionName = baseStoreModel.getSubmitOrderProcessCode();
+			String fulfilmentProcessDefinitionName="";
+			for(OrderProcessModel orderProcess:orderProcessList)
+			{
+				fulfilmentProcessDefinitionName = orderProcess.getCode();
+			}
 			final String eventID = new StringBuilder().append(fulfilmentProcessDefinitionName).append("_ConfirmActionEvent").toString();
 			final BusinessProcessEvent event = BusinessProcessEvent.builder(eventID).withChoice("waitForCustomerConfirm").build();
 		  	Boolean falg=businessProcessService.triggerEvent(event);  
@@ -1231,6 +1236,7 @@ public class AccountPageController extends AbstractSearchPageController
 		  		order.setCustomerConfirm(true);
 		  		modelService.save(order);
 		  	}
+		  	
 		}
 	}
 
