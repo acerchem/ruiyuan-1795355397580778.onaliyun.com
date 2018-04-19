@@ -223,7 +223,7 @@ function maxon_salesul(wrap){
 
 //列表页单品 尺寸
 function reimgsize(aitem){
-	var aimg = aitem.find('.img')
+	var aimg = aitem.find('.img a')
 	aimg.css({width:aitem.width(),height:aitem.width()});
 }
 var agallcont = $('.gen-content.gal-centent .g-cartable');
