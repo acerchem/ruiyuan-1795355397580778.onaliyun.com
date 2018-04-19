@@ -21,6 +21,22 @@ public class AcerchemAddToCartForm
 	private String storeId;
 
 	private String availableDate;
+	
+	private int tag;
+
+	/**
+	 * @return the tag
+	 */
+	public int getTag() {
+		return tag;
+	}
+
+	/**
+	 * @param tag the tag to set
+	 */
+	public void setTag(int tag) {
+		this.tag = tag;
+	}
 
 	public String getAvailableDate() {
 		return availableDate;

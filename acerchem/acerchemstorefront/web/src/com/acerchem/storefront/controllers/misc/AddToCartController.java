@@ -92,6 +92,14 @@ public class AddToCartController extends AbstractController
 		}
 
 		long qty = form.getQty();
+		
+		int tag = form.getTag();
+		
+		if (tag==1){
+			form.setIsUseFutureStock(true);
+		} else {
+			form.setIsUseFutureStock(false);
+		}
 
 		if (qty <= 0)
 		{

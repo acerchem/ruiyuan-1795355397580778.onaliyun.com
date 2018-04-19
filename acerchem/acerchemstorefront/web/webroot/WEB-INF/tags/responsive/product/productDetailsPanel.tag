@@ -509,7 +509,7 @@
 			futday = parseInt($('#futday').val()),
 			setnum = $('.m-setnum input');
 		if(acked){
-			
+			$("#tag").val('0');
 			
 			var inventory =$("#inventoryId option[value='"+$("#storeHidId").val()+"']").text();
 			var avaReleaseDay = $("#avaReleaseDayId option[value='"+$("#storeHidId").val()+"']").text();
@@ -523,6 +523,8 @@
 			emvi.text(avaReleaseDay);
 			
 		}else{
+			
+			$("#tag").val('1');
 			//days.show();
 			//spot.show();
 			/* invi.text(futday+parseInt(invi.text())); */
