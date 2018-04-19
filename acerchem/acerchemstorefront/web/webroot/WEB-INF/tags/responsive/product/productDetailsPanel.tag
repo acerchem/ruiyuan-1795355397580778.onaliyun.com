@@ -401,7 +401,8 @@
 	<!-- item end -->
 		</div>
 		
-<script type="text/javascript" src="/acerchemstorefront/_ui/responsive/common/js/maxprod.js"></script>
+		
+<script type="text/javascript" src="/_ui/responsive/common/js/maxprod.js"></script>
 <script type="text/javascript" >
     //send message
     $(document).ready(function () {
@@ -416,5 +417,6 @@
         });
     })
 </script>
+		
 		
 
