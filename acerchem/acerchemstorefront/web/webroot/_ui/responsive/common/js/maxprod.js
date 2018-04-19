@@ -167,13 +167,13 @@ inputint()
 					$(this).css('background-color','#ddd')
 					break;
 				}else{
-					if(avl<30){
+				/*	if(avl<30){
 						delin.find('em').text(30)
 					}else if(avl>30&&avl<60){
 						delin.find('em').text(60)
 					}else if(avl>60){
 						delin.find('em').text(90)
-					}
+					}*/
 				}
 				ainp.val(avl-1);
 				$('#qty').val(avl-1);
@@ -187,13 +187,13 @@ inputint()
 					maxalert("It's already the largest inventory.");
 					break;
 				}else{
-					if(avl<30){
+					/*if(avl<30){
 						delin.find('em').text(30)
 					}else if(avl>30&&avl<60){
 						delin.find('em').text(60)
 					}else if(avl>60){
 						delin.find('em').text(90)
-					}					
+					}		*/			
 				}
 				ainp.val(avl+1);
 				$('#qty').val(avl+1);
