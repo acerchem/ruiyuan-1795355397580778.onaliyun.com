@@ -123,7 +123,9 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		// Set the new address as the selected checkout delivery address
 		getCheckoutFacade().setDeliveryAddress(newAddress);
 
-		return getCheckoutStep().nextStep();
+		//return getCheckoutStep().nextStep();
+		
+		return ControllerConstants.Views.Pages.MultiStepCheckout.AddEditDeliveryAddressPage;
 	}
 
 	protected void processAddressVisibilityAndDefault(final AddressForm addressForm, final AddressData newAddress)
