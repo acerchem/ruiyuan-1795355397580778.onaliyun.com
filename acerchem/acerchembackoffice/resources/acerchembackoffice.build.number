@@ -1,0 +1,11 @@
+#Ant properties
+#Fri Apr 28 14:22:37 UTC 2017
+builddate=20170428 1422
+description=acerchembackoffice
+group.id=de.hybris.platform
+module.name=platform-module
+name=acerchembackoffice
+releasedate=20170427 0956
+vendor=hybris
+version=6.4.0.0
+version.api=6.4.0
