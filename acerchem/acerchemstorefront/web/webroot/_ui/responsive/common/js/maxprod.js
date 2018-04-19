@@ -25,25 +25,23 @@ inputint()
         calculateHeight : true,
         resizeReInit : true,
         speed: 600,        
-        pagination: '.m-prodslide .minimg', 
-       // paginationClickable :true,
+        pagination: '.minimg', 
+        paginationClickable :true,
         onSwiperCreated:function(swiper){
         	$('.m-prodslide .slide-item li').each(function(){
 		   		var aindex = $(this).index(),
 		   			aimg = $(this).html(),
-		   			aheight = swiper.width,
+		   			aheight = swiper.height,
 		   			minimg = $(flipspan);
 		   			minimg.eq(aindex).append(aimg);
-		   			$('.m-prodslide .minwrap').height(aheight);
-		   			$('.m-prodslide .slide-item').height(aheight);
+		   			minwrap.height(aheight);
 			})
 	     }      
     })
 
 
 	$(document).on('mouseover',flipspan,function(){
-		var ain = $(this).index();
-		slidwrap.swipeTo(ain)
+		$(this).click();
 	});
 
 	flipbtn.on('click',function(){
@@ -53,6 +51,7 @@ inputint()
 			ahi = parseInt(fwrap.find('span').css('height')),
 			maxtop = parseInt(prodslide.find('.slidewrap .item').height())-fwrap.height(),
 			topval = 0;
+
 		switch(aclass){
 			case 'up':
 				topval=atop-ahi;
@@ -75,9 +74,6 @@ inputint()
 		fwrap.animate({top:topval},300)
 	})
 	// m-prodslide end
-
-
-
 	var shareele = $('.footermin .share-buttons');
 	$('.product-right .tableshare').append(shareele.clone());
 
@@ -109,19 +105,36 @@ inputint()
 			futday = parseInt($('#futday').val()),
 			setnum = $('.m-setnum input');
 		if(acked){
+			
+			$("#tag").val('0');
+			var inventory =$("#inventoryId option[value='"+$("#storeHidId").val()+"']").text();
+			var avaReleaseDay = $("#avaReleaseDayId option[value='"+$("#storeHidId").val()+"']").text();
 			days.hide();
 			spot.hide();
-			invi.text(spot.find('em').text());
+			invi.text(inventory);
 			if(parseInt(setnum.val())>parseInt(spot.find('em').text())){
 				setnum.val(spot.find('em').text())
 			}
+			emvi = $('.prod-sum i em');
+			emvi.text(avaReleaseDay);
 			
 		}else{
-			days.show();
+			
+			$("#tag").val('1');
+			//days.show();
 			//spot.show();
 			/* invi.text(futday+parseInt(invi.text())); */
 			
-			invi.text(futday);
+			var futureAvailableDate = $("#futureAvailableDateId option[value='"+$("#storeHidId").val()+"']").text();
+	
+		    var futureInventory =  $("#futureInventoryId option[value='"+$("#storeHidId").val()+"']").text();
+			
+			invi.text(futureInventory);
+			emvi = $('.prod-sum i em');
+			//$('#avaReleaseDay').val(futureAvailableDate);
+			emvi.text(futureAvailableDate);
+			
+			
 		}
 		
 	})	
@@ -145,7 +158,7 @@ inputint()
 			case 'set sub':
 				avl = parseInt(ainp.val());
 				if(avl<=1){
-					maxalert('A minimum of one piece！');
+					maxalert('A minimum of one pieceï¼');
 					$(this).css('background-color','#ddd')
 					break;
 				}else{
@@ -184,7 +197,7 @@ inputint()
 		
 	})
 
-	$('.prodbase .btn-cart').on('click',function(){//加入购物车
+	$('.prodbase .btn-cart').on('click',function(){//å å¥è´­ç©è½¦
 		var srch = window.innerHeight;
 		$('.maxfixed').show();
 		$('body').css({'height':srch,'overflow':'hidden'});
@@ -199,13 +212,8 @@ inputint()
 			fications = $('input[name="spec"]').val(),
 			newele = '<li class="item"><div class="img">'+thisimg+'</div><div class="maxtext"><p class="in-title">'+thistit+'</p><p class="spec">Specifications:<i>'+fications+'</i></p><div class="spset"><span class="price">'+price+'</span><span class="old-price">'+oldprice+'</span><span class="num">'+goodsnum+'</span></div></div></li>';			
 			maxfixed.append(newele);
+			console.log(thisimg)
 			//totalprice()
-
-		$(document).on('keydown',function(ev){
-			if(ev.keyCode == 27){
-				$('body').css({'height':'','overflow':''});
-			}
-		})
 	})
 
 	$(".btn-continue").on('click',function(){
@@ -231,32 +239,45 @@ inputint()
 			case 'btn btn-submit':
 				$('#message').submit();
 				break;					
-		}	
+		}
 		$('body').css({'height':'','overflow':''});
 	})
 
 	$("#storeMulId").change(function(){
-		 /*库存信息*/
-		invi = $('.invernum .inventory i')
-		invi.text($("#inventoryId option[value='"+$("#storeMulId").val()+"']").text());
 		
-		 /*先期库存天数*/ 
+		
+		$('#storeHidId').val($("#storeMulId").val());
+		 /*åºå­ä¿¡æ¯*/
+		invi = $('.invernum .inventory i');
+		
+		 /*åæåºå­å¤©æ°*/ 
 		emvi = $('.prod-sum i em')
 		
-		emvi.text($("#avaReleaseDayId option[value='"+$("#storeMulId").val()+"']").text());
-	//	var data =$("#countryId option[value='"+$("#storeMulId").val()+"']").text();
+		 		
+		var futureAvailableDate = $("#futureAvailableDateId option[value='"+$("#storeMulId").val()+"']").text();
+	
+		var futureInventory =  $("#futureInventoryId option[value='"+$("#storeMulId").val()+"']").text();
+		
+		/* var futureHtml='<input type="hidden" value="'+futureInventory+'" name="futday" alt="Please Select nation" id="futday">'+
+									'<span class="pitch">'+futureAvailableDate+'</span>'+
+									'<ul class="select"><li data-val="'+futureInventory+'">'+futureAvailableDate+'</li></ul>';
+	   
+		$('#selectId').html(futureHtml); */
+		
+	//if ($('#checkfutureId').attr('checked')) {
+		
+		if($('#checkfutureId').is(':checked')) {
+
+			
+			invi.text(futureInventory);
+			
+			emvi.text(futureAvailableDate);
+		} else {
+			
+			invi.text($("#inventoryId option[value='"+$("#storeMulId").val()+"']").text());
+			
+			emvi.text($("#avaReleaseDayId option[value='"+$("#storeMulId").val()+"']").text());
+		}
 		
         $('#storeId').val($("#storeMulId").val());
 	});
-    
-    //send message
-    // $(document).ready(function () {
-    //     $('.click_pop').click(function () {
-    //     var openUrl = ACC.config.encodedContextPath + "/account/add-support-ticket?productId=${product.code}&productName=${product.name}";//弹出窗口的url
-    //      var iWidth=600; //弹出窗口的宽度;
-    //      var iHeight=600; //弹出窗口的高度;
-    //      var iTop = (window.screen.availHeight-30-iHeight)/2; //获得窗口的垂直位置;
-    //      var iLeft = (window.screen.availWidth-10-iWidth)/2; //获得窗口的水平位置;
-    //      window.open(openUrl,"","height="+iHeight+", width="+iWidth+", top="+iTop+",scrollbars=yes,resizable=yes,toolbar=no,location=no, left="+iLeft); 
-    //     });
-    // })
