@@ -69,7 +69,6 @@
 						</span>
 						
 						<span>
-									<em>Confirm Order</em>
 									<i><a href="${confirmOrder}${orderData.code}" style="${order.customerConfirm?'display: none;':''}">Confirm</a></i>
 								</span>
 								
