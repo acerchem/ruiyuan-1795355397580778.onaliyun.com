@@ -689,7 +689,8 @@
     //send message
     $(document).ready(function () {
         $('.click_pop').click(function () {
-        var openUrl = ACC.config.encodedContextPath + "/account/add-support-ticket?productId=${product.code}&productName=${product.name}";//弹出窗口的url
+        var proName="${product.name}".replace('%','%25').replace('+','%2B').replace('&','%26');
+        var openUrl = ACC.config.encodedContextPath + "/account/add-support-ticket?productId=${product.code}&productName="+proName;//弹出窗口的url
          var iWidth=600; //弹出窗口的宽度;
          var iHeight=600; //弹出窗口的高度;
          var iTop = (window.screen.availHeight-30-iHeight)/2; //获得窗口的垂直位置;
