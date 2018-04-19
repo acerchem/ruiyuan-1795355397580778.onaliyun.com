@@ -125,6 +125,7 @@ inputint()
 
 			$('#tag').val('1');
 
+			
 			//days.show();
 			//spot.show();
 			/* invi.text(futday+parseInt(invi.text())); */
