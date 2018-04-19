@@ -199,8 +199,13 @@ inputint()
 			fications = $('input[name="spec"]').val(),
 			newele = '<li class="item"><div class="img">'+thisimg+'</div><div class="maxtext"><p class="in-title">'+thistit+'</p><p class="spec">Specifications:<i>'+fications+'</i></p><div class="spset"><span class="price">'+price+'</span><span class="old-price">'+oldprice+'</span><span class="num">'+goodsnum+'</span></div></div></li>';			
 			maxfixed.append(newele);
-			console.log(thisimg)
 			//totalprice()
+
+		$(document).on('keydown',function(ev){
+			if(ev.keyCode == 27){
+				$('body').css({'height':'','overflow':''});
+			}
+		})
 	})
 
 	$(".btn-continue").on('click',function(){
@@ -226,7 +231,7 @@ inputint()
 			case 'btn btn-submit':
 				$('#message').submit();
 				break;					
-		}
+		}	
 		$('body').css({'height':'','overflow':''});
 	})
 
@@ -244,4 +249,14 @@ inputint()
         $('#storeId').val($("#storeMulId").val());
 	});
     
-  
+    //send message
+    // $(document).ready(function () {
+    //     $('.click_pop').click(function () {
+    //     var openUrl = ACC.config.encodedContextPath + "/account/add-support-ticket?productId=${product.code}&productName=${product.name}";//弹出窗口的url
+    //      var iWidth=600; //弹出窗口的宽度;
+    //      var iHeight=600; //弹出窗口的高度;
+    //      var iTop = (window.screen.availHeight-30-iHeight)/2; //获得窗口的垂直位置;
+    //      var iLeft = (window.screen.availWidth-10-iWidth)/2; //获得窗口的水平位置;
+    //      window.open(openUrl,"","height="+iHeight+", width="+iWidth+", top="+iTop+",scrollbars=yes,resizable=yes,toolbar=no,location=no, left="+iLeft); 
+    //     });
+    // })
