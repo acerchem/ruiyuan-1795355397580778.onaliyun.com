@@ -755,8 +755,13 @@ textarea{
 }
 
 .member-content .rigcont .btn-set{
-	text-align: center;
 	font-size: 0;
+}
+.member-content .rigcont .btn-set .btn{
+	text-align: center;
+}
+.member-content .g-right .rigcont .btn-set .btn-primary{
+	margin-left: 0
 }
 
 .member-content .rigcont .btn-set .btn , .delpop .btn , .gen-content .g-cartable .solid-form .btn , .m-message .btn{
