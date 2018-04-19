@@ -12,7 +12,7 @@
 .pagination {padding:60px 0; left: 0;text-align: center;width: 100%;}
 .banner .swiper-pagination-switch {display: inline-block; *display: inline;zoom:1; width: 30px;height: 4px;border-radius: 2px;background: rgba(0,0,0,.9);margin: 0 3px;cursor: pointer;}
 .banner .swiper-active-switch {background: #096735;}
-.banner .container{position: absolute; top:50%; left: 0; transform:translate(0,-50%);}
+.banner .container{position: absolute; top:50%; left: 0; -webkit-transform:translate(0,-50%);transform:translate(0,-50%);}
 .swiper-slide .container{padding: 0 17%;width: 100%; float: left;}
 .swiper-slide .maxtite_ban{color:#fff;width: 40%;float:left;}
 .swiper-slide .maxtite_ban p{padding:18px 0 30px; font-size: 1rem;}
@@ -28,12 +28,12 @@
     float: left;
 }*/
 
-.maxlatest .sign-content{position:  absolute; top:50%; z-index: 9; right:10%; padding:30px; width:25%; max-width: 400px; min-width: 330px; transform: translate(0,-50%); }
+.maxlatest .sign-content{position:  absolute; top:50%; z-index: 9; right:10%; padding:30px; width:25%; max-width: 400px; min-width: 330px; -webkit-transform: translate(0,-50%);transform: translate(0,-50%); }
 .maxlatest .sign-content .text-section{margin-bottom: 16px;}
 .maxlatest .sign-content .btn-set{margin-top: 20px;}
 .maxlatest .sign-content input[type="text"],.maxlatest .sign-content input[type="password"],.maxlatest .sign-content .btn{height: 40px; line-height: 40px; padding:0;}
 
-.maxlatest .bansearch{position: absolute; top:50%; left: 10%; z-index: 3; width: 40%; max-width: 450px; color: #fff; transform: translate(0,-50%);}
+.maxlatest .bansearch{position: absolute; top:50%; left: 11%; z-index: 3; width: 32%; max-width: 690px; color: #fff; -webkit-transform: translate(0,-50%); transform: translate(0,-50%);}
 .maxlatest .bansearch form{position: relative;  margin: 20px 0;}
 .maxlatest .bansearch .maxicon-search{background-position: 0 -218px; position: absolute; top:0; right: 0; height: 50px; width: 50px;}
 .maxlatest .bansearch p{font-size: 42px; text-transform: uppercase; font-weight: bold; line-height: 1.0em;}
@@ -49,7 +49,7 @@
 .maxfactory .maxitem1{margin-left:0;}
 .maxfactory .maxitem1{}
 .maxfactory li img{width: 30%;}
-.maxfactory li p{display:-webkit-box; position: absolute; top:50%; right:20px; width:calc(70% - 20px) ; transform:translate(0,-50%); padding-left:20px; line-height: 1em; font-size: 1.4rem; color:#fff; overflow:hidden;text-overflow:ellipsis;-webkit-box-orient:vertical;-webkit-line-clamp:2; }
+.maxfactory li p{display:-webkit-box; position: absolute; top:50%; right:20px; width:calc(70% - 20px) ;-webkit-transform:translate(0,-50%); transform:translate(0,-50%); padding-left:20px; line-height: 1em; font-size: 1.4rem; color:#fff; overflow:hidden;text-overflow:ellipsis;-webkit-box-orient:vertical;-webkit-line-clamp:2; }
 
 .maxmean li{display: table-cell;  color: #fff; width:20%;  font-size: 0; margin-left: 1.5%; vertical-align: top; }
 .maxmean li a{display: block; margin-right:5%; position: relative; line-height: 1em;}
@@ -179,6 +179,10 @@ background:-webkit-linear-gradient(top,rgba(0,0,0,0) 20%,rgba(0,0,0,.9) 100%);}
     .sign-content label, .gen-content .g-cartable .solid-form label , .maxlatest .sign-content .text-section{
         margin-bottom: 10px;
     }
+    .maxlatest .bansearch{
+        left: 12%;
+        width: 36%
+    }
 }
 
 @media screen and (max-width: 1580px) {
@@ -194,6 +198,9 @@ background:-webkit-linear-gradient(top,rgba(0,0,0,0) 20%,rgba(0,0,0,.9) 100%);}
    .footer .maxfootnav{
         padding-left: 13%;
    }
+   .maxlatest .bansearch{
+        width:37%
+    }
 
 }
 
@@ -229,7 +236,11 @@ background:-webkit-linear-gradient(top,rgba(0,0,0,0) 20%,rgba(0,0,0,.9) 100%);}
         right: 5%
     }
     .maxlatest .bansearch{
-        left: 7%;
+        left: 13%;
+        width:40%
+    }
+    #loginForm label{
+        font-size: 12px;
     }
     
 
@@ -260,6 +271,9 @@ background:-webkit-linear-gradient(top,rgba(0,0,0,0) 20%,rgba(0,0,0,.9) 100%);}
     .maxtop .maxmenu li a{
         font-size: .8rem;
     }
+    .maxlatest .bansearch{
+      max-width: 37%;
+   }
     
     
 }
@@ -345,14 +359,132 @@ background:-webkit-linear-gradient(top,rgba(0,0,0,0) 20%,rgba(0,0,0,.9) 100%);}
         padding-left: 10%;
    }
    .maxlatest .bansearch{
-      max-width: 400px;
+      max-width: 38%;
    }
-
 }
 
 
 
 
 
+/*针对style.css的修改*/
+a,button , .maxtop .maxmenu li a{
+    color: #333;
+    text-decoration:none;
+}
+.simple-banner-component img, .maxtop .banner__component img{
+    width: auto;
+    height: auto;
+}
+.col-xs-3{
+    width: 20%;
+    padding:0
+}
+.col-md-9{
+    width: 80%;
+    padding:0
+}
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
+    color: #999;
+    font-weight: normal;
+    font-size: 16px;
+    cursor: pointer;
+}
+.pagination > .act > span , .pagination > .active > a:hover{
+    color: #096735
+}
+.pagination > .disabled > span , .pagination > .disabled > span:hover{
+    color: #ddd;
+}
+.m-term-ri .m-pagination a{
+    color: #0d4025;
+}
+.m-term-ri .m-pagination .act , .m-term-ri .m-pagination a:hover{
+    color: #fff;
+}
 
+#cboxContent #cboxClose{
+    left:0; 
+    top:0;
+    text-align: right;
+    padding-right: 10px;
+}
+#customer-ticketing-buttons{
+    margin:60px auto;
+}
+.forgotten-password .btn-primary{
+    background: #096735;
+    border:1px solid transparent;
+}
+.forgotten-password .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary , .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default{
+    background:#0c7f44;
+    border-color:transparent;
+}
+.btn-default{
+    background: transparent;
+    border:1px solid #096735;
+    color: #096735;;
+}
 
+.checkout-login .col-md-6 .headline{
+    color: #333
+}
+.col-md-6 .form-control{
+    height: 50px;
+    line-height: 50px;
+}
+.col-md-6 label{
+    font-weight: normal;
+    color:#333
+}
+#loginForm label{
+    text-transform: initial
+}
+.col-md-6 .form-group .btn{
+    margin-top: 40px;
+}
+.col-md-6 .checkout-login-right-content-slot{
+    padding-top: 20%;
+}
+
+.col-md-6 .btn-default[disabled],.col-md-6 .btn-default[disabled]:hover,.btn-default.disabled, .btn-default[disabled], fieldset[disabled] .btn-default, .btn-default.disabled:hover, .btn-default[disabled]:hover, fieldset[disabled] .btn-default:hover, .btn-default.disabled:focus, .btn-default[disabled]:focus, fieldset[disabled] .btn-default:focus, .btn-default.disabled:active, .btn-default[disabled]:active, fieldset[disabled] .btn-default:active, .btn-default.disabled.active, .btn-default[disabled].active, fieldset[disabled] .btn-default.active{
+    background-color: rgba(9,103,53,.5);
+    border-color: transparent;
+}
+
+.glyphicon-remove:before{
+    font-size: 0;
+    background: url(maxicon.png);
+    width: 30px;
+    height: 18px;
+    display: block;
+    background-position: -10px -534px;
+    float: right;
+    margin-left: 3px;
+    cursor: pointer;
+}
+
+.global-alerts .alert-danger , .global-alerts .alert-warning , .global-alerts .alert-info{
+    text-align: center;
+}
+
+#cboxContent .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary{
+    background:#0c7f44;
+    border-color: transparent;
+}
+
+@media (min-width: 1024px){
+    .product-list-right-component{
+        padding:0; 
+        margin:0;
+    }
+   
+}
+@media (max-width: 1023px){
+      select.form-control{
+        height: 32px;
+        line-height: 32px;
+        padding:0;
+        padding-left: 12px;
+      }  
+}

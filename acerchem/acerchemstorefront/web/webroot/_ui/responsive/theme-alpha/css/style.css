@@ -1595,7 +1595,10 @@ pre code {
   padding-left: 10px;
   padding-right: 10px;
 }
-
+.row {
+  margin-left: -10px;
+  margin-right: -10px;
+}
 .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
   position: relative;
   min-height: 1px;
@@ -1633,8 +1636,7 @@ pre code {
   width: 33.33333333%;
 }
 .col-xs-3 {
-  width: 20%;
-  padding:0;
+  width: 25%;
 }
 .col-xs-2 {
   width: 16.66666667%;
@@ -1763,9 +1765,9 @@ pre code {
   .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12 {
     float: left;
   }
- /* .col-sm-12 {
+  .col-sm-12 {
     width: 100%;
-  }*/
+  }
   .col-sm-11 {
     width: 91.66666667%;
   }
@@ -2630,9 +2632,6 @@ input[type="search"] {
   margin-bottom: 0;
   font-weight: normal;
   cursor: pointer;
-}
-.checkbox:before{
-
 }
 .radio input[type="radio"],
 .radio-inline input[type="radio"],
@@ -3969,6 +3968,7 @@ select[multiple].input-group-sm > .input-group-btn > .btn {
 .input-group-btn:last-child > .btn,
 .input-group-btn:last-child > .btn-group {
   z-index: 2;
+  margin-left: -1px;
 }
 .nav {
   margin-bottom: 0;
@@ -4747,19 +4747,15 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 }
 .pagination > .active > a,
 .pagination > .active > span,
+.pagination > .active > a:hover,
+.pagination > .active > span:hover,
 .pagination > .active > a:focus,
 .pagination > .active > span:focus {
   z-index: 3;
-  color: #999;
+  color: #153a59;
   background-color: #47b6b1;
   border-color: #47b6b1;
   cursor: default;
-}
-.pagination > .act > span,
-.pagination > .active > a:hover,
-.pagination > .active > span:hover
-{
-  color: #096735;
 }
 .pagination > .disabled > span,
 .pagination > .disabled > span:hover,
@@ -4767,7 +4763,7 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
 .pagination > .disabled > a,
 .pagination > .disabled > a:hover,
 .pagination > .disabled > a:focus {
-  color: #ccc;
+  color: #a6a6a6;
   background-color: #ffffff;
   border-color: #dddddd;
   cursor: not-allowed;
@@ -7729,6 +7725,7 @@ body .ui-tooltip {
   /* support: IE8 - See #6059 */
 }
 body {
+  overflow-x: hidden;
   position: relative;
 }
 body.offcanvas {
@@ -7755,7 +7752,7 @@ ol {
   padding-left: 15px;
 }
 @media (max-width: 1023px) {
-  /*.form-control {
+  .form-control {
     height: 42px;
     padding: 10px 15px;
     font-size: 18px;
@@ -7766,7 +7763,7 @@ ol {
   select.form-control {
     height: 42px;
     line-height: 42px;
-  }*/
+  }
   textarea.form-control,
   select[multiple].form-control {
     height: auto;
@@ -7784,7 +7781,7 @@ General
 *****************************************************************/
 a,
 button {
-  color: #333;
+  color: #ec7205;
   text-decoration: none;
 }
 a:hover {
@@ -9638,17 +9635,17 @@ fieldset[disabled] .btn-default.active {
 .btn-primary {
   border: 3px solid;
   color: #ffffff;
-  background-color: #096735;
-  border-color: transparent;
+  background-color: #47b6b1;
+  border-color: #47b6b1;
 }
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active,
 .btn-primary.active,
 .open .dropdown-toggle.btn-primary {
-  color: #fff;
-  background-color: #0c7f44;
-  border-color: transparent;
+  color: #ffffff;
+  background-color: #5adfd9;
+  border-color: #5adfd9;
   -webkit-box-shadow: none;
   box-shadow: none;
 }
@@ -9753,14 +9750,13 @@ fieldset[disabled] .btn-primary.active {
   background-color: transparent;
   border: none;
   font-weight: 700;
-  cursor: pointer;
 }
 .pagination > li > a,
 .pagination > li > span {
   line-height: 30px;
   width: 30px;
   padding: 0;
-  font-size: 16px;
+  font-size: 24px;
   text-align: center;
 }
 .pagination > li.pagination-prev > a,
@@ -9778,14 +9774,14 @@ fieldset[disabled] .btn-primary.active {
   border-top-right-radius: 0;
 }
 @media (max-width: 1023px) {
-  /*.pagination > li > a,
+  .pagination > li > a,
   .pagination > li > span {
     line-height: 46px;
     width: 30px;
     padding: 0;
     font-size: 24px;
     text-align: center;
-  }*/
+  }
   .pagination > li.pagination-prev > a,
   .pagination > li.pagination-prev > span {
     margin-right: 10px;
@@ -10615,7 +10611,7 @@ fieldset[disabled] .btn-primary.active {
   bottom: 0;
   position: absolute;
   right: 0;
-  content: "â€¿";
+  content: "â€?";
 }
 .carousel .item .item__name:after,
 .carousel__component--carousel .item .item__name:after,
@@ -10804,7 +10800,8 @@ fieldset[disabled] .btn-primary.active {
 .banner__component a {
   display: block;
 }
-.simple-banner-component img{
+.simple-banner-component img,
+.banner__component img {
   width: 100%;
   height: auto;
 }
@@ -11693,18 +11690,19 @@ a.product__listing .product__listing--promo:focus {
   padding-top: 10px;
 }
 @media (min-width: 1024px) {
-  /* .search-list-page-right-result-list-slot {
+  .search-list-page-right-result-list-slot {
     margin-left: -20px;
     margin-top: -20px;
   }
- .search-list-page-right-result-list-component {
+  .search-list-page-right-result-list-component {
     padding-left: 20px;
   }
   .product-list-right-slot {
     margin-left: -20px;
-  }*/
+  }
   .product-list-right-component {
     margin-left: 0;
+    padding-top: 20px;
   }
   .product-list-right-component .pagination-bar {
     margin-top: 0;
@@ -15260,16 +15258,14 @@ fieldset#startDate .form-group .control-label {
 }
 #cboxClose {
   position: absolute;
-  right: 0;
-  top: 0;
+  right: 13px;
+  top: 10px;
   background: transparent;
   border: 0 none;
   color: #797979;
   padding: 5px;
   font-size: 25px;
-  text-align: right;
 }
-
 #cboxLoadedContent {
   margin-top: 88px;
   padding: 15px 40px 30px 40px;
@@ -16453,6 +16449,7 @@ table div.left-align {
 }
 table td {
   padding: 20px 10px;
+  vertical-align: top;
 }
 .responsive-table th:first-child {
   padding-left: 30px;
@@ -16539,9 +16536,10 @@ input[type="checkbox"] {
   margin-bottom: 20px;
 }
 label {
-  color: #333;
+  color: #153a59;
   font-weight: 600;
-  font-size: 12px;
+  text-transform: uppercase;
+  font-size: 13px;
 }
 .form-control:focus {
   border-color: #5adfd9;

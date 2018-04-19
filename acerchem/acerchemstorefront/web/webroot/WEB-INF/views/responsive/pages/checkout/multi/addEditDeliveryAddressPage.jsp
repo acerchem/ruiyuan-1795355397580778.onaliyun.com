@@ -39,7 +39,7 @@
 						
 						
 						<ul class="shiplist both">
-						
+						<%-- 
 						<c:if test="${not empty deliveryMode}">
 						<li class="now">
 								<label>
@@ -53,13 +53,27 @@
 									</div>	
 								</label>
 							</li>
- 							</c:if>
+ 							</c:if> --%>
  							
  								<c:forEach items="${deliveryMethods}" var="data" >
 						
 						<c:if test="${not empty data.deliveryCost}">
 						<c:if test="${data.code=='DELIVERY_GROSS'||data.code=='DELIVERY_MENTION'}">
-						<c:if test="${data.code!=deliveryMode.code}">
+						<c:if test="${data.code==deliveryMode.code}">
+						<li class="now">
+								<label>
+									<div class="into int">
+										<input type="radio" name="shipmethod"  checked="checked" value="${data.code}"/>
+									</div>
+									<div class="into">
+										<p><format:fromPrice priceData="${data.deliveryCost}"/></p>
+										<em>${data.name}</em>
+										<span>${data.description}</span>
+									</div>	
+								</label>
+							</li>
+							</c:if>
+							<c:if test="${data.code!=deliveryMode.code}">
 						<li class="now">
 								<label>
 									<div class="into int">
@@ -237,7 +251,7 @@
 				<!-- end -->
 
 				<!-- Final Review -->
-				<div class="g-table">
+			<!-- 	<div class="g-table">
 					<div class="g-title">
 						<span>Invoice</span>
 					</div>
@@ -258,7 +272,7 @@
 							</div>
 						</div>
 
-					<!-- Signature -->
+					Signature
 					<div class="solid-form newsign">
 						<div class="title">Signature</div>
 						<div class="form both">	
@@ -298,9 +312,9 @@
 							<a class="btn btn-submit" href="javascript:void(0)">Confirm</a>
 						</div>
 					</div>
-					<!-- new end -->			
+					new end			
 					</div>
-				</div>
+				</div> -->
 				<!-- end -->
 
 			</div>

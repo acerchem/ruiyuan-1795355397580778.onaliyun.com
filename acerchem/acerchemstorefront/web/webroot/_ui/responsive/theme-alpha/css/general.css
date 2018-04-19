@@ -48,6 +48,7 @@ textarea{
 	transition: all 500ms;
 }
 .rotary-flag:after{
+	-webkit-transform:rotate(180deg);
 	transform:rotate(180deg);
 }
 .select{
@@ -114,6 +115,7 @@ textarea{
 	border:2px solid #fff;
 	border-top:none;
 	border-left:none;
+	-webkit-transform:rotate(45deg);
 	transform:rotate(45deg);
 } 
 
@@ -343,6 +345,7 @@ textarea{
 	left:50%;
 	z-index: 999;
 	padding:20px 40px;
+	-webkit-transform:translate(-50%,-50%);
 	transform:translate(-50%,-50%);
 	color: #fff;
 	background-color: rgba(0,26,15,.7);
@@ -364,6 +367,7 @@ textarea{
 	background:#fff;
 	text-align:center;
 	color:#666;
+	-webkit-transform:translate(-50%,-50%);
 	transform:translate(-50%,-50%);
 }
 
@@ -751,8 +755,13 @@ textarea{
 }
 
 .member-content .rigcont .btn-set{
-	text-align: center;
 	font-size: 0;
+}
+.member-content .rigcont .btn-set .btn{
+	text-align: center;
+}
+.member-content .g-right .rigcont .btn-set .btn-primary{
+	margin-left: 0
 }
 
 .member-content .rigcont .btn-set .btn , .delpop .btn , .gen-content .g-cartable .solid-form .btn , .m-message .btn{
@@ -805,6 +814,12 @@ textarea{
 
 .member-content .addbook .operate{
 	font-size: 0;
+	width: 100px;
+}
+
+.member-content .operate a{
+	float: left;
+	display: table-cell;
 }
 
 .member-content .addbook .row-left{
@@ -834,6 +849,7 @@ textarea{
 	border:2px solid #fff;
 	border-top:none;
 	border-left:none;
+	-webkit-transform:rotate(45deg);
 	transform:rotate(45deg);
 }
 
@@ -844,6 +860,10 @@ textarea{
 .member-content .addbook .def .name{
 	color: #096735;
 	border-color:#096735;
+	display: block;
+	overflow:hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .member-content .addbook .def .setdef{
@@ -987,7 +1007,6 @@ textarea{
 	width:100%;
 	font-size: 14px;
 	text-align: left;
-	line-height: 1.5em;
 }
 
 .g-table .minflex{
@@ -1021,6 +1040,15 @@ textarea{
 .g-table span:first-child {
 	padding-left: 20px;
 	text-align: left;
+}
+.product-table .oper .btn-cart{
+	padding:15px;
+	font-size: 0;
+	background:url(mem-icons.png) no-repeat center 95.4%;
+	background-size:50px;
+}
+.product-table .oper .btn-cart:hover{
+	background-image: url(mem-icons2.png)
 }
 
 /*table 1/5*/
@@ -1107,7 +1135,6 @@ textarea{
 .product-table table .tot{
 	padding-right: 20px;
 	text-align: right;
-	line-height: 1em;
 }
 
 .product-table table .g-sale , .gen-content .gen-right .check-item .spset .g-sale{
@@ -1121,7 +1148,6 @@ textarea{
 
 .product-table .tot em{
 	display: block;
-	padding:10px 0 4px 0;	
 	font-size: 18px;
 }
 
@@ -1828,10 +1854,7 @@ textarea{
 }
 
 /*gallery*/
-.col-md-9{
-	width: 80%;
-	padding:0
-}
+
 #product-facet.gall-left{
 	border-top:4px solid #f3f3f3; 
 }
@@ -1949,6 +1972,8 @@ textarea{
 	width: 60%;
 }
 .m-term-le .glyphicon{
+	position: relative;
+	top: 2px;
 	color: #fff
 }
 .m-term-le:after{
@@ -1976,12 +2001,7 @@ textarea{
 .m-term-ri .m-pagination .pagination{
 	padding:0;
 }
-.m-term-ri .m-pagination a{
-	color: #0d4025;
-}
-.m-term-ri .m-pagination .act{
-	color: #fff;
-}
+
 .m-term-ri .m-pagination a:after {
     content: '/';
     color: #0d4025;
@@ -2169,6 +2189,7 @@ display: inline-table;
 	top: 50%;
 	left: 50%;
 	padding: 0px;
+	-webkit-transform: translate(-50%,-50%);
 	transform: translate(-50%,-50%);
 }
 .maxfixed .cart-total{
@@ -2434,6 +2455,7 @@ display: inline-table;
 }
 .m-prodslide .slidewrap .slide-item{
 	padding:0;
+	margin:0;
 }
 
 .m-prodslide .slidewrap img{
@@ -2459,6 +2481,7 @@ display: inline-table;
 	display: block;
 	border:2px solid transparent;
 	cursor: pointer;
+	
 }
 .m-prodslide .minimg .swiper-active-switch{
 	background-color: #096735;
@@ -2473,6 +2496,7 @@ display: inline-table;
 	width: 66px;
 	height: 24px;
 	background: rgba(0,0,0,.3) url(filpup.png) no-repeat center top;
+	-webkit-transform: translate(-50%,0);
 	transform: translate(-50%,0);
 	cursor: pointer;
 }
@@ -2493,7 +2517,7 @@ display: inline-table;
 
 .prod-cont .prodbase{
 	padding:0 40px;
-	width: 50%;
+	width: 49%;
 	float: left;
 }
 /**/

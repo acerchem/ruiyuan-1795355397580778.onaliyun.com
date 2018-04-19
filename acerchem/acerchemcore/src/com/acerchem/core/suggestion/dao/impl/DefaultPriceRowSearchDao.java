@@ -18,10 +18,13 @@ public class DefaultPriceRowSearchDao extends AbstractItemDao implements PriceRo
 	{
 		final String REF_QUERY_PRODUCTROW_START = "SELECT PK "
 				+ " FROM {"+PriceRowModel._TYPECODE+"}"
-				+ " WHERE {"+PriceRowModel.PRODUCT+"} =?pro ";
+				+ " WHERE {"+PriceRowModel.PRODUCT+"} =?pro and {"+PriceRowModel.CURRENCY+"} =?currency and {"+PriceRowModel.PK+"} !=?thispk ";
+		
 		final Map<String, Object> params = new HashMap<String, Object>();
 		final StringBuilder builder = new StringBuilder(REF_QUERY_PRODUCTROW_START);
 		params.put("pro", priceRow.getProduct());
+		params.put("currency", priceRow.getCurrency());
+		params.put("thispk", priceRow.getPk());
 		final SearchResult<PriceRowModel> result = getFlexibleSearchService().search(builder.toString(),params);
 		return result.getResult();
 	}

@@ -63,11 +63,9 @@ import de.hybris.platform.converters.Converters;
 import de.hybris.platform.converters.Populator;
 import de.hybris.platform.core.PK;
 import de.hybris.platform.core.model.c2l.CountryModel;
-import de.hybris.platform.core.model.c2l.RegionModel;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.core.model.user.CustomerModel;
-import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.servicelayer.i18n.CommonI18NService;
@@ -85,7 +83,6 @@ import com.acerchem.storefront.data.CustomRegisterForm;
 
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -880,7 +877,7 @@ public class AccountPageController extends AbstractSearchPageController
 				{
 					AddressForm address=new AddressForm();
 					address.setCountryIso(am.getCountry().getIsocode());
-					address.setRegionIso(am.getRegion().getIsocode());
+					if(am.getRegion()!=null){address.setRegionIso(am.getRegion().getIsocode());}
 					address.setAddressId(am.getPk().toString());
 					address.setTownCity(am.getTown());
 					CustomRegisterForm.setContactAddress(address);
