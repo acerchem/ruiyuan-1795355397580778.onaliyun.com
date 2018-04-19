@@ -372,7 +372,7 @@ a,button , .maxtop .maxmenu li a{
     color: #333;
     text-decoration:none;
 }
-.simple-banner-component img, .banner__component img{
+.simple-banner-component img, .maxtop .banner__component img{
     width: auto;
     height: auto;
 }
