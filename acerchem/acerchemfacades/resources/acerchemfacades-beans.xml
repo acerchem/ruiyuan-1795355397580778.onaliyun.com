@@ -146,6 +146,8 @@
 
 	<bean class="de.hybris.platform.commercefacades.order.data.AbstractOrderData">
 		<property name="paymentModeData" type="com.acerchem.facades.product.data.PaymentModeData"/>
+		<property name="storageCost" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+		<property name="operateCost" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
 	</bean>
 
 

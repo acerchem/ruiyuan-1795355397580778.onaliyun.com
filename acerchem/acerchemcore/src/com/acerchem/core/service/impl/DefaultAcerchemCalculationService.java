@@ -1,0 +1,75 @@
+/*
+ * [y] hybris Platform
+ *
+ * Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+ *
+ * This software is the confidential and proprietary information of SAP
+ * ("Confidential Information"). You shall not disclose such Confidential
+ * Information and shall use it only in accordance with the terms of the
+ * license agreement you entered into with SAP.
+ */
+package com.acerchem.core.service.impl;
+
+import de.hybris.platform.core.model.c2l.CurrencyModel;
+import de.hybris.platform.core.model.order.AbstractOrderModel;
+import de.hybris.platform.order.exceptions.CalculationException;
+import de.hybris.platform.order.impl.DefaultCalculationService;
+import de.hybris.platform.order.strategies.calculation.OrderRequiresCalculationStrategy;
+import de.hybris.platform.servicelayer.i18n.CommonI18NService;
+import de.hybris.platform.util.TaxValue;
+import org.apache.log4j.Logger;
+
+import javax.annotation.Resource;
+import java.util.Map;
+import java.util.Set;
+
+
+/**
+ *
+ */
+public class DefaultAcerchemCalculationService extends DefaultCalculationService
+{
+
+	private static final Logger LOG = Logger.getLogger(DefaultAcerchemCalculationService.class);
+
+	@Resource
+	private OrderRequiresCalculationStrategy orderRequiresCalculationStrategy;
+
+	@Resource
+	private CommonI18NService commonI18NService;
+
+	protected void calculateTotals(final AbstractOrderModel order, final boolean recalculate,
+			final Map<TaxValue, Map<Set<TaxValue>, Double>> taxValueMap) throws CalculationException
+	{
+		if (recalculate || orderRequiresCalculationStrategy.requiresCalculation(order))
+		{
+			final CurrencyModel curr = order.getCurrency();
+			final int digits = curr.getDigits().intValue();
+			// subtotal
+			final double subtotal = order.getSubtotal().doubleValue();
+			// discounts
+
+			final double totalDiscounts = calculateDiscountValues(order, recalculate);
+			final double roundedTotalDiscounts = commonI18NService.roundCurrency(totalDiscounts, digits);
+			order.setTotalDiscounts(Double.valueOf(roundedTotalDiscounts));
+			// set total
+			final double total = subtotal + order.getPaymentCost().doubleValue() + order.getDeliveryCost().doubleValue()
+					+order.getOperateCost().doubleValue()+order.getStorageCost().doubleValue()
+					- roundedTotalDiscounts;
+			final double totalRounded = commonI18NService.roundCurrency(total, digits);
+			order.setTotalPrice(Double.valueOf(totalRounded));
+			// taxes
+			final double totalTaxes = calculateTotalTaxValues(//
+					order, recalculate, //
+					digits, //
+					getTaxCorrectionFactor(taxValueMap, subtotal, total, order), //
+					taxValueMap);//
+			final double totalRoundedTaxes = commonI18NService.roundCurrency(totalTaxes, digits);
+			order.setTotalTax(Double.valueOf(totalRoundedTaxes));
+			setCalculatedStatus(order);
+			saveOrder(order);
+		}
+	}
+	
+
+}

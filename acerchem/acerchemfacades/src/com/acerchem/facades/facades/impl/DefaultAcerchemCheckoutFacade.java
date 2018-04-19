@@ -15,6 +15,7 @@ import de.hybris.platform.commercefacades.user.data.CountryData;
 import de.hybris.platform.commerceservices.service.data.CommerceCheckoutParameter;
 import de.hybris.platform.core.model.c2l.CountryModel;
 import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
+import de.hybris.platform.core.model.order.CartEntryModel;
 import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.order.delivery.DeliveryModeModel;
 import de.hybris.platform.core.model.order.payment.PaymentModeModel;
@@ -134,25 +135,24 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
             if (cartModel != null)
             {
                 DeliveryModeData deliveryModeData = getDeliveryModeConverter().convert(deliveryModeModel);
-                double orderTotalPrice  = cartModel.getTotalPrice();
-                String orderStandardFee = configurationService.getConfiguration().getString(ORDER_STANDARD_CRITICAL_FEE,defaultOrderStandardFee);
-                BigDecimal operationFee = BigDecimal.ZERO;
-                if (orderTotalPrice <= Double.valueOf(orderStandardFee)){
-                    String orderOperationFee = configurationService.getConfiguration().getString(ORDER_OPERATION_FEE,defaultOrderOperationFee);
-                    operationFee = operationFee.add(BigDecimal.valueOf(Double.valueOf(orderOperationFee)));
-                }
-
+//                double orderTotalPrice  = cartModel.getTotalPrice();
+//                String orderStandardFee = configurationService.getConfiguration().getString(ORDER_STANDARD_CRITICAL_FEE,defaultOrderStandardFee);
+//                BigDecimal operationFee = BigDecimal.ZERO;
+//                if (orderTotalPrice <= Double.valueOf(orderStandardFee)){
+//                    String orderOperationFee = configurationService.getConfiguration().getString(ORDER_OPERATION_FEE,defaultOrderOperationFee);
+//                    operationFee = operationFee.add(BigDecimal.valueOf(Double.valueOf(orderOperationFee)));
+//                }
                 PriceValue deliveryCost = null;
                 if (DELIVERY_MENTION.equals(deliveryModeModel.getCode())){
-                    String deliveryMetionPrice = configurationService.getConfiguration().getString(DELIVERY_MENTION_FEE,defaultStorageFee);
-                    BigDecimal fee = operationFee.add(BigDecimal.valueOf(Double.valueOf(deliveryMetionPrice)));
+//                    String deliveryMetionPrice = configurationService.getConfiguration().getString(DELIVERY_MENTION_FEE,defaultStorageFee);
+//                    BigDecimal fee = BigDecimal.valueOf(Double.valueOf(deliveryMetionPrice));
 
-                    deliveryCost = new PriceValue(cartModel.getCurrency().getIsocode(), fee.doubleValue(), true);
+                    deliveryCost = new PriceValue(cartModel.getCurrency().getIsocode(), 0.0d, true);
 
                 }else if (DELIVERY_GROSS.equals(deliveryModeModel.getCode())){
                     BigDecimal fee = BigDecimal.valueOf(0.0d);
                     fee =  BigDecimal.valueOf(acerchemTrayFacade.getTotalPriceForCart());
-                    fee = operationFee.add(fee);
+
                     deliveryCost = new PriceValue(cartModel.getCurrency().getIsocode(), fee.doubleValue(), true);
                 }
 
@@ -279,6 +279,44 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
 	//分摊价格
 	public void ApportionmentCartPrice(CartModel cartModel){
         if (!ObjectUtils.isEmpty(cartModel)){
+
+            //总托盘比例
+            BigDecimal totalUnitCalculateRato = BigDecimal.ZERO;
+            for (AbstractOrderEntryModel aoe: cartModel.getEntries()){
+                Double entryUnitCalculateRato = Double.valueOf(aoe.getProduct().getUnitCalculateRato());
+                totalUnitCalculateRato = totalUnitCalculateRato.add(BigDecimal.valueOf(entryUnitCalculateRato));
+            }
+            BigDecimal deliveryCost = BigDecimal.valueOf(cartModel.getDeliveryCost());
+            int size = cartModel.getEntries().size();
+            //
+            BigDecimal remainTotalDeliveryCost =BigDecimal.ZERO;
+
+            for (int i =0 ; i<size ; i++){
+                AbstractOrderEntryModel aoe = cartModel.getEntries().get(i);
+                Double basePrice = aoe.getBasePrice();
+                aoe.setBaseRealPrice(basePrice);
+                BigDecimal entryTotalDeliveryCost = BigDecimal.ZERO;
+               if (i == size-1) {
+                   entryTotalDeliveryCost = remainTotalDeliveryCost;
+               }else {
+
+                   Double entryUnitCalculateRato = Double.valueOf(aoe.getProduct().getUnitCalculateRato());
+                   //计算比例
+                   BigDecimal proportion = totalUnitCalculateRato.divide(new BigDecimal(entryUnitCalculateRato), BigDecimal.ROUND_HALF_UP, BigDecimal.ROUND_HALF_UP);
+                   //计算entry total 运费
+                   entryTotalDeliveryCost = proportion.multiply(deliveryCost);
+
+                   //剩余运费
+                   remainTotalDeliveryCost = deliveryCost.subtract(entryTotalDeliveryCost);
+
+               }
+               BigDecimal quantity = BigDecimal.valueOf(aoe.getQuantity());
+               BigDecimal entryDeliveryBasePrice = entryTotalDeliveryCost.divide(quantity, BigDecimal.ROUND_HALF_UP, BigDecimal.ROUND_HALF_UP);
+               basePrice = BigDecimal.valueOf(basePrice).add(entryDeliveryBasePrice).doubleValue();
+               aoe.setBasePrice(basePrice);
+
+            }
+            getModelService().saveAll(cartModel.getEntries());
 
         }
     }

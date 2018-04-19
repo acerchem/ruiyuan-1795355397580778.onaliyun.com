@@ -581,12 +581,12 @@
 						<modifiers />
 					</attribute>
 					<attribute qualifier="baseRealPrice" type="java.lang.Double">
-						<description>分摊之前的单价</description>
+						<description>分摊之后的单价</description>
 						<persistence type="property" />
 						<modifiers />
 					</attribute>
 					<attribute qualifier="totalRealPrice" type="java.lang.Double">
-						<description>分摊之前的总价</description>
+						<description>分摊之后的总价</description>
 						<persistence type="property" />
 						<modifiers />
 					</attribute>
@@ -804,6 +804,18 @@
 					</attribute>
 					<attribute qualifier="pickUpDate" type="java.util.Date">
 						<description>date for pickUp</description>
+						<persistence type="property" />
+						<modifiers />
+					</attribute>
+					<attribute qualifier="storageCost" type="java.lang.Double">
+						<description>price for storage</description>
+						<defaultvalue>Double.valueOf(0.0d)</defaultvalue>
+						<persistence type="property" />
+						<modifiers />
+					</attribute>
+					<attribute qualifier="operateCost" type="java.lang.Double">
+						<description>price for operate</description>
+						<defaultvalue>Double.valueOf(0.0d)</defaultvalue>
 						<persistence type="property" />
 						<modifiers />
 					</attribute>
