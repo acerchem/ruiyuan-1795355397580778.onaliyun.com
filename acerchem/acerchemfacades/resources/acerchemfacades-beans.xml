@@ -115,6 +115,7 @@
         <property name="storeId" type="String"/>
         <property name="storeName" type="String"/>
         <property name="countryDataList" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.CountryData>"/>
+		<property name="countryListString" type="String"/>
         <property name="inventory" type="java.lang.Integer"/>
         <property name="avaReleaseDay" type="java.lang.Integer"/>
         <property name="isUseFutureStock" type="Boolean"/>
@@ -148,6 +149,7 @@
 		<property name="paymentModeData" type="com.acerchem.facades.product.data.PaymentModeData"/>
 		<property name="storageCost" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
 		<property name="operateCost" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+		<property name="pickUpdate" type="java.lang.String"/>
 	</bean>
 
 
