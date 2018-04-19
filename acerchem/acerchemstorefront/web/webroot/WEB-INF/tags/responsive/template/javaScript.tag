@@ -44,7 +44,8 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/jquery.slideviewer.custom.1.2.js"></script>
 		
 		<%-- Custom ACC JS --%>
-		
+		<!-- shaun -->
+		<script type="text/javascript" src="${commonResourcePath}/js/maxprod.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.address.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.autocomplete.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.carousel.js"></script>
