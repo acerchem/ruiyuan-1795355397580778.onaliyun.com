@@ -33,7 +33,7 @@
 .maxlatest .sign-content .btn-set{margin-top: 20px;}
 .maxlatest .sign-content input[type="text"],.maxlatest .sign-content input[type="password"],.maxlatest .sign-content .btn{height: 40px; line-height: 40px; padding:0;}
 
-.maxlatest .bansearch{position: absolute; top:50%; left: 10%; z-index: 3; width: 40%; max-width: 450px; color: #fff; transform: translate(0,-50%);}
+.maxlatest .bansearch{position: absolute; top:50%; left: 11%; z-index: 3; width: 40%; max-width: 450px; color: #fff; transform: translate(0,-50%);}
 .maxlatest .bansearch form{position: relative;  margin: 20px 0;}
 .maxlatest .bansearch .maxicon-search{background-position: 0 -218px; position: absolute; top:0; right: 0; height: 50px; width: 50px;}
 .maxlatest .bansearch p{font-size: 42px; text-transform: uppercase; font-weight: bold; line-height: 1.0em;}
@@ -179,6 +179,9 @@ background:-webkit-linear-gradient(top,rgba(0,0,0,0) 20%,rgba(0,0,0,.9) 100%);}
     .sign-content label, .gen-content .g-cartable .solid-form label , .maxlatest .sign-content .text-section{
         margin-bottom: 10px;
     }
+    .maxlatest .bansearch{
+        left: 12%;
+    }
 }
 
 @media screen and (max-width: 1580px) {
@@ -194,6 +197,9 @@ background:-webkit-linear-gradient(top,rgba(0,0,0,0) 20%,rgba(0,0,0,.9) 100%);}
    .footer .maxfootnav{
         padding-left: 13%;
    }
+   .maxlatest .bansearch{
+        width:30%
+    }
 
 }
 
@@ -229,7 +235,8 @@ background:-webkit-linear-gradient(top,rgba(0,0,0,0) 20%,rgba(0,0,0,.9) 100%);}
         right: 5%
     }
     .maxlatest .bansearch{
-        left: 7%;
+        left: 13%;
+        width:28%
     }
     
 
@@ -347,12 +354,117 @@ background:-webkit-linear-gradient(top,rgba(0,0,0,0) 20%,rgba(0,0,0,.9) 100%);}
    .maxlatest .bansearch{
       max-width: 400px;
    }
-
 }
 
 
 
 
 
+/*针对style.css的修改*/
+a,button , .maxtop .maxmenu li a{
+    color: #333;
+    text-decoration:none;
+}
+.simple-banner-component img, .banner__component img{
+    width: auto;
+    height: auto;
+}
+.col-xs-3{
+    width: 20%;
+    padding:0
+}
+.col-md-9{
+    width: 80%;
+    padding:0
+}
+.pagination > .active > a, .pagination > .active > span, .pagination > .active > a:hover, .pagination > .active > span:hover, .pagination > .active > a:focus, .pagination > .active > span:focus{
+    color: #999;
+    font-weight: normal;
+    font-size: 16px;
+    cursor: pointer;
+}
+.pagination > .act > span , .pagination > .active > a:hover{
+    color: #096735
+}
+.pagination > .disabled > span , .pagination > .disabled > span:hover{
+    color: #ddd;
+}
+.m-term-ri .m-pagination a{
+    color: #0d4025;
+}
+.m-term-ri .m-pagination .act , .m-term-ri .m-pagination a:hover{
+    color: #fff;
+}
 
+#cboxContent #cboxClose{
+    left:0; 
+    top:0;
+    text-align: right;
+    padding-right: 10px;
+}
+#customer-ticketing-buttons{
+    margin:60px auto;
+}
+.btn-primary{
+    background: #096735;
+    border:1px solid transparent;
+}
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary , .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default{
+    background:#0c7f44;
+    border-color:transparent;
+}
+.btn-default{
+    background: transparent;
+    border:1px solid #096735;
+    color: #096735;;
+}
 
+.checkout-login .col-md-6 .headline{
+    color: #333
+}
+.col-md-6 .form-control{
+    height: 50px;
+    line-height: 50px;
+}
+.col-md-6 label{
+    font-weight: normal;
+    color:#333
+}
+.col-md-6 .form-group .btn{
+    margin-top: 40px;
+}
+.col-md-6 .checkout-login-right-content-slot{
+    padding-top: 20%;
+}
+
+.col-md-6 .btn-default[disabled],.col-md-6 .btn-default[disabled]:hover,.btn-default.disabled, .btn-default[disabled], fieldset[disabled] .btn-default, .btn-default.disabled:hover, .btn-default[disabled]:hover, fieldset[disabled] .btn-default:hover, .btn-default.disabled:focus, .btn-default[disabled]:focus, fieldset[disabled] .btn-default:focus, .btn-default.disabled:active, .btn-default[disabled]:active, fieldset[disabled] .btn-default:active, .btn-default.disabled.active, .btn-default[disabled].active, fieldset[disabled] .btn-default.active{
+    background-color: rgba(9,103,53,.5);
+    border-color: transparent;
+}
+
+.glyphicon-remove:before{
+    font-size: 0;
+    background: url(maxicon.png);
+    width: 30px;
+    height: 18px;
+    display: block;
+    background-position: -10px -534px;
+    float: right;
+    margin-left: 3px;
+    cursor: pointer;
+}
+@media (min-width: 1024px){
+    .product-list-right-component{
+        padding:0; 
+        margin:0;
+    }
+   
+}
+@media (max-width: 1023px){
+      select.form-control{
+        height: 32px;
+        line-height: 32px;
+        padding:0;
+        padding-left: 12px;
+      }  
+}
