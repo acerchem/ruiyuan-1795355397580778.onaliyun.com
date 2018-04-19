@@ -12,11 +12,10 @@
 						<div class="maxadd">
 							<h3>Contact us</h3>
 							<ul>
-								<li><i class="maxadd"></i><span>Baglan Bay Innovation Centre,Baglan Energy Park,
-Port Talbot,Wales,U.K.SA12 7AX.   </span></li>
-								<li><i class="maxfax"></i><span>FAX:+86(0)2131358998</span></li>
-								<li><i class="maxphone"></i><span>Phone: +86(0)2131358882</span></li>
-								<li><i class="maxemail"></i><span>Email: service@acerchem.com</span></li>
+							<li><i class="maxadd"></i><span>Baglan Bay Innovation Centre,Baglan Energy Park,Port Talbot,Wales,U.K.SA12 7AX.   </span></li>
+								<li><i class="maxfax"></i><span>FAX:+86(0)2131358998 </span></li>
+								<li><i class="maxphone"></i><span>TEL:+86(0)2131358882</span></li>
+								<li><i class="maxemail"></i><span>Email: customerservice@acerchem.com</span></li>
 							</ul>
 						</div>
 						<div class="maxfootnav">
@@ -62,7 +61,7 @@ Port Talbot,Wales,U.K.SA12 7AX.   </span></li>
 			<div class="gotop"></div>
 			<div class="footerbot maxleft">
 				<div class="container">
-				© 1996-2018, Acerchem.com, Inc. or its affiliates
+				 1996-2018, Acerchem.com, Inc. or its affiliates
 				</div>
 			</div>
 		</div>

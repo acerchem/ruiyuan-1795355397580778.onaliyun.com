@@ -368,14 +368,18 @@
 		<property name="add" ref="acerchemOrderOfEmailContextPopuulator"/>
 	</bean>
 
-	<alias name="defaultAcerchemOrderPopulator" alias="orderPopulator"/>
-	<bean id="defaultAcerchemOrderPopulator" class="com.acerchem.facades.populators.AcerchemOrderPopulator" parent="defaultOrderPopulator">
+	<alias name="customOrderPopulator" alias="orderPopulator"/>
+	<bean id="customOrderPopulator" class="com.acerchem.facades.populators.AcerchemOrderPopulator" parent="defaultOrderPopulator">
 		<property name="priceDataFactory" ref="priceDataFactory"/>
 	</bean>
 
 	<alias name="defaultAcerchemCartPopulator" alias="cartPopulator"/>
 	<bean id="defaultAcerchemCartPopulator" class="com.acerchem.facades.populators.AcerchemCartPopulator" parent="defaultCartPopulator">
 		<property name="priceDataFactory" ref="priceDataFactory"/>
+	</bean>
+
+	<alias name="customOrderHistoryPopulator" alias="orderHistoryPopulator" />
+	<bean id="customOrderHistoryPopulator" parent="defaultOrderHistoryPopulator" class="com.acerchem.facades.populators.AcerchemOrderHistoryPopulator" >
 	</bean>
 
 </beans>

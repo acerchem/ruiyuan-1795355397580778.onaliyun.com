@@ -1,3 +1,4 @@
+
 package com.acerchem.facades.populators;
 
 import de.hybris.platform.commercefacades.order.converters.populator.AbstractOrderPopulator;
@@ -27,6 +28,7 @@ public class AcerchemOrderPopulator extends OrderPopulator {
     @Override
     public void populate(OrderModel source, OrderData target){
         super.populate(source,target);
+        target.setCustomerConfirm(source.getCustomerConfirm());
         if (source.getStorageCost()!=null){
             target.setStorageCost(priceDataFactory.create(PriceDataType.BUY,
                     BigDecimal.valueOf(source.getStorageCost().doubleValue()), source.getCurrency().getIsocode()));
@@ -42,3 +44,4 @@ public class AcerchemOrderPopulator extends OrderPopulator {
 
     }
 }
+

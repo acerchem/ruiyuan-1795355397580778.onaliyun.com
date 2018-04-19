@@ -157,5 +157,13 @@
 		<property name="currency" type="String"/>
 		<property name="paymentMode" type="String"/>
 	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.order.data.OrderData">
+		<property name="customerConfirm" type="boolean"/>
+	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.order.data.OrderHistoryData">
+		<property name="customerConfirm" type="boolean"/>
+	</bean>
 
 </beans>
