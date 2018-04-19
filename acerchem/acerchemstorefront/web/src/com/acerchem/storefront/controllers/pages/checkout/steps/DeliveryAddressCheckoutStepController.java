@@ -358,7 +358,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 
     @RequestMapping(value = "/addPickUpDate", method = RequestMethod.GET)
     @RequireHardLogIn
-    public String doSelectDeliveryAddress(final Model model, @RequestParam(required = false) final String pickUpDate) {
+    public String addPickUpDate(final Model model, @RequestParam(required = false) final String pickUpDate) {
 
         //保存收货时间
         acerchemCheckoutFacade.savePickUpDateForOrder(pickUpDate);
