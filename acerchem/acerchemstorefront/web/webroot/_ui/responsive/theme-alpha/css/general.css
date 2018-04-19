@@ -814,6 +814,12 @@ textarea{
 
 .member-content .addbook .operate{
 	font-size: 0;
+	width: 100px;
+}
+
+.member-content .operate a{
+	float: left;
+	display: table-cell;
 }
 
 .member-content .addbook .row-left{
@@ -854,6 +860,10 @@ textarea{
 .member-content .addbook .def .name{
 	color: #096735;
 	border-color:#096735;
+	display: block;
+	overflow:hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .member-content .addbook .def .setdef{
