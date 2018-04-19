@@ -987,7 +987,6 @@ textarea{
 	width:100%;
 	font-size: 14px;
 	text-align: left;
-	line-height: 1.5em;
 }
 
 .g-table .minflex{
@@ -1021,6 +1020,15 @@ textarea{
 .g-table span:first-child {
 	padding-left: 20px;
 	text-align: left;
+}
+.product-table .oper .btn-cart{
+	padding:15px;
+	font-size: 0;
+	background:url(mem-icons.png) no-repeat center 95.4%;
+	background-size:50px;
+}
+.product-table .oper .btn-cart:hover{
+	background-image: url(mem-icons2.png)
 }
 
 /*table 1/5*/
@@ -1107,7 +1115,6 @@ textarea{
 .product-table table .tot{
 	padding-right: 20px;
 	text-align: right;
-	line-height: 1em;
 }
 
 .product-table table .g-sale , .gen-content .gen-right .check-item .spset .g-sale{
@@ -1121,7 +1128,6 @@ textarea{
 
 .product-table .tot em{
 	display: block;
-	padding:10px 0 4px 0;	
 	font-size: 18px;
 }
 
@@ -1828,10 +1834,7 @@ textarea{
 }
 
 /*gallery*/
-.col-md-9{
-	width: 80%;
-	padding:0
-}
+
 #product-facet.gall-left{
 	border-top:4px solid #f3f3f3; 
 }
@@ -1949,6 +1952,8 @@ textarea{
 	width: 60%;
 }
 .m-term-le .glyphicon{
+	position: relative;
+	top: 2px;
 	color: #fff
 }
 .m-term-le:after{
@@ -1976,12 +1981,7 @@ textarea{
 .m-term-ri .m-pagination .pagination{
 	padding:0;
 }
-.m-term-ri .m-pagination a{
-	color: #0d4025;
-}
-.m-term-ri .m-pagination .act{
-	color: #fff;
-}
+
 .m-term-ri .m-pagination a:after {
     content: '/';
     color: #0d4025;
