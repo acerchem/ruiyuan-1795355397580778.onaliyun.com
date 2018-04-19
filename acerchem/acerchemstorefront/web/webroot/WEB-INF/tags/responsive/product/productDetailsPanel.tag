@@ -54,7 +54,7 @@
 					
 					
 					<div class="specnum">
-						<div class="spec">
+						 <div class="spec">
 						 <!-- <label>
 								<span class="label-title">Specifications</span>	
 								<div class="selbox">
@@ -98,7 +98,7 @@
 							</label>	
 							</c:if>	
                         </c:forEach>					
-						</div>
+						</div> 
 						
 						<div class="invernum">
 						
@@ -132,6 +132,14 @@
 								</select>
 								
 							</div>
+							
+							<c:forEach items="${countrys}" var="data"  varStatus="id"  >
+							<c:if test="${id.index==0}">
+							   <input type="hidden" value="${data.storeId}" name="storeHidId"  id="storeHidId">
+					        </c:if>	
+	                       </c:forEach>
+							
+							
 						
 						</div>
 						
@@ -501,24 +509,32 @@
 			futday = parseInt($('#futday').val()),
 			setnum = $('.m-setnum input');
 		if(acked){
+			
+			
+			var inventory =$("#inventoryId option[value='"+$("#storeHidId").val()+"']").text();
+			var avaReleaseDay = $("#avaReleaseDayId option[value='"+$("#storeHidId").val()+"']").text();
 			days.hide();
 			spot.hide();
-			invi.text(spot.find('em').text());
+			invi.text(inventory);
 			if(parseInt(setnum.val())>parseInt(spot.find('em').text())){
 				setnum.val(spot.find('em').text())
 			}
 			emvi = $('.prod-sum i em');
-			emvi.text($('#avaReleaseDay').val());
+			emvi.text(avaReleaseDay);
 			
 		}else{
-			days.show();
+			//days.show();
 			//spot.show();
 			/* invi.text(futday+parseInt(invi.text())); */
 			
-			invi.text(futday);
+			var futureAvailableDate = $("#futureAvailableDateId option[value='"+$("#storeHidId").val()+"']").text();
+	
+		    var futureInventory =  $("#futureInventoryId option[value='"+$("#storeHidId").val()+"']").text();
+			
+			invi.text(futureInventory);
 			emvi = $('.prod-sum i em');
-			$('#avaReleaseDay').val(emvi.text());
-			emvi.text($('.spec .futday .pitch').text());
+			//$('#avaReleaseDay').val(futureAvailableDate);
+			emvi.text(futureAvailableDate);
 			
 			
 		}
@@ -631,7 +647,8 @@
 
 	$("#storeMulId").change(function(){
 		
-
+		
+		$('#storeHidId').val($("#storeMulId").val());
 		 /*库存信息*/
 		invi = $('.invernum .inventory i');
 		
@@ -643,20 +660,20 @@
 	
 		var futureInventory =  $("#futureInventoryId option[value='"+$("#storeMulId").val()+"']").text();
 		
-	    var futureHtml='<input type="hidden" value="'+futureInventory+'" name="futday" alt="Please Select nation" id="futday">'+
+		/* var futureHtml='<input type="hidden" value="'+futureInventory+'" name="futday" alt="Please Select nation" id="futday">'+
 									'<span class="pitch">'+futureAvailableDate+'</span>'+
 									'<ul class="select"><li data-val="'+futureInventory+'">'+futureAvailableDate+'</li></ul>';
 	   
-		$('#selectId').html(futureHtml);
+		$('#selectId').html(futureHtml); */
 		
 	//if ($('#checkfutureId').attr('checked')) {
 		
 		if($('#checkfutureId').is(':checked')) {
 
 			
-			invi.text($('#futday').val());
+			invi.text(futureInventory);
 			
-			emvi.text($('.spec .futday .pitch').text());
+			emvi.text(futureAvailableDate);
 		} else {
 			
 			invi.text($("#inventoryId option[value='"+$("#storeMulId").val()+"']").text());
