@@ -48,6 +48,7 @@ textarea{
 	transition: all 500ms;
 }
 .rotary-flag:after{
+	-webkit-transform:rotate(180deg);
 	transform:rotate(180deg);
 }
 .select{
@@ -114,6 +115,7 @@ textarea{
 	border:2px solid #fff;
 	border-top:none;
 	border-left:none;
+	-webkit-transform:rotate(45deg);
 	transform:rotate(45deg);
 } 
 
@@ -343,6 +345,7 @@ textarea{
 	left:50%;
 	z-index: 999;
 	padding:20px 40px;
+	-webkit-transform:translate(-50%,-50%);
 	transform:translate(-50%,-50%);
 	color: #fff;
 	background-color: rgba(0,26,15,.7);
@@ -364,6 +367,7 @@ textarea{
 	background:#fff;
 	text-align:center;
 	color:#666;
+	-webkit-transform:translate(-50%,-50%);
 	transform:translate(-50%,-50%);
 }
 
@@ -834,6 +838,7 @@ textarea{
 	border:2px solid #fff;
 	border-top:none;
 	border-left:none;
+	-webkit-transform:rotate(45deg);
 	transform:rotate(45deg);
 }
 
@@ -2169,6 +2174,7 @@ display: inline-table;
 	top: 50%;
 	left: 50%;
 	padding: 0px;
+	-webkit-transform: translate(-50%,-50%);
 	transform: translate(-50%,-50%);
 }
 .maxfixed .cart-total{
@@ -2434,6 +2440,7 @@ display: inline-table;
 }
 .m-prodslide .slidewrap .slide-item{
 	padding:0;
+	margin:0;
 }
 
 .m-prodslide .slidewrap img{
@@ -2459,6 +2466,7 @@ display: inline-table;
 	display: block;
 	border:2px solid transparent;
 	cursor: pointer;
+	
 }
 .m-prodslide .minimg .swiper-active-switch{
 	background-color: #096735;
@@ -2473,6 +2481,7 @@ display: inline-table;
 	width: 66px;
 	height: 24px;
 	background: rgba(0,0,0,.3) url(filpup.png) no-repeat center top;
+	-webkit-transform: translate(-50%,0);
 	transform: translate(-50%,0);
 	cursor: pointer;
 }
