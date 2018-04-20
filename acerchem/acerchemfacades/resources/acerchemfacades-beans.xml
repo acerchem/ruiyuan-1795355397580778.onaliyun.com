@@ -174,16 +174,37 @@
 	</bean>
 
 	<bean class="de.hybris.platform.commercefacades.order.data.OrderData">
-		<property name="customerConfirm" type="boolean" />
-		<property name="currency" type="String" />
-		<property name="paymentMode" type="String" />
+		<property name="currency" type="String"/>
+		<property name="paymentMode" type="String"/>
+		<property name="customerConfirm" type="java.lang.Boolean"/>
+		<property name="employeeConfirm" type="java.lang.Boolean"/>
+		<property name="deliveryConfirm" type="java.lang.Boolean"/>
+		<property name="payConfirm" type="java.lang.Boolean"/>
+		<property name="customerConfirmPay" type="java.lang.Boolean"/>
+		<property name="employeeConfirmPay" type="java.lang.Boolean"/>
+		<property name="customerConfirmDelivery" type="java.lang.Boolean"/>
+		<property name="employeeConfirmDelivery" type="java.lang.Boolean"/>
+		<property name="pickUpDate" type="java.util.Date"/>
+		<property name="storageCost" type="java.lang.Double"/>
+		<property name="operateCost" type="java.lang.Double"/>
 	</bean>
-
+	
 	<bean class="de.hybris.platform.commercefacades.order.data.OrderHistoryData">
-		<property name="customerConfirm" type="boolean" />
 		<property name="currency" type="String" />
-		<property name="paymentMode" type="String" />
+		<property name="paymentMode" type="String" />	
+		<property name="customerConfirm" type="java.lang.Boolean"/>
+		<property name="employeeConfirm" type="java.lang.Boolean"/>
+		<property name="deliveryConfirm" type="java.lang.Boolean"/>
+		<property name="payConfirm" type="java.lang.Boolean"/>
+		<property name="customerConfirmPay" type="java.lang.Boolean"/>
+		<property name="employeeConfirmPay" type="java.lang.Boolean"/>
+		<property name="customerConfirmDelivery" type="java.lang.Boolean"/>
+		<property name="employeeConfirmDelivery" type="java.lang.Boolean"/>
+		<property name="pickUpDate" type="java.util.Date"/>
+		<property name="storageCost" type="java.lang.Double"/>
+		<property name="operateCost" type="java.lang.Double"/>
 	</bean>
+	
 	<bean
 		class="de.hybris.platform.commercefacades.order.data.ConsignmentEntryData">
 		<property name="batchNum" type="String" />
