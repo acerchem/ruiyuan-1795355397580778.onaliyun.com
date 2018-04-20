@@ -185,8 +185,6 @@
 		<property name="customerConfirmDelivery" type="java.lang.Boolean"/>
 		<property name="employeeConfirmDelivery" type="java.lang.Boolean"/>
 		<property name="pickUpDate" type="java.util.Date"/>
-		<property name="storageCost" type="java.lang.Double"/>
-		<property name="operateCost" type="java.lang.Double"/>
 	</bean>
 	
 	<bean class="de.hybris.platform.commercefacades.order.data.OrderHistoryData">
@@ -201,8 +199,6 @@
 		<property name="customerConfirmDelivery" type="java.lang.Boolean"/>
 		<property name="employeeConfirmDelivery" type="java.lang.Boolean"/>
 		<property name="pickUpDate" type="java.util.Date"/>
-		<property name="storageCost" type="java.lang.Double"/>
-		<property name="operateCost" type="java.lang.Double"/>
 	</bean>
 	
 	<bean
