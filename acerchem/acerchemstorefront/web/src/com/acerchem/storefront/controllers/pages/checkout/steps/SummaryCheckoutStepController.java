@@ -154,7 +154,7 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 		final OrderData orderData;
 		try
 		{
-			orderData = getCheckoutFacade().placeOrder();
+			orderData = acerchemCheckoutFacade.placeOrder();
 		}
 		catch (final Exception e)
 		{
@@ -180,17 +180,28 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 		final String securityCode = placeOrderForm.getSecurityCode();
 		boolean invalid = false;
 
-		if (getCheckoutFlowFacade().hasNoDeliveryAddress())
+		final CartData cartData = acerchemCheckoutFacade.getCheckoutCart();
+
+		if (cartData.getDeliveryMode() == null)
+		{
+			GlobalMessages.addErrorMessage(model, "checkout.deliveryMethod.notSelected");
+			invalid = true;
+		}
+		
+		if (cartData.getDeliveryAddress() == null)
 		{
 			GlobalMessages.addErrorMessage(model, "checkout.deliveryAddress.notSelected");
 			invalid = true;
 		}
 
-		if (getCheckoutFlowFacade().hasNoDeliveryMode())
+		
+		
+		if (cartData.getPaymentModeData() == null)
 		{
-			GlobalMessages.addErrorMessage(model, "checkout.deliveryMethod.notSelected");
+			GlobalMessages.addErrorMessage(model, "checkout.paymentMethod.notSelected");
 			invalid = true;
 		}
+
 
 		/*if (getCheckoutFlowFacade().hasNoPaymentInfo())
 		{
@@ -214,7 +225,7 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 			invalid = true;
 			return invalid;
 		}*/
-		final CartData cartData = getCheckoutFacade().getCheckoutCart();
+		//final CartData cartData = getCheckoutFacade().getCheckoutCart();
 
 		//		if (!getCheckoutFacade().containsTaxValues())
 		//		{

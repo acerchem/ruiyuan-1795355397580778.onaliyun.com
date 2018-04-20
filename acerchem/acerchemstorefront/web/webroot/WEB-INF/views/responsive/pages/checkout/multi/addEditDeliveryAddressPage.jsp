@@ -14,7 +14,6 @@
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 
 
-
 <spring:htmlEscape defaultHtmlEscape="true" />
 <c:set var="deliveryAddress" value="${cartData.deliveryAddress}"/>
 <c:set var="deliveryMode" value="${cartData.deliveryMode}"/>
@@ -217,10 +216,45 @@
 					</div>
 				</div>
 				<!-- end -->
-
 				
+				
+					<!-- pickup date-->
+			<div class="g-table">
+					<div class="g-title">
+						<span>pickup date</span>
+					</div>
+				  <div class="inside-cont">
 
-				<!-- payment & Billing Address -->
+					<!-- <p>please select the date： <input type="date" /></p> -->
+					<div style="height: 30px"></div>
+
+					<div class="content">
+					 <c:choose>
+					<c:when test="${cartData.pickUpdate eq null}">
+						<div>
+							<label>Date:&nbsp;&nbsp;&nbsp;<input style="width: 300px" type="date" id="textDate" /></label>
+						</div>
+						<div class="btn-set">
+
+							<a class="btn btn-date"
+								style="width: 200px; position: relative; left: -450px">Submit</a>
+						</div>
+                      </c:when>
+                      <c:otherwise>
+                          <div>
+							<label>Date:&nbsp;&nbsp;&nbsp;${cartData.pickUpdate}</label>
+						</div>
+                      </c:otherwise>
+                      </c:choose>
+					</div>
+
+					<div style="height: 30px"></div>
+				</div>
+
+			</div>
+
+
+					<!-- payment & Billing Address -->
 				<div class="g-table"  id="payaddress">
 					<div class="g-title">
 						<span>payment</span>
@@ -355,6 +389,12 @@ $('.g-table .btn').on('click',function(){//
 		case 'btn btn-sign':
 			$('.hidlist , .solid-form').hide();
 			$(this).parents('.g-table').find('.solid-form').show();
+			break;
+			
+		case 'btn btn-date':
+			 var date =$('#textDate').val();
+			 
+			 window.location.href ='<c:url value='/checkout/multi/delivery-address/addPickUpDate?pickUpDate='/>'+date;
 			break;
 	}
 })
@@ -650,6 +690,12 @@ $(document).ready(function() {
     });
 });
 
+
+/* 
+$("#dateBtn").on('click',function(){
+	alert(($("#textDate").val);
+})
+ */
 
 </script>
 </template:page>
