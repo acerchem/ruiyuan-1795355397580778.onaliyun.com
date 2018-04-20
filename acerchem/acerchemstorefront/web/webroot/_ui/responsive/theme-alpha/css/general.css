@@ -266,7 +266,7 @@ textarea{
 	overflow: hidden;
 }
 
-.maxon_salesul .slide-item .item{
+.maxon_salesul .slide-item .aitem{
 	padding-right:20px;
 	width:20%;
 	float:left;
@@ -2083,13 +2083,13 @@ display: inline-table;
 	overflow: hidden;
 }
 
-.gal-centent .slide-item .item{
+.gal-centent .slide-item .aitem{
 	padding-left: 20px;
 	padding-right: 0px;
 	padding-bottom: 20px;
 }
 
-.gal-centent .slide-item .item .img{
+.gal-centent .slide-item .aitem .img{
 	display: table;
 	width: 100%;
 	min-height: 220px;
@@ -2097,12 +2097,12 @@ display: inline-table;
 	font-size: 0;
 	text-align: center;
 }
-.gal-centent .slide-item .item .img a{
+.gal-centent .slide-item .aitem .img a{
 	display: table-cell;
 	height: 100%;
 	vertical-align: middle;
 }
-.gall-right .slide-item .item a{
+.gall-right .slide-item .aitem a{
  	padding: 0;
  }
 
