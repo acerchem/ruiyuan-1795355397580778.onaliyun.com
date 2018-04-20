@@ -17,7 +17,7 @@
 
 <!--shaun: acerchem -->
 <!-- productDatails -->
-<li class="item">
+<li class="aitem">
 	<ycommerce:testId code="test_searchPage_wholeProduct">
 	
 			<!-- 图片 -->
