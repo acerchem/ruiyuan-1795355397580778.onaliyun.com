@@ -1143,11 +1143,6 @@ public class AccountPageController extends AbstractSearchPageController
 		}
 		orderResults.setSorts(result);
 		
-		/*final SearchPageData<OrderData> searchPageData = new SearchPageData<OrderData>();
-		searchPageData.setPagination(orderResults.getPagination());
-		searchPageData.setSorts(orderResults.getSorts());
-		searchPageData.setResults(Converters.convertAll(orderResults.getResults(), orderConverter));*/
-		
 		final SearchPageData<OrderHistoryData> searchPageData = new SearchPageData<OrderHistoryData>();
 		searchPageData.setPagination(orderResults.getPagination());
 		searchPageData.setSorts(orderResults.getSorts());
@@ -1200,22 +1195,23 @@ public class AccountPageController extends AbstractSearchPageController
 	public String listConfirm(@RequestParam(value = "page", defaultValue = "0") final int page,
 			@RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode,
 			@RequestParam(value = "sort", required = false) final String sortCode, 
-			@RequestParam(value = "key", required = false) final String key,final Model model,@PathVariable("orderCode") final String orderCode)
+			@RequestParam(value = "key", required = false) final String key,final Model model,@PathVariable("orderCode") final String orderCode,final String confirm)
 			throws CMSItemNotFoundException
 	{
-		confirm(orderCode);
+		confirm(orderCode,confirm);
 		return orders(page,showMode,sortCode, key,model);
 	}
 	
 	@RequestMapping(value = "/detailsConfirm/" + ORDER_CODE_PATH_VARIABLE_PATTERN, method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String detailsConfirm(@PathVariable("orderCode") final String orderCode, final Model model,final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	public String detailsConfirm(@PathVariable("orderCode") final String orderCode, 
+			final Model model,final RedirectAttributes redirectModel,final String confirm) throws CMSItemNotFoundException
 	{
-		confirm(orderCode);
+		confirm(orderCode,confirm);
 		return order(orderCode,model,redirectModel);
 	}
 	
-	public void confirm(String orderCode)
+	public void confirm(String orderCode,String confirm)
 	{
 		final BaseStoreModel baseStoreModel = baseStoreService.getCurrentBaseStore();
 		final OrderModel order =  customerAccountService.getOrderForCode((CustomerModel) userService.getCurrentUser(), orderCode,baseStoreModel);
@@ -1227,16 +1223,44 @@ public class AccountPageController extends AbstractSearchPageController
 			{
 				fulfilmentProcessDefinitionName = orderProcess.getCode();
 			}
-			final String eventID = new StringBuilder().append(fulfilmentProcessDefinitionName).append("_ConfirmActionEvent").toString();
-			final BusinessProcessEvent event = BusinessProcessEvent.builder(eventID).withChoice("waitForCustomerConfirm").build();
-		  	Boolean falg=businessProcessService.triggerEvent(event);  
-		  	
-		  	if(falg)
-		  	{
-		  		order.setCustomerConfirm(true);
-		  		modelService.save(order);
-		  	}
-		  	
+			
+			if(confirm.equals("order")&&!order.getCustomerConfirm())
+			{
+				final String eventID = new StringBuilder().append(fulfilmentProcessDefinitionName).append("_ConfirmActionEvent").toString();
+				final BusinessProcessEvent event = BusinessProcessEvent.builder(eventID).withChoice("waitForCustomerConfirm").build();
+				Boolean falg=businessProcessService.triggerEvent(event);  
+			  	if(falg)
+			  	{
+			  		order.setCustomerConfirm(true);
+			  		modelService.save(order);
+			  		modelService.refresh(order);
+			  	}
+			}
+			if(confirm.equals("receipt")&&!order.getCustomerConfirmDelivery())
+			{
+				final String eventID = new StringBuilder().append(fulfilmentProcessDefinitionName).append("_ConfirmConsignmentActionEvent").toString();
+				final BusinessProcessEvent event = BusinessProcessEvent.builder(eventID).withChoice("waitForCustomerConfirmConsignment").build();
+				Boolean falg=businessProcessService.triggerEvent(event);  
+			  	if(falg)
+			  	{
+			  		order.setCustomerConfirmDelivery(true);
+					modelService.save(order);
+					modelService.refresh(order);
+			  	}
+			}
+			if(confirm.equals("payment")&&!order.getCustomerConfirmPay())
+			{
+				final String eventID = new StringBuilder().append(fulfilmentProcessDefinitionName).append("_ConfirmPayActionEvent").toString();
+				final BusinessProcessEvent event = BusinessProcessEvent.builder(eventID).withChoice("waitForCustomerConfirmPay").build();
+				Boolean falg=businessProcessService.triggerEvent(event);  
+			  	if(falg)
+			  	{
+			  		order.setCustomerConfirmPay(true);
+					modelService.save(order);
+					modelService.refresh(order);
+			  	}
+			}
+			
 		}
 	}
 
