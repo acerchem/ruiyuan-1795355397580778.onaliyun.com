@@ -50,9 +50,17 @@ public class EmployeeUpdateDeliveryInfoAction extends AbstractComponentWidgetAda
 		LOG.info("--------------------start EmployeeUpdateDeliveryInfoAction-------------------");
 		OrderModel order = (OrderModel) ctx.getData();
 		final String processCode = order.getOrderProcess().iterator().next().getCode();
-		getBusinessProcessService().triggerEvent(processCode + "_"+ "WaitConfrimConsignmentForEmployee");
-		LOG.info("--------------------end EmployeeUpdateDeliveryInfoAction-------------------"+processCode);
+		final String eventID = new StringBuilder()//
+		          .append(processCode)//
+		          .append("_")//
+		    .append("ConfirmConsignmentForEmployeeActionEvent")//
+		    .toString();
+		final BusinessProcessEvent event = BusinessProcessEvent.builder(eventID)
+			    .withChoice("confirmConsignment").build();
+			  getBusinessProcessService().triggerEvent(event);
+		LOG.info("--------------------end  EmployeeUpdateDeliveryInfoAction-------------------");
 		return new ActionResult("success");
+		
 	}
 	
 }
