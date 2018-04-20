@@ -3,6 +3,7 @@ package com.acerchem.facades.facades;
 import de.hybris.platform.commercefacades.order.data.CardTypeData;
 import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.commercefacades.order.data.DeliveryModeData;
+import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.commercefacades.user.data.CountryData;
 import de.hybris.platform.core.model.order.delivery.DeliveryModeModel;
 
@@ -36,6 +37,8 @@ public interface AcerchemCheckoutFacade {
     PaymentModeData getPaymentModeData();
 
     CartData getCheckoutCart();
+
+    List<? extends AddressData> getDeliveryAddresses();
 
 }
 
