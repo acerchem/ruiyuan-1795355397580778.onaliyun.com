@@ -92,9 +92,9 @@
 		
 		
 		<%-- acerchem js file --%>
-		<script type="text/javascript" src="${commonResourcePath}/js/general.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/swiper.min.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/index.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/general.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/max.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/maxprod.js"></script>
 		
