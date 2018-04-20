@@ -154,7 +154,7 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 		final OrderData orderData;
 		try
 		{
-			orderData = getCheckoutFacade().placeOrder();
+			orderData = acerchemCheckoutFacade.placeOrder();
 		}
 		catch (final Exception e)
 		{

@@ -111,13 +111,13 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 
 		getUserFacade().addAddress(newAddress);
 
-		final AddressData previousSelectedAddress = getCheckoutFacade().getCheckoutCart().getDeliveryAddress();
+//		final AddressData previousSelectedAddress = getCheckoutFacade().getCheckoutCart().getDeliveryAddress();
 		// Set the new address as the selected checkout delivery address
 		getCheckoutFacade().setDeliveryAddress(newAddress);
-		if (previousSelectedAddress != null && !previousSelectedAddress.isVisibleInAddressBook())
-		{ // temporary address should be removed
-			getUserFacade().removeAddress(previousSelectedAddress);
-		}
+//		if (previousSelectedAddress != null && !previousSelectedAddress.isVisibleInAddressBook())
+//		{ // temporary address should be removed
+//			getUserFacade().removeAddress(previousSelectedAddress);
+//		}
 
 		// Set the new address as the selected checkout delivery address
 		getCheckoutFacade().setDeliveryAddress(newAddress);

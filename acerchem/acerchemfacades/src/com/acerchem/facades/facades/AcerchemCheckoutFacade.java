@@ -3,6 +3,7 @@ package com.acerchem.facades.facades;
 import de.hybris.platform.commercefacades.order.data.CardTypeData;
 import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.commercefacades.order.data.DeliveryModeData;
+import de.hybris.platform.commercefacades.order.data.OrderData;
 import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.commercefacades.user.data.CountryData;
 import de.hybris.platform.core.model.order.delivery.DeliveryModeModel;
@@ -12,6 +13,7 @@ import java.util.Collection;
 import java.util.List;
 
 import com.acerchem.facades.product.data.PaymentModeData;
+import de.hybris.platform.order.InvalidCartException;
 
 public interface AcerchemCheckoutFacade {
 
@@ -39,6 +41,8 @@ public interface AcerchemCheckoutFacade {
     CartData getCheckoutCart();
 
     List<? extends AddressData> getDeliveryAddresses();
+
+    OrderData placeOrder() throws InvalidCartException;
 
 }
 
