@@ -51,9 +51,15 @@ public class EmployeeUpdateDeliveryStatusAction extends AbstractComponentWidgetA
 		LOG.info("--------------------start EmployeeUpdateDeliveryStatusAction-------------------");
 		OrderModel order = (OrderModel) ctx.getData();
 		setOrderStatus(order, OrderStatus.DELIVERED);
-		getBusinessProcessService().triggerEvent(
-				order.getOrderProcess().iterator().next().getCode() + "_"
-						+ "WaitUpdateConsignmentStatus");
+		final String processCode = order.getOrderProcess().iterator().next().getCode();
+		final String eventID = new StringBuilder()//
+		          .append(processCode)//
+		          .append("_")//
+		    .append("ConfirmConsignmentStatusActionEvent")//
+		    .toString();
+		final BusinessProcessEvent event = BusinessProcessEvent.builder(eventID)
+			    .withChoice("waitForEmployeeConfirmConsignmentStatus").build();
+			  getBusinessProcessService().triggerEvent(event);
 		LOG.info("--------------------end EmployeeUpdateDeliveryStatusAction-------------------");
 		return new ActionResult("success");
 	}

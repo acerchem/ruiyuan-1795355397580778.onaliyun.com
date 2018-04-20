@@ -66,9 +66,16 @@
         </case>
     </wait> 
 	<action id="waitForConfirmPay" bean="waitForConfirmPayAction">
-		<transition name="OK" to="recordConsignmentInfo"/>
+		<transition name="OK" to="waitConfrimForEmployee"/>
 		<transition name="NOK" to="waitForAllConfirmPay"/>
 	</action>
+	
+	<!-- 添加运营等待 -->
+	<wait id="waitConfrimForEmployee" prependProcessCode="true" then="failed">
+	 	<case event="ConfirmConsignmentForEmployeeActionEvent">
+            <choice id="confirmConsignment" then="recordConsignmentInfo"/>
+        </case>
+	</wait>
 	
 	<action id="recordConsignmentInfo" bean="recordConsignmentInfoAction">
 		<transition name="OK" to="splitDeliveryMode"/>
@@ -105,10 +112,11 @@
 		<transition name="OK" to="waitUpdateConsignmentStatus"/>
 	</action>
 	
-	<wait id="waitUpdateConsignmentStatus" then="waitForAllConsignmentConfirm" prependProcessCode="false">
-  		<event>${process.order.code}_WaitUpdateConsignmentStatus</event>
+	<wait id="waitUpdateConsignmentStatus" prependProcessCode="true" then="failed">
+	 	<case event="ConfirmConsignmentStatusActionEvent">
+            <choice id="waitForEmployeeConfirmConsignmentStatus" then="waitForAllConsignmentConfirm"/>
+        </case>
 	</wait>
-	
 	
 	<wait id="waitForAllConsignmentConfirm" prependProcessCode="true" then="failed">
         <case event="ConfirmConsignmentActionEvent">
