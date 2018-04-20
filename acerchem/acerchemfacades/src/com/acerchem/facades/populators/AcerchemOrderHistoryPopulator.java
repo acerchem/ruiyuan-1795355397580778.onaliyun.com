@@ -20,8 +20,6 @@ public class AcerchemOrderHistoryPopulator extends OrderHistoryPopulator impleme
 		target.setCustomerConfirmDelivery(source.getCustomerConfirmDelivery());
 		target.setEmployeeConfirmDelivery(source.getEmployeeConfirmDelivery());
 		target.setPickUpDate(source.getPickUpDate());
-		target.setStorageCost(source.getStorageCost());
-		target.setOperateCost(source.getOperateCost());
 		
 	}
 
