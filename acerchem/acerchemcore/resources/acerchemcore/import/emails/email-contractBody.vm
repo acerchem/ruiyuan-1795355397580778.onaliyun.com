@@ -154,8 +154,8 @@ Contract</b></font></font></p>
 				<p lang="en-GB" class="western" align="center"><font face="Arial, Arial, sans-serif"><font size="2" style="font-size: 10pt">Package</font></font></p>
 			</td>
 		</tr>
-		 #foreach( $Item in ${ctx.append.productLists} )
-			#if (! $item.isTotal )
+		 #foreach( $item in ${ctx.append.productLists} )
+			#if (!$item.isTotal )
 			
 				<tr>
 					<td width="80" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">

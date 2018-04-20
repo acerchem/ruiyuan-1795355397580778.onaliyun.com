@@ -155,7 +155,7 @@ Kevin van Rij</b></font></font></p>
 			</td>
 		</tr>
 		 #foreach( $item in ${ctx.append.productLists} )
-			#if (! $item.isTotal )
+			#if (!$item.isTotal )
 			<tr>
 				<td width="67" height="7" valign="top" style="border-top: 1px solid #000000; border-bottom: 1px solid #000000; border-left: 1px solid #000000; border-right: none; padding-top: 0in; padding-bottom: 0in; padding-left: 0.08in; padding-right: 0in">
 					<p class="western" align="center" style="margin-right: -0.05in"><font face="Calibri, sans-serif"><font size="2" style="font-size: 10pt">${item.productCode}</font></font></p>
