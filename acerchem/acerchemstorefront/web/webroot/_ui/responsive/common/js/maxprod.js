@@ -25,23 +25,25 @@ inputint()
         calculateHeight : true,
         resizeReInit : true,
         speed: 600,        
-        pagination: '.minimg', 
-        paginationClickable :true,
+        pagination: '.m-prodslide .minimg', 
+       // paginationClickable :true,
         onSwiperCreated:function(swiper){
         	$('.m-prodslide .slide-item li').each(function(){
 		   		var aindex = $(this).index(),
 		   			aimg = $(this).html(),
-		   			aheight = swiper.height,
+		   			aheight = swiper.width,
 		   			minimg = $(flipspan);
 		   			minimg.eq(aindex).append(aimg);
-		   			minwrap.height(aheight);
+		   			$('.m-prodslide .minwrap').height(aheight);
+		   			$('.m-prodslide .slide-item').height(aheight);
 			})
 	     }      
     })
 
 
 	$(document).on('mouseover',flipspan,function(){
-		$(this).click();
+		var ain = $(this).index();
+		slidwrap.swipeTo(ain)
 	});
 
 	flipbtn.on('click',function(){
@@ -51,7 +53,6 @@ inputint()
 			ahi = parseInt(fwrap.find('span').css('height')),
 			maxtop = parseInt(prodslide.find('.slidewrap .item').height())-fwrap.height(),
 			topval = 0;
-
 		switch(aclass){
 			case 'up':
 				topval=atop-ahi;
@@ -74,6 +75,9 @@ inputint()
 		fwrap.animate({top:topval},300)
 	})
 	// m-prodslide end
+
+
+
 	var shareele = $('.footermin .share-buttons');
 	$('.product-right .tableshare').append(shareele.clone());
 
@@ -106,9 +110,7 @@ inputint()
 			setnum = $('.m-setnum input');
 		if(acked){
 			
-
 			$("#tag").val('0');
-
 			var inventory =$("#inventoryId option[value='"+$("#storeHidId").val()+"']").text();
 			var avaReleaseDay = $("#avaReleaseDayId option[value='"+$("#storeHidId").val()+"']").text();
 			days.hide();
@@ -122,10 +124,7 @@ inputint()
 			
 		}else{
 			
-
-			$('#tag').val('1');
-
-			
+			$("#tag").val('1');
 			//days.show();
 			//spot.show();
 			/* invi.text(futday+parseInt(invi.text())); */
@@ -167,13 +166,13 @@ inputint()
 					$(this).css('background-color','#ddd')
 					break;
 				}else{
-					if(avl<30){
+					/*if(avl<30){
 						delin.find('em').text(30)
 					}else if(avl>30&&avl<60){
 						delin.find('em').text(60)
 					}else if(avl>60){
 						delin.find('em').text(90)
-					}
+					}*/
 				}
 				ainp.val(avl-1);
 				$('#qty').val(avl-1);
@@ -187,13 +186,13 @@ inputint()
 					maxalert("It's already the largest inventory.");
 					break;
 				}else{
-					if(avl<30){
+					/*if(avl<30){
 						delin.find('em').text(30)
 					}else if(avl>30&&avl<60){
 						delin.find('em').text(60)
 					}else if(avl>60){
 						delin.find('em').text(90)
-					}					
+					}		*/			
 				}
 				ainp.val(avl+1);
 				$('#qty').val(avl+1);
@@ -201,6 +200,14 @@ inputint()
 		}
 		
 	})
+
+	function rebody(){
+		$(document).on('keydown',function(ev){
+			if(ev.keyCode == 27){
+				$('body').css({'height':'','overflow':''});
+			}
+		})
+	}
 
 	$('.prodbase .btn-cart').on('click',function(){//å å¥è´­ç©è½¦
 		var srch = window.innerHeight;
@@ -217,8 +224,7 @@ inputint()
 			fications = $('input[name="spec"]').val(),
 			newele = '<li class="item"><div class="img">'+thisimg+'</div><div class="maxtext"><p class="in-title">'+thistit+'</p><p class="spec">Specifications:<i>'+fications+'</i></p><div class="spset"><span class="price">'+price+'</span><span class="old-price">'+oldprice+'</span><span class="num">'+goodsnum+'</span></div></div></li>';			
 			maxfixed.append(newele);
-			console.log(thisimg)
-			//totalprice()
+			rebody()
 	})
 
 	$(".btn-continue").on('click',function(){
@@ -246,18 +252,21 @@ inputint()
 				break;					
 		}
 		$('body').css({'height':'','overflow':''});
+		rebody()
 	})
 
 	$("#storeMulId").change(function(){
 		
 		
 		$('#storeHidId').val($("#storeMulId").val());
-		 /*åºå­ä¿¡æ¯*/
+		
 		invi = $('.invernum .inventory i');
 		
-		 /*åæåºå­å¤©æ°*/ 
 		emvi = $('.prod-sum i em')
 		
+		cnvi = $('.delivery span em')
+		
+		var countrys = $("#countryId option[value='"+$("#storeMulId").val()+"']").text();
 		 		
 		var futureAvailableDate = $("#futureAvailableDateId option[value='"+$("#storeMulId").val()+"']").text();
 	
@@ -268,8 +277,8 @@ inputint()
 									'<ul class="select"><li data-val="'+futureInventory+'">'+futureAvailableDate+'</li></ul>';
 	   
 		$('#selectId').html(futureHtml); */
-		
-	//if ($('#checkfutureId').attr('checked')) {
+				
+		cnvi.text(countrys);
 		
 		if($('#checkfutureId').is(':checked')) {
 

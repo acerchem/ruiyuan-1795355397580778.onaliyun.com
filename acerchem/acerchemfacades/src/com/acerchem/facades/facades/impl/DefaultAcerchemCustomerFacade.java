@@ -65,6 +65,7 @@ public class DefaultAcerchemCustomerFacade extends DefaultCustomerFacade impleme
 		for (StockLevelModel stockLevelModel : stockLevels){
 			WarehouseModel warehouseModel = stockLevelModel.getWarehouse();
 			for (PointOfServiceModel pos : warehouseModel.getPointsOfService()){
+				String country = "";
 				StoreOfProductData storeOfProductData = new StoreOfProductData();
 
 				storeOfProductData.setStoreId(pos.getName());
@@ -82,7 +83,12 @@ public class DefaultAcerchemCustomerFacade extends DefaultCustomerFacade impleme
 
 				if (pos.getDeliveryZone()!=null&&pos.getDeliveryZone().getCountries()!=null){
 					storeOfProductData.setCountryDataList(countryConverter.convertAll(pos.getDeliveryZone().getCountries()));
+					for (CountryModel countryModel : pos.getDeliveryZone().getCountries()){
+						country = country + countryModel.getName()+"  ";
+					}
+					storeOfProductData.setCountryListString(country);
 				}
+
 				dataList.add(storeOfProductData);
 			}
 		}

@@ -356,6 +356,17 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		return getCheckoutStep().nextStep();
 	}
 
+    @RequestMapping(value = "/addPickUpDate", method = RequestMethod.GET)
+    @RequireHardLogIn
+    public String addPickUpDate(final Model model, @RequestParam(required = false) final String pickUpDate) {
+
+        //保存收货时间
+        acerchemCheckoutFacade.savePickUpDateForOrder(pickUpDate);
+
+		return ControllerConstants.Views.Pages.MultiStepCheckout.AddEditDeliveryAddressPage;
+
+	}
+
 	protected void setDeliveryAddress(final AddressData selectedAddressData)
 	{
 		final AddressData cartCheckoutDeliveryAddress = getCheckoutFacade().getCheckoutCart().getDeliveryAddress();
@@ -398,7 +409,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	protected void populateCommonModelAttributes(final Model model, final CartData cartData, final AddressForm addressForm)
 			throws CMSItemNotFoundException
 	{
-		
+
 		try {
 			model.addAttribute("deliveryMethods", acerchemCheckoutFacade.getAllDeliveryModes());
 		} catch (AcerchemOrderException e) {
@@ -409,7 +420,11 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		
 		model.addAttribute("cartData", cartData);
 		model.addAttribute("addressForm", addressForm);
-		model.addAttribute("paymentInfos", acerchemCheckoutFacade.getSupportedCardTypes(cartData.getDeliveryMode().getCode()));
+		if (cartData.getDeliveryMode()!=null) {
+			model.addAttribute("paymentInfos", acerchemCheckoutFacade.getSupportedCardTypes(cartData.getDeliveryMode().getCode()));
+		}else{
+			model.addAttribute("paymentInfos",acerchemCheckoutFacade.getSupportedCardTypes("DELIVERY_GROSS"));
+		}
 		model.addAttribute("deliveryAddresses", getDeliveryAddresses(cartData.getDeliveryAddress()));
 		model.addAttribute("noAddress", Boolean.valueOf(getCheckoutFlowFacade().hasNoDeliveryAddress()));
 		model.addAttribute("addressFormEnabled", Boolean.valueOf(getCheckoutFacade().isNewAddressEnabledForCart()));

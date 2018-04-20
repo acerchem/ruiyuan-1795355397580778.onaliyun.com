@@ -66,6 +66,9 @@ import de.hybris.platform.core.model.c2l.CountryModel;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.orderprocessing.model.OrderProcessModel;
+import de.hybris.platform.processengine.BusinessProcessEvent;
+import de.hybris.platform.processengine.BusinessProcessService;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.servicelayer.i18n.CommonI18NService;
@@ -74,6 +77,7 @@ import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
 import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.platform.store.BaseStoreModel;
 import de.hybris.platform.store.services.BaseStoreService;
 import de.hybris.platform.util.Config;
 
@@ -1139,6 +1143,11 @@ public class AccountPageController extends AbstractSearchPageController
 		}
 		orderResults.setSorts(result);
 		
+		/*final SearchPageData<OrderData> searchPageData = new SearchPageData<OrderData>();
+		searchPageData.setPagination(orderResults.getPagination());
+		searchPageData.setSorts(orderResults.getSorts());
+		searchPageData.setResults(Converters.convertAll(orderResults.getResults(), orderConverter));*/
+		
 		final SearchPageData<OrderHistoryData> searchPageData = new SearchPageData<OrderHistoryData>();
 		searchPageData.setPagination(orderResults.getPagination());
 		searchPageData.setSorts(orderResults.getSorts());
@@ -1181,6 +1190,54 @@ public class AccountPageController extends AbstractSearchPageController
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_ADDRESS_BOOK));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 		return "/pages/account/accountCreditPage";
+	}
+	
+	@Resource
+	private BusinessProcessService businessProcessService;
+	
+	@RequestMapping(value = "/confirm/" + ORDER_CODE_PATH_VARIABLE_PATTERN, method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String listConfirm(@RequestParam(value = "page", defaultValue = "0") final int page,
+			@RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode,
+			@RequestParam(value = "sort", required = false) final String sortCode, 
+			@RequestParam(value = "key", required = false) final String key,final Model model,@PathVariable("orderCode") final String orderCode)
+			throws CMSItemNotFoundException
+	{
+		confirm(orderCode);
+		return orders(page,showMode,sortCode, key,model);
+	}
+	
+	@RequestMapping(value = "/detailsConfirm/" + ORDER_CODE_PATH_VARIABLE_PATTERN, method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String detailsConfirm(@PathVariable("orderCode") final String orderCode, final Model model,final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	{
+		confirm(orderCode);
+		return order(orderCode,model,redirectModel);
+	}
+	
+	public void confirm(String orderCode)
+	{
+		final BaseStoreModel baseStoreModel = baseStoreService.getCurrentBaseStore();
+		final OrderModel order =  customerAccountService.getOrderForCode((CustomerModel) userService.getCurrentUser(), orderCode,baseStoreModel);
+		Collection<OrderProcessModel> orderProcessList = order.getOrderProcess();
+		if (orderProcessList != null)
+		{
+			String fulfilmentProcessDefinitionName="";
+			for(OrderProcessModel orderProcess:orderProcessList)
+			{
+				fulfilmentProcessDefinitionName = orderProcess.getCode();
+			}
+			final String eventID = new StringBuilder().append(fulfilmentProcessDefinitionName).append("_ConfirmActionEvent").toString();
+			final BusinessProcessEvent event = BusinessProcessEvent.builder(eventID).withChoice("waitForCustomerConfirm").build();
+		  	Boolean falg=businessProcessService.triggerEvent(event);  
+		  	
+		  	if(falg)
+		  	{
+		  		order.setCustomerConfirm(true);
+		  		modelService.save(order);
+		  	}
+		  	
+		}
 	}
 
 }

@@ -10,7 +10,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 
-
+<c:url value="/my-account/detailsConfirm/" var="confirmOrder"/>
 <link rel="stylesheet" type="text/css" href="https://electronics.local:9002/acerchemstorefront/_ui/desktop/common/css/orderCSS/general.css" />
 <link rel="stylesheet" type="text/css" href="https://electronics.local:9002/acerchemstorefront/_ui/desktop/common/css/orderCSS/min.css" />
 
@@ -67,6 +67,11 @@
 							<em>Total</em>
 							<i><format:price priceData="${orderData.totalPrice}"/></i>
 						</span>
+						
+						<span>
+									<i><a href="${confirmOrder}${orderData.code}" style="${orderData.customerConfirm?'display: none;':''}">Confirm</a></i>
+								</span>
+								
                             </div>
                         </div>
                     </div>
