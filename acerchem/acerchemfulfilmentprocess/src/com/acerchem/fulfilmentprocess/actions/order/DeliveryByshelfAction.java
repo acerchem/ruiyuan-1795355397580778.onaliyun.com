@@ -8,23 +8,21 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with SAP.
  */
-package com.acerchem.fulfilmentprocess.actions.consignment;
-
-import de.hybris.platform.ordersplitting.model.ConsignmentProcessModel;
-import de.hybris.platform.processengine.action.AbstractProceduralAction;
-import de.hybris.platform.warehouse.Process2WarehouseAdapter;
+package com.acerchem.fulfilmentprocess.actions.order;
 
 import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Required;
+
+import de.hybris.platform.orderprocessing.model.OrderProcessModel;
+import de.hybris.platform.processengine.action.AbstractProceduralAction;
 
 
-public class DeliveryByshelfAction extends AbstractProceduralAction<ConsignmentProcessModel>
+public class DeliveryByshelfAction extends AbstractProceduralAction<OrderProcessModel>
 {
 	private static final Logger LOG = Logger.getLogger(DeliveryByshelfAction.class);
 
 
 	@Override
-	public void executeAction(final ConsignmentProcessModel process)
+	public void executeAction(final OrderProcessModel process)
 	{
 		
 	}

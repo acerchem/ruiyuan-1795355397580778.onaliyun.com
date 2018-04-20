@@ -40,4 +40,19 @@ public class AcerChemMediaDaoImpl implements AcerChemMediaDao {
 		return null;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.acerchem.core.image.dao.AcerChemMediaDao#getMediaOfLimit(java.lang.String, int)
+	 */
+	@Override
+	public List<MediaModel> getMediasOfLimit(String mime, int limitCount) {
+		// TODO Auto-generated method stub
+		
+		final String SQL="select {pk} from {" + MediaModel._TYPECODE + "} where {" + MediaModel.MIME + "} like?mime ";
+		//MediaModel mm = new MediaModel();
+		
+		return null;
+	}
+	
+	
+
 }

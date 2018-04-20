@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-4-18 23:32:33                          ---
+ * --- Generated at 2018-4-20 11:35:05                          ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.jalo;
@@ -32,6 +32,7 @@ import de.hybris.platform.jalo.Item.AttributeMode;
 import de.hybris.platform.jalo.JaloBusinessException;
 import de.hybris.platform.jalo.JaloSystemException;
 import de.hybris.platform.jalo.SessionContext;
+import de.hybris.platform.jalo.enumeration.EnumerationValue;
 import de.hybris.platform.jalo.extension.Extension;
 import de.hybris.platform.jalo.media.AbstractMedia;
 import de.hybris.platform.jalo.media.Media;
@@ -45,6 +46,7 @@ import de.hybris.platform.jalo.type.JaloGenericCreationException;
 import de.hybris.platform.jalo.user.Customer;
 import de.hybris.platform.jalo.user.Employee;
 import de.hybris.platform.jalo.user.User;
+import de.hybris.platform.ordersplitting.jalo.ConsignmentEntry;
 import de.hybris.platform.ordersplitting.jalo.StockLevel;
 import de.hybris.platform.ordersplitting.jalo.Vendor;
 import de.hybris.platform.storelocator.jalo.PointOfService;
@@ -130,9 +132,12 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 		tmp = new HashMap<String, AttributeMode>();
 		tmp.put("isUseFutureStock", AttributeMode.INITIAL);
 		tmp.put("availableDate", AttributeMode.INITIAL);
+		tmp.put("baseRealPrice", AttributeMode.INITIAL);
+		tmp.put("totalRealPrice", AttributeMode.INITIAL);
 		ttmp.put("de.hybris.platform.jalo.order.AbstractOrderEntry", Collections.unmodifiableMap(tmp));
 		tmp = new HashMap<String, AttributeMode>();
 		tmp.put("creditAccount", AttributeMode.INITIAL);
+		tmp.put("area", AttributeMode.INITIAL);
 		tmp.put("companyType", AttributeMode.INITIAL);
 		tmp.put("establishedIn", AttributeMode.INITIAL);
 		tmp.put("revenue", AttributeMode.INITIAL);
@@ -156,7 +161,11 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 		tmp.put("employeeConfirmPay", AttributeMode.INITIAL);
 		tmp.put("customerConfirmDelivery", AttributeMode.INITIAL);
 		tmp.put("employeeConfirmDelivery", AttributeMode.INITIAL);
+		tmp.put("pickUpDate", AttributeMode.INITIAL);
 		ttmp.put("de.hybris.platform.jalo.order.AbstractOrder", Collections.unmodifiableMap(tmp));
+		tmp = new HashMap<String, AttributeMode>();
+		tmp.put("batchNum", AttributeMode.INITIAL);
+		ttmp.put("de.hybris.platform.ordersplitting.jalo.ConsignmentEntry", Collections.unmodifiableMap(tmp));
 		tmp = new HashMap<String, AttributeMode>();
 		tmp.put("userLevelPOS", AttributeMode.INITIAL);
 		tmp.put("userLevel", AttributeMode.INITIAL);
@@ -502,6 +511,42 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	}
 	
 	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.area</code> attribute.
+	 * @return the area - 用户区域
+	 */
+	public EnumerationValue getArea(final SessionContext ctx, final Customer item)
+	{
+		return (EnumerationValue)item.getProperty( ctx, AcerchemCoreConstants.Attributes.Customer.AREA);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.area</code> attribute.
+	 * @return the area - 用户区域
+	 */
+	public EnumerationValue getArea(final Customer item)
+	{
+		return getArea( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.area</code> attribute. 
+	 * @param value the area - 用户区域
+	 */
+	public void setArea(final SessionContext ctx, final Customer item, final EnumerationValue value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.Customer.AREA,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.area</code> attribute. 
+	 * @param value the area - 用户区域
+	 */
+	public void setArea(final Customer item, final EnumerationValue value)
+	{
+		setArea( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
 	 * <i>Generated method</i> - Getter of the <code>AbstractOrderEntry.availableDate</code> attribute.
 	 * @return the availableDate
 	 */
@@ -608,6 +653,115 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	public void setAvaPreOrderReleaseDay(final StockLevel item, final int value)
 	{
 		setAvaPreOrderReleaseDay( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrderEntry.baseRealPrice</code> attribute.
+	 * @return the baseRealPrice - 分摊之前的单价
+	 */
+	public Double getBaseRealPrice(final SessionContext ctx, final AbstractOrderEntry item)
+	{
+		return (Double)item.getProperty( ctx, AcerchemCoreConstants.Attributes.AbstractOrderEntry.BASEREALPRICE);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrderEntry.baseRealPrice</code> attribute.
+	 * @return the baseRealPrice - 分摊之前的单价
+	 */
+	public Double getBaseRealPrice(final AbstractOrderEntry item)
+	{
+		return getBaseRealPrice( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrderEntry.baseRealPrice</code> attribute. 
+	 * @return the baseRealPrice - 分摊之前的单价
+	 */
+	public double getBaseRealPriceAsPrimitive(final SessionContext ctx, final AbstractOrderEntry item)
+	{
+		Double value = getBaseRealPrice( ctx,item );
+		return value != null ? value.doubleValue() : 0.0d;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrderEntry.baseRealPrice</code> attribute. 
+	 * @return the baseRealPrice - 分摊之前的单价
+	 */
+	public double getBaseRealPriceAsPrimitive(final AbstractOrderEntry item)
+	{
+		return getBaseRealPriceAsPrimitive( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrderEntry.baseRealPrice</code> attribute. 
+	 * @param value the baseRealPrice - 分摊之前的单价
+	 */
+	public void setBaseRealPrice(final SessionContext ctx, final AbstractOrderEntry item, final Double value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.AbstractOrderEntry.BASEREALPRICE,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrderEntry.baseRealPrice</code> attribute. 
+	 * @param value the baseRealPrice - 分摊之前的单价
+	 */
+	public void setBaseRealPrice(final AbstractOrderEntry item, final Double value)
+	{
+		setBaseRealPrice( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrderEntry.baseRealPrice</code> attribute. 
+	 * @param value the baseRealPrice - 分摊之前的单价
+	 */
+	public void setBaseRealPrice(final SessionContext ctx, final AbstractOrderEntry item, final double value)
+	{
+		setBaseRealPrice( ctx, item, Double.valueOf( value ) );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrderEntry.baseRealPrice</code> attribute. 
+	 * @param value the baseRealPrice - 分摊之前的单价
+	 */
+	public void setBaseRealPrice(final AbstractOrderEntry item, final double value)
+	{
+		setBaseRealPrice( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>ConsignmentEntry.batchNum</code> attribute.
+	 * @return the batchNum - 批次号
+	 */
+	public String getBatchNum(final SessionContext ctx, final ConsignmentEntry item)
+	{
+		return (String)item.getProperty( ctx, AcerchemCoreConstants.Attributes.ConsignmentEntry.BATCHNUM);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>ConsignmentEntry.batchNum</code> attribute.
+	 * @return the batchNum - 批次号
+	 */
+	public String getBatchNum(final ConsignmentEntry item)
+	{
+		return getBatchNum( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>ConsignmentEntry.batchNum</code> attribute. 
+	 * @param value the batchNum - 批次号
+	 */
+	public void setBatchNum(final SessionContext ctx, final ConsignmentEntry item, final String value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.ConsignmentEntry.BATCHNUM,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>ConsignmentEntry.batchNum</code> attribute. 
+	 * @param value the batchNum - 批次号
+	 */
+	public void setBatchNum(final ConsignmentEntry item, final String value)
+	{
+		setBatchNum( getSession().getSessionContext(), item, value );
 	}
 	
 	/**
@@ -2482,6 +2636,42 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	}
 	
 	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.pickUpDate</code> attribute.
+	 * @return the pickUpDate - date for pickUp
+	 */
+	public Date getPickUpDate(final SessionContext ctx, final AbstractOrder item)
+	{
+		return (Date)item.getProperty( ctx, AcerchemCoreConstants.Attributes.AbstractOrder.PICKUPDATE);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.pickUpDate</code> attribute.
+	 * @return the pickUpDate - date for pickUp
+	 */
+	public Date getPickUpDate(final AbstractOrder item)
+	{
+		return getPickUpDate( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.pickUpDate</code> attribute. 
+	 * @param value the pickUpDate - date for pickUp
+	 */
+	public void setPickUpDate(final SessionContext ctx, final AbstractOrder item, final Date value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.AbstractOrder.PICKUPDATE,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.pickUpDate</code> attribute. 
+	 * @param value the pickUpDate - date for pickUp
+	 */
+	public void setPickUpDate(final AbstractOrder item, final Date value)
+	{
+		setPickUpDate( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
 	 * <i>Generated method</i> - Getter of the <code>StockLevel.preOrderReleaseDay</code> attribute.
 	 * @return the preOrderReleaseDay
 	 */
@@ -2986,6 +3176,79 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	public void setTelephone(final CsTicket item, final String value)
 	{
 		setTelephone( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrderEntry.totalRealPrice</code> attribute.
+	 * @return the totalRealPrice - 分摊之前的总价
+	 */
+	public Double getTotalRealPrice(final SessionContext ctx, final AbstractOrderEntry item)
+	{
+		return (Double)item.getProperty( ctx, AcerchemCoreConstants.Attributes.AbstractOrderEntry.TOTALREALPRICE);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrderEntry.totalRealPrice</code> attribute.
+	 * @return the totalRealPrice - 分摊之前的总价
+	 */
+	public Double getTotalRealPrice(final AbstractOrderEntry item)
+	{
+		return getTotalRealPrice( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrderEntry.totalRealPrice</code> attribute. 
+	 * @return the totalRealPrice - 分摊之前的总价
+	 */
+	public double getTotalRealPriceAsPrimitive(final SessionContext ctx, final AbstractOrderEntry item)
+	{
+		Double value = getTotalRealPrice( ctx,item );
+		return value != null ? value.doubleValue() : 0.0d;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrderEntry.totalRealPrice</code> attribute. 
+	 * @return the totalRealPrice - 分摊之前的总价
+	 */
+	public double getTotalRealPriceAsPrimitive(final AbstractOrderEntry item)
+	{
+		return getTotalRealPriceAsPrimitive( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrderEntry.totalRealPrice</code> attribute. 
+	 * @param value the totalRealPrice - 分摊之前的总价
+	 */
+	public void setTotalRealPrice(final SessionContext ctx, final AbstractOrderEntry item, final Double value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.AbstractOrderEntry.TOTALREALPRICE,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrderEntry.totalRealPrice</code> attribute. 
+	 * @param value the totalRealPrice - 分摊之前的总价
+	 */
+	public void setTotalRealPrice(final AbstractOrderEntry item, final Double value)
+	{
+		setTotalRealPrice( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrderEntry.totalRealPrice</code> attribute. 
+	 * @param value the totalRealPrice - 分摊之前的总价
+	 */
+	public void setTotalRealPrice(final SessionContext ctx, final AbstractOrderEntry item, final double value)
+	{
+		setTotalRealPrice( ctx, item, Double.valueOf( value ) );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrderEntry.totalRealPrice</code> attribute. 
+	 * @param value the totalRealPrice - 分摊之前的总价
+	 */
+	public void setTotalRealPrice(final AbstractOrderEntry item, final double value)
+	{
+		setTotalRealPrice( getSession().getSessionContext(), item, value );
 	}
 	
 	/**

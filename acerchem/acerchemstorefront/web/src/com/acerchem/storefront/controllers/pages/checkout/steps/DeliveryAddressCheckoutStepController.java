@@ -266,7 +266,8 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 
 	@RequestMapping(value = "/select", method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String doSelectSuggestedAddress(final AddressForm addressForm, final RedirectAttributes redirectModel)
+	public String doSelectSuggestedAddress(final AddressForm addressForm, final RedirectAttributes redirectModel,
+										   @RequestParam(required = false) final String pickUpDate)
 	{
 		final Set<String> resolveCountryRegions = org.springframework.util.StringUtils
 				.commaDelimitedListToSet(Config.getParameter("resolve.country.regions"));
@@ -303,6 +304,9 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 
 		GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER, "checkout.multi.address.added");
 
+		//保存收货时间
+		acerchemCheckoutFacade.savePickUpDateForOrder(pickUpDate);
+
 		return getCheckoutStep().nextStep();
 	}
 
@@ -319,8 +323,9 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	@RequestMapping(value = "/select", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String doSelectDeliveryAddress(@RequestParam("selectedAddressCode" ) final String selectedAddressCode,
-										  final Model model, final RedirectAttributes redirectAttributes
-										,@RequestParam("selectedDeliveryModeCode" ) final String selectedDeliveryModeCode) {
+										  final Model model, final RedirectAttributes redirectAttributes,
+										 @RequestParam(required = false) final String selectedDeliveryModeCode,
+										  @RequestParam(required = false) final String pickUpDate) {
 //		final ValidationResults validationResults = getCheckoutStep().validate(redirectAttributes);
 //		if (getCheckoutStep().checkIfValidationErrors(validationResults))
 //		{
@@ -336,14 +341,16 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 					CountryData countryData = selectedAddressData.getCountry();
 					acerchemCheckoutFacade.validateCartAddress(countryData);
 				}catch (AcerchemOrderException e){
-					model.addAttribute("errorMsg",e.getMessage());
+                    GlobalMessages.addErrorMessage(model, e.getMessage());
 				}
-
 				setDeliveryAddress(selectedAddressData);
 			}
 		}
-		model.addAttribute("paymentInfos",getUserFacade().getCCPaymentInfos(true));
-		model.addAttribute("paymentModes", acerchemCheckoutFacade.getSupportedCardTypes(selectedDeliveryModeCode));
+
+		//保存收货时间
+		acerchemCheckoutFacade.savePickUpDateForOrder(pickUpDate);
+
+		model.addAttribute("paymentInfos", acerchemCheckoutFacade.getSupportedCardTypes(selectedDeliveryModeCode));
 		return getCheckoutStep().nextStep();
 	}
 
@@ -389,8 +396,18 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	protected void populateCommonModelAttributes(final Model model, final CartData cartData, final AddressForm addressForm)
 			throws CMSItemNotFoundException
 	{
+		
+		try {
+			model.addAttribute("deliveryMethods", acerchemCheckoutFacade.getAllDeliveryModes());
+		} catch (AcerchemOrderException e) {
+//			model.addAttribute("errorMsg",e.getMessage());
+			GlobalMessages.addErrorMessage(model, e.getMessage());
+		}
+		
+		
 		model.addAttribute("cartData", cartData);
 		model.addAttribute("addressForm", addressForm);
+		model.addAttribute("paymentInfos", acerchemCheckoutFacade.getSupportedCardTypes(cartData.getDeliveryMode().getCode()));
 		model.addAttribute("deliveryAddresses", getDeliveryAddresses(cartData.getDeliveryAddress()));
 		model.addAttribute("noAddress", Boolean.valueOf(getCheckoutFlowFacade().hasNoDeliveryAddress()));
 		model.addAttribute("addressFormEnabled", Boolean.valueOf(getCheckoutFacade().isNewAddressEnabledForCart()));

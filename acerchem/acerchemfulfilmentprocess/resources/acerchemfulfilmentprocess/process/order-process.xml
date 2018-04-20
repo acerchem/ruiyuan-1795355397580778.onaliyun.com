@@ -12,39 +12,20 @@
 <process xmlns="http://www.hybris.de/xsd/processdefinition" start="checkOrder" name="order-process" processClass="de.hybris.platform.orderprocessing.model.OrderProcessModel">
 
 	<action id="checkOrder" bean="checkOrderAction">
-		<transition name="OK" to="split"/>
+		<transition name="OK" to="waitForAllConfirm"/>
 		<transition name="NOK" to="error"/>
 	</action>
 	
-	<split id="split">
-		<targetNode name="waitForCustomerConfirm"/>
-		<targetNode name="waitForEmployeeConfirm"/>
-	</split>
-
-	<action id="waitForCustomerConfirm" bean="waitForCustomerConfirmAction">
-		<transition name="OK" to="waitForConfirm"/>
-		<transition name="NOK" to="error"/>
-		<transition name="WAIT" to="waitForCustomerDecision"/>
-	</action>
-	
-	<wait id="waitForCustomerDecision" then="waitForCustomerConfirm" prependProcessCode="false">
-  		<event>${process.order.code}_WaitForCustomerDecision</event>
-	</wait>
-	
-	
-	<action id="waitForEmployeeConfirm" bean="waitForEmployeeConfirmAction">
-		<transition name="OK" to="waitForConfirm"/>
-		<transition name="NOK" to="error"/>
-		<transition name="WAIT" to="waitForEmployeeDecision"/>
-	</action>
-	
-	<wait id="waitForEmployeeDecision" then="waitForEmployeeConfirm" prependProcessCode="false">
-  		<event>${process.order.code}_WaitForEmployeeDecision</event>
-	</wait>
+	<wait id="waitForAllConfirm" prependProcessCode="true" then="failed">
+        <case event="ConfirmActionEvent">
+            <choice id="waitForCustomerConfirm" then="waitForConfirm"/>
+            <choice id="waitForEmployeeConfirm" then="waitForConfirm"/>
+        </case>
+    </wait> 
 	
 	<action id="waitForConfirm" bean="waitForConfirmAction">
 		<transition name="OK" to="generateContactEmail"/>
-		<transition name="NOK" to="waitForConfirm"/>
+		<transition name="NOK" to="waitForAllConfirm"/>
 	</action>
 	 
 	<action id="generateContactEmail" bean="generateContactEmailAction">
@@ -53,23 +34,21 @@
 	</action>
 	
 	<action id="sendContactEmail" bean="sendEmail">
-		<transition name="OK" to="splitPayMode"/>
+		<transition name="OK" to="choosePayMode"/>
 	</action>
 	
-	<split id="splitPayMode">
-		<targetNode name="creditPayMode"/>
-		<targetNode name="linePayMode"/>
-	</split>
+	<action id="choosePayMode" bean="choosePayModeAction">
+		<transition name="OK" to="creditPayMode"/>
+		<transition name="NOK" to="linePayMode"/>
+	</action>
 	
 	<action id="creditPayMode" bean="creditPayModeAction">
-		<transition name="OK" to="success"/>
+		<transition name="OK" to="recordConsignmentInfo"/>
 	</action>
 	
 	<action id="linePayMode" bean="linePayModeAction">
 		<transition name="OK" to="generateFormInvoiceEmail"/>
-		<transition name="NOK" to="creditPayMode"/>
 	</action>
-	
 	
 	<action id="generateFormInvoiceEmail" bean="generateFormInvoiceEmailAction">
 		<transition name="OK" to="sendFormInvoiceEmail"/>
@@ -77,39 +56,81 @@
 	</action>
 	
 	<action id="sendFormInvoiceEmail" bean="sendEmail">
-		<transition name="OK" to="splitPayConfrim"/>
+		<transition name="OK" to="waitForAllConfirmPay"/>
 	</action>
 	
-	<split id="splitPayConfrim">
-		<targetNode name="customerCofirmPay"/>
-		<targetNode name="employeeConfirmPay"/>
-	</split>
-	
-	<action id="customerCofirmPay" bean="waitCustomerCofirmPayAction">
-		<transition name="OK" to="waitForConfirmPay"/>
-		<transition name="NOK" to="error"/>
-		<transition name="WAIT" to="waitForCustomerConfirmPayDecision"/>
-	</action>
-	
-	<wait id="waitForCustomerConfirmPayDecision" then="customerCofirmPay" prependProcessCode="false">
-  		<event>${process.order.code}_WaitForCustomerConfirmPayDecision</event>
-	</wait>
-	
-	<action id="employeeConfirmPay" bean="waitEmployeeConfirmPayAction">
-		<transition name="OK" to="waitForConfirmPay"/>
-		<transition name="NOK" to="error"/>
-		<transition name="WAIT" to="waitForEmployeeConfirmPayDecision"/>
-	</action>
-	
-	<wait id="waitForEmployeeConfirmPayDecision" then="employeeConfirmPay" prependProcessCode="false">
-  		<event>${process.order.code}_WaitForEmployeeConfirmPayDecision</event>
-	</wait>
-	
+		<wait id="waitForAllConfirmPay" prependProcessCode="true" then="failed">
+        <case event="ConfirmPayActionEvent">
+            <choice id="waitForCustomerConfirmPay" then="waitForConfirmPay"/>
+            <choice id="waitForEmployeeConfirmPay" then="waitForConfirmPay"/>
+        </case>
+    </wait> 
 	<action id="waitForConfirmPay" bean="waitForConfirmPayAction">
-		<transition name="OK" to="success"/>
-		<transition name="NOK" to="waitForConfirmPay"/>
+		<transition name="OK" to="recordConsignmentInfo"/>
+		<transition name="NOK" to="waitForAllConfirmPay"/>
 	</action>
-
+	
+	<action id="recordConsignmentInfo" bean="recordConsignmentInfoAction">
+		<transition name="OK" to="splitDeliveryMode"/>
+	</action>
+	
+	<action id="splitDeliveryMode" bean="splitDeliveryModeAction">
+		<transition name="OK" to="deliveryByOther"/>
+		<transition name="NOK" to="deliveryByshelf"/>
+	</action>
+	
+	<action id="deliveryByOther" bean="deliveryByOtherAction">
+		<transition name="OK" to="generateDeliveryEmail"/>
+	</action>
+	
+	<action id="deliveryByshelf" bean="deliveryByshelfAction">
+		<transition name="OK" to="generateDeliveryByShelfEmail"/>
+	</action>
+	
+	<action id="generateDeliveryEmail" bean="generateDeliveryEmailAction">
+		<transition name="OK" to="sendDeliveryEmail"/>
+		<transition name="NOK" to="error"/>
+	</action>
+	
+	<action id="generateDeliveryByShelfEmail" bean="generateDeliveryByShelfEmailAction">
+		<transition name="OK" to="sendDeliveryByShelfEmail"/>
+		<transition name="NOK" to="error"/>
+	</action>
+	
+	<action id="sendDeliveryEmail" bean="sendEmail">
+		<transition name="OK" to="waitUpdateConsignmentStatus"/>
+	</action>
+	
+	<action id="sendDeliveryByShelfEmail" bean="sendEmail">
+		<transition name="OK" to="waitUpdateConsignmentStatus"/>
+	</action>
+	
+	<wait id="waitUpdateConsignmentStatus" then="waitForAllConsignmentConfirm" prependProcessCode="false">
+  		<event>${process.order.code}_WaitUpdateConsignmentStatus</event>
+	</wait>
+	
+	
+	<wait id="waitForAllConsignmentConfirm" prependProcessCode="true" then="failed">
+        <case event="ConfirmConsignmentActionEvent">
+            <choice id="waitForCustomerConfirmConsignment" then="waitConsignMentConfirm"/>
+            <choice id="waitForEmployeeConfirmConsignment" then="waitConsignMentConfirm"/>
+        </case>
+    </wait> 
+    
+	<action id="waitConsignMentConfirm" bean="waitConsignMentConfirmAction">
+		<transition name="OK" to="generateOfficialInvoiceEmail"/>
+		<transition name="NOK" to="waitForAllConsignmentConfirm"/>
+	</action>
+	
+	<action id="generateOfficialInvoiceEmail" bean="generateOfficialInvoiceEmailAction">
+		<transition name="OK" to="sendOfficialInvoiceEmail"/>
+		<transition name="NOK" to="error"/>
+	</action>
+	
+	<action id="sendOfficialInvoiceEmail" bean="sendEmail">
+		<transition name="OK" to="success"/>
+	</action> 
+	
 	<end id="error" state="ERROR">All went wrong.</end>
 	<end id="failed" state="FAILED">Order not placed.</end>
 	<end id="success" state="SUCCEEDED">Order placed.</end>

@@ -16,11 +16,14 @@
 		<property name="chemicalInfo" type="String"/>
 		<property name="unitCalculateRato" type="String"/>
 		<property name="promotionPrice" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+
+	    <property name="isAnonymousDisplayPrice" type="java.lang.Boolean"/>
 		<property name="packageWeight" type="String"/>
 		<property name="packageType" type="String"/>
 		<property name="netWeight" type="String"/>
 		<property name="grossWeight" type="String"/>
 		<property name="unitName" type="String"/>
+
 	</bean>
 
 	<bean class="com.acerchem.facades.product.data.GenderData">
@@ -76,6 +79,13 @@
 		<property name="employeesNo" type="java.lang.Integer"/>
 		<property name="limitCreditAmount" type="java.math.BigDecimal"/>
 		<property name="revenue" type="java.math.BigDecimal"/>
+		<property name="userLevel" type="de.hybris.platform.commercefacades.user.data.UserLevelData"/>
+	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.user.data.UserLevelData">
+		<property name="levelName" type="java.lang.String"/>
+		<property name="levelCode" type="java.lang.String"/>
+		<property name="discount" type="java.lang.Double"/>
 	</bean>
 	
 	<!-- alice :信用账户-->
@@ -122,8 +132,29 @@
 		<property name="isUseFutureStock" type="Boolean"/>
 		<property name="availableDate" type="java.util.Date"/>
 	</bean>
+
+	
+	<bean class="com.acerchem.facades.product.data.PaymentModeData">
+		<property name="code" type="String"/>
+		<property name="name" type="String"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.order.data.OrderEntryData">
+		<property name="baseRealPrice" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+		<property name="totalRealPrice" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.order.data.AbstractOrderData">
+		<property name="paymentModeData" type="com.acerchem.facades.product.data.PaymentModeData"/>
+	</bean>
+
+
 	<bean class="de.hybris.platform.commercefacades.order.data.OrderData">
 		<property name="currency" type="String"/>
 		<property name="paymentMode" type="String"/>
 	</bean>
+	<bean class="de.hybris.platform.commercefacades.order.data.ConsignmentEntryData">
+		<property name="batchNum" type="String"/>
+	</bean>
+
 </beans>

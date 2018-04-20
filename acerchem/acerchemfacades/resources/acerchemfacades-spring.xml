@@ -204,6 +204,11 @@
 		<property name="commercePriceService" ref="commercePriceService"/>
 		<property name="priceDataFactory" ref="priceDataFactory"/>
 	</bean>
+	
+	<alias name="customSearchResultProductPricePopulator" alias="commerceSearchResultProductPopulator"/>
+	<bean id="customSearchResultProductPricePopulator" parent="variantCommerceSearchResultProductPopulator" class="com.acerchem.facades.storefinder.populators.SearchResultProductPricePopulator">
+        <property name="priceDataFactory" ref="priceDataFactory"/>
+    </bean>
 	<!-- End -->
 	
 	
@@ -223,20 +228,67 @@
 		</property>
 	</bean>
 
-	<alias name="defaultAcerchemCustomerPopulator" alias="acerchemCustomerPopulator"/>
-	<bean id="defaultAcerchemCustomerPopulator" parent="customerPopulator" class="com.acerchem.facades.populators.AcerchemCustomerPopulator">
+	<!-- add by alice -->
+	<alias name="defaultAcerchemCustomerPopulator" alias="customerPopulator"/>
+	<bean id="defaultAcerchemCustomerPopulator" parent="defaultCustomerPopulator" class="com.acerchem.facades.populators.AcerchemCustomerPopulator">
 		<property name="addressConverter" ref="addressConverter"/>
+		<property name="creditAccountConverter" ref="creditAccountConverter"/>
+		<property name="userLevelConverter" ref="userLevelConverter"/>
 	</bean>
-
+	
 	<alias name="defaultAcerchemCustomerConverter" alias="acerchemCustomerConverter"/>
 	<bean id="defaultAcerchemCustomerConverter" parent="abstractPopulatingConverter">
 		<property name="targetClass" value="de.hybris.platform.commercefacades.user.data.CustomerData"/>
 		<property name="populators">
 			<list>
-				<ref bean="acerchemCustomerPopulator"/>
+				<ref bean="defaultAcerchemCustomerPopulator"/>
 			</list>
 		</property>
 	</bean>
+	
+	<alias name="defaultCreditAccountPopulator" alias="creditAccountPopulator"/>
+	<bean id="defaultCreditAccountPopulator" class="com.acerchem.facades.populators.AcerchemCreditAccountPopulator">
+		<property name="creditTransactionConverter" ref="creditTransactionConverter"/>
+	</bean>
+	
+	<alias name="defaultCreditAccountConverter" alias="creditAccountConverter"/>
+	<bean id="defaultCreditAccountConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.user.data.CustomerCreditAccountData"/>
+		<property name="populators">
+			<list>
+				<ref bean="defaultCreditAccountPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultUserLevelPopulator" alias="userLevelPopulator"/>
+	<bean id="defaultUserLevelPopulator" class="com.acerchem.facades.populators.AcerchemUserLevelPopulator">
+	</bean>
+	
+	<alias name="defaultUserLevelConverter" alias="userLevelConverter"/>
+	<bean id="defaultUserLevelConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.user.data.UserLevelData"/>
+		<property name="populators">
+			<list>
+				<ref bean="defaultUserLevelPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultCreditTransactionPopulator" alias="creditTransactionPopulator"/>
+	<bean id="defaultCreditTransactionPopulator" class="com.acerchem.facades.populators.AcerchemCreditTransactionPopulator">
+	</bean>
+	
+	<alias name="defaultCreditTransactionConverter" alias="creditTransactionConverter"/>
+	<bean id="defaultCreditTransactionConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.user.data.CreditTransactionData"/>
+		<property name="populators">
+			<list>
+				<ref bean="defaultCreditTransactionPopulator"/>
+			</list>
+		</property>
+	</bean>
+	<!-- end -->
 
 	<alias name="defaultAcerchemCustomerFacade" alias="acerchemCustomerFacade"/>
 	<bean id="defaultAcerchemCustomerFacade" parent="customerFacade" class="com.acerchem.facades.facades.impl.DefaultAcerchemCustomerFacade" >

@@ -5,11 +5,11 @@
 /*banner*/
 .maxlatest{position: relative;}
 .maxlatest .swiper-slide{position:relative;}
-.maxlatest .pagination{position: absolute;bottom: 6%;z-index: 1;}
+.maxlatest .pagination{position: absolute;bottom: 6%;z-index: 1; padding:0; }
 .banner{position: relative;}
 .maxon_salesul .banner_btn a{top:-60px;}
 .swiper-container .swiper-wrapper,.swiper-container .swiper-wrapper .swiper-slide{height: auto !important;}
-.pagination {left: 0;text-align: center;width: 100%;}
+.pagination {padding:60px 0; left: 0;text-align: center;width: 100%;}
 .banner .swiper-pagination-switch {display: inline-block; *display: inline;zoom:1; width: 30px;height: 4px;border-radius: 2px;background: rgba(0,0,0,.9);margin: 0 3px;cursor: pointer;}
 .banner .swiper-active-switch {background: #096735;}
 .banner .container{position: absolute; top:50%; left: 0; transform:translate(0,-50%);}
@@ -31,13 +31,15 @@
 .maxlatest .sign-content{position:  absolute; top:50%; z-index: 9; right:10%; padding:30px; width:25%; max-width: 400px; min-width: 330px; transform: translate(0,-50%); }
 .maxlatest .sign-content .text-section{margin-bottom: 16px;}
 .maxlatest .sign-content .btn-set{margin-top: 20px;}
-.maxlatest .sign-content input[type="text"],.maxlatest .sign-content input[type="password"],.maxlatest .sign-content .btn{height: 40px; line-height: 40px;}
+.maxlatest .sign-content input[type="text"],.maxlatest .sign-content input[type="password"],.maxlatest .sign-content .btn{height: 40px; line-height: 40px; padding:0;}
 
-.maxlatest .bansearch{position: absolute; top:50%; left: 10%; z-index: 3; width: 40%; max-width: 500px; color: #fff; transform: translate(0,-50%);}
+.maxlatest .bansearch{position: absolute; top:50%; left: 10%; z-index: 3; width: 40%; max-width: 450px; color: #fff; transform: translate(0,-50%);}
 .maxlatest .bansearch form{position: relative;  margin: 20px 0;}
 .maxlatest .bansearch .maxicon-search{background-position: 0 -218px; position: absolute; top:0; right: 0; height: 50px; width: 50px;}
 .maxlatest .bansearch p{font-size: 42px; text-transform: uppercase; font-weight: bold; line-height: 1.0em;}
-.maxlatest .bansearch span{font-size: 16px;line-height: 1.5em;}
+.maxlatest .bansearch span{position: absolute; right:0; top:0; width: 60px; height: 50px;line-height: 50px; font-size: 16px; color: #999 }
+.maxlatest .bansearch .btn{height: 50px;}
+.maxlatest .bansearch .input-group{width: 100%}
 
 /*main*/
 .maxfactory,.maxmean{margin: 60px 0;width: 100%;}
@@ -54,7 +56,7 @@
 
 .maxmean div{position: absolute; top:0; left: 0; width: 100%; height: 100%; color: #fff; font-size: 16px; line-height: 1.5em;}
 .maxmean p{font-size: 20px; font-weight: bolder;}
-.maxmean span{display: block; margin-top: 8px; line-height: 1.5em;}
+.maxmean span{display: block; margin-top: 8px; line-height: 1.4em;}
 .maxmean .meansale{padding:20px; text-align: center; color: #333 ;}
 .maxmean .meansale p{font-size: 32px; text-transform: uppercase;}
 .maxmean .meansale em , .maxmean .meansale i{display: block;  border-radius: 50%; padding:5px;}
@@ -73,10 +75,10 @@ background:-webkit-linear-gradient(top,rgba(0,0,0,0) 20%,rgba(0,0,0,.9) 100%);}
 .maxmean .formtext{background: #096735; padding:20px;}
 .maxmean .formtext div{position: static; font-size: 14px; color: #5fc48f}
 .maxmean .formtext p{ font-weight: normal; color: #fff }
-.maxmean .formtext input{background: #0c4e2b url(maxmeanicon.png) no-repeat left center; border:none; color: #fff; margin-top: 30px; padding-left:30px; font-size: .8rem;}
+.maxmean .formtext input{background: #0c4e2b url(maxmeanicon.png) no-repeat left center; border:none; color: #fff; margin-top: 15px; padding-left:30px; font-size: .8rem;}
 .maxmean .formtext input::-webkit-input-placeholder{color: #64cb94}
 .maxmean .formtext input[type="number"]{background-image:url(maxmeanicon2.png);}
-.maxmean .formtext button{display: block; margin-top: 30px; background: #70a644; color: #fff; border:none; width: 60%; height:50px ;line-height: 50px;  font-size: 18px;   text-transform: capitalize;  text-align: center;}
+.maxmean .formtext button{display: block; margin-top: 15px; padding:0; background: #70a644; color: #fff; border:none; width: 60%; height:50px ;line-height: 50px;  font-size: 18px;   text-transform: capitalize;  text-align: center; font-weight: normal;}
 
 /*maxsales*/
 .maxsales li{width: 33.33%;position: relative;}
@@ -160,6 +162,193 @@ background:-webkit-linear-gradient(top,rgba(0,0,0,0) 20%,rgba(0,0,0,.9) 100%);}
 
 
 
+
+/*media*/
+
+@media screen and (max-width: 1680px) {
+   body{
+    font-size: 1rem;
+   }
+   .maxmean .formtext input ,.maxmean .formtext button{
+        margin-top: 20px;
+    }
+    .maxmean .formtext input ,.maxmean .formtext button{
+        height: 36px;
+        line-height: 36px;
+    }
+    .sign-content label, .gen-content .g-cartable .solid-form label , .maxlatest .sign-content .text-section{
+        margin-bottom: 10px;
+    }
+}
+
+@media screen and (max-width: 1580px) {
+    body{
+    font-size: .9rem;
+   }
+   .sign-content .label-title{
+    font-size: 14px;
+   }
+   .sign-content .label-title{
+    margin-bottom: 6px;
+   }
+   .footer .maxfootnav{
+        padding-left: 13%;
+   }
+
+}
+
+
+@media screen and (max-width: 1440px) {
+    .maxmean .formtext input ,.maxmean .formtext button{
+        height: 30px;
+        line-height: 30px;
+        margin-top: 14px;
+    }
+    .maxlatest .sign-content{
+        padding:20px;
+    }
+    .maxlatest .sign-content input[type="text"], .maxlatest .sign-content input[type="password"], .maxlatest .sign-content .btn{
+        height: 36px;
+        line-height: 36px;
+        margin-top:10px;
+        font-size: 16px;
+    }
+    .maxlatest .sign-content .label-title{
+        margin-bottom: 0;
+    }
+
+    .maxlatest .sign-content .text-section{
+        font-size: 12px;
+        line-height: 1.2em;
+    }
+    .sign-content label, .gen-content .g-cartable .solid-form label ,.title{
+        margin-bottom: 10px;
+    }
+
+    .maxlatest .sign-content{
+        right: 5%
+    }
+    .maxlatest .bansearch{
+        left: 7%;
+    }
+    
+
+    
+}
+
+@media screen and (max-width: 1366px) {
+    .maxmean div , .maxmean .formtext div{
+        font-size: 12px
+    }
+    .maxmean .formtext button{
+        font-size: 14px;
+    }
+    .maxmean .meansale p,.maxmean p,.maxmean .textmessge p{
+        font-size: 18px;
+    }
+    .maxmean .meansale label i{
+        font-size: 28px;
+    }
+    .maxmean .formtext input ,.maxmean .formtext button{
+        height: 30px;
+        line-height: 30px;
+        margin-top: 14px;
+    }
+    .maxmean span{
+        margin-top: 4px;
+    }
+    .maxtop .maxmenu li a{
+        font-size: .8rem;
+    }
+    
+    
+}
+@media screen and (max-width: 1280px) {
+  .maxmean .meansale p, .maxmean p, .maxmean .textmessge p{
+    font-size: 16px;
+  }
+  .footer .maxfootnav{
+        padding-left: 12%;
+   }
+  
+}
+
+@media screen and (max-width: 1200px) {
+    .swiper-slide .maxtite_ban h2 {
+        font-size: 2rem;
+    }
+    .maxfactory li p , .maxlatest_main .maxtite_ban p{
+        font-size: 1.2rem;
+    }
+    .maxsales .maximgp {
+        font-size: 1rem;
+    }
+    .maxsales_but{
+        font-size: .8rem;
+    }
+    .maxmark-con h3{
+        font-size: 4rem;
+    }
+    .maxmark-con p{
+        margin-top: 1.8rem;
+    }
+    .maxmark-con{
+        margin-left: 20%;
+    }
+    .maxlatest_main .maxmark-con h3{
+        font-size: 5rem;
+    }
+    .maxlatest_main .maxmark-con h4 span , .maxlatest_main .maxmark-con p{
+        font-size: 2rem;
+    }
+    .maxlatest_main .maxmark-con em{
+        line-height: .9em;
+    }
+    .maxmean .meansale p,.maxmean p,.maxmean .textmessge p{
+        font-size: 14px;
+    }
+    .maxmean .textmessge span{
+        margin:16px auto;
+    }
+    .maxmean .formtext{
+        padding:14px;
+    }
+    .maxmean .formtext input ,.maxmean .formtext button{
+        margin-top: 12px;
+    }
+    .maxlatest .sign-content .title{
+        margin:0;
+    }
+    .btn-set .btn{
+        font-size: 16px;
+    }
+    .m-term-le {
+        width: 50%;
+    }
+    .prod-cont .product-right .pdlist .spset{
+        padding:0;
+    }
+    .g-proudtable .g-cell{
+        padding:20px;
+    }
+    .prod-cont .prodbase .priceset{
+        margin-bottom: 20px;
+    }
+    .prod-cont .prodbase .specnum{
+        padding-top: 20px;
+    }
+    .maxlatest .sign-content input[type="text"], .maxlatest .sign-content input[type="password"], .maxlatest .sign-content .btn{
+        height: 30px; 
+        line-height: 30px;
+    }
+    .footer .maxfootnav{
+        padding-left: 10%;
+   }
+   .maxlatest .bansearch{
+      max-width: 400px;
+   }
+
+}
 
 
 

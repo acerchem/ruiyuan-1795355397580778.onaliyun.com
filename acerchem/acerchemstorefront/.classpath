@@ -11,6 +11,13 @@
 	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/rhino-1.7R4.jar"/>
 	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/wro4j-core-1.7.9.jar"/>
 	<classpathentry exported="true" kind="lib" path="resources"/>
+	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/aliyun-sdk-oss-2.8.2.jar"/>
+	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/commons-codec-1.9.jar"/>
+	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/hamcrest-core-1.1.jar"/>
+	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/httpclient-4.4.1.jar"/>
+	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/httpcore-4.4.1.jar"/>
+	<classpathentry kind="lib" path="web/webroot/WEB-INF/lib/jdom-1.1.jar"/>
 	<classpathentry kind="src" output="eclipsebin/web/classes" path="web/src"/>
 	<classpathentry kind="src" output="eclipsebin/web/classes" path="web/testsrc"/>
 	<classpathentry kind="output" path="eclipsebin/notused"/>

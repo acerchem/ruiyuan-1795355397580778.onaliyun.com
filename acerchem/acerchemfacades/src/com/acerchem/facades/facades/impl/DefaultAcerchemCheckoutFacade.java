@@ -4,8 +4,9 @@ import com.acerchem.core.service.AcerchemDeliveryService;
 import com.acerchem.facades.facades.AcerchemCheckoutFacade;
 import com.acerchem.facades.facades.AcerchemOrderException;
 import com.acerchem.facades.facades.AcerchemTrayFacade;
-import de.hybris.platform.commercefacades.order.converters.populator.PaymentCardTypePopulator;
+import com.acerchem.facades.product.data.PaymentModeData;
 import de.hybris.platform.commercefacades.order.data.CardTypeData;
+import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.commercefacades.order.data.DeliveryModeData;
 import de.hybris.platform.commercefacades.order.data.ZoneDeliveryModeData;
 import de.hybris.platform.commercefacades.order.impl.DefaultCheckoutFacade;
@@ -20,16 +21,23 @@ import de.hybris.platform.core.model.order.payment.PaymentModeModel;
 import de.hybris.platform.deliveryzone.model.ZoneDeliveryModeModel;
 import de.hybris.platform.order.CartService;
 import de.hybris.platform.order.DeliveryModeService;
+import de.hybris.platform.order.PaymentModeService;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.storelocator.model.PointOfServiceModel;
 import de.hybris.platform.util.PriceValue;
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.logging.Log;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.springframework.util.ObjectUtils;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
-import java.util.*;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
@@ -39,15 +47,15 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
 
     private static final Logger LOG = Logger.getLogger(DefaultAcerchemCheckoutFacade.class);
 
-    //自提
+    //鑷彁
     private final String DELIVERY_MENTION = "DELIVERY_MENTION";
-    //送货
+    //閫佽揣
     private final String DELIVERY_GROSS = "DELIVERY_GROSS";
     private final String DELIVERY_MENTION_FEE ="delivery.mention.storage.fee";
     private final String ORDER_OPERATION_FEE ="order.operation.fee";
     private final String ORDER_STANDARD_CRITICAL_FEE ="order.standard.critical.price";
-    //默认存储费
-    private final String defaultStorageFee = "0";
+    //榛樿瀛樺偍璐�
+    private final String defaultStorageFee = "30";
     private final String defaultOrderOperationFee = "100";
     private final String defaultOrderStandardFee = "10000";
 
@@ -63,6 +71,8 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
     private AcerchemTrayFacade acerchemTrayFacade;
     @Resource
     private DeliveryModeService deliveryModeService;
+    @Resource
+    private PaymentModeService paymentModeService;
 
     @Override
     public void validateCartAddress(CountryData countryData) throws AcerchemOrderException{
@@ -74,13 +84,13 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
             for (AbstractOrderEntryModel aoe : cartModel.getEntries()){
                 PointOfServiceModel pos = aoe.getDeliveryPointOfService();
                 if (pos == null){
-                    throw new AcerchemOrderException("当前提货点为空.");
+                    throw new AcerchemOrderException("current pos Address is null");
                 }
                 if (pos.getDeliveryZone()!=null&&pos.getDeliveryZone().getCountries()!=null) {
                     Set<CountryModel> countrys = pos.getDeliveryZone().getCountries();
                     boolean isContains = countrys.stream().filter(countryModel -> countryIsoCode.equals(countryModel.getIsocode())).collect(Collectors.toList()).size()>0;
                     if (!isContains){
-                        throw new AcerchemOrderException("当前地址不在配送范围内.");
+                        throw new AcerchemOrderException("The current address is not within the scope of delivery.");
                     }
                 }
             }
@@ -88,20 +98,20 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
     }
 
 
-    public List<? extends DeliveryModeData> getSupportedDeliveryModes() {
+    public List<? extends DeliveryModeData> getAllDeliveryModes() throws AcerchemOrderException {
         final List<DeliveryModeData> result = new ArrayList<DeliveryModeData>();
         final CartModel cartModel = getCart();
         if (cartModel != null)
         {
             for (final DeliveryModeModel deliveryModeModel : acerchemDeliveryService.getSupportedDeliveryModeListForOrder())
             {
-                result.add(this.convert(deliveryModeModel));
+                result.add(this.convertDeliveyMode(deliveryModeModel));
             }
         }
         return result;
     }
 
-    protected DeliveryModeData convert(final DeliveryModeModel deliveryModeModel){
+    protected DeliveryModeData convertDeliveyMode(final DeliveryModeModel deliveryModeModel) throws AcerchemOrderException{
 
         final CartModel cartModel = getCart();
         if (deliveryModeModel instanceof ZoneDeliveryModeModel)
@@ -133,26 +143,16 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                 }
 
                 PriceValue deliveryCost = null;
-                //自提运费和存储费用改造
                 if (DELIVERY_MENTION.equals(deliveryModeModel.getCode())){
-                    //自提费
                     String deliveryMetionPrice = configurationService.getConfiguration().getString(DELIVERY_MENTION_FEE,defaultStorageFee);
-
-                    //操作费+自提费
                     BigDecimal fee = operationFee.add(BigDecimal.valueOf(Double.valueOf(deliveryMetionPrice)));
 
                     deliveryCost = new PriceValue(cartModel.getCurrency().getIsocode(), fee.doubleValue(), true);
 
                 }else if (DELIVERY_GROSS.equals(deliveryModeModel.getCode())){
                     BigDecimal fee = BigDecimal.valueOf(0.0d);
-                    try {
-                        //托盘运输费
-                        fee =  BigDecimal.valueOf(acerchemTrayFacade.getTotalPriceForCart());
-                        //操作费+托盘运输费
-                        fee = operationFee.add(fee);
-                    } catch (AcerchemOrderException e) {
-                        e.printStackTrace();
-                    }
+                    fee =  BigDecimal.valueOf(acerchemTrayFacade.getTotalPriceForCart());
+                    fee = operationFee.add(fee);
                     deliveryCost = new PriceValue(cartModel.getCurrency().getIsocode(), fee.doubleValue(), true);
                 }
 
@@ -210,5 +210,79 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
         }
         return cardTypeDataList;
     }
+
+    @Override
+    public boolean setPaymentDetails(final String paymentInfoId)
+    {
+        validateParameterNotNullStandardMessage("paymentInfoId", paymentInfoId);
+
+        if (StringUtils.isNotBlank(paymentInfoId))
+        {
+            PaymentModeModel paymentModeModel = paymentModeService.getPaymentModeForCode(paymentInfoId);
+            final CartModel cartModel = getCart();
+            if (paymentModeModel != null)
+            {
+               cartModel.setPaymentMode(paymentModeModel);
+               getModelService().save(cartModel);
+               return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean savePickUpDateForOrder(String pickUpDate) {
+        if (StringUtils.isNotBlank(pickUpDate))
+        {
+            final CartModel cartModel = getCart();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-DD");
+            try {
+                Date date=  sdf.parse(pickUpDate);
+                cartModel.setPickUpDate(date);
+                getModelService().save(cartModel);
+                return true;
+            } catch (ParseException e) {
+                LOG.error("parse time error : " +e.getMessage());
+            }
+        }
+        return false;
+    }
+
+
+    @Override
+    public CartData getCheckoutCart()
+    {
+        final CartData cartData = getCartFacade().getSessionCart();
+        if (cartData != null)
+        {
+            cartData.setDeliveryAddress(getDeliveryAddress());
+            cartData.setDeliveryMode(getDeliveryMode());
+            cartData.setPaymentModeData(getPaymentModeData());
+            cartData.setPaymentInfo(getPaymentDetails());
+        }
+        return cartData;
+    }
+
+	@Override
+	public PaymentModeData getPaymentModeData() {
+		final CartModel cartModel = getCart();
+		PaymentModeData paymentModeData = new PaymentModeData();
+		PaymentModeModel paymentModeModel = cartModel.getPaymentMode();
+		if(paymentModeModel!=null){
+			paymentModeData .setCode(paymentModeModel.getCode());
+			paymentModeData .setName(paymentModeModel.getName());
+		}
+		
+		return paymentModeData;
+	}
+
+	//分摊价格
+	public void ApportionmentCartPrice(CartModel cartModel){
+        if (!ObjectUtils.isEmpty(cartModel)){
+
+        }
+    }
+    
+    
 }
 

@@ -93,6 +93,5 @@ public class MyJhTestContrillor extends AbstractPageController {
 		//show
 		//String currency = orderData.get
 		
-
 	}
 }

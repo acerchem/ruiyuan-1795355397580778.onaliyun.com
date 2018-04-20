@@ -11,6 +11,7 @@
 package com.acerchem.storefront.controllers.pages.checkout.steps;
 
 
+import com.acerchem.facades.facades.AcerchemCheckoutFacade;
 import de.hybris.platform.acceleratorservices.enums.CheckoutPciOptionEnum;
 import de.hybris.platform.acceleratorservices.payment.constants.PaymentConstants;
 import de.hybris.platform.acceleratorservices.payment.data.PaymentData;
@@ -69,6 +70,9 @@ public class PaymentMethodCheckoutStepController extends AbstractCheckoutStepCon
 
 	@Resource(name = "addressDataUtil")
 	private AddressDataUtil addressDataUtil;
+
+	 @Resource(name = "defaultAcerchemCheckoutFacade")
+	 private AcerchemCheckoutFacade acerchemCheckoutFacade;
 
 	@ModelAttribute("billingCountries")
 	public Collection<CountryData> getBillingCountries()
@@ -312,7 +316,8 @@ public class PaymentMethodCheckoutStepController extends AbstractCheckoutStepCon
 	{
 		if (StringUtils.isNotBlank(selectedPaymentMethodId))
 		{
-			getCheckoutFacade().setPaymentDetails(selectedPaymentMethodId);
+//			getCheckoutFacade().setPaymentDetails(selectedPaymentMethodId);
+			acerchemCheckoutFacade.setPaymentDetails(selectedPaymentMethodId);
 		}
 		return getCheckoutStep().nextStep();
 	}

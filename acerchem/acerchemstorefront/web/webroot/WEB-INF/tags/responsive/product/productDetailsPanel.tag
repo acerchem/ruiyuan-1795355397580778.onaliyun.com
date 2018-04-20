@@ -55,7 +55,7 @@
 					
 					<div class="specnum">
 						<div class="spec">
-							<!-- <label>
+						 <!-- <label>
 								<span class="label-title">Specifications</span>	
 								<div class="selbox">
 									<input type="hidden" class="required" value="" name="spec" alt="Please Select nation">
@@ -68,14 +68,29 @@
 								</div>	
 							</label>
 							 -->
+							 
+					  <select id="futureAvailableDateId" style="display: none;">
+						<c:forEach items="${countrys}" var="data"  varStatus="id"  >
+						<option value ="${data.storeId}">${data.futureAvailableDate}</option>
+						
+                        </c:forEach>
+                        </select> 
+                        
+                        <select id="futureInventoryId" style="display: none;">
+						<c:forEach items="${countrys}" var="data"  varStatus="id"  >
+						<option value ="${data.storeId}">${data.futureInventory}</option>
+						
+                        </c:forEach>
+                        </select> 
+                        
 							<c:forEach items="${countrys}" var="data"  varStatus="id"  >
 						<c:if test="${id.index==0}">	
 							<label class="futday">
 								<span class="label-title">Future days</span>	
-								<div class="selbox">
+								<div class="selbox" id="selectId">
 									<input type="hidden" value="" name="futday" alt="Please Select nation" id="futday">
 									<span class="pitch"></span>
-									<ul class="select">
+									<ul class="select" >
 										<li data-val="${data.futureInventory}">${data.futureAvailableDate}</li>
 														
 									</ul>
@@ -101,7 +116,7 @@
                         </c:forEach>
 							
 							<label>
-								<input type="checkbox" name="Keep">
+								<input type="checkbox" name="Keep" id="checkfutureId">
 								<span class="checkbox">Display future inventory</span>
 							</label>							
 						</div>
@@ -125,10 +140,18 @@
 						<select id="countryId" style="display: none;">
 							<c:forEach items="${countrys}" var="data"  varStatus="id"  >
 									    
-							        <option value ="${data.storeId}">${data.countryDataList}</option>
+							       <%-- <c:forEach items="${data.countryDataList}" var="country"  varStatus="vs"  >
+								    
+								      <c:set var="myVar" value="${stat.first ? '' : myVar} ${country.name}" />
+								    
+								    </c:forEach> --%>
+							    
+							      <option value ="${data.storeId}">${data.countryDataList}</option>
+							     
 		                        </c:forEach>
 	                    </select>     
                         
+							      
 							
 						<c:forEach items="${countrys}" var="data"  varStatus="id"  >
 							<c:if test="${id.index==0}">
@@ -158,7 +181,7 @@
 							    <i class="delintro">Delivery &nbsp<em>${data.avaReleaseDay}</em>&nbsp days</i>
 						</c:if>	
                         </c:forEach>
-                        
+                        <input type="hidden" value="" name="avaReleaseDay"  id="avaReleaseDay">
                         <select id="avaReleaseDayId" style="display: none;">
 						<c:forEach items="${countrys}" var="data"  varStatus="id"  >
 						<option value ="${data.storeId}">${data.avaReleaseDay}</option>
@@ -484,6 +507,8 @@
 			if(parseInt(setnum.val())>parseInt(spot.find('em').text())){
 				setnum.val(spot.find('em').text())
 			}
+			emvi = $('.prod-sum i em');
+			emvi.text($('#avaReleaseDay').val());
 			
 		}else{
 			days.show();
@@ -491,6 +516,11 @@
 			/* invi.text(futday+parseInt(invi.text())); */
 			
 			invi.text(futday);
+			emvi = $('.prod-sum i em');
+			$('#avaReleaseDay').val(emvi.text());
+			emvi.text($('.spec .futday .pitch').text());
+			
+			
 		}
 		
 	})	
@@ -600,18 +630,44 @@
 	})
 
 	$("#storeMulId").change(function(){
+		
+
 		 /*库存信息*/
-		invi = $('.invernum .inventory i')
-		invi.text($("#inventoryId option[value='"+$("#storeMulId").val()+"']").text());
+		invi = $('.invernum .inventory i');
 		
 		 /*先期库存天数*/ 
 		emvi = $('.prod-sum i em')
 		
-		emvi.text($("#avaReleaseDayId option[value='"+$("#storeMulId").val()+"']").text());
-	//	var data =$("#countryId option[value='"+$("#storeMulId").val()+"']").text();
+		 		
+		var futureAvailableDate = $("#futureAvailableDateId option[value='"+$("#storeMulId").val()+"']").text();
+	
+		var futureInventory =  $("#futureInventoryId option[value='"+$("#storeMulId").val()+"']").text();
+		
+	    var futureHtml='<input type="hidden" value="'+futureInventory+'" name="futday" alt="Please Select nation" id="futday">'+
+									'<span class="pitch">'+futureAvailableDate+'</span>'+
+									'<ul class="select"><li data-val="'+futureInventory+'">'+futureAvailableDate+'</li></ul>';
+	   
+		$('#selectId').html(futureHtml);
+		
+	//if ($('#checkfutureId').attr('checked')) {
+		
+		if($('#checkfutureId').is(':checked')) {
+
+			
+			invi.text($('#futday').val());
+			
+			emvi.text($('.spec .futday .pitch').text());
+		} else {
+			
+			invi.text($("#inventoryId option[value='"+$("#storeMulId").val()+"']").text());
+			
+			emvi.text($("#avaReleaseDayId option[value='"+$("#storeMulId").val()+"']").text());
+		}
 		
         $('#storeId').val($("#storeMulId").val());
 	});
+	
+	 
     
     //send message
     $(document).ready(function () {

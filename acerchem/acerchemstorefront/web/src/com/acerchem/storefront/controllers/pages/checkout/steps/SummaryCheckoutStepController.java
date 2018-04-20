@@ -31,6 +31,7 @@ import de.hybris.platform.payment.AdapterException;
 
 import java.util.Arrays;
 
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
@@ -42,6 +43,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.acerchem.facades.facades.AcerchemCheckoutFacade;
+import com.acerchem.facades.facades.AcerchemOrderException;
 import com.acerchem.storefront.controllers.ControllerConstants;
 
 
@@ -52,6 +55,9 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 	private static final Logger LOGGER = Logger.getLogger(SummaryCheckoutStepController.class);
 
 	private static final String SUMMARY = "summary";
+	
+	 @Resource(name = "defaultAcerchemCheckoutFacade")
+	 private AcerchemCheckoutFacade acerchemCheckoutFacade;
 
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	@RequireHardLogIn
@@ -61,7 +67,8 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 	public String enterStep(final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException, // NOSONAR
 			CommerceCartModificationException
 	{
-		final CartData cartData = getCheckoutFacade().getCheckoutCart();
+		final CartData cartData = acerchemCheckoutFacade.getCheckoutCart();
+		
 		if (cartData.getEntries() != null && !cartData.getEntries().isEmpty())
 		{
 			for (final OrderEntryData entry : cartData.getEntries())
@@ -74,12 +81,22 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 				entry.setProduct(product);
 			}
 		}
+		
+		
+		try {
+			model.addAttribute("deliveryMethods", acerchemCheckoutFacade.getAllDeliveryModes());
+		} catch (AcerchemOrderException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		model.addAttribute("paymentInfos", acerchemCheckoutFacade.getSupportedCardTypes(cartData.getDeliveryMode().getCode()));
 
 		model.addAttribute("cartData", cartData);
 		model.addAttribute("allItems", cartData.getEntries());
 		model.addAttribute("deliveryAddress", cartData.getDeliveryAddress());
 		model.addAttribute("deliveryMode", cartData.getDeliveryMode());
 		model.addAttribute("paymentInfo", cartData.getPaymentInfo());
+		model.addAttribute("paymentModeData", cartData.getPaymentModeData());
 
 		// Only request the security code if the SubscriptionPciOption is set to Default.
 		final boolean requestSecurityCode = CheckoutPciOptionEnum.DEFAULT
@@ -117,7 +134,7 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 			return REDIRECT_PREFIX + "/cart";
 		}
 
-		// authorize, if failure occurs don't allow to place the order
+		/*// authorize, if failure occurs don't allow to place the order
 		boolean isPaymentUthorized = false;
 		try
 		{
@@ -132,7 +149,7 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 		{
 			GlobalMessages.addErrorMessage(model, "checkout.error.authorization.failed");
 			return enterStep(model, redirectModel);
-		}
+		}*/
 
 		final OrderData orderData;
 		try
@@ -175,11 +192,11 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 			invalid = true;
 		}
 
-		if (getCheckoutFlowFacade().hasNoPaymentInfo())
+		/*if (getCheckoutFlowFacade().hasNoPaymentInfo())
 		{
 			GlobalMessages.addErrorMessage(model, "checkout.paymentMethod.notSelected");
 			invalid = true;
-		}
+		}*/
 		else
 		{
 			// Only require the Security Code to be entered on the summary page if the SubscriptionPciOption is set to Default.
@@ -191,12 +208,12 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 			}
 		}
 
-		if (!placeOrderForm.isTermsCheck())
+	/*	if (!placeOrderForm.isTermsCheck())
 		{
 			GlobalMessages.addErrorMessage(model, "checkout.error.terms.not.accepted");
 			invalid = true;
 			return invalid;
-		}
+		}*/
 		final CartData cartData = getCheckoutFacade().getCheckoutCart();
 
 		//		if (!getCheckoutFacade().containsTaxValues())
@@ -208,13 +225,13 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 		//			invalid = true;
 		//		}
 
-		if (!cartData.isCalculated())
+		/*if (!cartData.isCalculated())
 		{
 			LOGGER.error(String.format("Cart %s has a calculated flag of FALSE, placement of order can't continue",
 					cartData.getCode()));
 			GlobalMessages.addErrorMessage(model, "checkout.error.cart.notcalculated");
 			invalid = true;
-		}
+		}*/
 
 		return invalid;
 	}

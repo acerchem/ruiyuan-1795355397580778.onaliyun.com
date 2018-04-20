@@ -45,6 +45,7 @@ public class WaitForConfirmAction extends AbstractSimpleDecisionAction<OrderProc
 
 		if (order.getEmployeeConfirm() && order.getCustomerConfirm())
 		{
+			setOrderStatus(order, OrderStatus.CONFIRMED);
 			return Transition.OK;
 		}
 		else

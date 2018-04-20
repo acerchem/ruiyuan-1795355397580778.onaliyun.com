@@ -3,7 +3,7 @@
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags/responsive/template"%>
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 
-<template:page pageTitle="${pageTitle}">
+<template:pageForSearch pageTitle="${pageTitle}">
     
  <div class="col-fun maxlatest" >
 	
@@ -27,10 +27,9 @@
 	</div>
 	  
 	  <!-- search compent banner -->
-	<cms:pageSlot position="Section3" var="component">
-		<cms:component component="${component}" />
-	</cms:pageSlot>
-	  
+				<cms:pageSlot position="Section3" var="component">
+					<cms:component component="${component}" />
+				</cms:pageSlot>
 	  
 	  <!-- login compent banner -->
 	<cms:pageSlot position="Section4" var="feature">
@@ -66,4 +65,4 @@
 
 
 
-</template:page>
+</template:pageForSearch>

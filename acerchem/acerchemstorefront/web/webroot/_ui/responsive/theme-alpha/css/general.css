@@ -80,14 +80,15 @@ textarea{
 	z-index: 99;
 }
 
-/* .checkbox{
+ .checkbox{
 	position: relative;
-	display: block;
+	display: initial;
 	padding-left: 30px;
 	line-height: 22px;
 	color: #666;
 	cursor: pointer;
 	font-size: 14px;
+	font-weight: normal;
 }
 
 .checkbox:hover{
@@ -114,7 +115,7 @@ textarea{
 	border-top:none;
 	border-left:none;
 	transform:rotate(45deg);
-} */
+} 
 
 .submit{
 	width: 250px;
@@ -143,6 +144,7 @@ textarea{
 
 .text-section{
 	margin-bottom: 30px;
+	color: #666;
 }
 
 .btn-set{
@@ -155,6 +157,7 @@ textarea{
 	display: block;
 	margin:auto;
 	margin-top: 20px;
+	padding:0;
 	height: 50px;
 	max-width: 500px;
 	line-height: 50px;
@@ -165,6 +168,7 @@ textarea{
 	background-color: #096735;
 	border:1px solid #096735;
 	color: #fff;
+	font-weight: normal;
 }
 
 .btn-set .btn:hover , .g-cartable .btn-set .btn-leadout:hover{
@@ -193,6 +197,7 @@ textarea{
 
 .maxon_salesul .title{
 	position: relative;
+	padding:20px 0;
 }
 
 .maxon_salesul .maxpagin{
@@ -272,7 +277,7 @@ textarea{
 	overflow:hidden;
 	text-overflow: ellipsis;
 	margin-bottom: 10px;
-	min-height: 42px;
+	height: 50px;
 
 }
 
@@ -423,6 +428,9 @@ textarea{
 /*布局 end*/
 
 /*sign*/
+.gray .maxtop{width: 100%; padding:0 5%; background-color: #fff;}
+.gray .login-section{padding-bottom: 60px;}
+
 .sign-header{
 	margin:60px auto; 
 	text-align: center;
@@ -461,6 +469,7 @@ textarea{
 	font-size: 16px;
 	color: #333;
 	text-transform: capitalize;
+	font-weight: normal;
 }
 .sign-content .checkbox ~ a{
 	position: absolute;
@@ -1329,10 +1338,6 @@ textarea{
 	margin:0;
 }
 
-.g-cartable .g-table td:last-child{
-	width: 10%
-}
-
 .g-cartable .cart-right{
 	width: 32%;
 	padding-left: 40px;
@@ -1357,7 +1362,7 @@ textarea{
 
 .g-cartable .list .oper{
 	text-align: right;
-	padding-right: 30px;
+	padding-left: 30px;
 }
 
 .g-cartable #cartitem ~ .btn-set{
@@ -1367,6 +1372,8 @@ textarea{
 }
 
 .g-cartable .btn-set .btn-leadout{
+	margin:0;
+	width: 160px;
 	background-color: #70a644;
 	border-color: transparent;
 }
@@ -1398,6 +1405,7 @@ textarea{
 
 .g-cartable label{
 	display: block;
+	color: #333;
 }
 
 .g-cartable .cart-total .item-row{
@@ -1820,10 +1828,16 @@ textarea{
 }
 
 /*gallery*/
+.col-md-9{
+	width: 80%;
+	padding:0
+}
+#product-facet.gall-left{
+	border-top:4px solid #f3f3f3; 
+}
 .gal-centent{
 	position: relative;
-	/*shaun  */
-	/* border-top:4px solid #f3f3f3; */
+	
 }
 .gal-centent .g-cont,.gal-centent .g-cartable{
 	padding-top: 0;
@@ -1861,7 +1875,7 @@ textarea{
 	margin-top: 34px;
 }
 .gal-centent .gall-left dd{
-	padding-left:22px;
+	padding-left:10px;
 	color:#666;
 	font-size: 14px;
 	padding-top: 6px;
@@ -1877,15 +1891,13 @@ textarea{
 }
 
 .m-term-bor{
-	border-bottom: 4px solid #f3f3f3;
+	border: 4px solid #f3f3f3;
+	border-right:none;
 	background-color: #096735;
 }
 .m-term{
 	position: relative;
 	min-height: 50px;
-	width: 75%;
-	/* shaun*/
-	margin:0 5% 0 5%;
 }
 .gal-centent .g-cont{
 	padding-bottom: 0;
@@ -1894,13 +1906,20 @@ textarea{
 .m-term-ri{
 	float:left;
 }
+.gall-left .gall-left label span{
+	font-weight: normal;
+}
+.gall-left .gall-left span:hover , .gall-left .gall-left a:hover{
+	color: #096735;
+	cursor: pointer;
+}
 
 /* shaun:sort by 下拉框 */
 .m-term-ri{
 	height:49px;
 	position: absolute;
-	right: 0;
-	top:0;
+	right: 6%;
+	top:0px;
 	padding-left: 105px;
 	background-color: #096735;
 }
@@ -1919,14 +1938,18 @@ textarea{
 .m-term-le li{
 	float:left;
 	padding-right: 2.6%;
-	line-height: 1.5em;
+	line-height: 2em;
 }
 .m-term-le{
-	padding:13px 0;
+	padding:9px 0;
 	padding-left: 20px;
+	margin:0;
 	color: #fff;
 	font-size: 16px;
-	width: 58%;
+	width: 60%;
+}
+.m-term-le .glyphicon{
+	color: #fff
 }
 .m-term-le:after{
 	content: '';
@@ -1947,7 +1970,11 @@ textarea{
 	float: right;
 }
 .m-term-ri .m-pagination{
-	margin-top: 15px;
+	margin-top: 10px;
+	margin-left: 10px;
+}
+.m-term-ri .m-pagination .pagination{
+	padding:0;
 }
 .m-term-ri .m-pagination a{
 	color: #0d4025;
@@ -1987,6 +2014,23 @@ textarea{
     transition: all 500ms;
     top: 13px;
 }
+.m-term-ri .form-control{
+	color: #fff;
+	background: #0d4025;
+}
+
+.m-term-ri .pagination  span , .m-term-ri .pagination  a , .m-term-ri .pagination .active a{
+	font-size: 1rem;
+}
+.m-term-ri .pagination .act span,.m-term-ri .pagination a:hover{
+	color: #fff;
+	cursor: pointer;
+	font-weight: normal;
+}
+.m-term-ri .pagination > .disabled > span{
+   color: #085e2f;
+
+}
 .gal-centent .maxon_salesul{
 	margin-top: 0;
 	padding-left: 0;
@@ -2024,9 +2068,19 @@ display: inline-table;
 	padding-right: 0px;
 	padding-bottom: 20px;
 }
+
 .gal-centent .slide-item .item .img{
-	font-size: 0;
+	display: table;
+	width: 100%;
+	min-height: 220px;
 	line-height: 1em;
+	font-size: 0;
+	text-align: center;
+}
+.gal-centent .slide-item .item .img a{
+	display: table-cell;
+	height: 100%;
+	vertical-align: middle;
 }
 .gall-right .slide-item .item a{
  	padding: 0;
@@ -2150,19 +2204,26 @@ display: inline-table;
 .maxfixed .maxtext{
 	width:100%;
 	padding: 0;
-	padding-right: 12%;
 	padding-left: 12px;
 	position: relative;
 }
 .maxfixed .maxtext .in-title{
 	min-height: auto;
-	max-height: 36px;
+	max-height: 50px;
 }
 .maxfixed .maxtext .spec{
 	color: #999;
+	line-height: 1em;
+	min-height: auto;
 }
 .maxfixed .spset{
 	position: relative;
+	height: 30px;
+}
+.maxfixed .spset:after{
+	content:'';
+	display: block;
+	clear: both;
 }
 .maxfixed .price {
     padding-right: 10px;
@@ -2371,6 +2432,9 @@ display: inline-table;
 	width: 82%;
 	overflow: hidden;
 }
+.m-prodslide .slidewrap .slide-item{
+	padding:0;
+}
 
 .m-prodslide .slidewrap img{
 	padding:0 2px;
@@ -2407,7 +2471,7 @@ display: inline-table;
 	left: 50%;
 	z-index: 9;
 	width: 66px;
-	height: 25px;
+	height: 24px;
 	background: rgba(0,0,0,.3) url(filpup.png) no-repeat center top;
 	transform: translate(-50%,0);
 	cursor: pointer;
@@ -2445,8 +2509,12 @@ display: inline-table;
 }
 
 .prod-cont .prodbase .g-title span{
+	display: block;
 	font-size: 16px;
 	color: #666;
+}
+.prod-cont .prodbase .g-title .mintitle{
+	margin-right: 80px;
 }
 .prod-cont.down-cont{
 	padding-bottom: 40px
@@ -2593,6 +2661,8 @@ display: inline-table;
 	width: 46%;
 	max-width: 200px;
 	margin-top: 0;
+	padding:0;
+	font-weight: normal;
 }
 
 .prod-cont .prodbase .btn-cart{
@@ -2687,6 +2757,7 @@ display: inline-table;
 	width: 100%;
 	font-size: 14px;
 	white-space: nowrap;
+	padding:0;
 }
 .prod-cont .product-right .tableshare{
 	margin-top: 40px;
@@ -2909,154 +2980,3 @@ display: inline-table;
 }
 
 
-
-/*media*/
-
-@media screen and (max-width: 1680px) {
-   .maxmean .formtext input ,.maxmean .formtext button{
-        margin-top: 20px;
-    }
-    .maxmean .formtext input ,.maxmean .formtext button{
-        height: 36px;
-        line-height: 36px;
-    }
-    .sign-content label, .gen-content .g-cartable .solid-form label , .maxlatest .sign-content .text-section{
-    	margin-bottom: 10px;
-    }
-    
-}
-
-
-@media screen and (max-width: 1440px) {
-    .maxmean .formtext input ,.maxmean .formtext button{
-        height: 30px;
-        line-height: 30px;
-        margin-top: 14px;
-    }
-    .maxlatest .sign-content{
-        padding:20px;
-    }
-    .maxlatest .sign-content input[type="text"], .maxlatest .sign-content input[type="password"], .maxlatest .sign-content .btn{
-        height: 36px;
-        line-height: 36px;
-        margin-top:10px;
-        font-size: 16px;
-    }
-    .maxlatest .sign-content .label-title{
-    	margin-bottom: 0;
-    }
-
-    .maxlatest .sign-content .text-section{
-        font-size: 12px;
-        line-height: 1.2em;
-    }
-    .sign-content label, .gen-content .g-cartable .solid-form label ,.title{
-        margin-bottom: 10px;
-    }
-
-    .maxlatest .sign-content{
-        right: 5%
-    }
-
-    
-}
-
-@media screen and (max-width: 1366px) {
-    .maxmean div , .maxmean .formtext div{
-        font-size: 12px
-    }
-    .maxmean .formtext button{
-        font-size: 14px;
-    }
-    .maxmean .meansale p,.maxmean p,.maxmean .textmessge p{
-        font-size: 18px;
-    }
-    .maxmean .meansale label i{
-        font-size: 28px;
-    }
-    .maxmean .formtext input ,.maxmean .formtext button{
-        height: 30px;
-        line-height: 30px;
-        margin-top: 14px;
-    }
-    .maxmean span{
-        margin-top: 4px;
-    }
-    .maxtop .maxmenu li a{
-        font-size: .8rem;
-    }
-    
-    
-}
-
-@media screen and (max-width: 1200px) {
-    .swiper-slide .maxtite_ban h2 {
-        font-size: 2rem;
-    }
-    .maxfactory li p , .maxlatest_main .maxtite_ban p{
-        font-size: 1.2rem;
-    }
-    .maxsales .maximgp {
-        font-size: 1rem;
-    }
-    .maxsales_but{
-        font-size: .8rem;
-    }
-    .maxmark-con h3{
-        font-size: 4rem;
-    }
-    .maxmark-con p{
-        margin-top: 1.8rem;
-    }
-    .maxmark-con{
-        margin-left: 20%;
-    }
-    .maxlatest_main .maxmark-con h3{
-        font-size: 5rem;
-    }
-    .maxlatest_main .maxmark-con h4 span , .maxlatest_main .maxmark-con p{
-        font-size: 2rem;
-    }
-    .maxlatest_main .maxmark-con em{
-        line-height: .9em;
-    }
-    .maxmean .meansale p,.maxmean p,.maxmean .textmessge p{
-        font-size: 14px;
-    }
-    .maxmean .textmessge span{
-        margin:16px auto;
-    }
-    .maxmean .formtext{
-        padding:14px;
-    }
-    .maxmean .formtext input ,.maxmean .formtext button{
-        margin-top: 12px;
-    }
-    .maxlatest .sign-content .title{
-        margin:0;
-    }
-    .btn-set .btn{
-		font-size: 16px;
-	}
-    .m-term-le {
-        width: 50%;
-    }
-    .prod-cont .product-right .pdlist .spset{
-    	padding:0;
-    }
-    .g-proudtable .g-cell{
-    	padding:20px;
-    }
-    .prod-cont .prodbase .priceset{
-    	margin-bottom: 20px;
-    }
-    .prod-cont .prodbase .specnum{
-    	padding-top: 20px;
-    }
-    .maxlatest .sign-content input[type="text"], .maxlatest .sign-content input[type="password"], .maxlatest .sign-content .btn{
-		height: 30px; 
-		line-height: 30px;
-    }
-
-   
-}

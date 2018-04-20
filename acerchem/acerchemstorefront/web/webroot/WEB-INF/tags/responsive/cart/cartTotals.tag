@@ -67,11 +67,11 @@
 								</div>
 							</div>					
 						</div>
-						<label>
+						<!-- <label>
 							<input type="checkbox" name="" id="setexpress">
 							<span class="checkbox">I Would Like To Express Checkout</span>
 						</label>
-						<div class="btn-set">							
+ -->						<div class="btn-set">							
 							<!-- <a class="btn btn-submit" href="checkout.html">Check Out</a> -->
 							<button class="btn btn-primary btn-block btn--continue-checkout js-continue-checkout-button" data-checkout-url="${checkoutUrl}">Check Out</button>
 							<a class="btn btn-line" href="${continueShoppingUrl}">Continue Shopping</a>

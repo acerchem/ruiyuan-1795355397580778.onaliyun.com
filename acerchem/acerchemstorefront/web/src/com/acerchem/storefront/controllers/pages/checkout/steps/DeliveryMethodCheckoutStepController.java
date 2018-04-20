@@ -11,12 +11,14 @@
 package com.acerchem.storefront.controllers.pages.checkout.steps;
 
 import com.acerchem.facades.facades.AcerchemCheckoutFacade;
+import com.acerchem.facades.facades.AcerchemOrderException;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.PreValidateCheckoutStep;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.PreValidateQuoteCheckoutStep;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.checkout.steps.CheckoutStep;
 import de.hybris.platform.acceleratorstorefrontcommons.constants.WebConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.checkout.steps.AbstractCheckoutStepController;
+import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.order.data.CartData;
 import com.acerchem.storefront.controllers.ControllerConstants;
@@ -53,7 +55,12 @@ public class DeliveryMethodCheckoutStepController extends AbstractCheckoutStepCo
 
 		final CartData cartData = getCheckoutFacade().getCheckoutCart();
 		model.addAttribute("cartData", cartData);
-		model.addAttribute("deliveryMethods", acerchemCheckoutFacade.getSupportedDeliveryModes());
+		try {
+			model.addAttribute("deliveryMethods", acerchemCheckoutFacade.getAllDeliveryModes());
+		} catch (AcerchemOrderException e) {
+//			model.addAttribute("errorMsg",e.getMessage());
+			GlobalMessages.addErrorMessage(model, e.getMessage());
+		}
 		this.prepareDataForPage(model);
 		storeCmsPageInModel(model, getContentPageForLabelOrId(MULTI_CHECKOUT_SUMMARY_CMS_PAGE_LABEL));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(MULTI_CHECKOUT_SUMMARY_CMS_PAGE_LABEL));
@@ -80,7 +87,7 @@ public class DeliveryMethodCheckoutStepController extends AbstractCheckoutStepCo
 		if (StringUtils.isNotEmpty(selectedDeliveryMethod))
 		{
 			acerchemCheckoutFacade.setDeliveryMode(selectedDeliveryMethod);
-			model.addAttribute("paymentModes", acerchemCheckoutFacade.getSupportedCardTypes(selectedDeliveryMethod));
+			model.addAttribute("paymentInfos", acerchemCheckoutFacade.getSupportedCardTypes(selectedDeliveryMethod));
 		}
 
 		return getCheckoutStep().nextStep();

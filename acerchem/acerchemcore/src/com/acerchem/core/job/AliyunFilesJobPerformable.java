@@ -57,7 +57,7 @@ public class AliyunFilesJobPerformable extends AbstractJobPerformable<CronJobMod
 			if (list.size() > 0) {
 
 				// 初始化aliyun参数
-				String lsEndpoint = configurationService.getConfiguration().getString("aliyun.endpoint");
+				String lsEndpoint = configurationService.getConfiguration().getString("aliyun.endpoint","");
 				String lsAccessKeyId = configurationService.getConfiguration().getString("aliyun.accessKeyId");
 				String lsAccessKeySecret = configurationService.getConfiguration().getString("aliyun.accessKeySecret");
 				String lsBucketName = configurationService.getConfiguration().getString("aliyun.bucketName");

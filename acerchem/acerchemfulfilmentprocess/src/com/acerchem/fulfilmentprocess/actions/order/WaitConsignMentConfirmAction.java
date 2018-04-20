@@ -8,8 +8,9 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with SAP.
  */
-package com.acerchem.fulfilmentprocess.actions.consignment;
+package com.acerchem.fulfilmentprocess.actions.order;
 
+import de.hybris.platform.core.enums.OrderStatus;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 import de.hybris.platform.processengine.action.AbstractSimpleDecisionAction;
@@ -33,15 +34,16 @@ public class WaitConsignMentConfirmAction extends AbstractSimpleDecisionAction<O
 	public Transition executeAction(final OrderProcessModel process)
 	{
 		final OrderModel order = process.getOrder();
-
+		setOrderStatus(order, OrderStatus.DELIVERED);
 		if (order == null)
 		{
 			LOG.error("Missing the order, exiting the process");
 			return Transition.NOK;
 		}
 
-		if (order.getEmployeeConfirmDelivery() && order.getCustomerConfirmDelivery())
+		if (order.getEmployeeConfirmDelivery() || order.getCustomerConfirmDelivery())
 		{
+			setOrderStatus(order, OrderStatus.COMPLETED);
 			return Transition.OK;
 		}
 		else

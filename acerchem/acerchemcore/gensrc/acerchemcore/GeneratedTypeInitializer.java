@@ -226,6 +226,11 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 		);
 	
 		createEnumerationType(
+			"CustomerArea",
+			null
+		);
+	
+		createEnumerationType(
 			"CreditAccountStatusEnum",
 			null
 		);
@@ -345,6 +350,10 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 				single_createattr_AbstractOrderEntry_availableDate();
 			
+				single_createattr_AbstractOrderEntry_baseRealPrice();
+			
+				single_createattr_AbstractOrderEntry_totalRealPrice();
+			
 				single_createattr_CountryTrayFareConf_country();
 			
 				single_createattr_CountryTrayFareConf_trayAmount();
@@ -372,6 +381,8 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 				single_createattr_CreditTransaction_cransactionId();
 			
 				single_createattr_Customer_creditAccount();
+			
+				single_createattr_Customer_area();
 			
 				single_createattr_Customer_companyType();
 			
@@ -406,6 +417,10 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 				single_createattr_AbstractOrder_customerConfirmDelivery();
 			
 				single_createattr_AbstractOrder_employeeConfirmDelivery();
+			
+				single_createattr_AbstractOrder_pickUpDate();
+			
+				single_createattr_ConsignmentEntry_batchNum();
 			
 		createRelationAttributes(
 			"AcerChemVendor2Product", 
@@ -1256,6 +1271,40 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 	}
 	
+	public void single_createattr_AbstractOrderEntry_baseRealPrice() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"AbstractOrderEntry", 
+					"baseRealPrice",  
+					null,
+					"java.lang.Double",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_AbstractOrderEntry_totalRealPrice() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"AbstractOrderEntry", 
+					"totalRealPrice",  
+					null,
+					"java.lang.Double",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
 	public void single_createattr_CountryTrayFareConf_country() throws JaloBusinessException
 	{
 		
@@ -1487,6 +1536,23 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 					"creditAccount",  
 					null,
 					"CustomerCreditAccount",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_Customer_area() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"Customer", 
+					"area",  
+					null,
+					"CustomerArea",
 					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
 					null,
 					sqlColumnDefinitions
@@ -1783,6 +1849,40 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 	}
 	
+	public void single_createattr_AbstractOrder_pickUpDate() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"AbstractOrder", 
+					"pickUpDate",  
+					null,
+					"java.util.Date",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_ConsignmentEntry_batchNum() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"ConsignmentEntry", 
+					"batchNum",  
+					null,
+					"java.lang.String",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
 
 
 	/**
@@ -1845,6 +1945,16 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 		);
 	
 		createEnumerationValues(
+			"CustomerArea",
+			true,
+			Arrays.asList( new String[] {
+			
+				"North_America",
+				"South_America"
+			} )
+		);
+	
+		createEnumerationValues(
 			"CreditAccountStatusEnum",
 			true,
 			Arrays.asList( new String[] {
@@ -1860,6 +1970,17 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			Arrays.asList( new String[] {
 			
 				"LINE"
+			} )
+		);
+	
+		createEnumerationValues(
+			"OrderStatus",
+			true,
+			Arrays.asList( new String[] {
+			
+				"CONFIRMED",
+				"DELIVERED",
+				"PAIED"
 			} )
 		);
 	
@@ -2239,6 +2360,10 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 		
 			single_setAttributeProperties_AbstractOrderEntry_availableDate();
 		
+			single_setAttributeProperties_AbstractOrderEntry_baseRealPrice();
+		
+			single_setAttributeProperties_AbstractOrderEntry_totalRealPrice();
+		
 				{
 				Map customPropsMap = new HashMap();
 				
@@ -2316,6 +2441,8 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 			single_setAttributeProperties_Customer_creditAccount();
 		
+			single_setAttributeProperties_Customer_area();
+		
 			single_setAttributeProperties_Customer_companyType();
 		
 			single_setAttributeProperties_Customer_establishedIn();
@@ -2370,6 +2497,8 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 		
 			single_setAttributeProperties_AbstractOrder_employeeConfirmDelivery();
 		
+			single_setAttributeProperties_AbstractOrder_pickUpDate();
+		
 				{
 				Map customPropsMap = new HashMap();
 				
@@ -2383,6 +2512,18 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 				);
 				}
 			
+				{
+				Map customPropsMap = new HashMap();
+				
+				changeMetaType(
+					"ConsignmentEntry",
+					null,
+					customPropsMap
+				);
+				}
+			
+			single_setAttributeProperties_ConsignmentEntry_batchNum();
+		
 				setDefaultProperties(
 					"GenderList",
 					true,
@@ -2419,6 +2560,13 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 				);
 			
 				setDefaultProperties(
+					"CustomerArea",
+					true,
+					true,
+					null
+				);
+			
+				setDefaultProperties(
 					"CreditAccountStatusEnum",
 					true,
 					true,
@@ -2427,6 +2575,12 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 				changeMetaType(
 					"PaymentTransactionType",
+					null,
+					null
+				);
+			
+				changeMetaType(
+					"OrderStatus",
 					null,
 					null
 				);
@@ -3425,6 +3579,50 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							);
 						}
 					
+						public void single_setAttributeProperties_AbstractOrderEntry_baseRealPrice() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"AbstractOrderEntry", 
+								"baseRealPrice",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_AbstractOrderEntry_totalRealPrice() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"AbstractOrderEntry", 
+								"totalRealPrice",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
 						public void single_setAttributeProperties_CountryTrayFareConf_country() throws JaloBusinessException
 						{
 							
@@ -3721,6 +3919,28 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							setAttributeProperties(
 								"Customer", 
 								"creditAccount",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_Customer_area() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"Customer", 
+								"area",
 								false, 
 								null,
 								null,
@@ -4098,6 +4318,50 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 								false, 
 								Boolean.FALSE,
 								"Boolean.FALSE",
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_AbstractOrder_pickUpDate() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"AbstractOrder", 
+								"pickUpDate",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_ConsignmentEntry_batchNum() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"ConsignmentEntry", 
+								"batchNum",
+								false, 
+								null,
+								null,
 								null,
 								true,
 								true,

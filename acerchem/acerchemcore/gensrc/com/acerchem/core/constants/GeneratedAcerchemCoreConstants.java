@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-4-18 23:32:33                          ---
+ * --- Generated at 2018-4-20 11:35:05                          ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.constants;
@@ -24,6 +24,7 @@ public class GeneratedAcerchemCoreConstants
 		public static final String CREDITACCOUNTSTATUSENUM = "CreditAccountStatusEnum".intern();
 		public static final String CREDITPAYMENTINFO = "CreditPaymentInfo".intern();
 		public static final String CREDITTRANSACTION = "CreditTransaction".intern();
+		public static final String CUSTOMERAREA = "CustomerArea".intern();
 		public static final String CUSTOMERCREDITACCOUNT = "CustomerCreditAccount".intern();
 		public static final String ELECTRONICSCOLORVARIANTPRODUCT = "ElectronicsColorVariantProduct".intern();
 		public static final String FUNCTIONBUTTONCOMPONENT = "FunctionButtonComponent".intern();
@@ -47,11 +48,18 @@ public class GeneratedAcerchemCoreConstants
 			public static final String EMPLOYEECONFIRMDELIVERY = "employeeConfirmDelivery".intern();
 			public static final String EMPLOYEECONFIRMPAY = "employeeConfirmPay".intern();
 			public static final String PAYCONFIRM = "payConfirm".intern();
+			public static final String PICKUPDATE = "pickUpDate".intern();
 		}
 		public static class AbstractOrderEntry
 		{
 			public static final String AVAILABLEDATE = "availableDate".intern();
+			public static final String BASEREALPRICE = "baseRealPrice".intern();
 			public static final String ISUSEFUTURESTOCK = "isUseFutureStock".intern();
+			public static final String TOTALREALPRICE = "totalRealPrice".intern();
+		}
+		public static class ConsignmentEntry
+		{
+			public static final String BATCHNUM = "batchNum".intern();
 		}
 		public static class CsTicket
 		{
@@ -64,6 +72,7 @@ public class GeneratedAcerchemCoreConstants
 		}
 		public static class Customer
 		{
+			public static final String AREA = "area".intern();
 			public static final String COMPANYTYPE = "companyType".intern();
 			public static final String CREDITACCOUNT = "creditAccount".intern();
 			public static final String EMPLOYEESNO = "employeesNo".intern();
@@ -134,10 +143,21 @@ public class GeneratedAcerchemCoreConstants
 			public static final String LOCKED = "LOCKED".intern();
 			public static final String NORMAL = "NORMAL".intern();
 		}
+		public static class CustomerArea
+		{
+			public static final String NORTH_AMERICA = "North_America".intern();
+			public static final String SOUTH_AMERICA = "South_America".intern();
+		}
 		public static class ImageFailedActionType
 		{
 			public static final String ADD = "ADD".intern();
 			public static final String DEL = "DEL".intern();
+		}
+		public static class OrderStatus
+		{
+			public static final String CONFIRMED = "CONFIRMED".intern();
+			public static final String DELIVERED = "DELIVERED".intern();
+			public static final String PAIED = "PAIED".intern();
 		}
 		public static class PaymentTransactionType
 		{

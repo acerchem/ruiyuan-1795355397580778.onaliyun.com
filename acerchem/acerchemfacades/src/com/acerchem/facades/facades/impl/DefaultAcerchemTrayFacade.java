@@ -12,6 +12,7 @@ import de.hybris.platform.order.CartService;
 import de.hybris.platform.servicelayer.i18n.CommonI18NService;
 import de.hybris.platform.servicelayer.i18n.I18NService;
 import de.hybris.platform.servicelayer.session.SessionService;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
@@ -21,6 +22,10 @@ import java.math.BigDecimal;
 
 @Service("acerchemTrayFacade")
 public class DefaultAcerchemTrayFacade implements AcerchemTrayFacade {
+
+    private static final Logger LOG = Logger.getLogger(DefaultAcerchemTrayFacade.class);
+
+    private final String errorCode="1";
 
     @Resource
     private AcerchemTrayService acerchemTrayService;
@@ -60,7 +65,8 @@ public class DefaultAcerchemTrayFacade implements AcerchemTrayFacade {
                 //先获取托盘比例，在计算数量
                 String unitCalculateRato = productModel.getUnitCalculateRato();
                 if (ObjectUtils.isEmpty(unitCalculateRato)){
-                    throw new AcerchemOrderException("当前商品未配置托盘比例,产品编号："+productModel.getCode());
+                   LOG.error("当前商品未配置托盘比例,产品编号："+productModel.getCode());
+                   throw new AcerchemOrderException(errorCode,"当前商品未配置托盘比例,产品编号："+productModel.getCode()+",请联系系统售后人员.");
                 }
                 Long quantity = aoe.getQuantity();
 
