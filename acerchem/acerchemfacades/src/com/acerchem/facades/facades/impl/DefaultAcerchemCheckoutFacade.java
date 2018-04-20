@@ -276,8 +276,17 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                 totalUnitCalculateRato = totalUnitCalculateRato.add(BigDecimal.valueOf(entryUnitCalculateRato));
             }
             //总附加费用
-            BigDecimal totalAdditionalFee = BigDecimal.valueOf(cartModel.getDeliveryCost())
-                    .add(new BigDecimal(cartModel.getOperateCost())).add(new BigDecimal(cartModel.getStorageCost()));
+            BigDecimal totalAdditionalFee = BigDecimal.ZERO;
+            if (cartModel.getDeliveryCost()!=null){
+                totalAdditionalFee = BigDecimal.valueOf(cartModel.getDeliveryCost());
+            }
+            if (cartModel.getOperateCost()!=null){
+                totalAdditionalFee = totalAdditionalFee.add(BigDecimal.valueOf(cartModel.getOperateCost()));
+            }
+            if (cartModel.getStorageCost()!=null){
+                totalAdditionalFee = totalAdditionalFee.add(BigDecimal.valueOf(cartModel.getStorageCost()));
+            }
+
             int size = cartModel.getEntries().size();
             //
             BigDecimal remainTotalDeliveryCost =BigDecimal.ZERO;
