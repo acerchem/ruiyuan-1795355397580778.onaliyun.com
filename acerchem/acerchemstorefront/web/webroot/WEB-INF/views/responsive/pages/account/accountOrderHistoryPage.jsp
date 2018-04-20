@@ -68,7 +68,7 @@
 							${fn:escapeXml(order.total.formattedValue)}
 						</td>
 						<td class="responsive-table-cell responsive-table-cell-bold" style="padding:10px 10px;font-size:14px;">
-							<a href="${confirmOrder}${ycommerce:encodeUrl(order.code)}" style="${order.customerConfirm?'display: none;':''}">Confirm</a>
+							<a href="${confirmOrder}${ycommerce:encodeUrl(order.code)}?confirm=order" style="${order.customerConfirm?'display: none;':''}">Confirm</a>
 						</td>
 						
 					</ycommerce:testId>

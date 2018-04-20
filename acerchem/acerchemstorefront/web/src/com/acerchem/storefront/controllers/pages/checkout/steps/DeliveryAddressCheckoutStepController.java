@@ -63,7 +63,6 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	@Resource(name = "defaultAcerchemCheckoutFacade")
 	private AcerchemCheckoutFacade acerchemCheckoutFacade;
 
-	@Override
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	@RequireHardLogIn
 	@PreValidateQuoteCheckoutStep
@@ -425,7 +424,13 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		}else{
 			model.addAttribute("paymentInfos",acerchemCheckoutFacade.getSupportedCardTypes("DELIVERY_GROSS"));
 		}
-		model.addAttribute("deliveryAddresses", getDeliveryAddresses(cartData.getDeliveryAddress()));
+
+		if (cartData.getDeliveryMode()!=null&&"DELIVERY_MENTION".equals(cartData.getDeliveryMode().getCode())) {
+			model.addAttribute("deliveryAddresses", acerchemCheckoutFacade.getDeliveryAddresses());
+		}else{
+			model.addAttribute("deliveryAddresses", getDeliveryAddresses(cartData.getDeliveryAddress()));
+		}
+
 		model.addAttribute("noAddress", Boolean.valueOf(getCheckoutFlowFacade().hasNoDeliveryAddress()));
 		model.addAttribute("addressFormEnabled", Boolean.valueOf(getCheckoutFacade().isNewAddressEnabledForCart()));
 		model.addAttribute("removeAddressEnabled", Boolean.valueOf(getCheckoutFacade().isRemoveAddressEnabledForCart()));

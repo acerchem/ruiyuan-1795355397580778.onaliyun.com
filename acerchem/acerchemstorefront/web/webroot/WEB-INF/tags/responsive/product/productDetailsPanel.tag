@@ -235,6 +235,7 @@
 				</div>
 				<div class="tableshare">
 					<div class="title">Share with a Friend</div>
+					<ul class="share-buttons"></ul>
 				</div>
 			</div>
 			<!-- r end -->	

@@ -80,7 +80,7 @@ $(document).ready(function(){
 
 
 	var shareele = $('.footermin .share-buttons');
-	$('.product-right .tableshare').append(shareele.clone());
+	 $('.product-right .tableshare .share-buttons').html(shareele.clone());
 
 	// m-starlev
 	function starlev(){
