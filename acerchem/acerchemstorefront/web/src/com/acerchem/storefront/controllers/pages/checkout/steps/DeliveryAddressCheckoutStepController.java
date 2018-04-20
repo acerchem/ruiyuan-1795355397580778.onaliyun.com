@@ -70,7 +70,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	public String enterStep(final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		getCheckoutFacade().setDeliveryAddressIfAvailable();
-		final CartData cartData = getCheckoutFacade().getCheckoutCart();
+		final CartData cartData = acerchemCheckoutFacade.getCheckoutCart();
 
 		populateCommonModelAttributes(model, cartData, new AddressForm());
 
@@ -357,10 +357,14 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 
     @RequestMapping(value = "/addPickUpDate", method = RequestMethod.GET)
     @RequireHardLogIn
-    public String addPickUpDate(final Model model, @RequestParam(required = false) final String pickUpDate) {
+    public String addPickUpDate(final Model model, @RequestParam(required = false) final String pickUpDate) throws CMSItemNotFoundException {
 
         //保存收货时间
         acerchemCheckoutFacade.savePickUpDateForOrder(pickUpDate);
+        
+        final CartData cartData = acerchemCheckoutFacade.getCheckoutCart();
+
+		populateCommonModelAttributes(model, cartData, new AddressForm());
 
 		return ControllerConstants.Views.Pages.MultiStepCheckout.AddEditDeliveryAddressPage;
 

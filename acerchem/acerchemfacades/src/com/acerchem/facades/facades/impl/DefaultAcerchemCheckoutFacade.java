@@ -236,12 +236,18 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
     public CartData getCheckoutCart()
     {
         final CartData cartData = getCartFacade().getSessionCart();
+        final CartModel cartModel = getCartService().getSessionCart();
         if (cartData != null)
         {
             cartData.setDeliveryAddress(getDeliveryAddress());
             cartData.setDeliveryMode(getDeliveryMode());
             cartData.setPaymentModeData(getPaymentModeData());
             cartData.setPaymentInfo(getPaymentDetails());
+            if(cartModel.getPickUpDate()!=null){
+        	  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-DD");
+        	  cartData.setPickUpdate(sdf.format(cartModel.getPickUpDate()));
+            }
+          
         }
         return cartData;
     }
