@@ -24,9 +24,9 @@ import de.hybris.platform.processengine.BusinessProcessEvent;
 import de.hybris.platform.processengine.BusinessProcessService;
 import de.hybris.platform.servicelayer.model.ModelService;
 
-public class OrderForAllCofirmAction extends AbstractComponentWidgetAdapterAware implements CockpitAction<OrderModel, Object>
+public class OrderForEmployeeCofirmDeliveryAction extends AbstractComponentWidgetAdapterAware implements CockpitAction<OrderModel, Object>
 {
-	private static final Logger LOG = Logger.getLogger(OrderForAllCofirmAction.class);
+	private static final Logger LOG = Logger.getLogger(OrderForEmployeeCofirmDeliveryAction.class);
 	private static final String CURRENT_OBJECT = "currentObject";
 	
 	@Resource
@@ -53,14 +53,14 @@ public class OrderForAllCofirmAction extends AbstractComponentWidgetAdapterAware
 		final String eventID = new StringBuilder()//
 		          .append(order.getOrderProcess().iterator().next().getCode())//
 		          .append("_")//
-		    .append("ConfirmActionEvent")//
+		    .append("ConfirmConsignmentActionEvent")//
 		    .toString();
 		final BusinessProcessEvent event = BusinessProcessEvent.builder(eventID)
-			    .withChoice("waitForEmployeeConfirm").build();
+			    .withChoice("waitForEmployeeConfirmConsignment").build();
 			  getBusinessProcessService().triggerEvent(event);
-			  order.setEmployeeConfirm(true);
+			  order.setEmployeeConfirmDelivery(true);
 			  this.modelService.save(order);
-		LOG.info("--------------------end-------------------"+order.getEmployeeConfirm());
+		LOG.info("--------------------end-------------------"+order.getEmployeeConfirmDelivery());
 		return new ActionResult("success");
 	}
 	
