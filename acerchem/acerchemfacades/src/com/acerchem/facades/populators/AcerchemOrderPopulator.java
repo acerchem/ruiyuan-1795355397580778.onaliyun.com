@@ -1,4 +1,3 @@
-
 package com.acerchem.facades.populators;
 
 import de.hybris.platform.commercefacades.order.converters.populator.OrderPopulator;
@@ -30,8 +29,6 @@ public class AcerchemOrderPopulator extends OrderPopulator {
 		target.setCustomerConfirmDelivery(source.getCustomerConfirmDelivery());
 		target.setEmployeeConfirmDelivery(source.getEmployeeConfirmDelivery());
 		target.setPickUpDate(source.getPickUpDate());
-		target.setStorageCost(source.getStorageCost());
-		target.setOperateCost(source.getOperateCost());
         if (source.getStorageCost()!=null){
             target.setStorageCost(priceDataFactory.create(PriceDataType.BUY,
                     BigDecimal.valueOf(source.getStorageCost().doubleValue()), source.getCurrency().getIsocode()));
