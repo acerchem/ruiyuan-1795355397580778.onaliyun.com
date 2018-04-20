@@ -1,15 +1,12 @@
 package com.acerchem.core.image.dao.impl;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.fest.util.Collections;
 
 import com.acerchem.core.image.dao.AcerChemMediaDao;
-import com.acerchem.core.model.ImageFailedRecordModel;
 
 import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
@@ -47,10 +44,19 @@ public class AcerChemMediaDaoImpl implements AcerChemMediaDao {
 	public List<MediaModel> getMediasOfLimit(String mime, int limitCount) {
 		// TODO Auto-generated method stub
 		
-		final String SQL="select {pk} from {" + MediaModel._TYPECODE + "} where {" + MediaModel.MIME + "} like?mime ";
+		final String SQL="select {pk} from {" + MediaModel._TYPECODE + "} where {" + MediaModel.ALIYUNURL + "} IS NULL and {"
+				 + MediaModel.MIME + "} =?mime";
+		
+		FlexibleSearchQuery query = new FlexibleSearchQuery(SQL);
+		query.addQueryParameter("mime", mime);
+		query.setNeedTotal(false);
+		query.setCount(limitCount);
+		
+		SearchResult<MediaModel> result = flexibleSearchService.search(query);
+		
 		//MediaModel mm = new MediaModel();
 		
-		return null;
+		return result.getResult();
 	}
 	
 	

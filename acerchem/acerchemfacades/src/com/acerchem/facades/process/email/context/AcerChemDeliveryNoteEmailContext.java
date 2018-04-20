@@ -15,6 +15,7 @@ import com.acerchem.facades.process.email.context.pojo.AcerChemEmailContextUtils
 import com.acerchem.facades.process.email.context.pojo.DeliveryNoteEmailContextPoJo;
 import com.acerchem.facades.process.email.context.pojo.ProductItemDataOfEmail;
 import com.acerchem.facades.process.email.context.pojo.ProductTotalDataOfEmail;
+
 import de.hybris.platform.acceleratorservices.model.cms2.pages.EmailPageModel;
 import de.hybris.platform.acceleratorservices.process.email.context.AbstractEmailContext;
 import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
@@ -259,14 +260,17 @@ public class AcerChemDeliveryNoteEmailContext extends AbstractEmailContext<Order
 		//Collection<AbstractContactInfoModel> coll = customer.getContactInfos();
 		
 		AbstractContactInfoModel contactInfo =  contactInfoService.getMainContactInfo(customer);
-		UserModel curUser = contactInfo.getUser();
-		this.setContactUser(curUser.getName());
-		
-		List<String> phones = AcerChemEmailContextUtils.getPhoneNumbers(curUser.getPhoneNumbers());
-		if(phones.size() > 0){
-			this.setContactMobile(phones.get(0));
+		if (contactInfo != null){
+			UserModel curUser = contactInfo.getUser();
+			if (curUser != null  ){
+				this.setContactUser(curUser.getName());
+				
+				List<String> phones = AcerChemEmailContextUtils.getPhoneNumbers(curUser.getPhoneNumbers());
+				if(phones.size() > 0){
+					this.setContactMobile(phones.get(0));
+				}
+			}
 		}
-		
 		
 	}
 
