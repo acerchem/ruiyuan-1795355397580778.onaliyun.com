@@ -259,10 +259,14 @@ inputint()
 		
 		
 		$('#storeHidId').val($("#storeMulId").val());
+		
 		invi = $('.invernum .inventory i');
 		
 		emvi = $('.prod-sum i em')
 		
+		cnvi = $('.delivery span em')
+		
+		var countrys = $("#countryId option[value='"+$("#storeMulId").val()+"']").text();
 		 		
 		var futureAvailableDate = $("#futureAvailableDateId option[value='"+$("#storeMulId").val()+"']").text();
 	
@@ -273,8 +277,8 @@ inputint()
 									'<ul class="select"><li data-val="'+futureInventory+'">'+futureAvailableDate+'</li></ul>';
 	   
 		$('#selectId').html(futureHtml); */
-		
-	//if ($('#checkfutureId').attr('checked')) {
+				
+		cnvi.text(countrys);
 		
 		if($('#checkfutureId').is(':checked')) {
 
