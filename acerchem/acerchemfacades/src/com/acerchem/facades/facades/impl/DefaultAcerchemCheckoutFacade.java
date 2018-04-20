@@ -341,6 +341,7 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                 afterPlaceOrder(cartModel, orderModel);
                 if (orderModel != null)
                 {
+                    apportionmentCartPrice(cartModel);
                     return getOrderConverter().convert(orderModel);
                 }
             }
