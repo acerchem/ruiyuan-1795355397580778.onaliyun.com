@@ -9,7 +9,18 @@
  Information and shall use it only in accordance with the terms of the
  license agreement you entered into with SAP.
 -->
-<config xmlns="http://www.hybris.com/cockpit/config">
+<config xmlns="http://www.hybris.com/cockpit/config"
+		xmlns:y="http://www.hybris.com/cockpit/config/hybris"
+		xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config"
+		xmlns:list-view="http://www.hybris.com/cockpitng/component/listView"
+		xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea"
+		xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree"
+		xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch"
+		xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch"
+		xmlns:df="http://www.hybris.com/cockpitng/component/dynamicForms"
+		xmlns:dsb="http://www.hybris.com/cockpitng/config/dashboard"
+		xmlns:na="http://www.hybris.com/cockpitng/config/notifications"
+		xmlns:grid-view="http://www.hybris.com/cockpitng/component/gridView">
 
 	<!-- acerchembackoffice UI configuration should be provided here -->
 
@@ -17,4 +28,12 @@
 		<!--Please check documentation for code snippets for specific components-->
 	<!--</context>-->
 
+	<context type="Order" component="editorareaactions" merge-by="type" parent="AbstractOrder">
+		<y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+				<y:group qualifier="common">
+					<y:label>actiongroup.common</y:label>
+					<y:action action-id="com.acerchem.actions.order.auditing" property="currentObject"/>
+				</y:group>
+			</y:actions>
+	</context>
 </config>
