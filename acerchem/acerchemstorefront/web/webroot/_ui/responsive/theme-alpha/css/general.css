@@ -2118,11 +2118,11 @@ display: inline-table;
 	background: url(maxicon.png) #6fa742;
 	background-position: -8px -567px;
 }
-.gal-centent .g-cartable .item .g-cart:hover i{
+.gal-centent .g-cartable .aitem .g-cart:hover i{
 	background: url(maxicon.png) no-repeat #096735;
 	background-position: -6px -567px;
 }
-.gal-centent .g-cartable .item .g-cart:hover i:after{
+.gal-centent .g-cartable .aitem .g-cart:hover i:after{
 	content: 'Add to Cart';
 	display:block;
 	color:#fff;
@@ -2403,7 +2403,7 @@ display: inline-table;
 	border-left: 0;
 	border-right: 0;
 }
-.gal-centent .item .g-cart:hover i{
+.gal-centent .aitem .g-cart:hover i{
 	background-color: #096735;
 	background:-webkit-gradient(linear,0 100%,from(#6fa742));
 	-webkit-animation:g-cart 1s;
