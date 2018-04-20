@@ -146,28 +146,21 @@
 						<div class="delivery flex-wrap">
 						
 						<select id="countryId" style="display: none;">
-							<c:forEach items="${countrys}" var="data"  varStatus="id"  >
-									    
-							       <%-- <c:forEach items="${data.countryDataList}" var="country"  varStatus="vs"  >
-								    
-								      <c:set var="myVar" value="${stat.first ? '' : myVar} ${country.name}" />
-								    
-								    </c:forEach> --%>
-							    
-							      <option value ="${data.storeId}">${data.countryDataList}</option>
-							     
-		                        </c:forEach>
-	                    </select>     
-                        
-							      
-							
+						<c:forEach items="${countrys}" var="data">
+						<option value ="${data.storeId}">${data.countryListString}</option>
+						
+                        </c:forEach>
+                        </select> 
+						
 						<c:forEach items="${countrys}" var="data"  varStatus="id"  >
 							<c:if test="${id.index==0}">
 							    <c:forEach items="${data.countryDataList}" var="country"  varStatus="vs"  >
 							    
 							      <c:set var="myVar" value="${stat.first ? '' : myVar} ${country.name}" />
-							    
+							      
 							    </c:forEach>
+							    
+							    
 					        </c:if>	
 	                       </c:forEach>
                         

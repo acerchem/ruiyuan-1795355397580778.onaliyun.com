@@ -42,13 +42,13 @@ public class AcerChemEmailContextUtils {
 			}
 			
 		}
-		return "";
+		return "&nbsp;";
 	}
 	
 	//获得信用期
 	public static String getPaymementTerms(final OrderProcessModel orderProcessModel,final String paymentMode){
 		
-		String terms = " ";
+		String terms = "&nbsp; ";
 		if (StringUtils.isNotBlank(paymentMode)) {
 			if (!paymentMode.equalsIgnoreCase("prepay")) {
 				CustomerModel customerModel = (CustomerModel) orderProcessModel.getOrder().getUser();
@@ -58,11 +58,10 @@ public class AcerChemEmailContextUtils {
 					if (customerCreditAccount != null) {
 						int dayCount = customerCreditAccount.getBillingInterval();
 
-						terms.replace("{DAYCOUNT}", String.valueOf(dayCount));
+						terms = terms.replace("{DAYCOUNT}", String.valueOf(dayCount));
 					}
 				} else {
-					terms.replace("{DAYCOUNT}", "0");
-					;
+					terms = terms.replace("{DAYCOUNT}", "0");
 				}
 			}
 		}

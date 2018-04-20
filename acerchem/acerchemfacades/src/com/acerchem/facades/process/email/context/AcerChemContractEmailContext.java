@@ -1,14 +1,11 @@
 package com.acerchem.facades.process.email.context;
 
 import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
-
-import javax.annotation.Resource;
-
-import java.text.DecimalFormat;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -27,13 +24,12 @@ import de.hybris.platform.commercefacades.order.data.OrderData;
 import de.hybris.platform.commercefacades.order.data.OrderEntryData;
 import de.hybris.platform.commercefacades.product.data.PriceData;
 import de.hybris.platform.commercefacades.product.data.ProductData;
+import de.hybris.platform.commercefacades.storelocator.data.PointOfServiceData;
 import de.hybris.platform.core.model.c2l.LanguageModel;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
-import de.hybris.platform.ordersplitting.WarehouseService;
-import de.hybris.platform.ordersplitting.model.WarehouseModel;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 
 public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProcessModel> {
@@ -48,8 +44,6 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 	private String paymentTerms;
 	private CustomerModel customerModel;  
 
-	@Resource
-	private WarehouseService warehouseService;
 
 	@Override
 	public void init(final OrderProcessModel orderProcessModel, final EmailPageModel emailPageModel) {
@@ -143,9 +137,9 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 		double subAmount = 0;
 
 		if (CollectionUtils.isNotEmpty(orderEntries)) {
-			for (OrderEntryData orderData : orderEntries) {
+			for (OrderEntryData orderEntry : orderEntries) {
 
-				ProductData product = orderData.getProduct();
+				ProductData product = orderEntry.getProduct();
 
 				ProductItemDataOfEmail pie = new ProductItemDataOfEmail();
 
@@ -172,10 +166,10 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 				pie.setProductName(product.getName());
 				pie.setUnitName(product.getUnitName());
 
-				long longQuantity = orderData.getQuantity();
+				long longQuantity = orderEntry.getQuantity();
 				pie.setQuantity(String.valueOf(longQuantity));
 
-				PriceData priceData = orderData.getBasePrice();
+				PriceData priceData = orderEntry.getBasePrice();
 				BigDecimal amount = new BigDecimal(0);
 				if (priceData != null) {
 					pie.setPrice(priceData.getFormattedValue());
@@ -196,22 +190,22 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 
 				pie.setTotal(false);
 
-				quantity += orderData.getQuantity();
-				subQuantity += orderData.getQuantity();
+				quantity += orderEntry.getQuantity();
+				subQuantity += orderEntry.getQuantity();
 				totalAmount += amount.doubleValue();
 				subAmount += amount.doubleValue();
 				list.add(pie);
 
 				// warehouse
 				if (StringUtils.isBlank(wareHouse)) {
-					String warehouseCode = orderData.getWarehouseCode();
-					if (StringUtils.isNotBlank(warehouseCode)) {
-						WarehouseModel whModel = warehouseService.getWarehouseForCode(warehouseCode);
-						if (whModel != null) {
-							wareHouse = whModel.getName();
-							pojo.setWarehouse(wareHouse);
-						}
+					//String warehouseCode = orderEntry.getWarehouseCode();
+					PointOfServiceData  pos = orderEntry.getDeliveryPointOfService();
+					if (pos != null){
+						wareHouse=pos.getAddress().getFormattedAddress();
+						wareHouse = StringUtils.defaultString(wareHouse,"&nbsp;");
 					}
+					
+					
 				}
 
 			}

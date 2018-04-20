@@ -69,7 +69,7 @@
 						</span>
 						
 						<span>
-									<i><a href="${confirmOrder}${orderData.code}" style="${order.customerConfirm?'display: none;':''}">Confirm</a></i>
+									<i><a href="${confirmOrder}${orderData.code}" style="${orderData.customerConfirm?'display: none;':''}">Confirm</a></i>
 								</span>
 								
                             </div>

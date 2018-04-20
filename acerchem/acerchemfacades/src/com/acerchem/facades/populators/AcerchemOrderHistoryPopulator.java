@@ -12,6 +12,15 @@ public class AcerchemOrderHistoryPopulator extends OrderHistoryPopulator impleme
 	public void populate(OrderModel source, OrderHistoryData target) throws ConversionException {
 		super.populate(source,target);
 		target.setCustomerConfirm(source.getCustomerConfirm());
+		target.setEmployeeConfirm(source.getEmployeeConfirm());
+		target.setDeliveryConfirm(source.getDeliveryConfirm());
+		target.setPayConfirm(source.getPayConfirm());
+		target.setCustomerConfirmPay(source.getCustomerConfirmPay());
+		target.setEmployeeConfirmPay(source.getEmployeeConfirmPay());
+		target.setCustomerConfirmDelivery(source.getCustomerConfirmDelivery());
+		target.setEmployeeConfirmDelivery(source.getEmployeeConfirmDelivery());
+		target.setPickUpDate(source.getPickUpDate());
+		
 	}
 
 }

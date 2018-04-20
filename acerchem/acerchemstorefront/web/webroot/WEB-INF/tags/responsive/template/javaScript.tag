@@ -45,7 +45,7 @@
 		
 		<%-- Custom ACC JS --%>
 		<!-- shaun -->
-		<script type="text/javascript" src="${commonResourcePath}/js/maxprod.js"></script>
+		
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.address.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.autocomplete.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/acc.carousel.js"></script>
@@ -92,10 +92,11 @@
 		
 		
 		<%-- acerchem js file --%>
-		<script type="text/javascript" src="${commonResourcePath}/js/general.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/swiper.min.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/index.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/general.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/max.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/maxprod.js"></script>
 		
 		<%-- Cms Action JavaScript files --%>
 		<c:forEach items="${cmsActionsJsFiles}" var="actionJsFile">

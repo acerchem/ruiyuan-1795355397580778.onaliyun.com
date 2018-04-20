@@ -1,4 +1,5 @@
-inputint()
+$(document).ready(function(){
+	inputint()
 
 	var wrap = '.maxon_salesul .slide-wrap';
 	maxon_salesul(wrap)
@@ -20,15 +21,15 @@ inputint()
 	var flipspan = '.m-prodslide .minimg span',
 		flipbtn = $('.m-prodslide .flip span');
 	var slidwrap = new Swiper('.slidewrap',{
-        wrapperClass : 'slide-item', 
-        slideClass : 'item',
-        calculateHeight : true,
-        resizeReInit : true,
-        speed: 600,        
-        pagination: '.m-prodslide .minimg', 
-       // paginationClickable :true,
-        onSwiperCreated:function(swiper){
-        	$('.m-prodslide .slide-item li').each(function(){
+	    wrapperClass : 'slide-item', 
+	    slideClass : 'item',
+	    calculateHeight : true,
+	    resizeReInit : true,
+	    speed: 600,        
+	    pagination: '.m-prodslide .minimg', 
+	   // paginationClickable :true,
+	    onSwiperCreated:function(swiper){
+	    	$('.m-prodslide .slide-item li').each(function(){
 		   		var aindex = $(this).index(),
 		   			aimg = $(this).html(),
 		   			aheight = swiper.width,
@@ -38,7 +39,7 @@ inputint()
 		   			$('.m-prodslide .slide-item').height(aheight);
 			})
 	     }      
-    })
+	})
 
 
 	$(document).on('mouseover',flipspan,function(){
@@ -79,7 +80,7 @@ inputint()
 
 
 	var shareele = $('.footermin .share-buttons');
-	$('.product-right .tableshare').append(shareele.clone());
+	 $('.product-right .tableshare .share-buttons').html(shareele.clone());
 
 	// m-starlev
 	function starlev(){
@@ -130,7 +131,7 @@ inputint()
 			/* invi.text(futday+parseInt(invi.text())); */
 			
 			var futureAvailableDate = $("#futureAvailableDateId option[value='"+$("#storeHidId").val()+"']").text();
-	
+
 		    var futureInventory =  $("#futureInventoryId option[value='"+$("#storeHidId").val()+"']").text();
 			
 			invi.text(futureInventory);
@@ -232,62 +233,45 @@ inputint()
 		$('body').css({'height':'','overflow':''});
 	})
 
-	// m-message
-	$(document).on('click','.product-right .btn-showlist',function(){
-		var srch = window.innerHeight;
-		$('body').css({'height':srch,'overflow':'hidden'});
-		$('.m-message').show();
-	})
-
-	$('.m-message .btn-set .btn').on('click',function(){
-		var aclass= $(this).attr('class'),
-			selbox = $(this).parents('.mes-table').find('.selbox');
-		switch(aclass){
-			case 'btn btn-line':
-				$('#message')[0].reset();
-				$('.m-message').hide();
-				break;
-			case 'btn btn-submit':
-				$('#message').submit();
-				break;					
-		}
-		$('body').css({'height':'','overflow':''});
-		rebody()
-	})
 
 	$("#storeMulId").change(function(){
 		
 		
 		$('#storeHidId').val($("#storeMulId").val());
-		invi = $('.invernum .inventory i');
+			
+			invi = $('.invernum .inventory i');
+			
+			emvi = $('.prod-sum i em')
+			
+			cnvi = $('.delivery span em')
+			
+			var countrys = $("#countryId option[value='"+$("#storeMulId").val()+"']").text();
+			 		
+			var futureAvailableDate = $("#futureAvailableDateId option[value='"+$("#storeMulId").val()+"']").text();
 		
-		emvi = $('.prod-sum i em')
-		
-		 		
-		var futureAvailableDate = $("#futureAvailableDateId option[value='"+$("#storeMulId").val()+"']").text();
-	
-		var futureInventory =  $("#futureInventoryId option[value='"+$("#storeMulId").val()+"']").text();
-		
-		/* var futureHtml='<input type="hidden" value="'+futureInventory+'" name="futday" alt="Please Select nation" id="futday">'+
-									'<span class="pitch">'+futureAvailableDate+'</span>'+
-									'<ul class="select"><li data-val="'+futureInventory+'">'+futureAvailableDate+'</li></ul>';
-	   
-		$('#selectId').html(futureHtml); */
-		
-	//if ($('#checkfutureId').attr('checked')) {
-		
-		if($('#checkfutureId').is(':checked')) {
+			var futureInventory =  $("#futureInventoryId option[value='"+$("#storeMulId").val()+"']").text();
+			
+			/* var futureHtml='<input type="hidden" value="'+futureInventory+'" name="futday" alt="Please Select nation" id="futday">'+
+										'<span class="pitch">'+futureAvailableDate+'</span>'+
+										'<ul class="select"><li data-val="'+futureInventory+'">'+futureAvailableDate+'</li></ul>';
+		   
+			$('#selectId').html(futureHtml); */
+					
+			cnvi.text(countrys);
+			
+			if($('#checkfutureId').is(':checked')) {
 
+				
+				invi.text(futureInventory);
+				
+				emvi.text(futureAvailableDate);
+			} else {
+				
+				invi.text($("#inventoryId option[value='"+$("#storeMulId").val()+"']").text());
+				
+				emvi.text($("#avaReleaseDayId option[value='"+$("#storeMulId").val()+"']").text());
+			}
 			
-			invi.text(futureInventory);
-			
-			emvi.text(futureAvailableDate);
-		} else {
-			
-			invi.text($("#inventoryId option[value='"+$("#storeMulId").val()+"']").text());
-			
-			emvi.text($("#avaReleaseDayId option[value='"+$("#storeMulId").val()+"']").text());
-		}
-		
-        $('#storeId').val($("#storeMulId").val());
+	        $('#storeId').val($("#storeMulId").val());
 	});
+})

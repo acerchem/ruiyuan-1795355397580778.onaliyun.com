@@ -122,6 +122,11 @@ public class AcerChemDeliveryNoteEmailContext extends AbstractEmailContext<Order
 		// add list
 		List<ProductItemDataOfEmail> list = new ArrayList<ProductItemDataOfEmail>();
 		List<ConsignmentData> consignments = orderData.getConsignments();
+		
+//		List<ConsignmentEntryData> consignmentEntries = orderData.getConsignments().stream()
+//				.filter(x->CollectionUtils.isNotEmpty(x.getEntries()))
+//				.flatMap(y->y.getEntries().stream()).collect(Collectors.toList());
+		
 		String tempName = "";
 
 		long quantity = 0;
@@ -166,7 +171,7 @@ public class AcerChemDeliveryNoteEmailContext extends AbstractEmailContext<Order
 						pie.setProductCode(product.getCode());
 						pie.setProductName(product.getName());
 						pie.setQuantity(consignEntry.getQuantity().toString());
-						pie.setBatchNo(" ");
+						pie.setBatchNo(StringUtils.defaultString(consignEntry.getBatchNum()," "));
 						String tempNet = StringUtils.defaultString(product.getNetWeight(),"0");
 						String tempGross = StringUtils.defaultString(product.getGrossWeight(),"0");
 						if(!StringUtils.isNumeric(tempNet)){

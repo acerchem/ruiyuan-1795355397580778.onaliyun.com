@@ -61,9 +61,10 @@
 			<value code="L" />
 
 		</enumtype>
-		
-		<!-- 用户区域:上线前再配置-->
-		<enumtype code="CustomerArea" autocreate="true" generate="true" dynamic="true">
+
+		<!-- 用户区域:上线前再配置 -->
+		<enumtype code="CustomerArea" autocreate="true" generate="true"
+			dynamic="true">
 			<description>用户区域</description>
 			<value code="North_America" />
 			<value code="South_America" />
@@ -78,7 +79,7 @@
 			generate="false" dynamic="false">
 			<value code="LINE" />
 		</enumtype>
-		
+
 		<enumtype code="OrderStatus" autocreate="false" generate="true"
 			dynamic="true">
 			<value code="CONFIRMED" />
@@ -458,7 +459,7 @@
 						<persistence type="property" />
 						<description>CAS</description>
 					</attribute>
-					
+
 
 				</attributes>
 			</itemtype>
@@ -688,7 +689,8 @@
 					</attribute>
 					<attribute qualifier="area" type="CustomerArea">
 						<description>用户区域</description>
-						<modifiers read="true" write="true" search="true" optional="true"/>
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
 						<persistence type="property" />
 					</attribute>
 
@@ -837,6 +839,20 @@
 
 				</attributes>
 
+			</itemtype>
+		</typegroup>
+
+		<typegroup name="ConsignmentEntry">
+			<itemtype code="ConsignmentEntry" autocreate="false"
+				generate="false">
+				<description>Extending ConsignmentEntry type with additional attributes.</description>
+				<attributes>
+					<attribute qualifier="batchNum" type="java.lang.String">
+						<description>批次号</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
 			</itemtype>
 		</typegroup>
 
