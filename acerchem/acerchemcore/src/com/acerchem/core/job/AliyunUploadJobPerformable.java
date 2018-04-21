@@ -34,7 +34,6 @@ public class AliyunUploadJobPerformable extends AbstractJobPerformable<CronJobMo
 
 	@Resource
 	private AcerChemMediaService acerChemMediaService;
-
 	@Resource
 	private EnumerationService enumerationService;
 	@Resource
@@ -57,20 +56,11 @@ public class AliyunUploadJobPerformable extends AbstractJobPerformable<CronJobMo
 			"GfyBU4iNfQftoUV20fHoYz2zNqJARy");
 	private final String lsBucketName = Config.getString("aliyun.bucketName", "acerchem");
 
-	/*
-	 * (non-Javadoc)
-	 * 
-	 * @see
-	 * de.hybris.platform.servicelayer.cronjob.AbstractJobPerformable#perform(de
-	 * .hybris.platform.cronjob.model.CronJobModel)
-	 */
+	
 	@Override
 	public PerformResult perform(CronJobModel cronJob) {
 		// TODO Auto-generated method stub
-
 		try {
-
-			// image
 			List<String> imageParams = new ArrayList<String>();
 			imageParams.add("image/jpeg");
 			imageParams.add("image/png");
@@ -126,12 +116,13 @@ public class AliyunUploadJobPerformable extends AbstractJobPerformable<CronJobMo
 				// get localfile path
 				String localPath = media.getLocation();
 
-				System.out.println(localPath);
+				LOG.debug(localPath);
 				// get parent fileDir
 				File mainDataDir = MediaUtil.getLocalStorageDataDir();
 				// get local file
 				File file = MediaUtil.composeOrGetParent(mainDataDir, localPath);
-				System.out.println(file.getAbsolutePath());
+				LOG.debug(file.getAbsolutePath());
+
 				if (file.exists()) {
 
 					// aliyun path
@@ -148,6 +139,7 @@ public class AliyunUploadJobPerformable extends AbstractJobPerformable<CronJobMo
 					// synchronize to save media with aliyunUrl
 					String aliyunUrl = DOMAIN + "/" + key;
 					if (uploadFlag) {
+						
 						System.out.println("****upload end>>>>synsave to Media start*****");
 
 						media.setAliyunUrl(aliyunUrl);
@@ -180,7 +172,6 @@ public class AliyunUploadJobPerformable extends AbstractJobPerformable<CronJobMo
 		}
 
 	}
-
 	// 上传失败处理--保存上传的文件路径和aliyun的key路径
 	// private void uploadFailedProccess(MediaModel media, String aliyunPath) {
 	// try {
@@ -226,4 +217,5 @@ public class AliyunUploadJobPerformable extends AbstractJobPerformable<CronJobMo
 	// }
 	//
 	// }
+
 }

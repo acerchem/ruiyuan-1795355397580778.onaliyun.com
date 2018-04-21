@@ -44,6 +44,7 @@
 	
 	<action id="creditPayMode" bean="creditPayModeAction">
 		<transition name="OK" to="recordConsignmentInfo"/>
+		<transition name="NOK" to="error"/>
 	</action>
 	
 	<action id="linePayMode" bean="linePayModeAction">

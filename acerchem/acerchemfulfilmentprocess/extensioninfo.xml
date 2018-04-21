@@ -12,9 +12,10 @@
 
 	<extension abstractclassprefix="Generated" classprefix="AcerchemFulfilmentProcess" managername="AcerchemFulfilmentProcessManager" managersuperclass="de.hybris.platform.jalo.extension.Extension" name="acerchemfulfilmentprocess">
 
-
+		<requires-extension name="acerchemcore"/>
 		<requires-extension name="acceleratorservices"/>
 		<requires-extension name="ticketsystem"/>
+		<requires-extension name="acerchemfacades"/>
 
 		<coremodule generated="true" manager="com.acerchem.fulfilmentprocess.jalo.AcerchemFulfilmentProcessManager" packageroot="com.acerchem.fulfilmentprocess"/>
 

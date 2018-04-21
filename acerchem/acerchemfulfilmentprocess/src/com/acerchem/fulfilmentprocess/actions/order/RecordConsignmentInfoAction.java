@@ -24,7 +24,7 @@ public class RecordConsignmentInfoAction extends AbstractProceduralAction<OrderP
 	@Override
 	public void executeAction(final OrderProcessModel process)
 	{
-			
+		LOG.info("=================RecordConsignmentInfoAction================");
 	}
 
 }

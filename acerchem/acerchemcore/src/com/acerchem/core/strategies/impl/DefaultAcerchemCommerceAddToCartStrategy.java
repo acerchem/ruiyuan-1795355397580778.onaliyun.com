@@ -2,6 +2,8 @@ package com.acerchem.core.strategies.impl;
 
 import com.acerchem.core.strategies.AcerchemCommerceAddToCartStrategy;
 import de.hybris.platform.basecommerce.enums.InStockStatus;
+import de.hybris.platform.commercefacades.order.data.AddToCartParams;
+import de.hybris.platform.commerceservices.order.CommerceCartCalculationStrategy;
 import de.hybris.platform.commerceservices.order.CommerceCartModification;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationStatus;
@@ -22,6 +24,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
 
 import javax.annotation.Nonnull;
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
@@ -34,6 +37,9 @@ import java.util.stream.Collectors;
 public class DefaultAcerchemCommerceAddToCartStrategy extends DefaultCommerceAddToCartStrategy implements AcerchemCommerceAddToCartStrategy {
 
     private WarehouseService warehouseService;
+
+    @Resource
+    private CommerceCartCalculationStrategy commerceCartCalculationStrategy;
 
 
     @Override
@@ -205,7 +211,13 @@ public class DefaultAcerchemCommerceAddToCartStrategy extends DefaultCommerceAdd
                     Long.valueOf(modification.getEntry().getQuantity().longValue() + mergeTarget.getQuantity().longValue()));
             entryQuantities.put(modification.getEntry().getEntryNumber(), Long.valueOf(0L));
             getCartService().updateQuantities(parameter.getCart(), entryQuantities);
-            calculateCartPrice(parameter.getCart());
+
+
+            CommerceCartParameter commerceCartParameter = new CommerceCartParameter();
+            commerceCartParameter.setEnableHooks(true);
+            commerceCartParameter.setCart(parameter.getCart());
+            commerceCartCalculationStrategy.recalculateCart(commerceCartParameter);
+//            calculateCartPrice(parameter.getCart());
             modification.setEntry(mergeTarget);
         }
 

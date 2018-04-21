@@ -33,17 +33,19 @@ public class MediaFilesAfterDeletedListener extends AbstractEventListener<AfterI
 	private AcerChemImageUploadLogService acerChemImageUploadLogService;
 	@Resource
 	private AcerChemImageFailedRecoredService acerChemImageFailedRecoredService;
-	
-	private static final String Endpoint = Config.getString("aliyun.endpoint","http://oss-us-east-1.aliyuncs.com");
-	private static final String AccessKeyId = Config.getString("aliyun.accessKeyId","LTAItFNuj9ju8BhI");
-	private static final String AccessKeySecret = Config.getString("aliyun.accessKeySecret","GfyBU4iNfQftoUV20fHoYz2zNqJARy");
-	private static final String BucketName = Config.getString("aliyun.bucketName","acerchem");
+
+	private static final String Endpoint = Config.getString("aliyun.endpoint", "http://oss-us-east-1.aliyuncs.com");
+	private static final String AccessKeyId = Config.getString("aliyun.accessKeyId", "LTAItFNuj9ju8BhI");
+	private static final String AccessKeySecret = Config.getString("aliyun.accessKeySecret",
+			"GfyBU4iNfQftoUV20fHoYz2zNqJARy");
+	private static final String BucketName = Config.getString("aliyun.bucketName", "acerchem");
 
 	@Override
 	protected void onEvent(AfterItemRemovalEvent event) {
 		// TODO Auto-generated method stub
 		try {
 			if (event != null) {
+
 				System.out.println("****after item removal event active****");
 				PK pk = (PK) event.getSource();
 				// 指定是media
@@ -56,8 +58,7 @@ public class MediaFilesAfterDeletedListener extends AbstractEventListener<AfterI
 						String key = iulModel.getAliyunUrl().replace(domain + "/", "");
 
 						// 初始化upload参数
-						MediaFileManager.initializeParameters(Endpoint, AccessKeyId, AccessKeySecret,
-								BucketName);
+						MediaFileManager.initializeParameters(Endpoint, AccessKeyId, AccessKeySecret, BucketName);
 
 						System.out.println("*****delete aliyun file starting*****");
 						// delete aliyun file
@@ -68,10 +69,10 @@ public class MediaFilesAfterDeletedListener extends AbstractEventListener<AfterI
 							modelService.remove(iulModel);
 						} else {
 							deleteAliyunFileFailedProccess(iulModel, key);
-						}
-						System.out.print("*****delete aliyun file finished*****");
-					}
 
+						}
+
+					}
 				}
 			}
 		} catch (Exception e) {
@@ -81,10 +82,10 @@ public class MediaFilesAfterDeletedListener extends AbstractEventListener<AfterI
 	}
 
 	// 网上删除aliyun文件失败处理
-	private void deleteAliyunFileFailedProccess(final ImageUploadedLogModel iulModel, final String key) {
+	private void deleteAliyunFileFailedProccess(final ImageUploadedLogModel media, final String key) {
 		ImageFailedActionType actionType = enumerationService.getEnumerationValue(ImageFailedActionType.class, "DEL");
 
-		String fileName = iulModel.getAliyunUrl();
+		String fileName = media.getAliyunUrl();
 		if (fileName == null)
 			return;
 

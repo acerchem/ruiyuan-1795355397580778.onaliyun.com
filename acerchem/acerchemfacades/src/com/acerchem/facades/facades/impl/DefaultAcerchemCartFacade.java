@@ -59,14 +59,6 @@ public class DefaultAcerchemCartFacade extends DefaultCartFacade implements Acer
         params.setQuantity(quantity);
         params.setIsUseFutureStock(isUseFutureStock);
         params.setStoreId(storeId);
-        if (availableDate!=null) {
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-DD");
-            try {
-                params.setAvailableDate(sdf.parse(availableDate));
-            } catch (ParseException e) {
-                e.printStackTrace();
-            }
-        }
 
         return addToCart(params);
     }

@@ -124,11 +124,11 @@ public class AliyunFilesJobPerformable extends AbstractJobPerformable<CronJobMod
 
 									// delete log
 
-									ImageUploadedLogModel iulModel = acerChemImageUploadLogService
-											.getImageUploadedLog(mediaPK);
-									if (iulModel != null) {
-										modelService.remove(iulModel);
-									}
+//									ImageUploadedLogModel iulModel = acerChemImageUploadLogService
+//											.getImageUploadedLog(mediaPK);
+//									if (iulModel != null) {
+//										modelService.remove(iulModel);
+//									}
 
 								}
 							}
