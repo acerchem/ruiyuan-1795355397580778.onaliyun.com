@@ -5,24 +5,27 @@ import com.acerchem.facades.facades.AcerchemCheckoutFacade;
 import com.acerchem.facades.facades.AcerchemOrderException;
 import com.acerchem.facades.facades.AcerchemTrayFacade;
 import com.acerchem.facades.product.data.PaymentModeData;
-import de.hybris.platform.commercefacades.order.data.CardTypeData;
-import de.hybris.platform.commercefacades.order.data.CartData;
-import de.hybris.platform.commercefacades.order.data.DeliveryModeData;
-import de.hybris.platform.commercefacades.order.data.ZoneDeliveryModeData;
+import de.hybris.platform.commercefacades.order.data.*;
 import de.hybris.platform.commercefacades.order.impl.DefaultCheckoutFacade;
 import de.hybris.platform.commercefacades.product.data.PriceDataType;
+import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.commercefacades.user.data.CountryData;
 import de.hybris.platform.commerceservices.service.data.CommerceCheckoutParameter;
 import de.hybris.platform.core.model.c2l.CountryModel;
 import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
+import de.hybris.platform.core.model.order.CartEntryModel;
 import de.hybris.platform.core.model.order.CartModel;
+import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.order.delivery.DeliveryModeModel;
 import de.hybris.platform.core.model.order.payment.PaymentModeModel;
+import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.deliveryzone.model.ZoneDeliveryModeModel;
 import de.hybris.platform.order.CartService;
 import de.hybris.platform.order.DeliveryModeService;
+import de.hybris.platform.order.InvalidCartException;
 import de.hybris.platform.order.PaymentModeService;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
+import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.storelocator.model.PointOfServiceModel;
 import de.hybris.platform.util.PriceValue;
 import org.apache.commons.collections.CollectionUtils;
@@ -34,10 +37,7 @@ import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
@@ -73,6 +73,8 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
     private DeliveryModeService deliveryModeService;
     @Resource
     private PaymentModeService paymentModeService;
+    @Resource
+    private Converter<AddressModel, AddressData> addressConverter;
 
     @Override
     public void validateCartAddress(CountryData countryData) throws AcerchemOrderException{
@@ -114,57 +116,31 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
     protected DeliveryModeData convertDeliveyMode(final DeliveryModeModel deliveryModeModel) throws AcerchemOrderException{
 
         final CartModel cartModel = getCart();
-        if (deliveryModeModel instanceof ZoneDeliveryModeModel)
+        if (cartModel != null)
         {
-            final ZoneDeliveryModeModel zoneDeliveryModeModel = (ZoneDeliveryModeModel) deliveryModeModel;
-            if (cartModel != null)
-            {
-                final ZoneDeliveryModeData zoneDeliveryModeData = getZoneDeliveryModeConverter().convert(zoneDeliveryModeModel);
+            DeliveryModeData deliveryModeData = getDeliveryModeConverter().convert(deliveryModeModel);
 
-                PriceValue deliveryCost  = getDeliveryService().getDeliveryCostForDeliveryModeAndAbstractOrder(
-                        deliveryModeModel, cartModel);;
-                if (deliveryCost != null)
-                {
-                    zoneDeliveryModeData.setDeliveryCost(getPriceDataFactory().create(PriceDataType.BUY,
-                            BigDecimal.valueOf(deliveryCost.getValue()), deliveryCost.getCurrencyIso()));
-                }
-                return zoneDeliveryModeData;
+            PriceValue deliveryCost = null;
+            if (DELIVERY_MENTION.equals(deliveryModeModel.getCode())){
+
+
+                deliveryCost = new PriceValue(cartModel.getCurrency().getIsocode(), 0.0d, true);
+
+            }else if (DELIVERY_GROSS.equals(deliveryModeModel.getCode())){
+                BigDecimal fee = BigDecimal.valueOf(0.0d);
+                fee =  BigDecimal.valueOf(acerchemTrayFacade.getTotalPriceForCart(cartModel));
+
+                deliveryCost = new PriceValue(cartModel.getCurrency().getIsocode(), fee.doubleValue(), true);
             }
-        }else{
-            if (cartModel != null)
+
+            if (deliveryCost != null)
             {
-                DeliveryModeData deliveryModeData = getDeliveryModeConverter().convert(deliveryModeModel);
-                double orderTotalPrice  = cartModel.getTotalPrice();
-                String orderStandardFee = configurationService.getConfiguration().getString(ORDER_STANDARD_CRITICAL_FEE,defaultOrderStandardFee);
-                BigDecimal operationFee = BigDecimal.ZERO;
-                if (orderTotalPrice <= Double.valueOf(orderStandardFee)){
-                    String orderOperationFee = configurationService.getConfiguration().getString(ORDER_OPERATION_FEE,defaultOrderOperationFee);
-                    operationFee = operationFee.add(BigDecimal.valueOf(Double.valueOf(orderOperationFee)));
-                }
-
-                PriceValue deliveryCost = null;
-                if (DELIVERY_MENTION.equals(deliveryModeModel.getCode())){
-                    String deliveryMetionPrice = configurationService.getConfiguration().getString(DELIVERY_MENTION_FEE,defaultStorageFee);
-                    BigDecimal fee = operationFee.add(BigDecimal.valueOf(Double.valueOf(deliveryMetionPrice)));
-
-                    deliveryCost = new PriceValue(cartModel.getCurrency().getIsocode(), fee.doubleValue(), true);
-
-                }else if (DELIVERY_GROSS.equals(deliveryModeModel.getCode())){
-                    BigDecimal fee = BigDecimal.valueOf(0.0d);
-                    fee =  BigDecimal.valueOf(acerchemTrayFacade.getTotalPriceForCart());
-                    fee = operationFee.add(fee);
-                    deliveryCost = new PriceValue(cartModel.getCurrency().getIsocode(), fee.doubleValue(), true);
-                }
-
-                if (deliveryCost != null)
-                {
-                    deliveryModeData.setDeliveryCost(getPriceDataFactory().create(PriceDataType.BUY,
-                            BigDecimal.valueOf(deliveryCost.getValue()), deliveryCost.getCurrencyIso()));
-                }
-                return deliveryModeData;
+                deliveryModeData.setDeliveryCost(getPriceDataFactory().create(PriceDataType.BUY,
+                        BigDecimal.valueOf(deliveryCost.getValue()), deliveryCost.getCurrencyIso()));
             }
-            return null;
+            return deliveryModeData;
         }
+
         return getDeliveryModeConverter().convert(deliveryModeModel);
     }
 
@@ -235,7 +211,7 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
         if (StringUtils.isNotBlank(pickUpDate))
         {
             final CartModel cartModel = getCart();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-DD");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             try {
                 Date date=  sdf.parse(pickUpDate);
                 cartModel.setPickUpDate(date);
@@ -253,12 +229,18 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
     public CartData getCheckoutCart()
     {
         final CartData cartData = getCartFacade().getSessionCart();
+        final CartModel cartModel = getCartService().getSessionCart();
         if (cartData != null)
         {
             cartData.setDeliveryAddress(getDeliveryAddress());
             cartData.setDeliveryMode(getDeliveryMode());
             cartData.setPaymentModeData(getPaymentModeData());
             cartData.setPaymentInfo(getPaymentDetails());
+            if(cartModel.getPickUpDate()!=null){
+        	  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-DD");
+        	  cartData.setPickUpdate(sdf.format(cartModel.getPickUpDate()));
+            }
+          
         }
         return cartData;
     }
@@ -275,14 +257,101 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
 		
 		return paymentModeData;
 	}
-
 	//分摊价格
-	public void ApportionmentCartPrice(CartModel cartModel){
-        if (!ObjectUtils.isEmpty(cartModel)){
+	public void apportionmentCartPrice(OrderModel orderModel){
+        if (!ObjectUtils.isEmpty(orderModel)){
 
+            //总托盘比例
+            BigDecimal totalUnitCalculateRato = BigDecimal.ZERO;
+            for (AbstractOrderEntryModel aoe: orderModel.getEntries()){
+                Double entryUnitCalculateRato = Double.valueOf(aoe.getProduct().getUnitCalculateRato());
+                totalUnitCalculateRato = totalUnitCalculateRato.add(BigDecimal.valueOf(entryUnitCalculateRato));
+            }
+            //总附加费用
+            BigDecimal totalAdditionalFee = BigDecimal.ZERO;
+            if (orderModel.getDeliveryCost()!=null){
+                totalAdditionalFee = BigDecimal.valueOf(orderModel.getDeliveryCost());
+            }
+            if (orderModel.getOperateCost()!=null){
+                totalAdditionalFee = totalAdditionalFee.add(BigDecimal.valueOf(orderModel.getOperateCost()));
+            }
+            if (orderModel.getStorageCost()!=null){
+                totalAdditionalFee = totalAdditionalFee.add(BigDecimal.valueOf(orderModel.getStorageCost()));
+            }
+
+            int size = orderModel.getEntries().size();
+            //
+            BigDecimal remainTotalDeliveryCost =totalAdditionalFee;
+
+            for (int i =0 ; i<size ; i++){
+                AbstractOrderEntryModel aoe = orderModel.getEntries().get(i);
+                Double basePrice = aoe.getBasePrice();
+                Double totalPrice = aoe.getTotalPrice();
+
+                BigDecimal entryTotalAdditionalFee = BigDecimal.ZERO;
+               if (i == size-1) {
+                   entryTotalAdditionalFee = remainTotalDeliveryCost;
+               }else {
+
+                   Double entryUnitCalculateRato = Double.valueOf(aoe.getProduct().getUnitCalculateRato());
+                   //计算比例
+                   BigDecimal proportion = new BigDecimal(entryUnitCalculateRato).divide(totalUnitCalculateRato, BigDecimal.ROUND_HALF_UP, BigDecimal.ROUND_HALF_UP);
+                   //计算entry total 运费
+                   entryTotalAdditionalFee = proportion.multiply(totalAdditionalFee);
+
+                   //剩余运费
+                   remainTotalDeliveryCost = totalAdditionalFee.subtract(entryTotalAdditionalFee);
+
+               }
+               BigDecimal quantity = BigDecimal.valueOf(aoe.getQuantity());
+                //附加费单价
+               BigDecimal entryDeliveryBasePrice = entryTotalAdditionalFee.divide(quantity, BigDecimal.ROUND_HALF_UP, BigDecimal.ROUND_HALF_UP);
+               Double baseRealPrice = BigDecimal.valueOf(basePrice).add(entryDeliveryBasePrice).doubleValue();
+               aoe.setBaseRealPrice(baseRealPrice);
+                //附加费行总价
+               Double totalRealPrice = BigDecimal.valueOf(totalPrice).add(entryTotalAdditionalFee).doubleValue();
+               aoe.setTotalRealPrice(totalRealPrice);
+
+            }
+            getModelService().saveAll(orderModel.getEntries());
         }
     }
-    
-    
+
+    @Override
+    public List<? extends AddressData> getDeliveryAddresses() // NOSONAR
+    {
+        //自提时取pos的地址
+        PointOfServiceModel pos = getCart().getEntries().get(0).getDeliveryPointOfService();
+        List<AddressData> deliveryAddresses = null;
+
+        if (pos !=null && pos.getAddress()!=null){
+            deliveryAddresses = new ArrayList<>();
+            AddressModel addressModel = pos.getAddress();
+            AddressData addressData = addressConverter.convert(addressModel);
+            deliveryAddresses.add(addressData);
+        }
+
+        return deliveryAddresses == null ? Collections.<AddressData> emptyList() : deliveryAddresses;
+    }
+
+    @Override
+    public OrderData placeOrder() throws InvalidCartException {
+        final CartModel cartModel = getCart();
+        if (cartModel != null)
+        {
+            if (cartModel.getUser().equals(getCurrentUserForCheckout()) || getCheckoutCustomerStrategy().isAnonymousCheckout())
+            {
+                beforePlaceOrder(cartModel);
+                final OrderModel orderModel = placeOrder(cartModel);
+                apportionmentCartPrice(orderModel);
+                afterPlaceOrder(cartModel, orderModel);
+                if (orderModel != null)
+                {
+                    return getOrderConverter().convert(orderModel);
+                }
+            }
+        }
+        return null;
+    }
 }
 

@@ -18,6 +18,7 @@ public class AcerChemMediaServiceImpl implements AcerChemMediaService {
 		// TODO Auto-generated method stub
 		return acerChemMediaDao.getMediaByPk(pk);
 	}
+
 	/* (non-Javadoc)
 	 * @see com.acerchem.core.image.service.AcerChemMediaService#getMediasOfLimit(java.lang.String, int)
 	 */
@@ -28,6 +29,5 @@ public class AcerChemMediaServiceImpl implements AcerChemMediaService {
 	}
 	
 
-	
-	
+
 }

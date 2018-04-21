@@ -40,7 +40,7 @@
 						
 						<ul class="shiplist both">
 						
-						<c:if test="${not empty deliveryMode}">
+						<%-- <c:if test="${not empty deliveryMode}">
 						<li class="now">
 								<label>
 									<div class="into int">
@@ -53,14 +53,31 @@
 									</div>	
 								</label>
 							</li>
- 							</c:if>
+ 							</c:if> --%>
  							
  							<c:forEach items="${deliveryMethods}" var="data" >
 						
 						<c:if test="${not empty data.deliveryCost}">
 						<c:if test="${data.code=='DELIVERY_GROSS'||data.code=='DELIVERY_MENTION'}">
-						<c:if test="${data.code!=deliveryMode.code}">
+						
+						<c:if test="${not empty deliveryMode}">
+						<c:if test="${data.code==deliveryMode.code}">
 						<li class="now">
+								<label>
+									<div class="into int">
+										<input type="radio" name="shipmethod" checked="checked"  value="${data.code}"/>
+									</div>
+									<div class="into">
+										<p><format:fromPrice priceData="${data.deliveryCost}"/></p>
+										<em>${data.name}</em>
+										<span>${data.description}</span>
+									</div>	
+								</label>
+							</li>
+							</c:if>
+							
+								<c:if test="${data.code!=deliveryMode.code}">
+						      <li class="now">
 								<label>
 									<div class="into int">
 										<input type="radio" name="shipmethod"   value="${data.code}"/>
@@ -73,6 +90,24 @@
 								</label>
 							</li>
 							</c:if>
+							</c:if>
+							
+							<c:if test="${empty deliveryMode}">
+							    <li class="now">
+								<label>
+									<div class="into int">
+										<input type="radio" name="shipmethod" value="${data.code}"/>
+									</div>
+									<div class="into">
+										<p><format:fromPrice priceData="${data.deliveryCost}"/></p>
+										<em>${data.name}</em>
+										<span>${data.description}</span>
+									</div>	
+								</label>
+							</li>
+							
+							</c:if>
+							
  							</c:if>
 							</c:if>
 
@@ -194,24 +229,22 @@
 					
 						<ul class="shiplist both">
 						
-							<c:if test="${not empty paymentModeData}">
-							
-							<li class="now">
-									<label>
+							    <c:forEach items="${paymentInfos}" var="data" >
+									<c:if test="${not empty paymentModeData}">
+										<c:if test="${data.code==paymentModeData.code}">
+										<li class="now">
+											<label>
 										<div class="into int">
-											<input type="radio" name="paymentmethod" checked="checked"  value="${paymentModeData.code}">
+											<input type="radio" name="paymentmethod"  checked="checked" value="${data.code}">
 										</div>
 										<div class="into">
-											<em>${paymentModeData.name}</em>
+											<em>${data.name}</em>
 										</div>	
 									</label>
-								</li>
-	 														
-							    </c:if>
-							    
-							    	<c:forEach items="${paymentInfos}" var="data" >
-										
-										<c:if test="${data.code!=paymentModeData.code}">
+									</li>
+									</c:if>
+									
+									<c:if test="${data.code!=paymentModeData.code}">
 										<li class="now">
 											<label>
 										<div class="into int">
@@ -223,9 +256,22 @@
 									</label>
 									</li>
 									</c:if>
+									
+									  </c:if>
+									  
+									  <c:if test="${empty paymentModeData}">
+									      	<li class="now">
+											<label>
+												<div class="into int">
+													<input type="radio" name="paymentmethod" value="${data.code}">
+												</div>
+												<div class="into">
+													<em>${data.name}</em>
+												</div>	
+											</label>
+											</li>
+									  </c:if>
  						
-						
-
 							</c:forEach>
 							</ul>
 							
@@ -622,14 +668,13 @@ $(document).ready(function() {
     });
 });
 
-
 $(document).ready(function() {
     $('input[type=radio][name=paymentmethod]').change(function() {
     	
     	//alert(this.value);
     	
-    	//var  dm = this.value;
-    	window.location.href ='<c:url value='/checkout/multi/payment-method/choose'/>';
+    	var  pm = this.value;
+    	window.location.href ='<c:url value='/checkout/multi/payment-method/choose?selectedPaymentMethodId='/>'+pm;
     });
 });
 

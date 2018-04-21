@@ -51,7 +51,7 @@ public class DefaultAcerchemFindDeliveryCostStrategy extends DefaultFindDelivery
 	private final String ORDER_OPERATION_FEE ="order.operation.fee";
 	private final String ORDER_STANDARD_CRITICAL_FEE ="order.standard.critical.price";
 	//默认存储费
-	private final String defaultStorageFee = "0";
+	private final String defaultStorageFee = "30";
 	private final String defaultOrderOperationFee = "100";
 	private final String defaultOrderStandardFee = "10000";
 
@@ -102,43 +102,46 @@ public class DefaultAcerchemFindDeliveryCostStrategy extends DefaultFindDelivery
 				double orderTotalPrice  = order.getTotalPrice();
 				String orderStandardFee = configurationService.getConfiguration().getString(ORDER_STANDARD_CRITICAL_FEE,defaultOrderStandardFee);
 				BigDecimal operationFee = BigDecimal.ZERO;
+				//add operate fee
 				if (orderTotalPrice <= Double.valueOf(orderStandardFee)){
 					String orderOperationFee = configurationService.getConfiguration().getString(ORDER_OPERATION_FEE,defaultOrderOperationFee);
 					operationFee = operationFee.add(BigDecimal.valueOf(Double.valueOf(orderOperationFee)));
+					order.setOperateCost(operationFee.doubleValue());
 				}
+
 
 				//自提运费和存储费用改造
 				if (DELIVERY_MENTION.equals(deliveryModeModel.getCode())){
-					//自提费
+					//存储费
 					String deliveryMetionPrice = configurationService.getConfiguration().getString(DELIVERY_MENTION_FEE,defaultStorageFee);
-
-					//操作费+自提费
-					BigDecimal fee = operationFee.add(BigDecimal.valueOf(Double.valueOf(deliveryMetionPrice)));
-
-					deliveryCost = new PriceValue(order.getCurrency().getIsocode(), fee.doubleValue(), true);
+					order.setStorageCost(Double.valueOf(deliveryMetionPrice));
+					order.setDeliveryCost(0.0d);
+					//运费为0
+					deliveryCost = new PriceValue(order.getCurrency().getIsocode(), 0.0d , true);
 
 				}else if (DELIVERY_GROSS.equals(deliveryModeModel.getCode())){
 					BigDecimal fee = BigDecimal.valueOf(0.0d);
 					//托盘运输费
-					fee =  BigDecimal.valueOf(getTotalPriceForCart());
-					//操作费+托盘运输费
-					fee = operationFee.add(fee);
+					fee =  BigDecimal.valueOf(getTotalPriceForCart(order));
+					order.setDeliveryCost(fee.doubleValue());
+					order.setStorageCost(0.0d);
+
 					deliveryCost = new PriceValue(order.getCurrency().getIsocode(), fee.doubleValue(), true);
 				}
 			}
+			getModelService().save(order);
 		return deliveryCost;
 	}
 
 
-	private  double getTotalPriceForCart(){
+	private  double getTotalPriceForCart(AbstractOrderModel order){
 		double totalTrayPrice = 0.0d;
 		CountryModel countryModel = null;
 		//托盘数量
 		BigDecimal totalTrayAmount = BigDecimal.ZERO;
-		if (cartService.hasSessionCart()){
-			CartModel cartModel = cartService.getSessionCart();
+		if (order!=null){
 
-			for (AbstractOrderEntryModel aoe : cartModel.getEntries()){
+			for (AbstractOrderEntryModel aoe : order.getEntries()){
 
 				if (aoe.getDeliveryPointOfService().getAddress()!=null) {
 					countryModel = aoe.getDeliveryPointOfService().getAddress().getCountry();

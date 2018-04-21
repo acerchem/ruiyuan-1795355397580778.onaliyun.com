@@ -223,15 +223,15 @@ function maxon_salesul(wrap){
 
 //列表页单品 尺寸
 function reimgsize(aitem){
-	var aimg = aitem.find('.img')
+	var aimg = aitem.find('.img a')
 	aimg.css({width:aitem.width(),height:aitem.width()});
 }
 var agallcont = $('.gen-content.gal-centent .g-cartable');
 if(agallcont.length>0){
-	var aitem = agallcont.find('.slide-item .item');
+	var aitem = agallcont.find('.slide-item .aitem');
 	reimgsize(aitem)
 	$(window).resize(function(){
-		var aitem = agallcont.find('.slide-item .item');
+		var aitem = agallcont.find('.slide-item .aitem');
 		reimgsize(aitem)
 	})
 

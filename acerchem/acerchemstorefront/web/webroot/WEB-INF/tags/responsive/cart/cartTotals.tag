@@ -16,21 +16,21 @@
 
 <div class="g-cell cart-right">
 			<div class="cart-total">
-				<div class="title">Subtotal</div>
+				<!-- <div class="title">Subtotal</div>
 
 				<div class="m-Coupon">
 					<form action="" id="coupon">
 						<input type="text" placeholder="Enter Coupon Code" class="code">
 						<input type="submit" value="Apply" class="btn-submit">
 					</form>
-				</div>
+				</div> -->
 				
 				<div class="g-table">	
 					<form action="">		
-						<div class="Summary">
+						<!-- <div class="Summary">
 							<span>Part of your order qualifies for FREE Shipping;</span>
 							<span>span.Buy 2 items  sales to 10% Off; </span>
-						</div>
+						</div> -->
 						<div class="list">
 							<div class="item">
 								<div class="item-row">

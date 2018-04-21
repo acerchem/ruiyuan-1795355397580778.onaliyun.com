@@ -63,7 +63,6 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	@Resource(name = "defaultAcerchemCheckoutFacade")
 	private AcerchemCheckoutFacade acerchemCheckoutFacade;
 
-	@Override
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	@RequireHardLogIn
 	@PreValidateQuoteCheckoutStep
@@ -71,7 +70,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	public String enterStep(final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
 		getCheckoutFacade().setDeliveryAddressIfAvailable();
-		final CartData cartData = getCheckoutFacade().getCheckoutCart();
+		final CartData cartData = acerchemCheckoutFacade.getCheckoutCart();
 
 		populateCommonModelAttributes(model, cartData, new AddressForm());
 
@@ -112,18 +111,20 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 
 		getUserFacade().addAddress(newAddress);
 
-		final AddressData previousSelectedAddress = getCheckoutFacade().getCheckoutCart().getDeliveryAddress();
+//		final AddressData previousSelectedAddress = getCheckoutFacade().getCheckoutCart().getDeliveryAddress();
 		// Set the new address as the selected checkout delivery address
 		getCheckoutFacade().setDeliveryAddress(newAddress);
-		if (previousSelectedAddress != null && !previousSelectedAddress.isVisibleInAddressBook())
-		{ // temporary address should be removed
-			getUserFacade().removeAddress(previousSelectedAddress);
-		}
+//		if (previousSelectedAddress != null && !previousSelectedAddress.isVisibleInAddressBook())
+//		{ // temporary address should be removed
+//			getUserFacade().removeAddress(previousSelectedAddress);
+//		}
 
 		// Set the new address as the selected checkout delivery address
 		getCheckoutFacade().setDeliveryAddress(newAddress);
 
-		return getCheckoutStep().nextStep();
+		//return getCheckoutStep().nextStep();
+		
+		return ControllerConstants.Views.Pages.MultiStepCheckout.AddEditDeliveryAddressPage;
 	}
 
 	protected void processAddressVisibilityAndDefault(final AddressForm addressForm, final AddressData newAddress)
@@ -141,6 +142,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 			newAddress.setDefaultAddress(true);
 			newAddress.setVisibleInAddressBook(true);
 		}
+		newAddress.setVisibleInAddressBook(true);
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
@@ -297,10 +299,10 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		final AddressData previousSelectedAddress = getCheckoutFacade().getCheckoutCart().getDeliveryAddress();
 		// Set the new address as the selected checkout delivery address
 		getCheckoutFacade().setDeliveryAddress(selectedAddress);
-		if (previousSelectedAddress != null && !previousSelectedAddress.isVisibleInAddressBook())
-		{ // temporary address should be removed
-			getUserFacade().removeAddress(previousSelectedAddress);
-		}
+//		if (previousSelectedAddress != null && !previousSelectedAddress.isVisibleInAddressBook())
+//		{ // temporary address should be removed
+//			getUserFacade().removeAddress(previousSelectedAddress);
+//		}
 
 		GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER, "checkout.multi.address.added");
 
@@ -354,6 +356,21 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		return getCheckoutStep().nextStep();
 	}
 
+    @RequestMapping(value = "/addPickUpDate", method = RequestMethod.GET)
+    @RequireHardLogIn
+    public String addPickUpDate(final Model model, @RequestParam(required = false) final String pickUpDate) throws CMSItemNotFoundException {
+
+        //保存收货时间
+        acerchemCheckoutFacade.savePickUpDateForOrder(pickUpDate);
+        
+        final CartData cartData = acerchemCheckoutFacade.getCheckoutCart();
+
+		populateCommonModelAttributes(model, cartData, new AddressForm());
+
+		return ControllerConstants.Views.Pages.MultiStepCheckout.AddEditDeliveryAddressPage;
+
+	}
+
 	protected void setDeliveryAddress(final AddressData selectedAddressData)
 	{
 		final AddressData cartCheckoutDeliveryAddress = getCheckoutFacade().getCheckoutCart().getDeliveryAddress();
@@ -362,7 +379,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 			getCheckoutFacade().setDeliveryAddress(selectedAddressData);
 			if (cartCheckoutDeliveryAddress != null && !cartCheckoutDeliveryAddress.isVisibleInAddressBook())
 			{ // temporary address should be removed
-				getUserFacade().removeAddress(cartCheckoutDeliveryAddress);
+//				getUserFacade().removeAddress(cartCheckoutDeliveryAddress);
 			}
 		}
 	}
@@ -396,7 +413,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	protected void populateCommonModelAttributes(final Model model, final CartData cartData, final AddressForm addressForm)
 			throws CMSItemNotFoundException
 	{
-		
+
 		try {
 			model.addAttribute("deliveryMethods", acerchemCheckoutFacade.getAllDeliveryModes());
 		} catch (AcerchemOrderException e) {
@@ -407,8 +424,18 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		
 		model.addAttribute("cartData", cartData);
 		model.addAttribute("addressForm", addressForm);
-		model.addAttribute("paymentInfos", acerchemCheckoutFacade.getSupportedCardTypes(cartData.getDeliveryMode().getCode()));
-		model.addAttribute("deliveryAddresses", getDeliveryAddresses(cartData.getDeliveryAddress()));
+		if (cartData.getDeliveryMode()!=null) {
+			model.addAttribute("paymentInfos", acerchemCheckoutFacade.getSupportedCardTypes(cartData.getDeliveryMode().getCode()));
+		}else{
+			model.addAttribute("paymentInfos",acerchemCheckoutFacade.getSupportedCardTypes("DELIVERY_GROSS"));
+		}
+
+		if (cartData.getDeliveryMode()!=null&&"DELIVERY_MENTION".equals(cartData.getDeliveryMode().getCode())) {
+			model.addAttribute("deliveryAddresses", acerchemCheckoutFacade.getDeliveryAddresses());
+		}else{
+			model.addAttribute("deliveryAddresses", getDeliveryAddresses(cartData.getDeliveryAddress()));
+		}
+
 		model.addAttribute("noAddress", Boolean.valueOf(getCheckoutFlowFacade().hasNoDeliveryAddress()));
 		model.addAttribute("addressFormEnabled", Boolean.valueOf(getCheckoutFacade().isNewAddressEnabledForCart()));
 		model.addAttribute("removeAddressEnabled", Boolean.valueOf(getCheckoutFacade().isRemoveAddressEnabledForCart()));

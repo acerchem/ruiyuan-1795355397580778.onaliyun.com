@@ -69,17 +69,10 @@
 			<!-- end -->
 
 			<!-- product Item -->
-			<c:forEach items="${orderData.consignments}" var="consignment">
-			    <c:if test="${consignment.status.code eq 'WAITING' or consignment.status.code eq 'PICKPACK' or consignment.status.code eq 'READY'}">
-			        <order:accountOrderDetailsItem order="${orderData}" consignment="${consignment}" inProgress="true"/>
-			    </c:if>
-			</c:forEach>
-			
-	   <c:forEach items="${orderData.consignments}" var="consignment">
-            <c:if test="${consignment.status.code ne 'WAITING' and consignment.status.code ne 'PICKPACK' and consignment.status.code ne 'READY'}">
-                    <order:accountOrderDetailsItem order="${orderData}" consignment="${consignment}"/>
-            </c:if>
-        </c:forEach>
+		
+			<order:accountOrderDetailsItem order="${orderData}" consignment="${consignment}" inProgress="true"/>
+			  
+	 
         			
 			<!-- end -->
 
@@ -112,22 +105,22 @@
 					<div class="item">
 						<span>
 							<em>Subtotal</em>
-							<i>$ 256.80</i>
+							<i><format:price priceData="${orderData.subTotal}"/></i>
 						</span>
 
 						<span>
 							<em>Delivery</em>
-							<i>$ 6.00</i>
+							<i><format:price priceData="${orderData.deliveryCost}"/></i>
 						</span>
-
+<!-- 
 						<span>
 							<em>Discount Amount</em>
 							<i>- $ 18.00</i>
-						</span>
+						</span> -->
 
 						<span>
 							<em>Order Total</em>
-							<i>$ 254.80</i>
+							<i><format:price priceData="${orderData.totalPrice}"/></i>
 						</span>
 					</div>					
 				</div>			

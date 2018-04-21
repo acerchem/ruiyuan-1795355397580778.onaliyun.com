@@ -11,15 +11,17 @@ if($('.maxprosi-top')){
 }
 
 //banner
-setTimeout(function(){
-  var slidewiper = new Swiper('.banner .swiper-container',{
-      pagination: '.banner .pagination',
-      loop:true,
-      autoplay:3000,
-      paginationClickable :true,
-  })
+if($('.banner .swiper-container')){
+  setTimeout(function(){
+    var slidewiper = new Swiper('.banner .swiper-container',{
+        pagination: '.banner .pagination',
+        loop:true,
+        autoplay:3000,
+        paginationClickable :true,
+    })
 
-  $('.banner .pagination span').on('mouseover',function(){
-    $(this).click();
-  })
-},0)
+    $('.banner .pagination span').on('mouseover',function(){
+      $(this).click();
+    })
+  },0)
+}

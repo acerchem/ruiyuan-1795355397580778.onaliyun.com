@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<config xmlns="http://www.hybris.com/cockpit/config"
+		xmlns:y="http://www.hybris.com/cockpit/config/hybris"
+		xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config"
+		xmlns:list-view="http://www.hybris.com/cockpitng/component/listView"
+		xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea"
+		xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree"
+		xmlns:simple-search="http://www.hybris.com/cockpitng/config/simplesearch"
+		xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch"
+		xmlns:df="http://www.hybris.com/cockpitng/component/dynamicForms"
+		xmlns:dsb="http://www.hybris.com/cockpitng/config/dashboard"
+		xmlns:na="http://www.hybris.com/cockpitng/config/notifications"
+		xmlns:grid-view="http://www.hybris.com/cockpitng/component/gridView">
+
+	<!-- acerchembackoffice UI configuration should be provided here -->
+
+	<!--<context component="component-code" module="acerchembackoffice">-->
+		<!--Please check documentation for code snippets for specific components-->
+	<!--</context>-->
+
+	<context type="Order" component="editorareaactions" merge-by="type" parent="AbstractOrder">
+		<y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+				<y:group qualifier="common">
+					<y:label>actiongroup.common</y:label>
+					<y:action action-id="com.acerchem.actions.order.auditing" property="currentObject"/>
+					<y:action action-id="com.acerchem.actions.order.auditing.EmployeeconfirmPay" property="currentObject"/>
+					<y:action action-id="com.acerchem.actions.order.auditing.EmployeeconfirmDelivery" property="currentObject"/>
+					<y:action action-id="com.acerchem.actions.order.auditing.EmployeeUpdateDeliveryInfo" property="currentObject"/>
+					<y:action action-id="com.acerchem.actions.order.auditing.EmployeeUpdateDeliveryStatus" property="currentObject"/>
+				</y:group>
+			</y:actions>
+	</context>
+	
+	<context merge-by="type" parent="GenericItem" type="ConsignmentEntry" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="consignment"/>
+            <list-view:column qualifier="orderEntry"/>
+            <list-view:column qualifier="quantity"/>
+            <list-view:column qualifier="shippedQuantity"/>
+            <list-view:column qualifier="batchNum"/>
+        </list-view:list-view>
+    </context>
+	
+	
+	<context merge-by="type" parent="GenericItem" type="ConsignmentEntry" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:essentials>
+                <editorArea:essentialSection name="hmc.essential">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="consignment"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="orderEntry"/>
+                </editorArea:essentialSection>
+            </editorArea:essentials>
+            <editorArea:tab name="hmc.properties">
+                <editorArea:section name="hmc.consignment.details">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="quantity"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="shippedQuantity"/>
+                     <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="batchNum"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+	
+	<context merge-by="type" parent="GenericItem" type="ConsignmentEntry" component="create-wizard">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="ConsignmentEntryConfigWizard">
+			<wz:prepare id="ConsignmentEntryPrepare">
+				<wz:initialize property="newConsignmentEntry" type="ConsignmentEntry"/>
+			</wz:prepare>
+			<wz:step id="step1" label="create.UniasiaConfig.general.label" >
+				<wz:content id="step1.content">
+					<wz:property-list root="newConsignmentEntry">
+						<wz:property qualifier="consignment"  />
+						<wz:property qualifier="orderEntry"  />
+						<wz:property qualifier="creationtime"  />
+						<wz:property qualifier="owner"  />
+						<wz:property qualifier="quantity"  />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel/>
+					<wz:done>
+						<wz:save property="newConsignmentEntry"/>
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+	
+</config>

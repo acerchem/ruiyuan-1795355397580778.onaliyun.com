@@ -63,7 +63,7 @@ import de.hybris.platform.commercefacades.user.data.CustomerData;
 /**
  * Controller for Customer Support tickets.
  */
-@Controller("mytestjhjh")
+@Controller
 @RequestMapping("/account")
 public class AccountSupportTicketsPageController extends AbstractSearchPageController {
 	private static final Logger LOG = Logger.getLogger(AccountSupportTicketsPageController.class);

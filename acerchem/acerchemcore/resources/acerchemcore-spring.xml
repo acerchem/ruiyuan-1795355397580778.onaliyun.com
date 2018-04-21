@@ -635,4 +635,10 @@
 	<alias name="defaultAcerchemFindDeliveryCostStrategy" alias="findDeliveryCostStrategy"/>
 	<bean id="defaultAcerchemFindDeliveryCostStrategy" parent="defaultFindDeliveryCostStrategy" class="com.acerchem.core.strategies.impl.DefaultAcerchemFindDeliveryCostStrategy">
 	</bean>
+
+	<alias name="defaultAcerchemCalculationService" alias="calculationService"/>
+	<bean id="defaultAcerchemCalculationService" parent="defaultCalculationService" class="com.acerchem.core.service.impl.DefaultAcerchemCalculationService">
+	</bean>
+
+
 </beans>

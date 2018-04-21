@@ -48,19 +48,15 @@ public class DefaultAcerchemTrayFacade implements AcerchemTrayFacade {
     }
 
     @Override
-    public double getTotalPriceForCart() throws AcerchemOrderException {
+    public double getTotalPriceForCart(CartModel cartModel) throws AcerchemOrderException {
         double totalTrayPrice = 0.0d;
         CountryModel countryModel = null;
         //托盘数量
         BigDecimal totalTrayAmount = BigDecimal.ZERO;
-        if (cartService.hasSessionCart()){
-            CartModel cartModel = cartService.getSessionCart();
+        if (cartModel!=null){
 
             for (AbstractOrderEntryModel aoe : cartModel.getEntries()){
 
-                if (aoe.getDeliveryPointOfService().getAddress()!=null) {
-                   countryModel = aoe.getDeliveryPointOfService().getAddress().getCountry();
-                }
                 ProductModel productModel = aoe.getProduct();
                 //先获取托盘比例，在计算数量
                 String unitCalculateRato = productModel.getUnitCalculateRato();
@@ -75,6 +71,7 @@ public class DefaultAcerchemTrayFacade implements AcerchemTrayFacade {
 
                 totalTrayAmount =totalTrayAmount.add(entryTrayAmount);
             }
+            countryModel = cartModel.getEntries().iterator().next().getDeliveryPointOfService().getAddress().getCountry();
         }
 
         CountryTrayFareConfModel countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(countryModel, (int) Math.ceil(totalTrayAmount.doubleValue()));
