@@ -1,5 +1,7 @@
 package com.acerchem.core.image.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
 import com.acerchem.core.image.dao.AcerChemMediaDao;
@@ -16,5 +18,16 @@ public class AcerChemMediaServiceImpl implements AcerChemMediaService {
 		// TODO Auto-generated method stub
 		return acerChemMediaDao.getMediaByPk(pk);
 	}
+
+	/* (non-Javadoc)
+	 * @see com.acerchem.core.image.service.AcerChemMediaService#getMediasOfLimit(java.lang.String, int)
+	 */
+	@Override
+	public List<MediaModel> getMediasOfLimit(List<String> mimes, int limitCount) {
+		// TODO Auto-generated method stub
+		return acerChemMediaDao.getMediasOfLimit(mimes, limitCount);
+	}
+	
+
 
 }

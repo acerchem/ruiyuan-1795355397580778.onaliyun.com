@@ -234,7 +234,7 @@ PriceTerms: DDP</font></font></p>
 Delivery Date: </font></font></p>
 <p class="western" style="margin-bottom: 0in; line-height: 100%; orphans: 0; widows: 0; text-indent:2.1in">
 <font face="Calibri, Calibri, sans-serif"><font size="3" style="font-size: 11pt">3.
-Deliver from: ${ctx.wareHouse} to:  ${ctx.order.deliveryAddress.formattedAddress}</font></font></p>
+Deliver from: ${ctx.warehouse} to:  ${ctx.order.deliveryAddress.formattedAddress}</font></font></p>
 <p class="western" style="margin-bottom: 0in; line-height: 100%; orphans: 0; widows: 0; text-indent:2.1in">
 <font face="Calibri, Calibri, sans-serif"><font size="3" style="font-size: 11pt">4.
 Marks: Product name,batch no,NW,GW,manufacture date,expira&nbsp;on

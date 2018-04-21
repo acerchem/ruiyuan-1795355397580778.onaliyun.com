@@ -57,7 +57,7 @@
 			<p class="western" style="text-indent: 2.01in"><font size="2" face="Calibri, serif" style="font-size: 10pt"><font size="3" style="font-size: 12pt">
 				<b>Tel: ${ctx.customer.defaultPaymentAddress.phone1}</b></font></font></p> 
 			<p class="western" style="text-indent: 2.01in"><font size="2" face="Calibri, serif" style="font-size: 10pt"><font size="3" style="font-size: 12pt">
-			<b>VAT NO.:${!ctx.customer.vatNo}</b></font></font></p> 
+			<b>VAT NO.:$!{ctx.customer.vatNo}</b></font></font></p> 
 			<p class="western" style="text-indent: 2.01in"><br /> </p> 
 			 
 			<p class="western" align="left" style="text-indent: 2.01in"><font size="2" face="Arial, serif" style="font-size: 10pt"><b>V.A.T
@@ -71,7 +71,7 @@
 			
 			<p class="western" style="text-indent: 2.01in"><br /> </p> 
 			<p class="western" style="text-indent: 2.01in"><font size="2" face="Calibri, serif" style="font-size: 10pt"><font size="3" style="font-size: 12pt">
-				<b>SHIP FROM: ${ctx.order.store} SHIP TO: ${ctx.order.deliveryAddress.formattedAddress}</b></font></font></p> 
+				<b>SHIP FROM: ${ctx.warehouse} SHIP TO: ${ctx.order.deliveryAddress.formattedAddress}</b></font></font></p> 
 				
 			<p class="western" style="text-indent: 2.01in"><font size="2" face="Calibri, serif" style="font-size: 10pt"><font size="3" style="font-size: 12pt">
 			<b>Terms: ${ctx.paymentTerms} Currency: ${ctx.currency}</b></font></font></p> 
