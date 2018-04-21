@@ -584,7 +584,7 @@
 	
 	<bean id="aliyunFilesJob" class="com.acerchem.core.job.AliyunFilesJobPerformable" parent="abstractJobPerformable"/>
 	
-
+	<bean id="aliyunUploadJob" class="com.acerchem.core.job.AliyunUploadJobPerformable" parent="abstractJobPerformable"/>
 	<!-- Jayson.Wang end -->
 	
 	<alias name="defaultAcerchemCustomerDao" alias="acerchemCustomerDao"/>

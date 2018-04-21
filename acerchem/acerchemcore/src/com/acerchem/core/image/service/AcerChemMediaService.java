@@ -7,5 +7,5 @@ import de.hybris.platform.core.model.media.MediaModel;
 public interface AcerChemMediaService {
 
 	public MediaModel getMediaModelByPk(final String pk);
-	public List<MediaModel> getMediasOfLimit(final List<String> mimes,final int limitCount); 
+	public List<MediaModel> getMediasOfLimit(final List<String> mimes,final int limitCount,final String version,final String catalogId); 
 }

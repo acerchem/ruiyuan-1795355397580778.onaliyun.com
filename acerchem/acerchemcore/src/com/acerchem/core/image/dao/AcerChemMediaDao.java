@@ -8,6 +8,6 @@ public interface AcerChemMediaDao {
 	public MediaModel getMediaByPk(final String pk);
 
 	
-	public List<MediaModel> getMediasOfLimit(final List<String> mimes,final int limitCount); 
+	public List<MediaModel> getMediasOfLimit(final List<String> mimes,final int limitCount,final String version,final String catalogId); 
 
 }
