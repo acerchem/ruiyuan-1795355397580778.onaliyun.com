@@ -85,8 +85,8 @@ public class AddressValidator implements Validator
 		}
 	}
 
-	protected static void validateStringField(final String addressField, final AddressField fieldType, final int maxFieldLength,
-			final Errors errors)
+	protected static void validateStringField(final String addressField, final AddressField fieldType,
+											  final int maxFieldLength, final Errors errors)
 	{
 		if (addressField == null || StringUtils.isEmpty(addressField) || (StringUtils.length(addressField) > maxFieldLength))
 		{
@@ -94,7 +94,8 @@ public class AddressValidator implements Validator
 		}
 	}
 
-	protected static void validateFieldNotNull(final String addressField, final AddressField fieldType, final Errors errors)
+	protected static void validateFieldNotNull(final String addressField, final AddressField fieldType,
+											   final Errors errors)
 	{
 		if (addressField == null)
 		{
@@ -106,7 +107,7 @@ public class AddressValidator implements Validator
 	{
 		USA("US"), CANADA("CA"), JAPAN("JP"), CHINA("CN"), BRITAIN("GB"), GERMANY("DE"), DEFAULT("");
 
-		private final String isoCode;
+		private String isoCode;
 
 		private static Map<String, CountryCode> lookupMap = new HashMap<String, CountryCode>();
 		static
@@ -140,13 +141,14 @@ public class AddressValidator implements Validator
 
 	protected enum AddressField
 	{
-		TITLE("titleCode", "address.title.invalid"), FIRSTNAME("firstName", "address.firstName.invalid"), LASTNAME("lastName",
-				"address.lastName.invalid"), LINE1("line1", "address.line1.invalid"), LINE2("line2", "address.line2.invalid"), TOWN(
-						"townCity", "address.townCity.invalid"), POSTCODE("postcode", "address.postcode.invalid"), REGION("regionIso",
-								"address.regionIso.invalid"), COUNTRY("countryIso", "address.country.invalid");
+		TITLE("titleCode", "address.title.invalid"), FIRSTNAME("firstName", "address.firstName.invalid"),
+		LASTNAME("lastName", "address.lastName.invalid"), LINE1("line1", "address.line1.invalid"),
+		LINE2("line2", "address.line2.invalid"), TOWN("townCity", "address.townCity.invalid"),
+		POSTCODE("postcode", "address.postcode.invalid"), REGION("regionIso", "address.regionIso.invalid"),
+		COUNTRY("countryIso", "address.country.invalid");
 
-		private final String fieldKey;
-		private final String errorKey;
+		private String fieldKey;
+		private String errorKey;
 
 		private AddressField(final String fieldKey, final String errorKey)
 		{

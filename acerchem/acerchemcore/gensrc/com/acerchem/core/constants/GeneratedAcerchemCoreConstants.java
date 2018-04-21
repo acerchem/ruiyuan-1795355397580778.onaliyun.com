@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-4-21 14:16:11                          ---
+ * --- Generated at 2018-4-21 14:34:05                          ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.constants;
@@ -47,8 +47,10 @@ public class GeneratedAcerchemCoreConstants
 			public static final String EMPLOYEECONFIRM = "employeeConfirm".intern();
 			public static final String EMPLOYEECONFIRMDELIVERY = "employeeConfirmDelivery".intern();
 			public static final String EMPLOYEECONFIRMPAY = "employeeConfirmPay".intern();
+			public static final String OPERATECOST = "operateCost".intern();
 			public static final String PAYCONFIRM = "payConfirm".intern();
 			public static final String PICKUPDATE = "pickUpDate".intern();
+			public static final String STORAGECOST = "storageCost".intern();
 		}
 		public static class AbstractOrderEntry
 		{

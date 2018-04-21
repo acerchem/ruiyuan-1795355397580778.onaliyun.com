@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-4-21 14:16:11                          ---
+ * --- Generated at 2018-4-21 14:34:05                          ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.jalo;
@@ -162,6 +162,8 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 		tmp.put("customerConfirmDelivery", AttributeMode.INITIAL);
 		tmp.put("employeeConfirmDelivery", AttributeMode.INITIAL);
 		tmp.put("pickUpDate", AttributeMode.INITIAL);
+		tmp.put("storageCost", AttributeMode.INITIAL);
+		tmp.put("operateCost", AttributeMode.INITIAL);
 		ttmp.put("de.hybris.platform.jalo.order.AbstractOrder", Collections.unmodifiableMap(tmp));
 		tmp = new HashMap<String, AttributeMode>();
 		tmp.put("batchNum", AttributeMode.INITIAL);
@@ -657,7 +659,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>AbstractOrderEntry.baseRealPrice</code> attribute.
-	 * @return the baseRealPrice - 分摊之前的单价
+	 * @return the baseRealPrice - 分摊之后的单价
 	 */
 	public Double getBaseRealPrice(final SessionContext ctx, final AbstractOrderEntry item)
 	{
@@ -666,7 +668,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>AbstractOrderEntry.baseRealPrice</code> attribute.
-	 * @return the baseRealPrice - 分摊之前的单价
+	 * @return the baseRealPrice - 分摊之后的单价
 	 */
 	public Double getBaseRealPrice(final AbstractOrderEntry item)
 	{
@@ -675,7 +677,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>AbstractOrderEntry.baseRealPrice</code> attribute. 
-	 * @return the baseRealPrice - 分摊之前的单价
+	 * @return the baseRealPrice - 分摊之后的单价
 	 */
 	public double getBaseRealPriceAsPrimitive(final SessionContext ctx, final AbstractOrderEntry item)
 	{
@@ -685,7 +687,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>AbstractOrderEntry.baseRealPrice</code> attribute. 
-	 * @return the baseRealPrice - 分摊之前的单价
+	 * @return the baseRealPrice - 分摊之后的单价
 	 */
 	public double getBaseRealPriceAsPrimitive(final AbstractOrderEntry item)
 	{
@@ -694,7 +696,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>AbstractOrderEntry.baseRealPrice</code> attribute. 
-	 * @param value the baseRealPrice - 分摊之前的单价
+	 * @param value the baseRealPrice - 分摊之后的单价
 	 */
 	public void setBaseRealPrice(final SessionContext ctx, final AbstractOrderEntry item, final Double value)
 	{
@@ -703,7 +705,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>AbstractOrderEntry.baseRealPrice</code> attribute. 
-	 * @param value the baseRealPrice - 分摊之前的单价
+	 * @param value the baseRealPrice - 分摊之后的单价
 	 */
 	public void setBaseRealPrice(final AbstractOrderEntry item, final Double value)
 	{
@@ -712,7 +714,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>AbstractOrderEntry.baseRealPrice</code> attribute. 
-	 * @param value the baseRealPrice - 分摊之前的单价
+	 * @param value the baseRealPrice - 分摊之后的单价
 	 */
 	public void setBaseRealPrice(final SessionContext ctx, final AbstractOrderEntry item, final double value)
 	{
@@ -721,7 +723,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>AbstractOrderEntry.baseRealPrice</code> attribute. 
-	 * @param value the baseRealPrice - 分摊之前的单价
+	 * @param value the baseRealPrice - 分摊之后的单价
 	 */
 	public void setBaseRealPrice(final AbstractOrderEntry item, final double value)
 	{
@@ -2491,6 +2493,79 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	}
 	
 	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.operateCost</code> attribute.
+	 * @return the operateCost - price for operate
+	 */
+	public Double getOperateCost(final SessionContext ctx, final AbstractOrder item)
+	{
+		return (Double)item.getProperty( ctx, AcerchemCoreConstants.Attributes.AbstractOrder.OPERATECOST);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.operateCost</code> attribute.
+	 * @return the operateCost - price for operate
+	 */
+	public Double getOperateCost(final AbstractOrder item)
+	{
+		return getOperateCost( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.operateCost</code> attribute. 
+	 * @return the operateCost - price for operate
+	 */
+	public double getOperateCostAsPrimitive(final SessionContext ctx, final AbstractOrder item)
+	{
+		Double value = getOperateCost( ctx,item );
+		return value != null ? value.doubleValue() : 0.0d;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.operateCost</code> attribute. 
+	 * @return the operateCost - price for operate
+	 */
+	public double getOperateCostAsPrimitive(final AbstractOrder item)
+	{
+		return getOperateCostAsPrimitive( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.operateCost</code> attribute. 
+	 * @param value the operateCost - price for operate
+	 */
+	public void setOperateCost(final SessionContext ctx, final AbstractOrder item, final Double value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.AbstractOrder.OPERATECOST,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.operateCost</code> attribute. 
+	 * @param value the operateCost - price for operate
+	 */
+	public void setOperateCost(final AbstractOrder item, final Double value)
+	{
+		setOperateCost( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.operateCost</code> attribute. 
+	 * @param value the operateCost - price for operate
+	 */
+	public void setOperateCost(final SessionContext ctx, final AbstractOrder item, final double value)
+	{
+		setOperateCost( ctx, item, Double.valueOf( value ) );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.operateCost</code> attribute. 
+	 * @param value the operateCost - price for operate
+	 */
+	public void setOperateCost(final AbstractOrder item, final double value)
+	{
+		setOperateCost( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
 	 * <i>Generated method</i> - Getter of the <code>Product.packageType</code> attribute.
 	 * @return the packageType - 包装形式
 	 */
@@ -3143,6 +3218,79 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	}
 	
 	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.storageCost</code> attribute.
+	 * @return the storageCost - price for storage
+	 */
+	public Double getStorageCost(final SessionContext ctx, final AbstractOrder item)
+	{
+		return (Double)item.getProperty( ctx, AcerchemCoreConstants.Attributes.AbstractOrder.STORAGECOST);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.storageCost</code> attribute.
+	 * @return the storageCost - price for storage
+	 */
+	public Double getStorageCost(final AbstractOrder item)
+	{
+		return getStorageCost( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.storageCost</code> attribute. 
+	 * @return the storageCost - price for storage
+	 */
+	public double getStorageCostAsPrimitive(final SessionContext ctx, final AbstractOrder item)
+	{
+		Double value = getStorageCost( ctx,item );
+		return value != null ? value.doubleValue() : 0.0d;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.storageCost</code> attribute. 
+	 * @return the storageCost - price for storage
+	 */
+	public double getStorageCostAsPrimitive(final AbstractOrder item)
+	{
+		return getStorageCostAsPrimitive( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.storageCost</code> attribute. 
+	 * @param value the storageCost - price for storage
+	 */
+	public void setStorageCost(final SessionContext ctx, final AbstractOrder item, final Double value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.AbstractOrder.STORAGECOST,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.storageCost</code> attribute. 
+	 * @param value the storageCost - price for storage
+	 */
+	public void setStorageCost(final AbstractOrder item, final Double value)
+	{
+		setStorageCost( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.storageCost</code> attribute. 
+	 * @param value the storageCost - price for storage
+	 */
+	public void setStorageCost(final SessionContext ctx, final AbstractOrder item, final double value)
+	{
+		setStorageCost( ctx, item, Double.valueOf( value ) );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.storageCost</code> attribute. 
+	 * @param value the storageCost - price for storage
+	 */
+	public void setStorageCost(final AbstractOrder item, final double value)
+	{
+		setStorageCost( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
 	 * <i>Generated method</i> - Getter of the <code>CsTicket.telephone</code> attribute.
 	 * @return the telephone
 	 */
@@ -3180,7 +3328,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>AbstractOrderEntry.totalRealPrice</code> attribute.
-	 * @return the totalRealPrice - 分摊之前的总价
+	 * @return the totalRealPrice - 分摊之后的总价
 	 */
 	public Double getTotalRealPrice(final SessionContext ctx, final AbstractOrderEntry item)
 	{
@@ -3189,7 +3337,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>AbstractOrderEntry.totalRealPrice</code> attribute.
-	 * @return the totalRealPrice - 分摊之前的总价
+	 * @return the totalRealPrice - 分摊之后的总价
 	 */
 	public Double getTotalRealPrice(final AbstractOrderEntry item)
 	{
@@ -3198,7 +3346,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>AbstractOrderEntry.totalRealPrice</code> attribute. 
-	 * @return the totalRealPrice - 分摊之前的总价
+	 * @return the totalRealPrice - 分摊之后的总价
 	 */
 	public double getTotalRealPriceAsPrimitive(final SessionContext ctx, final AbstractOrderEntry item)
 	{
@@ -3208,7 +3356,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Getter of the <code>AbstractOrderEntry.totalRealPrice</code> attribute. 
-	 * @return the totalRealPrice - 分摊之前的总价
+	 * @return the totalRealPrice - 分摊之后的总价
 	 */
 	public double getTotalRealPriceAsPrimitive(final AbstractOrderEntry item)
 	{
@@ -3217,7 +3365,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>AbstractOrderEntry.totalRealPrice</code> attribute. 
-	 * @param value the totalRealPrice - 分摊之前的总价
+	 * @param value the totalRealPrice - 分摊之后的总价
 	 */
 	public void setTotalRealPrice(final SessionContext ctx, final AbstractOrderEntry item, final Double value)
 	{
@@ -3226,7 +3374,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>AbstractOrderEntry.totalRealPrice</code> attribute. 
-	 * @param value the totalRealPrice - 分摊之前的总价
+	 * @param value the totalRealPrice - 分摊之后的总价
 	 */
 	public void setTotalRealPrice(final AbstractOrderEntry item, final Double value)
 	{
@@ -3235,7 +3383,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>AbstractOrderEntry.totalRealPrice</code> attribute. 
-	 * @param value the totalRealPrice - 分摊之前的总价
+	 * @param value the totalRealPrice - 分摊之后的总价
 	 */
 	public void setTotalRealPrice(final SessionContext ctx, final AbstractOrderEntry item, final double value)
 	{
@@ -3244,7 +3392,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	
 	/**
 	 * <i>Generated method</i> - Setter of the <code>AbstractOrderEntry.totalRealPrice</code> attribute. 
-	 * @param value the totalRealPrice - 分摊之前的总价
+	 * @param value the totalRealPrice - 分摊之后的总价
 	 */
 	public void setTotalRealPrice(final AbstractOrderEntry item, final double value)
 	{
