@@ -228,10 +228,10 @@ function reimgsize(aitem){
 }
 var agallcont = $('.gen-content.gal-centent .g-cartable');
 if(agallcont.length>0){
-	var aitem = agallcont.find('.slide-item .item');
+	var aitem = agallcont.find('.slide-item .aitem');
 	reimgsize(aitem)
 	$(window).resize(function(){
-		var aitem = agallcont.find('.slide-item .item');
+		var aitem = agallcont.find('.slide-item .aitem');
 		reimgsize(aitem)
 	})
 
