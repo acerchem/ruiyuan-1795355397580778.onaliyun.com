@@ -119,23 +119,16 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
         if (cartModel != null)
         {
             DeliveryModeData deliveryModeData = getDeliveryModeConverter().convert(deliveryModeModel);
-//                double orderTotalPrice  = cartModel.getTotalPrice();
-//                String orderStandardFee = configurationService.getConfiguration().getString(ORDER_STANDARD_CRITICAL_FEE,defaultOrderStandardFee);
-//                BigDecimal operationFee = BigDecimal.ZERO;
-//                if (orderTotalPrice <= Double.valueOf(orderStandardFee)){
-//                    String orderOperationFee = configurationService.getConfiguration().getString(ORDER_OPERATION_FEE,defaultOrderOperationFee);
-//                    operationFee = operationFee.add(BigDecimal.valueOf(Double.valueOf(orderOperationFee)));
-//                }
+
             PriceValue deliveryCost = null;
             if (DELIVERY_MENTION.equals(deliveryModeModel.getCode())){
-//                    String deliveryMetionPrice = configurationService.getConfiguration().getString(DELIVERY_MENTION_FEE,defaultStorageFee);
-//                    BigDecimal fee = BigDecimal.valueOf(Double.valueOf(deliveryMetionPrice));
+
 
                 deliveryCost = new PriceValue(cartModel.getCurrency().getIsocode(), 0.0d, true);
 
             }else if (DELIVERY_GROSS.equals(deliveryModeModel.getCode())){
                 BigDecimal fee = BigDecimal.valueOf(0.0d);
-                fee =  BigDecimal.valueOf(acerchemTrayFacade.getTotalPriceForCart());
+                fee =  BigDecimal.valueOf(acerchemTrayFacade.getTotalPriceForCart(cartModel));
 
                 deliveryCost = new PriceValue(cartModel.getCurrency().getIsocode(), fee.doubleValue(), true);
             }
@@ -218,7 +211,7 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
         if (StringUtils.isNotBlank(pickUpDate))
         {
             final CartModel cartModel = getCart();
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-DD");
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
             try {
                 Date date=  sdf.parse(pickUpDate);
                 cartModel.setPickUpDate(date);
@@ -264,37 +257,37 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
 		
 		return paymentModeData;
 	}
-
 	//分摊价格
-	public void apportionmentCartPrice(CartModel cartModel){
-        if (!ObjectUtils.isEmpty(cartModel)){
+	public void apportionmentCartPrice(OrderModel orderModel){
+        if (!ObjectUtils.isEmpty(orderModel)){
 
             //总托盘比例
             BigDecimal totalUnitCalculateRato = BigDecimal.ZERO;
-            for (AbstractOrderEntryModel aoe: cartModel.getEntries()){
+            for (AbstractOrderEntryModel aoe: orderModel.getEntries()){
                 Double entryUnitCalculateRato = Double.valueOf(aoe.getProduct().getUnitCalculateRato());
                 totalUnitCalculateRato = totalUnitCalculateRato.add(BigDecimal.valueOf(entryUnitCalculateRato));
             }
             //总附加费用
             BigDecimal totalAdditionalFee = BigDecimal.ZERO;
-            if (cartModel.getDeliveryCost()!=null){
-                totalAdditionalFee = BigDecimal.valueOf(cartModel.getDeliveryCost());
+            if (orderModel.getDeliveryCost()!=null){
+                totalAdditionalFee = BigDecimal.valueOf(orderModel.getDeliveryCost());
             }
-            if (cartModel.getOperateCost()!=null){
-                totalAdditionalFee = totalAdditionalFee.add(BigDecimal.valueOf(cartModel.getOperateCost()));
+            if (orderModel.getOperateCost()!=null){
+                totalAdditionalFee = totalAdditionalFee.add(BigDecimal.valueOf(orderModel.getOperateCost()));
             }
-            if (cartModel.getStorageCost()!=null){
-                totalAdditionalFee = totalAdditionalFee.add(BigDecimal.valueOf(cartModel.getStorageCost()));
+            if (orderModel.getStorageCost()!=null){
+                totalAdditionalFee = totalAdditionalFee.add(BigDecimal.valueOf(orderModel.getStorageCost()));
             }
 
-            int size = cartModel.getEntries().size();
+            int size = orderModel.getEntries().size();
             //
-            BigDecimal remainTotalDeliveryCost =BigDecimal.ZERO;
+            BigDecimal remainTotalDeliveryCost =totalAdditionalFee;
 
             for (int i =0 ; i<size ; i++){
-                AbstractOrderEntryModel aoe = cartModel.getEntries().get(i);
+                AbstractOrderEntryModel aoe = orderModel.getEntries().get(i);
                 Double basePrice = aoe.getBasePrice();
-                aoe.setBaseRealPrice(basePrice);
+                Double totalPrice = aoe.getTotalPrice();
+
                 BigDecimal entryTotalAdditionalFee = BigDecimal.ZERO;
                if (i == size-1) {
                    entryTotalAdditionalFee = remainTotalDeliveryCost;
@@ -302,7 +295,7 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
 
                    Double entryUnitCalculateRato = Double.valueOf(aoe.getProduct().getUnitCalculateRato());
                    //计算比例
-                   BigDecimal proportion = totalUnitCalculateRato.divide(new BigDecimal(entryUnitCalculateRato), BigDecimal.ROUND_HALF_UP, BigDecimal.ROUND_HALF_UP);
+                   BigDecimal proportion = new BigDecimal(entryUnitCalculateRato).divide(totalUnitCalculateRato, BigDecimal.ROUND_HALF_UP, BigDecimal.ROUND_HALF_UP);
                    //计算entry total 运费
                    entryTotalAdditionalFee = proportion.multiply(totalAdditionalFee);
 
@@ -311,12 +304,16 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
 
                }
                BigDecimal quantity = BigDecimal.valueOf(aoe.getQuantity());
+                //附加费单价
                BigDecimal entryDeliveryBasePrice = entryTotalAdditionalFee.divide(quantity, BigDecimal.ROUND_HALF_UP, BigDecimal.ROUND_HALF_UP);
-               basePrice = BigDecimal.valueOf(basePrice).add(entryDeliveryBasePrice).doubleValue();
-               aoe.setBasePrice(basePrice);
+               Double baseRealPrice = BigDecimal.valueOf(basePrice).add(entryDeliveryBasePrice).doubleValue();
+               aoe.setBaseRealPrice(baseRealPrice);
+                //附加费行总价
+               Double totalRealPrice = BigDecimal.valueOf(totalPrice).add(entryTotalAdditionalFee).doubleValue();
+               aoe.setTotalRealPrice(totalRealPrice);
 
             }
-            getModelService().saveAll(cartModel.getEntries());
+            getModelService().saveAll(orderModel.getEntries());
         }
     }
 
@@ -346,11 +343,10 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
             {
                 beforePlaceOrder(cartModel);
                 final OrderModel orderModel = placeOrder(cartModel);
-//                apportionmentCartPrice(cartModel);
+                apportionmentCartPrice(orderModel);
                 afterPlaceOrder(cartModel, orderModel);
                 if (orderModel != null)
                 {
-//                    apportionmentCartPrice(cartModel);
                     return getOrderConverter().convert(orderModel);
                 }
             }

@@ -1,5 +1,7 @@
 package com.acerchem.facades.facades;
 
+import de.hybris.platform.core.model.order.CartModel;
+
 /**
  * Created by Jacob.Ji on 2018/4/8.
  */
@@ -18,6 +20,6 @@ public interface AcerchemTrayFacade {
      * @param
      * @return
      */
-    double getTotalPriceForCart() throws AcerchemOrderException;
+    double getTotalPriceForCart(CartModel cartModel) throws AcerchemOrderException;
 
 }

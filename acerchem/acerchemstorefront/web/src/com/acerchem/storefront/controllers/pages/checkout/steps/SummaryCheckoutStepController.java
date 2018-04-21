@@ -89,7 +89,11 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		model.addAttribute("paymentInfos", acerchemCheckoutFacade.getSupportedCardTypes(cartData.getDeliveryMode().getCode()));
+		if (cartData.getDeliveryMode()!=null) {
+			model.addAttribute("paymentInfos", acerchemCheckoutFacade.getSupportedCardTypes(cartData.getDeliveryMode().getCode()));
+		}else{
+			model.addAttribute("paymentInfos", acerchemCheckoutFacade.getSupportedCardTypes("DELIVERY_MENTION"));
+		}
 
 		model.addAttribute("cartData", cartData);
 		model.addAttribute("allItems", cartData.getEntries());
