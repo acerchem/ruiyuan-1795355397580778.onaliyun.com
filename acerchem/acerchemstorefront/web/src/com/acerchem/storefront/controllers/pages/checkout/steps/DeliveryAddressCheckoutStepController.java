@@ -142,6 +142,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 			newAddress.setDefaultAddress(true);
 			newAddress.setVisibleInAddressBook(true);
 		}
+		newAddress.setVisibleInAddressBook(true);
 	}
 
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
@@ -298,10 +299,10 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		final AddressData previousSelectedAddress = getCheckoutFacade().getCheckoutCart().getDeliveryAddress();
 		// Set the new address as the selected checkout delivery address
 		getCheckoutFacade().setDeliveryAddress(selectedAddress);
-		if (previousSelectedAddress != null && !previousSelectedAddress.isVisibleInAddressBook())
-		{ // temporary address should be removed
-			getUserFacade().removeAddress(previousSelectedAddress);
-		}
+//		if (previousSelectedAddress != null && !previousSelectedAddress.isVisibleInAddressBook())
+//		{ // temporary address should be removed
+//			getUserFacade().removeAddress(previousSelectedAddress);
+//		}
 
 		GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.CONF_MESSAGES_HOLDER, "checkout.multi.address.added");
 
@@ -378,7 +379,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 			getCheckoutFacade().setDeliveryAddress(selectedAddressData);
 			if (cartCheckoutDeliveryAddress != null && !cartCheckoutDeliveryAddress.isVisibleInAddressBook())
 			{ // temporary address should be removed
-				getUserFacade().removeAddress(cartCheckoutDeliveryAddress);
+//				getUserFacade().removeAddress(cartCheckoutDeliveryAddress);
 			}
 		}
 	}
