@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.acerchem.core.image.service.AcerChemImageFailedRecoredService;
 import com.acerchem.core.image.service.AcerChemImageUploadLogService;
+import com.acerchem.core.image.service.AcerChemMediaService;
 import com.acerchem.core.model.ImageFailedRecordModel;
 import com.acerchem.core.model.ImageUploadedLogModel;
 import com.acerchem.core.web.aliyun.MediaFileManager;
@@ -37,6 +38,9 @@ public class AliyunFilesJobPerformable extends AbstractJobPerformable<CronJobMod
 
 	@Resource
 	private AcerChemImageUploadLogService acerChemImageUploadLogService;
+	
+	@Resource
+	private AcerChemMediaService acerChemMediaService;
 
 	private static final Integer MAX_COUNT = 20;
 
@@ -120,11 +124,11 @@ public class AliyunFilesJobPerformable extends AbstractJobPerformable<CronJobMod
 
 									// delete log
 
-//									ImageUploadedLogModel iulModel = acerChemImageUploadLogService
-//											.getImageUploadedLog(mediaPK);
-//									if (iulModel != null) {
-//										modelService.remove(iulModel);
-//									}
+									ImageUploadedLogModel iulModel = acerChemImageUploadLogService
+											.getImageUploadedLog(mediaPK);
+									if (iulModel != null) {
+										modelService.remove(iulModel);
+									}
 
 								}
 							}
