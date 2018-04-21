@@ -11,4 +11,6 @@ public interface AcerChemImageFailedRecordDao {
 	public List<ImageFailedRecordModel> getImageFailedRecordByFileAttr(final String fileName,final String actionType);
 	public List<ImageFailedRecordModel> getAllImageFailedRecord();
 	public List<MediaModel> getMediaWithImageFailedRecord();
+	
+	public List<ImageFailedRecordModel> getLimitedImageFailedRecord(final int limit);
 }

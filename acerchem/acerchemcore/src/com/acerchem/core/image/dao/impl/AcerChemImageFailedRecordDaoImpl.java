@@ -1,6 +1,5 @@
 package com.acerchem.core.image.dao.impl;
 
-import java.util.Arrays;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -9,8 +8,6 @@ import com.acerchem.core.image.dao.AcerChemImageFailedRecordDao;
 import com.acerchem.core.model.ImageFailedRecordModel;
 
 import de.hybris.platform.core.model.media.MediaModel;
-import de.hybris.platform.ordersplitting.model.StockLevelModel;
-import de.hybris.platform.ordersplitting.model.VendorModel;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
@@ -44,9 +41,6 @@ public class AcerChemImageFailedRecordDaoImpl implements AcerChemImageFailedReco
 		String GET_IMAGEFAILEDRECORD = "SELECT {pk} "
 				+ " FROM {"+ImageFailedRecordModel._TYPECODE+"}";
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(GET_IMAGEFAILEDRECORD );
-		query.setNeedTotal(true);
-		query.setCount(3);
-		query.setStart(0);
 		
 		final SearchResult<ImageFailedRecordModel> result = flexibleSearchService.search(query);
 		
@@ -67,6 +61,23 @@ public class AcerChemImageFailedRecordDaoImpl implements AcerChemImageFailedReco
 		final SearchResult<MediaModel> result = flexibleSearchService.search(query);
 		
 		return result.getResult();
+	}
+
+	/* (non-Javadoc)
+	 * @see com.acerchem.core.image.dao.AcerChemImageFailedRecordDao#getLimitedImageFailedRecord(int)
+	 */
+	@Override
+	public List<ImageFailedRecordModel> getLimitedImageFailedRecord(int limit) {
+		String GET_IMAGEFAILEDRECORD = "SELECT {pk} "
+				+ " FROM {"+ImageFailedRecordModel._TYPECODE+"}";
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(GET_IMAGEFAILEDRECORD );
+		query.setNeedTotal(false);
+		query.setCount(limit);
+		
+		final SearchResult<ImageFailedRecordModel> result = flexibleSearchService.search(query);
+		
+		return result.getResult();
+		
 	}
 
 	

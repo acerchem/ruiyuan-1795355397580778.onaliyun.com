@@ -12,9 +12,11 @@ import javax.annotation.Resource;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 
+import com.acerchem.core.enums.ImageFailedActionType;
 import com.acerchem.core.image.service.AcerChemImageFailedRecoredService;
 import com.acerchem.core.image.service.AcerChemImageUploadLogService;
 import com.acerchem.core.image.service.AcerChemMediaService;
+import com.acerchem.core.model.ImageFailedRecordModel;
 import com.acerchem.core.model.ImageUploadedLogModel;
 import com.acerchem.core.web.aliyun.UploadFileDefault;
 import com.aliyun.oss.OSSClient;
@@ -56,7 +58,6 @@ public class AliyunUploadJobPerformable extends AbstractJobPerformable<CronJobMo
 			"GfyBU4iNfQftoUV20fHoYz2zNqJARy");
 	private final String lsBucketName = Config.getString("aliyun.bucketName", "acerchem");
 
-	
 	@Override
 	public PerformResult perform(CronJobModel cronJob) {
 		// TODO Auto-generated method stub
@@ -68,11 +69,12 @@ public class AliyunUploadJobPerformable extends AbstractJobPerformable<CronJobMo
 			imageParams.add("image/bmp");
 
 			// 每次MAX_IMAGE个图片文件数据处理
-			List<MediaModel> medias = acerChemMediaService.getMediasOfLimit(imageParams, MAX_IMAGE);
+			List<MediaModel> medias = acerChemMediaService.getMediasOfLimit(imageParams, MAX_IMAGE,"Online","acerchem");
 
 			if (CollectionUtils.isNotEmpty(medias)) {
 
 				for (MediaModel media : medias) {
+					LOG.info("****>>>version=" + media.getCatalogVersion().getVersion());
 					uploadFileSendProcessor(media, IMAGEROOT);
 				}
 
@@ -86,7 +88,7 @@ public class AliyunUploadJobPerformable extends AbstractJobPerformable<CronJobMo
 				docParams.add("application/msword");
 
 				// 每次MAX_DOC个资质文件数据处理
-				List<MediaModel> docMedias = acerChemMediaService.getMediasOfLimit(docParams, MAX_DOC);
+				List<MediaModel> docMedias = acerChemMediaService.getMediasOfLimit(docParams, MAX_DOC,"Online","acerchem");
 
 				if (CollectionUtils.isNotEmpty(docMedias)) {
 
@@ -116,12 +118,12 @@ public class AliyunUploadJobPerformable extends AbstractJobPerformable<CronJobMo
 				// get localfile path
 				String localPath = media.getLocation();
 
-				LOG.debug(localPath);
+				LOG.info("****>>>RelativePath=" + localPath);
 				// get parent fileDir
 				File mainDataDir = MediaUtil.getLocalStorageDataDir();
 				// get local file
 				File file = MediaUtil.composeOrGetParent(mainDataDir, localPath);
-				LOG.debug(file.getAbsolutePath());
+				LOG.info("****>>>AbsolutePath=" + file.getAbsolutePath());
 
 				if (file.exists()) {
 
@@ -139,8 +141,8 @@ public class AliyunUploadJobPerformable extends AbstractJobPerformable<CronJobMo
 					// synchronize to save media with aliyunUrl
 					String aliyunUrl = DOMAIN + "/" + key;
 					if (uploadFlag) {
-						
-						System.out.println("****upload end>>>>synsave to Media start*****");
+
+						LOG.info("****upload end>>>>synsave to Media start*****");
 
 						media.setAliyunUrl(aliyunUrl);
 						modelService.save(media);
@@ -157,10 +159,22 @@ public class AliyunUploadJobPerformable extends AbstractJobPerformable<CronJobMo
 
 						modelService.save(iulModel);
 
-						System.out.println("****synsave to Media end*****");
-						// } else {
-						// uploadFailedProccess(media, key);
+						LOG.info("****synsave to Media end*****");
+						
+					} else {
+						//用来保证即使失败，原始media数据跳过这些失败的，继续新的数据上传
+						//而这些失败数据，放在上传失败记录处理！
+						media.setAliyunUrl("UploadAliyunFailed");
+						modelService.save(media);
+						uploadFailedProccess(media, key);
+						LOG.info("****>>>Upload Aliyun Failed!*****");
 					}
+				} else {
+
+					media.setAliyunUrl("ImagesOfFilesNoExist");
+					modelService.save(media);
+					LOG.info("****>>>Files can't find!*****");
+
 				}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -172,50 +186,50 @@ public class AliyunUploadJobPerformable extends AbstractJobPerformable<CronJobMo
 		}
 
 	}
+
 	// 上传失败处理--保存上传的文件路径和aliyun的key路径
-	// private void uploadFailedProccess(MediaModel media, String aliyunPath) {
-	// try {
-	//
-	// ImageFailedActionType actionType =
-	// enumerationService.getEnumerationValue(ImageFailedActionType.class,
-	// "ADD");
-	// // String fileName = media.getLocation();
-	// // if (fileName == null)
-	// // return;
-	//
-	// String fileName = aliyunPath.substring(aliyunPath.lastIndexOf("/") + 1);
-	//
-	// String status = "0";
-	// ImageFailedRecordModel failedRecord = acerChemImageFailedRecoredService
-	// .getImageFailedRecordByFileAttr(fileName, "ADD");
-	// if (failedRecord != null) {
-	// int n = Integer.getInteger(failedRecord.getStatus());
-	// n++;
-	// status = String.valueOf(n);
-	//
-	// failedRecord.setAliyunUrl(aliyunPath);
-	// failedRecord.setLocation(media.getLocation());
-	// failedRecord.setStatus(status);
-	// failedRecord.setMediaData(media);
-	// failedRecord.setMediaPK(media.getPk().getLongValueAsString());
-	//
-	// } else {
-	// failedRecord = modelService.create(ImageFailedRecordModel.class);
-	// failedRecord.setFileName(fileName);
-	// failedRecord.setActionType(actionType);
-	// failedRecord.setAliyunUrl(aliyunPath);
-	// failedRecord.setLocation(media.getLocation());
-	// failedRecord.setStatus(status);
-	// failedRecord.setMediaData(media);
-	// failedRecord.setMediaPK(media.getPk().getLongValueAsString());
-	//
-	// }
-	//
-	// modelService.save(failedRecord);
-	// } catch (Exception e) {
-	// e.printStackTrace();
-	// }
-	//
-	// }
+	private void uploadFailedProccess(MediaModel media, String aliyunPath) {
+		try {
+
+			ImageFailedActionType actionType = enumerationService.getEnumerationValue(ImageFailedActionType.class,
+					"ADD");
+			// String fileName = media.getLocation();
+			// if (fileName == null)
+			// return;
+
+			String fileName = aliyunPath.substring(aliyunPath.lastIndexOf("/") + 1);
+
+			String status = "0";
+			ImageFailedRecordModel failedRecord = acerChemImageFailedRecoredService
+					.getImageFailedRecordByFileAttr(fileName, "ADD");
+			if (failedRecord != null) {
+				int n = Integer.getInteger(failedRecord.getStatus());
+				n++;
+				status = String.valueOf(n);
+
+				failedRecord.setAliyunUrl(aliyunPath);
+				failedRecord.setLocation(media.getLocation());
+				failedRecord.setStatus(status);
+				failedRecord.setMediaData(media);
+				failedRecord.setMediaPK(media.getPk().getLongValueAsString());
+
+			} else {
+				failedRecord = modelService.create(ImageFailedRecordModel.class);
+				failedRecord.setFileName(fileName);
+				failedRecord.setActionType(actionType);
+				failedRecord.setAliyunUrl(aliyunPath);
+				failedRecord.setLocation(media.getLocation());
+				failedRecord.setStatus(status);
+				failedRecord.setMediaData(media);
+				failedRecord.setMediaPK(media.getPk().getLongValueAsString());
+
+			}
+
+			modelService.save(failedRecord);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+	}
 
 }

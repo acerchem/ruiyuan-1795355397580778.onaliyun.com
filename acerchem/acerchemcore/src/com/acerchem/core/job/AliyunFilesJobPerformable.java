@@ -47,9 +47,9 @@ public class AliyunFilesJobPerformable extends AbstractJobPerformable<CronJobMod
 	@Override
 	public PerformResult perform(CronJobModel cronJob) {
 		// TODO Auto-generated method stub
-		System.out.println("****cronJob  Scheduling***");
+		//System.out.println("****cronJob  Scheduling***");
 		try {
-			List<ImageFailedRecordModel> list = acerChemImageFailedRecoredService.getAllImageFailedRecord();
+			List<ImageFailedRecordModel> list = acerChemImageFailedRecoredService.getLimitedImageFailedRecord(MAX_COUNT);
 
 			// List<MediaModel> list =
 			// acerChemImageFailedRecoredService.getMediaWithImageFailedRecord();
@@ -76,9 +76,6 @@ public class AliyunFilesJobPerformable extends AbstractJobPerformable<CronJobMod
 						String ls = model.getLocation();
 						String mediaPK = model.getMediaPK();
 
-						if( iCount == MAX_COUNT.intValue()){
-							break;
-						}
 						// System.out.println(ls);
 						String action = model.getActionType().toString();
 						System.out.println("***" + action + "***");
@@ -96,11 +93,6 @@ public class AliyunFilesJobPerformable extends AbstractJobPerformable<CronJobMod
 								if (StringUtils.isNotBlank(ls)) {
 									File file = MediaUtil.composeOrGetParent(mainDataDir, ls);
 									if (file.exists()) {
-										System.out.println(file.getAbsolutePath());
-
-										// InputStream input =
-										// MediaManager.getInstance().getMediaAsStream(new
-										// ModelMediaSource(media));
 										System.out.println("*****start upload to aliyun*****");
 
 										boolean success = (UploadFileDefault.uploadFile(file, key, client));
@@ -123,12 +115,11 @@ public class AliyunFilesJobPerformable extends AbstractJobPerformable<CronJobMod
 									modelService.remove(model);
 
 									// delete log
-
-//									ImageUploadedLogModel iulModel = acerChemImageUploadLogService
-//											.getImageUploadedLog(mediaPK);
-//									if (iulModel != null) {
-//										modelService.remove(iulModel);
-//									}
+									ImageUploadedLogModel iulModel = acerChemImageUploadLogService
+											.getImageUploadedLog(mediaPK);
+									if (iulModel != null) {
+										modelService.remove(iulModel);
+									}
 
 								}
 							}

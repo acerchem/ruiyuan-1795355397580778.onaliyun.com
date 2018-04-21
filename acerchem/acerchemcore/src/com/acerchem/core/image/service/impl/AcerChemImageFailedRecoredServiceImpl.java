@@ -42,4 +42,15 @@ public class AcerChemImageFailedRecoredServiceImpl implements AcerChemImageFaile
 		// TODO Auto-generated method stub
 		return acerChemImageFailedRecordDao.getMediaWithImageFailedRecord();
 	}
+
+	/* (non-Javadoc)
+	 * @see com.acerchem.core.image.service.AcerChemImageFailedRecoredService#getLimitedImageFailedRecord(int)
+	 */
+	@Override
+	public List<ImageFailedRecordModel> getLimitedImageFailedRecord(final int limit) {
+		// TODO Auto-generated method stub
+		return acerChemImageFailedRecordDao.getLimitedImageFailedRecord(limit);
+	}
+	
+	
 }

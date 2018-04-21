@@ -7,10 +7,8 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import com.acerchem.core.dao.AcerChemProductDao;
-import com.acerchem.core.model.ImageUploadedLogModel;
 
 import de.hybris.platform.core.model.product.ProductModel;
-import de.hybris.platform.ordersplitting.model.StockLevelModel;
 import de.hybris.platform.ordersplitting.model.VendorModel;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
@@ -32,7 +30,7 @@ public class AcerChemProductDaoImpl implements AcerChemProductDao {
 	                                                                          																																					
 		final Map<String, Object> params = new HashMap<String, Object>();
 		final StringBuilder builder = new StringBuilder(SQL);
-		params.put("vendorName", "'%"+vendorName+"%'");
+		params.put("vendorName", "%"+vendorName+"%");
 		
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(builder.toString());
 		query.addQueryParameters(params);

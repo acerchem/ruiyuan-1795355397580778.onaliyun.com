@@ -46,7 +46,7 @@ public class MediaFilesAfterDeletedListener extends AbstractEventListener<AfterI
 		try {
 			if (event != null) {
 
-				System.out.println("****after item removal event active****");
+				//System.out.println("****after item removal event active****");
 				PK pk = (PK) event.getSource();
 				// 指定是media
 				if (30 == pk.getTypeCode()) {
