@@ -40,7 +40,7 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 
 	private String customerAddress;
 	private ContractEmailContextPoJo append;
-	private String wareHouse;
+	private String warehouse;
 	private String paymentTerms;
 	private CustomerModel customerModel;  
 
@@ -197,12 +197,13 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 				list.add(pie);
 
 				// warehouse
-				if (StringUtils.isBlank(wareHouse)) {
+				if (StringUtils.isBlank(warehouse)) {
 					//String warehouseCode = orderEntry.getWarehouseCode();
 					PointOfServiceData  pos = orderEntry.getDeliveryPointOfService();
 					if (pos != null){
-						wareHouse=pos.getAddress().getFormattedAddress();
-						wareHouse = StringUtils.defaultString(wareHouse,"&nbsp;");
+					
+						setWarehouse(StringUtils.defaultString(pos.getAddress().getFormattedAddress(),"&nbsp;"));
+						
 					}
 					
 					
@@ -243,9 +244,10 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 		this.append = append;
 	}
 
-	public String getWareHouse() {
-		return wareHouse;
+	public String getWarehouse() {
+		return warehouse;
 	}
+	
 
 	/**
 	 * @return the paymentTerms
@@ -267,6 +269,13 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 	 */
 	public CustomerModel getCustomer() {
 		return customerModel;
+	}
+
+	/**
+	 * @param warehouse the warehouse to set
+	 */
+	public void setWarehouse(String warehouse) {
+		this.warehouse = warehouse;
 	}
 
 }

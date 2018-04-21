@@ -157,7 +157,7 @@
 	  <p class="western" style="text-indent: 2.01in"><font face="Calibri, serif"><b>Tel: ${ctx.customer.defaultPaymentAddress.phone1}</b></font></p> 
 	  <p class="western"><br /> </p> 
 	  <p class="western" style="text-indent: 2.01in"><font size="2" face="Calibri, serif" style="font-size: 10pt"><font size="3" style="font-size: 12pt">
-		<b>SHIP FROM: ${ctx.order.store} SHIP TO: ${ctx.order.deliveryAddress.formattedAddress}</b></font></font></p> 
+		<b>SHIP FROM: ${ctx.warehouse} SHIP TO: ${ctx.order.deliveryAddress.formattedAddress}</b></font></font></p> 
 	  <p class="western"><br /> </p> 
   <center> 
    #if ($ctx.append.productLists.size() > 0)

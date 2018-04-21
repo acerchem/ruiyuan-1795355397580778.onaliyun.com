@@ -44,7 +44,7 @@ public class LinePayModeAction extends AbstractProceduralAction<OrderProcessMode
 		final OrderModel order = process.getOrder();
 		
 		if(order != null){
-			if (order.getPaymentInfo() instanceof InvoicePaymentInfoModel)
+			if (order.getPaymentMode().getCode().equals("InvoicePayment"))
 			{
 				return;
 			}
