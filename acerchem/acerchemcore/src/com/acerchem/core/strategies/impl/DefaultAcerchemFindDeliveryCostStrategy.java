@@ -122,7 +122,7 @@ public class DefaultAcerchemFindDeliveryCostStrategy extends DefaultFindDelivery
 				}else if (DELIVERY_GROSS.equals(deliveryModeModel.getCode())){
 					BigDecimal fee = BigDecimal.valueOf(0.0d);
 					//托盘运输费
-					fee =  BigDecimal.valueOf(getTotalPriceForCart());
+					fee =  BigDecimal.valueOf(getTotalPriceForCart(order));
 					order.setDeliveryCost(fee.doubleValue());
 					order.setStorageCost(0.0d);
 
@@ -134,15 +134,14 @@ public class DefaultAcerchemFindDeliveryCostStrategy extends DefaultFindDelivery
 	}
 
 
-	private  double getTotalPriceForCart(){
+	private  double getTotalPriceForCart(AbstractOrderModel order){
 		double totalTrayPrice = 0.0d;
 		CountryModel countryModel = null;
 		//托盘数量
 		BigDecimal totalTrayAmount = BigDecimal.ZERO;
-		if (cartService.hasSessionCart()){
-			CartModel cartModel = cartService.getSessionCart();
+		if (order!=null){
 
-			for (AbstractOrderEntryModel aoe : cartModel.getEntries()){
+			for (AbstractOrderEntryModel aoe : order.getEntries()){
 
 				if (aoe.getDeliveryPointOfService().getAddress()!=null) {
 					countryModel = aoe.getDeliveryPointOfService().getAddress().getCountry();
