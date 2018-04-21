@@ -23,7 +23,7 @@ import de.hybris.platform.commercefacades.order.data.ConsignmentEntryData;
 import de.hybris.platform.commercefacades.order.data.OrderData;
 import de.hybris.platform.commercefacades.order.data.OrderEntryData;
 import de.hybris.platform.commercefacades.product.data.ProductData;
-import de.hybris.platform.core.model.c2l.CountryModel;
+import de.hybris.platform.commercefacades.storelocator.data.PointOfServiceData;
 import de.hybris.platform.core.model.c2l.LanguageModel;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.AddressModel;
@@ -47,6 +47,8 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 	private String paymentTerms;
 	
 	private CustomerModel customerModel;  
+	
+	private String warehouse;
 
 	@Override
 	public void init(final OrderProcessModel orderProcessModel, final EmailPageModel emailPageModel) {
@@ -198,6 +200,19 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 						itemNet += Long.parseLong(tempNet);
 						itemGross += Long.parseLong(tempGross);
 						list.add(pie);
+						
+						
+						//add warehouse
+						if (StringUtils.isBlank(warehouse)){
+							OrderEntryData entryData = consignEntry.getOrderEntry();
+							
+							if ( entryData != null){
+								PointOfServiceData pos = entryData.getDeliveryPointOfService();
+								if (pos != null){
+									setWarehouse(StringUtils.defaultString(pos.getAddress().getFormattedAddress(),"&nbsp;"));
+								}
+							}
+						}
 
 					}
 
@@ -249,6 +264,9 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 		this.setPaymentTerms(terms);
 	}
 
+	public void initWarehouse(){
+		
+	}
 	/**
 	 * @return the paymentTerms
 	 */
@@ -269,6 +287,20 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 	 */
 	public CustomerModel getCustomer() {
 		return customerModel;
+	}
+
+	/**
+	 * @return the warehouse
+	 */
+	public String getWarehouse() {
+		return warehouse;
+	}
+
+	/**
+	 * @param warehouse the warehouse to set
+	 */
+	public void setWarehouse(String warehouse) {
+		this.warehouse = warehouse;
 	}
 
 }

@@ -22,10 +22,11 @@ public class AcerChemMediaServiceImpl implements AcerChemMediaService {
 	 * @see com.acerchem.core.image.service.AcerChemMediaService#getMediasOfLimit(java.lang.String, int)
 	 */
 	@Override
-	public List<MediaModel> getMediasOfLimit(String mime, int limitCount) {
+	public List<MediaModel> getMediasOfLimit(List<String> mimes, int limitCount) {
 		// TODO Auto-generated method stub
-		return acerChemMediaDao.getMediasOfLimit(mime, limitCount);
+		return acerChemMediaDao.getMediasOfLimit(mimes, limitCount);
 	}
+	
 
 	
 	

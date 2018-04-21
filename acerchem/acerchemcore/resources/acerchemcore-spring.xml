@@ -533,9 +533,9 @@
 	<!-- 
 	<bean id="mediaImageCreatedListener" class="com.acerchem.core.event.MediaImageCreatedListener" parent="abstractEventListener"/>
 	<bean id="myAfterSaveListener" class="com.acerchem.core.event.MyAfterSaveListener" />
-	 -->
+	 
 	<bean id="mediaImageSaveListener" class="com.acerchem.core.event.MediaImageSaveEventListener" />
-	
+	-->
 	<!-- Jayson.Wang add dao -->
 	<bean id="acerChemImageFailedRecordDao" class="com.acerchem.core.image.dao.impl.AcerChemImageFailedRecordDaoImpl"  >
 	</bean>

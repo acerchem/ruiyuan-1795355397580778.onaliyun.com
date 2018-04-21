@@ -2,12 +2,10 @@ package com.acerchem.core.job;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.acerchem.core.image.service.AcerChemImageFailedRecoredService;
@@ -22,15 +20,12 @@ import com.aliyun.oss.OSSClient;
 
 import de.hybris.platform.core.Registry;
 import de.hybris.platform.core.Tenant;
-import de.hybris.platform.core.model.media.MediaModel;
 import de.hybris.platform.cronjob.enums.CronJobResult;
 import de.hybris.platform.cronjob.enums.CronJobStatus;
 import de.hybris.platform.cronjob.model.CronJobModel;
-import de.hybris.platform.jalo.media.MediaManager;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.cronjob.AbstractJobPerformable;
 import de.hybris.platform.servicelayer.cronjob.PerformResult;
-import de.hybris.platform.servicelayer.media.impl.ModelMediaSource;
 import de.hybris.platform.util.MediaUtil;
 
 public class AliyunFilesJobPerformable extends AbstractJobPerformable<CronJobModel> {
@@ -125,11 +120,11 @@ public class AliyunFilesJobPerformable extends AbstractJobPerformable<CronJobMod
 
 									// delete log
 
-									ImageUploadedLogModel iulModel = acerChemImageUploadLogService
-											.getImageUploadedLog(mediaPK);
-									if (iulModel != null) {
-										modelService.remove(iulModel);
-									}
+//									ImageUploadedLogModel iulModel = acerChemImageUploadLogService
+//											.getImageUploadedLog(mediaPK);
+//									if (iulModel != null) {
+//										modelService.remove(iulModel);
+//									}
 
 								}
 							}

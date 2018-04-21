@@ -41,18 +41,18 @@ public class AcerChemMediaDaoImpl implements AcerChemMediaDao {
 	 * @see com.acerchem.core.image.dao.AcerChemMediaDao#getMediaOfLimit(java.lang.String, int)
 	 */
 	@Override
-	public List<MediaModel> getMediasOfLimit(String mime, int limitCount) {
+	public List<MediaModel> getMediasOfLimit(List<String> mimes, int limitCount) {
 		// TODO Auto-generated method stub
 		
 		final String SQL="select {pk} from {" + MediaModel._TYPECODE + "} where {" + MediaModel.ALIYUNURL + "} IS NULL and {"
-				 + MediaModel.MIME + "} =?mime";
+				 + MediaModel.MIME + "} in (?mimes)";
 		
-		FlexibleSearchQuery query = new FlexibleSearchQuery(SQL);
-		query.addQueryParameter("mime", mime);
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(SQL);
+		query.addQueryParameter("mimes", mimes);
 		query.setNeedTotal(false);
 		query.setCount(limitCount);
 		
-		SearchResult<MediaModel> result = flexibleSearchService.search(query);
+		final SearchResult<MediaModel> result = flexibleSearchService.search(query);
 		
 		//MediaModel mm = new MediaModel();
 		
