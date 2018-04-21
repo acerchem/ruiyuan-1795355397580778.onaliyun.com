@@ -125,7 +125,10 @@
 	</bean>
 	
 	<bean id="waitForConfirmAction" class="com.acerchem.fulfilmentprocess.actions.order.WaitForConfirmAction"  parent="abstractAction"/>
-	<bean id="creditPayModeAction" class="com.acerchem.fulfilmentprocess.actions.order.CreditPayModeAction"  parent="abstractAction"/>
+	<bean id="creditPayModeAction" class="com.acerchem.fulfilmentprocess.actions.order.CreditPayModeAction"  parent="abstractAction">
+			<property name="defaultCustomerCreditAccountService" ref="defaultCustomerCreditAccountService"/>
+			
+	</bean>
 	<bean id="linePayModeAction" class="com.acerchem.fulfilmentprocess.actions.order.LinePayModeAction"  parent="abstractAction"/>
 	<bean id="waitForConfirmPayAction" class="com.acerchem.fulfilmentprocess.actions.order.WaitForConfirmPayAction"  parent="abstractAction"/>
 	<bean id="choosePayModeAction" class="com.acerchem.fulfilmentprocess.actions.order.ChoosePayModeAction"  parent="abstractAction"/>
