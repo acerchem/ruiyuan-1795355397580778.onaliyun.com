@@ -29,7 +29,7 @@ public class ChoosePayModeAction extends AbstractSimpleDecisionAction<OrderProce
 {
 	private static final Logger LOG = Logger.getLogger(ChoosePayModeAction.class);
 	
-	private static final String CREDIT_PAYMENT_INFO = "CreditPaymentInfo";
+	private static final String CREDIT_PAYMENT_INFO = "CreditPayment";
 	
 	@Override
 	public Transition executeAction(final OrderProcessModel process)
