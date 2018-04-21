@@ -162,12 +162,14 @@
 		<input type="hidden" id="recaptchaChallangeAnswered" value="${requestScope.recaptchaChallangeAnswered}" />
 		<div class="form_field-elements control-group js-recaptcha-captchaaddon"></div>
 		
-		
-		<div class="link">
-		
-			By creating an account, you agree to Acerchem <br/> <a href="${loginUrl}">Conditions</a>
-		 of Use and <a href="${loginUrl}">Privacy Notice</a>.
+		<label align="center" style="width: calc(100% - 20px);">
+			<input type="checkbox" name="aidField" value="agree"/>
+			<span class="checkbox">By creating an account, you agree to Acerchem<br/></span>
+		</label>
+		<div align="center">
+			<a href="${loginUrl}">Conditions</a> of Use and <a href="${loginUrl}">Privacy Notice</a>.
 		</div>
+		
 		</form:form>
 		<div class="btn-set">
 			<button type="submit" class="btn btn-submit">Register</button>
@@ -230,9 +232,23 @@ $(document).on("change",'#selectContactCountry select', function (){
 	
 inputint()	
 $('.btn-submit').on('click',function(){
-	var req = $('#login form');
-	verification(req);
+	
+	var id = document.getElementsByName('aidField');
+	var value = new Array();
+	for(var i = 0; i < id.length; i++){
+	     if(id[i].checked)
+	     value.push(id[i].value);
+	}
+	if(value.toString()=="agree")
+	{
+		var req = $('#login form');
+		verification(req);
+	}
+	else
+	{
+		maxalert('Please agree to Acerchem!')
+		return false;
+	}
 })
-
 </script>
 </body>
