@@ -35,36 +35,43 @@
 							<div class="item">
 								<div class="item-row">
 									<span>Total Sum (<em>${cartData.totalUnitCount}</em> items)</span>
-									<span class="row"> <format:price priceData="${cartData.totalPrice}"/></span>
+									<span class="row"> <format:price priceData="${cartData.subTotal}"/></span>
 								</div>
 
 								<div class="item-row">
 									<span>Discount Amount</span>
 									
-									 <c:choose>
-						                <c:when test="${cartData.totalDiscounts.value > 0}">
-						                    <span class="row">-$0.00</span>
-						                </c:when>
+									 <%-- <c:choose>
+						                <c:when test="${cartData.totalDiscounts.value > 0}"> --%>
+						                    <span class="row"><format:price priceData="${cartData.totalDiscounts}"/></span>
+						             <%--    </c:when>
 						                <c:otherwise>
 						                     <span class="row">-$0.00</span>
 						                </c:otherwise>
-						            </c:choose>
+						            </c:choose> --%>
 									
+								</div>
+								
+								<div class="item-row">
+									<span>Storage Cost</span>
+									
+						              <span class="row"><format:price priceData="${cartData.storageCost}"/></span>
+						               
+								</div>
+								
+								<div class="item-row">
+									<span>Operate Cost</span>
+									
+						              <span class="row"><format:price priceData="${cartData.operateCost}"/></span>
+						               
 								</div>
 
-								<div class="item-row">
+								<%-- <div class="item-row">
 									<span>Order Total</span>
+						               
+						              <span class="row"><format:price priceData="${cartData.totalPrice}"/></span>
 									
-									<c:choose>
-						                <c:when test="${cartData.totalDiscounts.value > 0}">
-						                    <span class="row total">-$0.00</span>
-						                </c:when>
-						                <c:otherwise>
-						                     <span class="row total"><format:price priceData="${cartData.totalPrice}"/></span>
-						                </c:otherwise>
-						            </c:choose>
-									
-								</div>
+								</div> --%>
 							</div>					
 						</div>
 						<!-- <label>

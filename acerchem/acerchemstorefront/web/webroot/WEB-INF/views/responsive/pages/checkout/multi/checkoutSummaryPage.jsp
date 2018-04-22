@@ -218,6 +218,40 @@
 					</div>
 				</div>
 				<!-- end -->
+				
+				  <div class="g-table">
+					<div class="g-title">
+						<span>pickup date</span>
+					</div>
+				  <div class="inside-cont">
+
+					<!-- <p>please select the date： <input type="date" /></p> -->
+					<div style="height: 30px"></div>
+
+					<div class="content">
+					 <c:choose>
+					<c:when test="${cartData.pickUpdate eq null}">
+						<div>
+							<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date:&nbsp;&nbsp;&nbsp;<input style="width: 300px" type="date" id="textDate" /></label>
+						</div>
+						<div class="btn-set">
+
+							<a class="btn btn-date"
+								style="width: 200px; position: relative; left: -450px">Submit</a>
+						</div>
+                      </c:when>
+                      <c:otherwise>
+                          <div>
+							<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date:&nbsp;&nbsp;&nbsp;${cartData.pickUpdate}</label>
+						</div>
+                      </c:otherwise>
+                      </c:choose>
+					</div>
+
+					<div style="height: 30px"></div>
+				</div>
+
+			</div>
 
 				
 
@@ -277,6 +311,8 @@
 							
 							
 				   </div>
+				   
+				 
 				<!-- end -->
 
 				<!-- Final Review -->

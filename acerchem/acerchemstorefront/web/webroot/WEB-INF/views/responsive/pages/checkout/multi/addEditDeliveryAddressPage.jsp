@@ -232,7 +232,7 @@
 					 <c:choose>
 					<c:when test="${cartData.pickUpdate eq null}">
 						<div>
-							<label>Date:&nbsp;&nbsp;&nbsp;<input style="width: 300px" type="date" id="textDate" /></label>
+							<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date:&nbsp;&nbsp;&nbsp;<input style="width: 300px" type="date" id="textDate" /></label>
 						</div>
 						<div class="btn-set">
 
@@ -242,7 +242,7 @@
                       </c:when>
                       <c:otherwise>
                           <div>
-							<label>Date:&nbsp;&nbsp;&nbsp;${cartData.pickUpdate}</label>
+							<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date:&nbsp;&nbsp;&nbsp;${cartData.pickUpdate}</label>
 						</div>
                       </c:otherwise>
                       </c:choose>
@@ -285,7 +285,7 @@
 				<!-- end -->
 
 				<!-- Final Review -->
-			<!-- 	<div class="g-table">
+				<div class="g-table">
 					<div class="g-title">
 						<span>Invoice</span>
 					</div>
@@ -348,7 +348,7 @@
 					</div>
 					new end			
 					</div>
-				</div> -->
+				</div>
 				<!-- end -->
 
 			</div>

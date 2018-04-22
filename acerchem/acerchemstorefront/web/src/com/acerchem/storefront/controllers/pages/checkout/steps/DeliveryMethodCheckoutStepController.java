@@ -53,7 +53,7 @@ public class DeliveryMethodCheckoutStepController extends AbstractCheckoutStepCo
 		// Try to set default delivery mode
 //		getCheckoutFacade().setDeliveryModeIfAvailable();
 
-		final CartData cartData = getCheckoutFacade().getCheckoutCart();
+		final CartData cartData = acerchemCheckoutFacade.getCheckoutCart();
 		model.addAttribute("cartData", cartData);
 		try {
 			model.addAttribute("deliveryMethods", acerchemCheckoutFacade.getAllDeliveryModes());
