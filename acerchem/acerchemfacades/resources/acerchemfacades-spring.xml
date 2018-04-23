@@ -381,5 +381,9 @@
 	<alias name="customOrderHistoryPopulator" alias="orderHistoryPopulator" />
 	<bean id="customOrderHistoryPopulator" parent="defaultOrderHistoryPopulator" class="com.acerchem.facades.populators.AcerchemOrderHistoryPopulator" >
 	</bean>
+	
+	<alias name="acerchemConsignmentEntryPopulator" alias="consignmentEntryPopulator"/>
+	<bean id="acerchemConsignmentEntryPopulator" class="com.acerchem.facades.populators.AcerchemConsignmentEntryPopulator" parent="defaultConsignmentEntryPopulator">
+	</bean>
 
 </beans>

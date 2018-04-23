@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-4-23 10:56:43                          ---
+ * --- Generated at 2018-4-23 20:23:31                          ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.constants;
@@ -20,6 +20,7 @@ public class GeneratedAcerchemCoreConstants
 		public static final String APPARELPRODUCT = "ApparelProduct".intern();
 		public static final String APPARELSIZEVARIANTPRODUCT = "ApparelSizeVariantProduct".intern();
 		public static final String APPARELSTYLEVARIANTPRODUCT = "ApparelStyleVariantProduct".intern();
+		public static final String ARTICLE = "Article".intern();
 		public static final String COUNTRYTRAYFARECONF = "CountryTrayFareConf".intern();
 		public static final String CREDITACCOUNTSTATUSENUM = "CreditAccountStatusEnum".intern();
 		public static final String CREDITPAYMENTINFO = "CreditPaymentInfo".intern();
@@ -32,6 +33,8 @@ public class GeneratedAcerchemCoreConstants
 		public static final String IMAGEFAILEDRECORD = "ImageFailedRecord".intern();
 		public static final String IMAGEUPLOADEDLOG = "ImageUploadedLog".intern();
 		public static final String MULTIPLEBANNERCOMPONENT = "MultipleBannerComponent".intern();
+		public static final String PRODUCTTHRESHOLDPERCENTAGEDISCOUNTPROMOTION = "ProductThresholdPercentageDiscountPromotion".intern();
+		public static final String PROMOTIONTHRESHOLDDISCOUNT = "PromotionThresholdDiscount".intern();
 		public static final String SWATCHCOLORENUM = "SwatchColorEnum".intern();
 		public static final String USERLEVEL = "UserLevel".intern();
 		public static final String USERLEVELCLASSIFICATION = "UserLevelClassification".intern();
@@ -44,6 +47,7 @@ public class GeneratedAcerchemCoreConstants
 			public static final String CUSTOMERCONFIRMDELIVERY = "customerConfirmDelivery".intern();
 			public static final String CUSTOMERCONFIRMPAY = "customerConfirmPay".intern();
 			public static final String DELIVERYCONFIRM = "deliveryConfirm".intern();
+			public static final String DELIVEYDATE = "deliveyDate".intern();
 			public static final String EMPLOYEECONFIRM = "employeeConfirm".intern();
 			public static final String EMPLOYEECONFIRMDELIVERY = "employeeConfirmDelivery".intern();
 			public static final String EMPLOYEECONFIRMPAY = "employeeConfirmPay".intern();
@@ -51,6 +55,7 @@ public class GeneratedAcerchemCoreConstants
 			public static final String PAYCONFIRM = "payConfirm".intern();
 			public static final String PICKUPDATE = "pickUpDate".intern();
 			public static final String STORAGECOST = "storageCost".intern();
+			public static final String WAITDELIVEIEDDATE = "waitDeliveiedDate".intern();
 		}
 		public static class AbstractOrderEntry
 		{
@@ -118,6 +123,10 @@ public class GeneratedAcerchemCoreConstants
 			public static final String ISPROMOTION = "isPromotion".intern();
 			public static final String ISSALE = "isSale".intern();
 			public static final String ISWELL = "isWell".intern();
+		}
+		public static class PromotionOrderEntryAdjustAction
+		{
+			public static final String THRESHOLDDISCOUNT = "thresholdDiscount".intern();
 		}
 		public static class SimpleResponsiveBannerComponent
 		{

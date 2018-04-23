@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-4-23 10:56:43                          ---
+ * --- Generated at 2018-4-23 20:23:31                          ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.jalo;
@@ -10,6 +10,7 @@ import com.acerchem.core.constants.AcerchemCoreConstants;
 import com.acerchem.core.jalo.ApparelProduct;
 import com.acerchem.core.jalo.ApparelSizeVariantProduct;
 import com.acerchem.core.jalo.ApparelStyleVariantProduct;
+import com.acerchem.core.jalo.Article;
 import com.acerchem.core.jalo.CountryTrayFareConf;
 import com.acerchem.core.jalo.CreditPaymentInfo;
 import com.acerchem.core.jalo.CreditTransaction;
@@ -17,7 +18,9 @@ import com.acerchem.core.jalo.CustomerCreditAccount;
 import com.acerchem.core.jalo.ElectronicsColorVariantProduct;
 import com.acerchem.core.jalo.ImageFailedRecord;
 import com.acerchem.core.jalo.ImageUploadedLog;
+import com.acerchem.core.jalo.PromotionThresholdDiscount;
 import com.acerchem.core.jalo.UserLevel;
+import com.acerchem.core.promotions.jalo.ProductThresholdPercentageDiscountPromotion;
 import de.hybris.platform.acceleratorcms.jalo.components.AbstractResponsiveBannerComponent;
 import de.hybris.platform.acceleratorcms.jalo.components.SimpleResponsiveBannerComponent;
 import de.hybris.platform.cms2.jalo.contents.components.SimpleCMSComponent;
@@ -49,6 +52,8 @@ import de.hybris.platform.jalo.user.User;
 import de.hybris.platform.ordersplitting.jalo.ConsignmentEntry;
 import de.hybris.platform.ordersplitting.jalo.StockLevel;
 import de.hybris.platform.ordersplitting.jalo.Vendor;
+import de.hybris.platform.promotions.jalo.AbstractPromotionAction;
+import de.hybris.platform.promotions.jalo.PromotionOrderEntryAdjustAction;
 import de.hybris.platform.storelocator.jalo.PointOfService;
 import de.hybris.platform.ticket.jalo.CsTicket;
 import de.hybris.platform.util.OneToManyHandler;
@@ -164,10 +169,15 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 		tmp.put("pickUpDate", AttributeMode.INITIAL);
 		tmp.put("storageCost", AttributeMode.INITIAL);
 		tmp.put("operateCost", AttributeMode.INITIAL);
+		tmp.put("deliveyDate", AttributeMode.INITIAL);
+		tmp.put("waitDeliveiedDate", AttributeMode.INITIAL);
 		ttmp.put("de.hybris.platform.jalo.order.AbstractOrder", Collections.unmodifiableMap(tmp));
 		tmp = new HashMap<String, AttributeMode>();
 		tmp.put("batchNum", AttributeMode.INITIAL);
 		ttmp.put("de.hybris.platform.ordersplitting.jalo.ConsignmentEntry", Collections.unmodifiableMap(tmp));
+		tmp = new HashMap<String, AttributeMode>();
+		tmp.put("thresholdDiscount", AttributeMode.INITIAL);
+		ttmp.put("de.hybris.platform.promotions.jalo.PromotionOrderEntryAdjustAction", Collections.unmodifiableMap(tmp));
 		tmp = new HashMap<String, AttributeMode>();
 		tmp.put("userLevelPOS", AttributeMode.INITIAL);
 		tmp.put("userLevel", AttributeMode.INITIAL);
@@ -952,6 +962,32 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 		return createApparelStyleVariantProduct( getSession().getSessionContext(), attributeValues );
 	}
 	
+	public Article createArticle(final SessionContext ctx, final Map attributeValues)
+	{
+		try
+		{
+			ComposedType type = getTenant().getJaloConnection().getTypeManager().getComposedType( AcerchemCoreConstants.TC.ARTICLE );
+			return (Article)type.newInstance( ctx, attributeValues );
+		}
+		catch( JaloGenericCreationException e)
+		{
+			final Throwable cause = e.getCause();
+			throw (cause instanceof RuntimeException ?
+			(RuntimeException)cause
+			:
+			new JaloSystemException( cause, cause.getMessage(), e.getErrorCode() ) );
+		}
+		catch( JaloBusinessException e )
+		{
+			throw new JaloSystemException( e ,"error creating Article : "+e.getMessage(), 0 );
+		}
+	}
+	
+	public Article createArticle(final Map attributeValues)
+	{
+		return createArticle( getSession().getSessionContext(), attributeValues );
+	}
+	
 	public CountryTrayFareConf createCountryTrayFareConf(final SessionContext ctx, final Map attributeValues)
 	{
 		try
@@ -1184,6 +1220,58 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	public MultipleBannerComponent createMultipleBannerComponent(final Map attributeValues)
 	{
 		return createMultipleBannerComponent( getSession().getSessionContext(), attributeValues );
+	}
+	
+	public ProductThresholdPercentageDiscountPromotion createProductThresholdPercentageDiscountPromotion(final SessionContext ctx, final Map attributeValues)
+	{
+		try
+		{
+			ComposedType type = getTenant().getJaloConnection().getTypeManager().getComposedType( AcerchemCoreConstants.TC.PRODUCTTHRESHOLDPERCENTAGEDISCOUNTPROMOTION );
+			return (ProductThresholdPercentageDiscountPromotion)type.newInstance( ctx, attributeValues );
+		}
+		catch( JaloGenericCreationException e)
+		{
+			final Throwable cause = e.getCause();
+			throw (cause instanceof RuntimeException ?
+			(RuntimeException)cause
+			:
+			new JaloSystemException( cause, cause.getMessage(), e.getErrorCode() ) );
+		}
+		catch( JaloBusinessException e )
+		{
+			throw new JaloSystemException( e ,"error creating ProductThresholdPercentageDiscountPromotion : "+e.getMessage(), 0 );
+		}
+	}
+	
+	public ProductThresholdPercentageDiscountPromotion createProductThresholdPercentageDiscountPromotion(final Map attributeValues)
+	{
+		return createProductThresholdPercentageDiscountPromotion( getSession().getSessionContext(), attributeValues );
+	}
+	
+	public PromotionThresholdDiscount createPromotionThresholdDiscount(final SessionContext ctx, final Map attributeValues)
+	{
+		try
+		{
+			ComposedType type = getTenant().getJaloConnection().getTypeManager().getComposedType( AcerchemCoreConstants.TC.PROMOTIONTHRESHOLDDISCOUNT );
+			return (PromotionThresholdDiscount)type.newInstance( ctx, attributeValues );
+		}
+		catch( JaloGenericCreationException e)
+		{
+			final Throwable cause = e.getCause();
+			throw (cause instanceof RuntimeException ?
+			(RuntimeException)cause
+			:
+			new JaloSystemException( cause, cause.getMessage(), e.getErrorCode() ) );
+		}
+		catch( JaloBusinessException e )
+		{
+			throw new JaloSystemException( e ,"error creating PromotionThresholdDiscount : "+e.getMessage(), 0 );
+		}
+	}
+	
+	public PromotionThresholdDiscount createPromotionThresholdDiscount(final Map attributeValues)
+	{
+		return createPromotionThresholdDiscount( getSession().getSessionContext(), attributeValues );
 	}
 	
 	public UserLevel createUserLevel(final SessionContext ctx, final Map attributeValues)
@@ -1574,6 +1662,42 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	public void setDeliveryZone(final PointOfService item, final Zone value)
 	{
 		setDeliveryZone( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.deliveyDate</code> attribute.
+	 * @return the deliveyDate - 发货日期
+	 */
+	public Date getDeliveyDate(final SessionContext ctx, final AbstractOrder item)
+	{
+		return (Date)item.getProperty( ctx, AcerchemCoreConstants.Attributes.AbstractOrder.DELIVEYDATE);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.deliveyDate</code> attribute.
+	 * @return the deliveyDate - 发货日期
+	 */
+	public Date getDeliveyDate(final AbstractOrder item)
+	{
+		return getDeliveyDate( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.deliveyDate</code> attribute. 
+	 * @param value the deliveyDate - 发货日期
+	 */
+	public void setDeliveyDate(final SessionContext ctx, final AbstractOrder item, final Date value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.AbstractOrder.DELIVEYDATE,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.deliveyDate</code> attribute. 
+	 * @param value the deliveyDate - 发货日期
+	 */
+	public void setDeliveyDate(final AbstractOrder item, final Date value)
+	{
+		setDeliveyDate( getSession().getSessionContext(), item, value );
 	}
 	
 	/**
@@ -3327,6 +3451,42 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	}
 	
 	/**
+	 * <i>Generated method</i> - Getter of the <code>PromotionOrderEntryAdjustAction.thresholdDiscount</code> attribute.
+	 * @return the thresholdDiscount - The threshold to adjust the order entry by.
+	 */
+	public PromotionThresholdDiscount getThresholdDiscount(final SessionContext ctx, final PromotionOrderEntryAdjustAction item)
+	{
+		return (PromotionThresholdDiscount)item.getProperty( ctx, AcerchemCoreConstants.Attributes.PromotionOrderEntryAdjustAction.THRESHOLDDISCOUNT);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>PromotionOrderEntryAdjustAction.thresholdDiscount</code> attribute.
+	 * @return the thresholdDiscount - The threshold to adjust the order entry by.
+	 */
+	public PromotionThresholdDiscount getThresholdDiscount(final PromotionOrderEntryAdjustAction item)
+	{
+		return getThresholdDiscount( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>PromotionOrderEntryAdjustAction.thresholdDiscount</code> attribute. 
+	 * @param value the thresholdDiscount - The threshold to adjust the order entry by.
+	 */
+	public void setThresholdDiscount(final SessionContext ctx, final PromotionOrderEntryAdjustAction item, final PromotionThresholdDiscount value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.PromotionOrderEntryAdjustAction.THRESHOLDDISCOUNT,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>PromotionOrderEntryAdjustAction.thresholdDiscount</code> attribute. 
+	 * @param value the thresholdDiscount - The threshold to adjust the order entry by.
+	 */
+	public void setThresholdDiscount(final PromotionOrderEntryAdjustAction item, final PromotionThresholdDiscount value)
+	{
+		setThresholdDiscount( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
 	 * <i>Generated method</i> - Getter of the <code>AbstractOrderEntry.totalRealPrice</code> attribute.
 	 * @return the totalRealPrice - 分摊之后的总价
 	 */
@@ -3578,6 +3738,42 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	public void setVatNo(final Customer item, final String value)
 	{
 		setVatNo( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.waitDeliveiedDate</code> attribute.
+	 * @return the waitDeliveiedDate - 预计到货日期
+	 */
+	public Date getWaitDeliveiedDate(final SessionContext ctx, final AbstractOrder item)
+	{
+		return (Date)item.getProperty( ctx, AcerchemCoreConstants.Attributes.AbstractOrder.WAITDELIVEIEDDATE);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>AbstractOrder.waitDeliveiedDate</code> attribute.
+	 * @return the waitDeliveiedDate - 预计到货日期
+	 */
+	public Date getWaitDeliveiedDate(final AbstractOrder item)
+	{
+		return getWaitDeliveiedDate( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.waitDeliveiedDate</code> attribute. 
+	 * @param value the waitDeliveiedDate - 预计到货日期
+	 */
+	public void setWaitDeliveiedDate(final SessionContext ctx, final AbstractOrder item, final Date value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.AbstractOrder.WAITDELIVEIEDDATE,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>AbstractOrder.waitDeliveiedDate</code> attribute. 
+	 * @param value the waitDeliveiedDate - 预计到货日期
+	 */
+	public void setWaitDeliveiedDate(final AbstractOrder item, final Date value)
+	{
+		setWaitDeliveiedDate( getSession().getSessionContext(), item, value );
 	}
 	
 	/**
