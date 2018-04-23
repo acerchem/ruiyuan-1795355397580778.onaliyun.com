@@ -178,6 +178,9 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
 
     private void recalculateCartTotalPrice(CartModel cartModel) {
         double total =cartModel.getTotalPrice();
+        if(cartModel.getDeliveryCost()!=null){
+            total = total +cartModel.getDeliveryCost().doubleValue();
+        }
         if(cartModel.getOperateCost()!=null){
             total = total +cartModel.getOperateCost().doubleValue();
         }
