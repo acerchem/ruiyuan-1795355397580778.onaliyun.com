@@ -828,6 +828,7 @@
 					</attribute>
 					<attribute qualifier="deliveyDate" type="java.util.Date">
 						<description>发货日期</description>
+						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="waitDeliveiedDate" type="java.util.Date">
 						<description>预计到货日期</description>
