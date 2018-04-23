@@ -87,7 +87,9 @@ public class DeliveryMethodCheckoutStepController extends AbstractCheckoutStepCo
 		if (StringUtils.isNotEmpty(selectedDeliveryMethod))
 		{
 			acerchemCheckoutFacade.setDeliveryMode(selectedDeliveryMethod);
+			final CartData cartData = acerchemCheckoutFacade.getCheckoutCart();
 			model.addAttribute("paymentInfos", acerchemCheckoutFacade.getSupportedCardTypes(selectedDeliveryMethod));
+			model.addAttribute("cartData", cartData);
 		}
 
 		return getCheckoutStep().nextStep();
