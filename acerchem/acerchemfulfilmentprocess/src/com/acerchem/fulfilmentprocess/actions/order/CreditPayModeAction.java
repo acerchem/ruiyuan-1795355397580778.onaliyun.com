@@ -21,11 +21,9 @@ import com.acerchem.service.customercreditaccount.DefaultCustomerCreditAccountSe
 
 import de.hybris.platform.core.enums.OrderStatus;
 import de.hybris.platform.core.model.order.OrderModel;
+import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
-import de.hybris.platform.processengine.action.AbstractProceduralAction;
 import de.hybris.platform.processengine.action.AbstractSimpleDecisionAction;
-import de.hybris.platform.processengine.action.AbstractSimpleDecisionAction.Transition;
-import de.hybris.platform.task.RetryLaterException;
 
 
 /**
@@ -68,7 +66,7 @@ public class CreditPayModeAction extends AbstractSimpleDecisionAction<OrderProce
 				
 				try {
 					
-					CustomerCreditAccountModel customerCreditAccountModel = defaultCustomerCreditAccountService.updateCustomerCreditAccountConsume(BigDecimal.valueOf(order.getTotalPrice()));
+					CustomerCreditAccountModel customerCreditAccountModel = defaultCustomerCreditAccountService.updateCustomerCreditAccountConsume((CustomerModel) order.getUser(),BigDecimal.valueOf(order.getTotalPrice()));
 					if(customerCreditAccountModel != null){
 						//支付成功后,改变orderStatus
 						setOrderStatus(order, OrderStatus.PAIED);
