@@ -65,7 +65,7 @@
 			</c:if>
 			<c:if test='${level eq 4}'>
 			<li class="item4">
-				<a href="${contextPath}${urlLink}">
+				<a href="${contextPath}/article">
 				<div class="textmessge">
 					<p>If you have an opinion or advice </p>
 					<span>Send message</span>
