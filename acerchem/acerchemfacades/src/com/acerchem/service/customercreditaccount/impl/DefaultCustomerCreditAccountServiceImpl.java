@@ -55,10 +55,11 @@ public class DefaultCustomerCreditAccountServiceImpl implements DefaultCustomerC
     }
 
     @Override
-    public CustomerCreditAccountModel updateCustomerCreditAccountConsume(BigDecimal money) {
+    public CustomerCreditAccountModel updateCustomerCreditAccountConsume(CustomerModel customerModel,BigDecimal money) {
 
         if (money != null && money.compareTo(BigDecimal.ZERO) > 0) {
-            CustomerCreditAccountModel customerCreditAccount = this.getCustomerCreditAccount();
+            CustomerCreditAccountModel customerCreditAccount = customerModel.getCreditAccount();
+            
             if (customerCreditAccount != null) {
 
                 if (customerCreditAccount.getStatus() != null && customerCreditAccount.getStatus() == CreditAccountStatusEnum.NORMAL) {

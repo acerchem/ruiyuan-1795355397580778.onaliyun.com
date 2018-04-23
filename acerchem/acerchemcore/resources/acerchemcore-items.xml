@@ -13,6 +13,8 @@
 			autocreate="true" generate="true" type="list" />
 		<collectiontype code="SwatchColorSet" elementtype="SwatchColorEnum"
 			autocreate="true" generate="true" type="set" />
+		<collectiontype code="PromotionThresholdDiscountList" elementtype="PromotionThresholdDiscount"
+			autocreate="true" generate="true" type="list" />
 	</collectiontypes>
 
 	<enumtypes>
@@ -854,6 +856,70 @@
 					</attribute>
 				</attributes>
 			</itemtype>
+			
+			<!--  Acerchem product discount by threshold -->
+			<itemtype code="ProductThresholdPercentageDiscountPromotion"
+			extends="ProductPromotion"
+			jaloclass="com.acerchem.core.promotions.jalo.ProductThresholdPercentageDiscountPromotion"
+			autocreate="true"
+			generate="true">
+
+			<attributes>
+
+				<attribute
+					qualifier="thresholdDiscounts"
+					autocreate="true"
+					type="PromotionThresholdDiscountList">
+					<description>threshold Percentage discount.</description>
+					<modifiers read="true" write="true" search="true" optional="true"/>
+					<persistence type="property"/>
+				</attribute>
+
+				<attribute qualifier="messageFired" type="localized:java.lang.String">
+					<description>The message to show when the promotion has fired.</description>
+					<modifiers read="true" write="true" optional="true" />
+					<persistence type="property">
+						<columntype>
+							<value>HYBRIS.LONG_STRING</value>
+						</columntype>
+					</persistence>
+				</attribute>
+
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="PromotionThresholdDiscount" autocreate="true"
+				generate="true">
+				<description>保存促销的阶梯信息</description>
+				<deployment table="PromotionThreshold" typecode="30002" />
+				<attributes>
+					<attribute qualifier="minQuantity" type="java.lang.Integer">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="maxQuantity" type="java.lang.Integer">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="percentageDiscount" type="java.lang.Double">
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+		</itemtype>
+			
+		<itemtype code="PromotionOrderEntryAdjustAction"
+			autocreate="false"
+			generate="false">
+			<attributes>
+				<attribute
+					qualifier="thresholdDiscount"
+					autocreate="true"
+					type="PromotionThresholdDiscount">
+					<description>The threshold to adjust the order entry by.</description>
+					<modifiers read="true" write="true" />
+					<persistence type="property"/>
+				</attribute>
+			</attributes>
+		</itemtype>
+		
 		</typegroup>
 
 	</itemtypes>
