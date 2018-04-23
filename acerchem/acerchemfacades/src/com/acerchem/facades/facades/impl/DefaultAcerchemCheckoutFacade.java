@@ -7,6 +7,7 @@ import com.acerchem.facades.facades.AcerchemTrayFacade;
 import com.acerchem.facades.product.data.PaymentModeData;
 import de.hybris.platform.commercefacades.order.data.*;
 import de.hybris.platform.commercefacades.order.impl.DefaultCheckoutFacade;
+import de.hybris.platform.commercefacades.product.PriceDataFactory;
 import de.hybris.platform.commercefacades.product.data.PriceDataType;
 import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.commercefacades.user.data.CountryData;
@@ -20,12 +21,12 @@ import de.hybris.platform.core.model.order.delivery.DeliveryModeModel;
 import de.hybris.platform.core.model.order.payment.PaymentModeModel;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.deliveryzone.model.ZoneDeliveryModeModel;
-import de.hybris.platform.order.CartService;
-import de.hybris.platform.order.DeliveryModeService;
-import de.hybris.platform.order.InvalidCartException;
-import de.hybris.platform.order.PaymentModeService;
+import de.hybris.platform.order.*;
+import de.hybris.platform.order.exceptions.CalculationException;
+import de.hybris.platform.ordersplitting.model.StockLevelModel;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
+import de.hybris.platform.stock.StockService;
 import de.hybris.platform.storelocator.model.PointOfServiceModel;
 import de.hybris.platform.util.PriceValue;
 import org.apache.commons.collections.CollectionUtils;
@@ -75,6 +76,12 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
     private PaymentModeService paymentModeService;
     @Resource
     private Converter<AddressModel, AddressData> addressConverter;
+    @Resource
+    private PriceDataFactory priceDataFactory;
+    @Resource
+    private StockService stockService;
+    @Resource
+    private CalculationService calculationService;
 
     @Override
     public void validateCartAddress(CountryData countryData) throws AcerchemOrderException{
@@ -119,17 +126,12 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
         if (cartModel != null)
         {
             DeliveryModeData deliveryModeData = getDeliveryModeConverter().convert(deliveryModeModel);
-
             PriceValue deliveryCost = null;
             if (DELIVERY_MENTION.equals(deliveryModeModel.getCode())){
-
-
                 deliveryCost = new PriceValue(cartModel.getCurrency().getIsocode(), 0.0d, true);
-
             }else if (DELIVERY_GROSS.equals(deliveryModeModel.getCode())){
                 BigDecimal fee = BigDecimal.valueOf(0.0d);
                 fee =  BigDecimal.valueOf(acerchemTrayFacade.getTotalPriceForCart(cartModel));
-
                 deliveryCost = new PriceValue(cartModel.getCurrency().getIsocode(), fee.doubleValue(), true);
             }
 
@@ -163,10 +165,30 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
             {
                 final CommerceCheckoutParameter parameter = createCommerceCheckoutParameter(cartModel, true);
                 parameter.setDeliveryMode(deliveryModeModel);
-                return getCommerceCheckoutService().setDeliveryMode(parameter);
+
+                boolean flag = getCommerceCheckoutService().setDeliveryMode(parameter);
+                //促销那块会把操作费，存储费不加上，在此处计算总价格
+                recalculateCartTotalPrice(cartModel);
+                return flag;
+
             }
         }
         return false;
+    }
+
+    private void recalculateCartTotalPrice(CartModel cartModel) {
+        double total =cartModel.getTotalPrice();
+        if(cartModel.getDeliveryCost()!=null){
+            total = total +cartModel.getDeliveryCost().doubleValue();
+        }
+        if(cartModel.getOperateCost()!=null){
+            total = total +cartModel.getOperateCost().doubleValue();
+        }
+        if (cartModel.getStorageCost()!=null){
+            total = total +cartModel.getStorageCost().doubleValue();
+        }
+        cartModel.setTotalPrice(total);
+        getModelService().save(cartModel);
     }
 
     @Override
@@ -236,9 +258,40 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
             cartData.setDeliveryMode(getDeliveryMode());
             cartData.setPaymentModeData(getPaymentModeData());
             cartData.setPaymentInfo(getPaymentDetails());
+
+            if (cartModel.getStorageCost()!=null){
+                cartData.setStorageCost(priceDataFactory.create(PriceDataType.BUY,
+                        BigDecimal.valueOf(cartModel.getStorageCost().doubleValue()), cartModel.getCurrency().getIsocode()));
+            }
+            if (cartModel.getOperateCost()!=null){
+                cartData.setOperateCost(priceDataFactory.create(PriceDataType.BUY,
+                        BigDecimal.valueOf(cartModel.getOperateCost().doubleValue()), cartModel.getCurrency().getIsocode()));
+            }
             if(cartModel.getPickUpDate()!=null){
         	  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-DD");
         	  cartData.setPickUpdate(sdf.format(cartModel.getPickUpDate()));
+            }
+            cartData.setIsUseFutureStock(cartModel.getEntries().get(0).getIsUseFutureStock());
+
+            if (cartModel.getEntries()!=null && cartModel.getEntries().size()>0){
+                boolean isUsefutureStock = cartModel.getEntries().get(0).getIsUseFutureStock();
+                cartData.setIsUseFutureStock(isUsefutureStock);
+                List<Integer> deliveryDays = new ArrayList<>();
+                for (AbstractOrderEntryModel aoe: cartModel.getEntries()){
+                    if (isUsefutureStock){
+                        StockLevelModel stockLevelModel = stockService.getStockLevel(aoe.getProduct(),aoe.getDeliveryPointOfService().getWarehouses().get(0));
+                        deliveryDays.add(stockLevelModel.getPreOrderReleaseDay());
+                    }else{
+                        StockLevelModel stockLevelModel = stockService.getStockLevel(aoe.getProduct(),aoe.getDeliveryPointOfService().getWarehouses().get(0));
+                        deliveryDays.add(stockLevelModel.getAvaPreOrderReleaseDay());
+                    }
+                }
+
+                if (isUsefutureStock){
+                    cartData.setDeliveryDays(Collections.max(deliveryDays));
+                }else {
+                    cartData.setDeliveryDays(Collections.min(deliveryDays));
+                }
             }
           
         }

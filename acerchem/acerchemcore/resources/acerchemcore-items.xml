@@ -87,6 +87,9 @@
 			<value code="CONFIRMED" />
 			<value code="DELIVERED" />
 			<value code="PAIED" />
+			<value code="UNPAIED" />
+			<value code="UNCONFIRMED" />
+			<value code="UNDELIVERED" />
 		</enumtype>
 	</enumtypes>
 

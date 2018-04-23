@@ -50,6 +50,7 @@ public class WaitForConfirmAction extends AbstractSimpleDecisionAction<OrderProc
 		}
 		else
 		{
+			setOrderStatus(order, OrderStatus.UNCONFIRMED);
 			return Transition.NOK;
 		}
 	}

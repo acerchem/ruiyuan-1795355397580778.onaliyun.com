@@ -50,6 +50,7 @@ public class WaitForConfirmPayAction extends AbstractSimpleDecisionAction<OrderP
 		}
 		else
 		{
+			setOrderStatus(order, OrderStatus.UNPAIED);
 			return Transition.NOK;
 		}
 	}

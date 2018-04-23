@@ -35,7 +35,7 @@ public class ChoosePayModeAction extends AbstractSimpleDecisionAction<OrderProce
 	public Transition executeAction(final OrderProcessModel process)
 	{
 		final OrderModel order = process.getOrder();
-		//setOrderStatus(order, OrderStatus.CONTRACT_SENT);
+		setOrderStatus(order, OrderStatus.UNPAIED);
 		if (order == null)
 		{
 			LOG.error("Missing the order, exiting the process");

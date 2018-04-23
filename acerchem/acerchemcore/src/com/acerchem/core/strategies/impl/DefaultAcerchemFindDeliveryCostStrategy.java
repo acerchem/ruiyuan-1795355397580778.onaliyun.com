@@ -106,9 +106,8 @@ public class DefaultAcerchemFindDeliveryCostStrategy extends DefaultFindDelivery
 				if (orderTotalPrice <= Double.valueOf(orderStandardFee)){
 					String orderOperationFee = configurationService.getConfiguration().getString(ORDER_OPERATION_FEE,defaultOrderOperationFee);
 					operationFee = operationFee.add(BigDecimal.valueOf(Double.valueOf(orderOperationFee)));
-					order.setOperateCost(operationFee.doubleValue());
 				}
-
+				order.setOperateCost(operationFee.doubleValue());
 
 				//自提运费和存储费用改造
 				if (DELIVERY_MENTION.equals(deliveryModeModel.getCode())){

@@ -76,6 +76,7 @@ public class CreditPayModeAction extends AbstractSimpleDecisionAction<OrderProce
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
+					setOrderStatus(order, OrderStatus.UNPAIED);
 					LOG.error("更新信用账户失败!");
 					return Transition.NOK;
 				}

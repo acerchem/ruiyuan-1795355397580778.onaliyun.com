@@ -54,19 +54,19 @@ public class DefaultAcerchemCalculationService extends DefaultCalculationService
 			order.setTotalDiscounts(Double.valueOf(roundedTotalDiscounts));
 			// set total
 			double total =0.0d;
-
-			if (order.getDeliveryCost()!=null){
-				total = subtotal + total + order.getDeliveryCost().doubleValue();
-			}
+			total = subtotal + total;
+//			if (order.getDeliveryCost()!=null){
+//				total = subtotal + total + order.getDeliveryCost().doubleValue();
+//			}
 			if (order.getPaymentCost()!=null){
 				total = total + order.getPaymentCost().doubleValue();
 			}
-			if(order.getOperateCost()!=null){
-				total = total +order.getOperateCost().doubleValue();
-			}
-			if (order.getStorageCost()!=null){
-				total = total +order.getStorageCost().doubleValue();
-			}
+//			if(order.getOperateCost()!=null){
+//				total = total +order.getOperateCost().doubleValue();
+//			}
+//			if (order.getStorageCost()!=null){
+//				total = total +order.getStorageCost().doubleValue();
+//			}
 			total = total - roundedTotalDiscounts;
 
 			final double totalRounded = commonI18NService.roundCurrency(total, digits);

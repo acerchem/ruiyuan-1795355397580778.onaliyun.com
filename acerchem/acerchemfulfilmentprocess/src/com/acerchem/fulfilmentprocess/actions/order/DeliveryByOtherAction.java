@@ -12,6 +12,7 @@ package com.acerchem.fulfilmentprocess.actions.order;
 
 import org.apache.log4j.Logger;
 
+import de.hybris.platform.core.enums.OrderStatus;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 import de.hybris.platform.processengine.action.AbstractProceduralAction;
@@ -27,7 +28,7 @@ public class DeliveryByOtherAction extends AbstractProceduralAction<OrderProcess
 	{
 		final OrderModel order = process.getOrder();
 		if(order != null){
-				
+			setOrderStatus(order, OrderStatus.UNDELIVERED);
 		}
 	}	
 }
