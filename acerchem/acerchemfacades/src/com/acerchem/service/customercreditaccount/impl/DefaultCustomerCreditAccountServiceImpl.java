@@ -7,11 +7,11 @@ import com.acerchem.service.customercreditaccount.DefaultCustomerCreditAccountSe
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.platform.servicelayer.user.daos.UserDao;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.Date;
@@ -27,6 +27,9 @@ public class DefaultCustomerCreditAccountServiceImpl implements DefaultCustomerC
 
     @Resource
     ModelService modelService;
+   
+    @Resource
+    private UserDao userDao;
 
     private static final Logger LOG = Logger.getLogger(DefaultCustomerCreditAccountServiceImpl.class);
 
@@ -58,7 +61,10 @@ public class DefaultCustomerCreditAccountServiceImpl implements DefaultCustomerC
     public CustomerCreditAccountModel updateCustomerCreditAccountConsume(CustomerModel customerModel,BigDecimal money) {
 
         if (money != null && money.compareTo(BigDecimal.ZERO) > 0) {
-            CustomerCreditAccountModel customerCreditAccount = customerModel.getCreditAccount();
+        	
+        	CustomerModel userModel = (CustomerModel)userDao.findUserByUID(customerModel.getCustomerID());
+        	//userService.getUser(customerModel.getPk().toString());
+            CustomerCreditAccountModel customerCreditAccount = userModel.getCreditAccount();
             
             if (customerCreditAccount != null) {
 
