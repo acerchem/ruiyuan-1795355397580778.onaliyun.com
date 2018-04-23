@@ -83,6 +83,7 @@
 						<wz:property qualifier="creationtime"  />
 						<wz:property qualifier="owner"  />
 						<wz:property qualifier="quantity"  />
+						<wz:property qualifier="batchNum"  />
 					</wz:property-list>
 				</wz:content>
 				<wz:navigation id="step1.navigation">
