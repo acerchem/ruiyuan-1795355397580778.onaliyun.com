@@ -44,6 +44,7 @@ public class AliyunUploadJobPerformable extends AbstractJobPerformable<CronJobMo
 	@Resource
 	private AcerChemImageUploadLogService acerChemImageUploadLogService;
 
+	private final static boolean IS_NOUPLOAD = Config.getBoolean("aliyun.isNoUpload", false);
 	private final static String IMAGEROOT = Config.getString("aliyun.preffixImageKey", "image");
 	private final static String DOCROOT = Config.getString("aliyun.preffixDocKey", "doc");
 	private final static int MAX_IMAGE = Config.getInt("aliyun.maxOfImage", 10);
@@ -62,40 +63,44 @@ public class AliyunUploadJobPerformable extends AbstractJobPerformable<CronJobMo
 	public PerformResult perform(CronJobModel cronJob) {
 		// TODO Auto-generated method stub
 		try {
-			List<String> imageParams = new ArrayList<String>();
-			imageParams.add("image/jpeg");
-			imageParams.add("image/png");
-			imageParams.add("image/gif");
-			imageParams.add("image/bmp");
+			if (!IS_NOUPLOAD) {
+				List<String> imageParams = new ArrayList<String>();
+				imageParams.add("image/jpeg");
+				imageParams.add("image/png");
+				imageParams.add("image/gif");
+				imageParams.add("image/bmp");
 
-			// 每次MAX_IMAGE个图片文件数据处理
-			List<MediaModel> medias = acerChemMediaService.getMediasOfLimit(imageParams, MAX_IMAGE,"Online","acerchem");
+				// 每次MAX_IMAGE个图片文件数据处理
+				List<MediaModel> medias = acerChemMediaService.getMediasOfLimit(imageParams, MAX_IMAGE, "Online",
+						"acerchem");
 
-			if (CollectionUtils.isNotEmpty(medias)) {
+				if (CollectionUtils.isNotEmpty(medias)) {
 
-				for (MediaModel media : medias) {
-					LOG.info("****>>>version=" + media.getCatalogVersion().getVersion());
-					uploadFileSendProcessor(media, IMAGEROOT);
-				}
-
-			}
-
-			// doc
-			if (SYN_UPLOAD_DOC) {
-				List<String> docParams = new ArrayList<String>();
-				docParams.add("application/pdf");
-				docParams.add("application/msexcel");
-				docParams.add("application/msword");
-
-				// 每次MAX_DOC个资质文件数据处理
-				List<MediaModel> docMedias = acerChemMediaService.getMediasOfLimit(docParams, MAX_DOC,"Online","acerchem");
-
-				if (CollectionUtils.isNotEmpty(docMedias)) {
-
-					for (MediaModel docmedia : docMedias) {
-						uploadFileSendProcessor(docmedia, DOCROOT);
+					for (MediaModel media : medias) {
+						LOG.info("****>>>version=" + media.getCatalogVersion().getVersion());
+						uploadFileSendProcessor(media, IMAGEROOT);
 					}
 
+				}
+
+				// doc
+				if (SYN_UPLOAD_DOC) {
+					List<String> docParams = new ArrayList<String>();
+					docParams.add("application/pdf");
+					docParams.add("application/msexcel");
+					docParams.add("application/msword");
+
+					// 每次MAX_DOC个资质文件数据处理
+					List<MediaModel> docMedias = acerChemMediaService.getMediasOfLimit(docParams, MAX_DOC, "Online",
+							"acerchem");
+
+					if (CollectionUtils.isNotEmpty(docMedias)) {
+
+						for (MediaModel docmedia : docMedias) {
+							uploadFileSendProcessor(docmedia, DOCROOT);
+						}
+
+					}
 				}
 			}
 
@@ -160,10 +165,10 @@ public class AliyunUploadJobPerformable extends AbstractJobPerformable<CronJobMo
 						modelService.save(iulModel);
 
 						LOG.info("****synsave to Media end*****");
-						
+
 					} else {
-						//用来保证即使失败，原始media数据跳过这些失败的，继续新的数据上传
-						//而这些失败数据，放在上传失败记录处理！
+						// 用来保证即使失败，原始media数据跳过这些失败的，继续新的数据上传
+						// 而这些失败数据，放在上传失败记录处理！
 						media.setAliyunUrl("UploadAliyunFailed");
 						modelService.save(media);
 						uploadFailedProccess(media, key);
