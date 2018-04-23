@@ -49,5 +49,7 @@ UPDATE Category;code[unique=true];$catalogVersion;name[lang=$lang]
  ;829;;Battery Chargers;
  ;902;;Flash Memory;
  ;934;;Camera Cables;
+ #shaun
+ ;3510;;Acerchem;
 
 
