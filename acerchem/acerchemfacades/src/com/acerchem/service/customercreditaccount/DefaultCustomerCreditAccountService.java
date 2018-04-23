@@ -2,7 +2,7 @@ package com.acerchem.service.customercreditaccount;
 
 import com.acerchem.core.model.CreditTransactionModel;
 import com.acerchem.core.model.CustomerCreditAccountModel;
-
+import de.hybris.platform.core.model.user.CustomerModel;
 import java.math.BigDecimal;
 import java.util.List;
 
@@ -24,7 +24,7 @@ public interface DefaultCustomerCreditAccountService {
      * @param money
      * @return
      */
-    CustomerCreditAccountModel updateCustomerCreditAccountConsume(BigDecimal money);
+    CustomerCreditAccountModel updateCustomerCreditAccountConsume(CustomerModel customerModel,BigDecimal money);
 
 
     /**
