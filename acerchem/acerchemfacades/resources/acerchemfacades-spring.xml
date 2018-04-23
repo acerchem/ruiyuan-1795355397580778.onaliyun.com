@@ -375,7 +375,6 @@
 
 	<alias name="defaultAcerchemCartPopulator" alias="cartPopulator"/>
 	<bean id="defaultAcerchemCartPopulator" class="com.acerchem.facades.populators.AcerchemCartPopulator" parent="defaultCartPopulator">
-		<property name="priceDataFactory" ref="priceDataFactory"/>
 	</bean>
 
 	<alias name="customOrderHistoryPopulator" alias="orderHistoryPopulator" />
