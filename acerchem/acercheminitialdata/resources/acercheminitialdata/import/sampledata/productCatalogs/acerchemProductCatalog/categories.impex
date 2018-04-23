@@ -45,6 +45,9 @@ INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='custome
  ;1201
  ;1288
  ;1421
+ #shaun
+ ;3510
+ 
 
 # Insert Category Structure
 INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories

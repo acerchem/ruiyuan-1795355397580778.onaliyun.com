@@ -49,5 +49,7 @@ UPDATE Category;code[unique=true];$catalogVersion;name[lang=$lang]
  ;829;;电池充电器;
  ;902;;闪存;
  ;934;;相机数据线;
+ #shaun
+ ;3510;;冠硕;
 
 
