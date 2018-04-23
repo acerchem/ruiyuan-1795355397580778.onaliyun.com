@@ -48,6 +48,7 @@ public class WaitConsignMentConfirmAction extends AbstractSimpleDecisionAction<O
 		}
 		else
 		{
+			setOrderStatus(order, OrderStatus.UNDELIVERED);
 			return Transition.NOK;
 		}
 	}

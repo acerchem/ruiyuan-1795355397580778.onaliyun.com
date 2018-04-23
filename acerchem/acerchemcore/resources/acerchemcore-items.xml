@@ -87,6 +87,9 @@
 			<value code="CONFIRMED" />
 			<value code="DELIVERED" />
 			<value code="PAIED" />
+			<value code="UNPAIED" />
+			<value code="UNCONFIRMED" />
+			<value code="UNDELIVERED" />
 		</enumtype>
 	</enumtypes>
 
@@ -825,8 +828,6 @@
 					</attribute>
 					<attribute qualifier="deliveyDate" type="java.util.Date">
 						<description>发货日期</description>
-						<persistence type="property" />
-						<modifiers />
 					</attribute>
 					<attribute qualifier="waitDeliveiedDate" type="java.util.Date">
 						<description>预计到货日期</description>

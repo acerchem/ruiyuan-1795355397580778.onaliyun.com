@@ -54,7 +54,7 @@
 	<action id="generateFormInvoiceEmail" bean="generateFormInvoiceEmailAction">
 		<transition name="OK" to="sendFormInvoiceEmail"/>
 		<transition name="NOK" to="error"/>
-	</action>
+	</action>waitForConfirmPayAction
 	
 	<action id="sendFormInvoiceEmail" bean="sendEmail">
 		<transition name="OK" to="waitForAllConfirmPay"/>
