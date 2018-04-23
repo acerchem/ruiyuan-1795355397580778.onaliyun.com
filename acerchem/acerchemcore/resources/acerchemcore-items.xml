@@ -921,7 +921,26 @@
 		</itemtype>
 		
 		</typegroup>
-
+        
+        <typegroup name="Article">
+			<itemtype code="Article" autocreate="true" generate="true">
+				<description>文章</description>
+				<deployment table="article" typecode="20310" />
+				<attributes>
+					<attribute qualifier="articleTitle" type="java.lang.String">
+						<description>文章标题</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="articleUrl" type="java.lang.String">
+						<description>文件url</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+		
 	</itemtypes>
 </items>
 
