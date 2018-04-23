@@ -41,6 +41,16 @@ INSERT_UPDATE Product;packageWeight;packageType;netWeight;grossWeight;specificat
 ;25;Bag;15;18;USP;50-81-7;5;AC03131;576, brand_1;HP;Tribulus 90% UV THC FREE;kg;
 ;25;Carton;14;16;EP/USP;2420-56-6;2;AC01361;576, brand_1;HP;Vitamin C Powder;kg;
 ;10;Drum;6;8;Enterprise Standard;5949-29-10;7;AC01710;576, brand_1;HP;Alpha Lipoic Acid;kg;
+#shaun
+;10;Carton;5;15;EP/USP;303-98-0;1;AC05080a;3510, brand_1;HP;Coenzyme Q10 98% HPLC;kg;
+;10;Carton;5;15;EP/USP;303-98-0;1;AC05080b;3510, brand_1;HP;Coenzyme Q10 98% HPLC;kg;
+;25;Drum;5;30;EP/USP;22888-70-6;4;AC03390a;3510, brand_1;HP;Milk Thistle 80% UV (Silybin + Isosilybin 30% HPLC);kg;
+;25;Drum;5;30;Enterprise Standard;84650-60-2;4;AC03138a;3510, brand_1;HP;Green tea extract Polyphenol 95%, EGCG 45%;kg;
+;25;Drum;5;30;Enterprise Standard;84650-60-2;4;AC03887a;3510, brand_1;HP;Green tea extract Polyphenol 95%, EGCG 50%;kg;
+;25;Drum;5;30;Enterprise Standard;84929-27-1 ;4;AC03142a;3510, brand_1;HP;Grapse Seed extract Procyanidine 95%;kg;
+;25;Drum;5;30;EP/USP;31284-96-5;4;AC02345a;3510, brand_1;HP;D-Glucosamine Sulphate 2KCL 40-80mesh ;kg;
+;25;Drum;5;30;EP/USP;31284-96-5;4;AC02354a;3510, brand_1;HP;D-Glucosamine Sulphate 2KCL DC;kg;
+;25;Drum;5;30;Enterprise Standard;9007-28-7;4;AC05003a;3510, brand_1;HP;Chondroitin Sulphate Bovine CPC 90%;kg;
 
 
 # Insert Product References
@@ -50,6 +60,17 @@ INSERT_UPDATE ProductReference;source(code,$catalogVersion)[unique=true];target(
 ;358639;AC03131;ACCESSORIES;true;false
 ;358639;AC01361;ACCESSORIES;true;false
 ;358639;AC01710;ACCESSORIES;true;false
+#shaun
+;358639;AC05080a;ACCESSORIES;true;false
+;358639;AC05080b;ACCESSORIES;true;false
+;358639;AC03390a;ACCESSORIES;true;false
+;358639;AC03138a;ACCESSORIES;true;false
+;358639;AC03887a;ACCESSORIES;true;false
+;358639;AC03142a;ACCESSORIES;true;false
+;358639;AC02345a;ACCESSORIES;true;false
+;358639;AC02354a;ACCESSORIES;true;false
+;358639;AC05003a;ACCESSORIES;true;false
+
 
 
 INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];reserved
@@ -58,6 +79,16 @@ INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(co
 ;3;USA;notSpecified;1;0;0;0;AC03131;0
 ;10;USA;notSpecified;1;0;0;0;AC01361;0
 ;20;USA;notSpecified;1;0;0;0;AC01710;0
+#shaun
+;20;USA;notSpecified;1;0;0;0;AC05080a;0
+;20;USA;notSpecified;1;0;0;0;AC05080b;0
+;20;USA;notSpecified;1;0;0;0;AC03390a;0
+;20;USA;notSpecified;1;0;0;0;AC03138a;0
+;20;USA;notSpecified;1;0;0;0;AC03887a;0
+;20;USA;notSpecified;1;0;0;0;AC03142a;0
+;20;USA;notSpecified;1;0;0;0;AC02345a;0
+;20;USA;notSpecified;1;0;0;0;AC02354a;0
+;20;USA;notSpecified;1;0;0;0;AC05003a;0
  
 UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehouse(code));vendors(code)
 ;000001;;000001:USA;
@@ -65,6 +96,18 @@ UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehou
 ;AC03131;;AC03131:USA;
 ;AC01361;;AC01361:USA;
 ;AC01710;;AC01710:USA;
+#shaun
+;AC05080a;;AC05080a:USA;
+;AC05080b;;AC05080b:USA;
+;AC03390a;;AC03390a:USA;
+;AC03138a;;AC03138a:USA;
+;AC03887a;;AC03887a:USA;
+;AC03142a;;AC03142a:USA;
+;AC02345a;;AC02345a:USA;
+;AC02354a;;AC02354a:USA;
+;AC05003a;;AC05003a:USA;
+
+
 
  # Update allProducts with localisations
 UPDATE Product;code[unique=true];$catalogVersion;name[lang=$lang];summary[lang=$lang];description[lang=$lang]
@@ -73,6 +116,16 @@ UPDATE Product;code[unique=true];$catalogVersion;name[lang=$lang];summary[lang=$
 ;AC03131;;Tribulus 90% UV THC FREE;Tribulus 90% UV THC FREE;Sports Nutrition<br/><br/><b>Includes:</b><br/>- Plant Extract <br/>- 22153-44-2<br/>- Enterprise Standard
 ;AC01361;;Vitamin C Powder;Vitamin C Powder;Sports Nutrition<br/><br/><b>Includes:</b><br/>- Vitamin <br/>- C6H8O6 <br/>- EP/USP
 ;AC01710;;Vitamin C Powder;Vitamin C Powder;Sports Nutrition<br/><br/><b>Includes:</b><br/>- Vitamin <br/>- C6H8O6 <br/>- EP/USP
+#shaun
+;AC05080a;;Coenzyme Q10 98% HPLC;Coenzyme Q10 98% HPLC;Heart & Cardiovascular<br/><br/><b>Includes:</b><br/>- Vitamin <br/>- C59H90O4 <br/>- EP/USP
+;AC05080b;;Coenzyme Q10 98% HPLC;Coenzyme Q10 98% HPLC;Heart & Cardiovascular<br/><br/><b>Includes:</b><br/>- Vitamin <br/>- C59H90O4 <br/>- EP/USP
+;AC03390a;;Milk Thistle 80% UV (Silybin + Isosilybin 30% HPLC);Milk Thistle 80% UV (Silybin + Isosilybin 30% HPLC);Liver protection<br/><br/><b>Includes:</b><br/>- Plant Extract <br/>- C25H22O1 <br/>- EP/USP
+;AC03138a;;Green tea extract Polyphenol 95%, EGCG 45%;Green tea extract Polyphenol 95%, EGCG 45%;Weight management<br/><br/><b>Includes:</b><br/>- Plant Extract <br/>- C17H19N3O  <br/>- Enterprise Standard
+;AC03887a;;Green tea extract Polyphenol 95%, EGCG 50%;Green tea extract Polyphenol 95%, EGCG 50%;Weight management<br/><br/><b>Includes:</b><br/>- Plant Extract <br/>- C17H19N3O  <br/>- Enterprise Standard
+;AC03142a;;Grapse Seed extract Procyanidine 95%;Grapse Seed extract Procyanidine 95%;Beauty<br/><br/><b>Includes:</b><br/>- Plant Extract <br/>- C30H12O6  <br/>- Enterprise Standard
+;AC02345a;;D-Glucosamine Sulphate 2KCL 40-80mesh ;D-Glucosamine Sulphate 2KCL 40-80mesh ;Joint Health<br/><br/><b>Includes:</b><br/>- Joint Health <br/>- C6H12NKO8S <br/>- EP/USP
+;AC02354a;;D-Glucosamine Sulphate 2KCL DC;D-Glucosamine Sulphate 2KCL DC;Joint Health<br/><br/><b>Includes:</b><br/>- Joint Health <br/>- C6H12NKO8S  <br/>- EP/USP
+;AC05003a;;Chondroitin Sulphate Bovine CPC 90%;Chondroitin Sulphate Bovine CPC 90%;Joint Health<br/><br/><b>Includes:</b><br/>- Joint Health <br/>- C13H21NO16S <br/>- Enterprise Standard
 
 
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];$catalogVersion;folder(qualifier)
@@ -111,6 +164,70 @@ INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=d
 ;65Wx65H;/65Wx65H/14.png;$siteResource/images/65Wx65H/14.png;;;images
 ;30Wx30H;/30Wx30H/14.png;$siteResource/images/30Wx30H/14.png;;;images
 
+#shaun
+;1200Wx1200H;/1200Wx1200H/AC05080A.jpg;$siteResource/images/1200Wx1200H/AC05080A.jpg;;;images
+;515Wx515H;/515Wx515H/AC05080A.jpg;$siteResource/images/515Wx515H/AC05080A.jpg;;;images
+;300Wx300H;/300Wx300H/AC05080A.jpg;$siteResource/images/300Wx300H/AC05080A.jpg;;;images
+;96Wx96H;/96Wx96H/AC05080A.jpg;$siteResource/images/96Wx96H/AC05080A.jpg;;;images
+;65Wx65H;/65Wx65H/AC05080A.jpg;$siteResource/images/65Wx65H/AC05080A.jpg;;;images
+;30Wx30H;/30Wx30H/AC05080A.jpg;$siteResource/images/30Wx30H/AC05080A.jpg;;;images
+
+;1200Wx1200H;/1200Wx1200H/AC05080B.jpg;$siteResource/images/1200Wx1200H/AC05080B.jpg;;;images
+;515Wx515H;/515Wx515H/AC05080B.jpg;$siteResource/images/515Wx515H/AC05080B.jpg;;;images
+;300Wx300H;/300Wx300H/AC05080B.jpg;$siteResource/images/300Wx300H/AC05080B.jpg;;;images
+;96Wx96H;/96Wx96H/AC05080B.jpg;$siteResource/images/96Wx96H/AC05080B.jpg;;;images
+;65Wx65H;/65Wx65H/AC05080B.jpg;$siteResource/images/65Wx65H/AC05080B.jpg;;;images
+;30Wx30H;/30Wx30H/AC05080B.jpg;$siteResource/images/30Wx30H/AC05080B.jpg;;;images
+
+;1200Wx1200H;/1200Wx1200H/AC03390A.jpg;$siteResource/images/1200Wx1200H/AC03390A.jpg;;;images
+;515Wx515H;/515Wx515H/AC03390A.jpg;$siteResource/images/515Wx515H/AC03390A.jpg;;;images
+;300Wx300H;/300Wx300H/AC03390A.jpg;$siteResource/images/300Wx300H/AC03390A.jpg;;;images
+;96Wx96H;/96Wx96H/AC03390A.jpg;$siteResource/images/96Wx96H/AC03390A.jpg;;;images
+;65Wx65H;/65Wx65H/AC03390A.jpg;$siteResource/images/65Wx65H/AC03390A.jpg;;;images
+;30Wx30H;/30Wx30H/AC03390A.jpg;$siteResource/images/30Wx30H/AC03390A.jpg;;;images
+
+;1200Wx1200H;/1200Wx1200H/AC03138A.jpg;$siteResource/images/1200Wx1200H/AC03138A.jpg;;;images
+;515Wx515H;/515Wx515H/AC03138A.jpg;$siteResource/images/515Wx515H/AC03138A.jpg;;;images
+;300Wx300H;/300Wx300H/AC03138A.jpg;$siteResource/images/300Wx300H/AC03138A.jpg;;;images
+;96Wx96H;/96Wx96H/AC03138A.jpg;$siteResource/images/96Wx96H/AC03138A.jpg;;;images
+;65Wx65H;/65Wx65H/AC03138A.jpg;$siteResource/images/65Wx65H/AC03138A.jpg;;;images
+;30Wx30H;/30Wx30H/AC03138A.jpg;$siteResource/images/30Wx30H/AC03138A.jpg;;;images
+
+;1200Wx1200H;/1200Wx1200H/AC03887A.jpg;$siteResource/images/1200Wx1200H/AC03887A.jpg;;;images
+;515Wx515H;/515Wx515H/AC03887A.jpg;$siteResource/images/515Wx515H/AC03887A.jpg;;;images
+;300Wx300H;/300Wx300H/AC03887A.jpg;$siteResource/images/300Wx300H/AC03887A.jpg;;;images
+;96Wx96H;/96Wx96H/AC03887A.jpg;$siteResource/images/96Wx96H/AC03887A.jpg;;;images
+;65Wx65H;/65Wx65H/AC03887A.jpg;$siteResource/images/65Wx65H/AC03887A.jpg;;;images
+;30Wx30H;/30Wx30H/AC03887A.jpg;$siteResource/images/30Wx30H/AC03887A.jpg;;;images
+
+;1200Wx1200H;/1200Wx1200H/AC03142A.jpg;$siteResource/images/1200Wx1200H/AC03142A.jpg;;;images
+;515Wx515H;/515Wx515H/AC03142A.jpg;$siteResource/images/515Wx515H/AC03142A.jpg;;;images
+;300Wx300H;/300Wx300H/AC03142A.jpg;$siteResource/images/300Wx300H/AC03142A.jpg;;;images
+;96Wx96H;/96Wx96H/AC03142A.jpg;$siteResource/images/96Wx96H/AC03142A.jpg;;;images
+;65Wx65H;/65Wx65H/AC03142A.jpg;$siteResource/images/65Wx65H/AC03142A.jpg;;;images
+;30Wx30H;/30Wx30H/AC03142A.jpg;$siteResource/images/30Wx30H/AC03142A.jpg;;;images
+
+;1200Wx1200H;/1200Wx1200H/AC02345A.jpg;$siteResource/images/1200Wx1200H/AC02345A.jpg;;;images
+;515Wx515H;/515Wx515H/AC02345A.jpg;$siteResource/images/515Wx515H/AC02345A.jpg;;;images
+;300Wx300H;/300Wx300H/AC02345A.jpg;$siteResource/images/300Wx300H/AC02345A.jpg;;;images
+;96Wx96H;/96Wx96H/AC02345A.jpg;$siteResource/images/96Wx96H/AC02345A.jpg;;;images
+;65Wx65H;/65Wx65H/AC02345A.jpg;$siteResource/images/65Wx65H/AC02345A.jpg;;;images
+;30Wx30H;/30Wx30H/AC02345A.jpg;$siteResource/images/30Wx30H/AC02345A.jpg;;;images
+
+;1200Wx1200H;/1200Wx1200H/AC02354A.jpg;$siteResource/images/1200Wx1200H/AC02354A.jpg;;;images
+;515Wx515H;/515Wx515H/AC02354A.jpg;$siteResource/images/515Wx515H/AC02354A.jpg;;;images
+;300Wx300H;/300Wx300H/AC02354A.jpg;$siteResource/images/300Wx300H/AC02354A.jpg;;;images
+;96Wx96H;/96Wx96H/AC02354A.jpg;$siteResource/images/96Wx96H/AC02354A.jpg;;;images
+;65Wx65H;/65Wx65H/AC02354A.jpg;$siteResource/images/65Wx65H/AC02354A.jpg;;;images
+;30Wx30H;/30Wx30H/AC02354A.jpg;$siteResource/images/30Wx30H/AC02354A.jpg;;;images
+
+;1200Wx1200H;/1200Wx1200H/AC05003A.jpg;$siteResource/images/1200Wx1200H/AC05003A.jpg;;;images
+;515Wx515H;/515Wx515H/AC05003A.jpg;$siteResource/images/515Wx515H/AC05003A.jpg;;;images
+;300Wx300H;/300Wx300H/AC05003A.jpg;$siteResource/images/300Wx300H/AC05003A.jpg;;;images
+;96Wx96H;/96Wx96H/AC05003A.jpg;$siteResource/images/96Wx96H/AC05003A.jpg;;;images
+;65Wx65H;/65Wx65H/AC05003A.jpg;$siteResource/images/65Wx65H/AC05003A.jpg;;;images
+;30Wx30H;/30Wx30H/AC05003A.jpg;$siteResource/images/30Wx30H/AC05003A.jpg;;;images
+
 
 INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion
 ;zhangyin;/1200Wx1200H/zhangyin.jpg,/515Wx515H/zhangyin.jpg,/300Wx300H/zhangyin.jpg,/96Wx96H/zhangyin.jpg,/65Wx65H/zhangyin.jpg,/30Wx30H/zhangyin.jpg;
@@ -118,6 +235,16 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion
 ;Tribulus 90% UV THC FREE;/1200Wx1200H/12.png,/515Wx515H/12.png,/300Wx300H/12.png,/96Wx96H/12.png,/65Wx65H/12.png,/30Wx30H/12.png;
 ;Vitamin C Powder;/1200Wx1200H/13.png,/515Wx515H/13.png,/300Wx300H/13.png,/96Wx96H/13.png,/65Wx65H/13.png,/30Wx30H/13.png;
 ;Alpha Lipoic Acid;/1200Wx1200H/14.png,/515Wx515H/14.png,/300Wx300H/14.png,/96Wx96H/14.png,/65Wx65H/14.png,/30Wx30H/14.png;
+#shaun
+;AC05080A;/1200Wx1200H/AC05080A.jpg,/515Wx515H/AC05080A.jpg,/300Wx300H/AC05080A.jpg,/96Wx96H/AC05080A.jpg,/65Wx65H/AC05080A.jpg,/30Wx30H/AC05080A.jpg;
+;AC05080B;/1200Wx1200H/AC05080B.jpg,/515Wx515H/AC05080B.jpg,/300Wx300H/AC05080B.jpg,/96Wx96H/AC05080B.jpg,/65Wx65H/AC05080B.jpg,/30Wx30H/AC05080B.jpg;
+;AC03390A;/1200Wx1200H/AC03390A.jpg,/515Wx515H/AC03390A.jpg,/300Wx300H/AC03390A.jpg,/96Wx96H/AC03390A.jpg,/65Wx65H/AC03390A.jpg,/30Wx30H/AC03390A.jpg;
+;AC03138A;/1200Wx1200H/AC03138A.jpg,/515Wx515H/AC03138A.jpg,/300Wx300H/AC03138A.jpg,/96Wx96H/AC03138A.jpg,/65Wx65H/AC03138A.jpg,/30Wx30H/AC03138A.jpg;
+;AC03887A;/1200Wx1200H/AC03887A.jpg,/515Wx515H/AC03887A.jpg,/300Wx300H/AC03887A.jpg,/96Wx96H/AC03887A.jpg,/65Wx65H/AC03887A.jpg,/30Wx30H/AC03887A.jpg;
+;AC03142A;/1200Wx1200H/AC03142A.jpg,/515Wx515H/AC03142A.jpg,/300Wx300H/AC03142A.jpg,/96Wx96H/AC03142A.jpg,/65Wx65H/AC03142A.jpg,/30Wx30H/AC03142A.jpg;
+;AC02345A;/1200Wx1200H/AC02345A.jpg,/515Wx515H/AC02345A.jpg,/300Wx300H/AC02345A.jpg,/96Wx96H/AC02345A.jpg,/65Wx65H/AC02345A.jpg,/30Wx30H/AC02345A.jpg;
+;AC02354A;/1200Wx1200H/AC02354A.jpg,/515Wx515H/AC02354A.jpg,/300Wx300H/AC02354A.jpg,/96Wx96H/AC02354A.jpg,/65Wx65H/AC02354A.jpg,/30Wx30H/AC02354A.jpg;
+;AC05003A;/1200Wx1200H/AC05003A.jpg,/515Wx515H/AC05003A.jpg,/300Wx300H/AC05003A.jpg,/96Wx96H/AC05003A.jpg,/65Wx65H/AC05003A.jpg,/30Wx30H/AC05003A.jpg;
 
 
 UPDATE Product;code[unique=true];$picture;$thumbnail;$detail;$others;$normal;$thumbnails;$galleryImages;$catalogVersion
@@ -126,6 +253,18 @@ UPDATE Product;code[unique=true];$picture;$thumbnail;$detail;$others;$normal;$th
 ;AC03131;/300Wx300H/12.png;/96Wx96H/12.png;/1200Wx1200H/12.png;/515Wx515H/12.png,/65Wx65H/12.png,/30Wx30H/12.png;/300Wx300H/12.png;/96Wx96H/12.png;Tribulus 90% UV THC FREE;
 ;AC01361;/300Wx300H/13.png;/96Wx96H/13.png;/1200Wx1200H/13.png;/515Wx515H/13.png,/65Wx65H/13.png,/30Wx30H/13.png;/300Wx300H/13.png;/96Wx96H/13.png;Vitamin C Powder;
 ;AC01710;/300Wx300H/14.png;/96Wx96H/14.png;/1200Wx1200H/14.png;/515Wx515H/14.png,/65Wx65H/14.png,/30Wx30H/14.png;/300Wx300H/14.png;/96Wx96H/14.png;Alpha Lipoic Acid;
+#shaun
+;AC05080a;/300Wx300H/AC05080A.jpg;/96Wx96H/AC05080A.jpg;/1200Wx1200H/AC05080A.jpg;/515Wx515H/AC05080A.jpg,/65Wx65H/AC05080A.jpg,/30Wx30H/AC05080A.jpg;/300Wx300H/AC05080A.jpg;/96Wx96H/AC05080A.jpg;AC05080A;
+;AC05080b;/300Wx300H/AC05080B.jpg;/96Wx96H/AC05080B.jpg;/1200Wx1200H/AC05080B.jpg;/515Wx515H/AC05080B.jpg,/65Wx65H/AC05080B.jpg,/30Wx30H/AC05080B.jpg;/300Wx300H/AC05080B.jpg;/96Wx96H/AC05080B.jpg;AC05080B;
+;AC03390a;/300Wx300H/AC03390A.jpg;/96Wx96H/AC03390A.jpg;/1200Wx1200H/AC03390A.jpg;/515Wx515H/AC03390A.jpg,/65Wx65H/AC03390A.jpg,/30Wx30H/AC03390A.jpg;/300Wx300H/AC03390A.jpg;/96Wx96H/AC03390A.jpg;AC03390A;
+;AC03138a;/300Wx300H/AC03138A.jpg;/96Wx96H/AC03138A.jpg;/1200Wx1200H/AC03138A.jpg;/515Wx515H/AC03138A.jpg,/65Wx65H/AC03138A.jpg,/30Wx30H/AC03138A.jpg;/300Wx300H/AC03138A.jpg;/96Wx96H/AC03138A.jpg;AC03138A;
+;AC03887a;/300Wx300H/AC03887A.jpg;/96Wx96H/AC03887A.jpg;/1200Wx1200H/AC03887A.jpg;/515Wx515H/AC03887A.jpg,/65Wx65H/AC03887A.jpg,/30Wx30H/AC03887A.jpg;/300Wx300H/AC03887A.jpg;/96Wx96H/AC03887A.jpg;AC03887A;
+;AC03142a;/300Wx300H/AC03142A.jpg;/96Wx96H/AC03142A.jpg;/1200Wx1200H/AC03142A.jpg;/515Wx515H/AC03142A.jpg,/65Wx65H/AC03142A.jpg,/30Wx30H/AC03142A.jpg;/300Wx300H/AC03142A.jpg;/96Wx96H/AC03142A.jpg;AC03142A;
+;AC02345a;/300Wx300H/AC02345A.jpg;/96Wx96H/AC02345A.jpg;/1200Wx1200H/AC02345A.jpg;/515Wx515H/AC02345A.jpg,/65Wx65H/AC02345A.jpg,/30Wx30H/AC02345A.jpg;/300Wx300H/AC02345A.jpg;/96Wx96H/AC02345A.jpg;AC02345A;
+;AC02354a;/300Wx300H/AC02354A.jpg;/96Wx96H/AC02354A.jpg;/1200Wx1200H/AC02354A.jpg;/515Wx515H/AC02354A.jpg,/65Wx65H/AC02354A.jpg,/30Wx30H/AC02354A.jpg;/300Wx300H/AC02354A.jpg;/96Wx96H/AC02354A.jpg;AC02354A;
+;AC05003a;/300Wx300H/AC05003A.jpg;/96Wx96H/AC05003A.jpg;/1200Wx1200H/AC05003A.jpg;/515Wx515H/AC05003A.jpg,/65Wx65H/AC05003A.jpg,/30Wx30H/AC05003A.jpg;/300Wx300H/AC05003A.jpg;/96Wx96H/AC05003A.jpg;AC05003A;
+
+
 
 # Classification: Technical details (643)
 $feature1=@Tape size, 1446[$clAttrModifiers];  # Tape size in millimeter (mm)
@@ -139,6 +278,16 @@ INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature5;
  ;AC03131;<ignore>;<ignore>;MiniDV;ICEcat.biz;<ignore>;
  ;AC01361;<ignore>;<ignore>;MiniDV;ICEcat.biz;<ignore>;
  ;AC01710;<ignore>;<ignore>;MiniDV;ICEcat.biz;<ignore>;
+ #shaun
+ ;AC05080a;<ignore>;<ignore>;MiniDV;ICEcat.biz;<ignore>;
+ ;AC05080b;<ignore>;<ignore>;MiniDV;ICEcat.biz;<ignore>;
+ ;AC03390a;<ignore>;<ignore>;MiniDV;ICEcat.biz;<ignore>;
+ ;AC03138a;<ignore>;<ignore>;MiniDV;ICEcat.biz;<ignore>;
+ ;AC03887a;<ignore>;<ignore>;MiniDV;ICEcat.biz;<ignore>;
+ ;AC03142a;<ignore>;<ignore>;MiniDV;ICEcat.biz;<ignore>;
+ ;AC02345a;<ignore>;<ignore>;MiniDV;ICEcat.biz;<ignore>;
+ ;AC02354a;<ignore>;<ignore>;MiniDV;ICEcat.biz;<ignore>;
+ ;AC05003a;<ignore>;<ignore>;MiniDV;ICEcat.biz;<ignore>;
 
 
 UPDATE Product;code[unique=true];$approved;$catalogVersion;
@@ -147,6 +296,17 @@ UPDATE Product;code[unique=true];$approved;$catalogVersion;
 ;AC03131
 ;AC01361
 ;AC01710
+#shaun
+;AC05080a
+;AC05080b
+;AC03390a
+;AC03138a
+;AC03887a
+;AC03142a
+;AC02345a
+;AC02354a
+;AC05003a
+
 
 INSERT_UPDATE PriceRow;productId[unique=true];unit(code[unique=true,default=kg]);currency(isocode)[unique=true];price;minqtd;unitFactor;net
 ;000001;kg;USD;15888;1;1;false
@@ -154,6 +314,17 @@ INSERT_UPDATE PriceRow;productId[unique=true];unit(code[unique=true,default=kg])
 ;AC03131;kg;USD;23333;1;1;false
 ;AC01361;kg;USD;66321;1;1;false
 ;AC01710;kg;USD;58124;1;1;false
+#shaun
+;AC05080a;kg;USD;1024;1;1;false
+;AC05080b;kg;USD;1025;1;1;false
+;AC03390a;kg;USD;1026;1;1;false
+;AC03138a;kg;USD;1027;1;1;false
+;AC03887a;kg;USD;1028;1;1;false
+;AC03142a;kg;USD;1029;1;1;false
+;AC02345a;kg;USD;1030;1;1;false
+;AC02354a;kg;USD;1031;1;1;false
+;AC05003a;kg;USD;1032;1;1;false
+
 
 
 
@@ -181,6 +352,62 @@ INSERT_UPDATE StockLevel;available;warehouse(code)[default='Ichikawa',unique=tru
 INSERT_UPDATE StockLevel;available;warehouse(code)[default='Chiba',unique=true];inStockStatus(code)[default='notSpecified'];overSelling;preOrder;productCode[unique=true];reserved
 #;12;;;0;0;000001;0
 
+
+#shaun
+INSERT_UPDATE StockLevel;available;warehouse(code)[default='Shinbashi',unique=true];inStockStatus(code)[default='notSpecified'];overSelling;preOrder;productCode[unique=true];reserved
+#;8;;;0;0;AC05080a;0
+#;8;;;0;0;AC05080b;0
+#;8;;;0;0;AC03390a;0
+#;8;;;0;0;AC03138a;0
+#;8;;;0;0;AC03887a;0
+#;8;;;0;0;AC03142a;0
+#;8;;;0;0;AC02345a;0
+#;8;;;0;0;AC02354a;0
+#;8;;;0;0;AC05003a;0
+
+INSERT_UPDATE StockLevel;available;warehouse(code)[default='Nakano',unique=true];inStockStatus(code)[default='notSpecified'];overSelling;preOrder;productCode[unique=true];reserved
+#;7;;;0;0;AC05080a;0
+#;7;;;0;0;AC05080b;0
+#;7;;;0;0;AC03390a;0
+#;7;;;0;0;AC03138a;0
+#;7;;;0;0;AC03887a;0
+#;7;;;0;0;AC03142a;0
+#;7;;;0;0;AC02345a;0
+#;7;;;0;0;AC02354a;0
+#;7;;;0;0;AC05003a;0
+ 
+INSERT_UPDATE StockLevel;available;warehouse(code)[default='Misato',unique=true];inStockStatus(code)[default='notSpecified'];overSelling;preOrder;productCode[unique=true];reserved
+#;3;;;0;0;AC05080a;0
+#;3;;;0;0;AC05080b;0
+#;3;;;0;0;AC03390a;0
+#;3;;;0;0;AC03138a;0
+#;3;;;0;0;AC03887a;0
+#;3;;;0;0;AC03142a;0
+#;3;;;0;0;AC02345a;0
+#;3;;;0;0;AC02354a;0
+#;3;;;0;0;AC05003a;0
+
+INSERT_UPDATE StockLevel;available;warehouse(code)[default='Ichikawa',unique=true];inStockStatus(code)[default='notSpecified'];overSelling;preOrder;productCode[unique=true];reserved
+#;7;;;0;0;AC05080a;0
+#;7;;;0;0;AC05080b;0
+#;7;;;0;0;AC03390a;0
+#;7;;;0;0;AC03138a;0
+#;7;;;0;0;AC03887a;0
+#;7;;;0;0;AC03142a;0
+#;7;;;0;0;AC02345a;0
+#;7;;;0;0;AC02354a;0
+#;7;;;0;0;AC05003a;0
+
+INSERT_UPDATE StockLevel;available;warehouse(code)[default='Chiba',unique=true];inStockStatus(code)[default='notSpecified'];overSelling;preOrder;productCode[unique=true];reserved
+#;12;;;0;0;AC05080a;0
+#;12;;;0;0;AC05080b;0
+#;12;;;0;0;AC03390a;0
+#;12;;;0;0;AC03138a;0
+#;12;;;0;0;AC03887a;0
+#;12;;;0;0;AC03142a;0
+#;12;;;0;0;AC02345a;0
+#;12;;;0;0;AC02354a;0
+#;12;;;0;0;AC05003a;0
 
 
 
