@@ -83,6 +83,7 @@
 						<wz:property qualifier="creationtime"  />
 						<wz:property qualifier="owner"  />
 						<wz:property qualifier="quantity"  />
+						<wz:property qualifier="batchNum"  />
 					</wz:property-list>
 				</wz:content>
 				<wz:navigation id="step1.navigation">
@@ -94,5 +95,66 @@
 			</wz:step>
 		</wz:flow>
 	</context>
+	
+	<context component="create-wizard" type="UserLevel">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="UserLevelWizard" title="create.UserLevel.title">
+			<wz:prepare id="UserLevelPrepare">
+				<wz:initialize property="newUserLevel" type="UserLevel"/>
+			</wz:prepare>
+			<wz:step id="step1" label="create.UserLevel.general.label" >
+				<wz:content id="step1.content">
+					<wz:property-list root="newUserLevel">
+						<wz:property qualifier="id" />
+						<wz:property qualifier="name" />
+						<wz:property qualifier="levelName" />
+						<wz:property qualifier="levelCode" />
+						<wz:property qualifier="discount" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel/>
+					<wz:done>
+						<wz:save property="newUserLevel"/>
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+	
+	<context merge-by="type" parent="GenericItem" type="UserLevel" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+       	    <wz:property qualifier="id" />
+			<wz:property qualifier="name" />
+            <list-view:column qualifier="levelName"/>
+            <list-view:column qualifier="levelCode"/>
+            <list-view:column qualifier="discount"/>
+        </list-view:list-view>
+    </context>
+	
+	<context merge-by="module" parent="auto" component="explorer-tree">
+		<explorer-tree:explorer-tree xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
+			<explorer-tree:navigation-node id="hmc.b2bcommercegroup">
+				<explorer-tree:type-node code="UserLevel" id="UserLevel"/>
+			</explorer-tree:navigation-node>
+		</explorer-tree:explorer-tree>
+	</context>
+	
+	 <context merge-by="type" parent="AbstractOrder" type="Order" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:tab name="hmc.properties" merge-mode="remove">
+				<editorArea:section name="hmc.common">
+					<editorArea:attribute qualifier="quoteReference" readonly="true"/>
+				</editorArea:section>
+			</editorArea:tab>
+            <editorArea:tab name="hmc.order.fraud.tab" merge-mode="remove">
+                <editorArea:section name="hmc.order.fraud.section">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="fraudReports" />
+                </editorArea:section>
+            </editorArea:tab>
+            <editorArea:tab name="hmc.tab.order.tickets" merge-mode="remove">
+                <editorArea:section name="hmc.section.order.tickets"/>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
 	
 </config>
