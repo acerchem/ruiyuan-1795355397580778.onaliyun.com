@@ -69,22 +69,34 @@
 			<span ><format:price priceData="${cartData.deliveryCost}"/></span>
 		</div>
 </c:if>
-		<div class="item-row invpric">
-			<span>Proforma Invoice</span>
-			<span class="row"></span>
-		</div>
+		
 
 		<!-- <div class="item-row">
 			<span>Discount Amount</span>
 			<span class="row">-$12.34</span>
 		</div> -->
-
+		
+			<div class="item-row">
+				<span>Storage Cost</span>
+				
+	              <span class="row"><format:price priceData="${cartData.storageCost}"/></span>
+	               
+			</div>
+			
+			<div class="item-row">
+				<span>Operate Cost</span>
+				
+	              <span class="row"><format:price priceData="${cartData.operateCost}"/></span>
+	               
+			</div>
+<c:if test="${not empty cartData.totalPrice}">
 		<div class="item-row">
 			<span>Order Total</span>
 			<span >
 			<format:price priceData="${cartData.totalPrice}"/>
 			</span>
 		</div>
+		</c:if>
 	</div>					
 </div>		
 

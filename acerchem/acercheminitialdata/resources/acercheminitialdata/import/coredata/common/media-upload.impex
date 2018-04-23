@@ -5,5 +5,5 @@ INSERT_UPDATE CronJob; code[unique=true];job(code);singleExecutable;sessionLangu
 
 # Run the acerChemMediaCronJob every 5 minitues
 INSERT_UPDATE Trigger;cronjob(code)[unique=true];cronExpression
-#;acerChemMediaCronJob; 0 0/5 * * * ?
-#;acerchemUploadCronJob;0 0/20 * * * ?
+;acerChemMediaCronJob; 0 0/5 * * * ?
+;acerchemUploadCronJob;0 0/20 * * * ?
