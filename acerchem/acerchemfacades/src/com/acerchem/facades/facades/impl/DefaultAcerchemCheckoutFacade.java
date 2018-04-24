@@ -268,7 +268,7 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                         BigDecimal.valueOf(cartModel.getOperateCost().doubleValue()), cartModel.getCurrency().getIsocode()));
             }
             if(cartModel.getPickUpDate()!=null){
-        	  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-DD");
+        	  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         	  cartData.setPickUpdate(sdf.format(cartModel.getPickUpDate()));
             }
             cartData.setIsUseFutureStock(cartModel.getEntries().get(0).getIsUseFutureStock());
