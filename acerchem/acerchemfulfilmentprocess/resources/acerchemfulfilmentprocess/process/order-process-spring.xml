@@ -137,5 +137,5 @@
 	<bean id="deliveryByOtherAction" class="com.acerchem.fulfilmentprocess.actions.order.DeliveryByOtherAction"  parent="abstractAction"/>
 	<bean id="deliveryByshelfAction" class="com.acerchem.fulfilmentprocess.actions.order.DeliveryByshelfAction"  parent="abstractAction"/>
 	<bean id="waitConsignMentConfirmAction" class="com.acerchem.fulfilmentprocess.actions.order.WaitConsignMentConfirmAction"  parent="abstractAction"/>
-		
+	<bean id="checkConsignmentDateAction" class="com.acerchem.fulfilmentprocess.actions.order.CheckConsignmentDateAction"  parent="abstractAction"/>
 </beans>

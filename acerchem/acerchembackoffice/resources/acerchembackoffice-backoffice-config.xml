@@ -154,6 +154,14 @@
             <editorArea:tab name="hmc.tab.order.tickets" merge-mode="remove">
                 <editorArea:section name="hmc.section.order.tickets"/>
             </editorArea:tab>
+              <editorArea:tab name="hmc.order.cronjob.tab" merge-mode="remove">
+                <editorArea:section name="hmc.order.cronjob.ordertemplate">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="orderTemplateCronJob"/>
+                </editorArea:section>
+                <editorArea:section name="hmc.order.cronjob.scheduleorder">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="orderScheduleCronJob"/>
+                </editorArea:section>
+            </editorArea:tab>
         </editorArea:editorArea>
     </context>
 	
