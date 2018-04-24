@@ -219,16 +219,16 @@
 					
 				 <c:if test="${fn:length(product.certificates.url) > 0}">
 						<li>						
-							<a href="${product.certificates.url}" >Allergen Statement</a>
+							<a href="${product.certificates.url}" >${product.certificates.altText}</a>
 						</li>
 						<li>						
-							<a href="${product.certificates.url}" >Allergen Statement</a>
+							<a href="${product.certificates.url}" >${product.certificates.altText}</a>
 						</li>
 						<li>						
-							<a href="${product.certificates.url}" >Allergen Statement</a>
+							<a href="${product.certificates.url}" >${product.certificates.altText}</a>
 						</li>
 						<li>						
-							<a href="${product.certificates.url}" >Allergen Statement</a>
+							<a href="${product.certificates.url}" >${product.certificates.altText}</a>
 						</li>
 					</c:if>
 					</ul>
