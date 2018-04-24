@@ -194,8 +194,44 @@
 		<property name="populators">
 			<list merge="true">
 				<ref bean="productAcerchemPopulator"/>
+				<ref bean="productCertificatesImagePopulator"/>
 			</list>
 		</property>
+	</bean>
+	
+	
+	<!-- <alias name="defaultProductConverter" alias="productConverter"/>
+	<bean id="defaultProductConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.product.data.ProductData"/>
+		<property name="populators">
+			<list>
+				<ref bean="acerchemCertificatesPopulator"/>
+			</list>
+		</property>
+	</bean> -->
+	
+	
+	<alias name="defaultAcerchemCertificatesPopulator" alias="acerchemCertificatesPopulator"/>
+	<bean id="defaultAcerchemCertificatesPopulator"
+			class="com.acerchem.facades.populators.AcerchemCertificatesPopulator"/>
+			
+			
+	<alias name="defaultCertificatesConverter" alias="certificatesConverter"/>
+	<bean id="defaultCertificatesConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="com.acerchem.facades.product.data.CertificatesData"/>
+		<property name="populators">
+			<list>
+				<ref bean="acerchemCertificatesPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
+	<alias name="defaultProductCertificatesImagePopulator" alias="productCertificatesImagePopulator"/>
+	<bean id="defaultProductCertificatesImagePopulator"  parent="baseProductPopulator"
+			class="com.acerchem.facades.populators.ProductCertificatesImagePopulator">
+		
+		<property name="certificatesConverter" ref="certificatesConverter"/>
+	
 	</bean>
 	
 	<!-- add by alice -->
