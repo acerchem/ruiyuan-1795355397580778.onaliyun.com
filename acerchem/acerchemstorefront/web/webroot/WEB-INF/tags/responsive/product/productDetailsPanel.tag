@@ -179,7 +179,7 @@
 							<%-- <c:forEach var="${countrys}" var="data1" begin="0" end="1"> --%>
 						<c:forEach items="${countrys}" var="data"  varStatus="id"  >
 						<c:if test="${id.index==0}">
-							    <i class="delintro">Delivery &nbsp<em>${data.avaReleaseDay}</em>&nbsp days</i>
+							    <i class="delintro"><em>Delivery within &nbsp ${data.avaReleaseDay} &nbsp days</em></i>
 						</c:if>	
                         </c:forEach>
                         <input type="hidden" value="" name="avaReleaseDay"  id="avaReleaseDay">
@@ -216,18 +216,21 @@
 							QC Documents
 					</div>
 					<ul class="donlist">
+					
+				 <c:if test="${fn:length(product.certificates.url)==0}}">
 						<li>						
-							<a href="#" >Allergen Statement</a>
+							<a href="${product.certificates.url}" >Allergen Statement</a>
 						</li>
 						<li>						
-							<a href="#" >Allergen Statement</a>
+							<a href="${product.certificates.url}" >Allergen Statement</a>
 						</li>
 						<li>						
-							<a href="#" >Allergen Statement</a>
+							<a href="${product.certificates.url}" >Allergen Statement</a>
 						</li>
 						<li>						
-							<a href="#" >Allergen Statement</a>
+							<a href="${product.certificates.url}" >Allergen Statement</a>
 						</li>
+					</c:if>
 					</ul>
 					<div class="btn-set line-setbtn">       
 					      <a class="click_pop btn btn-showlist" href="javascript:void(0)">Message Consultation</a>

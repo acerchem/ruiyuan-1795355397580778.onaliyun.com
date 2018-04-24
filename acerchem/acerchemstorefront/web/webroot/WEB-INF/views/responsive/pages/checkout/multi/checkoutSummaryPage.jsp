@@ -16,7 +16,7 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<c:set var="deliveryAddress" value="${cartData.deliveryAddress}"/>
+<%-- <c:set var="deliveryAddress" value="${cartData.deliveryAddress}"/> --%>
 <c:set var="deliveryMode" value="${cartData.deliveryMode}"/>
 
 <template:page pageTitle="${pageTitle}" hideHeaderLinks="true">
@@ -131,7 +131,12 @@
 				<!-- Shipping Address -->
 				<div class="g-table">
 					<div class="g-title">
+					<c:if test="${deliveryMode.code=='DELIVERY_GROSS'}">
 						<span>Shipping Address</span>
+						</c:if>
+						<c:if test="${deliveryMode.code=='DELIVERY_MENTION'}">
+						<span>Warehouse Address</span>
+						</c:if>
 					</div>
 					<div class="inside-cont">
 						<input type="hidden" name='shipaddress' class="checkinput">
@@ -169,56 +174,11 @@
 							
 						</div>	
 
-						<!-- new end -->
-						<!-- book -->
-						<div class="shiplist hidlist addbook">
-							<div class="title">Address Book <i class="icons close-icon"></i> </div>
-							<ul>
-							<c:forEach items="${deliveryAddresses}" var="deliveryAddress" varStatus="status">
-								<li class="now">
-									<label>
-										<div class="into int">
-											<input type="radio" name="addbook" value="" checked="checked">
-										</div>
-										<div class="into book-item">
-											 <span>
-							                    <b>${fn:escapeXml(deliveryAddress.title)}&nbsp;${fn:escapeXml(deliveryAddress.firstName)}&nbsp;${fn:escapeXml(deliveryAddress.lastName)}</b>
-							                    <br/>
-							                    <c:if test="${ not empty deliveryAddress.line1 }">
-							                        ${fn:escapeXml(deliveryAddress.line1)},&nbsp;
-							                    </c:if>
-							                    <c:if test="${ not empty deliveryAddress.line2 }">
-							                        ${fn:escapeXml(deliveryAddress.line2)},&nbsp;
-							                    </c:if>
-							                    <c:if test="${not empty deliveryAddress.town }">
-							                        ${fn:escapeXml(deliveryAddress.town)},&nbsp;
-							                    </c:if>
-							                    <c:if test="${ not empty deliveryAddress.region.name }">
-							                        ${fn:escapeXml(deliveryAddress.region.name)},&nbsp;
-							                    </c:if>
-							                    <c:if test="${ not empty deliveryAddress.postalCode }">
-							                        ${fn:escapeXml(deliveryAddress.postalCode)},&nbsp;
-							                    </c:if>
-							                    <c:if test="${ not empty deliveryAddress.country.name }">
-							                        ${fn:escapeXml(deliveryAddress.country.name)}
-							                    </c:if>
-							                    <br/>
-							                    <c:if test="${ not empty deliveryAddress.phone }">
-							                        ${fn:escapeXml(deliveryAddress.phone)}
-							                    </c:if>
-							                </span>
-										</div>	
-									</label>
-								</li>
-						</c:forEach>		
-
-							</ul>
-						</div>
+						
 						<!-- b end -->
 					</div>
 				</div>
-				<!-- end -->
-				
+			
 				  <div class="g-table">
 					<div class="g-title">
 						<span>pickup date</span>
@@ -234,15 +194,16 @@
 						<div>
 							<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date:&nbsp;&nbsp;&nbsp;<input style="width: 300px" type="date" id="textDate" /></label>
 						</div>
-						<div class="btn-set">
+					<!-- 	<div class="btn-set">
 
 							<a class="btn btn-date"
 								style="width: 200px; position: relative; left: -450px">Submit</a>
-						</div>
+						</div> -->
                       </c:when>
                       <c:otherwise>
                           <div>
-							<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date:&nbsp;&nbsp;&nbsp;${cartData.pickUpdate}</label>
+                          <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date:&nbsp;&nbsp;&nbsp;<input style="width: 300px"  type="date" id="textDate" value="${cartData.pickUpdate}" /></label>
+                          
 						</div>
                       </c:otherwise>
                       </c:choose>
@@ -530,6 +491,19 @@ function formreq(wrap,parwrap,aspan,newval,ap,inputarep,addinput,inputval){//add
 	
 }
 
+function dateChange(num, date) {
+    debugger;
+    if (!date) {
+        date = new Date();//没有传入值时,默认是当前日期
+        date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+    }
+    date += " 00:00:00";//设置为当天凌晨12点
+    date = Date.parse(new Date(date))/1000;//转换为时间戳
+    date += (86400) * num;//修改后的时间戳
+    var newDate = new Date(parseInt(date) * 1000);//转换为时间
+    return newDate.getFullYear() + '-' + (newDate.getMonth() + 1) + '-' + newDate.getDate();
+}
+
 $(".newadd.solid-form .btn-submit").on('click',function(){ // 新增地址
 	var afrom = $(this).parents('.solid-form'),
 		req = afrom.find('.required'),
@@ -692,6 +666,38 @@ radio.change(function(){
 	alert(this.value);
 
 }); */
+
+$('#textDate').on('change',function(){
+	
+	date = new Date();
+	date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+	
+	releaseDate = dateChange(${cartData.deliveryDays},date)
+	selectDate = $('#textDate').val();
+	
+	var isFuture = ${cartData.isUseFutureStock};
+	
+	//alert(isFuture);
+	//判断是否远期库存
+	if(isFuture){
+		
+		if (new Date(selectDate).getTime()<new Date(releaseDate).getTime()){
+			alert("please select after "+${cartData.deliveryDays}+" pickup date");
+			
+			return false;
+		}
+	}else {
+		if (new Date(selectDate).getTime()>new Date(releaseDate).getTime()){
+			alert("please select within "+${cartData.deliveryDays}+" pickup date");
+			
+			return false;
+		}
+	}
+	
+	 //window.location.href ='<c:url value='/checkout/multi/delivery-address/addPickUpDate?pickUpDate='/>'+selectDate;
+	// break;
+	
+});
 
 
 $(document).ready(function() {
