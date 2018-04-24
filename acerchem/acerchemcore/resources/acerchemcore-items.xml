@@ -464,6 +464,12 @@
 						<persistence type="property" />
 						<description>CAS</description>
 					</attribute>
+					
+			   <attribute autocreate="true" qualifier="certificates" type="Media">
+                    <persistence type="property"/>
+                    <modifiers read="true" write="true" search="true" optional="true"/>
+                    <description>资质文件</description>
+                </attribute>
 
 
 				</attributes>

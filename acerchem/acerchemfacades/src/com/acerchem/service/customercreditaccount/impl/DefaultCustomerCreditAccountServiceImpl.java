@@ -62,45 +62,48 @@ public class DefaultCustomerCreditAccountServiceImpl implements DefaultCustomerC
 
         if (money != null && money.compareTo(BigDecimal.ZERO) > 0) {
         	
-        	CustomerModel userModel = (CustomerModel)userDao.findUserByUID(customerModel.getCustomerID());
-        	//userService.getUser(customerModel.getPk().toString());
-            CustomerCreditAccountModel customerCreditAccount = userModel.getCreditAccount();
-            
-            if (customerCreditAccount != null) {
-
-                if (customerCreditAccount.getStatus() != null && customerCreditAccount.getStatus() == CreditAccountStatusEnum.NORMAL) {
-                    BigDecimal creditTotalAmount = customerCreditAccount.getCreditTotalAmount();
-                    BigDecimal creaditRemainedAmount = customerCreditAccount.getCreaditRemainedAmount();
-
-                    if (creditTotalAmount.compareTo(BigDecimal.ZERO) > 0) {
-                        if (creaditRemainedAmount.compareTo(money) >= 0) {
-                            //更新信用账户可用额度
-                            customerCreditAccount.setCreaditRemainedAmount(creaditRemainedAmount.subtract(money));
-                            Integer billingInterval = customerCreditAccount.getBillingInterval();
-                            //新建流水
-                            CreditTransactionModel creditTransaction = (CreditTransactionModel) this.modelService.create(CreditTransactionModel.class);
-                            creditTransaction.setCreaditUsedAmount(money);
-                            creditTransaction.setCreationtime(new Date());
-                            creditTransaction.setIsPayback(FALSE);
-
-                            creditTransaction.setCransactionId(UUID.randomUUID().toString());
-                            creditTransaction.setShouldPaybackTime(System.currentTimeMillis() + billingInterval);
-                            creditTransaction.setCreditAccount(customerCreditAccount);
-
-                            this.modelService.save(creditTransaction);
-                            this.modelService.refresh(creditTransaction);
-                            this.modelService.save(customerCreditAccount);
-                            this.modelService.refresh(customerCreditAccount);
-
-                            return customerCreditAccount;
-                        } else {
-                            LOG.info("updateCustomerCreditAccountConsume CreaditAmount ERROR money=" + money + " | creaditRemainedAmount=" + creaditRemainedAmount);
-                        }
-                    } else {
-                        LOG.info("updateCustomerCreditAccountConsume CreaditAmount ERROR creditTotalAmount=" + creditTotalAmount + " | creaditRemainedAmount=" + creaditRemainedAmount);
-                    }
-                } else {
-                    LOG.info("updateCustomerCreditAccountConsume CustomerCreditAccountModel Status ERROR Status=" + customerCreditAccount.getStatus());
+        	CustomerModel userModel = (CustomerModel)userService.getUserForUID(customerModel.getUid());
+        	if(userModel != null)
+        	{
+        		CustomerCreditAccountModel customerCreditAccount = userModel.getCreditAccount();
+	            if (customerCreditAccount != null) {
+	
+	                if (customerCreditAccount.getStatus() != null && customerCreditAccount.getStatus() == CreditAccountStatusEnum.NORMAL) {
+	                    BigDecimal creditTotalAmount = customerCreditAccount.getCreditTotalAmount();
+	                    BigDecimal creaditRemainedAmount = customerCreditAccount.getCreaditRemainedAmount();
+	
+	                    if (creditTotalAmount.compareTo(BigDecimal.ZERO) > 0) {
+	                        if (creaditRemainedAmount.compareTo(money) >= 0) {
+	                            //更新信用账户可用额度
+	                            customerCreditAccount.setCreaditRemainedAmount(creaditRemainedAmount.subtract(money));
+	                            Integer billingInterval = customerCreditAccount.getBillingInterval();
+	                            //新建流水
+	                            CreditTransactionModel creditTransaction = (CreditTransactionModel) this.modelService.create(CreditTransactionModel.class);
+	                            creditTransaction.setCreaditUsedAmount(money);
+	                            creditTransaction.setCreationtime(new Date());
+	                            creditTransaction.setIsPayback(FALSE);
+	
+	                            creditTransaction.setCransactionId(UUID.randomUUID().toString());
+	                            creditTransaction.setShouldPaybackTime(System.currentTimeMillis() + billingInterval);
+	                            creditTransaction.setCreditAccount(customerCreditAccount);
+	
+	                            this.modelService.save(creditTransaction);
+	                            this.modelService.refresh(creditTransaction);
+	                            this.modelService.save(customerCreditAccount);
+	                            this.modelService.refresh(customerCreditAccount);
+	
+	                            return customerCreditAccount;
+	                        } else {
+	                            LOG.info("updateCustomerCreditAccountConsume CreaditAmount ERROR money=" + money + " | creaditRemainedAmount=" + creaditRemainedAmount);
+	                        }
+	                    } else {
+	                        LOG.info("updateCustomerCreditAccountConsume CreaditAmount ERROR creditTotalAmount=" + creditTotalAmount + " | creaditRemainedAmount=" + creaditRemainedAmount);
+	                    }
+	                } else {
+	                    LOG.info("updateCustomerCreditAccountConsume CustomerCreditAccountModel Status ERROR Status=" + customerCreditAccount.getStatus());
+	                }
+	            }else {
+                    LOG.info("updateCustomerCreditAccountConsume CustomerModel is null");
                 }
             } else {
                 LOG.info("updateCustomerCreditAccountConsume CustomerCreditAccountModel is null");

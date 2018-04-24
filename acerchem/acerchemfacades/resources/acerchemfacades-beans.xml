@@ -21,6 +21,7 @@
 		<property name="netWeight" type="String" />
 		<property name="grossWeight" type="String" />
 		<property name="unitName" type="String" />
+		<property name="certificates" type="com.acerchem.facades.product.data.CertificatesData"/>
 
 	</bean>
 
@@ -207,6 +208,12 @@
 		class="de.hybris.platform.commercefacades.order.data.ConsignmentEntryData">
 		<property name="batchNum" type="String" />
 
+	</bean>
+	
+		<bean class="com.acerchem.facades.product.data.CertificatesData">
+		<property name="url" type="String"/>
+		<property name="altText" type="String"/>
+		<property name="galleryIndex" type="Integer"/>
 	</bean>
 
 </beans>
