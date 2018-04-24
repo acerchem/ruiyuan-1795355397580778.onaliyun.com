@@ -178,7 +178,11 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
 
     private void recalculateCartTotalPrice(CartModel cartModel) {
         double total =cartModel.getTotalPrice();
-        if(cartModel.getDeliveryCost()!=null){
+        //促销那块会把运费加上，这边需要重新判断一下
+        if(cartModel.getAllPromotionResults()!=null
+                &&cartModel.getAllPromotionResults().size()>0){
+
+        }else if (cartModel.getDeliveryCost()!=null){
             total = total +cartModel.getDeliveryCost().doubleValue();
         }
         if(cartModel.getOperateCost()!=null){
