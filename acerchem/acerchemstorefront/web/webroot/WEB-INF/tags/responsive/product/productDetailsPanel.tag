@@ -217,7 +217,7 @@
 					</div>
 					<ul class="donlist">
 					
-				 <c:if test="${fn:length(product.certificates.url)==0}}">
+				 <c:if test="${fn:length(product.certificates.url) > 0}">
 						<li>						
 							<a href="${product.certificates.url}" >Allergen Statement</a>
 						</li>
