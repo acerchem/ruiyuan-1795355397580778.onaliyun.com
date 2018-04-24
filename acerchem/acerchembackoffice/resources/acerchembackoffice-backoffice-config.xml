@@ -130,11 +130,20 @@
             <list-view:column qualifier="discount"/>
         </list-view:list-view>
     </context>
+
+	<context merge-by="type" parent="GenericItem" type="CountryTrayFareConf" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="country"/>
+			<list-view:column qualifier="trayAmount"/>
+			<list-view:column qualifier="price"/>
+		</list-view:list-view>
+	</context>
 	
 	<context merge-by="module" parent="auto" component="explorer-tree">
 		<explorer-tree:explorer-tree xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
 			<explorer-tree:navigation-node id="hmc.b2bcommercegroup">
 				<explorer-tree:type-node code="UserLevel" id="UserLevel"/>
+				<explorer-tree:type-node code="CountryTrayFareConf" id="CountryTrayFareConf"/>
 			</explorer-tree:navigation-node>
 		</explorer-tree:explorer-tree>
 	</context>
