@@ -1357,7 +1357,7 @@ textarea{
 .g-cont .g-cell{
 	display: table-cell;
 	vertical-align: top;
-	width: auto;
+	width: 76%;
 }
 
 .g-cartable .g-table{
@@ -2428,6 +2428,7 @@ display: inline-table;
 /*product*/
 .prod-cont{
 	padding: 0;
+	display: table;
 }
 
 .prod-cont .g-cell{
