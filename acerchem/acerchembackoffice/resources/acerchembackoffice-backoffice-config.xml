@@ -104,7 +104,7 @@
 			<wz:step id="step1" label="create.UserLevel.general.label" >
 				<wz:content id="step1.content">
 					<wz:property-list root="newUserLevel">
-						<wz:property qualifier="id" />
+						<wz:property qualifier="uid" />
 						<wz:property qualifier="name" />
 						<wz:property qualifier="levelName" />
 						<wz:property qualifier="levelCode" />
@@ -123,7 +123,7 @@
 	
 	<context merge-by="type" parent="GenericItem" type="UserLevel" component="listview">
         <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
-       	    <wz:property qualifier="id" />
+       	    <wz:property qualifier="uid" />
 			<wz:property qualifier="name" />
             <list-view:column qualifier="levelName"/>
             <list-view:column qualifier="levelCode"/>
