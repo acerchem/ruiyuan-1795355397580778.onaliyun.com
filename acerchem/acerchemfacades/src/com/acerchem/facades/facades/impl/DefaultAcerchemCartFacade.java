@@ -4,6 +4,7 @@ import com.acerchem.core.service.AcerchemCommerCartService;
 import com.acerchem.facades.facades.AcerchemCartFacade;
 import de.hybris.platform.commercefacades.order.data.AddToCartParams;
 import de.hybris.platform.commercefacades.order.data.CartModificationData;
+import de.hybris.platform.commercefacades.order.data.OrderEntryData;
 import de.hybris.platform.commercefacades.order.impl.DefaultCartFacade;
 import de.hybris.platform.commercefacades.product.ProductOption;
 import de.hybris.platform.commercefacades.product.data.PriceData;
@@ -93,14 +94,10 @@ public class DefaultAcerchemCartFacade extends DefaultCartFacade implements Acer
     }
 
     @Override
-    public double getAddToCartPrice(String productCode, Long qty) {
-
-        final List<ProductOption> extraOptions = Arrays.asList(ProductOption.VARIANT_MATRIX_BASE, ProductOption.VARIANT_MATRIX_URL,
-                ProductOption.VARIANT_MATRIX_MEDIA,ProductOption.PRICE);
+    public double getAddToCartPrice(OrderEntryData orderEntryData, Long qty) {
 
         BigDecimal cartEntryTotalPrice = BigDecimal.ZERO;
-        ProductData productData =  getProductFacade().getProductForCodeAndOptions(productCode, extraOptions);
-        PriceData priceData = productData.getPrice();
+        PriceData priceData = orderEntryData.getBasePrice();
         if (priceData!=null){
             BigDecimal basePrice = priceData.getValue();
             cartEntryTotalPrice = basePrice.multiply(BigDecimal.valueOf(qty));

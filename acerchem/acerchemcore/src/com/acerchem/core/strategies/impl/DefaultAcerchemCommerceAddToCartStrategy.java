@@ -49,6 +49,7 @@ public class DefaultAcerchemCommerceAddToCartStrategy extends DefaultCommerceAdd
         afterAddToCart(parameter, modification);
         // Here the entry is fully populated, so we can search for a similar one and merge.
         this.mergeEntry(modification, parameter);
+
         return modification;
     }
 
@@ -202,6 +203,7 @@ public class DefaultAcerchemCommerceAddToCartStrategy extends DefaultCommerceAdd
                         + parameter.getEntryNumber() + ". Give a correct value or " + CommerceCartParameter.DEFAULT_ENTRY_NUMBER
                         + " to accept any suitable entry.");
             }
+            calculateCartBasePrice(modification.getEntry());
         }
         else
         {
@@ -217,19 +219,21 @@ public class DefaultAcerchemCommerceAddToCartStrategy extends DefaultCommerceAdd
             commerceCartParameter.setEnableHooks(true);
             commerceCartParameter.setCart(parameter.getCart());
             commerceCartCalculationStrategy.recalculateCart(commerceCartParameter);
-//            calculateCartPrice(parameter.getCart());
+            calculateCartBasePrice(mergeTarget);
             modification.setEntry(mergeTarget);
         }
 
     }
 
-    private void calculateCartPrice(CartModel cartModel){
-        for (AbstractOrderEntryModel aoe: cartModel.getEntries()){
-            BigDecimal basePrice = BigDecimal.valueOf(aoe.getBasePrice());
-            BigDecimal totalPrice = basePrice.multiply(BigDecimal.valueOf(aoe.getQuantity()));
-            aoe.setTotalPrice(totalPrice.doubleValue());
-        }
-        getModelService().saveAll(cartModel.getEntries());
+    private void calculateCartBasePrice(AbstractOrderEntryModel aoe){
+
+        BigDecimal totalPrice = BigDecimal.valueOf(aoe.getTotalPrice());
+        BigDecimal quantity = BigDecimal.valueOf(aoe.getQuantity());
+        BigDecimal baseRealPrice = totalPrice.divide(quantity,BigDecimal.ROUND_CEILING,BigDecimal.ROUND_HALF_UP);
+        aoe.setBasePrice(baseRealPrice.doubleValue());
+//        aoe.setCalculated(Boolean.TRUE);
+
+        getModelService().save(aoe);
     }
 
     @Required
