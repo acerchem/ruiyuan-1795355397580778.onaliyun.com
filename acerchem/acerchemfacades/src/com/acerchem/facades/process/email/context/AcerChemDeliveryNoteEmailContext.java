@@ -12,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.acerchem.facades.process.email.context.pojo.AcerChemEmailContextUtils;
+import com.acerchem.facades.process.email.context.pojo.CustomerContactAddressOfEmailData;
 import com.acerchem.facades.process.email.context.pojo.DeliveryNoteEmailContextPoJo;
 import com.acerchem.facades.process.email.context.pojo.ProductItemDataOfEmail;
 import com.acerchem.facades.process.email.context.pojo.ProductTotalDataOfEmail;
@@ -40,6 +41,7 @@ public class AcerChemDeliveryNoteEmailContext extends AbstractEmailContext<Order
 	private List<CouponData> giftCoupons;
 
 	private String customerAddress;
+	private CustomerContactAddressOfEmailData customerAddressData;
 	private DeliveryNoteEmailContextPoJo append;
 	private CustomerModel customerModel;  
 	
@@ -54,6 +56,7 @@ public class AcerChemDeliveryNoteEmailContext extends AbstractEmailContext<Order
 		super.init(orderProcessModel, emailPageModel);
 		orderData = getOrderConverter().convert(orderProcessModel.getOrder());
 
+		orderData.getDeliveyDate();
 		// orderData.getConsignments()
 		// List<ConsignmentData>
 		giftCoupons = orderData.getAppliedOrderPromotions().stream()
@@ -101,13 +104,16 @@ public class AcerChemDeliveryNoteEmailContext extends AbstractEmailContext<Order
 	private void initCustomerAddress(final OrderProcessModel orderProcessModel) {
 
 		String address = "";
+		CustomerContactAddressOfEmailData addressData = new CustomerContactAddressOfEmailData();
 		CustomerModel customer = getCustomer(orderProcessModel);
 		if (customer != null) {
 			Collection<AddressModel> addrs = customer.getAddresses();
 			address = AcerChemEmailContextUtils.getCustomerContactAddress(addrs);
+			addressData = AcerChemEmailContextUtils.getCustomerContactAddressData(addrs);
 		}
 
 		this.customerAddress = address;
+		this.customerAddressData = addressData;
 
 	}
 
@@ -286,6 +292,14 @@ public class AcerChemDeliveryNoteEmailContext extends AbstractEmailContext<Order
 	 */
 	public void setContactMobile(String contactMobile) {
 		this.contactMobile = contactMobile;
+	}
+
+	public CustomerContactAddressOfEmailData getCustomerAddressData() {
+		return customerAddressData;
+	}
+
+	public void setCustomerAddressData(CustomerContactAddressOfEmailData customerAddressData) {
+		this.customerAddressData = customerAddressData;
 	}
 
 }

@@ -1,13 +1,15 @@
 package com.acerchem.facades.populators;
 
+import java.math.BigDecimal;
+import java.text.SimpleDateFormat;
+
+import javax.annotation.Resource;
+
 import de.hybris.platform.commercefacades.order.converters.populator.OrderPopulator;
 import de.hybris.platform.commercefacades.order.data.OrderData;
 import de.hybris.platform.commercefacades.product.PriceDataFactory;
 import de.hybris.platform.commercefacades.product.data.PriceDataType;
 import de.hybris.platform.core.model.order.OrderModel;
-import javax.annotation.Resource;
-import java.math.BigDecimal;
-import java.text.SimpleDateFormat;
 
 /**
  * Created by Jacob.Ji on 2018/4/19.
@@ -37,9 +39,18 @@ public class AcerchemOrderPopulator extends OrderPopulator {
             target.setOperateCost(priceDataFactory.create(PriceDataType.BUY,
                     BigDecimal.valueOf(source.getOperateCost().doubleValue()), source.getCurrency().getIsocode()));
         }
+        // modified by Jayson.wang
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         if(source.getPickUpDate()!=null){
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-DD");
             target.setPickUpdate(sdf.format(source.getPickUpDate()));
+        }
+        
+        if(source.getDeliveyDate()!=null){
+        	target.setDeliveyDate(sdf.format(source.getDeliveyDate()));
+        }
+        
+        if(source.getWaitDeliveiedDate()!=null){
+        	target.setWaitDeliveiedDate(sdf.format(source.getWaitDeliveiedDate()));
         }
 
     }
