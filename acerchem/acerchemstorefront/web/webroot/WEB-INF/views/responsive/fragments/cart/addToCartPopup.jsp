@@ -64,9 +64,10 @@
 	                </c:choose> 
 	            </div>
 				
+				
 					<ul>
 					
-							
+					 <c:if test="${errorMsg eq null}">		
 		            <c:choose>
 		                <c:when test="${modifications ne null}">
 		                    <c:forEach items="${modifications}" var="modification">
@@ -82,8 +83,11 @@
 		                    <cart:popupCartItems entry="${entry}" product="${product}" quantity="${quantity}"/>
 		                </c:otherwise>
 		            </c:choose>
+		            </c:if>	
 		            </ul>
 				</div>
+				
+				  <c:if test="${errorMsg eq null}">		
 				<!-- 判断优惠 -->
 				<div class="Summary">
 					<span>Part of your order qualifies for FREE Shipping. </span>
@@ -106,8 +110,10 @@
 		                </c:otherwise>
 		            </c:choose>
 						
-					</div>			
+					</div>	
+						
 				</div>
+				</c:if>	
 				  <ycommerce:testId code="checkoutLinkInPopup">
 				<div class="btn-set">							
 					<a class="btn btn-submit" href="${cartUrl}">Check Out</a>

@@ -1,3 +1,5 @@
+$(document).ready(function(){
+
 
 if($('.maxprosi-top')){
   setTimeout(function(){  
@@ -25,3 +27,5 @@ if($('.banner .swiper-container')){
     })
   },0)
 }
+
+})

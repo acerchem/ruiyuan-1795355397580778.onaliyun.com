@@ -97,10 +97,16 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 
 		model.addAttribute("cartData", cartData);
 		model.addAttribute("allItems", cartData.getEntries());
-		model.addAttribute("deliveryAddress", cartData.getDeliveryAddress());
+		
 		model.addAttribute("deliveryMode", cartData.getDeliveryMode());
 		model.addAttribute("paymentInfo", cartData.getPaymentInfo());
 		model.addAttribute("paymentModeData", cartData.getPaymentModeData());
+		
+		if (cartData.getDeliveryMode()!=null&&"DELIVERY_MENTION".equals(cartData.getDeliveryMode().getCode())) {
+			model.addAttribute("deliveryAddress", acerchemCheckoutFacade.getDeliveryAddresses().get(0));
+		}else{
+			model.addAttribute("deliveryAddress", cartData.getDeliveryAddress());
+		}
 
 		// Only request the security code if the SubscriptionPciOption is set to Default.
 		final boolean requestSecurityCode = CheckoutPciOptionEnum.DEFAULT
@@ -203,6 +209,12 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 		if (cartData.getPaymentModeData() == null)
 		{
 			GlobalMessages.addErrorMessage(model, "checkout.paymentMethod.notSelected");
+			invalid = true;
+		}
+		
+		if (cartData.getPickUpdate() == null)
+		{
+			GlobalMessages.addErrorMessage(model, "checkout.pickUpDate.notSelected");
 			invalid = true;
 		}
 

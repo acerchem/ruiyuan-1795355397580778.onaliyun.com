@@ -226,13 +226,14 @@ function reimgsize(aitem){
 	var aimg = aitem.find('.img a')
 	aimg.css({width:aitem.width(),height:aitem.width()});
 }
-var agallcont = $('.gen-content.gal-centent .g-cartable');
-if(agallcont.length>0){
-	var aitem = agallcont.find('.slide-item .aitem');
-	reimgsize(aitem)
-	$(window).resize(function(){
+$(document).ready(function(){
+	var agallcont = $('.gen-content.gal-centent .g-cartable');
+	if(agallcont.length>0){
 		var aitem = agallcont.find('.slide-item .aitem');
 		reimgsize(aitem)
-	})
-
-}
+		$(window).resize(function(){
+			var aitem = agallcont.find('.slide-item .aitem');
+			reimgsize(aitem)
+		})
+	}
+})

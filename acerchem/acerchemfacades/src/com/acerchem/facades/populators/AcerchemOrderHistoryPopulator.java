@@ -1,9 +1,11 @@
 package com.acerchem.facades.populators;
 
-import de.hybris.platform.converters.Populator;
-import de.hybris.platform.core.model.order.OrderModel;
+import java.text.SimpleDateFormat;
+
 import de.hybris.platform.commercefacades.order.converters.populator.OrderHistoryPopulator;
 import de.hybris.platform.commercefacades.order.data.OrderHistoryData;
+import de.hybris.platform.converters.Populator;
+import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 
 public class AcerchemOrderHistoryPopulator extends OrderHistoryPopulator implements Populator<OrderModel, OrderHistoryData>
@@ -21,6 +23,16 @@ public class AcerchemOrderHistoryPopulator extends OrderHistoryPopulator impleme
 		target.setEmployeeConfirmDelivery(source.getEmployeeConfirmDelivery());
 		target.setPickUpDate(source.getPickUpDate());
 		
+		 // added by Jayson.wang
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        if(source.getDeliveyDate()!=null){
+        	target.setDeliveyDate(sdf.format(source.getDeliveyDate()));
+        }
+        
+        if(source.getWaitDeliveiedDate()!=null){
+        	target.setWaitDeliveiedDate(sdf.format(source.getWaitDeliveiedDate()));
+        }
+
 	}
 
 }

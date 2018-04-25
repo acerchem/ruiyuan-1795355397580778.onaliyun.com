@@ -44,6 +44,8 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 	private String paymentTerms;
 	private CustomerModel customerModel;  
 
+	private String moneyToWords;
+	
 
 	@Override
 	public void init(final OrderProcessModel orderProcessModel, final EmailPageModel emailPageModel) {
@@ -56,13 +58,14 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 				.filter(x -> CollectionUtils.isNotEmpty(x.getGiveAwayCouponCodes()))
 				.flatMap(p -> p.getGiveAwayCouponCodes().stream()).collect(Collectors.toList());
 
-		deliveryDate = "4/12/2018";
+		deliveryDate = orderData.getDeliveyDate();
 
 		initCustomerAddress(orderProcessModel);
 		initAppend();
 		initPaymentTerms(orderProcessModel);
 		
 		customerModel = getCustomer(orderProcessModel);
+		
 	}
 
 	@Override
@@ -196,6 +199,8 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 				subAmount += amount.doubleValue();
 				list.add(pie);
 
+				//add moneyToWords
+				this.moneyToWords = AcerChemEmailContextUtils.getMoneyOfWord(String.valueOf(totalAmount),"$");
 				// warehouse
 				if (StringUtils.isBlank(warehouse)) {
 					//String warehouseCode = orderEntry.getWarehouseCode();
@@ -276,6 +281,14 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 	 */
 	public void setWarehouse(String warehouse) {
 		this.warehouse = warehouse;
+	}
+
+	public String getMoneyToWords() {
+		return moneyToWords;
+	}
+
+	public void setMoneyToWords(String moneyToWords) {
+		this.moneyToWords = moneyToWords;
 	}
 
 }
