@@ -85,7 +85,7 @@
 					<input type="text" id="email" placeholder="Your Emaill Address" class="text-inp">
 					<input type="number" id="telephone" placeholder="Your Phone" class="text-inp">
 				</form>
-				<button class="btn click_pop">Subscribe</button>
+				<button class="btn click_pop">Consultation</button>
 			</li>
 			</c:if>
 			
