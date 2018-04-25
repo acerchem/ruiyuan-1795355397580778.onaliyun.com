@@ -640,5 +640,4 @@
 	<bean id="defaultAcerchemCalculationService" parent="defaultCalculationService" class="com.acerchem.core.service.impl.DefaultAcerchemCalculationService">
 	</bean>
 
-
 </beans>

@@ -127,6 +127,7 @@ public class AddToCartController extends AbstractController
 					model.addAttribute("entry", cartModification.getEntry());
 					model.addAttribute("cartCode", cartModification.getCartCode());
 					model.addAttribute("isQuote", cartFacade.getSessionCart().getQuoteData() != null ? Boolean.TRUE : Boolean.FALSE);
+					model.addAttribute("cartEntryPrice", acerchemCartFacade.getAddToCartPrice(cartModification.getEntry(),qty));
 
 					if (cartModification.getStatusCode().equalsIgnoreCase(CommerceCartModificationStatus.MAX_ORDER_QUANTITY_EXCEEDED))
 					{
@@ -149,8 +150,6 @@ public class AddToCartController extends AbstractController
 		}
 
 		model.addAttribute("product", productFacade.getProductForCodeAndOptions(code, Arrays.asList(ProductOption.BASIC)));
-
-		model.addAttribute("cartEntryPrice", acerchemCartFacade.getAddToCartPrice(code,qty));
 
 		return ControllerConstants.Views.Fragments.Cart.AddToCartPopup;
 	}

@@ -2,6 +2,7 @@ package com.acerchem.facades.facades;
 
 
 import de.hybris.platform.commercefacades.order.data.CartModificationData;
+import de.hybris.platform.commercefacades.order.data.OrderEntryData;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
 
 import java.text.ParseException;
@@ -31,5 +32,5 @@ public interface AcerchemCartFacade {
 
     CartModificationData updateCartEntry(long entryNumber, String storeId ,boolean isUseFutureStock) throws CommerceCartModificationException;
 
-    double getAddToCartPrice(String productCode,Long qty);
+    double getAddToCartPrice(OrderEntryData orderEntryData, Long qty);
 }
