@@ -133,7 +133,7 @@
     </wait> 
     
 	<action id="waitConsignMentConfirm" bean="waitConsignMentConfirmAction">
-		<transition name="OK" to="generateOfficialInvoiceEmail"/>
+		<transition name="OK" to="chooseInvoiceTemp"/>
 		<transition name="NOK" to="waitForAllConsignmentConfirm"/>
 	</action>
 	
