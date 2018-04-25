@@ -1357,7 +1357,6 @@ textarea{
 .g-cont .g-cell{
 	display: table-cell;
 	vertical-align: top;
-	width: 76%;
 }
 
 .g-cartable .g-table{
@@ -2433,6 +2432,7 @@ display: inline-table;
 
 .prod-cont .g-cell{
 	padding: 40px 0;
+	width: 76%;
 }
 
 .m-prodslide{
@@ -2749,6 +2749,7 @@ display: inline-table;
 .prod-cont .product-right .donlist{
 	padding:10px 0;
 	padding-left: 20px;
+	min-height: 300px;
 }
 .prod-cont .product-right .donlist li , .prod-cont .g-desclist li{
 	position: relative;
