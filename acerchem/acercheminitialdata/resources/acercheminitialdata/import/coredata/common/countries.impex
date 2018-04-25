@@ -13,6 +13,9 @@
 # Full country list conforming to ISO 3166-1 alpha-2
 #
 INSERT_UPDATE Country;isocode[unique=true];name[lang=en];active[default=true]
+#shaun
+;DCM;"Europe"
+
 ;AD;"Andorra"
 ;AE;"United Arab Emirates"
 ;AF;"Afghanistan"

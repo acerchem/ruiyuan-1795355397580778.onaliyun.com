@@ -18,6 +18,9 @@ $lang=zh
 
 # Create Countries
 UPDATE Country;isocode[unique=true];name[lang=$lang]
+#shaun
+;DCM;"欧洲其他"
+
  ;AD;"安道尔"
  ;AE;"阿拉伯联合酋长国"
  ;AF;"阿富汗"

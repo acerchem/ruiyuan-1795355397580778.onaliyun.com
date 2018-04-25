@@ -6,6 +6,7 @@
 <spring:url value="/my-account/update-password" var="updatePasswordUrl"/>
 <%-- <spring:url value="/my-account/payment-details" var="paymentDetailsUrl"/> --%>
 <spring:url value="/my-account/credit" var="creditUrl"/>
+<spring:url value="/logout" var="logoutUrl"/>
 
 <div class="g-left">
 	<div class="base">
@@ -14,7 +15,7 @@
 			<span>${user.userLevel.levelName}<br/>Member</span>
 		</div>
 		<div class="name">Hello,${user.name}</div>
-		<a href="/acerchemstorefront/electronics/en/logout"><i class="icons out-icon"></i></a>
+		<a href="${logoutUrl}"><i class="icons out-icon"></i></a>
 		
 	</div>
 

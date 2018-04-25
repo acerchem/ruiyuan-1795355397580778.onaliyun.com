@@ -18,6 +18,9 @@ $lang=en
 
 # Create Countries
 UPDATE Country;isocode[unique=true];name[lang=$lang]
+#shaun
+;DCM;"Europe"
+
  ;AD;"Andorra"
  ;AE;"United Arab Emirates"
  ;AF;"Afghanistan"

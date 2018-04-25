@@ -24,6 +24,10 @@ INSERT_UPDATE Warehouse;code[unique=true];name[lang=en];name[lang=de];vendor(cod
 ;USA;USA;;true
 ;United Kingdom;United Kingdom;;true
 ;Holland;Holland;;true
+#shaun
+;Europe;;true
+;Poland;;true
+
 
 INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];reserved
 ;0;USA;forceInStock;0;0;0;0;23355;0
