@@ -2249,7 +2249,10 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 				"CONFIRMED",
 				"DELIVERED",
-				"PAIED"
+				"PAIED",
+				"UNPAIED",
+				"UNCONFIRMED",
+				"UNDELIVERED"
 			} )
 		);
 	

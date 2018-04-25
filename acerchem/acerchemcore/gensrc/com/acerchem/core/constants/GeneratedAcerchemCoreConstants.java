@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-4-23 20:23:31                          ---
+ * --- Generated at 2018-4-25 8:00:37                           ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.constants;
@@ -169,6 +169,9 @@ public class GeneratedAcerchemCoreConstants
 			public static final String CONFIRMED = "CONFIRMED".intern();
 			public static final String DELIVERED = "DELIVERED".intern();
 			public static final String PAIED = "PAIED".intern();
+			public static final String UNPAIED = "UNPAIED".intern();
+			public static final String UNCONFIRMED = "UNCONFIRMED".intern();
+			public static final String UNDELIVERED = "UNDELIVERED".intern();
 		}
 		public static class PaymentTransactionType
 		{

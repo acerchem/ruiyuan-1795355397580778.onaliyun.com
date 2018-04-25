@@ -49,6 +49,8 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 	private CustomerModel customerModel;  
 	
 	private String warehouse;
+	
+	private String moneyToWords;
 
 	@Override
 	public void init(final OrderProcessModel orderProcessModel, final EmailPageModel emailPageModel) {
@@ -69,6 +71,9 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 		initPaymentTerms(orderProcessModel);
 		
 		customerModel = getCustomer(orderProcessModel);
+		
+		String total = orderData.getTotalPrice().getValue().toString();
+		moneyToWords = AcerChemEmailContextUtils.getMoneyOfWord(total,"$");
 
 	}
 
@@ -301,6 +306,14 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 	 */
 	public void setWarehouse(String warehouse) {
 		this.warehouse = warehouse;
+	}
+
+	public String getMoneyToWords() {
+		return moneyToWords;
+	}
+
+	public void setMoneyToWords(String moneyToWords) {
+		this.moneyToWords = moneyToWords;
 	}
 
 }
