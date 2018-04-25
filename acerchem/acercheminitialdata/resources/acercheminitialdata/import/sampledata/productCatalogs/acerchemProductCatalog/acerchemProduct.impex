@@ -31,6 +31,9 @@ INSERT_UPDATE Warehouse;code[unique=true];name[lang=en];name[lang=de];vendor(cod
 ;USA;USA;;true
 ;United Kingdom;United Kingdom;;true
 ;Holland;Holland;;true
+#shaun
+;Europe;Europe;;true
+;Poland;Poland;;true
 
 INSERT_UPDATE Unit;code[unique=true];name[lang=en];unitType
 ;kg;kg;kg

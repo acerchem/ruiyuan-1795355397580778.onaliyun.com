@@ -10,7 +10,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.acerchem.facades.process.email.context.pojo.AcerChemEmailContextUtils;
-import com.acerchem.facades.process.email.context.pojo.InvoiceEmailContextPoJo;
 import com.acerchem.facades.process.email.context.pojo.ProductItemDataOfEmail;
 import com.acerchem.facades.process.email.context.pojo.ProductTotalDataOfEmail;
 import com.acerchem.facades.process.email.context.pojo.ReleaseNoteEmailContextPoJo;
@@ -38,7 +37,8 @@ public class AcerChemReleaseNoteEmailContext extends AbstractEmailContext<OrderP
 	private String customerAddress;
 	private ReleaseNoteEmailContextPoJo append;
 	
-	private CustomerModel customerModel;  
+	private CustomerModel customerModel;
+	private String pickupDate;
 
 	@Override
 	public void init(final OrderProcessModel orderProcessModel, final EmailPageModel emailPageModel) {
@@ -54,6 +54,8 @@ public class AcerChemReleaseNoteEmailContext extends AbstractEmailContext<OrderP
 		initCustomerAddress(orderProcessModel);
 		initAppend();
 		customerModel = getCustomer(orderProcessModel);
+		
+		pickupDate = orderData.getPickUpdate();
 	}
 
 	@Override
@@ -226,6 +228,14 @@ public class AcerChemReleaseNoteEmailContext extends AbstractEmailContext<OrderP
 	 */
 	public CustomerModel getCustomer() {
 		return customerModel;
+	}
+
+	public String getPickupDate() {
+		return pickupDate;
+	}
+
+	public void setPickupDate(String pickupDate) {
+		this.pickupDate = pickupDate;
 	}
 
 }

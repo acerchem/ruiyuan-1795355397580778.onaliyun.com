@@ -114,10 +114,25 @@
 		<property name="frontendTemplateName" value="AcerchemReleaseNoteEmailTemplate"/>
 		</bean>
 		
-		<bean id="generateOfficialInvoiceEmailAction"  parent="abstractGenerateEmailAction">
+		<bean id="generateOfficialInvoiceEmailAction1"  parent="abstractGenerateEmailAction">
 		<property name="frontendTemplateName" value="AcerchemInvoiceEmailTemplate"/>
 		</bean>
-	
+		<bean id="generateOfficialInvoiceEmailAction2"  parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="AcerchemInvoiceEmailTemplate"/>
+		</bean>
+		<bean id="generateOfficialInvoiceEmailAction3"  parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="AcerchemInvoiceEmailTemplate"/>
+		</bean>
+		<bean id="generateOfficialInvoiceEmailAction4"  parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="AcerchemInvoiceEmailTemplate"/>
+		</bean>
+		<bean id="generateOfficialInvoiceEmailAction5"  parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="AcerchemInvoiceEmailTemplate"/>
+		</bean>
+		<bean id="generateOfficialInvoiceEmailAction6"  parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="AcerchemInvoiceEmailTemplate"/>
+		</bean>
+		
 	<bean id="sendEmail"
 	      class="de.hybris.platform.acceleratorservices.process.email.actions.SendEmailAction"
 	      parent="abstractAction">

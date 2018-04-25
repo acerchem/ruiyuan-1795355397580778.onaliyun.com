@@ -53,14 +53,16 @@ INSERT_UPDATE ProductPercentageDiscountPromotion;PromotionGroup(Identifier[defau
 
 #### shaun:Ladder sales price ####
 INSERT_UPDATE PromotionThresholdDiscount;minQuantity[unique=true];maxQuantity[unique=true];percentageDiscount[unique=true];
-;10;20;10;
-;20;30;20;
-;30;40;30;
+;1;5;10;
+;5;10;20;
+;10;15;50;
 
 INSERT_UPDATE ProductThresholdPercentageDiscountPromotion;PromotionGroup(Identifier[default=$defaultPromoGrp]);enabled[default=true][unique=true];code[unique=true];title;description;messageFired[lang=en];messageFired[lang=zh];priority;products(code,$catalogVersion);thresholdDiscounts(percentageDiscount)
-;;;10Discount;10% discount on 10-20;10% discount on 10-20;10% discount on 10-20 pieces;满10-20件享受10%的折扣;500;AC05080,AC03131,AC01361,AC01710,AC05080a,AC05080b,AC03390a,AC03138a,AC03887a,AC03142a,AC02345a,AC02354a,AC05003a;10
-;;;20Discount;20% discount on 20-30;20% discount on 20-30;20% discount on 20-30 pieces;满20-30件享受20%的折扣;500;AC05080,AC03131,AC01361,AC01710,AC05080a,AC05080b,AC03390a,AC03138a,AC03887a,AC03142a,AC02345a,AC02354a,AC05003a;20
-;;;30Discount;30% discount on 30-40;30% discount on 30-40;30% discount on 30-40 pieces;满30-40件享受30%的折扣;500;AC05080,AC03131,AC01361,AC01710,AC05080a,AC05080b,AC03390a,AC03138a,AC03887a,AC03142a,AC02345a,AC02354a,AC05003a;30
+#;;;10Discount;10% discount on 1-5;10% discount on 1-5;10% discount on 1-5 pieces;满1-5件享受10%的折扣;500;AC05080,AC03131,AC01361,AC01710,AC05080a,AC05080b,AC03390a,AC03138a,AC03887a,AC03142a,AC02345a,AC02354a,AC05003a;10
+#;;;20Discount;20% discount on 5-10;20% discount on 5-10;20% discount on 5-10 pieces;满5-10件享受20%的折扣;500;AC05080,AC03131,AC01361,AC01710,AC05080a,AC05080b,AC03390a,AC03138a,AC03887a,AC03142a,AC02345a,AC02354a,AC05003a;20
+#;;;50Discount;50% discount on 10-15;50% discount on 10-15;50% discount on 10-15 pieces;满10-15件享受50%的折扣;500;AC05080,AC03131,AC01361,AC01710,AC05080a,AC05080b,AC03390a,AC03138a,AC03887a,AC03142a,AC02345a,AC02354a,AC05003a;50
+
+;;;LadderDiscount;LadderDiscount;LadderDiscount;LadderDiscount;阶梯价优惠;500;AC05080,AC03131,AC01361,AC01710,AC05080a,AC05080b,AC03390a,AC03138a,AC03887a,AC03142a,AC02345a,AC02354a,AC05003a;10,20,50
 
 
 

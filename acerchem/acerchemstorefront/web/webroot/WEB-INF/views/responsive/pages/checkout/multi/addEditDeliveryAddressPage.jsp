@@ -443,11 +443,6 @@ $('.g-table .btn').on('click',function(){//
 			$(this).parents('.g-table').find('.solid-form').show();
 			break;
 			
-		case 'btn btn-date':
-			 var date =$('#textDate').val();
-			 
-			 window.location.href ='<c:url value='/checkout/multi/delivery-address/addPickUpDate?pickUpDate='/>'+date;
-			break;
 	}
 })
 
@@ -724,29 +719,19 @@ function checktot(){
 checktot()
 
 
-/* var radio=$('input[name="shipmethod"]');
-
-radio.change(function(){
-	
-	//alert(this.value);
-	
-	alert(this.value);
-
-}); */
-
 
 $('#textDate').on('change',function(){
 	
-	date = new Date();
-	date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+	var date = new Date();
+	var currDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 	
-	releaseDate = dateChange(${cartData.deliveryDays},date)
-	selectDate = $('#textDate').val();
+	var releaseDate = dateChange(${cartData.deliveryDays},currDate);
+	var selectDate = $('#textDate').val();
 	
 	var isFuture = ${cartData.isUseFutureStock};
 	
-	//alert(isFuture);
-	//判断是否远期库存
+	//var myBoolean=new Boolean(true);
+	
 	if(isFuture){
 		
 		if (new Date(selectDate).getTime()<new Date(releaseDate).getTime()){
@@ -763,13 +748,8 @@ $('#textDate').on('change',function(){
 	}
 	
 	 window.location.href ='<c:url value='/checkout/multi/delivery-address/addPickUpDate?pickUpDate='/>'+selectDate;
-	// break;
 	
 });
-/* 
-$('#textDate').onchange = function(){
-	  alert($('#textDate').val())
-	} */
 
 
 $(document).ready(function() {
