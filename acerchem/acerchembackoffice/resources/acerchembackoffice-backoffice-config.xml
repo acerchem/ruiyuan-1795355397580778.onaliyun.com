@@ -144,6 +144,7 @@
 			<explorer-tree:navigation-node id="hmc.b2bcommercegroup">
 				<explorer-tree:type-node code="UserLevel" id="UserLevel"/>
 				<explorer-tree:type-node code="CountryTrayFareConf" id="CountryTrayFareConf"/>
+				<explorer-tree:type-node code="OrderParam" id="OrderParam"/>
 			</explorer-tree:navigation-node>
 		</explorer-tree:explorer-tree>
 	</context>
@@ -172,6 +173,35 @@
                 </editorArea:section>
             </editorArea:tab>
         </editorArea:editorArea>
+    </context>
+    
+    <context component="create-wizard" type="OrderParam">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="OrderParamWizard" title="create.OrderParam.title">
+			<wz:prepare id="OrderParamPrepare">
+				<wz:initialize property="newOrderParam" type="OrderParam"/>
+			</wz:prepare>
+			<wz:step id="step1" label="create.OrderParam.general.label" >
+				<wz:content id="step1.content">
+					<wz:property-list root="newOrderParam">
+						<wz:property qualifier="daysForCancel" />
+						<wz:property qualifier="daysForPickUp" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel/>
+					<wz:done>
+						<wz:save property="newOrderParam"/>
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+	
+	<context merge-by="type" parent="GenericItem" type="OrderParam" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="daysForCancel"/>
+            <list-view:column qualifier="daysForPickUp"/>
+        </list-view:list-view>
     </context>
 	
 </config>
