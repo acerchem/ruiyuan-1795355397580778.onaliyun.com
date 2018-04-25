@@ -53,14 +53,14 @@
 								</div>
 								
 								<div class="item-row">
-									<span>Storage Cost</span>
+									<span>Release Cost</span>
 									
 						              <span class="row"><format:price priceData="${cartData.storageCost}"/></span>
 						               
 								</div>
 								
 								<div class="item-row">
-									<span>Operate Cost</span>
+									<span>Handling Charge</span>
 									
 						              <span class="row"><format:price priceData="${cartData.operateCost}"/></span>
 						               

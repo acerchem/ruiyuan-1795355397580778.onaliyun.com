@@ -47,7 +47,8 @@
 				<th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Order Status</th>
 				<th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Date Placed</th>
 				<th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Total</th>
-				<th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Confirm Order</th>
+				<th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Order Status</th>
+				<!-- <th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Confirm Order</th> -->
 			</tr>
 			<tr><td style="padding:0px 0px;"></td></tr>
 			<c:forEach items="${searchPageData.results}" var="order">
@@ -68,8 +69,11 @@
 							${fn:escapeXml(order.total.formattedValue)}
 						</td>
 						<td class="responsive-table-cell responsive-table-cell-bold" style="padding:10px 10px;font-size:14px;">
-							<a href="${confirmOrder}${ycommerce:encodeUrl(order.code)}?confirm=order" style="${order.customerConfirm?'display: none;':''}">Confirm</a>
+							${order.status}
 						</td>
+						<%-- <td class="responsive-table-cell responsive-table-cell-bold" style="padding:10px 10px;font-size:14px;">
+							<a href="${confirmOrder}${ycommerce:encodeUrl(order.code)}?confirm=order" style="${order.customerConfirm?'display: none;':''}">Confirm</a>
+						</td> --%>
 						
 					</ycommerce:testId>
 				</tr>

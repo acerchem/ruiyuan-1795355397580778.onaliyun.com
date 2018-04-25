@@ -178,7 +178,11 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
 
     private void recalculateCartTotalPrice(CartModel cartModel) {
         double total =cartModel.getTotalPrice();
-        if(cartModel.getDeliveryCost()!=null){
+        //促销那块会把运费加上，这边需要重新判断一下
+        if(cartModel.getAllPromotionResults()!=null
+                &&cartModel.getAllPromotionResults().size()>0){
+
+        }else if (cartModel.getDeliveryCost()!=null){
             total = total +cartModel.getDeliveryCost().doubleValue();
         }
         if(cartModel.getOperateCost()!=null){
@@ -268,7 +272,7 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                         BigDecimal.valueOf(cartModel.getOperateCost().doubleValue()), cartModel.getCurrency().getIsocode()));
             }
             if(cartModel.getPickUpDate()!=null){
-        	  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-DD");
+        	  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         	  cartData.setPickUpdate(sdf.format(cartModel.getPickUpDate()));
             }
             cartData.setIsUseFutureStock(cartModel.getEntries().get(0).getIsUseFutureStock());

@@ -80,6 +80,7 @@
 	
 	<action id="recordConsignmentInfo" bean="recordConsignmentInfoAction">
 		<transition name="OK" to="splitDeliveryMode"/>
+		<transition name="NOK" to="waitConfrimForEmployee"/>
 	</action>
 	
 	<action id="splitDeliveryMode" bean="splitDeliveryModeAction">
@@ -115,9 +116,14 @@
 	
 	<wait id="waitUpdateConsignmentStatus" prependProcessCode="true" then="failed">
 	 	<case event="ConfirmConsignmentStatusActionEvent">
-            <choice id="waitForEmployeeConfirmConsignmentStatus" then="waitForAllConsignmentConfirm"/>
+            <choice id="waitForEmployeeConfirmConsignmentStatus" then="checkConsignmentDate"/>
         </case>
 	</wait>
+	
+	<action id="checkConsignmentDate" bean="checkConsignmentDateAction">
+		<transition name="OK" to="waitForAllConsignmentConfirm"/>
+		<transition name="NOK" to="waitUpdateConsignmentStatus"/>
+	</action>
 	
 	<wait id="waitForAllConsignmentConfirm" prependProcessCode="true" then="failed">
         <case event="ConfirmConsignmentActionEvent">

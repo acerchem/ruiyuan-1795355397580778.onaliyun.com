@@ -57,9 +57,9 @@
 	</form>
 	<div id="ariaStatusMsg" class="skip" role="status" aria-relevant="text" aria-live="polite"></div>
 
-	<%-- Load JavaScript required by the site --%>
+	<%-- Load JavaScript required by the site 
 	<template:javaScript/>
-	
+	--%>
 	<%-- Inject any additional JavaScript required by the page --%>
 	<jsp:invoke fragment="pageScripts"/>
 

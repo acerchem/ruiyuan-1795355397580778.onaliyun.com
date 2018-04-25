@@ -121,7 +121,10 @@ $(document).ready(function(){
 				setnum.val(spot.find('em').text())
 			}
 			emvi = $('.prod-sum i em');
-			emvi.text(avaReleaseDay);
+			
+			var Adate = "Delivery within " +avaReleaseDay+" days";
+			
+			emvi.text(Adate);
 			
 		}else{
 			
@@ -137,7 +140,9 @@ $(document).ready(function(){
 			invi.text(futureInventory);
 			emvi = $('.prod-sum i em');
 			//$('#avaReleaseDay').val(futureAvailableDate);
-			emvi.text(futureAvailableDate);
+			
+			var fdate = "Delivery after " +futureAvailableDate+" days";
+			emvi.text(fdate);
 			
 			
 		}
@@ -264,12 +269,15 @@ $(document).ready(function(){
 				
 				invi.text(futureInventory);
 				
-				emvi.text(futureAvailableDate);
+				var fdate = "Delivery after " +futureAvailableDate+" days";
+				emvi.text(fdate);
 			} else {
 				
 				invi.text($("#inventoryId option[value='"+$("#storeMulId").val()+"']").text());
 				
-				emvi.text($("#avaReleaseDayId option[value='"+$("#storeMulId").val()+"']").text());
+				var Adate = "Delivery within " +$("#avaReleaseDayId option[value='"+$("#storeMulId").val()+"']").text()+" days";
+				
+				emvi.text(Adate);
 			}
 			
 	        $('#storeId').val($("#storeMulId").val());
