@@ -236,8 +236,8 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 		else
 		{
 			SupportTicketForm stf = new SupportTicketForm();
-			stf.setYourname(customerData.getName() == null ? "" : customerData.getName());
-			stf.setEmail(customerData.getUid() == null ? "" : customerData.getUid());
+			stf.setYourname(customerData.getName() == null ||customerData.getName().equals("Anonymous")? "" : customerData.getName());
+			stf.setEmail(customerData.getUid() == null ||customerData.getUid().equals("anonymous")? "" : customerData.getUid());
 			stf.setProductId(productId==null||productId.equals("")?"":productId);
 			stf.setProductName(productName==null||productName.equals("")?"":productName);
 			if(telephone!=null&&!telephone.equals(""))
