@@ -62,6 +62,12 @@
 				<format:price priceData="${cartData.subTotal}"/>
 			</span>
 		</div>
+		
+		<div class="item-row">
+			<span>Discount Amount</span>
+			
+            <span><format:price priceData="${cartData.totalDiscounts}"/></span>
+		</div>
 
 <c:if test="${not empty cartData.deliveryCost}">
 		<div class="item-row">
@@ -79,14 +85,14 @@
 			<div class="item-row">
 				<span>Release Cost</span>
 				
-	              <span class="row"><format:price priceData="${cartData.storageCost}"/></span>
+	              <span><format:price priceData="${cartData.storageCost}"/></span>
 	               
 			</div>
 			
 			<div class="item-row">
 				<span>Handling Charge</span>
 				
-	              <span class="row"><format:price priceData="${cartData.operateCost}"/></span>
+	              <span><format:price priceData="${cartData.operateCost}"/></span>
 	               
 			</div>
 <c:if test="${not empty cartData.totalPrice}">

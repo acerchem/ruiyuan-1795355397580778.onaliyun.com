@@ -122,7 +122,7 @@
 						</div>
 					 
 						<div class="delivery flex-wrap">
-							<span class="label-title">Delivery to:</span>
+							<span class="label-title">Delivery From:</span>
 							<div class="flex">
 							
 								<select id="storeMulId">
@@ -164,7 +164,7 @@
 					        </c:if>	
 	                       </c:forEach>
                         
-							<span class="label-title">Delivery scope: <em>${myVar}</em></span>
+							<span class="label-title">Delivery area: <em>${myVar}</em></span>
 						
 						</div>
 						

@@ -35,7 +35,7 @@
 							<div class="item">
 								<div class="item-row">
 									<span>Total Sum (<em>${cartData.totalUnitCount}</em> items)</span>
-									<span class="row"> <format:price priceData="${cartData.subTotal}"/></span>
+									<span> <format:price priceData="${cartData.subTotal}"/></span>
 								</div>
 
 								<div class="item-row">
@@ -43,7 +43,7 @@
 									
 									 <%-- <c:choose>
 						                <c:when test="${cartData.totalDiscounts.value > 0}"> --%>
-						                    <span class="row"><format:price priceData="${cartData.totalDiscounts}"/></span>
+						                    <span><format:price priceData="${cartData.totalDiscounts}"/></span>
 						             <%--    </c:when>
 						                <c:otherwise>
 						                     <span class="row">-$0.00</span>
@@ -55,14 +55,14 @@
 								<div class="item-row">
 									<span>Release Cost</span>
 									
-						              <span class="row"><format:price priceData="${cartData.storageCost}"/></span>
+						              <span><format:price priceData="${cartData.storageCost}"/></span>
 						               
 								</div>
 								
 								<div class="item-row">
 									<span>Handling Charge</span>
 									
-						              <span class="row"><format:price priceData="${cartData.operateCost}"/></span>
+						              <span><format:price priceData="${cartData.operateCost}"/></span>
 						               
 								</div>
 
