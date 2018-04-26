@@ -12,6 +12,7 @@ package com.acerchem.storefront.controllers.pages.checkout.steps;
 
 
 import com.acerchem.facades.facades.AcerchemCheckoutFacade;
+import com.acerchem.facades.facades.AcerchemOrderException;
 import de.hybris.platform.acceleratorservices.enums.CheckoutPciOptionEnum;
 import de.hybris.platform.acceleratorservices.payment.constants.PaymentConstants;
 import de.hybris.platform.acceleratorservices.payment.data.PaymentData;
@@ -312,12 +313,17 @@ public class PaymentMethodCheckoutStepController extends AbstractCheckoutStepCon
 	 */
 	@RequestMapping(value = "/choose", method = RequestMethod.GET)
 	@RequireHardLogIn
-	public String doSelectPaymentMethod(@RequestParam("selectedPaymentMethodId") final String selectedPaymentMethodId)
+	public String doSelectPaymentMethod(@RequestParam("selectedPaymentMethodId") final String selectedPaymentMethodId,final Model model)
 	{
 		if (StringUtils.isNotBlank(selectedPaymentMethodId))
 		{
 //			getCheckoutFacade().setPaymentDetails(selectedPaymentMethodId);
-			acerchemCheckoutFacade.setPaymentDetails(selectedPaymentMethodId);
+			try {
+				acerchemCheckoutFacade.setPaymentDetail(selectedPaymentMethodId);
+			} catch (AcerchemOrderException e) {
+				GlobalMessages.addErrorMessage(model, e.getMessage());
+
+			}
 		}
 		return getCheckoutStep().nextStep();
 	}

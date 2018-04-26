@@ -65,7 +65,7 @@ public class AcerchemCartPopulator extends CartPopulator {
             BigDecimal basePrice = orderEntryData.getTotalPrice().getValue().divide(BigDecimal.valueOf(orderEntryData.getQuantity()));
             PriceData promotionBasePrice = priceDataFactory.create(PriceDataType.BUY,
                     BigDecimal.valueOf(basePrice.doubleValue()), source.getCurrency().getIsocode());
-            target.setPromotionBasePrice(promotionBasePrice);
+            orderEntryData.setPromotionBasePrice(promotionBasePrice);
 
         }
     }
