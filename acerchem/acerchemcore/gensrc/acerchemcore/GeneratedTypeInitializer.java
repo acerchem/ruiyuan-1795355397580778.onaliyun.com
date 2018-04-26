@@ -216,6 +216,16 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			false
 		);
 	
+		createItemType(
+			"OrderParam",
+			"GenericItem",
+			com.acerchem.core.jalo.OrderParam.class,
+			"de.hybris.platform.persistence.acerchemcore_OrderParam",
+			false,
+			null,
+			false
+		);
+	
 		createRelationType(
 			"AcerChemVendor2Product",
 			null,
@@ -485,6 +495,10 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 				single_createattr_Article_articleTitle();
 			
 				single_createattr_Article_articleUrl();
+			
+				single_createattr_OrderParam_daysForCancel();
+			
+				single_createattr_OrderParam_daysForPickUp();
 			
 		createRelationAttributes(
 			"AcerChemVendor2Product", 
@@ -2190,6 +2204,40 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 	}
 	
+	public void single_createattr_OrderParam_daysForCancel() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"OrderParam", 
+					"daysForCancel",  
+					null,
+					"java.lang.Integer",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_OrderParam_daysForPickUp() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"OrderParam", 
+					"daysForPickUp",  
+					null,
+					"java.lang.Integer",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
 
 
 	/**
@@ -2910,6 +2958,23 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			single_setAttributeProperties_Article_articleTitle();
 		
 			single_setAttributeProperties_Article_articleUrl();
+		
+				{
+				Map customPropsMap = new HashMap();
+				
+				setItemTypeProperties(
+					"OrderParam",
+					false,
+					true,
+					true,
+					null,
+					customPropsMap
+				);
+				}
+			
+			single_setAttributeProperties_OrderParam_daysForCancel();
+		
+			single_setAttributeProperties_OrderParam_daysForPickUp();
 		
 				setDefaultProperties(
 					"GenderList",
@@ -5061,6 +5126,50 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							setAttributeProperties(
 								"Article", 
 								"articleUrl",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_OrderParam_daysForCancel() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"OrderParam", 
+								"daysForCancel",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_OrderParam_daysForPickUp() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"OrderParam", 
+								"daysForPickUp",
 								false, 
 								null,
 								null,

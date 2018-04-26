@@ -17,13 +17,13 @@
             	<table>
             		<tr>
             			<td align="right" style="color: #999;width: 33%">Credit Total Amount</td>
-            			<td align="left" style="color: #333;">${customerCreditAccountData.creditTotalAmount}</td>
+            			<td align="left" style="color: #333;">${customerCreditAccountData.creditTotalAmount=="0E-8"?"0":customerCreditAccountData.creditTotalAmount}</td>
             			<td align="right" style="color: #999;">Status</td>
             			<td align="left" style="color: #333;">${customerCreditAccountData.status}</td>
             		</tr>
             		<tr>
             			<td align="right" style="color: #999;">Creadit Remained Amount</td>
-            			<td align="left" style="color: #333;">${customerCreditAccountData.creaditRemainedAmount}</td>
+            			<td align="left" style="color: #333;">${customerCreditAccountData.creaditRemainedAmount=="0E-8"?"0":customerCreditAccountData.creaditRemainedAmount}</td>
             			<td align="right" style="color: #999;">Billing Interval</td>
             			<td align="left" style="color: #333;">${customerCreditAccountData.billingInterval}</td>
             		</tr>

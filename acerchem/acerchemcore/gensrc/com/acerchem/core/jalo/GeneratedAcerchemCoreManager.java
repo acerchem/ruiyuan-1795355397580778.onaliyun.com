@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-4-26 12:17:34                          ---
+ * --- Generated at 2018-4-26 12:35:36                          ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.jalo;
@@ -18,6 +18,7 @@ import com.acerchem.core.jalo.CustomerCreditAccount;
 import com.acerchem.core.jalo.ElectronicsColorVariantProduct;
 import com.acerchem.core.jalo.ImageFailedRecord;
 import com.acerchem.core.jalo.ImageUploadedLog;
+import com.acerchem.core.jalo.OrderParam;
 import com.acerchem.core.jalo.PromotionThresholdDiscount;
 import com.acerchem.core.jalo.UserLevel;
 import com.acerchem.core.promotions.jalo.ProductThresholdPercentageDiscountPromotion;
@@ -1258,6 +1259,32 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	public MultipleBannerComponent createMultipleBannerComponent(final Map attributeValues)
 	{
 		return createMultipleBannerComponent( getSession().getSessionContext(), attributeValues );
+	}
+	
+	public OrderParam createOrderParam(final SessionContext ctx, final Map attributeValues)
+	{
+		try
+		{
+			ComposedType type = getTenant().getJaloConnection().getTypeManager().getComposedType( AcerchemCoreConstants.TC.ORDERPARAM );
+			return (OrderParam)type.newInstance( ctx, attributeValues );
+		}
+		catch( JaloGenericCreationException e)
+		{
+			final Throwable cause = e.getCause();
+			throw (cause instanceof RuntimeException ?
+			(RuntimeException)cause
+			:
+			new JaloSystemException( cause, cause.getMessage(), e.getErrorCode() ) );
+		}
+		catch( JaloBusinessException e )
+		{
+			throw new JaloSystemException( e ,"error creating OrderParam : "+e.getMessage(), 0 );
+		}
+	}
+	
+	public OrderParam createOrderParam(final Map attributeValues)
+	{
+		return createOrderParam( getSession().getSessionContext(), attributeValues );
 	}
 	
 	public ProductThresholdPercentageDiscountPromotion createProductThresholdPercentageDiscountPromotion(final SessionContext ctx, final Map attributeValues)

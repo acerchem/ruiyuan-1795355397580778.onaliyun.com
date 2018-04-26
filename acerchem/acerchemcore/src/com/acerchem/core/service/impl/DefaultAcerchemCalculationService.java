@@ -11,15 +11,22 @@
 package com.acerchem.core.service.impl;
 
 import de.hybris.platform.core.model.c2l.CurrencyModel;
+import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.AbstractOrderModel;
+import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.order.exceptions.CalculationException;
 import de.hybris.platform.order.impl.DefaultCalculationService;
 import de.hybris.platform.order.strategies.calculation.OrderRequiresCalculationStrategy;
 import de.hybris.platform.servicelayer.i18n.CommonI18NService;
+import de.hybris.platform.util.DiscountValue;
+import de.hybris.platform.util.PriceValue;
 import de.hybris.platform.util.TaxValue;
 import org.apache.log4j.Logger;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -83,6 +90,37 @@ public class DefaultAcerchemCalculationService extends DefaultCalculationService
 			saveOrder(order);
 		}
 	}
-	
+
+	@Override
+	public void calculate(final AbstractOrderModel order) throws CalculationException
+	{
+		if (orderRequiresCalculationStrategy.requiresCalculation(order))
+		{
+			// -----------------------------
+			// first calc all entries
+			calculateEntries(order, false);
+			// -----------------------------
+			// reset own values
+			final Map taxValueMap = resetAllValues(order);
+			// -----------------------------
+			// now calculate all totals
+			calculateTotals(order, false, taxValueMap);
+			// notify manual discouns - needed?
+			//notifyDiscountsAboutCalculation();
+
+		}
+	}
+
+	private void reCalculateCart(AbstractOrderModel orderModel){
+		if (orderModel!=null&&orderModel.getEntries()!=null){
+			for (AbstractOrderEntryModel aoe : orderModel.getEntries()){
+				BigDecimal totalPrice = BigDecimal.valueOf(aoe.getTotalPrice());
+				BigDecimal quantity = BigDecimal.valueOf(aoe.getQuantity());
+				BigDecimal baseRealPrice = totalPrice.divide(quantity,BigDecimal.ROUND_CEILING,BigDecimal.ROUND_HALF_UP);
+				aoe.setBasePrice(baseRealPrice.doubleValue());
+			}
+			getModelService().saveAll(orderModel.getEntries());
+		}
+	}
 
 }

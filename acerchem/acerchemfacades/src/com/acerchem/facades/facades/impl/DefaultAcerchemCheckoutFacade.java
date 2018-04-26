@@ -5,9 +5,11 @@ import com.acerchem.facades.facades.AcerchemCheckoutFacade;
 import com.acerchem.facades.facades.AcerchemOrderException;
 import com.acerchem.facades.facades.AcerchemTrayFacade;
 import com.acerchem.facades.product.data.PaymentModeData;
+import com.acerchem.service.customercreditaccount.DefaultCustomerCreditAccountService;
 import de.hybris.platform.commercefacades.order.data.*;
 import de.hybris.platform.commercefacades.order.impl.DefaultCheckoutFacade;
 import de.hybris.platform.commercefacades.product.PriceDataFactory;
+import de.hybris.platform.commercefacades.product.data.PriceData;
 import de.hybris.platform.commercefacades.product.data.PriceDataType;
 import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.commercefacades.user.data.CountryData;
@@ -82,6 +84,9 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
     private StockService stockService;
     @Resource
     private CalculationService calculationService;
+
+    @Resource
+    private DefaultCustomerCreditAccountService defaultCustomerCreditAccountService;
 
     @Override
     public void validateCartAddress(CountryData countryData) throws AcerchemOrderException{
@@ -167,8 +172,13 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                 parameter.setDeliveryMode(deliveryModeModel);
 
                 boolean flag = getCommerceCheckoutService().setDeliveryMode(parameter);
-                //促销那块会把操作费，存储费不加上，在此处计算总价格
+                if (deliveryModeCode.equals("DELIVERY_MENTION")){
+                    AddressModel addressModel = cartModel.getEntries().get(0).getDeliveryPointOfService().getAddress();
+                    cartModel.setDeliveryAddress(addressModel);
+                }
+                //促销那块会把操作费，存储费不加上，在此处计算总价格和单价
                 recalculateCartTotalPrice(cartModel);
+
                 return flag;
 
             }
@@ -192,6 +202,7 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
             total = total +cartModel.getStorageCost().doubleValue();
         }
         cartModel.setTotalPrice(total);
+
         getModelService().save(cartModel);
     }
 
@@ -203,10 +214,14 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
             DeliveryModeModel deliveryModeModel = deliveryModeService.getDeliveryModeForCode(selectedDeliveryModeCode);
            if (deliveryModeModel!=null&&deliveryModeModel.getSupportedPaymentModes()!=null){
                for (PaymentModeModel paymentModeModel : deliveryModeModel.getSupportedPaymentModes()){
-                   CardTypeData cardTypeData = new CardTypeData();
-                   cardTypeData.setCode(paymentModeModel.getCode());
-                   cardTypeData.setName(paymentModeModel.getName());
-                   cardTypeDataList.add(cardTypeData);
+                   if (defaultCustomerCreditAccountService.getCustomerCreditAccount()== null && paymentModeModel.getCode().equals("CreditPayment")) {
+                      //信用账户为空就不存在data里
+                   }else{
+                       CardTypeData cardTypeData = new CardTypeData();
+                       cardTypeData.setCode(paymentModeModel.getCode());
+                       cardTypeData.setName(paymentModeModel.getName());
+                       cardTypeDataList.add(cardTypeData);
+                   }
                }
            }
         }
@@ -258,7 +273,7 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
         final CartModel cartModel = getCartService().getSessionCart();
         if (cartData != null)
         {
-            cartData.setDeliveryAddress(getDeliveryAddress());
+            cartData.setDeliveryAddress(this.getDeliveryAddress());
             cartData.setDeliveryMode(getDeliveryMode());
             cartData.setPaymentModeData(getPaymentModeData());
             cartData.setPaymentInfo(getPaymentDetails());
@@ -280,22 +295,22 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
             if (cartModel.getEntries()!=null && cartModel.getEntries().size()>0){
                 boolean isUsefutureStock = cartModel.getEntries().get(0).getIsUseFutureStock();
                 cartData.setIsUseFutureStock(isUsefutureStock);
-                List<Integer> deliveryDays = new ArrayList<>();
                 for (AbstractOrderEntryModel aoe: cartModel.getEntries()){
                     if (isUsefutureStock){
                         StockLevelModel stockLevelModel = stockService.getStockLevel(aoe.getProduct(),aoe.getDeliveryPointOfService().getWarehouses().get(0));
-                        deliveryDays.add(stockLevelModel.getPreOrderReleaseDay());
+                        cartData.setDeliveryDays(stockLevelModel.getPreOrderReleaseDay());
                     }else{
                         StockLevelModel stockLevelModel = stockService.getStockLevel(aoe.getProduct(),aoe.getDeliveryPointOfService().getWarehouses().get(0));
-                        deliveryDays.add(stockLevelModel.getAvaPreOrderReleaseDay());
+                        cartData.setDeliveryDays(stockLevelModel.getAvaPreOrderReleaseDay());
                     }
                 }
+            }
 
-                if (isUsefutureStock){
-                    cartData.setDeliveryDays(Collections.max(deliveryDays));
-                }else {
-                    cartData.setDeliveryDays(Collections.min(deliveryDays));
-                }
+            for (OrderEntryData orderEntryData: cartData.getEntries()){
+                BigDecimal basePrice = orderEntryData.getTotalPrice().getValue().divide(BigDecimal.valueOf(orderEntryData.getQuantity()));
+                PriceData promotionBasePrice = priceDataFactory.create(PriceDataType.BUY,
+                        BigDecimal.valueOf(basePrice.doubleValue()), cartModel.getCurrency().getIsocode());
+                cartData.setPromotionBasePrice(promotionBasePrice);
             }
           
         }
@@ -342,7 +357,7 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
 
             for (int i =0 ; i<size ; i++){
                 AbstractOrderEntryModel aoe = orderModel.getEntries().get(i);
-                Double basePrice = aoe.getBasePrice();
+                Double basePrice = getAbstractOrderEntryBasePrice(aoe);
                 Double totalPrice = aoe.getTotalPrice();
 
                 BigDecimal entryTotalAdditionalFee = BigDecimal.ZERO;
@@ -352,7 +367,7 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
 
                    Double entryUnitCalculateRato = Double.valueOf(aoe.getProduct().getUnitCalculateRato());
                    //计算比例
-                   BigDecimal proportion = new BigDecimal(entryUnitCalculateRato).divide(totalUnitCalculateRato, BigDecimal.ROUND_HALF_UP, BigDecimal.ROUND_HALF_UP);
+                   BigDecimal proportion = new BigDecimal(entryUnitCalculateRato).divide(totalUnitCalculateRato, BigDecimal.ROUND_CEILING, BigDecimal.ROUND_HALF_UP);
                    //计算entry total 运费
                    entryTotalAdditionalFee = proportion.multiply(totalAdditionalFee);
 
@@ -367,11 +382,19 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                aoe.setBaseRealPrice(baseRealPrice);
                 //附加费行总价
                Double totalRealPrice = BigDecimal.valueOf(totalPrice).add(entryTotalAdditionalFee).doubleValue();
+               aoe.setBasePrice(basePrice);
                aoe.setTotalRealPrice(totalRealPrice);
 
             }
             getModelService().saveAll(orderModel.getEntries());
         }
+    }
+
+    private Double getAbstractOrderEntryBasePrice (AbstractOrderEntryModel aoe){
+        BigDecimal entryTotalPrice = BigDecimal.valueOf(aoe.getTotalPrice());
+        BigDecimal quantity = BigDecimal.valueOf(aoe.getQuantity());
+        BigDecimal baseRealPrice = entryTotalPrice.divide(quantity,BigDecimal.ROUND_CEILING,BigDecimal.ROUND_HALF_UP);
+        return baseRealPrice.doubleValue();
     }
 
     @Override
@@ -406,6 +429,21 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                 {
                     return getOrderConverter().convert(orderModel);
                 }
+            }
+        }
+        return null;
+    }
+
+    @Override
+    protected AddressData getDeliveryAddress()
+    {
+        final CartModel cart = getCart();
+        if (cart != null)
+        {
+            final AddressModel deliveryAddress = cart.getDeliveryAddress();
+            if (deliveryAddress != null)
+            {
+                 return getAddressConverter().convert(deliveryAddress);
             }
         }
         return null;

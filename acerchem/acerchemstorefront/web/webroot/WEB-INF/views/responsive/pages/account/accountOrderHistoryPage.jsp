@@ -44,7 +44,7 @@
 		<table>
 			<tr>
 				<th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Order Number</th>
-				<th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Order Status</th>
+				<!-- <th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Order Status</th> -->
 				<th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Date Placed</th>
 				<th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Total</th>
 				<th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Order Status</th>
@@ -59,9 +59,9 @@
 								${fn:escapeXml(order.code)}
 							</a>
 						</td>
-						<td class="status" style="padding:10px 10px;font-size:14px;">
+						<%-- <td class="status" style="padding:10px 10px;font-size:14px;">
 							<spring:theme code="text.account.order.status.display.${order.statusDisplay}"/>
-						</td>
+						</td> --%>
 						<td class="responsive-table-cell" style="padding:10px 10px;font-size:14px;">
 							<fmt:formatDate value="${order.placed}" dateStyle="medium" timeStyle="short" type="both"/>
 						</td>
@@ -69,7 +69,7 @@
 							${fn:escapeXml(order.total.formattedValue)}
 						</td>
 						<td class="responsive-table-cell responsive-table-cell-bold" style="padding:10px 10px;font-size:14px;">
-							${order.status}
+							${order.status=="CHECKED_VALID"?"UNCONFIRMED":order.status}
 						</td>
 						<%-- <td class="responsive-table-cell responsive-table-cell-bold" style="padding:10px 10px;font-size:14px;">
 							<a href="${confirmOrder}${ycommerce:encodeUrl(order.code)}?confirm=order" style="${order.customerConfirm?'display: none;':''}">Confirm</a>

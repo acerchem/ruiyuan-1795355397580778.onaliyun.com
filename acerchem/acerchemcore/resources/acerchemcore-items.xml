@@ -963,6 +963,21 @@
 			</itemtype>
 		</typegroup>
 		
+		<typegroup name="OrderParam">
+				<itemtype code="OrderParam" autocreate="true" generate="true">
+				<description>订单参数配置</description>
+				<deployment table="orderParam" typecode="20311" />
+				<attributes>
+					<attribute qualifier="daysForCancel" type="java.lang.Integer">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="daysForPickUp" type="java.lang.Integer">
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+		
 	</itemtypes>
 </items>
 

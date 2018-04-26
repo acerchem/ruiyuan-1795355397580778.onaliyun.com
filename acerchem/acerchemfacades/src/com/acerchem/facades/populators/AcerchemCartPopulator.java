@@ -5,6 +5,7 @@ import de.hybris.platform.commercefacades.order.converters.populator.OrderPopula
 import de.hybris.platform.commercefacades.order.data.AbstractOrderData;
 import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.commercefacades.order.data.OrderData;
+import de.hybris.platform.commercefacades.order.data.OrderEntryData;
 import de.hybris.platform.commercefacades.product.PriceDataFactory;
 import de.hybris.platform.commercefacades.product.data.PriceData;
 import de.hybris.platform.commercefacades.product.data.PriceDataType;
@@ -59,6 +60,13 @@ public class AcerchemCartPopulator extends CartPopulator {
                     target.setDeliveryDays(stockLevelModel.getAvaPreOrderReleaseDay());
                 }
             }
+        }
+        for (OrderEntryData orderEntryData: target.getEntries()){
+            BigDecimal basePrice = orderEntryData.getTotalPrice().getValue().divide(BigDecimal.valueOf(orderEntryData.getQuantity()));
+            PriceData promotionBasePrice = priceDataFactory.create(PriceDataType.BUY,
+                    BigDecimal.valueOf(basePrice.doubleValue()), source.getCurrency().getIsocode());
+            target.setPromotionBasePrice(promotionBasePrice);
+
         }
     }
 }

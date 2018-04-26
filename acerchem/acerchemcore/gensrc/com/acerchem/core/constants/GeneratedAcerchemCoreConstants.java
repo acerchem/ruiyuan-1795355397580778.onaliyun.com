@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-4-26 12:17:34                          ---
+ * --- Generated at 2018-4-26 12:35:36                          ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.constants;
@@ -33,6 +33,7 @@ public class GeneratedAcerchemCoreConstants
 		public static final String IMAGEFAILEDRECORD = "ImageFailedRecord".intern();
 		public static final String IMAGEUPLOADEDLOG = "ImageUploadedLog".intern();
 		public static final String MULTIPLEBANNERCOMPONENT = "MultipleBannerComponent".intern();
+		public static final String ORDERPARAM = "OrderParam".intern();
 		public static final String PRODUCTTHRESHOLDPERCENTAGEDISCOUNTPROMOTION = "ProductThresholdPercentageDiscountPromotion".intern();
 		public static final String PROMOTIONTHRESHOLDDISCOUNT = "PromotionThresholdDiscount".intern();
 		public static final String SWATCHCOLORENUM = "SwatchColorEnum".intern();
