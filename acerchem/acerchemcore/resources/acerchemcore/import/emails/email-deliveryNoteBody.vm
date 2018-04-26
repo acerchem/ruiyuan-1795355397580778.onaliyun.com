@@ -109,18 +109,13 @@ p.western {
     </tr>
     <tr>
 
-      <td>$!{ctx.customerAddressData.street} </td>
+      <td>$!{ctx.customerAddressData.town}  </td>
     </tr>
     <tr>
       
-      <td>$!{ctx.customerAddressData.streetNum} </td>
+      <td>$!{ctx.customerAddressData.region} </td>
     </tr>
     
-    <tr>
-      
-      <td>$!{ctx.customerAddressData.town} </td>
-    </tr>
-    <tr>
       
       <td>$!{ctx.customerAddressData.country}/td>
     </tr>
@@ -167,7 +162,7 @@ p.western {
 		 #foreach( $item in ${ctx.append.productLists} )
 			#if (!$item.isTotal )
 			<tr>
-			  <td width="67" height="7"> {item.productCode} </td>
+			  <td width="67" height="7"> ${item.productCode} </td>
 			  <td width="206" > ${item.productName} </td>
 			  <td width="82" > $!{item.batchNo} </td>
 			  <td width="51" >${item.quantity} </td>
