@@ -70,7 +70,7 @@
         </editorArea:editorArea>
     </context>
 	
-	<context merge-by="type" parent="GenericItem" type="ConsignmentEntry" component="create-wizard">
+	<context merge-by="type" parent="GenericItem" type="ConsignmentEntry" component="create-wizard" merge-mode="replace">
 		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="ConsignmentEntryConfigWizard">
 			<wz:prepare id="ConsignmentEntryPrepare">
 				<wz:initialize property="newConsignmentEntry" type="ConsignmentEntry"/>
@@ -203,5 +203,5 @@
             <list-view:column qualifier="daysForPickUp"/>
         </list-view:list-view>
     </context>
-	
+    
 </config>
