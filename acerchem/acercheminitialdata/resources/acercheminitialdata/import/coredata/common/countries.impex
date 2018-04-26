@@ -110,7 +110,7 @@ INSERT_UPDATE Country;isocode[unique=true];name[lang=en];active[default=true]
 ;GU;"Guam"
 ;GW;"Guinea-Bissau"
 ;GY;"Guyana"
-;HK;"Hong Kong"
+
 ;HM;"Heard Island and McDonald Islands"
 ;HN;"Honduras"
 ;HR;"Croatia"
@@ -377,8 +377,9 @@ INSERT_UPDATE Region;country(isocode);isocode[unique=true];isocodeShort;name[lan
 ;CN;CN-64;64;"Ningxia"
 ;CN;CN-65;65;"Xinjiang"
 ;CN;CN-54;54;"Xizang"
-;CN;CN-91;91;"Xianggang"
+;CN;CN-91;91;"Hong Kong"
 ;CN;CN-92;92;"Aomen"
+
 
 #
 # ISO 3166-2:JP
