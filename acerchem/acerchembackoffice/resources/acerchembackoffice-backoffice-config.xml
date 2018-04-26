@@ -158,7 +158,6 @@
 			</explorer-tree:navigation-node>
 		</explorer-tree:explorer-tree>
 	</context>
-	
 	 <context merge-by="type" parent="AbstractOrder" type="Order" component="editor-area">
         <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
             <editorArea:tab name="hmc.properties" merge-mode="remove">
@@ -213,7 +212,7 @@
             <list-view:column qualifier="daysForPickUp"/>
         </list-view:list-view>
     </context>
-	
+
 	<context merge-by="type" parent="GenericItem" type="CountryTrayFareConf" component="advanced-search">
 		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
 			<advanced-search:field-list>
