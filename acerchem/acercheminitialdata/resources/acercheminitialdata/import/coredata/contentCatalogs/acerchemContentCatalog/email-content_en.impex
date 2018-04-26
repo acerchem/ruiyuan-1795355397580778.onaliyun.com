@@ -36,6 +36,13 @@ UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript
  ;acerchem_Email_Release_Note_Body;"Release Note Body";$emailResource/email-releaseNoteBody.vm
  ;acerchem_Email_Release_Note_Subject;"Release Note Subject";$emailResource/email-releaseNoteSubject.vm
 
+ ;acerchem_Email_invoicePackingList_BodyA;"InvoicePackingList BodyA";$emailResource/email-invoicePackingListBody-A.vm
+ ;acerchem_Email_invoicePackingList_BodyB;"InvoicePackingList BodyB";$emailResource/email-invoicePackingListBody-B.vm
+ ;acerchem_Email_invoicePackingList_BodyC;"InvoicePackingList BodyC";$emailResource/email-invoicePackingListBody-C.vm
+ ;acerchem_Email_invoicePackingList_BodyD;"InvoicePackingList BodyD";$emailResource/email-invoicePackingListBody-D.vm
+ ;acerchem_Email_invoicePackingList_BodyE;"InvoicePackingList BodyE";$emailResource/email-invoicePackingListBody-E.vm
+ ;acerchem_Email_invoicePackingList_BodyF;"InvoicePackingList BodyF";$emailResource/email-invoicePackingListBody-F.vm
+
 
  ;acerchem-BannerComponent-template;"CMSBannerComponent Template";$emailResource/email-bannerComponentTemplate.vm
  ;acerchem-CMSImageComponent-template;"CMSImageComponent Template";$emailResource/email-cmsImageComponentTemplate.vm
@@ -88,6 +95,12 @@ UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];fromEmail[lang=$lang];
  ;;ProformaInvoiceEmail;"customerservice@acerchem.com";"Customer Services Team"
  ;;ReleaseNoteEmail;"customerservice@acerchem.com";"Customer Services Team"
  
+ ;;InvoicePackingListEmailA;"customerservice@acerchem.com";"Customer Services Team"
+ ;;InvoicePackingListEmailB;"customerservice@acerchem.com";"Customer Services Team"
+ ;;InvoicePackingListEmailC;"customerservice@acerchem.com";"Customer Services Team"
+ ;;InvoicePackingListEmailD;"customerservice@acerchem.com";"Customer Services Team"
+ ;;InvoicePackingListEmailE;"customerservice@acerchem.com";"Customer Services Team"
+ ;;InvoicePackingListEmailF;"customerservice@acerchem.com";"Customer Services Team"
  
  
  
