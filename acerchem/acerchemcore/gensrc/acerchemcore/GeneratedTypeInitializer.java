@@ -362,6 +362,8 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 				single_createattr_Product_CAS();
 			
+				single_createattr_Product_certificates();
+			
 				single_createattr_ProductCarouselComponent_isPromotion();
 			
 				single_createattr_ProductCarouselComponent_isWell();
@@ -435,6 +437,8 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 				single_createattr_Customer_haveFinancialReport();
 			
 				single_createattr_Customer_provideTradeReference();
+			
+				single_createattr_Customer_employee();
 			
 				single_createattr_PointOfService_deliveryZone();
 			
@@ -1127,6 +1131,23 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 	}
 	
+	public void single_createattr_Product_certificates() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"Product", 
+					"certificates",  
+					null,
+					"Media",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
 	public void single_createattr_ProductCarouselComponent_isPromotion() throws JaloBusinessException
 	{
 		
@@ -1749,6 +1770,23 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 					"provideTradeReference",  
 					null,
 					"java.lang.Boolean",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_Customer_employee() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"Customer", 
+					"employee",  
+					null,
+					"Employee",
 					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
 					null,
 					sqlColumnDefinitions
@@ -2519,6 +2557,8 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 		
 			single_setAttributeProperties_Product_CAS();
 		
+			single_setAttributeProperties_Product_certificates();
+		
 				{
 				Map customPropsMap = new HashMap();
 				
@@ -2730,6 +2770,8 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			single_setAttributeProperties_Customer_haveFinancialReport();
 		
 			single_setAttributeProperties_Customer_provideTradeReference();
+		
+			single_setAttributeProperties_Customer_employee();
 		
 				{
 				Map customPropsMap = new HashMap();
@@ -3667,6 +3709,28 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							);
 						}
 					
+						public void single_setAttributeProperties_Product_certificates() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"Product", 
+								"certificates",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
 						public void single_setAttributeProperties_ProductCarouselComponent_isPromotion() throws JaloBusinessException
 						{
 							
@@ -4472,6 +4536,28 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 								false, 
 								Boolean.FALSE,
 								"Boolean.FALSE",
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_Customer_employee() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"Customer", 
+								"employee",
+								false, 
+								null,
+								null,
 								null,
 								true,
 								true,

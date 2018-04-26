@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-4-25 8:00:37                           ---
+ * --- Generated at 2018-4-26 12:17:34                          ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.jalo;
@@ -118,6 +118,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 		tmp.put("grossWeight", AttributeMode.INITIAL);
 		tmp.put("specification", AttributeMode.INITIAL);
 		tmp.put("CAS", AttributeMode.INITIAL);
+		tmp.put("certificates", AttributeMode.INITIAL);
 		tmp.put("anonymousDisplayPrice", AttributeMode.INITIAL);
 		tmp.put("acerChemVendorPOS", AttributeMode.INITIAL);
 		tmp.put("acerChemVendor", AttributeMode.INITIAL);
@@ -151,6 +152,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 		tmp.put("vatNo", AttributeMode.INITIAL);
 		tmp.put("haveFinancialReport", AttributeMode.INITIAL);
 		tmp.put("provideTradeReference", AttributeMode.INITIAL);
+		tmp.put("employee", AttributeMode.INITIAL);
 		tmp.put("relatedCustomerPOS", AttributeMode.INITIAL);
 		tmp.put("relatedCustomer", AttributeMode.INITIAL);
 		ttmp.put("de.hybris.platform.jalo.user.Customer", Collections.unmodifiableMap(tmp));
@@ -810,6 +812,42 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	public void setCAS(final Product item, final String value)
 	{
 		setCAS( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Product.certificates</code> attribute.
+	 * @return the certificates - 资质文件
+	 */
+	public Media getCertificates(final SessionContext ctx, final Product item)
+	{
+		return (Media)item.getProperty( ctx, AcerchemCoreConstants.Attributes.Product.CERTIFICATES);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Product.certificates</code> attribute.
+	 * @return the certificates - 资质文件
+	 */
+	public Media getCertificates(final Product item)
+	{
+		return getCertificates( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Product.certificates</code> attribute. 
+	 * @param value the certificates - 资质文件
+	 */
+	public void setCertificates(final SessionContext ctx, final Product item, final Media value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.Product.CERTIFICATES,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Product.certificates</code> attribute. 
+	 * @param value the certificates - 资质文件
+	 */
+	public void setCertificates(final Product item, final Media value)
+	{
+		setCertificates( getSession().getSessionContext(), item, value );
 	}
 	
 	/**
@@ -1734,6 +1772,42 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	public void setEmail(final CsTicket item, final String value)
 	{
 		setEmail( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.employee</code> attribute.
+	 * @return the employee
+	 */
+	public Employee getEmployee(final SessionContext ctx, final Customer item)
+	{
+		return (Employee)item.getProperty( ctx, AcerchemCoreConstants.Attributes.Customer.EMPLOYEE);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.employee</code> attribute.
+	 * @return the employee
+	 */
+	public Employee getEmployee(final Customer item)
+	{
+		return getEmployee( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.employee</code> attribute. 
+	 * @param value the employee
+	 */
+	public void setEmployee(final SessionContext ctx, final Customer item, final Employee value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.Customer.EMPLOYEE,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.employee</code> attribute. 
+	 * @param value the employee
+	 */
+	public void setEmployee(final Customer item, final Employee value)
+	{
+		setEmployee( getSession().getSessionContext(), item, value );
 	}
 	
 	/**

@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-4-25 8:00:37                           ---
+ * --- Generated at 2018-4-26 12:17:34                          ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.constants;
@@ -82,6 +82,7 @@ public class GeneratedAcerchemCoreConstants
 			public static final String AREA = "area".intern();
 			public static final String COMPANYTYPE = "companyType".intern();
 			public static final String CREDITACCOUNT = "creditAccount".intern();
+			public static final String EMPLOYEE = "employee".intern();
 			public static final String EMPLOYEESNO = "employeesNo".intern();
 			public static final String ESTABLISHEDIN = "establishedIn".intern();
 			public static final String HAVEFINANCIALREPORT = "haveFinancialReport".intern();
@@ -110,6 +111,7 @@ public class GeneratedAcerchemCoreConstants
 			public static final String ACERCHEMVENDORPOS = "acerChemVendorPOS".intern();
 			public static final String ANONYMOUSDISPLAYPRICE = "anonymousDisplayPrice".intern();
 			public static final String CAS = "CAS".intern();
+			public static final String CERTIFICATES = "certificates".intern();
 			public static final String CHEMICALINFO = "chemicalInfo".intern();
 			public static final String GROSSWEIGHT = "grossWeight".intern();
 			public static final String NETWEIGHT = "netWeight".intern();
