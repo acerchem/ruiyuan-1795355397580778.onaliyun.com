@@ -391,7 +391,10 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                aoe.setTotalRealPrice(totalRealPrice);
 
             }
+            BigDecimal orderTotalPrice = totalAdditionalFee.add(BigDecimal.valueOf(orderModel.getTotalPrice()));
+            orderModel.setTotalPrice(orderTotalPrice.doubleValue());
             getModelService().saveAll(orderModel.getEntries());
+            getModelService().saveAll(orderModel);
         }
     }
 

@@ -61,12 +61,14 @@ public class AcerchemCartPopulator extends CartPopulator {
                 }
             }
         }
-        for (OrderEntryData orderEntryData: target.getEntries()){
-            BigDecimal basePrice = orderEntryData.getTotalPrice().getValue().divide(BigDecimal.valueOf(orderEntryData.getQuantity()));
-            PriceData promotionBasePrice = priceDataFactory.create(PriceDataType.BUY,
-                    BigDecimal.valueOf(basePrice.doubleValue()), source.getCurrency().getIsocode());
-            orderEntryData.setPromotionBasePrice(promotionBasePrice);
+        if (source.getAllPromotionResults()!=null) {
+            for (OrderEntryData orderEntryData : target.getEntries()) {
+                BigDecimal basePrice = orderEntryData.getTotalPrice().getValue().divide(BigDecimal.valueOf(orderEntryData.getQuantity()));
+                PriceData promotionBasePrice = priceDataFactory.create(PriceDataType.BUY,
+                        BigDecimal.valueOf(basePrice.doubleValue()), source.getCurrency().getIsocode());
+                orderEntryData.setPromotionBasePrice(promotionBasePrice);
 
+            }
         }
     }
 }

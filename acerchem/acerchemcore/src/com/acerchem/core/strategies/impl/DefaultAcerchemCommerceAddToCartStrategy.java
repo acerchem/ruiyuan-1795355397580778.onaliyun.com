@@ -203,7 +203,7 @@ public class DefaultAcerchemCommerceAddToCartStrategy extends DefaultCommerceAdd
                         + parameter.getEntryNumber() + ". Give a correct value or " + CommerceCartParameter.DEFAULT_ENTRY_NUMBER
                         + " to accept any suitable entry.");
             }
-            calculateCartBasePrice(modification.getEntry());
+//            calculateCartBasePrice(modification.getEntry());
         }
         else
         {
@@ -219,7 +219,7 @@ public class DefaultAcerchemCommerceAddToCartStrategy extends DefaultCommerceAdd
             commerceCartParameter.setEnableHooks(true);
             commerceCartParameter.setCart(parameter.getCart());
             commerceCartCalculationStrategy.recalculateCart(commerceCartParameter);
-            calculateCartBasePrice(mergeTarget);
+//            calculateCartBasePrice(mergeTarget);
             modification.setEntry(mergeTarget);
         }
 

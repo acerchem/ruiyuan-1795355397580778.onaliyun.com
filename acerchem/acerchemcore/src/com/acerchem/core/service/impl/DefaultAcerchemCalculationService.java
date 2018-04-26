@@ -109,6 +109,7 @@ public class DefaultAcerchemCalculationService extends DefaultCalculationService
 			//notifyDiscountsAboutCalculation();
 
 		}
+		reCalculateCart(order);
 	}
 
 	private void reCalculateCart(AbstractOrderModel orderModel){
