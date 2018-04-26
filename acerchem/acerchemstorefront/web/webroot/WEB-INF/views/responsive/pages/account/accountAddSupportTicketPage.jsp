@@ -29,7 +29,7 @@
 <div class="row">
 	<div class="sign-content g-right">
 		<div class="rigcont" id="support">
-			<form:form method="post" commandName="supportTicketForm" id="supportTicketForm" class="both" action="${action}">
+			<form:form method="post" commandName="supportTicketForm" id="supportTicketForm" class="both" action="${url}">
 				<div>
 					<label> 
 						<span class='label-title'>Your Name</span> 
