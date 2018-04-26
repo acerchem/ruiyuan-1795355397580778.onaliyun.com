@@ -43,7 +43,7 @@
 	</action>
 	
 	<action id="creditPayMode" bean="creditPayModeAction">
-		<transition name="OK" to="recordConsignmentInfo"/>
+		<transition name="OK" to="waitConfrimForEmployee"/>
 		<transition name="NOK" to="error"/>
 	</action>
 	
@@ -133,11 +133,41 @@
     </wait> 
     
 	<action id="waitConsignMentConfirm" bean="waitConsignMentConfirmAction">
-		<transition name="OK" to="generateOfficialInvoiceEmail"/>
+		<transition name="OK" to="chooseInvoiceTemp"/>
 		<transition name="NOK" to="waitForAllConsignmentConfirm"/>
 	</action>
 	
-	<action id="generateOfficialInvoiceEmail" bean="generateOfficialInvoiceEmailAction">
+	<action id="chooseInvoiceTemp" bean="chooseInvoiceTempAction">
+		<transition name="TEMP1" to="generateOfficialInvoiceEmail1"/>
+		<transition name="TEMP2" to="generateOfficialInvoiceEmail2"/>
+		<transition name="TEMP3" to="generateOfficialInvoiceEmail3"/>
+		<transition name="TEMP4" to="generateOfficialInvoiceEmail4"/>
+		<transition name="TEMP5" to="generateOfficialInvoiceEmail5"/>
+		<transition name="TEMP6" to="generateOfficialInvoiceEmail6"/>
+		<transition name="NOK" to="error"/>
+	</action>
+	
+	<action id="generateOfficialInvoiceEmail1" bean="generateOfficialInvoiceEmailAction1">
+		<transition name="OK" to="sendOfficialInvoiceEmail"/>
+		<transition name="NOK" to="error"/>
+	</action>
+	<action id="generateOfficialInvoiceEmail2" bean="generateOfficialInvoiceEmailAction2">
+		<transition name="OK" to="sendOfficialInvoiceEmail"/>
+		<transition name="NOK" to="error"/>
+	</action>
+	<action id="generateOfficialInvoiceEmail3" bean="generateOfficialInvoiceEmailAction3">
+		<transition name="OK" to="sendOfficialInvoiceEmail"/>
+		<transition name="NOK" to="error"/>
+	</action>
+	<action id="generateOfficialInvoiceEmail4" bean="generateOfficialInvoiceEmailAction4">
+		<transition name="OK" to="sendOfficialInvoiceEmail"/>
+		<transition name="NOK" to="error"/>
+	</action>
+	<action id="generateOfficialInvoiceEmail5" bean="generateOfficialInvoiceEmailAction5">
+		<transition name="OK" to="sendOfficialInvoiceEmail"/>
+		<transition name="NOK" to="error"/>
+	</action>
+	<action id="generateOfficialInvoiceEmail6" bean="generateOfficialInvoiceEmailAction6">
 		<transition name="OK" to="sendOfficialInvoiceEmail"/>
 		<transition name="NOK" to="error"/>
 	</action>
