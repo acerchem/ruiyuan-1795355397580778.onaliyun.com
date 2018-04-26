@@ -21,7 +21,6 @@
 			<img src="images/succ1.png"/>
 			<h3>Thank You For Your Order!</h3>
 			<p>Your Order Number is ${fn:escapeXml(orderData.code)}</p>
-			<p>A copy of your order details has been sent to <span>${fn:escapeXml(email)}</span></p>
 		</div>
 		<!--s-->
 		<div class="rigcont">
