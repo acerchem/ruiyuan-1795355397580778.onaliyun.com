@@ -205,7 +205,7 @@ textarea{
 .maxon_salesul .maxpagin{
 	position: absolute;
 	right:20px;
-	top:0;
+	top:20px;
 	font-size: 14px;
 	color: #999;
 }
@@ -264,12 +264,14 @@ textarea{
 .maxon_salesul .slide-wrap{
 	margin-top: 20px;
 	overflow: hidden;
+	
 }
 
 .maxon_salesul .slide-item .aitem , .maxon_salesul .slide-item .item{
 	padding-right:20px;
-	width:20%;
+	/*width:20%;*/
 	float:left;
+	display: inline-block;
 }
 
 .maxon_salesul .slide-item .maxtext p{
@@ -2429,7 +2431,9 @@ display: inline-table;
 	padding: 0;
 	display: table;
 }
-
+.prod-cont.down-cont{
+	display: block;
+}
 .prod-cont .g-cell{
 	padding: 40px 0;
 	width: 76%;
@@ -2814,9 +2818,6 @@ display: inline-table;
 }
 .prod-cont .product-right .tableshare a:hover{
 	background-image: url(sharecolor.png);
-}
-.prod-cont .g-proudtable{
-
 }
 
 .g-proudtable span , .prod-cont .g-desclist li{
