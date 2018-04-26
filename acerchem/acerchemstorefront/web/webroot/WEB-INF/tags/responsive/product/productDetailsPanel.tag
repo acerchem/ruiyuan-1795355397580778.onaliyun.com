@@ -272,10 +272,13 @@
 						</ul>
 						<div class="g-descblock">
 							<div class="title">Specs</div>
-							<ul class="g-table">								
+							<ul class="g-table">	
+														
 								<li>
-									<span>Founded</span>
-									<span>2007</span>
+									<span>Vendor</span>
+									<c:if test="${not empty product.vendor}">
+									<span>${product.vendor.name}</span>
+									</c:if>
 								</li>
 								<li>
 									<span>Certifications</span>

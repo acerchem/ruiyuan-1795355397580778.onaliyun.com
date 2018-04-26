@@ -22,6 +22,8 @@
 		<property name="grossWeight" type="String" />
 		<property name="unitName" type="String" />
 		<property name="certificates" type="com.acerchem.facades.product.data.CertificatesData"/>
+		
+		<property name="vendor" type="com.acerchem.facades.product.data.VendorData"/>
 
 	</bean>
 
@@ -220,6 +222,11 @@
 		<property name="url" type="String"/>
 		<property name="altText" type="String"/>
 		<property name="galleryIndex" type="Integer"/>
+	</bean>
+	
+	<bean class="com.acerchem.facades.product.data.VendorData">
+		<property name="name" type="String"/>
+		<property name="code" type="String"/>
 	</bean>
 
 </beans>
