@@ -34,16 +34,16 @@
 		<div class="flex-wrap">
 			<div class="flex">					
 				<div class="selbox">
-					<input type="hidden"  value="" name="titleCode" alt="Please Select Shipping nation" class="required">
-					<span class="pitch"></span>
-					<ul class="select">
-						<li data-val="mrs">Mrs.</li>
-						<li data-val="miss">Miss</li>
-						<li data-val="ms">Ms.</li>
-						<li data-val="mr">Mr.</li>
-						<li data-val="dr">Dr.</li>
-						<li data-val="rev">Rev.</li>
-					</ul>
+				
+					<select name="titleCode" id="tileId">
+					<option value ="mrs">Mrs.</option>
+					<option value ="miss">Miss</option>
+					<option value ="ms">Ms.</option>
+					<option value ="mr">Mr.</option>
+					<option value ="dr">Dr.</option>
+					<option value ="rev">Rev.</option>
+					</select>
+					
 				</div>	
 			</div>
 				
@@ -68,29 +68,27 @@
 		<div class="flex-wrap">
 			<div class="flex">					
 				<div class="selbox">
-					<input type="hidden"  value="" name="countryIso" alt="Please Select Shipping nation" class="required">
-					<span class="pitch"></span>
-					<ul class="select">
-						<li>Nation</li>
-						<li data-val="US">U.S.A</li>
-						<li data-val="GB">England</li>
-						<li data-val="ITA">Repubblica Italiana</li>
-						<li data-val="SUI">Swiss Confederation</li>
-						<li data-val="MEX">The United States of Mexico</li>
-						<li data-val="FRA">French Republic</li>
-					</ul>
+				
+					<select name="countryIso" id="countryIso">
+					<option value ="US">U.S.A</option>
+					<option value ="GB">England</option>
+					<option value ="ITA">Repubblica Italiana</option>
+					<option value ="SUI">Swiss Confederation</option>
+					<option value ="MEX">The United States of Mexico</option>
+					<option value ="FRA">French Republic</option>
+					</select>
+
 				</div>	
 			</div>
 			<div class="flex">
 				<div class="selbox ">
-					<input type="hidden" value="" name="regionIso" alt="Please Select Shipping city" class="required">
-					<span class="pitch"></span>
-					<ul class="select">
-						<li>City</li>
-						<li data-val="US-NY">New York</li>
-						<li data-val="LA">Los Angeles</li>
-						<li data-val="CI">Chicago</li>
-					</ul>
+				
+					<select name="regionIso" id="regionIso">
+					<option value ="US-NY">New York</option>
+					<option value ="LA">Los Angeles</option>
+					<option value ="CI">Chicago</option>
+					</select>
+
 				</div>	
 			</div>				
 		</div>

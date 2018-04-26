@@ -1,5 +1,7 @@
 package com.acerchem.facades.process.email.context.pojo;
 
+import java.math.BigDecimal;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -10,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import com.acerchem.core.model.CustomerCreditAccountModel;
 
 import de.hybris.platform.core.model.c2l.CountryModel;
+import de.hybris.platform.core.model.c2l.RegionModel;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.mobileservices.model.text.PhoneNumberModel;
@@ -31,10 +34,15 @@ public class AcerChemEmailContextUtils {
 					if (countryModel != null) {
 						country = StringUtils.defaultString(countryModel.getName(), "");
 					}
-					StringBuilder sb = new StringBuilder(street);
+					String regin = "";
+					RegionModel reginModel = model.getRegion();
+					if (reginModel != null){
+						regin = reginModel.getName();
+					}
+					
+					StringBuilder sb = new StringBuilder(town);
 					sb.append("  ");
-					sb.append(streetNum).append(" ");
-					sb.append(town).append("  ");
+					sb.append(regin).append(" ");
 					sb.append(country);
 					return sb.toString();
 
@@ -58,11 +66,17 @@ public class AcerChemEmailContextUtils {
 					CountryModel countryModel = model.getCountry();
 					if (countryModel != null) {
 						country = StringUtils.defaultString(countryModel.getName(), "");
-						data.setCountry(country);
 					}
+					data.setCountry(country);
 					data.setStreet(street);
 					data.setStreetNum(streetNum);
 					data.setTown(town);
+					String regin = "";
+					RegionModel reginModel = model.getRegion();
+					if (reginModel != null){
+						regin = reginModel.getName();
+					}
+					data.setRegion(regin);
 					return data;
 
 				}
@@ -237,11 +251,33 @@ public class AcerChemEmailContextUtils {
 	}
 
 	public static void main(String[] args) {
-		String s = "73200";
-
-		s = AcerChemEmailContextUtils.getMoneyOfWord(s, "$");
-
-		System.out.println(s);
+//		String s = "73200";
+//
+//		s = AcerChemEmailContextUtils.getMoneyOfWord(s, "$");
+//
+//		System.out.println(s);
+//		String s = new StringBuilder("aaaa").append(" \0").append("bbbbbb").toString();
+//		System.out.println(s);
+//		String x[] = s.split(" ");
+//		System.out.println(x.length);
+//		for(String y:x){
+//			System.out.println(y);
+//		}
+		DecimalFormat df = new DecimalFormat();  
+        df.applyPattern(",##0.00");// 将格式应用于格式化器 
+        BigDecimal d = new BigDecimal(12312.2345);
+        BigDecimal d1 = new BigDecimal(12312312.2);
+        String s = df.format(d);
+        System.out.println(s);
+        String s1 = df.format(d1);
+        System.out.println(s1);
+        
+        
+        
+        
+        
+        
 	}
+		
 
 }

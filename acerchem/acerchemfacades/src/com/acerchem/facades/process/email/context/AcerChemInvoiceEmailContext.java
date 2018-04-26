@@ -1,15 +1,20 @@
 package com.acerchem.facades.process.email.context;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.annotation.Resource;
+
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.velocity.tools.generic.NumberTool;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.acerchem.facades.process.email.context.pojo.AcerChemEmailContextUtils;
+import com.acerchem.facades.process.email.context.pojo.CustomerContactAddressOfEmailData;
 import com.acerchem.facades.process.email.context.pojo.InvoiceEmailContextPoJo;
 import com.acerchem.facades.process.email.context.pojo.ProductItemDataOfEmail;
 import com.acerchem.facades.process.email.context.pojo.ProductTotalDataOfEmail;
@@ -26,15 +31,19 @@ import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commercefacades.storelocator.data.PointOfServiceData;
 import de.hybris.platform.core.model.c2l.LanguageModel;
 import de.hybris.platform.core.model.order.OrderModel;
+import de.hybris.platform.core.model.user.AbstractContactInfoModel;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
+import de.hybris.platform.servicelayer.user.ContactInfoService;
 
 /**
  * Velocity context for a Invoice notification email.
  */
 public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProcessModel> {
+	public static final String NUMBER_TOOL = "numberTool";
 
 	private Converter<OrderModel, OrderData> orderConverter;
 	private OrderData orderData;
@@ -51,10 +60,23 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 	private String warehouse;
 	
 	private String moneyToWords;
+	private CustomerContactAddressOfEmailData customerAddressData;
 
+	private String contactUser;
+	private String contactMobile;
+	
+	//total vat 20%
+	private String vatAmount;
+	private String vatTotal;
+	private String vatMoneyToWords;
+	
+	@Resource
+	private ContactInfoService contactInfoService;
+	
 	@Override
 	public void init(final OrderProcessModel orderProcessModel, final EmailPageModel emailPageModel) {
 		super.init(orderProcessModel, emailPageModel);
+		put(NUMBER_TOOL, new NumberTool());
 		orderData = getOrderConverter().convert(orderProcessModel.getOrder());
 
 		// orderData.getConsignments()
@@ -74,7 +96,10 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 		
 		String total = orderData.getTotalPrice().getValue().toString();
 		moneyToWords = AcerChemEmailContextUtils.getMoneyOfWord(total,"$");
-
+			
+		initContactInfo();
+		initVatTotal();
+		
 	}
 
 	@Override
@@ -121,12 +146,34 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 
 		String address = "";
 		CustomerModel customer = getCustomer(orderProcessModel);
+		CustomerContactAddressOfEmailData addressData = new CustomerContactAddressOfEmailData();
 		if (customer != null) {
 			Collection<AddressModel> addrs = customer.getAddresses();
 			address = AcerChemEmailContextUtils.getCustomerContactAddress(addrs);
+			addressData = AcerChemEmailContextUtils.getCustomerContactAddressData(addrs);
 		}
 
-		this.customerAddress = address;
+		setCustomerAddressData(addressData);
+		setCustomerAddress(address);
+	}
+	
+	public void initContactInfo(){
+		CustomerModel customer = this.getCustomer();
+		//Collection<AbstractContactInfoModel> coll = customer.getContactInfos();
+		
+		AbstractContactInfoModel contactInfo =  contactInfoService.getMainContactInfo(customer);
+		if (contactInfo != null){
+			UserModel curUser = contactInfo.getUser();
+			if (curUser != null  ){
+				this.setContactUser(curUser.getName());
+				
+				List<String> phones = AcerChemEmailContextUtils.getPhoneNumbers(curUser.getPhoneNumbers());
+				if(phones.size() > 0){
+					this.setContactMobile(phones.get(0));
+				}
+			}
+		}
+		
 	}
 
 	public String getCustomerAddress() {
@@ -316,4 +363,79 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 		this.moneyToWords = moneyToWords;
 	}
 
+	public CustomerContactAddressOfEmailData getCustomerAddressData() {
+		return customerAddressData;
+	}
+
+	public void setCustomerAddressData(CustomerContactAddressOfEmailData customerAddressData) {
+		this.customerAddressData = customerAddressData;
+	}
+
+	public void setCustomerAddress(String customerAddress) {
+		this.customerAddress = customerAddress;
+	}
+
+	public String getContactUser() {
+		return contactUser;
+	}
+
+	public void setContactUser(String contactUser) {
+		this.contactUser = contactUser;
+	}
+
+	public String getContactMobile() {
+		return contactMobile;
+	}
+
+	public void setContactMobile(String contactMobile) {
+		this.contactMobile = contactMobile;
+	}
+
+	public String getVatAmount() {
+		return vatAmount;
+	}
+
+	public void setVatAmount(String vatAmount) {
+		this.vatAmount = vatAmount;
+	}
+
+	public String getVatTotal() {
+		return vatTotal;
+	}
+
+	public void setVatTotal(String vatTotal) {
+		this.vatTotal = vatTotal;
+	}
+
+	public String getVatMoneyToWords() {
+		return vatMoneyToWords;
+	}
+
+	public void setVatMoneyToWords(String vatMoneyToWords) {
+		this.vatMoneyToWords = vatMoneyToWords;
+	}
+
+	//vat 20%
+	public void initVatTotal(){
+		
+		DecimalFormat df   = new DecimalFormat(",##0.00");	
+		
+		double dTotal =orderData.getTotalPrice().getValue().doubleValue();
+		
+	
+		double dVat = dTotal*0.2;
+		String vat_ = df.format(dVat);
+		this.setVatAmount(vat_);
+		
+		
+		double  dVatTotal  =  dTotal + dVat;
+		String vatTotal_ = df.format(dVatTotal);
+		this.setVatTotal(vatTotal_);
+		DecimalFormat df1   = new DecimalFormat("0.00");
+		
+		String formatTotal = df1.format(dVatTotal);
+		String vatMoney_ = AcerChemEmailContextUtils.getMoneyOfWord(formatTotal,"$");
+		
+		this.setVatMoneyToWords(vatMoney_);
+	}
 }
