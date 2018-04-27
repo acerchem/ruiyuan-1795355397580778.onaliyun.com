@@ -19,12 +19,15 @@ import de.hybris.platform.task.RetryLaterException;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
+
 
 /**
  * This action check if authorization has review status
  */
 public class ChooseInvoiceTempAction extends AbstractAction<OrderProcessModel>
 {
+	private static final Logger LOG = Logger.getLogger(ChooseInvoiceTempAction.class);
 
 	public enum Transition
 	{
@@ -57,11 +60,12 @@ public class ChooseInvoiceTempAction extends AbstractAction<OrderProcessModel>
 	protected Transition executeAction(final OrderProcessModel process)
 	{
 		final OrderModel order = process.getOrder();
-		if("GB".equals(order.getEntries().get(0).getDeliveryPointOfService().getAddress().getCountry().getIsocode())){
+		LOG.info("-------------------------------------"+order.getEntries().get(0).getDeliveryPointOfService().getDeliveryZone().getCode());
+		if("GB".equals(order.getEntries().get(0).getDeliveryPointOfService().getDeliveryZone().getCode())){
 			if("DCM".equals(order.getEntries().get(0).getDeliveryPointOfService().getWarehouses().get(0).getCode()) || "Neele-vat".equals(order.getEntries().get(0).getDeliveryPointOfService().getWarehouses().get(0).getCode()) || "UK".equals(order.getEntries().get(0).getDeliveryPointOfService().getWarehouses().get(0).getCode())){
 				return Transition.TEMP2;
 			}
-		}else if("PL".equals(order.getEntries().get(0).getDeliveryPointOfService().getAddress().getCountry().getIsocode())){
+		}else if("PL".equals(order.getEntries().get(0).getDeliveryPointOfService().getDeliveryZone().getCode())){
 			if("DCM".equals(order.getEntries().get(0).getDeliveryPointOfService().getWarehouses().get(0).getCode())){
 				return Transition.TEMP5;
 			}else if("Neele-vat".equals(order.getEntries().get(0).getDeliveryPointOfService().getWarehouses().get(0).getCode())){
@@ -70,7 +74,7 @@ public class ChooseInvoiceTempAction extends AbstractAction<OrderProcessModel>
 				return Transition.TEMP6;
 			}
 			
-		}else if("DCM".equals(order.getEntries().get(0).getDeliveryPointOfService().getAddress().getCountry().getIsocode())){
+		}else{
 			if("DCM".equals(order.getEntries().get(0).getDeliveryPointOfService().getWarehouses().get(0).getCode())){
 				return Transition.TEMP3;
 			}else if("Neele-vat".equals(order.getEntries().get(0).getDeliveryPointOfService().getWarehouses().get(0).getCode())){
