@@ -37,6 +37,7 @@
 					<y:action action-id="com.acerchem.actions.order.auditing.EmployeeconfirmDelivery" property="currentObject"/>
 					<y:action action-id="com.acerchem.actions.order.auditing.EmployeeUpdateDeliveryInfo" property="currentObject"/>
 					<y:action action-id="com.acerchem.actions.order.auditing.EmployeeUpdateDeliveryStatus" property="currentObject"/>
+					<y:action action-id="com.acerchem.actions.order.auditing.EmployeeCancellOrder" property="currentObject"/>
 				</y:group>
 			</y:actions>
 	</context>
@@ -74,6 +75,8 @@
 		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="ConsignmentEntryConfigWizard">
 			<wz:prepare id="ConsignmentEntryPrepare">
 				<wz:initialize property="newConsignmentEntry" type="ConsignmentEntry"/>
+				 <!-- <wz:initialize property="consignmentEntry" type="ctx.TYPE_CODE" /> -->
+				<wz:assign property="newConsignmentEntry.orderEntry" value="ctx.parentObject" />
 			</wz:prepare>
 			<wz:step id="step1" label="create.UniasiaConfig.general.label" >
 				<wz:content id="step1.content">
@@ -203,5 +206,37 @@
             <list-view:column qualifier="daysForPickUp"/>
         </list-view:list-view>
     </context>
+    
+    <context merge-by="type" parent="GenericItem" type="Consignment" component="create-wizard"  merge-mode="replace">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="ConsignmentConfigWizard">
+			<wz:prepare id="ConsignmentEntryPrepare">
+				<wz:initialize property="consignment" type="ctx.TYPE_CODE" /> 
+				<wz:assign property="consignment.order" value="ctx.parentObject" />
+			</wz:prepare>
+			<wz:step id="step1" label="create.Consignment.general.label" >
+				<wz:content id="step1.content">
+					<wz:property-list root="consignment">
+						<wz:property qualifier="order"/>
+						<wz:property qualifier="shippingAddress" merge-mode="remove" validate="false"/>
+						<wz:property qualifier="status" validate="false"/>
+						<wz:property qualifier="creationtime" validate="false"/>
+						<wz:property qualifier="consignmentProcesses" validate="false"/>
+						<wz:property qualifier="code" validate="false"/>
+						<wz:property qualifier="owner"  validate="false"/>
+						<wz:property qualifier="namedDeliveryDate"  validate="false"/>
+						<wz:property qualifier="warehouse" validate="false"/>
+						<wz:property qualifier="deliveryMode" validate="false"/>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel/>
+					<wz:done>
+						<wz:save property="consignment"/>
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+    
     
 </config>

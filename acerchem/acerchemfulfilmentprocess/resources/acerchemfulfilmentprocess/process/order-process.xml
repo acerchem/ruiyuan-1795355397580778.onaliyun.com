@@ -79,8 +79,29 @@
 	</wait>
 	
 	<action id="recordConsignmentInfo" bean="recordConsignmentInfoAction">
-		<transition name="OK" to="splitDeliveryMode"/>
+		<transition name="OK" to="waitUpdateConsignmentStatus"/>
 		<transition name="NOK" to="waitConfrimForEmployee"/>
+	</action>
+	
+	<wait id="waitUpdateConsignmentStatus" prependProcessCode="true" then="failed">
+	 	<case event="ConfirmConsignmentStatusActionEvent">
+            <choice id="waitForEmployeeConfirmConsignmentStatus" then="splitDeliveryMode"/>
+            <choice id="cancelOrder" then="cancelOrderStatus"/>
+        </case>
+	</wait>
+	
+	<action id="cancelOrderStatus" bean="cancelOrderStatusAction">
+		<transition name="OK" to="generateCancelOrderEmail"/>
+		<transition name="NOK" to="failed"/>
+	</action>
+	
+	<action id="generateCancelOrderEmail" bean="generateCancelOrderEmailAction">
+		<transition name="OK" to="sendCancelOrderEmail"/>
+		<transition name="NOK" to="failed"/>
+	</action>
+	
+	<action id="sendCancelOrderEmail" bean="sendEmail">
+		<transition name="OK" to="success"/>
 	</action>
 	
 	<action id="splitDeliveryMode" bean="splitDeliveryModeAction">
@@ -107,18 +128,12 @@
 	</action>
 	
 	<action id="sendDeliveryEmail" bean="sendEmail">
-		<transition name="OK" to="waitUpdateConsignmentStatus"/>
+		<transition name="OK" to="checkConsignmentDate"/>
 	</action>
 	
 	<action id="sendDeliveryByShelfEmail" bean="sendEmail">
-		<transition name="OK" to="waitUpdateConsignmentStatus"/>
+		<transition name="OK" to="checkConsignmentDate"/>
 	</action>
-	
-	<wait id="waitUpdateConsignmentStatus" prependProcessCode="true" then="failed">
-	 	<case event="ConfirmConsignmentStatusActionEvent">
-            <choice id="waitForEmployeeConfirmConsignmentStatus" then="checkConsignmentDate"/>
-        </case>
-	</wait>
 	
 	<action id="checkConsignmentDate" bean="checkConsignmentDateAction">
 		<transition name="OK" to="waitForAllConsignmentConfirm"/>
@@ -167,6 +182,7 @@
 		<transition name="OK" to="sendOfficialInvoiceEmail"/>
 		<transition name="NOK" to="error"/>
 	</action>
+	
 	<action id="generateOfficialInvoiceEmail6" bean="generateOfficialInvoiceEmailAction6">
 		<transition name="OK" to="sendOfficialInvoiceEmail"/>
 		<transition name="NOK" to="error"/>
