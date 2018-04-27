@@ -45,8 +45,20 @@
 						</span>								
 					</div>
 				</td>
-				<td>
-				<format:price priceData="${entry.basePrice}" displayFreeForZero="true"/>
+				<td class="tot">
+				<c:choose>
+				     <c:when test="${not empty entry.promotionBasePrice}">
+						<em>
+						<format:price priceData="${entry.promotionBasePrice}" displayFreeForZero="true"/>
+						</em>
+						<i><format:price priceData="${entry.basePrice}" displayFreeForZero="true"/></i>
+					</c:when>
+					  <c:otherwise>
+					      <em>
+						<format:price priceData="${entry.basePrice}" displayFreeForZero="true"/>
+						</em>
+					  </c:otherwise>
+				</c:choose>	
 				</td>
 				
 				
@@ -65,6 +77,7 @@
 						<em>
 						<format:price priceData="${entry.totalPrice}" displayFreeForZero="true"/>
 						</em>
+						
 					</div>
 				</td>
 				<td>
