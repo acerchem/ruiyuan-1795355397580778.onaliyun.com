@@ -10,14 +10,16 @@
  */
 package com.acerchem.fulfilmentprocess.actions.order;
 
+import javax.annotation.Resource;
+
 import org.apache.log4j.Logger;
+
+import com.acerchem.core.service.AcerchemStockService;
 
 import de.hybris.platform.core.enums.OrderStatus;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 import de.hybris.platform.processengine.action.AbstractSimpleDecisionAction;
-import de.hybris.platform.processengine.action.AbstractSimpleDecisionAction.Transition;
-import de.hybris.platform.task.RetryLaterException;
 
 
 /**
@@ -30,7 +32,9 @@ import de.hybris.platform.task.RetryLaterException;
 public class CancelOrderStatusAction extends AbstractSimpleDecisionAction<OrderProcessModel>
 {
 	private static final Logger LOG = Logger.getLogger(CancelOrderStatusAction.class);
-
+	
+	@Resource
+	private AcerchemStockService acerchemStockService;
 
 	@Override
 	public Transition executeAction(final OrderProcessModel process) {
@@ -40,7 +44,8 @@ public class CancelOrderStatusAction extends AbstractSimpleDecisionAction<OrderP
 		if(order != null){
 			if (OrderStatus.UNDELIVERED.equals(order.getStatus()))
 			{
-				setOrderStatus(order, OrderStatus.UNDELIVERED);
+				setOrderStatus(order, OrderStatus.CANCELLED);
+				acerchemStockService.releaseStock(order);
 				return Transition.OK;
 			}
 		}
