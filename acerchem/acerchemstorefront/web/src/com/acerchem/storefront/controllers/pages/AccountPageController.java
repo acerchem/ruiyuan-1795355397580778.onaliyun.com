@@ -62,6 +62,7 @@ import de.hybris.platform.commerceservices.util.ResponsiveUtils;
 import de.hybris.platform.converters.Converters;
 import de.hybris.platform.converters.Populator;
 import de.hybris.platform.core.PK;
+import de.hybris.platform.core.enums.OrderStatus;
 import de.hybris.platform.core.model.c2l.CountryModel;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.AddressModel;
@@ -81,6 +82,7 @@ import de.hybris.platform.store.BaseStoreModel;
 import de.hybris.platform.store.services.BaseStoreService;
 import de.hybris.platform.util.Config;
 
+import com.acerchem.core.service.AcerchemStockService;
 import com.acerchem.service.customercreditaccount.DefaultCustomerCreditAccountService;
 import com.acerchem.storefront.controllers.ControllerConstants;
 import com.acerchem.storefront.data.CustomRegisterForm;
@@ -1249,7 +1251,8 @@ public class AccountPageController extends AbstractSearchPageController
 		return order(orderCode,model,redirectModel);
 	}
 	
-	
+	@Resource
+	private AcerchemStockService acerchemStockService;
 	
 	public void confirm(String orderCode,String confirm)
 	{
@@ -1312,9 +1315,10 @@ public class AccountPageController extends AbstractSearchPageController
 		    
 			if(confirm.equals("cancel")&&todaydate.before(date))
 			{
-				final String eventID = new StringBuilder().append(fulfilmentProcessDefinitionName).append("_ConfirmConsignmentStatusActionEvent").toString();
-				final BusinessProcessEvent event = BusinessProcessEvent.builder(eventID).withChoice("cancelOrder").build();
-				Boolean falg=businessProcessService.triggerEvent(event);  
+				order.setStatus(OrderStatus.CANCELLED);
+				modelService.save(order);
+				modelService.refresh(order);
+			    acerchemStockService.releaseStock(order);
 			}
 			
 		}
