@@ -10,6 +10,8 @@
  */
 package com.acerchem.facades.populators;
 
+import com.acerchem.facades.product.data.VendorData;
+
 import de.hybris.platform.commercefacades.product.converters.populator.AbstractProductPopulator;
 import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.core.model.product.ProductModel;
@@ -32,6 +34,16 @@ public class ProductAcerchemPopulator<SOURCE extends ProductModel, TARGET extend
 		productData.setNetWeight(safeToString(getProductAttribute(productModel, ProductModel.NETWEIGHT)));
 		productData.setGrossWeight(safeToString(getProductAttribute(productModel, ProductModel.GROSSWEIGHT)));
 		
+		VendorData data = new VendorData();
+		if (productModel.getAcerChemVendor()!= null){
+			data.setName(productModel.getAcerChemVendor().getName());
+	        data.setCode(productModel.getAcerChemVendor().getCode());
+	        
+	        productData.setVendor(data);
+	      }
+		
+	    
+				
 		
 		UnitModel uModel = productModel.getUnit();
 		if (uModel != null){
