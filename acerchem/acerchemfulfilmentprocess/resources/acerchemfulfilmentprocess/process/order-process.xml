@@ -34,7 +34,12 @@
 	</action>
 	
 	<action id="sendContactEmail" bean="sendEmail">
+		<transition name="OK" to="removeSentContactEmail"/>
+	</action>
+	
+	<action id="removeSentContactEmail" bean="removeSentEmail">
 		<transition name="OK" to="choosePayMode"/>
+		<transition name="NOK" to="error"/>
 	</action>
 	
 	<action id="choosePayMode" bean="choosePayModeAction">
@@ -57,7 +62,12 @@
 	</action>
 	
 	<action id="sendFormInvoiceEmail" bean="sendEmail">
+		<transition name="OK" to="removeSentFormInvoiceEmail"/>
+	</action>
+	
+	<action id="removeSentFormInvoiceEmail" bean="removeSentEmail">
 		<transition name="OK" to="waitForAllConfirmPay"/>
+		<transition name="NOK" to="error"/>
 	</action>
 	
 		<wait id="waitForAllConfirmPay" prependProcessCode="true" then="failed">
@@ -86,7 +96,7 @@
 	<wait id="waitUpdateConsignmentStatus" prependProcessCode="true" then="failed">
 	 	<case event="ConfirmConsignmentStatusActionEvent">
             <choice id="waitForEmployeeConfirmConsignmentStatus" then="splitDeliveryMode"/>
-            <choice id="cancelOrder" then="cancelOrderStatus"/>
+            <choice id="cancelOrderConfirm" then="cancelOrderStatus"/>
         </case>
 	</wait>
 	
@@ -128,7 +138,12 @@
 	</action>
 	
 	<action id="sendDeliveryEmail" bean="sendEmail">
+		<transition name="OK" to="removeSentDeliveryByShelfEmail"/>
+	</action>
+	
+	<action id="removeSentDeliveryByShelfEmail" bean="removeSentEmail">
 		<transition name="OK" to="checkConsignmentDate"/>
+		<transition name="NOK" to="error"/>
 	</action>
 	
 	<action id="sendDeliveryByShelfEmail" bean="sendEmail">
@@ -189,8 +204,13 @@
 	</action>
 	
 	<action id="sendOfficialInvoiceEmail" bean="sendEmail">
-		<transition name="OK" to="success"/>
+		<transition name="OK" to="removeSentOfficialInvoiceEmail"/>
 	</action> 
+	
+	<action id="removeSentOfficialInvoiceEmail" bean="removeSentEmail">
+		<transition name="OK" to="success"/>
+		<transition name="NOK" to="error"/>
+	</action>
 	
 	<end id="error" state="ERROR">All went wrong.</end>
 	<end id="failed" state="FAILED">Order not placed.</end>
