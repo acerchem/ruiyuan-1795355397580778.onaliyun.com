@@ -1301,12 +1301,20 @@ public class AccountPageController extends AbstractSearchPageController
 			  	}
 			}
 			
-			if(confirm.equals("cancel"))
+			Date pickupDate=order.getPickupDateOfExtended()!=null?order.getPickupDateOfExtended():order.getPickUpDate();
+			Calendar c = Calendar.getInstance(); 
+			c.setTime(pickupDate); 
+		    c.set(Calendar.DATE,c.get(Calendar.DATE)-Integer.valueOf(Config.getParameter("cancel.order.day"))); 
+		    Date date=c.getTime();
+		    
+			Calendar today = Calendar.getInstance(); 
+		    Date todaydate=today.getTime();
+		    
+			if(confirm.equals("cancel")&&todaydate.before(date))
 			{
 				final String eventID = new StringBuilder().append(fulfilmentProcessDefinitionName).append("_ConfirmConsignmentStatusActionEvent").toString();
 				final BusinessProcessEvent event = BusinessProcessEvent.builder(eventID).withChoice("cancelOrder").build();
 				Boolean falg=businessProcessService.triggerEvent(event);  
-			  	
 			}
 			
 		}
