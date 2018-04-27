@@ -9,6 +9,7 @@
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <c:url value="/my-account/detailsConfirm/" var="confirmOrder"/>
 <c:url value="/my-account/extendedPickup/" var="extendedPickup"/>
@@ -61,7 +62,7 @@
 										<a href="${confirmOrder}${orderData.code}?confirm=payment" style="${!orderData.customerConfirmPay && orderData.status=='UNPAIED'?'':'display: none;'}">Confirm Payment</a>
 										
 										
-										<a href="${confirmOrder}${orderData.code}?confirm=cancel">Cancel Order</a>
+										<a href="${confirmOrder}${orderData.code}?confirm=cancel" style="${orderData.status=='CANCELLED'?'display: none;':''}" >Cancel Order</a>
 									</i>
 								</span>
                             </div>
@@ -228,27 +229,40 @@
 		                 </div>
 		             </div>
 		             
-		             
-		             <div>
-		             	Pickup date extended days:<input type="text" name='pickupDays'/>
-						<button type="submit" class="pickup">Confirm</button>
-						<script type="text/javascript">									
-						inputint()	
-						$('.pickup').on('click',function(){
-							
-							var days = document.getElementsByName('pickupDays')[0].value;
-							if(days>=1)
-							{
-								window.location.href="${extendedPickup}${orderData.code}?days="+days;
-								return false;	
-							}
-							else
-							{
-								maxalert('Please agree to Acerchem!')
-								return false;
-							}
-						})
-						</script>
+		             <div class="g-table">
+                        <div class="g-title">
+                            <span>Delayed Pickup date</span>
+                        </div>
+                        <div>
+                            <span>Pickup Date:<fmt:formatDate value="${orderData.pickupDateOfExtended==null?orderData.pickUpDate:orderData.pickupDateOfExtended}" pattern="yyyy-MM-dd"/> <br/></span>
+                            <div style="${orderData.pickupDateOfExtended==null?'':'display: none;'}">
+				             	<span>
+				             		Pickup date extended days(Max days:${maxday}):
+				             		<input type="text" name='pickupDays' style="width:80px; height:40px;"/>
+				             		<a class="pickup" href="#" style="display: inline;background: #28FF28;">Confirm</a>
+				             	</span>
+								<script type="text/javascript">									
+									inputint()	
+									$('.pickup').on('click',function(){
+										var days = document.getElementsByName('pickupDays')[0].value;
+									    if(isNaN(days)){
+									    	maxalert('Please enter positive integer!');
+									        return false;
+									    }
+									    else if(days<=${maxday}&&days>0)
+										{
+											window.location.href="${extendedPickup}${orderData.code}?days="+days;
+											return false;	
+										}
+										else
+										{
+											maxalert('Please enter Less than ${maxday} days!');
+											return false;
+										}
+									})
+								</script>
+							</div>
+                        </div>
 		             </div>
 		             <div class="btn-set">
 		                <a class="btn btn-back" href="javascript:window.history.back()">Back</a>
