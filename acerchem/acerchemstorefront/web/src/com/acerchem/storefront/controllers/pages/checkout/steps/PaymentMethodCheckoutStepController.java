@@ -321,8 +321,9 @@ public class PaymentMethodCheckoutStepController extends AbstractCheckoutStepCon
 			try {
 				acerchemCheckoutFacade.setPaymentDetail(selectedPaymentMethodId);
 			} catch (AcerchemOrderException e) {
+				LOG.error(e.getMessage());
 				GlobalMessages.addErrorMessage(model, e.getMessage());
-
+				model.addAttribute("errorMsg",e.getMessage());
 			}
 		}
 		return getCheckoutStep().nextStep();

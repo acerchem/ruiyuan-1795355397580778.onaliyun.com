@@ -11,6 +11,7 @@
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 
 <c:url value="/my-account/detailsConfirm/" var="confirmOrder"/>
+<c:url value="/my-account/extendedPickup/" var="extendedPickup"/>
 <link rel="stylesheet" type="text/css" href="https://electronics.local:9002/acerchemstorefront/_ui/desktop/common/css/orderCSS/general.css" />
 <link rel="stylesheet" type="text/css" href="https://electronics.local:9002/acerchemstorefront/_ui/desktop/common/css/orderCSS/min.css" />
 
@@ -58,6 +59,9 @@
 										<a href="${confirmOrder}${orderData.code}?confirm=order" style="${!orderData.customerConfirm && (orderData.status=='UNCONFIRMED'||orderData.status=='CHECKED_VALID')?'':'display: none;'}">Confirm Order</a>
 										<a href="${confirmOrder}${orderData.code}?confirm=receipt" style="${!orderData.customerConfirmDelivery && orderData.status=='UNDELIVERED'?'':'display: none;'}">Confirm Delivery</a>
 										<a href="${confirmOrder}${orderData.code}?confirm=payment" style="${!orderData.customerConfirmPay && orderData.status=='UNPAIED'?'':'display: none;'}">Confirm Payment</a>
+										
+										
+										<a href="${confirmOrder}${orderData.code}?confirm=cancel">Cancel Order</a>
 									</i>
 								</span>
                             </div>
@@ -222,6 +226,29 @@
 								</span>
 		                     </div>
 		                 </div>
+		             </div>
+		             
+		             
+		             <div>
+		             	Pickup date extended days:<input type="text" name='pickupDays'/>
+						<button type="submit" class="pickup">Confirm</button>
+						<script type="text/javascript">									
+						inputint()	
+						$('.pickup').on('click',function(){
+							
+							var days = document.getElementsByName('pickupDays')[0].value;
+							if(days>=1)
+							{
+								window.location.href="${extendedPickup}${orderData.code}?days="+days;
+								return false;	
+							}
+							else
+							{
+								maxalert('Please agree to Acerchem!')
+								return false;
+							}
+						})
+						</script>
 		             </div>
 		             <div class="btn-set">
 		                <a class="btn btn-back" href="javascript:window.history.back()">Back</a>
