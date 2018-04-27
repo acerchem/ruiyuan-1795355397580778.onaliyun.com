@@ -42,19 +42,19 @@
 								</span>
                                 <span>
 									<em>Order Status</em>
-									<i><spring:theme code="text.account.order.status.display.${orderData.statusDisplay}"/></i>
+									<i>${orderData.status=="CHECKED_VALID"?"UNCONFIRMED":orderData.status}</i>
+								</span>
+								<span>
+									<em>Total</em>
+									<i><format:price priceData="${orderData.totalPrice}"/></i>
 								</span>
                                 <span>
 									<em>Date Placed</em>
 									<i><fmt:formatDate value="${orderData.created}" dateStyle="medium" timeStyle="short" type="both"/></i>
 								</span>
-                                <span>
-									<em>Total</em>
-									<i><format:price priceData="${orderData.totalPrice}"/></i>
-								</span>
 								<span>
-									 <i>
-									Status:${orderData.status}
+									<em>Operate</em>
+									<i>
 										<a href="${confirmOrder}${orderData.code}?confirm=order" style="${!orderData.customerConfirm && (orderData.status=='UNCONFIRMED'||orderData.status=='CHECKED_VALID')?'':'display: none;'}">Confirm Order</a>
 										<a href="${confirmOrder}${orderData.code}?confirm=receipt" style="${!orderData.customerConfirmDelivery && orderData.status=='UNDELIVERED'?'':'display: none;'}">Confirm Delivery</a>
 										<a href="${confirmOrder}${orderData.code}?confirm=payment" style="${!orderData.customerConfirmPay && orderData.status=='UNPAIED'?'':'display: none;'}">Confirm Payment</a>
