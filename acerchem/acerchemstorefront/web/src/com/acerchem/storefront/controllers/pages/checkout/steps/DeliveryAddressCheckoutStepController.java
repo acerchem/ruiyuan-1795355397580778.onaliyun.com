@@ -341,7 +341,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 				}catch (AcerchemOrderException e){
                     GlobalMessages.addErrorMessage(model, e.getMessage());
 				}
-				setDeliveryAddress(selectedAddressData);
+				acerchemCheckoutFacade.setDeliveryAddress(selectedAddressData);
 			}
 		}
 
