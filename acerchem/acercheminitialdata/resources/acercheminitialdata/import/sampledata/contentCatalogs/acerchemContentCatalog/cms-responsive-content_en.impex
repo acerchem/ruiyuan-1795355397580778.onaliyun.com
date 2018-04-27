@@ -124,7 +124,7 @@ UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$la
 ;;PowerSuppliesNavNode;"Power Supplies"
 ;;SiteRootNode;"SiteRoot"
 ;;SuppliesNavNode;"Supplies"
-;;WebcamsNavNode;"Webcams"
+;;WebcamsNavNode;"Others"
 
 # acerchem FAQ Page 
 
@@ -506,7 +506,7 @@ UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[la
 ## Navigation component refactor
 # CMS Link name
 UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
-;;WebcamsCategoryLink;"Webcams"
+;;WebcamsCategoryLink;"Others"
 
 # CMS Footer Navigation Component
 UPDATE FooterNavigationComponent;$contentCV[unique=true];uid[unique=true];notice[lang=$lang]

@@ -119,7 +119,7 @@ UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$la
 ;;PowerSuppliesNavNode;"电源"
 ;;SiteRootNode;"站点根目录"
 ;;SuppliesNavNode;"耗材"
-;;WebcamsNavNode;"摄像头"
+;;WebcamsNavNode;"Others"
 
 # acerchem FAQ Page 
 

@@ -140,7 +140,7 @@ UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$la
 ;;PowerSuppliesNavNode;"Power Supplies"
 ;;SiteRootNode;"SiteRoot"
 ;;SuppliesNavNode;"Supplies"
-;;WebcamsNavNode;"Webcams"
+;;WebcamsNavNode;"Others"
 
 # acerchem FAQ Page 
 
