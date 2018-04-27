@@ -67,7 +67,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		getCheckoutFacade().setDeliveryAddressIfAvailable();
 		final CartData cartData = acerchemCheckoutFacade.getCheckoutCart();
 
-		cartData.setDeliveryAddress(null);
+		//cartData.setDeliveryAddress(null);
 		populateCommonModelAttributes(model, cartData, new AddressForm());
 
 
@@ -79,10 +79,10 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	public String add(final AddressForm addressForm, final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
-		final CartData cartData = getCheckoutFacade().getCheckoutCart();
+		
 
 		getAddressValidator().validate(addressForm, bindingResult);
-		populateCommonModelAttributes(model, cartData, addressForm);
+	
 
 		if (bindingResult.hasErrors())
 		{
@@ -111,17 +111,15 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 //		final AddressData previousSelectedAddress = getCheckoutFacade().getCheckoutCart().getDeliveryAddress();
 		// Set the new address as the selected checkout delivery address
 		getCheckoutFacade().setDeliveryAddress(newAddress);
-//		if (previousSelectedAddress != null && !previousSelectedAddress.isVisibleInAddressBook())
-//		{ // temporary address should be removed
-//			getUserFacade().removeAddress(previousSelectedAddress);
-//		}
-
-		// Set the new address as the selected checkout delivery address
-		getCheckoutFacade().setDeliveryAddress(newAddress);
-
-		//return getCheckoutStep().nextStep();
+//	
+		/*final CartData cartData = acerchemCheckoutFacade.getCheckoutCart();
+		populateCommonModelAttributes(model, cartData, addressForm);
+		return ControllerConstants.Views.Pages.MultiStepCheckout.AddEditDeliveryAddressPage;*/
 		
-		return ControllerConstants.Views.Pages.MultiStepCheckout.AddEditDeliveryAddressPage;
+	//	return enterStep(model,redirectModel);
+		
+		return getCheckoutStep().currentStep();
+	
 	}
 
 	protected void processAddressVisibilityAndDefault(final AddressForm addressForm, final AddressData newAddress)
@@ -318,13 +316,14 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	 *           - the id of the delivery address.
 	 *
 	 * @return - a URL to the page to load.
+	 * @throws CMSItemNotFoundException 
 	 */
 	@RequestMapping(value = "/select", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String doSelectDeliveryAddress(@RequestParam("selectedAddressCode" ) final String selectedAddressCode,
 										  final Model model, final RedirectAttributes redirectAttributes,
 										 @RequestParam(required = false) final String selectedDeliveryModeCode,
-										  @RequestParam(required = false) final String pickUpDate) {
+										  @RequestParam(required = false) final String pickUpDate) throws CMSItemNotFoundException {
 //		final ValidationResults validationResults = getCheckoutStep().validate(redirectAttributes);
 //		if (getCheckoutStep().checkIfValidationErrors(validationResults))
 //		{
@@ -342,15 +341,23 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 				}catch (AcerchemOrderException e){
                     GlobalMessages.addErrorMessage(model, e.getMessage());
 				}
-				setDeliveryAddress(selectedAddressData);
+				acerchemCheckoutFacade.setDeliveryAddress(selectedAddressData);
 			}
 		}
 
 		//保存收货时间
-		acerchemCheckoutFacade.savePickUpDateForOrder(pickUpDate);
+	//	acerchemCheckoutFacade.savePickUpDateForOrder(pickUpDate);
 
-		model.addAttribute("paymentInfos", acerchemCheckoutFacade.getSupportedCardTypes(selectedDeliveryModeCode));
-		return getCheckoutStep().nextStep();
+		//model.addAttribute("paymentInfos", acerchemCheckoutFacade.getSupportedCardTypes(selectedDeliveryModeCode));
+	//	return getCheckoutStep().currentStep();
+		
+		//return enterStep(model,redirectAttributes);
+		
+	        final CartData cartData = acerchemCheckoutFacade.getCheckoutCart();
+
+			populateCommonModelAttributes(model, cartData, new AddressForm());
+
+			return ControllerConstants.Views.Pages.MultiStepCheckout.AddEditDeliveryAddressPage;
 	}
 
     @RequestMapping(value = "/addPickUpDate", method = RequestMethod.GET)

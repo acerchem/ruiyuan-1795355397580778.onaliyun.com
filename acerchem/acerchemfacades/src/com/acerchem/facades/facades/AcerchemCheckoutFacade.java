@@ -44,5 +44,7 @@ public interface AcerchemCheckoutFacade {
 
     OrderData placeOrder() throws InvalidCartException;
 
+    boolean setDeliveryAddress(AddressData address);
+
 }
 

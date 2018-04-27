@@ -476,5 +476,24 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
             }
         }
     }
+
+    @Override
+    public boolean setDeliveryAddress(final AddressData addressData)
+    {
+        final CartModel cartModel = getCart();
+        if (cartModel != null)
+        {
+            AddressModel addressModel = null;
+            if (addressData != null)
+            {
+                addressModel = addressData.getId() == null ? createDeliveryAddressModel(addressData, cartModel)
+                        : getDeliveryAddressModelForCode(addressData.getId());
+            }
+
+            cartModel.setDeliveryAddress(addressModel);
+            getModelService().save(cartModel);
+        }
+        return false;
+    }
 }
 

@@ -327,6 +327,7 @@ public class AccountPageController extends AbstractSearchPageController
 	{
 		try
 		{
+			model.addAttribute("maxday", Integer.valueOf(Config.getParameter("cancel.order.day")));
 			final OrderData orderDetails = orderFacade.getOrderDetailsForCode(orderCode);
 			model.addAttribute("orderData", orderDetails);
             final List<Breadcrumb> breadcrumbs = accountBreadcrumbBuilder.getBreadcrumbs(null);
@@ -335,6 +336,17 @@ public class AccountPageController extends AbstractSearchPageController
 			breadcrumbs.add(new Breadcrumb("#", getMessageSource().getMessage("text.account.order.orderBreadcrumb", new Object[]
 			{ orderDetails.getCode() }, "Order {0}", getI18nService().getCurrentLocale()), null));
 			model.addAttribute(BREADCRUMBS_ATTR, breadcrumbs);
+			
+			Date pickupDate=orderDetails.getPickupDateOfExtended()!=null?orderDetails.getPickupDateOfExtended():orderDetails.getPickUpDate();
+			Calendar c = Calendar.getInstance(); 
+			c.setTime(pickupDate); 
+		    c.set(Calendar.DATE,c.get(Calendar.DATE)-Integer.valueOf(Config.getParameter("cancel.order.day"))); 
+		    Date date=c.getTime();
+		    
+			Calendar today = Calendar.getInstance(); 
+		    Date todaydate=today.getTime();
+		    
+		    model.addAttribute("canCancel",todaydate.before(date));
 
 		}
 		catch (final UnknownIdentifierException e)
@@ -1221,14 +1233,18 @@ public class AccountPageController extends AbstractSearchPageController
 		final BaseStoreModel baseStoreModel = baseStoreService.getCurrentBaseStore();
 		final OrderModel order =  customerAccountService.getOrderForCode((CustomerModel) userService.getCurrentUser(), orderCode,baseStoreModel);
 		
+		Integer maxday = Integer.valueOf(Config.getParameter("cancel.order.day"));
+		
 		Calendar c = Calendar.getInstance(); 
 		c.setTime(order.getPickUpDate()); 
 	    c.set(Calendar.DATE,c.get(Calendar.DATE)+days); 
 	    Date date=c.getTime();
-		
-		order.setPickUpDate(date);
-  		modelService.save(order);
-  		modelService.refresh(order);
+		if(order.getPickupDateOfExtended()==null&&maxday>=days)
+		{
+			order.setPickupDateOfExtended(date);
+	  		modelService.save(order);
+	  		modelService.refresh(order);
+		}
 		
 		return order(orderCode,model,redirectModel);
 	}
@@ -1285,15 +1301,20 @@ public class AccountPageController extends AbstractSearchPageController
 			  	}
 			}
 			
-			if(confirm.equals("cancel"))
+			Date pickupDate=order.getPickupDateOfExtended()!=null?order.getPickupDateOfExtended():order.getPickUpDate();
+			Calendar c = Calendar.getInstance(); 
+			c.setTime(pickupDate); 
+		    c.set(Calendar.DATE,c.get(Calendar.DATE)-Integer.valueOf(Config.getParameter("cancel.order.day"))); 
+		    Date date=c.getTime();
+		    
+			Calendar today = Calendar.getInstance(); 
+		    Date todaydate=today.getTime();
+		    
+			if(confirm.equals("cancel")&&todaydate.before(date))
 			{
 				final String eventID = new StringBuilder().append(fulfilmentProcessDefinitionName).append("_ConfirmConsignmentStatusActionEvent").toString();
 				final BusinessProcessEvent event = BusinessProcessEvent.builder(eventID).withChoice("cancelOrder").build();
 				Boolean falg=businessProcessService.triggerEvent(event);  
-			  	if(falg)
-			  	{
-			  		
-			  	}
 			}
 			
 		}

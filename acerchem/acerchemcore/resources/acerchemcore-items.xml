@@ -978,6 +978,18 @@
 			</itemtype>
 		</typegroup>
 		
+		<typegroup name="Order">
+				<itemtype code="Order" autocreate="false" generate="false">
+				<deployment table="order" typecode="30313" />
+				<attributes>
+					<attribute qualifier="pickupDateOfExtended" type="java.util.Date">
+						<persistence type="property" />
+						<description>推迟后的配送日期</description>
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+		
 	</itemtypes>
 </items>
 
