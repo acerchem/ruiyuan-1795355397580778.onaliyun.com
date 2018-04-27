@@ -12,6 +12,7 @@ package com.acerchem.storefront.controllers.pages.checkout.steps;
 
 import com.acerchem.facades.facades.AcerchemCheckoutFacade;
 import com.acerchem.facades.facades.AcerchemOrderException;
+import com.acerchem.storefront.controllers.ControllerConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.PreValidateCheckoutStep;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.PreValidateQuoteCheckoutStep;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
@@ -24,22 +25,11 @@ import de.hybris.platform.acceleratorstorefrontcommons.forms.AddressForm;
 import de.hybris.platform.acceleratorstorefrontcommons.util.AddressDataUtil;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.address.data.AddressVerificationResult;
-import de.hybris.platform.commercefacades.order.data.CardTypeData;
 import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.commercefacades.user.data.CountryData;
 import de.hybris.platform.commerceservices.address.AddressVerificationDecision;
-import de.hybris.platform.deliveryzone.model.ZoneModel;
 import de.hybris.platform.util.Config;
-import com.acerchem.storefront.controllers.ControllerConstants;
-
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-
-import javax.annotation.Resource;
-
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -48,6 +38,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.annotation.Resource;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 
 
 @Controller
@@ -72,7 +67,9 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		getCheckoutFacade().setDeliveryAddressIfAvailable();
 		final CartData cartData = acerchemCheckoutFacade.getCheckoutCart();
 
+		cartData.setDeliveryAddress(null);
 		populateCommonModelAttributes(model, cartData, new AddressForm());
+
 
 		return ControllerConstants.Views.Pages.MultiStepCheckout.AddEditDeliveryAddressPage;
 	}
@@ -451,5 +448,25 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		storeCmsPageInModel(model, getContentPageForLabelOrId(MULTI_CHECKOUT_SUMMARY_CMS_PAGE_LABEL));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(MULTI_CHECKOUT_SUMMARY_CMS_PAGE_LABEL));
 		setCheckoutStepLinksForModel(model, getCheckoutStep());
+	}
+
+	protected List<? extends AddressData> 	getDeliveryAddresses(final AddressData selectedAddressData) // NOSONAR
+	{
+		List<AddressData> deliveryAddresses = null;
+//		if (selectedAddressData != null)
+//		{
+			deliveryAddresses = (List<AddressData>) getCheckoutFacade().getSupportedDeliveryAddresses(true);
+
+//			if (deliveryAddresses == null || deliveryAddresses.isEmpty())
+//			{
+//				deliveryAddresses = Collections.singletonList(selectedAddressData);
+//			}
+//			else if (!isAddressOnList(deliveryAddresses, selectedAddressData))
+//			{
+//				deliveryAddresses.add(selectedAddressData);
+//			}
+//		}
+
+		return deliveryAddresses == null ? Collections.<AddressData> emptyList() : deliveryAddresses;
 	}
 }
