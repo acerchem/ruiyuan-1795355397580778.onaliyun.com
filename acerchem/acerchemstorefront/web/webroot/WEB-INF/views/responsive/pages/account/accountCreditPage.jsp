@@ -11,7 +11,6 @@
 	<div class="member-content">
 		<user:personalInfo/>
 		<div class="sign-content g-right">
-            <!-- ä¿¡ç¨è´¦æ·ä¿¡æ¯å±ç¤º -->
             <div class="title">Credit Account</div>
             <form:form action="" method="post" commandName="customerCreditAccountData">
             	<table>
