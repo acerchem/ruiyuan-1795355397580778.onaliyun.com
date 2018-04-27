@@ -194,6 +194,7 @@
 		<property name="pickUpDate" type="java.util.Date"/>
 		<property name="deliveyDate" type="java.lang.String" />
 		<property name="waitDeliveiedDate" type="java.lang.String" />
+		<property name="pickupDateOfExtended" type="java.util.Date"/>
 	</bean>
 	
 	<bean class="de.hybris.platform.commercefacades.order.data.OrderHistoryData">
