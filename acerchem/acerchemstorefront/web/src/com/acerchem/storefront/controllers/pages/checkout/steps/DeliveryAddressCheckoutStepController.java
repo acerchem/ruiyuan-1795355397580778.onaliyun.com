@@ -108,17 +108,9 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 
 		getUserFacade().addAddress(newAddress);
 
-//		final AddressData previousSelectedAddress = getCheckoutFacade().getCheckoutCart().getDeliveryAddress();
-		// Set the new address as the selected checkout delivery address
-		getCheckoutFacade().setDeliveryAddress(newAddress);
-//	
-		/*final CartData cartData = acerchemCheckoutFacade.getCheckoutCart();
-		populateCommonModelAttributes(model, cartData, addressForm);
-		return ControllerConstants.Views.Pages.MultiStepCheckout.AddEditDeliveryAddressPage;*/
+		acerchemCheckoutFacade.setDeliveryAddress(newAddress);
 		
-	//	return enterStep(model,redirectModel);
-		
-		return getCheckoutStep().currentStep();
+		return enterStep(model, redirectModel);
 	
 	}
 
@@ -335,29 +327,18 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 			final boolean hasSelectedAddressData = selectedAddressData != null;
 			if (hasSelectedAddressData)
 			{
-				try {
+				/*try {
 					CountryData countryData = selectedAddressData.getCountry();
 					acerchemCheckoutFacade.validateCartAddress(countryData);
 				}catch (AcerchemOrderException e){
                     GlobalMessages.addErrorMessage(model, e.getMessage());
-				}
+				}*/
 				acerchemCheckoutFacade.setDeliveryAddress(selectedAddressData);
 			}
 		}
 
-		//保存收货时间
-	//	acerchemCheckoutFacade.savePickUpDateForOrder(pickUpDate);
+		return enterStep(model, redirectAttributes);
 
-		//model.addAttribute("paymentInfos", acerchemCheckoutFacade.getSupportedCardTypes(selectedDeliveryModeCode));
-	//	return getCheckoutStep().currentStep();
-		
-		//return enterStep(model,redirectAttributes);
-		
-	        final CartData cartData = acerchemCheckoutFacade.getCheckoutCart();
-
-			populateCommonModelAttributes(model, cartData, new AddressForm());
-
-			return ControllerConstants.Views.Pages.MultiStepCheckout.AddEditDeliveryAddressPage;
 	}
 
     @RequestMapping(value = "/addPickUpDate", method = RequestMethod.GET)

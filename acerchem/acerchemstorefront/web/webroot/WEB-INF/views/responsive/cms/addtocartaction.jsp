@@ -29,7 +29,7 @@
     
     
 <div class="btn-set">
-	    <button class="btn btn-submit">Check Out</button>
+	   <!--  <button class="btn btn-submit">Check Out</button> -->
 <c:if test="${empty showAddToCart ? true : showAddToCart}">
 	<c:set var="buttonType">button</c:set>
 	<c:if test="${product.stock.stockLevelStatus.code ne 'outOfStock' }">
