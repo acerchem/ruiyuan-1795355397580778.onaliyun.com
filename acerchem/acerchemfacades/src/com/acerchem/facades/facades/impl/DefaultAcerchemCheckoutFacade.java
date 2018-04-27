@@ -24,6 +24,7 @@ import de.hybris.platform.core.model.order.delivery.DeliveryModeModel;
 import de.hybris.platform.core.model.order.payment.PaymentModeModel;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.deliveryzone.model.ZoneDeliveryModeModel;
 import de.hybris.platform.order.*;
 import de.hybris.platform.order.exceptions.CalculationException;
@@ -177,6 +178,11 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                 if (deliveryModeCode.equals("DELIVERY_MENTION")){
                     AddressModel addressModel = cartModel.getEntries().get(0).getDeliveryPointOfService().getAddress();
                     cartModel.setDeliveryAddress(addressModel);
+                }else{
+                    List<AddressModel> deliveryAddresses = getDeliveryService().getSupportedDeliveryAddressesForOrder(cartModel,true);
+                    if (deliveryAddresses !=null && deliveryAddresses.size()>0){
+                        cartModel.setDeliveryAddress(deliveryAddresses.get(0));
+                    }
                 }
                 //促销那块会把操作费，存储费不加上，在此处计算总价格和单价
                 recalculateCartTotalPrice(cartModel);
