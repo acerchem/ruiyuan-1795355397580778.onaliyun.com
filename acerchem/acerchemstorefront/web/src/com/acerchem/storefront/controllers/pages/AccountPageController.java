@@ -89,7 +89,9 @@ import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParamete
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -1211,6 +1213,28 @@ public class AccountPageController extends AbstractSearchPageController
 		return order(orderCode,model,redirectModel);
 	}
 	
+	@RequestMapping(value = "/extendedPickup/" + ORDER_CODE_PATH_VARIABLE_PATTERN, method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String extendedPickupDate(@PathVariable("orderCode") final String orderCode, 
+			final Model model,final RedirectAttributes redirectModel,final Integer days) throws CMSItemNotFoundException
+	{
+		final BaseStoreModel baseStoreModel = baseStoreService.getCurrentBaseStore();
+		final OrderModel order =  customerAccountService.getOrderForCode((CustomerModel) userService.getCurrentUser(), orderCode,baseStoreModel);
+		
+		Calendar c = Calendar.getInstance(); 
+		c.setTime(order.getPickUpDate()); 
+	    c.set(Calendar.DATE,c.get(Calendar.DATE)+days); 
+	    Date date=c.getTime();
+		
+		order.setPickUpDate(date);
+  		modelService.save(order);
+  		modelService.refresh(order);
+		
+		return order(orderCode,model,redirectModel);
+	}
+	
+	
+	
 	public void confirm(String orderCode,String confirm)
 	{
 		final BaseStoreModel baseStoreModel = baseStoreService.getCurrentBaseStore();
@@ -1258,6 +1282,17 @@ public class AccountPageController extends AbstractSearchPageController
 			  		order.setCustomerConfirmPay(true);
 					modelService.save(order);
 					modelService.refresh(order);
+			  	}
+			}
+			
+			if(confirm.equals("cancel"))
+			{
+				final String eventID = new StringBuilder().append(fulfilmentProcessDefinitionName).append("_ConfirmConsignmentStatusActionEvent").toString();
+				final BusinessProcessEvent event = BusinessProcessEvent.builder(eventID).withChoice("cancelOrder").build();
+				Boolean falg=businessProcessService.triggerEvent(event);  
+			  	if(falg)
+			  	{
+			  		
 			  	}
 			}
 			
