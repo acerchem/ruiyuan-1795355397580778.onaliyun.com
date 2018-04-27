@@ -10,12 +10,14 @@
  */
 package com.acerchem.fulfilmentprocess.actions.order;
 
+import org.apache.log4j.Logger;
+
 import de.hybris.platform.core.enums.OrderStatus;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 import de.hybris.platform.processengine.action.AbstractSimpleDecisionAction;
-
-import org.apache.log4j.Logger;
+import de.hybris.platform.processengine.action.AbstractSimpleDecisionAction.Transition;
+import de.hybris.platform.task.RetryLaterException;
 
 
 /**
@@ -25,34 +27,23 @@ import org.apache.log4j.Logger;
  * order (a typical case), it is recommended to use the OrderProcess as a parentClass instead of the plain
  * BusinessProcess.
  */
-public class SplitDeliveryModeAction extends AbstractSimpleDecisionAction<OrderProcessModel>
+public class CancelOrderStatusAction extends AbstractSimpleDecisionAction<OrderProcessModel>
 {
-	private static final Logger LOG = Logger.getLogger(SplitDeliveryModeAction.class);
+	private static final Logger LOG = Logger.getLogger(CancelOrderStatusAction.class);
 
-	private static final String DELIVERY_GROSS = "DELIVERY_GROSS";
 
-	
 	@Override
-	public Transition executeAction(final OrderProcessModel process)
-	{
+	public Transition executeAction(final OrderProcessModel process) {
+		// TODO Auto-generated method stub
+		
 		final OrderModel order = process.getOrder();
-
-		if (order == null)
-		{
-			LOG.error("Missing the order, exiting the process");
-			return Transition.NOK;
+		if(order != null){
+			if (OrderStatus.UNDELIVERED.equals(order.getStatus()))
+			{
+				setOrderStatus(order, OrderStatus.UNDELIVERED);
+				return Transition.OK;
+			}
 		}
-
-		if (order.getDeliveryMode().getCode().equals(DELIVERY_GROSS))
-		{
-			setOrderStatus(order, OrderStatus.UNDELIVERED);
-			return Transition.OK;
-		}
-		else
-		{
-			setOrderStatus(order, OrderStatus.UNDELIVERED);
-			return Transition.NOK;
-		}
+		return Transition.NOK;
 	}
-
 }
