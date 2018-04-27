@@ -18,7 +18,6 @@
  <div class="gen-content maxsucce">
 	<div class="g-cont">
 		<div class="maxstatu">
-			<img src="images/succ1.png"/>
 			<h3>Thank You For Your Order!</h3>
 			<p>Your Order Number is ${fn:escapeXml(orderData.code)}</p>
 		</div>
@@ -78,14 +77,20 @@
 			<!-- Billing -->
 			<div class="g-table">
 				<div class="g-title">
-					<span>Billing Information</span>
+					<span>Payment Info</span>
 				</div>
 				<div class="textlist">
 					
-					<span>Payment Info</span>
 					<div class="text">
-						xinyong pay<br/>
+					 <c:choose>
+					<c:when test="${orderData.paymentMode=='InvoicePayment'}">
+						INVOICEPAYMENT<br/>
 						
+						</c:when>
+						 <c:otherwise>
+						 CREDITPAYMENT<br/>
+						</c:otherwise>
+					</c:choose>	
 					</div>		
 				</div>			
 			</div>
