@@ -2844,7 +2844,7 @@ display: inline-table;
 }
 
 .prod-cont .g-descblock .g-table{
-	width: 500px;
+	max-width: 500px;
 }
 .prod-cont .g-descblock .g-table li{
 	padding:10px 0;
