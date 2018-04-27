@@ -24,9 +24,9 @@ import de.hybris.platform.processengine.BusinessProcessEvent;
 import de.hybris.platform.processengine.BusinessProcessService;
 import de.hybris.platform.servicelayer.model.ModelService;
 
-public class EmployeeCancellOrder extends AbstractComponentWidgetAdapterAware implements CockpitAction<OrderModel, Object>
+public class EmployeeCancellOrderAction extends AbstractComponentWidgetAdapterAware implements CockpitAction<OrderModel, Object>
 {
-	private static final Logger LOG = Logger.getLogger(EmployeeCancellOrder.class);
+	private static final Logger LOG = Logger.getLogger(EmployeeCancellOrderAction.class);
 	private static final String CURRENT_OBJECT = "currentObject";
 	
 	@Resource
