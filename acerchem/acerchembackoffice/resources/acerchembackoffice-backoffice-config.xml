@@ -357,7 +357,7 @@
 				<wz:content id="step1.content">
 					<wz:property-list root="consignment">
 						<wz:property qualifier="order"/>
-						<wz:property qualifier="consignment.order.shippingAddress" merge-mode="remove" validate="false"/>
+						<wz:property qualifier="shippingAddress" merge-mode="remove" validate="false"/>
 						<wz:property qualifier="status" validate="false"/>
 						<wz:property qualifier="creationtime" validate="false"/>
 						<wz:property qualifier="consignmentProcesses" validate="false"/>
