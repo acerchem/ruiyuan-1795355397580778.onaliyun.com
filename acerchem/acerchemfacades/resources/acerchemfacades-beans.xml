@@ -124,6 +124,8 @@
 		<property name="creditAccount"
 			type="de.hybris.platform.commercefacades.user.data.CustomerCreditAccountData" /><!-- 
 			信用账户 -->
+		<property name="orderCode" type="java.lang.String" />
+		<property name="productNumber" type="java.lang.Integer" />
 	</bean>
 	<!-- end -->
 
