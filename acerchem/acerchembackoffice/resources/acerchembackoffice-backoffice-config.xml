@@ -74,7 +74,8 @@
 	<context merge-by="type" parent="GenericItem" type="ConsignmentEntry" component="create-wizard" merge-mode="replace">
 		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="ConsignmentEntryConfigWizard">
 			<wz:prepare id="ConsignmentEntryPrepare">
-				<wz:initialize property="newConsignmentEntry" type="ConsignmentEntry"/>
+				<wz:initialize property="newConsignmentEntry" type="ctx.TYPE_CODE" /> 
+				<wz:assign property="newConsignmentEntry.consignment" value="ctx.parentObject" />
 			</wz:prepare>
 			<wz:step id="step1" label="create.UniasiaConfig.general.label" >
 				<wz:content id="step1.content">

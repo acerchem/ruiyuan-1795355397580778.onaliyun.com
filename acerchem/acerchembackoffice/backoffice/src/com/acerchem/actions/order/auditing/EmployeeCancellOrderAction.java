@@ -14,13 +14,14 @@ import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 
+import com.acerchem.core.service.AcerchemStockService;
 import com.hybris.cockpitng.actions.ActionContext;
 import com.hybris.cockpitng.actions.ActionResult;
 import com.hybris.cockpitng.actions.CockpitAction;
 import com.hybris.cockpitng.engine.impl.AbstractComponentWidgetAdapterAware;
 
+import de.hybris.platform.core.enums.OrderStatus;
 import de.hybris.platform.core.model.order.OrderModel;
-import de.hybris.platform.processengine.BusinessProcessEvent;
 import de.hybris.platform.processengine.BusinessProcessService;
 import de.hybris.platform.servicelayer.model.ModelService;
 
@@ -35,6 +36,17 @@ public class EmployeeCancellOrderAction extends AbstractComponentWidgetAdapterAw
 	@Resource
 	private ModelService modelService;
 	
+	@Resource
+	private AcerchemStockService acerchemStockService;
+	
+	public AcerchemStockService getAcerchemStockService() {
+		return acerchemStockService;
+	}
+
+	public void setAcerchemStockService(AcerchemStockService acerchemStockService) {
+		this.acerchemStockService = acerchemStockService;
+	}
+
 	public BusinessProcessService getBusinessProcessService() {
 		return businessProcessService;
 	}
@@ -50,16 +62,25 @@ public class EmployeeCancellOrderAction extends AbstractComponentWidgetAdapterAw
 		LOG.info("--------------------start-------------------");
 		OrderModel order = (OrderModel) ctx.getData();
 		LOG.info("---------------------------------------"+order.getOrderProcess().iterator().next().getCode());
-		final String eventID = new StringBuilder()//
-		          .append(order.getOrderProcess().iterator().next().getCode())//
-		          .append("_")//
-		    .append("ConfirmConsignmentStatusActionEvent")//
-		    .toString();
-		final BusinessProcessEvent event = BusinessProcessEvent.builder(eventID)
-			    .withChoice("cancelOrder").build();
-			  getBusinessProcessService().triggerEvent(event);
-		LOG.info("--------------------end-------------------"+order.getEmployeeConfirm());
-		return new ActionResult("success");
+		
+		if(order != null){
+			if (OrderStatus.COMPLETED.equals(order.getStatus()) || OrderStatus.DELIVERED.equals(order.getStatus()))
+			{
+				return new ActionResult("failed");
+			}else{
+				setOrderStatus(order, OrderStatus.CANCELLED);
+				acerchemStockService.releaseStock(order);
+				LOG.info("--------------------------------end CancelOrderStatusAction----------------------");
+				return new ActionResult("success");
+			}
+		}
+		LOG.info("--------------------end-------------------");
+		return new ActionResult("failed");
 	}
+	
+	private void setOrderStatus(OrderModel order, OrderStatus orderStatus) {
+		       order.setStatus(orderStatus);
+		      this.modelService.save(order);
+    }
 	
 }
