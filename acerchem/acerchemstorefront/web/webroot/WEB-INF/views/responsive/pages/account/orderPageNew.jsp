@@ -133,8 +133,7 @@
                                 </td>
                                 <td>
                                     <div class="tot">
-                                        <em><format:price priceData="${orderEntries.basePrice}" displayFreeForZero="true" /></em>
-                                        <i> <format:price priceData="${orderEntries.totalPrice}" displayFreeForZero="true"/></i>
+                                        <em><format:price priceData="${orderEntries.totalPrice}" displayFreeForZero="true"/></em>
                                     </div>
                                 </td>
                             </tr>
@@ -151,7 +150,7 @@
                             <span>Billing Information</span>
                         </div>
                         <div class="textlist">
-                            <span>Billing Address</span>
+                            <%-- <span>Billing Address</span>
                             <div class="text">
                                   <c:if test="${not storeAddress }">
                                       <c:if test="${not empty orderData.paymentInfo.billingAddress.title}">
@@ -171,7 +170,7 @@
                                       ${fn:escapeXml(orderData.paymentInfo.billingAddress.country.name)}&nbsp;${fn:escapeXml(orderData.paymentInfo.billingAddress.postalCode)}
                                   <br/>
                                       ${fn:escapeXml(orderData.paymentInfo.billingAddress.phone)}
-                            </div>
+                            </div> --%>
                             <span>Payment Type</span>
                             <div class="text">
                                 MasterCard<br/>
@@ -201,14 +200,24 @@
 									<em>Delivery</em>
 									<i><format:price priceData="${orderData.deliveryCost}"/></i>
 								</span>
+								
+								<span>
+									<em>Storage</em>
+									<i><format:price priceData="${orderData.storageCost}"/></i>
+								</span>
+								
+								<span>
+									<em>Operate</em>
+									<i><format:price priceData="${orderData.operateCost}"/></i>
+								</span>
 		
 		                        <span>
-									<em>Discount Amount</em>
+									<em>Discount</em>
 									<i>- <format:price priceData="${orderData.orderDiscounts}"/></i>
 								</span>
 		
 		                        <span>
-									<em>Order Total</em>
+									<em>Total</em>
 									<i><format:price priceData="${orderData.totalPrice}"/></i>
 								</span>
 		                     </div>
