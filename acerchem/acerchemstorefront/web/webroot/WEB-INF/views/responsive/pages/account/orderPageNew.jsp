@@ -60,9 +60,7 @@
 										<a href="${confirmOrder}${orderData.code}?confirm=order" style="${!orderData.customerConfirm && (orderData.status=='UNCONFIRMED'||orderData.status=='CHECKED_VALID')?'':'display: none;'}">Confirm Order</a>
 										<a href="${confirmOrder}${orderData.code}?confirm=receipt" style="${!orderData.customerConfirmDelivery && orderData.status=='UNDELIVERED'?'':'display: none;'}">Confirm Delivery</a>
 										<a href="${confirmOrder}${orderData.code}?confirm=payment" style="${!orderData.customerConfirmPay && orderData.status=='UNPAIED'?'':'display: none;'}">Confirm Payment</a>
-										
-										
-										<a href="${confirmOrder}${orderData.code}?confirm=cancel" style="${orderData.status=='CANCELLED'?'display: none;':''}" >Cancel Order</a>
+										<a href="${confirmOrder}${orderData.code}?confirm=cancel" style="${canCancel&&orderData.status!='CANCELLED'?'':'display: none;'}" class="cancelOrder">Cancel Order</a>
 									</i>
 								</span>
                             </div>
@@ -235,7 +233,7 @@
                         </div>
                         <div>
                             <span>Pickup Date:<fmt:formatDate value="${orderData.pickupDateOfExtended==null?orderData.pickUpDate:orderData.pickupDateOfExtended}" pattern="yyyy-MM-dd"/> <br/></span>
-                            <div style="${orderData.pickupDateOfExtended==null?'':'display: none;'}">
+                            <div style="${orderData.pickupDateOfExtended!=null?'':'display: none;'}">
 				             	<span>
 				             		Pickup date extended days(Max days:${maxday}):
 				             		<input type="text" name='pickupDays' style="width:80px; height:40px;"/>
