@@ -1,0 +1,39 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+# ImpEx for Importing Products stock levels into acerchem Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog=acerchemProductCatalog
+$productCatalogName=acerchem Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+$vendor=default
+
+INSERT_UPDATE Warehouse;code[unique=true];name[lang=en];name[lang=de];vendor(code)[default=$vendor];default
+#;USA;Warehouse South;Warehouse South;;true
+#;USA;Warehouse East;Warehouse East;;true
+#;United Kingdom;Warehouse West;Warehouse West;;true
+#;Holland;Warehouse North;Warehouse North;;true
+;USA;USA;;true
+;United Kingdom;United Kingdom;;true
+;Holland;Holland;;true
+#shaun
+;Europe;;true
+;Poland;;true
+
+
+INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];reserved
+;31;USA;notSpecified;1;0;0;0;300938;0
+;4;Holland;notSpecified;1;0;0;0;1382080;0
+
+
+UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehouse(code));vendors(code)
+;300938;;300938:USA;
+;1382080;;1382080:Holland;

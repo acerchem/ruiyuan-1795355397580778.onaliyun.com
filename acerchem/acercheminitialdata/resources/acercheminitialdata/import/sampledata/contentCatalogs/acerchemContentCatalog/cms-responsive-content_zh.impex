@@ -40,13 +40,13 @@ UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$
 ;;ColourFilmsCategoryLink;"彩色胶卷"
 ;;ComponentsCategoryLink;"部件"
 ;;ContactUsLink;"联系我们"
-;;DigitalCamerasCategoryLink;"数码相机"
+;;DigitalCamerasCategoryLink;"Vitamin"
 ;;DigitalCompactsCategoryLink;"紧凑型相机"
 ;;DigitalSLRCategoryLink;"单反相机"
 ;;DocumentationLink;"文档"
 ;;FAQLink;"常见问题解答"
 ;;FacebookLink;"Facebook"
-;;FilmCamerasCategoryLink;"胶卷相机"
+;;FilmCamerasCategoryLink;"Plant Extract"
 ;;FlashMemoryCategoryLink;"闪存"
 ;;FujifilmBrandCategoryLink;"富士"
 ;;HandheldCamcordersCategoryLink;"手持摄像机"
@@ -111,7 +111,7 @@ UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$la
 ;;CameraAccessoriesNavNode;"相机配件和耗材"
 ;;DigitalCamerasNavNode;"数码相机"
 ;;acerchemNavNode;"电子产品站点"
-;;FilmCamerasNavNode;"胶卷相机"
+;;FilmCamerasNavNode;"Plant Extract"
 ;;FlashMemoryNavNode;"闪存"
 ;;FollowUsNavNode;"关注我们"
 ;;HandheldCamcordersNavNode;"手持摄像机"
@@ -248,7 +248,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-homepage-spalsh-zh;Elec_480x320_HomeSpeed_ZH_01_480W.jpg,Elec_770x350_HomeSpeed_ZH_01_770W.jpg,Elec_960x330_HomeSpeed_ZH_01_960W.jpg,Elec_1400x440_HomeSpeed_ZH_01_1400W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemHompageSplashBannerComponent;acerchem-homepage-spalsh-zh
+;;acerchemHompageSplashBannerComponent;
 
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images]
 #;mobile;Elec_480x118_HomeDiscount_ZH_01_480W.jpg;$siteResource/images/banners/homepage/responsive/Elec_480x118_HomeDiscount_ZH_01_480W.jpg;Elec_480x118_HomeDiscount_ZH_01_480W.jpg;"选购相机配件及耗材，节省多多";
@@ -260,7 +260,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-homepage-discount-zh;Elec_480x118_HomeDiscount_ZH_01_480W.jpg,Elec_770x80_HomeDiscount_ZH_01_770W.jpg,Elec_960x80_HomeDiscount_ZH_01_960W.jpg,Elec_1400x80_HomeDiscount_ZH_01_1400W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemHompageDiscountBannerComponent;acerchem-homepage-discount-zh;
+;;acerchemHompageDiscountBannerComponent;
 
 ###  Home page slot 2A  ####
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images]
@@ -272,7 +272,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-homepage-light-fam-zh;Elec_200x150_HomeFam_ZH_01_200W.jpg,Elec_240x180_HomeFam_ZH_01_240W.jpg,Elec_350x262_HomeFam_ZH_01_350W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemHompageLightFamBannerComponent;acerchem-homepage-light-fam-zh
+;;acerchemHompageLightFamBannerComponent;
 
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images]
 #;tablet;Elec_200x150_HomeFamLight_ZH_01_200W.jpg;$siteResource/images/banners/homepage/responsive/Elec_200x150_HomeFamLight_ZH_01_200W.jpg;Elec_200x150_HomeFamLight_ZH_01_200W.jpg;"相机镜头";
@@ -283,7 +283,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-homepage-light-text-zh;Elec_200x150_HomeFamLight_ZH_01_200W.jpg,Elec_240x180_HomeFamLight_ZH_01_240W.jpg,Elec_350x262_HomeFamLight_ZH_01_350W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemHompageLightFamTextBannerComponent;acerchem-homepage-light-text-zh
+;;acerchemHompageLightFamTextBannerComponent;
 
 #### Home section 2B #######
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images]
@@ -295,7 +295,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-homepage-camcorders-zh;Elec_200x150_HomeKid_ZH_01_200W.jpg,Elec_240x180_HomeKid_ZH_01_240W.jpg,Elec_350x262_HomeKid_ZH_01_350W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemHompageCamcordersBannerComponent;acerchem-homepage-camcorders-zh
+;;acerchemHompageCamcordersBannerComponent;
 
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images]
 #;tablet;Elec_200x150_HomeCaptureFirst_ZH_01_200W.jpg;$siteResource/images/banners/homepage/responsive/Elec_200x150_HomeCaptureFirst_ZH_01_200W.jpg;Elec_200x150_HomeCaptureFirst_ZH_01_200W.jpg;"摄像机";
@@ -306,7 +306,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-homepage-camcorders-02-zh;Elec_200x150_HomeCaptureFirst_ZH_01_200W.jpg,Elec_240x180_HomeCaptureFirst_ZH_01_240W.jpg,Elec_350x262_HomeCaptureFirst_ZH_01_350W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemHompageCamcordersChildBannerComponent;acerchem-homepage-camcorders-02-zh
+;;acerchemHompageCamcordersChildBannerComponent;
 ### Section 4
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images]
 #;tablet;Elec_200x200_HomeSmallDiscount_ZH_01_200W.jpg;$siteResource/images/banners/homepage/responsive/Elec_200x200_HomeSmallDiscount_ZH_01_200W.jpg;Elec_200x200_HomeSmallDiscount_ZH_01_200W.jpg;"佳能 100 KpixelM CMOS 摄像头";
@@ -317,7 +317,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-homepage-sm-discount-zh;Elec_200x200_HomeSmallDiscount_ZH_01_200W.jpg,Elec_240x240_HomeSmallDiscount_ZH_01_240W.jpg,Elec_350x350_HomeSmallDiscount_ZH_01_350W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemHompageSmDiscountBannerComponent;acerchem-homepage-sm-discount-zh
+;;acerchemHompageSmDiscountBannerComponent;
 
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images]
 #;tablet;Elec_200x200_HomeShop_ZH_01_200W.jpg;$siteResource/images/banners/homepage/responsive/Elec_200x200_HomeShop_ZH_01_200W.jpg;Elec_200x200_HomeShop_ZH_01_200W.jpg;"罗技 QuickCam for Notebook Pro";
@@ -328,7 +328,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-homepage-shop-zh;Elec_200x200_HomeShop_ZH_01_200W.jpg,Elec_240x240_HomeShop_ZH_01_240W.jpg,Elec_350x350_HomeShop_ZH_01_350W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemHompageShopBannerComponent;acerchem-homepage-shop-zh
+;;acerchemHompageShopBannerComponent;
 
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images]
 #;tablet;Elec_200x200_HomeShipment_ZH_01_200W.jpg;$siteResource/images/banners/homepage/responsive/Elec_200x200_HomeShipment_ZH_01_200W.jpg;Elec_200x200_HomeShipment_ZH_01_200W.jpg;"三星 NV10 紧凑型相机";
@@ -339,7 +339,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-homepage-shipment-zh;Elec_200x200_HomeShipment_ZH_01_200W.jpg,Elec_240x240_HomeShipment_ZH_01_240W.jpg,Elec_350x350_HomeShipment_ZH_01_350W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemHompageShipmentBannerComponent;acerchem-homepage-shipment-zh
+;;acerchemHompageShipmentBannerComponent;
 
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images]
 #;tablet;Elec_200x200_HomeService_ZH_01_200W.jpg;$siteResource/images/banners/homepage/responsive/Elec_200x200_HomeService_ZH_01_200W.jpg;Elec_200x200_HomeService_ZH_01_200W.jpg;"索尼 Light HVL-20DW2";
@@ -350,7 +350,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-homepage-service-zh;Elec_200x200_HomeService_ZH_01_200W.jpg,Elec_240x240_HomeService_ZH_01_240W.jpg,Elec_350x350_HomeService_ZH_01_350W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemHompageServiceBannerComponent;acerchem-homepage-service-zh
+;;acerchemHompageServiceBannerComponent;
 
 
 ### Section 5
@@ -364,7 +364,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-homepage-free-del-zh;Elec_475x119_HomeFreeDel_ZH_01_475W.jpg,Elec_770x50_HomeFreeDel_ZH_01_770W.jpg,Elec_960x50_HomFreeDel_ZH_01_960W.jpg,Elec_1400x50_HomeFreeDel_ZH_01_1400W.jpg	
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemHompageFreeDelBannerComponent;acerchem-homepage-free-del-zh
+;;acerchemHompageFreeDelBannerComponent;
 
 ##### DSLR Category Page ######
 
@@ -378,7 +378,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-slr-category-splash-zh;Elec_480x320_Category11_ZH_01_480W.jpg,Elec_770x350_Category11_ZH_01_770W.jpg,Elec_1400x440_Category11_ZH_01_1400W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemSLRSplashBannerComponent;acerchem-slr-category-splash-zh
+;;acerchemSLRSplashBannerComponent;
 
 ##### Section 2
 # A330
@@ -391,7 +391,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-sony-A330-banner-zh;Elec_350x350_Category02_ZH_01_350W.jpg,Elec_200x200_Category02_ZH_01_200W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemSonyA330BannerComponent;acerchem-sony-A330-banner-zh
+;;acerchemSonyA330BannerComponent;
 
 #Canon 500D
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
@@ -402,7 +402,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-canon-500D-banner-zh;Elec_350x350_Category07_ZH_01_350W.jpg,Elec_200x200_Category07_ZH_01_200W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemCanon500DBannerComponent;acerchem-canon-500D-banner-zh
+;;acerchemCanon500DBannerComponent;
 
 #Canon 450D
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
@@ -413,7 +413,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-canon-450-banner-zh;Elec_350x350_Category06_ZH_01_350W.jpg,Elec_200x200_Category06_ZH_01_200W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemCanon450DBannerComponent;acerchem-canon-450-banner-zh
+;;acerchemCanon450DBannerComponent;
 
 # Sony A100
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
@@ -424,7 +424,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-sony-a100-banner-zh;Elec_350x350_Category05_ZH_01_350W.jpg,Elec_200x200_Category05_ZH_01_200W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemSonyA100HBannerComponent;acerchem-sony-a100-banner-zh
+;;acerchemSonyA100HBannerComponent;
 
 # Sony Alpha 200
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
@@ -435,7 +435,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-sony-A200-banner-zh;Elec_350x350_Category03_ZH_01_350W.jpg,Elec_200x200_Category03_ZH_01_200W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemSonyA200BannerComponent;acerchem-sony-A200-banner-zh
+;;acerchemSonyA200BannerComponent;
 
 # Sony Alpha 350
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
@@ -446,7 +446,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-sony-Alpha-350-banner-zh;Elec_350x350_Category01_ZH_01_350W.jpg,Elec_200x200_Category01_ZH_01_200W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemSonyAlpha350BannerComponent;acerchem-sony-Alpha-350-banner-zh
+;;acerchemSonyAlpha350BannerComponent;
 
 ##### Section 3
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
@@ -458,7 +458,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-save-big-banner-zh;Elec_480x118_Category10_ZH_01_480W.jpg,Elec_770x80_Category10_ZH_01_770W.jpg,Elec_1400x140_Category10_ZH_01_1400W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemSaveBigDLSRBannerComponent;acerchem-save-big-banner-zh
+;;acerchemSaveBigDLSRBannerComponent;
 
 ##### End DSLR Category Page ######
 
@@ -519,7 +519,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-errorpage-pagenotfound-zh;Elec_480x170_ErrorPage_ZH_480W.svg,Elec_770x221_ErrorPage_ZH_770W.svg,Elec_960x275_ErrorPage_ZH_960W.svg,Elec_1400x401_ErrorPage_ZH_1400W.svg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;$mediaContainer
-;;acerchemErrorpageBannerComponent;acerchem Error Page Banner Component;acerchemErrorpageBannerComponent;acerchem-errorpage-pagenotfound-zh
+;;acerchemErrorpageBannerComponent;acerchem Error Page Banner Component;acerchemErrorpageBannerComponent;
 
 # CMS Footer Navigation Component
 UPDATE FooterNavigationComponent;$contentCV[unique=true];uid[unique=true];notice[lang=$lang]

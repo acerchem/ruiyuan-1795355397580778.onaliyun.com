@@ -1,0 +1,27 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+#******************************This file is generated - please do not edit it. It will be regenerated after every build.********************************#
+# ImpEx template for Importing all Localisations for Products in the acerchem Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog=acerchemProductCatalog
+$productCatalogName=acerchem Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+$lang=en
+
+
+# Update allProducts with localisations
+UPDATE Product;code[unique=true];$catalogVersion;name[lang=$lang];summary[lang=$lang];description[lang=$lang]
+ 
+ ;1382080;;EOS450D + 18-55 IS Kit;EOS450D + 18-55 IS Kit - 12.2 MP, 4272 × 2848, 3:2 CMOS, 3"" TFT, USB 2.0;The EOS 450D blends uncompromising performance with ease of use in a lightweight, ergonomic body. Capture your world with a 12.2 Megapixel CMOS sensor and the very latest Canon technologies.<br/>Features<br/><br/>- 12.2 MP CMOS sensor<br/>- 3.5fps<br/>- 9-point wide-area AF<br/>- EOS Integrated Cleaning System<br/>- 3.0” LCD with Live View mode<br/>- DIGIC III processor<br/>- Large, bright viewfinder<br/>- Total image control<br/>- Compact and lightweight<br/>- Compatible with EF/EF-S lenses and EX Speedlites
+ ;300938;;Photosmart E317 Digital Camera;Point and shoot simplicity in a 5 MP camera.;Get point and shoot simplicity plus crisp, true-to-life photos with this stylish and easy-to-use camera.<br/><br/>Get close in with 4x digital zoom, review via the clear 3.8 cm LCD then print great 10 × 15 cm photos and enlargements up to poster size.
+ 

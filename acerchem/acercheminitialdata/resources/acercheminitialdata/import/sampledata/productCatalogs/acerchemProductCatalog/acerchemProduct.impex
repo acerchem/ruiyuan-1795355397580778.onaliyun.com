@@ -39,26 +39,24 @@ INSERT_UPDATE Unit;code[unique=true];name[lang=en];unitType
 ;kg;kg;kg
 
 INSERT_UPDATE Product;packageWeight;packageType;netWeight;grossWeight;specification;CAS;unitCalculateRato;code[unique=true];$supercategories;manufacturerName;manufacturerAID;unit(code);ean;variantType(code);$catalogVersion;$approved
-;10;Carton;5;8;EP/USP;303-98-0;1;000001;576, brand_1;HP;zhangyin;kg;
-;20;Drum;12;8;Enterprise Standard;2420-56-6;3;AC05080;576, brand_1;HP;Coenzyme Q10 98% HPLC;kg;
-;25;Bag;15;18;USP;50-81-7;5;AC03131;576, brand_1;HP;Tribulus 90% UV THC FREE;kg;
-;25;Carton;14;16;EP/USP;2420-56-6;2;AC01361;576, brand_1;HP;Vitamin C Powder;kg;
-;10;Drum;6;8;Enterprise Standard;5949-29-10;7;AC01710;576, brand_1;HP;Alpha Lipoic Acid;kg;
+;20;Drum;12;8;Enterprise Standard;2420-56-6;3;AC05080;576;HP;Coenzyme Q10 98% HPLC;kg;
+;25;Bag;15;18;USP;50-81-7;5;AC03131;576;HP;Tribulus 90% UV THC FREE;kg;
+;25;Carton;14;16;EP/USP;2420-56-6;2;AC01361;576;HP;Vitamin C Powder;kg;
+;10;Drum;6;8;Enterprise Standard;5949-29-10;7;AC01710;576;HP;Alpha Lipoic Acid;kg;
 #shaun
-;10;Carton;5;15;EP/USP;303-98-0;1;AC05080a;3510, brand_1;HP;Coenzyme Q10 98% HPLC;kg;
-;10;Carton;5;15;EP/USP;303-98-0;1;AC05080b;3510, brand_1;HP;Coenzyme Q10 98% HPLC;kg;
-;25;Drum;5;30;EP/USP;22888-70-6;4;AC03390a;3510, brand_1;HP;Milk Thistle 80% UV (Silybin + Isosilybin 30% HPLC);kg;
-;25;Drum;5;30;Enterprise Standard;84650-60-2;4;AC03138a;3510, brand_1;HP;Green tea extract Polyphenol 95%, EGCG 45%;kg;
-;25;Drum;5;30;Enterprise Standard;84650-60-2;4;AC03887a;3510, brand_1;HP;Green tea extract Polyphenol 95%, EGCG 50%;kg;
-;25;Drum;5;30;Enterprise Standard;84929-27-1 ;4;AC03142a;3510, brand_1;HP;Grapse Seed extract Procyanidine 95%;kg;
-;25;Drum;5;30;EP/USP;31284-96-5;4;AC02345a;3510, brand_1;HP;D-Glucosamine Sulphate 2KCL 40-80mesh ;kg;
-;25;Drum;5;30;EP/USP;31284-96-5;4;AC02354a;3510, brand_1;HP;D-Glucosamine Sulphate 2KCL DC;kg;
-;25;Drum;5;30;Enterprise Standard;9007-28-7;4;AC05003a;3510, brand_1;HP;Chondroitin Sulphate Bovine CPC 90%;kg;
+;10;Carton;5;15;EP/USP;303-98-0;1;AC05080a;571;HP;Coenzyme Q10 98% HPLC;kg;
+;10;Carton;5;15;EP/USP;303-98-0;1;AC05080b;571;HP;Coenzyme Q10 98% HPLC;kg;
+;25;Drum;5;30;EP/USP;22888-70-6;4;AC03390a;575;HP;Milk Thistle 80% UV (Silybin + Isosilybin 30% HPLC);kg;
+;25;Drum;5;30;Enterprise Standard;84650-60-2;4;AC03138a;575;HP;Green tea extract Polyphenol 95%, EGCG 45%;kg;
+;25;Drum;5;30;Enterprise Standard;84650-60-2;4;AC03887a;575;HP;Green tea extract Polyphenol 95%, EGCG 50%;kg;
+;25;Drum;5;30;Enterprise Standard;84929-27-1 ;4;AC03142a;575;HP;Grapse Seed extract Procyanidine 95%;kg;
+;25;Drum;5;30;EP/USP;31284-96-5;4;AC02345a;576;HP;D-Glucosamine Sulphate 2KCL 40-80mesh ;kg;
+;25;Drum;5;30;EP/USP;31284-96-5;4;AC02354a;576;HP;D-Glucosamine Sulphate 2KCL DC;kg;
+;25;Drum;5;30;Enterprise Standard;9007-28-7;4;AC05003a;576;HP;Chondroitin Sulphate Bovine CPC 90%;kg;
 
 
 # Insert Product References
 INSERT_UPDATE ProductReference;source(code,$catalogVersion)[unique=true];target(code,$catalogVersion)[unique=true];referenceType(code);active;preselected
-;358639;000001;ACCESSORIES;true;false
 ;358639;AC05080;ACCESSORIES;true;false
 ;358639;AC03131;ACCESSORIES;true;false
 ;358639;AC01361;ACCESSORIES;true;false
@@ -77,7 +75,6 @@ INSERT_UPDATE ProductReference;source(code,$catalogVersion)[unique=true];target(
 
 
 INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];reserved
-;29;USA;notSpecified;1;0;0;0;000001;0
 ;30;USA;notSpecified;1;0;0;0;AC05080;0
 ;3;USA;notSpecified;1;0;0;0;AC03131;0
 ;10;USA;notSpecified;1;0;0;0;AC01361;0
@@ -94,7 +91,6 @@ INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(co
 ;20;USA;notSpecified;1;0;0;0;AC05003a;0
  
 UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehouse(code));vendors(code)
-;000001;;000001:USA;
 ;AC05080;;AC05080:USA;
 ;AC03131;;AC03131:USA;
 ;AC01361;;AC01361:USA;
@@ -114,7 +110,6 @@ UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehou
 
  # Update allProducts with localisations
 UPDATE Product;code[unique=true];$catalogVersion;name[lang=$lang];summary[lang=$lang];description[lang=$lang]
-;000001;;one;one;这不是一个杯子，请注意<br/><br/><b>Includes:</b><br/>- Rechargeable info-lithium Battery.<br/>- Charger.<br/>- Carry Case.
 ;AC05080;;Coenzyme Q10 98% HPLC;Coenzyme Q10 98% HPLC;Heart & Cardiovascular<br/><br/><b>Includes:</b><br/>- Vitamin <br/>- C59H90O4<br/>- EP/USP
 ;AC03131;;Tribulus 90% UV THC FREE;Tribulus 90% UV THC FREE;Sports Nutrition<br/><br/><b>Includes:</b><br/>- Plant Extract <br/>- 22153-44-2<br/>- Enterprise Standard
 ;AC01361;;Vitamin C Powder;Vitamin C Powder;Sports Nutrition<br/><br/><b>Includes:</b><br/>- Vitamin <br/>- C6H8O6 <br/>- EP/USP
@@ -251,7 +246,6 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion
 
 
 UPDATE Product;code[unique=true];$picture;$thumbnail;$detail;$others;$normal;$thumbnails;$galleryImages;$catalogVersion
-;000001;/300Wx300H/zhangyin.jpg;/96Wx96H/zhangyin.jpg;/1200Wx1200H/zhangyin.jpg;/515Wx515H/zhangyin.jpg,/65Wx65H/zhangyin.jpg,/30Wx30H/zhangyin.jpg;/300Wx300H/zhangyin.jpg;/96Wx96H/zhangyin.jpg;zhangyin;
 ;AC05080;/300Wx300H/11.png;/96Wx96H/11.png;/1200Wx1200H/11.png;/515Wx515H/11.png,/65Wx65H/11.png,/30Wx30H/11.png;/300Wx300H/11.png;/96Wx96H/11.png;Coenzyme Q10 98% HPLC;
 ;AC03131;/300Wx300H/12.png;/96Wx96H/12.png;/1200Wx1200H/12.png;/515Wx515H/12.png,/65Wx65H/12.png,/30Wx30H/12.png;/300Wx300H/12.png;/96Wx96H/12.png;Tribulus 90% UV THC FREE;
 ;AC01361;/300Wx300H/13.png;/96Wx96H/13.png;/1200Wx1200H/13.png;/515Wx515H/13.png,/65Wx65H/13.png,/30Wx30H/13.png;/300Wx300H/13.png;/96Wx96H/13.png;Vitamin C Powder;
@@ -276,7 +270,6 @@ $feature3=@Tape type, 2217[$clAttrModifiers];  # Tape type
 $feature5=@Source data-sheet, 6617[$clAttrModifiers];  # Source data-sheet
 $feature6=@Tape thickness, 2137[$clAttrModifiers];  # Tape thickness in micron (µm)
 INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature5;$feature6;$catalogVersion;
- ;000001;<ignore>;<ignore>;MiniDV;ICEcat.biz;<ignore>;
  ;AC05080;<ignore>;<ignore>;MiniDV;ICEcat.biz;<ignore>;
  ;AC03131;<ignore>;<ignore>;MiniDV;ICEcat.biz;<ignore>;
  ;AC01361;<ignore>;<ignore>;MiniDV;ICEcat.biz;<ignore>;
@@ -294,7 +287,6 @@ INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature5;
 
 
 UPDATE Product;code[unique=true];$approved;$catalogVersion;
-;000001
 ;AC05080
 ;AC03131
 ;AC01361
@@ -312,21 +304,20 @@ UPDATE Product;code[unique=true];$approved;$catalogVersion;
 
 
 INSERT_UPDATE PriceRow;productId[unique=true];unit(code[unique=true,default=kg]);currency(isocode)[unique=true];price;minqtd;unitFactor;net
-;000001;kg;USD;15888;1;1;false
-;AC05080;kg;USD;18786;1;1;false
-;AC03131;kg;USD;23333;1;1;false
-;AC01361;kg;USD;66321;1;1;false
-;AC01710;kg;USD;58124;1;1;false
+;AC05080;kg;USD;100;1;1;false
+;AC03131;kg;USD;200;1;1;false
+;AC01361;kg;USD;300;1;1;false
+;AC01710;kg;USD;400;1;1;false
 #shaun
-;AC05080a;kg;USD;1024;1;1;false
-;AC05080b;kg;USD;1025;1;1;false
-;AC03390a;kg;USD;1026;1;1;false
-;AC03138a;kg;USD;1027;1;1;false
-;AC03887a;kg;USD;1028;1;1;false
-;AC03142a;kg;USD;1029;1;1;false
-;AC02345a;kg;USD;1030;1;1;false
-;AC02354a;kg;USD;1031;1;1;false
-;AC05003a;kg;USD;1032;1;1;false
+;AC05080a;kg;USD;500;1;1;false
+;AC05080b;kg;USD;600;1;1;false
+;AC03390a;kg;USD;700;1;1;false
+;AC03138a;kg;USD;800;1;1;false
+;AC03887a;kg;USD;900;1;1;false
+;AC03142a;kg;USD;1000;1;1;false
+;AC02345a;kg;USD;200;1;1;false
+;AC02354a;kg;USD;400;1;1;false
+;AC05003a;kg;USD;600;1;1;false
 
 
 
@@ -341,19 +332,14 @@ INSERT_UPDATE PriceRow;productId[unique=true];unit(code[unique=true,default=kg])
 
 
 INSERT_UPDATE StockLevel;available;warehouse(code)[default='Shinbashi',unique=true];inStockStatus(code)[default='notSpecified'];overSelling;preOrder;productCode[unique=true];reserved
-#;8;;;0;0;000001;0
 
 INSERT_UPDATE StockLevel;available;warehouse(code)[default='Nakano',unique=true];inStockStatus(code)[default='notSpecified'];overSelling;preOrder;productCode[unique=true];reserved
-#;7;;;0;0;000001;0
  
 INSERT_UPDATE StockLevel;available;warehouse(code)[default='Misato',unique=true];inStockStatus(code)[default='notSpecified'];overSelling;preOrder;productCode[unique=true];reserved
-#;3;;;0;0;000001;0
 
 INSERT_UPDATE StockLevel;available;warehouse(code)[default='Ichikawa',unique=true];inStockStatus(code)[default='notSpecified'];overSelling;preOrder;productCode[unique=true];reserved
-#;7;;;0;0;000001;0
 
 INSERT_UPDATE StockLevel;available;warehouse(code)[default='Chiba',unique=true];inStockStatus(code)[default='notSpecified'];overSelling;preOrder;productCode[unique=true];reserved
-#;12;;;0;0;000001;0
 
 
 #shaun

@@ -347,7 +347,7 @@ INSERT_UPDATE ClassificationAttribute;$classSystemVersion;code[unique=true]
 ;;Video compression formats, 2225
 ;;Recharge indicator, 4033
 ;;Packaging length, 4932
-;;Mounting, 1867
+#;;Mounting, 1867
 ;;Quantity per box, 2055
 ;;Form factor, 771
 ;;Plug and Play, 775
@@ -1067,7 +1067,7 @@ INSERT_UPDATE ClassAttributeAssignment;$class;$attribute;position;$unit;attribut
  ;633;Lamp power, 1170;12;44;number
  ;633;Source data-sheet, 6617;15;300;
  ;634;Tripod legs, 1868;0;300;
- ;634;Mounting, 1867;1;300;
+# ;634;Mounting, 1867;1;300;
  ;634;Colour of product, 1766;2;300;
  ;634;Tripod head, 1869;3;300;
  ;634;Special features, 86;5;300;;true

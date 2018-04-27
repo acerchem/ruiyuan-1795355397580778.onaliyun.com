@@ -55,10 +55,11 @@
 		<property name="rootCategory" value="1"/>
 		<!-- '1' is the root icecat category -->
 	</bean>
-	<bean id="acerchemBrandCategorySource" parent="abstractCategorySource">
+	<!-- <bean id="acerchemBrandCategorySource" parent="abstractCategorySource">
+	shaun 
 		<property name="rootCategory" value="brands"/>
-		<!-- 'brands' is the root of the brands hierarchy -->
-	</bean>
+		'brands' is the root of the brands hierarchy
+	</bean> -->
 
     <bean id="apparelCategorySource" parent="abstractCategorySource">
 		<property name="rootCategory" value="categories"/>
@@ -88,15 +89,15 @@
 	<bean id="acerchemCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
 		<property name="categorySource" ref="acerchemCategorySource"/>
 	</bean>
-	<bean id="acerchemBrandCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
+	<!-- <bean id="acerchemBrandCategoryCodeValueProvider" parent="abstractCategoryCodeValueProvider">
 		<property name="categorySource" ref="acerchemBrandCategorySource"/>
-	</bean>
+	</bean> -->
 	<bean id="acerchemCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
 		<property name="categorySource" ref="acerchemCategorySource"/>
 	</bean>
-	<bean id="acerchemBrandCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
+<!-- 	<bean id="acerchemBrandCategoryNameValueProvider" parent="abstractCategoryNameValueProvider">
 		<property name="categorySource" ref="acerchemBrandCategorySource"/>
-	</bean>
+	</bean> -->
 
 	
 
