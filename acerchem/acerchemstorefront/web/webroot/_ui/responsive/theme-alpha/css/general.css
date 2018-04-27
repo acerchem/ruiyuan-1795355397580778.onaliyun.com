@@ -1,4 +1,3 @@
-
 body{
 	font-size: 14px;
 	line-height: 1.5em;
@@ -946,7 +945,7 @@ textarea{
 /*span 1/4*/
 .g-table .item span{
 	padding-top: 20px;
-	width:25%;
+	/*width:25%;*/
 	line-height: 2em;
 	text-align: left;
 }
