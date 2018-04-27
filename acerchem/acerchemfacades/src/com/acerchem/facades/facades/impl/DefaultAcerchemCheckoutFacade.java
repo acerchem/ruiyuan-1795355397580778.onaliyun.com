@@ -295,21 +295,8 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
         	  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         	  cartData.setPickUpdate(sdf.format(cartModel.getPickUpDate()));
             }
-            cartData.setIsUseFutureStock(cartModel.getEntries().get(0).getIsUseFutureStock());
 
-            if (cartModel.getEntries()!=null && cartModel.getEntries().size()>0){
-                boolean isUsefutureStock = cartModel.getEntries().get(0).getIsUseFutureStock();
-                cartData.setIsUseFutureStock(isUsefutureStock);
-                for (AbstractOrderEntryModel aoe: cartModel.getEntries()){
-                    if (isUsefutureStock){
-                        StockLevelModel stockLevelModel = stockService.getStockLevel(aoe.getProduct(),aoe.getDeliveryPointOfService().getWarehouses().get(0));
-                        cartData.setDeliveryDays(stockLevelModel.getPreOrderReleaseDay());
-                    }else{
-                        StockLevelModel stockLevelModel = stockService.getStockLevel(aoe.getProduct(),aoe.getDeliveryPointOfService().getWarehouses().get(0));
-                        cartData.setDeliveryDays(stockLevelModel.getAvaPreOrderReleaseDay());
-                    }
-                }
-            }
+            setOrderDeliveryDays(cartData, cartModel);
 
             for (OrderEntryData orderEntryData: cartData.getEntries()){
                 BigDecimal basePrice = orderEntryData.getTotalPrice().getValue().divide(BigDecimal.valueOf(orderEntryData.getQuantity()));
@@ -322,7 +309,29 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
         return cartData;
     }
 
-	@Override
+    private void setOrderDeliveryDays(CartData cartData, CartModel cartModel) {
+        List<Integer> deliveryDayList =new ArrayList<>();
+        if (cartModel.getEntries()!=null && cartModel.getEntries().size()>0){
+            boolean isUsefutureStock = cartModel.getEntries().get(0).getIsUseFutureStock();
+            cartData.setIsUseFutureStock(isUsefutureStock);
+            for (AbstractOrderEntryModel aoe: cartModel.getEntries()){
+                if (isUsefutureStock){
+                    StockLevelModel stockLevelModel = stockService.getStockLevel(aoe.getProduct(),aoe.getDeliveryPointOfService().getWarehouses().get(0));
+                    deliveryDayList.add(stockLevelModel.getPreOrderReleaseDay());
+                }else{
+                    StockLevelModel stockLevelModel = stockService.getStockLevel(aoe.getProduct(),aoe.getDeliveryPointOfService().getWarehouses().get(0));
+                    deliveryDayList.add(stockLevelModel.getAvaPreOrderReleaseDay());
+                }
+            }
+            if (isUsefutureStock){
+                cartData.setDeliveryDays(Collections.max(deliveryDayList));
+            }else{
+                cartData.setDeliveryDays(Collections.min(deliveryDayList));
+            }
+        }
+    }
+
+    @Override
 	public PaymentModeData getPaymentModeData() {
 		final CartModel cartModel = getCart();
 		PaymentModeData paymentModeData = new PaymentModeData();
