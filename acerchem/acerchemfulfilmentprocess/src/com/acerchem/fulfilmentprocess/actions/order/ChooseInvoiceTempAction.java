@@ -60,7 +60,7 @@ public class ChooseInvoiceTempAction extends AbstractAction<OrderProcessModel>
 	protected Transition executeAction(final OrderProcessModel process)
 	{
 		final OrderModel order = process.getOrder();
-		LOG.info("-------------------------------------"+order.getEntries().get(0).getDeliveryPointOfService().getDeliveryZone().getCode());
+		/*LOG.info("-------------------------------------"+order.getEntries().get(0).getDeliveryPointOfService().getDeliveryZone().getCode());
 		if("GB".equals(order.getEntries().get(0).getDeliveryPointOfService().getDeliveryZone().getCode())){
 			if("DCM".equals(order.getEntries().get(0).getDeliveryPointOfService().getWarehouses().get(0).getCode()) || "Neele-vat".equals(order.getEntries().get(0).getDeliveryPointOfService().getWarehouses().get(0).getCode()) || "UK".equals(order.getEntries().get(0).getDeliveryPointOfService().getWarehouses().get(0).getCode())){
 				return Transition.TEMP2;
@@ -83,6 +83,7 @@ public class ChooseInvoiceTempAction extends AbstractAction<OrderProcessModel>
 				return Transition.TEMP3;
 			}
 		}
-		return Transition.NOK; 
+		return Transition.NOK; */
+		return Transition.TEMP1;
 	}
 }

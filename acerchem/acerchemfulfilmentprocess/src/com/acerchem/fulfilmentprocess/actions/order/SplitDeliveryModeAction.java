@@ -45,12 +45,12 @@ public class SplitDeliveryModeAction extends AbstractSimpleDecisionAction<OrderP
 
 		if (order.getDeliveryMode().getCode().equals(DELIVERY_GROSS))
 		{
-			setOrderStatus(order, OrderStatus.UNDELIVERED);
+			setOrderStatus(order, OrderStatus.DELIVERED);
 			return Transition.OK;
 		}
 		else
 		{
-			setOrderStatus(order, OrderStatus.UNDELIVERED);
+			setOrderStatus(order, OrderStatus.DELIVERED);
 			return Transition.NOK;
 		}
 	}
