@@ -689,6 +689,16 @@
 						<modifiers read="true" write="true" search="true" />
 						<persistence type="property" />
 					</attribute>
+					<attribute qualifier="orderCode" type="java.lang.String">
+						<description>订单号</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="productNumber" type="java.lang.Integer">
+						<description>产品数量</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
 				</attributes>
 			</itemtype>
 

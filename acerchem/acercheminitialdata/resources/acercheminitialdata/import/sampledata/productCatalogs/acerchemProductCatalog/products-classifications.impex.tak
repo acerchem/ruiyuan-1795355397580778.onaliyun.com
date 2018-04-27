@@ -31,7 +31,7 @@ $feature8=@Source data-sheet, 6617[$clAttrModifiers];  # Source data-sheet
 INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature4;$feature6;$feature7;$feature8;$catalogVersion;
  ;1099285;<ignore>;<ignore>;Silver/Black;<ignore>;<ignore>;<ignore>;ICEcat.biz;
  ;1687508;3 leg(s);Floor-standing;<ignore>;<ignore>;<ignore>;<ignore>;ICEcat.biz;
- ;23355;<ignore>;Quick-release Mounting Shoe;<ignore>;Oil Friction Head;Counter Balance Function;<ignore>;ICEcat.biz;
+# ;23355;<ignore>;Quick-release Mounting Shoe;<ignore>;Oil Friction Head;Counter Balance Function;<ignore>;ICEcat.biz;
  ;29925;3 leg(s);Floor-standing;Silver;<ignore>;"3-way Tripod Head Positioning; Quick lock";Aluminum, ABS, POM, and PA;ICEcat.biz
  ;3429337;3;<ignore>;Black;<ignore>;<ignore>;Rubber;ICEcat.biz;
  ;454831;<ignore>;<ignore>;Black;<ignore>;<ignore>;<ignore>;ICEcat.biz;

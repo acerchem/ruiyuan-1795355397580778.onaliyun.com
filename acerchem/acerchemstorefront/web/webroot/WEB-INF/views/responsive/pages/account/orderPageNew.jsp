@@ -233,7 +233,7 @@
                         </div>
                         <div>
                             <span>Pickup Date:<fmt:formatDate value="${orderData.pickupDateOfExtended==null?orderData.pickUpDate:orderData.pickupDateOfExtended}" pattern="yyyy-MM-dd"/> <br/></span>
-                            <div style="${orderData.pickupDateOfExtended!=null?'':'display: none;'}">
+                            <div style="${orderData.pickupDateOfExtended==null?'':'display: none;'}">
 				             	<span>
 				             		Pickup date extended days(Max days:${maxday}):
 				             		<input type="text" name='pickupDays' style="width:80px; height:40px;"/>

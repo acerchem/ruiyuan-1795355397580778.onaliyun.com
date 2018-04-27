@@ -325,7 +325,7 @@ UPDATE ClassificationAttribute;code[unique=true];$classSystemVersion;name[lang=$
  ;Minimum system requiremen, 493;;Minimum system requirements for Macintosh;
  ;Minimum system requiremen, 861;;Minimum system requirements;
  ;Motion JPEG frame rate, 2413;;Motion JPEG frame rate;
- ;Mounting, 1867;;Mounting;
+# ;Mounting, 1867;;Mounting;
  ;Movies, 3776;;Movies;
  ;Multi burst mode, 1297;;Multi burst mode;
  ;Multi-pattern, 3668;;Multi-pattern;

@@ -325,7 +325,7 @@ UPDATE ClassificationAttribute;code[unique=true];$classSystemVersion;name[lang=$
  ;Minimum system requiremen, 493;;Macintosh 最低系统要求;
  ;Minimum system requiremen, 861;;最低系统要求;
  ;Motion JPEG frame rate, 2413;;动态 JPEG 帧率;
- ;Mounting, 1867;;安装;
+# ;Mounting, 1867;;安装;
  ;Movies, 3776;;电影;
  ;Multi burst mode, 1297;;多段连拍模式;
  ;Multi-pattern, 3668;;多区;

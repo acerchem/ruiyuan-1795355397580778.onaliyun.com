@@ -107,25 +107,36 @@
 				</div>
 				<div class="list ord-total">
 					<div class="item">
+						
 						<span>
-							<em>Subtotal</em>
-							<i><format:price priceData="${orderData.subTotal}"/></i>
-						</span>
-
-						<span>
-							<em>Delivery</em>
-							<i><format:price priceData="${orderData.deliveryCost}"/></i>
-						</span>
-<!-- 
-						<span>
-							<em>Discount Amount</em>
-							<i>- $ 18.00</i>
-						</span> -->
-
-						<span>
-							<em>Order Total</em>
-							<i><format:price priceData="${orderData.totalPrice}"/></i>
-						</span>
+								   <em>Subtotal</em>
+									<i><format:price priceData="${orderData.subTotal}"/></i>
+								</span>
+		
+		                        <span>
+									<em>Delivery</em>
+									<i><format:price priceData="${orderData.deliveryCost}"/></i>
+								</span>
+								
+								<span>
+									<em>Storage</em>
+									<i><format:price priceData="${orderData.storageCost}"/></i>
+								</span>
+								
+								<span>
+									<em>Operate</em>
+									<i><format:price priceData="${orderData.operateCost}"/></i>
+								</span>
+		
+		                        <span>
+									<em>Discount</em>
+									<i>- <format:price priceData="${orderData.orderDiscounts}"/></i>
+								</span>
+		
+		                        <span>
+									<em>Total</em>
+									<i><format:price priceData="${orderData.totalPrice}"/></i>
+								</span>
 					</div>					
 				</div>			
 			</div>

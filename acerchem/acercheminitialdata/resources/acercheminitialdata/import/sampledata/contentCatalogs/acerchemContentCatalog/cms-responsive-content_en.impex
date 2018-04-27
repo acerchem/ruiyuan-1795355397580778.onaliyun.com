@@ -40,16 +40,16 @@ UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$
 ;;ColourFilmsCategoryLink;"Color Films"
 ;;ComponentsCategoryLink;"Components"
 ;;ContactUsLink;"Contact Us"
-;;DigitalCamerasCategoryLink;"Digital Cameras"
-;;DigitalCompactsCategoryLink;"Compact Cameras"
+;;DigitalCamerasCategoryLink;"Vitamin"
+;;DigitalCompactsCategoryLink;"Vitamin"
 ;;DigitalSLRCategoryLink;"SLR Cameras"
 ;;DocumentationLink;"Documentation"
 ;;FAQLink;"FAQ"
 ;;FacebookLink;"Facebook"
-;;FilmCamerasCategoryLink;"Film Cameras"
+;;FilmCamerasCategoryLink;"Plant Extract"
 ;;FlashMemoryCategoryLink;"Flash Memory"
 ;;FujifilmBrandCategoryLink;"Fujifilm"
-;;HandheldCamcordersCategoryLink;"Hand Held Camcorders"
+;;HandheldCamcordersCategoryLink;"Joint Health"
 ;;HomepageNavLink;"Home"
 ;;IciduBrandCategoryLink;"Icidu"
 ;;KingstonBrandCategoryLink;"Kingston"
@@ -116,10 +116,10 @@ UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$la
 ;;CameraAccessoriesNavNode;"Camera Accessories & Supplies"
 ;;DigitalCamerasNavNode;"Digital Cameras"
 ;;acerchemNavNode;"acerchem Site"
-;;FilmCamerasNavNode;"Film Cameras"
+;;FilmCamerasNavNode;"Plant Extract"
 ;;FlashMemoryNavNode;"Flash Memory"
 ;;FollowUsNavNode;"Follow Us"
-;;HandheldCamcordersNavNode;"Hand Held Camcorders"
+;;HandheldCamcordersNavNode;"Joint Health"
 ;;HybrisNavNode;"Hybris"
 ;;PowerSuppliesNavNode;"Power Supplies"
 ;;SiteRootNode;"SiteRoot"
@@ -255,7 +255,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-homepage-spalsh-en;Elec_480x320_HomeSpeed_EN_01_480W.jpg,Elec_770x350_HomeSpeed_EN_01_770W.jpg,Elec_960x330_HomeSpeed_EN_01_960W.jpg,Elec_1400x440_HomeSpeed_EN_01_1400W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemHompageSplashBannerComponent;acerchem-homepage-spalsh-en
+;;acerchemHompageSplashBannerComponent;
 
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images]
 #;mobile;Elec_480x118_HomeDiscount_EN_01_480W.jpg;$siteResource/images/banners/homepage/responsive/Elec_480x118_HomeDiscount_EN_01_480W.jpg;Elec_480x118_HomeDiscount_EN_01_480W.jpg;"Save Big on Select Camera Accessories & Supplies";
@@ -267,7 +267,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-homepage-discount-en;Elec_480x118_HomeDiscount_EN_01_480W.jpg,Elec_770x80_HomeDiscount_EN_01_770W.jpg,Elec_960x80_HomeDiscount_EN_01_960W.jpg,Elec_1400x80_HomeDiscount_EN_01_1400W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemHompageDiscountBannerComponent;acerchem-homepage-discount-en;
+;;acerchemHompageDiscountBannerComponent;
 
 ###  Home page slot 2A  ####
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images]
@@ -279,7 +279,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-homepage-light-fam-en;Elec_200x150_HomeFam_EN_01_200W.jpg,Elec_240x180_HomeFam_EN_01_240W.jpg,Elec_350x262_HomeFam_EN_01_350W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemHompageLightFamBannerComponent;acerchem-homepage-light-fam-en
+;;acerchemHompageLightFamBannerComponent;
 
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images]
 #;tablet;Elec_200x150_HomeFamLight_EN_01_200W.jpg;$siteResource/images/banners/homepage/responsive/Elec_200x150_HomeFamLight_EN_01_200W.jpg;Elec_200x150_HomeFamLight_EN_01_200W.jpg;"Camera Lenses";
@@ -290,7 +290,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-homepage-light-text-en;Elec_200x150_HomeFamLight_EN_01_200W.jpg,Elec_240x180_HomeFamLight_EN_01_240W.jpg,Elec_350x262_HomeFamLight_EN_01_350W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemHompageLightFamTextBannerComponent;acerchem-homepage-light-text-en
+;;acerchemHompageLightFamTextBannerComponent;
 
 #### Home section 2B #######
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images]
@@ -302,7 +302,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-homepage-camcorders-en;Elec_200x150_HomeKid_EN_01_200W.jpg,Elec_240x180_HomeKid_EN_01_240W.jpg,Elec_350x262_HomeKid_EN_01_350W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemHompageCamcordersBannerComponent;acerchem-homepage-camcorders-en
+;;acerchemHompageCamcordersBannerComponent;
 
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images]
 #;tablet;Elec_200x150_HomeCaptureFirst_EN_01_200W.jpg;$siteResource/images/banners/homepage/responsive/Elec_200x150_HomeCaptureFirst_EN_01_200W.jpg;Elec_200x150_HomeCaptureFirst_EN_01_200W.jpg;"Camcorders";
@@ -313,7 +313,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-homepage-camcorders-02-en;Elec_200x150_HomeCaptureFirst_EN_01_200W.jpg,Elec_240x180_HomeCaptureFirst_EN_01_240W.jpg,Elec_350x262_HomeCaptureFirst_EN_01_350W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemHompageCamcordersChildBannerComponent;acerchem-homepage-camcorders-02-en
+;;acerchemHompageCamcordersChildBannerComponent;
 ### Section 4
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images]
 #;tablet;Elec_200x200_HomeSmallDiscount_EN_01_200W.jpg;$siteResource/images/banners/homepage/responsive/Elec_200x200_HomeSmallDiscount_EN_01_200W.jpg;Elec_200x200_HomeSmallDiscount_EN_01_200W.jpg;"Canyon Web Camera 100KpxelIM CMOS";
@@ -324,7 +324,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-homepage-sm-discount-en;Elec_200x200_HomeSmallDiscount_EN_01_200W.jpg,Elec_240x240_HomeSmallDiscount_EN_01_240W.jpg,Elec_350x350_HomeSmallDiscount_EN_01_350W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemHompageSmDiscountBannerComponent;acerchem-homepage-sm-discount-en
+;;acerchemHompageSmDiscountBannerComponent;
 
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images]
 #;tablet;Elec_200x200_HomeShop_EN_01_200W.jpg;$siteResource/images/banners/homepage/responsive/Elec_200x200_HomeShop_EN_01_200W.jpg;Elec_200x200_HomeShop_EN_01_200W.jpg;"Logitech QuickCam for Notebook Pro";
@@ -335,7 +335,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-homepage-shop-en;Elec_200x200_HomeShop_EN_01_200W.jpg,Elec_240x240_HomeShop_EN_01_240W.jpg,Elec_350x350_HomeShop_EN_01_350W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemHompageShopBannerComponent;acerchem-homepage-shop-en
+;;acerchemHompageShopBannerComponent;
 
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images]
 #;tablet;Elec_200x200_HomeShipment_EN_01_200W.jpg;$siteResource/images/banners/homepage/responsive/Elec_200x200_HomeShipment_EN_01_200W.jpg;Elec_200x200_HomeShipment_EN_01_200W.jpg;"Samsung NV10 Compact Camera";
@@ -346,7 +346,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-homepage-shipment-en;Elec_200x200_HomeShipment_EN_01_200W.jpg,Elec_240x240_HomeShipment_EN_01_240W.jpg,Elec_350x350_HomeShipment_EN_01_350W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemHompageShipmentBannerComponent;acerchem-homepage-shipment-en
+;;acerchemHompageShipmentBannerComponent;
 
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images]
 #;tablet;Elec_200x200_HomeService_EN_01_200W.jpg;$siteResource/images/banners/homepage/responsive/Elec_200x200_HomeService_EN_01_200W.jpg;Elec_200x200_HomeService_EN_01_200W.jpg;"Sony Light HVL-20DW2";
@@ -357,7 +357,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-homepage-service-en;Elec_200x200_HomeService_EN_01_200W.jpg,Elec_240x240_HomeService_EN_01_240W.jpg,Elec_350x350_HomeService_EN_01_350W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemHompageServiceBannerComponent;acerchem-homepage-service-en
+;;acerchemHompageServiceBannerComponent;
 
 
 ### Section 5
@@ -371,7 +371,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-homepage-free-del-en;Elec_475x119_HomeFreeDel_EN_01_475W.jpg,Elec_770x50_HomeFreeDel_EN_01_770W.jpg,Elec_960x50_HomFreeDel_EN_01_960W.jpg,Elec_1400x50_HomeFreeDel_EN_01_1400W.jpg	
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemHompageFreeDelBannerComponent;acerchem-homepage-free-del-en
+;;acerchemHompageFreeDelBannerComponent;
 
 # CMS Paragraph Component (Contact information)
 UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[lang=$lang];
@@ -393,7 +393,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-slr-category-splash-en;Elec_480x320_Category11_EN_01_480W.jpg,Elec_770x350_Category11_EN_01_770W.jpg,Elec_1400x440_Category11_EN_01_1400W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemSLRSplashBannerComponent;acerchem-slr-category-splash-en
+;;acerchemSLRSplashBannerComponent;
 
 ##### Section 2
 # A330
@@ -406,7 +406,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-sony-A330-banner-en;Elec_350x350_Category02_EN_01_350W.jpg,Elec_200x200_Category02_EN_01_200W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemSonyA330BannerComponent;acerchem-sony-A330-banner-en
+;;acerchemSonyA330BannerComponent;
 
 #Canon 500D
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
@@ -417,7 +417,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-canon-500D-banner-en;Elec_350x350_Category07_EN_01_350W.jpg,Elec_200x200_Category07_EN_01_200W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemCanon500DBannerComponent;acerchem-canon-500D-banner-en
+;;acerchemCanon500DBannerComponent;
 
 #Canon 450D
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
@@ -428,7 +428,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-canon-450-banner-en;Elec_350x350_Category06_EN_01_350W.jpg,Elec_200x200_Category06_EN_01_200W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemCanon450DBannerComponent;acerchem-canon-450-banner-en
+;;acerchemCanon450DBannerComponent;
 
 # Sony A100
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
@@ -439,7 +439,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-sony-a100-banner-en;Elec_350x350_Category05_EN_01_350W.jpg,Elec_200x200_Category05_EN_01_200W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemSonyA100HBannerComponent;acerchem-sony-a100-banner-en
+;;acerchemSonyA100HBannerComponent;
 
 # Sony Alpha 200
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
@@ -450,7 +450,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-sony-A200-banner-en;Elec_350x350_Category03_EN_01_350W.jpg,Elec_200x200_Category03_EN_01_200W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemSonyA200BannerComponent;acerchem-sony-A200-banner-en
+;;acerchemSonyA200BannerComponent;
 
 # Sony Alpha 350
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
@@ -461,7 +461,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-sony-Alpha-350-banner-en;Elec_350x350_Category01_EN_01_350W.jpg,Elec_200x200_Category01_EN_01_200W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemSonyAlpha350BannerComponent;acerchem-sony-Alpha-350-banner-en
+;;acerchemSonyAlpha350BannerComponent;
 
 ##### Section 3
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];realfilename;altText;mime[default='image/jpeg'];$contentCV[unique=true];folder(qualifier)[default=images];
@@ -473,7 +473,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$contentCV[unique=tr
 #;acerchem-save-big-banner-en;Elec_480x118_Category10_EN_01_480W.jpg,Elec_770x80_Category10_EN_01_770W.jpg,Elec_1400x140_Category10_EN_01_1400W.jpg
 
 INSERT_UPDATE SimpleResponsiveBannerComponent;$contentCV[unique=true];uid[unique=true];$mediaContainer
-;;acerchemSaveBigDLSRBannerComponent;acerchem-save-big-banner-en
+;;acerchemSaveBigDLSRBannerComponent;
 
 # update linkname
 UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]

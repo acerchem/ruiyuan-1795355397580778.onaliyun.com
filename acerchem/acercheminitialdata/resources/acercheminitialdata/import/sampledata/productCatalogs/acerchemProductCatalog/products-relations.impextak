@@ -8,18 +8,21 @@
 # Information and shall use it only in accordance with the terms of the
 # license agreement you entered into with SAP.
 # -----------------------------------------------------------------------
-# ImpEx for Importing Category Media into acerchem Store
+# ImpEx for Related Products into acerchem Store
 
 # Macros / Replacement Parameter definitions
 $productCatalog=acerchemProductCatalog
 $productCatalogName=acerchem Product Catalog
 $catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
-$thumbnail=thumbnail(code, $catalogVersion)
-$picture=picture(code, $catalogVersion)
-$siteResource=jar:com.acerchem.initialdata.constants.AcerchemInitialDataConstants&/acercheminitialdata/import/sampledata/productCatalogs/$productCatalog
+$supercategories=supercategories(code, $catalogVersion)
+$baseProduct=baseProduct(code,$catalogVersion)
+$approved=approvalstatus(code)[default='check']
 
+# Insert Product References
+INSERT_UPDATE ProductReference;source(code,$catalogVersion)[unique=true];target(code,$catalogVersion)[unique=true];referenceType(code);active;preselected
 
-# Import Category Media
-INSERT_UPDATE Media;code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];$catalogVersion
-
-UPDATE Category;code[unique=true];$thumbnail;$picture;allowedPrincipals(uid)[default='customergroup'];$catalogVersion
+ ;300938;328796;ACCESSORIES;true;false
+ ;300938;335546;ACCESSORIES;true;false
+ ;300938;360308;ACCESSORIES;true;false
+ ;300938;335443;ACCESSORIES;true;false
+ ;1382080;1422222;ACCESSORIES;true;false
