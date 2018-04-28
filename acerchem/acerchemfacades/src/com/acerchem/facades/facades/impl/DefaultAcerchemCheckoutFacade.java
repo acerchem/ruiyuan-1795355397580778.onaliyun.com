@@ -1,5 +1,6 @@
 package com.acerchem.facades.facades.impl;
 
+import com.acerchem.core.enums.CreditAccountStatusEnum;
 import com.acerchem.core.model.CustomerCreditAccountModel;
 import com.acerchem.core.service.AcerchemDeliveryService;
 import com.acerchem.facades.facades.AcerchemCheckoutFacade;
@@ -222,8 +223,11 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
             DeliveryModeModel deliveryModeModel = deliveryModeService.getDeliveryModeForCode(selectedDeliveryModeCode);
            if (deliveryModeModel!=null&&deliveryModeModel.getSupportedPaymentModes()!=null){
                for (PaymentModeModel paymentModeModel : deliveryModeModel.getSupportedPaymentModes()){
-                   if (defaultCustomerCreditAccountService.getCustomerCreditAccount()== null && paymentModeModel.getCode().equals("CreditPayment")) {
+                   CustomerCreditAccountModel customerCreditAccountModel = defaultCustomerCreditAccountService.getCustomerCreditAccount();
+                   if (customerCreditAccountModel== null && paymentModeModel.getCode().equals("CreditPayment")) {
                       //信用账户为空就不存在data里
+                   }else if (customerCreditAccountModel!=null&& CreditAccountStatusEnum.LOCKED.equals(customerCreditAccountModel.getStatus())){
+
                    }else{
                        CardTypeData cardTypeData = new CardTypeData();
                        cardTypeData.setCode(paymentModeModel.getCode());
