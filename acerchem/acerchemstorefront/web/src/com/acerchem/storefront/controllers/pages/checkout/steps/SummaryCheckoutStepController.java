@@ -18,6 +18,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.checkout.steps.CheckoutSt
 import de.hybris.platform.acceleratorstorefrontcommons.constants.WebConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.checkout.steps.AbstractCheckoutStepController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
+import de.hybris.platform.acceleratorstorefrontcommons.forms.AddressForm;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.PlaceOrderForm;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.order.data.CartData;
@@ -25,11 +26,14 @@ import de.hybris.platform.commercefacades.order.data.OrderData;
 import de.hybris.platform.commercefacades.order.data.OrderEntryData;
 import de.hybris.platform.commercefacades.product.ProductOption;
 import de.hybris.platform.commercefacades.product.data.ProductData;
+import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
 import de.hybris.platform.order.InvalidCartException;
 import de.hybris.platform.payment.AdapterException;
 
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -41,6 +45,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.acerchem.facades.facades.AcerchemCheckoutFacade;
@@ -96,6 +101,8 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 		}
 
 		model.addAttribute("cartData", cartData);
+		
+		model.addAttribute("addressForm", new AddressForm());
 		model.addAttribute("allItems", cartData.getEntries());
 		
 		model.addAttribute("deliveryMode", cartData.getDeliveryMode());
@@ -106,6 +113,12 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 			model.addAttribute("deliveryAddress", acerchemCheckoutFacade.getDeliveryAddresses().get(0));
 		}else{
 			model.addAttribute("deliveryAddress", cartData.getDeliveryAddress());
+		}
+		
+		if (cartData.getDeliveryMode()!=null&&"DELIVERY_MENTION".equals(cartData.getDeliveryMode().getCode())) {
+			model.addAttribute("deliveryAddresses", acerchemCheckoutFacade.getDeliveryAddresses());
+		}else{
+			model.addAttribute("deliveryAddresses", getDeliveryAddresses(cartData.getDeliveryAddress()));
 		}
 
 		// Only request the security code if the SubscriptionPciOption is set to Default.
@@ -206,7 +219,7 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 
 		
 		
-		if (cartData.getPaymentModeData() == null)
+		if (cartData.getPaymentModeData().getCode() == null)
 		{
 			GlobalMessages.addErrorMessage(model, "checkout.paymentMethod.notSelected");
 			invalid = true;
@@ -282,6 +295,46 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 	protected CheckoutStep getCheckoutStep()
 	{
 		return getCheckoutStep(SUMMARY);
+	}
+	
+	
+	@RequestMapping(value = "/choose", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String doSelectPaymentMethod(@RequestParam("selectedPaymentMethodId") final String selectedPaymentMethodId,final Model model, final RedirectAttributes redirectModel) throws CMSItemNotFoundException, CommerceCartModificationException
+	{
+		if (StringUtils.isNotBlank(selectedPaymentMethodId))
+		{
+//			getCheckoutFacade().setPaymentDetails(selectedPaymentMethodId);
+			try {
+				acerchemCheckoutFacade.setPaymentDetail(selectedPaymentMethodId);
+			} catch (AcerchemOrderException e) {
+				LOG.error(e.getMessage());
+				GlobalMessages.addErrorMessage(model, e.getMessage());
+			}
+		}
+		
+		return enterStep(model, redirectModel);
+	}
+	
+	
+	protected List<? extends AddressData> 	getDeliveryAddresses(final AddressData selectedAddressData) // NOSONAR
+	{
+		List<AddressData> deliveryAddresses = null;
+//		if (selectedAddressData != null)
+//		{
+			deliveryAddresses = (List<AddressData>) getCheckoutFacade().getSupportedDeliveryAddresses(true);
+
+//			if (deliveryAddresses == null || deliveryAddresses.isEmpty())
+//			{
+//				deliveryAddresses = Collections.singletonList(selectedAddressData);
+//			}
+//			else if (!isAddressOnList(deliveryAddresses, selectedAddressData))
+//			{
+//				deliveryAddresses.add(selectedAddressData);
+//			}
+//		}
+
+		return deliveryAddresses == null ? Collections.<AddressData> emptyList() : deliveryAddresses;
 	}
 
 

@@ -482,7 +482,7 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
         if (customerCreditAccountModel!=null && customerCreditAccountModel.getCreaditRemainedAmount()!=null){
             double creaditReaminAmount = customerCreditAccountModel.getCreaditRemainedAmount().doubleValue();
             if(totalPrice > creaditReaminAmount){
-                throw new AcerchemOrderException("信用额度不足.");
+                throw new AcerchemOrderException("checkout.creditcard.limit");
             }
         }
     }
