@@ -281,6 +281,54 @@
 			
 		</explorer-tree:explorer-tree>
 	</context>
+	
+	<!-- add by alice -->
+	<context merge-by="type" parent="GenericItem" type="CsTicket" component="listview">
+        <list-view:list-view >
+            <list-view:column qualifier="ticketID"/>
+            <list-view:column qualifier="headline"/>
+            <list-view:column qualifier="customer"/>
+            <list-view:column qualifier="order" merge-mode="Remove"/>
+            <list-view:column qualifier="state"/>
+            <list-view:column qualifier="priority"/>
+            <list-view:column qualifier="category"/>
+            <list-view:column qualifier="telephone"/><!-- 电话 -->
+            <list-view:column qualifier="Email"/><!-- 邮箱 -->
+            <list-view:column qualifier="creationtime"/><!-- 创建时间 -->
+            <list-view:column qualifier="modifiedtime"/><!-- 最新更新时间 -->
+        </list-view:list-view>
+    </context>
+    
+    <context merge-by="type" parent="GenericItem" type="CsTicket" component="editor-area">
+        <editorArea:editorArea>
+            <editorArea:tab name="hmc.tab.ticket.information">
+                <editorArea:section name="hmc.tab.section.ticket.information">
+                    <editorArea:attribute qualifier="ticketID"/>
+                    <editorArea:attribute qualifier="headline"/>
+                    <editorArea:attribute qualifier="state"/>
+                    <editorArea:attribute qualifier="customer"/>
+                    <editorArea:attribute qualifier="telephone"/>
+                    <editorArea:attribute qualifier="Email"/>
+                    <editorArea:attribute qualifier="creationtime"/>
+                    <editorArea:attribute qualifier="modifiedtime"/>
+                    <editorArea:attribute qualifier="address"/>
+                    <editorArea:attribute qualifier="productId"/>
+                    <editorArea:attribute qualifier="productName"/>
+                    <editorArea:attribute qualifier="yourname"/>
+                    <editorArea:attribute qualifier="assignedAgent"/>
+                    <editorArea:attribute qualifier="events"/>
+                </editorArea:section>
+            </editorArea:tab>
+            <editorArea:tab name="hmc.tab.ticket.history" merge-mode="Remove">
+                <editorArea:section name="hmc.tab.section.ticket.history">
+                    <editorArea:attribute qualifier="resolution"/>
+                    <editorArea:attribute qualifier="events"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <!-- end -->
+	
 	 <context merge-by="type" parent="AbstractOrder" type="Order" component="editor-area">
         <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
             <editorArea:tab name="hmc.properties" merge-mode="remove">
