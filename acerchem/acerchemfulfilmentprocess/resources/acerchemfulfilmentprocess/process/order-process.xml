@@ -95,10 +95,15 @@
 	
 	<wait id="waitUpdateConsignmentStatus" prependProcessCode="true" then="failed">
 	 	<case event="ConfirmConsignmentStatusActionEvent">
-            <choice id="waitForEmployeeConfirmConsignmentStatus" then="splitDeliveryMode"/>
+            <choice id="waitForEmployeeConfirmConsignmentStatus" then="checkConsignmentDate"/>
             <choice id="cancelOrderConfirm" then="cancelOrderStatus"/>
         </case>
 	</wait>
+	
+	<action id="checkConsignmentDate" bean="checkConsignmentDateAction">
+		<transition name="OK" to="splitDeliveryMode"/>
+		<transition name="NOK" to="waitUpdateConsignmentStatus"/>
+	</action>
 	
 	<action id="cancelOrderStatus" bean="cancelOrderStatusAction">
 		<transition name="OK" to="generateCancelOrderEmail"/>
@@ -138,21 +143,21 @@
 	</action>
 	
 	<action id="sendDeliveryEmail" bean="sendEmail">
-		<transition name="OK" to="removeSentDeliveryByShelfEmail"/>
+		<transition name="OK" to="removeSentDeliveryEmail"/>
 	</action>
 	
-	<action id="removeSentDeliveryByShelfEmail" bean="removeSentEmail">
-		<transition name="OK" to="checkConsignmentDate"/>
+	<action id="removeSentDeliveryEmail" bean="removeSentEmail">
+		<transition name="OK" to="waitForAllConsignmentConfirm"/>
 		<transition name="NOK" to="error"/>
 	</action>
 	
 	<action id="sendDeliveryByShelfEmail" bean="sendEmail">
-		<transition name="OK" to="checkConsignmentDate"/>
+		<transition name="OK" to="removeSentDeliveryByShelfEmail"/>
 	</action>
 	
-	<action id="checkConsignmentDate" bean="checkConsignmentDateAction">
+	<action id="removeSentDeliveryByShelfEmail" bean="removeSentEmail">
 		<transition name="OK" to="waitForAllConsignmentConfirm"/>
-		<transition name="NOK" to="waitUpdateConsignmentStatus"/>
+		<transition name="NOK" to="error"/>
 	</action>
 	
 	<wait id="waitForAllConsignmentConfirm" prependProcessCode="true" then="failed">

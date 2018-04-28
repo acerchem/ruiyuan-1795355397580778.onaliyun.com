@@ -40,12 +40,16 @@ public class CancelOrderStatusAction extends AbstractSimpleDecisionAction<OrderP
 	public Transition executeAction(final OrderProcessModel process) {
 		// TODO Auto-generated method stub
 		
+		LOG.info("--------------------------------start CancelOrderStatusAction----------------------");
 		final OrderModel order = process.getOrder();
 		if(order != null){
-			if (OrderStatus.UNDELIVERED.equals(order.getStatus()))
+			if (OrderStatus.COMPLETED.equals(order.getStatus()) || OrderStatus.DELIVERED.equals(order.getStatus()))
 			{
+				return Transition.NOK;
+			}else{
 				setOrderStatus(order, OrderStatus.CANCELLED);
 				acerchemStockService.releaseStock(order);
+				LOG.info("--------------------------------end CancelOrderStatusAction----------------------");
 				return Transition.OK;
 			}
 		}

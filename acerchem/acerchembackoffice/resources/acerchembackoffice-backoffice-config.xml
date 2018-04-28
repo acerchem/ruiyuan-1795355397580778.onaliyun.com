@@ -350,8 +350,8 @@
 			<wz:prepare id="ConsignmentEntryPrepare">
 				<wz:initialize property="consignment" type="ctx.TYPE_CODE" /> 
 				<wz:assign property="consignment.order" value="ctx.parentObject" />
-				<wz:assign property="consignment.status" value="ctx.parentObject.status" />
-				<wz:assign property="consignment.creationtime" value="ctx.parentObject.creationtime" />
+				<!-- <wz:assign property="consignment.status" value="ctx.parentObject.status" /> -->
+				<!-- <wz:assign property="consignment.creationtime" value="ctx.parentObject.creationtime" /> -->
 			</wz:prepare>
 			<wz:step id="step1" label="create.Consignment.general.label" >
 				<wz:content id="step1.content">

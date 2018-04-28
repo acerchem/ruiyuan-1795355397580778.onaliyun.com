@@ -561,7 +561,6 @@ function formreq(wrap,parwrap,aspan,newval,ap,inputarep,addinput,inputval){//add
 
 
 function dateChange(num, date) {
-    debugger;
     if (!date) {
         date = new Date();//没有传入值时,默认是当前日期
         date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
