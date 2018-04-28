@@ -1,11 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
-<<<<<<< HEAD
- * --- Generated at 2018-4-28 18:44:38                          ---
-=======
- * --- Generated at 2018-4-19 10:28:44                          ---
->>>>>>> master
+ * --- Generated at 2018-4-28 19:14:12                          ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.facades.constants;

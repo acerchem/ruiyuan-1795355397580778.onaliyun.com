@@ -186,6 +186,46 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			false
 		);
 	
+		createItemType(
+			"ProductThresholdPercentageDiscountPromotion",
+			"ProductPromotion",
+			com.acerchem.core.promotions.jalo.ProductThresholdPercentageDiscountPromotion.class,
+			null,
+			false,
+			null,
+			false
+		);
+	
+		createItemType(
+			"PromotionThresholdDiscount",
+			"GenericItem",
+			com.acerchem.core.jalo.PromotionThresholdDiscount.class,
+			"de.hybris.platform.persistence.acerchemcore_PromotionThresholdDiscount",
+			false,
+			null,
+			false
+		);
+	
+		createItemType(
+			"Article",
+			"GenericItem",
+			com.acerchem.core.jalo.Article.class,
+			"de.hybris.platform.persistence.acerchemcore_Article",
+			false,
+			null,
+			false
+		);
+	
+		createItemType(
+			"OrderParam",
+			"GenericItem",
+			com.acerchem.core.jalo.OrderParam.class,
+			"de.hybris.platform.persistence.acerchemcore_OrderParam",
+			false,
+			null,
+			false
+		);
+	
 		createRelationType(
 			"AcerChemVendor2Product",
 			null,
@@ -226,6 +266,11 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 		);
 	
 		createEnumerationType(
+			"CustomerArea",
+			null
+		);
+	
+		createEnumerationType(
 			"CreditAccountStatusEnum",
 			null
 		);
@@ -240,6 +285,12 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			"SwatchColorSet",
 			"SwatchColorEnum",
 			CollectionType.SET
+		);
+	
+		createCollectionType(
+			"PromotionThresholdDiscountList",
+			"PromotionThresholdDiscount",
+			CollectionType.LIST
 		);
 	
 	}
@@ -321,6 +372,8 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 				single_createattr_Product_CAS();
 			
+				single_createattr_Product_certificates();
+			
 				single_createattr_ProductCarouselComponent_isPromotion();
 			
 				single_createattr_ProductCarouselComponent_isWell();
@@ -344,6 +397,10 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 				single_createattr_AbstractOrderEntry_isUseFutureStock();
 			
 				single_createattr_AbstractOrderEntry_availableDate();
+			
+				single_createattr_AbstractOrderEntry_baseRealPrice();
+			
+				single_createattr_AbstractOrderEntry_totalRealPrice();
 			
 				single_createattr_CountryTrayFareConf_country();
 			
@@ -371,7 +428,13 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 				single_createattr_CreditTransaction_cransactionId();
 			
+				single_createattr_CreditTransaction_orderCode();
+			
+				single_createattr_CreditTransaction_productNumber();
+			
 				single_createattr_Customer_creditAccount();
+			
+				single_createattr_Customer_area();
 			
 				single_createattr_Customer_companyType();
 			
@@ -388,6 +451,8 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 				single_createattr_Customer_haveFinancialReport();
 			
 				single_createattr_Customer_provideTradeReference();
+			
+				single_createattr_Customer_employee();
 			
 				single_createattr_PointOfService_deliveryZone();
 			
@@ -408,6 +473,38 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 				single_createattr_AbstractOrder_employeeConfirmDelivery();
 			
 				single_createattr_AbstractOrder_pickUpDate();
+			
+				single_createattr_AbstractOrder_storageCost();
+			
+				single_createattr_AbstractOrder_operateCost();
+			
+				single_createattr_AbstractOrder_deliveyDate();
+			
+				single_createattr_AbstractOrder_waitDeliveiedDate();
+			
+				single_createattr_ConsignmentEntry_batchNum();
+			
+				single_createattr_ProductThresholdPercentageDiscountPromotion_thresholdDiscounts();
+			
+				single_createattr_ProductThresholdPercentageDiscountPromotion_messageFired();
+			
+				single_createattr_PromotionThresholdDiscount_minQuantity();
+			
+				single_createattr_PromotionThresholdDiscount_maxQuantity();
+			
+				single_createattr_PromotionThresholdDiscount_percentageDiscount();
+			
+				single_createattr_PromotionOrderEntryAdjustAction_thresholdDiscount();
+			
+				single_createattr_Article_articleTitle();
+			
+				single_createattr_Article_articleUrl();
+			
+				single_createattr_OrderParam_daysForCancel();
+			
+				single_createattr_OrderParam_daysForPickUp();
+			
+				single_createattr_Order_pickupDateOfExtended();
 			
 		createRelationAttributes(
 			"AcerChemVendor2Product", 
@@ -1054,6 +1151,23 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 	}
 	
+	public void single_createattr_Product_certificates() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"Product", 
+					"certificates",  
+					null,
+					"Media",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
 	public void single_createattr_ProductCarouselComponent_isPromotion() throws JaloBusinessException
 	{
 		
@@ -1251,6 +1365,40 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 					"availableDate",  
 					null,
 					"java.util.Date",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_AbstractOrderEntry_baseRealPrice() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"AbstractOrderEntry", 
+					"baseRealPrice",  
+					null,
+					"java.lang.Double",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_AbstractOrderEntry_totalRealPrice() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"AbstractOrderEntry", 
+					"totalRealPrice",  
+					null,
+					"java.lang.Double",
 					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
 					null,
 					sqlColumnDefinitions
@@ -1479,6 +1627,40 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 	}
 	
+	public void single_createattr_CreditTransaction_orderCode() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"CreditTransaction", 
+					"orderCode",  
+					null,
+					"java.lang.String",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_CreditTransaction_productNumber() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"CreditTransaction", 
+					"productNumber",  
+					null,
+					"java.lang.Integer",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
 	public void single_createattr_Customer_creditAccount() throws JaloBusinessException
 	{
 		
@@ -1489,6 +1671,23 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 					"creditAccount",  
 					null,
 					"CustomerCreditAccount",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_Customer_area() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"Customer", 
+					"area",  
+					null,
+					"CustomerArea",
 					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
 					null,
 					sqlColumnDefinitions
@@ -1625,6 +1824,23 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 					"provideTradeReference",  
 					null,
 					"java.lang.Boolean",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_Customer_employee() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"Customer", 
+					"employee",  
+					null,
+					"Employee",
 					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
 					null,
 					sqlColumnDefinitions
@@ -1802,6 +2018,283 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 	}
 	
+	public void single_createattr_AbstractOrder_storageCost() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"AbstractOrder", 
+					"storageCost",  
+					null,
+					"java.lang.Double",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_AbstractOrder_operateCost() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"AbstractOrder", 
+					"operateCost",  
+					null,
+					"java.lang.Double",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_AbstractOrder_deliveyDate() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"AbstractOrder", 
+					"deliveyDate",  
+					null,
+					"java.util.Date",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_AbstractOrder_waitDeliveiedDate() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"AbstractOrder", 
+					"waitDeliveiedDate",  
+					null,
+					"java.util.Date",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_ConsignmentEntry_batchNum() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"ConsignmentEntry", 
+					"batchNum",  
+					null,
+					"java.lang.String",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_ProductThresholdPercentageDiscountPromotion_thresholdDiscounts() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"ProductThresholdPercentageDiscountPromotion", 
+					"thresholdDiscounts",  
+					null,
+					"PromotionThresholdDiscountList",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_ProductThresholdPercentageDiscountPromotion_messageFired() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = new HashMap();
+						
+							sqlColumnDefinitions.put(
+								de.hybris.platform.persistence.property.PersistenceManager.NO_DATABASE,
+								"HYBRIS.LONG_STRING"
+							);
+						
+				createPropertyAttribute(
+					"ProductThresholdPercentageDiscountPromotion", 
+					"messageFired",  
+					null,
+					"localized:java.lang.String",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_PromotionThresholdDiscount_minQuantity() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"PromotionThresholdDiscount", 
+					"minQuantity",  
+					null,
+					"java.lang.Integer",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_PromotionThresholdDiscount_maxQuantity() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"PromotionThresholdDiscount", 
+					"maxQuantity",  
+					null,
+					"java.lang.Integer",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_PromotionThresholdDiscount_percentageDiscount() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"PromotionThresholdDiscount", 
+					"percentageDiscount",  
+					null,
+					"java.lang.Double",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_PromotionOrderEntryAdjustAction_thresholdDiscount() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"PromotionOrderEntryAdjustAction", 
+					"thresholdDiscount",  
+					null,
+					"PromotionThresholdDiscount",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_Article_articleTitle() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"Article", 
+					"articleTitle",  
+					null,
+					"java.lang.String",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_Article_articleUrl() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"Article", 
+					"articleUrl",  
+					null,
+					"java.lang.String",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_OrderParam_daysForCancel() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"OrderParam", 
+					"daysForCancel",  
+					null,
+					"java.lang.Integer",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_OrderParam_daysForPickUp() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"OrderParam", 
+					"daysForPickUp",  
+					null,
+					"java.lang.Integer",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_Order_pickupDateOfExtended() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"Order", 
+					"pickupDateOfExtended",  
+					null,
+					"java.util.Date",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
 
 
 	/**
@@ -1864,6 +2357,16 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 		);
 	
 		createEnumerationValues(
+			"CustomerArea",
+			true,
+			Arrays.asList( new String[] {
+			
+				"North_America",
+				"South_America"
+			} )
+		);
+	
+		createEnumerationValues(
 			"CreditAccountStatusEnum",
 			true,
 			Arrays.asList( new String[] {
@@ -1879,6 +2382,20 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			Arrays.asList( new String[] {
 			
 				"LINE"
+			} )
+		);
+	
+		createEnumerationValues(
+			"OrderStatus",
+			true,
+			Arrays.asList( new String[] {
+			
+				"CONFIRMED",
+				"DELIVERED",
+				"PAIED",
+				"UNPAIED",
+				"UNCONFIRMED",
+				"UNDELIVERED"
 			} )
 		);
 	
@@ -2145,6 +2662,8 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 		
 			single_setAttributeProperties_Product_CAS();
 		
+			single_setAttributeProperties_Product_certificates();
+		
 				{
 				Map customPropsMap = new HashMap();
 				
@@ -2258,6 +2777,10 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 		
 			single_setAttributeProperties_AbstractOrderEntry_availableDate();
 		
+			single_setAttributeProperties_AbstractOrderEntry_baseRealPrice();
+		
+			single_setAttributeProperties_AbstractOrderEntry_totalRealPrice();
+		
 				{
 				Map customPropsMap = new HashMap();
 				
@@ -2323,6 +2846,10 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 		
 			single_setAttributeProperties_CreditTransaction_cransactionId();
 		
+			single_setAttributeProperties_CreditTransaction_orderCode();
+		
+			single_setAttributeProperties_CreditTransaction_productNumber();
+		
 				{
 				Map customPropsMap = new HashMap();
 				
@@ -2334,6 +2861,8 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 				}
 			
 			single_setAttributeProperties_Customer_creditAccount();
+		
+			single_setAttributeProperties_Customer_area();
 		
 			single_setAttributeProperties_Customer_companyType();
 		
@@ -2350,6 +2879,8 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			single_setAttributeProperties_Customer_haveFinancialReport();
 		
 			single_setAttributeProperties_Customer_provideTradeReference();
+		
+			single_setAttributeProperties_Customer_employee();
 		
 				{
 				Map customPropsMap = new HashMap();
@@ -2391,6 +2922,14 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 		
 			single_setAttributeProperties_AbstractOrder_pickUpDate();
 		
+			single_setAttributeProperties_AbstractOrder_storageCost();
+		
+			single_setAttributeProperties_AbstractOrder_operateCost();
+		
+			single_setAttributeProperties_AbstractOrder_deliveyDate();
+		
+			single_setAttributeProperties_AbstractOrder_waitDeliveiedDate();
+		
 				{
 				Map customPropsMap = new HashMap();
 				
@@ -2404,6 +2943,112 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 				);
 				}
 			
+				{
+				Map customPropsMap = new HashMap();
+				
+				changeMetaType(
+					"ConsignmentEntry",
+					null,
+					customPropsMap
+				);
+				}
+			
+			single_setAttributeProperties_ConsignmentEntry_batchNum();
+		
+				{
+				Map customPropsMap = new HashMap();
+				
+				setItemTypeProperties(
+					"ProductThresholdPercentageDiscountPromotion",
+					false,
+					true,
+					true,
+					null,
+					customPropsMap
+				);
+				}
+			
+			single_setAttributeProperties_ProductThresholdPercentageDiscountPromotion_thresholdDiscounts();
+		
+			single_setAttributeProperties_ProductThresholdPercentageDiscountPromotion_messageFired();
+		
+				{
+				Map customPropsMap = new HashMap();
+				
+				setItemTypeProperties(
+					"PromotionThresholdDiscount",
+					false,
+					true,
+					true,
+					null,
+					customPropsMap
+				);
+				}
+			
+			single_setAttributeProperties_PromotionThresholdDiscount_minQuantity();
+		
+			single_setAttributeProperties_PromotionThresholdDiscount_maxQuantity();
+		
+			single_setAttributeProperties_PromotionThresholdDiscount_percentageDiscount();
+		
+				{
+				Map customPropsMap = new HashMap();
+				
+				changeMetaType(
+					"PromotionOrderEntryAdjustAction",
+					null,
+					customPropsMap
+				);
+				}
+			
+			single_setAttributeProperties_PromotionOrderEntryAdjustAction_thresholdDiscount();
+		
+				{
+				Map customPropsMap = new HashMap();
+				
+				setItemTypeProperties(
+					"Article",
+					false,
+					true,
+					true,
+					null,
+					customPropsMap
+				);
+				}
+			
+			single_setAttributeProperties_Article_articleTitle();
+		
+			single_setAttributeProperties_Article_articleUrl();
+		
+				{
+				Map customPropsMap = new HashMap();
+				
+				setItemTypeProperties(
+					"OrderParam",
+					false,
+					true,
+					true,
+					null,
+					customPropsMap
+				);
+				}
+			
+			single_setAttributeProperties_OrderParam_daysForCancel();
+		
+			single_setAttributeProperties_OrderParam_daysForPickUp();
+		
+				{
+				Map customPropsMap = new HashMap();
+				
+				changeMetaType(
+					"Order",
+					null,
+					customPropsMap
+				);
+				}
+			
+			single_setAttributeProperties_Order_pickupDateOfExtended();
+		
 				setDefaultProperties(
 					"GenderList",
 					true,
@@ -2413,6 +3058,13 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 				setDefaultProperties(
 					"SwatchColorSet",
+					true,
+					true,
+					null
+				);
+			
+				setDefaultProperties(
+					"PromotionThresholdDiscountList",
 					true,
 					true,
 					null
@@ -2440,6 +3092,13 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 				);
 			
 				setDefaultProperties(
+					"CustomerArea",
+					true,
+					true,
+					null
+				);
+			
+				setDefaultProperties(
 					"CreditAccountStatusEnum",
 					true,
 					true,
@@ -2448,6 +3107,12 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 				changeMetaType(
 					"PaymentTransactionType",
+					null,
+					null
+				);
+			
+				changeMetaType(
+					"OrderStatus",
 					null,
 					null
 				);
@@ -3182,6 +3847,28 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							);
 						}
 					
+						public void single_setAttributeProperties_Product_certificates() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"Product", 
+								"certificates",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
 						public void single_setAttributeProperties_ProductCarouselComponent_isPromotion() throws JaloBusinessException
 						{
 							
@@ -3434,6 +4121,50 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							setAttributeProperties(
 								"AbstractOrderEntry", 
 								"availableDate",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_AbstractOrderEntry_baseRealPrice() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"AbstractOrderEntry", 
+								"baseRealPrice",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_AbstractOrderEntry_totalRealPrice() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"AbstractOrderEntry", 
+								"totalRealPrice",
 								false, 
 								null,
 								null,
@@ -3732,6 +4463,50 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							);
 						}
 					
+						public void single_setAttributeProperties_CreditTransaction_orderCode() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"CreditTransaction", 
+								"orderCode",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_CreditTransaction_productNumber() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"CreditTransaction", 
+								"productNumber",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
 						public void single_setAttributeProperties_Customer_creditAccount() throws JaloBusinessException
 						{
 							
@@ -3742,6 +4517,28 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							setAttributeProperties(
 								"Customer", 
 								"creditAccount",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_Customer_area() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"Customer", 
+								"area",
 								false, 
 								null,
 								null,
@@ -3921,6 +4718,28 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 								false, 
 								Boolean.FALSE,
 								"Boolean.FALSE",
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_Customer_employee() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"Customer", 
+								"employee",
+								false, 
+								null,
+								null,
 								null,
 								true,
 								true,
@@ -4138,6 +4957,358 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							setAttributeProperties(
 								"AbstractOrder", 
 								"pickUpDate",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_AbstractOrder_storageCost() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"AbstractOrder", 
+								"storageCost",
+								false, 
+								Double.valueOf(0.0d),
+								"Double.valueOf(0.0d)",
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_AbstractOrder_operateCost() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"AbstractOrder", 
+								"operateCost",
+								false, 
+								Double.valueOf(0.0d),
+								"Double.valueOf(0.0d)",
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_AbstractOrder_deliveyDate() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"AbstractOrder", 
+								"deliveyDate",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_AbstractOrder_waitDeliveiedDate() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"AbstractOrder", 
+								"waitDeliveiedDate",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_ConsignmentEntry_batchNum() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"ConsignmentEntry", 
+								"batchNum",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_ProductThresholdPercentageDiscountPromotion_thresholdDiscounts() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"ProductThresholdPercentageDiscountPromotion", 
+								"thresholdDiscounts",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_ProductThresholdPercentageDiscountPromotion_messageFired() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"ProductThresholdPercentageDiscountPromotion", 
+								"messageFired",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_PromotionThresholdDiscount_minQuantity() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"PromotionThresholdDiscount", 
+								"minQuantity",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_PromotionThresholdDiscount_maxQuantity() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"PromotionThresholdDiscount", 
+								"maxQuantity",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_PromotionThresholdDiscount_percentageDiscount() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"PromotionThresholdDiscount", 
+								"percentageDiscount",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_PromotionOrderEntryAdjustAction_thresholdDiscount() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"PromotionOrderEntryAdjustAction", 
+								"thresholdDiscount",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_Article_articleTitle() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"Article", 
+								"articleTitle",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_Article_articleUrl() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"Article", 
+								"articleUrl",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_OrderParam_daysForCancel() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"OrderParam", 
+								"daysForCancel",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_OrderParam_daysForPickUp() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"OrderParam", 
+								"daysForPickUp",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_Order_pickupDateOfExtended() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"Order", 
+								"pickupDateOfExtended",
 								false, 
 								null,
 								null,

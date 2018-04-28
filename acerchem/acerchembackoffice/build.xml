@@ -9,11 +9,7 @@
  Information and shall use it only in accordance with the terms of the
  license agreement you entered into with SAP.
 -->
-<<<<<<< HEAD
-<project name="addonsupport" default="all">
-=======
 <project name="acerchembackoffice" default="all">
->>>>>>> master
 	<property file="platformhome.properties" />
 
 	<!-- next line is only for eclipse to get rid of warnings -->

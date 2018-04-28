@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-4-28 18:44:38                          ---
+ * --- Generated at 2018-4-28 19:14:12                          ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.jalo;
@@ -39,6 +39,10 @@ public abstract class GeneratedCreditTransaction extends GenericItem
 	public static final String SHOULDPAYBACKTIME = "shouldPaybackTime";
 	/** Qualifier of the <code>CreditTransaction.cransactionId</code> attribute **/
 	public static final String CRANSACTIONID = "cransactionId";
+	/** Qualifier of the <code>CreditTransaction.orderCode</code> attribute **/
+	public static final String ORDERCODE = "orderCode";
+	/** Qualifier of the <code>CreditTransaction.productNumber</code> attribute **/
+	public static final String PRODUCTNUMBER = "productNumber";
 	/** Qualifier of the <code>CreditTransaction.creditAccountPOS</code> attribute **/
 	public static final String CREDITACCOUNTPOS = "creditAccountPOS";
 	/** Qualifier of the <code>CreditTransaction.creditAccount</code> attribute **/
@@ -65,6 +69,8 @@ public abstract class GeneratedCreditTransaction extends GenericItem
 		tmp.put(PAYBACKTIME, AttributeMode.INITIAL);
 		tmp.put(SHOULDPAYBACKTIME, AttributeMode.INITIAL);
 		tmp.put(CRANSACTIONID, AttributeMode.INITIAL);
+		tmp.put(ORDERCODE, AttributeMode.INITIAL);
+		tmp.put(PRODUCTNUMBER, AttributeMode.INITIAL);
 		tmp.put(CREDITACCOUNTPOS, AttributeMode.INITIAL);
 		tmp.put(CREDITACCOUNT, AttributeMode.INITIAL);
 		DEFAULT_INITIAL_ATTRIBUTES = Collections.unmodifiableMap(tmp);
@@ -337,6 +343,42 @@ public abstract class GeneratedCreditTransaction extends GenericItem
 	}
 	
 	/**
+	 * <i>Generated method</i> - Getter of the <code>CreditTransaction.orderCode</code> attribute.
+	 * @return the orderCode - 订单号
+	 */
+	public String getOrderCode(final SessionContext ctx)
+	{
+		return (String)getProperty( ctx, ORDERCODE);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>CreditTransaction.orderCode</code> attribute.
+	 * @return the orderCode - 订单号
+	 */
+	public String getOrderCode()
+	{
+		return getOrderCode( getSession().getSessionContext() );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>CreditTransaction.orderCode</code> attribute. 
+	 * @param value the orderCode - 订单号
+	 */
+	public void setOrderCode(final SessionContext ctx, final String value)
+	{
+		setProperty(ctx, ORDERCODE,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>CreditTransaction.orderCode</code> attribute. 
+	 * @param value the orderCode - 订单号
+	 */
+	public void setOrderCode(final String value)
+	{
+		setOrderCode( getSession().getSessionContext(), value );
+	}
+	
+	/**
 	 * <i>Generated method</i> - Getter of the <code>CreditTransaction.paybackAmount</code> attribute.
 	 * @return the paybackAmount - 还款金额
 	 */
@@ -443,6 +485,79 @@ public abstract class GeneratedCreditTransaction extends GenericItem
 	public void setPaybackTime(final long value)
 	{
 		setPaybackTime( getSession().getSessionContext(), value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>CreditTransaction.productNumber</code> attribute.
+	 * @return the productNumber - 产品数量
+	 */
+	public Integer getProductNumber(final SessionContext ctx)
+	{
+		return (Integer)getProperty( ctx, PRODUCTNUMBER);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>CreditTransaction.productNumber</code> attribute.
+	 * @return the productNumber - 产品数量
+	 */
+	public Integer getProductNumber()
+	{
+		return getProductNumber( getSession().getSessionContext() );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>CreditTransaction.productNumber</code> attribute. 
+	 * @return the productNumber - 产品数量
+	 */
+	public int getProductNumberAsPrimitive(final SessionContext ctx)
+	{
+		Integer value = getProductNumber( ctx );
+		return value != null ? value.intValue() : 0;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>CreditTransaction.productNumber</code> attribute. 
+	 * @return the productNumber - 产品数量
+	 */
+	public int getProductNumberAsPrimitive()
+	{
+		return getProductNumberAsPrimitive( getSession().getSessionContext() );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>CreditTransaction.productNumber</code> attribute. 
+	 * @param value the productNumber - 产品数量
+	 */
+	public void setProductNumber(final SessionContext ctx, final Integer value)
+	{
+		setProperty(ctx, PRODUCTNUMBER,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>CreditTransaction.productNumber</code> attribute. 
+	 * @param value the productNumber - 产品数量
+	 */
+	public void setProductNumber(final Integer value)
+	{
+		setProductNumber( getSession().getSessionContext(), value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>CreditTransaction.productNumber</code> attribute. 
+	 * @param value the productNumber - 产品数量
+	 */
+	public void setProductNumber(final SessionContext ctx, final int value)
+	{
+		setProductNumber( ctx,Integer.valueOf( value ) );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>CreditTransaction.productNumber</code> attribute. 
+	 * @param value the productNumber - 产品数量
+	 */
+	public void setProductNumber(final int value)
+	{
+		setProductNumber( getSession().getSessionContext(), value );
 	}
 	
 	/**
