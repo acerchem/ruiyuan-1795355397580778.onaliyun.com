@@ -1,9 +1,12 @@
 ## messageSource=classpath:/acerchemcore/messages/email-customerRegistration_$lang.properties
+#macro(genHtmlLink)
+<a href="mailto:customerservice@acerchem.com"><font color="#006000" size="2">customerservice@acerchem.com</font></a>
+#end
 <!doctype html>
 <html>
 <head>
 <meta charset="utf-8">
-<title>Registration audit passed</title>
+<title>Failure of registration audit</title>
 <style type="text/css">
 	@page {
 	margin-right: 0.79in;
@@ -24,15 +27,15 @@
 	<table class="font" width="600px" height="300px" frame="void">
 	<tbody>
 		<tr height="30px">
-			<td bgcolor="#006000">
-				&nbsp;
+			<td bgcolor="#006000">&nbsp;
+				
 			</td>
 		</tr>
 		<tr height="60px">
 			<td align="center">
 			<font size="5px" style="font-weight: 600" color="
 			#006000">
-				Registration audit passed
+				Failure of registration audit
 			</font>
 				
 			</td>
@@ -44,26 +47,21 @@
 		</tr>
 		<tr>
 			<td>
-				${ctx.messages.thankYouForRegistering}
+				${ctx.messages.getMessage('registerEmailAnditFailureInfo', "#genHtmlLink()")}.
+
 				
 			</td>
 		</tr>
+		
 		<tr>
 			<td>
-				${ctx.messages.registeredEmailInfo}: ${ctx.email}.</font>
-				
-			</td>
-		</tr>
-		<tr>
-			<td>
-			
 				
 				${ctx.messages.instructionsContactUs_new} <a href="mailto:customerservice@acerchem.com"><font color="#006000" size="2">customerservice@acerchem.com</font></a>
 			</td>
 		</tr>
 		<tr height="30px">
-			<td bgcolor="#006000">
-				&nbsp;
+			<td bgcolor="#006000">&nbsp;
+				
 			</td>
 		</tr>
 		</tbody>
