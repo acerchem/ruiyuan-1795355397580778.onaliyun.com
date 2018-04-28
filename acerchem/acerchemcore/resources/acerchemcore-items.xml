@@ -689,6 +689,16 @@
 						<modifiers read="true" write="true" search="true" />
 						<persistence type="property" />
 					</attribute>
+					<attribute qualifier="orderCode" type="java.lang.String">
+						<description>订单号</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="productNumber" type="java.lang.Integer">
+						<description>产品数量</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
 				</attributes>
 			</itemtype>
 
@@ -973,6 +983,18 @@
 					</attribute>
 					<attribute qualifier="daysForPickUp" type="java.lang.Integer">
 						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+		</typegroup>
+		
+		<typegroup name="Order">
+				<itemtype code="Order" autocreate="false" generate="false">
+				<deployment table="order" typecode="30313" />
+				<attributes>
+					<attribute qualifier="pickupDateOfExtended" type="java.util.Date">
+						<persistence type="property" />
+						<description>推迟后的配送日期</description>
 					</attribute>
 				</attributes>
 			</itemtype>

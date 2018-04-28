@@ -16,7 +16,7 @@
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
-<%-- <c:set var="deliveryAddress" value="${cartData.deliveryAddress}"/> --%>
+ <c:set var="deliveryAddress" value="${cartData.deliveryAddress}"/>
 <c:set var="deliveryMode" value="${cartData.deliveryMode}"/>
 
 <template:page pageTitle="${pageTitle}" hideHeaderLinks="true">
@@ -172,9 +172,65 @@
 							</div>
 							</c:if>
 							
+							<div class="btn-set line-setbtn">							
+								<a class="btn btn-showlist" href="javascript:void(0)">Address Book</a>
+								<a class="btn btn-showform" href="javascript:void(0)">New Address</a>
+							</div>
+							
 						</div>	
-
 						
+						
+
+						<div class="shiplist hidlist addbook">
+							<div class="title">Address Book <i class="icons close-icon"></i> </div>
+							<ul>
+							<c:forEach items="${deliveryAddresses}" var="da" varStatus="status">
+								<li class="now">
+									<label>
+										<div class="into int">
+										    <c:choose>
+										         <c:when test="${deliveryAddress.id == da.id}">
+											<input type="radio" name="addbook" id="addbook" value="${da.id}" checked="checked">
+											    </c:when>
+											     <c:otherwise>
+											     <input type="radio" name="addbook" id="addbook" value="${da.id}" >
+											     </c:otherwise>
+											</c:choose>
+										</div>
+										<div class="into book-item">
+											 <span>
+							                    <b>${fn:escapeXml(da.title)}&nbsp;${fn:escapeXml(da.firstName)}&nbsp;${fn:escapeXml(da.lastName)}</b>
+							                    <br/>
+							                    <c:if test="${ not empty da.line1 }">
+							                        ${fn:escapeXml(da.line1)},&nbsp;
+							                    </c:if>
+							                    <c:if test="${ not empty da.line2 }">
+							                        ${fn:escapeXml(da.line2)},&nbsp;
+							                    </c:if>
+							                    <c:if test="${not empty da.town }">
+							                        ${fn:escapeXml(da.town)},&nbsp;
+							                    </c:if>
+							                    <c:if test="${ not empty da.region.name }">
+							                        ${fn:escapeXml(da.region.name)},&nbsp;
+							                    </c:if>
+							                    <c:if test="${ not empty da.postalCode }">
+							                        ${fn:escapeXml(da.postalCode)},&nbsp;
+							                    </c:if>
+							                    <c:if test="${ not empty da.country.name }">
+							                        ${fn:escapeXml(da.country.name)}
+							                    </c:if>
+							                    <br/>
+							                    <c:if test="${ not empty da.phone }">
+							                        ${fn:escapeXml(da.phone)}
+							                    </c:if>
+							                </span>
+										</div>	
+									</label>
+								</li>
+						</c:forEach>		
+
+							</ul>
+						</div>
 						<!-- b end -->
 					</div>
 				</div>
@@ -361,7 +417,7 @@
 
 <script>
 inputint()
-		
+
 $('.g-table .btn').on('click',function(){//
 	var atext = $(this).attr('class');
 	switch(atext){
@@ -382,6 +438,7 @@ $('.g-table .btn').on('click',function(){//
 			$('.hidlist , .solid-form').hide();
 			$(this).parents('.g-table').find('.solid-form').show();
 			break;
+			
 	}
 })
 
@@ -490,6 +547,7 @@ function formreq(wrap,parwrap,aspan,newval,ap,inputarep,addinput,inputval){//add
 	} 
 	
 }
+
 
 function dateChange(num, date) {
     debugger;
@@ -657,28 +715,19 @@ function checktot(){
 checktot()
 
 
-/* var radio=$('input[name="shipmethod"]');
-
-radio.change(function(){
-	
-	//alert(this.value);
-	
-	alert(this.value);
-
-}); */
 
 $('#textDate').on('change',function(){
 	
-	date = new Date();
-	date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+	var date = new Date();
+	var currDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 	
-	releaseDate = dateChange(${cartData.deliveryDays},date)
-	selectDate = $('#textDate').val();
+	var releaseDate = dateChange(${cartData.deliveryDays},currDate);
+	var selectDate = $('#textDate').val();
 	
 	var isFuture = ${cartData.isUseFutureStock};
 	
-	//alert(isFuture);
-	//判断是否远期库存
+	//var myBoolean=new Boolean(true);
+	
 	if(isFuture){
 		
 		if (new Date(selectDate).getTime()<new Date(releaseDate).getTime()){
@@ -694,10 +743,20 @@ $('#textDate').on('change',function(){
 		}
 	}
 	
-	 //window.location.href ='<c:url value='/checkout/multi/delivery-address/addPickUpDate?pickUpDate='/>'+selectDate;
-	// break;
+	 window.location.href ='<c:url value='/checkout/multi/delivery-address/addPickUpDate?pickUpDate='/>'+selectDate;
 	
 });
+
+$(document).ready(function() {
+    $('input[type=radio][name=addbook]').change(function() {
+    	
+    	//alert(this.value);
+    	
+    	var  ib = this.value;
+    	window.location.href ='<c:url value='/checkout/multi/delivery-address/select?selectedAddressCode='/>'+ib;
+    });
+});
+
 
 
 $(document).ready(function() {
@@ -710,15 +769,19 @@ $(document).ready(function() {
     });
 });
 
+
 $(document).ready(function() {
     $('input[type=radio][name=paymentmethod]').change(function() {
     	
     	//alert(this.value);
     	
     	var  pm = this.value;
-    	window.location.href ='<c:url value='/checkout/multi/payment-method/choose?selectedPaymentMethodId='/>'+pm;
+    	window.location.href ='<c:url value='/checkout/multi/summary/choose?selectedPaymentMethodId='/>'+pm;
     });
 });
+
+
+
 
 
 </script>

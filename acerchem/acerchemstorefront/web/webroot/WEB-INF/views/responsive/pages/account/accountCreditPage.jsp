@@ -11,7 +11,6 @@
 	<div class="member-content">
 		<user:personalInfo/>
 		<div class="sign-content g-right">
-            <!-- 信用账户信息展示 -->
             <div class="title">Credit Account</div>
             <form:form action="" method="post" commandName="customerCreditAccountData">
             	<table>
@@ -35,32 +34,40 @@
 				
 				<table>
 					<tr>
+						<th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Order Code</th>
+						<th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Product Quantity</th>
 						<th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Creadit Used Amount</th>
-						<th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Payback Amount</th>
-						<th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Is Payback</th>
-						<th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Payback Time</th>
 						<th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Should Payback Time</th>
+						<th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Payback Amount</th>
+						<th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Payback Time</th>
+						<th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Is Payback</th>
+						
+						
 					</tr>
 					<tr><td style="padding:0px 0px;"></td></tr>
 					<c:forEach items="${customerCreditAccountData.transactions}" var="trans">
 						<tr class="responsive-table-item">
 							<ycommerce:testId code="orderHistoryItem_orderDetails_link">
 								<td style="padding:10px 10px;font-size:14px;">
-									<%-- <a href="${orderDetailsUrl}${trans.cransactionId}" class="responsive-table-link"> --%>
-										${trans.creaditUsedAmount}
-									<!-- </a> -->
+									${trans.orderCode}
+								</td>
+								<td style="padding:10px 10px;font-size:14px;">
+									${trans.productNumber}
+								</td>
+								<td style="padding:10px 10px;font-size:14px;">
+									${trans.creaditUsedAmount}
+								</td>
+								<td style="padding:10px 10px;font-size:14px;">
+									${trans.shouldPaybackTime}
 								</td>
 								<td style="padding:10px 10px;font-size:14px;">
 									${trans.paybackAmount}
 								</td>
 								<td style="padding:10px 10px;font-size:14px;">
-									${trans.isPayback}
-								</td>
-								<td style="padding:10px 10px;font-size:14px;">
 									${trans.paybackTime}
 								</td>
 								<td style="padding:10px 10px;font-size:14px;">
-									${trans.shouldPaybackTime}
+									${trans.isPayback}
 								</td>
 							</ycommerce:testId>
 						</tr>

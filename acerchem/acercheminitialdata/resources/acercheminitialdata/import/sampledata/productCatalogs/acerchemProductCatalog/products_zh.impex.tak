@@ -1,0 +1,27 @@
+# -----------------------------------------------------------------------
+# [y] hybris Platform
+#
+# Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+#
+# This software is the confidential and proprietary information of SAP
+# ("Confidential Information"). You shall not disclose such Confidential
+# Information and shall use it only in accordance with the terms of the
+# license agreement you entered into with SAP.
+# -----------------------------------------------------------------------
+#******************************This file is generated - please do not edit it. It will be regenerated after every build.********************************#
+# ImpEx template for Importing all Localisations for Products in the acerchem Store
+
+# Macros / Replacement Parameter definitions
+$productCatalog=acerchemProductCatalog
+$productCatalogName=acerchem Product Catalog
+$catalogVersion=catalogversion(catalog(id[default=$productCatalog]),version[default='Staged'])[unique=true,default=$productCatalog:Staged]
+
+$lang=zh
+
+
+# Update allProducts with localisations
+UPDATE Product;code[unique=true];$catalogVersion;name[lang=$lang];summary[lang=$lang];description[lang=$lang]
+
+ ;1382080;;EOS450D + 18-55 IS 套装;EOS450D + 18-55 IS 套装 - 1220 万像素，4272 x 2848，3:2 CMOS，3 英寸 TFT 液晶屏，USB 2.0;EOS 450D 拥有符合人体工学的轻巧机身，融合了各种功能但性能丝毫不打折扣。采用佳能最新技术，搭载 1220 万像素 CMOS 传感器，随意拍摄任何精彩瞬间。<br/>特点<br/><br/>- 1220 万像素 CMOS 传感器<br/>- 3.5 帧/秒连拍<br/>- 9 点宽区自动对焦<br/>- EOS 综合除尘系统<br/>- 3.0 英寸液晶屏，带“实时取景”模式<br/>- DIGIC III 处理器<br/>- 超大明亮的取景器<br/>- 整体图像控制<br/>- 小巧轻便<br/>- 兼容 EF/EF-S 镜头和 EX Speedlites 系列闪光灯
+ ;300938;;Photosmart E317 数码相机;使用 500 万像素相机享受随走随拍的乐趣;使用这款时尚易用的相机随走随拍，拍出清晰绚丽、自然逼真的照片。<br/><br/>采用 4x 数码变焦拉近距离，通过 3.8 cm 液晶屏查看拍摄效果，打印超值 10 x 15 cm 照片并可放大至海报大小。
+ 

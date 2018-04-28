@@ -62,14 +62,15 @@
 				</ul>
 			</c:forEach>
 		</div>
-		<div class="btn-set">	
-	        <a href="add-address" class="btn btn-newadd">
-	            New Address
-	        </a>
-		</div>
 	</div>
 </c:if>
-
+<div class="rigcont">
+	<div class="btn-set">	
+	    <a href="add-address" class="btn btn-newadd">
+	        New Address
+	    </a>
+	</div>
+</div>
 <c:forEach items="${addressData}" var="address">
 	<div class="display-none">
     	<div id="popup_confirm_address_removal_${fn:escapeXml(address.id)}" class="account-address-removal-popup">

@@ -144,7 +144,7 @@ public class DefaultAcerchemCommercePlaceOrderStrategy extends DefaultCommercePl
 			Long quantity = aoe.getQuantity();
 			boolean isUseFutureStock = aoe.getIsUseFutureStock();
 
-			acerchemStockService.calculateFutureStock(productModel,warehouseModel,quantity.intValue(),null,isUseFutureStock);
+			acerchemStockService.calculateStock(productModel,warehouseModel,quantity.intValue(),null,isUseFutureStock);
 		}
 	}
 

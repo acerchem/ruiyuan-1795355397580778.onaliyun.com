@@ -10,6 +10,7 @@
  */
 package com.acerchem.fulfilmentprocess.actions.order;
 
+import de.hybris.platform.core.enums.OrderStatus;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 import de.hybris.platform.processengine.action.AbstractSimpleDecisionAction;
@@ -44,10 +45,12 @@ public class SplitDeliveryModeAction extends AbstractSimpleDecisionAction<OrderP
 
 		if (order.getDeliveryMode().getCode().equals(DELIVERY_GROSS))
 		{
+			setOrderStatus(order, OrderStatus.DELIVERED);
 			return Transition.OK;
 		}
 		else
 		{
+			setOrderStatus(order, OrderStatus.DELIVERED);
 			return Transition.NOK;
 		}
 	}

@@ -66,9 +66,9 @@ public class CreditPayModeAction extends AbstractSimpleDecisionAction<OrderProce
 				
 				try {
 					
-					CustomerCreditAccountModel customerCreditAccountModel = defaultCustomerCreditAccountService.updateCustomerCreditAccountConsume((CustomerModel) order.getUser(),BigDecimal.valueOf(order.getTotalPrice()));
+					CustomerCreditAccountModel customerCreditAccountModel = defaultCustomerCreditAccountService.updateCustomerCreditAccountConsume(order,BigDecimal.valueOf(order.getTotalPrice()));
 					if(customerCreditAccountModel != null){
-						//Ö§¸¶³É¹¦ºó,¸Ä±äorderStatus
+						//æ”¯ä»˜æˆåŠŸåŽ,æ”¹å˜orderStatus
 						setOrderStatus(order, OrderStatus.PAIED);
 						return Transition.OK;
 					}else{
@@ -77,7 +77,7 @@ public class CreditPayModeAction extends AbstractSimpleDecisionAction<OrderProce
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
 					setOrderStatus(order, OrderStatus.UNPAIED);
-					LOG.error("¸üÐÂÐÅÓÃÕË»§Ê§°Ü!");
+					LOG.error("æ›´æ–°ä¿¡ç”¨è´¦æˆ·å¤±è´¥!");
 					return Transition.NOK;
 				}
 			}

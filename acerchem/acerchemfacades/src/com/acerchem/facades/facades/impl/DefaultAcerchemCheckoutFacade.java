@@ -1,5 +1,7 @@
 package com.acerchem.facades.facades.impl;
 
+import com.acerchem.core.enums.CreditAccountStatusEnum;
+import com.acerchem.core.model.CustomerCreditAccountModel;
 import com.acerchem.core.service.AcerchemDeliveryService;
 import com.acerchem.facades.facades.AcerchemCheckoutFacade;
 import com.acerchem.facades.facades.AcerchemOrderException;
@@ -22,6 +24,8 @@ import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.order.delivery.DeliveryModeModel;
 import de.hybris.platform.core.model.order.payment.PaymentModeModel;
 import de.hybris.platform.core.model.user.AddressModel;
+import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.deliveryzone.model.ZoneDeliveryModeModel;
 import de.hybris.platform.order.*;
 import de.hybris.platform.order.exceptions.CalculationException;
@@ -175,6 +179,11 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                 if (deliveryModeCode.equals("DELIVERY_MENTION")){
                     AddressModel addressModel = cartModel.getEntries().get(0).getDeliveryPointOfService().getAddress();
                     cartModel.setDeliveryAddress(addressModel);
+                }else{
+                    List<AddressModel> deliveryAddresses = getDeliveryService().getSupportedDeliveryAddressesForOrder(cartModel,true);
+                    if (deliveryAddresses !=null && deliveryAddresses.size()>0){
+                        cartModel.setDeliveryAddress(deliveryAddresses.get(0));
+                    }
                 }
                 //促销那块会把操作费，存储费不加上，在此处计算总价格和单价
                 recalculateCartTotalPrice(cartModel);
@@ -214,8 +223,11 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
             DeliveryModeModel deliveryModeModel = deliveryModeService.getDeliveryModeForCode(selectedDeliveryModeCode);
            if (deliveryModeModel!=null&&deliveryModeModel.getSupportedPaymentModes()!=null){
                for (PaymentModeModel paymentModeModel : deliveryModeModel.getSupportedPaymentModes()){
-                   if (defaultCustomerCreditAccountService.getCustomerCreditAccount()== null && paymentModeModel.getCode().equals("CreditPayment")) {
+                   CustomerCreditAccountModel customerCreditAccountModel = defaultCustomerCreditAccountService.getCustomerCreditAccount();
+                   if (customerCreditAccountModel== null && paymentModeModel.getCode().equals("CreditPayment")) {
                       //信用账户为空就不存在data里
+                   }else if (customerCreditAccountModel!=null&& CreditAccountStatusEnum.LOCKED.equals(customerCreditAccountModel.getStatus())){
+
                    }else{
                        CardTypeData cardTypeData = new CardTypeData();
                        cardTypeData.setCode(paymentModeModel.getCode());
@@ -228,20 +240,23 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
         return cardTypeDataList;
     }
 
+
     @Override
-    public boolean setPaymentDetails(final String paymentInfoId)
-    {
+    public boolean setPaymentDetail(final String paymentInfoId) throws AcerchemOrderException {
         validateParameterNotNullStandardMessage("paymentInfoId", paymentInfoId);
 
         if (StringUtils.isNotBlank(paymentInfoId))
         {
             PaymentModeModel paymentModeModel = paymentModeService.getPaymentModeForCode(paymentInfoId);
             final CartModel cartModel = getCart();
+            if (paymentModeModel.getCode().equals("CreditPayment")) {
+                validateCustomerCredit(cartModel);
+            }
             if (paymentModeModel != null)
             {
                cartModel.setPaymentMode(paymentModeModel);
                getModelService().save(cartModel);
-               return true;
+                return true;
             }
         }
         return false;
@@ -290,34 +305,43 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
         	  SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
         	  cartData.setPickUpdate(sdf.format(cartModel.getPickUpDate()));
             }
-            cartData.setIsUseFutureStock(cartModel.getEntries().get(0).getIsUseFutureStock());
 
-            if (cartModel.getEntries()!=null && cartModel.getEntries().size()>0){
-                boolean isUsefutureStock = cartModel.getEntries().get(0).getIsUseFutureStock();
-                cartData.setIsUseFutureStock(isUsefutureStock);
-                for (AbstractOrderEntryModel aoe: cartModel.getEntries()){
-                    if (isUsefutureStock){
-                        StockLevelModel stockLevelModel = stockService.getStockLevel(aoe.getProduct(),aoe.getDeliveryPointOfService().getWarehouses().get(0));
-                        cartData.setDeliveryDays(stockLevelModel.getPreOrderReleaseDay());
-                    }else{
-                        StockLevelModel stockLevelModel = stockService.getStockLevel(aoe.getProduct(),aoe.getDeliveryPointOfService().getWarehouses().get(0));
-                        cartData.setDeliveryDays(stockLevelModel.getAvaPreOrderReleaseDay());
-                    }
-                }
-            }
+            setOrderDeliveryDays(cartData, cartModel);
 
             for (OrderEntryData orderEntryData: cartData.getEntries()){
                 BigDecimal basePrice = orderEntryData.getTotalPrice().getValue().divide(BigDecimal.valueOf(orderEntryData.getQuantity()));
                 PriceData promotionBasePrice = priceDataFactory.create(PriceDataType.BUY,
                         BigDecimal.valueOf(basePrice.doubleValue()), cartModel.getCurrency().getIsocode());
-                cartData.setPromotionBasePrice(promotionBasePrice);
+                orderEntryData.setPromotionBasePrice(promotionBasePrice);
             }
           
         }
         return cartData;
     }
 
-	@Override
+    private void setOrderDeliveryDays(CartData cartData, CartModel cartModel) {
+        List<Integer> deliveryDayList =new ArrayList<>();
+        if (cartModel.getEntries()!=null && cartModel.getEntries().size()>0){
+            boolean isUsefutureStock = cartModel.getEntries().get(0).getIsUseFutureStock();
+            cartData.setIsUseFutureStock(isUsefutureStock);
+            for (AbstractOrderEntryModel aoe: cartModel.getEntries()){
+                if (isUsefutureStock){
+                    StockLevelModel stockLevelModel = stockService.getStockLevel(aoe.getProduct(),aoe.getDeliveryPointOfService().getWarehouses().get(0));
+                    deliveryDayList.add(stockLevelModel.getPreOrderReleaseDay());
+                }else{
+                    StockLevelModel stockLevelModel = stockService.getStockLevel(aoe.getProduct(),aoe.getDeliveryPointOfService().getWarehouses().get(0));
+                    deliveryDayList.add(stockLevelModel.getAvaPreOrderReleaseDay());
+                }
+            }
+            if (isUsefutureStock){
+                cartData.setDeliveryDays(Collections.max(deliveryDayList));
+            }else{
+                cartData.setDeliveryDays(Collections.min(deliveryDayList));
+            }
+        }
+    }
+
+    @Override
 	public PaymentModeData getPaymentModeData() {
 		final CartModel cartModel = getCart();
 		PaymentModeData paymentModeData = new PaymentModeData();
@@ -386,7 +410,10 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                aoe.setTotalRealPrice(totalRealPrice);
 
             }
+            BigDecimal orderTotalPrice = totalAdditionalFee.add(BigDecimal.valueOf(orderModel.getTotalPrice()));
+            orderModel.setTotalPrice(orderTotalPrice.doubleValue());
             getModelService().saveAll(orderModel.getEntries());
+            getModelService().saveAll(orderModel);
         }
     }
 
@@ -447,6 +474,36 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
             }
         }
         return null;
+    }
+
+    private void validateCustomerCredit(CartModel cartModel) throws AcerchemOrderException {
+        double totalPrice = cartModel.getTotalPrice();
+        CustomerCreditAccountModel customerCreditAccountModel = defaultCustomerCreditAccountService.getCustomerCreditAccount();
+        if (customerCreditAccountModel!=null && customerCreditAccountModel.getCreaditRemainedAmount()!=null){
+            double creaditReaminAmount = customerCreditAccountModel.getCreaditRemainedAmount().doubleValue();
+            if(totalPrice > creaditReaminAmount){
+                throw new AcerchemOrderException("checkout.creditcard.limit");
+            }
+        }
+    }
+
+    @Override
+    public boolean setDeliveryAddress(final AddressData addressData)
+    {
+        final CartModel cartModel = getCart();
+        if (cartModel != null)
+        {
+            AddressModel addressModel = null;
+            if (addressData != null)
+            {
+                addressModel = addressData.getId() == null ? createDeliveryAddressModel(addressData, cartModel)
+                        : getDeliveryAddressModelForCode(addressData.getId());
+            }
+
+            cartModel.setDeliveryAddress(addressModel);
+            getModelService().save(cartModel);
+        }
+        return false;
     }
 }
 

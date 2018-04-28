@@ -29,7 +29,7 @@
     
     
 <div class="btn-set">
-	    <button class="btn btn-submit">Check Out</button>
+	    <!--  <button class="btn btn-submit">Check Out</button>  -->
 <c:if test="${empty showAddToCart ? true : showAddToCart}">
 	<c:set var="buttonType">button</c:set>
 	<c:if test="${product.stock.stockLevelStatus.code ne 'outOfStock' }">
@@ -38,13 +38,13 @@
 	<c:choose>
 	
 		<c:when test="${fn:contains(buttonType, 'button')}">
-			<button type="${buttonType}" class="btn btn-cart" disabled="disabled">
+			<button type="${buttonType}" class="btn btn-submit" disabled="disabled">
 				Add to Cart
 			</button>
 		</c:when>
 		<c:otherwise>
 			<ycommerce:testId code="addToCartButton">
-				<button id="addToCartButton" type="${buttonType}" class="btn btn-cart" >
+				<button id="addToCartButton" type="${buttonType}" class="btn btn-submit" >
 					Add to Cart
 				</button>
 			</ycommerce:testId>
@@ -52,6 +52,8 @@
 	
 	</c:choose>
 </c:if>
+
+ <button class="btn btn-cart"  style="display: none;">Check Out</button>
 	</div>
 </form:form>
 

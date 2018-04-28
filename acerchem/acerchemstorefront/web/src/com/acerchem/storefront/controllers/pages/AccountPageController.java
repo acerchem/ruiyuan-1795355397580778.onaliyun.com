@@ -62,6 +62,7 @@ import de.hybris.platform.commerceservices.util.ResponsiveUtils;
 import de.hybris.platform.converters.Converters;
 import de.hybris.platform.converters.Populator;
 import de.hybris.platform.core.PK;
+import de.hybris.platform.core.enums.OrderStatus;
 import de.hybris.platform.core.model.c2l.CountryModel;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.AddressModel;
@@ -81,6 +82,7 @@ import de.hybris.platform.store.BaseStoreModel;
 import de.hybris.platform.store.services.BaseStoreService;
 import de.hybris.platform.util.Config;
 
+import com.acerchem.core.service.AcerchemStockService;
 import com.acerchem.service.customercreditaccount.DefaultCustomerCreditAccountService;
 import com.acerchem.storefront.controllers.ControllerConstants;
 import com.acerchem.storefront.data.CustomRegisterForm;
@@ -89,7 +91,9 @@ import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParamete
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collection;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -325,6 +329,7 @@ public class AccountPageController extends AbstractSearchPageController
 	{
 		try
 		{
+			model.addAttribute("maxday", Integer.valueOf(Config.getParameter("cancel.order.day")));
 			final OrderData orderDetails = orderFacade.getOrderDetailsForCode(orderCode);
 			model.addAttribute("orderData", orderDetails);
             final List<Breadcrumb> breadcrumbs = accountBreadcrumbBuilder.getBreadcrumbs(null);
@@ -333,6 +338,17 @@ public class AccountPageController extends AbstractSearchPageController
 			breadcrumbs.add(new Breadcrumb("#", getMessageSource().getMessage("text.account.order.orderBreadcrumb", new Object[]
 			{ orderDetails.getCode() }, "Order {0}", getI18nService().getCurrentLocale()), null));
 			model.addAttribute(BREADCRUMBS_ATTR, breadcrumbs);
+			
+			Date pickupDate=orderDetails.getPickupDateOfExtended()!=null?orderDetails.getPickupDateOfExtended():orderDetails.getPickUpDate();
+			Calendar c = Calendar.getInstance(); 
+			c.setTime(pickupDate); 
+		    c.set(Calendar.DATE,c.get(Calendar.DATE)-Integer.valueOf(Config.getParameter("cancel.order.day"))); 
+		    Date date=c.getTime();
+		    
+			Calendar today = Calendar.getInstance(); 
+		    Date todaydate=today.getTime();
+		    
+		    model.addAttribute("canCancel",todaydate.before(date));
 
 		}
 		catch (final UnknownIdentifierException e)
@@ -1211,6 +1227,33 @@ public class AccountPageController extends AbstractSearchPageController
 		return order(orderCode,model,redirectModel);
 	}
 	
+	@RequestMapping(value = "/extendedPickup/" + ORDER_CODE_PATH_VARIABLE_PATTERN, method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String extendedPickupDate(@PathVariable("orderCode") final String orderCode, 
+			final Model model,final RedirectAttributes redirectModel,final Integer days) throws CMSItemNotFoundException
+	{
+		final BaseStoreModel baseStoreModel = baseStoreService.getCurrentBaseStore();
+		final OrderModel order =  customerAccountService.getOrderForCode((CustomerModel) userService.getCurrentUser(), orderCode,baseStoreModel);
+		
+		Integer maxday = Integer.valueOf(Config.getParameter("cancel.order.day"));
+		
+		Calendar c = Calendar.getInstance(); 
+		c.setTime(order.getPickUpDate()); 
+	    c.set(Calendar.DATE,c.get(Calendar.DATE)+days); 
+	    Date date=c.getTime();
+		if(order.getPickupDateOfExtended()==null&&maxday>=days)
+		{
+			order.setPickupDateOfExtended(date);
+	  		modelService.save(order);
+	  		modelService.refresh(order);
+		}
+		
+		return order(orderCode,model,redirectModel);
+	}
+	
+	@Resource
+	private AcerchemStockService acerchemStockService;
+	
 	public void confirm(String orderCode,String confirm)
 	{
 		final BaseStoreModel baseStoreModel = baseStoreService.getCurrentBaseStore();
@@ -1259,6 +1302,23 @@ public class AccountPageController extends AbstractSearchPageController
 					modelService.save(order);
 					modelService.refresh(order);
 			  	}
+			}
+			
+			Date pickupDate=order.getPickupDateOfExtended()!=null?order.getPickupDateOfExtended():order.getPickUpDate();
+			Calendar c = Calendar.getInstance(); 
+			c.setTime(pickupDate); 
+		    c.set(Calendar.DATE,c.get(Calendar.DATE)-Integer.valueOf(Config.getParameter("cancel.order.day"))); 
+		    Date date=c.getTime();
+		    
+			Calendar today = Calendar.getInstance(); 
+		    Date todaydate=today.getTime();
+		    
+			if(confirm.equals("cancel")&&todaydate.before(date))
+			{
+				order.setStatus(OrderStatus.CANCELLED);
+				modelService.save(order);
+				modelService.refresh(order);
+			    acerchemStockService.releaseStock(order);
 			}
 			
 		}

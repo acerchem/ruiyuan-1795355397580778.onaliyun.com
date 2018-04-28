@@ -34,9 +34,10 @@
 					<y:label>actiongroup.common</y:label>
 					<y:action action-id="com.acerchem.actions.order.auditing" property="currentObject"/>
 					<y:action action-id="com.acerchem.actions.order.auditing.EmployeeconfirmPay" property="currentObject"/>
-					<y:action action-id="com.acerchem.actions.order.auditing.EmployeeconfirmDelivery" property="currentObject"/>
 					<y:action action-id="com.acerchem.actions.order.auditing.EmployeeUpdateDeliveryInfo" property="currentObject"/>
 					<y:action action-id="com.acerchem.actions.order.auditing.EmployeeUpdateDeliveryStatus" property="currentObject"/>
+					<y:action action-id="com.acerchem.actions.order.auditing.EmployeeconfirmDelivery" property="currentObject"/>
+					<y:action action-id="com.acerchem.actions.order.auditing.EmployeeCancellOrder" property="currentObject"/>
 				</y:group>
 			</y:actions>
 	</context>
@@ -70,10 +71,11 @@
         </editorArea:editorArea>
     </context>
 	
-	<context merge-by="type" parent="GenericItem" type="ConsignmentEntry" component="create-wizard">
+	<context merge-by="type" parent="GenericItem" type="ConsignmentEntry" component="create-wizard" merge-mode="replace">
 		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="ConsignmentEntryConfigWizard">
 			<wz:prepare id="ConsignmentEntryPrepare">
-				<wz:initialize property="newConsignmentEntry" type="ConsignmentEntry"/>
+				<wz:initialize property="newConsignmentEntry" type="ctx.TYPE_CODE" /> 
+				<wz:assign property="newConsignmentEntry.consignment" value="ctx.parentObject" />
 			</wz:prepare>
 			<wz:step id="step1" label="create.UniasiaConfig.general.label" >
 				<wz:content id="step1.content">
@@ -138,7 +140,17 @@
 			<list-view:column qualifier="price"/>
 		</list-view:list-view>
 	</context>
-	
+
+	<context merge-by="type" parent="GenericItem" type="StockLevel" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="productCode"/>
+			<list-view:column qualifier="warehouse"/>
+			<list-view:column qualifier="available"/>
+			<list-view:column qualifier="reserved"/>
+			<list-view:column qualifier="preOrder"/>
+		</list-view:list-view>
+	</context>
+
 	<context merge-by="module" parent="auto" component="explorer-tree">
 		<explorer-tree:explorer-tree xmlns:explorer-tree="http://www.hybris.com/cockpitng/config/explorertree">
 			<explorer-tree:navigation-node id="hmc.b2bcommercegroup">
@@ -146,8 +158,176 @@
 				<explorer-tree:type-node code="CountryTrayFareConf" id="CountryTrayFareConf"/>
 				<explorer-tree:type-node code="OrderParam" id="OrderParam"/>
 			</explorer-tree:navigation-node>
+			
+			<explorer-tree:navigation-node id="hmc_backoffice-workflow-inbox" position="1" merge-mode="Remove"/>
+			
+			<explorer-tree:navigation-node id="hmc_treenode_system">
+				<explorer-tree:navigation-node id="hmc.solrfacetsearch" merge-mode="Remove">
+					<explorer-tree:type-node code="AbstractAsSearchProfile" id="hmc_type_tree_searchprofile" />
+					<explorer-tree:type-node code="AsSearchProfileActivationSet" id="hmc_type_tree_searchprofileactivationset" />
+				</explorer-tree:navigation-node>
+				<explorer-tree:navigation-node id="hmc.solrfacetsearch" merge-mode="Remove">
+					<explorer-tree:type-node code="AbstractAsSearchProfile" id="hmc_type_tree_searchprofile" />
+					<explorer-tree:type-node code="AsSearchProfileActivationSet" id="hmc_type_tree_searchprofileactivationset" />
+				</explorer-tree:navigation-node>
+                <explorer-tree:navigation-node id="hmc.solrfacetsearch" merge-mode="Remove">
+                    <explorer-tree:navigation-node id="hmc_treenode_solr_backoffice">
+                        <explorer-tree:type-node code="BackofficeIndexedTypeToSolrFacetSearchConfig" id="hmc_typenode_BackofficeIndexedTypeToSolrFacetSearchConfig"/>
+                    </explorer-tree:navigation-node>
+                </explorer-tree:navigation-node>
+          	    <explorer-tree:navigation-node id="hmc_navigationnode_scripting" merge-mode="Remove">
+		            <explorer-tree:type-node code="DynamicWebService" id="hmc_typenode_dynamicwebservice"/>
+			    </explorer-tree:navigation-node>
+				<explorer-tree:type-node code="LuceneIndex" id="hmc_typenode_luceneindex" position="11" merge-mode="Remove"/>
+				<explorer-tree:navigation-node id="hmc_type_tree_oauthserver" merge-mode="Remove">
+					<explorer-tree:type-node code="OAuthClientDetails" id="hmc_type_tree_oauthclientdetails"/>
+					<explorer-tree:type-node code="OAuthAccessToken" id="type_tree_oauthaccesstoken"/>
+				</explorer-tree:navigation-node>
+				<explorer-tree:navigation-node id="hmc_treenode_systemconfig" merge-mode="Remove">
+					<explorer-tree:type-node code="JaloTranslatorConfiguration" id="hmc_typenode_jalotranslatorconfiguration"/>
+				</explorer-tree:navigation-node>
+				<explorer-tree:navigation-node id="hmc_treenode_group.commons" merge-mode="Remove">
+					<explorer-tree:type-node code="Format" id="hmc_typenode_format"/>
+					<explorer-tree:type-node code="ItemFormatter" id="hmc_typenode_itemformatter"/>
+					<explorer-tree:type-node code="MediaFormatter" id="hmc_typenode_mediaformatter"/>
+					<explorer-tree:type-node code="Document" id="hmc_typenode_document"/>
+					<explorer-tree:type-node code="RendererTemplate" id="hmc_typenode_renderertemplate"/>
+				</explorer-tree:navigation-node>
+				<explorer-tree:navigation-node id="hmc_treenode_workflowgroup" merge-mode="Remove">
+					<explorer-tree:type-node code="WorkflowTemplate" id="hmc_typenode_workflowtemplate"/>
+					<explorer-tree:type-node code="Workflow" id="hmc_typenode_workflow"/>
+					<explorer-tree:type-node code="WorkflowAction" id="hmc_typenode_workflowaction"/>
+				</explorer-tree:navigation-node>
+				<explorer-tree:navigation-node id="hmc_treenode_validationgroup" merge-mode="Remove">
+					<explorer-tree:type-node code="ConstraintGroup" id="hmc_typenode_constraintgroup"/>
+					<explorer-tree:type-node code="AbstractConstraint" id="hmc_typenode_abstractconstraint">
+						<explorer-tree:navigation-node id="hmc_backoffice-validationPojoOnly"/>
+					</explorer-tree:type-node>
+				</explorer-tree:navigation-node>
+				<explorer-tree:navigation-node id="hmc_navigationnode_scripting" merge-mode="Remove">
+					<explorer-tree:type-node id="hmc_typenode_scripting" code="Script"/>
+					<explorer-tree:type-node code="ScriptingJob" id="hmc_typenode_scriptingjob"/>
+					<explorer-tree:type-node code="ScriptingTask" id="hmc_typenode_scriptingtask"/>
+				</explorer-tree:navigation-node>
+				<explorer-tree:navigation-node id="hmc_navigationnode_businessprocess" merge-mode="Remove">
+					<explorer-tree:type-node code="BusinessProcess" id="hmc_typenode_businessprocess"/>
+					<explorer-tree:type-node id="hmc_typenode_dynamic_process_definition" code="DynamicProcessDefinition"/>
+				</explorer-tree:navigation-node>
+				<explorer-tree:navigation-node id="hmc_treenode_background_processes" merge-mode="Remove">
+					<explorer-tree:type-node code="CronJob" id="hmc_typenode_cronjob"/>
+					<explorer-tree:type-node code="Job" id="hmc_typenode_job"/>
+					<explorer-tree:type-node code="JobLog" id="hmc_typenode_joblog"/>
+					<explorer-tree:type-node code="Task" id="hmc_typenode_task"/>
+					<explorer-tree:type-node code="TaskCondition" id="hmc_typenode_taskcondition"/>
+				</explorer-tree:navigation-node>
+				<explorer-tree:type-node code="Type" id="hmc_typenode_type" merge-mode="Remove"/>
+				<explorer-tree:type-node code="SavedQuery" id="hmc_typenode_savedquery" merge-mode="Remove"/>
+				<explorer-tree:type-node code="BackofficeSavedQuery" id="hmc_typenode_backofficesavedquery" merge-mode="Remove"/>
+				<explorer-tree:type-node code="ViewType" id="hmc_typenode_viewtype" merge-mode="Remove"/>
+				<explorer-tree:type-node code="SearchRestriction" id="hmc_typenode_searchrestriction" merge-mode="Remove"/>
+				<explorer-tree:type-node code="SystemSetupAudit" id="hmc_typenode_systemsetupaudit" merge-mode="Remove"/>
+				<explorer-tree:navigation-node id="hmc.solrfacetsearch" merge-mode="Remove">
+					<explorer-tree:type-node code="SolrFacetSearchConfig" id="hmc_type_tree_solrfacetsearchconfig" />
+					<explorer-tree:type-node code="SolrIndexedType" id="hmc_type_tree_solrindexedtype" />
+					<explorer-tree:type-node code="SolrValueRangeSet" id="hmc_type_tree_solrvaluerangeset" />
+				</explorer-tree:navigation-node>
+			</explorer-tree:navigation-node>
+			
+			<explorer-tree:navigation-node id="hmc.cockpit" merge-mode="Remove">
+                <explorer-tree:type-node code="CockpitItemTemplate" id="type_tree_cockpititemtemplate"/>
+                <explorer-tree:type-node code="CockpitUIComponentConfiguration" id="type_tree_cockpituicomponentconfiguration"/>
+                <explorer-tree:type-node code="CockpitUIComponentAccessRight" id="type_tree_cockpituicomponentaccessright"/>
+                <explorer-tree:navigation-node id="type_tree_mcc" merge-mode="Remove">
+                    <explorer-tree:type-node code="AbstractLinkEntry" id="type_tree_abstractlinkentry"/>
+                </explorer-tree:navigation-node>
+            </explorer-tree:navigation-node>
+            
+            <explorer-tree:navigation-node id="hmc.text.group" merge-mode="Remove">
+                <explorer-tree:type-node code="MobileAggregator" id="hmc.type_tree_mobileaggregator"/>
+                <explorer-tree:type-node code="MobileShortcode" id="hmc.type_tree_mobileshortcode"/>
+                <explorer-tree:type-node code="MobileReceiveGenericAction" id="hmc.type_tree_mobilereceivegenericaction"/>
+                <explorer-tree:type-node code="PhoneNumberList" id="hmc.type_tree_phonenumberlist"/>
+                <explorer-tree:type-node code="PhoneNumber" id="hmc.type_tree_phonenumber"/>
+                <explorer-tree:type-node code="MobileMessageContext" id="hmc.type_tree_mobilemessagecontext"/>
+                <explorer-tree:type-node code="MobileSendMessageCronJob" id="hmc.type_tree_mobilesendmessagecronjob"/>
+            </explorer-tree:navigation-node>
+            
+            <explorer-tree:navigation-node id="hmc.cms2">
+                <explorer-tree:type-node code="CMSSite" id="CMSSite" merge-mode="Remove"/>
+                <explorer-tree:type-node code="CMSPageType" id="CMSPageType" merge-mode="Remove"/>
+                <explorer-tree:type-node code="PageTemplate" id="PageTemplate" merge-mode="Remove"/>
+                <explorer-tree:type-node code="ContentSlotForTemplate" id="ContentSlotForTemplate" merge-mode="Remove"/>
+                <explorer-tree:type-node code="AbstractPage" id="AbstractPage" merge-mode="Remove"/>
+                <explorer-tree:type-node code="ContentSlot" id="ContentSlot" merge-mode="Remove"/><!-- 内容位置 -->
+                <explorer-tree:type-node code="ContentSlotForPage" id="ContentSlotForPage" merge-mode="Remove"/>
+                <explorer-tree:type-node code="SimpleCMSComponent" id="SimpleCMSComponent"/><!-- 组件 -->
+                <explorer-tree:type-node code="ComponentTypeGroup" id="ComponentTypeGroup" merge-mode="Remove"/>
+                <explorer-tree:type-node code="AbstractCMSComponentContainer" id="AbstractCMSComponentContainer" merge-mode="Remove"/>
+                <explorer-tree:type-node code="RestrictionType" id="RestrictionType" merge-mode="Remove"/>
+                <explorer-tree:type-node code="AbstractRestriction" id="AbstractRestriction" merge-mode="Remove"/>
+                <explorer-tree:type-node code="CMSNavigationNode" id="CMSNavigationNode"/><!-- 导航节点 -->
+                <explorer-tree:type-node code="SimpleCMSAction" id="SimpleCMSAction" position="9" merge-mode="Remove"/>
+            </explorer-tree:navigation-node>
+			
+			<explorer-tree:navigation-node id="hmc_ticketsystemgroup">
+			    <explorer-tree:type-node code="CsTicket" id="hmc_type_tree_csticket"/>
+			    <explorer-tree:type-node code="CsTicketEventEmailConfiguration" id="CsTicketEventEmailConfiguration" merge-mode="Remove"/>
+			</explorer-tree:navigation-node>
+			
+			<explorer-tree:navigation-node id="hmc.group.basecommerce.deeplink" merge-mode="Remove">
+                <explorer-tree:type-node code="DeeplinkUrl" id="DeeplinkUrl"/>
+                <explorer-tree:type-node code="DeeplinkUrlRule" id="DeeplinkUrlRule"/>
+            </explorer-tree:navigation-node>
+			
 		</explorer-tree:explorer-tree>
 	</context>
+	
+	<!-- add by alice -->
+	<context merge-by="type" parent="GenericItem" type="CsTicket" component="listview">
+        <list-view:list-view >
+            <list-view:column qualifier="ticketID"/>
+            <list-view:column qualifier="headline"/>
+            <list-view:column qualifier="customer"/>
+            <list-view:column qualifier="order" merge-mode="Remove"/>
+            <list-view:column qualifier="state"/>
+            <list-view:column qualifier="priority"/>
+            <list-view:column qualifier="category"/>
+            <list-view:column qualifier="telephone"/><!-- 电话 -->
+            <list-view:column qualifier="Email"/><!-- 邮箱 -->
+            <list-view:column qualifier="creationtime"/><!-- 创建时间 -->
+            <list-view:column qualifier="modifiedtime"/><!-- 最新更新时间 -->
+        </list-view:list-view>
+    </context>
+    
+    <context merge-by="type" parent="GenericItem" type="CsTicket" component="editor-area">
+        <editorArea:editorArea>
+            <editorArea:tab name="hmc.tab.ticket.information">
+                <editorArea:section name="hmc.tab.section.ticket.information">
+                    <editorArea:attribute qualifier="ticketID"/>
+                    <editorArea:attribute qualifier="headline"/>
+                    <editorArea:attribute qualifier="state"/>
+                    <editorArea:attribute qualifier="customer"/>
+                    <editorArea:attribute qualifier="telephone"/>
+                    <editorArea:attribute qualifier="Email"/>
+                    <editorArea:attribute qualifier="creationtime"/>
+                    <editorArea:attribute qualifier="modifiedtime"/>
+                    <editorArea:attribute qualifier="address"/>
+                    <editorArea:attribute qualifier="productId"/>
+                    <editorArea:attribute qualifier="productName"/>
+                    <editorArea:attribute qualifier="yourname"/>
+                    <editorArea:attribute qualifier="assignedAgent"/>
+                    <editorArea:attribute qualifier="events"/>
+                </editorArea:section>
+            </editorArea:tab>
+            <editorArea:tab name="hmc.tab.ticket.history" merge-mode="Remove">
+                <editorArea:section name="hmc.tab.section.ticket.history">
+                    <editorArea:attribute qualifier="resolution"/>
+                    <editorArea:attribute qualifier="events"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    <!-- end -->
 	
 	 <context merge-by="type" parent="AbstractOrder" type="Order" component="editor-area">
         <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
@@ -203,5 +383,69 @@
             <list-view:column qualifier="daysForPickUp"/>
         </list-view:list-view>
     </context>
+
+	<context merge-by="type" parent="GenericItem" type="CountryTrayFareConf" component="advanced-search">
+		<advanced-search:advanced-search xmlns:advanced-search="http://www.hybris.com/cockpitng/config/advancedsearch">
+			<advanced-search:field-list>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="country" selected="true"/>
+				<advanced-search:field xmlns="http://www.hybris.com/cockpitng/config/advancedsearch" name="trayAmount" selected="true"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
 	
+	<context merge-by="type" parent="GenericItem" type="Consignment" component="create-wizard"  merge-mode="replace">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="ConsignmentConfigWizard">
+			<wz:prepare id="ConsignmentEntryPrepare">
+				<wz:initialize property="consignment" type="ctx.TYPE_CODE" /> 
+				<wz:assign property="consignment.order" value="ctx.parentObject" />
+				<!-- <wz:assign property="consignment.status" value="ctx.parentObject.status" /> -->
+				<!-- <wz:assign property="consignment.creationtime" value="ctx.parentObject.creationtime" /> -->
+			</wz:prepare>
+			<wz:step id="step1" label="create.Consignment.general.label" >
+				<wz:content id="step1.content">
+					<wz:property-list root="consignment">
+						<wz:property qualifier="order"/>
+						<wz:property qualifier="shippingAddress" merge-mode="remove" validate="false"/>
+						<wz:property qualifier="status" validate="false"/>
+						<wz:property qualifier="creationtime" validate="false"/>
+						<wz:property qualifier="consignmentProcesses" validate="false"/>
+						<wz:property qualifier="code" validate="false"/>
+						<wz:property qualifier="owner"  validate="false"/>
+						<wz:property qualifier="namedDeliveryDate"  validate="false"/>
+						<wz:property qualifier="warehouse" validate="false"/>
+						<wz:property qualifier="deliveryMode" validate="false"/>
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel/>
+					<wz:done>
+						<wz:save property="consignment"/>
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+	
+	<context type="AbstractOrderEntry" component="advanced-search" merge-by="type" parent="GenericItem">
+		<advanced-search:advanced-search>
+			<advanced-search:field-list>
+				<advanced-search:field name="product" selected="true" operator="equals"/>
+				<advanced-search:field name="calculated" selected="false"/>
+				<advanced-search:field name="entryNumber" selected="false"/>
+				<advanced-search:field name="giveAway" selected="false"/>
+				<advanced-search:field name="info" selected="false"/>
+				<advanced-search:field name="order" selected="true"/>
+				<advanced-search:field name="quantity" selected="false"/>
+				<advanced-search:field name="rejected" selected="false"/>
+				<advanced-search:field name="unit" selected="false"/>
+				<advanced-search:field name="comments" selected="false"/>
+				<advanced-search:field name="creationtime" selected="false"/>
+				<advanced-search:field name="itemtype" selected="false"/>
+				<advanced-search:field name="modifiedtime" selected="false"/>
+				<advanced-search:field name="owner" selected="false"/>
+				<advanced-search:field name="pk" selected="false" editor="com.hybris.cockpitng.editor.defaultlong"/>
+			</advanced-search:field-list>
+		</advanced-search:advanced-search>
+	</context>
+
 </config>

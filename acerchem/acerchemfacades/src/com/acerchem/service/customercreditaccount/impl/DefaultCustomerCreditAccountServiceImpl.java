@@ -4,6 +4,8 @@ import com.acerchem.core.enums.CreditAccountStatusEnum;
 import com.acerchem.core.model.CreditTransactionModel;
 import com.acerchem.core.model.CustomerCreditAccountModel;
 import com.acerchem.service.customercreditaccount.DefaultCustomerCreditAccountService;
+
+import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
@@ -58,11 +60,11 @@ public class DefaultCustomerCreditAccountServiceImpl implements DefaultCustomerC
     }
 
     @Override
-    public CustomerCreditAccountModel updateCustomerCreditAccountConsume(CustomerModel customerModel,BigDecimal money) {
+    public CustomerCreditAccountModel updateCustomerCreditAccountConsume(OrderModel orderModel,BigDecimal money) {
 
         if (money != null && money.compareTo(BigDecimal.ZERO) > 0) {
         	
-        	CustomerModel userModel = (CustomerModel)userService.getUserForUID(customerModel.getUid());
+        	CustomerModel userModel = (CustomerModel)userService.getUserForUID(orderModel.getUser().getUid());
         	if(userModel != null)
         	{
         		CustomerCreditAccountModel customerCreditAccount = userModel.getCreditAccount();
@@ -86,7 +88,10 @@ public class DefaultCustomerCreditAccountServiceImpl implements DefaultCustomerC
 	                            creditTransaction.setCransactionId(UUID.randomUUID().toString());
 	                            creditTransaction.setShouldPaybackTime(System.currentTimeMillis() + billingInterval);
 	                            creditTransaction.setCreditAccount(customerCreditAccount);
-	
+	                            
+	                            creditTransaction.setOrderCode(orderModel.getCode());
+	                            creditTransaction.setProductNumber(orderModel.getEntries().size());
+	                    		
 	                            this.modelService.save(creditTransaction);
 	                            this.modelService.refresh(creditTransaction);
 	                            this.modelService.save(customerCreditAccount);

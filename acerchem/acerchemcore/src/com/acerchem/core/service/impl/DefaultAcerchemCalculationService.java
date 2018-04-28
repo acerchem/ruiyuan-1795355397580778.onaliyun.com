@@ -107,20 +107,6 @@ public class DefaultAcerchemCalculationService extends DefaultCalculationService
 			calculateTotals(order, false, taxValueMap);
 			// notify manual discouns - needed?
 			//notifyDiscountsAboutCalculation();
-
 		}
 	}
-
-	private void reCalculateCart(AbstractOrderModel orderModel){
-		if (orderModel!=null&&orderModel.getEntries()!=null){
-			for (AbstractOrderEntryModel aoe : orderModel.getEntries()){
-				BigDecimal totalPrice = BigDecimal.valueOf(aoe.getTotalPrice());
-				BigDecimal quantity = BigDecimal.valueOf(aoe.getQuantity());
-				BigDecimal baseRealPrice = totalPrice.divide(quantity,BigDecimal.ROUND_CEILING,BigDecimal.ROUND_HALF_UP);
-				aoe.setBasePrice(baseRealPrice.doubleValue());
-			}
-			getModelService().saveAll(orderModel.getEntries());
-		}
-	}
-
 }

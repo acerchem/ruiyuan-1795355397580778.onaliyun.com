@@ -22,6 +22,8 @@
 		<property name="grossWeight" type="String" />
 		<property name="unitName" type="String" />
 		<property name="certificates" type="com.acerchem.facades.product.data.CertificatesData"/>
+		
+		<property name="vendor" type="com.acerchem.facades.product.data.VendorData"/>
 
 	</bean>
 
@@ -122,6 +124,8 @@
 		<property name="creditAccount"
 			type="de.hybris.platform.commercefacades.user.data.CustomerCreditAccountData" /><!-- 
 			信用账户 -->
+		<property name="orderCode" type="java.lang.String" />
+		<property name="productNumber" type="java.lang.Integer" />
 	</bean>
 	<!-- end -->
 
@@ -162,6 +166,7 @@
 			type="de.hybris.platform.commercefacades.product.data.PriceData" />
 		<property name="totalRealPrice"
 			type="de.hybris.platform.commercefacades.product.data.PriceData" />
+        <property name="promotionBasePrice" type="de.hybris.platform.commercefacades.product.data.PriceData" />
 	</bean>
 
 	<bean class="de.hybris.platform.commercefacades.order.data.AbstractOrderData">
@@ -174,7 +179,7 @@
 		<property name="pickUpdate" type="java.lang.String" />
 		<property name="isUseFutureStock" type="java.lang.Boolean" />
 		<property name="deliveryDays" type="java.lang.Integer" />
-		<property name="promotionBasePrice" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+
 	</bean>
 
 	<bean class="de.hybris.platform.commercefacades.order.data.OrderData">
@@ -191,6 +196,7 @@
 		<property name="pickUpDate" type="java.util.Date"/>
 		<property name="deliveyDate" type="java.lang.String" />
 		<property name="waitDeliveiedDate" type="java.lang.String" />
+		<property name="pickupDateOfExtended" type="java.util.Date"/>
 	</bean>
 	
 	<bean class="de.hybris.platform.commercefacades.order.data.OrderHistoryData">
@@ -219,6 +225,11 @@
 		<property name="url" type="String"/>
 		<property name="altText" type="String"/>
 		<property name="galleryIndex" type="Integer"/>
+	</bean>
+	
+	<bean class="com.acerchem.facades.product.data.VendorData">
+		<property name="name" type="String"/>
+		<property name="code" type="String"/>
 	</bean>
 
 </beans>

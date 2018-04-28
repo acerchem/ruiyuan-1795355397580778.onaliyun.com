@@ -34,7 +34,12 @@
 	</action>
 	
 	<action id="sendContactEmail" bean="sendEmail">
+		<transition name="OK" to="removeSentContactEmail"/>
+	</action>
+	
+	<action id="removeSentContactEmail" bean="removeSentEmail">
 		<transition name="OK" to="choosePayMode"/>
+		<transition name="NOK" to="error"/>
 	</action>
 	
 	<action id="choosePayMode" bean="choosePayModeAction">
@@ -43,7 +48,7 @@
 	</action>
 	
 	<action id="creditPayMode" bean="creditPayModeAction">
-		<transition name="OK" to="recordConsignmentInfo"/>
+		<transition name="OK" to="waitConfrimForEmployee"/>
 		<transition name="NOK" to="error"/>
 	</action>
 	
@@ -57,7 +62,12 @@
 	</action>
 	
 	<action id="sendFormInvoiceEmail" bean="sendEmail">
+		<transition name="OK" to="removeSentFormInvoiceEmail"/>
+	</action>
+	
+	<action id="removeSentFormInvoiceEmail" bean="removeSentEmail">
 		<transition name="OK" to="waitForAllConfirmPay"/>
+		<transition name="NOK" to="error"/>
 	</action>
 	
 		<wait id="waitForAllConfirmPay" prependProcessCode="true" then="failed">
@@ -79,8 +89,34 @@
 	</wait>
 	
 	<action id="recordConsignmentInfo" bean="recordConsignmentInfoAction">
-		<transition name="OK" to="splitDeliveryMode"/>
+		<transition name="OK" to="waitUpdateConsignmentStatus"/>
 		<transition name="NOK" to="waitConfrimForEmployee"/>
+	</action>
+	
+	<wait id="waitUpdateConsignmentStatus" prependProcessCode="true" then="failed">
+	 	<case event="ConfirmConsignmentStatusActionEvent">
+            <choice id="waitForEmployeeConfirmConsignmentStatus" then="checkConsignmentDate"/>
+            <choice id="cancelOrderConfirm" then="cancelOrderStatus"/>
+        </case>
+	</wait>
+	
+	<action id="checkConsignmentDate" bean="checkConsignmentDateAction">
+		<transition name="OK" to="splitDeliveryMode"/>
+		<transition name="NOK" to="waitUpdateConsignmentStatus"/>
+	</action>
+	
+	<action id="cancelOrderStatus" bean="cancelOrderStatusAction">
+		<transition name="OK" to="generateCancelOrderEmail"/>
+		<transition name="NOK" to="failed"/>
+	</action>
+	
+	<action id="generateCancelOrderEmail" bean="generateCancelOrderEmailAction">
+		<transition name="OK" to="sendCancelOrderEmail"/>
+		<transition name="NOK" to="failed"/>
+	</action>
+	
+	<action id="sendCancelOrderEmail" bean="sendEmail">
+		<transition name="OK" to="success"/>
 	</action>
 	
 	<action id="splitDeliveryMode" bean="splitDeliveryModeAction">
@@ -107,22 +143,21 @@
 	</action>
 	
 	<action id="sendDeliveryEmail" bean="sendEmail">
-		<transition name="OK" to="waitUpdateConsignmentStatus"/>
+		<transition name="OK" to="removeSentDeliveryEmail"/>
+	</action>
+	
+	<action id="removeSentDeliveryEmail" bean="removeSentEmail">
+		<transition name="OK" to="waitForAllConsignmentConfirm"/>
+		<transition name="NOK" to="error"/>
 	</action>
 	
 	<action id="sendDeliveryByShelfEmail" bean="sendEmail">
-		<transition name="OK" to="waitUpdateConsignmentStatus"/>
+		<transition name="OK" to="removeSentDeliveryByShelfEmail"/>
 	</action>
 	
-	<wait id="waitUpdateConsignmentStatus" prependProcessCode="true" then="failed">
-	 	<case event="ConfirmConsignmentStatusActionEvent">
-            <choice id="waitForEmployeeConfirmConsignmentStatus" then="checkConsignmentDate"/>
-        </case>
-	</wait>
-	
-	<action id="checkConsignmentDate" bean="checkConsignmentDateAction">
+	<action id="removeSentDeliveryByShelfEmail" bean="removeSentEmail">
 		<transition name="OK" to="waitForAllConsignmentConfirm"/>
-		<transition name="NOK" to="waitUpdateConsignmentStatus"/>
+		<transition name="NOK" to="error"/>
 	</action>
 	
 	<wait id="waitForAllConsignmentConfirm" prependProcessCode="true" then="failed">
@@ -133,18 +168,54 @@
     </wait> 
     
 	<action id="waitConsignMentConfirm" bean="waitConsignMentConfirmAction">
-		<transition name="OK" to="generateOfficialInvoiceEmail"/>
+		<transition name="OK" to="chooseInvoiceTemp"/>
 		<transition name="NOK" to="waitForAllConsignmentConfirm"/>
 	</action>
 	
-	<action id="generateOfficialInvoiceEmail" bean="generateOfficialInvoiceEmailAction">
+	<action id="chooseInvoiceTemp" bean="chooseInvoiceTempAction">
+		<transition name="TEMP1" to="generateOfficialInvoiceEmail1"/>
+		<transition name="TEMP2" to="generateOfficialInvoiceEmail2"/>
+		<transition name="TEMP3" to="generateOfficialInvoiceEmail3"/>
+		<transition name="TEMP4" to="generateOfficialInvoiceEmail4"/>
+		<transition name="TEMP5" to="generateOfficialInvoiceEmail5"/>
+		<transition name="TEMP6" to="generateOfficialInvoiceEmail6"/>
+		<transition name="NOK" to="error"/>
+	</action>
+	
+	<action id="generateOfficialInvoiceEmail1" bean="generateOfficialInvoiceEmailAction1">
+		<transition name="OK" to="sendOfficialInvoiceEmail"/>
+		<transition name="NOK" to="error"/>
+	</action>
+	<action id="generateOfficialInvoiceEmail2" bean="generateOfficialInvoiceEmailAction2">
+		<transition name="OK" to="sendOfficialInvoiceEmail"/>
+		<transition name="NOK" to="error"/>
+	</action>
+	<action id="generateOfficialInvoiceEmail3" bean="generateOfficialInvoiceEmailAction3">
+		<transition name="OK" to="sendOfficialInvoiceEmail"/>
+		<transition name="NOK" to="error"/>
+	</action>
+	<action id="generateOfficialInvoiceEmail4" bean="generateOfficialInvoiceEmailAction4">
+		<transition name="OK" to="sendOfficialInvoiceEmail"/>
+		<transition name="NOK" to="error"/>
+	</action>
+	<action id="generateOfficialInvoiceEmail5" bean="generateOfficialInvoiceEmailAction5">
+		<transition name="OK" to="sendOfficialInvoiceEmail"/>
+		<transition name="NOK" to="error"/>
+	</action>
+	
+	<action id="generateOfficialInvoiceEmail6" bean="generateOfficialInvoiceEmailAction6">
 		<transition name="OK" to="sendOfficialInvoiceEmail"/>
 		<transition name="NOK" to="error"/>
 	</action>
 	
 	<action id="sendOfficialInvoiceEmail" bean="sendEmail">
-		<transition name="OK" to="success"/>
+		<transition name="OK" to="removeSentOfficialInvoiceEmail"/>
 	</action> 
+	
+	<action id="removeSentOfficialInvoiceEmail" bean="removeSentEmail">
+		<transition name="OK" to="success"/>
+		<transition name="NOK" to="error"/>
+	</action>
 	
 	<end id="error" state="ERROR">All went wrong.</end>
 	<end id="failed" state="FAILED">Order not placed.</end>

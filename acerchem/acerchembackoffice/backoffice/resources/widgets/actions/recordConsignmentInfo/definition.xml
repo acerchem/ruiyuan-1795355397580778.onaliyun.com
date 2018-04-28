@@ -21,6 +21,6 @@
     <inputType>de.hybris.platform.core.model.order.OrderModel</inputType>
     <outputType>java.lang.Object</outputType>
 
-    <iconUri>icons/approved.png</iconUri>
+    <iconUri>icons/confirmBatch.png</iconUri>
 
 </action-definition>

@@ -222,37 +222,44 @@
 						<div class="shiplist hidlist addbook">
 							<div class="title">Address Book <i class="icons close-icon"></i> </div>
 							<ul>
-							<c:forEach items="${deliveryAddresses}" var="deliveryAddress" varStatus="status">
+							<c:forEach items="${deliveryAddresses}" var="da" varStatus="status">
 								<li class="now">
 									<label>
 										<div class="into int">
-											<input type="radio" name="addbook" value="" checked="checked">
+										    <c:choose>
+										         <c:when test="${deliveryAddress.id == da.id}">
+											<input type="radio" name="addbook" id="addbook" value="${da.id}" checked="checked">
+											    </c:when>
+											     <c:otherwise>
+											     <input type="radio" name="addbook" id="addbook" value="${da.id}" >
+											     </c:otherwise>
+											</c:choose>
 										</div>
 										<div class="into book-item">
 											 <span>
-							                    <b>${fn:escapeXml(deliveryAddress.title)}&nbsp;${fn:escapeXml(deliveryAddress.firstName)}&nbsp;${fn:escapeXml(deliveryAddress.lastName)}</b>
+							                    <b>${fn:escapeXml(da.title)}&nbsp;${fn:escapeXml(da.firstName)}&nbsp;${fn:escapeXml(da.lastName)}</b>
 							                    <br/>
-							                    <c:if test="${ not empty deliveryAddress.line1 }">
-							                        ${fn:escapeXml(deliveryAddress.line1)},&nbsp;
+							                    <c:if test="${ not empty da.line1 }">
+							                        ${fn:escapeXml(da.line1)},&nbsp;
 							                    </c:if>
-							                    <c:if test="${ not empty deliveryAddress.line2 }">
-							                        ${fn:escapeXml(deliveryAddress.line2)},&nbsp;
+							                    <c:if test="${ not empty da.line2 }">
+							                        ${fn:escapeXml(da.line2)},&nbsp;
 							                    </c:if>
-							                    <c:if test="${not empty deliveryAddress.town }">
-							                        ${fn:escapeXml(deliveryAddress.town)},&nbsp;
+							                    <c:if test="${not empty da.town }">
+							                        ${fn:escapeXml(da.town)},&nbsp;
 							                    </c:if>
-							                    <c:if test="${ not empty deliveryAddress.region.name }">
-							                        ${fn:escapeXml(deliveryAddress.region.name)},&nbsp;
+							                    <c:if test="${ not empty da.region.name }">
+							                        ${fn:escapeXml(da.region.name)},&nbsp;
 							                    </c:if>
-							                    <c:if test="${ not empty deliveryAddress.postalCode }">
-							                        ${fn:escapeXml(deliveryAddress.postalCode)},&nbsp;
+							                    <c:if test="${ not empty da.postalCode }">
+							                        ${fn:escapeXml(da.postalCode)},&nbsp;
 							                    </c:if>
-							                    <c:if test="${ not empty deliveryAddress.country.name }">
-							                        ${fn:escapeXml(deliveryAddress.country.name)}
+							                    <c:if test="${ not empty da.country.name }">
+							                        ${fn:escapeXml(da.country.name)}
 							                    </c:if>
 							                    <br/>
-							                    <c:if test="${ not empty deliveryAddress.phone }">
-							                        ${fn:escapeXml(deliveryAddress.phone)}
+							                    <c:if test="${ not empty da.phone }">
+							                        ${fn:escapeXml(da.phone)}
 							                    </c:if>
 							                </span>
 										</div>	
@@ -554,7 +561,6 @@ function formreq(wrap,parwrap,aspan,newval,ap,inputarep,addinput,inputval){//add
 
 
 function dateChange(num, date) {
-    debugger;
     if (!date) {
         date = new Date();//没有传入值时,默认是当前日期
         date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
@@ -751,6 +757,17 @@ $('#textDate').on('change',function(){
 	
 });
 
+$(document).ready(function() {
+    $('input[type=radio][name=addbook]').change(function() {
+    	
+    	//alert(this.value);
+    	
+    	var  ib = this.value;
+    	window.location.href ='<c:url value='/checkout/multi/delivery-address/select?selectedAddressCode='/>'+ib;
+    });
+});
+
+
 
 $(document).ready(function() {
     $('input[type=radio][name=shipmethod]').change(function() {
@@ -769,7 +786,7 @@ $(document).ready(function() {
     	//alert(this.value);
     	
     	var  pm = this.value;
-    	window.location.href ='<c:url value='/checkout/multi/payment-method/choose?selectedPaymentMethodId='/>'+pm;
+    	window.location.href ='<c:url value='/checkout/multi/summary/choose?selectedPaymentMethodId='/>'+pm;
     });
 });
 

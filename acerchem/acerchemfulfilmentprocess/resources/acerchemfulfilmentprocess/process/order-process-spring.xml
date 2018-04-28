@@ -99,6 +99,10 @@
 	</bean>
 	
 	<!-- 添加新的订单流程处理 -->
+	<bean id="generateCancelOrderEmailAction"   parent="abstractGenerateEmailAction">
+			<property name="frontendTemplateName" value="AcerchemContractEmailTemplate"/>
+	</bean>
+	
 	<bean id="generateContactEmailAction"   parent="abstractGenerateEmailAction">
 			<property name="frontendTemplateName" value="AcerchemContractEmailTemplate"/>
 	</bean>
@@ -114,14 +118,35 @@
 		<property name="frontendTemplateName" value="AcerchemReleaseNoteEmailTemplate"/>
 		</bean>
 		
-		<bean id="generateOfficialInvoiceEmailAction"  parent="abstractGenerateEmailAction">
-		<property name="frontendTemplateName" value="AcerchemInvoiceEmailTemplate"/>
+		 <bean id="generateOfficialInvoiceEmailAction1"  parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="AcerchemInvoicePackingListEmailATemplate"/>
 		</bean>
-	
+		<bean id="generateOfficialInvoiceEmailAction2"  parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="AcerchemInvoicePackingListEmailBTemplate"/>
+		</bean>
+		<bean id="generateOfficialInvoiceEmailAction3"  parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="AcerchemInvoicePackingListEmailCTemplate"/>
+		</bean>
+		<bean id="generateOfficialInvoiceEmailAction4"  parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="AcerchemInvoicePackingListEmailDTemplate"/>
+		</bean>
+		<bean id="generateOfficialInvoiceEmailAction5"  parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="AcerchemInvoicePackingListEmailETemplate"/>
+		</bean>
+		<bean id="generateOfficialInvoiceEmailAction6"  parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="AcerchemInvoicePackingListEmailFTemplate"/>
+		</bean> 
+		
 	<bean id="sendEmail"
 	      class="de.hybris.platform.acceleratorservices.process.email.actions.SendEmailAction"
 	      parent="abstractAction">
 		<property name="emailService" ref="emailService"/>
+	</bean>
+	
+	<bean id="removeSentEmail"
+	      class="de.hybris.platform.acceleratorservices.process.email.actions.RemoveSentEmailAction"
+	      parent="abstractAction">
+		<property name="modelService" ref="modelService"/>
 	</bean>
 	
 	<bean id="waitForConfirmAction" class="com.acerchem.fulfilmentprocess.actions.order.WaitForConfirmAction"  parent="abstractAction"/>
@@ -138,4 +163,8 @@
 	<bean id="deliveryByshelfAction" class="com.acerchem.fulfilmentprocess.actions.order.DeliveryByshelfAction"  parent="abstractAction"/>
 	<bean id="waitConsignMentConfirmAction" class="com.acerchem.fulfilmentprocess.actions.order.WaitConsignMentConfirmAction"  parent="abstractAction"/>
 	<bean id="checkConsignmentDateAction" class="com.acerchem.fulfilmentprocess.actions.order.CheckConsignmentDateAction"  parent="abstractAction"/>
+	<bean id="chooseInvoiceTempAction" class="com.acerchem.fulfilmentprocess.actions.order.ChooseInvoiceTempAction"  parent="abstractAction"/>
+	<bean id="cancelOrderStatusAction" class="com.acerchem.fulfilmentprocess.actions.order.CancelOrderStatusAction"  parent="abstractAction"/>
+	
+	
 </beans>

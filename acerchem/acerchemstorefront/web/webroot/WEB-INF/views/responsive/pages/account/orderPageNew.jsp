@@ -9,8 +9,10 @@
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 
 <c:url value="/my-account/detailsConfirm/" var="confirmOrder"/>
+<c:url value="/my-account/extendedPickup/" var="extendedPickup"/>
 <link rel="stylesheet" type="text/css" href="https://electronics.local:9002/acerchemstorefront/_ui/desktop/common/css/orderCSS/general.css" />
 <link rel="stylesheet" type="text/css" href="https://electronics.local:9002/acerchemstorefront/_ui/desktop/common/css/orderCSS/min.css" />
 
@@ -42,22 +44,23 @@
 								</span>
                                 <span>
 									<em>Order Status</em>
-									<i><spring:theme code="text.account.order.status.display.${orderData.statusDisplay}"/></i>
+									<i>${orderData.status=="CHECKED_VALID"?"UNCONFIRMED":orderData.status}</i>
+								</span>
+								<span>
+									<em>Total</em>
+									<i><format:price priceData="${orderData.totalPrice}"/></i>
 								</span>
                                 <span>
 									<em>Date Placed</em>
 									<i><fmt:formatDate value="${orderData.created}" dateStyle="medium" timeStyle="short" type="both"/></i>
 								</span>
-                                <span>
-									<em>Total</em>
-									<i><format:price priceData="${orderData.totalPrice}"/></i>
-								</span>
 								<span>
-									 <i>
-									Status:${orderData.status}
+									<em>Operate</em>
+									<i>
 										<a href="${confirmOrder}${orderData.code}?confirm=order" style="${!orderData.customerConfirm && (orderData.status=='UNCONFIRMED'||orderData.status=='CHECKED_VALID')?'':'display: none;'}">Confirm Order</a>
 										<a href="${confirmOrder}${orderData.code}?confirm=receipt" style="${!orderData.customerConfirmDelivery && orderData.status=='UNDELIVERED'?'':'display: none;'}">Confirm Delivery</a>
 										<a href="${confirmOrder}${orderData.code}?confirm=payment" style="${!orderData.customerConfirmPay && orderData.status=='UNPAIED'?'':'display: none;'}">Confirm Payment</a>
+										<a href="${confirmOrder}${orderData.code}?confirm=cancel" style="${canCancel&&orderData.status!='CANCELLED'?'':'display: none;'}" class="cancelOrder">Cancel Order</a>
 									</i>
 								</span>
                             </div>
@@ -133,8 +136,7 @@
                                 </td>
                                 <td>
                                     <div class="tot">
-                                        <em><format:price priceData="${orderEntries.basePrice}" displayFreeForZero="true" /></em>
-                                        <i> <format:price priceData="${orderEntries.totalPrice}" displayFreeForZero="true"/></i>
+                                        <em><format:price priceData="${orderEntries.totalPrice}" displayFreeForZero="true"/></em>
                                     </div>
                                 </td>
                             </tr>
@@ -151,7 +153,7 @@
                             <span>Billing Information</span>
                         </div>
                         <div class="textlist">
-                            <span>Billing Address</span>
+                            <%-- <span>Billing Address</span>
                             <div class="text">
                                   <c:if test="${not storeAddress }">
                                       <c:if test="${not empty orderData.paymentInfo.billingAddress.title}">
@@ -171,7 +173,7 @@
                                       ${fn:escapeXml(orderData.paymentInfo.billingAddress.country.name)}&nbsp;${fn:escapeXml(orderData.paymentInfo.billingAddress.postalCode)}
                                   <br/>
                                       ${fn:escapeXml(orderData.paymentInfo.billingAddress.phone)}
-                            </div>
+                            </div> --%>
                             <span>Payment Type</span>
                             <div class="text">
                                 MasterCard<br/>
@@ -201,18 +203,64 @@
 									<em>Delivery</em>
 									<i><format:price priceData="${orderData.deliveryCost}"/></i>
 								</span>
+								
+								<span>
+									<em>Storage</em>
+									<i><format:price priceData="${orderData.storageCost}"/></i>
+								</span>
+								
+								<span>
+									<em>Operate</em>
+									<i><format:price priceData="${orderData.operateCost}"/></i>
+								</span>
 		
 		                        <span>
-									<em>Discount Amount</em>
+									<em>Discount</em>
 									<i>- <format:price priceData="${orderData.orderDiscounts}"/></i>
 								</span>
 		
 		                        <span>
-									<em>Order Total</em>
+									<em>Total</em>
 									<i><format:price priceData="${orderData.totalPrice}"/></i>
 								</span>
 		                     </div>
 		                 </div>
+		             </div>
+		             
+		             <div class="g-table">
+                        <div class="g-title">
+                            <span>Delayed Pickup date</span>
+                        </div>
+                        <div>
+                            <span>Pickup Date:<fmt:formatDate value="${orderData.pickupDateOfExtended==null?orderData.pickUpDate:orderData.pickupDateOfExtended}" pattern="yyyy-MM-dd"/> <br/></span>
+                            <div style="${orderData.pickupDateOfExtended==null?'':'display: none;'}">
+				             	<span>
+				             		Pickup date extended days(Max days:${maxday}):
+				             		<input type="text" name='pickupDays' style="width:80px; height:40px;"/>
+				             		<a class="pickup" href="#" style="display: inline;background: #28FF28;">Confirm</a>
+				             	</span>
+								<script type="text/javascript">									
+									inputint()	
+									$('.pickup').on('click',function(){
+										var days = document.getElementsByName('pickupDays')[0].value;
+									    if(isNaN(days)){
+									    	maxalert('Please enter positive integer!');
+									        return false;
+									    }
+									    else if(days<=${maxday}&&days>0)
+										{
+											window.location.href="${extendedPickup}${orderData.code}?days="+days;
+											return false;	
+										}
+										else
+										{
+											maxalert('Please enter Less than ${maxday} days!');
+											return false;
+										}
+									})
+								</script>
+							</div>
+                        </div>
 		             </div>
 		             <div class="btn-set">
 		                <a class="btn btn-back" href="javascript:window.history.back()">Back</a>
