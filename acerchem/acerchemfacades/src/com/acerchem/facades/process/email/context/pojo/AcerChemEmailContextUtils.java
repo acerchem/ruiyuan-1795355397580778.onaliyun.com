@@ -1,7 +1,6 @@
 package com.acerchem.facades.process.email.context.pojo;
 
 import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -36,10 +35,10 @@ public class AcerChemEmailContextUtils {
 					}
 					String regin = "";
 					RegionModel reginModel = model.getRegion();
-					if (reginModel != null){
+					if (reginModel != null) {
 						regin = reginModel.getName();
 					}
-					
+
 					StringBuilder sb = new StringBuilder(town);
 					sb.append("  ");
 					sb.append(regin).append(" ");
@@ -52,9 +51,9 @@ public class AcerChemEmailContextUtils {
 		}
 		return "&nbsp;";
 	}
-	
+
 	public static CustomerContactAddressOfEmailData getCustomerContactAddressData(Collection<AddressModel> collect) {
-		
+
 		CustomerContactAddressOfEmailData data = new CustomerContactAddressOfEmailData();
 		if (CollectionUtils.isNotEmpty(collect)) {
 			for (AddressModel model : collect) {
@@ -73,7 +72,7 @@ public class AcerChemEmailContextUtils {
 					data.setTown(town);
 					String regin = "";
 					RegionModel reginModel = model.getRegion();
-					if (reginModel != null){
+					if (reginModel != null) {
 						regin = reginModel.getName();
 					}
 					data.setRegion(regin);
@@ -128,7 +127,7 @@ public class AcerChemEmailContextUtils {
 		return list;
 	}
 
-	//number translate into words 
+	// number translate into words
 	private static String[] smallNumbers = new String[] { "ZERO", "ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN",
 			"EIGHT", "NINE", "TEN", "ELEVEN", "TWELVE", "THIRTEEN", "FOURTEEN", "FIFTEEN", "SIXTEEN", "SEVENTEEN",
 			"EIGHTEEN", "NINETEEN" };
@@ -140,7 +139,22 @@ public class AcerChemEmailContextUtils {
 	// email 所用
 	public static String getMoneyOfWord(String money, String prefixWord) {
 		String param = money;
-		if (!StringUtils.isNumeric(param)) {
+
+		if (isNumber(param)) {
+			// 只允许两位小数
+			double f = Double.parseDouble(money);
+			BigDecimal b = new BigDecimal(f);
+			f = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+			param = String.valueOf(f);
+			if (param.lastIndexOf(".") > 0) {
+				int pos = param.lastIndexOf(".");
+				String pureDecimal = param.substring(pos + 1);
+
+				if (StringUtils.equals("0", pureDecimal)) {
+					param = param.substring(0, pos);
+				}
+			}
+		} else {
 			param = "0";
 		}
 
@@ -183,7 +197,6 @@ public class AcerChemEmailContextUtils {
 			for (int i = 0; i < 4; i++) {
 				int hundreds = digitGroups[i] / 100;
 				int tensUnits = digitGroups[i] % 100;
-
 				// 百位
 				if (hundreds != 0) {
 					groupText[i] = groupText[i] + smallNumbers[hundreds] + " HUNDRED";
@@ -200,8 +213,10 @@ public class AcerChemEmailContextUtils {
 					if (units != 0) {
 						groupText[i] = groupText[i] + " " + smallNumbers[units];
 					}
-				} else if (tens != 0) {// 十位和个位，小于20的情况
-					groupText[i] = groupText[i] + smallNumbers[tens];
+				} else if(tens != 0 || units !=0) {// 十位和个位，小于20的情况
+					// if (units != 0)
+				     groupText[i] = groupText[i] + smallNumbers[tensUnits];
+
 				}
 			}
 			// 金额的个十百位赋值到combined
@@ -250,34 +265,43 @@ public class AcerChemEmailContextUtils {
 		}
 	}
 
-	public static void main(String[] args) {
-//		String s = "73200";
-//
-//		s = AcerChemEmailContextUtils.getMoneyOfWord(s, "$");
-//
-//		System.out.println(s);
-//		String s = new StringBuilder("aaaa").append(" \0").append("bbbbbb").toString();
-//		System.out.println(s);
-//		String x[] = s.split(" ");
-//		System.out.println(x.length);
-//		for(String y:x){
-//			System.out.println(y);
-//		}
-		DecimalFormat df = new DecimalFormat();  
-        df.applyPattern(",##0.00");// 将格式应用于格式化器 
-        BigDecimal d = new BigDecimal(12312.2345);
-        BigDecimal d1 = new BigDecimal(12312312.2);
-        String s = df.format(d);
-        System.out.println(s);
-        String s1 = df.format(d1);
-        System.out.println(s1);
-        
-        
-        
-        
-        
-        
+	public static boolean isNumber(String number) {
+		if (number == null || "".equals(number))
+			return false;
+		int index = number.indexOf(".");
+		if (index < 0) {
+			return StringUtils.isNumeric(number);
+		} else {
+			String num1 = number.substring(0, index);
+			String num2 = number.substring(index + 1);
+
+			return StringUtils.isNumeric(num1) && StringUtils.isNumeric(num2);
+		}
 	}
-		
+
+	public static void main(String[] args) {
+		String s = "207.998678";
+
+		s = AcerChemEmailContextUtils.getMoneyOfWord(s, "$");
+
+		System.out.println(s);
+		// String s = new StringBuilder("aaaa").append("
+		// \0").append("bbbbbb").toString();
+		// System.out.println(s);
+		// String x[] = s.split(" ");
+		// System.out.println(x.length);
+		// for(String y:x){
+		// System.out.println(y);
+		// }
+		// DecimalFormat df = new DecimalFormat();
+		// df.applyPattern(",##0.00");// 将格式应用于格式化器
+		// BigDecimal d = new BigDecimal(12312.2345);
+		// BigDecimal d1 = new BigDecimal(12312312.2);
+		// String s = df.format(d);
+		// System.out.println(s);
+		// String s1 = df.format(d1);
+		// System.out.println(s1);
+
+	}
 
 }
