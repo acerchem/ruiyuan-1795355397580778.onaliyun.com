@@ -112,7 +112,7 @@
 	<a class="btn btn-submit" href="success.html">Place Order</a>
 </div> -->
 
-  <button id="placeOrder" type="submit" class="btn btn-submit">
+  <button id="placeOrder" type="submit" class="btn btn-submit" style="background-color: #096735;color:#ffffff;">
       Place Order
   </button>
 
