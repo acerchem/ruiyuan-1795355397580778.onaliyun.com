@@ -75,20 +75,36 @@ INSERT_UPDATE ProductReference;source(code,$catalogVersion)[unique=true];target(
 
 
 INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];reserved;avaPreOrderReleaseDay;preOrderReleaseDay
-;30;USA;notSpecified;1;0;0;0;AC05080;0;20;50
-;3;USA;notSpecified;1;0;0;0;AC03131;0;20;50
-;10;USA;notSpecified;1;0;0;0;AC01361;0;20;50
-;20;USA;notSpecified;1;0;0;0;AC01710;0;20;50
+;300;USA;notSpecified;10;0;0;0;AC05080;0;20;50
+;300;USA;notSpecified;10;0;0;0;AC03131;0;20;50
+;100;USA;notSpecified;10;0;0;0;AC01361;0;20;50
+;200;USA;notSpecified;10;0;0;0;AC01710;0;20;50
 #shaun
-;20;USA;notSpecified;1;0;0;0;AC05080a;0;20;50
-;20;USA;notSpecified;1;0;0;0;AC05080b;0;20;50
-;20;USA;notSpecified;1;0;0;0;AC03390a;0;20;50
-;20;USA;notSpecified;1;0;0;0;AC03138a;0;20;50
-;20;USA;notSpecified;1;0;0;0;AC03887a;0;20;50
-;20;USA;notSpecified;1;0;0;0;AC03142a;0;20;50
-;20;USA;notSpecified;1;0;0;0;AC02345a;0;20;50
-;20;USA;notSpecified;1;0;0;0;AC02354a;0;20;50
-;20;USA;notSpecified;1;0;0;0;AC05003a;0;20;50
+;200;USA;notSpecified;10;0;0;0;AC05080a;0;20;50
+;200;USA;notSpecified;10;0;0;0;AC05080b;0;20;50
+;200;USA;notSpecified;10;0;0;0;AC03390a;0;20;50
+;200;USA;notSpecified;10;0;0;0;AC03138a;0;20;50
+;200;USA;notSpecified;10;0;0;0;AC03887a;0;20;50
+;200;USA;notSpecified;10;0;0;0;AC03142a;0;20;50
+;200;USA;notSpecified;10;0;0;0;AC02345a;0;20;50
+;200;USA;notSpecified;10;0;0;0;AC02354a;0;20;50
+;200;USA;notSpecified;10;0;0;0;AC05003a;0;20;50
+
+;400;Holland;notSpecified;10;0;0;0;AC05080;0;20;50
+;400;Holland;notSpecified;10;0;0;0;AC03131;0;20;50
+;200;Holland;notSpecified;10;0;0;0;AC01361;0;20;50
+;300;Holland;notSpecified;10;0;0;0;AC01710;0;20;50
+#shaun
+;300;Holland;notSpecified;10;0;0;0;AC05080a;0;20;50
+;300;Holland;notSpecified;10;0;0;0;AC05080b;0;20;50
+;300;Holland;notSpecified;10;0;0;0;AC03390a;0;20;50
+;300;Holland;notSpecified;10;0;0;0;AC03138a;0;20;50
+;300;Holland;notSpecified;10;0;0;0;AC03887a;0;20;50
+;300;Holland;notSpecified;10;0;0;0;AC03142a;0;20;50
+;300;Holland;notSpecified;10;0;0;0;AC02345a;0;20;50
+;300;Holland;notSpecified;10;0;0;0;AC02354a;0;20;50
+;300;Holland;notSpecified;10;0;0;0;AC05003a;0;20;50
+
  
 UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehouse(code));vendors(code)
 ;AC05080;;AC05080:USA;
