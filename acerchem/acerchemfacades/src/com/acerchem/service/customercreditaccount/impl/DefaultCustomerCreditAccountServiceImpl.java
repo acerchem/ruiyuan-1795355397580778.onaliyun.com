@@ -120,9 +120,9 @@ public class DefaultCustomerCreditAccountServiceImpl implements DefaultCustomerC
     }
 
     @Override
-    public CustomerCreditAccountModel updateCustomerCreditAccountRepayment(String cransactionId, BigDecimal money) {
+    public CustomerCreditAccountModel updateCustomerCreditAccountRepayment(String orderCode, BigDecimal money) {
 
-        if (money != null && money.compareTo(BigDecimal.ZERO) > 0 && StringUtils.isNotBlank(cransactionId)) {
+        if (money != null && money.compareTo(BigDecimal.ZERO) > 0 && StringUtils.isNotBlank(orderCode)) {
             CustomerCreditAccountModel customerCreditAccount = this.getCustomerCreditAccount();
             if (customerCreditAccount != null) {
                 BigDecimal creaditRemainedAmount = customerCreditAccount.getCreaditRemainedAmount();
@@ -134,7 +134,7 @@ public class DefaultCustomerCreditAccountServiceImpl implements DefaultCustomerC
                 if (transactions != null) {
                     for (CreditTransactionModel creditTransaction : transactions) {
                         //找到还款单号
-                        if (StringUtils.isNotBlank(creditTransaction.getCransactionId()) && cransactionId.equals(creditTransaction.getCransactionId())) {
+                        if (StringUtils.isNotBlank(creditTransaction.getOrderCode()) && orderCode.equals(creditTransaction.getOrderCode())) {
                             LOG.info("creditTransaction.getCransactionId()=" + creditTransaction.getCransactionId());
                             //如果还款金额==消费金额则更新信用账户和流水,否则不进行操作
                             if (money.compareTo(creditTransaction.getCreaditUsedAmount()) == 0) {
@@ -167,7 +167,7 @@ public class DefaultCustomerCreditAccountServiceImpl implements DefaultCustomerC
                 LOG.info("updateCustomerCreditAccountRepayment CustomerCreditAccountModel is null");
             }
         } else {
-            LOG.info("updateCustomerCreditAccountRepayment Parameter ERROR money=" + money + " | cransactionId=" + cransactionId);
+            LOG.info("updateCustomerCreditAccountRepayment Parameter ERROR money=" + money + " | orderCode=" + orderCode);
         }
         return null;
     }
