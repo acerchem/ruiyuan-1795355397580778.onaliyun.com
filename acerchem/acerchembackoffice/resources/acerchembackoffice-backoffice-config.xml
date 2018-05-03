@@ -123,6 +123,44 @@
 		</wz:flow>
 	</context>
 	
+	<!--add by alice-->
+	<context component="create-wizard" type="CustomerCreditAccount">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="CustomerCreditAccountWizard" title="create.CustomerCreditAccount.title">
+			<wz:prepare id="CustomerCreditAccountPrepare">
+				<wz:initialize property="newCustomerCreditAccount" type="CustomerCreditAccount"/>
+			</wz:prepare>
+			<wz:step id="step1" label="create.CustomerCreditAccount.general.label" >
+				<wz:content id="step1.content">
+					<wz:property-list root="newCustomerCreditAccount">
+						<wz:property qualifier="creditTotalAmount" />
+						<wz:property qualifier="creaditRemainedAmount" />
+						<wz:property qualifier="billingInterval" />
+						<wz:property qualifier="status" />
+						<wz:property qualifier="transactions" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel/>
+					<wz:done>
+						<wz:save property="newCustomerCreditAccount"/>
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
+	
+	<context merge-by="type" parent="GenericItem" type="CustomerCreditAccount" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+        	<wz:property qualifier="uid" />
+			<wz:property qualifier="name" />
+			<list-view:column qualifier="creditTotalAmount"/>
+            <list-view:column qualifier="creaditRemainedAmount"/>
+            <list-view:column qualifier="billingInterval"/>
+            <list-view:column qualifier="status"/>
+        </list-view:list-view>
+    </context>
+	<!--end-->
+	
 	<context merge-by="type" parent="GenericItem" type="UserLevel" component="listview">
         <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
        	    <wz:property qualifier="uid" />
@@ -157,8 +195,10 @@
 				<explorer-tree:type-node code="UserLevel" id="UserLevel"/>
 				<explorer-tree:type-node code="CountryTrayFareConf" id="CountryTrayFareConf"/>
 				<explorer-tree:type-node code="OrderParam" id="OrderParam"/>
+				<explorer-tree:type-node code="CustomerCreditAccount" id="CustomerCreditAccount"/>
 			</explorer-tree:navigation-node>
 			
+			<!-- add by alice -->
 			<explorer-tree:navigation-node id="hmc_backoffice-workflow-inbox" position="1" merge-mode="Remove"/>
 			
 			<explorer-tree:navigation-node id="hmc_treenode_system">
@@ -278,6 +318,7 @@
                 <explorer-tree:type-node code="DeeplinkUrl" id="DeeplinkUrl"/>
                 <explorer-tree:type-node code="DeeplinkUrlRule" id="DeeplinkUrlRule"/>
             </explorer-tree:navigation-node>
+			<!-- end -->
 			
 		</explorer-tree:explorer-tree>
 	</context>
