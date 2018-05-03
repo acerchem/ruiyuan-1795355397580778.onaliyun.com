@@ -154,7 +154,16 @@
 					optional="true" />
 			</targetElement>
 		</relation>
-
+        
+        <!-- 客户和信用账户关系建立 -->
+		<relation code="CreditAccount2Customer" generate="true" localized="false" autocreate="true">
+			<sourceElement qualifier="creditAccount" type="CustomerCreditAccount" cardinality="one" >
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="customer" type="Customer" cardinality="many" collectiontype="list" ordered="true">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
 
 	</relations>
 
@@ -704,10 +713,6 @@
 
 			<itemtype code="Customer" autocreate="false" generate="false">
 				<attributes>
-					<attribute qualifier="creditAccount" type="CustomerCreditAccount">
-						<modifiers read="true" write="true" search="true" />
-						<persistence type="property" />
-					</attribute>
 					<attribute qualifier="area" type="CustomerArea">
 						<description>用户区域</description>
 						<modifiers read="true" write="true" search="true"
