@@ -19,12 +19,12 @@ public class CofirmCreditRepaymentAction extends AbstractComponentWidgetAdapterA
 	@Override
 	public ActionResult<Object> perform(ActionContext<CreditTransactionModel> ctx) {
 		LOG.info("--------------------start-------------------");
-		CreditTransactionModel CreditTransaction = (CreditTransactionModel) ctx.getData();
-		LOG.info("---------------------------------------"+CreditTransaction.getOrderCode());
+		CreditTransactionModel creditTransaction = (CreditTransactionModel) ctx.getData();
+		LOG.info("---------------------------------------"+creditTransaction.getOrderCode());
 		
-		if(CreditTransaction != null){
+		if(creditTransaction != null){
 				
-			CustomerCreditAccountModel creditAccount=defaultCustomerCreditAccountService.updateCustomerCreditAccountRepayment(CreditTransaction.getOrderCode(),CreditTransaction.getCreaditUsedAmount());
+			CustomerCreditAccountModel creditAccount=defaultCustomerCreditAccountService.updateCustomerCreditAccountRepayment(creditTransaction);
 			if(creditAccount!=null)
 			{
 				LOG.info("--------------------------------end CofirmCreditRepaymentAction----------------------");
@@ -38,6 +38,7 @@ public class CofirmCreditRepaymentAction extends AbstractComponentWidgetAdapterA
 		LOG.info("--------------------end-------------------");
 		return new ActionResult("failed");
 	}
+	
 	
 	
 }
