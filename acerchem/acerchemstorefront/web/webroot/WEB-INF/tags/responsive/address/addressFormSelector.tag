@@ -70,12 +70,10 @@
 				<div class="selbox">
 				
 					<select name="countryIso" id="countryIso">
-					<option value ="US">U.S.A</option>
-					<option value ="GB">England</option>
-					<option value ="ITA">Repubblica Italiana</option>
-					<option value ="SUI">Swiss Confederation</option>
-					<option value ="MEX">The United States of Mexico</option>
-					<option value ="FRA">French Republic</option>
+					
+					<c:forEach items="${supportedCountries}" var="country" >
+					<option value ="${country.isocode}">${country.name}</option>
+					</c:forEach>
 					</select>
 
 				</div>	

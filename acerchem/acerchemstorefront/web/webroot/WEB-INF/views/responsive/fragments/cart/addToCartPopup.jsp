@@ -88,10 +88,7 @@
 				</div>
 				
 				  <c:if test="${errorMsg eq null}">		
-				<!-- 判断优惠 -->
-				<div class="Summary">
-					<span>Part of your order qualifies for FREE Shipping. </span>
-				</div>
+				
 				<!-- 判断优惠 end-->
 				<div class="list">
 					<div class="item-row">

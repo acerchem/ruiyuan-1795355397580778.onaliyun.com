@@ -13,32 +13,36 @@ package com.acerchem.facades.populators;
 import de.hybris.platform.converters.Populator;
 import de.hybris.platform.core.model.media.MediaModel;
 
-import org.springframework.util.Assert;
-
-import com.acerchem.facades.product.data.CertificatesData;
+import java.util.Collection;
+import java.util.List;
+import com.acerchem.facades.product.data.CertificatessData;
 
 
 /**
  * Converter implementation for {@link de.hybris.platform.core.model.media.MediaModel} as source and {@link de.hybris.platform.commercefacades.product.data.ImageData} as target type.
  */
-public class AcerchemCertificatesPopulator implements Populator<MediaModel, CertificatesData>
+public class AcerchemCertificatesPopulator implements Populator<Collection<MediaModel>,List<CertificatessData>>
 {
 
 	@Override
-	public void populate(final MediaModel source, final CertificatesData target)
+	public void populate(final Collection<MediaModel>  sources, final List<CertificatessData> targets)
 	{
 		/*Assert.notNull(source, "Parameter source cannot be null.");
 		Assert.notNull(target, "Parameter target cannot be null.");*/
 
-		if (source != null){
+		if (sources != null){
 			
-			target.setUrl(source.getURL());
-			target.setAltText(source.getAltText());
+			for(MediaModel model:sources){
+				
+				CertificatessData data = new CertificatessData();
+				data.setAltText(model.getAltText());
+				data.setUrl(model.getURL());
+				
+				
+				targets.add(data);
+			}
 		}
 		
-	/*	if (source.getMediaFormat() != null)
-		{
-			target.setFormat(source.getMediaFormat().getQualifier());
-		}*/
+	
 	}
 }

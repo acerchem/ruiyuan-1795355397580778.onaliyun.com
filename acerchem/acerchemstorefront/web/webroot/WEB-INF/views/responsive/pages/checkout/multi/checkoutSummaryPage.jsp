@@ -171,11 +171,12 @@
 				                </span>
 							</div>
 							</c:if>
-							
+							<c:if test="${deliveryMode.code=='DELIVERY_GROSS'}">
 							<div class="btn-set line-setbtn">							
 								<a class="btn btn-showlist" href="javascript:void(0)">Address Book</a>
-								<a class="btn btn-showform" href="javascript:void(0)">New Address</a>
+								<!-- <a class="btn btn-showform" href="javascript:void(0)">New Address</a> -->
 							</div>
+							</c:if>
 							
 						</div>	
 						
@@ -333,7 +334,7 @@
 				<!-- end -->
 
 				<!-- Final Review -->
-				<div class="g-table">
+				<!-- <div class="g-table">
 					<div class="g-title">
 						<span>Invoice</span>
 					</div>
@@ -354,7 +355,7 @@
 							</div>
 						</div>
 
-					<!-- Signature -->
+					Signature
 					<div class="solid-form newsign">
 						<div class="title">Signature</div>
 						<div class="form both">	
@@ -394,9 +395,9 @@
 							<a class="btn btn-submit" href="javascript:void(0)">Confirm</a>
 						</div>
 					</div>
-					<!-- new end -->			
+					new end			
 					</div>
-				</div>
+				</div> -->
 				<!-- end -->
 
 			</div>

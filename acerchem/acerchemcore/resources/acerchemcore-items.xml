@@ -479,6 +479,11 @@
                     <modifiers read="true" write="true" search="true" optional="true"/>
                     <description>资质文件</description>
                 </attribute>
+                
+                <attribute qualifier="certificatess" type="MediaCollection">
+					<modifiers read="true" write="true" search="true" optional="true"/>
+					<persistence type="property"/>
+				</attribute>
 
 
 				</attributes>

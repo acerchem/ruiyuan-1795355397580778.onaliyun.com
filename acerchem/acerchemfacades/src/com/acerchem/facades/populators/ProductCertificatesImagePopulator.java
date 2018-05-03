@@ -18,43 +18,52 @@ import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 
-import com.acerchem.facades.product.data.CertificatesData;
+import java.util.Collection;
+import java.util.List;
+
+import com.acerchem.facades.product.data.CertificatessData;
 
 
 public class ProductCertificatesImagePopulator<SOURCE extends ProductModel, TARGET extends ProductData> 
 extends AbstractProductPopulator<SOURCE, TARGET>
 {
 	
-	private Converter<MediaModel, CertificatesData> certificatesConverter;
+	private Converter<Collection<MediaModel>,List<CertificatessData>> certificatesConverter;
 	
 
 	
+
+
 	/**
 	 * @return the certificatesConverter
 	 */
-	public Converter<MediaModel, CertificatesData> getCertificatesConverter() {
+	public Converter<Collection<MediaModel>, List<CertificatessData>> getCertificatesConverter() {
 		return certificatesConverter;
 	}
+
+
 
 
 
 	/**
 	 * @param certificatesConverter the certificatesConverter to set
 	 */
-	public void setCertificatesConverter(Converter<MediaModel, CertificatesData> certificatesConverter) {
+	public void setCertificatesConverter(Converter<Collection<MediaModel>, List<CertificatessData>> certificatesConverter) {
 		this.certificatesConverter = certificatesConverter;
 	}
+
+
 
 
 
 	@Override
 	public void populate(final SOURCE productModel, final TARGET productData) throws ConversionException
 	{
-		final MediaModel media = productModel.getCertificates();
+		final Collection<MediaModel>  medias = productModel.getCertificatess();
 		
-		final CertificatesData imageData = getCertificatesConverter().convert(media);
+		final List<CertificatessData> cas = getCertificatesConverter().convert(medias);
 		
-		productData.setCertificates(imageData);
+		productData.setCertificatess(cas);;
 	}
 
 	

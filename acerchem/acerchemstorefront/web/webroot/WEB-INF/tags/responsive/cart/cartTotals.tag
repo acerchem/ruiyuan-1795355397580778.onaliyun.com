@@ -7,6 +7,8 @@
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags" %>
 <%@ taglib prefix="quote" tagdir="/WEB-INF/tags/responsive/quote" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
+
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
@@ -34,7 +36,7 @@
 						<div class="list">
 							<div class="item">
 								<div class="item-row">
-									<span>Total Sum (<em>${cartData.totalUnitCount}</em> items)</span>
+									<span>Total amount (<em> ${fn:length(cartData.entries)}</em> items)</span>
 									<span> <format:price priceData="${cartData.subTotal}"/></span>
 								</div>
 
@@ -52,12 +54,12 @@
 									
 								</div>
 								
-								<div class="item-row">
+							<%-- 	<div class="item-row">
 									<span>Release Cost</span>
 									
 						              <span><format:price priceData="${cartData.storageCost}"/></span>
 						               
-								</div>
+								</div> --%>
 								
 								<div class="item-row">
 									<span>Handling Charge</span>
