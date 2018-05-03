@@ -164,7 +164,7 @@
 		
 		<label align="center" style="width: calc(100% - 20px);">
 			<input type="checkbox" name="aidField" value="agree"/>
-			<span class="checkbox">By creating an account, you agree to Acerchem<br/></span>
+			<span class="checkbox" style="font-weight: 800;">By creating an account, you agree to Acerchem<br/></span>
 		</label>
 		<div align="center">
 			<a href="${loginUrl}">Conditions</a> of Use and <a href="${loginUrl}">Privacy Notice</a>.
