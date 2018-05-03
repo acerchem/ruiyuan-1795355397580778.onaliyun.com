@@ -120,54 +120,42 @@ public class DefaultCustomerCreditAccountServiceImpl implements DefaultCustomerC
     }
 
     @Override
-    public CustomerCreditAccountModel updateCustomerCreditAccountRepayment(String orderCode, BigDecimal money) {
+    public CustomerCreditAccountModel updateCustomerCreditAccountRepayment(CreditTransactionModel creditTransaction) {
+    	
+        if (creditTransaction != null) {
+        	if (creditTransaction.getCreditAccount()!=null) {
+	            if (creditTransaction.getCreaditUsedAmount()!=null && creditTransaction.getCreaditUsedAmount().compareTo(BigDecimal.ZERO) > 0) {
+	            	//信用账户：更新信用账户可用额度
+		        	CustomerCreditAccountModel customerCreditAccount=creditTransaction.getCreditAccount();
+	                BigDecimal creaditRemainedAmount = customerCreditAccount.getCreaditRemainedAmount();
+	                customerCreditAccount.setCreaditRemainedAmount(creaditRemainedAmount.add(creditTransaction.getCreaditUsedAmount()));
+	                
+	                //开始更新流水
+                    if (StringUtils.isNotBlank(creditTransaction.getOrderCode()) && creditTransaction.getIsPayback()==false) {
+                        LOG.info("creditTransaction.getOrderCode()=" + creditTransaction.getOrderCode());
+                        creditTransaction.setPaybackAmount(creditTransaction.getCreaditUsedAmount());
+                        //creditTransaction.setCreationtime(new Date());
+                        creditTransaction.setPaybackTime(System.currentTimeMillis());
 
-        if (money != null && money.compareTo(BigDecimal.ZERO) > 0 && StringUtils.isNotBlank(orderCode)) {
-            CustomerCreditAccountModel customerCreditAccount = this.getCustomerCreditAccount();
-            if (customerCreditAccount != null) {
-                BigDecimal creaditRemainedAmount = customerCreditAccount.getCreaditRemainedAmount();
-                //更新信用账户可用额度
-                customerCreditAccount.setCreaditRemainedAmount(creaditRemainedAmount.add(money));
-                //开始更新流水
-                List<CreditTransactionModel> transactions = customerCreditAccount.getTransactions();
-                //流水不为空
-                if (transactions != null) {
-                    for (CreditTransactionModel creditTransaction : transactions) {
-                        //找到还款单号
-                        if (StringUtils.isNotBlank(creditTransaction.getOrderCode()) && orderCode.equals(creditTransaction.getOrderCode()) && creditTransaction.getIsPayback()==false) {
-                            LOG.info("creditTransaction.getCransactionId()=" + creditTransaction.getCransactionId());
-                            //如果还款金额==消费金额则更新信用账户和流水,否则不进行操作
-                            if (money.compareTo(creditTransaction.getCreaditUsedAmount()) == 0) {
+                        creditTransaction.setIsPayback(TRUE);
+                        creditTransaction.setCreditAccount(customerCreditAccount);
 
-                                creditTransaction.setPaybackAmount(money);
-                                creditTransaction.setCreationtime(new Date());
-                                creditTransaction.setPaybackTime(System.currentTimeMillis());
+                        this.modelService.save(creditTransaction);
+                        this.modelService.refresh(creditTransaction);
+                        this.modelService.save(customerCreditAccount);
+                        this.modelService.refresh(customerCreditAccount);
 
-                                creditTransaction.setIsPayback(TRUE);
-                                creditTransaction.setCreditAccount(customerCreditAccount);
-
-                                this.modelService.save(creditTransaction);
-                                this.modelService.refresh(creditTransaction);
-                                this.modelService.save(customerCreditAccount);
-                                this.modelService.refresh(customerCreditAccount);
-
-                                return customerCreditAccount;
-                            } else {
-                                LOG.info("updateCustomerCreditAccountRepayment PaybackAmount ERROR PaybackAmount=" + creditTransaction.getCreaditUsedAmount() + " | money=" + money);
-                            }
-                        }
+                        return customerCreditAccount;
                     }
-                    //没有找到还款单号
-                    LOG.info("updateCustomerCreditAccountRepayment CreditTransaction.cransactionId ERROR");
-
-                } else {
-                    LOG.info("updateCustomerCreditAccountRepayment CreditTransaction is null");
-                }
-            } else {
-                LOG.info("updateCustomerCreditAccountRepayment CustomerCreditAccountModel is null");
+	                    
+	            } else {
+	            	LOG.info("updateCustomerCreditAccountRepayment CreaditUsedAmount = "+creditTransaction.getCreaditUsedAmount());
+	            }
+        	} else {
+                LOG.info("updateCustomerCreditAccountRepayment Parameter ERROR CustomerCreditAccountModel is null");
             }
         } else {
-            LOG.info("updateCustomerCreditAccountRepayment Parameter ERROR money=" + money + " | orderCode=" + orderCode);
+            LOG.info("updateCustomerCreditAccountRepayment Parameter ERROR CreditTransaction is null");
         }
         return null;
     }
