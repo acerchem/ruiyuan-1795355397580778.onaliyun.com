@@ -134,7 +134,7 @@ public class DefaultCustomerCreditAccountServiceImpl implements DefaultCustomerC
                 if (transactions != null) {
                     for (CreditTransactionModel creditTransaction : transactions) {
                         //找到还款单号
-                        if (StringUtils.isNotBlank(creditTransaction.getOrderCode()) && orderCode.equals(creditTransaction.getOrderCode())) {
+                        if (StringUtils.isNotBlank(creditTransaction.getOrderCode()) && orderCode.equals(creditTransaction.getOrderCode()) && creditTransaction.getIsPayback()==false) {
                             LOG.info("creditTransaction.getCransactionId()=" + creditTransaction.getCransactionId());
                             //如果还款金额==消费金额则更新信用账户和流水,否则不进行操作
                             if (money.compareTo(creditTransaction.getCreaditUsedAmount()) == 0) {
