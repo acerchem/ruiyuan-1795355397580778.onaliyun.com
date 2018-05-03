@@ -17,7 +17,7 @@
 
 		<requires-extension name="backoffice"/>
 		<requires-extension name="acerchemcore"/>
-        <requires-extension name="acceleratorfacades"/>
+        <requires-extension name="acerchemfacades"/>
 		<coremodule generated="true" manager="com.acerchem.jalo.AcerchembackofficeManager" packageroot="com.acerchem"/>
 
 		<meta key="backoffice-module" value="true"/>
