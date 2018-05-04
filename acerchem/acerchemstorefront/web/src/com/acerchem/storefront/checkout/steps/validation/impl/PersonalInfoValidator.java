@@ -37,7 +37,8 @@ public class PersonalInfoValidator implements Validator
 		final String name = registerForm.getName();
 		final String currency = registerForm.getCurrency();
 		final String language = registerForm.getLanguage();
-		final String contacts = registerForm.getContacts();
+		//final String contacts = registerForm.getContacts();
+		final String companyName = registerForm.getCompanyName();
 		final AddressForm contactCountry = registerForm.getContactAddress();
 		
 		if(contactCountry==null||contactCountry.getCountryIso()==null)
@@ -58,8 +59,8 @@ public class PersonalInfoValidator implements Validator
 		validateNullValue(errors, name, "name", "register.name.invalid");
 		validateNullValue(errors, currency, "currency", "register.currency.invalid");
 		validateNullValue(errors, language, "language", "register.language.invalid");
-		validateNullValue(errors, contacts, "contacts", "register.contacts.invalid");
-
+		//validateNullValue(errors, contacts, "contacts", "register.contacts.invalid");
+		validateNullValue(errors, companyName, "companyName", "register.companyName.invalid");
 	}
 
 	protected void validateNullValue(final Errors errors, final String filed, final String propertyName, final String property)
