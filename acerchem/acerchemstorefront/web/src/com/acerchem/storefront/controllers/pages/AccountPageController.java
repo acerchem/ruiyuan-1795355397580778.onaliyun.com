@@ -1182,6 +1182,11 @@ public class AccountPageController extends AbstractSearchPageController
 	{
 		model.addAttribute("nowPage", "address-book");
 		model.addAttribute(ADDRESS_DATA_ATTR, userFacade.getAddressBook());
+		
+		System.out.println("userFacade.getAddressBook().toString()=="+userFacade.getAddressBook().toString());
+		System.out.println("userFacade.getAddressBook()=="+userFacade.getAddressBook());
+		System.out.println("userFacade.getAddressBook().size()=="+userFacade.getAddressBook().size());
+		
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ADDRESS_BOOK_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ADDRESS_BOOK_CMS_PAGE));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_ADDRESS_BOOK));
