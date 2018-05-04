@@ -724,8 +724,12 @@
 							optional="true" />
 						<persistence type="property" />
 					</attribute>
-
-					<!-- add by alice -->
+                    <attribute qualifier="companyName" type="java.lang.String">
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+						<description>Name of Company</description>
+					</attribute>
 					<attribute qualifier="companyType" type="java.lang.String">
 						<modifiers read="true" write="true" search="true"
 							optional="true" />
@@ -763,14 +767,12 @@
 						<defaultvalue>Boolean.FALSE</defaultvalue>
 						<persistence type="property" />
 					</attribute>
-
 					<attribute qualifier="provideTradeReference" type="java.lang.Boolean">
 						<description>Can you provide any trade reference for Acerchem?</description>
 						<modifiers read="true" write="true" search="true" />
 						<persistence type="property" />
 						<defaultvalue>Boolean.FALSE</defaultvalue>
 					</attribute>
-					<!-- end -->
                     <attribute qualifier="employee" type="Employee">
 						<modifiers read="true" write="true" search="true"/>
 						<persistence type="property" />
