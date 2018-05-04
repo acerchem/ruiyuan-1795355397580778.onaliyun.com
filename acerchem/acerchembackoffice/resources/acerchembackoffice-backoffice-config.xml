@@ -77,9 +77,9 @@
 				<wz:initialize property="newConsignmentEntry" type="ctx.TYPE_CODE" /> 
 				<wz:assign property="newConsignmentEntry.consignment" value="ctx.parentObject" />
 			</wz:prepare>
-			<wz:step id="step1" label="create.UniasiaConfig.general.label" >
+			<wz:step id="step1" label="create.UniasiaConfig.general.label" merge-mode="replace">
 				<wz:content id="step1.content" merge-mode="replace">
-					<wz:property-list root="newConsignmentEntry">
+					<wz:property-list root="newConsignmentEntry" merge-mode="replace">
 						<wz:property qualifier="consignment"  />
 						<wz:property qualifier="orderEntry"  />
 						<wz:property qualifier="quantity"  />
@@ -512,7 +512,7 @@
 					<wz:cancel/>
 					<wz:done>
 						<!-- <wz:save property="consignment"/> -->
-						<wz:custom label="Save" visible="true" handler="acerchemSaveConsignmentHandler"/>
+						<wz:custom label="done" visible="true" handler="acerchemSaveConsignmentHandler"/>
 					</wz:done>
 				</wz:navigation>
 			</wz:step>
@@ -567,5 +567,51 @@
             </advanced-search:field-list>
         </advanced-search:advanced-search>
     </context>
+    
+    <!-- <context component="create-wizard" type="StockLevel">
+        <wz:flow id="StockLevelWizard" title="create.title(ctx.TYPE_CODE)">
+            <wz:prepare id="stockLevelPrepare">
+                <wz:initialize property="newStockLevel" type="ctx.TYPE_CODE"/>
+                <wz:assign property="newStockLevel.productCode" value="ctx.productCode"/>
+                <wz:assign property="newStockLevel.warehouse" value="ctx.warehouse"/>
+            </wz:prepare>
+            <wz:step id="step1" label="create.stockLevel.essential.label" sublabel="create.stockLevel.essential.sublabel">
+                <wz:content id="step1.content">
+                    <wz:property-list root="newStockLevel">
+                        <wz:property qualifier="productCode"/>
+                        <wz:property qualifier="warehouse"/>
+                        <wz:property qualifier="available"/>
+                    </wz:property-list>
+                </wz:content>
+                <wz:navigation id="step1.navigation">
+                    <wz:cancel/>
+                    <wz:next visible="newStockLevel.productCode != null and newStockLevel.warehouse != null and
+					    newStockLevel.available != null" default-target="step2"/>
+                    <wz:done visible="newStockLevel.productCode != null and newStockLevel.warehouse != null and
+					    newStockLevel.available != null">
+                        <wz:save property="newStockLevel"/>
+                    </wz:done>
+                </wz:navigation>
+            </wz:step>
+            <wz:step id="step2" label="create.stockLevel.additional.label" sublabel="create.stockLevel.additional.sublabel">
+                <wz:content id="step2.content">
+                    <wz:property-list root="newStockLevel">
+                        <wz:property qualifier="inStockStatus"/>
+                        <wz:property qualifier="nextDeliveryTime"/>
+                        <wz:property qualifier="releaseDate"/>
+                        <wz:property qualifier="bin"/>
+                    </wz:property-list>
+                </wz:content>
+                <wz:navigation id="step2.navigation">
+                    <wz:cancel/>
+                    <wz:back/>
+                    <wz:done>
+                        <wz:save property="newStockLevel"/>
+                    </wz:done>
+                </wz:navigation>
+            </wz:step>
+        </wz:flow>
+    </context> -->
+    
 
 </config>
