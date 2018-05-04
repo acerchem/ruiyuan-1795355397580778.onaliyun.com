@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-4-28 19:14:12                          ---
+ * --- Generated at 2018-5-4 19:15:39                           ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.constants;
@@ -81,8 +81,10 @@ public class GeneratedAcerchemCoreConstants
 		public static class Customer
 		{
 			public static final String AREA = "area".intern();
+			public static final String COMPANYNAME = "companyName".intern();
 			public static final String COMPANYTYPE = "companyType".intern();
 			public static final String CREDITACCOUNT = "creditAccount".intern();
+			public static final String CREDITACCOUNTPOS = "creditAccountPOS".intern();
 			public static final String EMPLOYEE = "employee".intern();
 			public static final String EMPLOYEESNO = "employeesNo".intern();
 			public static final String ESTABLISHEDIN = "establishedIn".intern();
@@ -92,6 +94,7 @@ public class GeneratedAcerchemCoreConstants
 			public static final String RELATEDCUSTOMER = "relatedCustomer".intern();
 			public static final String RELATEDCUSTOMERPOS = "relatedCustomerPOS".intern();
 			public static final String REVENUE = "revenue".intern();
+			public static final String UNAUDITED = "unAudited".intern();
 			public static final String VATNO = "vatNo".intern();
 		}
 		public static class Employee
@@ -117,6 +120,7 @@ public class GeneratedAcerchemCoreConstants
 			public static final String ANONYMOUSDISPLAYPRICE = "anonymousDisplayPrice".intern();
 			public static final String CAS = "CAS".intern();
 			public static final String CERTIFICATES = "certificates".intern();
+			public static final String CERTIFICATESS = "certificatess".intern();
 			public static final String CHEMICALINFO = "chemicalInfo".intern();
 			public static final String GROSSWEIGHT = "grossWeight".intern();
 			public static final String NETWEIGHT = "netWeight".intern();
@@ -165,6 +169,12 @@ public class GeneratedAcerchemCoreConstants
 		{
 			public static final String NORTH_AMERICA = "North_America".intern();
 			public static final String SOUTH_AMERICA = "South_America".intern();
+		}
+		public static class CustomerType
+		{
+			public static final String AUDITING = "AUDITING".intern();
+			public static final String APPROVED = "APPROVED".intern();
+			public static final String REJECTED = "REJECTED".intern();
 		}
 		public static class ImageFailedActionType
 		{
@@ -219,6 +229,7 @@ public class GeneratedAcerchemCoreConstants
 	{
 		public static final String ACERCHEMCUSTOMERLEVEL2USER = "AcerChemCustomerLevel2User".intern();
 		public static final String ACERCHEMVENDOR2PRODUCT = "AcerChemVendor2Product".intern();
+		public static final String CREDITACCOUNT2CUSTOMER = "CreditAccount2Customer".intern();
 		public static final String RECEPTIONIST2CUSTOMER = "Receptionist2Customer".intern();
 		public static final String TRANSACTIONS2CREDITACCOUNT = "Transactions2CreditAccount".intern();
 	}

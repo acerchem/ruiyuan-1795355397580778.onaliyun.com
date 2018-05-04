@@ -12,7 +12,7 @@
  Tag to render a currency formatted price.
  Includes the currency symbol for the specific currency.
 --%>
-<c:set value="${fn:escapeXml(priceData.value)}" var="formattedPrice"/>
+<c:set value="${fn:escapeXml(priceData.formattedValue)}" var="formattedPrice"/>
 <c:choose>
 	<c:when test="${priceData.value > 0}">
 		<c:if test="${displayNegationForDiscount}">

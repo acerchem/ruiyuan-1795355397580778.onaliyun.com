@@ -112,9 +112,11 @@
 	<a class="btn btn-submit" href="success.html">Place Order</a>
 </div> -->
 
+<div class="btn-set">	
   <button id="placeOrder" type="submit" class="btn btn-submit">
       Place Order
   </button>
+  </div>
 
 </form:form>						
 </div>

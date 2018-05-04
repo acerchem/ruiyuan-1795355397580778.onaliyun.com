@@ -20,9 +20,11 @@ import com.hybris.cockpitng.actions.ActionResult;
 import com.hybris.cockpitng.actions.CockpitAction;
 import com.hybris.cockpitng.engine.impl.AbstractComponentWidgetAdapterAware;
 
+import de.hybris.platform.commerceservices.event.OrderCancelledEvent;
 import de.hybris.platform.core.enums.OrderStatus;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.processengine.BusinessProcessService;
+import de.hybris.platform.servicelayer.event.EventService;
 import de.hybris.platform.servicelayer.model.ModelService;
 
 public class EmployeeCancellOrderAction extends AbstractComponentWidgetAdapterAware implements CockpitAction<OrderModel, Object>
@@ -39,6 +41,17 @@ public class EmployeeCancellOrderAction extends AbstractComponentWidgetAdapterAw
 	@Resource
 	private AcerchemStockService acerchemStockService;
 	
+	@Resource
+	private EventService eventService;
+	
+	public EventService getEventService() {
+		return eventService;
+	}
+
+	public void setEventService(EventService eventService) {
+		this.eventService = eventService;
+	
+	}
 	public AcerchemStockService getAcerchemStockService() {
 		return acerchemStockService;
 	}
@@ -70,6 +83,7 @@ public class EmployeeCancellOrderAction extends AbstractComponentWidgetAdapterAw
 			}else{
 				setOrderStatus(order, OrderStatus.CANCELLED);
 				acerchemStockService.releaseStock(order);
+				getEventService().publishEvent(new OrderCancelledEvent(order.getOrderProcess().iterator().next()));
 				LOG.info("--------------------------------end CancelOrderStatusAction----------------------");
 				return new ActionResult("success");
 			}

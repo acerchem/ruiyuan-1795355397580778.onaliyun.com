@@ -1,7 +1,7 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-4-28 19:14:12                          ---
+ * --- Generated at 2018-5-4 19:15:39                           ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.jalo;
@@ -60,6 +60,7 @@ import de.hybris.platform.storelocator.jalo.PointOfService;
 import de.hybris.platform.ticket.jalo.CsTicket;
 import de.hybris.platform.util.OneToManyHandler;
 import java.math.BigDecimal;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -121,6 +122,7 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 		tmp.put("specification", AttributeMode.INITIAL);
 		tmp.put("CAS", AttributeMode.INITIAL);
 		tmp.put("certificates", AttributeMode.INITIAL);
+		tmp.put("certificatess", AttributeMode.INITIAL);
 		tmp.put("anonymousDisplayPrice", AttributeMode.INITIAL);
 		tmp.put("acerChemVendorPOS", AttributeMode.INITIAL);
 		tmp.put("acerChemVendor", AttributeMode.INITIAL);
@@ -144,8 +146,8 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 		tmp.put("totalRealPrice", AttributeMode.INITIAL);
 		ttmp.put("de.hybris.platform.jalo.order.AbstractOrderEntry", Collections.unmodifiableMap(tmp));
 		tmp = new HashMap<String, AttributeMode>();
-		tmp.put("creditAccount", AttributeMode.INITIAL);
 		tmp.put("area", AttributeMode.INITIAL);
+		tmp.put("companyName", AttributeMode.INITIAL);
 		tmp.put("companyType", AttributeMode.INITIAL);
 		tmp.put("establishedIn", AttributeMode.INITIAL);
 		tmp.put("revenue", AttributeMode.INITIAL);
@@ -155,8 +157,11 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 		tmp.put("haveFinancialReport", AttributeMode.INITIAL);
 		tmp.put("provideTradeReference", AttributeMode.INITIAL);
 		tmp.put("employee", AttributeMode.INITIAL);
+		tmp.put("unAudited", AttributeMode.INITIAL);
 		tmp.put("relatedCustomerPOS", AttributeMode.INITIAL);
 		tmp.put("relatedCustomer", AttributeMode.INITIAL);
+		tmp.put("creditAccountPOS", AttributeMode.INITIAL);
+		tmp.put("creditAccount", AttributeMode.INITIAL);
 		ttmp.put("de.hybris.platform.jalo.user.Customer", Collections.unmodifiableMap(tmp));
 		tmp = new HashMap<String, AttributeMode>();
 		tmp.put("deliveryZone", AttributeMode.INITIAL);
@@ -856,6 +861,43 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	}
 	
 	/**
+	 * <i>Generated method</i> - Getter of the <code>Product.certificatess</code> attribute.
+	 * @return the certificatess
+	 */
+	public Collection<Media> getCertificatess(final SessionContext ctx, final Product item)
+	{
+		Collection<Media> coll = (Collection<Media>)item.getProperty( ctx, AcerchemCoreConstants.Attributes.Product.CERTIFICATESS);
+		return coll != null ? coll : Collections.EMPTY_LIST;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Product.certificatess</code> attribute.
+	 * @return the certificatess
+	 */
+	public Collection<Media> getCertificatess(final Product item)
+	{
+		return getCertificatess( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Product.certificatess</code> attribute. 
+	 * @param value the certificatess
+	 */
+	public void setCertificatess(final SessionContext ctx, final Product item, final Collection<Media> value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.Product.CERTIFICATESS,value == null || !value.isEmpty() ? value : null );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Product.certificatess</code> attribute. 
+	 * @param value the certificatess
+	 */
+	public void setCertificatess(final Product item, final Collection<Media> value)
+	{
+		setCertificatess( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
 	 * <i>Generated method</i> - Getter of the <code>Product.chemicalInfo</code> attribute.
 	 * @return the chemicalInfo - Attribute about ç¾hemicalInfo of Product
 	 */
@@ -889,6 +931,42 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	public void setChemicalInfo(final Product item, final String value)
 	{
 		setChemicalInfo( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.companyName</code> attribute.
+	 * @return the companyName - Name of Company
+	 */
+	public String getCompanyName(final SessionContext ctx, final Customer item)
+	{
+		return (String)item.getProperty( ctx, AcerchemCoreConstants.Attributes.Customer.COMPANYNAME);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.companyName</code> attribute.
+	 * @return the companyName - Name of Company
+	 */
+	public String getCompanyName(final Customer item)
+	{
+		return getCompanyName( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.companyName</code> attribute. 
+	 * @param value the companyName - Name of Company
+	 */
+	public void setCompanyName(final SessionContext ctx, final Customer item, final String value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.Customer.COMPANYNAME,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.companyName</code> attribute. 
+	 * @param value the companyName - Name of Company
+	 */
+	public void setCompanyName(final Customer item, final String value)
+	{
+		setCompanyName( getSession().getSessionContext(), item, value );
 	}
 	
 	/**
@@ -1403,6 +1481,79 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	public void setCreditAccount(final Customer item, final CustomerCreditAccount value)
 	{
 		setCreditAccount( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.creditAccountPOS</code> attribute.
+	 * @return the creditAccountPOS
+	 */
+	 Integer getCreditAccountPOS(final SessionContext ctx, final Customer item)
+	{
+		return (Integer)item.getProperty( ctx, AcerchemCoreConstants.Attributes.Customer.CREDITACCOUNTPOS);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.creditAccountPOS</code> attribute.
+	 * @return the creditAccountPOS
+	 */
+	 Integer getCreditAccountPOS(final Customer item)
+	{
+		return getCreditAccountPOS( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.creditAccountPOS</code> attribute. 
+	 * @return the creditAccountPOS
+	 */
+	 int getCreditAccountPOSAsPrimitive(final SessionContext ctx, final Customer item)
+	{
+		Integer value = getCreditAccountPOS( ctx,item );
+		return value != null ? value.intValue() : 0;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.creditAccountPOS</code> attribute. 
+	 * @return the creditAccountPOS
+	 */
+	 int getCreditAccountPOSAsPrimitive(final Customer item)
+	{
+		return getCreditAccountPOSAsPrimitive( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.creditAccountPOS</code> attribute. 
+	 * @param value the creditAccountPOS
+	 */
+	 void setCreditAccountPOS(final SessionContext ctx, final Customer item, final Integer value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.Customer.CREDITACCOUNTPOS,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.creditAccountPOS</code> attribute. 
+	 * @param value the creditAccountPOS
+	 */
+	 void setCreditAccountPOS(final Customer item, final Integer value)
+	{
+		setCreditAccountPOS( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.creditAccountPOS</code> attribute. 
+	 * @param value the creditAccountPOS
+	 */
+	 void setCreditAccountPOS(final SessionContext ctx, final Customer item, final int value)
+	{
+		setCreditAccountPOS( ctx, item, Integer.valueOf( value ) );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.creditAccountPOS</code> attribute. 
+	 * @param value the creditAccountPOS
+	 */
+	 void setCreditAccountPOS(final Customer item, final int value)
+	{
+		setCreditAccountPOS( getSession().getSessionContext(), item, value );
 	}
 	
 	/**
@@ -3698,6 +3849,79 @@ public abstract class GeneratedAcerchemCoreManager extends Extension
 	public void setTotalRealPrice(final AbstractOrderEntry item, final double value)
 	{
 		setTotalRealPrice( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.unAudited</code> attribute.
+	 * @return the unAudited - 是否审核标志
+	 */
+	public Boolean isUnAudited(final SessionContext ctx, final Customer item)
+	{
+		return (Boolean)item.getProperty( ctx, AcerchemCoreConstants.Attributes.Customer.UNAUDITED);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.unAudited</code> attribute.
+	 * @return the unAudited - 是否审核标志
+	 */
+	public Boolean isUnAudited(final Customer item)
+	{
+		return isUnAudited( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.unAudited</code> attribute. 
+	 * @return the unAudited - 是否审核标志
+	 */
+	public boolean isUnAuditedAsPrimitive(final SessionContext ctx, final Customer item)
+	{
+		Boolean value = isUnAudited( ctx,item );
+		return value != null ? value.booleanValue() : false;
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>Customer.unAudited</code> attribute. 
+	 * @return the unAudited - 是否审核标志
+	 */
+	public boolean isUnAuditedAsPrimitive(final Customer item)
+	{
+		return isUnAuditedAsPrimitive( getSession().getSessionContext(), item );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.unAudited</code> attribute. 
+	 * @param value the unAudited - 是否审核标志
+	 */
+	public void setUnAudited(final SessionContext ctx, final Customer item, final Boolean value)
+	{
+		item.setProperty(ctx, AcerchemCoreConstants.Attributes.Customer.UNAUDITED,value);
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.unAudited</code> attribute. 
+	 * @param value the unAudited - 是否审核标志
+	 */
+	public void setUnAudited(final Customer item, final Boolean value)
+	{
+		setUnAudited( getSession().getSessionContext(), item, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.unAudited</code> attribute. 
+	 * @param value the unAudited - 是否审核标志
+	 */
+	public void setUnAudited(final SessionContext ctx, final Customer item, final boolean value)
+	{
+		setUnAudited( ctx, item, Boolean.valueOf( value ) );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>Customer.unAudited</code> attribute. 
+	 * @param value the unAudited - 是否审核标志
+	 */
+	public void setUnAudited(final Customer item, final boolean value)
+	{
+		setUnAudited( getSession().getSessionContext(), item, value );
 	}
 	
 	/**

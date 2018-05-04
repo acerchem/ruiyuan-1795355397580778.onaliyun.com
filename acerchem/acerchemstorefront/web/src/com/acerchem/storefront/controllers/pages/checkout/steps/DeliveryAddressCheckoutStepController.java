@@ -327,12 +327,12 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 			final boolean hasSelectedAddressData = selectedAddressData != null;
 			if (hasSelectedAddressData)
 			{
-				/*try {
+				try {
 					CountryData countryData = selectedAddressData.getCountry();
 					acerchemCheckoutFacade.validateCartAddress(countryData);
 				}catch (AcerchemOrderException e){
                     GlobalMessages.addErrorMessage(model, e.getMessage());
-				}*/
+				}
 				acerchemCheckoutFacade.setDeliveryAddress(selectedAddressData);
 			}
 		}

@@ -1,18 +1,20 @@
 /*
  * ----------------------------------------------------------------
  * --- WARNING: THIS FILE IS GENERATED AND WILL BE OVERWRITTEN! ---
- * --- Generated at 2018-4-28 19:14:12                          ---
+ * --- Generated at 2018-5-4 19:15:39                           ---
  * ----------------------------------------------------------------
  */
 package com.acerchem.core.jalo;
 
 import com.acerchem.core.constants.AcerchemCoreConstants;
 import com.acerchem.core.jalo.CreditTransaction;
+import de.hybris.platform.constants.CoreConstants;
 import de.hybris.platform.jalo.GenericItem;
 import de.hybris.platform.jalo.Item.AttributeMode;
 import de.hybris.platform.jalo.SessionContext;
 import de.hybris.platform.jalo.enumeration.EnumerationValue;
 import de.hybris.platform.jalo.type.CollectionType;
+import de.hybris.platform.jalo.user.Customer;
 import de.hybris.platform.util.OneToManyHandler;
 import java.math.BigDecimal;
 import java.util.Collections;
@@ -36,11 +38,25 @@ public abstract class GeneratedCustomerCreditAccount extends GenericItem
 	public static final String STATUS = "status";
 	/** Qualifier of the <code>CustomerCreditAccount.transactions</code> attribute **/
 	public static final String TRANSACTIONS = "transactions";
+	/** Qualifier of the <code>CustomerCreditAccount.customer</code> attribute **/
+	public static final String CUSTOMER = "customer";
 	/**
 	* {@link OneToManyHandler} for handling 1:n TRANSACTIONS's relation attributes from 'many' side.
 	**/
 	protected static final OneToManyHandler<CreditTransaction> TRANSACTIONSHANDLER = new OneToManyHandler<CreditTransaction>(
 	AcerchemCoreConstants.TC.CREDITTRANSACTION,
+	false,
+	"creditAccount",
+	"creditAccountPOS",
+	true,
+	true,
+	CollectionType.LIST
+	);
+	/**
+	* {@link OneToManyHandler} for handling 1:n CUSTOMER's relation attributes from 'many' side.
+	**/
+	protected static final OneToManyHandler<Customer> CUSTOMERHANDLER = new OneToManyHandler<Customer>(
+	CoreConstants.TC.CUSTOMER,
 	false,
 	"creditAccount",
 	"creditAccountPOS",
@@ -207,6 +223,78 @@ public abstract class GeneratedCustomerCreditAccount extends GenericItem
 	public void setCreditTotalAmount(final BigDecimal value)
 	{
 		setCreditTotalAmount( getSession().getSessionContext(), value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>CustomerCreditAccount.customer</code> attribute.
+	 * @return the customer
+	 */
+	public List<Customer> getCustomer(final SessionContext ctx)
+	{
+		return (List<Customer>)CUSTOMERHANDLER.getValues( ctx, this );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Getter of the <code>CustomerCreditAccount.customer</code> attribute.
+	 * @return the customer
+	 */
+	public List<Customer> getCustomer()
+	{
+		return getCustomer( getSession().getSessionContext() );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>CustomerCreditAccount.customer</code> attribute. 
+	 * @param value the customer
+	 */
+	public void setCustomer(final SessionContext ctx, final List<Customer> value)
+	{
+		CUSTOMERHANDLER.setValues( ctx, this, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Setter of the <code>CustomerCreditAccount.customer</code> attribute. 
+	 * @param value the customer
+	 */
+	public void setCustomer(final List<Customer> value)
+	{
+		setCustomer( getSession().getSessionContext(), value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Adds <code>value</code> to customer. 
+	 * @param value the item to add to customer
+	 */
+	public void addToCustomer(final SessionContext ctx, final Customer value)
+	{
+		CUSTOMERHANDLER.addValue( ctx, this, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Adds <code>value</code> to customer. 
+	 * @param value the item to add to customer
+	 */
+	public void addToCustomer(final Customer value)
+	{
+		addToCustomer( getSession().getSessionContext(), value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Removes <code>value</code> from customer. 
+	 * @param value the item to remove from customer
+	 */
+	public void removeFromCustomer(final SessionContext ctx, final Customer value)
+	{
+		CUSTOMERHANDLER.removeValue( ctx, this, value );
+	}
+	
+	/**
+	 * <i>Generated method</i> - Removes <code>value</code> from customer. 
+	 * @param value the item to remove from customer
+	 */
+	public void removeFromCustomer(final Customer value)
+	{
+		removeFromCustomer( getSession().getSessionContext(), value );
 	}
 	
 	/**

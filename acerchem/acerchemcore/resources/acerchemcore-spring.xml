@@ -152,6 +152,8 @@
 		Event listeners are singletons, therefore the dependency for a bean in tenant-scope
 		must be configured with a lookup method.
 	-->
+	
+	
 	<bean id="orderCancelledEventListener"
 	      class="com.acerchem.core.event.OrderCancelledEventListener" parent="abstractAcceleratorSiteEventListener">
 		<property name="modelService" ref="modelService"/>
@@ -213,7 +215,17 @@
 	</bean>
 
 	<!-- Process resources definition -->
-
+	
+	<bean id="approveCustomerEmailProcessDefinitionResource"
+	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/acerchemcore/processes/approveCustomerEmailProcess.xml"/>
+	</bean>
+	
+	<bean id="rejectCustomerEmailProcessDefinitionResource"
+	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/acerchemcore/processes/rejectCustomerEmailProcess.xml"/>
+	</bean>
+	
 	<bean id="customerRegistrationEmailProcessDefinitionResource"
 	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
 		<property name="resource" value="classpath:/acerchemcore/processes/customerRegistrationEmailProcess.xml"/>
@@ -274,7 +286,18 @@
 		<property name="contextResolutionStrategy" ref="processContextResolutionStrategy"/>
 		<property name="emailGenerationService" ref="emailGenerationService"/>
 	</bean>
-
+	
+	<!-- 添加审核通过和审核拒绝的 -->
+	<bean id="generateApproveCustomerEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="CustomerRegistrationEmailTemplate"/>
+	</bean>
+	
+	<bean id="generateRejectCustomerEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="CustomerRegistrationEmailTemplate"/>
+	</bean>
+	
+	<!-- end -->
+	
 	<bean id="generateCustomerRegistrationEmail" parent="abstractGenerateEmailAction">
 		<property name="frontendTemplateName" value="CustomerRegistrationEmailTemplate"/>
 	</bean>
@@ -623,6 +646,15 @@
 	<bean id="defaultAcerchemCommercePlaceOrderStrategy" parent="defaultCommercePlaceOrderStrategy" class="com.acerchem.core.strategies.impl.DefaultAcerchemCommercePlaceOrderStrategy">
 		<property name="acerchemStockService" ref="acerchemStockService"/>
 	</bean>
+	
+	<alias alias="createOrderFromCartStrategy" name="defaultAcerchemCreateOrderFromCartStrategy"/>
+	<bean id="defaultAcerchemCreateOrderFromCartStrategy"
+			class="com.acerchem.core.strategies.impl.DefaultAcerchemCreateOrderFromCartStrategy">
+		<property name="cartValidator" ref="cartValidator"/>
+		<property name="cloneAbstractOrderStrategy" ref="cloneAbstractOrderStrategy"/>
+		<property name="keyGenerator"
+					 ref="#{configurationService.configuration.getProperty('commerceservices.orderCode.keyGenerator')}"/>
+	</bean>
 
 
 	<alias name="defaultAcerchemStockService" alias="acerchemStockService"/>
@@ -639,6 +671,18 @@
 
 	<alias name="defaultAcerchemCalculationService" alias="calculationService"/>
 	<bean id="defaultAcerchemCalculationService" parent="defaultCalculationService" class="com.acerchem.core.service.impl.DefaultAcerchemCalculationService">
+	</bean>
+	
+	<bean id="approveCustomerEventListener"
+	      class="com.acerchem.core.event.ApproveCustomerEventListener" parent="abstractAcceleratorSiteEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+	</bean>
+	
+	<bean id="rejectCustomerEventListener"
+	      class="com.acerchem.core.event.RejectCustomerEventListener" parent="abstractAcceleratorSiteEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
 	</bean>
 
 </beans>

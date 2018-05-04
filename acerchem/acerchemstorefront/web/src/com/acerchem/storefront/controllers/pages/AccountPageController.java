@@ -880,6 +880,7 @@ public class AccountPageController extends AbstractSearchPageController
 		CustomRegisterForm.setName(customer.getName());
 		CustomRegisterForm.setEmail(customer.getUid());;
 		CustomRegisterForm.setCompanyType(customer.getCompanyType());
+		CustomRegisterForm.setCompanyName(customer.getCompanyName());
 		CustomRegisterForm.setEstablishedIn(customer.getEstablishedIn());
 		CustomRegisterForm.setRevenue(customer.getRevenue());
 		CustomRegisterForm.setEmployeesNo(customer.getEmployeesNo());
@@ -901,7 +902,7 @@ public class AccountPageController extends AbstractSearchPageController
 					address.setAddressId(am.getPk().toString());
 					address.setTownCity(am.getTown());
 					CustomRegisterForm.setContactAddress(address);
-					CustomRegisterForm.setContacts(am.getLastname());
+					//CustomRegisterForm.setContacts(am.getLastname());
 					model.addAttribute("regions", i18NFacade.getRegionsForCountryIso(am.getCountry().getIsocode()));
 				}
 			}
@@ -968,7 +969,7 @@ public class AccountPageController extends AbstractSearchPageController
 				am2.setOwner(user);
 				am2.setVisibleInAddressBook(false);
 			}
-			am2.setLastname(form.getContacts());
+			am2.setLastname(form.getName());
 			am2.setCountry(contactCountry);
 			if(contactRegionIso!=null&&contactRegionIso!="")
 			{
@@ -980,6 +981,7 @@ public class AccountPageController extends AbstractSearchPageController
 			user.setSessionCurrency(commonI18NService.getCurrency(form.getCurrency()));
 			user.setName(form.getName());
 			user.setCompanyType(form.getCompanyType());
+			user.setCompanyName(form.getCompanyName());
 			user.setEstablishedIn(form.getEstablishedIn());
 			user.setRevenue(form.getRevenue());
 			user.setEmployeesNo(form.getEmployeesNo());

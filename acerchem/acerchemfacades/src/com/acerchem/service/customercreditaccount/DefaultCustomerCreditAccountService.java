@@ -33,7 +33,7 @@ public interface DefaultCustomerCreditAccountService {
      * @param money
      * @return
      */
-    CustomerCreditAccountModel updateCustomerCreditAccountRepayment(String cransactionId ,BigDecimal money);
+    CustomerCreditAccountModel updateCustomerCreditAccountRepayment(CreditTransactionModel creditTransaction);
 
 
 

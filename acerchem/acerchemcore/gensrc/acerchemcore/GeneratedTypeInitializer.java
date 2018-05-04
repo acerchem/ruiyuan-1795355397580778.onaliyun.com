@@ -250,6 +250,12 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			true
 		);
 	
+		createRelationType(
+			"CreditAccount2Customer",
+			null,
+			true
+		);
+	
 		createEnumerationType(
 			"SwatchColorEnum",
 			null
@@ -374,6 +380,8 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 				single_createattr_Product_certificates();
 			
+				single_createattr_Product_certificatess();
+			
 				single_createattr_ProductCarouselComponent_isPromotion();
 			
 				single_createattr_ProductCarouselComponent_isWell();
@@ -432,9 +440,9 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 				single_createattr_CreditTransaction_productNumber();
 			
-				single_createattr_Customer_creditAccount();
-			
 				single_createattr_Customer_area();
+			
+				single_createattr_Customer_companyName();
 			
 				single_createattr_Customer_companyType();
 			
@@ -453,6 +461,8 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 				single_createattr_Customer_provideTradeReference();
 			
 				single_createattr_Customer_employee();
+			
+				single_createattr_Customer_unAudited();
 			
 				single_createattr_PointOfService_deliveryZone();
 			
@@ -579,6 +589,26 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			CollectionType.COLLECTION,
 			"transactions", 
 			"CreditTransaction", 
+			true,
+			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
+			true,
+			true,
+			CollectionType.LIST
+		);
+	
+		createRelationAttributes(
+			"CreditAccount2Customer", 
+			false, 
+
+			"creditAccount", 
+			"CustomerCreditAccount", 
+			true,
+			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
+			false,
+			false,
+			CollectionType.COLLECTION,
+			"customer", 
+			"Customer", 
 			true,
 			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
 			true,
@@ -1168,6 +1198,23 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 	}
 	
+	public void single_createattr_Product_certificatess() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"Product", 
+					"certificatess",  
+					null,
+					"MediaCollection",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
 	public void single_createattr_ProductCarouselComponent_isPromotion() throws JaloBusinessException
 	{
 		
@@ -1661,23 +1708,6 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 	}
 	
-	public void single_createattr_Customer_creditAccount() throws JaloBusinessException
-	{
-		
-						Map sqlColumnDefinitions = null;
-					
-				createPropertyAttribute(
-					"Customer", 
-					"creditAccount",  
-					null,
-					"CustomerCreditAccount",
-					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
-					null,
-					sqlColumnDefinitions
-				);
-			
-	}
-	
 	public void single_createattr_Customer_area() throws JaloBusinessException
 	{
 		
@@ -1688,6 +1718,23 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 					"area",  
 					null,
 					"CustomerArea",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_Customer_companyName() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"Customer", 
+					"companyName",  
+					null,
+					"java.lang.String",
 					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
 					null,
 					sqlColumnDefinitions
@@ -1841,6 +1888,23 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 					"employee",  
 					null,
 					"Employee",
+					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
+					null,
+					sqlColumnDefinitions
+				);
+			
+	}
+	
+	public void single_createattr_Customer_unAudited() throws JaloBusinessException
+	{
+		
+						Map sqlColumnDefinitions = null;
+					
+				createPropertyAttribute(
+					"Customer", 
+					"unAudited",  
+					null,
+					"java.lang.Boolean",
 					de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG,
 					null,
 					sqlColumnDefinitions
@@ -2399,6 +2463,17 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			} )
 		);
 	
+		createEnumerationValues(
+			"CustomerType",
+			true,
+			Arrays.asList( new String[] {
+			
+				"AUDITING",
+				"APPROVED",
+				"REJECTED"
+			} )
+		);
+	
 		single_setRelAttributeProperties_AcerChemVendor2Product_source();
 	
 		single_setRelAttributeProperties_AcerChemCustomerLevel2User_source();
@@ -2407,6 +2482,8 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 	
 		single_setRelAttributeProperties_Transactions2CreditAccount_source();
 	
+		single_setRelAttributeProperties_CreditAccount2Customer_source();
+	
 		single_setRelAttributeProperties_AcerChemVendor2Product_target();
 	
 		single_setRelAttributeProperties_AcerChemCustomerLevel2User_target();
@@ -2414,6 +2491,8 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 		single_setRelAttributeProperties_Receptionist2Customer_target();
 	
 		single_setRelAttributeProperties_Transactions2CreditAccount_target();
+	
+		single_setRelAttributeProperties_CreditAccount2Customer_target();
 	
 		connectRelation(
 			"AcerChemVendor2Product", 
@@ -2469,6 +2548,21 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
 			"transactions", 
 			"CreditTransaction", 
+			true,
+			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
+			true,
+			true
+		);
+	
+		connectRelation(
+			"CreditAccount2Customer", 
+			false, 
+			"creditAccount", 
+			"CustomerCreditAccount", 
+			true,
+			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
+			"customer", 
+			"Customer", 
 			true,
 			de.hybris.platform.jalo.type.AttributeDescriptor.READ_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.WRITE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.OPTIONAL_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.REMOVE_FLAG|de.hybris.platform.jalo.type.AttributeDescriptor.SEARCH_FLAG, 
 			true,
@@ -2663,6 +2757,8 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			single_setAttributeProperties_Product_CAS();
 		
 			single_setAttributeProperties_Product_certificates();
+		
+			single_setAttributeProperties_Product_certificatess();
 		
 				{
 				Map customPropsMap = new HashMap();
@@ -2860,9 +2956,9 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 				);
 				}
 			
-			single_setAttributeProperties_Customer_creditAccount();
-		
 			single_setAttributeProperties_Customer_area();
+		
+			single_setAttributeProperties_Customer_companyName();
 		
 			single_setAttributeProperties_Customer_companyType();
 		
@@ -2881,6 +2977,8 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			single_setAttributeProperties_Customer_provideTradeReference();
 		
 			single_setAttributeProperties_Customer_employee();
+		
+			single_setAttributeProperties_Customer_unAudited();
 		
 				{
 				Map customPropsMap = new HashMap();
@@ -3113,6 +3211,12 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 			
 				changeMetaType(
 					"OrderStatus",
+					null,
+					null
+				);
+			
+				changeMetaType(
+					"CustomerType",
 					null,
 					null
 				);
@@ -3869,6 +3973,28 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							);
 						}
 					
+						public void single_setAttributeProperties_Product_certificatess() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"Product", 
+								"certificatess",
+								false, 
+								null,
+								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
 						public void single_setAttributeProperties_ProductCarouselComponent_isPromotion() throws JaloBusinessException
 						{
 							
@@ -4507,7 +4633,7 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							);
 						}
 					
-						public void single_setAttributeProperties_Customer_creditAccount() throws JaloBusinessException
+						public void single_setAttributeProperties_Customer_area() throws JaloBusinessException
 						{
 							
 							
@@ -4516,7 +4642,7 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							
 							setAttributeProperties(
 								"Customer", 
-								"creditAccount",
+								"area",
 								false, 
 								null,
 								null,
@@ -4529,7 +4655,7 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							);
 						}
 					
-						public void single_setAttributeProperties_Customer_area() throws JaloBusinessException
+						public void single_setAttributeProperties_Customer_companyName() throws JaloBusinessException
 						{
 							
 							
@@ -4538,7 +4664,7 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 							
 							setAttributeProperties(
 								"Customer", 
-								"area",
+								"companyName",
 								false, 
 								null,
 								null,
@@ -4740,6 +4866,28 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 								false, 
 								null,
 								null,
+								null,
+								true,
+								true,
+								null,
+								customPropsMap,
+								null
+							);
+						}
+					
+						public void single_setAttributeProperties_Customer_unAudited() throws JaloBusinessException
+						{
+							
+							
+							
+							Map customPropsMap = new HashMap();
+							
+							setAttributeProperties(
+								"Customer", 
+								"unAudited",
+								false, 
+								Boolean.TRUE,
+								"Boolean.TRUE",
 								null,
 								true,
 								true,
@@ -5477,6 +5625,48 @@ public class GeneratedTypeInitializer extends AbstractTypeInitializer
 									setAttributeProperties(
 										"CustomerCreditAccount", 
 										"transactions",
+										false, 
+										null,
+										null,
+										null,
+										true,
+										true,
+										null,
+										customPropsMap,
+										null
+									);
+								}
+							
+								public void single_setRelAttributeProperties_CreditAccount2Customer_source() throws JaloBusinessException
+								{
+									
+									Map customPropsMap = new HashMap();
+									
+
+									setAttributeProperties(
+										"Customer", 
+										"creditAccount",
+										false, 
+										null,
+										null,
+										null,
+										true,
+										true,
+										null,
+										customPropsMap,
+										null
+									);
+								}
+							
+								public void single_setRelAttributeProperties_CreditAccount2Customer_target() throws JaloBusinessException
+								{
+									
+									Map customPropsMap = new HashMap();
+									
+
+									setAttributeProperties(
+										"CustomerCreditAccount", 
+										"customer",
 										false, 
 										null,
 										null,

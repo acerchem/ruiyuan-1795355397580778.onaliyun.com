@@ -344,7 +344,7 @@
 				<!-- end -->
 
 				<!-- Final Review -->
-				<div class="g-table">
+				<!-- <div class="g-table">
 					<div class="g-title">
 						<span>Invoice</span>
 					</div>
@@ -407,7 +407,7 @@
 					</div>
 					new end			
 					</div>
-				</div>
+				</div> -->
 				<!-- end -->
 
 			</div>
