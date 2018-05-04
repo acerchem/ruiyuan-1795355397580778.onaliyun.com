@@ -70,7 +70,7 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 
 	// CMS Pages
 	private static final String SUPPORT_TICKET_CODE_PATH_VARIABLE_PATTERN = "{ticketId:.*}";
-	private static final String REDIRECT_TO_SUPPORT_TICKETS_PAGE = REDIRECT_PREFIX + "/account/support-tickets";
+	private static String REDIRECT_TO_SUPPORT_TICKETS_PAGE = REDIRECT_PREFIX + "/account/support-tickets";
 
 	private long maxUploadSizeValue = Long.MAX_VALUE;
 
@@ -125,6 +125,19 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 
 		return getListView(pageNumber, showMode, sortCode, ticketAdded, model);
 	}
+	
+	@RequestMapping(value = "/personal-tickets", method = RequestMethod.GET)
+	public String personalTickets(@RequestParam(value = "page", defaultValue = "0") final int pageNumber,
+			@RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode,
+			@RequestParam(value = "sort", required = false) final String sortCode,
+			@RequestParam(value = "ticketAdded", required = false, defaultValue = "false") final boolean ticketAdded,
+			final Model model) throws CMSItemNotFoundException {
+
+		getListView(pageNumber, showMode, sortCode, ticketAdded, model);
+		model.addAttribute("nowPage","tickets");
+		return "pages/account/accountPersonalTicketsPage";
+		
+	}
 
 	@InitBinder
 	public void init(final WebDataBinder binder) {
@@ -141,6 +154,13 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 	@RequestMapping(value = "/add-support-ticket", method = RequestMethod.GET)
 	public String addSupportTicket(final Model model,String productId,String productName,String email,String telephone) throws CMSItemNotFoundException {
 		return getAddView(model,productId,productName,email,telephone,null);
+	}
+	
+	@RequestMapping(value = "/add-personal-ticket", method = RequestMethod.GET)
+	public String addPersonalTicket(final Model model) throws CMSItemNotFoundException {
+		model.addAttribute("nowPage","tickets");
+		getAddView(model,null,null,null,null,null);
+		return "pages/account/accountAddPersonalTicketPage";
 	}
 
 	/**
@@ -189,6 +209,52 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 		}
 		return getListView(pageNumber, showMode, sortCode, ticketAdded, model);
 	}
+	
+	@RequestMapping(value = "/add-personal-ticket", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public String addPersonalTicket(@RequestParam(value = "page", defaultValue = "0") final int pageNumber,
+			@RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode,
+			@RequestParam(value = "sort", required = false) final String sortCode,
+			@RequestParam(value = "ticketAdded", required = false, defaultValue = "false") final boolean ticketAdded,
+			final SupportTicketForm supportTicketForm, final BindingResult bindingResult,Model model)
+			throws CMSItemNotFoundException {
+		
+		model.addAttribute("nowPage","tickets");
+		addSupportTicketValidator.validate(supportTicketForm, bindingResult);
+
+		if (bindingResult.hasErrors()) {
+			final List<Map<String, String>> list = buildErrorMessagesMap(bindingResult);
+			list.add(buildMessageMap(CustomerticketingaddonConstants.FORM_GLOBAL_ERROR_KEY,CustomerticketingaddonConstants.FORM_GLOBAL_ERROR));
+
+			getAddView(model,supportTicketForm.getProductId(),supportTicketForm.getProductName(),null,null,supportTicketForm);
+			return "pages/account/accountAddPersonalTicketPage";
+		}
+
+		try {
+			ticketFacadeImpl.createTicket(this.populateTicketData(supportTicketForm));
+
+		} catch (final UnsupportedAttachmentException usAttEx) {
+			LOG.error(usAttEx.getMessage(), usAttEx);
+			final Map<String, String> map = Maps.newHashMap();
+			map.put(CustomerticketingaddonConstants.SUPPORT_TICKET_TRY_LATER,
+					getMessageSource().getMessage(
+							CustomerticketingaddonConstants.TEXT_SUPPORT_TICKETING_ATTACHMENT_BLOCK_LISTED,
+							new Object[] { allowedUploadedFormats }, getI18nService().getCurrentLocale()));
+			getAddView(model,supportTicketForm.getProductId(),supportTicketForm.getProductName(),null,null,supportTicketForm);
+			return "pages/account/accountAddPersonalTicketPage";
+		} catch (final RuntimeException rEX) {
+			final Map<String, String> map = Maps.newHashMap();
+			LOG.error(rEX.getMessage(), rEX);
+
+			map.put(CustomerticketingaddonConstants.SUPPORT_TICKET_TRY_LATER,
+					getMessageSource().getMessage(CustomerticketingaddonConstants.TEXT_SUPPORT_TICKETING_TRY_LATER,
+							null, getI18nService().getCurrentLocale()));
+			getAddView(model,supportTicketForm.getProductId(),supportTicketForm.getProductName(),null,null,supportTicketForm);
+			return "pages/account/accountAddPersonalTicketPage";
+		}
+		
+		getListView(pageNumber, showMode, sortCode, ticketAdded, model);
+		return "pages/account/accountPersonalTicketsPage";
+	}
 
 	private String getListView(int pageNumber, ShowMode showMode, String sortCode, boolean ticketAdded, Model model)
 			throws CMSItemNotFoundException {
@@ -214,13 +280,7 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 	private String getAddView(Model model,String productId,String productName,String email,String telephone,SupportTicketForm SupportTicketForm) throws CMSItemNotFoundException {
 		
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
-		/*final CustomRegisterForm CustomRegisterForm = new CustomRegisterForm();
-		if (customerData.getUid()!=null) {
-			CustomRegisterForm.setEmail(customerData.getUid());
-			CustomRegisterForm.setLanguage(customerData.getLanguage().getIsocode());
-			CustomRegisterForm.setCurrency(customerData.getCurrency().getIsocode());
-		}*/
-		
+
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CustomerticketingaddonConstants.ADD_SUPPORT_TICKET_PAGE));
 		setUpMetaDataForContentPage(model,
 				getContentPageForLabelOrId(CustomerticketingaddonConstants.ADD_SUPPORT_TICKET_PAGE));
@@ -279,13 +339,9 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 	public String getSupportTicket(@PathVariable("ticketId") final String ticketId, final Model model,
 			@RequestParam(value = "ticketUpdated", required = false, defaultValue = "false") final boolean ticketUpdated,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException {
-		storeCmsPageInModel(model,
-				getContentPageForLabelOrId(CustomerticketingaddonConstants.UPDATE_SUPPORT_TICKET_PAGE));
-		setUpMetaDataForContentPage(model,
-				getContentPageForLabelOrId(CustomerticketingaddonConstants.UPDATE_SUPPORT_TICKET_PAGE));
-
-		model.addAttribute(WebConstants.BREADCRUMBS_KEY,
-				getBreadcrumbs(CustomerticketingaddonConstants.TEXT_SUPPORT_TICKETING_UPDATE));
+		storeCmsPageInModel(model,getContentPageForLabelOrId(CustomerticketingaddonConstants.UPDATE_SUPPORT_TICKET_PAGE));
+		setUpMetaDataForContentPage(model,getContentPageForLabelOrId(CustomerticketingaddonConstants.UPDATE_SUPPORT_TICKET_PAGE));
+		model.addAttribute(WebConstants.BREADCRUMBS_KEY,getBreadcrumbs(CustomerticketingaddonConstants.TEXT_SUPPORT_TICKETING_UPDATE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 		model.addAttribute(CustomerticketingaddonConstants.SUPPORT_TICKET_FORM, new SupportTicketForm());
 		model.addAttribute(CustomerticketingaddonConstants.MAX_UPLOAD_SIZE, Long.valueOf(maxUploadSizeValue));
@@ -304,6 +360,15 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 			GlobalMessages.addConfMessage(model, CustomerticketingaddonConstants.TEXT_SUPPORT_TICKETING_ADDED);
 		}
 		return "pages/account/accountUpdateSupportTicketPage";
+	}
+	
+	@RequestMapping(value = "/personal-ticket/" + SUPPORT_TICKET_CODE_PATH_VARIABLE_PATTERN, method = RequestMethod.GET)
+	public String getPersonalTicket(@PathVariable("ticketId") final String ticketId, final Model model,
+			@RequestParam(value = "ticketUpdated", required = false, defaultValue = "false") final boolean ticketUpdated,
+			final RedirectAttributes redirectModel) throws CMSItemNotFoundException {
+		REDIRECT_TO_SUPPORT_TICKETS_PAGE=REDIRECT_PREFIX + "/account/personal-tickets";
+		getSupportTicket(ticketId,model,ticketUpdated,redirectModel);
+		return "pages/account/accountUpdatePersonalTicketPage";
 	}
 
 	/**
@@ -354,6 +419,49 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 			GlobalMessages.addConfMessage(model, CustomerticketingaddonConstants.TEXT_SUPPORT_TICKETING_ADDED);
 		}
 		return returnPage(model,ticketId);
+	}
+	
+	@RequestMapping(value = "/personal-ticket/"+ SUPPORT_TICKET_CODE_PATH_VARIABLE_PATTERN, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	public String updatePersonalTicket(final SupportTicketForm supportTicketForm,final BindingResult bindingResult,
+			@PathVariable("ticketId") final String ticketId, final Model model,
+			@RequestParam(value = "ticketUpdated", required = false, defaultValue = "false") final boolean ticketUpdated,
+			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+	{
+		addSupportTicketValidator.validate(supportTicketForm, bindingResult);
+		if (bindingResult.hasErrors()) {
+			final List<Map<String, String>> list = buildErrorMessagesMap(bindingResult);
+			list.add(buildMessageMap(CustomerticketingaddonConstants.FORM_GLOBAL_ERROR_KEY,CustomerticketingaddonConstants.FORM_GLOBAL_ERROR));
+			returnPage(model,ticketId);
+			return "pages/account/accountUpdatePersonalTicketPage";
+		}
+
+		try {
+			ticketFacade.updateTicket(this.populateTicketData(supportTicketForm));
+		} catch (final UnsupportedAttachmentException usAttEx) {
+			LOG.error(usAttEx.getMessage(), usAttEx);
+			final Map<String, String> map = Maps.newHashMap();
+
+			map.put(CustomerticketingaddonConstants.SUPPORT_TICKET_TRY_LATER,
+					getMessageSource().getMessage(
+							CustomerticketingaddonConstants.TEXT_SUPPORT_TICKETING_ATTACHMENT_BLOCK_LISTED,
+							new Object[] { allowedUploadedFormats }, getI18nService().getCurrentLocale()));
+		} catch (final RuntimeException rEx) {
+			LOG.error(rEx.getMessage(), rEx);
+			final Map<String, String> map = Maps.newHashMap();
+			map.put(CustomerticketingaddonConstants.SUPPORT_TICKET_TRY_LATER,
+					getMessageSource().getMessage(CustomerticketingaddonConstants.TEXT_SUPPORT_TICKETING_TRY_LATER,
+							null, getI18nService().getCurrentLocale()));
+		} catch (final Exception e) {
+			LOG.error("Attempted to load ticket details that does not exist or is not visible", e);
+			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER,CustomerticketingaddonConstants.TEXT_SUPPORT_TICKETING_TRY_LATER, null);
+			return REDIRECT_PREFIX + "/account/personal-tickets";
+		}
+		
+		if (ticketUpdated) {
+			GlobalMessages.addConfMessage(model, CustomerticketingaddonConstants.TEXT_SUPPORT_TICKETING_ADDED);
+		}
+		returnPage(model,ticketId);
+		return "pages/account/accountUpdatePersonalTicketPage";
 	}
 	
 	protected String returnPage(final Model model,@PathVariable("ticketId") final String ticketId) throws CMSItemNotFoundException{
