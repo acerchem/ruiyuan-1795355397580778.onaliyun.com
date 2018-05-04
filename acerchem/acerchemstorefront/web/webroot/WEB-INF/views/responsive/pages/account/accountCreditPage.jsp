@@ -23,7 +23,7 @@
             		<tr>
             			<td align="right" style="color: #999;">Creadit Remained Amount</td>
             			<td align="left" style="color: #333;">${customerCreditAccountData.creaditRemainedAmount=="0E-8"?"0":customerCreditAccountData.creaditRemainedAmount}</td>
-            			<td align="right" style="color: #999;">Billing Interval</td>
+            			<td align="right" style="color: #999;">Payment Term</td>
             			<td align="left" style="color: #333;">${customerCreditAccountData.billingInterval}</td>
             		</tr>
             	</table>
@@ -36,9 +36,9 @@
 					<tr>
 						<th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Order Code</th>
 						<th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Product Quantity</th>
-						<th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Creadit Used Amount</th>
-						<th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Should Payback Time</th>
-						<th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Payback Amount</th>
+						<th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Invoice Amount</th>
+						<th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Due Date</th>
+						<th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Paid</th>
 						<th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Payback Time</th>
 						<th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Is Payback</th>
 						
@@ -67,7 +67,7 @@
 									${trans.paybackTime}
 								</td>
 								<td style="padding:10px 10px;font-size:14px;">
-									${trans.isPayback}
+									${trans.isPayback?"yes":"no"}
 								</td>
 							</ycommerce:testId>
 						</tr>
