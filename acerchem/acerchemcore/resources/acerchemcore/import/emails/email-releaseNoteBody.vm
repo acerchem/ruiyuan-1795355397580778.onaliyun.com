@@ -224,6 +224,7 @@ p.western {
 			</tr>
 			
 			#end
+			#end
 			#if(${ctx.append.totalData})
 			<tr class="table2">
 			  <td colspan="3" width="383" height="27" > TOTAL
@@ -234,7 +235,7 @@ p.western {
 			</tr>
 			#end
 			
-		#end
+		
 	  </table>
   #end
 </center>

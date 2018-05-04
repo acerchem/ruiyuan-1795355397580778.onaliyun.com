@@ -1,15 +1,16 @@
 package com.acerchem.core.web.aliyun;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
-import java.io.BufferedReader;
 import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.UUID;
 
 import com.aliyun.oss.ClientException;
 import com.aliyun.oss.OSSClient;
@@ -23,13 +24,6 @@ import com.aliyun.oss.model.OSSObjectSummary;
 import com.aliyun.oss.model.ObjectAcl;
 import com.aliyun.oss.model.ObjectListing;
 import com.aliyun.oss.model.PutObjectRequest;
-
-import de.hybris.platform.servicelayer.config.ConfigurationService;
-
-import java.util.UUID;
-
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 
 /**
  * 上传文件
@@ -322,6 +316,9 @@ public class UploadFileDefault {
 		String temp_ = df.format(new Date());
 		System.out.println(temp_);
 
+		
+		initializeParameters("https://oss-us-east-1.aliyuncs.com","LTAIuleTEtEf4JnB","7WFdsSmV878UcAMUIlRfWF3RzJed2M","acerchem-r");
+		
 		String key = preffixKey + "/" + temp_ + "/" + UUID.randomUUID().toString().replaceAll("-", "");
 		// 59ddcd8cN50a50637.jpg
 		// 5a01a250N56caf7f6.jpg

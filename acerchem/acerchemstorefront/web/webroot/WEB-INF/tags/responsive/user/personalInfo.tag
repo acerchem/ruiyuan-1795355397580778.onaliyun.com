@@ -5,6 +5,7 @@
 <spring:url value="/my-account/address-book" var="addressBookUrl"/>
 <spring:url value="/my-account/update-password" var="updatePasswordUrl"/>
 <%-- <spring:url value="/my-account/payment-details" var="paymentDetailsUrl"/> --%>
+<spring:url value="/account/personal-tickets" var="ticketsUrl"/>
 <spring:url value="/my-account/credit" var="creditUrl"/>
 <spring:url value="/logout" var="logoutUrl"/>
 
@@ -23,10 +24,11 @@
 		<ul>
 			<li class="${nowPage=='orders'?'now':''}"><a href="${ordersUrl}" class="icons order-icons">Order History <i>${searchPageData.pagination.totalNumberOfResults}</i></a></li>
 			<li class="${nowPage=='update-profile'?'now':''}"><a href="${infoUrl}" class="icons personal-icons">Personal Information</a></li>
+			<li class="${nowPage=='credit'?'now':''}"><a href="${creditUrl}" class="icons personal-icons">Credit Account</a></li>
 			<li class="${nowPage=='address-book'?'now':''}"><a href="${addressBookUrl}" class="icons address-icons">Address Book</a></li>
 			<li class="${nowPage=='update-password'?'now':''}"><a href="${updatePasswordUrl}" class="icons modify-icons">Modify The Password</a></li>
 			<%-- <li class="${nowPage=='payment-details'?'now':''}"><a href="${paymentDetailsUrl}" class="icons modify-icons">Payment Details</a></li> --%>
-			<li class="${nowPage=='credit'?'now':''}"><a href="${creditUrl}" class="icons modify-icons">Credit Account</a></li>
+			<li class="${nowPage=='tickets'?'now':''}"><a href="${ticketsUrl}" class="icons order-icons">Tickets</a></li>
 		</ul>
 	</div>
 
