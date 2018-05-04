@@ -17,8 +17,8 @@ public class CustomRegisterForm implements Serializable
 	private String currency;
 	private String language;
 	private String telephone;
-	private String mobileNumber;
-	private String contacts;
+	//private String mobileNumber;
+	//private String contacts;
 	private AddressForm shipAddress;
 	private AddressForm contactAddress;
 	
@@ -185,7 +185,7 @@ public class CustomRegisterForm implements Serializable
 		this.language = language;
 	}
 
-	public String getContacts()
+	/*public String getContacts()
 	{
 		return contacts;
 	}
@@ -193,7 +193,7 @@ public class CustomRegisterForm implements Serializable
 	public void setContacts(final String contacts)
 	{
 		this.contacts = contacts;
-	}
+	}*/
 
 	public String getTelephone()
 	{
@@ -205,7 +205,7 @@ public class CustomRegisterForm implements Serializable
 		this.telephone = telephone;
 	}
 
-	public String getMobileNumber()
+	/*public String getMobileNumber()
 	{
 		return mobileNumber;
 	}
@@ -213,7 +213,7 @@ public class CustomRegisterForm implements Serializable
 	public void setMobileNumber(final String mobileNumber)
 	{
 		this.mobileNumber = mobileNumber;
-	}
+	}*/
 
 }
 
