@@ -89,7 +89,8 @@
 				<wz:navigation id="step1.navigation">
 					<wz:cancel/>
 					<wz:done>
-						<wz:save property="newConsignmentEntry"/>
+						<!-- <wz:save property="newConsignmentEntry"/> -->
+						<wz:custom label="done" visible="true" handler="acerchemSaveConsignmentHandler"/>
 					</wz:done>
 				</wz:navigation>
 			</wz:step>
@@ -563,7 +564,7 @@
         <advanced-search:advanced-search>
             <advanced-search:field-list>
             		<advanced-search:field name="unAudited" selected="true"/>
-            		<list-view:column qualifier="type"/>
+            		<advanced-search:field name="type" selected="true"/>
             </advanced-search:field-list>
         </advanced-search:advanced-search>
     </context>
