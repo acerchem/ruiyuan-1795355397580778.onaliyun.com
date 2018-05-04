@@ -32,7 +32,7 @@
 			<form:form method="post" commandName="supportTicketForm" id="supportTicketForm" class="both" action="${url}">
 				<div>
 					<label> 
-						<span class='label-title'>Your Name</span> 
+						<span class='label-title'>Your Name<span style="color:red;font-size: 100%;"> *</span></span> 
 						<input type="text" name='yourname' value="${supportTicketForm.yourname}" alt='Please Enter Your Name' class="required">
 						<div style="color: #F00"><form:errors path="yourname" /></div>
 					</label> 
@@ -45,7 +45,7 @@
 					</label>
 					
 					<label> 
-						<span class='label-title'>Telephone / Mobile Phone</span> 
+						<span class='label-title'>Telephone / Mobile Phone<span style="color:red;font-size: 100%;"> *</span></span> 
 						<input type="text" name="telephone" value="${supportTicketForm.telephone}" alt='Please Enter Telephone' class="required">
 						<div style="color: #F00"><form:errors path="telephone" /></div>
 					</label> 
@@ -59,7 +59,7 @@
 						</div>
 					</label> 
 					<label> 
-						<span class='label-title'>Shipping Address</span>
+						<span class='label-title'>Shipping Address<span style="color:red;font-size: 100%;"> *</span></span>
 						<input type="text" name='address' value="${supportTicketForm.address}" alt='Please Enter Address' class="required">
 						<div style="color: #F00">
 							<form:errors path="address" />
@@ -67,13 +67,13 @@
 
 					</label> 
 					<label> 
-						<span class='label-title'>Email</span> 
+						<span class='label-title'>Email<span style="color:red;font-size: 100%;"> *</span></span> 
 						<input type="text" name="email" value="${supportTicketForm.email }" alt='Please Enter Email' class="required">
 						<div style="color: #F00">
 							<form:errors path="email" />
 						</div>
 					</label> 
-					<span class=''>message</span>
+					<span class=''>message<span style="color:red;font-size: 100%;"> *</span></span>
 					<textarea id="message" name="message" alt='Please Enter message' class="required"> </textarea>
 					<div style="color: #F00">
 						<form:errors path="message" />
