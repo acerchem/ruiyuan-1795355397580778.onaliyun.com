@@ -30,6 +30,15 @@ public class CustomRegisterForm implements Serializable
 	private String vatNo;
 	private boolean haveFinancialReport;
 	private boolean provideTradeReference;
+	private String companyName;
+	
+	public String getCompanyName() {
+		return companyName;
+	}
+
+	public void setCompanyName(String companyName) {
+		this.companyName = companyName;
+	}
 	
 	public String getCompanyType() {
 		return companyType;
