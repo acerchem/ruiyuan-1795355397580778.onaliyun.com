@@ -199,8 +199,6 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 				subAmount += amount.doubleValue();
 				list.add(pie);
 
-				//add moneyToWords
-				this.moneyToWords = AcerChemEmailContextUtils.getMoneyOfWord(String.valueOf(totalAmount),"$");
 				// warehouse
 				if (StringUtils.isBlank(warehouse)) {
 					//String warehouseCode = orderEntry.getWarehouseCode();
@@ -219,6 +217,10 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 
 		pojo.setProductLists(list);
 
+
+		//add moneyToWords
+		this.moneyToWords = AcerChemEmailContextUtils.getMoneyOfWord(String.valueOf(totalAmount),"$");
+		
 		// add total
 
 		 ProductTotalDataOfEmail totalData = new ProductTotalDataOfEmail();

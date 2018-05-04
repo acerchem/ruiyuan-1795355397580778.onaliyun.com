@@ -46,19 +46,19 @@
 					</div>
 				</td>
 				<td class="tot">
-				<c:choose>
-				     <c:when test="${not empty entry.promotionBasePrice}">
+				<%-- <c:choose>
+				     <c:when test="${entry.promotionBasePrice ne entry.basePrice}">
 						<em>
 						<format:price priceData="${entry.promotionBasePrice}" displayFreeForZero="true"/>
 						</em>
 						<i><format:price priceData="${entry.basePrice}" displayFreeForZero="true"/></i>
 					</c:when>
-					  <c:otherwise>
+					  <c:otherwise> --%>
 					      <em>
 						<format:price priceData="${entry.basePrice}" displayFreeForZero="true"/>
 						</em>
-					  </c:otherwise>
-				</c:choose>	
+					<%--   </c:otherwise>
+				</c:choose>	 --%>
 				</td>
 				
 				

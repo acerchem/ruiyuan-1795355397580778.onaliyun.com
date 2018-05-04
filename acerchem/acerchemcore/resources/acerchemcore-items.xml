@@ -164,7 +164,16 @@
 					optional="true" />
 			</targetElement>
 		</relation>
-
+        
+        <!-- 客户和信用账户关系建立 -->
+		<relation code="CreditAccount2Customer" generate="true" localized="false" autocreate="true">
+			<sourceElement qualifier="creditAccount" type="CustomerCreditAccount" cardinality="one" >
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement qualifier="customer" type="Customer" cardinality="many" collectiontype="list" ordered="true">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</targetElement>
+		</relation>
 
 	</relations>
 
@@ -480,6 +489,11 @@
                     <modifiers read="true" write="true" search="true" optional="true"/>
                     <description>资质文件</description>
                 </attribute>
+                
+                <attribute qualifier="certificatess" type="MediaCollection">
+					<modifiers read="true" write="true" search="true" optional="true"/>
+					<persistence type="property"/>
+				</attribute>
 
 
 				</attributes>
@@ -714,18 +728,18 @@
 
 			<itemtype code="Customer" autocreate="false" generate="false">
 				<attributes>
-					<attribute qualifier="creditAccount" type="CustomerCreditAccount">
-						<modifiers read="true" write="true" search="true" />
-						<persistence type="property" />
-					</attribute>
 					<attribute qualifier="area" type="CustomerArea">
 						<description>用户区域</description>
 						<modifiers read="true" write="true" search="true"
 							optional="true" />
 						<persistence type="property" />
 					</attribute>
-
-					<!-- add by alice -->
+                    <attribute qualifier="companyName" type="java.lang.String">
+						<modifiers read="true" write="true" search="true"
+							optional="true" />
+						<persistence type="property" />
+						<description>Name of Company</description>
+					</attribute>
 					<attribute qualifier="companyType" type="java.lang.String">
 						<modifiers read="true" write="true" search="true"
 							optional="true" />
@@ -763,14 +777,12 @@
 						<defaultvalue>Boolean.FALSE</defaultvalue>
 						<persistence type="property" />
 					</attribute>
-
 					<attribute qualifier="provideTradeReference" type="java.lang.Boolean">
 						<description>Can you provide any trade reference for Acerchem?</description>
 						<modifiers read="true" write="true" search="true" />
 						<persistence type="property" />
 						<defaultvalue>Boolean.FALSE</defaultvalue>
 					</attribute>
-					<!-- end -->
                     <attribute qualifier="employee" type="Employee">
 						<modifiers read="true" write="true" search="true"/>
 						<persistence type="property" />

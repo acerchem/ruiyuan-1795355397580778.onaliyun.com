@@ -23,6 +23,8 @@
 		<property name="unitName" type="String" />
 		<property name="certificates" type="com.acerchem.facades.product.data.CertificatesData"/>
 		
+		<property name="certificatess" type="java.util.List&lt;com.acerchem.facades.product.data.CertificatessData>"/>
+		
 		<property name="vendor" type="com.acerchem.facades.product.data.VendorData"/>
 
 	</bean>
@@ -76,6 +78,7 @@
 		<property name="creditAccount"
 			type="de.hybris.platform.commercefacades.user.data.CustomerCreditAccountData" />
 		<property name="companyType" type="java.lang.String" />
+		<property name="companyName" type="java.lang.String" />
 		<property name="establishedIn" type="java.lang.String" />
 		<property name="vatNo" type="java.lang.String" />
 		<property name="haveFinancialReport" type="java.lang.Boolean" />
@@ -221,7 +224,14 @@
 
 	</bean>
 	
-		<bean class="com.acerchem.facades.product.data.CertificatesData">
+	<bean class="com.acerchem.facades.product.data.CertificatesData">
+		<property name="url" type="String"/>
+		<property name="altText" type="String"/>
+		<property name="galleryIndex" type="Integer"/>
+	</bean>
+	
+	
+	<bean class="com.acerchem.facades.product.data.CertificatessData">
 		<property name="url" type="String"/>
 		<property name="altText" type="String"/>
 		<property name="galleryIndex" type="Integer"/>

@@ -344,7 +344,7 @@
 				<!-- end -->
 
 				<!-- Final Review -->
-				<div class="g-table">
+				<!-- <div class="g-table">
 					<div class="g-title">
 						<span>Invoice</span>
 					</div>
@@ -407,7 +407,7 @@
 					</div>
 					new end			
 					</div>
-				</div>
+				</div> -->
 				<!-- end -->
 
 			</div>
@@ -786,7 +786,7 @@ $(document).ready(function() {
     	//alert(this.value);
     	
     	var  pm = this.value;
-    	window.location.href ='<c:url value='/checkout/multi/payment-method/choose?selectedPaymentMethodId='/>'+pm;
+    	window.location.href ='<c:url value='/checkout/multi/summary/choose?selectedPaymentMethodId='/>'+pm;
     });
 });
 

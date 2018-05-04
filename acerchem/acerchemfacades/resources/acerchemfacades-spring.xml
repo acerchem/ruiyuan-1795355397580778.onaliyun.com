@@ -194,8 +194,8 @@
 		<property name="populators">
 			<list merge="true">
 				<ref bean="productAcerchemPopulator"/>
-				<ref bean="productCertificatesImagePopulator"/>
-			</list>
+<!-- 				<ref bean="productCertificatesImagePopulator"/>
+ -->			</list>
 		</property>
 	</bean>
 	
@@ -211,14 +211,14 @@
 	</bean> -->
 	
 	
-	<alias name="defaultAcerchemCertificatesPopulator" alias="acerchemCertificatesPopulator"/>
+	<!-- <alias name="defaultAcerchemCertificatesPopulator" alias="acerchemCertificatesPopulator"/>
 	<bean id="defaultAcerchemCertificatesPopulator"
 			class="com.acerchem.facades.populators.AcerchemCertificatesPopulator"/>
 			
 			
 	<alias name="defaultCertificatesConverter" alias="certificatesConverter"/>
 	<bean id="defaultCertificatesConverter" parent="abstractPopulatingConverter">
-		<property name="targetClass" value="com.acerchem.facades.product.data.CertificatesData"/>
+		<property name="targetClass" value="com.acerchem.facades.product.data.CertificatessData"/>
 		<property name="populators">
 			<list>
 				<ref bean="acerchemCertificatesPopulator"/>
@@ -232,7 +232,7 @@
 		
 		<property name="certificatesConverter" ref="certificatesConverter"/>
 	
-	</bean>
+	</bean> -->
 	
 	<!-- add by alice -->
 	<alias name="yacceleratorProductPricePopulator1" alias="productPricePopulator" />

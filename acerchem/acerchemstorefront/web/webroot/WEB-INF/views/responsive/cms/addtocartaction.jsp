@@ -5,6 +5,7 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="ycommerce" uri="http://hybris.com/tld/ycommercetags"%>
 <%@ taglib prefix="product" tagdir="/WEB-INF/tags/responsive/product" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags"%>
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
@@ -12,6 +13,8 @@
 
 <product:addToCartTitle/>
 
+ <sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')" >
+ 
 <form:form id="addToCartForm" method="post"  class="add_to_cart_form" action="${addToCartUrl}">
 	
 	<input type="hidden" maxlength="3" size="1" id="qty" name="qty"  value="1">
@@ -26,11 +29,10 @@
     </c:forEach>
                         
     
-    
-    
 <div class="btn-set">
-	   <!--  <button class="btn btn-submit">Check Out</button> -->
+
 <c:if test="${empty showAddToCart ? true : showAddToCart}">
+
 	<c:set var="buttonType">button</c:set>
 	<c:if test="${product.stock.stockLevelStatus.code ne 'outOfStock' }">
 		<c:set var="buttonType">submit</c:set>
@@ -38,20 +40,38 @@
 	<c:choose>
 	
 		<c:when test="${fn:contains(buttonType, 'button')}">
-			<button type="${buttonType}" class="btn btn-cart" disabled="disabled">
+			<button type="${buttonType}" class="btn btn-submit" disabled="disabled">
 				Add to Cart
 			</button>
 		</c:when>
 		<c:otherwise>
 			<ycommerce:testId code="addToCartButton">
-				<button id="addToCartButton" type="${buttonType}" class="btn btn-cart" >
+				<button id="addToCartButton" type="${buttonType}" class="btn btn-submit" >
 					Add to Cart
 				</button>
 			</ycommerce:testId>
 		</c:otherwise>
 	
 	</c:choose>
+	
 </c:if>
+	
+ <button class="btn btn-cart"  style="display: none;">Check Out</button>
 	</div>
 </form:form>
+
+ </sec:authorize>
+
+<sec:authorize access="hasAnyRole('ROLE_ANONYMOUS')" >
+	<div class="btn-set">
+		<!-- <button  id="logoutId"   class="btn">
+			Add to Cart
+		</button> -->
+		
+		<a class="btn"  href="${addToCartUrl}">Add to Cart</a>
+	</div>
+	
+</sec:authorize>
+
+
 

@@ -31,6 +31,7 @@ public class AcerchemCustomerPopulator extends CustomerPopulator implements Popu
 			target.setCreditAccount(creditAccountConverter.convert(source.getCreditAccount()));
 		}
 		target.setCompanyType(source.getCompanyType());
+		target.setCompanyName(source.getCompanyName());
 		target.setEstablishedIn(source.getEstablishedIn());
 		target.setRevenue(source.getRevenue());
 		target.setEmployeesNo(source.getEmployeesNo());

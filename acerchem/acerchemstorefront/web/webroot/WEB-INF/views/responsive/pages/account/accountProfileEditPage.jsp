@@ -11,13 +11,19 @@
 <div class="rigcont">
     <form:form method="post" commandName="customRegisterForm" class="both" id="personal" action="${action}">
 		<label>
-			<span class='label-title' style="font-weight:normal;">Email</span>	
-			<input type="text" value="${customRegisterForm.email}"  alt='Please Enter Email' disabled="disabled" class="required"/>
+			<span class='label-title' style="font-weight:normal;">Email<span style="color:red;font-size: 100%;"> *</span></span>	
+			<input type="text" value="${customRegisterForm.email}" disabled="disabled"/>
 			<div style="color:#F00"><form:errors path="email"/></div>
 		</label>
 		
 		<label>
-			<span class='label-title' style="font-weight:normal;">Your Name</span>	
+			<span class='label-title' style="font-weight:normal;">Company Name<span style="color:red;font-size: 100%;"> *</span></span>	
+			<input type="text" value="${customRegisterForm.companyName}" disabled="disabled"/>
+			<div style="color:#F00"><form:errors path="companyName"/></div>
+		</label>
+		
+		<label>
+			<span class='label-title' style="font-weight:normal;">Your Name<span style="color:red;font-size: 100%;"> *</span></span>	
 			<input id="register.name" type="text" name='name' value="${customRegisterForm.name}"  alt='Please Enter Your Name' class="required"/>
 			<div style="color:#F00"><form:errors path="name"/></div>
 		</label>
@@ -25,7 +31,7 @@
 		<label>
 			<div class="flex-wrap select-wrap">
 				<div class="flex">
-					<span class='label-title' style="font-weight:normal;">Currency</span>	
+					<span class='label-title' style="font-weight:normal;">Currency<span style="color:red;font-size: 100%;"> *</span></span>	
 					<div class="selbox">
 						<select name="currency" id="register.currency">
 							<c:forEach items="${currencies}" var="curr">
@@ -38,7 +44,7 @@
 					</div>	
 				</div>
 				<div class="flex">
-					<span class='label-title' style="font-weight:normal;">Language</span>	
+					<span class='label-title' style="font-weight:normal;">Language<span style="color:red;font-size: 100%;"> *</span></span>	
 					<div class="selbox">
 						<select name="language" id="register.language">
 							<c:forEach items="${languages}" var="lang">
@@ -62,16 +68,16 @@
 			</div>
 		</label>
 		
-		<label>
+		<%-- <label>
 			<span class='label-title' style="font-weight:normal;">Contacts</span>	
 			<input id="register.contacts" type="text" name='contacts' value="${customRegisterForm.contacts}" alt='Please Enter Contacts Name' class="required"/>
 			<div style="color:#F00"><form:errors path="contacts"/></div>
-		</label>
+		</label> --%>
 		
 		<label>
 			<div class="flex-wrap select-wrap">
 				<div class="flex">		
-					<span class='label-title' style="font-weight:normal;">Contact Address</span>	
+					<span class='label-title' style="font-weight:normal;">Contact Address<span style="color:red;font-size: 100%;"> *</span></span>	
 					<div class="selbox" id="selectContactCountry" data-address-code="${fn:escapeXml(addressData.id)}" data-country-iso-code="${fn:escapeXml(addressData.country.isocode)}">
 						<formElement:customSelectBox idKey="register.contactAddressCountry" labelKey="address.country" path="contactAddress.countryIso" mandatory="true" skipBlank="false" skipBlankMessageKey="address.country" items="${countries}" itemValue="isocode" selectedValue="${customRegisterForm.contactAddress.countryIso}"/>
 						<div style="color:#F00"><form:errors path="contactAddress.countryIso"/></div>
@@ -147,6 +153,7 @@
 		</label>
 		
 		<input type="hidden" name='email' value="${customRegisterForm.email}"/>
+		<input type="hidden" name='companyName' value="${customRegisterForm.companyName}"/>
 		<input type="hidden" name="contactAddress.addressId" value="${customRegisterForm.contactAddress.addressId}" />
 	</form:form>
 	<div class="btn-set">	

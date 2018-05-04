@@ -16,6 +16,7 @@ import com.acerchem.facades.facades.AcerchemCustomerFacade;
 import com.acerchem.storefront.controllers.ControllerConstants;
 import com.acerchem.storefront.data.AcerchemAddToCartForm;
 import de.hybris.platform.acceleratorfacades.product.data.ProductWrapperData;
+import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.AbstractController;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.acceleratorstorefrontcommons.forms.AddToCartOrderForm;
@@ -41,11 +42,15 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.util.*;
 
@@ -82,7 +87,8 @@ public class AddToCartController extends AbstractController
 	@Resource(name = "defaultAcerchemCheckoutFacade")
 	private AcerchemCheckoutFacade acerchemCheckoutFacade;
 
-	@RequestMapping(value = "/cart/add", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value = "/cart/add", method = RequestMethod.POST)
+	@RequireHardLogIn
 	public String addToCart(@RequestParam("productCodePost") final String code, final Model model,
 							@Valid final AcerchemAddToCartForm form, final BindingResult bindingErrors)
 	{
@@ -152,6 +158,19 @@ public class AddToCartController extends AbstractController
 		model.addAttribute("product", productFacade.getProductForCodeAndOptions(code, Arrays.asList(ProductOption.BASIC)));
 
 		return ControllerConstants.Views.Fragments.Cart.AddToCartPopup;
+	}
+	
+	
+	
+	@RequestMapping(value = "/cart/add", method = RequestMethod.GET)
+	@RequireHardLogIn
+	public String addToCart(@RequestHeader(value = "referer", required = false) final String referer,
+			@RequestParam(value = "error", defaultValue = "false") final boolean loginError, final Model model,
+			final HttpServletRequest request, final HttpServletResponse response, final HttpSession session)
+	{
+		return ControllerConstants.Views.Pages.Account.AccountLoginPage;
+
+		
 	}
 
 	protected String getViewWithBindingErrorMessages(final Model model, final BindingResult bindingErrors)

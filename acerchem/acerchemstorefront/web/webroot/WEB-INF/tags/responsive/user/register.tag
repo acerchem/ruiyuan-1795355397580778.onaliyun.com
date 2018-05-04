@@ -19,7 +19,7 @@
 		<img src="${themeResourcePath}/css/acerchem.png" alt="acerchem"/>
 	</a>
 </div>
-<div class="sign-content regular-content" id="login">
+<div class="sign-content" style="width: 600px;" id="login"><!--  regular-content -->
 	<div class="title">
 		Create An Account
 	</div>
@@ -27,48 +27,42 @@
 		For a fast checkout, easy access to previous orders, and the adility to create an address book and store settings. Register below
 	</div>
 	
-	<form:form method="post" commandName="customRegisterForm" name="customRegisterForm" class="both" action="${action}">
+	<form:form method="post" commandName="customRegisterForm" name="customRegisterForm"  action="${action}">
 	
 		<label>
-			<span class='label-title'>Email</span>	
+			<span class='label-title'>Email<span style="color:red;font-size: 150%;"> *</span></span>	
 			<input id="email" type="text" name='email' value="${customRegisterForm.email}"  alt='Please Enter Email' class="required">
 			<div style="color:#F00"><form:errors path="email"/></div>
 		</label>
 
-		<label>
-			<span class='label-title'>Name</span>	
+		<%-- <label>
+			<span class='label-title'>Nickname<span style="color:red;font-size: 150%;"> *</span></span>	
 			<input id="contacts" type="text" name='contacts' value="${customRegisterForm.contacts}" alt='Please Enter Contacts Name' class="required">
 			<div style="color:#F00"><form:errors path="contacts"/></div>
-		</label>
+		</label> --%>
+		
+		<%-- <label>
+			<span class='label-title'>Mobile Number<span style="color:red;font-size: 150%;"> *</span></span>	
+			<input type="text" name='mobileNumber' id="mobileNumber" value="${customRegisterForm.mobileNumber}" alt='Please Enter Mobile Phone' class="required"/>
+			<div style="color:#F00"><form:errors path="mobileNumber"/></div>
+		</label> --%>
 		
 		<label>
-			<span class='label-title'>password</span>	
+			<span class='label-title'>Password<span style="color:red;font-size: 150%;"> *</span></span>	
 			<input id="pwd" type="password" name='pwd'  alt='Please Enter Password' value="${customRegisterForm.pwd}" autocomplete="off" class="required"/>
 			<div style="color:#F00"><form:errors path="pwd"/></div>
 		</label>
 		
 		<label>
-			<span class='label-title'>checkPwd</span>	
+			<span class='label-title'>Re-enter Password<span style="color:red;font-size: 150%;"> *</span></span>	
 			<input id="checkPwd" type="password" name='checkPwd' autocomplete="off" value="${customRegisterForm.checkPwd}" alt='Please Enter checkPwd' class="required"/>
 			<div style="color:#F00"><form:errors path="checkPwd"/></div>
 		</label>
 		
 		<label>
-			<span class='label-title'>Nickname</span>	
-			<input id="name" type="text" name='name' value="${customRegisterForm.name}"  alt='Please Enter Your Name' class="required"/>
-			<div style="color:#F00"><form:errors path="name"/></div>
-		</label>
-
-		<label>
-			<span class='label-title'>Telephone</span>	
-			<input id="telephone" type="text" name='telephone' value="${customRegisterForm.telephone}" alt='Please Enter Telephone' class="required"/>
-			<div style="color:#F00"><form:errors path="telephone"/></div>
-		</label>
-		
-		<label>
 			<div class="flex-wrap select-wrap">
 				<div class="flex">
-					<span class='label-title'>Currency</span>	
+					<span class='label-title'>Currency<span style="color:red;font-size: 150%;"> *</span></span>	
 					<div class="selbox">
 							<select name="currency" id="currency">
 								<c:forEach items="${currencies}" var="curr">
@@ -81,7 +75,7 @@
 					</div>	
 				</div>
 				<div class="flex">
-					<span class='label-title'>Language</span>	
+					<span class='label-title'>Language<span style="color:red;font-size: 150%;"> *</span></span>	
 					<div class="selbox">
 							<select name="language" id="language">
 								<c:forEach items="${languages}" var="lang">
@@ -104,39 +98,27 @@
 				</div>
 			</div>
 		</label>
-
+		
 		<label>
-			<span class='label-title'>Mobile Number</span>	
-			<input type="text" name='mobileNumber' id="mobileNumber" value="${customRegisterForm.mobileNumber}" alt='Please Enter Mobile Phone' class="required"/>
-			<div style="color:#F00"><form:errors path="mobileNumber"/></div>
+			<span class='label-title'>Company Name<span style="color:red;font-size: 150%;"> *</span></span>	
+			<input id="companyName" type="text" name='companyName' value="${customRegisterForm.companyName}" alt='Please Enter Company Name' class="required"/>
+			<div style="color:#F00"><form:errors path="companyName"/></div>
 		</label>
 		
 		<label>
-			<span class='label-title'>Shipping Address</span>	
-			<div class="flex-wrap">
-				<div class="flex">					
-					<div class="selbox">
-						<div id="selectShipCountry" data-address-code="${fn:escapeXml(addressData.id)}" data-country-iso-code="${fn:escapeXml(addressData.country.isocode)}" class="form-group">
-							<formElement:customSelectBox idKey="shipAddress.countryIso" labelKey="address.country" path="shipAddress.countryIso" mandatory="true" skipBlank="false" skipBlankMessageKey="address.country" items="${countries}" itemValue="isocode" selectedValue="${customRegisterForm.shipAddress.countryIso}"/>
-							<div style="color:#F00"><form:errors path="shipAddress.countryIso"/></div>
-						</div>
-					</div>
-				</div>
-				<div class="flex">					
-					<div class="selbox">	
-						<div id="showShipRegions" class="showShipRegions">
-							<formElement:customSelectBox idKey="shipAddress.regionIso" labelKey="address.province" path="shipAddress.regionIso" mandatory="true" skipBlank="false" skipBlankMessageKey="address.selectProvince" items="${regions}" itemValue="${useShortRegionIso ? 'isocodeShort' : 'isocode'}" selectedValue="${customRegisterForm.shipAddress.regionIso}"/>
-							<div style="color:#F00"><form:errors path="shipAddress.regionIso"/></div>
-						</div>
-					</div>	
-				</div>
-			</div>
-			<input type="text" id="shipAddress.townCity" name='shipAddress.townCity' value="${customRegisterForm.shipAddress.townCity}" placeholder="Detailed address" alt='Please Enter Shipping Detailed Address' class="lab-row required"/>
-			<div style="color:#F00"><form:errors path="shipAddress.townCity"/></div>
+			<span class='label-title'>Your Name<span style="color:red;font-size: 150%;"> *</span></span>	
+			<input id="name" type="text" name='name' value="${customRegisterForm.name}"  alt='Please Enter Your Name' class="required"/>
+			<div style="color:#F00"><form:errors path="name"/></div>
 		</label>
 
 		<label>
-			<span class='label-title'>Contact Address</span>	
+			<span class='label-title'>Telephone<span style="color:red;font-size: 150%;"> *</span></span>	
+			<input id="telephone" type="text" name='telephone' value="${customRegisterForm.telephone}" alt='Please Enter Telephone' class="required"/>
+			<div style="color:#F00"><form:errors path="telephone"/></div>
+		</label>
+
+		<label>
+			<span class='label-title'>Contact Address<span style="color:red;font-size: 150%;"> *</span></span>	
 			<div class="flex-wrap">
 				<div class="flex">					
 					<div class="selbox">
@@ -159,22 +141,46 @@
 			<div style="color:#F00"><form:errors path="contactAddress.townCity"/></div>
 		</label>
 		
+		<label>
+			<span class='label-title'>Shipping Address<span style="color:red;font-size: 150%;"> *</span></span>	
+			<div class="flex-wrap">
+				<div class="flex">					
+					<div class="selbox">
+						<div id="selectShipCountry" data-address-code="${fn:escapeXml(addressData.id)}" data-country-iso-code="${fn:escapeXml(addressData.country.isocode)}" class="form-group">
+							<formElement:customSelectBox idKey="shipAddress.countryIso" labelKey="address.country" path="shipAddress.countryIso" mandatory="true" skipBlank="false" skipBlankMessageKey="address.country" items="${countries}" itemValue="isocode" selectedValue="${customRegisterForm.shipAddress.countryIso}"/>
+							<div style="color:#F00"><form:errors path="shipAddress.countryIso"/></div>
+						</div>
+					</div>
+				</div>
+				<div class="flex">					
+					<div class="selbox">	
+						<div id="showShipRegions" class="showShipRegions">
+							<formElement:customSelectBox idKey="shipAddress.regionIso" labelKey="address.province" path="shipAddress.regionIso" mandatory="true" skipBlank="false" skipBlankMessageKey="address.selectProvince" items="${regions}" itemValue="${useShortRegionIso ? 'isocodeShort' : 'isocode'}" selectedValue="${customRegisterForm.shipAddress.regionIso}"/>
+							<div style="color:#F00"><form:errors path="shipAddress.regionIso"/></div>
+						</div>
+					</div>	
+				</div>
+			</div>
+			<input type="text" id="shipAddress.townCity" name='shipAddress.townCity' value="${customRegisterForm.shipAddress.townCity}" placeholder="Detailed address" alt='Please Enter Shipping Detailed Address' class="lab-row required"/>
+			<div style="color:#F00"><form:errors path="shipAddress.townCity"/></div>
+		</label>
+		
 		<input type="hidden" id="recaptchaChallangeAnswered" value="${requestScope.recaptchaChallangeAnswered}" />
 		<div class="form_field-elements control-group js-recaptcha-captchaaddon"></div>
 		
 		<label align="center" style="width: calc(100% - 20px);">
 			<input type="checkbox" name="aidField" value="agree"/>
-			<span class="checkbox">By creating an account, you agree to Acerchem<br/></span>
+			<span class="checkbox" style="font-weight: 800;"><a href="https://www.baidu.com">By creating an account, you agree to Acerchem</a><br/></span>
 		</label>
-		<div align="center">
+		<%-- <div align="center">
 			<a href="${loginUrl}">Conditions</a> of Use and <a href="${loginUrl}">Privacy Notice</a>.
-		</div>
+		</div> --%>
 		
 		</form:form>
 		<div class="btn-set">
 			<button type="submit" class="btn btn-submit">Register</button>
 		</div>
-	<div class="link">
+	<div class="link" style="width: 60%;">
 		Already have an account? <a href="${loginUrl}">Sign in </a>
 	</div>
 </div>
@@ -186,7 +192,7 @@
 		<a href="">Privacy Notice</a>
 	</div>
 	<div class="copyright">
-		?1996-2018, Acerchem.com, Inc. or its affiliates 
+		© 1996-2018, Acerchem.com, Inc. or its affiliates 
 	</div>
 </div>
 <script type="text/javascript">
