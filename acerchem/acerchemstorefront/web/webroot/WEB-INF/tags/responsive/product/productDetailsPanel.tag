@@ -217,19 +217,16 @@
 					</div>
 					<ul class="donlist">
 					
-				 <c:if test="${fn:length(product.certificates.url) > 0}">
-						<li>						
-							<a href="${product.certificates.url}" >${product.certificates.altText}</a>
+				 <%-- <c:if test="${fn:length(product.certificates.url) > 0}"> --%>
+				 <c:if test="${product.certificatess ne null}"> 
+					 <c:forEach items="${product.certificatess}" var="data"  varStatus="id"  >
+					 
+				        <li>						
+							<a href="${data.url}" >${data.altText}</a>
 						</li>
-						<li>						
-							<a href="${product.certificates.url}" >${product.certificates.altText}</a>
-						</li>
-						<li>						
-							<a href="${product.certificates.url}" >${product.certificates.altText}</a>
-						</li>
-						<li>						
-							<a href="${product.certificates.url}" >${product.certificates.altText}</a>
-						</li>
+						
+					 </c:forEach>
+						
 					</c:if>
 					</ul>
 					<div class="btn-set line-setbtn">       
@@ -408,11 +405,11 @@
     $(document).ready(function () {
         $('.click_pop').click(function () {
         var proName="${product.name}".replace('%','%25').replace('+','%2B').replace('&','%26');
-        var openUrl = ACC.config.encodedContextPath + "/account/add-support-ticket?productId=${product.code}&productName="+proName;//弹出窗口的url
-         var iWidth=700; //弹出窗口的宽度;
-         var iHeight=700; //弹出窗口的高度;
-         var iTop = (window.screen.availHeight-30-iHeight)/2; //获得窗口的垂直位置;
-         var iLeft = (window.screen.availWidth-10-iWidth)/2; //获得窗口的水平位置;
+        var openUrl = ACC.config.encodedContextPath + "/account/add-support-ticket?productId=${product.code}&productName="+proName;//å¼¹åºçªå£çurl
+         var iWidth=700; //å¼¹åºçªå£çå®½åº¦;
+         var iHeight=700; //å¼¹åºçªå£çé«åº¦;
+         var iTop = (window.screen.availHeight-30-iHeight)/2; //è·å¾çªå£çåç´ä½ç½®;
+         var iLeft = (window.screen.availWidth-10-iWidth)/2; //è·å¾çªå£çæ°´å¹³ä½ç½®;
          window.open(openUrl,"","height="+iHeight+", width="+iWidth+", top="+iTop+",scrollbars=yes,resizable=yes,toolbar=no,location=no, left="+iLeft); 
         });
     })
