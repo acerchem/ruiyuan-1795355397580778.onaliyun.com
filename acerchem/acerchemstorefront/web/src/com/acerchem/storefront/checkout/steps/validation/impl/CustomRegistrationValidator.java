@@ -47,8 +47,11 @@ public class CustomRegistrationValidator implements Validator
 		final String currency = registerForm.getCurrency();
 		final String language = registerForm.getLanguage();
 		final String telephone = registerForm.getTelephone();
-		final String mobileNumber = registerForm.getMobileNumber();
-		final String contacts = registerForm.getContacts();
+		
+		final String companyName = registerForm.getCompanyName();
+		
+		//final String mobileNumber = registerForm.getMobileNumber();
+		//final String contacts = registerForm.getContacts();
 		final AddressForm shipCountry = registerForm.getShipAddress();
 		final AddressForm contactCountry = registerForm.getContactAddress();
 		
@@ -91,8 +94,11 @@ public class CustomRegistrationValidator implements Validator
 		validateNullValue(errors, currency, "currency", "register.currency.invalid");
 		validateNullValue(errors, language, "language", "register.language.invalid");
 		validateNullValue(errors, telephone, "telephone", "register.telephone.invalid");
-		validateNullValue(errors, mobileNumber, "mobileNumber", "register.mobileNumber.invalid");
-		validateNullValue(errors, contacts, "contacts", "register.contacts.invalid");
+		
+		
+		validateNullValue(errors, companyName, "companyName", "register.companyName.invalid");
+		//validateNullValue(errors, mobileNumber, "mobileNumber", "register.mobileNumber.invalid");
+		//validateNullValue(errors, contacts, "contacts", "register.contacts.invalid");
 
 	}
 
