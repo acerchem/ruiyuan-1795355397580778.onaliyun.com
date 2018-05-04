@@ -18,52 +18,66 @@ import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 
+import com.acerchem.facades.product.data.CertificatessData;
+
 import java.util.Collection;
 import java.util.List;
+import java.util.ArrayList;;
 
-import com.acerchem.facades.product.data.CertificatessData;
 
 
 public class ProductCertificatesImagePopulator<SOURCE extends ProductModel, TARGET extends ProductData> 
 extends AbstractProductPopulator<SOURCE, TARGET>
 {
 	
-	private Converter<Collection<MediaModel>,List<CertificatessData>> certificatesConverter;
+	private Converter<MediaModel, CertificatessData> certificatesConverter;
 	
 
 	
-
-
 	/**
 	 * @return the certificatesConverter
 	 */
-	public Converter<Collection<MediaModel>, List<CertificatessData>> getCertificatesConverter() {
+	public Converter<MediaModel, CertificatessData> getCertificatesConverter() {
 		return certificatesConverter;
 	}
-
-
 
 
 
 	/**
 	 * @param certificatesConverter the certificatesConverter to set
 	 */
-	public void setCertificatesConverter(Converter<Collection<MediaModel>, List<CertificatessData>> certificatesConverter) {
+	public void setCertificatesConverter(Converter<MediaModel, CertificatessData> certificatesConverter) {
 		this.certificatesConverter = certificatesConverter;
 	}
-
-
 
 
 
 	@Override
 	public void populate(final SOURCE productModel, final TARGET productData) throws ConversionException
 	{
-		final Collection<MediaModel>  medias = productModel.getCertificatess();
+		//final MediaModel media = productModel.getCertificates();
 		
-		final List<CertificatessData> cas = getCertificatesConverter().convert(medias);
+		final Collection<MediaModel> medias = productModel.getCertificatess();
 		
-		productData.setCertificatess(cas);;
+		List<CertificatessData>  datas = new ArrayList<CertificatessData>();
+		
+		if (medias != null){
+			
+			for(MediaModel media:medias){
+				
+				final CertificatessData data = getCertificatesConverter().convert(media);
+				
+				datas.add(data);
+
+			}
+			
+			productData.setCertificatess(datas);
+			
+		}
+		
+		
+		
+	
 	}
 
 	
