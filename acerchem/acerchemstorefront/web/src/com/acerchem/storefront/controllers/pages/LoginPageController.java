@@ -246,12 +246,8 @@ public class LoginPageController extends AbstractLoginPageController
 			}
 			else
 			{
-				PhoneNumberModel phone=modelService.create(PhoneNumberModel.class);
+				/*PhoneNumberModel phone=modelService.create(PhoneNumberModel.class);
 				phone.setNumber(form.getMobileNumber());
-				
-				PhoneNumberModel tel=modelService.create(PhoneNumberModel.class);
-				tel.setNumber(form.getTelephone());
-				
 				try
 				{
 					modelService.save(phone);
@@ -260,7 +256,10 @@ public class LoginPageController extends AbstractLoginPageController
 				{
 					GlobalMessages.addErrorMessage(model, "form.global.error");
 					bindingResult.rejectValue("mobileNumber", "register.phone.invalid");
-				}
+				}*/
+				
+				PhoneNumberModel tel=modelService.create(PhoneNumberModel.class);
+				tel.setNumber(form.getTelephone());
 				
 				try
 				{
@@ -272,7 +271,7 @@ public class LoginPageController extends AbstractLoginPageController
 					bindingResult.rejectValue("telephone", "register.phone.invalid");
 				}
 				
-				CustomerModel user=RegisterCustomerService(form,model,phone,tel);
+				CustomerModel user=RegisterCustomerService(form,model,tel);
 				userService.setCurrentUser(user);
 				customerAccountService.register(user, form.getPwd());
 				getAutoLoginStrategy().login(form.getEmail().toLowerCase(), form.getPwd(), request, response);
@@ -312,9 +311,8 @@ public class LoginPageController extends AbstractLoginPageController
 		
 	}
 	
-	public CustomerModel RegisterCustomerService(final CustomRegisterForm form,final Model model,final PhoneNumberModel phone,final PhoneNumberModel tel)
+	public CustomerModel RegisterCustomerService(final CustomRegisterForm form,final Model model,final PhoneNumberModel tel)
 	{
-		
 		final CustomerModel user = new CustomerModel();
 		user.setUid(form.getEmail().toLowerCase());
 		user.setName(form.getName());
@@ -329,9 +327,10 @@ public class LoginPageController extends AbstractLoginPageController
 		am.setContactAddress(false);
 		am.setShippingAddress(true);
 		am.setVisibleInAddressBook(true);
-		am.setLastname(form.getContacts());
-		am.setPhone1(form.getMobileNumber());
-		am.setCellphone(form.getMobileNumber());
+		am.setLastname(form.getName());
+		am.setCompany(form.getCompanyName());
+		am.setPhone1(form.getTelephone());
+		am.setCellphone(form.getTelephone());
 		am.setCountry(shipCountry);
 		if(shipRegionIso!=null)
 		{
@@ -347,9 +346,9 @@ public class LoginPageController extends AbstractLoginPageController
 		am2.setContactAddress(true);
 		am2.setShippingAddress(false);
 		am2.setVisibleInAddressBook(false);
-		am2.setLastname(form.getContacts());
-		am2.setPhone1(form.getMobileNumber());
-		am2.setCellphone(form.getMobileNumber());
+		am2.setLastname(form.getName());
+		am2.setPhone1(form.getTelephone());
+		am2.setCellphone(form.getTelephone());
 		am2.setCountry(contactCountry);
 		if(contactRegionIso!=null)
 		{
@@ -362,25 +361,25 @@ public class LoginPageController extends AbstractLoginPageController
 		amlist.add(am);
 		amlist.add(am2);
 		
-		UserPhoneNumberModel pn=modelService.create(UserPhoneNumberModel.class);
+		/*UserPhoneNumberModel pn=modelService.create(UserPhoneNumberModel.class);
 		pn.setPhoneNumber(phone);
-		pn.setType(PhoneType.valueOf("MOBILE"));//HOME\OFFICE\MOBILE
-		pn.setDefault(true);
+		pn.setType(PhoneType.valueOf("MOBILE"));
+		pn.setDefault(true);*/
 		
 		UserPhoneNumberModel pn2=modelService.create(UserPhoneNumberModel.class);
 		pn2.setPhoneNumber(tel);
-		pn2.setType(PhoneType.valueOf("HOME"));
-		pn2.setDefault(false);
+		pn2.setType(PhoneType.valueOf("HOME"));//HOME\OFFICE\MOBILE
+		pn2.setDefault(true);
 		
 		List<UserPhoneNumberModel> phoneNumbers=new ArrayList<UserPhoneNumberModel>();
-		phoneNumbers.add(pn);
+		//phoneNumbers.add(pn);
 		phoneNumbers.add(pn2);
 		
 		CustomerCreditAccountModel ca=modelService.create(CustomerCreditAccountModel.class);
 		ca.setCreaditRemainedAmount(BigDecimal.valueOf(0));
 		ca.setCreditTotalAmount(BigDecimal.valueOf(0));;
 		ca.setStatus(CreditAccountStatusEnum.LOCKED);
-		ca.setBillingInterval(1);
+		ca.setBillingInterval(30);
 		
 		user.setOriginalUid(form.getEmail());
 		user.setSessionLanguage(commonI18NService.getLanguage(form.getLanguage()));
@@ -389,8 +388,9 @@ public class LoginPageController extends AbstractLoginPageController
 		user.setPhoneNumbers(phoneNumbers);
 		user.setPassword(form.getPwd());
 		user.setCreditAccount(ca);
+		user.setCompanyName(form.getCompanyName());
 		
-		modelService.saveAll(user,pn2,pn,am2,am,ca);
+		modelService.saveAll(user,pn2,am2,am,ca);
 		return user;
 	}
 	
