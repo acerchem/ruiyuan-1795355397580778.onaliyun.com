@@ -57,7 +57,7 @@
 								<span>
 									<em>Operate</em>
 									<i>
-										<a href="${confirmOrder}${orderData.code}?confirm=order" style="${!orderData.customerConfirm && (orderData.status=='UNCONFIRMED'||orderData.status=='CHECKED_VALID')?'':'display: none;'}">Confirm Order</a> 
+										<!--<a href="${confirmOrder}${orderData.code}?confirm=order" style="${!orderData.customerConfirm && (orderData.status=='UNCONFIRMED'||orderData.status=='CHECKED_VALID')?'':'display: none;'}">Confirm Order</a> -->
 										<a href="${confirmOrder}${orderData.code}?confirm=receipt" style="${!orderData.customerConfirmDelivery && orderData.status=='UNDELIVERED'?'':'display: none;'}">Confirm Delivery</a>
 										<a href="${confirmOrder}${orderData.code}?confirm=payment" style="${!orderData.customerConfirmPay && orderData.status=='UNPAIED'?'':'display: none;'}">Confirm Payment</a>
 										<a href="${confirmOrder}${orderData.code}?confirm=cancel" style="${canCancel&&orderData.status!='CANCELLED'?'':'display: none;'}" class="cancelOrder">Cancel Order</a>
