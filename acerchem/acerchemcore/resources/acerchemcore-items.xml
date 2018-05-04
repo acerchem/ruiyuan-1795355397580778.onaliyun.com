@@ -91,7 +91,17 @@
 			<value code="UNCONFIRMED" />
 			<value code="UNDELIVERED" />
 		</enumtype>
+		
+		<enumtype code="CustomerType" generate="true"  autocreate="false" dynamic="true">
+			<description>Customer types for checkout</description>
+			<value code="AUDITING" />
+			<value code="APPROVED" />
+			<value code="REJECTED" />
+		</enumtype>
+		
 	</enumtypes>
+	
+		
 
 
 	<relations>
@@ -764,6 +774,12 @@
                     <attribute qualifier="employee" type="Employee">
 						<modifiers read="true" write="true" search="true"/>
 						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="unAudited" type="java.lang.Boolean">
+						<description>是否审核标志</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+						<defaultvalue>Boolean.TRUE</defaultvalue>
 					</attribute>
 				</attributes>
 			</itemtype>

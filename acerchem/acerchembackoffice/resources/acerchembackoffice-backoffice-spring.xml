@@ -20,5 +20,11 @@
   		<property name="location" value="/acerchembackoffice-backoffice-labels/"/>
   		<property name="name" value="labels"/>
   	</bean>
+  	
+  	<bean id="acerchemSaveConsignmentHandler"
+	      class="com.acerchem.handle.AcerchemSaveConsignmentHandler">
+		<property name="modelService" ref="modelService"/>
+	</bean>
+  	
 
 </beans>

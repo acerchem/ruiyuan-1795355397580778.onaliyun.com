@@ -16,10 +16,12 @@ import org.apache.log4j.Logger;
 
 import com.acerchem.core.service.AcerchemStockService;
 
+import de.hybris.platform.commerceservices.event.OrderCancelledEvent;
 import de.hybris.platform.core.enums.OrderStatus;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 import de.hybris.platform.processengine.action.AbstractSimpleDecisionAction;
+import de.hybris.platform.servicelayer.event.EventService;
 
 
 /**
@@ -35,6 +37,19 @@ public class CancelOrderStatusAction extends AbstractSimpleDecisionAction<OrderP
 	
 	@Resource
 	private AcerchemStockService acerchemStockService;
+	
+	@Resource
+	private EventService eventService;
+	
+	public EventService getEventService() {
+		return eventService;
+	}
+
+	public void setEventService(EventService eventService) {
+		this.eventService = eventService;
+	}
+
+
 
 	@Override
 	public Transition executeAction(final OrderProcessModel process) {
@@ -50,6 +65,7 @@ public class CancelOrderStatusAction extends AbstractSimpleDecisionAction<OrderP
 				setOrderStatus(order, OrderStatus.CANCELLED);
 				acerchemStockService.releaseStock(order);
 				LOG.info("--------------------------------end CancelOrderStatusAction----------------------");
+				getEventService().publishEvent(new OrderCancelledEvent(order.getOrderProcess().iterator().next()));
 				return Transition.OK;
 			}
 		}

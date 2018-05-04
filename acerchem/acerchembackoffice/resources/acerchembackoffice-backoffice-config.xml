@@ -78,12 +78,10 @@
 				<wz:assign property="newConsignmentEntry.consignment" value="ctx.parentObject" />
 			</wz:prepare>
 			<wz:step id="step1" label="create.UniasiaConfig.general.label" >
-				<wz:content id="step1.content">
+				<wz:content id="step1.content" merge-mode="replace">
 					<wz:property-list root="newConsignmentEntry">
 						<wz:property qualifier="consignment"  />
 						<wz:property qualifier="orderEntry"  />
-						<wz:property qualifier="creationtime"  />
-						<wz:property qualifier="owner"  />
 						<wz:property qualifier="quantity"  />
 						<wz:property qualifier="batchNum"  />
 					</wz:property-list>
@@ -347,31 +345,22 @@
 	
 	<context merge-by="type" parent="GenericItem" type="Consignment" component="create-wizard"  merge-mode="replace">
 		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="ConsignmentConfigWizard">
-			<wz:prepare id="ConsignmentEntryPrepare">
+			<wz:prepare id="ConsignmentPrepare">
 				<wz:initialize property="consignment" type="ctx.TYPE_CODE" /> 
 				<wz:assign property="consignment.order" value="ctx.parentObject" />
-				<!-- <wz:assign property="consignment.status" value="ctx.parentObject.status" /> -->
-				<!-- <wz:assign property="consignment.creationtime" value="ctx.parentObject.creationtime" /> -->
 			</wz:prepare>
-			<wz:step id="step1" label="create.Consignment.general.label" >
-				<wz:content id="step1.content">
+			<wz:step id="step1" label="create.Consignment.general.label"  merge-mode="replace">
+				<wz:content id="step1.content" merge-mode="replace">
 					<wz:property-list root="consignment">
 						<wz:property qualifier="order"/>
-						<wz:property qualifier="shippingAddress" merge-mode="remove" validate="false"/>
-						<wz:property qualifier="status" validate="false"/>
-						<wz:property qualifier="creationtime" validate="false"/>
-						<wz:property qualifier="consignmentProcesses" validate="false"/>
-						<wz:property qualifier="code" validate="false"/>
-						<wz:property qualifier="owner"  validate="false"/>
-						<wz:property qualifier="namedDeliveryDate"  validate="false"/>
-						<wz:property qualifier="warehouse" validate="false"/>
-						<wz:property qualifier="deliveryMode" validate="false"/>
+						<wz:property qualifier="code"/>
 					</wz:property-list>
 				</wz:content>
 				<wz:navigation id="step1.navigation">
 					<wz:cancel/>
 					<wz:done>
-						<wz:save property="consignment"/>
+						<!-- <wz:save property="consignment"/> -->
+						<wz:custom label="Save" visible="true" handler="acerchemSaveConsignmentHandler"/>
 					</wz:done>
 				</wz:navigation>
 			</wz:step>
@@ -399,5 +388,32 @@
 			</advanced-search:field-list>
 		</advanced-search:advanced-search>
 	</context>
+	
+	
+	<context merge-by="type" component="editorareaactions" parent="Principal" type="Customer">
+		<y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
+				<y:group qualifier="common">
+					<y:label>actiongroup.common</y:label>
+					<y:action action-id="com.acerchem.actions.user.approved" property="currentObject"/>
+					<y:action action-id="com.acerchem.actions.user.rejected" property="currentObject"/>
+				</y:group>
+			</y:actions>
+	</context>
+	
+	<context merge-by="type" parent="User" type="Customer" component="listview">
+		<list-view:list-view>
+			<list-view:column qualifier="unAudited"/>
+			<list-view:column qualifier="type"/>
+		</list-view:list-view>
+	</context>
+	
+	<context merge-by="type" parent="User" type="Customer" component="advanced-search">
+        <advanced-search:advanced-search>
+            <advanced-search:field-list>
+            		<advanced-search:field name="unAudited" selected="true"/>
+            		<list-view:column qualifier="type"/>
+            </advanced-search:field-list>
+        </advanced-search:advanced-search>
+    </context>
 
 </config>
