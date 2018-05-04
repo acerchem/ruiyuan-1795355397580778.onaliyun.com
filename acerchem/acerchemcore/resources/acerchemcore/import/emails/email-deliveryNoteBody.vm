@@ -92,10 +92,6 @@ p.western {
       
     </tr>
     <tr>
-      <td>Shipping: </td>
-     
-    </tr>
-    <tr>
       <td>Consignee: ${ctx.customer.name}</td>
      
     </tr>

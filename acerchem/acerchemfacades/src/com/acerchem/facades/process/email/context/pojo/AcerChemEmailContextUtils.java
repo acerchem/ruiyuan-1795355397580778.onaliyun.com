@@ -280,8 +280,8 @@ public class AcerChemEmailContextUtils {
 	}
 
 	public static void main(String[] args) {
-		String s = "207.998678";
-
+		//String s = "207.998678";
+		String s = "18000.0";
 		s = AcerChemEmailContextUtils.getMoneyOfWord(s, "$");
 
 		System.out.println(s);
