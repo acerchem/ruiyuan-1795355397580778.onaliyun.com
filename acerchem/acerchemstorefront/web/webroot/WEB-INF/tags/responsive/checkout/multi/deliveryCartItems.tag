@@ -112,7 +112,6 @@
 	<a class="btn btn-submit" href="success.html">Place Order</a>
 </div> -->
 
-  <button id="placeOrder" type="submit" class="btn btn-submit" style="background-color: #096735;color:#ffffff;">
 <div class="btn-set">	
   <button id="placeOrder" type="submit" class="btn btn-submit">
       Place Order
