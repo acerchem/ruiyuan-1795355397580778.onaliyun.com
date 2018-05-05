@@ -22,29 +22,29 @@ $storefrontContextRoot=$config-storefrontContextRoot
 
 
 UPDATE ProductPercentageDiscountPromotion;code[unique=true];enabled[default=true][unique=true];messageFired[lang=$lang];name[lang=$lang];
- ;10DiscountCanonEOS450D;;10% 折扣。<br>为您节省了 {2}。;10% 折扣;
+# ;10DiscountCanonEOS450D;;10% 折扣。<br>为您节省了 {2}。;10% 折扣;
 
 
 
 UPDATE AcceleratorProductMultiBuyPromotion;code[unique=true];enabled[default=true][unique=true];messageCouldHaveFired[lang=$lang];messageFired[lang=$lang];name[lang=$lang];
- ;MultiBuyacerchem;;购买 {0,number,integer} 卷胶卷只需 {2} - 再加 {3,number,integer} 卷即可享有;购买 {0,number,integer} 件仅需支付 {2} - 您已节省 {4};多买折扣;
+# ;MultiBuyacerchem;;购买 {0,number,integer} 卷胶卷只需 {2} - 再加 {3,number,integer} 卷即可享有;购买 {0,number,integer} 件仅需支付 {2} - 您已节省 {4};多买折扣;
 
 
 
 UPDATE AcceleratorProductBOGOFPromotion;code[unique=true];enabled[default=true][unique=true];messageCouldHaveFired[lang=$lang];messageFired[lang=$lang];name[lang=$lang];
- ;BOGOFacerchem;;购买 {0,choice,1#one more item|1<another {0,number,integer} items} 即可享受我们的买 {1,number,integer} 赠 {2,number,integer} 优惠活动;这些卡可享受我们的买 {0,number,integer} 赠 {1,number,integer} 优惠活动 - 为您节省了 {3};买 1 赠 1;
+ #;BOGOFacerchem;;购买 {0,choice,1#one more item|1<another {0,number,integer} items} 即可享受我们的买 {1,number,integer} 赠 {2,number,integer} 优惠活动;这些卡可享受我们的买 {0,number,integer} 赠 {1,number,integer} 优惠活动 - 为您节省了 {3};买 1 赠 1;
 
 
 
 UPDATE ProductPerfectPartnerPromotion;code[unique=true];enabled[default=true][unique=true];messageCouldHaveFired[lang=$lang];messageFired[lang=$lang];name[lang=$lang];
- ;PerfectPartneracerchem;;购买 DSLR-A100H，再加 {1} 即可获赠索尼电池;购买 DSLR-A100H，再加 {1} 即可获赠索尼电池 - 为您节省了 {3};DSLR-A100H 电池折扣;
+# ;PerfectPartneracerchem;;购买 DSLR-A100H，再加 {1} 即可获赠索尼电池;购买 DSLR-A100H，再加 {1} 即可获赠索尼电池 - 为您节省了 {3};DSLR-A100H 电池折扣;
 
 
 
 UPDATE ProductBundlePromotion;code[unique=true];enabled[default=true][unique=true];messageCouldHaveFired[lang=$lang];messageFired[lang=$lang];name[lang=$lang];
- ;ProductBundleacerchem;;购买 {0,choice,1#one more item|1<another {0,number,integer} items} 件<a href=$storefrontContextRoot/Cameras/Hand-held-Camcorders/HDR-CX105E-Red/p/1934406 class=promotion_link><b>索尼 HDR 红色</b></a>套装，含<a href=$storefrontContextRoot/Components/Power-Supplies/Battery-Chargers/AC-VQP10-CHARGER/p/278688 class=promotion_link><b>充电器</b></a>和<a href=$storefrontContextRoot/Cameras/Camera-Accessories-Supplies/Tripods/Remote-Control-Tripod-VCT-80AV/p/1687508 class=promotion_link><b>三脚架</b></a>，现在只需 {2}！!;您购买的摄像机套装仅花费了 {1}，节省了 {3};摄像机捆绑促销;
+ #;ProductBundleacerchem;;购买 {0,choice,1#one more item|1<another {0,number,integer} items} 件<a href=$storefrontContextRoot/Cameras/Hand-held-Camcorders/HDR-CX105E-Red/p/1934406 class=promotion_link><b>索尼 HDR 红色</b></a>套装，含<a href=$storefrontContextRoot/Components/Power-Supplies/Battery-Chargers/AC-VQP10-CHARGER/p/278688 class=promotion_link><b>充电器</b></a>和<a href=$storefrontContextRoot/Cameras/Camera-Accessories-Supplies/Tripods/Remote-Control-Tripod-VCT-80AV/p/1687508 class=promotion_link><b>三脚架</b></a>，现在只需 {2}！!;您购买的摄像机套装仅花费了 {1}，节省了 {3};摄像机捆绑促销;
 
 #Discount on the cart using a coupon (promotion voucher)
 UPDATE PromotionVoucher;voucherCode[unique=true];description[lang=$lang];
-;SUMMER69;为购物车获得 $10 折扣;
-;WINTER16;为购物车获得 10% 折扣;
+#;SUMMER69;为购物车获得 $10 折扣;
+#;WINTER16;为购物车获得 10% 折扣;
