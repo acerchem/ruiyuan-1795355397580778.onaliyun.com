@@ -121,7 +121,7 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 		getEventService().publishEvent(new CoreDataImportedEvent(context, importData));
 		
 		getSampleDataImportService().execute(this, context, importData);
-			getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/productCatalogs/acerchemProductCatalog/acerchemProduct.impex", context.getExtensionName()), false);
+			//getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/productCatalogs/acerchemProductCatalog/acerchemProduct.impex", context.getExtensionName()), false);
 			getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/backoffice/customersupport/cscockpit-access-rights.impex", context.getExtensionName()), false);
 			getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/backoffice/customersupport/Catherinegroup-access-rights.impex", context.getExtensionName()), false);
 			getSetupImpexService().importImpexFile(String.format("/%s/import/sampledata/backoffice/customersupport/Frencegroup-access-rights.impex", context.getExtensionName()), false);
