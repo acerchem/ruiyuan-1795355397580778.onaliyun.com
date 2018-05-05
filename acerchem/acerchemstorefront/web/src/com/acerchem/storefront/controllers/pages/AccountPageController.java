@@ -562,6 +562,7 @@ public class AccountPageController extends AbstractSearchPageController
 		addressReversePopulator.populate(newAddress, Address);
 		Address.setPhone2(addressForm.getLine1());
 		Address.setLine1(null);
+		Address.setVisibleInAddressBook(true);
 		customerAccountService.saveAddressEntry(currentCustomer, Address);
 		newAddress.setId(Address.getPk().toString());
 		if (makeThisAddressTheDefault)
