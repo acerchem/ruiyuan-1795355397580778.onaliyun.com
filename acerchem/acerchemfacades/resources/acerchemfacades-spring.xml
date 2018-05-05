@@ -324,6 +324,11 @@
 			</list>
 		</property>
 	</bean>
+	
+	<alias name="acerchemProductPopulator" alias="productPopulator"/>
+	<bean id="acerchemProductPopulator" class="com.acerchem.facades.populators.AcerchemProductPopulator" parent="defaultProductPopulator">
+	</bean>
+	
 	<!-- end -->
 
 	<alias name="defaultAcerchemCustomerFacade" alias="acerchemCustomerFacade"/>
