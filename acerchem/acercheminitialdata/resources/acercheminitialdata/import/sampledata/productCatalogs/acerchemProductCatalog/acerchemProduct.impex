@@ -44,15 +44,15 @@ INSERT_UPDATE Product;packageWeight;packageType;netWeight;grossWeight;specificat
 ;25;Carton;14;16;EP/USP;2420-56-6;2;AC01361;576;HP;Vitamin C Powder;kg;
 ;10;Drum;6;8;Enterprise Standard;5949-29-10;7;AC01710;576;HP;Alpha Lipoic Acid;kg;
 #shaun
-;10;Carton;5;15;EP/USP;303-98-0;1;AC05080a;571;HP;Coenzyme Q10 98% HPLC;kg;
-;10;Carton;5;15;EP/USP;303-98-0;1;AC05080b;571;HP;Coenzyme Q10 98% HPLC;kg;
-;25;Drum;5;30;EP/USP;22888-70-6;4;AC03390a;575;HP;Milk Thistle 80% UV (Silybin + Isosilybin 30% HPLC);kg;
-;25;Drum;5;30;Enterprise Standard;84650-60-2;4;AC03138a;575;HP;Green tea extract Polyphenol 95%, EGCG 45%;kg;
-;25;Drum;5;30;Enterprise Standard;84650-60-2;4;AC03887a;575;HP;Green tea extract Polyphenol 95%, EGCG 50%;kg;
-;25;Drum;5;30;Enterprise Standard;84929-27-1 ;4;AC03142a;575;HP;Grapse Seed extract Procyanidine 95%;kg;
-;25;Drum;5;30;EP/USP;31284-96-5;4;AC02345a;576;HP;D-Glucosamine Sulphate 2KCL 40-80mesh ;kg;
-;25;Drum;5;30;EP/USP;31284-96-5;4;AC02354a;576;HP;D-Glucosamine Sulphate 2KCL DC;kg;
-;25;Drum;5;30;Enterprise Standard;9007-28-7;4;AC05003a;576;HP;Chondroitin Sulphate Bovine CPC 90%;kg;
+;4;Carton;10;14;EP/USP;303-98-0;20;AC05080a;571;HP;Coenzyme Q10 98% HPLC;kg;
+;4;Carton;10;14;EP/USP;303-98-0;20;AC05080b;571;HP;Coenzyme Q10 98% HPLC;kg;
+;3;Drum;25;28;EP/USP;22888-70-6;20;AC03390a;575;HP;Milk Thistle 80% UV (Silybin + Isosilybin 30% HPLC);kg;
+;3;Drum;25;28;Enterprise Standard;84650-60-2;20;AC03138a;575;HP;Green tea extract Polyphenol 95%, EGCG 45%;kg;
+;3;Drum;25;28;Enterprise Standard;84650-60-2;20;AC03887a;575;HP;Green tea extract Polyphenol 95%, EGCG 50%;kg;
+;3;Drum;25;28;Enterprise Standard;84929-27-1 ;20;AC03142a;575;HP;Grapse Seed extract Procyanidine 95%;kg;
+;1.5;Drum;25;26.5;EP/USP;31284-96-5;20;AC02345a;576;HP;D-Glucosamine Sulphate 2KCL 40-80mesh ;kg;
+;2;Drum;25;27;EP/USP;31284-96-5;20;AC02354a;576;HP;D-Glucosamine Sulphate 2KCL DC;kg;
+;2.5;Drum;25;27.5;Enterprise Standard;9007-28-7;20;AC05003a;576;HP;Chondroitin Sulphate Bovine CPC 90%;kg;
 
 
 # Insert Product References
