@@ -51,7 +51,6 @@ import de.hybris.platform.commercefacades.user.data.TitleData;
 import de.hybris.platform.commercefacades.user.exceptions.PasswordMismatchException;
 import de.hybris.platform.commerceservices.customer.CustomerAccountService;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
-import de.hybris.platform.commerceservices.i18n.CommerceCommonI18NService;
 import de.hybris.platform.commerceservices.search.flexiblesearch.PagedFlexibleSearchService;
 import de.hybris.platform.commerceservices.search.flexiblesearch.data.SortQueryData;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
@@ -1179,8 +1178,6 @@ public class AccountPageController extends AbstractSearchPageController
 		return getViewForPage(model);
 	}
 	@Resource
-	private CommerceCommonI18NService commerceCommonI18NService;
-	@Resource
 	private Converter<AddressModel, AddressData> addressConverter;
 	
 	@RequestMapping(value = "/address-book", method = RequestMethod.GET)
@@ -1188,48 +1185,32 @@ public class AccountPageController extends AbstractSearchPageController
 	public String getAddressBook(final Model model) throws CMSItemNotFoundException
 	{
 		model.addAttribute("nowPage", "address-book");
-		model.addAttribute(ADDRESS_DATA_ATTR, userFacade.getAddressBook());
 		
-		//-alice debug---------------------------------------------------------------------
 		final CustomerModel currentUser = (CustomerModel) userService.getCurrentUser();
 		final Collection<AddressModel> addresses = customerAccountService.getAddressBookDeliveryEntries(currentUser);
-		System.out.println("addresses==="+addresses);
+		final List<AddressData> result = new ArrayList<AddressData>();
 		if (CollectionUtils.isNotEmpty(addresses))
 		{
 			final AddressModel defaultAddress = customerAccountService.getDefaultAddress(currentUser);
-			System.out.println("defaultAddress==="+defaultAddress);
-			
-			final List<AddressModel> addresses1 = customerAccountService.getAddressBookEntries(currentUser);
-			System.out.println("addresses1==="+addresses1);
-			
-			final List<AddressData> result = new ArrayList<AddressData>();
-			
-			//final Collection<CountryModel> deliveryCountries = commerceCommonI18NService.getAllCountries();
-			
-			final Collection<CountryData> deliveryCountries = getCountries();
-			System.out.println("deliveryCountries==="+deliveryCountries);
 			for (final AddressModel address : addresses)
 			{
-				if (address.getCountry() != null && deliveryCountries != null && deliveryCountries.contains(address.getCountry()))
+				if (defaultAddress != null && defaultAddress.getPk() != null && defaultAddress.getPk().equals(address.getPk()))
 				{
-					if (defaultAddress != null && defaultAddress.getPk() != null && defaultAddress.getPk().equals(address.getPk()))
-					{
-						result.add(addressConverter.convert(address));
-						System.out.println("result111=="+address);
-					}
+					AddressData addressData=addressConverter.convert(address);
+					addressData.setDefaultAddress(true);
+					result.add(0,addressData);
 				}
 				else
 				{
-					System.out.println("====NO Countries");
+					result.add(addressConverter.convert(address));
 				}
+				System.out.println("defaultAddress=="+defaultAddress);
+				System.out.println("address=="+address);
 			}
 			System.out.println("result=="+result);
 		}
-		
-		System.out.println("userFacade.getAddressBook()=="+userFacade.getAddressBook());
-		System.out.println("userFacade.getAddressBook().size()=="+userFacade.getAddressBook().size());
-		//-------------------------------------------------------------------------------------
-		
+		//model.addAttribute(ADDRESS_DATA_ATTR, userFacade.getAddressBook());
+		model.addAttribute(ADDRESS_DATA_ATTR, result);
 		
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ADDRESS_BOOK_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ADDRESS_BOOK_CMS_PAGE));
