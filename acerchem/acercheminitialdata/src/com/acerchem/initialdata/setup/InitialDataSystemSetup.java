@@ -117,6 +117,7 @@ public class InitialDataSystemSetup extends AbstractSystemSetup
 
 	getCoreDataImportService().execute(this, context, importData);
 			getSetupImpexService().importImpexFile(String.format("/%s/import/coredata/common/user-level.impex", context.getExtensionName()),false);
+			getSetupImpexService().importImpexFile(String.format("/%s/import/coredata/common/media-upload.impex", context.getExtensionName()),false);
 		getEventService().publishEvent(new CoreDataImportedEvent(context, importData));
 		
 		getSampleDataImportService().execute(this, context, importData);
