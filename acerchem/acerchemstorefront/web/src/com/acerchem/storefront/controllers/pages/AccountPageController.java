@@ -1185,9 +1185,41 @@ public class AccountPageController extends AbstractSearchPageController
 		model.addAttribute("nowPage", "address-book");
 		model.addAttribute(ADDRESS_DATA_ATTR, userFacade.getAddressBook());
 		
-		System.out.println("userFacade.getAddressBook().toString()=="+userFacade.getAddressBook().toString());
+		//-alice debug---------------------------------------------------------------------
+		final CustomerModel currentUser = (CustomerModel) userService.getCurrentUser();
+		final Collection<AddressModel> addresses = customerAccountService.getAddressBookDeliveryEntries(currentUser);
+		System.out.println("addresses==="+addresses);
+		if (CollectionUtils.isNotEmpty(addresses))
+		{
+			final AddressModel defaultAddress = customerAccountService.getDefaultAddress(currentUser);
+			System.out.println("defaultAddress==="+defaultAddress);
+			
+			final List<AddressModel> addresses1 = customerAccountService.getAddressBookEntries(currentUser);
+			System.out.println("addresses1==="+addresses1);
+			
+			final List<AddressData> result = new ArrayList<AddressData>();
+			final Collection<CountryModel> deliveryCountries = commerceCommonI18NService.getAllCountries();
+			for (final AddressModel address : addresses)
+			{
+				if (address.getCountry() != null && deliveryCountries != null && deliveryCountries.contains(address.getCountry()))
+				{
+					if (defaultAddress != null && defaultAddress.getPk() != null && defaultAddress.getPk().equals(address.getPk()))
+					{
+						result.add(addressConverter.convert(address));
+						System.out.println("result111=="+address);
+					}
+				}
+				else
+				{
+					System.out.println("====NO Countries");
+				}
+			}
+			System.out.println("result=="+result);
+		}
+		
 		System.out.println("userFacade.getAddressBook()=="+userFacade.getAddressBook());
 		System.out.println("userFacade.getAddressBook().size()=="+userFacade.getAddressBook().size());
+		//-----end------------------------------------------------------------------------------------------
 		
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ADDRESS_BOOK_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ADDRESS_BOOK_CMS_PAGE));
