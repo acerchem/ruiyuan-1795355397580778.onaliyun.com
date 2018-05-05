@@ -57,6 +57,8 @@ public class MiniCartComponentController extends AbstractAcceleratorCMSComponent
 		}
 		model.addAttribute(TOTAL_PRICE, cartData.getTotalPrice());
 		model.addAttribute(TOTAL_DISPLAY, component.getTotalDisplay());
-		model.addAttribute(TOTAL_ITEMS, cartData.getTotalUnitCount());
+		//model.addAttribute(TOTAL_ITEMS, cartData.getTotalUnitCount());
+		
+		model.addAttribute(TOTAL_ITEMS, cartData.getTotalItems());
 	}
 }

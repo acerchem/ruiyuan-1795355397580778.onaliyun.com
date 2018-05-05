@@ -72,6 +72,18 @@
 						 ${entry.quantity}
 					</div>
 				</td>
+				
+				<td>
+					<div class="m-setnum">
+					<!-- 
+						<span class="set sub">-</span>
+						<input type="text" name="pdnum" class="set" value="${entry.quantity}">
+						<span class="set add">+</span>
+						 -->
+						 ${entry.product.netWeight}kg
+					</div>
+				</td>
+				
 				<td>
 					<div class="tot">
 						<em>
