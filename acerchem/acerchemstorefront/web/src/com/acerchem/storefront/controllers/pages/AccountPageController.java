@@ -51,6 +51,7 @@ import de.hybris.platform.commercefacades.user.data.TitleData;
 import de.hybris.platform.commercefacades.user.exceptions.PasswordMismatchException;
 import de.hybris.platform.commerceservices.customer.CustomerAccountService;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
+import de.hybris.platform.commerceservices.i18n.CommerceCommonI18NService;
 import de.hybris.platform.commerceservices.search.flexiblesearch.PagedFlexibleSearchService;
 import de.hybris.platform.commerceservices.search.flexiblesearch.data.SortQueryData;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
@@ -895,7 +896,7 @@ public class AccountPageController extends AbstractSearchPageController
 		{
 			for(AddressModel am:amlist)
 			{
-			    System.out.println("am.getVisibleInAddressBook()====="+am.getVisibleInAddressBook());
+				System.out.println("am.getVisibleInAddressBook()====="+am.getVisibleInAddressBook());
 				if(am.getVisibleInAddressBook()!=null&&!am.getVisibleInAddressBook())
 				{
 					AddressForm address=new AddressForm();
@@ -1177,6 +1178,10 @@ public class AccountPageController extends AbstractSearchPageController
 		model.addAttribute("sort",sortCode);
 		return getViewForPage(model);
 	}
+	@Resource
+	private CommerceCommonI18NService commerceCommonI18NService;
+	@Resource
+	private Converter<AddressModel, AddressData> addressConverter;
 	
 	@RequestMapping(value = "/address-book", method = RequestMethod.GET)
 	@RequireHardLogIn
@@ -1198,7 +1203,11 @@ public class AccountPageController extends AbstractSearchPageController
 			System.out.println("addresses1==="+addresses1);
 			
 			final List<AddressData> result = new ArrayList<AddressData>();
-			final Collection<CountryModel> deliveryCountries = commerceCommonI18NService.getAllCountries();
+			
+			//final Collection<CountryModel> deliveryCountries = commerceCommonI18NService.getAllCountries();
+			
+			final Collection<CountryData> deliveryCountries = getCountries();
+			System.out.println("deliveryCountries==="+deliveryCountries);
 			for (final AddressModel address : addresses)
 			{
 				if (address.getCountry() != null && deliveryCountries != null && deliveryCountries.contains(address.getCountry()))
@@ -1219,7 +1228,8 @@ public class AccountPageController extends AbstractSearchPageController
 		
 		System.out.println("userFacade.getAddressBook()=="+userFacade.getAddressBook());
 		System.out.println("userFacade.getAddressBook().size()=="+userFacade.getAddressBook().size());
-		//-----end------------------------------------------------------------------------------------------
+		//-------------------------------------------------------------------------------------
+		
 		
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ADDRESS_BOOK_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ADDRESS_BOOK_CMS_PAGE));
