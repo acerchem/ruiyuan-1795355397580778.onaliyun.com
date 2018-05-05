@@ -1050,7 +1050,6 @@
 			
 			
 		<itemtype code="PhoneNumber"
-			jaloclass="de.hybris.platform.mobileservices.jalo.text.PhoneNumber"
 			extends="GenericItem" autocreate="true" generate="true">
 			<deployment table="PhoneNumbers" typecode="2605" />
 			<attributes>
@@ -1075,7 +1074,6 @@
 		</itemtype>
 		
 		<itemtype code="UserPhoneNumber"
-			jaloclass="de.hybris.platform.mobileservices.jalo.text.UserPhoneNumber"
 			extends="GenericItem" autocreate="true" generate="true">
 			<deployment table="UserPhoneNumbers" typecode="2606" />
 			<attributes>
