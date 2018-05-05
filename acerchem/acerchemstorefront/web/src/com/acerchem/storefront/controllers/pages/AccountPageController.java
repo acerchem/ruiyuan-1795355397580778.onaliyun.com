@@ -1186,9 +1186,9 @@ public class AccountPageController extends AbstractSearchPageController
 	{
 		model.addAttribute("nowPage", "address-book");
 		
+		final List<AddressData> result = new ArrayList<AddressData>();
 		final CustomerModel currentUser = (CustomerModel) userService.getCurrentUser();
 		final Collection<AddressModel> addresses = customerAccountService.getAddressBookDeliveryEntries(currentUser);
-		final List<AddressData> result = new ArrayList<AddressData>();
 		if (CollectionUtils.isNotEmpty(addresses))
 		{
 			final AddressModel defaultAddress = customerAccountService.getDefaultAddress(currentUser);
@@ -1204,12 +1204,8 @@ public class AccountPageController extends AbstractSearchPageController
 				{
 					result.add(addressConverter.convert(address));
 				}
-				System.out.println("defaultAddress=="+defaultAddress);
-				System.out.println("address=="+address);
 			}
-			System.out.println("result=="+result);
 		}
-		//model.addAttribute(ADDRESS_DATA_ATTR, userFacade.getAddressBook());
 		model.addAttribute(ADDRESS_DATA_ATTR, result);
 		
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ADDRESS_BOOK_CMS_PAGE));
