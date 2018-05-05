@@ -894,7 +894,8 @@ public class AccountPageController extends AbstractSearchPageController
 		{
 			for(AddressModel am:amlist)
 			{
-				if(!am.getVisibleInAddressBook())
+			    System.out.println("am.getVisibleInAddressBook()====="+am.getVisibleInAddressBook());
+				if(am.getVisibleInAddressBook()!=null&&!am.getVisibleInAddressBook())
 				{
 					AddressForm address=new AddressForm();
 					address.setCountryIso(am.getCountry().getIsocode());
