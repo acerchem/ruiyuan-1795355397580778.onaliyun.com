@@ -15,7 +15,6 @@ import com.acerchem.facades.product.data.VendorData;
 import de.hybris.platform.commercefacades.product.converters.populator.AbstractProductPopulator;
 import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.core.model.product.ProductModel;
-import de.hybris.platform.core.model.product.UnitModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 
 /**
@@ -29,10 +28,10 @@ public class ProductAcerchemPopulator<SOURCE extends ProductModel, TARGET extend
 		productData.setChemicalInfo(safeToString(getProductAttribute(productModel, ProductModel.CHEMICALINFO)));
 		productData.setUnitCalculateRato(safeToString(getProductAttribute(productModel, ProductModel.CHEMICALINFO)));
 		
-		productData.setPackageType(safeToString(getProductAttribute(productModel, ProductModel.PACKAGETYPE)));
-		productData.setPackageWeight(safeToString(getProductAttribute(productModel, ProductModel.PACKAGEWEIGHT)));
-		productData.setNetWeight(safeToString(getProductAttribute(productModel, ProductModel.NETWEIGHT)));
-		productData.setGrossWeight(safeToString(getProductAttribute(productModel, ProductModel.GROSSWEIGHT)));
+//		productData.setPackageType(safeToString(getProductAttribute(productModel, ProductModel.PACKAGETYPE)));
+//		productData.setPackageWeight(safeToString(getProductAttribute(productModel, ProductModel.PACKAGEWEIGHT)));
+//		productData.setNetWeight(safeToString(getProductAttribute(productModel, ProductModel.NETWEIGHT)));
+//		productData.setGrossWeight(safeToString(getProductAttribute(productModel, ProductModel.GROSSWEIGHT)));
 		
 		VendorData data = new VendorData();
 		if (productModel.getAcerChemVendor()!= null){
@@ -41,14 +40,12 @@ public class ProductAcerchemPopulator<SOURCE extends ProductModel, TARGET extend
 	        
 	        productData.setVendor(data);
 	      }
+			
 		
-	    
-				
-		
-		UnitModel uModel = productModel.getUnit();
-		if (uModel != null){
-			productData.setUnitName(uModel.getName());
-		}
+//		UnitModel uModel = productModel.getUnit();
+//		if (uModel != null){
+//			productData.setUnitName(uModel.getName());
+//		}
 		
 	}
 }

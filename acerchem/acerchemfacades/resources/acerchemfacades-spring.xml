@@ -404,6 +404,13 @@
 		<property name="add" ref="acerchemOrderOfEmailContextPopuulator"/>
 	</bean>
 
+	<bean id="acerchemProductPopulator" class="com.acerchem.facades.populators.AcerchemProductPopulator" >
+	</bean>
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="productConverter"/>
+		<property name="add" ref="acerchemProductPopulator"/>
+	</bean>
+
 	<alias name="customOrderPopulator" alias="orderPopulator"/>
 	<bean id="customOrderPopulator" class="com.acerchem.facades.populators.AcerchemOrderPopulator" parent="defaultOrderPopulator">
 		<property name="priceDataFactory" ref="priceDataFactory"/>

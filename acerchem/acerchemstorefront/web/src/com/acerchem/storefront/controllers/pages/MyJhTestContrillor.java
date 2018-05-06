@@ -1,7 +1,10 @@
 package com.acerchem.storefront.controllers.pages;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.commercefacades.order.data.OrderData;
+import de.hybris.platform.commercefacades.order.data.OrderEntryData;
+import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commerceservices.customer.CustomerAccountService;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.CustomerModel;
@@ -64,10 +69,10 @@ public class MyJhTestContrillor extends AbstractPageController {
 		// businessProcessService.startProcess(orderProcessModel);
 		//
 		// System.out.println("****"+ orderModel.getCode());
-		
+
 		model.addAttribute("code", formalcode);
-		testOrderProcess();
-		
+		// testOrderProcess();
+		testOrderData();
 		model.addAttribute("showdata", "call proccess finished!");
 
 		return "pages/product/mytest-jh";
@@ -86,17 +91,38 @@ public class MyJhTestContrillor extends AbstractPageController {
 		businessProcessService.startProcess(orderProcessModel);
 	}
 
-	
-	private void testOrderData(){
+	private void testOrderData() {
 		final BaseStoreModel baseStoreModel = baseStoreService.getCurrentBaseStore();
 		final OrderModel orderModel = customerAccountService
 				.getOrderForCode((CustomerModel) userService.getCurrentUser(), "jh1234567", baseStoreModel);
-		
+
 		orderData = orderConverter.convert(orderModel);
-		
-		
-		//show
-		//String currency = orderData.get
-		
+
+		List<OrderEntryData> orderEntries = orderData.getEntries();
+		String tempCode = "";
+
+		long quantity = 0;
+		double totalAmount = 0;
+		long subQuantity = 0;
+		double subAmount = 0;
+
+		if (CollectionUtils.isNotEmpty(orderEntries)) {
+			for (OrderEntryData orderEntry : orderEntries) {
+
+				ProductData product = orderEntry.getProduct();
+
+				// ProductItemDataOfEmail pie = new ProductItemDataOfEmail();
+
+				System.out.println("code=" + product.getCode());
+
+				System.out.println("name=" + product.getName());
+				System.out.println("quantity=" + orderEntry.getQuantity());
+				System.out.println("unitname=" + product.getUnitName());
+
+			}
+		}
+		// show
+		// String currency = orderData.get
+
 	}
 }
