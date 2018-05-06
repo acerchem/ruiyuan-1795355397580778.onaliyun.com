@@ -131,14 +131,20 @@ public class CustomRegistrationValidator implements Validator
 
 	protected void validatePassword(final Errors errors, final String pwd)
 	{
+		String regex = "^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$";	
 		if (StringUtils.isEmpty(pwd))
 		{
 			errors.rejectValue("pwd", "register.pwd.invalid");
 		}
-		else if (StringUtils.length(pwd) < 6 || StringUtils.length(pwd) > 255)
+		else if (StringUtils.length(pwd) < 6 || StringUtils.length(pwd) > 16)
 		{
 			errors.rejectValue("pwd", "register.pwd.invalid");
 		}
+		else if(!pwd.matches(regex))
+		{
+			errors.rejectValue("pwd", "register.pwd.invalid");
+		}
+
 	}
 
 	protected void validateEmail(final Errors errors, final String email)

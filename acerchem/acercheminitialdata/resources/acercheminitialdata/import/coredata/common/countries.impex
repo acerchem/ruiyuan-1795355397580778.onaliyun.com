@@ -163,7 +163,7 @@ INSERT_UPDATE Country;isocode[unique=true];name[lang=en];active[default=true]
 ;ML;"Mali"
 ;MM;"Myanmar"
 ;MN;"Mongolia"
-;MO;"Macao"
+#;MO;"Macao"
 ;MP;"Northern Mariana Islands"
 ;MQ;"Martinique"
 ;MR;"Mauritania"
@@ -378,7 +378,7 @@ INSERT_UPDATE Region;country(isocode);isocode[unique=true];isocodeShort;name[lan
 ;CN;CN-65;65;"Xinjiang"
 ;CN;CN-54;54;"Xizang"
 ;CN;CN-91;91;"Hong Kong"
-;CN;CN-92;92;"Aomen"
+;CN;CN-92;92;"Macao"
 
 
 #

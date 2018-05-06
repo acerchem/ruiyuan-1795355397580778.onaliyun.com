@@ -84,11 +84,11 @@
 					<div class="text">
 					 <c:choose>
 					<c:when test="${orderData.paymentMode=='InvoicePayment'}">
-						INVOICEPAYMENT<br/>
+						 PRE-PAYMENT<br/>
 						
 						</c:when>
 						 <c:otherwise>
-						 CREDITPAYMENT<br/>
+						 Payment by credit <br/>
 						</c:otherwise>
 					</c:choose>	
 					</div>		

@@ -17,6 +17,7 @@
 					<td><div class="intro">Item <em class="min">(style number)</em></div></td>
 					<td>Price</td>
 					<td>Qty</td>
+					<td>Package</td>
 					<td>Total</td>
 					<td><div class="tot">Operate</div></td>
 				</tr>

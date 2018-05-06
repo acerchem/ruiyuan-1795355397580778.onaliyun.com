@@ -562,6 +562,7 @@ public class AccountPageController extends AbstractSearchPageController
 		addressReversePopulator.populate(newAddress, Address);
 		Address.setPhone2(addressForm.getLine1());
 		Address.setLine1(null);
+		Address.setVisibleInAddressBook(true);
 		customerAccountService.saveAddressEntry(currentCustomer, Address);
 		newAddress.setId(Address.getPk().toString());
 		if (makeThisAddressTheDefault)
@@ -894,7 +895,8 @@ public class AccountPageController extends AbstractSearchPageController
 		{
 			for(AddressModel am:amlist)
 			{
-				if(!am.getVisibleInAddressBook())
+				System.out.println("am.getVisibleInAddressBook()====="+am.getVisibleInAddressBook());
+				if(am.getVisibleInAddressBook()!=null&&!am.getVisibleInAddressBook())
 				{
 					AddressForm address=new AddressForm();
 					address.setCountryIso(am.getCountry().getIsocode());
@@ -1175,13 +1177,37 @@ public class AccountPageController extends AbstractSearchPageController
 		model.addAttribute("sort",sortCode);
 		return getViewForPage(model);
 	}
+	@Resource
+	private Converter<AddressModel, AddressData> addressConverter;
 	
 	@RequestMapping(value = "/address-book", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String getAddressBook(final Model model) throws CMSItemNotFoundException
 	{
 		model.addAttribute("nowPage", "address-book");
-		model.addAttribute(ADDRESS_DATA_ATTR, userFacade.getAddressBook());
+		
+		final List<AddressData> result = new ArrayList<AddressData>();
+		final CustomerModel currentUser = (CustomerModel) userService.getCurrentUser();
+		final Collection<AddressModel> addresses = customerAccountService.getAddressBookDeliveryEntries(currentUser);
+		if (CollectionUtils.isNotEmpty(addresses))
+		{
+			final AddressModel defaultAddress = customerAccountService.getDefaultAddress(currentUser);
+			for (final AddressModel address : addresses)
+			{
+				if (defaultAddress != null && defaultAddress.getPk() != null && defaultAddress.getPk().equals(address.getPk()))
+				{
+					AddressData addressData=addressConverter.convert(address);
+					addressData.setDefaultAddress(true);
+					result.add(0,addressData);
+				}
+				else
+				{
+					result.add(addressConverter.convert(address));
+				}
+			}
+		}
+		model.addAttribute(ADDRESS_DATA_ATTR, result);
+		
 		storeCmsPageInModel(model, getContentPageForLabelOrId(ADDRESS_BOOK_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(ADDRESS_BOOK_CMS_PAGE));
 		model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs(TEXT_ACCOUNT_ADDRESS_BOOK));

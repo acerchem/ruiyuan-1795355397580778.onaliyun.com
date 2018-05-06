@@ -45,7 +45,7 @@
 	</td>
 	<td><b><format:price priceData="${entry.product.price}" displayFreeForZero="true"/></b></td>
 	<td><b> ${entry.quantity}</b></td>
-	<td><b>SA00582</b></td>
+	<td><b>${entry.product.code}</b></td>
 	<td>
 		<div class="tot">
 			<em><format:price priceData="${entry.totalPrice}" displayFreeForZero="true"/></em>

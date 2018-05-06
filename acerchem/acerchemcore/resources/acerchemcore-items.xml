@@ -98,7 +98,19 @@
 			<value code="APPROVED" />
 			<value code="REJECTED" />
 		</enumtype>
+
+		<enumtype code="PhoneNumberFormat" autocreate="true"
+			generate="true" dynamic="true">
+			<value code="LOCAL" />
+			<value code="INTERNATIONAL" />
+		</enumtype>
 		
+		<enumtype code="PhoneType" autocreate="true"
+			generate="true" dynamic="true">
+			<value code="MOBILE" />
+			<value code="OFFICE" />
+			<value code="HOME" />
+		</enumtype>
 	</enumtypes>
 	
 		
@@ -175,6 +187,15 @@
 			</targetElement>
 		</relation>
 
+
+        <relation code="UserPhoneNumberRelation" localized="false" generate="true" autocreate="true">
+			<sourceElement type="User" qualifier="user" cardinality="one">
+				<modifiers read="true" write="true" search="true" optional="true" />
+			</sourceElement>
+			<targetElement type="UserPhoneNumber" qualifier="phoneNumbers" cardinality="many">
+				<modifiers read="true" write="true" search="true" partof="true" optional="true" />
+			</targetElement>
+		</relation>
 	</relations>
 
 	<itemtypes>
@@ -1026,6 +1047,54 @@
 					</attribute>
 				</attributes>
 			</itemtype>
+			
+			
+	
+		<itemtype code="PhoneNumber"
+			extends="GenericItem" autocreate="true" generate="true">
+			<deployment table="PhoneNumbers" typecode="2605" />
+			<attributes>
+				<attribute qualifier="format" type="PhoneNumberFormat">
+					<persistence type="property" />
+					<modifiers optional="false" search="false" />
+					<defaultvalue>em().getEnumerationValue("PhoneNumberFormat", "LOCAL")</defaultvalue>
+				</attribute>
+				<attribute qualifier="number" type="java.lang.String">
+					<persistence type="property" />
+					<modifiers optional="false" />
+				</attribute>
+				<attribute qualifier="country" type="Country">
+					<persistence type="property" />
+					<modifiers optional="true" />
+				</attribute>
+				<attribute qualifier="normalizedNumber" type="java.lang.String">
+					<persistence type="property" />
+					<modifiers optional="true" write="false" />
+				</attribute>
+			</attributes>
+		</itemtype>
+		
+		<itemtype code="UserPhoneNumber"
+			extends="GenericItem" autocreate="true" generate="true">
+			<deployment table="UserPhoneNumbers" typecode="2606" />
+			<attributes>
+				<attribute qualifier="type" type="PhoneType">
+					<persistence type="property" />
+					<modifiers optional="false" search="true" />
+					<defaultvalue>em().getEnumerationValue("PhoneType", "MOBILE")</defaultvalue>
+				</attribute>
+				<attribute qualifier="phoneNumber" type="PhoneNumber">
+					<persistence type="property" />
+					<modifiers optional="false" />
+				</attribute>
+				<attribute qualifier="default" type="java.lang.Boolean">
+					<persistence type="property" />
+					<modifiers optional="false" />
+					<defaultvalue>java.lang.Boolean.FALSE</defaultvalue>
+				</attribute>
+			</attributes>
+		</itemtype>
+	
 		</typegroup>
 		
 	</itemtypes>

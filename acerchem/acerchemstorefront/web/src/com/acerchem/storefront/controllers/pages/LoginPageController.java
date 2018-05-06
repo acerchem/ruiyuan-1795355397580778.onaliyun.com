@@ -30,9 +30,6 @@ import de.hybris.platform.core.model.c2l.CountryModel;
 import de.hybris.platform.core.model.c2l.RegionModel;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.core.model.user.CustomerModel;
-import de.hybris.platform.mobileservices.enums.PhoneType;
-import de.hybris.platform.mobileservices.model.text.PhoneNumberModel;
-import de.hybris.platform.mobileservices.model.text.UserPhoneNumberModel;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.servicelayer.i18n.CommonI18NService;
 import de.hybris.platform.servicelayer.model.ModelService;
@@ -40,10 +37,7 @@ import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.tx.Transaction;
-import com.acerchem.core.enums.CreditAccountStatusEnum;
-import com.acerchem.core.model.CustomerCreditAccountModel;
-import com.acerchem.storefront.controllers.ControllerConstants;
-import com.acerchem.storefront.data.CustomRegisterForm;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -51,10 +45,12 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.stereotype.Controller;
@@ -67,6 +63,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.acerchem.core.enums.CreditAccountStatusEnum;
+import com.acerchem.core.enums.PhoneType;
+import com.acerchem.core.model.CustomerCreditAccountModel;
+import com.acerchem.core.model.PhoneNumberModel;
+import com.acerchem.core.model.UserPhoneNumberModel;
+import com.acerchem.storefront.controllers.ControllerConstants;
+import com.acerchem.storefront.data.CustomRegisterForm;
 
 
 /**

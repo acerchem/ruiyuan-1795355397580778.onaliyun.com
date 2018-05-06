@@ -130,7 +130,7 @@
                                     </div>
                                 </td>
                                 <td><format:price priceData="${orderEntries.basePrice}" displayFreeForZero="true" /></td>
-                                <td> ${orderEntries.quantity}</td>
+                                <td> ${orderEntries.quantity}*${orderEntries.product.netWeight}Kg</td>
                                 <td>
                                         ${fn:escapeXml(orderEntries.product.code)}
                                 </td>
