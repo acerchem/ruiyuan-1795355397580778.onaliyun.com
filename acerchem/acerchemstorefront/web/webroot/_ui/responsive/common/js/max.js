@@ -17,8 +17,9 @@ $(window).ready(function(){
 
 //gotop
 $('.gotop').on('click',function(){
-  console.log('to top')
+  console.log('html body to top')
   $("body").animate({scrollTop:0},300);
+  $("html").animate({scrollTop:0},300);
 })
 
 // top srarch
