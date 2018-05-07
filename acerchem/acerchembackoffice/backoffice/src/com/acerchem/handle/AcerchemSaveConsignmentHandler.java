@@ -40,9 +40,22 @@ public class AcerchemSaveConsignmentHandler implements FlowActionHandler
 		LOG.info("--------------START AcerchemSaveConsignmentHandler-----------");
 		final ConsignmentEntryModel consignmentEntryModel =  adapter.getWidgetInstanceManager().getModel().getValue("newConsignmentEntry",
 				ConsignmentEntryModel.class);
+		consignmentEntryModel.getPk();
+		consignmentEntryModel.getOrderEntry().getDeliveryPointOfService().getWarehouses();
 		final ConsignmentModel consignmentModel = modelService.create(ConsignmentModel.class);
 		consignmentModel.setCode(String.valueOf(new Date().getTime()));
 		consignmentModel.setStatus(ConsignmentStatus.DELIVERING);
+		if(consignmentEntryModel.getOrderEntry() != null){
+			if(consignmentEntryModel.getOrderEntry().getOrder() != null){
+				if(consignmentEntryModel.getOrderEntry().getOrder().getDeliveryAddress() != null){
+					consignmentModel.setShippingAddress(consignmentEntryModel.getOrderEntry().getOrder().getDeliveryAddress());
+				}
+			}
+		}
+		if(consignmentEntryModel.getOrderEntry() != null && consignmentEntryModel.getOrderEntry().getDeliveryPointOfService() != null && consignmentEntryModel.getOrderEntry().getDeliveryPointOfService().getWarehouses() != null){
+			consignmentModel.setWarehouse(consignmentEntryModel.getOrderEntry().getDeliveryPointOfService().getWarehouses().get(0));
+		}
+		modelService.save(consignmentModel);
 		consignmentEntryModel.setConsignment(consignmentModel);
 		modelService.save(consignmentEntryModel);
 		adapter.done();
