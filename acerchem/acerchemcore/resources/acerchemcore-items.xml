@@ -637,6 +637,19 @@
 					</attribute>
 				</attributes>
 			</itemtype>
+			
+			<!-- shaun.sheng -->
+			<itemtype code="Warehouse" autocreate="false" generate="false">
+				<description>Extending the Product type from core with additional attributes.</description>
+				<attributes>
+					<attribute qualifier="Area" type="java.lang.String">
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="Address" type="java.lang.String">
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
 
 			<itemtype code="AbstractOrderEntry" autocreate="false"
 				generate="false">
