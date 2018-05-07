@@ -40,6 +40,11 @@ INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@medi
 ;;/acerchemimages/acerchem.png;acerchem.png;$siteResource/acerchemimages/acerchem.png;image/png;hybris Accelerator;
 ;;/acerchemimages/acerchem.png;acerchem.png;$siteResource/acerchemimages/acerchem.png;image/png;hybris Accelerator;
 ;;/acerchemimages/maxbanner-bg.jpg;maxbanner-bg.jpg;$siteResource/acerchemimages/maxbanner-bg.jpg;image/jpeg;;
+
+;;/acerchemimages/maxbanner-1.jpg;maxbanner-1.jpg;$siteResource/acerchemimages/maxbanner-1.jpg;image/jpeg;;
+;;/acerchemimages/maxbanner-2.jpg;maxbanner-2.jpg;$siteResource/acerchemimages/maxbanner-1.jpg;image/jpeg;;
+;;/acerchemimages/maxbanner-3.png;maxbanner-3.png;$siteResource/acerchemimages/maxbanner-3.png;image/png;;
+
 ;;maxmean1Preview;maxbanner-bg.jpg;$siteResource/acerchemimages/maxmean1.jpg;image/jpeg;;
 ;;maxmean2Preview;maxbanner-bg.jpg;$siteResource/acerchemimages/maxmean2.jpg;image/jpeg;;
 ;;maxmean3Preview;maxbanner-bg.jpg;$siteResource/acerchemimages/maxmean3.jpg;image/jpeg;;
@@ -823,7 +828,7 @@ INSERT_UPDATE MultipleBannerComponent;$contentCV[unique=true];displayLevel;uid[u
 UPDATE MultipleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
 ;;HomepageSwiperOneBannerComponent;/acerchemimages/maxbanner-1.jpg
 ;;HomepageSwiperTwoBannerComponent;/acerchemimages/maxbanner-2.jpg
-;;HomepageSwiperThreeBannerComponent;/acerchemimages/maxbanner-3.jpg
+;;HomepageSwiperThreeBannerComponent;/acerchemimages/maxbanner-3.png
 ;;OneBannerComponent;maxmean1Preview
 ;;TwoBannerComponent;maxmean2Preview
 ;;ThreeBannerComponent;maxmean3Preview
