@@ -171,7 +171,12 @@
 		
 		<label align="center" style="width: calc(100% - 20px);">
 			<input type="checkbox" name="aidField" value="agree"/>
-			<span class="checkbox" style="font-weight: 800;"><a href="#" class="showTerms" data-popup-title="TERMS OF USE">By creating an account, you agree to Acerchem</a><br/></span>
+			<span class="checkbox" style="font-weight: 800;">
+				<a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">
+					By creating an account, you agree to Acerchem
+				</a>
+			<br/>
+			</span>
 		</label>
 		<%-- <div align="center">
 			<a href="${loginUrl}">Conditions</a> of Use and <a href="${loginUrl}">Privacy Notice</a>.
@@ -193,12 +198,11 @@
 		<a href="">Privacy Notice</a>
 	</div>
 	<div class="copyright">
-		Â© 1996-2018, Acerchem.com, Inc. or its affiliates 
+		© 1996-2018, Acerchem.com, Inc. or its affiliates 
 	</div>
 </div>
 
-
-<div class="display-none">
+<div id="light" class="white_content">
    	<div id="Terms">
 		<table style="font-family:arial;font-size: 12px;border-color: #000000">
 		<tbody>
@@ -410,23 +414,12 @@
 			</tr>
 			</tbody>
 		</table>
+		<button onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">close</button>
 	</div>
 </div>
+<div id="fade" class="black_overlay"></div>
 
 <script type="text/javascript">
-$(document).on("click", ".showTerms", function ()
-{
-	$.colorbox({
-		top: "-45%",  
-		inline: true,
-		width:"80%",
-		href: "#Terms",
-		height: "auto",
-		position: "fixed"
-		
-	});
-})
-
 $(document).on("change",'#selectShipCountry select', function (){
 	var options = {
 		'addressCode': '',
@@ -488,4 +481,33 @@ $('.btn-submit').on('click',function(){
 	}
 })
 </script>
+
+<style> 
+    .black_overlay{ 
+        display: none; 
+        position: absolute; 
+        top: 0%; 
+        left: 0%; 
+        width: 100%; 
+        height: 100%; 
+        background-color: black; 
+        z-index:1001; 
+        -moz-opacity: 0.8; 
+        opacity:.80; 
+        filter: alpha(opacity=88); 
+    } 
+    .white_content { 
+        display: none; 
+        position: absolute; 
+        top: 5%; 
+        left: 25%; 
+        width: 55%; 
+        height: 80%; 
+        padding: 20px; 
+        border: 10px solid orange; 
+        background-color: white; 
+        z-index:1002; 
+        overflow: auto; 
+    } 
+</style> 
 </body>
