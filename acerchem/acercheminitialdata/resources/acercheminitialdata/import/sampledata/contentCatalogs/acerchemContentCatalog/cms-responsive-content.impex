@@ -1280,9 +1280,9 @@ INSERT_UPDATE MultipleBannerComponent;$contentCV[unique=true];displayLevel;uid[u
 ;;5;FiveBannerComponent;FiveBannerComponent;FiveBannerComponent;5;/Open-Catalogue/Data-storage/Flash-Memory/c/571
 
 UPDATE MultipleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
-;;HomepageSwiperOneBannerComponent;/acerchemimages/maxbanner-bg.jpg
-;;HomepageSwiperTwoBannerComponent;/acerchemimages/maxbanner-bg.jpg
-;;HomepageSwiperThreeBannerComponent;/acerchemimages/maxbanner-bg.jpg
+;;HomepageSwiperOneBannerComponent;/acerchemimages/maxbanner-1.jpg
+;;HomepageSwiperTwoBannerComponent;/acerchemimages/maxbanner-2.jpg
+;;HomepageSwiperThreeBannerComponent;/acerchemimages/maxbanner-3.jpg
 ;;OneBannerComponent;maxmean1Preview
 ;;TwoBannerComponent;maxmean2Preview
 ;;ThreeBannerComponent;maxmean3Preview
