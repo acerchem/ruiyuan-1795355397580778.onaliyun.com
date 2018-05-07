@@ -37,6 +37,8 @@ UPDATE DocumentPageTemplate;$contentCV[unique=true];uid[unique=true];velocityTem
 # Email page Template shaun
 INSERT_UPDATE EmailPageTemplate;$contentCV[unique=true];uid[unique=true];name;active;frontendTemplateName;subject(code);htmlTemplate(code);restrictedPageTypes(code)
 #shaun
+;;AcerchemCustomerRegistrationAuditFalureEmailTemplate;Acerchem Customer Registration Audit Falure Email Template;true;CustomerRegistrationAuditFalureEmail;acerchem_Email_Customer_Registration_Audit_Falure_Subject;acerchem_Email_Customer_Registration_Audit_Falure_Body;EmailPage
+
 ;;AcerchemContractEmailTemplate;Acerchem  Contract Email Template;true;ContractEmail;acerchem_Email_Contract_Subject;acerchem_Email_Contract_Body;EmailPage
 ;;AcerchemDeliveryNoteEmailTemplate;Acerchem Delivery Note Email Template;true;DeliveryNoteEmail;acerchem_Email_Delivery_Note_Subject;acerchem_Email_Delivery_Note_Body;EmailPage
 ;;AcerchemInvoiceEmailTemplate;Acerchem Invoice Email Template;true;InvoiceEmail;acerchem_Email_Invoice_Subject;acerchem_Email_Invoice_Body;EmailPage
@@ -236,6 +238,8 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 # Email Pages
 INSERT_UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved']
 #shaun
+;;CustomerRegistrationAuditFalureEmail;Customer Registration Audit Falure Email;AcerchemCustomerRegistrationAuditFalureEmailTemplate;true;
+
 ;;ContractEmail;Contract Email;AcerchemContractEmailTemplate;true;
 ;;DeliveryNoteEmail;Delivery Note Email;AcerchemDeliveryNoteEmailTemplate;true;
 ;;InvoiceEmail;Invoice Email;AcerchemInvoiceEmailTemplate;true;
@@ -279,6 +283,9 @@ INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;rendererType(code)
 INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;rendererType(code)[default='velocity']
 
 #shaun
+;acerchem_Email_Customer_Registration_Audit_Falure_Body;$emailPackageName.CustomerEmailContext
+;acerchem_Email_Customer_Registration_Audit_Falure_Subject;$emailPackageName.CustomerEmailContext
+
 ;acerchem_Email_Contract_Body;$emailPackageName.AcerChemContractEmailContext
 ;acerchem_Email_Contract_Subject;$emailPackageName.AcerChemContractEmailContext
 ;acerchem_Email_Delivery_Note_Body;$emailPackageName.AcerChemDeliveryNoteEmailContext

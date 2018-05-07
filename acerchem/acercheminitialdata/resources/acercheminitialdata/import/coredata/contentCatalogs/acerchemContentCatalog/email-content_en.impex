@@ -25,6 +25,9 @@ $lang=en
 # CMS components and Email velocity templates
 UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang,translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
 #shaun
+ ;acerchem_Email_Customer_Registration_Audit_Falure_Body;"Contract Body";$emailResource/email-customerRegistrationAuditFalureBody.vm
+ ;acerchem_Email_Customer_Registration_Audit_Falure_Subject;"Contract Body";$emailResource/email-customerRegistrationAuditFalureSubject.vm
+
  ;acerchem_Email_Contract_Body;"Contract Body";$emailResource/email-contractBody.vm
  ;acerchem_Email_Contract_Subject;"Contract Subject";$emailResource/email-contractSubject.vm
  ;acerchem_Email_Delivery_Note_Body;"Delivery Note Body";$emailResource/email-deliveryNoteBody.vm
@@ -89,6 +92,8 @@ UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];fromEmail[lang=$lang];
  ;;ReadyForPickupEmail;"customerservice@acerchem.com";"Customer Services Team"
  
  #shaun
+ ;;CustomerRegistrationAuditFalureEmail;"customerservice@acerchem.com";"Customer Services Team"
+ 
  ;;ContractEmail;"customerservice@acerchem.com";"Customer Services Team"
  ;;DeliveryNoteEmail;"customerservice@acerchem.com";"Customer Services Team"
  ;;InvoiceEmail;"customerservice@acerchem.com";"Customer Services Team"
