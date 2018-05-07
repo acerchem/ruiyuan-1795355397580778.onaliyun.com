@@ -40,7 +40,7 @@ public class CheckConsignmentDateAction extends AbstractSimpleDecisionAction<Ord
 			return Transition.NOK;
 		}
 
-		if (order.getDeliveyDate() != null && order.getWaitDeliveiedDate() != null )
+		if (order.getPickUpDate() != null && order.getWaitDeliveiedDate() != null )
 		{
 			return Transition.OK;
 		}
