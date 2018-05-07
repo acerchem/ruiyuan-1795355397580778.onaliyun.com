@@ -171,7 +171,12 @@
 		
 		<label align="center" style="width: calc(100% - 20px);">
 			<input type="checkbox" name="aidField" value="agree"/>
-			<span class="checkbox" style="font-weight: 800;"><a href="#" class="showTerms" data-popup-title="TERMS OF USE">By creating an account, you agree to Acerchem</a><br/></span>
+			<span class="checkbox" style="font-weight: 800;">
+				<a href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">
+					By creating an account, you agree to Acerchem
+				</a>
+			<br/>
+			</span>
 		</label>
 		<%-- <div align="center">
 			<a href="${loginUrl}">Conditions</a> of Use and <a href="${loginUrl}">Privacy Notice</a>.
@@ -193,12 +198,11 @@
 		<a href="">Privacy Notice</a>
 	</div>
 	<div class="copyright">
-		Â© 1996-2018, Acerchem.com, Inc. or its affiliates 
+		© 1996-2018, Acerchem.com, Inc. or its affiliates 
 	</div>
 </div>
 
-
-<div class="display-none">
+<div id="light" class="white_content">
    	<div id="Terms">
 		<table style="font-family:arial;font-size: 12px;border-color: #000000">
 		<tbody>
@@ -293,7 +297,7 @@
 			<tr>
 				<td>
 					<p>
-						You may use the Site’s features, offerings and content for lawful purposes only.  By using the Site, you represent and warrant that: (i) you have the power and authority to accept this Terms of Use and to enter into this agreement with Ingredients4U; (ii) you are capable of assuming, and do assume, any risks related to the use of the Materials on the Site; and (iii) you understand and accept the terms, conditions and risks relating to the use of the content and Materials on the Site. If you do not agree with this Terms of Use or are in any way dissatisfied with the Site or the Materials, your exclusive remedy is to discontinue using the Site.
+						You may use the Siteâs features, offerings and content for lawful purposes only.  By using the Site, you represent and warrant that: (i) you have the power and authority to accept this Terms of Use and to enter into this agreement with Ingredients4U; (ii) you are capable of assuming, and do assume, any risks related to the use of the Materials on the Site; and (iii) you understand and accept the terms, conditions and risks relating to the use of the content and Materials on the Site. If you do not agree with this Terms of Use or are in any way dissatisfied with the Site or the Materials, your exclusive remedy is to discontinue using the Site.
 					</p>
 				</td>
 			</tr>
@@ -350,7 +354,7 @@
 			<tr>
 				<td>
 					<p>
-						You agree to indemnify, defend and hold Ingredients4U and its affiliates, and their respective officers, directors, owners, employees, agents, information providers and licensors (collectively the "Indemnified Parties") harmless from and against any and all claims, liability, losses, actions, suits, costs and expenses (including attorneys’ fees) arising out of or incurred by any breach by you of this Terms of Use. Ingredients4U reserves the right, at its own expense, to assume the exclusive defense and control of any matter otherwise subject to indemnification by you, and in such case, you agree to cooperate with Ingredients4U ’s defense of such claim.  Ingredients4U has no duty to reimburse, defend, indemnify, or hold you harmless resulting from, relating to, or arising out of, this Terms of Use or the Site.
+						You agree to indemnify, defend and hold Ingredients4U and its affiliates, and their respective officers, directors, owners, employees, agents, information providers and licensors (collectively the "Indemnified Parties") harmless from and against any and all claims, liability, losses, actions, suits, costs and expenses (including attorneysâ fees) arising out of or incurred by any breach by you of this Terms of Use. Ingredients4U reserves the right, at its own expense, to assume the exclusive defense and control of any matter otherwise subject to indemnification by you, and in such case, you agree to cooperate with Ingredients4U âs defense of such claim.  Ingredients4U has no duty to reimburse, defend, indemnify, or hold you harmless resulting from, relating to, or arising out of, this Terms of Use or the Site.
 					</p>
 				</td>
 			</tr>
@@ -364,7 +368,7 @@
 			<tr>
 				<td>
 					<p>
-						The Site contains links to or references third party websites, resources and advertisers (collectively, "Third Party Sites").  Your linking to such Third Party Sites is at your own risk.  Ingredients4U is not responsible for the accuracy or reliability of any content, data, opinions, advice, statements, or other information made on the Third Party Sites.  Ingredients4U also is not responsible for the availability of these Third Party Sites, nor is it responsible for the aesthetics, appeal, suitability to taste or subjective quality of informational content, advertising, products or other materials made available on or through such Third Party Sites.  No endorsement of any third party content, information, data, opinions, advice, statements, goods, services or products is expressed or implied by any information, material or content of any third party contained in, referred to, included on, or linked from or to, the Site.  Under no circumstances shall Ingredients4U be held responsible or liable, directly or indirectly, for any loss, injury, or damage caused or alleged to have been caused to you in connection with the use of, or reliance on, any content, information, data, opinions, advice, statements, goods, services, or products available on such Third Party Sites.  You should direct any concerns to the respective Third Party Site’s administrator or webmaster.  Any links to Third Party Sites do not imply that Ingredients4U is legally authorized to use any trademark, trade name, logo or copyright symbol displayed in or accessible through such links, or that any linked Third Party Site is authorized to use any trademark, trade name, logo or copyright symbol of Ingredients4U .
+						The Site contains links to or references third party websites, resources and advertisers (collectively, "Third Party Sites").  Your linking to such Third Party Sites is at your own risk.  Ingredients4U is not responsible for the accuracy or reliability of any content, data, opinions, advice, statements, or other information made on the Third Party Sites.  Ingredients4U also is not responsible for the availability of these Third Party Sites, nor is it responsible for the aesthetics, appeal, suitability to taste or subjective quality of informational content, advertising, products or other materials made available on or through such Third Party Sites.  No endorsement of any third party content, information, data, opinions, advice, statements, goods, services or products is expressed or implied by any information, material or content of any third party contained in, referred to, included on, or linked from or to, the Site.  Under no circumstances shall Ingredients4U be held responsible or liable, directly or indirectly, for any loss, injury, or damage caused or alleged to have been caused to you in connection with the use of, or reliance on, any content, information, data, opinions, advice, statements, goods, services, or products available on such Third Party Sites.  You should direct any concerns to the respective Third Party Siteâs administrator or webmaster.  Any links to Third Party Sites do not imply that Ingredients4U is legally authorized to use any trademark, trade name, logo or copyright symbol displayed in or accessible through such links, or that any linked Third Party Site is authorized to use any trademark, trade name, logo or copyright symbol of Ingredients4U .
 					</p>
 				</td>
 			</tr>
@@ -378,7 +382,7 @@
 			<tr>
 				<td>
 					<p>
-						Any dispute relating in any way to your visit to the Site shall be submitted to confidential arbitration, except that, to the extent you have in any manner violated or threatened to violate Ingredients4U ’s intellectual property rights, Ingredients4U may seek injunctive or other appropriate relief in any state or federal court, and you consent to jurisdiction and venue in such courts. Arbitration under this agreement shall be conducted under the rules then prevailing of the American Arbitration Association. The arbitrator’s award shall be binding and may be entered as a judgment in any court of competent jurisdiction. To the fullest extent permitted by applicable law, no arbitration under this Agreement shall be joined to an arbitration involving any other party subject to this Agreement, whether through class arbitration proceedings or otherwise.
+						Any dispute relating in any way to your visit to the Site shall be submitted to confidential arbitration, except that, to the extent you have in any manner violated or threatened to violate Ingredients4U âs intellectual property rights, Ingredients4U may seek injunctive or other appropriate relief in any state or federal court, and you consent to jurisdiction and venue in such courts. Arbitration under this agreement shall be conducted under the rules then prevailing of the American Arbitration Association. The arbitratorâs award shall be binding and may be entered as a judgment in any court of competent jurisdiction. To the fullest extent permitted by applicable law, no arbitration under this Agreement shall be joined to an arbitration involving any other party subject to this Agreement, whether through class arbitration proceedings or otherwise.
 					</p>
 				</td>
 			</tr>
@@ -410,23 +414,12 @@
 			</tr>
 			</tbody>
 		</table>
+		<button onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">close</button>
 	</div>
 </div>
+<div id="fade" class="black_overlay"></div>
 
 <script type="text/javascript">
-$(document).on("click", ".showTerms", function ()
-{
-	$.colorbox({
-		top: "-45%",  
-		inline: true,
-		width:"80%",
-		href: "#Terms",
-		height: "auto",
-		position: "fixed"
-		
-	});
-})
-
 $(document).on("change",'#selectShipCountry select', function (){
 	var options = {
 		'addressCode': '',
@@ -488,4 +481,33 @@ $('.btn-submit').on('click',function(){
 	}
 })
 </script>
+
+<style> 
+    .black_overlay{ 
+        display: none; 
+        position: absolute; 
+        top: 0%; 
+        left: 0%; 
+        width: 100%; 
+        height: 100%; 
+        background-color: black; 
+        z-index:1001; 
+        -moz-opacity: 0.8; 
+        opacity:.80; 
+        filter: alpha(opacity=88); 
+    } 
+    .white_content { 
+        display: none; 
+        position: absolute; 
+        top: 5%; 
+        left: 25%; 
+        width: 55%; 
+        height: 80%; 
+        padding: 20px; 
+        border: 10px solid orange; 
+        background-color: white; 
+        z-index:1002; 
+        overflow: auto; 
+    } 
+</style> 
 </body>

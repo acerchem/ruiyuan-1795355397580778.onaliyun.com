@@ -79,7 +79,7 @@ function verification(wrap){//register verification
 		
 		var mymail = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;	
 		var mobile = /^\d{0,4}[-]?\d{8,12}$/;
-		var pwd = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,16}$/;
+		var pwd = /^(?=.*?[0-9])(?=.*?[a-z])(?=.*?[A-Z])[0-9a-zA-Z]{6,16}$/;
 		
 		if(aval)
 		{		
@@ -90,7 +90,7 @@ function verification(wrap){//register verification
 			
 			if(aname=='pwd' && (aval.length<6 || aval.length>16 ||!pwd.test(aval)))
 			{
-				maxalert('Password should be a combination of 6-16 letters and numbers!')
+				maxalert('Password should be a combination of 6-16 lower case letters,uppercase letter and numbers!')
 				return false;
 			}
 			
