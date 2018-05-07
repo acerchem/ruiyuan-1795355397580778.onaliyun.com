@@ -393,6 +393,7 @@ public class LoginPageController extends AbstractLoginPageController
 		user.setPassword(form.getPwd());
 		user.setCreditAccount(ca);
 		user.setCompanyName(form.getCompanyName());
+		user.setType(CustomerType.AUDITING);
 		
 		modelService.saveAll(user,pn2,am2,am,ca);
 		return user;
