@@ -514,6 +514,21 @@
 					<modifiers read="true" write="true" search="true" optional="true"/>
 					<persistence type="property"/>
 				</attribute>
+				
+				
+				<attribute type="java.lang.String" qualifier="formulaWeight">
+						<modifiers read="true" write="true" search="false"
+							optional="true" />
+						<persistence type="property" />
+						<description>分子量</description>
+					</attribute>
+					
+				<attribute type="java.lang.String" qualifier="otherName">
+					<modifiers read="true" write="true" search="false"
+						optional="true" />
+					<persistence type="property" />
+					<description>别名</description>
+				</attribute>
 
 
 				</attributes>

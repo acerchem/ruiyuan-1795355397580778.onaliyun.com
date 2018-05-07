@@ -26,6 +26,15 @@
 		<property name="certificatess" type="java.util.List&lt;com.acerchem.facades.product.data.CertificatessData>"/>
 		
 		<property name="vendor" type="com.acerchem.facades.product.data.VendorData"/>
+		
+		<property name="specification" type="String" />
+		
+		<property name="CAS" type="String" />
+		
+		<property name="formulaWeight" type="String" />
+		
+		<property name="otherName" type="String" />
+		
 
 	</bean>
 

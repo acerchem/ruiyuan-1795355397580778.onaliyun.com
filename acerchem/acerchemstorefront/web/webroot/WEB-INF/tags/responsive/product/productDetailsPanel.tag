@@ -267,7 +267,7 @@
 		<div class="m-pagecard">
 			<div class="card">
 				<span class="now">Product Description</span>
-				<span>Revews</span>
+				<!-- <span>Revews</span> -->
 			</div>
 		</div>
 		<!-- down -->
@@ -283,67 +283,50 @@
 							</div>
 						</div> -->
 						<ul class="g-desclist">
+					    	${product.summary}
 							${product.description}
 						</ul>
 						<div class="g-descblock">
-							<div class="title">Specs</div>
+							<div class="title">Additional Information</div>
 							<ul class="g-table">	
-														
 								<li>
-									<span>Vendor</span>
-									<c:if test="${not empty product.vendor}">
-									<span>${product.vendor.name}</span>
-									</c:if>
+									<span>Other Names</span>
+									<span>${product.otherName}</span>
 								</li>
 								<li>
-									<span>Certifications</span>
-									<span>Organic,Kosher, ISO 22000</span>
+									<span>Quality Standard</span>
+									<span>${product.specification}</span>
 								</li>	
 								<li>
-									<span>Annual Export Amount</span>
-									<span>EURO 4 million</span>
+									<span>CAS</span>
+									<span>${product.CAS}</span>
 								</li>
-								
 								<li>
-									<span>Major Ingredients</span>
-									<span>Hulled/Shelled hemp seeds ,Hemp seed protein powder ,Cold pressed hempseed oil</span>
-								</li>	
-								<li>
-									<span>Plant Part Used</span>
-									<span> Seed</span>
-								</li>	
-								<li>
-									<span>Processing Method</span>
-									<span>Drying</span>
-								</li>			
+									<span>Chemical Formula</span>
+									<span>${product.chemicalInfo}</span>
+								</li>
 							</ul>
 						</div>
 						<div class="g-descblock">
-							<div class="title">Additional Information</div>
+						<div class="title">&nbsp &nbsp</div>
+							
 							<ul class="g-table">								
+								
+								
 								<li>
-									<span>SKU</span>
-									<span>97801-20KG-BAG-CANAH</span>
-								</li>
-								<li>
-									<span>CAS</span>
-									<span>N/A</span>
+									<span>Molecular Weight</span>
+									<span>${product.formulaWeight}</span>
 								</li>	
 								<li>
-									<span>Chemical Formula</span>
-									<span>N/A</span>
+									<span>Manufacturer</span>
+									<c:if test="${not empty product.vendor}">
+									<span>${product.vendor.name}</span>
+									</c:if>
 								</li>	
-								<li>
-									<span>Solubility</span>
-									<span>Insoluble in water</span>
-								</li>
+								
 								<li>
 									<span>Package Type</span>
-									<span>110 : 20 kg Bag</span>
-								</li>	
-								<li>
-									<span>Country Of Origin	</span>
-									<span> Romania</span>
+									<span> ${product.netWeight}${product.unitName}/${product.packageType}</span>
 								</li>	
 											
 							</ul>
@@ -351,7 +334,7 @@
 					</div>
 					<!-- descr end -->
 					<!-- revews -->
-					<div class="m-cardwrap revews">
+					<!-- <div class="m-cardwrap revews">
 						<ul class="m-revlist">
 							<li>
 								<div class="party">
@@ -383,7 +366,7 @@
 
 
 						</ul>
-					</div>
+					</div> -->
 					<!-- revews end -->
 				</div>
 

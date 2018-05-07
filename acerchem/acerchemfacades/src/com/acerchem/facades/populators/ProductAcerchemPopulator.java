@@ -34,6 +34,14 @@ public class ProductAcerchemPopulator<SOURCE extends ProductModel, TARGET extend
 		productData.setNetWeight(safeToString(getProductAttribute(productModel, ProductModel.NETWEIGHT)));
 		productData.setGrossWeight(safeToString(getProductAttribute(productModel, ProductModel.GROSSWEIGHT)));
 		
+		productData.setCAS(safeToString(getProductAttribute(productModel, ProductModel.CAS)));
+		
+		productData.setSpecification(safeToString(getProductAttribute(productModel, ProductModel.SPECIFICATION)));
+		
+		productData.setOtherName(safeToString(getProductAttribute(productModel, ProductModel.OTHERNAME)));
+		
+		productData.setFormulaWeight(safeToString(getProductAttribute(productModel, ProductModel.FORMULAWEIGHT)));
+		
 		VendorData data = new VendorData();
 		if (productModel.getAcerChemVendor()!= null){
 			data.setName(productModel.getAcerChemVendor().getName());
