@@ -64,7 +64,10 @@ import de.hybris.platform.converters.Populator;
 import de.hybris.platform.core.PK;
 import de.hybris.platform.core.enums.OrderStatus;
 import de.hybris.platform.core.model.c2l.CountryModel;
+import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
+import de.hybris.platform.core.model.order.AbstractOrderModel;
 import de.hybris.platform.core.model.order.OrderModel;
+import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
@@ -82,13 +85,18 @@ import de.hybris.platform.store.BaseStoreModel;
 import de.hybris.platform.store.services.BaseStoreService;
 import de.hybris.platform.util.Config;
 
+import com.acerchem.core.model.CountryTrayFareConfModel;
 import com.acerchem.core.service.AcerchemStockService;
+import com.acerchem.core.service.AcerchemTrayService;
 import com.acerchem.service.customercreditaccount.DefaultCustomerCreditAccountService;
 import com.acerchem.storefront.controllers.ControllerConstants;
 import com.acerchem.storefront.data.CustomRegisterForm;
 
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -110,6 +118,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -1271,12 +1280,50 @@ public class AccountPageController extends AbstractSearchPageController
 	    Date date=c.getTime();
 		if(order.getPickupDateOfExtended()==null&&maxday>=days)
 		{
-			order.setPickupDateOfExtended(date);
-	  		modelService.save(order);
-	  		modelService.refresh(order);
+		    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		    String waitDelivereyDate = sdf.format(date);
+		    Calendar ca = Calendar.getInstance();
+		    try 
+		    {
+		    	ca.setTime(sdf.parse(waitDelivereyDate));
+		    	ca.add(Calendar.DATE, getTotalPriceForCart(order));// num为增加的天数，可以改变的
+		    	waitDelivereyDate = sdf.format(ca.getTime());
+		    	Date endDate = sdf.parse(waitDelivereyDate);
+		    	order.setWaitDeliveiedDate(endDate);
+		    	order.setPickupDateOfExtended(date);
+		  		modelService.save(order);
+		  		modelService.refresh(order);
+		    } catch (ParseException e1) {
+		    	e1.printStackTrace();
+		    }
 		}
 		
 		return order(orderCode,model,redirectModel);
+	}
+	
+	@Resource
+	private AcerchemTrayService acerchemTrayService;
+	
+	private  Integer getTotalPriceForCart(AbstractOrderModel order){
+		CountryModel countryModel = null;
+		BigDecimal totalTrayAmount = BigDecimal.ZERO;
+		if (order!=null){
+			for (AbstractOrderEntryModel aoe : order.getEntries()){
+				if (aoe.getDeliveryPointOfService().getAddress()!=null) {
+					countryModel = aoe.getDeliveryPointOfService().getAddress().getCountry();
+				}
+				ProductModel productModel = aoe.getProduct();
+				String unitCalculateRato = productModel.getUnitCalculateRato();
+				if (ObjectUtils.isEmpty(unitCalculateRato)){
+					
+				}
+				Long quantity = aoe.getQuantity();
+				BigDecimal entryTrayAmount = BigDecimal.valueOf(quantity).divide(new BigDecimal(unitCalculateRato),BigDecimal.ROUND_HALF_UP,BigDecimal.ROUND_DOWN);
+				totalTrayAmount =totalTrayAmount.add(entryTrayAmount);
+			}
+		}
+		CountryTrayFareConfModel countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(countryModel, (int) Math.ceil(totalTrayAmount.doubleValue()));
+		return countryTrayFareConf.getDeliveriedDay();
 	}
 	
 	@Resource
