@@ -29,7 +29,7 @@ public class RecordConsignmentInfoAction extends AbstractSimpleDecisionAction<Or
 		// TODO Auto-generated method stub
 		LOG.info("=================RecordConsignmentInfoAction================");
 		final OrderModel order = process.getOrder();
-		if(order.getConsignments().size() > 0){
+		/*if(order.getConsignments().size() > 0){
 			for(ConsignmentModel consignment : order.getConsignments()){
 				if(consignment.getConsignmentEntries().size()>0){
 					return Transition.OK;
@@ -39,7 +39,7 @@ public class RecordConsignmentInfoAction extends AbstractSimpleDecisionAction<Or
 			}
 		}else{
 			return Transition.NOK;
-		}
+		}*/
 		return Transition.OK;
 	}
 }
