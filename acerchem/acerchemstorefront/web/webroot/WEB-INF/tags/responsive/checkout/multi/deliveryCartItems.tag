@@ -34,7 +34,7 @@
    		</div>
    		<div class="maxtext">
     		<p class="in-title">${fn:escapeXml(entry.product.name)}</p>
-    		<p class="spec">Specifications:<i>50kg</i></p>
+    		<p class="spec">package:<i>${entry.product.netWeight}${entry.product.unitName} &nbsp ${entry.product.packageType}</i></p>
     		<div class="spset">
     			<span class="price">
     			    <format:price priceData="${entry.basePrice}" displayFreeForZero="true" />
@@ -49,10 +49,6 @@
 
 </ul>
 
-<div class="Summary">
-	<span>Part of your order qualifies for FREE Shipping;</span>
-	<span>span.Buy 2 items  sales to 10% Off; </span>
-</div>
 
 <div class="list">
 	<div class="item">
