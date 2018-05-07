@@ -12,9 +12,12 @@
         document.documentElement.style.fontSize = fontValue + '%';
     }
     
+$(window).ready(function(){
+  
 
 //gotop
 $('.gotop').on('click',function(){
+  console.log('to top')
   $("body").animate({scrollTop:0},300);
 })
 
@@ -37,4 +40,7 @@ $('#search .lab-row').on('focus',function(e){
 $('#search .btn-submit').on('click',function(){
   $('#search').submit();
 })
+
+})
+
 
