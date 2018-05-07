@@ -1,28 +1,18 @@
 package com.acerchem.facades.populators;
 
+import de.hybris.platform.commercefacades.product.converters.populator.ProductPopulator;
 import de.hybris.platform.commercefacades.product.data.ProductData;
-import de.hybris.platform.converters.Populator;
 import de.hybris.platform.core.model.product.ProductModel;
-import de.hybris.platform.core.model.product.UnitModel;
-import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 
-public class AcerchemProductPopulator implements Populator<ProductModel, ProductData> {
-
+public class AcerchemProductPopulator extends ProductPopulator{
+	
 	@Override
-	public void populate(ProductModel source, ProductData target) throws ConversionException {
-		// TODO Auto-generated method stub
-		
-		target.setPackageType(source.getPackageType());
-		target.setPackageWeight(source.getPackageWeight());
+	public void populate(final ProductModel source, final ProductData target)
+	{
+		super.populate(source, target);
 		target.setNetWeight(source.getNetWeight());
-		target.setGrossWeight(source.getGrossWeight());
-		
-		UnitModel uModel = source.getUnit();
-		if(uModel!=null){
-			target.setUnitName(uModel.getCode());
-		}
 	}
 	
-	
-
 }
+
+

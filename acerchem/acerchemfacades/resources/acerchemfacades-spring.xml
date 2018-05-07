@@ -433,11 +433,11 @@
 		<property name="add" ref="acerchemOrderOfEmailContextPopuulator"/>
 	</bean>
 
-	<bean id="acerchemProductPopulator" class="com.acerchem.facades.populators.AcerchemProductPopulator" >
+	<bean id="acerchemProductOfEmailPopulator" class="com.acerchem.facades.populators.AcerchemProductOfEmailPopulator" >
 	</bean>
 	<bean parent="modifyPopulatorList">
 		<property name="list" ref="productConverter"/>
-		<property name="add" ref="acerchemProductPopulator"/>
+		<property name="add" ref="acerchemProductOfEmailPopulator"/>
 	</bean>
 
 	<alias name="customOrderPopulator" alias="orderPopulator"/>
