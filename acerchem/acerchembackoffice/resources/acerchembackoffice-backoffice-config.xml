@@ -78,7 +78,7 @@
 				<wz:assign property="newConsignmentEntry.orderEntry" value="ctx.parentObject" />
 			</wz:prepare>
 			<wz:step id="step1" label="create.UniasiaConfig.general.label" merge-mode="replace">
-				<wz:content id="step1.content">
+				<wz:content id="step1.content" merge-mode="replace">
 					<wz:property-list root="newConsignmentEntry" merge-mode="replace">
 						<wz:property qualifier="orderEntry"  />
 						<wz:property qualifier="quantity"  />
@@ -234,6 +234,7 @@
 			<list-view:column qualifier="country"/>
 			<list-view:column qualifier="trayAmount"/>
 			<list-view:column qualifier="price"/>
+			<list-view:column qualifier="deliveriedDay"/>
 		</list-view:list-view>
 	</context>
 
@@ -500,8 +501,8 @@
 				<wz:assign property="consignment.order" value="ctx.parentObject" />
 			</wz:prepare>
 			<wz:step id="step1" label="create.Consignment.general.label"  merge-mode="replace">
-				<wz:content id="step1.content">
-					<wz:property-list root="consignment">
+				<wz:content id="step1.content" merge-mode="replace">
+					<wz:property-list root="consignment" merge-mode="replace">
 						<wz:property qualifier="order"/>
 						<wz:property qualifier="code"/>
 					</wz:property-list>
