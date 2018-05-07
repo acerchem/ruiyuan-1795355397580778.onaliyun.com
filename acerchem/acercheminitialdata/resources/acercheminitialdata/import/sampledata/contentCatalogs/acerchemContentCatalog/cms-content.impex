@@ -42,7 +42,7 @@ INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@medi
 ;;/acerchemimages/maxbanner-bg.jpg;maxbanner-bg.jpg;$siteResource/acerchemimages/maxbanner-bg.jpg;image/jpeg;;
 
 ;;/acerchemimages/maxbanner-1.jpg;maxbanner-1.jpg;$siteResource/acerchemimages/maxbanner-1.jpg;image/jpeg;;
-;;/acerchemimages/maxbanner-2.jpg;maxbanner-2.jpg;$siteResource/acerchemimages/maxbanner-1.jpg;image/jpeg;;
+;;/acerchemimages/maxbanner-2.jpg;maxbanner-2.jpg;$siteResource/acerchemimages/maxbanner-2.jpg;image/jpeg;;
 ;;/acerchemimages/maxbanner-3.png;maxbanner-3.png;$siteResource/acerchemimages/maxbanner-3.png;image/png;;
 
 ;;maxmean1Preview;maxbanner-bg.jpg;$siteResource/acerchemimages/maxmean1.jpg;image/jpeg;;
