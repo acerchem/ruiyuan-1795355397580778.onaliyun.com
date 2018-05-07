@@ -684,5 +684,13 @@
 		<property name="modelService" ref="modelService"/>
 		<property name="businessProcessService" ref="businessProcessService"/>
 	</bean>
+	
+	<alias alias="emailGenerationService" name="defaultAcermEmailGenerationService"/>
+	<bean id="defaultAcermEmailGenerationService"
+	      class="com.acerchem.core.service.impl.DefaultAcermEmailGenerationService">
+		<property name="emailService" ref="emailService"/>
+		<property name="rendererService" ref="rendererService"/>
+		<property name="emailContextFactory" ref="emailContextFactory"/>
+	</bean>
 
 </beans>
