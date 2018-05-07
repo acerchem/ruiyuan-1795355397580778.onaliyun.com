@@ -238,7 +238,13 @@
 			
 				  <div class="g-table">
 					<div class="g-title">
-						<span>pickup date</span>
+						<c:if test="${deliveryMode.code=='DELIVERY_MENTION'}">
+							<span>pickup date</span>
+						</c:if>
+						
+						<c:if test="${deliveryMode.code=='DELIVERY_GROSS'}">
+							<span>delivery date</span>
+						</c:if>
 					</div>
 				  <div class="inside-cont">
 
