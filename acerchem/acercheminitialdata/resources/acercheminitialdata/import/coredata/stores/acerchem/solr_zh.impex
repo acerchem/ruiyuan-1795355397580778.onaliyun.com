@@ -22,7 +22,7 @@ $lang=zh
 UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=true];displayName[lang=$lang]
  ;$solrIndexedType;allPromotions;"促销"
  ;$solrIndexedType;availableInStores;"店铺"
- ;$solrIndexedType;brand;"品牌"
+ #;$solrIndexedType;brand;"品牌"
  ;$solrIndexedType;category;"类别"
  ;$solrIndexedType;code;"代码"
  ;$solrIndexedType;description;"描述"

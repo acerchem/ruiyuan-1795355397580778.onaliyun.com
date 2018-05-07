@@ -9,15 +9,8 @@
 
 	<extension abstractclassprefix="Generated" classprefix="AcerchemStorefront"
 		name="acerchemstorefront" usemaven="false">
-		<requires-extension name="notificationaddon" />
-		<requires-extension name="ordermanagementaddon" />
 		
-		<requires-extension name="customerticketingaddon" />
 		
-		<requires-extension name="consignmenttrackingaddon" />
-		<requires-extension name="orderselfserviceaddon" />
-		<requires-extension name="customerinterestsaddon" />
-		<requires-extension name="stocknotificationaddon" />
 		<requires-extension name="acceleratorstorefrontcommons" />
 		<requires-extension name="acerchemfacades" />
 

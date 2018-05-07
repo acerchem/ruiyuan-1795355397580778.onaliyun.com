@@ -20,10 +20,10 @@
 						</div>
 					</div>
 					<div class="slidewrap">
-						<div class="maxmark">
+						<!-- <div class="maxmark">
 							<h3>10</h3>
 			    			<p><em class="">%</em><em>OFF</em></p>
-			    		</div>
+			    		</div> -->
 						<ul class="slide-item">
 							 <c:forEach items="${galleryImages}" var="container" varStatus="varStatus">
 							<li class="item"><img src="${container.product.url}"  alt=""></li>
@@ -46,12 +46,34 @@
 						<span class="price"><format:fromPrice priceData="${product.price}"/></span>
 						<span class="old-price"><format:fromPrice priceData="${product.promotionPrice}"/></span>
 					</div>
-					<div class="Summary">
-						<span><i>FREE</i>Buy 2 pieces for FREE Shipping;</span>
-						<span><i>10% off</i>All goods Sales to 10% Off; </span>
-						<span><i>40%</i>Buy 400 items  sales to 40% Off;</span>
-					</div>
 					
+					<div class="Summary">
+						<c:forEach items="${product.potentialPromotions}" var="promotion"  varStatus="id"  >
+						    <c:if test="${id.index==0}">	
+						    <c:if test="${promotion.firedMessages ne null}"> 
+							    <c:forEach items="${promotion.firedMessages}" var="messages" >
+							    <c:set value="${ fn:split(messages, ',') }" var="arr"  />
+							     <span>
+								    <c:forEach items="${arr}" var="message" varStatus="i" >
+								      <c:if test="${i.index==0}">	
+								          <i>${message}% off</i>
+								      </c:if>
+								      
+								        <c:if test="${i.index==1}">	
+								      From minQuantity ${message}
+								      </c:if>
+								        <c:if test="${i.index==2}">	
+								       to maxQuantity ${message}
+								      </c:if>
+								    
+								    </c:forEach>
+							    
+							        </span>
+							    </c:forEach>
+							    </c:if>
+							</c:if>
+						</c:forEach>
+					</div>
 					
 					<div class="specnum">
 						 <div class="spec">
@@ -254,18 +276,14 @@
 				<div class="g-cell">					
 					<!-- descr -->
 					<div class="m-cardwrap descr">
-						<div class="m-note">
+						<!-- <div class="m-note">
 							<div class="title">Note</div>
 							<div class="text">
 								These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure or prevent any disease. <br/>*All product pictures are for display purposes only, it may not reflect the exact product color or mesh size, please refer to spec sheet for details.
 							</div>
-						</div>
+						</div> -->
 						<ul class="g-desclist">
-							<li>50% protein, as know, protein contributes to the growth and maintenance of muscle mass</li>
-							<li>Hemp protein is considered complete plant-based protein, including all the 21 amino acids, as well as all the 8 essential amino acids</li>
-							<li>Easy digestible, duo to the content of albumin and edestin</li>
-							<li>High in vitamins (complex B) & minerals (Potassium, Phosphorus, Magnesium, Iron, Zinc, Copper, Manganese). High in Omega 3 fatty acids</li>
-							<li>High in vitamins (complex B) & minerals (Potassium, Phosphorus, Magnesium, Iron, Zinc, Copper, Manganese). High in Omega 3 fatty acids</li>
+							${product.description}
 						</ul>
 						<div class="g-descblock">
 							<div class="title">Specs</div>

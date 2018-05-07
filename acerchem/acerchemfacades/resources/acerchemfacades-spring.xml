@@ -234,6 +234,30 @@
 	
 	</bean>
 	
+		<!-- Promotion info -->
+		<alias name="defaultAcerchemPromotionsPopulator" alias="promotionsPopulator"/>
+	<bean id="defaultAcerchemPromotionsPopulator"
+			class=" com.acerchem.facades.populators.AcerchemPromotionsPopulator">
+		<property name="cartService" ref="cartService"/>
+		<property name="promotionResultService" ref="promotionResultService"/>
+		<property name="promotionService" ref="promotionsService"/>
+	</bean>
+	
+		<!--net weight info-->
+	<alias name="defaultProductNetWeightPopulator" alias="productNetWeightPopulator"/>
+	<bean id="defaultProductNetWeightPopulator" parent="baseProductPopulator"
+			class="com.acerchem.facades.populators.ProductNetWeightPopulator">
+	</bean>
+	
+	<alias name="defaultOrderEntryProductConverter" alias="orderEntryProductConverter"/>
+	<bean id="defaultOrderEntryProductConverter" parent="defaultProductConverter">
+		<property name="populators">
+			<list merge="true">
+				<ref bean="productNetWeightPopulator"/>
+			</list>
+		</property>
+	</bean>
+	
 	<!-- add by alice -->
 	<alias name="yacceleratorProductPricePopulator1" alias="productPricePopulator" />
 	<bean id="yacceleratorProductPricePopulator1" parent="defaultProductPricePopulator" class="com.acerchem.facades.storefinder.populators.ProductPricePopulator1" >
@@ -324,6 +348,11 @@
 			</list>
 		</property>
 	</bean>
+	
+	<alias name="acerchemProductPopulator" alias="productPopulator"/>
+	<bean id="acerchemProductPopulator" class="com.acerchem.facades.populators.AcerchemProductPopulator" parent="defaultProductPopulator">
+	</bean>
+	
 	<!-- end -->
 
 	<alias name="defaultAcerchemCustomerFacade" alias="acerchemCustomerFacade"/>
@@ -402,6 +431,13 @@
 	<bean parent="modifyPopulatorList">
 		<property name="list" ref="orderConverter"/>
 		<property name="add" ref="acerchemOrderOfEmailContextPopuulator"/>
+	</bean>
+
+	<bean id="acerchemProductPopulator" class="com.acerchem.facades.populators.AcerchemProductPopulator" >
+	</bean>
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="productConverter"/>
+		<property name="add" ref="acerchemProductPopulator"/>
 	</bean>
 
 	<alias name="customOrderPopulator" alias="orderPopulator"/>
