@@ -75,12 +75,11 @@
 		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="ConsignmentEntryConfigWizard">
 			<wz:prepare id="ConsignmentEntryPrepare">
 				<wz:initialize property="newConsignmentEntry" type="ctx.TYPE_CODE" /> 
-				<wz:assign property="newConsignmentEntry.consignment" value="ctx.parentObject" />
+				<wz:assign property="newConsignmentEntry.orderEntry" value="ctx.parentObject" />
 			</wz:prepare>
 			<wz:step id="step1" label="create.UniasiaConfig.general.label" merge-mode="replace">
-				<wz:content id="step1.content" merge-mode="replace">
+				<wz:content id="step1.content">
 					<wz:property-list root="newConsignmentEntry" merge-mode="replace">
-						<wz:property qualifier="consignment"  />
 						<wz:property qualifier="orderEntry"  />
 						<wz:property qualifier="quantity"  />
 						<wz:property qualifier="batchNum"  />
@@ -88,10 +87,7 @@
 				</wz:content>
 				<wz:navigation id="step1.navigation">
 					<wz:cancel/>
-					<wz:done>
-						<!-- <wz:save property="newConsignmentEntry"/> -->
-						<wz:custom label="done" visible="true" handler="acerchemSaveConsignmentHandler"/>
-					</wz:done>
+						<wz:custom label="Done"  handler="acerchemSaveConsignmentHandler"/>
 				</wz:navigation>
 			</wz:step>
 		</wz:flow>
@@ -322,7 +318,7 @@
 					<explorer-tree:type-node code="Task" id="hmc_typenode_task"/>
 					<explorer-tree:type-node code="TaskCondition" id="hmc_typenode_taskcondition"/>
 				</explorer-tree:navigation-node>
-				<explorer-tree:type-node code="Type" id="hmc_typenode_type" merge-mode="Remove"/>
+				<explorer-tree:type-node code="Type" id="hmc_typenode_type"/>
 				<explorer-tree:type-node code="SavedQuery" id="hmc_typenode_savedquery" merge-mode="Remove"/>
 				<explorer-tree:type-node code="BackofficeSavedQuery" id="hmc_typenode_backofficesavedquery" merge-mode="Remove"/>
 				<explorer-tree:type-node code="ViewType" id="hmc_typenode_viewtype" merge-mode="Remove"/>
@@ -503,7 +499,7 @@
 				<wz:assign property="consignment.order" value="ctx.parentObject" />
 			</wz:prepare>
 			<wz:step id="step1" label="create.Consignment.general.label"  merge-mode="replace">
-				<wz:content id="step1.content" merge-mode="replace">
+				<wz:content id="step1.content">
 					<wz:property-list root="consignment">
 						<wz:property qualifier="order"/>
 						<wz:property qualifier="code"/>
@@ -511,10 +507,7 @@
 				</wz:content>
 				<wz:navigation id="step1.navigation">
 					<wz:cancel/>
-					<wz:done>
-						<!-- <wz:save property="consignment"/> -->
-						<wz:custom label="done" visible="true" handler="acerchemSaveConsignmentHandler"/>
-					</wz:done>
+						<wz:custom label="Done"  handler="acerchemSaveConsignmentHandler"/>
 				</wz:navigation>
 			</wz:step>
 		</wz:flow>
@@ -555,7 +548,6 @@
 	
 	<context merge-by="type" parent="User" type="Customer" component="listview">
 		<list-view:list-view>
-			<list-view:column qualifier="unAudited"/>
 			<list-view:column qualifier="type"/>
 		</list-view:list-view>
 	</context>
@@ -563,16 +555,16 @@
 	<context merge-by="type" parent="User" type="Customer" component="advanced-search">
         <advanced-search:advanced-search>
             <advanced-search:field-list>
-            		<advanced-search:field name="unAudited" selected="true"/>
             		<advanced-search:field name="type" selected="true"/>
             </advanced-search:field-list>
         </advanced-search:advanced-search>
     </context>
     
-    <!-- <context component="create-wizard" type="StockLevel">
+    <context component="create-wizard" type="StockLevel">
         <wz:flow id="StockLevelWizard" title="create.title(ctx.TYPE_CODE)">
             <wz:prepare id="stockLevelPrepare">
                 <wz:initialize property="newStockLevel" type="ctx.TYPE_CODE"/>
+                <wz:assign property="newStockLevel.product" value="ctx.parentObject" />
                 <wz:assign property="newStockLevel.productCode" value="ctx.productCode"/>
                 <wz:assign property="newStockLevel.warehouse" value="ctx.warehouse"/>
             </wz:prepare>
@@ -612,7 +604,7 @@
                 </wz:navigation>
             </wz:step>
         </wz:flow>
-    </context> -->
+    </context>
     
 
 </config>

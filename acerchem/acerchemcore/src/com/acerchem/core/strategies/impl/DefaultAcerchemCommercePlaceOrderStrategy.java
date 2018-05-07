@@ -10,12 +10,33 @@
  */
 package com.acerchem.core.strategies.impl;
 
+import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNull;
+
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Collections;
+import java.util.Date;
+
+import javax.annotation.Resource;
+
+import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Required;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.ObjectUtils;
+
+import com.acerchem.core.model.CountryTrayFareConfModel;
 import com.acerchem.core.service.AcerchemStockService;
+import com.acerchem.core.service.AcerchemTrayService;
 import com.acerchem.core.strategies.AcerchemCommercePlaceOrderStrategy;
+
 import de.hybris.platform.commerceservices.order.impl.DefaultCommercePlaceOrderStrategy;
 import de.hybris.platform.commerceservices.service.data.CommerceCheckoutParameter;
 import de.hybris.platform.commerceservices.service.data.CommerceOrderResult;
+import de.hybris.platform.core.model.c2l.CountryModel;
 import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
+import de.hybris.platform.core.model.order.AbstractOrderModel;
 import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.product.ProductModel;
@@ -26,16 +47,6 @@ import de.hybris.platform.order.exceptions.CalculationException;
 import de.hybris.platform.ordersplitting.model.WarehouseModel;
 import de.hybris.platform.promotions.model.PromotionResultModel;
 import de.hybris.platform.stock.exception.InsufficientStockLevelException;
-import de.hybris.platform.tx.Transaction;
-import org.apache.log4j.Logger;
-import org.springframework.beans.factory.annotation.Required;
-import org.springframework.transaction.annotation.Transactional;
-
-import javax.annotation.Resource;
-import java.util.Collections;
-import java.util.Date;
-
-import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNull;
 
 
 public class DefaultAcerchemCommercePlaceOrderStrategy extends DefaultCommercePlaceOrderStrategy implements AcerchemCommercePlaceOrderStrategy
@@ -43,6 +54,9 @@ public class DefaultAcerchemCommercePlaceOrderStrategy extends DefaultCommercePl
 	private static final Logger LOG = Logger.getLogger(DefaultAcerchemCommercePlaceOrderStrategy.class);
 
 	private AcerchemStockService acerchemStockService;
+	
+	@Resource
+	private AcerchemTrayService acerchemTrayService;
 
 	@Transactional
 	@Override
@@ -94,6 +108,23 @@ public class DefaultAcerchemCommercePlaceOrderStrategy extends DefaultCommercePl
 					orderModel.getPaymentInfo().setBillingAddress(getModelService().clone(billingAddress));
 					getModelService().save(orderModel.getPaymentInfo());
 				}
+				
+				//添加预期到货时间日期
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				String waitDelivereyDate = sdf.format(orderModel.getPickUpDate());
+				Calendar ca = Calendar.getInstance();
+				try {
+					ca.setTime(sdf.parse(waitDelivereyDate));
+					ca.add(Calendar.DATE, getTotalPriceForCart(orderModel));// num为增加的天数，可以改变的\
+					waitDelivereyDate = sdf.format(ca.getTime());
+					Date endDate = sdf.parse(waitDelivereyDate);
+					orderModel.setWaitDeliveiedDate(endDate);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+				
 				getModelService().save(orderModel);
 				// Transfer promotions to the order
 				getPromotionsService().transferPromotionsToOrder(cartModel, orderModel, false);
@@ -152,4 +183,35 @@ public class DefaultAcerchemCommercePlaceOrderStrategy extends DefaultCommercePl
 	public void setAcerchemStockService(AcerchemStockService acerchemStockService) {
 		this.acerchemStockService = acerchemStockService;
 	}
+	
+	 private  Integer getTotalPriceForCart(AbstractOrderModel order){
+			CountryModel countryModel = null;
+			//托盘数量
+			BigDecimal totalTrayAmount = BigDecimal.ZERO;
+			if (order!=null){
+
+				for (AbstractOrderEntryModel aoe : order.getEntries()){
+
+					if (aoe.getDeliveryPointOfService().getAddress()!=null) {
+						countryModel = aoe.getDeliveryPointOfService().getAddress().getCountry();
+					}
+					ProductModel productModel = aoe.getProduct();
+					//先获取托盘比例，在计算数量
+					String unitCalculateRato = productModel.getUnitCalculateRato();
+					if (ObjectUtils.isEmpty(unitCalculateRato)){
+						
+					}
+					Long quantity = aoe.getQuantity();
+
+					//托盘数量
+					BigDecimal entryTrayAmount = BigDecimal.valueOf(quantity).divide(new BigDecimal(unitCalculateRato),BigDecimal.ROUND_HALF_UP,BigDecimal.ROUND_DOWN);
+
+					totalTrayAmount =totalTrayAmount.add(entryTrayAmount);
+				}
+			}
+
+			CountryTrayFareConfModel countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(countryModel, (int) Math.ceil(totalTrayAmount.doubleValue()));
+			
+			return countryTrayFareConf.getDeliveriedDay();
+		}
 }

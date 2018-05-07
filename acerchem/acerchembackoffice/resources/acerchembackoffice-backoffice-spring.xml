@@ -22,7 +22,7 @@
   	</bean>
   	
   	<bean id="acerchemSaveConsignmentHandler"
-	      class="com.acerchem.handle.AcerchemSaveConsignmentHandler">
+	      class="com.acerchem.handle.AcerchemSaveConsignmentHandler" >
 		<property name="modelService" ref="modelService"/>
 	</bean>
   	

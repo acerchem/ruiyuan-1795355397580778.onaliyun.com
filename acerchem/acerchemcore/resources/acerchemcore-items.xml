@@ -646,6 +646,11 @@
 						<persistence type="property" />
 						<modifiers />
 					</attribute>
+					<attribute qualifier="deliveriedDay" type="java.lang.Integer">
+						<description>发货天数</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
 				</attributes>
 			</itemtype>
 
