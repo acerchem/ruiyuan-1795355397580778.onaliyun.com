@@ -37,7 +37,7 @@ import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.tx.Transaction;
-
+import de.hybris.platform.commerceservices.enums.CustomerType;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
