@@ -225,6 +225,7 @@
             <list-view:column qualifier="levelName"/>
             <list-view:column qualifier="levelCode"/>
             <list-view:column qualifier="discount"/>
+            <list-view:column qualifier="deliveriedDay"/>
         </list-view:list-view>
     </context>
 
