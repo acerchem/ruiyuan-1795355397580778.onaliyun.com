@@ -51,16 +51,16 @@ public class AcerchemSaveConsignmentHandler implements FlowActionHandler
 						consignmentModel.setShippingAddress(consignmentEntryModel.getOrderEntry().getDeliveryPointOfService().getAddress());
 						consignmentModel.setOrder(consignmentEntryModel.getOrderEntry().getOrder());
 					}
-				}
-			}else{
-				if(consignmentEntryModel.getOrderEntry().getDeliveryPointOfService() != null && consignmentEntryModel.getOrderEntry().getDeliveryPointOfService().getWarehouses() != null){
-					consignmentModel.setWarehouse(consignmentEntryModel.getOrderEntry().getDeliveryPointOfService().getWarehouses().get(0));
-				}
-				if(consignmentEntryModel.getOrderEntry().getOrder() != null){
-					if(consignmentEntryModel.getOrderEntry().getOrder().getDeliveryAddress() != null){
-						consignmentModel.setShippingAddress(consignmentEntryModel.getOrderEntry().getOrder().getDeliveryAddress());
+				}else{
+					if(consignmentEntryModel.getOrderEntry().getDeliveryPointOfService() != null && consignmentEntryModel.getOrderEntry().getDeliveryPointOfService().getWarehouses() != null){
+						consignmentModel.setWarehouse(consignmentEntryModel.getOrderEntry().getDeliveryPointOfService().getWarehouses().get(0));
 					}
-					consignmentModel.setOrder(consignmentEntryModel.getOrderEntry().getOrder());
+					if(consignmentEntryModel.getOrderEntry().getOrder() != null){
+						if(consignmentEntryModel.getOrderEntry().getOrder().getDeliveryAddress() != null){
+							consignmentModel.setShippingAddress(consignmentEntryModel.getOrderEntry().getOrder().getDeliveryAddress());
+						}
+						consignmentModel.setOrder(consignmentEntryModel.getOrderEntry().getOrder());
+					}
 				}
 			}
 		}
