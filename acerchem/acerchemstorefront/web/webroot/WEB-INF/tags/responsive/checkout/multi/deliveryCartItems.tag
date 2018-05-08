@@ -322,6 +322,8 @@
 		</tr>
 		</tbody>
 	</table>
+	<button onclick = "document.getElementById('light').style.display='none';document.getElementById('fade').style.display='none'">close</button>
+	
 </div>
 <div id="fade" class="black_overlay"></div>
 <style> 
