@@ -129,8 +129,8 @@
 		<property name="paybackAmount" type="java.math.BigDecimal" /><!-- 
 			还款金额 -->
 		<property name="isPayback" type="java.lang.Boolean" /><!-- 是否已还款 -->
-		<property name="paybackTime" type="java.lang.long" /><!-- 实际还款日期 -->
-		<property name="shouldPaybackTime" type="java.lang.long" /><!-- 
+		<property name="paybackTime" type="java.util.Date" /><!-- 实际还款日期 -->
+		<property name="shouldPaybackTime" type="java.util.Date" /><!-- 
 			还款日 -->
 		<property name="cransactionId" type="java.lang.String" />
 		<property name="creditAccount"

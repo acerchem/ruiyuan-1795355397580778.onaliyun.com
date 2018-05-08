@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -86,7 +87,13 @@ public class DefaultCustomerCreditAccountServiceImpl implements DefaultCustomerC
 	                            creditTransaction.setIsPayback(FALSE);
 	
 	                            creditTransaction.setCransactionId(UUID.randomUUID().toString());
-	                            creditTransaction.setShouldPaybackTime(System.currentTimeMillis() + billingInterval);
+	                            
+	                            Calendar c = Calendar.getInstance(); 
+	                    		c.setTime(new Date()); 
+	                    	    c.set(Calendar.DATE,c.get(Calendar.DATE)+billingInterval); 
+	                    	    Date date=c.getTime();
+	                            
+	                            creditTransaction.setShouldPaybackTime(date);
 	                            creditTransaction.setCreditAccount(customerCreditAccount);
 	                            
 	                            creditTransaction.setOrderCode(orderModel.getCode());
@@ -134,9 +141,7 @@ public class DefaultCustomerCreditAccountServiceImpl implements DefaultCustomerC
                     if (StringUtils.isNotBlank(creditTransaction.getOrderCode()) && creditTransaction.getIsPayback()==false) {
                         LOG.info("creditTransaction.getOrderCode()=" + creditTransaction.getOrderCode());
                         creditTransaction.setPaybackAmount(creditTransaction.getCreaditUsedAmount());
-                        //creditTransaction.setCreationtime(new Date());
-                        creditTransaction.setPaybackTime(System.currentTimeMillis());
-
+                        creditTransaction.setPaybackTime(new Date());
                         creditTransaction.setIsPayback(TRUE);
                         creditTransaction.setCreditAccount(customerCreditAccount);
 
