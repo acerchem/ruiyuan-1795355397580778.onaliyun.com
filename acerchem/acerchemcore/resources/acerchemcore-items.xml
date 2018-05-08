@@ -762,12 +762,12 @@
 						<modifiers read="true" write="true" search="true" />
 						<persistence type="property" />
 					</attribute>
-					<attribute qualifier="paybackTime" type="java.lang.long">
+					<attribute qualifier="paybackTime" type="java.util.Date">
 						<description>实际还款日期</description>
 						<modifiers read="true" write="true" search="true" />
 						<persistence type="property" />
 					</attribute>
-					<attribute qualifier="shouldPaybackTime" type="java.lang.long">
+					<attribute qualifier="shouldPaybackTime" type="java.util.Date">
 						<description>还款日</description>
 						<modifiers read="true" write="true" search="true" />
 						<persistence type="property" />
