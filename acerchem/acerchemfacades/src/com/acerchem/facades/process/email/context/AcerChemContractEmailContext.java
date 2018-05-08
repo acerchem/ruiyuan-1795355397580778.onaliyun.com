@@ -1,7 +1,5 @@
 package com.acerchem.facades.process.email.context;
 
-import java.math.BigDecimal;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -42,10 +40,9 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 	private ContractEmailContextPoJo append;
 	private String warehouse;
 	private String paymentTerms;
-	private CustomerModel customerModel;  
+	private CustomerModel customerModel;
 
 	private String moneyToWords;
-	
 
 	@Override
 	public void init(final OrderProcessModel orderProcessModel, final EmailPageModel emailPageModel) {
@@ -63,9 +60,9 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 		initCustomerAddress(orderProcessModel);
 		initAppend();
 		initPaymentTerms(orderProcessModel);
-		
+
 		customerModel = getCustomer(orderProcessModel);
-		
+
 	}
 
 	@Override
@@ -132,13 +129,8 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 		// add list
 		List<ProductItemDataOfEmail> list = new ArrayList<ProductItemDataOfEmail>();
 		List<OrderEntryData> orderEntries = orderData.getEntries();
-		String tempCode = "";
 
 		long quantity = 0;
-		double totalAmount = 0;
-		long subQuantity = 0;
-		double subAmount = 0;
-
 		if (CollectionUtils.isNotEmpty(orderEntries)) {
 			for (OrderEntryData orderEntry : orderEntries) {
 
@@ -146,42 +138,25 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 
 				ProductItemDataOfEmail pie = new ProductItemDataOfEmail();
 
-				if (StringUtils.isNotBlank(tempCode)) {
-					if (!tempCode.equals(product.getCode())) {
-						ProductItemDataOfEmail subtotalPie = new ProductItemDataOfEmail();
-
-						subtotalPie.setProductName("Total");
-
-						String formatDouble = new DecimalFormat("0.00").format(subAmount);
-						subtotalPie.setQuantity(String.valueOf(subQuantity));
-						subtotalPie.setAmount(formatDouble);
-						subtotalPie.setTotal(true);
-
-						list.add(subtotalPie);
-						
-						subQuantity = 0;
-						subAmount = 0;
-					}
-				}
-
-				tempCode = product.getCode();
-				pie.setProductCode(tempCode);
+				pie.setProductCode(product.getCode());
 				pie.setProductName(product.getName());
 				pie.setUnitName(product.getUnitName());
 
 				long longQuantity = orderEntry.getQuantity();
 				pie.setQuantity(String.valueOf(longQuantity));
 
-				PriceData priceData = orderEntry.getBasePrice();
-				BigDecimal amount = new BigDecimal(0);
-				if (priceData != null) {
-					pie.setPrice(priceData.getFormattedValue());
-					BigDecimal dPrice = priceData.getValue();
-					amount = dPrice.multiply(new BigDecimal(longQuantity));
-					pie.setAmount(amount.toString());
+				PriceData basePrice = orderEntry.getBaseRealPrice();
+				if (basePrice != null) {
+					pie.setPrice(basePrice.getFormattedValue());
 				} else {
 					pie.setPrice("0.00");
-					pie.setAmount("0.00");
+				}
+
+				PriceData amountPrice = orderEntry.getTotalRealPrice();
+				if (amountPrice != null) {
+					pie.setAmount(amountPrice.getFormattedValue());
+				} else {
+					pie.setPrice("0.00");
 				}
 
 				// pie.setPackageWeight(priceData);
@@ -194,22 +169,19 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 				pie.setTotal(false);
 
 				quantity += orderEntry.getQuantity();
-				subQuantity += orderEntry.getQuantity();
-				totalAmount += amount.doubleValue();
-				subAmount += amount.doubleValue();
+
 				list.add(pie);
 
 				// warehouse
 				if (StringUtils.isBlank(warehouse)) {
-					//String warehouseCode = orderEntry.getWarehouseCode();
-					PointOfServiceData  pos = orderEntry.getDeliveryPointOfService();
-					if (pos != null){
-					
-						setWarehouse(StringUtils.defaultString(pos.getAddress().getFormattedAddress(),"&nbsp;"));
-						
+					// String warehouseCode = orderEntry.getWarehouseCode();
+					PointOfServiceData pos = orderEntry.getDeliveryPointOfService();
+					if (pos != null) {
+
+						setWarehouse(StringUtils.defaultString(pos.getAddress().getFormattedAddress(), "&nbsp;"));
+
 					}
-					
-					
+
 				}
 
 			}
@@ -217,18 +189,23 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 
 		pojo.setProductLists(list);
 
-
-		//add moneyToWords
-		this.moneyToWords = AcerChemEmailContextUtils.getMoneyOfWord(String.valueOf(totalAmount),"$");
-		
 		// add total
 
-		 ProductTotalDataOfEmail totalData = new ProductTotalDataOfEmail();
+		String totalPriceStr = "0.00";
+		ProductTotalDataOfEmail totalData = new ProductTotalDataOfEmail();
 		totalData.setQuantity(String.valueOf(quantity));
-		totalData.setAmountTotal(new DecimalFormat("0.00").format(totalAmount));
-		// totalData.setNetWeight(String.valueOf(net));
-		// totalData.setGrossWeight(String.valueOf(gross));
-		 pojo.setTotalData(totalData);
+
+		PriceData totalPrice = orderData.getTotalPrice();
+		if (totalPrice != null) {
+			totalData.setAmountTotal(totalPrice.getFormattedValue());
+			totalPriceStr = totalPrice.getValue().toString();
+		}
+		pojo.setTotalData(totalData);
+
+		// add moneyToWords
+
+		// String totalPrice = orderData.getTotalPrice()
+		this.moneyToWords = AcerChemEmailContextUtils.getMoneyOfWord(String.valueOf(totalPriceStr), "$");
 
 		// add paymentTerms
 
@@ -237,7 +214,7 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 	}
 
 	public void initPaymentTerms(final OrderProcessModel orderProcessModel) {
-		
+
 		String paymentMode = orderData.getPaymentMode();
 		String terms = AcerChemEmailContextUtils.getPaymementTerms(orderProcessModel, paymentMode);
 		this.setPaymentTerms(terms);
@@ -254,7 +231,6 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 	public String getWarehouse() {
 		return warehouse;
 	}
-	
 
 	/**
 	 * @return the paymentTerms
@@ -279,7 +255,8 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 	}
 
 	/**
-	 * @param warehouse the warehouse to set
+	 * @param warehouse
+	 *            the warehouse to set
 	 */
 	public void setWarehouse(String warehouse) {
 		this.warehouse = warehouse;
