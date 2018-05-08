@@ -15,6 +15,7 @@ import javax.annotation.Resource;
 import org.apache.log4j.Logger;
 
 import com.acerchem.core.service.AcerchemStockService;
+import com.acerchem.service.customercreditaccount.DefaultCustomerCreditAccountService;
 import com.hybris.cockpitng.actions.ActionContext;
 import com.hybris.cockpitng.actions.ActionResult;
 import com.hybris.cockpitng.actions.CockpitAction;
@@ -43,6 +44,9 @@ public class EmployeeCancellOrderAction extends AbstractComponentWidgetAdapterAw
 	
 	@Resource
 	private EventService eventService;
+	
+	@Resource
+	private DefaultCustomerCreditAccountService defaultCustomerCreditAccountService;
 	
 	public EventService getEventService() {
 		return eventService;
@@ -77,12 +81,13 @@ public class EmployeeCancellOrderAction extends AbstractComponentWidgetAdapterAw
 		LOG.info("---------------------------------------"+order.getOrderProcess().iterator().next().getCode());
 		
 		if(order != null){
-			if (OrderStatus.COMPLETED.equals(order.getStatus()) || OrderStatus.DELIVERED.equals(order.getStatus()))
+			if (OrderStatus.COMPLETED.equals(order.getStatus()) || OrderStatus.DELIVERED.equals(order.getStatus()) || OrderStatus.UNCONFIRMDELIVERY.equals(order.getStatus()))
 			{
 				return new ActionResult("failed");
 			}else{
 				setOrderStatus(order, OrderStatus.CANCELLED);
 				acerchemStockService.releaseStock(order);
+				defaultCustomerCreditAccountService.updateCreditAccountRepaymentByOrder(order);
 				getEventService().publishEvent(new OrderCancelledEvent(order.getOrderProcess().iterator().next()));
 				LOG.info("--------------------------------end CancelOrderStatusAction----------------------");
 				return new ActionResult("success");
