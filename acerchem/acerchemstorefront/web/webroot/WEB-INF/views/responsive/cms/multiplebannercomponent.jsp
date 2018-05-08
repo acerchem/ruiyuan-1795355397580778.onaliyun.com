@@ -67,8 +67,8 @@
 			<li class="item4">
 				<a href="${contextPath}/article">
 				<div class="textmessge">
-					<p>If you have an opinion or advice </p>
-					<span>Send message</span>
+					<p>Here are some qualification documents</p>
+					<span>Documents</span>
 				</div>
 				<img src="${media.url}"/>
 				</a>
