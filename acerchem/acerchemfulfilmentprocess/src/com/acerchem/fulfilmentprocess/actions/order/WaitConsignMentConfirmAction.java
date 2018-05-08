@@ -34,7 +34,7 @@ public class WaitConsignMentConfirmAction extends AbstractSimpleDecisionAction<O
 	public Transition executeAction(final OrderProcessModel process)
 	{
 		final OrderModel order = process.getOrder();
-		setOrderStatus(order, OrderStatus.DELIVERED);
+		setOrderStatus(order, OrderStatus.UNCONFIRMDELIVERY);
 		if (order == null)
 		{
 			LOG.error("Missing the order, exiting the process");
@@ -48,7 +48,7 @@ public class WaitConsignMentConfirmAction extends AbstractSimpleDecisionAction<O
 		}
 		else
 		{
-			setOrderStatus(order, OrderStatus.UNDELIVERED);
+			setOrderStatus(order, OrderStatus.UNCONFIRMDELIVERY);
 			return Transition.NOK;
 		}
 	}
