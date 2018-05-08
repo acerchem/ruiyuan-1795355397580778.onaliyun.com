@@ -40,23 +40,32 @@ public class AcerchemSaveConsignmentHandler implements FlowActionHandler
 		LOG.info("--------------START AcerchemSaveConsignmentHandler-----------");
 		final ConsignmentEntryModel consignmentEntryModel =  adapter.getWidgetInstanceManager().getModel().getValue("newConsignmentEntry",
 				ConsignmentEntryModel.class);
-		consignmentEntryModel.getPk();
-		consignmentEntryModel.getOrderEntry().getDeliveryPointOfService().getWarehouses();
 		final ConsignmentModel consignmentModel = modelService.create(ConsignmentModel.class);
 		consignmentModel.setCode(String.valueOf(new Date().getTime()));
 		consignmentModel.setStatus(ConsignmentStatus.DELIVERING);
 		if(consignmentEntryModel.getOrderEntry() != null){
-			if(consignmentEntryModel.getOrderEntry().getOrder() != null){
-				if(consignmentEntryModel.getOrderEntry().getOrder().getDeliveryAddress() != null){
-					consignmentModel.setShippingAddress(consignmentEntryModel.getOrderEntry().getOrder().getDeliveryAddress());
+			if(consignmentEntryModel.getOrderEntry().getOrder() != null && consignmentEntryModel.getOrderEntry().getOrder().getDeliveryMode() != null){
+				if(consignmentEntryModel.getOrderEntry().getOrder().getDeliveryMode().getCode().equals("DELIVERY_MENTION")){
+					if(consignmentEntryModel.getOrderEntry().getDeliveryPointOfService() != null && consignmentEntryModel.getOrderEntry().getDeliveryPointOfService().getWarehouses() != null){
+						consignmentModel.setWarehouse(consignmentEntryModel.getOrderEntry().getDeliveryPointOfService().getWarehouses().get(0));
+						consignmentModel.setShippingAddress(consignmentEntryModel.getOrderEntry().getDeliveryPointOfService().getAddress());
+						consignmentModel.setOrder(consignmentEntryModel.getOrderEntry().getOrder());
+						consignmentModel.setDeliveryMode(consignmentEntryModel.getOrderEntry().getOrder().getDeliveryMode());
+					}
 				}
-				consignmentModel.setOrder(consignmentEntryModel.getOrderEntry().getOrder());
+			}else{
+				if(consignmentEntryModel.getOrderEntry().getDeliveryPointOfService() != null && consignmentEntryModel.getOrderEntry().getDeliveryPointOfService().getWarehouses() != null){
+					consignmentModel.setWarehouse(consignmentEntryModel.getOrderEntry().getDeliveryPointOfService().getWarehouses().get(0));
+				}
+				if(consignmentEntryModel.getOrderEntry().getOrder() != null){
+					if(consignmentEntryModel.getOrderEntry().getOrder().getDeliveryAddress() != null){
+						consignmentModel.setShippingAddress(consignmentEntryModel.getOrderEntry().getOrder().getDeliveryAddress());
+						consignmentModel.setDeliveryMode(consignmentEntryModel.getOrderEntry().getOrder().getDeliveryMode());
+					}
+					consignmentModel.setOrder(consignmentEntryModel.getOrderEntry().getOrder());
+				}
 			}
 		}
-		if(consignmentEntryModel.getOrderEntry() != null && consignmentEntryModel.getOrderEntry().getDeliveryPointOfService() != null && consignmentEntryModel.getOrderEntry().getDeliveryPointOfService().getWarehouses() != null){
-			consignmentModel.setWarehouse(consignmentEntryModel.getOrderEntry().getDeliveryPointOfService().getWarehouses().get(0));
-		}
-		
 		modelService.save(consignmentModel);
 		consignmentEntryModel.setConsignment(consignmentModel);
 		modelService.save(consignmentEntryModel);

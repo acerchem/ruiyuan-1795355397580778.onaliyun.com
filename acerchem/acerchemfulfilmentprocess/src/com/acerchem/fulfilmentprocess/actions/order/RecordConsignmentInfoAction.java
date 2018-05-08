@@ -12,9 +12,9 @@ package com.acerchem.fulfilmentprocess.actions.order;
 
 import org.apache.log4j.Logger;
 
+import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
-import de.hybris.platform.ordersplitting.model.ConsignmentModel;
 import de.hybris.platform.processengine.action.AbstractSimpleDecisionAction;
 import de.hybris.platform.task.RetryLaterException;
 
@@ -29,17 +29,13 @@ public class RecordConsignmentInfoAction extends AbstractSimpleDecisionAction<Or
 		// TODO Auto-generated method stub
 		LOG.info("=================RecordConsignmentInfoAction================");
 		final OrderModel order = process.getOrder();
-		/*if(order.getConsignments().size() > 0){
-			for(ConsignmentModel consignment : order.getConsignments()){
-				if(consignment.getConsignmentEntries().size()>0){
-					return Transition.OK;
-				}else{
-					return Transition.NOK;
-				}
+		for(AbstractOrderEntryModel orderEntry :order.getEntries()){
+			if(orderEntry.getConsignmentEntries().size()>0){
+				return Transition.OK;
+			}else{
+				return Transition.NOK;
 			}
-		}else{
-			return Transition.NOK;
-		}*/
+		}
 		return Transition.OK;
 	}
 }

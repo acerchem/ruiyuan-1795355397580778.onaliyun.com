@@ -100,7 +100,7 @@ public class DefaultAcerchemCommercePlaceOrderStrategy extends DefaultCommercePl
 
 
 				getModelService().saveAll(customer, orderModel);
-
+				
 				if (cartModel.getPaymentInfo() != null && cartModel.getPaymentInfo().getBillingAddress() != null)
 				{
 					final AddressModel billingAddress = cartModel.getPaymentInfo().getBillingAddress();
@@ -109,6 +109,9 @@ public class DefaultAcerchemCommercePlaceOrderStrategy extends DefaultCommercePl
 					getModelService().save(orderModel.getPaymentInfo());
 				}
 				
+				if(cartModel.getDeliveryMode() != null){
+					orderModel.setDeliveryMode(cartModel.getDeliveryMode());
+				}
 				//添加预期到货时间日期
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 				String waitDelivereyDate = sdf.format(orderModel.getPickUpDate());
