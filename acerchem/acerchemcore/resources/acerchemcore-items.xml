@@ -650,6 +650,16 @@
 					</attribute>
 				</attributes>
 			</itemtype>
+			<!-- shaun.sheng -->
+			<itemtype code="CountryTrayFareConf" autocreate="false" generate="false">
+				<description>Extending the Product type from core with additional attributes.</description>
+				<attributes>
+					<attribute qualifier="region" type="java.lang.String">
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+			
 
 			<itemtype code="AbstractOrderEntry" autocreate="false"
 				generate="false">
