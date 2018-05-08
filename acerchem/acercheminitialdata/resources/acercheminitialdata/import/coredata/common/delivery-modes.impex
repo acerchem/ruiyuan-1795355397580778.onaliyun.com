@@ -51,6 +51,55 @@ INSERT_UPDATE PaymentMode;code[unique=true];supportedDeliveryModes(code)
 ;InvoicePayment;DELIVERY_MENTION,DELIVERY_GROSS
 ;CreditPayment;DELIVERY_MENTION,DELIVERY_GROSS
 
+#shaun Spain
+INSERT_UPDATE CountryTrayFareConf;region(isocode)[unique=true];price;trayAmount[unique=true];deliveriedDay
+;ES-MAD;230;1
+;ES-MAD;350;2
+;ES-MAD;470;3
+;ES-MAD;580;4
+;ES-MAD;640;5
+;ES-MAD;690;6
+;ES-MAD;800;7
+;ES-MAD;830;8
+;ES-MAD;890;9
+;ES-MAD;940;10
+;ES-MAD;990;11
+;ES-MAD;1040;12
+;ES-MAD;1090;13
+;ES-MAD;1140;14
+;ES-MAD;1190;15
+;ES-MAD;1240;16
+;ES-MAD;1290;17
+;ES-MAD;1340;18
+;ES-MAD;1390;19
+;ES-MAD;1440;20
+
+;IT-FDA;255;1
+;IT-FDA;355;2
+;IT-FDA;430;3
+;IT-FDA;480;4
+;IT-FDA;520;5
+;IT-FDA;650;6
+;IT-FDA;730;7
+;IT-FDA;810;8
+;IT-FDA;850;9
+;IT-FDA;880;10
+;IT-FDA;920;11
+;IT-FDA;960;12
+;IT-FDA;1000;13
+;IT-FDA;1040;14
+;IT-FDA;1080;15
+;IT-FDA;1120;16
+;IT-FDA;1160;17
+;IT-FDA;1200;18
+;IT-FDA;1240;19
+;IT-FDA;1280;20
+
+
+
+
+
+
 #
 INSERT_UPDATE CountryTrayFareConf; country(isocode)[unique=true];price;trayAmount[unique=true]
 ;US;10;1

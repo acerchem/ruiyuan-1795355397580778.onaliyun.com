@@ -263,6 +263,154 @@ INSERT_UPDATE Country;isocode[unique=true];name[lang=en];active[default=true]
 ;ZA;"South Africa"
 ;ZM;"Zambia"
 ;ZW;"Zimbabwe"
+
+
+#shaun
+# ISO 3166-2:ES	Spain
+#
+INSERT_UPDATE Region;country(isocode);isocode[unique=true];isocodeShort;name[lang=en];active[default=true]
+;ES;ES-ALA;ALA;"Alava"
+;ES;ES-ALB;ALB;"Albacete"
+;ES;ES-ALC;ALC;"Alicante"
+;ES;ES-LEI;LEI;"Almeria"
+;ES;ES-AST;AST;"Asturias"
+;ES;ES-AVI;AVI;"Avila"
+;ES;ES-BJZ;BJZ;"Badajoz"
+;ES;ES-BLR;BLR;"Baleares"
+;ES;ES-BCN;BCN;"Barcelona"
+;ES;ES-BUR;BUR;"Burgos"
+;ES;ES-CCS;CCS;"Caceres"
+;ES;ES-CAD;CAD;"Cadiz"
+;ES;ES-CAS;CAS;"Castellon"
+;ES;ES-CIR;CIR;"Cludad Real"
+;ES;ES-ODB;ODB;"Cordoba"
+;ES;ES-CUE;CUE;"Cuenca"
+;ES;ES-GRO;GRO;"Gerona"
+;ES;ES-GRX;GRX;"Granada"
+;ES;ES-GUA;GUA;"Guadalajara"
+;ES;ES-GUI;GUI;"Guipuzcoa"
+;ES;ES-HUV;HUV;"Huelva"
+;ES;ES-HUC;HUC;"Huesca"
+;ES;ES-JAE;JAE;"Jaen"
+;ES;ES-LCG;LCG;"La Coruna"
+;ES;ES-ARL;ARL;"La Rioja"
+;ES;ES-LPA;LPA;"Las Palmas"
+;ES;ES-LEN;LEN;"Leon"
+;ES;ES-LLE;LLE;"Lleida"
+;ES;ES-MAD;MAD;"Madrid"
+;ES;ES-AGP;AGP;"Malaga"
+;ES;ES-MJV;MJV;"Murcia"
+;ES;ES-NVV;NVV;"Navarra"
+;ES;ES-ORE;ORE;"Orense"
+;ES;ES-PAC;PAC;"Palencia"
+;ES;ES-LGO;LGO;"Provincia de Lugo"
+;ES;ES-PEV;PEV;"Provincia de Pontevedra"
+;ES;ES-SLM;SLM;"Salamanca"
+;ES;ES-SCT;SCT;"Santa Cruz de Tenerife"
+;ES;ES-SDR;SDR;"Santander"
+;ES;ES-SEG;SEG;"Segovia"
+;ES;ES-SVQ;SVQ;"Sevilla"
+;ES;ES-SOR;SOR;"Soria"
+;ES;ES-TAR;TAR;"Tarragona"
+;ES;ES-TER;TER;"Teruel"
+;ES;ES-TOL;TOL;"Toledo"
+;ES;ES-VLC;VLC;"Valencia"
+;ES;ES-VLL;VLL;"Valladolid"
+;ES;ES-VSE;VSE;"Vizcaya"
+;ES;ES-ZMR;ZMR;"Zamora"
+;ES;ES-ZAZ;ZAZ;"Zaragoza"
+#shaun
+
+
+#shaun
+# ISO 3166-2:IT	Italy
+#
+INSERT_UPDATE Region;country(isocode);isocode[unique=true];isocodeShort;name[lang=en];active[default=true]
+;IT;IT-FDA;FDA;"Fiorenzuola D Arda"
+;IT;IT-MTZ;MTZ;"Monterenzio"
+;IT;IT-GAL;GAL;"Gallarate"
+
+;IT;IT-ALE;ALE;"Alessandria"
+;IT;IT-AOI;AOI;"Ancona"
+;IT;IT-AOT;AOT;"Aosta"
+;IT;IT-ASP;ASP;"Ascoli Piceno"
+;IT;IT-AST;AST;"Asti"
+;IT;IT-BRI;BRI;"Bari"
+;IT;IT-BEN;BEN;"Benevento"
+;IT;IT-BGO;BGO;"Bergamo"
+;IT;IT-BIE;BIE;"Biella"
+;IT;IT-BLQ;BLQ;"Bologna"
+;IT;IT-BRC;BRC;"Brescia"
+;IT;IT-BDS;BDS;"Brindisi"
+;IT;IT-CAG;CAG;"Cagliari"
+;IT;IT-COB;COB;"Campobasso"
+;IT;IT-CST;CST;"Caserta"
+;IT;IT-CTA;CTA;"Catania"
+;IT;IT-QCZ;QCZ;"Catanzaro"
+;IT;IT-CIY;CIY;"Como"
+;IT;IT-QCS;QCS;"Cosenza"
+;IT;IT-CRV;CRV;"Crotone"
+;IT;IT-CUN;CUN;"Cuneo"
+
+#shaun
+
+
+
+#shaun
+# ISO 3166-2:DE	Germany
+#
+INSERT_UPDATE Region;country(isocode);isocode[unique=true];isocodeShort;name[lang=en];active[default=true]
+;DE;DE-ANS;ANS;"Ansbach"
+;DE;DE-ARN;ARN;"Arnsberg"
+;DE;DE-AGB;AGB;"Augsburg"
+;DE;DE-BYU;BYU;"Bayreuth"
+;DE;DE-BE;BE;"Berlin"
+;DE;DE-BFE;BFE;"Bielefeld"
+;DE;DE-BOM;BOM;"Bochum"
+;DE;DE-HB;HB;"Bremen"
+;DE;DE-BRW;BRW;"Brunswick"
+;DE;DE-CHE;CHE;"Chemnitz"
+;DE;DE-CGN;CGN;"Cologne"
+;DE;DE-DAR;DAR;"Darmstadt"
+;DE;DE-DES;DES;"Dessau"
+;DE;DE-DET;DET;"Detmold"
+;DE;DE-DRS;DRS;"Dresden"
+;DE;DE-DUS;DUS;"Dusseldorf"
+;DE;DE-ERF;ERF;"Erfurt"
+;DE;DE-FFO;FFO;"Frankfurt"
+;DE;DE-FBG;FBG;"Freiburg"
+;DE;DE-GBN;GBN;"GieBen"
+;DE;DE-HAE;HAE;"Halle"
+;DE;DE-HH;HH;"Hamburg"
+;DE;DE-HAJ;HAJ;"Hannover"
+;DE;DE-KAE;KAE;"Karlsruhe"
+;DE;DE-KAS;KAS;"Kassel"
+;DE;DE-KEL;KEL;"Kiel"
+;DE;DE-KOB;KOB;"Koblenz"
+;DE;DE-LDH;LDH;"Landshut"
+;DE;DE-LEJ;LEJ;"Leipzig"
+;DE;DE-LBG;LBG;"Luneburg"
+;DE;DE-MAG;MAG;"Magdeburg"
+;DE;DE-MAI;MAI;"Mainz"
+;DE;DE-MHG;MHG;"Mannheim"
+;DE;DE-MUN;MUN;"Muenster"
+;DE;DE-MUC;MUC;"Munich"
+;DE;DE-NUE;NUE;"Nuremberg"
+;DE;DE-POT;POT;"Potsdam"
+;DE;DE-SWH;SWH;"Schwerin"
+;DE;DE-STR;STR;"Stuttgart"
+;DE;DE-TRI;TRI;"Trier"
+;DE;DE-WIB;WIB;"Wiesbaden"
+;DE;DE-WUG;WUG;"Wuerzburg"
+#shaun
+
+
+
+
+
+
+
+
 #
 # ISO 3166-2:US
 #

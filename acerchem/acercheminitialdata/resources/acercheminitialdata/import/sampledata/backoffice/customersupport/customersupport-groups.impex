@@ -27,9 +27,9 @@
 
 #shaun
 INSERT_UPDATE BackofficeRole;UID[unique=true];backOfficeLoginDisabled;authorities
-;customersupportadministratorrole;FALSE;customersupportadministratorrole
-;customersupportmanagerrole;FALSE;customersupportmanagerrole
 ;customersupportagentrole;FALSE;customersupportagentrole
+;customersupportadministratorrole;FALSE;customersupportadministratorrole,customersupportagentrole
+;customersupportmanagerrole;FALSE;customersupportmanagerrole
 ;acerchemrole;FALSE;acerchemrole
 ;;;;;
 
@@ -113,6 +113,7 @@ INSERT_UPDATE UserGroup;UID[unique=true];groups(uid)[mode=append];locname[lang=e
 INSERT_UPDATE UserGroup;UID[unique=true];groups(uid)[mode=append];locname[lang=en]
 ;csagentgroup;customerservicegroup;"Customer Service Agent Group"
 
+
 INSERT_UPDATE Employee;UID[unique=true];password[default=$defaultPassword];description;name;groups(uid);sessionLanguage(isocode);sessionCurrency(isocode)
 ;csagent;;"Customer service agent. Can edit order and customer data. Can read product data.";"Customer Service Agent";csagentgroup;en;EUR
 
@@ -123,5 +124,6 @@ INSERT_UPDATE Employee;UID[unique=true];password[default=$defaultPassword];descr
 INSERT_UPDATE CsAgentGroup;UID[unique=true];locname[lang=en];groups(uid);description
 ;customersupportmanagergroup;Customer Support Manager Group;customersupportmanagerrole,customersupportagentrole,csagentgroup,csagentmanagergroup;The Customer Support Manager Group has access to the Customer Support Backoffice's Customer Support Manager Group and Customer Support Agent Group views AND/OR the Assisted Service Module.
 ;customersupportagentgroup;Customer Support Agent Group;customersupportagentrole,csagentgroup;The Customer Support Agent Group has access to the Customer Support Backoffice's Customer Support Agent Group views and AND/OR the Assisted Service Module.
+#;customersupportadministratorgroup;Customer Support Administrator Group;customersupportagentrole,csagentgroup;The Customer Support Agent Group has access to the Customer Support Backoffice's Customer Support Agent Group views and AND/OR the Assisted Service Module.
 
 
