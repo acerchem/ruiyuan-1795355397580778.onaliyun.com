@@ -38,43 +38,38 @@
                         </div>
                         <div class="list">
                             <div class="item">
-								<span>
-									<em>Order Number</em>
-									<i>${orderData.code}</i>
-								</span>
-                                <span>
-									<em>Order Status</em>
-									<i>${orderData.status=="CHECKED_VALID"?"UNCONFIRMED":orderData.status}</i>
-								</span>
-								<span>
-									<em>Total</em>
-									<i><format:price priceData="${orderData.totalPrice}"/></i>
-								</span>
-                                <span>
-									<em>Date Placed</em>
-									<i><fmt:formatDate value="${orderData.created}" dateStyle="medium" timeStyle="short" type="both"/></i>
-								</span>
-								<span>
-									<em>Operate</em>
-									<i>
-										<!--<a href="${confirmOrder}${orderData.code}?confirm=order" style="${!orderData.customerConfirm && (orderData.status=='UNCONFIRMED'||orderData.status=='CHECKED_VALID')?'':'display: none;'}">Confirm Order</a> -->
-										<a href="${confirmOrder}${orderData.code}?confirm=receipt" style="${!orderData.customerConfirmDelivery && orderData.status=='UNDELIVERED'?'':'display: none;'}">Confirm Delivery</a>
-										<a href="${confirmOrder}${orderData.code}?confirm=payment" style="${!orderData.customerConfirmPay && orderData.status=='UNPAIED'?'':'display: none;'}">Confirm Payment</a>
-										<a href="${confirmOrder}${orderData.code}?confirm=cancel" style="${canCancel&&orderData.status!='CANCELLED'?'':'display: none;'}" class="cancelOrder">Cancel Order</a>
-									</i>
-								</span>
+                            	<table>
+                            		<tr>
+                            			<td style="color:#999;line-height:2em;text-align:left;padding: 5px 10px;">Order Number</td>
+                            			<td style="color:#999;line-height:2em;text-align:left;padding: 5px 10px;">Order Status</td>
+                            			<td style="color:#999;line-height:2em;text-align:left;padding: 5px 10px;">Total</td>
+                            			<td style="color:#999;line-height:2em;text-align:left;padding: 5px 10px;">Date Placed</td>
+                            			<td style="color:#999;line-height:2em;text-align:left;padding: 5px 10px;">Operate</td>
+                            		</tr>
+                            		<tr>
+                            			<td style="padding: 5px 10px;">${orderData.code}</td>
+                            			<td style="padding: 5px 10px;">${orderData.status=="CHECKED_VALID"?"UNCONFIRMED":orderData.status}</td>
+                            			<td style="padding: 5px 10px;"><format:price priceData="${orderData.totalPrice}"/></td>
+                            			<td style="padding: 5px 10px;"><fmt:formatDate value="${orderData.created}" dateStyle="medium" timeStyle="short" type="both"/></td>
+                            			<td style="padding: 5px 10px;">
+                            				<!--<a href="${confirmOrder}${orderData.code}?confirm=order" style="${!orderData.customerConfirm && (orderData.status=='UNCONFIRMED'||orderData.status=='CHECKED_VALID')?'':'display: none;'}">Confirm Order</a> -->
+											<a href="${confirmOrder}${orderData.code}?confirm=receipt" style="${!orderData.customerConfirmDelivery && orderData.status=='UNDELIVERED'?'':'display: none;'}">Confirm Delivery</a>
+											<a href="${confirmOrder}${orderData.code}?confirm=payment" style="${!orderData.customerConfirmPay && orderData.status=='UNPAIED'?'':'display: none;'}">Confirm Payment</a>
+											<a href="${confirmOrder}${orderData.code}?confirm=cancel" style="${canCancel&&orderData.status!='CANCELLED'?'':'display: none;'}" class="cancelOrder">Cancel Order</a>
+										</td>
+                            		</tr>
+                            	</table>
                             </div>
                         </div>
                     </div>
                     <!-- end -->
 
                     <!-- Ship To -->
-                    <div class="g-table">
+                    <div class="g-table" style="${orderData.deliveryMode.code=='DELIVERY_GROSS'?'':'display: none;'}">
                         <div class="g-title">
                             <span>Ship To</span>
                         </div>
                         <div class="text">
-
                               <c:if test="${not empty orderData.deliveryAddress.title}">
                                   ${fn:escapeXml(orderData.deliveryAddress.title)}&nbsp;
                               </c:if>
@@ -93,6 +88,15 @@
                                   ${fn:escapeXml(orderData.deliveryAddress.phone)}
 
                         </div>
+                    </div>
+                    <div class="g-table" style="${orderData.deliveryMode.code=='DELIVERY_MENTION'?'':'display: none;'}">
+                        <!-- <div class="g-title">
+                            <span>Pickup Address</span>
+                        </div>
+                        <div class="text">
+                             
+
+                        </div> -->
                     </div>
                     <!-- end -->
 
