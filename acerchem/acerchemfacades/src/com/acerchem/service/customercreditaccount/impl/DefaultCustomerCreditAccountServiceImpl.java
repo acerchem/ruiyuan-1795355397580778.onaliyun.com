@@ -8,6 +8,8 @@ import com.acerchem.service.customercreditaccount.DefaultCustomerCreditAccountSe
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.platform.servicelayer.search.FlexibleSearchService;
+import de.hybris.platform.servicelayer.search.SearchResult;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.servicelayer.user.daos.UserDao;
 import org.apache.commons.lang3.StringUtils;
@@ -18,7 +20,9 @@ import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @Service("defaultCustomerCreditAccountService")
@@ -161,6 +165,31 @@ public class DefaultCustomerCreditAccountServiceImpl implements DefaultCustomerC
             }
         } else {
             LOG.info("updateCustomerCreditAccountRepayment Parameter ERROR CreditTransaction is null");
+        }
+        return null;
+    }
+    
+    @Resource
+    protected FlexibleSearchService flexibleSearchService;
+    
+    @Override
+    public CustomerCreditAccountModel updateCreditAccountRepaymentByOrder(OrderModel order){
+    	
+        if (order != null&&order.getCode()!=null) {
+    		final String SQL = "SELECT PK FROM {"+CreditTransactionModel._TYPECODE+"} WHERE {"+CreditTransactionModel.ORDERCODE+"} =?orderCode ";
+    		final Map<String, Object> params = new HashMap<String, Object>();
+    		final StringBuilder builder = new StringBuilder(SQL);
+    		params.put("orderCode", order.getCode());
+    		final SearchResult<CreditTransactionModel> result = flexibleSearchService.search(builder.toString(),params);
+    		if(result.getResult().size()>0)
+    		{
+    			return updateCustomerCreditAccountRepayment(result.getResult().get(0));
+    		
+    		}else{
+    			LOG.info("updateCreditAccountRepaymentByOrder Parameter ERROR CreditTransaction is null");
+    		}
+        } else {
+            LOG.info("updateCreditAccountRepaymentByOrder Parameter ERROR order is null");
         }
         return null;
     }
