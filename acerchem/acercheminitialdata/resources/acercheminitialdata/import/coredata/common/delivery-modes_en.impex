@@ -17,7 +17,13 @@ $lang=en
 
 # Zone Delivery Modes
 UPDATE DeliveryMode;code[unique=true];name[lang=$lang];description[lang=$lang]
-; DELIVERY_MENTION;DELIVERY_MENTION Delivery;"1-2 business days"
-; DELIVERY_GROSS;DELIVERY_GROSS Delivery;"1-2 business days" 
+; DELIVERY_MENTION;FCA;"1-2 business days"
+; DELIVERY_GROSS;DDP;"1-2 business days" 
+
+#shaun
+UPDATE PaymentMode;code[unique=true];name[lang=$lang];description[lang=$lang]
+; InvoicePayment;PRE-PAYMENT;
+; CreditPayment;Payment by credit;
+
 
 #UPDATE PickUpDeliveryMode;code[unique=true];name[lang=$lang];description[lang=$lang]
