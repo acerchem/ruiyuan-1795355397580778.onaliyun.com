@@ -28,12 +28,14 @@
 			<li class="item1">
 				<a href="${contextPath}${urlLink}">
 				
-					<div class="meansale">
+				<!-- <div class="meansale"> -->
+					<div class="text">
 						<p>promo</p>
 						<span>Sodium Hyaluronate 1% Solution (25kg Drum) </span>
-						<label><i>15</i>%</label>
-						<em><i>$58</i></em>
+						<!-- <label><i>15</i>%</label>
+						<em><i>$58</i></em> -->
 					</div>
+					
 					
 					<img src="${media.url}"/>
 				</a>
