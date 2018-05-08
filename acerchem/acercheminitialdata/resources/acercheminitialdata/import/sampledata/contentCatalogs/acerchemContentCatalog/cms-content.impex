@@ -433,7 +433,7 @@ INSERT_UPDATE RotatingImagesComponent;$contentCV[unique=true];uid[unique=true];n
 ;;acerchemHomepageCarouselComponent;acerchem Homepage Carousel;CarouselCyberBanner,CarouselCamcorderBanner,CarouselFunBanner;acerchemHomepageCarouselComponent
 
 INSERT_UPDATE ProductCarouselComponent;$contentCV[unique=true];uid[unique=true];name;products(code,$productCV);scroll(code);popup;&componentRef
-;;acerchemHomepageProductCarouselComponent;acerchem Homepage Product Carousel;AC05080,AC03131,AC01361,AC01710,AC05080a,AC05080b,AC03390a,AC03138a,AC03887a,AC03142a,AC02345a,AC02354a,AC05003a;allVisible;false;acerchemHomepageProductCarouselComponent
+;;acerchemHomepageProductCarouselComponent;acerchem Homepage Product Carousel;AC05080a,AC05080b,AC03390a,AC03138a,AC03887a,AC03142a,AC02345a,AC02354a,AC05003a;allVisible;false;acerchemHomepageProductCarouselComponent
 
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];folder(qualifier)[default='images']
 ;;BannerComponent;text/jpg;maxbanner-bg.jpg;$section/acerchemimages/maxbanner-bg.jpg
