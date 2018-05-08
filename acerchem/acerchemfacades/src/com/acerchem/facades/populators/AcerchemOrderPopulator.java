@@ -60,11 +60,17 @@ public class AcerchemOrderPopulator extends OrderPopulator {
         //add orderEntry's baseRealPrice and totalRealPrice by Jayson.wang
         for(AbstractOrderEntryModel entry: source.getEntries()) {
         	
-        	for (OrderEntryData targetEntry :target.getEntries()){
+        	for (int i=0 ;i<target.getEntries().size();i++){
+        		OrderEntryData targetEntry = target.getEntries().get(i);
         		if (targetEntry.getEntryNumber().equals(entry.getEntryNumber())){
         			targetEntry.setBaseRealPrice(priceDataFactory.create(PriceDataType.BUY, BigDecimal.valueOf(entry.getBaseRealPrice().doubleValue()), source.getCurrency().getIsocode()));
         			targetEntry.setTotalRealPrice(priceDataFactory.create(PriceDataType.BUY, BigDecimal.valueOf(entry.getTotalRealPrice().doubleValue()), source.getCurrency().getIsocode()));
+        			
+        			target.getEntries().remove(i);
+        			target.getEntries().add(i,targetEntry);
+
         		}
+        		
         	}
         }
 
