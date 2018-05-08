@@ -133,7 +133,18 @@ public class AddToCartController extends AbstractController
 					model.addAttribute("entry", cartModification.getEntry());
 					model.addAttribute("cartCode", cartModification.getCartCode());
 					model.addAttribute("isQuote", cartFacade.getSessionCart().getQuoteData() != null ? Boolean.TRUE : Boolean.FALSE);
-					model.addAttribute("cartEntryPrice", acerchemCartFacade.getAddToCartPrice(cartModification.getEntry(),qty));
+					
+					java.text.DecimalFormat   df   =new   java.text.DecimalFormat("#.00");  
+					
+					// 获得币种符号
+					String currencyIso = cartModification.getEntry().getBasePrice().getCurrencyIso();
+					
+					String suffix = "";
+					if (currencyIso.equalsIgnoreCase("USD")){
+						suffix="$";
+					}
+					 
+					model.addAttribute("cartEntryPrice",suffix+df.format(acerchemCartFacade.getAddToCartPrice(cartModification.getEntry(),qty)));
 
 					if (cartModification.getStatusCode().equalsIgnoreCase(CommerceCartModificationStatus.MAX_ORDER_QUANTITY_EXCEEDED))
 					{

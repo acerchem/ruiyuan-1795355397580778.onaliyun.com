@@ -65,7 +65,7 @@
             <span><format:price priceData="${cartData.totalDiscounts}"/></span>
 		</div>
 
-<c:if test="${not empty cartData.deliveryCost}">
+<c:if test="${not empty cartData.deliveryMode}">
 		<div class="item-row">
 			<span>Delivery</span>
 			<span ><format:price priceData="${cartData.deliveryCost}"/></span>
@@ -91,7 +91,7 @@
 	              <span><format:price priceData="${cartData.operateCost}"/></span>
 	               
 			</div>
-<c:if test="${not empty cartData.totalPrice}">
+<c:if test="${not empty cartData.deliveryMode}">
 		<div class="item-row">
 			<span>Order Total</span>
 			<span >

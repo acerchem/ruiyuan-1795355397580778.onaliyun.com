@@ -99,13 +99,15 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 		}else{
 			model.addAttribute("paymentInfos", acerchemCheckoutFacade.getSupportedCardTypes("DELIVERY_MENTION"));
 		}
-
+		cartData.setDeliveryMode(acerchemCheckoutFacade.getDeliveryModes());
 		model.addAttribute("cartData", cartData);
 		
 		model.addAttribute("addressForm", new AddressForm());
 		model.addAttribute("allItems", cartData.getEntries());
+				
+		//cartData.setDeliveryMode(acerchemCheckoutFacade.getDeliveryModes());
 		
-		model.addAttribute("deliveryMode", cartData.getDeliveryMode());
+		model.addAttribute("deliveryMode", acerchemCheckoutFacade.getDeliveryModes());
 		model.addAttribute("paymentInfo", cartData.getPaymentInfo());
 		model.addAttribute("paymentModeData", cartData.getPaymentModeData());
 		
@@ -205,7 +207,7 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 
 		final CartData cartData = acerchemCheckoutFacade.getCheckoutCart();
 
-		if (cartData.getDeliveryMode() == null)
+		if (acerchemCheckoutFacade.getDeliveryModes() == null)
 		{
 			GlobalMessages.addErrorMessage(model, "checkout.deliveryMethod.notSelected");
 			invalid = true;

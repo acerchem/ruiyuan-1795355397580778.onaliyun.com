@@ -43,6 +43,8 @@ public interface AcerchemCheckoutFacade {
     List<? extends AddressData> getDeliveryAddresses();
 
     OrderData placeOrder() throws InvalidCartException;
+    
+    DeliveryModeData getDeliveryModes();
 
     boolean setDeliveryAddress(AddressData address);
 

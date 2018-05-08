@@ -24,6 +24,15 @@
     <c:set property="index" value="${entryNumber}"/>
 </c:if>
 
+
+<c:set var ="a" value="${entry.product.netWeight}"/>
+<c:set var="b" value="${entry.quantity}"/>
+<c:set var ="TotalWeight" value="${a*b}"/>
+
+
+
+
+
 <c:if test="${not empty entry}">
 
         <c:set var="showEditableGridClass" value=""/>
@@ -80,7 +89,7 @@
 						<input type="text" name="pdnum" class="set" value="${entry.quantity}">
 						<span class="set add">+</span>
 						 -->
-						 ${entry.product.netWeight}${entry.product.unitName}
+						 ${TotalWeight}
 					</div>
 				</td>
 				

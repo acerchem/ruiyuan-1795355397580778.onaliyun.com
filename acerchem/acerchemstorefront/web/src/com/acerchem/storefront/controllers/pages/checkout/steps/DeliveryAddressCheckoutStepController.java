@@ -406,6 +406,9 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 			GlobalMessages.addErrorMessage(model, e.getMessage());
 		}
 		
+		cartData.setDeliveryMode(acerchemCheckoutFacade.getDeliveryModes());
+		
+		//model.addAttribute("deliveryMode", acerchemCheckoutFacade.getDeliveryModes());
 		
 		model.addAttribute("cartData", cartData);
 		model.addAttribute("addressForm", addressForm);
@@ -457,4 +460,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 
 		return deliveryAddresses == null ? Collections.<AddressData> emptyList() : deliveryAddresses;
 	}
+	
+	
+	
 }
