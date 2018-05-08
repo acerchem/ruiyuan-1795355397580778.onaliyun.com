@@ -1,0 +1,53 @@
+## messageSource=classpath:/acerchemcore/messages/email-customerRegistration_$lang.properties
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Forget the password</title>
+<style type="text/css">
+	@page {
+	margin-right: 0.79in;
+	margin-top: 0.59in;
+	margin-bottom: 0.47in
+}
+	.font{
+		font-family:arial;
+		font-size: 12px;
+		border-color: #000000
+		
+	}
+	</style>
+</head>
+
+<body>
+<center>
+	<table class="font" width="600px" height="300px" frame="void">
+	<tbody>
+		<tr height="30px">
+			<td bgcolor="#006000">&nbsp;
+				
+			</td>
+		</tr>
+		<tr>
+			<td>
+				
+				${ctx.messages.notificationAdministrator} <a href="https://acerchem.ibreakingpoint.com:9002/backoffice/"><font color="#006000" size="2">https://acerchem.ibreakingpoint.com</font></a>
+				<p>
+					<strong>
+						&emsp;UserID: &emsp;${ctx.email}
+					</strong>
+					
+				</p>
+			</td>
+		</tr>
+		
+		<tr height="30px">
+			<td bgcolor="#006000">&nbsp;
+				
+			</td>
+		</tr>
+		</tbody>
+	</table>
+</center>
+</body>
+</html>
