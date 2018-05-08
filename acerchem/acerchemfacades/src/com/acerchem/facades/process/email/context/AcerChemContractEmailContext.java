@@ -156,7 +156,7 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 				if (amountPrice != null) {
 					pie.setAmount(amountPrice.getFormattedValue());
 				} else {
-					pie.setPrice("0.00");
+					pie.setAmount("0.00");
 				}
 
 				// pie.setPackageWeight(priceData);

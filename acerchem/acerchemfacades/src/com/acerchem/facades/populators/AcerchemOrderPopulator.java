@@ -7,8 +7,10 @@ import javax.annotation.Resource;
 
 import de.hybris.platform.commercefacades.order.converters.populator.OrderPopulator;
 import de.hybris.platform.commercefacades.order.data.OrderData;
+import de.hybris.platform.commercefacades.order.data.OrderEntryData;
 import de.hybris.platform.commercefacades.product.PriceDataFactory;
 import de.hybris.platform.commercefacades.product.data.PriceDataType;
+import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.OrderModel;
 
 /**
@@ -53,6 +55,17 @@ public class AcerchemOrderPopulator extends OrderPopulator {
         
         if(source.getWaitDeliveiedDate()!=null){
         	target.setWaitDeliveiedDate(sdf.format(source.getWaitDeliveiedDate()));
+        }
+        
+        //add orderEntry's baseRealPrice and totalRealPrice by Jayson.wang
+        for(AbstractOrderEntryModel entry: source.getEntries()) {
+        	
+        	for (OrderEntryData targetEntry :target.getEntries()){
+        		if (targetEntry.getEntryNumber().equals(entry.getEntryNumber())){
+        			targetEntry.setBaseRealPrice(priceDataFactory.create(PriceDataType.BUY, BigDecimal.valueOf(entry.getBaseRealPrice().doubleValue()), source.getCurrency().getIsocode()));
+        			targetEntry.setTotalRealPrice(priceDataFactory.create(PriceDataType.BUY, BigDecimal.valueOf(entry.getTotalRealPrice().doubleValue()), source.getCurrency().getIsocode()));
+        		}
+        	}
         }
 
     }
