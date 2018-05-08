@@ -50,7 +50,6 @@ public class AcerchemSaveConsignmentHandler implements FlowActionHandler
 						consignmentModel.setWarehouse(consignmentEntryModel.getOrderEntry().getDeliveryPointOfService().getWarehouses().get(0));
 						consignmentModel.setShippingAddress(consignmentEntryModel.getOrderEntry().getDeliveryPointOfService().getAddress());
 						consignmentModel.setOrder(consignmentEntryModel.getOrderEntry().getOrder());
-						consignmentModel.setDeliveryMode(consignmentEntryModel.getOrderEntry().getOrder().getDeliveryMode());
 					}
 				}
 			}else{
@@ -60,7 +59,6 @@ public class AcerchemSaveConsignmentHandler implements FlowActionHandler
 				if(consignmentEntryModel.getOrderEntry().getOrder() != null){
 					if(consignmentEntryModel.getOrderEntry().getOrder().getDeliveryAddress() != null){
 						consignmentModel.setShippingAddress(consignmentEntryModel.getOrderEntry().getOrder().getDeliveryAddress());
-						consignmentModel.setDeliveryMode(consignmentEntryModel.getOrderEntry().getOrder().getDeliveryMode());
 					}
 					consignmentModel.setOrder(consignmentEntryModel.getOrderEntry().getOrder());
 				}
