@@ -35,7 +35,12 @@ public interface DefaultCustomerCreditAccountService {
      */
     CustomerCreditAccountModel updateCustomerCreditAccountRepayment(CreditTransactionModel creditTransaction);
 
-
+    /**
+     * 更新信用账户方法的每笔消费的还款接口;成功返回更新后的CustomerCreditAccountModel,失败返回null
+     * @param money
+     * @return
+     */
+    CustomerCreditAccountModel updateCreditAccountRepaymentByOrder(OrderModel order);
 
 
 }
