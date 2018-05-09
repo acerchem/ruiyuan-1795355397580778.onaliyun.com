@@ -64,6 +64,7 @@ import de.hybris.platform.converters.Populator;
 import de.hybris.platform.core.PK;
 import de.hybris.platform.core.enums.OrderStatus;
 import de.hybris.platform.core.model.c2l.CountryModel;
+import de.hybris.platform.core.model.c2l.RegionModel;
 import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.AbstractOrderModel;
 import de.hybris.platform.core.model.order.OrderModel;
@@ -1305,12 +1306,12 @@ public class AccountPageController extends AbstractSearchPageController
 	private AcerchemTrayService acerchemTrayService;
 	
 	private  Integer getTotalPriceForCart(AbstractOrderModel order){
-		CountryModel countryModel = null;
+		 RegionModel regionModel = null;
 		BigDecimal totalTrayAmount = BigDecimal.ZERO;
 		if (order!=null){
 			for (AbstractOrderEntryModel aoe : order.getEntries()){
 				if (aoe.getDeliveryPointOfService().getAddress()!=null) {
-					countryModel = aoe.getDeliveryPointOfService().getAddress().getCountry();
+					regionModel = aoe.getOrder().getDeliveryAddress().getRegion();
 				}
 				ProductModel productModel = aoe.getProduct();
 				String unitCalculateRato = productModel.getUnitCalculateRato();
@@ -1322,7 +1323,7 @@ public class AccountPageController extends AbstractSearchPageController
 				totalTrayAmount =totalTrayAmount.add(entryTrayAmount);
 			}
 		}
-		CountryTrayFareConfModel countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(countryModel, (int) Math.ceil(totalTrayAmount.doubleValue()));
+		CountryTrayFareConfModel countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(regionModel, (int) Math.ceil(totalTrayAmount.doubleValue()));
 		return countryTrayFareConf.getDeliveriedDay();
 	}
 	
