@@ -84,7 +84,12 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		final CartData cartData = acerchemCheckoutFacade.getCheckoutCart();
 
 		//cartData.setDeliveryAddress(null);
-		populateCommonModelAttributes(model, cartData, new AddressForm());
+		try {
+			populateCommonModelAttributes(model, cartData, new AddressForm());
+		} catch (AcerchemOrderException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 
 		return ControllerConstants.Views.Pages.MultiStepCheckout.AddEditDeliveryAddressPage;
@@ -151,7 +156,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String editAddressForm(@RequestParam("editAddressCode") final String editAddressCode, final Model model,
-			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException, AcerchemOrderException
 	{
 		final ValidationResults validationResults = getCheckoutStep().validate(redirectAttributes);
 		if (getCheckoutStep().checkIfValidationErrors(validationResults))
