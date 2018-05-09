@@ -232,18 +232,19 @@
                             <span>Date</span>
                         </div>
                         <div>
-                            <span style="${orderData.deliveryMode.code=='DELIVERY_GROSS'?'':'display: none;'}">
+                            <span style="padding-left:20px;width:100%;${orderData.deliveryMode.code=='DELIVERY_GROSS'?'':'display: none;'}">
                             	Pickup Date:
                             	<fmt:formatDate value="${orderData.pickupDateOfExtended==null?orderData.pickUpDate:orderData.pickupDateOfExtended}" pattern="yyyy-MM-dd"/> <br/>
 								Wait Deliveied Date:${orderData.waitDeliveiedDate}
                             </span>
-                            <span style="${orderData.deliveryMode.code=='DELIVERY_MENTION'?'':'display: none;'}">
+                            <span style="padding-left:20px;width:100%;${orderData.deliveryMode.code=='DELIVERY_MENTION'?'':'display: none;'}">
                             	Delivery Date:
                             	<fmt:formatDate value="${orderData.pickupDateOfExtended==null?orderData.pickUpDate:orderData.pickupDateOfExtended}" pattern="yyyy-MM-dd"/> <br/>
                             </span>
+                            
                             <div style="${orderData.pickupDateOfExtended==null?'':'display: none;'}">
 				             	<span>
-				             		Extended days(Max days:${maxday}):
+				             		Extended Days(Max days:${maxday}):
 				             		<input type="text" name='pickupDays' style="width:80px; height:40px;"/>
 				             		<a class="pickup" href="#" style="display: inline;background: #28FF28;">Confirm</a>
 				             	</span>
