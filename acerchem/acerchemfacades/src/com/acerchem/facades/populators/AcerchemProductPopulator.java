@@ -11,6 +11,7 @@ public class AcerchemProductPopulator extends ProductPopulator{
 	{
 		super.populate(source, target);
 		target.setNetWeight(source.getNetWeight());
+		target.setUnitCalculateRato(source.getUnitCalculateRato());
 	}
 	
 }

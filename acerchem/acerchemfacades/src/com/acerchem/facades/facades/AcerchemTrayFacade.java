@@ -1,7 +1,7 @@
 package com.acerchem.facades.facades;
 
-import de.hybris.platform.core.model.order.CartModel;
-import de.hybris.platform.core.model.user.AddressModel;
+import de.hybris.platform.commercefacades.order.data.CartData;
+import de.hybris.platform.commercefacades.user.data.AddressData;
 
 /**
  * Created by Jacob.Ji on 2018/4/8.
@@ -21,6 +21,6 @@ public interface AcerchemTrayFacade {
      * @param
      * @return
      */
-    double getTotalPriceForCart(CartModel cartModel,AddressModel addressModel) throws AcerchemOrderException;
+    double getTotalPriceForCart(CartData cartData,AddressData addressData) throws AcerchemOrderException;
 
 }

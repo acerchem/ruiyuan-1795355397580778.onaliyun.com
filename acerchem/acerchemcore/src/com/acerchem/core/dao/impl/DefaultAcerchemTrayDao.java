@@ -24,7 +24,7 @@ public class DefaultAcerchemTrayDao extends AbstractItemDao implements AcerchemT
 
         final Map<String, Object> params = new HashMap<String, Object>();
         final StringBuilder builder = new StringBuilder(GET_COUNTRY_TRAY_FARE_CONF);
-        params.put("region",region);
+        params.put("region",region.getIsocode());
         params.put("trayAmount",trayAmount);
         final SearchResult<CountryTrayFareConfModel> result = getFlexibleSearchService().search(builder.toString(),params);
         if (result!=null && CollectionUtils.isNotEmpty(result.getResult())){

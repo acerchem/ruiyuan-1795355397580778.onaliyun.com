@@ -134,6 +134,7 @@ public class DefaultAcerchemFindDeliveryCostStrategy extends DefaultFindDelivery
 	private  double getTotalPriceForCart(AbstractOrderModel order){
 		double totalTrayPrice = 0.0d;
 		RegionModel regionModel = null;
+		CountryTrayFareConfModel countryTrayFareConf  = null;
 		//托盘数量
 		BigDecimal totalTrayAmount = BigDecimal.ZERO;
 		if (order!=null){
@@ -149,7 +150,9 @@ public class DefaultAcerchemFindDeliveryCostStrategy extends DefaultFindDelivery
 				if (ObjectUtils.isEmpty(unitCalculateRato)){
 					LOG.error("当前商品未配置托盘比例,产品编号："+productModel.getCode());
 				}
-				Long quantity = aoe.getQuantity();
+				Long quantity = (aoe.getQuantity())*(Long.parseLong(aoe.getProduct().getNetWeight()));
+				
+				regionModel = aoe.getOrder().getDeliveryAddress().getRegion();
 
 				//托盘数量
 				BigDecimal entryTrayAmount = BigDecimal.valueOf(quantity).divide(new BigDecimal(unitCalculateRato),BigDecimal.ROUND_HALF_UP,BigDecimal.ROUND_DOWN);
@@ -157,8 +160,9 @@ public class DefaultAcerchemFindDeliveryCostStrategy extends DefaultFindDelivery
 				totalTrayAmount =totalTrayAmount.add(entryTrayAmount);
 			}
 		}
-
-		CountryTrayFareConfModel countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(regionModel, (int) Math.ceil(totalTrayAmount.doubleValue()));
+		if(regionModel != null){
+			 countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(regionModel, (int) Math.ceil(totalTrayAmount.doubleValue()));
+		}
 		if (countryTrayFareConf!=null){
 			totalTrayPrice = countryTrayFareConf.getPrice();
 		}
