@@ -128,13 +128,13 @@
 								</span>
                                         <span class="minflex text">
 									<span class="in-title">${fn:escapeXml(orderEntries.product.name)}</span>
-									<span class="spec">Specifications:<i>50kg</i></span>
+									<span class="spec">Package:<i>${orderEntries.product.netWeight}kg ${orderEntries.product.packageType}</i></span>
 									<span class="old-price">price:<i><format:price priceData="${orderEntries.basePrice}" displayFreeForZero="true" /></i></span>
 								</span>
                                     </div>
                                 </td>
                                 <td><format:price priceData="${orderEntries.basePrice}" displayFreeForZero="true" /></td>
-                                <td> ${orderEntries.quantity}*${orderEntries.product.netWeight}Kg</td>
+                                <td> ${orderEntries.quantity}*${orderEntries.product.netWeight}kg</td>
                                 <td>
                                         ${fn:escapeXml(orderEntries.product.code)}
                                 </td>
@@ -180,8 +180,7 @@
                             </div> --%>
                             <span>Payment Type</span>
                             <div class="text">
-                                MasterCard<br/>
-                                ${orderData.paymentInfo.cardNumber}
+                                ${orderData.paymentMode}
                             </div>
                         </div>
                     </div>
