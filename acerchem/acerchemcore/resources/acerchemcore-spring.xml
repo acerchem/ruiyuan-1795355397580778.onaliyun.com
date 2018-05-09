@@ -722,9 +722,9 @@
 					 value="#{configurationService.configuration.getProperty('guest.orderstatuspage.access.expiry.month')}"/>
 	</bean>
 	
-	<bean id="sendEmployeeEmailProcessProcessDefinitionResource"
+	<bean id="sendEmployeeEmailProcessDefinitionResource"
 	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
-		<property name="resource" value="classpath:/acerchemcore/processes/sendEmployeeEmailEventListener.xml"/>
+		<property name="resource" value="classpath:/acerchemcore/processes/sendEmployeeEmailProcess.xml"/>
 	</bean>
 	
 	<bean id="sendEmployeeEmailEventListener"

@@ -1329,7 +1329,10 @@ public class AccountPageController extends AbstractSearchPageController
 		if(regionModel != null){
 			 countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(regionModel, (int) Math.ceil(totalTrayAmount.doubleValue()));
 		}
-		return countryTrayFareConf.getDeliveriedDay();
+		if(countryTrayFareConf != null){
+			return countryTrayFareConf.getDeliveriedDay();
+		}
+		return 0;
 	}
 	
 	@Resource
