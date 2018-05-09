@@ -112,7 +112,7 @@ p.western {
     </tr>
     
       
-      <td>$!{ctx.customerAddressData.country}/td>
+      <td>$!{ctx.customerAddressData.country} </td>
     </tr>
     <tr>
       
