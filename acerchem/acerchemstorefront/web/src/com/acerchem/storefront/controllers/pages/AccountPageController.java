@@ -1390,10 +1390,24 @@ public class AccountPageController extends AbstractSearchPageController
 		    
 			if(confirm.equals("cancel")&&todaydate.before(date))
 			{
+			    final Transaction tx = Transaction.current();
+				tx.begin();
+				
 				order.setStatus(OrderStatus.CANCELLED);
 				modelService.save(order);
 				modelService.refresh(order);
 			    acerchemStockService.releaseStock(order);
+			    
+			    CustomerCreditAccountModel customerCreditAccount=defaultCustomerCreditAccountService.updateCreditAccountRepaymentByOrder(order);
+			    
+			    if(customerCreditAccount==null)
+			    {
+			    	tx.rollback();
+			    }
+			    else
+			    {
+			    	tx.commit();
+			    }
 			}
 			
 		}
