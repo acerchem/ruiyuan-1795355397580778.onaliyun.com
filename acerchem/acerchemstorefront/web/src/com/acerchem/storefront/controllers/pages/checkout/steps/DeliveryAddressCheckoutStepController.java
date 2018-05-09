@@ -71,7 +71,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	@Resource(name = "defaultAcerchemCheckoutFacade")
 	private AcerchemCheckoutFacade acerchemCheckoutFacade;
 	
-	@Resource(name = "defaultAcerchemTrayFacade")
+	@Resource
 	private AcerchemTrayFacade acerchemTrayFacade;
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
@@ -356,6 +356,8 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	        cartData.setDeliveryCost(acerchemCheckoutFacade.createPrice(cartModel, deliveryCost));
 			
 			final boolean hasSelectedAddressData = selectedAddressData != null;
+			
+			boolean isValid = true;
 			if (hasSelectedAddressData)
 			{
 				try {
@@ -363,8 +365,13 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 					acerchemCheckoutFacade.validateCartAddress(countryData);
 				}catch (AcerchemOrderException e){
                     GlobalMessages.addErrorMessage(model, e.getMessage());
+                    
+                    isValid= false;
 				}
-				acerchemCheckoutFacade.setDeliveryAddress(selectedAddressData);
+				
+				if (isValid){
+				    acerchemCheckoutFacade.setDeliveryAddress(selectedAddressData);
+				}
 			}
 		}
 
@@ -477,7 +484,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 			
 			 double deliveryCost=acerchemTrayFacade.getTotalPriceForCart(cartData, cartData.getDeliveryAddress());
 			 CartModel cartModel = acerchemCheckoutFacade.getCartModel();
-		        cartData.setDeliveryCost(acerchemCheckoutFacade.createPrice(cartModel, deliveryCost));
+		     cartData.setDeliveryCost(acerchemCheckoutFacade.createPrice(cartModel, deliveryCost));
 		}
 
 		model.addAttribute("noAddress", Boolean.valueOf(getCheckoutFlowFacade().hasNoDeliveryAddress()));

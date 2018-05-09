@@ -16,9 +16,10 @@
 	</div>
 <ul class="pdlist">
  <c:forEach items="${productData}" var="product">
+ <c:url value="${product.url}" var="productUrl"/>
 	<li class="both">
 		<div class="img">
-   			<product:productPrimaryImage product="${product}" format="product"/>
+   			<a href="${productUrl}"><product:productPrimaryImage product="${product}" format="product"/></a>
    		</div>
    		<div class="maxtext">
     		<p class="in-title">Potassium Sorbate Granular (25kg Carton) by Gaojiang</p>
@@ -45,9 +46,10 @@
 	    <div class="slide-wrap">
 		    <div class="slide-item both">
 		     <c:forEach items="${productData}" var="product">
+		     <c:url value="${product.url}" var="productUrl"/>
 		    	<div class="item">	    		
 		    		<div class="img">
-		    			<product:productPrimaryImage product="${product}" format="product"/>
+		    			<a href="${productUrl}"><product:productPrimaryImage product="${product}" format="product"/></a>
 		    		</div>
 		    		<div class="maxtext">
 			    		<p>TwinTiger Glutathione (5kg Bag) by Jincheng</p>
