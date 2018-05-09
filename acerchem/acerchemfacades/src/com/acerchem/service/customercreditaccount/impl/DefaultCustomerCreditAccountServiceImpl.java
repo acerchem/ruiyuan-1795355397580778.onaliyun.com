@@ -93,7 +93,18 @@ public class DefaultCustomerCreditAccountServiceImpl implements DefaultCustomerC
 	                            creditTransaction.setCransactionId(UUID.randomUUID().toString());
 	                            
 	                            Calendar c = Calendar.getInstance(); 
-	                    		c.setTime(new Date()); 
+	                    		if(orderModel.getPickupDateOfExtended()!=null)
+	                            {
+	                            	c.setTime(orderModel.getPickupDateOfExtended()); 
+	                            }
+	                            else if(orderModel.getDeliveryMode().getCode()=="DELIVERY_MENTION")
+	                            {//自提 DELIVERY_MENTION
+	                            	c.setTime(orderModel.getPickUpDate()); 
+	                            }
+	                            else
+	                            {//送货  DELIVERY_GROSS
+	                            	c.setTime(orderModel.getWaitDeliveiedDate()); 
+	                            }
 	                    	    c.set(Calendar.DATE,c.get(Calendar.DATE)+billingInterval); 
 	                    	    Date date=c.getTime();
 	                            

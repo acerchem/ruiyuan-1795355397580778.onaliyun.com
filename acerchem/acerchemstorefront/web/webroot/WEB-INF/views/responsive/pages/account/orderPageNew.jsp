@@ -128,13 +128,13 @@
 								</span>
                                         <span class="minflex text">
 									<span class="in-title">${fn:escapeXml(orderEntries.product.name)}</span>
-									<span class="spec">Specifications:<i>50kg</i></span>
+									<span class="spec">Package:<i>${orderEntries.product.netWeight}kg ${orderEntries.product.packageType}</i></span>
 									<span class="old-price">price:<i><format:price priceData="${orderEntries.basePrice}" displayFreeForZero="true" /></i></span>
 								</span>
                                     </div>
                                 </td>
                                 <td><format:price priceData="${orderEntries.basePrice}" displayFreeForZero="true" /></td>
-                                <td> ${orderEntries.quantity}*${orderEntries.product.netWeight}Kg</td>
+                                <td> ${orderEntries.quantity}*${orderEntries.product.netWeight}kg</td>
                                 <td>
                                         ${fn:escapeXml(orderEntries.product.code)}
                                 </td>
@@ -180,8 +180,7 @@
                             </div> --%>
                             <span>Payment Type</span>
                             <div class="text">
-                                MasterCard<br/>
-                                ${orderData.paymentInfo.cardNumber}
+                                ${orderData.paymentMode}
                             </div>
                         </div>
                     </div>
@@ -232,18 +231,19 @@
                             <span>Date</span>
                         </div>
                         <div>
-                            <span style="${orderData.deliveryMode.code=='DELIVERY_GROSS'?'':'display: none;'}">
+                            <span style="padding-left:20px;width:100%;${orderData.deliveryMode.code=='DELIVERY_GROSS'?'':'display: none;'}">
                             	Pickup Date:
                             	<fmt:formatDate value="${orderData.pickupDateOfExtended==null?orderData.pickUpDate:orderData.pickupDateOfExtended}" pattern="yyyy-MM-dd"/> <br/>
 								Wait Deliveied Date:${orderData.waitDeliveiedDate}
                             </span>
-                            <span style="${orderData.deliveryMode.code=='DELIVERY_MENTION'?'':'display: none;'}">
+                            <span style="padding-left:20px;width:100%;${orderData.deliveryMode.code=='DELIVERY_MENTION'?'':'display: none;'}">
                             	Delivery Date:
                             	<fmt:formatDate value="${orderData.pickupDateOfExtended==null?orderData.pickUpDate:orderData.pickupDateOfExtended}" pattern="yyyy-MM-dd"/> <br/>
                             </span>
+                            
                             <div style="${orderData.pickupDateOfExtended==null?'':'display: none;'}">
 				             	<span>
-				             		Extended days(Max days:${maxday}):
+				             		Extended Days(Max days:${maxday}):
 				             		<input type="text" name='pickupDays' style="width:80px; height:40px;"/>
 				             		<a class="pickup" href="#" style="display: inline;background: #28FF28;">Confirm</a>
 				             	</span>
