@@ -300,6 +300,7 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
         if (cartData != null)
         {
             cartData.setDeliveryAddress(this.getDeliveryAddress());
+                        
             cartData.setDeliveryMode(null);
             cartData.setPaymentModeData(getPaymentModeData());
             cartData.setPaymentInfo(getPaymentDetails());
@@ -539,10 +540,18 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
     }
     
     
-    protected PriceData createPrice(final CartModel cardModel, final Double val)
+    public PriceData createPrice(final CartModel cardModel, final Double val)
    	{
    		return getPriceDataFactory().create(PriceDataType.BUY, BigDecimal.valueOf(val.doubleValue()),
    				cardModel.getCurrency());
    	}
+
+
+	@Override
+	public CartModel getCartModel() {
+		 final CartModel cartModel = getCartService().getSessionCart();
+		 
+		 return cartModel;
+	}
 }
 
