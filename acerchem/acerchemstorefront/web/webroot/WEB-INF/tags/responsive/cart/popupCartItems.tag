@@ -23,7 +23,7 @@
     		
     		<div class="maxtext">
     		<p class="in-title"><a href="${entryProductUrl}">${fn:escapeXml(product.name)}</a></p>
-				<p class="spec">Specifications:<i>25kg</i></p>
+				<p class="spec">package:<i>${product.netWeight}${product.unitName} &nbsp ${product.packageType}</i></p>
 				<div class="spset"><span class="price"><format:fromPrice priceData="${entry.basePrice}"/></span>
 				<span class="old-price"><format:fromPrice priceData="${entry.basePrice}"/></span>
 				<span class="num">${quantity}</span>

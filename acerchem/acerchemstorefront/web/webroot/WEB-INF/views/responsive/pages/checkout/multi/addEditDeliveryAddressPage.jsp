@@ -206,16 +206,109 @@
 								
 								
 								
-								 <address:addressFormSelector supportedCountries="${countries}"
-                                        regions="${regions}" cancelUrl="${currentStepUrl}"
-                                        country="${country}" />
-							
+								<%--  <address:addressFormSelector supportedCountries="${countries}"
+		                                      regions="${regions}" cancelUrl="${currentStepUrl}"
+		                                      country="${country}" />
+							 --%>
 	
+							<div class="form both">
+								<form:form id="addressAddForm" method="post" commandName="addressForm" >
+																
+								<form:hidden path="addressId" class="add_edit_delivery_address_id"
+									status="${not empty suggestedAddresses ? 'hasSuggestedAddresses' : ''}" />
+								<input type="hidden" name="bill_state" id="address.billstate" />
 								
-								<!-- <div class="btn-set">				
+									<label>
+										<span class="label-title">FIRST NAME</span>	
+										<input type="text" name="firstName"  alt="Please Enter Contacts" class="required rep">
+									</label>
+									<label>
+										<span class="label-title">LAST NAME</span>	
+										<input type="text" name="lastName"  alt="Please Enter Contacts" class="required rep">
+									</label>
+									
+									<label>
+									<span class="label-title">Title</span>	
+										<div class="flex-wrap">
+											<div class="flex">					
+												<div class="selbox">
+												
+													<select name="titleCode" id="tileId">
+													<option value ="mrs">Mrs.</option>
+													<option value ="miss">Miss</option>
+													<option value ="ms">Ms.</option>
+													<option value ="mr">Mr.</option>
+													<option value ="dr">Dr.</option>
+													<option value ="rev">Rev.</option>
+													</select>
+													
+												</div>	
+											</div>
+												
+										</div>
+									</label>
+									
+									<label>
+										<span class="label-title">Telephone</span>	
+										<input type="text" name="line1"  alt="Please Enter Telephone">
+									</label>
+									<label>
+										<span class="label-title">Mobile Phone</span>	
+										<input type="text" name="phone"  alt="Please Enter Mobile Phone" class="required">
+									</label>
+									<label>
+										<span class="label-title">Zip Code</span>	
+										<input type="text" name="postcode" alt="Please Enter Zip Code" class="required">
+									</label>
+								
+									<label>
+									<span class="label-title">Shipping Address</span>	
+										<div class="flex-wrap">
+											<div class="flex">					
+												<div class="selbox">
+												
+													<select name="countryIso" id="countryIso">
+													<option value ="${country.isocode}">${country.name}</option>
+													<c:forEach items="${supportedCountries}" var="countrys" >
+													 
+													<option value ="${countrys.isocode}">${countrys.name}</option>
+													
+													</c:forEach>
+													</select>
+								
+												</div>	
+											</div>
+											<div class="flex">
+												<div class="selbox ">
+												
+													<select name="regionIso" id="regionIso">
+														<c:forEach items="${regions}" var="region" >
+														<option value ="${region.isocode}">${region.name}</option>
+														</c:forEach>
+													</select>
+								
+												</div>	
+											</div>				
+										</div>
+									</label>
+								
+									<label>						
+										<input type="text" name="townCity" class="lab-row required" placeholder="Detailed address" alt="Please Enter Shipping Detailed Address">
+									</label>
+									
+									<!-- <div class="btn-set">
 									<a class="btn btn-line" href="javascript:void(0)">Cancel</a>
-									<a class="btn btn-submit" href="javascript:void(0)">Confirm</a>
-								</div> -->
+										<button type="submit" class="btn btn-submit">Confirm</button>
+										
+										</div> -->
+								 </form:form>	
+             </div>
+			 <div class="btn-set">				
+				<a class="btn btn-line" href="javascript:void(0)">Cancel</a>
+				<a class="btn btn-submit" href="javascript:void(0)">Confirm</a>
+			</div>
+								
+								
 							</div>
 						<!-- new end -->
 						<!-- book -->
@@ -796,6 +889,40 @@ $(document).ready(function() {
     });
 });
 
+
+$(document).ready(function() {
+	
+	$('#countryIso').change(function() {
+		
+        var selectValue = $("#countryIso").val();
+        
+       // alert(selectValue);
+       
+      //  window.location.href ='<c:url value='/checkout/multi/delivery-address/region?countryIso='/>'+selectValue;
+      
+      
+      $.get('<c:url value='/checkout/multi/delivery-address/region'/>', { countryIso: selectValue},
+		  function(arr){
+    	  
+    	   // alert("Data Loaded: " + data);
+    	   
+    	   //<option value ="${region.isocode}">${region.name}</option>
+    	       var con="";  
+			   $.each(arr,function(i,data){  
+			        con+="<option value ="+data.isocode+">"+data.name+"</option>"  
+			    });
+			   
+			   $("#regionIso").html(con);  
+			   
+		  });
+      
+       
+
+
+	})
+	
+	
+});
 
 /* 
 $("#dateBtn").on('click',function(){

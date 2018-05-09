@@ -155,6 +155,29 @@
         </list-view:list-view>
     </context>
     
+    <context merge-by="type" parent="GenericItem" type="CustomerCreditAccount" component="editor-area">
+        <editorArea:editorArea>
+            <editorArea:tab name="hmc.tab.ticket.details">
+                <editorArea:section name="hmc.tab.section.ticket.details">
+                    <editorArea:attribute qualifier="creditTotalAmount" xmlns="http://www.hybris.com/cockpitng/component/editorArea">
+                    	<editorArea:editor-parameter> 
+							<editorArea:name>numberFormat</editorArea:name>
+							<editorArea:value>#,###,###,###,###,###,###,###.00</editorArea:value>
+						</editorArea:editor-parameter>
+                    </editorArea:attribute>
+					<editorArea:attribute qualifier="creaditRemainedAmount" xmlns="http://www.hybris.com/cockpitng/component/editorArea">
+                    	<editorArea:editor-parameter> 
+							<editorArea:name>numberFormat</editorArea:name>
+							<editorArea:value>#,###,###,###,###,###,###,###.00</editorArea:value>
+						</editorArea:editor-parameter>
+                    </editorArea:attribute>
+                    <editorArea:attribute qualifier="billingInterval"/>
+                    <editorArea:attribute qualifier="status"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    
     <context component="create-wizard" type="CreditTransaction">
 		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="CreditTransactionWizard" title="create.CreditTransaction.title">
 			<wz:prepare id="CreditTransactionPrepare">
@@ -193,6 +216,32 @@
             <list-view:column qualifier="paybackTime"/>
             <list-view:column qualifier="isPayback"/>
         </list-view:list-view>
+    </context>
+    
+    <context merge-by="type" parent="GenericItem" type="CreditTransaction" component="editor-area">
+        <editorArea:editorArea>
+            <editorArea:tab name="hmc.tab.ticket.details">
+                <editorArea:section name="hmc.tab.section.ticket.details">
+                    <editorArea:attribute qualifier="orderCode"/>
+                    <editorArea:attribute qualifier="productNumber"/>
+					<editorArea:attribute qualifier="creaditUsedAmount" xmlns="http://www.hybris.com/cockpitng/component/editorArea">
+                    	<editorArea:editor-parameter> 
+							<editorArea:name>numberFormat</editorArea:name>
+							<editorArea:value>#,###,###,###,###,###,###,###.00</editorArea:value>
+						</editorArea:editor-parameter>
+                    </editorArea:attribute>
+                    <editorArea:attribute qualifier="shouldPaybackTime"/>
+                    <editorArea:attribute qualifier="paybackAmount" xmlns="http://www.hybris.com/cockpitng/component/editorArea">
+	                    <editorArea:editor-parameter> 
+							<editorArea:name>numberFormat</editorArea:name>
+							<editorArea:value>#,###,###,###,###,###,###,###.00</editorArea:value>
+						</editorArea:editor-parameter>
+					</editorArea:attribute>
+                    <editorArea:attribute qualifier="paybackTime"/>
+                    <editorArea:attribute qualifier="isPayback"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
     </context>
     
     <context type="CreditTransaction" component="advanced-search" merge-by="type" parent="GenericItem">

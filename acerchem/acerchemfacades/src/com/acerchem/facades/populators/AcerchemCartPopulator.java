@@ -60,6 +60,26 @@ public class AcerchemCartPopulator extends CartPopulator {
                     target.setDeliveryDays(stockLevelModel.getAvaPreOrderReleaseDay());
                 }
             }
+            
+            Double subTotal = (double) 0;
+            for (OrderEntryData orderEntryData : target.getEntries()) {
+            	
+            	String netWeight = orderEntryData.getProduct().getNetWeight();
+            	
+            	long items = orderEntryData.getQuantity();
+            	
+            	BigDecimal basePrice = orderEntryData.getBasePrice().getValue();
+            	long totalWeight = items* Long.valueOf(netWeight);
+            	//Double totalPrice = Long.valueOf(basePrice)*totalWeight;
+            	
+            	Double totalPrice =basePrice.doubleValue()*totalWeight;
+            	
+            	subTotal += totalPrice;
+            	
+            	orderEntryData.setTotalPrice(createPrice(source, totalPrice));
+            }
+            
+            target.setSubTotal(createPrice(source, subTotal));
         }
         if (source.getAllPromotionResults()!=null) {
             for (OrderEntryData orderEntryData : target.getEntries()) {
@@ -71,4 +91,11 @@ public class AcerchemCartPopulator extends CartPopulator {
             }
         }
     }
+    ///orderEntry.getOrder().getCurrency()
+    
+    protected PriceData createPrice(final CartModel cardModel, final Double val)
+	{
+		return getPriceDataFactory().create(PriceDataType.BUY, BigDecimal.valueOf(val.doubleValue()),
+				cardModel.getCurrency());
+	}
 }

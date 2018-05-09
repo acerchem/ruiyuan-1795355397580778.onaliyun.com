@@ -70,9 +70,11 @@
 				<div class="selbox">
 				
 					<select name="countryIso" id="countryIso">
-					
-					<c:forEach items="${supportedCountries}" var="country" >
 					<option value ="${country.isocode}">${country.name}</option>
+					<c:forEach items="${supportedCountries}" var="countrys" >
+					 
+					<option value ="${countrys.isocode}">${countrys.name}</option>
+					
 					</c:forEach>
 					</select>
 
@@ -82,9 +84,9 @@
 				<div class="selbox ">
 				
 					<select name="regionIso" id="regionIso">
-					<option value ="US-NY">New York</option>
-					<option value ="LA">Los Angeles</option>
-					<option value ="CI">Chicago</option>
+						<c:forEach items="${regions}" var="region" >
+						<option value ="${region.isocode}">${region.name}</option>
+						</c:forEach>
 					</select>
 
 				</div>	

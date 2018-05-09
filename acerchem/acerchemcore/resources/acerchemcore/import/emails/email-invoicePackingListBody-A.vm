@@ -96,7 +96,7 @@ p.western {
       <td>INVOICE NO.: ${ctx.order.code}</td>
       <td>&nbsp;</td>
     </tr>
-	#set ($formattedOrderDate = $ctx.dateTool.format('MM/dd/yyyy', $ctx.order.created))
+	#set ($formattedOrderDate = $ctx.order.waitDeliveiedDate)
     <tr>
       <td>DATE: ${formattedOrderDate}</td>
       <td>&nbsp;</td>

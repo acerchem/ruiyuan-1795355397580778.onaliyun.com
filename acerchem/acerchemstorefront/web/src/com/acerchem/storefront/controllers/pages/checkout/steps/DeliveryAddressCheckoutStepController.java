@@ -12,6 +12,7 @@ package com.acerchem.storefront.controllers.pages.checkout.steps;
 
 import com.acerchem.facades.facades.AcerchemCheckoutFacade;
 import com.acerchem.facades.facades.AcerchemOrderException;
+import com.acerchem.facades.facades.AcerchemTrayFacade;
 import com.acerchem.storefront.controllers.ControllerConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.PreValidateCheckoutStep;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.PreValidateQuoteCheckoutStep;
@@ -26,9 +27,13 @@ import de.hybris.platform.acceleratorstorefrontcommons.util.AddressDataUtil;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.address.data.AddressVerificationResult;
 import de.hybris.platform.commercefacades.order.data.CartData;
+import de.hybris.platform.commercefacades.product.data.PriceData;
+import de.hybris.platform.commercefacades.product.data.PriceDataType;
 import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.commercefacades.user.data.CountryData;
+import de.hybris.platform.commercefacades.user.data.RegionData;
 import de.hybris.platform.commerceservices.address.AddressVerificationDecision;
+import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.util.Config;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
@@ -37,12 +42,20 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+
+
 
 
 @Controller
@@ -57,6 +70,9 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 
 	@Resource(name = "defaultAcerchemCheckoutFacade")
 	private AcerchemCheckoutFacade acerchemCheckoutFacade;
+	
+	@Resource(name = "defaultAcerchemTrayFacade")
+	private AcerchemTrayFacade acerchemTrayFacade;
 
 	@RequestMapping(value = "/add", method = RequestMethod.GET)
 	@RequireHardLogIn
@@ -68,7 +84,12 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		final CartData cartData = acerchemCheckoutFacade.getCheckoutCart();
 
 		//cartData.setDeliveryAddress(null);
-		populateCommonModelAttributes(model, cartData, new AddressForm());
+		try {
+			populateCommonModelAttributes(model, cartData, new AddressForm());
+		} catch (AcerchemOrderException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 
 		return ControllerConstants.Views.Pages.MultiStepCheckout.AddEditDeliveryAddressPage;
@@ -135,7 +156,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	@RequestMapping(value = "/edit", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String editAddressForm(@RequestParam("editAddressCode") final String editAddressCode, final Model model,
-			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
+			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException, AcerchemOrderException
 	{
 		final ValidationResults validationResults = getCheckoutStep().validate(redirectAttributes);
 		if (getCheckoutStep().checkIfValidationErrors(validationResults))
@@ -170,7 +191,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	@RequireHardLogIn
 	public String edit(final AddressForm addressForm, final BindingResult bindingResult, final Model model,
-			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
+			final RedirectAttributes redirectModel) throws CMSItemNotFoundException, AcerchemOrderException
 	{
 		getAddressValidator().validate(addressForm, bindingResult);
 
@@ -309,21 +330,31 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	 *
 	 * @return - a URL to the page to load.
 	 * @throws CMSItemNotFoundException 
+	 * @throws AcerchemOrderException 
 	 */
 	@RequestMapping(value = "/select", method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String doSelectDeliveryAddress(@RequestParam("selectedAddressCode" ) final String selectedAddressCode,
 										  final Model model, final RedirectAttributes redirectAttributes,
 										 @RequestParam(required = false) final String selectedDeliveryModeCode,
-										  @RequestParam(required = false) final String pickUpDate) throws CMSItemNotFoundException {
+										  @RequestParam(required = false) final String pickUpDate) throws CMSItemNotFoundException, AcerchemOrderException {
 //		final ValidationResults validationResults = getCheckoutStep().validate(redirectAttributes);
 //		if (getCheckoutStep().checkIfValidationErrors(validationResults))
 //		{
 //			return getCheckoutStep().onValidation(validationResults);
 //		}
+		
+		final CartData cartData = acerchemCheckoutFacade.getCheckoutCart();
+		
+		
 		if (StringUtils.isNotBlank(selectedAddressCode))
 		{
 			final AddressData selectedAddressData = getCheckoutFacade().getDeliveryAddressForCode(selectedAddressCode);
+			
+	        double deliveryCost=acerchemTrayFacade.getTotalPriceForCart(cartData, selectedAddressData);
+	        CartModel cartModel = acerchemCheckoutFacade.getCartModel();
+	        cartData.setDeliveryCost(acerchemCheckoutFacade.createPrice(cartModel, deliveryCost));
+			
 			final boolean hasSelectedAddressData = selectedAddressData != null;
 			if (hasSelectedAddressData)
 			{
@@ -340,10 +371,29 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		return enterStep(model, redirectAttributes);
 
 	}
+	
+	
+	@RequestMapping(value = "/region", method = RequestMethod.GET, produces = "application/json")
+	@ResponseBody
+	public List<RegionData> doSelectRegion(@RequestParam("countryIso" ) final String countryIso,
+										  final Model model, final RedirectAttributes redirectAttributes
+										) throws CMSItemNotFoundException {
+
+		//return  getI18NFacade().getRegionsForCountryIso(countryIso);
+		
+		List<RegionData> regions =getI18NFacade().getRegionsForCountryIso(countryIso);
+		
+       // response.getWriter().write("123");  
+		
+		return regions;
+
+		
+	}
+	
 
     @RequestMapping(value = "/addPickUpDate", method = RequestMethod.GET)
     @RequireHardLogIn
-    public String addPickUpDate(final Model model, @RequestParam(required = false) final String pickUpDate) throws CMSItemNotFoundException {
+    public String addPickUpDate(final Model model, @RequestParam(required = false) final String pickUpDate) throws CMSItemNotFoundException, AcerchemOrderException {
 
         //保存收货时间
         acerchemCheckoutFacade.savePickUpDateForOrder(pickUpDate);
@@ -396,7 +446,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	}
 
 	protected void populateCommonModelAttributes(final Model model, final CartData cartData, final AddressForm addressForm)
-			throws CMSItemNotFoundException
+			throws CMSItemNotFoundException, AcerchemOrderException
 	{
 
 		try {
@@ -406,6 +456,9 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 			GlobalMessages.addErrorMessage(model, e.getMessage());
 		}
 		
+		cartData.setDeliveryMode(acerchemCheckoutFacade.getDeliveryModes());
+		
+		//model.addAttribute("deliveryMode", acerchemCheckoutFacade.getDeliveryModes());
 		
 		model.addAttribute("cartData", cartData);
 		model.addAttribute("addressForm", addressForm);
@@ -414,11 +467,17 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		}else{
 			model.addAttribute("paymentInfos",acerchemCheckoutFacade.getSupportedCardTypes("DELIVERY_GROSS"));
 		}
+		
 
 		if (cartData.getDeliveryMode()!=null&&"DELIVERY_MENTION".equals(cartData.getDeliveryMode().getCode())) {
 			model.addAttribute("deliveryAddresses", acerchemCheckoutFacade.getDeliveryAddresses());
 		}else{
 			model.addAttribute("deliveryAddresses", getDeliveryAddresses(cartData.getDeliveryAddress()));
+			
+			
+			 double deliveryCost=acerchemTrayFacade.getTotalPriceForCart(cartData, cartData.getDeliveryAddress());
+			 CartModel cartModel = acerchemCheckoutFacade.getCartModel();
+		        cartData.setDeliveryCost(acerchemCheckoutFacade.createPrice(cartModel, deliveryCost));
 		}
 
 		model.addAttribute("noAddress", Boolean.valueOf(getCheckoutFlowFacade().hasNoDeliveryAddress()));
@@ -427,10 +486,13 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		model.addAttribute(SHOW_SAVE_TO_ADDRESS_BOOK_ATTR, Boolean.TRUE);
 		model.addAttribute(WebConstants.BREADCRUMBS_KEY, getResourceBreadcrumbBuilder().getBreadcrumbs(getBreadcrumbKey()));
 		model.addAttribute("metaRobots", "noindex,nofollow");
+		
+		
+		addressForm.setCountryIso("US");
 		if (StringUtils.isNotBlank(addressForm.getCountryIso()))
 		{
 			model.addAttribute("regions", getI18NFacade().getRegionsForCountryIso(addressForm.getCountryIso()));
-			model.addAttribute("country", addressForm.getCountryIso());
+			model.addAttribute("country", getI18NFacade().getCountryForIsocode(addressForm.getCountryIso()));
 		}
 		prepareDataForPage(model);
 		storeCmsPageInModel(model, getContentPageForLabelOrId(MULTI_CHECKOUT_SUMMARY_CMS_PAGE_LABEL));
@@ -457,4 +519,5 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 
 		return deliveryAddresses == null ? Collections.<AddressData> emptyList() : deliveryAddresses;
 	}
+	
 }
