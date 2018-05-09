@@ -91,7 +91,7 @@ p.western {
       
       <td>&nbsp;</td>
     </tr>
-	#set ($formattedOrderDate = $ctx.dateTool.format('MM/dd/yyyy', $ctx.order.created))
+	#set ($formattedOrderDate = $ctx.order.waitDeliveiedDate)
     <tr>
       <td colspan="2">DATE: ${formattedOrderDate}</td>
       
