@@ -1307,6 +1307,7 @@ public class AccountPageController extends AbstractSearchPageController
 	
 	private  Integer getTotalPriceForCart(AbstractOrderModel order){
 		 RegionModel regionModel = null;
+		 CountryTrayFareConfModel countryTrayFareConf  = null;
 		BigDecimal totalTrayAmount = BigDecimal.ZERO;
 		if (order!=null){
 			for (AbstractOrderEntryModel aoe : order.getEntries()){
@@ -1318,12 +1319,14 @@ public class AccountPageController extends AbstractSearchPageController
 				if (ObjectUtils.isEmpty(unitCalculateRato)){
 					
 				}
-				Long quantity = aoe.getQuantity();
+				  Long quantity = (aoe.getQuantity())*(Long.parseLong(aoe.getProduct().getNetWeight()));
 				BigDecimal entryTrayAmount = BigDecimal.valueOf(quantity).divide(new BigDecimal(unitCalculateRato),BigDecimal.ROUND_HALF_UP,BigDecimal.ROUND_DOWN);
 				totalTrayAmount =totalTrayAmount.add(entryTrayAmount);
 			}
 		}
-		CountryTrayFareConfModel countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(regionModel, (int) Math.ceil(totalTrayAmount.doubleValue()));
+		if(regionModel != null){
+			 countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(regionModel, (int) Math.ceil(totalTrayAmount.doubleValue()));
+		}
 		return countryTrayFareConf.getDeliveriedDay();
 	}
 	
@@ -1391,24 +1394,24 @@ public class AccountPageController extends AbstractSearchPageController
 		    
 			if(confirm.equals("cancel")&&todaydate.before(date))
 			{
-			    final Transaction tx = Transaction.current();
-				tx.begin();
+			   // final Transaction tx = Transaction.current();
+			   //tx.begin();
 				
 				order.setStatus(OrderStatus.CANCELLED);
 				modelService.save(order);
 				modelService.refresh(order);
 			    acerchemStockService.releaseStock(order);
 			    
-			    CustomerCreditAccountModel customerCreditAccount=defaultCustomerCreditAccountService.updateCreditAccountRepaymentByOrder(order);
+			   // CustomerCreditAccountModel customerCreditAccount=defaultCustomerCreditAccountService.updateCreditAccountRepaymentByOrder(order);
 			    
-			    if(customerCreditAccount==null)
-			    {
-			    	tx.rollback();
-			    }
-			    else
-			    {
-			    	tx.commit();
-			    }
+//			    if(customerCreditAccount==null)
+//			    {
+//			    	tx.rollback();
+//			    }
+//			    else
+//			    {
+//			    	tx.commit();
+//			    }
 			}
 			
 		}
