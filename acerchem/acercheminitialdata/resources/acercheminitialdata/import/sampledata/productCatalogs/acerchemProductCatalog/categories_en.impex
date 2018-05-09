@@ -27,6 +27,7 @@ UPDATE Category;code[unique=true];$catalogVersion;name[lang=$lang]
  ;571;;Vitamin;
  ;575;;Plant Extract;
  ;576;;Joint Health;
+ ;577;;Amino Acid;
  #shaun
  ;3510;;Acerchem;
 

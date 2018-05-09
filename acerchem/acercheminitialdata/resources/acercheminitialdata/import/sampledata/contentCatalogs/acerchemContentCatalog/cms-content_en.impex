@@ -20,7 +20,7 @@ $lang=en
 
 # Site Logo Component
 UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
-;;SiteLogoComponent;/acerchemimages/acerchem.png
+;;SiteLogoComponent;/acerchemimages/Logo.jpg
 
 # CMS Link Components
 UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
@@ -140,7 +140,7 @@ UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$la
 ;;PowerSuppliesNavNode;"Power Supplies"
 ;;SiteRootNode;"SiteRoot"
 ;;SuppliesNavNode;"Supplies"
-;;WebcamsNavNode;"Others"
+;;WebcamsNavNode;"Amino Acid"
 
 # acerchem FAQ Page 
 

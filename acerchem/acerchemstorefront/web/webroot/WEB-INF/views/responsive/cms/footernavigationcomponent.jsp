@@ -3,6 +3,7 @@
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags"%>
 <%@ taglib prefix="footer" tagdir="/WEB-INF/tags/responsive/common/footer"  %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<c:url value="/" var="homeUrl"/>
 
 <c:if test="${component.visible}">
 		<div class="footer maxleft">
@@ -21,30 +22,30 @@
 						<div class="maxfootnav">
 							<h3>Customer service</h3>
 							<ul>
-								<li><a href="#">FAQ</a></li>
-								<li><a href="#">Privacy & Security Policy</a></li>
-								<li><a href="#">Shipping & Return Policy</a></li>
-								<li><a href="#">Terms & Condition</a></li>
+								<li><a href="${homeUrl}faq">FAQ</a></li>
+								<li><a href="${homeUrl}privacyPolicy">Privacy & Security Policy</a></li>
+								<li><a href="${homeUrl}shippingOrReturnPolicy">Shipping & Return Policy</a></li>
+								<li><a href="${homeUrl}termsConditions">Terms & Condition</a></li>
 							</ul>
 						</div>
 						<div class="maxfootnav">
 							<h3>Company</h3>
 							<ul>
-								<li><a href="#">About</a></li>
-								<li><a href="#">Help</a></li>
-								<li><a href="#">Contact</a></li>
-								<li><a href="#">Terms</a></li>
-								<li><a href="#">Privacy</a></li>
+								<li><a href="${homeUrl}aboutUs">About</a></li>
+								<li><a href="${homeUrl}help">Help</a></li>
+								<li><a href="${homeUrl}contactUs">Contact</a></li>
+								<li><a href="${homeUrl}">Terms</a></li>
+								<li><a href="${homeUrl}">Privacy</a></li>
 							</ul>
 						</div>
 						<div class="maxfootnav">
 							<h3>Connect</h3>
 							<ul>
-								<li><a href="#">Animal Nutrition</a></li>
-								<li><a href="#">Antioxidants</a></li>
-								<li><a href="#">B-Complex</a></li>
-								<li><a href="#">Carotenoids</a></li>
-								<li><a href="#">Cognitive</a></li>
+								<li><a href="${homeUrl}">Animal Nutrition</a></li>
+								<li><a href="${homeUrl}">Antioxidants</a></li>
+								<li><a href="${homeUrl}">B-Complex</a></li>
+								<li><a href="${homeUrl}">Carotenoids</a></li>
+								<li><a href="${homeUrl}">Cognitive</a></li>
 							</ul>
 						</div>
 					</div>
