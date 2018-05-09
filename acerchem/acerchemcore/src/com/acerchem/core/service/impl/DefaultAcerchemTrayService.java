@@ -4,6 +4,8 @@ import com.acerchem.core.dao.AcerchemTrayDao;
 import com.acerchem.core.model.CountryTrayFareConfModel;
 import com.acerchem.core.service.AcerchemTrayService;
 import de.hybris.platform.core.model.c2l.CountryModel;
+import de.hybris.platform.core.model.c2l.RegionModel;
+
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -18,9 +20,9 @@ public class DefaultAcerchemTrayService implements AcerchemTrayService {
     private AcerchemTrayDao acerchemTrayDao;
 
     @Override
-    public CountryTrayFareConfModel getPriceByCountryAndTray(CountryModel countryModel, int quantity) {
+    public CountryTrayFareConfModel getPriceByCountryAndTray(RegionModel regionModel, int quantity) {
 
-        CountryTrayFareConfModel countryTrayFareConf = acerchemTrayDao.getCouTrayFareConf(countryModel,quantity);
+        CountryTrayFareConfModel countryTrayFareConf = acerchemTrayDao.getCouTrayFareConf(regionModel,quantity);
 
         return countryTrayFareConf;
     }

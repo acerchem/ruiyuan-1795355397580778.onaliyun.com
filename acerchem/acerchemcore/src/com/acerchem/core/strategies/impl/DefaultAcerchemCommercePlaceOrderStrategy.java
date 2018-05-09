@@ -35,6 +35,7 @@ import de.hybris.platform.commerceservices.order.impl.DefaultCommercePlaceOrderS
 import de.hybris.platform.commerceservices.service.data.CommerceCheckoutParameter;
 import de.hybris.platform.commerceservices.service.data.CommerceOrderResult;
 import de.hybris.platform.core.model.c2l.CountryModel;
+import de.hybris.platform.core.model.c2l.RegionModel;
 import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.AbstractOrderModel;
 import de.hybris.platform.core.model.order.CartModel;
@@ -188,7 +189,7 @@ public class DefaultAcerchemCommercePlaceOrderStrategy extends DefaultCommercePl
 	}
 	
 	 private  Integer getTotalPriceForCart(AbstractOrderModel order){
-			CountryModel countryModel = null;
+		 RegionModel regionModel = null;
 			//托盘数量
 			BigDecimal totalTrayAmount = BigDecimal.ZERO;
 			if (order!=null){
@@ -196,7 +197,7 @@ public class DefaultAcerchemCommercePlaceOrderStrategy extends DefaultCommercePl
 				for (AbstractOrderEntryModel aoe : order.getEntries()){
 
 					if (aoe.getDeliveryPointOfService().getAddress()!=null) {
-						countryModel = aoe.getDeliveryPointOfService().getAddress().getCountry();
+						regionModel = aoe.getOrder().getDeliveryAddress().getRegion();
 					}
 					ProductModel productModel = aoe.getProduct();
 					//先获取托盘比例，在计算数量
@@ -213,7 +214,7 @@ public class DefaultAcerchemCommercePlaceOrderStrategy extends DefaultCommercePl
 				}
 			}
 
-			CountryTrayFareConfModel countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(countryModel, (int) Math.ceil(totalTrayAmount.doubleValue()));
+			CountryTrayFareConfModel countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(regionModel, (int) Math.ceil(totalTrayAmount.doubleValue()));
 			
 			return countryTrayFareConf.getDeliveriedDay();
 		}

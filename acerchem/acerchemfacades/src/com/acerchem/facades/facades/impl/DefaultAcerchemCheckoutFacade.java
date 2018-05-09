@@ -140,7 +140,8 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                 deliveryCost = new PriceValue(cartModel.getCurrency().getIsocode(), 0.0d, true);
             }else if (DELIVERY_GROSS.equals(deliveryModeModel.getCode())){
                 BigDecimal fee = BigDecimal.valueOf(0.0d);
-                fee =  BigDecimal.valueOf(acerchemTrayFacade.getTotalPriceForCart(cartModel));
+                //add by taolq
+                //fee =  BigDecimal.valueOf(acerchemTrayFacade.getTotalPriceForCart(cartModel));
                 deliveryCost = new PriceValue(cartModel.getCurrency().getIsocode(), fee.doubleValue(), true);
             }
 

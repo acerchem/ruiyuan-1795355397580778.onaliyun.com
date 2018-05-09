@@ -1,23 +1,26 @@
 package com.acerchem.facades.facades.impl;
 
-import com.acerchem.core.model.CountryTrayFareConfModel;
-import com.acerchem.core.service.AcerchemTrayService;
-import com.acerchem.facades.facades.AcerchemOrderException;
-import com.acerchem.facades.facades.AcerchemTrayFacade;
-import de.hybris.platform.core.model.c2l.CountryModel;
-import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
-import de.hybris.platform.core.model.order.CartModel;
-import de.hybris.platform.core.model.product.ProductModel;
-import de.hybris.platform.order.CartService;
-import de.hybris.platform.servicelayer.i18n.CommonI18NService;
-import de.hybris.platform.servicelayer.i18n.I18NService;
-import de.hybris.platform.servicelayer.session.SessionService;
+import java.math.BigDecimal;
+
+import javax.annotation.Resource;
+
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
 
-import javax.annotation.Resource;
-import java.math.BigDecimal;
+import com.acerchem.core.model.CountryTrayFareConfModel;
+import com.acerchem.core.service.AcerchemTrayService;
+import com.acerchem.facades.facades.AcerchemOrderException;
+import com.acerchem.facades.facades.AcerchemTrayFacade;
+
+import de.hybris.platform.core.model.c2l.CountryModel;
+import de.hybris.platform.core.model.c2l.RegionModel;
+import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
+import de.hybris.platform.core.model.order.CartModel;
+import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.core.model.user.AddressModel;
+import de.hybris.platform.order.CartService;
+import de.hybris.platform.servicelayer.i18n.CommonI18NService;
 
 
 @Service("acerchemTrayFacade")
@@ -37,10 +40,11 @@ public class DefaultAcerchemTrayFacade implements AcerchemTrayFacade {
     private CartService cartService;
 
     @Override
-    public double getBasePriceByCountryAndTray(String countryIsoCode, int trayAmount){
+    public double getBasePriceByCountryAndTray(String countryIsoCode,String regionIsoCode, int trayAmount){
         double price = 0.0;
         CountryModel countryModel = commonI18NService.getCountry(countryIsoCode);
-        CountryTrayFareConfModel countryTrayFareConf =  acerchemTrayService.getPriceByCountryAndTray(countryModel,trayAmount);
+        RegionModel regionModel =  commonI18NService.getRegion(countryModel, regionIsoCode);
+        CountryTrayFareConfModel countryTrayFareConf =  acerchemTrayService.getPriceByCountryAndTray(regionModel, trayAmount);
         if (countryTrayFareConf!=null){
             price = countryTrayFareConf.getPrice();
         }
@@ -48,9 +52,9 @@ public class DefaultAcerchemTrayFacade implements AcerchemTrayFacade {
     }
 
     @Override
-    public double getTotalPriceForCart(CartModel cartModel) throws AcerchemOrderException {
+    public double getTotalPriceForCart(CartModel cartModel,AddressModel addressModel) throws AcerchemOrderException {
         double totalTrayPrice = 0.0d;
-        CountryModel countryModel = null;
+        RegionModel regionModel = null;
         //托盘数量
         BigDecimal totalTrayAmount = BigDecimal.ZERO;
         if (cartModel!=null){
@@ -71,10 +75,10 @@ public class DefaultAcerchemTrayFacade implements AcerchemTrayFacade {
 
                 totalTrayAmount =totalTrayAmount.add(entryTrayAmount);
             }
-            countryModel = cartModel.getEntries().iterator().next().getDeliveryPointOfService().getAddress().getCountry();
+            regionModel = addressModel.getRegion();
+            //countryModel = cartModel.getEntries().iterator().next().getDeliveryPointOfService().getAddress().getCountry();
         }
-
-        CountryTrayFareConfModel countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(countryModel, (int) Math.ceil(totalTrayAmount.doubleValue()));
+        CountryTrayFareConfModel countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(regionModel, (int) Math.ceil(totalTrayAmount.doubleValue()));
         if (countryTrayFareConf!=null){
             totalTrayPrice = countryTrayFareConf.getPrice();
         }

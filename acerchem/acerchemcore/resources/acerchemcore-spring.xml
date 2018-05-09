@@ -296,6 +296,10 @@
 		<property name="frontendTemplateName" value="CustomerRegistrationEmailTemplate"/>
 	</bean>
 	
+	<bean id="generateSendEmployeeEmail" parent="abstractGenerateEmailAction">
+		<property name="frontendTemplateName" value="AcerchemDeliveryNoteEmailTemplate"/>
+	</bean>
+	
 	<!-- end -->
 	
 	<bean id="generateCustomerRegistrationEmail" parent="abstractGenerateEmailAction">
@@ -691,6 +695,42 @@
 		<property name="emailService" ref="emailService"/>
 		<property name="rendererService" ref="rendererService"/>
 		<property name="emailContextFactory" ref="emailContextFactory"/>
+	</bean>
+	
+	<alias alias="customerAccountService" name="defaultAcermCustomerAccountService"/>
+	<bean id="defaultAcermCustomerAccountService"
+			class="com.acerchem.core.service.impl.DefaultAcermCustomerAccountService">
+		<property name="userService" ref="userService"/>
+		<property name="paymentService" ref="paymentService"/>
+		<property name="modelService" ref="modelService"/>
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+		<property name="i18nService" ref="i18nService"/>
+		<property name="passwordEncoderService" ref="passwordEncoderService"/>
+		<property name="secureTokenService" ref="secureTokenService"/>
+		<property name="tokenValiditySeconds" value="1800"/>
+		<property name="customerAccountDao" ref="customerAccountDao"/>
+		<property name="baseSiteService" ref="baseSiteService"/>
+		<property name="baseStoreService" ref="baseStoreService"/>
+		<property name="eventService" ref="eventService"/>
+		<property name="commonI18NService" ref="commonI18NService"/>
+		<property name="customerEmailResolutionService" ref="customerEmailResolutionService"/>
+		<property name="passwordEncoding" value="#{configurationService.configuration.getProperty('default.password.encoding')}"/>
+		<property name="typeService" ref="typeService"/>
+		<property name="customerNameStrategy" ref="defaultCustomerNameStrategy"/>
+		<property name="timeService" ref="timeService"/>
+		<property name="monthsForOrderExpiry"
+					 value="#{configurationService.configuration.getProperty('guest.orderstatuspage.access.expiry.month')}"/>
+	</bean>
+	
+	<bean id="sendEmployeeEmailProcessProcessDefinitionResource"
+	      class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/acerchemcore/processes/sendEmployeeEmailEventListener.xml"/>
+	</bean>
+	
+	<bean id="sendEmployeeEmailEventListener"
+	      class="com.acerchem.core.event.SendEmployeeEmailEventListener" parent="abstractAcceleratorSiteEventListener">
+		<property name="modelService" ref="modelService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
 	</bean>
 
 </beans>

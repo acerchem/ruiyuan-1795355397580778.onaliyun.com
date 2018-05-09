@@ -29,50 +29,95 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 		ServicesUtil.validateParameterNotNull(emailPageModel, "EmailPageModel cannot be null");
 		Assert.isInstanceOf(EmailPageTemplateModel.class, emailPageModel.getMasterTemplate(),
 				"MasterTemplate associated with EmailPageModel should be EmailPageTemplate");
-
-		final EmailPageTemplateModel emailPageTemplateModel = (EmailPageTemplateModel) emailPageModel.getMasterTemplate();
-		final RendererTemplateModel bodyRenderTemplate = emailPageTemplateModel.getHtmlTemplate();
-		Assert.notNull(bodyRenderTemplate, "HtmlTemplate associated with MasterTemplate of EmailPageModel cannot be null");
-		final RendererTemplateModel subjectRenderTemplate = emailPageTemplateModel.getSubject();
-		Assert.notNull(subjectRenderTemplate, "Subject associated with MasterTemplate of EmailPageModel cannot be null");
-
 		final EmailMessageModel emailMessageModel;
-		//This call creates the context to be used for rendering of subject and body templates.
-		final AbstractEmailContext<BusinessProcessModel> emailContext = getEmailContextFactory().create(businessProcessModel,
-				emailPageModel, bodyRenderTemplate);
+		final EmailPageTemplateModel emailPageTemplateModel = (EmailPageTemplateModel) emailPageModel.getMasterTemplate();
+		
+		//if("AcerchemSendEmployeeRegisterEmail".equalsIgnoreCase(emailPageTemplateModel.getUid()) || "AcerchemSendOrderConfirmEmail".equalsIgnoreCase(emailPageTemplateModel.getUid())){
+		if("AcerchemDeliveryNoteEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid()) || "AcerchemReleaseNoteEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())){
+			final RendererTemplateModel bodyRenderTemplate = emailPageTemplateModel.getHtmlTemplate();
+			Assert.notNull(bodyRenderTemplate, "HtmlTemplate associated with MasterTemplate of EmailPageModel cannot be null");
+			final RendererTemplateModel subjectRenderTemplate = emailPageTemplateModel.getSubject();
+			Assert.notNull(subjectRenderTemplate, "Subject associated with MasterTemplate of EmailPageModel cannot be null");
 
-		if (emailContext == null)
-		{
-			LOG.error("Failed to create email context for businessProcess [" + businessProcessModel + "]");
-			throw new IllegalStateException("Failed to create email context for businessProcess [" + businessProcessModel + "]");
-		}
-		else
-		{
-			if (!validate(emailContext))
+			
+			//This call creates the context to be used for rendering of subject and body templates.
+			final AbstractEmailContext<BusinessProcessModel> emailContext = getEmailContextFactory().create(businessProcessModel,
+					emailPageModel, bodyRenderTemplate);
+
+			if (emailContext == null)
 			{
-				LOG.error("Email context for businessProcess [" + businessProcessModel + "] is not valid: "
-						+ ReflectionToStringBuilder.toString(emailContext));
-				throw new IllegalStateException("Email context for businessProcess [" + businessProcessModel + "] is not valid: "
-						+ ReflectionToStringBuilder.toString(emailContext));
+				LOG.error("Failed to create email context for businessProcess [" + businessProcessModel + "]");
+				throw new IllegalStateException("Failed to create email context for businessProcess [" + businessProcessModel + "]");
 			}
-
-			final StringWriter subject = new StringWriter();
-			getRendererService().render(subjectRenderTemplate, emailContext, subject);
-
-			final StringWriter body = new StringWriter();
-			getRendererService().render(bodyRenderTemplate, emailContext, body);
-
-			emailMessageModel = createEmailMessage(subject.toString(), body.toString(), emailContext);
-
-			if (LOG.isDebugEnabled())
+			else
 			{
-				LOG.debug("Email Subject: " + emailMessageModel.getSubject());
-				LOG.debug("Email Body: " + emailMessageModel.getBody());
+				if (!validate(emailContext))
+				{
+					LOG.error("Email context for businessProcess [" + businessProcessModel + "] is not valid: "
+							+ ReflectionToStringBuilder.toString(emailContext));
+					throw new IllegalStateException("Email context for businessProcess [" + businessProcessModel + "] is not valid: "
+							+ ReflectionToStringBuilder.toString(emailContext));
+				}
+
+				final StringWriter subject = new StringWriter();
+				getRendererService().render(subjectRenderTemplate, emailContext, subject);
+
+				final StringWriter body = new StringWriter();
+				getRendererService().render(bodyRenderTemplate, emailContext, body);
+				
+				emailMessageModel = createSendEmployeeEmailMessage(subject.toString(), body.toString(), emailContext);
+
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("Email Subject: " + emailMessageModel.getSubject());
+					LOG.debug("Email Body: " + emailMessageModel.getBody());
+				}
+
 			}
+			return emailMessageModel;
+		}else{
+			final RendererTemplateModel bodyRenderTemplate = emailPageTemplateModel.getHtmlTemplate();
+			Assert.notNull(bodyRenderTemplate, "HtmlTemplate associated with MasterTemplate of EmailPageModel cannot be null");
+			final RendererTemplateModel subjectRenderTemplate = emailPageTemplateModel.getSubject();
+			Assert.notNull(subjectRenderTemplate, "Subject associated with MasterTemplate of EmailPageModel cannot be null");
 
+			
+			//This call creates the context to be used for rendering of subject and body templates.
+			final AbstractEmailContext<BusinessProcessModel> emailContext = getEmailContextFactory().create(businessProcessModel,
+					emailPageModel, bodyRenderTemplate);
+
+			if (emailContext == null)
+			{
+				LOG.error("Failed to create email context for businessProcess [" + businessProcessModel + "]");
+				throw new IllegalStateException("Failed to create email context for businessProcess [" + businessProcessModel + "]");
+			}
+			else
+			{
+				if (!validate(emailContext))
+				{
+					LOG.error("Email context for businessProcess [" + businessProcessModel + "] is not valid: "
+							+ ReflectionToStringBuilder.toString(emailContext));
+					throw new IllegalStateException("Email context for businessProcess [" + businessProcessModel + "] is not valid: "
+							+ ReflectionToStringBuilder.toString(emailContext));
+				}
+
+				final StringWriter subject = new StringWriter();
+				getRendererService().render(subjectRenderTemplate, emailContext, subject);
+
+				final StringWriter body = new StringWriter();
+				getRendererService().render(bodyRenderTemplate, emailContext, body);
+				
+				emailMessageModel = createEmailMessage(subject.toString(), body.toString(), emailContext);
+
+				if (LOG.isDebugEnabled())
+				{
+					LOG.debug("Email Subject: " + emailMessageModel.getSubject());
+					LOG.debug("Email Body: " + emailMessageModel.getBody());
+				}
+
+			}
+			return emailMessageModel;
 		}
-
-		return emailMessageModel;
 	}
 	
 	protected EmailMessageModel createEmailMessage(final String emailSubject, final String emailBody,
@@ -84,14 +129,23 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 		toEmails.add(toAddress);
 		final EmailAddressModel fromAddress = getEmailService().getOrCreateEmailAddressForEmail(emailContext.getFromEmail(),
 				emailContext.getFromDisplayName());
+		return getEmailService().createEmailMessage(toEmails, new ArrayList<EmailAddressModel>(), new ArrayList<EmailAddressModel>(), fromAddress,
+				emailContext.getFromEmail(), emailSubject, emailBody, null);
+	}
+	
+	protected EmailMessageModel createSendEmployeeEmailMessage(final String emailSubject, final String emailBody,
+			final AbstractEmailContext<BusinessProcessModel> emailContext)
+	{
+		final List<EmailAddressModel> toEmails = new ArrayList<EmailAddressModel>();
 		final EmailAddressModel ccEmailOneAddressModel = getEmailService().getOrCreateEmailAddressForEmail(Config.getParameter("mail.ccAddress.one"),
 				Config.getParameter("mail.ccAddress.displayOneName"));
 		final EmailAddressModel ccEmailTwoAddressModel = getEmailService().getOrCreateEmailAddressForEmail(Config.getParameter("mail.ccAddress.two"),
 				Config.getParameter("mail.ccAddress.displayTwoName"));
-		final List<EmailAddressModel> ccAddressModel = new ArrayList<EmailAddressModel>();
-		ccAddressModel.add(ccEmailOneAddressModel);
-		ccAddressModel.add(ccEmailTwoAddressModel);
-		return getEmailService().createEmailMessage(toEmails, ccAddressModel, new ArrayList<EmailAddressModel>(), fromAddress,
+		toEmails.add(ccEmailOneAddressModel);
+		toEmails.add(ccEmailTwoAddressModel);
+		final EmailAddressModel fromAddress = getEmailService().getOrCreateEmailAddressForEmail(emailContext.getFromEmail(),
+				emailContext.getFromDisplayName());
+		return getEmailService().createEmailMessage(toEmails, new ArrayList<EmailAddressModel>(), new ArrayList<EmailAddressModel>(), fromAddress,
 				emailContext.getFromEmail(), emailSubject, emailBody, null);
 	}
 	

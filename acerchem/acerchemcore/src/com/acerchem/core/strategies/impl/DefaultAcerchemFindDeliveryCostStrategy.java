@@ -10,33 +10,31 @@
  */
 package com.acerchem.core.strategies.impl;
 
+import java.math.BigDecimal;
+
+import javax.annotation.Resource;
+
+import org.apache.log4j.Logger;
+import org.springframework.util.ObjectUtils;
+
 import com.acerchem.core.model.CountryTrayFareConfModel;
 import com.acerchem.core.service.AcerchemTrayService;
 import com.acerchem.core.strategies.AcerchemFindDeliveryCostStrategy;
-import de.hybris.platform.commercefacades.order.data.DeliveryModeData;
-import de.hybris.platform.commercefacades.order.data.ZoneDeliveryModeData;
-import de.hybris.platform.commercefacades.product.data.PriceDataType;
+
 import de.hybris.platform.core.model.c2l.CountryModel;
+import de.hybris.platform.core.model.c2l.RegionModel;
 import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.AbstractOrderModel;
-import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.order.delivery.DeliveryModeModel;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.deliveryzone.model.ZoneDeliveryModeModel;
 import de.hybris.platform.jalo.order.AbstractOrder;
 import de.hybris.platform.jalo.order.delivery.DeliveryMode;
 import de.hybris.platform.order.CartService;
-import de.hybris.platform.order.strategies.calculation.FindDeliveryCostStrategy;
 import de.hybris.platform.order.strategies.calculation.impl.DefaultFindDeliveryCostStrategy;
 import de.hybris.platform.servicelayer.config.ConfigurationService;
-import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.servicelayer.util.ServicesUtil;
 import de.hybris.platform.util.PriceValue;
-import org.apache.log4j.Logger;
-import org.springframework.util.ObjectUtils;
-
-import javax.annotation.Resource;
-import java.math.BigDecimal;
 
 public class DefaultAcerchemFindDeliveryCostStrategy extends DefaultFindDeliveryCostStrategy implements AcerchemFindDeliveryCostStrategy
 {
@@ -135,7 +133,7 @@ public class DefaultAcerchemFindDeliveryCostStrategy extends DefaultFindDelivery
 
 	private  double getTotalPriceForCart(AbstractOrderModel order){
 		double totalTrayPrice = 0.0d;
-		CountryModel countryModel = null;
+		RegionModel regionModel = null;
 		//托盘数量
 		BigDecimal totalTrayAmount = BigDecimal.ZERO;
 		if (order!=null){
@@ -143,7 +141,7 @@ public class DefaultAcerchemFindDeliveryCostStrategy extends DefaultFindDelivery
 			for (AbstractOrderEntryModel aoe : order.getEntries()){
 
 				if (aoe.getDeliveryPointOfService().getAddress()!=null) {
-					countryModel = aoe.getDeliveryPointOfService().getAddress().getCountry();
+					regionModel = aoe.getOrder().getDeliveryAddress().getRegion();
 				}
 				ProductModel productModel = aoe.getProduct();
 				//先获取托盘比例，在计算数量
@@ -160,7 +158,7 @@ public class DefaultAcerchemFindDeliveryCostStrategy extends DefaultFindDelivery
 			}
 		}
 
-		CountryTrayFareConfModel countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(countryModel, (int) Math.ceil(totalTrayAmount.doubleValue()));
+		CountryTrayFareConfModel countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(regionModel, (int) Math.ceil(totalTrayAmount.doubleValue()));
 		if (countryTrayFareConf!=null){
 			totalTrayPrice = countryTrayFareConf.getPrice();
 		}
