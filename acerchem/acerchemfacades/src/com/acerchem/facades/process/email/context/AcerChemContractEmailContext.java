@@ -55,7 +55,7 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 				.filter(x -> CollectionUtils.isNotEmpty(x.getGiveAwayCouponCodes()))
 				.flatMap(p -> p.getGiveAwayCouponCodes().stream()).collect(Collectors.toList());
 
-		deliveryDate = orderData.getDeliveyDate();
+		deliveryDate = orderData.getPickUpdate();
 
 		initCustomerAddress(orderProcessModel);
 		initAppend();
