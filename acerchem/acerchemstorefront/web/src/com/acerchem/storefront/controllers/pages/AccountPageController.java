@@ -83,9 +83,11 @@ import de.hybris.platform.servicelayer.search.SearchResult;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.store.BaseStoreModel;
 import de.hybris.platform.store.services.BaseStoreService;
+import de.hybris.platform.tx.Transaction;
 import de.hybris.platform.util.Config;
 
 import com.acerchem.core.model.CountryTrayFareConfModel;
+import com.acerchem.core.model.CustomerCreditAccountModel;
 import com.acerchem.core.service.AcerchemStockService;
 import com.acerchem.core.service.AcerchemTrayService;
 import com.acerchem.service.customercreditaccount.DefaultCustomerCreditAccountService;
@@ -1390,7 +1392,7 @@ public class AccountPageController extends AbstractSearchPageController
 		    
 			if(confirm.equals("cancel")&&todaydate.before(date))
 			{
-			    final Transaction tx = Transaction.current();
+				final Transaction tx = Transaction.current();
 				tx.begin();
 				
 				order.setStatus(OrderStatus.CANCELLED);
@@ -1408,6 +1410,7 @@ public class AccountPageController extends AbstractSearchPageController
 			    {
 			    	tx.commit();
 			    }
+			    
 			}
 			
 		}
