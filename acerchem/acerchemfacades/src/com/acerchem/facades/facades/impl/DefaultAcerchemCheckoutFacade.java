@@ -132,10 +132,10 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
     protected DeliveryModeData convertDeliveyMode(final DeliveryModeModel deliveryModeModel) throws AcerchemOrderException{
 
         final CartModel cartModel = getCart();
-        if (cartModel != null)
+       /* if (cartModel != null)
         {
-            DeliveryModeData deliveryModeData = getDeliveryModeConverter().convert(deliveryModeModel);
-            PriceValue deliveryCost = null;
+            DeliveryModeData deliveryModeData = getDeliveryModeConverter().convert(deliveryModeModel);*/
+           /* PriceValue deliveryCost = null;
             if (DELIVERY_MENTION.equals(deliveryModeModel.getCode())){
                 deliveryCost = new PriceValue(cartModel.getCurrency().getIsocode(), 0.0d, true);
             }else if (DELIVERY_GROSS.equals(deliveryModeModel.getCode())){
@@ -148,9 +148,9 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
             {
                 deliveryModeData.setDeliveryCost(getPriceDataFactory().create(PriceDataType.BUY,
                         BigDecimal.valueOf(deliveryCost.getValue()), deliveryCost.getCurrencyIso()));
-            }
-            return deliveryModeData;
-        }
+            }*/
+       /*     return deliveryModeData;
+        }*/
 
         return getDeliveryModeConverter().convert(deliveryModeModel);
     }
