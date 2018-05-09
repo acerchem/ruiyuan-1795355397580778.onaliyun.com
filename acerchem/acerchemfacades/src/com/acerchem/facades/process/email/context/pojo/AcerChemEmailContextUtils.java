@@ -1,11 +1,5 @@
 package com.acerchem.facades.process.email.context.pojo;
 
-import de.hybris.platform.core.model.c2l.CountryModel;
-import de.hybris.platform.core.model.c2l.RegionModel;
-import de.hybris.platform.core.model.user.AddressModel;
-import de.hybris.platform.core.model.user.CustomerModel;
-import de.hybris.platform.orderprocessing.model.OrderProcessModel;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -17,6 +11,12 @@ import org.apache.commons.lang3.StringUtils;
 import com.acerchem.core.model.CustomerCreditAccountModel;
 import com.acerchem.core.model.PhoneNumberModel;
 import com.acerchem.core.model.UserPhoneNumberModel;
+
+import de.hybris.platform.core.model.c2l.CountryModel;
+import de.hybris.platform.core.model.c2l.RegionModel;
+import de.hybris.platform.core.model.user.AddressModel;
+import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 
 //根据地址集合获得客户联系地址
 public class AcerChemEmailContextUtils {
@@ -75,7 +75,12 @@ public class AcerChemEmailContextUtils {
 					if (reginModel != null) {
 						regin = reginModel.getName();
 					}
+					
 					data.setRegion(regin);
+					//add contact info
+					data.setContactPhone(model.getPhone1());
+					data.setContactUser(model.getLastname());
+					
 					return data;
 
 				}

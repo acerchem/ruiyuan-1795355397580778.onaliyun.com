@@ -85,7 +85,7 @@ p.western {
       <td align="right">Date:  $!{ctx.order.pickUpDate}</td>
     </tr>
     <tr>
-      <td>PO: </td>
+      <td>PO: ${ctx.order.code} </td>
     </tr>
     <tr>
       <td>INVOICE NO.: ${ctx.order.code}</td>
@@ -132,7 +132,7 @@ p.western {
     </tr>
     <tr>
       
-      <td>&emsp;&emsp;&emsp;&emsp;&nbsp;TEL:$!{ctx.contactMobile}</td>
+      <td>TEL:$!{ctx.contactMobile}</td>
     </tr>
   </tbody>
 </table>

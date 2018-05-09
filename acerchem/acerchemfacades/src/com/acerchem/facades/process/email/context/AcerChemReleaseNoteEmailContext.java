@@ -10,6 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 
 import com.acerchem.facades.process.email.context.pojo.AcerChemEmailContextUtils;
+import com.acerchem.facades.process.email.context.pojo.CustomerContactAddressOfEmailData;
 import com.acerchem.facades.process.email.context.pojo.ProductItemDataOfEmail;
 import com.acerchem.facades.process.email.context.pojo.ProductTotalDataOfEmail;
 import com.acerchem.facades.process.email.context.pojo.ReleaseNoteEmailContextPoJo;
@@ -35,10 +36,14 @@ public class AcerChemReleaseNoteEmailContext extends AbstractEmailContext<OrderP
 	private List<CouponData> giftCoupons;
 
 	private String customerAddress;
+	private CustomerContactAddressOfEmailData customerAddressData;
 	private ReleaseNoteEmailContextPoJo append;
-	
+
 	private CustomerModel customerModel;
 	private String pickupDate;
+
+	private String contactUser = "";
+	private String contactMobile = "";
 
 	@Override
 	public void init(final OrderProcessModel orderProcessModel, final EmailPageModel emailPageModel) {
@@ -54,7 +59,7 @@ public class AcerChemReleaseNoteEmailContext extends AbstractEmailContext<OrderP
 		initCustomerAddress(orderProcessModel);
 		initAppend();
 		customerModel = getCustomer(orderProcessModel);
-		
+
 		pickupDate = orderData.getPickUpdate();
 	}
 
@@ -97,6 +102,11 @@ public class AcerChemReleaseNoteEmailContext extends AbstractEmailContext<OrderP
 		if (customer != null) {
 			Collection<AddressModel> addrs = customer.getAddresses();
 			address = AcerChemEmailContextUtils.getCustomerContactAddress(addrs);
+			this.setCustomerAddressData(AcerChemEmailContextUtils.getCustomerContactAddressData(addrs));
+			if (this.customerAddressData != null) {
+				this.setContactMobile(this.customerAddressData.getContactPhone());
+				this.setContactUser(this.customerAddressData.getContactUser());
+			}
 		}
 
 		this.customerAddress = address;
@@ -151,8 +161,8 @@ public class AcerChemReleaseNoteEmailContext extends AbstractEmailContext<OrderP
 								itemQuantity = 0;
 								itemNet = 0;
 								itemGross = 0;
-								
-								batchNum ++;
+
+								batchNum++;
 							}
 						}
 
@@ -160,13 +170,13 @@ public class AcerChemReleaseNoteEmailContext extends AbstractEmailContext<OrderP
 						pie.setProductCode(product.getCode());
 						pie.setProductName(product.getName());
 						pie.setQuantity(consignEntry.getQuantity().toString());
-						pie.setBatchNo(StringUtils.defaultString(consignEntry.getBatchNum()," "));
-						String tempNet = StringUtils.defaultString(product.getNetWeight(),"0");
-						String tempGross = StringUtils.defaultString(product.getGrossWeight(),"0");
-						if(!StringUtils.isNumeric(tempNet)){
+						pie.setBatchNo(StringUtils.defaultString(consignEntry.getBatchNum(), " "));
+						String tempNet = StringUtils.defaultString(product.getNetWeight(), "0");
+						String tempGross = StringUtils.defaultString(product.getGrossWeight(), "0");
+						if (!StringUtils.isNumeric(tempNet)) {
 							tempNet = "0";
 						}
-						if(!StringUtils.isNumeric(tempGross)){
+						if (!StringUtils.isNumeric(tempGross)) {
 							tempGross = "0";
 						}
 						pie.setNetWeight(tempNet);
@@ -184,10 +194,10 @@ public class AcerChemReleaseNoteEmailContext extends AbstractEmailContext<OrderP
 					}
 
 				}
-				
+
 			}
-			//add last item project
-			if (batchNum > 1){
+			// add last item project
+			if (batchNum > 1) {
 				ProductItemDataOfEmail lastPie = new ProductItemDataOfEmail();
 
 				lastPie.setProductName("subTotal");
@@ -209,8 +219,7 @@ public class AcerChemReleaseNoteEmailContext extends AbstractEmailContext<OrderP
 		totalData.setNetWeight(String.valueOf(net));
 		totalData.setGrossWeight(String.valueOf(gross));
 		pojo.setTotalData(totalData);
-		
-		
+
 		setAppend(pojo);
 
 	}
@@ -236,6 +245,34 @@ public class AcerChemReleaseNoteEmailContext extends AbstractEmailContext<OrderP
 
 	public void setPickupDate(String pickupDate) {
 		this.pickupDate = pickupDate;
+	}
+
+	public String getContactUser() {
+		return contactUser;
+	}
+
+	public void setContactUser(String contactUser) {
+		this.contactUser = contactUser;
+	}
+
+	public String getContactMobile() {
+		return contactMobile;
+	}
+
+	public void setContactMobile(String contactMobile) {
+		this.contactMobile = contactMobile;
+	}
+
+	public void setCustomerAddress(String customerAddress) {
+		this.customerAddress = customerAddress;
+	}
+
+	public CustomerContactAddressOfEmailData getCustomerAddressData() {
+		return customerAddressData;
+	}
+
+	public void setCustomerAddressData(CustomerContactAddressOfEmailData customerAddressData) {
+		this.customerAddressData = customerAddressData;
 	}
 
 }
