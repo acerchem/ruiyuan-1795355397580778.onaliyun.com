@@ -22,7 +22,7 @@ $mediaContainer=media(qualifier, $contentCV)[lang=$lang];
 
 # Site Logo Component
 UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
-;;SiteLogoComponent;/acerchemimages/acerchem.png
+;;SiteLogoComponent;/acerchemimages/Logo.jpg
 
 # CMS Link Components
 UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$lang]
@@ -119,7 +119,7 @@ UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$la
 ;;PowerSuppliesNavNode;"电源"
 ;;SiteRootNode;"站点根目录"
 ;;SuppliesNavNode;"耗材"
-;;WebcamsNavNode;"Others"
+;;WebcamsNavNode;"Amino Acid"
 
 # acerchem FAQ Page 
 
@@ -468,7 +468,7 @@ UPDATE CMSParagraphComponent;$contentCV[unique=true];uid[unique=true];content[la
 
 # Site Logo Component
 UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
-;;SiteLogoComponent;/acerchemimages/acerchem.png
+;;SiteLogoComponent;/acerchemimages/Logo.jpg
 
 #############################################################################################################################################
 #############################################				 needs localization 				#############################################

@@ -33,8 +33,8 @@ UPDATE CMSSite;uid[unique=true];defaultPreviewCategory(code, $productCV);default
 
 # Site Logo
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];altText;folder(qualifier)[default='images']
-;;/acerchemimages/acerchem.png;acerchem.png;$siteResource/acerchemimages/acerchem.png;image/png;hybris Accelerator;
-;;/acerchemimages/acerchem.png;acerchem.png;$siteResource/acerchemimages/acerchem.png;image/png;hybris Accelerator;
+;;/acerchemimages/Logo.jpg;Logo.jpg;$siteResource/acerchemimages/Logo.jpg;image/jpeg;hybris Accelerator;
+;;/acerchemimages/Logo.jpg;Logo.jpg;$siteResource/acerchemimages/Logo.jpg;image/jpeg;hybris Accelerator;
 ;;/acerchemimages/maxbanner-bg.jpg;maxbanner-bg.jpg;$siteResource/acerchemimages/maxbanner-bg.jpg;image/jpeg;;
 
 ;;/acerchemimages/maxbanner-1.jpg;maxbanner-1.jpg;$siteResource/acerchemimages/maxbanner-1.jpg;image/jpeg;;
@@ -154,7 +154,7 @@ INSERT_UPDATE ProductReferencesComponent;$contentCV[unique=true];uid[unique=true
 
 # CMS PurchasedCategorySuggestion Components
 INSERT_UPDATE PurchasedCategorySuggestionComponent;$contentCV[unique=true];uid[unique=true];name;productReferenceTypes(code);maximumNumberProducts;filterPurchased;category(code, $productCV);&componentRef
-;;PurchasedCategorySuggestions;Purchased Category Suggestions;OTHERS;10;true;575;PurchasedCategorySuggestions
+;;PurchasedCategorySuggestions;Purchased Category Suggestions;OTHERS;10;true;577;PurchasedCategorySuggestions
 
 # CMS CartSuggestion Components
 INSERT_UPDATE CartSuggestionComponent;$contentCV[unique=true];uid[unique=true];name;productReferenceTypes(code);maximumNumberProducts;filterPurchased;&componentRef
@@ -347,9 +347,9 @@ INSERT_UPDATE RotatingImagesComponent;$contentCV[unique=true];uid[unique=true];n
 
 
 INSERT_UPDATE ProductCarouselComponent;$contentCV[unique=true];uid[unique=true];name;products(code,$productCV);scroll(code);popup;&componentRef;isSale;isPromotion
-;;acerchemHomepageProductCarouselComponent;acerchem Homepage Product Carousel;AC05080a,AC05080b,AC03390a,AC03138a,AC03887a,AC03142a,AC02345a,AC02354a,AC05003a;allVisible;false;acerchemHomepageProductCarouselComponent;false;false
-;;SaleWellProductCarousel;SaleWellProductCarousel;AC05080a,AC05080b,AC03390a,AC03138a,AC03887a,AC03142a,AC02345a,AC02354a,AC05003a;allVisible;false;SaleWellProductCarousel;true;false
-;;PromotionProductCarousel;PromotionProductCarousel;AC05080a,AC05080b,AC03390a,AC03138a,AC03887a,AC03142a,AC02345a,AC02354a,AC05003a;allVisible;false;PromotionProductCarousel;false;true
+;;acerchemHomepageProductCarouselComponent;acerchem Homepage Product Carousel;AC05080a,AC05080b,AC03390a,AC03138a,AC03887a,AC03142a,AC02345a,AC02354a,AC05003a,AC02090a;allVisible;false;acerchemHomepageProductCarouselComponent;false;false
+;;SaleWellProductCarousel;SaleWellProductCarousel;AC05080a,AC05080b,AC03390a,AC03138a,AC03887a,AC03142a,AC02345a,AC02354a,AC05003a,AC02090a;allVisible;false;SaleWellProductCarousel;true;false
+;;PromotionProductCarousel;PromotionProductCarousel;AC05080a,AC05080b,AC03390a,AC03138a,AC03887a,AC03142a,AC02345a,AC02354a,AC05003a,AC02090a;allVisible;false;PromotionProductCarousel;false;true
 
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];mime;realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator][forceWrite=true];folder(qualifier)[default='images']
 ;;BannerComponent;text/jpg;maxbanner-bg.jpg;$siteResource/acerchemimages/maxbanner-bg.jpg
@@ -765,7 +765,7 @@ INSERT_UPDATE ProductCarouselComponent;$contentCV[unique=true];uid[unique=true];
 ;;acerchemHomepageProductCarouselComponent;acerchemHomepageProductCarouselComponent
 
 INSERT_UPDATE ProductCarouselComponent;$contentCV[unique=true];uid[unique=true];name;products(code,$productCV);scroll(code);popup;&componentRef
-;;NewacerchemHomepageProductCarouselComponent;What's New acerchem Homepage Product Carousel;AC05080a,AC05080b,AC03390a,AC03138a,AC03887a,AC03142a,AC02345a,AC02354a,AC05003a;allVisible;false;NewacerchemHomepageProductCarouselComponent
+;;NewacerchemHomepageProductCarouselComponent;What's New acerchem Homepage Product Carousel;AC05080a,AC05080b,AC03390a,AC03138a,AC03887a,AC03142a,AC02345a,AC02354a,AC05003a,AC02090a;allVisible;false;NewacerchemHomepageProductCarouselComponent
 
 INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents(&componentRef)
 ;;Section3Slot-Homepage;AcerchemIndexSearchBoxComponent
@@ -820,7 +820,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 # Site Logo
 INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/png'];altText;folder(qualifier)[default='images']
 #;;/images/theme/acerchem.svg;acerchem.svg;$siteResource/images/theme/acerchem.svg;image/svg+xml;hybris Accelerator;
-;;/acerchemimages/acerchem.png;acerchem.png;$siteResource/acerchemimages/acerchem.png;image/png;hybris Accelerator;
+;;/acerchemimages/Logo.jpg;Logo.jpg;$siteResource/acerchemimages/Logo.jpg;image/jpeg;hybris Accelerator;
 
 ###  Responsive Error page #######
 
@@ -1169,7 +1169,7 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
 
 # CMS Link Components
 INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];$category;$product;
-;;WebcamsCategoryLink;Webcams Category Link;/Open-Catalogue/Cameras/Webcams/c/575;WebcamsCategoryLink;WebcamsCategoryLink;;575;;
+;;WebcamsCategoryLink;Webcams Category Link;/Open-Catalogue/Cameras/Webcams/c/577;WebcamsCategoryLink;WebcamsCategoryLink;;577;;
 
 
 ## level 4. children of NavNode (the following order of children is the display order on the site) ## 

@@ -37,6 +37,10 @@ UPDATE DocumentPageTemplate;$contentCV[unique=true];uid[unique=true];velocityTem
 # Email page Template shaun
 INSERT_UPDATE EmailPageTemplate;$contentCV[unique=true];uid[unique=true];name;active;frontendTemplateName;subject(code);htmlTemplate(code);restrictedPageTypes(code)
 #shaun
+;;AcerchemSendEmployeeRegisterEmail;Acerchem Send Employee Register Email;true;SendEmployeeRegisterEmail;acerchem_Email_Order_Confirmation_Notification_Subject;acerchem_Email_Order_Confirmation_Notification_Body;EmailPage
+;;AcerchemSendOrderConfirmEmail;Acerchem Send Order Confirm Email;true;SendOrderConfirmEmail;acerchem_Email_Customer_Register_Notification_Admin_Subject;acerchem_Email_Customer_Register_Notification_Admin_Body;EmailPage
+
+;;AcerchemCustomerRegistrationAuditPassEmailTemplate;Acerchem Customer Registration Audit Pass Email Template;true;CustomerRegistrationAuditPassEmail;acerchem_Email_Customer_Registration_Audit_Pass_Subject;acerchem_Email_Customer_Registration_Audit_Pass_Body;EmailPage
 ;;AcerchemCustomerRegistrationAuditFalureEmailTemplate;Acerchem Customer Registration Audit Falure Email Template;true;CustomerRegistrationAuditFalureEmail;acerchem_Email_Customer_Registration_Audit_Falure_Subject;acerchem_Email_Customer_Registration_Audit_Falure_Body;EmailPage
 
 ;;AcerchemContractEmailTemplate;Acerchem  Contract Email Template;true;ContractEmail;acerchem_Email_Contract_Subject;acerchem_Email_Contract_Body;EmailPage
@@ -238,6 +242,10 @@ INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];po
 # Email Pages
 INSERT_UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];name;masterTemplate(uid,$contentCV);defaultPage;approvalStatus(code)[default='approved']
 #shaun
+;;SendEmployeeRegisterEmail;Send Employee Register Email;AcerchemSendEmployeeRegisterEmail;true;
+;;SendOrderConfirmEmail;Send Order Confirm Email;AcerchemSendOrderConfirmEmail;true;
+
+;;CustomerRegistrationAuditPassEmail;Customer Registration Audit Pass Email;AcerchemCustomerRegistrationAuditPassEmailTemplate;true;
 ;;CustomerRegistrationAuditFalureEmail;Customer Registration Audit Falure Email;AcerchemCustomerRegistrationAuditFalureEmailTemplate;true;
 
 ;;ContractEmail;Contract Email;AcerchemContractEmailTemplate;true;
@@ -283,6 +291,13 @@ INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;rendererType(code)
 INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;rendererType(code)[default='velocity']
 
 #shaun
+;acerchem_Email_Order_Confirmation_Notification_Body;$emailPackageName.OrderNotificationEmailContext
+;acerchem_Email_Order_Confirmation_Notification_Subject;$emailPackageName.OrderNotificationEmailContext
+;acerchem_Email_Customer_Register_Notification_Admin_Body;$emailPackageName.CustomerEmailContext
+;acerchem_Email_Customer_Register_Notification_Admin_Subject;$emailPackageName.CustomerEmailContext
+
+;acerchem_Email_Customer_Registration_Audit_Pass_Body;$emailPackageName.CustomerEmailContext
+;acerchem_Email_Customer_Registration_Audit_Pass_Subject;$emailPackageName.CustomerEmailContext
 ;acerchem_Email_Customer_Registration_Audit_Falure_Body;$emailPackageName.CustomerEmailContext
 ;acerchem_Email_Customer_Registration_Audit_Falure_Subject;$emailPackageName.CustomerEmailContext
 

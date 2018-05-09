@@ -23,6 +23,7 @@ INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='custome
  ;571
  ;575
  ;576
+ ;577
  #shaun
  ;3510
  
@@ -32,3 +33,4 @@ INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
  ;571;1
  ;575;1
  ;576;1
+ ;577;1

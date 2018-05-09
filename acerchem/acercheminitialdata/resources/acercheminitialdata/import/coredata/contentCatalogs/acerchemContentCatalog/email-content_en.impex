@@ -25,6 +25,13 @@ $lang=en
 # CMS components and Email velocity templates
 UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang,translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
 #shaun
+ ;acerchem_Email_Order_Confirmation_Notification_Body;"Contract Body";$emailResource/email-orderConfirmationNotificationBody.vm
+ ;acerchem_Email_Order_Confirmation_Notification_Subject;"Contract Body";$emailResource/email-orderConfirmationNotificationSubject.vm
+ ;acerchem_Email_Customer_Register_Notification_Admin_Body;"Contract Body";$emailResource/email-customerRegisterNotificationAdminBody.vm
+ ;acerchem_Email_Customer_Register_Notification_Admin_Subject;"Contract Body";$emailResource/email-customerRegisterNotificationAdminSubject.vm
+
+ ;acerchem_Email_Customer_Registration_Audit_Pass_Body;"Contract Body";$emailResource/email-customerRegistrationAuditPassBody.vm
+ ;acerchem_Email_Customer_Registration_Audit_Pass_Subject;"Contract Body";$emailResource/email-customerRegistrationAuditPassSubject.vm
  ;acerchem_Email_Customer_Registration_Audit_Falure_Body;"Contract Body";$emailResource/email-customerRegistrationAuditFalureBody.vm
  ;acerchem_Email_Customer_Registration_Audit_Falure_Subject;"Contract Body";$emailResource/email-customerRegistrationAuditFalureSubject.vm
 
@@ -92,6 +99,10 @@ UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];fromEmail[lang=$lang];
  ;;ReadyForPickupEmail;"customerservice@acerchem.com";"Customer Services Team"
  
  #shaun
+  ;;SendEmployeeRegisterEmail;"customerservice@acerchem.com";"Customer Services Team"
+ ;;SendOrderConfirmEmail;"customerservice@acerchem.com";"Customer Services Team"
+ 
+ ;;CustomerRegistrationAuditPassEmail;"customerservice@acerchem.com";"Customer Services Team"
  ;;CustomerRegistrationAuditFalureEmail;"customerservice@acerchem.com";"Customer Services Team"
  
  ;;ContractEmail;"customerservice@acerchem.com";"Customer Services Team"
