@@ -97,7 +97,7 @@ public class DefaultCustomerCreditAccountServiceImpl implements DefaultCustomerC
 	                            {
 	                            	c.setTime(orderModel.getPickupDateOfExtended()); 
 	                            }
-	                            else if(orderModel.getDeliveryMode().getCode()=="DELIVERY_MENTION")
+	                            else if(orderModel.getDeliveryMode().getCode().equals("DELIVERY_MENTION"))
 	                            {//自提 DELIVERY_MENTION
 	                            	c.setTime(orderModel.getPickUpDate()); 
 	                            }
