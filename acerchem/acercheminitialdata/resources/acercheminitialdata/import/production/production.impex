@@ -1,0 +1,14 @@
+##注意此配置仅用于线上系统初始化后手动在hac上执行
+
+INSERT_UPDATE SolrEndpointUrl; url[unique=true]          ; master; solrServerConfig(name)[unique=true];
+                             ; http://172.31.1.199:8983/solr; true  ; standalone-Backoffice 
+                             ; http://172.31.1.199:8983/solr; true  ; Default 
+                             ; http://172.31.1.199:8983/solr; true  ; Local Standalone
+                             
+UPDATE CronJob;nodeId;code[unique=true]
+;       1 ;update-acerchemIndex-cronJob
+;       1 ;acerChemMediaCronJob
+;       1 ;acerchemUploadCronJob
+;       1 ;backofficeSolrIndexerUpdateCronJob
+;       1 ;backofficeSolrIndexerDeleteCronJob
+;       1 ;full-acerchemIndex-cronJob
