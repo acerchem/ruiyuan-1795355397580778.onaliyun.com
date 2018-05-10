@@ -34,11 +34,11 @@
 								<li><a href="${homeUrl}aboutUs">About</a></li>
 								<li><a href="${homeUrl}help">Help</a></li>
 								<li><a href="${homeUrl}contactUs">Contact</a></li>
-								<li><a href="${homeUrl}">Terms</a></li>
-								<li><a href="${homeUrl}">Privacy</a></li>
+								<%-- <li><a href="${homeUrl}">Terms</a></li>
+								<li><a href="${homeUrl}">Privacy</a></li> --%>
 							</ul>
 						</div>
-						<div class="maxfootnav">
+						<%-- <div class="maxfootnav">
 							<h3>Connect</h3>
 							<ul>
 								<li><a href="${homeUrl}">Animal Nutrition</a></li>
@@ -47,7 +47,7 @@
 								<li><a href="${homeUrl}">Carotenoids</a></li>
 								<li><a href="${homeUrl}">Cognitive</a></li>
 							</ul>
-						</div>
+						</div> --%>
 					</div>
 					<div class="right">
 						<ul class="share-buttons">
