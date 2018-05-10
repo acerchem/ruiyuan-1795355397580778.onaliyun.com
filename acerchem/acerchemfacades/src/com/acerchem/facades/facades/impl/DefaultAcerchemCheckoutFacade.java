@@ -326,7 +326,7 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
 
             setOrderDeliveryDays(cartData, cartModel);
             
-            Double subTotal = (double) 0;
+            double subTotal = 0;
 
             for (OrderEntryData orderEntryData: cartData.getEntries()){
               //  BigDecimal basePrice = orderEntryData.getTotalPrice().getValue().divide(BigDecimal.valueOf(orderEntryData.getQuantity()));
@@ -486,7 +486,7 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
 
     @Override
     public OrderData placeOrder() throws InvalidCartException {
-        final CartModel cartModel = getCart();
+        final CartModel cartModel = getCartModel();
         if (cartModel != null)
         {
             if (cartModel.getUser().equals(getCurrentUserForCheckout()) || getCheckoutCustomerStrategy().isAnonymousCheckout())
@@ -561,7 +561,28 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
 	public CartModel getCartModel() {
 		 final CartModel cartModel = getCartService().getSessionCart();
 		 
+		 
+	            double deliveryCost=0;
+	            
+	            final CartData cartData = getCartFacade().getSessionCart();
+	            
+	            if (this.getDeliveryAddress() != null){
+	            	 try {
+						 deliveryCost=acerchemTrayFacade.getTotalPriceForCart(cartData, this.getDeliveryAddress());
+					} catch (AcerchemOrderException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+	            	 
+	            	
+	            }
+	            cartModel.setDeliveryCost(deliveryCost);
+	            
+		 
 		 return cartModel;
 	}
+
+
+	
 }
 
