@@ -9,6 +9,8 @@ public class CustomerContactAddressOfEmailData {
 	
 	private String region;
 	
+	private String contactUser;
+	private String contactPhone;
 	
 	public String getStreet() {
 		return street;
@@ -39,6 +41,18 @@ public class CustomerContactAddressOfEmailData {
 	}
 	public void setRegion(String region) {
 		this.region = region;
+	}
+	public String getContactUser() {
+		return contactUser;
+	}
+	public void setContactUser(String contactUser) {
+		this.contactUser = contactUser;
+	}
+	public String getContactPhone() {
+		return contactPhone;
+	}
+	public void setContactPhone(String contactPhone) {
+		this.contactPhone = contactPhone;
 	}
 	
 	

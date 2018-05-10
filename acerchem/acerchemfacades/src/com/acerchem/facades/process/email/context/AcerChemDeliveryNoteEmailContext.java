@@ -27,10 +27,8 @@ import de.hybris.platform.commercefacades.order.data.OrderData;
 import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.core.model.c2l.LanguageModel;
 import de.hybris.platform.core.model.order.OrderModel;
-import de.hybris.platform.core.model.user.AbstractContactInfoModel;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.core.model.user.CustomerModel;
-import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.servicelayer.user.ContactInfoService;
@@ -56,7 +54,7 @@ public class AcerChemDeliveryNoteEmailContext extends AbstractEmailContext<Order
 		super.init(orderProcessModel, emailPageModel);
 		orderData = getOrderConverter().convert(orderProcessModel.getOrder());
 
-		orderData.getDeliveyDate();
+		//orderData.getWaitDeliveiedDate();
 		// orderData.getConsignments()
 		// List<ConsignmentData>
 		giftCoupons = orderData.getAppliedOrderPromotions().stream()
@@ -66,7 +64,7 @@ public class AcerChemDeliveryNoteEmailContext extends AbstractEmailContext<Order
 		initCustomerAddress(orderProcessModel);
 		initAppend();
 		customerModel = getCustomer(orderProcessModel);
-		initContactInfo();
+		//initContactInfo();
 	}
 
 	@Override
@@ -110,11 +108,14 @@ public class AcerChemDeliveryNoteEmailContext extends AbstractEmailContext<Order
 			Collection<AddressModel> addrs = customer.getAddresses();
 			address = AcerChemEmailContextUtils.getCustomerContactAddress(addrs);
 			addressData = AcerChemEmailContextUtils.getCustomerContactAddressData(addrs);
+			
 		}
 
 		this.customerAddress = address;
 		this.customerAddressData = addressData;
 
+		this.contactMobile = addressData.getContactPhone();
+		this.contactUser = addressData.getContactUser();
 	}
 
 	public String getCustomerAddress() {
@@ -261,24 +262,24 @@ public class AcerChemDeliveryNoteEmailContext extends AbstractEmailContext<Order
 		return contactMobile;
 	}
 	
-	public void initContactInfo(){
-		CustomerModel customer = this.getCustomer();
-		//Collection<AbstractContactInfoModel> coll = customer.getContactInfos();
-		
-		AbstractContactInfoModel contactInfo =  contactInfoService.getMainContactInfo(customer);
-		if (contactInfo != null){
-			UserModel curUser = contactInfo.getUser();
-			if (curUser != null  ){
-				this.setContactUser(curUser.getName());
-				
-				List<String> phones = AcerChemEmailContextUtils.getPhoneNumbers(curUser.getPhoneNumbers());
-				if(phones.size() > 0){
-					this.setContactMobile(phones.get(0));
-				}
-			}
-		}
-		
-	}
+//	public void initContactInfo(){
+//		CustomerModel customer = this.getCustomer();
+//		//Collection<AbstractContactInfoModel> coll = customer.getContactInfos();
+//		
+//		AbstractContactInfoModel contactInfo =  contactInfoService.getMainContactInfo(customer);
+//		if (contactInfo != null){
+//			UserModel curUser = contactInfo.getUser();
+//			if (curUser != null  ){
+//				this.setContactUser(curUser.getName());
+//				
+//				List<String> phones = AcerChemEmailContextUtils.getPhoneNumbers(curUser.getPhoneNumbers());
+//				if(phones.size() > 0){
+//					this.setContactMobile(phones.get(0));
+//				}
+//			}
+//		}
+//		
+//	}
 
 	/**
 	 * @param contactUser the contactUser to set
