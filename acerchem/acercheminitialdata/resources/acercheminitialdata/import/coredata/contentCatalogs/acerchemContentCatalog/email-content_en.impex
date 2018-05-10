@@ -25,15 +25,15 @@ $lang=en
 # CMS components and Email velocity templates
 UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript[lang=$lang,translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
 #shaun
- ;acerchem_Email_Order_Confirmation_Notification_Body;"Contract Body";$emailResource/email-orderConfirmationNotificationBody.vm
- ;acerchem_Email_Order_Confirmation_Notification_Subject;"Contract Body";$emailResource/email-orderConfirmationNotificationSubject.vm
- ;acerchem_Email_Customer_Register_Notification_Admin_Body;"Contract Body";$emailResource/email-customerRegisterNotificationAdminBody.vm
- ;acerchem_Email_Customer_Register_Notification_Admin_Subject;"Contract Body";$emailResource/email-customerRegisterNotificationAdminSubject.vm
+ ;acerchem_Email_Order_Confirmation_Notification_Body;"Order Confirmation Notification Body";$emailResource/email-orderConfirmationNotificationBody.vm
+ ;acerchem_Email_Order_Confirmation_Notification_Subject;"Order Confirmation Notification Subject";$emailResource/email-orderConfirmationNotificationSubject.vm
+ ;acerchem_Email_Customer_Register_Notification_Admin_Body;"Customer Register Notification Admin Body";$emailResource/email-customerRegisterNotificationAdminBody.vm
+ ;acerchem_Email_Customer_Register_Notification_Admin_Subject;"Customer Register Notification Admin Subject";$emailResource/email-customerRegisterNotificationAdminSubject.vm
 
- ;acerchem_Email_Customer_Registration_Audit_Pass_Body;"Contract Body";$emailResource/email-customerRegistrationAuditPassBody.vm
- ;acerchem_Email_Customer_Registration_Audit_Pass_Subject;"Contract Body";$emailResource/email-customerRegistrationAuditPassSubject.vm
- ;acerchem_Email_Customer_Registration_Audit_Falure_Body;"Contract Body";$emailResource/email-customerRegistrationAuditFalureBody.vm
- ;acerchem_Email_Customer_Registration_Audit_Falure_Subject;"Contract Body";$emailResource/email-customerRegistrationAuditFalureSubject.vm
+ ;acerchem_Email_Customer_Registration_Audit_Pass_Body;"Customer Registration Audit Pass Body";$emailResource/email-customerRegistrationAuditPassBody.vm
+ ;acerchem_Email_Customer_Registration_Audit_Pass_Subject;"Customer Registration Audit Pass Subject";$emailResource/email-customerRegistrationAuditPassSubject.vm
+ ;acerchem_Email_Customer_Registration_Audit_Falure_Body;"Customer Registration Audit Falure Body";$emailResource/email-customerRegistrationAuditFalureBody.vm
+ ;acerchem_Email_Customer_Registration_Audit_Falure_Subject;"Customer Registration Audit Falure Subject";$emailResource/email-customerRegistrationAuditFalureSubject.vm
 
  ;acerchem_Email_Contract_Body;"Contract Body";$emailResource/email-contractBody.vm
  ;acerchem_Email_Contract_Subject;"Contract Subject";$emailResource/email-contractSubject.vm
