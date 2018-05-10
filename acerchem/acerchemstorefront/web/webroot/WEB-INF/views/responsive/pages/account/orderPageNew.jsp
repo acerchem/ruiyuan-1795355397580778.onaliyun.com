@@ -63,7 +63,16 @@
                         </div>
                     </div>
                     <!-- end -->
-
+					
+					<div class="g-table">
+                        <div class="g-title">
+                            <span>Delivery Methods</span>
+                        </div>
+                        <div class="textlist">
+                            <span>${orderData.deliveryMode.code=='DELIVERY_GROSS'?'DDP':'FCA'}</span>
+                        </div>
+                    </div>
+					
                     <!-- Ship To -->
                     <div class="g-table" style="${orderData.deliveryMode.code=='DELIVERY_GROSS'?'':'display: none;'}">
                         <div class="g-title">
@@ -234,7 +243,7 @@
                             <span style="padding-left:20px;width:100%;${orderData.deliveryMode.code=='DELIVERY_GROSS'?'':'display: none;'}">
                             	Pickup Date:
                             	<fmt:formatDate value="${orderData.pickupDateOfExtended==null?orderData.pickUpDate:orderData.pickupDateOfExtended}" pattern="yyyy-MM-dd"/> <br/>
-								Wait Deliveied Date:${orderData.waitDeliveiedDate}
+								Estimated Delivery Date:${orderData.waitDeliveiedDate}
                             </span>
                             <span style="padding-left:20px;width:100%;${orderData.deliveryMode.code=='DELIVERY_MENTION'?'':'display: none;'}">
                             	Delivery Date:
