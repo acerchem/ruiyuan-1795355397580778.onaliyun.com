@@ -15,9 +15,11 @@ import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParamete
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -34,7 +36,6 @@ import com.acerchem.core.strategies.AcerchemCommercePlaceOrderStrategy;
 import de.hybris.platform.commerceservices.order.impl.DefaultCommercePlaceOrderStrategy;
 import de.hybris.platform.commerceservices.service.data.CommerceCheckoutParameter;
 import de.hybris.platform.commerceservices.service.data.CommerceOrderResult;
-import de.hybris.platform.core.model.c2l.CountryModel;
 import de.hybris.platform.core.model.c2l.RegionModel;
 import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.AbstractOrderModel;
@@ -114,21 +115,28 @@ public class DefaultAcerchemCommercePlaceOrderStrategy extends DefaultCommercePl
 					orderModel.setDeliveryMode(cartModel.getDeliveryMode());
 				}
 				//添加预期到货时间日期
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-				String waitDelivereyDate = sdf.format(orderModel.getPickUpDate());
-				Calendar ca = Calendar.getInstance();
-				try {
-					ca.setTime(sdf.parse(waitDelivereyDate));
-					ca.add(Calendar.DATE, getTotalPriceForCart(orderModel));// num为增加的天数，可以改变的\
-					waitDelivereyDate = sdf.format(ca.getTime());
-					Date endDate = sdf.parse(waitDelivereyDate);
-					orderModel.setWaitDeliveiedDate(endDate);
-				} catch (ParseException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
+				if(cartModel.getDeliveryMode() != null && cartModel.getDeliveryMode().getCode().equalsIgnoreCase("DELIVERY_GROSS")){
+					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+					String waitDelivereyDate = sdf.format(orderModel.getPickUpDate());
+					Calendar ca = Calendar.getInstance();
+					try {
+						ca.setTime(sdf.parse(waitDelivereyDate));
+						ca.add(Calendar.DATE, getTotalPriceForCart(orderModel));// num为增加的天数，可以改变的
+						waitDelivereyDate = sdf.format(ca.getTime());
+						Date endDate = sdf.parse(waitDelivereyDate);
+						orderModel.setWaitDeliveiedDate(endDate);
+					} catch (ParseException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
 				}
-				
-				
+				List<AbstractOrderEntryModel> orderEntries = new ArrayList<AbstractOrderEntryModel>();
+				for (AbstractOrderEntryModel aoe: orderModel.getEntries()){
+					Long totalWeight = (aoe.getQuantity())*(Long.parseLong(aoe.getProduct().getNetWeight()));
+					aoe.setTotalWeight(new Long(totalWeight).intValue());;
+					orderEntries.add(aoe);
+				}
+				orderModel.setEntries(orderEntries);
 				getModelService().save(orderModel);
 				// Transfer promotions to the order
 				getPromotionsService().transferPromotionsToOrder(cartModel, orderModel, false);

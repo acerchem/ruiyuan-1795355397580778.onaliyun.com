@@ -79,8 +79,8 @@ public class SendEmployeeEmailEventListener extends AbstractAcceleratorSiteEvent
 		LOG.info("-------------------------onSiteEvent start------------------");
 		final StoreFrontCustomerProcessModel storeFrontCustomerProcessModel = (StoreFrontCustomerProcessModel) getBusinessProcessService()
 				.createProcess(
-						"approveCustomerEmailProcess-" + sendeEmployeeEmailEvent.getCustomer().getUid() + "-" + System.currentTimeMillis(),
-						"approveCustomerEmailProcess");
+						"sendEmployeeEmailProcess-" + sendeEmployeeEmailEvent.getCustomer().getUid() + "-" + System.currentTimeMillis(),
+						"sendEmployeeEmailProcess");
 		storeFrontCustomerProcessModel.setSite(sendeEmployeeEmailEvent.getSite());
 		storeFrontCustomerProcessModel.setCustomer(sendeEmployeeEmailEvent.getCustomer());
 		storeFrontCustomerProcessModel.setLanguage(sendeEmployeeEmailEvent.getLanguage());

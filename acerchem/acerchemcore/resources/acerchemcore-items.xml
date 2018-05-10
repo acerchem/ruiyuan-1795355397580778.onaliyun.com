@@ -675,6 +675,10 @@
 						<persistence type="property" />
 						<modifiers />
 					</attribute>
+					<attribute qualifier="totalWeight" type="java.lang.Integer">
+						<persistence type="property" />
+						<modifiers />
+					</attribute>
 				</attributes>
 			</itemtype>
 
