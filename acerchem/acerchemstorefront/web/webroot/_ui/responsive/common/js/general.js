@@ -90,6 +90,7 @@ function verification(wrap){//register verification
 			
 			if(aname=='pwd' && (aval.length<6 || aval.length>16 ||!pwd.test(aval)))
 			{
+			    $("#pwdError").text('Password should be a combination of 6-16 lower case letters,uppercase letter and numbers!');
 				maxalert('Password should be a combination of 6-16 lower case letters,uppercase letter and numbers!')
 				return false;
 			}
