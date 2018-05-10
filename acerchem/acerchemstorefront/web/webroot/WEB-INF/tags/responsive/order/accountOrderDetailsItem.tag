@@ -12,6 +12,12 @@
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 <spring:htmlEscape defaultHtmlEscape="true" />
 
+<c:set var ="a" value="${entry.product.netWeight}"/>
+<c:set var="b" value="${entry.quantity}"/>
+
+<c:set var="c" value="${entry.product.price}"/>
+<c:set var ="TotalPrice" value="${a*b*c}"/>
+
 <div class="g-table product-table">
 	<div class="g-title">					
 		<table>
@@ -38,7 +44,7 @@
 			</span>
 			<span class="minflex text">
 				<span class="in-title">${fn:escapeXml(entry.product.name)}</span>
-				<span class="price">Specifications:<i>50kg</i></span>	
+				<span class="price">package:<i>${entry.product.netWeight}${entry.product.unitName} &nbsp ${entry.product.packageType}</i></span>	
 				<span class="old-price">price:<i><format:price priceData="${entry.product.price}" displayFreeForZero="true"/></i></span>
 			</span>								
 		</div>
@@ -48,8 +54,8 @@
 	<td><b>${entry.product.code}</b></td>
 	<td>
 		<div class="tot">
-			<em><format:price priceData="${entry.totalPrice}" displayFreeForZero="true"/></em>
-			<i><format:price priceData="${entry.totalPrice}" displayFreeForZero="true"/></i>
+			<format:price priceData="${entry.totalPrice}" displayFreeForZero="true"/>
+			<%-- <i><format:price priceData="${entry.totalPrice}" displayFreeForZero="true"/></i> --%>
 		</div>
 	</td>
 </tr>

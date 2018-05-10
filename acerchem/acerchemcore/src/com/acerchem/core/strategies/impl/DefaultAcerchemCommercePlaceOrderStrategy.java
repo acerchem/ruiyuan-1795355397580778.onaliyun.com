@@ -59,6 +59,7 @@ public class DefaultAcerchemCommercePlaceOrderStrategy extends DefaultCommercePl
 	
 	@Resource
 	private AcerchemTrayService acerchemTrayService;
+	
 
 	@Transactional
 	@Override
@@ -114,14 +115,13 @@ public class DefaultAcerchemCommercePlaceOrderStrategy extends DefaultCommercePl
 				if(cartModel.getDeliveryMode() != null){
 					orderModel.setDeliveryMode(cartModel.getDeliveryMode());
 				}
-				//添加预期到货时间日期
 				if(cartModel.getDeliveryMode() != null && cartModel.getDeliveryMode().getCode().equalsIgnoreCase("DELIVERY_GROSS")){
 					SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 					String waitDelivereyDate = sdf.format(orderModel.getPickUpDate());
 					Calendar ca = Calendar.getInstance();
 					try {
 						ca.setTime(sdf.parse(waitDelivereyDate));
-						ca.add(Calendar.DATE, getTotalPriceForCart(orderModel));// num为增加的天数，可以改变的
+						ca.add(Calendar.DATE, getTotalPriceForCart(orderModel));// 
 						waitDelivereyDate = sdf.format(ca.getTime());
 						Date endDate = sdf.parse(waitDelivereyDate);
 						orderModel.setWaitDeliveiedDate(endDate);
@@ -131,18 +131,50 @@ public class DefaultAcerchemCommercePlaceOrderStrategy extends DefaultCommercePl
 					}
 				}
 				List<AbstractOrderEntryModel> orderEntries = new ArrayList<AbstractOrderEntryModel>();
+				
+				double subTotal = 0;
+				double total=0;
+				
+				 if (orderModel.getStorageCost()!=null){
+		            	
+		            	total +=orderModel.getStorageCost();
+		               
+		            }
+		            if (orderModel.getOperateCost()!=null){
+		            	total+=orderModel.getOperateCost();
+		               
+		            }
+				
 				for (AbstractOrderEntryModel aoe: orderModel.getEntries()){
+					
+					double basePrice =	aoe.getBasePrice();
 					Long totalWeight = (aoe.getQuantity())*(Long.parseLong(aoe.getProduct().getNetWeight()));
-					aoe.setTotalWeight(new Long(totalWeight).intValue());;
+					aoe.setTotalWeight(new Long(totalWeight).intValue());
+                    Double totalPrice =basePrice*totalWeight;
+			        
+                    aoe.setTotalPrice(totalPrice);
 					orderEntries.add(aoe);
+					
+					subTotal += totalPrice;
 				}
+				
+				total+=subTotal;
 				orderModel.setEntries(orderEntries);
+				
+				orderModel.setSubtotal(subTotal);
+				
+				if (orderModel.getDeliveryCost()>0){
+					total+=orderModel.getDeliveryCost();
+				}
+				
+				orderModel.setTotalPrice(total);
+				
 				getModelService().save(orderModel);
 				// Transfer promotions to the order
 				getPromotionsService().transferPromotionsToOrder(cartModel, orderModel, false);
 
 				// Calculate the order now that it has been copied
-				try
+			/*	try
 				{
 					getCalculationService().calculateTotals(orderModel, false);
 					getExternalTaxesService().calculateExternalTaxes(orderModel);
@@ -150,7 +182,7 @@ public class DefaultAcerchemCommercePlaceOrderStrategy extends DefaultCommercePl
 				catch (final CalculationException ex)
 				{
 					LOG.error("Failed to calculate order [" + orderModel + "]", ex);
-				}
+				}*/
 
 				getModelService().refresh(orderModel);
 				getModelService().refresh(customer);
@@ -199,7 +231,7 @@ public class DefaultAcerchemCommercePlaceOrderStrategy extends DefaultCommercePl
 	 private  Integer getTotalPriceForCart(AbstractOrderModel order){
 		 	RegionModel regionModel = null;
 			CountryTrayFareConfModel countryTrayFareConf  = null;
-			//托盘数量
+			//锟斤拷锟斤拷锟斤拷锟斤拷
 			BigDecimal totalTrayAmount = BigDecimal.ZERO;
 			if (order!=null){
 
@@ -209,14 +241,14 @@ public class DefaultAcerchemCommercePlaceOrderStrategy extends DefaultCommercePl
 						regionModel = aoe.getOrder().getDeliveryAddress().getRegion();
 					}
 					ProductModel productModel = aoe.getProduct();
-					//先获取托盘比例，在计算数量
+					//锟饺伙拷取锟斤拷锟教憋拷锟斤拷锟斤拷锟节硷拷锟斤拷锟斤拷锟斤拷
 					String unitCalculateRato = productModel.getUnitCalculateRato();
 					if (ObjectUtils.isEmpty(unitCalculateRato)){
 						
 					}
 					Long quantity = (aoe.getQuantity())*(Long.parseLong(aoe.getProduct().getNetWeight()));
 
-					//托盘数量
+					//锟斤拷锟斤拷锟斤拷锟斤拷
 					BigDecimal entryTrayAmount = BigDecimal.valueOf(quantity).divide(new BigDecimal(unitCalculateRato),BigDecimal.ROUND_HALF_UP,BigDecimal.ROUND_DOWN);
 
 					totalTrayAmount =totalTrayAmount.add(entryTrayAmount);

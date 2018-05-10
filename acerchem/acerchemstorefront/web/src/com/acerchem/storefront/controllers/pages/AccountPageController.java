@@ -43,6 +43,7 @@ import de.hybris.platform.commercefacades.order.data.OrderData;
 import de.hybris.platform.commercefacades.order.data.OrderHistoryData;
 import de.hybris.platform.commercefacades.product.ProductFacade;
 import de.hybris.platform.commercefacades.product.ProductOption;
+import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commercefacades.user.UserFacade;
 import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.commercefacades.user.data.CountryData;
@@ -88,7 +89,9 @@ import de.hybris.platform.tx.Transaction;
 import de.hybris.platform.util.Config;
 
 import com.acerchem.core.model.CountryTrayFareConfModel;
+import com.acerchem.core.model.CreditTransactionModel;
 import com.acerchem.core.model.CustomerCreditAccountModel;
+import com.acerchem.core.model.ImageFailedRecordModel;
 import com.acerchem.core.service.AcerchemStockService;
 import com.acerchem.core.service.AcerchemTrayService;
 import com.acerchem.service.customercreditaccount.DefaultCustomerCreditAccountService;
@@ -294,6 +297,7 @@ public class AccountPageController extends AbstractSearchPageController
 	public String getCountryAddressForm(@RequestParam("addressCode") final String addressCode,
 			@RequestParam("countryIsoCode") final String countryIsoCode, final Model model)
 	{
+		promotionItem(model);
 		model.addAttribute("supportedCountries", getCountries());
 		populateModelRegionAndCountry(model, countryIsoCode);
 
@@ -341,6 +345,7 @@ public class AccountPageController extends AbstractSearchPageController
 	{
 		try
 		{
+			promotionItem(model);
 			model.addAttribute("maxday", Integer.valueOf(Config.getParameter("cancel.order.day")));
 			final OrderData orderDetails = orderFacade.getOrderDetailsForCode(orderCode);
 			model.addAttribute("orderData", orderDetails);
@@ -380,6 +385,7 @@ public class AccountPageController extends AbstractSearchPageController
 	public String getProductVariantMatrixForResponsive(@PathVariable("orderCode") final String orderCode,
 			@RequestParam("productCode") final String productCode, final Model model)
 	{
+		promotionItem(model);
 		final OrderData orderData = orderFacade.getOrderDetailsForCodeWithoutUser(orderCode);
 		
 		final Map<String, ReadOnlyOrderGridData> readOnlyMultiDMap = orderGridFormFacade.getReadOnlyOrderGridForProductInOrder(
@@ -393,6 +399,7 @@ public class AccountPageController extends AbstractSearchPageController
 	@RequireHardLogIn
 	public String profile(final Model model) throws CMSItemNotFoundException
 	{
+		promotionItem(model);
 		final List<TitleData> titles = userFacade.getTitles();
 
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
@@ -429,6 +436,7 @@ public class AccountPageController extends AbstractSearchPageController
 	@RequireHardLogIn
 	public String editEmail(final Model model) throws CMSItemNotFoundException
 	{
+		promotionItem(model);
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 		final UpdateEmailForm updateEmailForm = new UpdateEmailForm();
 
@@ -448,6 +456,7 @@ public class AccountPageController extends AbstractSearchPageController
 	public String updateEmail(final UpdateEmailForm updateEmailForm, final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
+		promotionItem(model);
 		getEmailValidator().validate(updateEmailForm, bindingResult);
 		String returnAction = REDIRECT_TO_UPDATE_EMAIL_PAGE;
 
@@ -504,6 +513,7 @@ public class AccountPageController extends AbstractSearchPageController
 	@RequireHardLogIn
 	public String addAddress(final Model model) throws CMSItemNotFoundException
 	{
+		promotionItem(model);
 		model.addAttribute("nowPage", "address-book");
 		model.addAttribute(COUNTRY_DATA_ATTR, checkoutFacade.getDeliveryCountries());
 		model.addAttribute(TITLE_DATA_ATTR, userFacade.getTitles());
@@ -539,7 +549,7 @@ public class AccountPageController extends AbstractSearchPageController
 	public String addAddress(final AddressForm addressForm, final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
-		
+		promotionItem(model);
 		model.addAttribute("nowPage", "address-book");
 		customAddressValidator.validate(addressForm, bindingResult);
 		if (bindingResult.hasErrors())
@@ -602,6 +612,7 @@ public class AccountPageController extends AbstractSearchPageController
 	public String editAddress(@PathVariable("addressCode") final String addressCode, final Model model)
 			throws CMSItemNotFoundException
 	{
+		promotionItem(model);
 		model.addAttribute("nowPage", "address-book");
 		final AddressForm addressForm = new AddressForm();
 		model.addAttribute(COUNTRY_DATA_ATTR, checkoutFacade.getDeliveryCountries());
@@ -679,6 +690,7 @@ public class AccountPageController extends AbstractSearchPageController
 	public String editAddress(final AddressForm addressForm, final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
+		promotionItem(model);
 		model.addAttribute("nowPage", "address-book");
 		customAddressValidator.validate(addressForm, bindingResult);
 		if (bindingResult.hasErrors())
@@ -868,6 +880,7 @@ public class AccountPageController extends AbstractSearchPageController
 	@RequireHardLogIn
 	public String editProfile(final Model model) throws CMSItemNotFoundException
 	{
+		promotionItem(model);
 		model.addAttribute("countryData", checkoutFacade.getDeliveryCountries());
 		final AbstractPageModel cmsPage = cmsPageService.getPageForLabelOrId("add-edit-address");
 		if (model != null && cmsPage != null)
@@ -940,6 +953,7 @@ public class AccountPageController extends AbstractSearchPageController
 	public String updateProfile(final CustomRegisterForm form,final BindingResult bindingResult, final Model model,final RedirectAttributes redirectAttributes,final String aidField) 
 			throws CMSItemNotFoundException
 	{
+		promotionItem(model);
 		personalInfoValidator.validate(form, bindingResult);
 		if (bindingResult.hasErrors())
 		{
@@ -1028,6 +1042,7 @@ public class AccountPageController extends AbstractSearchPageController
 	@RequireHardLogIn
 	public String updatePassword(final Model model) throws CMSItemNotFoundException
 	{
+		promotionItem(model);
 		final UpdatePasswordForm updatePasswordForm = new UpdatePasswordForm();
 		model.addAttribute("nowPage", "update-password");
 		model.addAttribute("updatePasswordForm", updatePasswordForm);
@@ -1045,6 +1060,7 @@ public class AccountPageController extends AbstractSearchPageController
 	public String updatePassword(final UpdatePasswordForm updatePasswordForm, final BindingResult bindingResult,
 			final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException
 	{
+		promotionItem(model);
 		model.addAttribute("nowPage", "update-password");
 		getPasswordValidator().validate(updatePasswordForm, bindingResult);
 		if (!bindingResult.hasErrors())
@@ -1105,6 +1121,7 @@ public class AccountPageController extends AbstractSearchPageController
 			@RequestParam(value = "key", required = false) final String key,final Model model)
 			throws CMSItemNotFoundException
 	{
+		promotionItem(model);
 		final PageableData pageableData = createPageableData(page, 10, sortCode, showMode);
 		final Map<String, Object> queryParams = new HashMap<String, Object>();
 		queryParams.put("customer", (CustomerModel) userService.getCurrentUser());
@@ -1196,6 +1213,7 @@ public class AccountPageController extends AbstractSearchPageController
 	@RequireHardLogIn
 	public String getAddressBook(final Model model) throws CMSItemNotFoundException
 	{
+		promotionItem(model);
 		model.addAttribute("nowPage", "address-book");
 		
 		final List<AddressData> result = new ArrayList<AddressData>();
@@ -1234,6 +1252,7 @@ public class AccountPageController extends AbstractSearchPageController
 	@RequireHardLogIn
 	public String getCreditAccount(final Model model) throws CMSItemNotFoundException
 	{
+		promotionItem(model);
 		model.addAttribute("nowPage", "credit");
 		model.addAttribute("customerCreditAccountData", defaultCustomerCreditAccountService.getCustomerCreditAccount());
 		storeCmsPageInModel(model, getContentPageForLabelOrId("address-book"));
@@ -1254,6 +1273,7 @@ public class AccountPageController extends AbstractSearchPageController
 			@RequestParam(value = "key", required = false) final String key,final Model model,@PathVariable("orderCode") final String orderCode,final String confirm)
 			throws CMSItemNotFoundException
 	{
+		promotionItem(model);
 		confirm(orderCode,confirm);
 		return orders(page,showMode,sortCode, key,model);
 	}
@@ -1272,6 +1292,7 @@ public class AccountPageController extends AbstractSearchPageController
 	public String extendedPickupDate(@PathVariable("orderCode") final String orderCode, 
 			final Model model,final RedirectAttributes redirectModel,final Integer days) throws CMSItemNotFoundException
 	{
+		promotionItem(model);
 		final BaseStoreModel baseStoreModel = baseStoreService.getCurrentBaseStore();
 		final OrderModel order =  customerAccountService.getOrderForCode((CustomerModel) userService.getCurrentUser(), orderCode,baseStoreModel);
 		
@@ -1421,6 +1442,20 @@ public class AccountPageController extends AbstractSearchPageController
 			}
 			
 		}
+	}
+	
+	@Resource
+	private Converter<ProductModel, ProductData> productConverter;
+	
+	public void promotionItem(final Model model)
+	{
+		final String SQL = "SELECT PK FROM {"+ProductModel._TYPECODE+"} WHERE {"+ProductModel.PROMOTIONITEM+"} =true ";//limit 1,15
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(SQL);
+		query.setNeedTotal(false);
+		query.setCount(15);
+		final SearchResult<ProductModel> result = flexibleSearchService.search(query);
+		model.addAttribute("promotionItem", Converters.convertAll(result.getResult(), productConverter));
+		
 	}
 
 }

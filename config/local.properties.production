@@ -1,0 +1,99 @@
+
+# see bin/platform/project.properties or dev.hybris.de for information about possible properties
+
+
+tomcat.maxthreads=200
+tomcat.minsparethreads=50
+tomcat.maxidletime=10000
+tomcat.acceptcount=100
+
+build.development.mode=false
+tomcat.development.mode=false
+ 
+hac.webroot=/hac
+build.parallel=true
+
+java.mem=8G
+cache.main=300000
+tomcat.generaloptions=-Xmx${java.mem} -Xms${java.mem} -Xss256K -XX:+DisableExplicitGC -XX:+UseConcMarkSweepGC -XX:CMSInitiatingOccupancyFraction=75 -XX:+CMSClassUnloadingEnabled -XX:+UseCMSInitiatingOccupancyOnly -XX:+CMSParallelRemarkEnabled -XX:+ParallelRefProcEnabled -XX:+CMSScavengeBeforeRemark  -XX:+PrintGCTimeStamps -XX:+PrintGCDetails -Xloggc:"${HYBRIS_LOG_DIR}/tomcat/java_gc.log" -Dcom.sun.management.jmxremote -Dcom.sun.management.jmxremote.authenticate=false -Dcom.sun.management.jmxremote.ssl=false -Dorg.tanukisoftware.wrapper.WrapperManager.mbean=true -Djava.endorsed.dirs=../lib/endorsed -Dcatalina.base=%CATALINA_BASE% -Dcatalina.home=%CATALINA_HOME% -Dfile.encoding=UTF-8 -Djava.util.logging.config.file=jdk_logging.properties -Djava.io.tmpdir="${HYBRIS_TEMP_DIR}" -Dsun.rmi.dgc.client.gcInterval=3600000 -Dsun.rmi.dgc.server.gcInterval=3600000
+
+#put your additional java options here
+tomcat.javaoptions= -XX:MaxPermSize=512M
+
+
+db.pool.maxActive=90
+db.pool.maxIdle=90
+
+
+hmc.default.autologin=false
+hmc.default.login=admin
+hmc.default.password=acerchem_123
+
+cronjob.maxthreads=50
+
+hmc.debug.showjspcomments=false
+hmc.developermode=false
+
+solrserver.instances.default.autostart=false
+solrserver.instances.default.mode=standalone
+solrserver.instances.standalone.autostart=false
+solrserver.instances.standalone.hostname=172.31.1.199
+solrserver.instances.standalone.port=8983
+
+clustermode=true
+cluster.id=1
+cluster.maxid=2
+cluster.broadcast.methods=unicast
+
+# define server host name or ip ( use a public ip here)
+cluster.broadcast.method.unicast.serveraddress=172.31.1.199
+
+# define the server port
+cluster.broadcast.method.unicast.port=9997
+
+# define all known nodes as hostnameOrIp:port 
+cluster.broadcast.method.unicast.clusternodes=172.31.1.199:9997;172.31.10.175:9997;
+
+# if the interval value is higher than 0 , the platform synchronizes its list of known nodes with all the cluster members, negative values mean that the service is disabled
+cluster.broadcast.method.unicast.sync.nodes.interval=-1
+
+##acerchem config
+
+acerchemstorefront.webroot=
+storefrontContextRoot=
+
+db.url=jdbc:mysql://acerchem.cae3ximlzgsw.rds.cn-north-1.amazonaws.com.cn/acerchem?useConfigs=maxPerformance&characterEncoding=utf8
+db.driver=com.mysql.jdbc.Driver
+db.username=acerchem
+db.password=acerchemdb_Mysql
+mysql.optional.tabledefs=CHARSET=utf8 COLLATE=utf8_bin
+mysql.tabletype=InnoDB
+#mysql.allow.fractional.seconds=true
+#tenant.restart.on.connection.error=false
+
+
+emailservice.send.enabled=true
+mail.from=customerservice@acerchem.com
+mail.smtp.server=smtp.exmail.qq.com
+mail.smtp.port=25
+mail.smtp.user=customerservice@acerchem.com
+mail.smtp.password=1qaz2wsX
+mail.smtp.auth=true
+mail.debug=true
+
+aliyun.endpoint=http://oss-us-east-1.aliyuncs.com
+aliyun.accessKeyId=LTAItFNuj9ju8BhI
+aliyun.accessKeySecret=GfyBU4iNfQftoUV20fHoYz2zNqJARy
+aliyun.bucketName=acerchem
+aliyun.preffixImageKey=image
+aliyun.preffixDocKey=doc
+aliyun.key=<key>
+aliyun.domain=https://acerchem.oss-us-east-1.aliyuncs.com
+#aliyun.async=yes or aliyun.async=no
+aliyun.async=yes
+
+#website
+website.acerchem.https=https://ingredients4u.com:9090
+
+#取消订单、延迟收货时间的天数限制
+cancel.order.day=10

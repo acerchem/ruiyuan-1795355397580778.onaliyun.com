@@ -21,8 +21,11 @@ import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.order.CartFacade;
 import de.hybris.platform.commercefacades.order.data.CartData;
+import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
+import de.hybris.platform.converters.Converters;
+import de.hybris.platform.core.model.product.ProductModel;
 
 import com.acerchem.facade.supportticket.facade.impl.AcerchemFacadeTicketFacadeImpl;
 import com.acerchem.storefront.checkout.steps.validation.impl.AddSupportTicketValidator;
@@ -32,6 +35,10 @@ import de.hybris.platform.customerticketingfacades.TicketFacade;
 import de.hybris.platform.customerticketingfacades.data.StatusData;
 import de.hybris.platform.customerticketingfacades.data.TicketCategory;
 import de.hybris.platform.customerticketingfacades.data.TicketData;
+import de.hybris.platform.servicelayer.dto.converter.Converter;
+import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
+import de.hybris.platform.servicelayer.search.FlexibleSearchService;
+import de.hybris.platform.servicelayer.search.SearchResult;
 import de.hybris.platform.ticket.service.UnsupportedAttachmentException;
 
 import java.io.UnsupportedEncodingException;
@@ -179,7 +186,7 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 			final SupportTicketForm supportTicketForm, final BindingResult bindingResult,Model model)
 			throws CMSItemNotFoundException {
 		addSupportTicketValidator.validate(supportTicketForm, bindingResult);
-
+		
 		if (bindingResult.hasErrors()) {
 			final List<Map<String, String>> list = buildErrorMessagesMap(bindingResult);
 			list.add(buildMessageMap(CustomerticketingaddonConstants.FORM_GLOBAL_ERROR_KEY,CustomerticketingaddonConstants.FORM_GLOBAL_ERROR));
@@ -258,7 +265,7 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 
 	private String getListView(int pageNumber, ShowMode showMode, String sortCode, boolean ticketAdded, Model model)
 			throws CMSItemNotFoundException {
-
+		promotionItem(model);
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CustomerticketingaddonConstants.SUPPORT_TICKETS_PAGE));
 		setUpMetaDataForContentPage(model,
 				getContentPageForLabelOrId(CustomerticketingaddonConstants.SUPPORT_TICKETS_PAGE));
@@ -278,7 +285,7 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 	}
 
 	private String getAddView(Model model,String productId,String productName,String email,String telephone,SupportTicketForm SupportTicketForm) throws CMSItemNotFoundException {
-		
+		promotionItem(model);
 		final CustomerData customerData = customerFacade.getCurrentCustomer();
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId(CustomerticketingaddonConstants.ADD_SUPPORT_TICKET_PAGE));
@@ -339,6 +346,7 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 	public String getSupportTicket(@PathVariable("ticketId") final String ticketId, final Model model,
 			@RequestParam(value = "ticketUpdated", required = false, defaultValue = "false") final boolean ticketUpdated,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException {
+		promotionItem(model);
 		storeCmsPageInModel(model,getContentPageForLabelOrId(CustomerticketingaddonConstants.UPDATE_SUPPORT_TICKET_PAGE));
 		setUpMetaDataForContentPage(model,getContentPageForLabelOrId(CustomerticketingaddonConstants.UPDATE_SUPPORT_TICKET_PAGE));
 		model.addAttribute(WebConstants.BREADCRUMBS_KEY,getBreadcrumbs(CustomerticketingaddonConstants.TEXT_SUPPORT_TICKETING_UPDATE));
@@ -384,6 +392,7 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 			@RequestParam(value = "ticketUpdated", required = false, defaultValue = "false") final boolean ticketUpdated,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
+		promotionItem(model);
 		addSupportTicketValidator.validate(supportTicketForm, bindingResult);
 		if (bindingResult.hasErrors()) {
 			final List<Map<String, String>> list = buildErrorMessagesMap(bindingResult);
@@ -427,6 +436,7 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 			@RequestParam(value = "ticketUpdated", required = false, defaultValue = "false") final boolean ticketUpdated,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
+		promotionItem(model);
 		addSupportTicketValidator.validate(supportTicketForm, bindingResult);
 		if (bindingResult.hasErrors()) {
 			final List<Map<String, String>> list = buildErrorMessagesMap(bindingResult);
@@ -564,4 +574,21 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 
 		return map;
 	}
+	
+	@Resource
+	private FlexibleSearchService flexibleSearchService;
+	@Resource
+	private Converter<ProductModel, ProductData> productConverter;
+	
+	public void promotionItem(final Model model)
+	{
+		final String SQL = "SELECT PK FROM {"+ProductModel._TYPECODE+"} WHERE {"+ProductModel.PROMOTIONITEM+"} =true ";//limit 1,15
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(SQL);
+		query.setNeedTotal(false);
+		query.setCount(15);
+		final SearchResult<ProductModel> result = flexibleSearchService.search(query);
+		model.addAttribute("promotionItem", Converters.convertAll(result.getResult(), productConverter));
+		
+	}
+	
 }
