@@ -30,6 +30,6 @@ public class DefaultAcermCustomerAccountService extends DefaultCustomerAccountSe
 	{
 		registerCustomer(customerModel, password);
 		getEventService().publishEvent(initializeEvent(new RegisterEvent(), customerModel));
-		//getEventService().publishEvent(initializeEvent(new SendEmployeeEmailEvent(), customerModel));
+		getEventService().publishEvent(initializeEvent(new SendEmployeeEmailEvent(), customerModel));
 	}
 }

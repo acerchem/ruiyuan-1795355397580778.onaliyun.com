@@ -33,7 +33,7 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 		final EmailPageTemplateModel emailPageTemplateModel = (EmailPageTemplateModel) emailPageModel.getMasterTemplate();
 		
 		if("AcerchemSendEmployeeRegisterEmail".equalsIgnoreCase(emailPageTemplateModel.getUid()) || "AcerchemSendOrderConfirmEmail".equalsIgnoreCase(emailPageTemplateModel.getUid())){
-		//if("AcerchemDeliveryNoteEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid()) || "AcerchemReleaseNoteEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())){
+		//if("ForgottenPasswordEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid()) || "AcerchemReleaseNoteEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())){
 			final RendererTemplateModel bodyRenderTemplate = emailPageTemplateModel.getHtmlTemplate();
 			Assert.notNull(bodyRenderTemplate, "HtmlTemplate associated with MasterTemplate of EmailPageModel cannot be null");
 			final RendererTemplateModel subjectRenderTemplate = emailPageTemplateModel.getSubject();
@@ -51,13 +51,13 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 			}
 			else
 			{
-				if (!validate(emailContext))
-				{
-					LOG.error("Email context for businessProcess [" + businessProcessModel + "] is not valid: "
-							+ ReflectionToStringBuilder.toString(emailContext));
-					throw new IllegalStateException("Email context for businessProcess [" + businessProcessModel + "] is not valid: "
-							+ ReflectionToStringBuilder.toString(emailContext));
-				}
+//				if (!validate(emailContext))
+//				{
+//					LOG.error("Email context for businessProcess [" + businessProcessModel + "] is not valid: "
+//							+ ReflectionToStringBuilder.toString(emailContext));
+//					throw new IllegalStateException("Email context for businessProcess [" + businessProcessModel + "] is not valid: "
+//							+ ReflectionToStringBuilder.toString(emailContext));
+//				}
 
 				final StringWriter subject = new StringWriter();
 				getRendererService().render(subjectRenderTemplate, emailContext, subject);
@@ -136,6 +136,7 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 	protected EmailMessageModel createSendEmployeeEmailMessage(final String emailSubject, final String emailBody,
 			final AbstractEmailContext<BusinessProcessModel> emailContext)
 	{
+		String fromServerEmail = Config.getParameter("mail.from");
 		final List<EmailAddressModel> toEmails = new ArrayList<EmailAddressModel>();
 		final EmailAddressModel ccEmailOneAddressModel = getEmailService().getOrCreateEmailAddressForEmail(Config.getParameter("mail.ccAddress.one"),
 				Config.getParameter("mail.ccAddress.displayOneName"));
@@ -143,10 +144,10 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 				Config.getParameter("mail.ccAddress.displayTwoName"));
 		toEmails.add(ccEmailOneAddressModel);
 		toEmails.add(ccEmailTwoAddressModel);
-		final EmailAddressModel fromAddress = getEmailService().getOrCreateEmailAddressForEmail(emailContext.getFromEmail(),
-				emailContext.getFromDisplayName());
+		final EmailAddressModel fromAddress = getEmailService().getOrCreateEmailAddressForEmail(fromServerEmail,
+				"email for employee");
 		return getEmailService().createEmailMessage(toEmails, new ArrayList<EmailAddressModel>(), new ArrayList<EmailAddressModel>(), fromAddress,
-				emailContext.getFromEmail(), emailSubject, emailBody, null);
+				fromServerEmail, emailSubject, emailBody, null);
 	}
 	
 

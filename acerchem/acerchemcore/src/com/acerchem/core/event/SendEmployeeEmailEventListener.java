@@ -88,7 +88,7 @@ public class SendEmployeeEmailEventListener extends AbstractAcceleratorSiteEvent
 		storeFrontCustomerProcessModel.setStore(sendeEmployeeEmailEvent.getBaseStore());
 		getModelService().save(storeFrontCustomerProcessModel);
 		getBusinessProcessService().startProcess(storeFrontCustomerProcessModel);
-		LOG.info("-------------------------onSiteEvent end------------------");
+		LOG.info("-------------------------onSiteEvent end------------------"+storeFrontCustomerProcessModel.getCode());
 	}
 
 	@Override

@@ -289,15 +289,15 @@
 	
 	<!-- 添加审核通过和审核拒绝的 -->
 	<bean id="generateApproveCustomerEmail" parent="abstractGenerateEmailAction">
-		<property name="frontendTemplateName" value="CustomerRegistrationEmailTemplate"/>
+		<property name="frontendTemplateName" value="AcerchemCustomerRegistrationAuditPassEmailTemplate"/>
 	</bean>
 	
 	<bean id="generateRejectCustomerEmail" parent="abstractGenerateEmailAction">
-		<property name="frontendTemplateName" value="CustomerRegistrationEmailTemplate"/>
+		<property name="frontendTemplateName" value="AcerchemCustomerRegistrationAuditFalureEmailTemplate"/>
 	</bean>
 	
 	<bean id="generateSendEmployeeEmail" parent="abstractGenerateEmailAction">
-		<property name="frontendTemplateName" value="AcerchemDeliveryNoteEmailTemplate"/>
+		<property name="frontendTemplateName" value="AcerchemSendEmployeeRegisterEmail"/>
 	</bean>
 	
 	<!-- end -->
