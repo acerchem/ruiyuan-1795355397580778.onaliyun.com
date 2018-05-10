@@ -622,6 +622,12 @@
 						<persistence type="property" />
 						<defaultvalue>Boolean.FALSE</defaultvalue>
 					</attribute>
+					<attribute qualifier="promotionItem" type="boolean">
+						<description>Whether to show in Promotion Item</description>
+						<modifiers optional="false" initial="false" />
+						<persistence type="property" />
+						<defaultvalue>Boolean.FALSE</defaultvalue>
+					</attribute>
 				</attributes>
 			</itemtype>
 			<!-- End -->
