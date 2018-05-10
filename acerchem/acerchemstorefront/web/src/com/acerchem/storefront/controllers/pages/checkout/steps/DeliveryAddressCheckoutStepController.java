@@ -334,22 +334,13 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 										  final Model model, final RedirectAttributes redirectAttributes,
 										 @RequestParam(required = false) final String selectedDeliveryModeCode,
 										  @RequestParam(required = false) final String pickUpDate) throws CMSItemNotFoundException, AcerchemOrderException {
-//		final ValidationResults validationResults = getCheckoutStep().validate(redirectAttributes);
-//		if (getCheckoutStep().checkIfValidationErrors(validationResults))
-//		{
-//			return getCheckoutStep().onValidation(validationResults);
-//		}
-		
-		final CartData cartData = acerchemCheckoutFacade.getCheckoutCart();
-		
-		
 		if (StringUtils.isNotBlank(selectedAddressCode))
 		{
 			final AddressData selectedAddressData = getCheckoutFacade().getDeliveryAddressForCode(selectedAddressCode);
 			
-	        double deliveryCost=acerchemTrayFacade.getTotalPriceForCart(cartData, selectedAddressData);
+	      /*  double deliveryCost=acerchemTrayFacade.getTotalPriceForCart(cartData, selectedAddressData);
 	        CartModel cartModel = acerchemCheckoutFacade.getCartModel();
-	        cartData.setDeliveryCost(acerchemCheckoutFacade.createPrice(cartModel, deliveryCost));
+	        cartData.setDeliveryCost(acerchemCheckoutFacade.createPrice(cartModel, deliveryCost));*/
 			
 			final boolean hasSelectedAddressData = selectedAddressData != null;
 			
@@ -481,6 +472,15 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 			 double deliveryCost=acerchemTrayFacade.getTotalPriceForCart(cartData, cartData.getDeliveryAddress());
 			 CartModel cartModel = acerchemCheckoutFacade.getCartModel();
 		     cartData.setDeliveryCost(acerchemCheckoutFacade.createPrice(cartModel, deliveryCost));
+		     
+		    
+		     if (deliveryCost>0){
+		    	 
+		    	 double total=0;
+		    	 total= cartData.getDeliveryCost().getValue().doubleValue()+cartData.getTotalPrice().getValue().doubleValue();
+		    	 
+		    	 cartData.setTotalPrice(acerchemCheckoutFacade.createPrice(cartModel, total));
+		     }
 		}
 
 		model.addAttribute("noAddress", Boolean.valueOf(getCheckoutFlowFacade().hasNoDeliveryAddress()));

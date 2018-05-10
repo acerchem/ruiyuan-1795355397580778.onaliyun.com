@@ -98,13 +98,7 @@
 
 			<!-- Summary -->
 			<div class="g-table">
-				<div class="g-title">
-					<span>Summary</span>
-				</div>
-				<div class="Summary">
-					<span>Part of your order qualifies for FREE Shipping;</span>
-					<span>span.Buy 2 items  sales to 10% Off; </span>
-				</div>
+				
 				<div class="list ord-total">
 					<div class="item">
 						

@@ -298,6 +298,8 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
     {
         final CartData cartData = getCartFacade().getSessionCart();
         final CartModel cartModel = getCartService().getSessionCart();
+        
+        double total =  0;
         if (cartData != null)
         {
             cartData.setDeliveryAddress(this.getDeliveryAddress());
@@ -307,10 +309,13 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
             cartData.setPaymentInfo(getPaymentDetails());
 
             if (cartModel.getStorageCost()!=null){
+            	
+            	total +=cartModel.getStorageCost();
                 cartData.setStorageCost(priceDataFactory.create(PriceDataType.BUY,
                         BigDecimal.valueOf(cartModel.getStorageCost().doubleValue()), cartModel.getCurrency().getIsocode()));
             }
             if (cartModel.getOperateCost()!=null){
+            	total+=cartModel.getOperateCost();
                 cartData.setOperateCost(priceDataFactory.create(PriceDataType.BUY,
                         BigDecimal.valueOf(cartModel.getOperateCost().doubleValue()), cartModel.getCurrency().getIsocode()));
             }
@@ -346,8 +351,12 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
             	
             	orderEntryData.setTotalPrice(createPrice(cartModel, totalPrice));
             }
+            
+            total += subTotal;
           
             cartData.setSubTotal(createPrice(cartModel, subTotal));
+            cartData.setTotalPrice(createPrice(cartModel, total));
+            
             
         }
         return cartData;

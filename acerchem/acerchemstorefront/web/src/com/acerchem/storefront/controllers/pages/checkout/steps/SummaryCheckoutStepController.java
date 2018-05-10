@@ -27,7 +27,9 @@ import de.hybris.platform.commercefacades.order.data.OrderEntryData;
 import de.hybris.platform.commercefacades.product.ProductOption;
 import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commercefacades.user.data.AddressData;
+import de.hybris.platform.commercefacades.user.data.CountryData;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
+import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.order.InvalidCartException;
 import de.hybris.platform.payment.AdapterException;
 
@@ -50,6 +52,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.acerchem.facades.facades.AcerchemCheckoutFacade;
 import com.acerchem.facades.facades.AcerchemOrderException;
+import com.acerchem.facades.facades.AcerchemTrayFacade;
 import com.acerchem.storefront.controllers.ControllerConstants;
 
 
@@ -63,6 +66,9 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 	
 	 @Resource(name = "defaultAcerchemCheckoutFacade")
 	 private AcerchemCheckoutFacade acerchemCheckoutFacade;
+	 
+	@Resource
+	private AcerchemTrayFacade acerchemTrayFacade;
 
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	@RequireHardLogIn
@@ -74,7 +80,7 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 	{
 		final CartData cartData = acerchemCheckoutFacade.getCheckoutCart();
 		
-		if (cartData.getEntries() != null && !cartData.getEntries().isEmpty())
+		/*if (cartData.getEntries() != null && !cartData.getEntries().isEmpty())
 		{
 			for (final OrderEntryData entry : cartData.getEntries())
 			{
@@ -85,7 +91,7 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 								ProductOption.PRICE_RANGE));
 				entry.setProduct(product);
 			}
-		}
+		}*/
 		
 		
 		try {
@@ -115,6 +121,25 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 			model.addAttribute("deliveryAddress", acerchemCheckoutFacade.getDeliveryAddresses().get(0));
 		}else{
 			model.addAttribute("deliveryAddress", cartData.getDeliveryAddress());
+			
+			 double deliveryCost = 0;
+			try {
+				deliveryCost = acerchemTrayFacade.getTotalPriceForCart(cartData, cartData.getDeliveryAddress());
+			} catch (AcerchemOrderException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			 CartModel cartModel = acerchemCheckoutFacade.getCartModel();
+		     cartData.setDeliveryCost(acerchemCheckoutFacade.createPrice(cartModel, deliveryCost));
+		     
+		    
+		     if (deliveryCost>0){
+		    	 
+		    	 double total=0;
+		    	 total= cartData.getDeliveryCost().getValue().doubleValue()+cartData.getTotalPrice().getValue().doubleValue();
+		    	 
+		    	 cartData.setTotalPrice(acerchemCheckoutFacade.createPrice(cartModel, total));
+		     }
 		}
 		
 		if (cartData.getDeliveryMode()!=null&&"DELIVERY_MENTION".equals(cartData.getDeliveryMode().getCode())) {
@@ -217,6 +242,20 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 		{
 			GlobalMessages.addErrorMessage(model, "checkout.deliveryAddress.notSelected");
 			invalid = true;
+		}else {
+			AddressData address = cartData.getDeliveryAddress() ;
+			
+			
+			CountryData countryData = address.getCountry();
+			
+			try {
+				acerchemCheckoutFacade.validateCartAddress(countryData);
+			} catch (AcerchemOrderException e) {
+				 GlobalMessages.addErrorMessage(model, e.getMessage());
+				 
+				 invalid = true;
+			}
+			
 		}
 
 		
