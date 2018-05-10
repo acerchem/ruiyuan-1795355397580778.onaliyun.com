@@ -68,6 +68,8 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 	private String vatTotal;
 	private String vatMoneyToWords;
 	
+	private String customerCompany;
+	
 	@Resource
 	private ContactInfoService contactInfoService;
 	
@@ -91,6 +93,8 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 		initPaymentTerms(orderProcessModel);
 		
 		customerModel = getCustomer(orderProcessModel);
+		
+		this.setCustomerCompany(customerModel.getCompanyName());
 		
 		String total = orderData.getTotalPrice().getValue().toString();
 		moneyToWords = AcerChemEmailContextUtils.getMoneyOfWord(total,"$");
@@ -437,5 +441,13 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 		String vatMoney_ = AcerChemEmailContextUtils.getMoneyOfWord(formatTotal,"$");
 		
 		this.setVatMoneyToWords(vatMoney_);
+	}
+
+	public String getCustomerCompany() {
+		return customerCompany;
+	}
+
+	public void setCustomerCompany(String customerCompany) {
+		this.customerCompany = customerCompany;
 	}
 }

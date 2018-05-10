@@ -103,7 +103,7 @@ p.western {
     </tr>
     
     <tr>
-      <td>TO: ${ctx.customer.name}</td>
+      <td>TO: ${ctx.customerCompany}</td>
       <td>&nbsp;</td>
     </tr>
     <tr>
