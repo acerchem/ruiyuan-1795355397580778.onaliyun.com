@@ -261,7 +261,7 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 							if ( entryData != null){
 								PointOfServiceData pos = entryData.getDeliveryPointOfService();
 								if (pos != null){
-									setWarehouse(StringUtils.defaultString(pos.getAddress().getFormattedAddress(),"&nbsp;"));
+									setWarehouse(StringUtils.defaultString(pos.getName(),"&nbsp;"));
 								}
 							}
 						}
