@@ -26,6 +26,7 @@ INSERT_UPDATE BaseStore2WarehouseRel;source(uid)[unique=true];target(code)[uniqu
 #shaun
 ;$storeUid;Poland
 ;$storeUid;Europe
+;$storeUid;Italy
 
 INSERT_UPDATE PointOfService;name[unique=true];displayName;warehouses(code);address(&addrID);latitude;longitude;geocodeTimestamp[dateformat=dd.MM.yyyy];type(code)[default=WAREHOUSE]
 #;warehouse_s;Warehouse South;warehouse_s;warehouse_s;33,5933317;130,3515247;11.12.2025

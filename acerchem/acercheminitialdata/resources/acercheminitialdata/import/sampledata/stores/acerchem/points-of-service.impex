@@ -76,12 +76,13 @@ INSERT_UPDATE SpecialOpeningDay;openingSchedule(code)[unique=true];date[unique=t
 
 
 INSERT_UPDATE Zone;code[unique=true];countries(isocode)
-;ES;ES,DE
-;DE;DE,ES
+;ES;ES,DE,IT
+;DE;DE,ES,IT
+;IT;IT,ES,DE
 #shaun
-;DCM;DCM,DE,ES
-;PL;PL,DE,ES
-;GB;GB,DE,ES
+;DCM;DCM,DE,ES,IT
+;PL;PL,DE,ES,IT
+;GB;GB,DE,ES,IT
 
 
 
@@ -92,6 +93,7 @@ INSERT_UPDATE PointOfService;deliveryZone(code);name[unique=true];type(code);add
 #shaun
 ;PL;Poland;STORE;addr4;;;29-04-2025;acerchem_store_04;$standardHours;$storeUid;Poland
 ;DCM;Europe;STORE;addr5;;;29-04-2025;acerchem_store_05;$standardHours;$storeUid;Europe
+;IT;Italy;STORE;addr6;;;29-04-2025;acerchem_store_06;$standardHours;$storeUid;Italy
 
 
 
@@ -100,8 +102,9 @@ INSERT_UPDATE Address;&addrID;streetname;streetnumber;postalcode[unique=true];to
 ;addr2;United Kingdom;44;;United Kingdom;GB;;+81 4649 8891;United Kingdom
 ;addr3;Germany;31;;Germany;DE;;+31 6176 3426;Germany
 #shaun
-;addr4;Poland;32;;Poland;NL;;+31 6176 3426;Poland
+;addr4;Poland;32;;Poland;PL;;+31 6176 3426;Poland
 ;addr5;Europe;33;;Europe;NL;;+31 6176 3426;Europe
+;addr6;Italy;33;;Italy;IT;;+31 6176 3426;Italy
 
 
 
@@ -121,4 +124,5 @@ INSERT_UPDATE PoS2WarehouseRel;source(name)[unique=true];target(code)[unique=tru
 #shaun
 ;Poland;Poland
 ;Europe;Europe
+;Italy;Italy
 

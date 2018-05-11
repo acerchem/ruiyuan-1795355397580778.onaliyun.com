@@ -62,6 +62,7 @@ INSERT_UPDATE Warehouse;code[unique=true];name[lang=en];name[lang=de];vendor(cod
 #shaun
 ;Europe;Europe;;true
 ;Poland;Poland;;true
+;Italy;Italy;;true
 
 INSERT_UPDATE Unit;code[unique=true];name[lang=en];unitType
 ;kg;kg;kg
