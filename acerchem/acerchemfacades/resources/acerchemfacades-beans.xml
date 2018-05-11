@@ -132,7 +132,7 @@
 		<property name="paybackTime" type="java.util.Date" /><!-- 实际还款日期 -->
 		<property name="shouldPaybackTime" type="java.util.Date" /><!-- 
 			还款日 -->
-		<property name="cransactionId" type="java.lang.String" />
+		<property name="remark" type="java.lang.String" /><!-- 备注 -->
 		<property name="creditAccount"
 			type="de.hybris.platform.commercefacades.user.data.CustomerCreditAccountData" /><!-- 
 			信用账户 -->
