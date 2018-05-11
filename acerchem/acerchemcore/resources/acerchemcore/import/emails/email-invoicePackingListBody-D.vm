@@ -90,7 +90,7 @@ p.western {
     </tr>
     #set ($formattedOrderDate = $ctx.order.waitDeliveiedDate)
     <tr>
-      <td>DATE: ${formattedOrderDate}</td>
+      <td>DATE: $!{formattedOrderDate}</td>
       <td>&nbsp;</td>
     </tr>
     
@@ -312,7 +312,7 @@ p.western {
       <td>&nbsp;</td>
     </tr>
     <tr>
-      <td>DATE: ${formattedOrderDate}</td>
+      <td>DATE: $!{formattedOrderDate}</td>
       <td>&nbsp;</td>
     </tr>
     
