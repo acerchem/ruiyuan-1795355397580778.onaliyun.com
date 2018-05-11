@@ -284,7 +284,7 @@ $(document).ready(function(){
 	});
 })
 
-$('#addToCartButton').on('click',function(){
+$(document).on('click','#addToCartButton',function(){
 	setTimeout(function(){
 		var acbox = $('#colorbox');
 		acbox.css({width:'100%',height:'100%',left:0,top:0})
