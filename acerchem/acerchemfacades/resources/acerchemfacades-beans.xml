@@ -251,4 +251,10 @@
 		<property name="code" type="String"/>
 	</bean>
 
+
+	<bean
+		class="de.hybris.platform.commercefacades.order.data.OrderEntryData">
+		<property name="consignmentEntries" type="java.util.List&lt;de.hybris.platform.commercefacades.order.data.ConsignmentEntryData>" />
+		<property name="totalWeight" type="Integer"/>
+	</bean>
 </beans>

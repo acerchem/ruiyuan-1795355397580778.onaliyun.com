@@ -65,6 +65,7 @@ public class AcerchemOrderPopulator extends OrderPopulator {
         		if (targetEntry.getEntryNumber().equals(entry.getEntryNumber())){
         			targetEntry.setBaseRealPrice(priceDataFactory.create(PriceDataType.BUY, BigDecimal.valueOf(entry.getBaseRealPrice().doubleValue()), source.getCurrency().getIsocode()));
         			targetEntry.setTotalRealPrice(priceDataFactory.create(PriceDataType.BUY, BigDecimal.valueOf(entry.getTotalRealPrice().doubleValue()), source.getCurrency().getIsocode()));
+        			targetEntry.setTotalWeight(entry.getTotalWeight());
         			
         			target.getEntries().remove(i);
         			target.getEntries().add(i,targetEntry);

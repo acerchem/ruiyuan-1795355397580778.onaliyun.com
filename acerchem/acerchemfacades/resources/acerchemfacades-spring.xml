@@ -1,97 +1,94 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
- [y] hybris Platform
-
- Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
-
- This software is the confidential and proprietary information of SAP
- ("Confidential Information"). You shall not disclose such Confidential
- Information and shall use it only in accordance with the terms of the
- license agreement you entered into with SAP.
--->
+<!-- [y] hybris Platform Copyright (c) 2017 SAP SE or an SAP affiliate company. 
+	All rights reserved. This software is the confidential and proprietary information 
+	of SAP ("Confidential Information"). You shall not disclose such Confidential 
+	Information and shall use it only in accordance with the terms of the license 
+	agreement you entered into with SAP. -->
 
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context
         http://www.springframework.org/schema/context/spring-context.xsd">
-		
-	<context:annotation-config/> 
-    <context:component-scan base-package="com.acerchem" scope-resolver="de.hybris.platform.spring.IgnoreTenantScopeMetadataResolver"  />
 
-	<alias alias="simpleSuggestionFacade" name="defaultSimpleSuggestionFacade"/>
-	<bean id="defaultSimpleSuggestionFacade" class="com.acerchem.facades.suggestion.impl.DefaultSimpleSuggestionFacade" >
-		<property name="simpleSuggestionService" ref="simpleSuggestionService"/>
-		<property name="userService" ref="userService"/>
-		<property name="categoryService" ref="categoryService"/>
-		<property name="productService" ref="productService"/>
-		<property name="productConverter" ref="carouselProductConverter"/>
-		<property name="cartService" ref="cartService"/>
+	<context:annotation-config />
+	<context:component-scan base-package="com.acerchem"
+		scope-resolver="de.hybris.platform.spring.IgnoreTenantScopeMetadataResolver" />
+
+	<alias alias="simpleSuggestionFacade" name="defaultSimpleSuggestionFacade" />
+	<bean id="defaultSimpleSuggestionFacade"
+		class="com.acerchem.facades.suggestion.impl.DefaultSimpleSuggestionFacade">
+		<property name="simpleSuggestionService" ref="simpleSuggestionService" />
+		<property name="userService" ref="userService" />
+		<property name="categoryService" ref="categoryService" />
+		<property name="productService" ref="productService" />
+		<property name="productConverter" ref="carouselProductConverter" />
+		<property name="cartService" ref="cartService" />
 	</bean>
-	
+
 	<bean id="carouselProductConverter" parent="defaultProductConverter">
 		<property name="populators">
 			<list merge="true">
-				<ref bean="productPricePopulator"/>
+				<ref bean="productPricePopulator" />
 			</list>
 		</property>
 	</bean>
 
-	<alias name="acceleratorVariantOptionDataConverter" alias="variantOptionDataConverter"/> 
+	<alias name="acceleratorVariantOptionDataConverter" alias="variantOptionDataConverter" />
 	<bean id="acceleratorVariantOptionDataConverter" parent="abstractPopulatingConverter">
-		<lookup-method name="createTarget" bean="variantOptionData"/>
+		<lookup-method name="createTarget" bean="variantOptionData" />
 		<property name="populators">
 			<list>
-				<ref bean="acceleratorVariantOptionDataPopulator"/>
+				<ref bean="acceleratorVariantOptionDataPopulator" />
 			</list>
 		</property>
 	</bean>
 
-	<alias name="defaultAcceleratorVariantOptionDataPopulator" alias="acceleratorVariantOptionDataPopulator"/>
-	<bean id="defaultAcceleratorVariantOptionDataPopulator"  class="com.acerchem.facades.populators.AcceleratorVariantOptionDataPopulator"
-	      parent="variantOptionDataPopulator" >
-		<property name="mediaService" ref="mediaService"/>
-		<property name="mediaContainerService" ref="mediaContainerService"/>
-		<property name="typeService" ref="typeService"/>
-		<property name="imageFormatMapping" ref="imageFormatMapping"/>
+	<alias name="defaultAcceleratorVariantOptionDataPopulator" alias="acceleratorVariantOptionDataPopulator" />
+	<bean id="defaultAcceleratorVariantOptionDataPopulator"
+		class="com.acerchem.facades.populators.AcceleratorVariantOptionDataPopulator"
+		parent="variantOptionDataPopulator">
+		<property name="mediaService" ref="mediaService" />
+		<property name="mediaContainerService" ref="mediaContainerService" />
+		<property name="typeService" ref="typeService" />
+		<property name="imageFormatMapping" ref="imageFormatMapping" />
 		<property name="variantAttributeMapping">
 			<map>
-				<entry key="ApparelStyleVariantProduct.style" value="styleSwatch"/>
+				<entry key="ApparelStyleVariantProduct.style" value="styleSwatch" />
 			</map>
 		</property>
 	</bean>
 
 
-	<alias name="acceleratorGenderConverter" alias="genderConverter"/> 
+	<alias name="acceleratorGenderConverter" alias="genderConverter" />
 	<bean id="acceleratorGenderConverter" parent="abstractPopulatingConverter">
-		<property name="targetClass" value="com.acerchem.facades.product.data.GenderData"/>
-			<property name="populators">
-				<list>
-					<ref bean="genderDataPopulator"/>
-				</list>
-			</property>
+		<property name="targetClass" value="com.acerchem.facades.product.data.GenderData" />
+		<property name="populators">
+			<list>
+				<ref bean="genderDataPopulator" />
+			</list>
+		</property>
 	</bean>
 
-	<alias name="defaultGenderDataPopulator" alias="genderDataPopulator"/>
-	<bean id="defaultGenderDataPopulator" class="com.acerchem.facades.populators.GenderDataPopulator" >
-		<property name="typeService" ref="typeService"/>
+	<alias name="defaultGenderDataPopulator" alias="genderDataPopulator" />
+	<bean id="defaultGenderDataPopulator" class="com.acerchem.facades.populators.GenderDataPopulator">
+		<property name="typeService" ref="typeService" />
 	</bean>
 
 
 	<!-- accelerator Image Format Mappings -->
-	<alias name="acceleratorImageFormatMapping" alias="imageFormatMapping"/>
+	<alias name="acceleratorImageFormatMapping" alias="imageFormatMapping" />
 	<bean id="acceleratorImageFormatMapping" parent="defaultImageFormatMapping">
 		<property name="mapping">
 			<map>
-				<entry key="superZoom" value="1200Wx1200H"/>
-				<entry key="zoom" value="515Wx515H"/>
-				<entry key="store" value="365Wx246H"/>
-				<entry key="product" value="300Wx300H"/>
-				<entry key="thumbnail" value="96Wx96H"/>
-				<entry key="cartIcon" value="65Wx65H"/>
-				<entry key="styleSwatch" value="30Wx30H"/>
+				<entry key="superZoom" value="1200Wx1200H" />
+				<entry key="zoom" value="515Wx515H" />
+				<entry key="store" value="365Wx246H" />
+				<entry key="product" value="300Wx300H" />
+				<entry key="thumbnail" value="96Wx96H" />
+				<entry key="cartIcon" value="65Wx65H" />
+				<entry key="styleSwatch" value="30Wx30H" />
 			</map>
 		</property>
 	</bean>
@@ -120,341 +117,408 @@
 		</property>
 	</bean>
 
-	<bean id="customerEmailContext" class="com.acerchem.facades.process.email.context.CustomerEmailContext" parent="abstractEmailContext" scope="prototype" >
-		<property name="customerConverter" ref="customerConverter"/>
+	<bean id="customerEmailContext"
+		class="com.acerchem.facades.process.email.context.CustomerEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="customerConverter" ref="customerConverter" />
 	</bean>
 
-	<bean id="forgottenPasswordEmailContext" class="com.acerchem.facades.process.email.context.ForgottenPasswordEmailContext" parent="customerEmailContext" scope="prototype" >
-		<property name="customerConverter" ref="customerConverter"/>
+	<bean id="forgottenPasswordEmailContext"
+		class="com.acerchem.facades.process.email.context.ForgottenPasswordEmailContext"
+		parent="customerEmailContext" scope="prototype">
+		<property name="customerConverter" ref="customerConverter" />
 	</bean>
 
-	<bean id="orderNotificationEmailContext" class="com.acerchem.facades.process.email.context.OrderNotificationEmailContext" parent="abstractEmailContext" scope="prototype" >
-		<property name="orderConverter" ref="orderConverter"/>
+	<bean id="orderNotificationEmailContext"
+		class="com.acerchem.facades.process.email.context.OrderNotificationEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="orderConverter" ref="orderConverter" />
 	</bean>
 
-	<bean id="quoteNotificationEmailContext" class="com.acerchem.facades.process.email.context.QuoteNotificationEmailContext" parent="abstractEmailContext" scope="prototype" >
-		<property name="quoteService" ref="quoteService"/>
-		<property name="quoteConverter" ref="quoteConverter"/>
-	</bean>
-	
-	<bean id="deliverySentEmailContext" class="com.acerchem.facades.process.email.context.DeliverySentEmailContext" parent="abstractEmailContext" scope="prototype" >
-		<property name="consignmentConverter" ref="consignmentConverter"/>
-	</bean>
-	
-	<bean id="readyForPickupEmailContext" class="com.acerchem.facades.process.email.context.ReadyForPickupEmailContext" parent="abstractEmailContext" scope="prototype" >
-		<property name="consignmentConverter" ref="consignmentConverter"/>
-	</bean>
-	
-	<bean id="orderCancelledEmailContext" class="com.acerchem.facades.process.email.context.OrderCancelledEmailContext" parent="abstractEmailContext" scope="prototype" >
-		<property name="orderConverter" ref="orderConverter"/>
-	</bean>
-	
-	<bean id="orderRefundEmailContext" class="com.acerchem.facades.process.email.context.OrderRefundEmailContext" parent="abstractEmailContext" scope="prototype" >
-		<property name="orderConverter" ref="orderConverter"/>
-	</bean>
-	<bean id="consignmentCollectionReminderEmailContext" class="com.acerchem.facades.process.email.context.ConsignmentCollectionReminderEmailContext" parent="abstractEmailContext" scope="prototype">
-        <property name="consignmentConverter" ref="consignmentConverter"/>
-        <property name="formatFactory" ref="formatFactory"/>
-        <property name="customerServiceUncollectedConsignmentStrategy" ref="customerServiceUncollectedConsignmentStrategy" />
-        <property name="orderConverter" ref="orderConverter"/>
-    </bean>
-
-	<bean id="orderPartiallyModifiedEmailContext" class="com.acerchem.facades.process.email.context.OrderPartiallyModifiedEmailContext" parent="abstractEmailContext" scope="prototype" >
-		<property name="orderConverter" ref="orderConverter"/>
-		<property name="orderEntryConverter" ref="orderEntryConverter"/>
-		<property name="priceDataFactory" ref="priceDataFactory"/>		
+	<bean id="quoteNotificationEmailContext"
+		class="com.acerchem.facades.process.email.context.QuoteNotificationEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="quoteService" ref="quoteService" />
+		<property name="quoteConverter" ref="quoteConverter" />
 	</bean>
 
-	<bean id="orderPartiallyCanceledEmailContext" class="com.acerchem.facades.process.email.context.OrderPartiallyCanceledEmailContext" parent="orderPartiallyModifiedEmailContext" scope="prototype" >
+	<bean id="deliverySentEmailContext"
+		class="com.acerchem.facades.process.email.context.DeliverySentEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="consignmentConverter" ref="consignmentConverter" />
 	</bean>
 
-	<bean id="orderPartiallyRefundedEmailContext" class="com.acerchem.facades.process.email.context.OrderPartiallyRefundedEmailContext" parent="orderPartiallyModifiedEmailContext" scope="prototype" >
+	<bean id="readyForPickupEmailContext"
+		class="com.acerchem.facades.process.email.context.ReadyForPickupEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="consignmentConverter" ref="consignmentConverter" />
 	</bean>
 
-	<bean id="notPickedUpConsignmentCanceledEmailContext" class="com.acerchem.facades.process.email.context.NotPickedUpConsignmentCanceledEmailContext" parent="abstractEmailContext" scope="prototype" >
-		<property name="consignmentConverter" ref="consignmentConverter"/>
-		<property name="priceDataFactory" ref="priceDataFactory"/>
+	<bean id="orderCancelledEmailContext"
+		class="com.acerchem.facades.process.email.context.OrderCancelledEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="orderConverter" ref="orderConverter" />
 	</bean>
 
-	<alias name="yacceleratorSearchPagePointOfServiceDistancePopulator" alias="searchPagePointOfServiceDistancePopulator" />
-	<bean id="yacceleratorSearchPagePointOfServiceDistancePopulator" class="com.acerchem.facades.storefinder.populators.SearchPagePointOfServiceDistancePopulator" >
-		<property name="pointOfServiceDistanceConverter" ref="pointOfServiceDistanceConverter"/>
+	<bean id="orderRefundEmailContext"
+		class="com.acerchem.facades.process.email.context.OrderRefundEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="orderConverter" ref="orderConverter" />
+	</bean>
+	<bean id="consignmentCollectionReminderEmailContext"
+		class="com.acerchem.facades.process.email.context.ConsignmentCollectionReminderEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="consignmentConverter" ref="consignmentConverter" />
+		<property name="formatFactory" ref="formatFactory" />
+		<property name="customerServiceUncollectedConsignmentStrategy"
+			ref="customerServiceUncollectedConsignmentStrategy" />
+		<property name="orderConverter" ref="orderConverter" />
 	</bean>
 
-	<bean id="genderData" class="com.acerchem.facades.product.data.GenderData" scope="prototype"/>
-	
+	<bean id="orderPartiallyModifiedEmailContext"
+		class="com.acerchem.facades.process.email.context.OrderPartiallyModifiedEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="orderConverter" ref="orderConverter" />
+		<property name="orderEntryConverter" ref="orderEntryConverter" />
+		<property name="priceDataFactory" ref="priceDataFactory" />
+	</bean>
+
+	<bean id="orderPartiallyCanceledEmailContext"
+		class="com.acerchem.facades.process.email.context.OrderPartiallyCanceledEmailContext"
+		parent="orderPartiallyModifiedEmailContext" scope="prototype">
+	</bean>
+
+	<bean id="orderPartiallyRefundedEmailContext"
+		class="com.acerchem.facades.process.email.context.OrderPartiallyRefundedEmailContext"
+		parent="orderPartiallyModifiedEmailContext" scope="prototype">
+	</bean>
+
+	<bean id="notPickedUpConsignmentCanceledEmailContext"
+		class="com.acerchem.facades.process.email.context.NotPickedUpConsignmentCanceledEmailContext"
+		parent="abstractEmailContext" scope="prototype">
+		<property name="consignmentConverter" ref="consignmentConverter" />
+		<property name="priceDataFactory" ref="priceDataFactory" />
+	</bean>
+
+	<alias name="yacceleratorSearchPagePointOfServiceDistancePopulator"
+		alias="searchPagePointOfServiceDistancePopulator" />
+	<bean id="yacceleratorSearchPagePointOfServiceDistancePopulator"
+		class="com.acerchem.facades.storefinder.populators.SearchPagePointOfServiceDistancePopulator">
+		<property name="pointOfServiceDistanceConverter" ref="pointOfServiceDistanceConverter" />
+	</bean>
+
+	<bean id="genderData" class="com.acerchem.facades.product.data.GenderData"
+		scope="prototype" />
+
 	<!-- add by randy -->
-	<alias name="defaultProductAcerchemPopulator" alias="productAcerchemPopulator"/>
+	<alias name="defaultProductAcerchemPopulator" alias="productAcerchemPopulator" />
 	<bean id="defaultProductAcerchemPopulator" parent="baseProductPopulator"
-			class="com.acerchem.facades.populators.ProductAcerchemPopulator">
-    </bean>
-    
-    <alias name="defaultProductAcerchemPopulatorList" alias="productBasicPopulatorList"/>
+		class="com.acerchem.facades.populators.ProductAcerchemPopulator">
+	</bean>
+
+	<alias name="defaultProductAcerchemPopulatorList" alias="productBasicPopulatorList" />
 	<bean id="defaultProductAcerchemPopulatorList" parent="defaultProductBasicPopulatorList">
 		<property name="populators">
 			<list merge="true">
-				<ref bean="productAcerchemPopulator"/>
-				<ref bean="productCertificatesImagePopulator"/>
+				<ref bean="productAcerchemPopulator" />
+				<ref bean="productCertificatesImagePopulator" />
 			</list>
 		</property>
 	</bean>
-	
-	
-	<!-- <alias name="defaultProductConverter" alias="productConverter"/>
-	<bean id="defaultProductConverter" parent="abstractPopulatingConverter">
-		<property name="targetClass" value="de.hybris.platform.commercefacades.product.data.ProductData"/>
-		<property name="populators">
-			<list>
-				<ref bean="acerchemCertificatesPopulator"/>
-			</list>
-		</property>
-	</bean> -->
-	
-	
-	<alias name="defaultAcerchemCertificatesPopulator" alias="acerchemCertificatesPopulator"/>
+
+
+	<!-- <alias name="defaultProductConverter" alias="productConverter"/> <bean 
+		id="defaultProductConverter" parent="abstractPopulatingConverter"> <property 
+		name="targetClass" value="de.hybris.platform.commercefacades.product.data.ProductData"/> 
+		<property name="populators"> <list> <ref bean="acerchemCertificatesPopulator"/> 
+		</list> </property> </bean> -->
+
+
+	<alias name="defaultAcerchemCertificatesPopulator" alias="acerchemCertificatesPopulator" />
 	<bean id="defaultAcerchemCertificatesPopulator"
-			class="com.acerchem.facades.populators.AcerchemCertificatesPopulator"/>
-			
-			
-	<alias name="defaultCertificatesConverter" alias="certificatesConverter"/>
+		class="com.acerchem.facades.populators.AcerchemCertificatesPopulator" />
+
+
+	<alias name="defaultCertificatesConverter" alias="certificatesConverter" />
 	<bean id="defaultCertificatesConverter" parent="abstractPopulatingConverter">
-		<property name="targetClass" value="com.acerchem.facades.product.data.CertificatessData"/>
+		<property name="targetClass"
+			value="com.acerchem.facades.product.data.CertificatessData" />
 		<property name="populators">
 			<list>
-				<ref bean="acerchemCertificatesPopulator"/>
+				<ref bean="acerchemCertificatesPopulator" />
 			</list>
 		</property>
 	</bean>
-	
-	<alias name="defaultProductCertificatesImagePopulator" alias="productCertificatesImagePopulator"/>
-	<bean id="defaultProductCertificatesImagePopulator"  parent="baseProductPopulator"
-			class="com.acerchem.facades.populators.ProductCertificatesImagePopulator">
-		
-		<property name="certificatesConverter" ref="certificatesConverter"/>
-	
+
+	<alias name="defaultProductCertificatesImagePopulator" alias="productCertificatesImagePopulator" />
+	<bean id="defaultProductCertificatesImagePopulator" parent="baseProductPopulator"
+		class="com.acerchem.facades.populators.ProductCertificatesImagePopulator">
+
+		<property name="certificatesConverter" ref="certificatesConverter" />
+
 	</bean>
-	
-		<!-- Promotion info -->
-		<alias name="defaultAcerchemPromotionsPopulator" alias="promotionsPopulator"/>
+
+	<!-- Promotion info -->
+	<alias name="defaultAcerchemPromotionsPopulator" alias="promotionsPopulator" />
 	<bean id="defaultAcerchemPromotionsPopulator"
-			class=" com.acerchem.facades.populators.AcerchemPromotionsPopulator">
-		<property name="cartService" ref="cartService"/>
-		<property name="promotionResultService" ref="promotionResultService"/>
-		<property name="promotionService" ref="promotionsService"/>
+		class=" com.acerchem.facades.populators.AcerchemPromotionsPopulator">
+		<property name="cartService" ref="cartService" />
+		<property name="promotionResultService" ref="promotionResultService" />
+		<property name="promotionService" ref="promotionsService" />
 	</bean>
-	
-		<!--net weight info-->
-	<alias name="defaultProductNetWeightPopulator" alias="productNetWeightPopulator"/>
+
+	<!--net weight info -->
+	<alias name="defaultProductNetWeightPopulator" alias="productNetWeightPopulator" />
 	<bean id="defaultProductNetWeightPopulator" parent="baseProductPopulator"
-			class="com.acerchem.facades.populators.ProductNetWeightPopulator">
+		class="com.acerchem.facades.populators.ProductNetWeightPopulator">
 	</bean>
-	
-	<alias name="defaultOrderEntryProductConverter" alias="orderEntryProductConverter"/>
+
+	<alias name="defaultOrderEntryProductConverter" alias="orderEntryProductConverter" />
 	<bean id="defaultOrderEntryProductConverter" parent="defaultProductConverter">
 		<property name="populators">
 			<list merge="true">
-				<ref bean="productNetWeightPopulator"/>
+				<ref bean="productNetWeightPopulator" />
 			</list>
 		</property>
 	</bean>
-	
+
 	<!-- add by alice -->
 	<alias name="yacceleratorProductPricePopulator1" alias="productPricePopulator" />
-	<bean id="yacceleratorProductPricePopulator1" parent="defaultProductPricePopulator" class="com.acerchem.facades.storefinder.populators.ProductPricePopulator1" >
-		<property name="commercePriceService" ref="commercePriceService"/>
-		<property name="priceDataFactory" ref="priceDataFactory"/>
-	</bean>
-	
-	<alias name="customSearchResultProductPricePopulator" alias="commerceSearchResultProductPopulator"/>
-	<bean id="customSearchResultProductPricePopulator" parent="variantCommerceSearchResultProductPopulator" class="com.acerchem.facades.storefinder.populators.SearchResultProductPricePopulator">
-        <property name="priceDataFactory" ref="priceDataFactory"/>
-    </bean>
-	<!-- End -->
-	
-	
-	<!--shaun: 添加远期库存 -->
-	<alias name="defaultAcerchemStockPopulator" alias="acerchemStockPopulator"/>
-	<bean id="defaultAcerchemStockPopulator" class="com.acerchem.facades.populators.AcerchemFutureStockPopulator">
-		<property name="acerchemFutureStockservice" ref="acerchemFutureStockservice"/>
+	<bean id="yacceleratorProductPricePopulator1" parent="defaultProductPricePopulator"
+		class="com.acerchem.facades.storefinder.populators.ProductPricePopulator1">
+		<property name="commercePriceService" ref="commercePriceService" />
+		<property name="priceDataFactory" ref="priceDataFactory" />
 	</bean>
 
-	<alias name="defaultAcerchemStockConverter" alias="acerchemStockConverter"/>
+	<alias name="customSearchResultProductPricePopulator" alias="commerceSearchResultProductPopulator" />
+	<bean id="customSearchResultProductPricePopulator" parent="variantCommerceSearchResultProductPopulator"
+		class="com.acerchem.facades.storefinder.populators.SearchResultProductPricePopulator">
+		<property name="priceDataFactory" ref="priceDataFactory" />
+	</bean>
+	<!-- End -->
+
+
+	<!--shaun: 添加远期库存 -->
+	<alias name="defaultAcerchemStockPopulator" alias="acerchemStockPopulator" />
+	<bean id="defaultAcerchemStockPopulator"
+		class="com.acerchem.facades.populators.AcerchemFutureStockPopulator">
+		<property name="acerchemFutureStockservice" ref="acerchemFutureStockservice" />
+	</bean>
+
+	<alias name="defaultAcerchemStockConverter" alias="acerchemStockConverter" />
 	<bean id="defaultAcerchemStockConverter" parent="abstractPopulatingConverter">
-		<property name="targetClass" value="de.hybris.platform.commercefacades.product.data.StockData"/>
+		<property name="targetClass"
+			value="de.hybris.platform.commercefacades.product.data.StockData" />
 		<property name="populators">
 			<list>
-				<ref bean="acerchemStockPopulator"/>
+				<ref bean="acerchemStockPopulator" />
 			</list>
 		</property>
 	</bean>
 
 	<!-- add by alice -->
-	<alias name="defaultAcerchemCustomerPopulator" alias="customerPopulator"/>
-	<bean id="defaultAcerchemCustomerPopulator" parent="defaultCustomerPopulator" class="com.acerchem.facades.populators.AcerchemCustomerPopulator">
-		<property name="addressConverter" ref="addressConverter"/>
-		<property name="creditAccountConverter" ref="creditAccountConverter"/>
-		<property name="userLevelConverter" ref="userLevelConverter"/>
+	<alias name="defaultAcerchemCustomerPopulator" alias="customerPopulator" />
+	<bean id="defaultAcerchemCustomerPopulator" parent="defaultCustomerPopulator"
+		class="com.acerchem.facades.populators.AcerchemCustomerPopulator">
+		<property name="addressConverter" ref="addressConverter" />
+		<property name="creditAccountConverter" ref="creditAccountConverter" />
+		<property name="userLevelConverter" ref="userLevelConverter" />
 	</bean>
-	
-	<alias name="defaultAcerchemCustomerConverter" alias="acerchemCustomerConverter"/>
+
+	<alias name="defaultAcerchemCustomerConverter" alias="acerchemCustomerConverter" />
 	<bean id="defaultAcerchemCustomerConverter" parent="abstractPopulatingConverter">
-		<property name="targetClass" value="de.hybris.platform.commercefacades.user.data.CustomerData"/>
+		<property name="targetClass"
+			value="de.hybris.platform.commercefacades.user.data.CustomerData" />
 		<property name="populators">
 			<list>
-				<ref bean="defaultAcerchemCustomerPopulator"/>
+				<ref bean="defaultAcerchemCustomerPopulator" />
 			</list>
 		</property>
 	</bean>
-	
-	<alias name="defaultCreditAccountPopulator" alias="creditAccountPopulator"/>
-	<bean id="defaultCreditAccountPopulator" class="com.acerchem.facades.populators.AcerchemCreditAccountPopulator">
-		<property name="creditTransactionConverter" ref="creditTransactionConverter"/>
+
+	<alias name="defaultCreditAccountPopulator" alias="creditAccountPopulator" />
+	<bean id="defaultCreditAccountPopulator"
+		class="com.acerchem.facades.populators.AcerchemCreditAccountPopulator">
+		<property name="creditTransactionConverter" ref="creditTransactionConverter" />
 	</bean>
-	
-	<alias name="defaultCreditAccountConverter" alias="creditAccountConverter"/>
+
+	<alias name="defaultCreditAccountConverter" alias="creditAccountConverter" />
 	<bean id="defaultCreditAccountConverter" parent="abstractPopulatingConverter">
-		<property name="targetClass" value="de.hybris.platform.commercefacades.user.data.CustomerCreditAccountData"/>
+		<property name="targetClass"
+			value="de.hybris.platform.commercefacades.user.data.CustomerCreditAccountData" />
 		<property name="populators">
 			<list>
-				<ref bean="defaultCreditAccountPopulator"/>
+				<ref bean="defaultCreditAccountPopulator" />
 			</list>
 		</property>
 	</bean>
-	
-	<alias name="defaultUserLevelPopulator" alias="userLevelPopulator"/>
-	<bean id="defaultUserLevelPopulator" class="com.acerchem.facades.populators.AcerchemUserLevelPopulator">
+
+	<alias name="defaultUserLevelPopulator" alias="userLevelPopulator" />
+	<bean id="defaultUserLevelPopulator"
+		class="com.acerchem.facades.populators.AcerchemUserLevelPopulator">
 	</bean>
-	
-	<alias name="defaultUserLevelConverter" alias="userLevelConverter"/>
+
+	<alias name="defaultUserLevelConverter" alias="userLevelConverter" />
 	<bean id="defaultUserLevelConverter" parent="abstractPopulatingConverter">
-		<property name="targetClass" value="de.hybris.platform.commercefacades.user.data.UserLevelData"/>
+		<property name="targetClass"
+			value="de.hybris.platform.commercefacades.user.data.UserLevelData" />
 		<property name="populators">
 			<list>
-				<ref bean="defaultUserLevelPopulator"/>
+				<ref bean="defaultUserLevelPopulator" />
 			</list>
 		</property>
 	</bean>
-	
-	<alias name="defaultCreditTransactionPopulator" alias="creditTransactionPopulator"/>
-	<bean id="defaultCreditTransactionPopulator" class="com.acerchem.facades.populators.AcerchemCreditTransactionPopulator">
+
+	<alias name="defaultCreditTransactionPopulator" alias="creditTransactionPopulator" />
+	<bean id="defaultCreditTransactionPopulator"
+		class="com.acerchem.facades.populators.AcerchemCreditTransactionPopulator">
 	</bean>
-	
-	<alias name="defaultCreditTransactionConverter" alias="creditTransactionConverter"/>
+
+	<alias name="defaultCreditTransactionConverter" alias="creditTransactionConverter" />
 	<bean id="defaultCreditTransactionConverter" parent="abstractPopulatingConverter">
-		<property name="targetClass" value="de.hybris.platform.commercefacades.user.data.CreditTransactionData"/>
+		<property name="targetClass"
+			value="de.hybris.platform.commercefacades.user.data.CreditTransactionData" />
 		<property name="populators">
 			<list>
-				<ref bean="defaultCreditTransactionPopulator"/>
+				<ref bean="defaultCreditTransactionPopulator" />
 			</list>
 		</property>
 	</bean>
-	
-	<alias name="acerchemProductPopulator" alias="productPopulator"/>
-	<bean id="acerchemProductPopulator" class="com.acerchem.facades.populators.AcerchemProductPopulator" parent="defaultProductPopulator">
+	<alias name="acerchemProductPopulator" alias="productPopulator" />
+	<bean id="acerchemProductPopulator"
+		class="com.acerchem.facades.populators.AcerchemProductPopulator"
+		parent="defaultProductPopulator">
 	</bean>
-	
 	<!-- end -->
 
-	<alias name="defaultAcerchemCustomerFacade" alias="acerchemCustomerFacade"/>
-	<bean id="defaultAcerchemCustomerFacade" parent="customerFacade" class="com.acerchem.facades.facades.impl.DefaultAcerchemCustomerFacade" >
-    </bean>
+	<alias name="defaultAcerchemCustomerFacade" alias="acerchemCustomerFacade" />
+	<bean id="defaultAcerchemCustomerFacade" parent="customerFacade"
+		class="com.acerchem.facades.facades.impl.DefaultAcerchemCustomerFacade">
+	</bean>
 
-	<alias name="defaultAcerchemCartFacade" alias="acerchemCartFacade"/>
-	<bean id="defaultAcerchemCartFacade" parent="cartFacade" class="com.acerchem.facades.facades.impl.DefaultAcerchemCartFacade" >
+	<alias name="defaultAcerchemCartFacade" alias="acerchemCartFacade" />
+	<bean id="defaultAcerchemCartFacade" parent="cartFacade"
+		class="com.acerchem.facades.facades.impl.DefaultAcerchemCartFacade">
 		<property name="acerchemCommerCartService" ref="acerchemCommerCartService" />
 	</bean>
 
-	<alias name="defaultAcerchemStockFacade" alias="acerchemStockFacade"/>
-	<bean id="defaultAcerchemStockFacade" class="com.acerchem.facades.facades.impl.DefaultAcerchemStockFacade" >
+	<alias name="defaultAcerchemStockFacade" alias="acerchemStockFacade" />
+	<bean id="defaultAcerchemStockFacade"
+		class="com.acerchem.facades.facades.impl.DefaultAcerchemStockFacade">
 		<property name="acerchemStockConverter" ref="acerchemStockConverter" />
 		<property name="productService" ref="productService" />
 	</bean>
 
-	<alias name="defaultAcerchemCartParameterPopulator" alias="acerchemCartParameterPopulator"/>
-	<bean id="defaultAcerchemCartParameterPopulator" class="com.acerchem.facades.populators.AcerchemCartParameterPopulator">
+	<alias name="defaultAcerchemCartParameterPopulator" alias="acerchemCartParameterPopulator" />
+	<bean id="defaultAcerchemCartParameterPopulator"
+		class="com.acerchem.facades.populators.AcerchemCartParameterPopulator">
 	</bean>
 
-	<alias name="defaultCommerceCartParameterConverter" alias="commerceCartParameterConverter"/>
+	<alias name="defaultCommerceCartParameterConverter" alias="commerceCartParameterConverter" />
 	<bean name="defaultCommerceCartParameterConverter" parent="abstractPopulatingConverter">
-		<property name="targetClass" value="de.hybris.platform.commerceservices.service.data.CommerceCartParameter"/>
+		<property name="targetClass"
+			value="de.hybris.platform.commerceservices.service.data.CommerceCartParameter" />
 		<property name="populators">
 			<list>
-				<ref bean="commerceCartParameterBasicPopulator"/>
-				<ref bean="acerchemCartParameterPopulator"/>
+				<ref bean="commerceCartParameterBasicPopulator" />
+				<ref bean="acerchemCartParameterPopulator" />
 			</list>
 		</property>
 	</bean>
 
-    <alias name="defaultAcerchemCheckoutFacade" alias="checkoutFacade"/>
-    <bean id="defaultAcerchemCheckoutFacade" parent="defaultCheckoutFacade" class="com.acerchem.facades.facades.impl.DefaultAcerchemCheckoutFacade" >
-    </bean>
-    
-    <!-- lz ↓-->
-	<alias name="ticketFacadeImpl" alias="defaultTicketFacade" /> 
-	<bean id="ticketFacadeImpl" parent="defaultCustomerTicketingFacade" class="com.acerchem.facade.supportticket.facade.impl.AcerchemFacadeTicketFacadeImpl" />
-	<!-- lz ↑-->
-	<bean id="defaultCustomerCreditAccountService" class="com.acerchem.service.customercreditaccount.impl.DefaultCustomerCreditAccountServiceImpl" />
-	
-	<!--  <bean id="defaultAcerchemPriceService" class="com.acerchem.service.price.DefaultAcerchemPriceService" />-->
-
-
-	<alias name="defaultAcerchemDeliveryOrderEntryGroupPopulator" alias="deliveryOrderEntryGroupPopulator"/>
-	<bean id="defaultAcerchemDeliveryOrderEntryGroupPopulator" parent="defaultDeliveryOrderEntryGroupPopulator" class="com.acerchem.facades.populators.AcerchemDeliveryOrderEntryGroupPopulator">
+	<alias name="defaultAcerchemCheckoutFacade" alias="checkoutFacade" />
+	<bean id="defaultAcerchemCheckoutFacade" parent="defaultCheckoutFacade"
+		class="com.acerchem.facades.facades.impl.DefaultAcerchemCheckoutFacade">
 	</bean>
 
-   <bean id="acerChemContractEmailContext"
+	<!-- lz ↓ -->
+	<alias name="ticketFacadeImpl" alias="defaultTicketFacade" />
+	<bean id="ticketFacadeImpl" parent="defaultCustomerTicketingFacade"
+		class="com.acerchem.facade.supportticket.facade.impl.AcerchemFacadeTicketFacadeImpl" />
+	<!-- lz ↑ -->
+	<bean id="defaultCustomerCreditAccountService"
+		class="com.acerchem.service.customercreditaccount.impl.DefaultCustomerCreditAccountServiceImpl" />
+
+	<!-- <bean id="defaultAcerchemPriceService" class="com.acerchem.service.price.DefaultAcerchemPriceService" 
+		/> -->
+
+
+	<alias name="defaultAcerchemDeliveryOrderEntryGroupPopulator"
+		alias="deliveryOrderEntryGroupPopulator" />
+	<bean id="defaultAcerchemDeliveryOrderEntryGroupPopulator" parent="defaultDeliveryOrderEntryGroupPopulator"
+		class="com.acerchem.facades.populators.AcerchemDeliveryOrderEntryGroupPopulator">
+	</bean>
+
+	<bean id="acerChemContractEmailContext"
 		class="com.acerchem.facades.process.email.context.AcerChemContractEmailContext"
 		parent="abstractEmailContext" scope="prototype">
 		<property name="orderConverter" ref="orderConverter" />
 	</bean>
-	
+
 	<bean id="acerChemDeliveryNoteEmailContext"
 		class="com.acerchem.facades.process.email.context.AcerChemDeliveryNoteEmailContext"
 		parent="abstractEmailContext" scope="prototype">
 		<property name="orderConverter" ref="orderConverter" />
 	</bean>
-	
+
 	<bean id="acerChemInvoiceEmailContext"
 		class="com.acerchem.facades.process.email.context.AcerChemInvoiceEmailContext"
 		parent="abstractEmailContext" scope="prototype">
 		<property name="orderConverter" ref="orderConverter" />
 	</bean>
-	
+
 	<bean id="acerChemReleaseNoteEmailContext"
 		class="com.acerchem.facades.process.email.context.AcerChemReleaseNoteEmailContext"
 		parent="abstractEmailContext" scope="prototype">
 		<property name="orderConverter" ref="orderConverter" />
 	</bean>
-	
-	<bean id="acerchemOrderOfEmailContextPopuulator" class="com.acerchem.facades.populators.AcerchemOrderOfEmailContextPopuulator" >
+
+	<bean id="acerchemOrderOfEmailContextPopuulator"
+		class="com.acerchem.facades.populators.AcerchemOrderOfEmailContextPopuulator">
 	</bean>
 	<bean parent="modifyPopulatorList">
-		<property name="list" ref="orderConverter"/>
-		<property name="add" ref="acerchemOrderOfEmailContextPopuulator"/>
+		<property name="list" ref="orderConverter" />
+		<property name="add" ref="acerchemOrderOfEmailContextPopuulator" />
 	</bean>
 
-	<bean id="acerchemProductOfEmailPopulator" class="com.acerchem.facades.populators.AcerchemProductOfEmailPopulator" >
+	<bean id="acerchemProductOfEmailPopulator"
+		class="com.acerchem.facades.populators.AcerchemProductOfEmailPopulator">
 	</bean>
 	<bean parent="modifyPopulatorList">
-		<property name="list" ref="productConverter"/>
-		<property name="add" ref="acerchemProductOfEmailPopulator"/>
+		<property name="list" ref="productConverter" />
+		<property name="add" ref="acerchemProductOfEmailPopulator" />
 	</bean>
 
-	<alias name="customOrderPopulator" alias="orderPopulator"/>
-	<bean id="customOrderPopulator" class="com.acerchem.facades.populators.AcerchemOrderPopulator" parent="defaultOrderPopulator">
-		<property name="priceDataFactory" ref="priceDataFactory"/>
+	<alias name="customOrderPopulator" alias="orderPopulator" />
+	<bean id="customOrderPopulator" class="com.acerchem.facades.populators.AcerchemOrderPopulator"
+		parent="defaultOrderPopulator">
+		<property name="priceDataFactory" ref="priceDataFactory" />
 	</bean>
 
-	<alias name="defaultAcerchemCartPopulator" alias="cartPopulator"/>
-	<bean id="defaultAcerchemCartPopulator" class="com.acerchem.facades.populators.AcerchemCartPopulator" parent="defaultCartPopulator">
+	<alias name="defaultAcerchemCartPopulator" alias="cartPopulator" />
+	<bean id="defaultAcerchemCartPopulator" class="com.acerchem.facades.populators.AcerchemCartPopulator"
+		parent="defaultCartPopulator">
 	</bean>
 
 	<alias name="customOrderHistoryPopulator" alias="orderHistoryPopulator" />
-	<bean id="customOrderHistoryPopulator" parent="defaultOrderHistoryPopulator" class="com.acerchem.facades.populators.AcerchemOrderHistoryPopulator" >
+	<bean id="customOrderHistoryPopulator" parent="defaultOrderHistoryPopulator"
+		class="com.acerchem.facades.populators.AcerchemOrderHistoryPopulator">
 	</bean>
+
+
+	<alias name="acerchemConsignmentEntryPopulator" alias="consignmentEntryPopulator" />
+	<bean id="acerchemConsignmentEntryPopulator"
+		class="com.acerchem.facades.populators.AcerchemConsignmentEntryPopulator"
+		parent="defaultConsignmentEntryPopulator">
+	</bean>
+ 
 	
-	<alias name="acerchemConsignmentEntryPopulator" alias="consignmentEntryPopulator"/>
-	<bean id="acerchemConsignmentEntryPopulator" class="com.acerchem.facades.populators.AcerchemConsignmentEntryPopulator" parent="defaultConsignmentEntryPopulator">
+	<bean id="acerchemOrderEntryPopulator" class="com.acerchem.facades.populators.AcerchemOrderEntryPopulator" >
+	
+	</bean>
+	<bean parent="modifyPopulatorList">
+		<property name="list" ref="orderEntryConverter" />
+		<property name="add" ref="acerchemOrderEntryPopulator" />
 	</bean>
 
 </beans>
