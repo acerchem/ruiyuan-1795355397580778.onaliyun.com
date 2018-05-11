@@ -47,7 +47,7 @@ public class WaitForConfirmAction extends AbstractSimpleDecisionAction<OrderProc
 		{
 			if (order.getPaymentMode().getCode().equals("CreditPayment"))
 			{
-				setOrderStatus(order, OrderStatus.PROCESSING);
+				setOrderStatus(order, OrderStatus.UNDELIVERED);
 			}else{
 				setOrderStatus(order, OrderStatus.UNPAIED);
 			}

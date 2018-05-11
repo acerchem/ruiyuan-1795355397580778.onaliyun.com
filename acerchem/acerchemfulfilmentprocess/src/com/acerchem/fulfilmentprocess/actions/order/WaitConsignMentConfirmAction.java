@@ -38,12 +38,17 @@ public class WaitConsignMentConfirmAction extends AbstractSimpleDecisionAction<O
 		if (order == null)
 		{
 			LOG.error("Missing the order, exiting the process");
-			return Transition.NOK;
+			return Transition.NOK;	
 		}
 
 		if (order.getEmployeeConfirmDelivery() || order.getCustomerConfirmDelivery())
 		{
-			setOrderStatus(order, OrderStatus.COMPLETED);
+			if (order.getPaymentMode().getCode().equals("CreditPayment"))
+			{
+				setOrderStatus(order, OrderStatus.UNPAIED);
+			}else{
+				setOrderStatus(order, OrderStatus.COMPLETED);
+			}
 			return Transition.OK;
 		}
 		else
