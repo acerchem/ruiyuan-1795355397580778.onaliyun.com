@@ -49,8 +49,8 @@
 									<em>Order Status</em>
 								    <i>
 										${orderData.status=="CHECKED_VALID"?"UNCONFIRMED":""}
-										${orderData.status=="UNDELIVERED"||orderData.status=="DELIVERIED"?"PROCESSING":""}
-										${orderData.status!="CHECKED_VALID"&&orderData.status!="UNDELIVERY"&&orderData.status!="DELIVERIED"?orderData.status:""}
+										${orderData.status=="UNDELIVERIED"||orderData.status=="DELIVERIED"?"PROCESSING":""}
+										${orderData.status!="CHECKED_VALID"&&orderData.status!="UNDELIVERIED"&&orderData.status!="DELIVERIED"?orderData.status:""}
 									</i>
 								</span>
 								
