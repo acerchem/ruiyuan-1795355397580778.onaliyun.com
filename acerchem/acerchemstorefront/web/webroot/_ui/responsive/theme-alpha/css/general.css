@@ -761,8 +761,23 @@ textarea{
 .member-content .rigcont .btn-set{
 	font-size: 0;
 }
+.member-content .rigcont .btn-set:after{
+	content:'';
+	display: block;
+	clear: both;
+}
 .member-content .rigcont .btn-set .btn{
 	text-align: center;
+}
+.member-content .rigcont .operate{
+	margin: 24px 0;
+}
+.member-content .rigcont .btn-set.operate .btn{
+	background-color: #6fa742;
+	width: 160px;
+}
+.member-content .rigcont .btn-set.operate .btn:hover{
+	background-color: #0c7f44;
 }
 .member-content .g-right .rigcont .btn-set .btn-primary{
 	margin-left: 0
