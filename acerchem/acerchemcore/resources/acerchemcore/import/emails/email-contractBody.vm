@@ -103,7 +103,7 @@ p.western {
     </tr>
     <tr>
       <td width="60%">S/C# ${ctx.order.code}</td>
-    #set ($formattedOrderDate = $ctx.dateTool.format('MM/dd/yyyy', $ctx.order.created)) 
+    #set ($formattedOrderDate = $ctx.dateTool.format('d/M/yyyy', $ctx.order.created)) 
       <td>S/C date: ${formattedOrderDate}</td>
     </tr>
     <tr>

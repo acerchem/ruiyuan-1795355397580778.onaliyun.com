@@ -25,6 +25,7 @@ import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.commercefacades.coupon.data.CouponData;
 import de.hybris.platform.commercefacades.order.data.ConsignmentData;
 import de.hybris.platform.commercefacades.order.data.ConsignmentEntryData;
+import de.hybris.platform.commercefacades.order.data.DeliveryModeData;
 import de.hybris.platform.commercefacades.order.data.OrderData;
 import de.hybris.platform.commercefacades.order.data.OrderEntryData;
 import de.hybris.platform.commercefacades.product.data.ProductData;
@@ -450,4 +451,19 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 	public void setCustomerCompany(String customerCompany) {
 		this.customerCompany = customerCompany;
 	}
+	
+	public String getInvoiceDate(){
+		String dateStr="";
+		DeliveryModeData dmData = orderData.getDeliveryMode();
+		if(dmData !=null){
+			if (dmData.getName().equals("DDP")){//配送
+				dateStr = orderData.getWaitDeliveiedDate();
+			}else if (dmData.getName().equals("FCA")){//自提
+				dateStr = orderData.getPickUpdate();
+			}
+		}
+		
+		return dateStr;
+	}
+	
 }

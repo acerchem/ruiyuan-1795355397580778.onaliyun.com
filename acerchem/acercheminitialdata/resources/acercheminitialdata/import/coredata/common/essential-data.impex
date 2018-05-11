@@ -64,6 +64,7 @@ INSERT_UPDATE Warehouse;code[unique=true];name;vendor(code)[default=default];def
 #shaun
 ;Europe;Europe
 ;Poland;Poland
+;Italy;Italy
 
 # Disable preview for email pages
 UPDATE CMSPageType;code[unique=true];previewDisabled

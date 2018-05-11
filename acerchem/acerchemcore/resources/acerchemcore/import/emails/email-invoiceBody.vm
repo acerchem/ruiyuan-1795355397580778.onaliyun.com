@@ -96,18 +96,18 @@ p.western {
       <td>INVOICE NO.: ${ctx.order.code}</td>
       <td>&nbsp;</td>
     </tr>
-	#set ($formattedOrderDate = $ctx.order.waitDeliveiedDate)
+	#set ($formattedOrderDate = $ctx.invoiceDate)
     <tr>
       <td>DATE: $!{formattedOrderDate}</td>
       <td>&nbsp;</td>
     </tr>
     
     <tr>
-      <td>TO: ${ctx.customerCompany}</td>
+      <td>TO: $!{ctx.customerCompany}</td>
       <td>&nbsp;</td>
     </tr>
     <tr>
-      <td>Address: ${ctx.customerAddress}</td>
+      <td>Address: $!{ctx.customerAddress}</td>
       <td>&nbsp;</td>
     </tr>
     <tr>
@@ -135,7 +135,7 @@ p.western {
     </tr>
     <tr>
       <td width="60%">SHIP FROM:  $!{ctx.warehouse} </td>
-      <td align="right">SHIP TO: ${ctx.order.deliveryAddress.formattedAddress}</td>
+      <td align="right">SHIP TO: $!{ctx.order.deliveryAddress.formattedAddress}</td>
     </tr>
     <tr>
       <td>Terms: $!{ctx.paymentTerms} </td>
@@ -323,15 +323,15 @@ p.western {
     </tr>
     
     <tr>
-      <td>TO: ${ctx.customer.name} </td>
+      <td>TO: $!{ctx.customerCompany} </td>
       <td>&nbsp;</td>
     </tr>
     <tr>
-      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${ctx.customerAddress} </td>
+      <td>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$!{ctx.customerAddress} </td>
       <td>&nbsp;</td>
     </tr>
     <tr>
-      <td>Tel: $!{ctx.customer.defaultPaymentAddress.phone1}</td>
+      <td>Tel: $!{ctx.contactMobile}</td>
       <td>&nbsp;</td>
     </tr>
     <tr>

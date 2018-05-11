@@ -106,7 +106,7 @@ public class AcerChemDeliveryNoteEmailContext extends AbstractEmailContext<Order
 		CustomerModel customer = getCustomer(orderProcessModel);
 		if (customer != null) {
 			Collection<AddressModel> addrs = customer.getAddresses();
-			address = AcerChemEmailContextUtils.getCustomerContactAddress(addrs);
+			address = AcerChemEmailContextUtils.getCustomerContactAddress(addrs,"SHIPPING");
 			addressData = AcerChemEmailContextUtils.getCustomerContactAddressData(addrs,"SHIPPING");
 			
 		}

@@ -26,6 +26,7 @@ INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];$media;mime[default
 #shaun
 ;365Wx246H;/365Wx246H/acerchem_store_04;$siteResource/images/storefinder/acerchem_store_365x246_04.jpg;;;images
 ;365Wx246H;/365Wx246H/acerchem_store_05;$siteResource/images/storefinder/acerchem_store_365x246_05.jpg;;;images
+;365Wx246H;/365Wx246H/acerchem_store_06;$siteResource/images/storefinder/acerchem_store_365x246_06.jpg;;;images
 
 ;65Wx65H;/65Wx65H/acerchem_store_01;$siteResource/images/storefinder/acerchem_store_65x65_01.jpg;;;images
 ;65Wx65H;/65Wx65H/acerchem_store_02;$siteResource/images/storefinder/acerchem_store_65x65_02.jpg;;;images
@@ -33,6 +34,7 @@ INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];$media;mime[default
 #shaun
 ;65Wx65H;/65Wx65H/acerchem_store_04;$siteResource/images/storefinder/acerchem_store_65x65_04.jpg;;;images
 ;65Wx65H;/65Wx65H/acerchem_store_05;$siteResource/images/storefinder/acerchem_store_65x65_05.jpg;;;images
+;65Wx65H;/65Wx65H/acerchem_store_06;$siteResource/images/storefinder/acerchem_store_65x65_06.jpg;;;images
 
 INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion
 ;acerchem_store_01;/365Wx246H/acerchem_store_01,/65Wx65H/acerchem_store_01
@@ -40,3 +42,4 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion
 ;acerchem_store_03;/365Wx246H/acerchem_store_03,/65Wx65H/acerchem_store_03
 ;acerchem_store_04;/365Wx246H/acerchem_store_04,/65Wx65H/acerchem_store_04
 ;acerchem_store_05;/365Wx246H/acerchem_store_05,/65Wx65H/acerchem_store_05
+;acerchem_store_06;/365Wx246H/acerchem_store_05,/65Wx65H/acerchem_store_06

@@ -21,10 +21,14 @@ import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 //根据地址集合获得客户联系地址
 public class AcerChemEmailContextUtils {
 
+	//联系地址
 	public static String getCustomerContactAddress(Collection<AddressModel> collect) {
+		return getCustomerContactAddress(collect,"CONTACT");
+	}
+	public static String getCustomerContactAddress(Collection<AddressModel> collect,String AddressType) {
 		if (CollectionUtils.isNotEmpty(collect)) {
 			for (AddressModel model : collect) {
-				if (model.getContactAddress()) {
+				if (getAddressType(AddressType,model)) {
 					String street = StringUtils.defaultString(model.getStreetname(), "");
 					String streetNum = StringUtils.defaultString(model.getStreetnumber(), "");
 					String town = StringUtils.defaultString(model.getTown(), "");
@@ -52,6 +56,7 @@ public class AcerChemEmailContextUtils {
 		return "&nbsp;";
 	}
 
+	//联系地址对象
 	public static CustomerContactAddressOfEmailData getCustomerContactAddressData(Collection<AddressModel> collect) {
 		return getCustomerContactAddressData(collect,"CONTACT");
 	}

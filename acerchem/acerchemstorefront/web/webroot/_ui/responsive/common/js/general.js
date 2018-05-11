@@ -196,6 +196,7 @@ function maxon_salesul(wrap){
         loop:true,
         pagination: '.maxpagin', 
         paginationClickable :true,
+        setWrapperSize:true,
         onSwiperCreated:function(swiper){
         	$('.maxpagin span').each(function(){
 		   		var ai = $(this).index();

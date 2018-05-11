@@ -2245,12 +2245,12 @@ display: inline-table;
 	color: #333;
 }
 .maxfixed .img ,.maxfixed .maxtext{
-    display: table-cell;
+	float: left;
     vertical-align: top;
-    width: auto;
+    width: 24%;
 }
 .maxfixed .maxtext{
-	width:100%;
+	width:76%;
 	padding: 0;
 	padding-left: 12px;
 	position: relative;
@@ -2321,6 +2321,11 @@ display: inline-table;
 }
 .maxfixed ul .item{
 	margin-top:20px;
+}
+.maxfixed ul .item:after{
+	content: '';
+	display: block;
+	clear: both;
 }
 .maxfixed ul .item:hover .price{
 	color:#096735;
@@ -3059,6 +3064,8 @@ display: inline-table;
 
 
 /*补充style.css*/
+#cboxTopLeft , #cboxTopRight , #cboxTitle .headline , #cboxTopCenter {display: none;}
+#cboxMiddleLeft{width: auto;}
 #cboxWrapper{width: 100%;}
 #cboxLoadedContent{padding:0; margin:0;}
 #cboxContent{background-color:transparent}

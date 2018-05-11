@@ -1,6 +1,8 @@
 package com.acerchem.facades.populators;
 
-import org.apache.commons.lang.StringUtils;
+
+
+import org.apache.commons.lang3.StringUtils;
 
 import de.hybris.platform.commercefacades.order.converters.populator.ConsignmentEntryPopulator;
 import de.hybris.platform.commercefacades.order.data.ConsignmentEntryData;

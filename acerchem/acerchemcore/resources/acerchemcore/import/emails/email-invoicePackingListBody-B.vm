@@ -91,7 +91,7 @@ p.western {
       
       <td>&nbsp;</td>
     </tr>
-	#set ($formattedOrderDate = $ctx.order.waitDeliveiedDate)
+	#set ($formattedOrderDate = $ctx.invoiceDate)
     <tr>
       <td colspan="2">DATE: $!{formattedOrderDate}</td>
       
@@ -134,7 +134,7 @@ p.western {
     </tr>
     <tr>
       <td colspan="2">SHIP FROM: $!{ctx.warehouse}</td>
-      <td align="center">SHIP TO: ${ctx.order.deliveryAddress.formattedAddress}</td>
+      <td align="center">SHIP TO: $!{ctx.order.deliveryAddress.formattedAddress}</td>
     </tr>
      <tr>
       <td colspan="2">Pay Terms: $!{ctx.paymentTerms}</td>
@@ -368,7 +368,7 @@ p.western {
     </tr>
     <tr>
       <td width="5">TO: </td>
-      <td>${ctx.customer.name}</td>
+      <td>$!{ctx.customerCompany}</td>
       <td>&nbsp;</td>
     </tr>
     <tr>
