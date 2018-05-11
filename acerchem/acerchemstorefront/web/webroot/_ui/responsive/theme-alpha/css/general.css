@@ -3052,6 +3052,7 @@ display: inline-table;
 
 
 /*补充style.css*/
-#cboxWrapper{width: 100%;}
+#cboxTitle .headline, #cboxMiddleLeft , #cboxTopLeft , #cboxTopCenter ,  #cboxTopRight{display: none;}
+#cboxWrapper{width: 100%; background-color: transparent; position: fixed;}
 #cboxLoadedContent{padding:0; margin:0;}
 #cboxContent{background-color:transparent}
