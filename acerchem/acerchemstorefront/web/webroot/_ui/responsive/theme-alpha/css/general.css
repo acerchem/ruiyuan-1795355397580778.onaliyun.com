@@ -774,11 +774,18 @@ textarea{
 }
 .member-content .rigcont .btn-set.operate .btn{
 	background-color: #6fa742;
+	border-color: #6fa742;
 	width: 160px;
 }
 .member-content .rigcont .btn-set.operate .btn:hover{
 	background-color: #0c7f44;
+
 }
+.member-content .rigcont .btn-set.operate .btn-line{
+	background-color: transparent;
+	border-color:#096735;
+}
+
 .member-content .g-right .rigcont .btn-set .btn-primary{
 	margin-left: 0
 }
@@ -3052,7 +3059,6 @@ display: inline-table;
 
 
 /*补充style.css*/
-#cboxTitle .headline, #cboxMiddleLeft , #cboxTopLeft , #cboxTopCenter ,  #cboxTopRight{display: none;}
-#cboxWrapper{width: 100%; background-color: transparent; position: fixed;}
+#cboxWrapper{width: 100%;}
 #cboxLoadedContent{padding:0; margin:0;}
 #cboxContent{background-color:transparent}
