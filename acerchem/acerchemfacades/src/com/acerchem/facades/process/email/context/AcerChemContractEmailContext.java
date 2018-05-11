@@ -161,7 +161,14 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 
 				// pie.setPackageWeight(priceData);
 				if (StringUtils.isNotBlank(product.getPackageWeight())) {
-					pie.setPackageWeight(product.getPackageWeight() + "/" + product.getPackageType());
+					//计算包裹重量,圆整为整数
+					double entryPackageWeight=0;
+					if (AcerChemEmailContextUtils.isNumber(product.getPackageWeight())){
+						double perPackageWeight = Double.valueOf(product.getPackageWeight());
+						entryPackageWeight = perPackageWeight * longQuantity;
+					}
+					
+					pie.setPackageWeight(Math.round(entryPackageWeight) + "/" + product.getPackageType());
 				} else {
 					pie.setPackageWeight("");
 				}
