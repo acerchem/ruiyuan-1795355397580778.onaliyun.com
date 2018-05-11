@@ -21,16 +21,16 @@
                 <c:forEach items="${promotionItem}" var="pro">
                 	<c:url value="${pro.url}" var="productUrl"/>
                 	<div class="item">	    		
-			    		<div class="img">
+			    		<div class="img" style="height:120px;">
 			    			<a href="${productUrl}">
 			    				<img src="${pro.images.get(0).url}" alt="">
 			    		  	</a>
 			    		</div>
 			    		<div class="maxtext">
-				    		<p style="height:auto;line-height: 20px;">
+				    		<p style="height:38px;line-height:20px;">
 				    			${fn:escapeXml(pro.name)} (${pro.netWeight}kg ${pro.packageType})
 				    		</p>
-				    		<span class="price">${pro.price.formattedValue}</span>
+				    		<span class="price" style="padding-top: 0px; ">${pro.price.formattedValue}</span>
 				    		<span class="old-price">${pro.promotionPrice.formattedValue}</span>
 				    	</div>
 			    	</div>
