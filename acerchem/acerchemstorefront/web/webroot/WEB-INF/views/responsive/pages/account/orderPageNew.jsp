@@ -47,12 +47,10 @@
 		
 								<span>
 									<em>Order Status</em>
-									<i>
-										<%-- ${orderData.status=="CHECKED_VALID"?"UNCONFIRMED":""}
+								    <i>
+										${orderData.status=="CHECKED_VALID"?"UNCONFIRMED":""}
 										${orderData.status=="UNDELIVERY"||orderData.status=="DELIVERIED"?"PROCESSING":""}
-										${orderData.status!="CHECKED_VALID"&&orderData.status!="UNDELIVERY"&&orderData.status!="DELIVERIED"?orderData.status:""} --%>
-										
-										${orderData.status=="UNDELIVERY"||orderData.status=="DELIVERIED"?"PROCESSING":${orderData.status=="CHECKED_VALID"?"UNCONFIRMED":orderData.status}}
+										${orderData.status!="CHECKED_VALID"&&orderData.status!="UNDELIVERY"&&orderData.status!="DELIVERIED"?orderData.status:""}
 									</i>
 								</span>
 								
