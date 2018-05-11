@@ -131,6 +131,7 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 		List<OrderEntryData> orderEntries = orderData.getEntries();
 
 		long quantity = 0;
+		long sumTotalWeight=0;
 		if (CollectionUtils.isNotEmpty(orderEntries)) {
 			for (OrderEntryData orderEntry : orderEntries) {
 
@@ -176,10 +177,11 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 				pie.setTotal(false);
 				
 				//增加单位总重量
-				pie.setTotalWeight(String.valueOf(orderEntry.getTotalWeight()));
+				long pWeight =orderEntry.getTotalWeight();
+				pie.setTotalWeight(String.valueOf(pWeight));
 
 				quantity += orderEntry.getQuantity();
-
+				sumTotalWeight += pWeight;
 				list.add(pie);
 
 				// warehouse
@@ -203,8 +205,8 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 
 		String totalPriceStr = "0.00";
 		ProductTotalDataOfEmail totalData = new ProductTotalDataOfEmail();
-		totalData.setQuantity(String.valueOf(quantity));
-
+		//totalData.setQuantity(String.valueOf(quantity));
+		totalData.setQuantity(String.valueOf(sumTotalWeight));
 		PriceData totalPrice = orderData.getTotalPrice();
 		if (totalPrice != null) {
 			totalData.setAmountTotal(totalPrice.getFormattedValue());
