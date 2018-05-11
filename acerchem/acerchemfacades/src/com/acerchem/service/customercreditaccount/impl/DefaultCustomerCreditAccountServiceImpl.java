@@ -5,6 +5,7 @@ import com.acerchem.core.model.CreditTransactionModel;
 import com.acerchem.core.model.CustomerCreditAccountModel;
 import com.acerchem.service.customercreditaccount.DefaultCustomerCreditAccountService;
 
+import de.hybris.platform.core.enums.OrderStatus;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.model.ModelService;
@@ -149,22 +150,33 @@ public class DefaultCustomerCreditAccountServiceImpl implements DefaultCustomerC
 	                BigDecimal creaditRemainedAmount = customerCreditAccount.getCreaditRemainedAmount();
 	                customerCreditAccount.setCreaditRemainedAmount(creaditRemainedAmount.add(creditTransaction.getCreaditUsedAmount()));
 	                
-	                //开始更新流水
-                    if (StringUtils.isNotBlank(creditTransaction.getOrderCode()) && creditTransaction.getIsPayback()==false) {
-                        LOG.info("creditTransaction.getOrderCode()=" + creditTransaction.getOrderCode());
-                        creditTransaction.setPaybackAmount(creditTransaction.getCreaditUsedAmount());
-                        creditTransaction.setPaybackTime(new Date());
-                        creditTransaction.setIsPayback(TRUE);
-                        creditTransaction.setCreditAccount(customerCreditAccount);
+	                //更新订单状态为completed
+	                final String SQL = "SELECT PK FROM {"+OrderModel._TYPECODE+"} WHERE {"+OrderModel.CODE+"} =?orderCode ";
+	        		final Map<String, Object> params = new HashMap<String, Object>();
+	        		final StringBuilder builder = new StringBuilder(SQL);
+	        		params.put("orderCode", creditTransaction.getOrderCode());
+	        		final SearchResult<OrderModel> result = flexibleSearchService.search(builder.toString(),params);
+	        		if(result.getResult().size()>0)
+	        		{
+	        			//开始更新流水
+	                    if (StringUtils.isNotBlank(creditTransaction.getOrderCode()) && creditTransaction.getIsPayback()==false) {
+	                        LOG.info("creditTransaction.getOrderCode()=" + creditTransaction.getOrderCode());
+	                        creditTransaction.setPaybackAmount(creditTransaction.getCreaditUsedAmount());
+	                        creditTransaction.setPaybackTime(new Date());
+	                        creditTransaction.setIsPayback(TRUE);
+	                        creditTransaction.setCreditAccount(customerCreditAccount);
+	                        
+	                        OrderModel order=result.getResult().get(0);
+		        			order.setStatus(OrderStatus.COMPLETED);
+		        			
+	                        this.modelService.saveAll(creditTransaction,customerCreditAccount,order);
+	                        
 
-                        this.modelService.save(creditTransaction);
-                        this.modelService.refresh(creditTransaction);
-                        this.modelService.save(customerCreditAccount);
-                        this.modelService.refresh(customerCreditAccount);
-
-                        return customerCreditAccount;
-                    }
-	                    
+	                        return customerCreditAccount;
+	                    }
+	        		}else{
+	        			LOG.info("No corresponding order found! order code = "+creditTransaction.getOrderCode());
+	        		}
 	            } else {
 	            	LOG.info("updateCustomerCreditAccountRepayment CreaditUsedAmount = "+creditTransaction.getCreaditUsedAmount());
 	            }
