@@ -2704,7 +2704,7 @@ display: inline-table;
 	margin-top:16px;
 }
 .prod-cont .prodbase .delintro{
-	padding-left: 10px;
+	padding-left: 80px;
 	position: absolute;
 	bottom:0;
 	left: 145px;
@@ -2718,6 +2718,25 @@ display: inline-table;
 	font-size: 0;
 	line-height: 0;
 	background: url(intro.png) no-repeat center top;
+	vertical-align: middle;
+}
+
+
+.prod-cont .prodbase .delint{
+	padding-left: 5px;
+	position: absolute;
+	bottom:0;
+	left: 120px;
+	line-height: 30px;
+}
+
+.prod-cont .prodbase .delint:before , .m-note .title:before{
+	content:'';
+	padding:12px;
+	margin-right: 4px;
+	font-size: 0;
+	line-height: 0;
+	background: url() no-repeat center top;
 	vertical-align: middle;
 }
 

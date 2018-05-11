@@ -201,7 +201,7 @@
 							<%-- <c:forEach var="${countrys}" var="data1" begin="0" end="1"> --%>
 						<c:forEach items="${countrys}" var="data"  varStatus="id"  >
 						<c:if test="${id.index==0}">
-							    <i class="delintro"><em>Delivery within &nbsp ${data.avaReleaseDay} &nbsp days</em></i>
+							<i class="delint"><em>${product.packageType}</em></i> <i class="delintro"><em>Delivery within &nbsp ${data.avaReleaseDay} &nbsp days</em></i>
 						</c:if>	
                         </c:forEach>
                         <input type="hidden" value="" name="avaReleaseDay"  id="avaReleaseDay">
