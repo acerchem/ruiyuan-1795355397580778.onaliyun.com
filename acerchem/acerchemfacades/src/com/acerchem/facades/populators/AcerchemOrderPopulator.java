@@ -44,7 +44,7 @@ public class AcerchemOrderPopulator extends OrderPopulator {
                     BigDecimal.valueOf(source.getOperateCost().doubleValue()), source.getCurrency().getIsocode()));
         }
         // modified by Jayson.wang
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("d/M/yyyy");
         if(source.getPickUpDate()!=null){
             target.setPickUpdate(sdf.format(source.getPickUpDate()));
         }

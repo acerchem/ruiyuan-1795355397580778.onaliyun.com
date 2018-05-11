@@ -53,11 +53,17 @@ public class AcerChemEmailContextUtils {
 	}
 
 	public static CustomerContactAddressOfEmailData getCustomerContactAddressData(Collection<AddressModel> collect) {
+		return getCustomerContactAddressData(collect,"CONTACT");
+	}
+	
+	
+	//SHIPPING/UNLOADING/BILLING/CONTACT
+	public static CustomerContactAddressOfEmailData getCustomerContactAddressData(Collection<AddressModel> collect,String AddressType) {
 
 		CustomerContactAddressOfEmailData data = new CustomerContactAddressOfEmailData();
 		if (CollectionUtils.isNotEmpty(collect)) {
 			for (AddressModel model : collect) {
-				if (model.getContactAddress()) {
+				if (getAddressType(AddressType,model)) {
 					String street = StringUtils.defaultString(model.getStreetname(), "");
 					String streetNum = StringUtils.defaultString(model.getStreetnumber(), "");
 					String town = StringUtils.defaultString(model.getTown(), "");
@@ -89,7 +95,22 @@ public class AcerChemEmailContextUtils {
 		}
 		return data;
 	}
-
+	// type = SHIPPING/UNLOADING/BILLING/CONTACT
+	private static boolean getAddressType(String type,AddressModel model){
+		if (model !=null){
+			if (type.equals("SHIPPING")){
+				return model.getShippingAddress();
+			}else if (type.equals("UNLOADING")){
+				return model.getUnloadingAddress();
+			}else if (type.equals("BILLING")){
+				return model.getBillingAddress();
+			}else if (type.equals("CONTACT")){
+				return model.getContactAddress();
+			}
+		}
+		return false;
+	}
+	
 	// 获得信用期
 	public static String getPaymementTerms(final OrderProcessModel orderProcessModel, final String paymentMode) {
 
