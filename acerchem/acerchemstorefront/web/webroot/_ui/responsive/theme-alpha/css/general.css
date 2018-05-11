@@ -1,3 +1,4 @@
+
 body{
 	font-size: 14px;
 	line-height: 1.5em;
@@ -945,7 +946,7 @@ textarea{
 /*span 1/4*/
 .g-table .item span{
 	padding-top: 20px;
-	/*width:25%;*/
+	width:25%;
 	line-height: 2em;
 	text-align: left;
 }
@@ -2832,9 +2833,16 @@ display: inline-table;
 .prod-cont .g-desclist{
 	padding: 40px 0 40px 20px;
 }
+.prod-cont .g-deswrap{
+	border:1px solid #ddd;
+}
+.prod-cont .g-deswrap:after{
+	content:'';
+	clear: both;
+	display: block;
+}
 .prod-cont .g-descblock{
 	padding:40px 0;
-	border-top:1px solid #ddd;
 	width: 48%;
 	float: left;
 }

@@ -169,9 +169,16 @@ button{
 .maxtop:after{content:''; display: block;  clear: both;}
 .maxtop .maxLogo , .maxtop .maxmenu , .maxtop_rig{display: table-cell; vertical-align: middle; padding:10px 0;}
 .maxtop .maxLogo{width:15%;}
+<<<<<<< Updated upstream
 .maxtop .maxLogo a{display:block; height: 60px; }
 .maxtop .maxLogo img{width: auto; height: 100%;}
 .maxtop .maxmenu{width: 70%; }
+=======
+.maxtop .maxLogo a img{height: 60px; width: auto;}
+.maxtop .maxLogo a{display:block; }
+.maxtop .maxmenu{width: 65%; }
+.maxtop .maxmenu ul:after{content:''; display: block; clear:both;}
+>>>>>>> Stashed changes
 .maxtop .maxmenu li{position: relative; z-index: 999; float:left;text-align:center;margin-left: 20px; }
 .maxtop .maxmenu li a{ font-size: 1rem; line-height: 60px; display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
 .maxtop .maxmenu li.hover a,.maxtop .maxmenu li:hover a{color:#096735;}
