@@ -241,12 +241,12 @@
                         </div>
                         <div>
                             <span style="padding-left:20px;width:100%;${orderData.deliveryMode.code=='DELIVERY_GROSS'?'':'display: none;'}">
-                            	Pickup Date:
+                            	Delivery Date:
                             	<fmt:formatDate value="${orderData.pickupDateOfExtended==null?orderData.pickUpDate:orderData.pickupDateOfExtended}" pattern="yyyy-MM-dd"/> <br/>
 								Estimated Delivery Date:${orderData.waitDeliveiedDate}
                             </span>
                             <span style="padding-left:20px;width:100%;${orderData.deliveryMode.code=='DELIVERY_MENTION'?'':'display: none;'}">
-                            	Delivery Date:
+                            	Pickup Date:
                             	<fmt:formatDate value="${orderData.pickupDateOfExtended==null?orderData.pickUpDate:orderData.pickupDateOfExtended}" pattern="yyyy-MM-dd"/> <br/>
                             </span>
                             
