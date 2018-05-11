@@ -147,21 +147,21 @@ p.western {
 <center>
 #if ($ctx.order.entries.size() > 0)
   <table class="font1" width="700" border="1" cellpadding="1" cellspacing="0"  style="text-align: center; border-collapse: collapse" bordercolor="#000000">
-    <tr class="table1">
-      <td width="67" height="7">MARKS& <br>NUMBERS</td>
-      <td width="236">PRODUCTS </td>
-      <td width="82">Quantity<br> (KG)</td>
-      <td width="51"> UNIT PRICE<br>(USD)</td>
-      <td width="58"> AMOUNT<br>(USD)</td>
+     <tr>
+      <td width="67" height="7">Marks Numberse</td>
+      <td width="236">Product name</td>
+      <td width="82">Total Weight<br> (Kg)</td>
+      <td width="51"> Unit Price<br>(USD)</td>
+      <td width="58"> Amount<br>(USD)</td>
 
     </tr>
-	#foreach( $entry in ${ctx.order.entries} )
+	 #foreach( $entry in ${ctx.order.entries} )
 		<tr>
 		  <td width="67" height="7"> N/M </td>
 		  <td width="206" > ${entry.product.name} </td>
-		  <td width="82" > ${entry.quantity}KG  </td>
-		  <td width="51" > USD ${entry.basePrice.formattedValue} </td>
-		  <td width="58" > USD ${entry.totalPrice.formattedValue} </td>
+		  <td width="82" > ${entry.totalWeight} </td>
+		  <td width="51" > ${entry.baseRealPrice.formattedValue} </td>
+		  <td width="58" > ${entry.totalRealPrice.formattedValue} </td>
 		</tr>
 	#end
 	
