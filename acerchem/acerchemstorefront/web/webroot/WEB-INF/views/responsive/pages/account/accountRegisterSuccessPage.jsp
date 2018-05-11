@@ -12,7 +12,7 @@
 			<p>Please wait patiently for the audit, after which you can log on to the platform to purchase</p>
 			<ul class="tipslist">
 				<li>If you have any questions, please contact the customer service <b>service@acerchem.com</b>, we will reply within 24 hours. </li>
-				<li>call <b>010-64127215</b></li>
+				<li>call <b>0592-8263908</b></li>
 			</ul>
 			<div class="btn-set">		
 				<a class="btn" href="${homeUrl}">back home</a>

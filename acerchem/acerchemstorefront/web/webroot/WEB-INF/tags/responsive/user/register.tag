@@ -51,7 +51,7 @@
 		<label>
 			<span class='label-title'>Password<span style="color:red;font-size: 150%;"> *</span></span>	
 			<input id="pwd" type="password" name='pwd'  alt='Please Enter Password' value="${customRegisterForm.pwd}" autocomplete="off" class="required"/>
-			<div style="color:#F00"><form:errors path="pwd"/></div>
+			<div id="pwdError" style="color:#F00"><form:errors path="pwd"/></div>
 		</label>
 		
 		<label>

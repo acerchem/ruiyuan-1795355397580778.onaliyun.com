@@ -31,7 +31,7 @@ public class AcerchemCreditTransactionPopulator implements Populator<CreditTrans
 			target.setPaybackTime(source.getPaybackTime());
 		}
 		target.setShouldPaybackTime(source.getShouldPaybackTime());
-		target.setCransactionId(source.getCransactionId());
+		target.setRemark(source.getRemark());
 		
 		target.setOrderCode(source.getOrderCode());
 		target.setProductNumber(source.getProductNumber());

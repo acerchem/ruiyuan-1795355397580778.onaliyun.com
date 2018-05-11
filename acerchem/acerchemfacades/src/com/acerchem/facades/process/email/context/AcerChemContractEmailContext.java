@@ -167,6 +167,9 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 				}
 
 				pie.setTotal(false);
+				
+				//增加单位总重量
+				pie.setTotalWeight(String.valueOf(orderEntry.getTotalWeight()));
 
 				quantity += orderEntry.getQuantity();
 

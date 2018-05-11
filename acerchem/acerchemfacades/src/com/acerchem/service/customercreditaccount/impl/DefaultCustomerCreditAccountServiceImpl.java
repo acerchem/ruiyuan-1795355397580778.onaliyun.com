@@ -23,7 +23,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 @Service("defaultCustomerCreditAccountService")
 @Transactional
@@ -90,14 +89,12 @@ public class DefaultCustomerCreditAccountServiceImpl implements DefaultCustomerC
 	                            creditTransaction.setCreationtime(new Date());
 	                            creditTransaction.setIsPayback(FALSE);
 	
-	                            creditTransaction.setCransactionId(UUID.randomUUID().toString());
-	                            
 	                            Calendar c = Calendar.getInstance(); 
 	                    		if(orderModel.getPickupDateOfExtended()!=null)
 	                            {
 	                            	c.setTime(orderModel.getPickupDateOfExtended()); 
 	                            }
-	                            else if(orderModel.getDeliveryMode().getCode()=="DELIVERY_MENTION")
+	                            else if(orderModel.getDeliveryMode().getCode().equals("DELIVERY_MENTION"))
 	                            {//自提 DELIVERY_MENTION
 	                            	c.setTime(orderModel.getPickUpDate()); 
 	                            }

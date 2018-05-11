@@ -778,7 +778,8 @@
 						<modifiers read="true" write="true" search="true" />
 						<persistence type="property" />
 					</attribute>
-					<attribute qualifier="cransactionId" type="java.lang.String">
+					<attribute qualifier="remark" type="java.lang.String">
+						<description>备注</description>
 						<modifiers read="true" write="true" search="true" />
 						<persistence type="property" />
 					</attribute>

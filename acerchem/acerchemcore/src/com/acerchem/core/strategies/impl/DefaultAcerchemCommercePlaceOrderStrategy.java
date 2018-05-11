@@ -135,15 +135,7 @@ public class DefaultAcerchemCommercePlaceOrderStrategy extends DefaultCommercePl
 				double subTotal = 0;
 				double total=0;
 				
-				 if (orderModel.getStorageCost()!=null){
-		            	
-		            	total +=orderModel.getStorageCost();
-		               
-		            }
-		            if (orderModel.getOperateCost()!=null){
-		            	total+=orderModel.getOperateCost();
-		               
-		            }
+				
 				
 				for (AbstractOrderEntryModel aoe: orderModel.getEntries()){
 					

@@ -286,50 +286,52 @@
 					    	${product.summary}
 							${product.description}
 						</ul>
-						<div class="g-descblock">
-							<div class="title">Additional Information</div>
-							<ul class="g-table">	
-								<li>
-									<span>Other Names</span>
-									<span>${product.otherName}</span>
-								</li>
-								<li>
-									<span>Quality Standard</span>
-									<span>${product.specification}</span>
-								</li>	
-								<li>
-									<span>CAS</span>
-									<span>${product.CAS}</span>
-								</li>
-								<li>
-									<span>Chemical Formula</span>
-									<span>${product.chemicalInfo}</span>
-								</li>
-							</ul>
-						</div>
-						<div class="g-descblock">
-						<div class="title">&nbsp &nbsp</div>
-							
-							<ul class="g-table">								
+						<div class="g-deswrap">	
+							<div class="g-descblock">
+								<div class="title">Additional Information</div>
+								<ul class="g-table">	
+									<li>
+										<span>Other Names</span>
+										<span>${product.otherName}</span>
+									</li>
+									<li>
+										<span>Quality Standard</span>
+										<span>${product.specification}</span>
+									</li>	
+									<li>
+										<span>CAS</span>
+										<span>${product.CAS}</span>
+									</li>
+									<li>
+										<span>Chemical Formula</span>
+										<span>${product.chemicalInfo}</span>
+									</li>
+								</ul>
+							</div>
+							<div class="g-descblock">
+							<div class="title">&nbsp &nbsp</div>
 								
-								
-								<li>
-									<span>Molecular Weight</span>
-									<span>${product.formulaWeight}</span>
-								</li>	
-								<li>
-									<span>Manufacturer</span>
-									<c:if test="${not empty product.vendor}">
-									<span>${product.vendor.name}</span>
-									</c:if>
-								</li>	
-								
-								<li>
-									<span>Package Type</span>
-									<span> ${product.netWeight}${product.unitName}/${product.packageType}</span>
-								</li>	
-											
-							</ul>
+								<ul class="g-table">								
+									
+									
+									<li>
+										<span>Molecular Weight</span>
+										<span>${product.formulaWeight}</span>
+									</li>	
+									<li>
+										<span>Manufacturer</span>
+										<c:if test="${not empty product.vendor}">
+										<span>${product.vendor.name}</span>
+										</c:if>
+									</li>	
+									
+									<li>
+										<span>Package Type</span>
+										<span> ${product.netWeight}${product.unitName}/${product.packageType}</span>
+									</li>	
+												
+								</ul>
+							</div>
 						</div>
 					</div>
 					<!-- descr end -->

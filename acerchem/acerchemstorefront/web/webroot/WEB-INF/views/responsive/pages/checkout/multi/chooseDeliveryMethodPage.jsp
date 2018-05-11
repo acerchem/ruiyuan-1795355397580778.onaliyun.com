@@ -48,9 +48,9 @@
 										<input type="radio" name="shipmethod"   value="${data.code}"/>
 									</div>
 									<div class="into">
-										<p><format:fromPrice priceData="${data.deliveryCost}"/></p>
+										<%-- <p><format:fromPrice priceData="${data.deliveryCost}"/></p> --%>
 										<em>${data.name}</em>
-										<span>${data.description}</span>
+										<%-- <span>${data.description}</span> --%>
 									</div>	
 								</label>
 							</li>

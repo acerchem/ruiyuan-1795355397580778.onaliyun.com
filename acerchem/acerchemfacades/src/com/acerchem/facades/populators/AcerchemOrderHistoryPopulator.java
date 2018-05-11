@@ -24,7 +24,7 @@ public class AcerchemOrderHistoryPopulator extends OrderHistoryPopulator impleme
 		target.setPickUpDate(source.getPickUpDate());
 		
 		 // added by Jayson.wang
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat sdf = new SimpleDateFormat("d/M/yyyy");
         if(source.getDeliveyDate()!=null){
         	target.setDeliveyDate(sdf.format(source.getDeliveyDate()));
         }

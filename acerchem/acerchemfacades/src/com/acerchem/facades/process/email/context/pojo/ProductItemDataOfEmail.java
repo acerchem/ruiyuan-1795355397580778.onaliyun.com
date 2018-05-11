@@ -15,6 +15,8 @@ public class ProductItemDataOfEmail {
 	private String packageWeight;//单种产品的包裹重量
 	private String unitName;
 	
+	private String totalWeight; //单位产品总重量
+	
 	public String getProductCode() {
 		return productCode;
 	}
@@ -116,6 +118,12 @@ public class ProductItemDataOfEmail {
 	 */
 	public void setUnitName(String unitName) {
 		this.unitName = unitName;
+	}
+	public String getTotalWeight() {
+		return totalWeight;
+	}
+	public void setTotalWeight(String totalWeight) {
+		this.totalWeight = totalWeight;
 	}
 	
 	

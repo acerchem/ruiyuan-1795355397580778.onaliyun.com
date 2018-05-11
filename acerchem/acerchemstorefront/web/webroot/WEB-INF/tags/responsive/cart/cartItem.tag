@@ -54,7 +54,7 @@
 						</span>								
 					</div>
 				</td>
-				<td class="tot">
+				<td>
 				<%-- <c:choose>
 				     <c:when test="${entry.promotionBasePrice ne entry.basePrice}">
 						<em>
@@ -62,11 +62,11 @@
 						</em>
 						<i><format:price priceData="${entry.basePrice}" displayFreeForZero="true"/></i>
 					</c:when>
-					  <c:otherwise> --%>
-					      <em>
+					  <c:otherwise>
+					      <em> --%>
 						<format:price priceData="${entry.basePrice}" displayFreeForZero="true"/>
-						</em>
-					<%--   </c:otherwise>
+						<%-- </em>
+					  </c:otherwise>
 				</c:choose>	 --%>
 				</td>
 				
@@ -89,7 +89,7 @@
 						<input type="text" name="pdnum" class="set" value="${entry.quantity}">
 						<span class="set add">+</span>
 						 -->
-						 ${TotalWeight}
+						 ${TotalWeight}${entry.product.unitName}
 					</div>
 				</td>
 				

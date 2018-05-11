@@ -5,7 +5,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.Assert;
 
 import de.hybris.platform.commercefacades.order.data.OrderData;
-
 import de.hybris.platform.converters.Populator;
 import de.hybris.platform.core.model.c2l.CurrencyModel;
 import de.hybris.platform.core.model.order.OrderModel;
@@ -27,7 +26,7 @@ public class AcerchemOrderOfEmailContextPopuulator implements Populator<OrderMod
 		CurrencyModel curModel = source.getCurrency();
 		if(curModel != null){
 			if(StringUtils.isNotBlank(curModel.getName())){
-				target.setCurrency(curModel.getName());
+				target.setCurrency(curModel.getIsocode());
 			}
 		}
 		

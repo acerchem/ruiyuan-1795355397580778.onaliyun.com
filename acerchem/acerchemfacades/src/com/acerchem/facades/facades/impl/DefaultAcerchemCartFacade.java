@@ -96,13 +96,20 @@ public class DefaultAcerchemCartFacade extends DefaultCartFacade implements Acer
     @Override
     public double getAddToCartPrice(OrderEntryData orderEntryData, Long qty) {
 
-        BigDecimal cartEntryTotalPrice = BigDecimal.ZERO;
+        String netWeight = orderEntryData.getProduct().getNetWeight();
+        		
         PriceData priceData = orderEntryData.getBasePrice();
+        double totalPrice=0;
         if (priceData!=null){
             BigDecimal basePrice = priceData.getValue();
-            cartEntryTotalPrice = basePrice.multiply(BigDecimal.valueOf(qty));
+            
+            long totalWeight = qty* Long.valueOf(netWeight);
+        	//Double totalPrice = Long.valueOf(basePrice)*totalWeight;
+        	
+        	 totalPrice =basePrice.doubleValue()*totalWeight;
+            //cartEntryTotalPrice = basePrice.multiply(BigDecimal.valueOf(qty));
         }
-        return cartEntryTotalPrice.doubleValue();
+        return totalPrice;
     }
 
     private boolean acerchemValidatePointOfService(String storeId, CartModel cartModel){

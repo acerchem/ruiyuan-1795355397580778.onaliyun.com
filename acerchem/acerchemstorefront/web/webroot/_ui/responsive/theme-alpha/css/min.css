@@ -172,6 +172,7 @@ button{
 .maxtop:after{content:''; display: block;  clear: both;}
 .maxtop .maxLogo , .maxtop .maxmenu , .maxtop_rig{display: table-cell; vertical-align: middle; padding:10px 0;}
 .maxtop .maxLogo{width:15%;}
+.maxtop .maxLogo a img{height: 60px; width: auto;}
 .maxtop .maxLogo a{display:block; }
 .maxtop .maxmenu{width: 65%; }
 .maxtop .maxmenu ul:after{content:''; display: block; clear:both;}
