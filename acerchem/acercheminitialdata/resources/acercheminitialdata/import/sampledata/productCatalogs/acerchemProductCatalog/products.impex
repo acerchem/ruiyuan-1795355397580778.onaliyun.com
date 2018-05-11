@@ -56,9 +56,9 @@ INSERT_UPDATE Warehouse;code[unique=true];name[lang=en];name[lang=de];vendor(cod
 #;warehouse_e;Warehouse East;Warehouse East;;true
 #;warehouse_w;Warehouse West;Warehouse West;;true
 #;warehouse_n;Warehouse North;Warehouse North;;true
-;USA;USA;;true
+;Spain;Spain;;true
 ;United Kingdom;United Kingdom;;true
-;Holland;Holland;;true
+;Germany;Germany;;true
 #shaun
 ;Europe;Europe;;true
 ;Poland;Poland;;true
@@ -66,75 +66,68 @@ INSERT_UPDATE Warehouse;code[unique=true];name[lang=en];name[lang=de];vendor(cod
 INSERT_UPDATE Unit;code[unique=true];name[lang=en];unitType
 ;kg;kg;kg
 
-INSERT_UPDATE Product;formulaWeight;chemicalInfo;packageWeight;packageType;netWeight;grossWeight;specification;CAS;unitCalculateRato;code[unique=true];$supercategories;manufacturerName;manufacturerAID;unit(code);otherName;ean;variantType(code);$catalogVersion;$approved
+INSERT_UPDATE Product;promotionItem;formulaWeight;chemicalInfo;packageWeight;packageType;netWeight;grossWeight;specification;CAS;unitCalculateRato;code[unique=true];$supercategories;manufacturerName;manufacturerAID;unit(code);otherName;ean;variantType(code);$catalogVersion;$approved
 #;20;Drum;12;8;Enterprise Standard;2420-56-6;3;AC05080;576;HP;Coenzyme Q10 98% HPLC;kg;
 #;25;Bag;15;18;USP;50-81-7;5;AC03131;576;HP;Tribulus 90% UV THC FREE;kg;
 #;25;Carton;14;16;EP/USP;2420-56-6;2;AC01361;576;HP;Vitamin C Powder;kg;
 #;10;Drum;6;8;Enterprise Standard;5949-29-10;7;AC01710;576;HP;Alpha Lipoic Acid;kg;
 #shaun
-;863.343;C59H90O4;4;Carton;10;14;EP/USP;303-98-0;20;AC05080a;571;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
-;863.343;C59H90O4;4;Carton;10;14;EP/USP;303-98-0;20;AC05080b;571;Kingdomway;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
-;482.436;C25H22O10;3;Drum;25;28;EP/USP;22888-70-6;20;AC03390a;575;Liverd;Milk Thistle 80% UV (Silybin + Isosilybin 30% HPLC);kg;SILYMARIN Silymarin P.E.;
-;458.372;C22H18O11;3;Drum;25;28;Enterprise Standard;84650-60-2;20;AC03138a;575;Skyherb;Green tea extract Polyphenol 95%, EGCG 45%;kg;Tea polyphenols;
-;458.372;C22H18O11;3;Drum;25;28;Enterprise Standard;84650-60-2;20;AC03887a;575;Skyherb;Green tea extract Polyphenol 95%, EGCG 50%;kg;Tea polyphenols;
-;468.42;C30H12O6;3;Drum;25;28;Enterprise Standard;84929-27-1 ;20;AC03142a;575;CCGB;Grapse Seed extract Procyanidine 95%;kg;Proanthocyanidins;
-;297.325;C6H12NKO8S;2;Drum;25;27;EP/USP;31284-96-5;20;AC02345a;576;Rixing;D-Glucosamine Sulphate 2KCL 40-80mesh ;kg;Glucosamine Sulfate Potassium Chloride;
-;297.325;C6H12NKO8S;2;Drum;25;27;EP/USP;31284-96-5;20;AC02354a;576;Rixing;D-Glucosamine Sulphate 2KCL DC;kg;Glucosamine Sulfate Potassium Chloride particle granule;
-;479.368;C13H21NO16S;3;Drum;25;28;Enterprise Standard;9007-28-7;20;AC05003a;576;RKD;Chondroitin Sulphate Bovine CPC 90%;kg;Chondroitin Sulfate;
-;146.144;C5H10N2O3;3;Drum;25;28;FCCVI;56-85-9;20;AC02090a;577;Meihua;L-Glutamine;kg;Glutamine;
+;true;863.343;C59H90O4;4;Carton;10;14;EP/USP;303-98-0;20;AC05080a;571;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;true;863.343;C59H90O4;4;Carton;10;14;EP/USP;303-98-0;20;AC05080b;571;Kingdomway;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;true;482.436;C25H22O10;3;Drum;25;28;EP/USP;22888-70-6;20;AC03390a;575;Liverd;Milk Thistle 80% UV (Silybin + Isosilybin 30% HPLC);kg;SILYMARIN Silymarin P.E.;
+;true;458.372;C22H18O11;3;Drum;25;28;Enterprise Standard;84650-60-2;20;AC03138a;575;Skyherb;Green tea extract Polyphenol 95%, EGCG 45%;kg;Tea polyphenols;
+;true;458.372;C22H18O11;3;Drum;25;28;Enterprise Standard;84650-60-2;20;AC03887a;575;Skyherb;Green tea extract Polyphenol 95%, EGCG 50%;kg;Tea polyphenols;
+;true;468.42;C30H12O6;3;Drum;25;28;Enterprise Standard;84929-27-1 ;20;AC03142a;575;CCGB;Grapse Seed extract Procyanidine 95%;kg;Proanthocyanidins;
+;true;297.325;C6H12NKO8S;2;Drum;25;27;EP/USP;31284-96-5;20;AC02345a;576;Rixing;D-Glucosamine Sulphate 2KCL 40-80mesh ;kg;Glucosamine Sulfate Potassium Chloride;
+;true;297.325;C6H12NKO8S;2;Drum;25;27;EP/USP;31284-96-5;20;AC02354a;576;Rixing;D-Glucosamine Sulphate 2KCL DC;kg;Glucosamine Sulfate Potassium Chloride particle granule;
+;true;479.368;C13H21NO16S;3;Drum;25;28;Enterprise Standard;9007-28-7;20;AC05003a;576;RKD;Chondroitin Sulphate Bovine CPC 90%;kg;Chondroitin Sulfate;
+;true;146.144;C5H10N2O3;3;Drum;25;28;FCCVI;56-85-9;20;AC02090a;577;Meihua;L-Glutamine;kg;Glutamine;
 
 
 # Insert Product References
 INSERT_UPDATE ProductReference;source(code,$catalogVersion)[unique=true];target(code,$catalogVersion)[unique=true];referenceType(code);active;preselected
-#;358639;AC05080;ACCESSORIES;true;false
-#;358639;AC03131;ACCESSORIES;true;false
-#;358639;AC01361;ACCESSORIES;true;false
-#;358639;AC01710;ACCESSORIES;true;false
-#shaun
-#;358639;AC05080a;ACCESSORIES;true;false
-#;358639;AC05080b;ACCESSORIES;true;false
-#;358639;AC03390a;ACCESSORIES;true;false
-#;358639;AC03138a;ACCESSORIES;true;false
-#;358639;AC03887a;ACCESSORIES;true;false
-#;358639;AC03142a;ACCESSORIES;true;false
-#;358639;AC02345a;ACCESSORIES;true;false
-#;358639;AC02354a;ACCESSORIES;true;false
-#;358639;AC05003a;ACCESSORIES;true;false
+
 
 
 
 INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];reserved;avaPreOrderReleaseDay;preOrderReleaseDay
-#;300;USA;notSpecified;10;0;0;0;AC05080;0;20;50
-#;300;USA;notSpecified;10;0;0;0;AC03131;0;20;50
-#;100;USA;notSpecified;10;0;0;0;AC01361;0;20;50
-#;200;USA;notSpecified;10;0;0;0;AC01710;0;20;50
-#shaun
-;200;USA;notSpecified;10;0;0;0;AC05080a;0;20;50
-;200;USA;notSpecified;10;0;0;0;AC05080b;0;20;50
-;200;USA;notSpecified;10;0;0;0;AC03390a;0;20;50
-;200;USA;notSpecified;10;0;0;0;AC03138a;0;20;50
-;200;USA;notSpecified;10;0;0;0;AC03887a;0;20;50
-;200;USA;notSpecified;10;0;0;0;AC03142a;0;20;50
-;200;USA;notSpecified;10;0;0;0;AC02345a;0;20;50
-;200;USA;notSpecified;10;0;0;0;AC02354a;0;20;50
-;200;USA;notSpecified;10;0;0;0;AC05003a;0;20;50
-;200;USA;notSpecified;10;0;0;0;AC02090a;0;20;50
 
-#;400;Holland;notSpecified;10;0;0;0;AC05080;0;20;50
-#;400;Holland;notSpecified;10;0;0;0;AC03131;0;20;50
-#;200;Holland;notSpecified;10;0;0;0;AC01361;0;20;50
-#;300;Holland;notSpecified;10;0;0;0;AC01710;0;20;50
 #shaun
-;300;Holland;notSpecified;10;0;0;0;AC05080a;0;20;50
-;300;Holland;notSpecified;10;0;0;0;AC05080b;0;20;50
-;300;Holland;notSpecified;10;0;0;0;AC03390a;0;20;50
-;300;Holland;notSpecified;10;0;0;0;AC03138a;0;20;50
-;300;Holland;notSpecified;10;0;0;0;AC03887a;0;20;50
-;300;Holland;notSpecified;10;0;0;0;AC03142a;0;20;50
-;300;Holland;notSpecified;10;0;0;0;AC02345a;0;20;50
-;300;Holland;notSpecified;10;0;0;0;AC02354a;0;20;50
-;300;Holland;notSpecified;10;0;0;0;AC05003a;0;20;50
-;300;Holland;notSpecified;10;0;0;0;AC02090a;0;20;50
+;200;Poland;notSpecified;10;0;0;0;AC05080a;0;20;50
+;200;Poland;notSpecified;10;0;0;0;AC05080b;0;20;50
+;200;Poland;notSpecified;10;0;0;0;AC03390a;0;20;50
+;200;Poland;notSpecified;10;0;0;0;AC03138a;0;20;50
+;200;Poland;notSpecified;10;0;0;0;AC03887a;0;20;50
+;200;Poland;notSpecified;10;0;0;0;AC03142a;0;20;50
+;200;Poland;notSpecified;10;0;0;0;AC02345a;0;20;50
+;200;Poland;notSpecified;10;0;0;0;AC02354a;0;20;50
+;200;Poland;notSpecified;10;0;0;0;AC05003a;0;20;50
+;200;Poland;notSpecified;10;0;0;0;AC02090a;0;20;50
+
+
+#shaun
+;300;United Kingdom;notSpecified;10;0;0;0;AC05080a;0;20;50
+;300;United Kingdom;notSpecified;10;0;0;0;AC05080b;0;20;50
+;300;United Kingdom;notSpecified;10;0;0;0;AC03390a;0;20;50
+;300;United Kingdom;notSpecified;10;0;0;0;AC03138a;0;20;50
+;300;United Kingdom;notSpecified;10;0;0;0;AC03887a;0;20;50
+;300;United Kingdom;notSpecified;10;0;0;0;AC03142a;0;20;50
+;300;United Kingdom;notSpecified;10;0;0;0;AC02345a;0;20;50
+;300;United Kingdom;notSpecified;10;0;0;0;AC02354a;0;20;50
+;300;United Kingdom;notSpecified;10;0;0;0;AC05003a;0;20;50
+;300;United Kingdom;notSpecified;10;0;0;0;AC02090a;0;20;50
+
+#shaun
+;300;Europe;notSpecified;10;0;0;0;AC05080a;0;20;50
+;300;Europe;notSpecified;10;0;0;0;AC05080b;0;20;50
+;300;Europe;notSpecified;10;0;0;0;AC03390a;0;20;50
+;300;Europe;notSpecified;10;0;0;0;AC03138a;0;20;50
+;300;Europe;notSpecified;10;0;0;0;AC03887a;0;20;50
+;300;Europe;notSpecified;10;0;0;0;AC03142a;0;20;50
+;300;Europe;notSpecified;10;0;0;0;AC02345a;0;20;50
+;300;Europe;notSpecified;10;0;0;0;AC02354a;0;20;50
+;300;Europe;notSpecified;10;0;0;0;AC05003a;0;20;50
+;300;Europe;notSpecified;10;0;0;0;AC02090a;0;20;50
 
  
 UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehouse(code));vendors(code)
@@ -143,16 +136,16 @@ UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehou
 #;AC01361;;AC01361:USA;
 #;AC01710;;AC01710:USA;
 #shaun
-;AC05080a;;AC05080a:USA;
-;AC05080b;;AC05080b:USA;
-;AC03390a;;AC03390a:USA;
-;AC03138a;;AC03138a:USA;
-;AC03887a;;AC03887a:USA;
-;AC03142a;;AC03142a:USA;
-;AC02345a;;AC02345a:USA;
-;AC02354a;;AC02354a:USA;
-;AC05003a;;AC05003a:USA;
-;AC02090a;;AC02090a:USA;
+;AC05080a;;AC05080a:Poland;
+;AC05080b;;AC05080b:Poland;
+;AC03390a;;AC03390a:Poland;
+;AC03138a;;AC03138a:Poland;
+;AC03887a;;AC03887a:Poland;
+;AC03142a;;AC03142a:Poland;
+;AC02345a;;AC02345a:Poland;
+;AC02354a;;AC02354a:Poland;
+;AC05003a;;AC05003a:Poland;
+;AC02090a;;AC02090a:Poland;
 
 
 

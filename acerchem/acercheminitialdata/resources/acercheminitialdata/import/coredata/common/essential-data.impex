@@ -58,9 +58,9 @@ INSERT_UPDATE Warehouse;code[unique=true];name;vendor(code)[default=default];def
 #;warehouse_e;Warehouse East;
 #;warehouse_w;Warehouse West;
 #;warehouse_n;Warehouse North;
-;USA;USA
+;Spain;Spain
 ;United Kingdom;United Kingdom
-;Holland;Holland
+;Germany;Germany
 #shaun
 ;Europe;Europe
 ;Poland;Poland
