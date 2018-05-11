@@ -481,6 +481,13 @@
     </context>
     <!-- end -->
 	
+	<context merge-by="type" parent="GenericItem" type="AbstractOrder" component="listview">
+		<list-view:list-view>
+            <list-view:column qualifier="status"/>
+            <list-view:column qualifier="deliveryMode"/>
+		</list-view:list-view>
+	</context>
+	
 	 <context merge-by="type" parent="AbstractOrder" type="Order" component="editor-area">
         <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
             <editorArea:tab name="hmc.properties" merge-mode="remove">
