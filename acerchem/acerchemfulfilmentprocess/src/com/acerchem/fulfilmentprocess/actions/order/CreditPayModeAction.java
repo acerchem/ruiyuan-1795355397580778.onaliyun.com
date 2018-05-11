@@ -68,16 +68,15 @@ public class CreditPayModeAction extends AbstractSimpleDecisionAction<OrderProce
 					
 					CustomerCreditAccountModel customerCreditAccountModel = defaultCustomerCreditAccountService.updateCustomerCreditAccountConsume(order,BigDecimal.valueOf(order.getTotalPrice()));
 					if(customerCreditAccountModel != null){
-						//支付成功后,改变orderStatus
-						setOrderStatus(order, OrderStatus.PAIED);
+						//setOrderStatus(order, OrderStatus.PAIED);
 						return Transition.OK;
 					}else{
 						return Transition.NOK;
 					}
 				} catch (Exception e) {
 					// TODO Auto-generated catch block
-					setOrderStatus(order, OrderStatus.UNPAIED);
-					LOG.error("更新信用账户失败!");
+					//setOrderStatus(order, OrderStatus.UNPAIED);
+					LOG.error("update customerCreditAccountModel failed!");
 					return Transition.NOK;
 				}
 			}

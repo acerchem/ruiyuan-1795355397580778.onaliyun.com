@@ -34,7 +34,7 @@
 					<y:label>actiongroup.common</y:label>
 					<y:action action-id="com.acerchem.actions.order.auditing" property="currentObject"/>
 					<y:action action-id="com.acerchem.actions.order.auditing.EmployeeconfirmPay" property="currentObject"/>
-					<y:action action-id="com.acerchem.actions.order.auditing.EmployeeUpdateDeliveryInfo" property="currentObject"/>
+					<!-- <y:action action-id="com.acerchem.actions.order.auditing.EmployeeUpdateDeliveryInfo" property="currentObject"/> -->
 					<y:action action-id="com.acerchem.actions.order.auditing.EmployeeUpdateDeliveryStatus" property="currentObject"/>
 					<y:action action-id="com.acerchem.actions.order.auditing.EmployeeconfirmDelivery" property="currentObject"/>
 					<y:action action-id="com.acerchem.actions.order.auditing.EmployeeCancellOrder" property="currentObject"/>

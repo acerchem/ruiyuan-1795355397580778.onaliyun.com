@@ -28,7 +28,7 @@ public class DeliveryByshelfAction extends AbstractProceduralAction<OrderProcess
 	{
 		final OrderModel order = process.getOrder();
 		if(order != null){
-			setOrderStatus(order, OrderStatus.UNDELIVERED);
+			//setOrderStatus(order, OrderStatus.UNDELIVERED);
 		}
 	}
 }

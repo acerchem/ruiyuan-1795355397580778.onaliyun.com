@@ -44,21 +44,10 @@ public class CheckOrderAction extends AbstractSimpleDecisionAction<OrderProcessM
 			LOG.error("Missing the order, exiting the process");
 			return Transition.NOK;
 		}
-		setOrderStatus(order, OrderStatus.CHECKED_VALID);
+		setOrderStatus(order, OrderStatus.UNCONFIRMED);
 		return Transition.OK;
-
-//		if (getCheckOrderService().check(order))
-//		{
-//			setOrderStatus(order, OrderStatus.CHECKED_VALID);
-//			return Transition.OK;
-//		}
-//		else
-//		{
-//			setOrderStatus(order, OrderStatus.CHECKED_INVALID);
-//			return Transition.NOK;
-//		}
 	}
-
+	
 	protected CheckOrderService getCheckOrderService()
 	{
 		return checkOrderService;

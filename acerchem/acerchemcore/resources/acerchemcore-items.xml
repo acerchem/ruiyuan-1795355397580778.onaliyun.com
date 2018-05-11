@@ -91,6 +91,7 @@
 			<value code="UNCONFIRMED" />
 			<value code="UNDELIVERED" />
 			<value code="UNCONFIRMDELIVERY" />
+			<value code="PROCESSING" />
 		</enumtype>
 		
 		<enumtype code="CustomerType" generate="true"  autocreate="false" dynamic="true">

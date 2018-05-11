@@ -48,7 +48,7 @@
 	</action>
 	
 	<action id="creditPayMode" bean="creditPayModeAction">
-		<transition name="OK" to="waitConfrimForEmployee"/>
+		<transition name="OK" to="waitUpdateConsignmentStatus"/>
 		<transition name="NOK" to="error"/>
 	</action>
 	
@@ -77,21 +77,21 @@
         </case>
     </wait> 
 	<action id="waitForConfirmPay" bean="waitForConfirmPayAction">
-		<transition name="OK" to="waitConfrimForEmployee"/>
+		<transition name="OK" to="waitUpdateConsignmentStatus"/>
 		<transition name="NOK" to="waitForAllConfirmPay"/>
 	</action>
 	
 	<!-- 添加运营等待 -->
-	<wait id="waitConfrimForEmployee" prependProcessCode="true" then="failed">
+	<!-- <wait id="waitConfrimForEmployee" prependProcessCode="true" then="failed">
 	 	<case event="ConfirmConsignmentForEmployeeActionEvent">
             <choice id="confirmConsignment" then="recordConsignmentInfo"/>
         </case>
-	</wait>
+	</wait> -->
 	
-	<action id="recordConsignmentInfo" bean="recordConsignmentInfoAction">
+	<!-- <action id="recordConsignmentInfo" bean="recordConsignmentInfoAction">
 		<transition name="OK" to="waitUpdateConsignmentStatus"/>
 		<transition name="NOK" to="waitConfrimForEmployee"/>
-	</action>
+	</action> -->
 	
 	<wait id="waitUpdateConsignmentStatus" prependProcessCode="true" then="failed">
 	 	<case event="ConfirmConsignmentStatusActionEvent">

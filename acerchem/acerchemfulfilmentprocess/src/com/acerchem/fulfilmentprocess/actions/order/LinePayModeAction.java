@@ -46,7 +46,7 @@ public class LinePayModeAction extends AbstractProceduralAction<OrderProcessMode
 		if(order != null){
 			if (order.getPaymentMode().getCode().equals("InvoicePayment"))
 			{
-				setOrderStatus(order, OrderStatus.UNPAIED);
+				setOrderStatus(order, OrderStatus.PROCESSING);
 				return;
 			}
 		}

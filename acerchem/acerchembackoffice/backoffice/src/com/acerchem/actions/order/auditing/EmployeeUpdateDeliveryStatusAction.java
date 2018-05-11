@@ -50,7 +50,7 @@ public class EmployeeUpdateDeliveryStatusAction extends AbstractComponentWidgetA
 		// TODO Auto-generated method stub
 		LOG.info("--------------------start EmployeeUpdateDeliveryStatusAction-------------------");
 		OrderModel order = (OrderModel) ctx.getData();
-		setOrderStatus(order, OrderStatus.DELIVERED);
+		//setOrderStatus(order, OrderStatus.DELIVERED);
 		final String processCode = order.getOrderProcess().iterator().next().getCode();
 		final String eventID = new StringBuilder()//
 		          .append(processCode)//

@@ -10,9 +10,11 @@
  */
 package com.acerchem.fulfilmentprocess.actions.order;
 
+import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 import de.hybris.platform.processengine.action.AbstractSimpleDecisionAction;
+import de.hybris.platform.processengine.action.AbstractSimpleDecisionAction.Transition;
 
 import org.apache.log4j.Logger;
 
@@ -39,7 +41,14 @@ public class CheckConsignmentDateAction extends AbstractSimpleDecisionAction<Ord
 			LOG.error("Missing the order, exiting the process");
 			return Transition.NOK;
 		}
-
+		
+		for(AbstractOrderEntryModel orderEntry :order.getEntries()){
+			if(orderEntry.getConsignmentEntries().size()>0){
+				return Transition.OK;
+			}else{
+				return Transition.NOK;
+			}
+		}
 		if (order.getPickUpDate() != null)
 		{
 			return Transition.OK;

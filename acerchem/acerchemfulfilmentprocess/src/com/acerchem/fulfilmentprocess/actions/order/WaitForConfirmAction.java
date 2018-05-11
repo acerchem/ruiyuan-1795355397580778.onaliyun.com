@@ -45,7 +45,12 @@ public class WaitForConfirmAction extends AbstractSimpleDecisionAction<OrderProc
 
 		if (order.getEmployeeConfirm())
 		{
-			setOrderStatus(order, OrderStatus.CONFIRMED);
+			if (order.getPaymentMode().getCode().equals("CreditPayment"))
+			{
+				setOrderStatus(order, OrderStatus.PROCESSING);
+			}else{
+				setOrderStatus(order, OrderStatus.UNPAIED);
+			}
 			return Transition.OK;
 		}
 		else

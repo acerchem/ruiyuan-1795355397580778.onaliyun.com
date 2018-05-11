@@ -124,12 +124,19 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 			final AbstractEmailContext<BusinessProcessModel> emailContext)
 	{
 		final List<EmailAddressModel> toEmails = new ArrayList<EmailAddressModel>();
+		final List<EmailAddressModel> ccAddress = new ArrayList<EmailAddressModel>();
 		final EmailAddressModel toAddress = getEmailService().getOrCreateEmailAddressForEmail(emailContext.getToEmail(),
 				emailContext.getToDisplayName());
 		toEmails.add(toAddress);
 		final EmailAddressModel fromAddress = getEmailService().getOrCreateEmailAddressForEmail(emailContext.getFromEmail(),
 				emailContext.getFromDisplayName());
-		return getEmailService().createEmailMessage(toEmails, new ArrayList<EmailAddressModel>(), new ArrayList<EmailAddressModel>(), fromAddress,
+		final EmailAddressModel ccEmailOneAddressModel = getEmailService().getOrCreateEmailAddressForEmail(Config.getParameter("mail.ccAddress.one"),
+				Config.getParameter("mail.ccAddress.displayOneName"));
+		final EmailAddressModel ccEmailTwoAddressModel = getEmailService().getOrCreateEmailAddressForEmail(Config.getParameter("mail.ccAddress.two"),
+				Config.getParameter("mail.ccAddress.displayTwoName"));
+		ccAddress.add(ccEmailOneAddressModel);
+		ccAddress.add(ccEmailTwoAddressModel);
+		return getEmailService().createEmailMessage(toEmails, ccAddress, new ArrayList<EmailAddressModel>(), fromAddress,
 				emailContext.getFromEmail(), emailSubject, emailBody, null);
 	}
 	
