@@ -386,6 +386,13 @@ radio.change(function(){
 
 }); */
 
+function openText(){
+	
+	//alert(1111);
+	$('#light').show();
+	$('#fade').show();
+}
+
 
 $(document).ready(function() {
     $('input[type=radio][name=shipmethod]').change(function() {

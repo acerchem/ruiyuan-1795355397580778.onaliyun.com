@@ -1,8 +1,10 @@
 package com.acerchem.facades.facades.impl;
 
 import com.acerchem.core.enums.CreditAccountStatusEnum;
+import com.acerchem.core.model.CountryTrayFareConfModel;
 import com.acerchem.core.model.CustomerCreditAccountModel;
 import com.acerchem.core.service.AcerchemDeliveryService;
+import com.acerchem.core.service.AcerchemTrayService;
 import com.acerchem.facades.facades.AcerchemCheckoutFacade;
 import com.acerchem.facades.facades.AcerchemOrderException;
 import com.acerchem.facades.facades.AcerchemTrayFacade;
@@ -13,16 +15,21 @@ import de.hybris.platform.commercefacades.order.impl.DefaultCheckoutFacade;
 import de.hybris.platform.commercefacades.product.PriceDataFactory;
 import de.hybris.platform.commercefacades.product.data.PriceData;
 import de.hybris.platform.commercefacades.product.data.PriceDataType;
+import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.commercefacades.user.data.CountryData;
+import de.hybris.platform.commercefacades.user.data.RegionData;
 import de.hybris.platform.commerceservices.service.data.CommerceCheckoutParameter;
 import de.hybris.platform.core.model.c2l.CountryModel;
+import de.hybris.platform.core.model.c2l.RegionModel;
 import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
+import de.hybris.platform.core.model.order.AbstractOrderModel;
 import de.hybris.platform.core.model.order.CartEntryModel;
 import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.order.delivery.DeliveryModeModel;
 import de.hybris.platform.core.model.order.payment.PaymentModeModel;
+import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.core.model.user.UserModel;
@@ -89,6 +96,10 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
     @Resource
     private CalculationService calculationService;
 
+    
+    @Resource
+	private AcerchemTrayService acerchemTrayService;
+    
     @Resource
     private DefaultCustomerCreditAccountService defaultCustomerCreditAccountService;
 
@@ -243,24 +254,34 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
 
 
     @Override
-    public boolean setPaymentDetail(final String paymentInfoId) throws AcerchemOrderException {
+    public void setPaymentDetail(final String paymentInfoId) throws AcerchemOrderException {
         validateParameterNotNullStandardMessage("paymentInfoId", paymentInfoId);
 
         if (StringUtils.isNotBlank(paymentInfoId))
         {
             PaymentModeModel paymentModeModel = paymentModeService.getPaymentModeForCode(paymentInfoId);
-            final CartModel cartModel = getCart();
+            final CartModel cartModel = getCartModel();
+            
+            final CartData cartData = getCheckoutCart();
+            
+            if(getDeliveryModes().getCode().equalsIgnoreCase("DELIVERY_GROSS")){
+            	cartModel.setTotalPrice(cartData.getTotalPrice().getValue().doubleValue()+cartModel.getDeliveryCost());
+            } else {
+            	cartModel.setTotalPrice(cartData.getTotalPrice().getValue().doubleValue());
+            }
+            
             if (paymentModeModel.getCode().equals("CreditPayment")) {
                 validateCustomerCredit(cartModel);
             }
+            
             if (paymentModeModel != null)
             {
                cartModel.setPaymentMode(paymentModeModel);
                getModelService().save(cartModel);
-                return true;
+              //  return true;
             }
+           
         }
-        return false;
     }
 
     @Override
@@ -483,6 +504,22 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
 
         return deliveryAddresses == null ? Collections.<AddressData> emptyList() : deliveryAddresses;
     }
+    
+    
+  private List<? extends AddressModel> getWareHoseAddresses() // NOSONAR
+    {
+        //自提时取pos的地址
+        PointOfServiceModel pos = getCart().getEntries().get(0).getDeliveryPointOfService();
+        List<AddressModel> deliveryAddresses = null;
+
+        if (pos !=null && pos.getAddress()!=null){
+            deliveryAddresses = new ArrayList<>();
+            AddressModel addressModel = pos.getAddress();
+            deliveryAddresses.add(addressModel);
+        }
+
+        return deliveryAddresses == null ? Collections.<AddressModel> emptyList() : deliveryAddresses;
+    }
 
     @Override
     public OrderData placeOrder() throws InvalidCartException {
@@ -578,8 +615,53 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
 	            }
 	            cartModel.setDeliveryCost(deliveryCost);
 	            
+	      if(cartModel.getDeliveryMode() != null && cartModel.getDeliveryMode().getCode().equalsIgnoreCase("DELIVERY_MENTION")){
+	    	  cartModel.setDeliveryAddress(getWareHoseAddresses().get(0));
+	      }
+	            
 		 
 		 return cartModel;
+	}
+	
+	
+	public  Integer getTotalPriceForCart(CartData data){
+		
+		final CartModel cartModel = getCartService().getSessionCart();
+	 	RegionData regionData = null;
+	 	
+	 	RegionModel regionModel = null;
+		CountryTrayFareConfModel countryTrayFareConf  = null;
+		//��������
+		BigDecimal totalTrayAmount = BigDecimal.ZERO;
+		if (data!=null){
+
+			for (OrderEntryData aoe : data.getEntries()){
+
+				if (aoe.getDeliveryPointOfService().getAddress()!=null) {
+					regionData =data.getDeliveryAddress().getRegion();
+				}
+				ProductData productData = aoe.getProduct();
+				//�Ȼ�ȡ���̱������ڼ�������
+				String unitCalculateRato = productData.getUnitCalculateRato();
+				if (ObjectUtils.isEmpty(unitCalculateRato)){
+					
+				}
+				Long quantity = (aoe.getQuantity())*(Long.parseLong(aoe.getProduct().getNetWeight()));
+
+				//��������
+				BigDecimal entryTrayAmount = BigDecimal.valueOf(quantity).divide(new BigDecimal(unitCalculateRato),BigDecimal.ROUND_HALF_UP,BigDecimal.ROUND_DOWN);
+
+				totalTrayAmount =totalTrayAmount.add(entryTrayAmount);
+			}
+		}
+		if(regionData != null){
+			regionModel =cartModel.getDeliveryAddress().getRegion();
+			countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(regionModel, (int) Math.ceil(totalTrayAmount.doubleValue()));
+		}
+		if(countryTrayFareConf != null){
+			return countryTrayFareConf.getDeliveriedDay();
+		}
+		return 0;
 	}
 
 

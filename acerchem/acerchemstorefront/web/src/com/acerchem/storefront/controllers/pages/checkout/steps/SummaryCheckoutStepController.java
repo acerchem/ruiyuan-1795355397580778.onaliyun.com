@@ -33,7 +33,10 @@ import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.order.InvalidCartException;
 import de.hybris.platform.payment.AdapterException;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.List;
 
@@ -119,9 +122,12 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 		
 		if (cartData.getDeliveryMode()!=null&&"DELIVERY_MENTION".equals(cartData.getDeliveryMode().getCode())) {
 			model.addAttribute("deliveryAddress", acerchemCheckoutFacade.getDeliveryAddresses().get(0));
-		}else{
+			model.addAttribute("deliveryAddresses", acerchemCheckoutFacade.getDeliveryAddresses());
+		}
+		
+		if (cartData.getDeliveryMode()!=null&&"DELIVERY_GROSS".equals(cartData.getDeliveryMode().getCode())) {
 			model.addAttribute("deliveryAddress", cartData.getDeliveryAddress());
-			
+			model.addAttribute("deliveryAddresses", getDeliveryAddresses(cartData.getDeliveryAddress()));
 			 double deliveryCost = 0;
 			try {
 				deliveryCost = acerchemTrayFacade.getTotalPriceForCart(cartData, cartData.getDeliveryAddress());
@@ -140,13 +146,27 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 		    	 
 		    	 cartData.setTotalPrice(acerchemCheckoutFacade.createPrice(cartModel, total));
 		     }
+		     
+		     if (cartData.getPickUpdate() != null){
+			     
+			     SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+					String waitDelivereyDate = cartData.getPickUpdate();
+					Calendar ca = Calendar.getInstance();
+					try {
+						ca.setTime(sdf1.parse(waitDelivereyDate));
+						ca.add(Calendar.DATE, acerchemCheckoutFacade.getTotalPriceForCart(cartData));// 
+						waitDelivereyDate = sdf1.format(ca.getTime());
+						cartData.setWaitDeliveiedDate(waitDelivereyDate);
+						//Date endDate = sdf.parse(waitDelivereyDate);
+						//orderModel.setWaitDeliveiedDate(endDate);
+					} catch (ParseException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}
+					
+			     }
 		}
 		
-		if (cartData.getDeliveryMode()!=null&&"DELIVERY_MENTION".equals(cartData.getDeliveryMode().getCode())) {
-			model.addAttribute("deliveryAddresses", acerchemCheckoutFacade.getDeliveryAddresses());
-		}else{
-			model.addAttribute("deliveryAddresses", getDeliveryAddresses(cartData.getDeliveryAddress()));
-		}
 
 		// Only request the security code if the SubscriptionPciOption is set to Default.
 		final boolean requestSecurityCode = CheckoutPciOptionEnum.DEFAULT
@@ -227,8 +247,15 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 	 */
 	protected boolean validateOrderForm(final PlaceOrderForm placeOrderForm, final Model model)
 	{
-		final String securityCode = placeOrderForm.getSecurityCode();
+		//final String securityCode = placeOrderForm.getSecurityCode();
 		boolean invalid = false;
+		
+		if (!placeOrderForm.isTermsCheck())
+		{
+			GlobalMessages.addErrorMessage(model, "checkout.error.terms.not.accepted");
+			invalid = true;
+			return invalid;
+		}
 
 		final CartData cartData = acerchemCheckoutFacade.getCheckoutCart();
 
@@ -236,12 +263,14 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 		{
 			GlobalMessages.addErrorMessage(model, "checkout.deliveryMethod.notSelected");
 			invalid = true;
+			return invalid;
 		}
 		
 		if (cartData.getDeliveryAddress() == null)
 		{
 			GlobalMessages.addErrorMessage(model, "checkout.deliveryAddress.notSelected");
 			invalid = true;
+			return invalid;
 		}else {
 			AddressData address = cartData.getDeliveryAddress() ;
 			
@@ -254,31 +283,46 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 				 GlobalMessages.addErrorMessage(model, e.getMessage());
 				 
 				 invalid = true;
+				 return invalid;
 			}
 			
 		}
 
-		
-		
-		if (cartData.getPaymentModeData().getCode() == null)
-		{
-			GlobalMessages.addErrorMessage(model, "checkout.paymentMethod.notSelected");
-			invalid = true;
-		}
-		
 		if (cartData.getPickUpdate() == null)
 		{
 			GlobalMessages.addErrorMessage(model, "checkout.pickUpDate.notSelected");
 			invalid = true;
+			return invalid;
 		}
 
+		
+		
+		if ( placeOrderForm.getPaymentCode()== null ||placeOrderForm.getPaymentCode().length()==0)
+		{
+			GlobalMessages.addErrorMessage(model, "checkout.paymentMethod.notSelected");
+			invalid = true;
+			return invalid;
+		} else {
+				try {
+					acerchemCheckoutFacade.setPaymentDetail( placeOrderForm.getPaymentCode());
+				} catch (AcerchemOrderException e) {
+					GlobalMessages.addErrorMessage(model, e.getMessage());
+					
+					invalid = true;
+					return invalid;
+				}
+			}
+			
+		
+		
+		
 
 		/*if (getCheckoutFlowFacade().hasNoPaymentInfo())
 		{
 			GlobalMessages.addErrorMessage(model, "checkout.paymentMethod.notSelected");
 			invalid = true;
 		}*/
-		else
+	/*	else
 		{
 			// Only require the Security Code to be entered on the summary page if the SubscriptionPciOption is set to Default.
 			if (CheckoutPciOptionEnum.DEFAULT.equals(getCheckoutFlowFacade().getSubscriptionPciOption())
@@ -288,7 +332,7 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 				invalid = true;
 			}
 		}
-
+*/
 	/*	if (!placeOrderForm.isTermsCheck())
 		{
 			GlobalMessages.addErrorMessage(model, "checkout.error.terms.not.accepted");
@@ -349,7 +393,6 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 			try {
 				acerchemCheckoutFacade.setPaymentDetail(selectedPaymentMethodId);
 			} catch (AcerchemOrderException e) {
-				LOG.error(e.getMessage());
 				GlobalMessages.addErrorMessage(model, e.getMessage());
 			}
 		}

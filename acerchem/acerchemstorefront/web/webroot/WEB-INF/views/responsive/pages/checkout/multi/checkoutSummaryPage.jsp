@@ -265,7 +265,11 @@
                       </c:when>
                       <c:otherwise>
                           <div>
-                          <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date:&nbsp;&nbsp;&nbsp;<input style="width: 300px"  type="date" id="textDate" value="${cartData.pickUpdate}" /></label>
+                          <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date:&nbsp;&nbsp;&nbsp;<input style="width: 300px"  type="date" id="textDate" value="${cartData.pickUpdate}" />
+	                          <c:if test="${deliveryMode.code=='DELIVERY_GROSS'}">
+									 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ETA Date:&nbsp;&nbsp;&nbsp;<input style="width: 300px"  type="date"  readonly="readonly" value="${cartData.waitDeliveiedDate}"/>
+									 </c:if>
+                          </label>
                           
 						</div>
                       </c:otherwise>
@@ -688,6 +692,14 @@ $(document).on('click','.btn-inv.inv-active',function(){//增加发票价
 	   checktot()
 	  
 })	
+
+function openText(){
+	
+	//alert(1111);
+	$('#light').show();
+	$('#fade').show();
+}
+
 	
 
 // 金额计算
@@ -782,8 +794,10 @@ $(document).ready(function() {
     	
     	//alert(this.value);
     	
-    	var  pm = this.value;
-    	window.location.href ='<c:url value='/checkout/multi/summary/choose?selectedPaymentMethodId='/>'+pm;
+    	//var  pm = this.value;
+    	//window.location.href ='<c:url value='/checkout/multi/summary/choose?selectedPaymentMethodId='/>'+pm;
+    	
+    	$('#paymentCode').val(this.value);
     });
 });
 

@@ -130,6 +130,11 @@ public class DefaultAcerchemCommercePlaceOrderStrategy extends DefaultCommercePl
 						e1.printStackTrace();
 					}
 				}
+				
+				if(cartModel.getDeliveryMode() != null && cartModel.getDeliveryMode().getCode().equalsIgnoreCase("DELIVERY_MENTION")){
+					orderModel.setDeliveryAddress(cartModel.getDeliveryAddress());
+					
+				}
 				List<AbstractOrderEntryModel> orderEntries = new ArrayList<AbstractOrderEntryModel>();
 				
 				double subTotal = 0;

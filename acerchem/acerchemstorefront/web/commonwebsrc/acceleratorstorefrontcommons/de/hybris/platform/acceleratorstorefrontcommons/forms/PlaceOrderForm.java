@@ -16,6 +16,25 @@ public class PlaceOrderForm
 	private String securityCode;
 	private boolean termsCheck;
 
+	private String paymentCode;
+
+	/**
+	 * @return the paymentCode
+	 */
+	public String getPaymentCode()
+	{
+		return paymentCode;
+	}
+
+	/**
+	 * @param paymentCode
+	 *           the paymentCode to set
+	 */
+	public void setPaymentCode(final String paymentCode)
+	{
+		this.paymentCode = paymentCode;
+	}
+
 	public String getSecurityCode()
 	{
 		return securityCode;
