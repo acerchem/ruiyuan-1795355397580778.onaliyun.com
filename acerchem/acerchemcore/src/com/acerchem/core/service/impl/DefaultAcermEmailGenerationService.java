@@ -2,6 +2,7 @@ package com.acerchem.core.service.impl;
 
 import java.io.StringWriter;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
@@ -64,9 +65,9 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 
 				final StringWriter body = new StringWriter();
 				getRendererService().render(bodyRenderTemplate, emailContext, body);
-				
+				LOG.info("=======================generate1 start===================="+new Date());
 				emailMessageModel = createSendEmployeeEmailMessage(subject.toString(), body.toString(), emailContext);
-
+				LOG.info("=======================generate1 end===================="+new Date());
 				if (LOG.isDebugEnabled())
 				{
 					LOG.debug("Email Subject: " + emailMessageModel.getSubject());
@@ -74,6 +75,7 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 				}
 
 			}
+			
 			return emailMessageModel;
 		}else{
 			final RendererTemplateModel bodyRenderTemplate = emailPageTemplateModel.getHtmlTemplate();
@@ -106,8 +108,9 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 
 				final StringWriter body = new StringWriter();
 				getRendererService().render(bodyRenderTemplate, emailContext, body);
-				
+				LOG.info("=======================generate2 start===================="+new Date());
 				emailMessageModel = createEmailMessage(subject.toString(), body.toString(), emailContext);
+				LOG.info("=======================generate2 end===================="+new Date());
 
 				if (LOG.isDebugEnabled())
 				{

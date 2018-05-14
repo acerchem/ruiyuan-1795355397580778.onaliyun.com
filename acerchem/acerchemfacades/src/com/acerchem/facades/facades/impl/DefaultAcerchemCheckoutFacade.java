@@ -463,7 +463,8 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                    remainTotalDeliveryCost = totalAdditionalFee.subtract(entryTotalAdditionalFee);
 
                }
-               BigDecimal quantity = BigDecimal.valueOf(aoe.getQuantity());
+               
+               BigDecimal quantity = (BigDecimal.valueOf(aoe.getQuantity() * Long.parseLong(aoe.getProduct().getNetWeight()) ));
                 //附加费单价
                BigDecimal entryDeliveryBasePrice = entryTotalAdditionalFee.divide(quantity, BigDecimal.ROUND_HALF_UP, BigDecimal.ROUND_HALF_UP);
                Double baseRealPrice = BigDecimal.valueOf(basePrice).add(entryDeliveryBasePrice).doubleValue();
@@ -483,7 +484,7 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
 
     private Double getAbstractOrderEntryBasePrice (AbstractOrderEntryModel aoe){
         BigDecimal entryTotalPrice = BigDecimal.valueOf(aoe.getTotalPrice());
-        BigDecimal quantity = BigDecimal.valueOf(aoe.getQuantity());
+        BigDecimal quantity = BigDecimal.valueOf(aoe.getQuantity() * Long.parseLong(aoe.getProduct().getNetWeight()));
         BigDecimal baseRealPrice = entryTotalPrice.divide(quantity,BigDecimal.ROUND_CEILING,BigDecimal.ROUND_HALF_UP);
         return baseRealPrice.doubleValue();
     }
