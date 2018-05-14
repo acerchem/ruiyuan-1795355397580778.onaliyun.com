@@ -29,6 +29,6 @@ UPDATE Category;code[unique=true];$catalogVersion;name[lang=$lang]
  ;576;;Joint Health;
  ;577;;Amino Acid;
  #shaun
- ;3510;;Acerchem;
+ ;3510;;ALL;
 
 
