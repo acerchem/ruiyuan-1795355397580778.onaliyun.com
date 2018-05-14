@@ -137,8 +137,8 @@ public class DefaultAcerchemCommercePlaceOrderStrategy extends DefaultCommercePl
 				}
 				List<AbstractOrderEntryModel> orderEntries = new ArrayList<AbstractOrderEntryModel>();
 				
-				double subTotal = 0;
-				double total=0;
+				//double subTotal = 0;
+				//double total=0;
 				
 				
 				
@@ -152,19 +152,19 @@ public class DefaultAcerchemCommercePlaceOrderStrategy extends DefaultCommercePl
                     aoe.setTotalPrice(totalPrice);
 					orderEntries.add(aoe);
 					
-					subTotal += totalPrice;
+					//subTotal += totalPrice;
 				}
 				
-				total+=subTotal;
+				//total+=subTotal;
 				orderModel.setEntries(orderEntries);
 				
-				orderModel.setSubtotal(subTotal);
+				//orderModel.setSubtotal(subTotal);
 				
-				if (orderModel.getDeliveryCost()>0){
-					total+=orderModel.getDeliveryCost();
-				}
+				//if (orderModel.getDeliveryCost()>0){
+					//total+=orderModel.getDeliveryCost();
+				//}
 				
-				orderModel.setTotalPrice(total);
+				//orderModel.setTotalPrice(total);
 				
 				getModelService().save(orderModel);
 				// Transfer promotions to the order
