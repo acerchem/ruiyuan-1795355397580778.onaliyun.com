@@ -119,12 +119,12 @@
 								</span>
 								
 								<span>
-									<em>Storage</em>
+									<em>Release Cost</em>
 									<i><format:price priceData="${orderData.storageCost}"/></i>
 								</span>
 								
 								<span>
-									<em>Operate</em>
+									<em>Handling Charge</em>
 									<i><format:price priceData="${orderData.operateCost}"/></i>
 								</span>
 		
