@@ -74,13 +74,13 @@ INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url
 ;;FilmCamerasCategoryLink;Film Cameras Category Link;/Open-Catalogue/Cameras/Film-Cameras/c/571;FilmCamerasCategoryLink;FilmCamerasCategoryLink;;571;;
 ;;CameraAccessoriesCategoryLink;Camera Accessories Category Link;/Open-Catalogue/Cameras/Camera-Accessories-26-Supplies/c/575;CameraAccessoriesCategoryLink;CameraAccessoriesCategoryLink;;575;;
 ;;PowerSuppliesCategoryLink;Power Supplies Category Link;/Open-Catalogue/Components/Power-Supplies/c/571;PowerSuppliesCategoryLink;PowerSuppliesCategoryLink;;571;;
-;;FlashMemoryCategoryLink;Flash Memory Category Link;/Open-Catalogue/Data-storage/Flash-Memory/c/575;FlashMemoryCategoryLink;FlashMemoryCategoryLink;;575;;
+;;FlashMemoryCategoryLink;Flash Memory Category Link;/Open-Catalogue/Data-storage/Flash-Memory/c/1;FlashMemoryCategoryLink;FlashMemoryCategoryLink;;1;;
 ;;HandheldCamcordersCategoryLink;Handheld Camcorders Category Link;/Open-Catalogue/Cameras/Hand-held-Camcorders/c/576;HandheldCamcordersCategoryLink;HandheldCamcordersCategoryLink;;576;;
 ;;SpecialOffersLink;Special Offers Link;"/Open-Catalogue/c/1?q=%3AtopRated%3AallPromotions%3ABOGOFacerchem%3AallPromotions%3A10DiscountCanonEOS450D%3AallPromotions%3AMultiBuyacerchem%3AallPromotions%3APerfectPartneracerchem%3AallPromotions%3AProductBundleacerchem";SpecialOffersLink;SpecialOffersLink;;1;;
 ;;CamerasFlashesCategoryLink;Cameras Flashes Category Link;/Open-Catalogue/Cameras/Camera-Accessories-26-Supplies/Camera-Flashes/c/571;CamerasFlashesCategoryLink;CamerasFlashesCategoryLink;;571;;
 ;;TripodsCategoryLink;Tripods Category Link;/Open-Catalogue/Cameras/Camera-Accessories-26-Supplies/Tripods/c/575;TripodsCategoryLink;TripodsCategoryLink;;575;;
 ;;CameraLensesCategoryLink;Camera Lenses Category Link;/Open-Catalogue/Cameras/Camera-Accessories-26-Supplies/Camera-Lenses/c/571;CameraLensesCategoryLink;CameraLensesCategoryLink;;571;;
-;;ColourFilmsCategoryLink;ColourFilms Category Link;/Open-Catalogue/Cameras/Camera-Accessories-26-Supplies/Colour-Films/c/576;ColourFilmsCategoryLink;ColourFilmsCategoryLink;;576;;
+;;ColourFilmsCategoryLink;ColourFilms Category Link;/Open-Catalogue/Cameras/Camera-Accessories-26-Supplies/Colour-Films/c/1;ColourFilmsCategoryLink;ColourFilmsCategoryLink;;1;;
 ;;BlackAndWhiteFilmsCategoryLink;Black And WhiteFilms Category Link;/Open-Catalogue/Cameras/Camera-Accessories-26-Supplies/Black-26-White-Films/c/571;BlackAndWhiteFilmsCategoryLink;BlackAndWhiteFilmsCategoryLink;;571;;
 ;;BlankVideotapesCategoryLink;BlankVideotapes Category Link;/Open-Catalogue/Cameras/Camera-Accessories-26-Supplies/Blank-Video-Tapes/c/575;BlankVideotapesCategoryLink;BlankVideotapesCategoryLink;;575;;
 ;;AboutAcceleratorLink;About Accelerator Link;"http://www.hybris.com/multichannel-accelerator";AboutAcceleratorLink;AboutAcceleratorLink;newWindow;;;
@@ -1143,7 +1143,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];cmsComponents
 ## level 2. children of SiteRoot ## 
 # the following order of children is the display order on the site
 INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);&nodeRef;children(uid,$contentCV)
-;acerchemCategoryNavNode;;Categories;acerchemNavNode;acerchemCategoryNavNode;DigitalCamerasNavNode,FilmCamerasNavNode,HandheldCamcordersNavNode,WebcamsNavNode
+;acerchemCategoryNavNode;;Categories;acerchemNavNode;acerchemCategoryNavNode;DigitalCamerasNavNode,FilmCamerasNavNode,HandheldCamcordersNavNode,WebcamsNavNode,FlashMemoryNavNode
 
 ## level 3. children of Category Nav ##
 INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;&nodeRef;children(uid,$contentCV);links(&linkRef);

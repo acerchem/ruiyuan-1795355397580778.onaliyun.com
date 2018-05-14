@@ -156,7 +156,13 @@ $(document).ready(function(){
 			inval = parseInt(invem.text());
 			invi.text(aval+inval);
 	})
-
+    
+    //m-setnum
+	$('#pdnum').bind('input propertychange', function() {  
+		var pdnum=$('#pdnum').val();
+		$('#qty').val(pdnum);
+	});
+	
 	//m-setnum
 	$('.m-setnum span').on('click',function(){
 		var aclass=$(this).attr('class'),
