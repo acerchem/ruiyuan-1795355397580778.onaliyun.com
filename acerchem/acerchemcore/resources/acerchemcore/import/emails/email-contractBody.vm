@@ -113,7 +113,7 @@ p.western {
     
     <tr>
       <td>Tel:  +44 (0) 1639 792295</td>
-      <td>Tel: $!{ctx.customer.defaultPaymentAddress.phone1}   </td>
+      <td>Tel: $!{ctx.contactMobile}   </td>
     </tr>
     <tr>
       <td colspan="2">The buyer and the seller agree to conclude this contract subject to the terms and condi.ons stated below </td>
