@@ -38,8 +38,8 @@
 					<div class="g-title">
 						<p>${fn:escapeXml(product.name)}</p>
 						<div class="min">
-							<span class="mintitle">${ycommerce:sanitizeHTML(product.summary)}</span>
 							<span class="sku">${fn:escapeXml(product.code)}</span>
+							<span class="mintitle">${ycommerce:sanitizeHTML(product.summary)}</span>
 						</div>
 					</div>
 					<div class="priceset">
@@ -201,7 +201,7 @@
 							<%-- <c:forEach var="${countrys}" var="data1" begin="0" end="1"> --%>
 						<c:forEach items="${countrys}" var="data"  varStatus="id"  >
 						<c:if test="${id.index==0}">
-							<%-- <i class="delint"><em>${product.packageType}</em></i>  --%><i class="delintro"><em>Delivery within &nbsp ${data.avaReleaseDay} &nbsp days</em></i>
+							    <i class="delintro"><em>Delivery within &nbsp ${data.avaReleaseDay} &nbsp days</em></i>
 						</c:if>	
                         </c:forEach>
                         <input type="hidden" value="" name="avaReleaseDay"  id="avaReleaseDay">
