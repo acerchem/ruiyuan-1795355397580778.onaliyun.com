@@ -732,5 +732,18 @@
 		<property name="modelService" ref="modelService"/>
 		<property name="businessProcessService" ref="businessProcessService"/>
 	</bean>
-
+	
+	<alias alias="emailService" name="defaultAcerchemEmailService"/>
+	<bean id="defaultAcerchemEmailService"
+	      class="com.acerchem.core.service.impl.DefaultAcerchemEmailService">
+	    <property name="modelService" ref="modelService"/>
+		<property name="mediaService" ref="mediaService"/>
+		<property name="catalogVersionService" ref="catalogVersionService"/>
+		<property name="catalogService" ref="catalogService"/>
+		<property name="configurationService" ref="configurationService"/>
+		<property name="emailAttachmentsMediaFolderName" value="email-attachments"/>
+		<property name="emailBodyMediaFolderName" value="email-body"/>
+		<property name="emailAddressFetchStrategy" ref="emailAddressFetchStrategy"/>
+	</bean>
+	
 </beans>
