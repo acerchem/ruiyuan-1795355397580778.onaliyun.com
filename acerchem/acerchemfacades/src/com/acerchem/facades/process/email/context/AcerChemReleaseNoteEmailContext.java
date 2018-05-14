@@ -197,7 +197,7 @@ public class AcerChemReleaseNoteEmailContext extends AbstractEmailContext<OrderP
 
 			}
 			// add last item project
-			if (batchNum > 1) {
+			if (batchNum > 0) {
 				final ProductItemDataOfEmail lastPie = new ProductItemDataOfEmail();
 
 				lastPie.setProductName("subTotal");
