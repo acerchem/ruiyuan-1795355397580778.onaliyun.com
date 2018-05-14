@@ -105,14 +105,17 @@
 </div>		
 
 <form:form action="${placeOrderUrl}" id="placeOrderForm1" commandName="placeOrderForm">	
- 				
-<!-- <div class="btn-set">							
-	<a class="btn btn-submit" href="success.html">Place Order</a>
-</div> -->
 
-<a style="text-align: center;color: red;" href = "javascript:void(0)" onclick = "document.getElementById('light').style.display='block';document.getElementById('fade').style.display='block'">
-	Sales agreement
-</a>
+<input type="hidden" name="paymentCode" id="paymentCode" value=""/>
+ 				
+ <label>
+ <input type="checkbox" name="termsCheck" id="termsCheck">
+ 	<span class="checkbox" >
+	<a href="javascript:openText()" style="color: red" >Sales agreement</a>
+	</span>
+	</label>
+
+
 
 <div class="btn-set">	
   <button id="placeOrder" type="submit" class="btn btn-submit">

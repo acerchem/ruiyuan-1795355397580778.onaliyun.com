@@ -10,7 +10,11 @@
  */
 package com.acerchem.storefront.controllers.pages.checkout.steps;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Collections;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -480,6 +484,27 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		    	 total= cartData.getDeliveryCost().getValue().doubleValue()+cartData.getTotalPrice().getValue().doubleValue();
 		    	 
 		    	 cartData.setTotalPrice(acerchemCheckoutFacade.createPrice(cartModel, total));
+		     }
+		     
+		     // set the waitDelivereyDate
+		     if (cartData.getPickUpdate() != null){
+		     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		     
+		     SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+				String waitDelivereyDate = cartData.getPickUpdate();
+				Calendar ca = Calendar.getInstance();
+				try {
+					ca.setTime(sdf1.parse(waitDelivereyDate));
+					ca.add(Calendar.DATE, acerchemCheckoutFacade.getTotalPriceForCart(cartData));// 
+					waitDelivereyDate = sdf1.format(ca.getTime());
+					cartData.setWaitDeliveiedDate(waitDelivereyDate);
+					//Date endDate = sdf.parse(waitDelivereyDate);
+					//orderModel.setWaitDeliveiedDate(endDate);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
 		     }
 		}
 

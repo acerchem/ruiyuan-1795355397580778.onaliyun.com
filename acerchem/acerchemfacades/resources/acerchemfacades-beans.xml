@@ -191,6 +191,7 @@
 		<property name="pickUpdate" type="java.lang.String" />
 		<property name="isUseFutureStock" type="java.lang.Boolean" />
 		<property name="deliveryDays" type="java.lang.Integer" />
+		<property name="waitDeliveiedDate" type="java.lang.String" />
 
 	</bean>
 

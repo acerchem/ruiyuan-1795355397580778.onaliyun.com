@@ -58,7 +58,13 @@
 			<!-- Ship To -->
 			<div class="g-table">
 				<div class="g-title">
+					
+				<c:if test="${orderData.deliveryMode.code=='DELIVERY_GROSS'}">
 					<span>Ship To</span>
+					</c:if>
+					<c:if test="${orderData.deliveryMode.code=='DELIVERY_MENTION'}">
+					<span>Warehouse Address</span>
+					</c:if>
 				</div>
 				<div class="text">
 					<order:addressItem address="${orderData.deliveryAddress}"/>

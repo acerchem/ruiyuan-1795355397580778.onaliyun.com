@@ -31,7 +31,7 @@
 				
 	</div>
 	
-	<cart:exportCart/>
+	<%-- <cart:exportCart/> --%>
 </div>
 
 		

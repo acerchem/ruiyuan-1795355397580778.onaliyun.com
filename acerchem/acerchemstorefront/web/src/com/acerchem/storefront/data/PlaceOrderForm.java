@@ -8,16 +8,16 @@
  * Information and shall use it only in accordance with the terms of the
  * license agreement you entered into with SAP.
  */
-package de.hybris.platform.acceleratorstorefrontcommons.forms;
+package com.acerchem.storefront.data;
 
 
 public class PlaceOrderForm
 {
 	private String securityCode;
 	private boolean termsCheck;
-	
 
 	private String paymentCode;
+
 
 	/**
 	 * @return the paymentCode

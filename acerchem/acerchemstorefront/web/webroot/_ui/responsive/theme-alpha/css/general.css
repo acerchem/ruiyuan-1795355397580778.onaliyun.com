@@ -2722,6 +2722,25 @@ display: inline-table;
 }
 
 
+.prod-cont .prodbase .delint{
+	padding-left: 5px;
+	position: absolute;
+	bottom:0;
+	left: 120px;
+	line-height: 30px;
+}
+
+.prod-cont .prodbase .delint:before , .m-note .title:before{
+	content:'';
+	padding:12px;
+	margin-right: 4px;
+	font-size: 0;
+	line-height: 0;
+	background: url() no-repeat center top;
+	vertical-align: middle;
+}
+
+
 .prod-cont .prodbase .btn-set .btn{
 	display: inline-block;
 	*display: inline;

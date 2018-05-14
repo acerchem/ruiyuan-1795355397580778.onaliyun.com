@@ -34,7 +34,7 @@ public interface AcerchemCheckoutFacade {
      *           the ID of the payment info to set as the default payment
      * @return true if operation succeeded
      */
-    boolean setPaymentDetail(String paymentInfoId) throws AcerchemOrderException;
+    void setPaymentDetail(String paymentInfoId) throws AcerchemOrderException;
 
     boolean savePickUpDateForOrder(String pickUpDate);
     
@@ -53,6 +53,8 @@ public interface AcerchemCheckoutFacade {
     boolean setDeliveryAddress(AddressData address);
     
     PriceData createPrice(final CartModel cardModel, final Double val);
+    
+    Integer getTotalPriceForCart(CartData data);
 
 }
 

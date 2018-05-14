@@ -69,7 +69,9 @@
 							${fn:escapeXml(order.total.formattedValue)}
 						</td>
 						<td class="responsive-table-cell responsive-table-cell-bold" style="padding:10px 10px;font-size:14px;">
-							${order.status=="CHECKED_VALID"?"UNCONFIRMED":order.status}
+							${order.status=="CHECKED_VALID"?"UNCONFIRMED":""}
+							${order.status=="UNDELIVERED"||order.status=="DELIVERED"?"PROCESSING":""}
+							${order.status!="CHECKED_VALID"&&order.status!="UNDELIVERED"&&order.status!="DELIVERED"?order.status:""}
 						</td>
 						<%-- <td class="responsive-table-cell responsive-table-cell-bold" style="padding:10px 10px;font-size:14px;">
 							<a href="${confirmOrder}${ycommerce:encodeUrl(order.code)}?confirm=order" style="${order.customerConfirm?'display: none;':''}">Confirm</a>

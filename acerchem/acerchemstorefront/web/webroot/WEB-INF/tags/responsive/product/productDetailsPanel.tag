@@ -38,8 +38,8 @@
 					<div class="g-title">
 						<p>${fn:escapeXml(product.name)}</p>
 						<div class="min">
-							<span class="mintitle">${ycommerce:sanitizeHTML(product.summary)}</span>
 							<span class="sku">${fn:escapeXml(product.code)}</span>
+							<span class="mintitle">${ycommerce:sanitizeHTML(product.summary)}</span>
 						</div>
 					</div>
 					<div class="priceset">
