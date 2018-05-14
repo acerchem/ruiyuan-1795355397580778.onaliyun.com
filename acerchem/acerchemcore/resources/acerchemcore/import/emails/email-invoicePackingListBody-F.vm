@@ -106,7 +106,7 @@ p.western {
       <td>&nbsp;</td>
     </tr>
     <tr>
-      <td>$!{ctx.customerAddressData.regin} </td>
+      <td>$!{ctx.customerAddressData.region} </td>
       <td>&nbsp;</td>
     </tr>
     <tr>
@@ -124,7 +124,7 @@ p.western {
     </tr>
     <tr>
       <td width="60%">SHIP FROM: $!{ctx.warehouse}</td>
-      <td align="left">SHIP TO: $!{ctx.order.deliveryAddress.formattedAddress} </td>
+      <td align="left">SHIP TO: $!{ctx.shipto} </td>
     </tr>
     <tr>
       <td>Payment terms: $!{ctx.paymentTerms}  </td>
@@ -138,7 +138,7 @@ p.western {
      <tr>
       <td width="67" height="7">Marks Numberse</td>
       <td width="236">Product name</td>
-      <td width="82">Total Weight<br> (Kg)</td>
+      <td width="82">Quantity<br> (Kg)</td>
       <td width="51"> Unit Price<br>(USD)</td>
       <td width="58"> Amount<br>(USD)</td>
 
@@ -160,7 +160,7 @@ p.western {
 		<tbody>
 			<tr>
 				<td style="border-bottom-color: #FFFFFF"  align="right">
-					Subtotal USD ${ctx.order.subTotal.formattedValue}
+					Subtotal ${ctx.order.subTotal.formattedValue}
 				</td>
 			</tr>
 			<tr>
@@ -170,7 +170,7 @@ p.western {
 			</tr>
 			<tr>
 				<td align="right">
-					Total USD ${ctx.order.totalPrice.formattedValue}
+					Total ${ctx.order.totalPrice.formattedValue}
 				</td>
 			</tr>
 
@@ -352,7 +352,7 @@ p.western {
     </tr>
     <tr>
       <td>SHIP FROM: $!{ctx.warehouse} </td>
-      <td>SHIP TO: $!{ctx.order.deliveryAddress.formattedAddress}</td>
+      <td>SHIP TO: $!{ctx.shipto}</td>
     </tr>
     <tr>
       <td>&nbsp;</td>

@@ -135,7 +135,7 @@ p.western {
     </tr>
     <tr>
       <td width="60%">SHIP FROM:  $!{ctx.warehouse} </td>
-      <td align="right">SHIP TO: $!{ctx.order.deliveryAddress.formattedAddress}</td>
+      <td align="right">SHIP TO: $!{ctx.shipto}</td>
     </tr>
     <tr>
       <td>Terms: $!{ctx.paymentTerms} </td>
@@ -149,7 +149,7 @@ p.western {
     <tr>
       <td width="67" height="7">Marks Numberse</td>
       <td width="236">Product name</td>
-      <td width="82">Total Weight<br> (Kg)</td>
+      <td width="82">Quantity<br> (Kg)</td>
       <td width="51"> Unit Price<br>(USD)</td>
       <td width="58"> Amount<br>(USD)</td>
 
@@ -340,7 +340,7 @@ p.western {
     </tr>
     <tr>
       <td>SHIP FROM: $!{ctx.warehouse}</td>
-      <td align="right">SHIP TO:$!{ctx.order.deliveryAddress.formattedAddress}</td>
+      <td align="right">SHIP TO:$!{ctx.shipto}</td>
     </tr>
     <tr>
       <td>&nbsp;</td>
