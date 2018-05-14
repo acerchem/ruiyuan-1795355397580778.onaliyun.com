@@ -15,6 +15,7 @@ public class PlaceOrderForm
 {
 	private String securityCode;
 	private boolean termsCheck;
+	
 
 	private String paymentCode;
 
