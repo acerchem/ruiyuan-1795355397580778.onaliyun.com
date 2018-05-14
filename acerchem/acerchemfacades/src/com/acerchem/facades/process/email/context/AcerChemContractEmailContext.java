@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Required;
 
 import com.acerchem.facades.process.email.context.pojo.AcerChemEmailContextUtils;
 import com.acerchem.facades.process.email.context.pojo.ContractEmailContextPoJo;
+import com.acerchem.facades.process.email.context.pojo.CustomerContactAddressOfEmailData;
 import com.acerchem.facades.process.email.context.pojo.ProductItemDataOfEmail;
 import com.acerchem.facades.process.email.context.pojo.ProductTotalDataOfEmail;
 
@@ -43,6 +44,9 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 	private CustomerModel customerModel;
 
 	private String moneyToWords;
+	
+	private String contactUser;
+	private String contactMobile;
 
 	@Override
 	public void init(final OrderProcessModel orderProcessModel, final EmailPageModel emailPageModel) {
@@ -111,6 +115,12 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 		if (customer != null) {
 			final Collection<AddressModel> addrs = customer.getAddresses();
 			address = AcerChemEmailContextUtils.getCustomerContactAddress(addrs);
+			
+			//增加contact 电话
+			final CustomerContactAddressOfEmailData objCustomAddress = AcerChemEmailContextUtils.getCustomerContactAddressData(addrs);
+			
+			setContactMobile(objCustomAddress.getContactPhone());
+			setContactUser(objCustomAddress.getContactUser());
 		}
 
 		this.customerAddress = address;
@@ -160,19 +170,20 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 					pie.setAmount("0.00");
 				}
 
-				// pie.setPackageWeight(priceData);
-				if (StringUtils.isNotBlank(product.getPackageWeight())) {
-					//计算包裹重量,圆整为整数
-					double entryPackageWeight=0;
-					if (AcerChemEmailContextUtils.isNumber(product.getPackageWeight())){
-						final double perPackageWeight = Double.valueOf(product.getPackageWeight());
-						entryPackageWeight = perPackageWeight * longQuantity;
-					}
-					
-					pie.setPackageWeight(Math.round(entryPackageWeight) + "/" + product.getPackageType());
-				} else {
-					pie.setPackageWeight("");
-				}
+				// pie.setPackageWeight( quantity + packageType)
+				pie.setPackageWeight(longQuantity + "/" + StringUtils.defaultString(product.getPackageType()));
+//				if (StringUtils.isNotBlank(product.getPackageWeight())) {
+//					//计算包裹重量,圆整为整数
+//					double entryPackageWeight=0;
+//					if (AcerChemEmailContextUtils.isNumber(product.getPackageWeight())){
+//						final double perPackageWeight = Double.valueOf(product.getPackageWeight());
+//						entryPackageWeight = perPackageWeight * longQuantity;
+//					}
+//					
+//					pie.setPackageWeight(Math.round(entryPackageWeight) + "/" + product.getPackageType());
+//				} else {
+//					pie.setPackageWeight("");
+//				}
 
 				pie.setTotal(false);
 				
@@ -280,6 +291,22 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 
 	public void setMoneyToWords(final String moneyToWords) {
 		this.moneyToWords = moneyToWords;
+	}
+
+	public String getContactMobile() {
+		return contactMobile;
+	}
+
+	public void setContactMobile(final String contactMobile) {
+		this.contactMobile = contactMobile;
+	}
+
+	public String getContactUser() {
+		return contactUser;
+	}
+
+	public void setContactUser(final String contactUser) {
+		this.contactUser = contactUser;
 	}
 
 }
