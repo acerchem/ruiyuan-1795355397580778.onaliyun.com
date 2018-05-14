@@ -135,8 +135,7 @@ p.western {
       <td width="150">Amount(USD)</td>
       <td >Package</td>
     </tr>
-     #foreach( $item in ${ctx.append.productLists} )
-      #if (!$item.isTotal )
+		#foreach( $item in ${ctx.append.productLists} )
         <tr>
           <td > ${item.productCode} </td>
           <td >${item.productName} </td>
@@ -144,9 +143,8 @@ p.western {
           <td > $!{item.totalWeight} </td>
           <td > ${item.price}</td>
           <td > ${item.amount} </td>
-          <td > $!{item.quantity} </td>
+          <td > $!{item.packageWeight} </td>
         </tr>
-      #end
       #end
       #if(${ctx.append.totalData})
         <tr>
