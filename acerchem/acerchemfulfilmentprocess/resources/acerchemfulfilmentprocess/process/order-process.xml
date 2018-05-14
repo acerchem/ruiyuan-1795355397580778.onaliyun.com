@@ -12,6 +12,11 @@
 <process xmlns="http://www.hybris.de/xsd/processdefinition" start="checkOrder" name="order-process" processClass="de.hybris.platform.orderprocessing.model.OrderProcessModel">
 
 	<action id="checkOrder" bean="checkOrderAction">
+		<transition name="OK" to="sendOrderPlacedNotification"/>
+		<transition name="NOK" to="error"/>
+	</action>
+	
+	<action id="sendOrderPlacedNotification" bean="sendOrderPlacedNotificationAction">
 		<transition name="OK" to="waitForAllConfirm"/>
 		<transition name="NOK" to="error"/>
 	</action>
