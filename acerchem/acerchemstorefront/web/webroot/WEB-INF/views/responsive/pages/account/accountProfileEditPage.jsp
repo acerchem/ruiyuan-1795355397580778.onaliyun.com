@@ -6,6 +6,7 @@
 <%@ taglib prefix="formElement" tagdir="/WEB-INF/tags/responsive/formElement" %>
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
+<%@ taglib prefix="footer" tagdir="/WEB-INF/tags/responsive/common/footer"  %>
 
 <div class="title">Personal Information</div>
 <div class="rigcont">
@@ -33,7 +34,7 @@
 				<div class="flex">
 					<span class='label-title' style="font-weight:normal;">Currency<span style="color:red;font-size: 100%;"> *</span></span>	
 					<div class="selbox">
-						<select name="currency" id="register.currency">
+						<select name="currency" id="currency">
 							<c:forEach items="${currencies}" var="curr">
 								<option value="${curr.isocode}" ${curr.isocode == customRegisterForm.currency ? 'selected="selected"' : ''}>
 									<c:out value="${curr.symbol} ${curr.isocode} "/>
@@ -42,6 +43,9 @@
 						</select>
 						<div style="color:#F00"><form:errors path="currency"/></div>
 					</div>	
+					
+					<%--   <footer:currencySelector currencies="${currencies}"
+                                                     currentCurrency="${currentCurrency}" /> --%>
 				</div>
 				<div class="flex">
 					<span class='label-title' style="font-weight:normal;">Language<span style="color:red;font-size: 100%;"> *</span></span>	
@@ -186,4 +190,19 @@ $(document).on("change",'#selectContactCountry select', function (){
 				$("#showContactRegions").html($(data).html());
 			});
 }) 
+
+ $(document).ready(function() {
+    $('#currency').change(function() {
+    	
+    	var currencyValue= this.value;
+    			
+    	 $.post('<c:url value='/_s/currency'/>', { code: currencyValue},
+		  function(arr){
+    	  
+    	  // alert(11111);
+    	   
+			   
+		  });
+    });
+}); 
 </script>
