@@ -120,7 +120,7 @@ $(document).ready(function(){
 			if(parseInt(setnum.val())>parseInt(spot.find('em').text())){
 				setnum.val(spot.find('em').text())
 			}
-			emvi = $('.prod-sum i em');
+			emvi = $('.prod-sum .delintro em');
 			
 			var Adate = "Delivery within " +avaReleaseDay+" days";
 			
@@ -138,7 +138,7 @@ $(document).ready(function(){
 		    var futureInventory =  $("#futureInventoryId option[value='"+$("#storeHidId").val()+"']").text();
 			
 			invi.text(futureInventory);
-			emvi = $('.prod-sum i em');
+			emvi = $('.prod-sum .delintro em');
 			//$('#avaReleaseDay').val(futureAvailableDate);
 			
 			var fdate = "Delivery after " +futureAvailableDate+" days";
