@@ -194,7 +194,7 @@
 						<div class="prod-sum">
 							<div class="m-setnum">
 							<span class="set sub">-</span>
-                              <input type="text" name="pdnum" class="set" value="1">								
+                              <input type="text" id="pdnum" name="pdnum" class="set" value="1">		
 								<span class="set add">+</span>
 								
 							</div>
