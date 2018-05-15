@@ -50,13 +50,15 @@ public class DefaultAcerchemCalculationService extends DefaultCalculationService
 	{
 		if (recalculate || orderRequiresCalculationStrategy.requiresCalculation(order))
 		{
+			double remainDiscountPrice = 0.0;
 			final CurrencyModel curr = order.getCurrency();
 			final int digits = curr.getDigits().intValue();
 			// subtotal
 			final double subtotal = order.getSubtotal().doubleValue();
 			// discounts
-			
-			double remainDiscountPrice = (order.getUser().getUserLevel().getDiscount())*(order.getSubtotal());
+			if(order.getUser().getUserLevel() != null && order.getUser().getUserLevel().getDiscount() != null && !"".equals(order.getUser().getUserLevel().getDiscount())){
+				remainDiscountPrice = (order.getUser().getUserLevel().getDiscount())*(order.getSubtotal());
+			}
 			double totalDiscounts = calculateDiscountValues(order, recalculate);
 			totalDiscounts =subtotal - remainDiscountPrice;
 			final double roundedTotalDiscounts = commonI18NService.roundCurrency(totalDiscounts, digits);
