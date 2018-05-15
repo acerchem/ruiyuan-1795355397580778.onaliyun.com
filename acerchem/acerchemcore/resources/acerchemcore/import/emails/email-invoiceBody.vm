@@ -149,16 +149,16 @@ p.western {
     <tr>
       <td width="67" height="7">Marks Numberse</td>
       <td width="236">Product name</td>
-      <td width="82">Quantity<br> (Kg)</td>
-      <td width="51"> Unit Price<br>(USD)</td>
-      <td width="58"> Amount<br>(USD)</td>
+      <td width="82">Quantity<br/> (Kg)</td>
+      <td width="51"> Unit Price</td>
+      <td width="58"> Amount</td>
 
     </tr>
 	 #foreach( $entry in ${ctx.order.entries} )
 		<tr>
 		  <td width="67" height="7"> N/M </td>
 		  <td width="206" > ${entry.product.name} </td>
-		  <td width="82" > ${entry.totalWeight} </td>
+		  <td width="82" > $!{entry.totalWeight} </td>
 		  <td width="51" > ${entry.baseRealPrice.formattedValue} </td>
 		  <td width="58" > ${entry.totalRealPrice.formattedValue} </td>
 		</tr>
@@ -364,7 +364,7 @@ p.western {
         (KGS) </td>
     </tr>
 	 #foreach( $item in ${ctx.append.productLists} )
-		#if (!$item.isTotal )
+		#if (!$item.isTotal() )
 		<tr>
 		  <td width="67" height="7" class="table3">  ${item.productCode} </td>
 		  <td width="206" > ${item.productName} </td>

@@ -1,6 +1,8 @@
 package com.acerchem.facades.process.email.context;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -130,6 +132,15 @@ public class AcerChemDeliveryNoteEmailContext extends AbstractEmailContext<Order
 	public String getCustomerAddress() {
 		return this.customerAddress;
 	}
+	
+	//add  productCode comparator
+	private static final Comparator<ConsignmentEntryData> productCodeComparator = new Comparator<ConsignmentEntryData>() {
+		@Override
+		public int compare(final ConsignmentEntryData o1, final ConsignmentEntryData o2)
+		{
+			return o1.getOrderEntry().getProduct().getCode().compareTo(o2.getOrderEntry().getProduct().getCode());
+		}
+	};
 
 	// initialize append data
 	public void initAppend() {
@@ -160,6 +171,8 @@ public class AcerChemDeliveryNoteEmailContext extends AbstractEmailContext<Order
 				final List<ConsignmentEntryData> entryLists = consignment.getEntries();
 
 				if (entryLists != null) {
+					
+					Collections.sort(entryLists,productCodeComparator);
 					for (final ConsignmentEntryData consignEntry : entryLists) {
 
 						final ProductData product = consignEntry.getOrderEntry().getProduct();
@@ -193,9 +206,13 @@ public class AcerChemDeliveryNoteEmailContext extends AbstractEmailContext<Order
 						String tempGross = StringUtils.defaultString(product.getGrossWeight(),"0");
 						if(!StringUtils.isNumeric(tempNet)){
 							tempNet = "0";
+						}else{
+							tempNet = String.valueOf(Long.valueOf(tempNet) * consignEntry.getQuantity());
 						}
 						if(!StringUtils.isNumeric(tempGross)){
 							tempGross = "0";
+						}else{
+							tempGross = String.valueOf(Long.valueOf(tempGross) * consignEntry.getQuantity());
 						}
 						pie.setNetWeight(tempNet);
 						pie.setGrossWeight(tempGross);

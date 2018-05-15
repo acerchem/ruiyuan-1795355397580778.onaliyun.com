@@ -175,9 +175,13 @@ public class AcerChemReleaseNoteEmailContext extends AbstractEmailContext<OrderP
 						String tempGross = StringUtils.defaultString(product.getGrossWeight(), "0");
 						if (!StringUtils.isNumeric(tempNet)) {
 							tempNet = "0";
+						}else{
+							tempNet = String.valueOf(Long.valueOf(tempNet) * consignEntry.getQuantity());
 						}
 						if (!StringUtils.isNumeric(tempGross)) {
 							tempGross = "0";
+						}else{
+							tempGross = String.valueOf(Long.valueOf(tempGross) * consignEntry.getQuantity());
 						}
 						pie.setNetWeight(tempNet);
 						pie.setGrossWeight(tempGross);

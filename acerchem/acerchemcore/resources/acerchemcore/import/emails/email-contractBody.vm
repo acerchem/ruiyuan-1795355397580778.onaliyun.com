@@ -131,8 +131,8 @@ p.western {
       <td width="180" >Name</td>
       <td width="60" >Unit</td>
       <td width="80" >Quantity</td>
-      <td width="80" >Price(USD)</td>
-      <td width="150">Amount(USD)</td>
+      <td width="80" >Price</td>
+      <td width="150">Amount</td>
       <td >Package</td>
     </tr>
 		#foreach( $item in ${ctx.append.productLists} )
