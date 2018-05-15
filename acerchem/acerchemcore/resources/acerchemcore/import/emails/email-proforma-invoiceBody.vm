@@ -93,9 +93,9 @@ p.western {
       <td>INVOICE NO.: ${ctx.order.code}</td>
       <td>&nbsp;</td>
     </tr>
-	#set ($formattedOrderDate =  $ctx.order.waitDeliveiedDate)
+	#set ($formattedOrderDate =  $ctx.invoiceDate)
     <tr>
-      <td>DATE: ${formattedOrderDate}</td>
+      <td>DATE: $!{formattedOrderDate}</td>
       <td>&nbsp;</td>
     </tr>
     
@@ -131,8 +131,8 @@ p.western {
       <td>&nbsp;</td>
     </tr>
     <tr>
-      <td width="60%">SHIP FROM:  $!{ctx.warehouse} </td>
-      <td align="right">SHIP TO: ${ctx.order.deliveryAddress.formattedAddress}</td>
+      <td width="60%">SHIP FROM:  $!{ctx.warehouse}  </td>
+      <td align="right">SHIP TO: ${ctx.shipto}</td>
     </tr>
     <tr>
       <td>Terms: $!{ctx.paymentTerms} </td>
@@ -146,7 +146,7 @@ p.western {
     <tr>
       <td width="67" height="7">Marks Numberse</td>
       <td width="236">Product name</td>
-      <td width="82">Total Weight<br> (Kg)</td>
+      <td width="82">Quantity<br> (Kg)</td>
       <td width="51"> Unit Price<br>(USD)</td>
       <td width="58"> Amount<br>(USD)</td>
     </tr>
@@ -155,8 +155,8 @@ p.western {
 		  <td width="67" height="7"> N/M </td>
 		  <td width="206" > ${entry.product.name} </td>
 		  <td width="82" > ${entry.totalWeight} </td>
-		  <td width="51" > ${entry.basePrice.formattedValue} </td>
-		  <td width="58" > ${entry.totalPrice.formattedValue} </td>
+		  <td width="51" > ${entry.baseRealPrice.formattedValue} </td>
+		  <td width="58" > ${entry.totalRealPrice.formattedValue} </td>
 		</tr>
 	#end
     <tr>

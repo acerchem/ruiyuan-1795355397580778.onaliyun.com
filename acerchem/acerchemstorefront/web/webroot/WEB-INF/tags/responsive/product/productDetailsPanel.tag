@@ -194,14 +194,14 @@
 						<div class="prod-sum">
 							<div class="m-setnum">
 							<span class="set sub">-</span>
-                              <input type="text" name="pdnum" class="set" value="1">								
+                              <input type="text" id="pdnum" name="pdnum" class="set" value="1">		
 								<span class="set add">+</span>
 								
 							</div>
 							<%-- <c:forEach var="${countrys}" var="data1" begin="0" end="1"> --%>
 						<c:forEach items="${countrys}" var="data"  varStatus="id"  >
 						<c:if test="${id.index==0}">
-							    <i class="delintro"><em>Delivery within &nbsp ${data.avaReleaseDay} &nbsp days</em></i>
+							    <i class="delint"><em>${product.packageType}</em></i><i class="delintro"><em>Delivery within &nbsp ${data.avaReleaseDay} &nbsp days</em></i>
 						</c:if>	
                         </c:forEach>
                         <input type="hidden" value="" name="avaReleaseDay"  id="avaReleaseDay">

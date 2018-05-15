@@ -1,7 +1,6 @@
 package com.acerchem.facades.process.email.context;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -11,7 +10,6 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 
-import com.acerchem.facades.process.email.context.pojo.AcerChemEmailContextUtils;
 import com.acerchem.facades.process.email.context.pojo.CustomerContactAddressOfEmailData;
 import com.acerchem.facades.process.email.context.pojo.DeliveryNoteEmailContextPoJo;
 import com.acerchem.facades.process.email.context.pojo.ProductItemDataOfEmail;
@@ -25,9 +23,9 @@ import de.hybris.platform.commercefacades.order.data.ConsignmentData;
 import de.hybris.platform.commercefacades.order.data.ConsignmentEntryData;
 import de.hybris.platform.commercefacades.order.data.OrderData;
 import de.hybris.platform.commercefacades.product.data.ProductData;
+import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.core.model.c2l.LanguageModel;
 import de.hybris.platform.core.model.order.OrderModel;
-import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
@@ -101,16 +99,27 @@ public class AcerChemDeliveryNoteEmailContext extends AbstractEmailContext<Order
 
 	private void initCustomerAddress(final OrderProcessModel orderProcessModel) {
 
-		String address = "";
-		CustomerContactAddressOfEmailData addressData = new CustomerContactAddressOfEmailData();
-		CustomerModel customer = getCustomer(orderProcessModel);
-		if (customer != null) {
-			Collection<AddressModel> addrs = customer.getAddresses();
-			address = AcerChemEmailContextUtils.getCustomerContactAddress(addrs,"SHIPPING");
-			addressData = AcerChemEmailContextUtils.getCustomerContactAddressData(addrs,"SHIPPING");
-			
-		}
+		final String address = "";
+		final CustomerContactAddressOfEmailData addressData = new CustomerContactAddressOfEmailData();
+//		CustomerModel customer = getCustomer(orderProcessModel);
+//		if (customer != null) {
+//			Collection<AddressModel> addrs = customer.getAddresses();
+//			address = AcerChemEmailContextUtils.getCustomerContactAddress(addrs,"SHIPPING");
+//			addressData = AcerChemEmailContextUtils.getCustomerContactAddressData(addrs,"SHIPPING");
+//			
+//		}
 
+		final AddressData  orderAddressData = orderData.getDeliveryAddress();
+		
+		if(orderAddressData != null){
+			addressData.setCountry(orderAddressData.getCountry().getName());
+			addressData.setRegion(orderAddressData.getRegion().getName());
+			addressData.setTown(orderAddressData.getTown());
+			
+			addressData.setContactPhone(orderAddressData.getPhone());
+			addressData.setContactUser(orderAddressData.getLastName());
+		}
+		
 		this.customerAddress = address;
 		this.customerAddressData = addressData;
 
@@ -124,12 +133,12 @@ public class AcerChemDeliveryNoteEmailContext extends AbstractEmailContext<Order
 
 	// initialize append data
 	public void initAppend() {
-		DeliveryNoteEmailContextPoJo pojo = new DeliveryNoteEmailContextPoJo();
+		final DeliveryNoteEmailContextPoJo pojo = new DeliveryNoteEmailContextPoJo();
 		// todo ...
 
 		// add list
-		List<ProductItemDataOfEmail> list = new ArrayList<ProductItemDataOfEmail>();
-		List<ConsignmentData> consignments = orderData.getConsignments();
+		final List<ProductItemDataOfEmail> list = new ArrayList<ProductItemDataOfEmail>();
+		final List<ConsignmentData> consignments = orderData.getConsignments();
 		
 //		List<ConsignmentEntryData> consignmentEntries = orderData.getConsignments().stream()
 //				.filter(x->CollectionUtils.isNotEmpty(x.getEntries()))
@@ -146,20 +155,20 @@ public class AcerChemDeliveryNoteEmailContext extends AbstractEmailContext<Order
 
 		int batchNum = 0;
 		if (CollectionUtils.isNotEmpty(consignments)) {
-			for (ConsignmentData consignment : consignments) {
+			for (final ConsignmentData consignment : consignments) {
 
-				List<ConsignmentEntryData> entryLists = consignment.getEntries();
+				final List<ConsignmentEntryData> entryLists = consignment.getEntries();
 
 				if (entryLists != null) {
-					for (ConsignmentEntryData consignEntry : entryLists) {
+					for (final ConsignmentEntryData consignEntry : entryLists) {
 
-						ProductData product = consignEntry.getOrderEntry().getProduct();
+						final ProductData product = consignEntry.getOrderEntry().getProduct();
 
-						ProductItemDataOfEmail pie = new ProductItemDataOfEmail();
+						final ProductItemDataOfEmail pie = new ProductItemDataOfEmail();
 
 						if (StringUtils.isNotBlank(tempName)) {
 							if (!tempName.equals(product.getName())) {
-								ProductItemDataOfEmail totalPie = new ProductItemDataOfEmail();
+								final ProductItemDataOfEmail totalPie = new ProductItemDataOfEmail();
 
 								totalPie.setProductName("subTotal");
 								totalPie.setGrossWeight(String.valueOf(itemGross));
@@ -207,7 +216,7 @@ public class AcerChemDeliveryNoteEmailContext extends AbstractEmailContext<Order
 			}
 			//add last item project
 			if (batchNum > 1){
-				ProductItemDataOfEmail lastPie = new ProductItemDataOfEmail();
+				final ProductItemDataOfEmail lastPie = new ProductItemDataOfEmail();
 
 				lastPie.setProductName("subTotal");
 				lastPie.setGrossWeight(String.valueOf(itemGross));
@@ -223,7 +232,7 @@ public class AcerChemDeliveryNoteEmailContext extends AbstractEmailContext<Order
 
 		// add total
 
-		ProductTotalDataOfEmail totalData = new ProductTotalDataOfEmail();
+		final ProductTotalDataOfEmail totalData = new ProductTotalDataOfEmail();
 		totalData.setQuantity(String.valueOf(quantity));
 		totalData.setNetWeight(String.valueOf(net));
 		totalData.setGrossWeight(String.valueOf(gross));
@@ -237,7 +246,7 @@ public class AcerChemDeliveryNoteEmailContext extends AbstractEmailContext<Order
 		return append;
 	}
 
-	public void setAppend(DeliveryNoteEmailContextPoJo append) {
+	public void setAppend(final DeliveryNoteEmailContextPoJo append) {
 		this.append = append;
 	}
 
@@ -284,14 +293,14 @@ public class AcerChemDeliveryNoteEmailContext extends AbstractEmailContext<Order
 	/**
 	 * @param contactUser the contactUser to set
 	 */
-	public void setContactUser(String contactUser) {
+	public void setContactUser(final String contactUser) {
 		this.contactUser = contactUser;
 	}
 
 	/**
 	 * @param contactMobile the contactMobile to set
 	 */
-	public void setContactMobile(String contactMobile) {
+	public void setContactMobile(final String contactMobile) {
 		this.contactMobile = contactMobile;
 	}
 
@@ -299,7 +308,7 @@ public class AcerChemDeliveryNoteEmailContext extends AbstractEmailContext<Order
 		return customerAddressData;
 	}
 
-	public void setCustomerAddressData(CustomerContactAddressOfEmailData customerAddressData) {
+	public void setCustomerAddressData(final CustomerContactAddressOfEmailData customerAddressData) {
 		this.customerAddressData = customerAddressData;
 	}
 

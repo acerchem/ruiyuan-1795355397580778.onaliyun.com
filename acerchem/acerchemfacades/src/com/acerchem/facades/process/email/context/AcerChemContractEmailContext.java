@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Required;
 
 import com.acerchem.facades.process.email.context.pojo.AcerChemEmailContextUtils;
 import com.acerchem.facades.process.email.context.pojo.ContractEmailContextPoJo;
+import com.acerchem.facades.process.email.context.pojo.CustomerContactAddressOfEmailData;
 import com.acerchem.facades.process.email.context.pojo.ProductItemDataOfEmail;
 import com.acerchem.facades.process.email.context.pojo.ProductTotalDataOfEmail;
 
@@ -43,6 +44,9 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 	private CustomerModel customerModel;
 
 	private String moneyToWords;
+	
+	private String contactUser;
+	private String contactMobile;
 
 	@Override
 	public void init(final OrderProcessModel orderProcessModel, final EmailPageModel emailPageModel) {
@@ -107,10 +111,16 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 	private void initCustomerAddress(final OrderProcessModel orderProcessModel) {
 
 		String address = "";
-		CustomerModel customer = getCustomer(orderProcessModel);
+		final CustomerModel customer = getCustomer(orderProcessModel);
 		if (customer != null) {
-			Collection<AddressModel> addrs = customer.getAddresses();
+			final Collection<AddressModel> addrs = customer.getAddresses();
 			address = AcerChemEmailContextUtils.getCustomerContactAddress(addrs);
+			
+			//增加contact 电话
+			final CustomerContactAddressOfEmailData objCustomAddress = AcerChemEmailContextUtils.getCustomerContactAddressData(addrs);
+			
+			setContactMobile(objCustomAddress.getContactPhone());
+			setContactUser(objCustomAddress.getContactUser());
 		}
 
 		this.customerAddress = address;
@@ -123,61 +133,62 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 
 	// initialize append data
 	public void initAppend() {
-		ContractEmailContextPoJo pojo = new ContractEmailContextPoJo();
+		final ContractEmailContextPoJo pojo = new ContractEmailContextPoJo();
 		// todo ...
 
 		// add list
-		List<ProductItemDataOfEmail> list = new ArrayList<ProductItemDataOfEmail>();
-		List<OrderEntryData> orderEntries = orderData.getEntries();
+		final List<ProductItemDataOfEmail> list = new ArrayList<ProductItemDataOfEmail>();
+		final List<OrderEntryData> orderEntries = orderData.getEntries();
 
 		long quantity = 0;
 		long sumTotalWeight=0;
 		if (CollectionUtils.isNotEmpty(orderEntries)) {
-			for (OrderEntryData orderEntry : orderEntries) {
+			for (final OrderEntryData orderEntry : orderEntries) {
 
-				ProductData product = orderEntry.getProduct();
+				final ProductData product = orderEntry.getProduct();
 
-				ProductItemDataOfEmail pie = new ProductItemDataOfEmail();
+				final ProductItemDataOfEmail pie = new ProductItemDataOfEmail();
 
 				pie.setProductCode(product.getCode());
 				pie.setProductName(product.getName());
 				pie.setUnitName(product.getUnitName());
 
-				long longQuantity = orderEntry.getQuantity();
+				final long longQuantity = orderEntry.getQuantity();
 				pie.setQuantity(String.valueOf(longQuantity));
 
-				PriceData basePrice = orderEntry.getBaseRealPrice();
+				final PriceData basePrice = orderEntry.getBaseRealPrice();
 				if (basePrice != null) {
 					pie.setPrice(basePrice.getFormattedValue());
 				} else {
 					pie.setPrice("0.00");
 				}
 
-				PriceData amountPrice = orderEntry.getTotalRealPrice();
+				final PriceData amountPrice = orderEntry.getTotalRealPrice();
 				if (amountPrice != null) {
 					pie.setAmount(amountPrice.getFormattedValue());
 				} else {
 					pie.setAmount("0.00");
 				}
 
-				// pie.setPackageWeight(priceData);
-				if (StringUtils.isNotBlank(product.getPackageWeight())) {
-					//计算包裹重量,圆整为整数
-					double entryPackageWeight=0;
-					if (AcerChemEmailContextUtils.isNumber(product.getPackageWeight())){
-						double perPackageWeight = Double.valueOf(product.getPackageWeight());
-						entryPackageWeight = perPackageWeight * longQuantity;
-					}
-					
-					pie.setPackageWeight(Math.round(entryPackageWeight) + "/" + product.getPackageType());
-				} else {
-					pie.setPackageWeight("");
-				}
+				// pie.setPackageWeight( quantity + packageType)
+				pie.setPackageWeight(longQuantity + "/" + StringUtils.defaultString(product.getPackageType()));
+//				if (StringUtils.isNotBlank(product.getPackageWeight())) {
+//					//计算包裹重量,圆整为整数
+//					double entryPackageWeight=0;
+//					if (AcerChemEmailContextUtils.isNumber(product.getPackageWeight())){
+//						final double perPackageWeight = Double.valueOf(product.getPackageWeight());
+//						entryPackageWeight = perPackageWeight * longQuantity;
+//					}
+//					
+//					pie.setPackageWeight(Math.round(entryPackageWeight) + "/" + product.getPackageType());
+//				} else {
+//					pie.setPackageWeight("");
+//				}
 
 				pie.setTotal(false);
 				
 				//增加单位总重量
-				long pWeight =orderEntry.getTotalWeight();
+				final long pWeight =orderEntry.getTotalWeight();
 				pie.setTotalWeight(String.valueOf(pWeight));
 
 				quantity += orderEntry.getQuantity();
@@ -187,10 +198,10 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 				// warehouse
 				if (StringUtils.isBlank(warehouse)) {
 					// String warehouseCode = orderEntry.getWarehouseCode();
-					PointOfServiceData pos = orderEntry.getDeliveryPointOfService();
+					final PointOfServiceData pos = orderEntry.getDeliveryPointOfService();
 					if (pos != null) {
 
-						setWarehouse(StringUtils.defaultString(pos.getAddress().getFormattedAddress(), "&nbsp;"));
+						setWarehouse(StringUtils.defaultString(pos.getName(), "&nbsp;"));
 
 					}
 
@@ -204,10 +215,10 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 		// add total
 
 		String totalPriceStr = "0.00";
-		ProductTotalDataOfEmail totalData = new ProductTotalDataOfEmail();
+		final ProductTotalDataOfEmail totalData = new ProductTotalDataOfEmail();
 		//totalData.setQuantity(String.valueOf(quantity));
 		totalData.setQuantity(String.valueOf(sumTotalWeight));
-		PriceData totalPrice = orderData.getTotalPrice();
+		final PriceData totalPrice = orderData.getTotalPrice();
 		if (totalPrice != null) {
 			totalData.setAmountTotal(totalPrice.getFormattedValue());
 			totalPriceStr = totalPrice.getValue().toString();
@@ -227,16 +238,16 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 
 	public void initPaymentTerms(final OrderProcessModel orderProcessModel) {
 
-		String paymentMode = orderData.getPaymentMode();
-		String terms = AcerChemEmailContextUtils.getPaymementTerms(orderProcessModel, paymentMode);
-		this.setPaymentTerms(terms);
+		final String paymentMode = orderData.getPaymentMode();
+		final String terms = AcerChemEmailContextUtils.getPaymementTerms(orderProcessModel, paymentMode);
+		setPaymentTerms(terms);
 	}
 
 	public ContractEmailContextPoJo getAppend() {
 		return append;
 	}
 
-	public void setAppend(ContractEmailContextPoJo append) {
+	public void setAppend(final ContractEmailContextPoJo append) {
 		this.append = append;
 	}
 
@@ -255,7 +266,7 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 	 * @param paymentTerms
 	 *            the paymentTerms to set
 	 */
-	public void setPaymentTerms(String paymentTerms) {
+	public void setPaymentTerms(final String paymentTerms) {
 		this.paymentTerms = paymentTerms;
 	}
 
@@ -270,7 +281,7 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 	 * @param warehouse
 	 *            the warehouse to set
 	 */
-	public void setWarehouse(String warehouse) {
+	public void setWarehouse(final String warehouse) {
 		this.warehouse = warehouse;
 	}
 
@@ -278,8 +289,24 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 		return moneyToWords;
 	}
 
-	public void setMoneyToWords(String moneyToWords) {
+	public void setMoneyToWords(final String moneyToWords) {
 		this.moneyToWords = moneyToWords;
+	}
+
+	public String getContactMobile() {
+		return contactMobile;
+	}
+
+	public void setContactMobile(final String contactMobile) {
+		this.contactMobile = contactMobile;
+	}
+
+	public String getContactUser() {
+		return contactUser;
+	}
+
+	public void setContactUser(final String contactUser) {
+		this.contactUser = contactUser;
 	}
 
 }
