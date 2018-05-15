@@ -113,11 +113,13 @@ public class DefaultAcerchemCalculationService extends DefaultCalculationService
 	public void calculateEntries(final AbstractOrderModel order, final boolean forceRecalculate) throws CalculationException
 	{
 		double subtotal = 0.0;
+		double entrySubtotal = 0.0;
 		for (final AbstractOrderEntryModel e : order.getEntries())
 		{
 			recalculateOrderEntryIfNeeded(e, forceRecalculate);
 			subtotal += (e.getBasePrice() * Double.parseDouble(e.getProduct().getNetWeight())* e.getQuantity());
-			e.setTotalPrice(subtotal);
+			entrySubtotal = (e.getBasePrice() * Double.parseDouble(e.getProduct().getNetWeight())* e.getQuantity());
+			e.setTotalPrice(entrySubtotal);
 			modelService.save(e);
 		}
 		order.setTotalPrice(Double.valueOf(subtotal));
