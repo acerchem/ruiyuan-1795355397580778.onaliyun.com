@@ -41,8 +41,8 @@ public class AcerChemDeliveryNoteEmailContext extends AbstractEmailContext<Order
 	private DeliveryNoteEmailContextPoJo append;
 	private CustomerModel customerModel;  
 	
-	private String contactUser="";
-	private String contactMobile="";
+	private String contactUser;
+	private String contactMobile;
 	
 	@Resource
 	private ContactInfoService contactInfoService;
@@ -215,7 +215,7 @@ public class AcerChemDeliveryNoteEmailContext extends AbstractEmailContext<Order
 				
 			}
 			//add last item project
-			if (batchNum > 1){
+			if (batchNum > 0){
 				final ProductItemDataOfEmail lastPie = new ProductItemDataOfEmail();
 
 				lastPie.setProductName("subTotal");
