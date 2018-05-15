@@ -10,25 +10,22 @@
  */
 package com.acerchem.core.service.impl;
 
+import java.util.Map;
+import java.util.Set;
+
+import javax.annotation.Resource;
+
+import org.apache.log4j.Logger;
+
 import de.hybris.platform.core.model.c2l.CurrencyModel;
 import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.AbstractOrderModel;
-import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.order.exceptions.CalculationException;
 import de.hybris.platform.order.impl.DefaultCalculationService;
 import de.hybris.platform.order.strategies.calculation.OrderRequiresCalculationStrategy;
 import de.hybris.platform.servicelayer.i18n.CommonI18NService;
-import de.hybris.platform.util.DiscountValue;
-import de.hybris.platform.util.PriceValue;
+import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.util.TaxValue;
-import org.apache.log4j.Logger;
-
-import javax.annotation.Resource;
-import java.math.BigDecimal;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 
 /**
@@ -41,6 +38,9 @@ public class DefaultAcerchemCalculationService extends DefaultCalculationService
 
 	@Resource
 	private OrderRequiresCalculationStrategy orderRequiresCalculationStrategy;
+	
+	@Resource
+	private ModelService modelService;
 
 	@Resource
 	private CommonI18NService commonI18NService;
@@ -108,5 +108,19 @@ public class DefaultAcerchemCalculationService extends DefaultCalculationService
 			// notify manual discouns - needed?
 			//notifyDiscountsAboutCalculation();
 		}
+	}
+	
+	public void calculateEntries(final AbstractOrderModel order, final boolean forceRecalculate) throws CalculationException
+	{
+		double subtotal = 0.0;
+		for (final AbstractOrderEntryModel e : order.getEntries())
+		{
+			recalculateOrderEntryIfNeeded(e, forceRecalculate);
+			subtotal += (e.getBasePrice() * Double.parseDouble(e.getProduct().getNetWeight())* e.getQuantity());
+			e.setTotalPrice(subtotal);
+			modelService.save(e);
+		}
+		order.setTotalPrice(Double.valueOf(subtotal));
+
 	}
 }

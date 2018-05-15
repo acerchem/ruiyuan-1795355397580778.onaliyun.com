@@ -135,28 +135,28 @@ public class DefaultAcerchemCommercePlaceOrderStrategy extends DefaultCommercePl
 					orderModel.setDeliveryAddress(cartModel.getDeliveryAddress());
 					
 				}
-				List<AbstractOrderEntryModel> orderEntries = new ArrayList<AbstractOrderEntryModel>();
+				//List<AbstractOrderEntryModel> orderEntries = new ArrayList<AbstractOrderEntryModel>();
 				
 				//double subTotal = 0;
 				//double total=0;
 				
 				
 				
-				for (AbstractOrderEntryModel aoe: orderModel.getEntries()){
-					
-					double basePrice =	aoe.getBasePrice();
-					Long totalWeight = (aoe.getQuantity())*(Long.parseLong(aoe.getProduct().getNetWeight()));
-					aoe.setTotalWeight(new Long(totalWeight).intValue());
-                    Double totalPrice =basePrice*totalWeight;
-			        
-                    aoe.setTotalPrice(totalPrice);
-					orderEntries.add(aoe);
-					
-					//subTotal += totalPrice;
-				}
+//				for (AbstractOrderEntryModel aoe: orderModel.getEntries()){
+//					
+//					double basePrice =	aoe.getBasePrice();
+//					Long totalWeight = (aoe.getQuantity())*(Long.parseLong(aoe.getProduct().getNetWeight()));
+//					aoe.setTotalWeight(new Long(totalWeight).intValue());
+//                    Double totalPrice =basePrice*totalWeight;
+//			        
+//                    aoe.setTotalPrice(totalPrice);
+//					orderEntries.add(aoe);
+//					
+//					//subTotal += totalPrice;
+//				}
 				
 				//total+=subTotal;
-				orderModel.setEntries(orderEntries);
+				//orderModel.setEntries(orderEntries);
 				
 				//orderModel.setSubtotal(subTotal);
 				
