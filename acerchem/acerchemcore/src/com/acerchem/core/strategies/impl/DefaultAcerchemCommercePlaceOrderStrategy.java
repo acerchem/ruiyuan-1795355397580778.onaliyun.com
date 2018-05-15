@@ -135,51 +135,19 @@ public class DefaultAcerchemCommercePlaceOrderStrategy extends DefaultCommercePl
 					orderModel.setDeliveryAddress(cartModel.getDeliveryAddress());
 					
 				}
-				//List<AbstractOrderEntryModel> orderEntries = new ArrayList<AbstractOrderEntryModel>();
+				List<AbstractOrderEntryModel> orderEntries = new ArrayList<AbstractOrderEntryModel>();
+				for (AbstractOrderEntryModel aoe: orderModel.getEntries()){
+					
+					Long totalWeight = (aoe.getQuantity())*(Long.parseLong(aoe.getProduct().getNetWeight()));
+					aoe.setTotalWeight(new Long(totalWeight).intValue());
+					orderEntries.add(aoe);
+				}
 				
-				//double subTotal = 0;
-				//double total=0;
-				
-				
-				
-//				for (AbstractOrderEntryModel aoe: orderModel.getEntries()){
-//					
-//					double basePrice =	aoe.getBasePrice();
-//					Long totalWeight = (aoe.getQuantity())*(Long.parseLong(aoe.getProduct().getNetWeight()));
-//					aoe.setTotalWeight(new Long(totalWeight).intValue());
-//                    Double totalPrice =basePrice*totalWeight;
-//			        
-//                    aoe.setTotalPrice(totalPrice);
-//					orderEntries.add(aoe);
-//					
-//					//subTotal += totalPrice;
-//				}
-				
-				//total+=subTotal;
-				//orderModel.setEntries(orderEntries);
-				
-				//orderModel.setSubtotal(subTotal);
-				
-				//if (orderModel.getDeliveryCost()>0){
-					//total+=orderModel.getDeliveryCost();
-				//}
-				
-				//orderModel.setTotalPrice(total);
+				orderModel.setEntries(orderEntries);
 				
 				getModelService().save(orderModel);
 				// Transfer promotions to the order
 				getPromotionsService().transferPromotionsToOrder(cartModel, orderModel, false);
-
-				// Calculate the order now that it has been copied
-			/*	try
-				{
-					getCalculationService().calculateTotals(orderModel, false);
-					getExternalTaxesService().calculateExternalTaxes(orderModel);
-				}
-				catch (final CalculationException ex)
-				{
-					LOG.error("Failed to calculate order [" + orderModel + "]", ex);
-				}*/
 
 				getModelService().refresh(orderModel);
 				getModelService().refresh(customer);
