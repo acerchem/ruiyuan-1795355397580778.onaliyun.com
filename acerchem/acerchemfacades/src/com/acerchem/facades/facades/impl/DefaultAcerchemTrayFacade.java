@@ -79,6 +79,9 @@ public class DefaultAcerchemTrayFacade implements AcerchemTrayFacade {
                 BigDecimal entryTrayAmount = BigDecimal.valueOf(quantity).divide(new BigDecimal(unitCalculateRato),BigDecimal.ROUND_HALF_UP,BigDecimal.ROUND_DOWN);
 
                 totalTrayAmount =totalTrayAmount.add(entryTrayAmount);
+                if(totalTrayAmount.intValue() > 20){
+                	totalTrayAmount = new BigDecimal(20);
+                }
             }
             
             CountryModel countryModel = commonI18NService.getCountry(addressData.getCountry().getIsocode());

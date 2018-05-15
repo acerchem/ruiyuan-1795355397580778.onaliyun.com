@@ -423,8 +423,14 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
 
             //总托盘比例
             BigDecimal totalUnitCalculateRato = BigDecimal.ZERO;
+            //总托盘数量
+            BigDecimal totalUnitCalculateQuantity = BigDecimal.ZERO;
             for (AbstractOrderEntryModel aoe: orderModel.getEntries()){
                 Double entryUnitCalculateRato = Double.valueOf(aoe.getProduct().getUnitCalculateRato());
+                BigDecimal entryQuantity = (BigDecimal.valueOf(aoe.getQuantity() * Long.parseLong(aoe.getProduct().getNetWeight())));
+                //托盘数量
+                BigDecimal entryTrayAmount = entryQuantity.divide(new BigDecimal(entryUnitCalculateRato),BigDecimal.ROUND_HALF_UP,BigDecimal.ROUND_DOWN);
+                totalUnitCalculateQuantity = totalUnitCalculateQuantity.add(entryTrayAmount);
                 totalUnitCalculateRato = totalUnitCalculateRato.add(BigDecimal.valueOf(entryUnitCalculateRato));
             }
             //总附加费用
@@ -453,18 +459,19 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                    entryTotalAdditionalFee = remainTotalDeliveryCost;
                }else {
 
-                   Double entryUnitCalculateRato = Double.valueOf(aoe.getProduct().getUnitCalculateRato());
+                   	Double entryUnitCalculateRato = Double.valueOf(aoe.getProduct().getUnitCalculateRato());
+                    BigDecimal entryQuantity = (BigDecimal.valueOf(aoe.getQuantity() * Long.parseLong(aoe.getProduct().getNetWeight())));
+                    //托盘数量
+                    BigDecimal entryTrayAmount = entryQuantity.divide(new BigDecimal(entryUnitCalculateRato),BigDecimal.ROUND_HALF_UP,BigDecimal.ROUND_DOWN);
                    //计算比例
-                   BigDecimal proportion = new BigDecimal(entryUnitCalculateRato).divide(totalUnitCalculateRato, BigDecimal.ROUND_CEILING, BigDecimal.ROUND_HALF_UP);
+                   BigDecimal proportion = entryTrayAmount.divide(totalUnitCalculateQuantity, BigDecimal.ROUND_CEILING, BigDecimal.ROUND_HALF_UP);
                    //计算entry total 运费
                    entryTotalAdditionalFee = proportion.multiply(totalAdditionalFee);
-
                    //剩余运费
-                   remainTotalDeliveryCost = totalAdditionalFee.subtract(entryTotalAdditionalFee);
-
+                   remainTotalDeliveryCost = remainTotalDeliveryCost.subtract(entryTotalAdditionalFee);
                }
                
-               BigDecimal quantity = (BigDecimal.valueOf(aoe.getQuantity() * Long.parseLong(aoe.getProduct().getNetWeight()) ));
+               BigDecimal quantity = (BigDecimal.valueOf(aoe.getQuantity() * Long.parseLong(aoe.getProduct().getNetWeight())));
                 //附加费单价
                BigDecimal entryDeliveryBasePrice = entryTotalAdditionalFee.divide(quantity, BigDecimal.ROUND_HALF_UP, BigDecimal.ROUND_HALF_UP);
                Double baseRealPrice = BigDecimal.valueOf(basePrice).add(entryDeliveryBasePrice).doubleValue();

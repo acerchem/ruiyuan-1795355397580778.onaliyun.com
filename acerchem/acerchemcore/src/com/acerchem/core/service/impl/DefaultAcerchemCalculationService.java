@@ -55,8 +55,10 @@ public class DefaultAcerchemCalculationService extends DefaultCalculationService
 			// subtotal
 			final double subtotal = order.getSubtotal().doubleValue();
 			// discounts
-
-			final double totalDiscounts = calculateDiscountValues(order, recalculate);
+			
+			double remainDiscountPrice = (order.getUser().getUserLevel().getDiscount())*(order.getSubtotal());
+			double totalDiscounts = calculateDiscountValues(order, recalculate);
+			totalDiscounts =subtotal - remainDiscountPrice;
 			final double roundedTotalDiscounts = commonI18NService.roundCurrency(totalDiscounts, digits);
 			order.setTotalDiscounts(Double.valueOf(roundedTotalDiscounts));
 			// set total

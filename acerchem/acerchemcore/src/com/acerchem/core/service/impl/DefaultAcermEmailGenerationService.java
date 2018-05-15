@@ -30,7 +30,7 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 		ServicesUtil.validateParameterNotNull(emailPageModel, "EmailPageModel cannot be null");
 		Assert.isInstanceOf(EmailPageTemplateModel.class, emailPageModel.getMasterTemplate(),
 				"MasterTemplate associated with EmailPageModel should be EmailPageTemplate");
-		final EmailMessageModel emailMessageModel;
+		EmailMessageModel emailMessageModel = null;
 		final EmailPageTemplateModel emailPageTemplateModel = (EmailPageTemplateModel) emailPageModel.getMasterTemplate();
 		
 		if("AcerchemSendEmployeeRegisterEmail".equalsIgnoreCase(emailPageTemplateModel.getUid()) || "AcerchemSendOrderConfirmEmail".equalsIgnoreCase(emailPageTemplateModel.getUid())){
@@ -108,9 +108,13 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 
 				final StringWriter body = new StringWriter();
 				getRendererService().render(bodyRenderTemplate, emailContext, body);
-				LOG.info("=======================generate2 start===================="+new Date());
-				emailMessageModel = createEmailMessage(subject.toString(), body.toString(), emailContext);
-				LOG.info("=======================generate2 end===================="+new Date());
+				if("CustomerRegistrationEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())){
+					LOG.info("=======================generate2 start===================="+new Date());
+					emailMessageModel = createSendEmployeeEmailUNCCMessage(subject.toString(), body.toString(), emailContext);
+					LOG.info("=======================generate2 end===================="+new Date());
+				}else{
+					emailMessageModel = createEmailMessage(subject.toString(), body.toString(), emailContext);
+				}
 
 				if (LOG.isDebugEnabled())
 				{
@@ -158,6 +162,19 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 				"email for employee");
 		return getEmailService().createEmailMessage(toEmails, new ArrayList<EmailAddressModel>(), new ArrayList<EmailAddressModel>(), fromAddress,
 				fromServerEmail, emailSubject, emailBody, null);
+	}
+	
+	protected EmailMessageModel createSendEmployeeEmailUNCCMessage(final String emailSubject, final String emailBody,
+			final AbstractEmailContext<BusinessProcessModel> emailContext)
+	{
+		final List<EmailAddressModel> toEmails = new ArrayList<EmailAddressModel>();
+		final EmailAddressModel toAddress = getEmailService().getOrCreateEmailAddressForEmail(emailContext.getToEmail(),
+				emailContext.getToDisplayName());
+		toEmails.add(toAddress);
+		final EmailAddressModel fromAddress = getEmailService().getOrCreateEmailAddressForEmail(emailContext.getFromEmail(),
+				emailContext.getFromDisplayName());
+		return getEmailService().createEmailMessage(toEmails, new ArrayList<EmailAddressModel>(),
+				new ArrayList<EmailAddressModel>(), fromAddress, emailContext.getFromEmail(), emailSubject, emailBody, null);
 	}
 	
 
