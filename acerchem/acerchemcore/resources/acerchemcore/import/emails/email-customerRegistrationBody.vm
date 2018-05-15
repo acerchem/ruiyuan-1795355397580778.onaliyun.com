@@ -3,7 +3,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Registration audit passed</title>
+<title>Registration submission</title>
 <style type="text/css">
 	@page {
 	margin-right: 0.79in;
@@ -21,18 +21,18 @@
 
 <body>
 <center>
-	<table class="font" width="600px" height="300px" frame="void">
+	<table class="font" width="600" height="300" frame="void">
 	<tbody>
-		<tr height="30px">
-			<td bgcolor="#006000">
-				&nbsp;
+		<tr height="30">
+			<td bgcolor="#006000">&nbsp;
+				
 			</td>
 		</tr>
-		<tr height="60px">
+		<tr height="60">
 			<td align="center">
-			<font size="5px" style="font-weight: 600" color="
+			<font size="5" style="font-weight: 600" color="
 			#006000">
-				Registration audit passed
+				Registration submission
 			</font>
 				
 			</td>
@@ -44,13 +44,13 @@
 		</tr>
 		<tr>
 			<td>
-				${ctx.messages.registerSuccess}
+				${ctx.messages.thankYou_customerRegister}
 				
 			</td>
 		</tr>
 		<tr>
 			<td>
-			${ctx.messages.instructionsContactUs_new} <a href="mailto:customerservice@acerchem.com"><font color="#006000" size="2">customerservice@acerchem.com</font></a>
+			${ctx.messages.contactus_customerRegister} <a href="mailto:customerservice@ingredients4u.com"><font color="#006000" size="2">Customerservice@ingredients4u.com</font></a>
 				
 				
 			</td>
@@ -62,9 +62,9 @@
 				
 			</td>
 		</tr>
-		<tr height="30px">
-			<td bgcolor="#006000">
-				&nbsp;
+		<tr height="30">
+			<td bgcolor="#006000">&nbsp;
+				
 			</td>
 		</tr>
 		</tbody>
