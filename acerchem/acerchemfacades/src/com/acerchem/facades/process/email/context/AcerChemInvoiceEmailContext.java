@@ -470,9 +470,9 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 		String dateStr="";
 		final DeliveryModeData dmData = orderData.getDeliveryMode();
 		if(dmData !=null){
-			if (dmData.getName().equals("DDP")){//配送
+			if (dmData.getCode().equals("DELIVERY_GROSS")){//配送  DELIVERY_GROSS
 				dateStr = orderData.getWaitDeliveiedDate();
-			}else if (dmData.getName().equals("FCA")){//自提
+			}else {//自提 DELIVERY_MENTION
 				dateStr = orderData.getPickUpdate();
 			}
 		}
@@ -485,10 +485,10 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 		String shipto = "";
 		final DeliveryModeData dmData = orderData.getDeliveryMode();
 		if(dmData !=null){
-			if (dmData.getName().equals("DDP")){//配送
+			if (dmData.getCode().equals("DELIVERY_GROSS")){//配送  DELIVERY_GROSS
 				shipto = orderData.getDeliveryAddress().getFormattedAddress();
-			}else if (dmData.getName().equals("FCA")){//自提
-				shipto ="";
+			}else {//自提 DELIVERY_MENTION
+				shipto ="&nbsp;&nbsp;&nbsp;&nbsp;";
 			}
 		}
 		return shipto;

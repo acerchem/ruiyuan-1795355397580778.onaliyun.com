@@ -132,7 +132,7 @@ p.western {
     </tr>
     <tr>
       <td width="60%">SHIP FROM:  $!{ctx.warehouse}  </td>
-      <td align="right">SHIP TO: ${ctx.shipto}</td>
+      <td align="right">SHIP TO: $!{ctx.shipto}</td>
     </tr>
     <tr>
       <td>Terms: $!{ctx.paymentTerms} </td>
@@ -146,15 +146,15 @@ p.western {
     <tr>
       <td width="67" height="7">Marks Numberse</td>
       <td width="236">Product name</td>
-      <td width="82">Quantity<br> (Kg)</td>
-      <td width="51"> Unit Price<br>(USD)</td>
-      <td width="58"> Amount<br>(USD)</td>
+      <td width="82">Quantity<br/> (Kg)</td>
+      <td width="51"> Unit Price</td>
+      <td width="58"> Amount</td>
     </tr>
 	 #foreach( $entry in ${ctx.order.entries} )
 		<tr>
 		  <td width="67" height="7"> N/M </td>
 		  <td width="206" > ${entry.product.name} </td>
-		  <td width="82" > ${entry.totalWeight} </td>
+		  <td width="82" > $!{entry.totalWeight} </td>
 		  <td width="51" > ${entry.baseRealPrice.formattedValue} </td>
 		  <td width="58" > ${entry.totalRealPrice.formattedValue} </td>
 		</tr>
