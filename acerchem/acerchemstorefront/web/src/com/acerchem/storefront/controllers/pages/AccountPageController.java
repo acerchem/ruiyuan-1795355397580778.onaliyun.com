@@ -13,6 +13,7 @@ package com.acerchem.storefront.controllers.pages;
 import de.hybris.platform.acceleratorfacades.ordergridform.OrderGridFormFacade;
 import de.hybris.platform.acceleratorfacades.product.data.ReadOnlyOrderGridData;
 import de.hybris.platform.acceleratorservices.storefront.data.MetaElementData;
+import de.hybris.platform.acceleratorservices.urlencoder.UrlEncoderService;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.Breadcrumb;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
@@ -44,6 +45,7 @@ import de.hybris.platform.commercefacades.order.data.OrderHistoryData;
 import de.hybris.platform.commercefacades.product.ProductFacade;
 import de.hybris.platform.commercefacades.product.ProductOption;
 import de.hybris.platform.commercefacades.product.data.ProductData;
+import de.hybris.platform.commercefacades.storesession.StoreSessionFacade;
 import de.hybris.platform.commercefacades.user.UserFacade;
 import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.commercefacades.user.data.CountryData;
@@ -89,14 +91,13 @@ import de.hybris.platform.tx.Transaction;
 import de.hybris.platform.util.Config;
 
 import com.acerchem.core.model.CountryTrayFareConfModel;
-import com.acerchem.core.model.CreditTransactionModel;
 import com.acerchem.core.model.CustomerCreditAccountModel;
-import com.acerchem.core.model.ImageFailedRecordModel;
 import com.acerchem.core.service.AcerchemStockService;
 import com.acerchem.core.service.AcerchemTrayService;
 import com.acerchem.service.customercreditaccount.DefaultCustomerCreditAccountService;
 import com.acerchem.storefront.controllers.ControllerConstants;
 import com.acerchem.storefront.data.CustomRegisterForm;
+import com.acerchem.storefront.filters.StorefrontFilter;
 
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
 
@@ -115,6 +116,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
@@ -876,6 +878,12 @@ public class AccountPageController extends AbstractSearchPageController
 	@Resource(name = "commonI18NService")
 	private CommonI18NService commonI18NService;
 	
+	@Resource(name = "storeSessionFacade")
+	private StoreSessionFacade storeSessionFacade;
+	
+	@Resource(name = "urlEncoderService")
+	private UrlEncoderService urlEncoderService;
+	
 	@RequestMapping(value = "/update-profile",method = RequestMethod.GET)
 	@RequireHardLogIn
 	public String editProfile(final Model model) throws CMSItemNotFoundException
@@ -950,7 +958,7 @@ public class AccountPageController extends AbstractSearchPageController
 	
 	@RequestMapping(value = "/update-profile",method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String updateProfile(final CustomRegisterForm form,final BindingResult bindingResult, final Model model,final RedirectAttributes redirectAttributes,final String aidField) 
+	public String updateProfile(final CustomRegisterForm form,final BindingResult bindingResult, final Model model,final RedirectAttributes redirectAttributes,final String aidField,final HttpServletRequest request) 
 			throws CMSItemNotFoundException
 	{
 		promotionItem(model);
@@ -1025,7 +1033,16 @@ public class AccountPageController extends AbstractSearchPageController
 			model.addAttribute("CustomRegisterForm",form);
 			model.addAttribute("nowPage", "update-profile");
 			storeCmsPageInModel(model, getContentPageForLabelOrId("update-profile"));
-			return getViewForPage(model);
+			
+			final String previousLanguage = storeSessionFacade.getCurrentLanguage().getIsocode();
+			storeSessionFacade.setCurrentLanguage(form.getLanguage());;
+			if (!userFacade.isAnonymousUser())
+			{
+				userFacade.syncSessionLanguage();
+			}
+			
+			return REDIRECT_PREFIX + StringUtils.replace((String) request.getSession().getAttribute(StorefrontFilter.ORIGINAL_REFERER), 
+					"/" + previousLanguage + "/", "/" + storeSessionFacade.getCurrentLanguage().getIsocode() + "/");
 		}
 		catch(Exception exception)
 		{
@@ -1036,6 +1053,22 @@ public class AccountPageController extends AbstractSearchPageController
 			GlobalMessages.addErrorMessage(model, "fail to edit: " + exception);
 			return getViewForPage(model);
 		}
+	}
+	
+	protected String getReturnRedirectUrlWithoutReferer(final HttpServletRequest request)
+	{
+		final String originalReferer = (String) request.getSession().getAttribute(StorefrontFilter.ORIGINAL_REFERER);
+		if (StringUtils.isNotBlank(originalReferer))
+		{
+			return REDIRECT_PREFIX + originalReferer;
+		}
+
+		final String referer = StringUtils.remove(request.getRequestURL().toString(), request.getServletPath());
+		if (referer != null && !referer.isEmpty())
+		{
+			return REDIRECT_PREFIX + referer;
+		}
+		return REDIRECT_PREFIX + '/';
 	}
 	
 	@RequestMapping(value = "/update-password", method = RequestMethod.GET)
@@ -1457,5 +1490,7 @@ public class AccountPageController extends AbstractSearchPageController
 		model.addAttribute("promotionItem", Converters.convertAll(result.getResult(), productConverter));
 		
 	}
+	
+	
 
 }
