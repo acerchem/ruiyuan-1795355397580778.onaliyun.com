@@ -22,6 +22,7 @@ import de.hybris.platform.cms2.servicelayer.services.CMSPageService;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.i18n.I18NFacade;
 import de.hybris.platform.commercefacades.order.CheckoutFacade;
+import de.hybris.platform.commercefacades.storesession.StoreSessionFacade;
 import de.hybris.platform.commercefacades.user.UserFacade;
 import de.hybris.platform.commercefacades.user.data.CountryData;
 import de.hybris.platform.commercefacades.user.data.RegionData;
@@ -222,6 +223,9 @@ public class LoginPageController extends AbstractLoginPageController
 	@Resource
 	private FlexibleSearchService flexibleSearchService;
 	
+	@Resource(name = "storeSessionFacade")
+	private StoreSessionFacade storeSessionFacade;
+	
 	@RequestMapping(value = "/register", method = RequestMethod.POST)
 	public String doRegister(final CustomRegisterForm form,
 			@RequestHeader(value = "referer", required = false) final String referer, 
@@ -275,7 +279,9 @@ public class LoginPageController extends AbstractLoginPageController
 					bindingResult.rejectValue("telephone", "register.phone.invalid");
 				}
 				
+				
 				CustomerModel user=RegisterCustomerService(form,model,tel);
+				storeSessionFacade.setCurrentLanguage(form.getLanguage());
 				userService.setCurrentUser(user);
 				customerAccountService.register(user, form.getPwd());
 				getAutoLoginStrategy().login(form.getEmail().toLowerCase(), form.getPwd(), request, response);
@@ -302,7 +308,6 @@ public class LoginPageController extends AbstractLoginPageController
 		
 		if(success)
 		{
-			storeCmsPageInModel(model, getCmsPage());
 			return ControllerConstants.Views.Pages.Account.AccountRegisterSuccessPage;
 		}
 		else
