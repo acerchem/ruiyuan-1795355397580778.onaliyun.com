@@ -1,1 +1,1 @@
-Proforma Invoice Email
+Proforma Invoice Email Order Number: ${ctx.order.code}
