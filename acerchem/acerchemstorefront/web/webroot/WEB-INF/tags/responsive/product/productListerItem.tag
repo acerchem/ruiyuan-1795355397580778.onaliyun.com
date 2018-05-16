@@ -29,12 +29,9 @@
 			
 			<div class="maxtext">
 	    		<p>${fn:escapeXml(product.name)}</p>
-	    		<!-- 登录显示 -->
-	    		<span class="price"><product:productListerItemPrice product="${product}"/></span>
-	    		<!-- <br> -->
-	    		<span class="old-price"><product:productListerItemPrice product="${product}"/></span>
-	    		<!-- 登录显示 END-->
-					
+
+	    		<product:productListerItemPrice product="${product}"/>
+	    		<!-- <br> -->					
 					
 				 <c:set var="product" value="${product}" scope="request"/>
 				 <c:set var="addToCartText" value="${addToCartText}" scope="request"/>
