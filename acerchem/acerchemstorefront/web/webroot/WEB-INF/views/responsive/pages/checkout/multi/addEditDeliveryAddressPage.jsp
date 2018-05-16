@@ -384,61 +384,32 @@
 				  <div class="inside-cont">
 
 					<!-- <p>please select the date： <input type="date" /></p> -->
-					<div class="datewrap">
+						<div class="datewrap">
 			 	 		<div class="date-item">
 				 	 		<span class="d-titls">Date:</span>
 							<div class='input-group date' id='strdate'>
-							    <input type='text' class="form-control2" " />
+							 <c:choose>
+							<c:when test="${cartData.pickUpdate eq null}"> 
+							    <input type='text' class="form-control2"  id="textDate" /> 
+							      </c:when> 
+		                      <c:otherwise>
+		                      <input type='text' class="form-control2" value ="${cartData.pickUpdate}" id="textDate" /> 
+		                        </c:otherwise>
+		                      </c:choose>
 							    <span class="input-group-addon">
 							    </span>
 							</div>
-						</div>
-					</div>
-
 						
-					<div style="display: none;">
-						<div style="height: 30px"></div>
-
-							<div class="content">
-							 <c:choose>
-							<c:when test="${cartData.pickUpdate eq null}">
-								<!-- <div>
-									<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date:&nbsp;&nbsp;&nbsp;<input style="width: 300px"  type="date" id="textDate" /> 
-									
-									<%-- 	<c:if test="${deliveryMode.code=='DELIVERY_GROSS'}">
-									 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ETA Date:&nbsp;&nbsp;&nbsp;<input style="width: 300px"  type="date" />
-									 </c:if> --%>
-									 
-									 </label>
-									
-								</div> -->
-								
-
-								<!-- <div class="btn-set">
-
-									<a class="btn btn-date"
-										style="width: 200px; position: relative; left: -450px">Submit</a>
-								</div> -->
-		                      </c:when>
-		                      <c:otherwise>
-		                          <div>
-									<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date:&nbsp;&nbsp;&nbsp;<input style="width: 300px"  type="date" id="textDate" value="${cartData.pickUpdate}" />
-									
-										<c:if test="${deliveryMode.code=='DELIVERY_GROSS'}">
-										 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ETA Date:&nbsp;&nbsp;&nbsp;<input style="width: 300px"  type="date"  readonly="readonly" value="${cartData.waitDeliveiedDate}"/>
-										 </c:if>
-									</label>
-								</div>
-		                      </c:otherwise>
-		                      </c:choose>
-							</div>
+						</div>
+						
+					</div>
 
 							<div style="height: 30px"></div>
 					</div>
 				</div>
 				
 
-			</div>
+		
 
 
 					<!-- payment & Billing Address -->
@@ -862,37 +833,6 @@ checktot()
 
 
 
-$('#textDate').on('change',function(){
-	
-	var date = new Date();
-	var currDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-	
-	var releaseDate = dateChange(${cartData.deliveryDays},currDate);
-	var selectDate = $('#textDate').val();
-	
-	var isFuture = ${cartData.isUseFutureStock};
-	
-	//var myBoolean=new Boolean(true);
-	
-	if(isFuture){
-		
-		if (new Date(selectDate).getTime()<new Date(releaseDate).getTime()){
-			alert("please select after "+${cartData.deliveryDays}+" pickup date");
-			
-			return false;
-		}
-	}else {
-		if (new Date(selectDate).getTime()>new Date(releaseDate).getTime()){
-			alert("please select within "+${cartData.deliveryDays}+" pickup date");
-			
-			return false;
-		}
-	}
-	
-	 window.location.href ='<c:url value='/checkout/multi/delivery-address/addPickUpDate?pickUpDate='/>'+selectDate;
-	
-});
-
 $(document).ready(function() {
     $('input[type=radio][name=addbook]').change(function() {
     	
@@ -970,9 +910,60 @@ $("#dateBtn").on('click',function(){
 
  // 时间控件
 $(document).ready(function() {
-    $('#strdate').datetimepicker({
-    	format: 'DD/MM/YYYY'
-    });
+     $('#strdate').datetimepicker({
+    	format: 'YYYY-MM-DD'
+    	
+    }).on('dp.change',function(e){
+    	
+    	  date = new Date();//没有传入值时,默认是当前日期
+    	 // alert(date.getMonth().toString().length);
+    	  if (date.getMonth().toString().length <2){
+    		  date = date.getFullYear() + '-0' + (date.getMonth() + 1) + '-' + date.getDate();
+    	  } else {
+    		  date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+    	  }
+    	  
+    	  
+    	
+         var selectDate=$("#textDate").val();
+         
+    	 if (new Date(date).getTime()==new Date(selectDate).getTime()){
+   		 
+   	     }else {
+   	    	    	    	 
+   	    var date = new Date();
+   	 	var currDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+   	 	
+   	 	var releaseDate = dateChange(${cartData.deliveryDays},currDate);
+   	 	
+   	 	var isFuture = ${cartData.isUseFutureStock};
+   	 	
+   	 	//var myBoolean=new Boolean(true);
+   	 	
+   	 	if(isFuture){
+   	 		
+   	 		if (new Date(selectDate).getTime()<new Date(releaseDate).getTime()){
+   	 			alert("please select after "+${cartData.deliveryDays}+" pickup date");
+   	 			
+   	 			return false;
+   	 		}
+   	 	}else {
+   	 		if (new Date(selectDate).getTime()>new Date(releaseDate).getTime()){
+   	 			alert("please select within "+${cartData.deliveryDays}+" pickup date");
+   	 			
+   	 			return false;
+   	 		}
+   	 	}
+   	 	
+   	 	 window.location.href ='<c:url value='/checkout/multi/delivery-address/addPickUpDate?pickUpDate='/>'+selectDate;
+   	    	 
+   	     } 
+     
+     
+      
+    }); 
+    
+  
 });
  
 

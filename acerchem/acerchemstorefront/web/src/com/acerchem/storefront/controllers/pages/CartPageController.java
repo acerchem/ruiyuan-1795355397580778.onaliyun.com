@@ -47,6 +47,8 @@ import de.hybris.platform.core.enums.QuoteState;
 import de.hybris.platform.enumeration.EnumerationService;
 import de.hybris.platform.site.BaseSiteService;
 import de.hybris.platform.util.Config;
+
+import com.acerchem.facades.facades.AcerchemCartFacade;
 import com.acerchem.storefront.controllers.ControllerConstants;
 
 import java.io.IOException;
@@ -97,6 +99,9 @@ public class CartPageController extends AbstractCartPageController
 	private static final String REDIRECT_CART_URL = REDIRECT_PREFIX + "/cart";
 	private static final String REDIRECT_QUOTE_EDIT_URL = REDIRECT_PREFIX + "/quote/%s/edit/";
 	private static final String REDIRECT_QUOTE_VIEW_URL = REDIRECT_PREFIX + "/my-account/my-quotes/%s/";
+	
+	private static final String CART_CMS_PAGE_LABEL = "cart";
+	private static final String CONTINUE_URL = "continueUrl";
 
 	private static final Logger LOG = Logger.getLogger(CartPageController.class);
 
@@ -126,6 +131,9 @@ public class CartPageController extends AbstractCartPageController
 
 	@Resource(name = "cartEntryActionFacade")
 	private CartEntryActionFacade cartEntryActionFacade;
+	
+	@Resource(name = "acerchemCartFacade")
+	private AcerchemCartFacade acerchemCartFacade;
 
 	@ModelAttribute("showCheckoutStrategies")
 	public boolean isCheckoutStrategyVisible()
@@ -152,6 +160,16 @@ public class CartPageController extends AbstractCartPageController
 
 			return ControllerConstants.Views.Pages.Cart.CartPage;
 		}
+	}
+	
+	
+	protected void createProductList(final Model model) throws CMSItemNotFoundException
+	{
+		final CartData cartData = acerchemCartFacade.getSessionCartWithEntryOrdering(false);
+		createProductEntryList(model, cartData);
+
+		storeCmsPageInModel(model, getContentPageForLabelOrId(CART_CMS_PAGE_LABEL));
+		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(CART_CMS_PAGE_LABEL));
 	}
 
 	protected Optional<String> getQuoteUrl()

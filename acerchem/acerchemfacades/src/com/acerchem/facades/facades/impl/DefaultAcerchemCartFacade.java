@@ -2,12 +2,16 @@ package com.acerchem.facades.facades.impl;
 
 import com.acerchem.core.service.AcerchemCommerCartService;
 import com.acerchem.facades.facades.AcerchemCartFacade;
+
+import de.hybris.platform.commercefacades.order.EntryGroupData;
 import de.hybris.platform.commercefacades.order.data.AddToCartParams;
+import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.commercefacades.order.data.CartModificationData;
 import de.hybris.platform.commercefacades.order.data.OrderEntryData;
 import de.hybris.platform.commercefacades.order.impl.DefaultCartFacade;
 import de.hybris.platform.commercefacades.product.ProductOption;
 import de.hybris.platform.commercefacades.product.data.PriceData;
+import de.hybris.platform.commercefacades.product.data.PriceDataType;
 import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commerceservices.order.CommerceCartModification;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
@@ -22,7 +26,9 @@ import org.springframework.util.ObjectUtils;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -138,5 +144,69 @@ public class DefaultAcerchemCartFacade extends DefaultCartFacade implements Acer
     public void setAcerchemCommerCartService(AcerchemCommerCartService acerchemCommerCartService) {
         this.acerchemCommerCartService = acerchemCommerCartService;
     }
+    
+    @Override
+	public CartData getSessionCartWithEntryOrdering(final boolean recentlyAddedFirst)
+	{
+		if (hasSessionCart())
+		{
+			final CartData data = getSessionCart();
+			
+			String netWeight = null;
+			
+			if (data.getEntries()!= null){
+				
+				for(OrderEntryData entry:data.getEntries()){
+					ProductData productData = entry.getProduct();
+				    netWeight =productData.getNetWeight();
+					
+					// set the basePrice
+					
+					BigDecimal priceValue=entry.getBasePrice().getValue();
+					
+					Double basePrice = priceValue.doubleValue()/ Double.valueOf(netWeight);
+					
+					String currentyIso = entry.getBasePrice().getCurrencyIso();
+					
+					PriceData priceData = getPriceDataFactory().create(PriceDataType.BUY, BigDecimal.valueOf(basePrice),
+							currentyIso);
+					
+					entry.setBasePrice(priceData);
+					
+					//-----------------set the total Price
+					
+					BigDecimal totalPrice=entry.getTotalPrice().getValue();
+					
+					Double price = totalPrice.doubleValue()/ Double.valueOf(netWeight);
+					
+					PriceData priceData1 = getPriceDataFactory().create(PriceDataType.BUY, BigDecimal.valueOf(price),
+							currentyIso);
+					entry.setTotalPrice(priceData1);
+					
+				}
+				//-----------------set the sub Price
+			     BigDecimal subPrice=data.getSubTotal().getValue();
+		
+				 Double subTotal = subPrice.doubleValue()/ Double.valueOf(netWeight);
+					
+				PriceData priceData2 = getPriceDataFactory().create(PriceDataType.BUY, BigDecimal.valueOf(subTotal),
+							data.getSubTotal().getCurrencyIso());
+				data.setSubTotal(priceData2);
+			}
+
+			if (recentlyAddedFirst)
+			{
+				final List<OrderEntryData> recentlyAddedListEntries = new ArrayList<>(data.getEntries());
+				Collections.reverse(recentlyAddedListEntries);
+				data.setEntries(Collections.unmodifiableList(recentlyAddedListEntries));
+				final List<EntryGroupData> recentlyChangedEntryGroups = new ArrayList<>(data.getRootGroups());
+				Collections.reverse(recentlyChangedEntryGroups);
+				data.setRootGroups(Collections.unmodifiableList(recentlyChangedEntryGroups));
+			}
+
+			return data;
+		}
+		return createEmptyCart();
+	}
 }
 

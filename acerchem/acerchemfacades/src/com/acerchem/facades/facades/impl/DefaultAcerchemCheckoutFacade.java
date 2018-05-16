@@ -363,10 +363,10 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
             	long items = orderEntryData.getQuantity();
             	
             	//BigDecimal basePrice = orderEntryData.getBasePrice().getValue();
-            	long totalWeight = items* Long.valueOf(netWeight);
+            	//long totalWeight = items* Long.valueOf(netWeight);
             	//Double totalPrice = Long.valueOf(basePrice)*totalWeight;
             	
-            	Double totalPrice =basePrice.doubleValue()*totalWeight;
+            	Double totalPrice =basePrice.doubleValue()*items;
             	
             	subTotal += totalPrice;
             	

@@ -30,9 +30,6 @@
 <c:set var ="TotalWeight" value="${a*b}"/>
 
 
-
-
-
 <c:if test="${not empty entry}">
 
         <c:set var="showEditableGridClass" value=""/>

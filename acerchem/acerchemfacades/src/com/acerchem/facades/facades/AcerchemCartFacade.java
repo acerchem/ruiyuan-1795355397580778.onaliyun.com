@@ -1,6 +1,7 @@
 package com.acerchem.facades.facades;
 
 
+import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.commercefacades.order.data.CartModificationData;
 import de.hybris.platform.commercefacades.order.data.OrderEntryData;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
@@ -33,4 +34,6 @@ public interface AcerchemCartFacade {
     CartModificationData updateCartEntry(long entryNumber, String storeId ,boolean isUseFutureStock) throws CommerceCartModificationException;
 
     double getAddToCartPrice(OrderEntryData orderEntryData, Long qty);
+    
+    CartData getSessionCartWithEntryOrdering(boolean recentlyAddedFirst);
 }

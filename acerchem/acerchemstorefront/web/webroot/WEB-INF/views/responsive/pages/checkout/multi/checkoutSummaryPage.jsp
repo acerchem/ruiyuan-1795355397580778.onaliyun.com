@@ -248,33 +248,26 @@
 					</div>
 				  <div class="inside-cont">
 
-					<!-- <p>please select the date： <input type="date" /></p> -->
-					<div style="height: 30px"></div>
-
-					<div class="content">
-					 <c:choose>
-					<c:when test="${cartData.pickUpdate eq null}">
-						<div>
-							<label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date:&nbsp;&nbsp;&nbsp;<input style="width: 300px" type="date" id="textDate" /></label>
+					<div class="datewrap">
+			 	 		<div class="date-item">
+				 	 		<span class="d-titls">Date:</span>
+							<div class='input-group date' id='strdate'>
+							 <c:choose>
+							<c:when test="${cartData.pickUpdate eq null}"> 
+							    <input type='text' class="form-control2"  id="textDate" /> 
+							      </c:when> 
+		                      <c:otherwise>
+		                      <input type='text' class="form-control2" value ="${cartData.pickUpdate}" id="textDate" /> 
+		                        </c:otherwise>
+		                      </c:choose>
+							    <span class="input-group-addon">
+							    </span>
+							</div>
+						
 						</div>
-					<!-- 	<div class="btn-set">
-
-							<a class="btn btn-date"
-								style="width: 200px; position: relative; left: -450px">Submit</a>
-						</div> -->
-                      </c:when>
-                      <c:otherwise>
-                          <div>
-                          <label>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Date:&nbsp;&nbsp;&nbsp;<input style="width: 300px"  type="date" id="textDate" value="${cartData.pickUpdate}" />
-	                          <c:if test="${deliveryMode.code=='DELIVERY_GROSS'}">
-									 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ETA Date:&nbsp;&nbsp;&nbsp;<input style="width: 300px"  type="date"  readonly="readonly" value="${cartData.waitDeliveiedDate}"/>
-									 </c:if>
-                          </label>
-                          
-						</div>
-                      </c:otherwise>
-                      </c:choose>
+						
 					</div>
+					
 
 					<div style="height: 30px"></div>
 				</div>
@@ -801,7 +794,12 @@ $(document).ready(function() {
     });
 });
 
-
+//时间控件
+$(document).ready(function() {
+    $('#strdate').datetimepicker({
+    	format: 'DD/MM/YYYY'
+    });
+});
 
 
 
