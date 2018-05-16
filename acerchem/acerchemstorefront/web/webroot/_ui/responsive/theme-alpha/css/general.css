@@ -354,6 +354,9 @@ textarea{
 	color: #fff;
 	background-color: rgba(0,26,15,.7);
 }
+#cboxContent .maxfixed-bg{
+	background: transparent;
+}
 .maxfixed-bg{
 	position: static;
 	transform: none;
@@ -3078,10 +3081,114 @@ display: inline-table;
 	margin-bottom: 14px;
 }
 
+/*时间控件*/
+.g-table .datewrap .date-item{
+	width: 35%;
+	padding:40px 20px;
+}
+.g-table .datewrap .date-item:after{
+	content:'';
+	display: block;
+	clear: both;
+}
+.g-table .datewrap .d-titls , .g-table .datewrap .input-group{
+	float: left;
+}
+.g-table .datewrap .d-titls{
+	display: inline;
+	width: auto;
+	padding-right: 20px 
+}
+.g-table .datewrap .input-group{
+	position: relative;
+	width: calc(100% - 85px);
+}
+.g-table .datewrap .input-group-addon{
+	display: block;
+	height: 50px;
+	width: 100%;
+	position: absolute; 
+	right: 0;
+	top:0;
+	background: transparent;
+}
+.g-table .datewrap .input-group-addon:after{
+	content: '';
+	display: block;
+	width: 50px;
+	height: 50px;
+	background: url(time.png) no-repeat center center;
+	position: absolute;
+	right: 0;
+	top:0;
+
+}
+.g-table .datewrap .dropdown-menu{
+   position:absolute;
+   top:100%;
+   left:0;
+   margin: 20px;
+   margin-left:auto;
+   margin-right: auto;
+   z-index:1000;
+   background: #fff;
+   width: 300px;
+   padding:0;
+   border:none;
+}
+.g-table .dropdown-menu table{
+	border:1px solid #ddd;
+}
+.g-table .dropdown-menu .list-unstyled{
+	margin:0;
+}
+.g-table .dropdown-menu th{
+	text-align: center;
+	background: transparent;
+	color: #222;
+	height: 40px;
+	line-height: 40px;
+	margin:auto;
+}
+.g-table .dropdown-menu td{
+	width: 36px;
+	height: 36px;
+	line-height: 36px; 
+	text-align: center;
+	padding:0;
+} 
+
+.g-table .dropdown-menu td:hover,.g-table .dropdown-menu .active{
+	background: #096735;
+	color: #fff;
+	cursor: pointer;
+}
+.g-table .dropdown-menu .prev span , .g-table .dropdown-menu .next span{
+	display: block;
+	height: 20px;
+	width: 20px;
+	margin:10px auto;
+	background: url(filp.png) no-repeat center 0;
+	cursor: pointer;
+}
+.g-table .dropdown-menu .prev span{
+	background-position: center bottom;
+}
+.g-table .dropdown-menu .next span{
+	background-position: center top;
+}
+.g-table .datewrap .dropdown-menu .timepicker , .g-table .datewrap .dropdown-menu .accordion-toggle , .g-table .dropdown-menu .glyphicon-chevron-left:before,.g-table .dropdown-menu .glyphicon-chevron-right:before{
+	display: none
+}
+
+
+
+
 
 /*补充style.css*/
 #cboxTopLeft , #cboxTopRight , #cboxTitle .headline , #cboxTopCenter {display: none;}
 #cboxMiddleLeft{width: auto;}
 #cboxWrapper{width: 100%;}
 #cboxLoadedContent{padding:0; margin:0;}
-#cboxContent{background-color:transparent}
+#cboxContent{background-color:transparent;}
+#colorbox{background-color:rgba(0,26,15,.7)}

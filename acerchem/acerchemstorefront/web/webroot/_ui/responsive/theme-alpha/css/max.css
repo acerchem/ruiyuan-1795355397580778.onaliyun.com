@@ -484,13 +484,17 @@ a,button , .maxtop .maxmenu li a{
     .search-list-page-right-result-list-component{
         padding:0;
     }
-   
-}
-@media (max-width: 1023px){
-      select.form-control{
+    .prod-cont .prodbase{
+        padding:0 20px;
+    }
+    .prod-cont .prodbase .delintro{
+        left: 180px;
+    }
+    select.form-control{
         height: 32px;
         line-height: 32px;
         padding:0;
         padding-left: 12px;
       }  
+   
 }

@@ -97,7 +97,11 @@
 		<script type="text/javascript" src="${commonResourcePath}/js/general.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/max.js"></script>
 		<script type="text/javascript" src="${commonResourcePath}/js/maxprod.js"></script>
-		
+
+		<script type="text/javascript" src="${commonResourcePath}/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/moment-with-locales.js"></script>
+		<script type="text/javascript" src="${commonResourcePath}/js/bootstrap-datetimepicker.js"></script>
+
 		<%-- Cms Action JavaScript files --%>
 		<c:forEach items="${cmsActionsJsFiles}" var="actionJsFile">
 		    <script type="text/javascript" src="${commonResourcePath}/js/cms/${actionJsFile}"></script>
