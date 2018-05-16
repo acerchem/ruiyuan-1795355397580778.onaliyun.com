@@ -71,6 +71,8 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 	private String customerCompany;
 
 	private String deliveryCode;
+	
+	private String upperCasePackageWeightArray;
 
 	@Resource
 	private ContactInfoService contactInfoService;
@@ -238,7 +240,8 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 						pie.setGrossWeight(tempGross);
 						pie.setTotal(false);
 
-						final String pack = StringUtils.defaultString(product.getPackageWeight()).trim() + "/" +
+						final String punit = StringUtils.defaultString(product.getUnitName(),"kg"); 
+						final String pack = StringUtils.defaultString(product.getPackageWeight()).trim() + punit+"/" +
 						              StringUtils.defaultString(product.getPackageType()).trim();
 
 						quantity += consignEntry.getQuantity();
@@ -282,6 +285,7 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 			packageWeightList = AcerChemEmailContextUtils.removeDuplicate(packageWeightList);
 			final String packArrayStr = packageWeightList.toString().replace("[", "").replace("]","");
 			totalData.setPackingWeight(StringUtils.defaultString(packArrayStr, ""));
+			setUpperCasePackageWeightArray(StringUtils.upperCase(packArrayStr));
 		}else{
 			totalData.setPackingWeight("  ");
 		}
@@ -496,6 +500,14 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 
 	public void setDeliveryCode(final String deliveryCode) {
 		this.deliveryCode = deliveryCode;
+	}
+
+	public String getUpperCasePackageWeightArray() {
+		return upperCasePackageWeightArray;
+	}
+
+	public void setUpperCasePackageWeightArray(final String upperCasePackageWeightArray) {
+		this.upperCasePackageWeightArray = upperCasePackageWeightArray;
 	}
 
 }

@@ -460,7 +460,7 @@ p.western {
    			</tr>
    			<tr>
    				<td>
-   					PACKING: $!{ctx.append.totalData.packingWeight}KG/DRUMS,TOTAL PACKED IN $!{ctx.append.totalData.packingCount} PACKAGES
+   					PACKING: $!{ctx.upperCasePackageWeightArray},TOTAL PACKED IN $!{ctx.append.totalData.packingCount} PACKAGES
    				</td>
    			</tr>
    			<tr>
