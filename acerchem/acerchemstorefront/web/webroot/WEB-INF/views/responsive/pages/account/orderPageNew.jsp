@@ -84,9 +84,12 @@
                     </div>
 					
                     <!-- Ship To -->
-                    <div class="g-table" style="${orderData.deliveryMode.code=='DELIVERY_GROSS'?'':'display: none;'}">
-                        <div class="g-title">
+                    <div class="g-table">
+                        <div class="g-title" style="${orderData.deliveryMode.code=='DELIVERY_GROSS'?'':'display: none;'}">
                             <span>Ship To</span>
+                        </div>
+                        <div class="g-title" style="${orderData.deliveryMode.code=='DELIVERY_MENTION'?'':'display: none;'}">
+                            <span>Pickup Address</span>
                         </div>
                         <div class="text">
                               <c:if test="${not empty orderData.deliveryAddress.title}">
@@ -108,15 +111,7 @@
 
                         </div>
                     </div>
-                    <div class="g-table" style="${orderData.deliveryMode.code=='DELIVERY_MENTION'?'':'display: none;'}">
-                        <!-- <div class="g-title">
-                            <span>Pickup Address</span>
-                        </div>
-                        <div class="text">
-                             
-
-                        </div> -->
-                    </div>
+                    
                     <!-- end -->
 
                     <!-- product Item -->

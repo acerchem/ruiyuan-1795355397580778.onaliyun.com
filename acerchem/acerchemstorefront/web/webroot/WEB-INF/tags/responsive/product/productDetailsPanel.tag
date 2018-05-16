@@ -43,8 +43,14 @@
 						</div>
 					</div>
 					<div class="priceset">
-						<span class="price"><format:fromPrice priceData="${product.price}"/></span>
-						<span class="old-price"><format:fromPrice priceData="${product.promotionPrice}"/></span>
+					    <c:if test="${not empty product.promotionPrice}">
+						    <span class="price"><format:fromPrice priceData="${product.promotionPrice}"/></span>
+						    <span class="old-price"><format:fromPrice priceData="${product.price}"/></span>
+						</c:if>
+						
+						<c:if test="${empty product.promotionPrice}">
+					    	<span class="price"><format:fromPrice priceData="${product.price}"/></span>
+						</c:if>
 					</div>
 					
 					<div class="Summary">
