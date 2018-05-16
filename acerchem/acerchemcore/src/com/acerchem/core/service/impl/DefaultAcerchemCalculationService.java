@@ -10,6 +10,8 @@
  */
 package com.acerchem.core.service.impl;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
@@ -25,6 +27,8 @@ import de.hybris.platform.order.impl.DefaultCalculationService;
 import de.hybris.platform.order.strategies.calculation.OrderRequiresCalculationStrategy;
 import de.hybris.platform.servicelayer.i18n.CommonI18NService;
 import de.hybris.platform.servicelayer.model.ModelService;
+import de.hybris.platform.util.DiscountValue;
+import de.hybris.platform.util.PriceValue;
 import de.hybris.platform.util.TaxValue;
 
 
@@ -117,16 +121,26 @@ public class DefaultAcerchemCalculationService extends DefaultCalculationService
 	public void calculateEntries(final AbstractOrderModel order, final boolean forceRecalculate) throws CalculationException
 	{
 		double subtotal = 0.0;
-		double entrySubtotal = 0.0;
 		for (final AbstractOrderEntryModel e : order.getEntries())
 		{
 			recalculateOrderEntryIfNeeded(e, forceRecalculate);
-			subtotal += (e.getBasePrice() * Double.parseDouble(e.getProduct().getNetWeight())* e.getQuantity());
-			entrySubtotal = (e.getBasePrice() * Double.parseDouble(e.getProduct().getNetWeight())* e.getQuantity());
-			e.setTotalPrice(entrySubtotal);
-			modelService.save(e);
+			subtotal += (e.getTotalPrice());
 		}
 		order.setTotalPrice(Double.valueOf(subtotal));
 
+	}
+	
+	protected void resetAllValues(final AbstractOrderEntryModel entry) throws CalculationException
+	{
+		// taxes
+		final Collection<TaxValue> entryTaxes = findTaxValues(entry);
+		entry.setTaxValues(entryTaxes);
+		final PriceValue pv = findBasePrice(entry);
+		final AbstractOrderModel order = entry.getOrder();
+		final PriceValue basePrice = convertPriceIfNecessary(pv, order.getNet().booleanValue(), order.getCurrency(), entryTaxes);
+		entry.setBasePrice(Double.valueOf(basePrice.getValue()) * Double.valueOf(entry.getProduct().getNetWeight()));
+		modelService.save(entry);
+		final List<DiscountValue> entryDiscounts = findDiscountValues(entry);
+		entry.setDiscountValues(entryDiscounts);
 	}
 }

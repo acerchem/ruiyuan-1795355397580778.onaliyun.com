@@ -1,11 +1,9 @@
 package com.acerchem.core.promotions.jalo;
 
-import de.hybris.platform.jalo.JaloInvalidParameterException;
 import de.hybris.platform.jalo.SessionContext;
 import de.hybris.platform.jalo.c2l.Currency;
 import de.hybris.platform.jalo.order.AbstractOrder;
 import de.hybris.platform.jalo.order.AbstractOrderEntry;
-import de.hybris.platform.jalo.security.JaloSecurityException;
 import de.hybris.platform.promotions.jalo.ProductPercentageDiscountPromotion;
 import de.hybris.platform.promotions.jalo.PromotionOrderEntryAdjustAction;
 import de.hybris.platform.promotions.jalo.PromotionOrderEntryConsumed;
@@ -59,7 +57,7 @@ public class ProductThresholdPercentageDiscountPromotion extends GeneratedProduc
 	          
 	          PromotionThresholdDiscount thresholdDiscount= getProperThreshold(entry,ctx);
 	          if(thresholdDiscount==null){
-	         	 //娌℃湁鍚堥�傜殑鎶樻墸鍖洪棿
+	         	 //没有合适的折扣区间
 	         	 continue;
 	          }
 	         	 
@@ -69,17 +67,7 @@ public class ProductThresholdPercentageDiscountPromotion extends GeneratedProduc
 	          
 	  
 	          BigDecimal originalUnitPrice = new BigDecimal(entry.getBasePrice(ctx).toString());
-	          BigDecimal totalQuantityToDiscount = BigDecimal.ZERO;
-			try {
-				totalQuantityToDiscount = new BigDecimal(entry.getProduct(ctx).getAttribute("netWeight").toString());
-			} catch (JaloInvalidParameterException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (JaloSecurityException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-	          BigDecimal originalEntryPrice = originalUnitPrice.multiply(totalQuantityToDiscount);
+	          BigDecimal originalEntryPrice = originalUnitPrice.multiply(quantityToDiscount);
 	          
 	          Currency currency = promoContext.getOrder().getCurrency(ctx);
 	          
@@ -90,10 +78,10 @@ public class ProductThresholdPercentageDiscountPromotion extends GeneratedProduc
 	  
 	          BigDecimal adjustedUnitPrice = Helper.roundCurrencyValue(ctx, currency, 
 	            adjustedEntryPrice.equals(BigDecimal.ZERO) ? BigDecimal.ZERO : 
-	            adjustedEntryPrice.divide(totalQuantityToDiscount, RoundingMode.HALF_EVEN));
+	            adjustedEntryPrice.divide(quantityToDiscount, RoundingMode.HALF_EVEN));
 	          
 	  
-	          BigDecimal fiddleAmount = adjustedEntryPrice.subtract(adjustedUnitPrice.multiply(totalQuantityToDiscount));
+	          BigDecimal fiddleAmount = adjustedEntryPrice.subtract(adjustedUnitPrice.multiply(quantityToDiscount));
 	          
 	  
 	          if (fiddleAmount.compareTo(BigDecimal.ZERO) == 0)
