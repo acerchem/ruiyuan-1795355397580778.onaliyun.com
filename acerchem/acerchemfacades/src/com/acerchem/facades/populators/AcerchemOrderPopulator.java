@@ -22,7 +22,7 @@ public class AcerchemOrderPopulator extends OrderPopulator {
     private PriceDataFactory priceDataFactory;
 
     @Override
-    public void populate(OrderModel source, OrderData target){
+    public void populate(final OrderModel source, final OrderData target){
         super.populate(source,target);
         target.setCustomerConfirm(source.getCustomerConfirm());
         target.setEmployeeConfirm(source.getEmployeeConfirm());
@@ -44,7 +44,7 @@ public class AcerchemOrderPopulator extends OrderPopulator {
                     BigDecimal.valueOf(source.getOperateCost().doubleValue()), source.getCurrency().getIsocode()));
         }
         // modified by Jayson.wang
-        SimpleDateFormat sdf = new SimpleDateFormat("d/M/yyyy");
+        final SimpleDateFormat sdf = new SimpleDateFormat("d/M/yyyy");
         if(source.getPickUpDate()!=null){
             target.setPickUpdate(sdf.format(source.getPickUpDate()));
         }
@@ -58,13 +58,15 @@ public class AcerchemOrderPopulator extends OrderPopulator {
         }
         
         //add orderEntry's baseRealPrice and totalRealPrice by Jayson.wang
-        for(AbstractOrderEntryModel entry: source.getEntries()) {
+        for(final AbstractOrderEntryModel entry: source.getEntries()) {
         	
         	for (int i=0 ;i<target.getEntries().size();i++){
-        		OrderEntryData targetEntry = target.getEntries().get(i);
+        		final OrderEntryData targetEntry = target.getEntries().get(i);
         		if (targetEntry.getEntryNumber().equals(entry.getEntryNumber())){
-        			targetEntry.setBaseRealPrice(priceDataFactory.create(PriceDataType.BUY, BigDecimal.valueOf(entry.getBaseRealPrice().doubleValue()), source.getCurrency().getIsocode()));
-        			targetEntry.setTotalRealPrice(priceDataFactory.create(PriceDataType.BUY, BigDecimal.valueOf(entry.getTotalRealPrice().doubleValue()), source.getCurrency().getIsocode()));
+        			final Double baseReal = entry.getBaseRealPrice()==null?0:entry.getBaseRealPrice();
+        			final Double totalReal = entry.getTotalRealPrice()==null?0:entry.getTotalRealPrice();
+        			targetEntry.setBaseRealPrice(priceDataFactory.create(PriceDataType.BUY, BigDecimal.valueOf(baseReal.doubleValue()), source.getCurrency().getIsocode()));
+        			targetEntry.setTotalRealPrice(priceDataFactory.create(PriceDataType.BUY, BigDecimal.valueOf(totalReal.doubleValue()), source.getCurrency().getIsocode()));
         			targetEntry.setTotalWeight(entry.getTotalWeight());
         			
         			target.getEntries().remove(i);

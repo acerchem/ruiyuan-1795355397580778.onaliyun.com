@@ -1,1 +1,1 @@
-Delivery Note Email
+Delivery Note Email  Order Number: ${ctx.order.code}

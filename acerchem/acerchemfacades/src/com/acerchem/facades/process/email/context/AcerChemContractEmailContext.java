@@ -47,6 +47,8 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 	
 	private String contactUser;
 	private String contactMobile;
+	
+	private String deliveryMode;
 
 	@Override
 	public void init(final OrderProcessModel orderProcessModel, final EmailPageModel emailPageModel) {
@@ -66,7 +68,21 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 		initPaymentTerms(orderProcessModel);
 
 		customerModel = getCustomer(orderProcessModel);
+		
+		 initDeliveryMode();
 
+	}
+	
+	//统一对模式处理为英文
+	private void initDeliveryMode(){
+		final String deliveryCode = orderData.getDeliveryMode() == null ? "" : orderData.getDeliveryMode().getCode();
+		if(deliveryCode.equals("DELIVERY_GROSS")){
+			setDeliveryMode("DDP"); 
+		}else if(deliveryCode.equals("DELIVERY_MENTION")){
+			setDeliveryMode("FCA"); 
+		}else{
+			setDeliveryMode("DDP"); //默认DDP
+		}
 	}
 
 	@Override
@@ -308,5 +324,15 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 	public void setContactUser(final String contactUser) {
 		this.contactUser = contactUser;
 	}
+
+	public String getDeliveryMode() {
+		return deliveryMode;
+	}
+
+	public void setDeliveryMode(final String deliveryMode) {
+		this.deliveryMode = deliveryMode;
+	}
+	
+	
 
 }

@@ -87,7 +87,7 @@ p.western {
 <table class="table1" width="700" align="center" frame="void">
   <tbody>
     <tr>
-      <td colspan="2" width="60" align="center"><font font size="6" style="font-size: 22pt"> <strong> Release note </strong> </font></td>
+      <td colspan="2" width="60" align="center"><font font size="6" style="font-size: 22pt"> <strong> Release Note </strong> </font></td>
     </tr>
     <tr>
       <td colspan="2" width="60" align="center"><font font size="6" style="font-size: 22pt"> <strong> &nbsp; </strong> </font></td>
@@ -195,7 +195,7 @@ p.western {
 			</tr>
 			#else
 			<tr>
-			  <td colspan="3" width="383" height="3" class="table2"> Sub Total </td>
+			  <td colspan="3" width="383" height="3" class="table2"> Subtotal </td>
 			  <td width="51"  class="table2"> ${item.quantity} </td>
 			  <td width="58"  class="table2"> $!{item.netWeight} </td>
 			  <td width="88"  class="table2"> $!{item.grossWeight} </td>
@@ -205,8 +205,7 @@ p.western {
 		#end
 			#if(${ctx.append.totalData})
 			<tr class="table2">
-			  <td colspan="3" width="383" height="27" > TOTAL
-				AMOUNT </td>
+			  <td colspan="3" width="383" height="27" > Total </td>
 			  <td width="51" >${ctx.append.totalData.quantity} </td>
 			  <td width="58" > ${ctx.append.totalData.netWeight} </td>
 			  <td width="88" style="border: 1px solid #000000; padding: 0in 0.08in"> ${ctx.append.totalData.grossWeight} </td>

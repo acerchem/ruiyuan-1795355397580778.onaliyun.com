@@ -1,1 +1,1 @@
-Release Note Email
+Release Note Email Order Number: ${ctx.order.code}

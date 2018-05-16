@@ -399,7 +399,7 @@ p.western {
    		<tbody>
    			<tr>
    				<td>
-   					Packing: $!{ctx.append.totalData.packingWeight}kg/drum, Total: $!{ctx.append.totalData.packingCount}drums
+   					Packing: $!{ctx.append.totalData.packingWeight}, Total: $!{ctx.append.totalData.packingCount}drums
    				</td>
    			</tr>
    			<tr>
