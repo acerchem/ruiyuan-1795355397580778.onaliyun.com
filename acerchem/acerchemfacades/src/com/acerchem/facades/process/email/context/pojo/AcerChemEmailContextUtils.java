@@ -3,6 +3,7 @@ package com.acerchem.facades.process.email.context.pojo;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -313,6 +314,15 @@ public class AcerChemEmailContextUtils {
 
 			return StringUtils.isNumeric(num1) && StringUtils.isNumeric(num2);
 		}
+	}
+	
+	//剔除list重复的值
+	public static <T> List<T> removeDuplicate(final List<T> list)
+	{
+		final HashSet<T> h = new HashSet<T>(list);
+		list.clear();
+		list.addAll(h);
+		return list;
 	}
 
 	public static void main(final String[] args) {

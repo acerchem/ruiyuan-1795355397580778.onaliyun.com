@@ -69,8 +69,20 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 
 		customerModel = getCustomer(orderProcessModel);
 		
-		deliveryMode = orderData.getDeliveryMode()==null?"":orderData.getDeliveryMode().getName();
+		 initDeliveryMode();
 
+	}
+	
+	//统一对模式处理为英文
+	private void initDeliveryMode(){
+		final String deliveryCode = orderData.getDeliveryMode() == null ? "" : orderData.getDeliveryMode().getCode();
+		if(deliveryCode.equals("DELIVERY_GROSS")){
+			setDeliveryMode("DDP"); 
+		}else if(deliveryCode.equals("DELIVERY_MENTION")){
+			setDeliveryMode("FCA"); 
+		}else{
+			setDeliveryMode("DDP"); //默认DDP
+		}
 	}
 
 	@Override

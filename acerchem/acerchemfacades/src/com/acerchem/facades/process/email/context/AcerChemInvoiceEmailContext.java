@@ -184,7 +184,10 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 		long itemNet = 0;
 		long itemGross = 0;
 
-		String packageWeight = ""; // 当前认为包裹重量一致
+		//String packageWeight = ""; // 当前认为包裹重量一致
+		//处理不同的packageWeight
+		List<String> packageWeightList = new ArrayList<String>();
+		
 		if (CollectionUtils.isNotEmpty(consignments)) {
 			for (final ConsignmentData consignment : consignments) {
 
@@ -235,7 +238,8 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 						pie.setGrossWeight(tempGross);
 						pie.setTotal(false);
 
-						packageWeight = product.getPackageWeight();
+						final String pack = StringUtils.defaultString(product.getPackageWeight()).trim() + "/" +
+						              StringUtils.defaultString(product.getPackageType()).trim();
 
 						quantity += consignEntry.getQuantity();
 						net += Long.parseLong(tempNet);
@@ -244,7 +248,8 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 						itemNet += Long.parseLong(tempNet);
 						itemGross += Long.parseLong(tempGross);
 						list.add(pie);
-
+						packageWeightList.add(pack);
+						
 						// add warehouse
 						if (StringUtils.isBlank(warehouse)) {
 							final OrderEntryData entryData = consignEntry.getOrderEntry();
@@ -272,7 +277,15 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 		totalData.setGrossWeight(String.valueOf(gross));
 
 		totalData.setPackingCount(String.valueOf(quantity));
-		totalData.setPackingWeight(StringUtils.defaultString(packageWeight, ""));
+		//处理packageweightList组合
+		if(packageWeightList.size() > 0 ) {
+			packageWeightList = AcerChemEmailContextUtils.removeDuplicate(packageWeightList);
+			final String packArrayStr = packageWeightList.toString().replace("[", "").replace("]","");
+			totalData.setPackingWeight(StringUtils.defaultString(packArrayStr, ""));
+		}else{
+			totalData.setPackingWeight("  ");
+		}
+		
 		totalData.setShippingMarks("N/M");
 		totalData.setPoNo(" ");
 
