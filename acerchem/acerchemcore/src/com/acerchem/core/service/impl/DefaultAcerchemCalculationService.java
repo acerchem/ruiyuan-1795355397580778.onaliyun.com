@@ -10,7 +10,9 @@
  */
 package com.acerchem.core.service.impl;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -18,12 +20,14 @@ import java.util.Set;
 import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
+import org.springframework.beans.factory.annotation.Required;
 
 import de.hybris.platform.core.model.c2l.CurrencyModel;
 import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.AbstractOrderModel;
 import de.hybris.platform.order.exceptions.CalculationException;
 import de.hybris.platform.order.impl.DefaultCalculationService;
+import de.hybris.platform.order.strategies.calculation.FindDiscountValuesStrategy;
 import de.hybris.platform.order.strategies.calculation.OrderRequiresCalculationStrategy;
 import de.hybris.platform.servicelayer.i18n.CommonI18NService;
 import de.hybris.platform.servicelayer.model.ModelService;
@@ -54,17 +58,13 @@ public class DefaultAcerchemCalculationService extends DefaultCalculationService
 	{
 		if (recalculate || orderRequiresCalculationStrategy.requiresCalculation(order))
 		{
-			double remainDiscountPrice = 0.0;
 			final CurrencyModel curr = order.getCurrency();
 			final int digits = curr.getDigits().intValue();
 			// subtotal
 			final double subtotal = order.getSubtotal().doubleValue();
 			// discounts
-			if(order.getUser().getUserLevel() != null && order.getUser().getUserLevel().getDiscount() != null && !"".equals(order.getUser().getUserLevel().getDiscount())){
-				remainDiscountPrice = (order.getUser().getUserLevel().getDiscount())*(order.getSubtotal());
-			}
+			
 			double totalDiscounts = calculateDiscountValues(order, recalculate);
-			totalDiscounts =subtotal - remainDiscountPrice;
 			final double roundedTotalDiscounts = commonI18NService.roundCurrency(totalDiscounts, digits);
 			order.setTotalDiscounts(Double.valueOf(roundedTotalDiscounts));
 			// set total
@@ -138,9 +138,74 @@ public class DefaultAcerchemCalculationService extends DefaultCalculationService
 		final PriceValue pv = findBasePrice(entry);
 		final AbstractOrderModel order = entry.getOrder();
 		final PriceValue basePrice = convertPriceIfNecessary(pv, order.getNet().booleanValue(), order.getCurrency(), entryTaxes);
-		entry.setBasePrice(Double.valueOf(basePrice.getValue()) * Double.valueOf(entry.getProduct().getNetWeight()));
-		modelService.save(entry);
+		//entry.setBasePrice(Double.valueOf(basePrice.getValue()));
+		if(order.getUser().getUserLevel() != null && order.getUser().getUserLevel().getDiscount() != null &&  !"".equals(order.getUser().getUserLevel().getDiscount())){
+			double userLevelPrice = (Double.valueOf(basePrice.getValue())* order.getUser().getUserLevel().getDiscount());
+			entry.setBasePrice(userLevelPrice * Double.valueOf(entry.getProduct().getNetWeight()));
+		}else{
+			entry.setBasePrice(Double.valueOf(basePrice.getValue()) * Double.valueOf(entry.getProduct().getNetWeight()));
+		}
+		//modelService.save(entry);
 		final List<DiscountValue> entryDiscounts = findDiscountValues(entry);
 		entry.setDiscountValues(entryDiscounts);
 	}
+	
+	
+	protected double calculateDiscountValues(final AbstractOrderModel order, final boolean recalculate)
+	{
+		if (recalculate || orderRequiresCalculationStrategy.requiresCalculation(order))
+		{
+			
+			final List<DiscountValue> discountValues = order.getGlobalDiscountValues();
+			if (discountValues != null && !discountValues.isEmpty())
+			{
+				// clean discount value list -- do we still need it?
+				//				removeAllGlobalDiscountValues();
+				//
+				final CurrencyModel curr = order.getCurrency();
+				final String iso = curr.getIsocode();
+
+				final int digits = curr.getDigits().intValue();
+				final double discountablePrice = order.getSubtotal().doubleValue()
+						+ (order.isDiscountsIncludeDeliveryCost() ? order.getDeliveryCost().doubleValue() : 0.0)
+						+ (order.isDiscountsIncludePaymentCost() ? order.getPaymentCost().doubleValue() : 0.0);
+				/*
+				 * apply discounts to this order's total
+				 */
+				final List appliedDiscounts = DiscountValue.apply(1.0, discountablePrice, digits,
+						convertDiscountValues(order, discountValues), iso);
+				// store discount values
+				order.setGlobalDiscountValues(appliedDiscounts);
+				return DiscountValue.sumAppliedValues(appliedDiscounts);
+			}
+			return 0.0;
+		}
+		else
+		{
+			return DiscountValue.sumAppliedValues(order.getGlobalDiscountValues());
+		}
+	}
+	
+	
+	
+//	protected List<DiscountValue> findDiscountValues(final AbstractOrderEntryModel entry) throws CalculationException
+//	{
+//		if (findDiscountsStrategies.isEmpty())
+//		{
+//			LOG.warn("No strategies for finding discount values could be found!");
+//			return Collections.<DiscountValue> emptyList();
+//		}
+//		else
+//		{
+//			final List<DiscountValue> result = new ArrayList<DiscountValue>();
+//			if(entry.getDiscountValues() != null){
+//				result.addAll(entry.getDiscountValues());
+//			}
+//			for (final FindDiscountValuesStrategy findStrategy : findDiscountsStrategies)
+//			{
+//				result.addAll(findStrategy.findDiscountValues(entry));
+//			}
+//			return result;
+//		}
+//	}
 }
