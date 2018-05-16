@@ -970,7 +970,9 @@ $("#dateBtn").on('click',function(){
 
  // 时间控件
 $(document).ready(function() {
-    $('#strdate').datetimepicker();
+    $('#strdate').datetimepicker({
+    	format: 'DD/MM/YYYY'
+    });
 });
  
 
