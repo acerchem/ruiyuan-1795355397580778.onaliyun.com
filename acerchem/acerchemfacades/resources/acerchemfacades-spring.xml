@@ -266,6 +266,13 @@
 		<property name="promotionResultService" ref="promotionResultService" />
 		<property name="promotionService" ref="promotionsService" />
 	</bean>
+	
+	<alias name="defaultAcerchemProductPromotionsPopulator" alias="productPromotionsPopulator"/>
+	<bean id="defaultAcerchemProductPromotionsPopulator" parent="baseProductPopulator"
+			class="com.acerchem.facades.populators.AcerchemProductPromotionsPopulator">
+		<property name="promotionsConverter" ref="promotionsConverter"/>
+		<property name="baseSiteService" ref="baseSiteService"/>
+	</bean>
 
 	<!--net weight info -->
 	<alias name="defaultProductNetWeightPopulator" alias="productNetWeightPopulator" />
