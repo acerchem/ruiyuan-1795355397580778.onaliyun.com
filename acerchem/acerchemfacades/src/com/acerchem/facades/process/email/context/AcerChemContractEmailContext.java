@@ -47,6 +47,8 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 	
 	private String contactUser;
 	private String contactMobile;
+	
+	private String deliveryMode;
 
 	@Override
 	public void init(final OrderProcessModel orderProcessModel, final EmailPageModel emailPageModel) {
@@ -66,6 +68,8 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 		initPaymentTerms(orderProcessModel);
 
 		customerModel = getCustomer(orderProcessModel);
+		
+		deliveryMode = orderData.getDeliveryMode()==null?"":orderData.getDeliveryMode().getName();
 
 	}
 
@@ -308,5 +312,15 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 	public void setContactUser(final String contactUser) {
 		this.contactUser = contactUser;
 	}
+
+	public String getDeliveryMode() {
+		return deliveryMode;
+	}
+
+	public void setDeliveryMode(final String deliveryMode) {
+		this.deliveryMode = deliveryMode;
+	}
+	
+	
 
 }

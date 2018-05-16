@@ -25,7 +25,6 @@ import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.commercefacades.coupon.data.CouponData;
 import de.hybris.platform.commercefacades.order.data.ConsignmentData;
 import de.hybris.platform.commercefacades.order.data.ConsignmentEntryData;
-import de.hybris.platform.commercefacades.order.data.DeliveryModeData;
 import de.hybris.platform.commercefacades.order.data.OrderData;
 import de.hybris.platform.commercefacades.order.data.OrderEntryData;
 import de.hybris.platform.commercefacades.product.data.ProductData;
@@ -53,27 +52,29 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 
 	private String currency;
 	private String paymentTerms;
-	
-	private CustomerModel customerModel;  
-	
+
+	private CustomerModel customerModel;
+
 	private String warehouse;
-	
+
 	private String moneyToWords;
 	private CustomerContactAddressOfEmailData customerAddressData;
 
 	private String contactUser;
 	private String contactMobile;
-	
-	//total vat 20%
+
+	// total vat 20%
 	private String vatAmount;
 	private String vatTotal;
 	private String vatMoneyToWords;
-	
+
 	private String customerCompany;
-	
+
+	private String deliveryCode;
+
 	@Resource
 	private ContactInfoService contactInfoService;
-	
+
 	@Override
 	public void init(final OrderProcessModel orderProcessModel, final EmailPageModel emailPageModel) {
 		super.init(orderProcessModel, emailPageModel);
@@ -92,17 +93,18 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 		initAppend();
 
 		initPaymentTerms(orderProcessModel);
-		
+
 		customerModel = getCustomer(orderProcessModel);
-		
+
 		setCustomerCompany(customerModel.getCompanyName());
-		
+
 		final String total = orderData.getTotalPrice().getValue().toString();
-		moneyToWords = AcerChemEmailContextUtils.getMoneyOfWord(total,"$");
-			
-		//initContactInfo();
+		moneyToWords = AcerChemEmailContextUtils.getMoneyOfWord(total, "$");
+
+		// initContactInfo();
 		initVatTotal();
-		
+
+		this.deliveryCode = orderData.getDeliveryMode() == null ? "" : orderData.getDeliveryMode().getCode();
 	}
 
 	@Override
@@ -161,25 +163,6 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 		this.contactMobile = addressData.getContactPhone();
 		this.contactUser = addressData.getContactUser();
 	}
-	
-//	public void initContactInfo(){
-//		CustomerModel customer = this.getCustomer();
-//		//Collection<AbstractContactInfoModel> coll = customer.getContactInfos();
-//		
-//		AbstractContactInfoModel contactInfo =  contactInfoService.getMainContactInfo(customer);
-//		if (contactInfo != null){
-//			UserModel curUser = contactInfo.getUser();
-//			if (curUser != null  ){
-//				this.setContactUser(curUser.getName());
-//				
-//				List<String> phones = AcerChemEmailContextUtils.getPhoneNumbers(curUser.getPhoneNumbers());
-//				if(phones.size() > 0){
-//					this.setContactMobile(phones.get(0));
-//				}
-//			}
-//		}
-//		
-//	}
 
 	public String getCustomerAddress() {
 		return this.customerAddress;
@@ -201,7 +184,7 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 		long itemNet = 0;
 		long itemGross = 0;
 
-		String packageWeight = ""; //当前认为包裹重量一致
+		String packageWeight = ""; // 当前认为包裹重量一致
 		if (CollectionUtils.isNotEmpty(consignments)) {
 			for (final ConsignmentData consignment : consignments) {
 
@@ -235,21 +218,25 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 						pie.setProductCode(product.getCode());
 						pie.setProductName(product.getName());
 						pie.setQuantity(consignEntry.getQuantity().toString());
-						pie.setBatchNo(StringUtils.defaultString(consignEntry.getBatchNum()," "));
-						String tempNet = StringUtils.defaultString(product.getNetWeight(),"0");
-						String tempGross = StringUtils.defaultString(product.getGrossWeight(),"0");
-						if(!StringUtils.isNumeric(tempNet)){
+						pie.setBatchNo(StringUtils.defaultString(consignEntry.getBatchNum(), " "));
+						String tempNet = StringUtils.defaultString(product.getNetWeight(), "0");
+						String tempGross = StringUtils.defaultString(product.getGrossWeight(), "0");
+						if (!StringUtils.isNumeric(tempNet)) {
 							tempNet = "0";
+						} else {
+							tempNet = String.valueOf(Long.valueOf(tempNet) * consignEntry.getQuantity());
 						}
-						if(!StringUtils.isNumeric(tempGross)){
+						if (!StringUtils.isNumeric(tempGross)) {
 							tempGross = "0";
+						} else {
+							tempGross = String.valueOf(Long.valueOf(tempGross) * consignEntry.getQuantity());
 						}
 						pie.setNetWeight(tempNet);
 						pie.setGrossWeight(tempGross);
 						pie.setTotal(false);
 
 						packageWeight = product.getPackageWeight();
-						
+
 						quantity += consignEntry.getQuantity();
 						net += Long.parseLong(tempNet);
 						gross += Long.parseLong(tempGross);
@@ -257,16 +244,15 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 						itemNet += Long.parseLong(tempNet);
 						itemGross += Long.parseLong(tempGross);
 						list.add(pie);
-						
-						
-						//add warehouse
-						if (StringUtils.isBlank(warehouse)){
+
+						// add warehouse
+						if (StringUtils.isBlank(warehouse)) {
 							final OrderEntryData entryData = consignEntry.getOrderEntry();
-							
-							if ( entryData != null){
+
+							if (entryData != null) {
 								final PointOfServiceData pos = entryData.getDeliveryPointOfService();
-								if (pos != null){
-									setWarehouse(StringUtils.defaultString(pos.getName(),"&nbsp;"));
+								if (pos != null) {
+									setWarehouse(StringUtils.defaultString(pos.getName(), "&nbsp;"));
 								}
 							}
 						}
@@ -286,7 +272,7 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 		totalData.setGrossWeight(String.valueOf(gross));
 
 		totalData.setPackingCount(String.valueOf(quantity));
-		totalData.setPackingWeight(StringUtils.defaultString(packageWeight,""));
+		totalData.setPackingWeight(StringUtils.defaultString(packageWeight, ""));
 		totalData.setShippingMarks("N/M");
 		totalData.setPoNo(" ");
 
@@ -307,9 +293,9 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 		initAppend.setTaxInfo(sb.toString());
 
 		setAppend(initAppend);
-		
-		//处理warehouse数据，这个数据在proforma时，因没有consignment，而取不到
-		if (StringUtils.isBlank(warehouse)){
+
+		// 处理warehouse数据，这个数据在proforma时，因没有consignment，而取不到
+		if (StringUtils.isBlank(warehouse)) {
 			final List<OrderEntryData> orderEntries = orderData.getEntries();
 			if (CollectionUtils.isNotEmpty(orderEntries)) {
 				for (final OrderEntryData orderEntry : orderEntries) {
@@ -335,9 +321,10 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 		setPaymentTerms(terms);
 	}
 
-	public void initWarehouse(){
-		
+	public void initWarehouse() {
+
 	}
+
 	/**
 	 * @return the paymentTerms
 	 */
@@ -368,7 +355,8 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 	}
 
 	/**
-	 * @param warehouse the warehouse to set
+	 * @param warehouse
+	 *            the warehouse to set
 	 */
 	public void setWarehouse(final String warehouse) {
 		this.warehouse = warehouse;
@@ -434,27 +422,25 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 		this.vatMoneyToWords = vatMoneyToWords;
 	}
 
-	//vat 20%
-	public void initVatTotal(){
-		
-		final DecimalFormat df   = new DecimalFormat(",##0.00");	
-		
-		final double dTotal =orderData.getTotalPrice().getValue().doubleValue();
-		
-	
-		final double dVat = dTotal*0.2;
+	// vat 20%
+	public void initVatTotal() {
+
+		final DecimalFormat df = new DecimalFormat(",##0.00");
+
+		final double dTotal = orderData.getTotalPrice().getValue().doubleValue();
+
+		final double dVat = dTotal * 0.2;
 		final String vat_ = df.format(dVat);
 		setVatAmount(vat_);
-		
-		
-		final double  dVatTotal  =  dTotal + dVat;
+
+		final double dVatTotal = dTotal + dVat;
 		final String vatTotal_ = df.format(dVatTotal);
 		setVatTotal(vatTotal_);
-		final DecimalFormat df1   = new DecimalFormat("0.00");
-		
+		final DecimalFormat df1 = new DecimalFormat("0.00");
+
 		final String formatTotal = df1.format(dVatTotal);
-		final String vatMoney_ = AcerChemEmailContextUtils.getMoneyOfWord(formatTotal,"$");
-		
+		final String vatMoney_ = AcerChemEmailContextUtils.getMoneyOfWord(formatTotal, "$");
+
 		setVatMoneyToWords(vatMoney_);
 	}
 
@@ -465,33 +451,38 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 	public void setCustomerCompany(final String customerCompany) {
 		this.customerCompany = customerCompany;
 	}
-	
-	public String getInvoiceDate(){
-		String dateStr="";
-		final DeliveryModeData dmData = orderData.getDeliveryMode();
-		if(dmData !=null){
-			if (dmData.getCode().equals("DELIVERY_GROSS")){//配送  DELIVERY_GROSS
-				dateStr = orderData.getWaitDeliveiedDate();
-			}else {//自提 DELIVERY_MENTION
-				dateStr = orderData.getPickUpdate();
-			}
+
+	public String getInvoiceDate() {
+		String dateStr = "";
+
+		if (getDeliveryCode().equals("DELIVERY_GROSS")) {// 配送 DELIVERY_GROSS
+			dateStr = orderData.getWaitDeliveiedDate();
+		} else {// 自提 DELIVERY_MENTION
+			dateStr = orderData.getPickUpdate();
 		}
-		
+
 		return dateStr;
 	}
-	
-	//处理到货地址
-	public String getShipto(){
+
+	// 处理到货地址
+	public String getShipto() {
 		String shipto = "";
-		final DeliveryModeData dmData = orderData.getDeliveryMode();
-		if(dmData !=null){
-			if (dmData.getCode().equals("DELIVERY_GROSS")){//配送  DELIVERY_GROSS
-				shipto = orderData.getDeliveryAddress().getFormattedAddress();
-			}else {//自提 DELIVERY_MENTION
-				shipto ="&nbsp;&nbsp;&nbsp;&nbsp;";
-			}
+
+		if (getDeliveryCode().equals("DELIVERY_GROSS")) {// 配送 DELIVERY_GROSS
+			shipto = orderData.getDeliveryAddress().getFormattedAddress();
+		} else {// 自提 DELIVERY_MENTION
+			shipto = "&nbsp;&nbsp;&nbsp;&nbsp;";
 		}
+
 		return shipto;
 	}
-	
+
+	public String getDeliveryCode() {
+		return deliveryCode;
+	}
+
+	public void setDeliveryCode(final String deliveryCode) {
+		this.deliveryCode = deliveryCode;
+	}
+
 }

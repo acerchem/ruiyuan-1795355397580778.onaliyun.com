@@ -178,7 +178,7 @@ p.western {
         </tr>
         <tr>
           <td>
-            1.Delivery Terms: DDP
+            1.Delivery Terms: $!{ctx.deliveryMode}
           </td>
         </tr>
         <tr>

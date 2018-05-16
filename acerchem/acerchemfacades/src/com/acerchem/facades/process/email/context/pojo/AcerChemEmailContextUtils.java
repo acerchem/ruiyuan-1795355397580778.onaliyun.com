@@ -22,28 +22,28 @@ import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 public class AcerChemEmailContextUtils {
 
 	//联系地址
-	public static String getCustomerContactAddress(Collection<AddressModel> collect) {
+	public static String getCustomerContactAddress(final Collection<AddressModel> collect) {
 		return getCustomerContactAddress(collect,"CONTACT");
 	}
-	public static String getCustomerContactAddress(Collection<AddressModel> collect,String AddressType) {
+	public static String getCustomerContactAddress(final Collection<AddressModel> collect,final String AddressType) {
 		if (CollectionUtils.isNotEmpty(collect)) {
-			for (AddressModel model : collect) {
+			for (final AddressModel model : collect) {
 				if (getAddressType(AddressType,model)) {
-					String street = StringUtils.defaultString(model.getStreetname(), "");
-					String streetNum = StringUtils.defaultString(model.getStreetnumber(), "");
-					String town = StringUtils.defaultString(model.getTown(), "");
+					final String street = StringUtils.defaultString(model.getStreetname(), "");
+					final String streetNum = StringUtils.defaultString(model.getStreetnumber(), "");
+					final String town = StringUtils.defaultString(model.getTown(), "");
 					String country = "";
-					CountryModel countryModel = model.getCountry();
+					final CountryModel countryModel = model.getCountry();
 					if (countryModel != null) {
 						country = StringUtils.defaultString(countryModel.getName(), "");
 					}
 					String regin = "";
-					RegionModel reginModel = model.getRegion();
+					final RegionModel reginModel = model.getRegion();
 					if (reginModel != null) {
 						regin = reginModel.getName();
 					}
 
-					StringBuilder sb = new StringBuilder(town);
+					final StringBuilder sb = new StringBuilder(town);
 					sb.append("  ");
 					sb.append(regin).append(" ");
 					sb.append(country);
@@ -57,23 +57,23 @@ public class AcerChemEmailContextUtils {
 	}
 
 	//联系地址对象
-	public static CustomerContactAddressOfEmailData getCustomerContactAddressData(Collection<AddressModel> collect) {
+	public static CustomerContactAddressOfEmailData getCustomerContactAddressData(final Collection<AddressModel> collect) {
 		return getCustomerContactAddressData(collect,"CONTACT");
 	}
 	
 	
 	//SHIPPING/UNLOADING/BILLING/CONTACT
-	public static CustomerContactAddressOfEmailData getCustomerContactAddressData(Collection<AddressModel> collect,String AddressType) {
+	public static CustomerContactAddressOfEmailData getCustomerContactAddressData(final Collection<AddressModel> collect,final String AddressType) {
 
-		CustomerContactAddressOfEmailData data = new CustomerContactAddressOfEmailData();
+		final CustomerContactAddressOfEmailData data = new CustomerContactAddressOfEmailData();
 		if (CollectionUtils.isNotEmpty(collect)) {
-			for (AddressModel model : collect) {
+			for (final AddressModel model : collect) {
 				if (getAddressType(AddressType,model)) {
-					String street = StringUtils.defaultString(model.getStreetname(), "");
-					String streetNum = StringUtils.defaultString(model.getStreetnumber(), "");
-					String town = StringUtils.defaultString(model.getTown(), "");
+					final String street = StringUtils.defaultString(model.getStreetname(), "");
+					final String streetNum = StringUtils.defaultString(model.getStreetnumber(), "");
+					final String town = StringUtils.defaultString(model.getTown(), "");
 					String country = "";
-					CountryModel countryModel = model.getCountry();
+					final CountryModel countryModel = model.getCountry();
 					if (countryModel != null) {
 						country = StringUtils.defaultString(countryModel.getName(), "");
 					}
@@ -82,7 +82,7 @@ public class AcerChemEmailContextUtils {
 					data.setStreetNum(streetNum);
 					data.setTown(town);
 					String regin = "";
-					RegionModel reginModel = model.getRegion();
+					final RegionModel reginModel = model.getRegion();
 					if (reginModel != null) {
 						regin = reginModel.getName();
 					}
@@ -90,7 +90,12 @@ public class AcerChemEmailContextUtils {
 					data.setRegion(regin);
 					//add contact info
 					data.setContactPhone(model.getPhone1());
-					data.setContactUser(model.getLastname());
+					
+					//full username
+					final String lastName = StringUtils.defaultString(model.getLastname());
+					final String firstName = StringUtils.defaultString(model.getFirstname());
+					
+					data.setContactUser(firstName + "  "+ lastName);
 					
 					return data;
 
@@ -101,7 +106,7 @@ public class AcerChemEmailContextUtils {
 		return data;
 	}
 	// type = SHIPPING/UNLOADING/BILLING/CONTACT
-	private static boolean getAddressType(String type,AddressModel model){
+	private static boolean getAddressType(final String type,final AddressModel model){
 		if (model !=null){
 			if (type.equals("SHIPPING")){
 				return model.getShippingAddress();
@@ -122,12 +127,12 @@ public class AcerChemEmailContextUtils {
 		String terms = "&nbsp; ";
 		if (StringUtils.isNotBlank(paymentMode)) {
 			if (!paymentMode.equalsIgnoreCase("prepay")) {
-				CustomerModel customerModel = (CustomerModel) orderProcessModel.getOrder().getUser();
+				final CustomerModel customerModel = (CustomerModel) orderProcessModel.getOrder().getUser();
 				terms = " T/T {DAYCOUNT} DAYS AFTER SHIPPING DOCUMENTS";
 				if (customerModel != null) {
-					CustomerCreditAccountModel customerCreditAccount = customerModel.getCreditAccount();
+					final CustomerCreditAccountModel customerCreditAccount = customerModel.getCreditAccount();
 					if (customerCreditAccount != null) {
-						int dayCount = customerCreditAccount.getBillingInterval();
+						final int dayCount = customerCreditAccount.getBillingInterval();
 
 						terms = terms.replace("{DAYCOUNT}", String.valueOf(dayCount));
 					}
@@ -141,12 +146,12 @@ public class AcerChemEmailContextUtils {
 
 	// 获得电话号码
 	public static List<String> getPhoneNumbers(final Collection<UserPhoneNumberModel> coll) {
-		List<String> list = new ArrayList<String>();
+		final List<String> list = new ArrayList<String>();
 		if (CollectionUtils.isNotEmpty(coll)) {
-			for (UserPhoneNumberModel userPhone : coll) {
-				PhoneNumberModel pnm = userPhone.getPhoneNumber();
+			for (final UserPhoneNumberModel userPhone : coll) {
+				final PhoneNumberModel pnm = userPhone.getPhoneNumber();
 				if (pnm != null) {
-					String phone = pnm.getFormat().getCode();
+					final String phone = pnm.getFormat().getCode();
 					if (StringUtils.isNotBlank(phone)) {
 						list.add(phone);
 					}
@@ -168,18 +173,18 @@ public class AcerChemEmailContextUtils {
 	private static String end = "ONLY";
 
 	// email 所用
-	public static String getMoneyOfWord(String money, String prefixWord) {
+	public static String getMoneyOfWord(final String money, final String prefixWord) {
 		String param = money;
 
 		if (isNumber(param)) {
 			// 只允许两位小数
 			double f = Double.parseDouble(money);
-			BigDecimal b = new BigDecimal(f);
+			final BigDecimal b = new BigDecimal(f);
 			f = b.setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
 			param = String.valueOf(f);
 			if (param.lastIndexOf(".") > 0) {
-				int pos = param.lastIndexOf(".");
-				String pureDecimal = param.substring(pos + 1);
+				final int pos = param.lastIndexOf(".");
+				final String pureDecimal = param.substring(pos + 1);
 
 				if (StringUtils.equals("0", pureDecimal)) {
 					param = param.substring(0, pos);
@@ -189,14 +194,14 @@ public class AcerChemEmailContextUtils {
 			param = "0";
 		}
 
-		String prefix = StringUtils.containsIgnoreCase(prefixWord, "$") ? "say us dollors" : prefixWord;
+		final String prefix = StringUtils.containsIgnoreCase(prefixWord, "$") ? "say us dollors" : prefixWord;
 		return StringUtils.upperCase(prefix + " " + getMoneyOfWord(param));
 	}
 
 	// 转换钱数为英文
-	public static String getMoneyOfWord(String money) {
-		double dMoney = Double.parseDouble(money);
-		String[] arrMoney = money.split("\\.");
+	public static String getMoneyOfWord(final String money) {
+		final double dMoney = Double.parseDouble(money);
+		final String[] arrMoney = money.split("\\.");
 		// 小数点前
 		int decimals1 = 0;
 		// 小数点后
@@ -216,18 +221,18 @@ public class AcerChemEmailContextUtils {
 		String combined2 = smallNumbers[0];
 
 		if (decimals1 != 0) {
-			int[] digitGroups = new int[] { 0, 0, 0, 0 };
+			final int[] digitGroups = new int[] { 0, 0, 0, 0 };
 			//// 将金额拆分成4段，每段放3位数，即：XXX,XXX,XXX,XXX。最大仅支持到Billion，
 			for (int i = 0; i < 4; i++) {
 				digitGroups[i] = decimals1 % 1000;
 				decimals1 = decimals1 / 1000;
 			}
 
-			String[] groupText = new String[] { "", "", "", "" };
+			final String[] groupText = new String[] { "", "", "", "" };
 			// 处理每段的金额转英文，百位+十位+个位
 			for (int i = 0; i < 4; i++) {
-				int hundreds = digitGroups[i] / 100;
-				int tensUnits = digitGroups[i] % 100;
+				final int hundreds = digitGroups[i] / 100;
+				final int tensUnits = digitGroups[i] % 100;
 				// 百位
 				if (hundreds != 0) {
 					groupText[i] = groupText[i] + smallNumbers[hundreds] + " HUNDRED";
@@ -237,8 +242,8 @@ public class AcerChemEmailContextUtils {
 				}
 
 				// 十位和个位
-				int tens = tensUnits / 10;
-				int units = tensUnits % 10;
+				final int tens = tensUnits / 10;
+				final int units = tensUnits % 10;
 				if (tens >= 2) {// 十位大于等于20
 					groupText[i] = groupText[i] + tensNumbers[tens];
 					if (units != 0) {
@@ -268,8 +273,8 @@ public class AcerChemEmailContextUtils {
 
 		if (decimals2 != 0) {
 			// 十位和个位
-			int tens = decimals2 / 10;
-			int units = decimals2 % 10;
+			final int tens = decimals2 / 10;
+			final int units = decimals2 % 10;
 
 			if (decimals2 >= 20) {
 				combined2 = "CENTS " + tensNumbers[tens];
@@ -296,21 +301,21 @@ public class AcerChemEmailContextUtils {
 		}
 	}
 
-	public static boolean isNumber(String number) {
+	public static boolean isNumber(final String number) {
 		if (number == null || "".equals(number))
 			return false;
-		int index = number.indexOf(".");
+		final int index = number.indexOf(".");
 		if (index < 0) {
 			return StringUtils.isNumeric(number);
 		} else {
-			String num1 = number.substring(0, index);
-			String num2 = number.substring(index + 1);
+			final String num1 = number.substring(0, index);
+			final String num2 = number.substring(index + 1);
 
 			return StringUtils.isNumeric(num1) && StringUtils.isNumeric(num2);
 		}
 	}
 
-	public static void main(String[] args) {
+	public static void main(final String[] args) {
 		//String s = "207.998678";
 		String s = "18000.0";
 		s = AcerChemEmailContextUtils.getMoneyOfWord(s, "$");
