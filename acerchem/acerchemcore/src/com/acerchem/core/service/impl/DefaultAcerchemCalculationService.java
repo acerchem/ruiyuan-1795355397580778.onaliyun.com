@@ -167,7 +167,6 @@ public class DefaultAcerchemCalculationService extends DefaultCalculationService
 
 				final int digits = curr.getDigits().intValue();
 				final double discountablePrice = order.getSubtotal().doubleValue()
-						+ (order.isDiscountsIncludeDeliveryCost() ? order.getDeliveryCost().doubleValue() : 0.0)
 						+ (order.isDiscountsIncludePaymentCost() ? order.getPaymentCost().doubleValue() : 0.0);
 				/*
 				 * apply discounts to this order's total
