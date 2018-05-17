@@ -460,16 +460,6 @@ INSERT_UPDATE StockLevel;available;warehouse(code)[default='Chiba',unique=true];
 #;12;;;0;0;AC05003a;0
 
 
-#### shaun:Ladder sales price ####
-INSERT_UPDATE PromotionThresholdDiscount;minQuantity[unique=true];maxQuantity[unique=true];percentageDiscount[unique=true];
-;1;5;10;
-;5;10;20;
-;10;15;50;
-
-
-INSERT_UPDATE ProductThresholdPercentageDiscountPromotion;PromotionGroup(Identifier[default=$defaultPromoGrp]);enabled[default=true][unique=true];code[unique=true];title;description;messageFired[lang=en];messageFired[lang=zh];priority;products(code,$catalogVersion);thresholdDiscounts(percentageDiscount)
-
-;;;LadderDiscount;LadderDiscount;LadderDiscount;LadderDiscount;阶梯价优惠;500;AC05080a,AC05080b,AC03390a,AC03138a,AC03887a,AC03142a,AC02345a,AC02354a,AC05003a,AC02090a;10,20,50
 
 
 
