@@ -188,7 +188,10 @@ p.western {
         </tr>
         <tr>
           <td>
-            3.Deliver from: $!{ctx.warehouse} to: $!{ctx.order.deliveryAddress.formattedAddress}
+            3.Deliver from: $!{ctx.warehouse} to: 
+			#if(${ctx.deliveryMode} == "DDP")
+				$!{ctx.order.deliveryAddress.formattedAddress}
+			#end
           </td>
         </tr>
         <tr>
