@@ -44,6 +44,7 @@ INSERT_UPDATE PrincipalGroupRelation;source(uid)[unique=true];target(uid)[unique
 ;customersupportadministratorgroup;acerchemrole
 ;customersupportadministratorgroup;customersupportagentrole
 ;customersupportadministratorgroup;csagentmanagergroup
+;customersupportadministratorgroup;customersupportagentgroup
 
 ;acerchemsupportgroup;backofficeadmingroup
 ;acerchemsupportgroup;customersupportadministratorrole
@@ -89,7 +90,8 @@ INSERT_UPDATE UserGroup;UID[unique=true];groups(uid)[mode=append];locname[lang=e
 #
 INSERT_UPDATE Employee;UID[unique=true];name;groups(uid);description;password
 
-;CustomerSupportAdministrator;Customer Support Administrator;customersupportadministratorgroup;This generic Customer Support Administrator User is assigned and has access to the Backoffice Administrator, Customer Support Manager and Customer Support Agent Group views - to provide administrative support to these later users.;1234
+;admin;Customer Support Administrator;customersupportagentgroup;This generic Customer Support Administrator User is assigned and has access to the Backoffice Administrator, Customer Support Manager and Customer Support Agent Group views - to provide administrative support to these later users.;nimda
+;CustomerSupportAdministrator;Customer Support Administrator;customersupportadministratorgroup,customersupportagentgroup;This generic Customer Support Administrator User is assigned and has access to the Backoffice Administrator, Customer Support Manager and Customer Support Agent Group views - to provide administrative support to these later users.;1234
 ;CustomerSupportManager;Customer Support Manager;customersupportmanagergroup;This generic Customer Support Manager User is assigned and has access to the Backoffice Customer Support Manager and Customer Support Agent Group views and ASM - to provide restricted Backoffice and ASM customer sales and service manager support.;1234
 ;CustomerSupportAgent;Customer Support Agent;customersupportagentgroup;This generic Customer Support Agent is assigned and has access to the Backoffice Customer Support Agent Group views and ASM - to provide restricted Backoffice and ASM customer sales and service manager support.;1234
 ;customer.support.1@sap.com;Customer Support 1;customersupportagentgroup;This generic Customer Support Agent is assigned and has access to the Backoffice Customer Support Agent Group views and ASM - to provide restricted Backoffice and ASM customer sales and service manager support.;1234
