@@ -25,9 +25,6 @@ import de.hybris.platform.ticket.strategies.TicketEventStrategy;
 public class AcerChemSupportTicketServiceImpl extends DefaultTicketBusinessService implements AcerChemSupportTicketService {
 	private static final Logger LOG = Logger.getLogger(DefaultTicketBusinessService.class);
 	
-	private static final String CANNOT_UPDATE_TICKET_TO_NULL_STATE = "Cannot update ticket to null state";
-	private static final String CANNOT_UPDATE_NULL_TICKET = "Cannot update null ticket";
-	private static final String DEFAULT_SUBJECT_MESSAGE = "Support Ticket Status Updated from %s to  %s";
 	@Resource
 	private Converter<CsTicketParameter, CsTicketModel> defaultTicketParameterConverter;
 	@Resource
@@ -38,9 +35,9 @@ public class AcerChemSupportTicketServiceImpl extends DefaultTicketBusinessServi
 
 	@Override
 	public CsTicketModel createTicket(CsTicketParameter ticketParameter) {
-		ArrayList attachments = new ArrayList();
+		ArrayList<CommentAttachmentModel> attachments = new ArrayList<CommentAttachmentModel>();
 		if (CollectionUtils.isNotEmpty(ticketParameter.getAttachments())) {
-			Iterator creationEvent = ticketParameter.getAttachments().iterator();
+			Iterator<?> creationEvent = ticketParameter.getAttachments().iterator();
 
 			while (creationEvent.hasNext()) {
 				MultipartFile ticket = (MultipartFile) creationEvent.next();
@@ -65,6 +62,7 @@ public class AcerChemSupportTicketServiceImpl extends DefaultTicketBusinessServi
 		ticket1.setTelephone(ticketParameter.getTelephone());
 		ticket1.setAddress(ticketParameter.getAddress());
 		ticket1.setEmail(ticketParameter.getEmail());
+		ticket1.setSessionId(getSessionService().getCurrentSession().getSessionId());
 		
 		CsCustomerEventModel creationEvent1 = this.defaultTicketEventStrategy.createCreationEventForTicket(ticket1,
 				ticketParameter.getReason(), ticketParameter.getInterventionType(), ticketParameter.getCreationNotes());
