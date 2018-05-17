@@ -49,7 +49,15 @@
 			</span>								
 		</div>
 	</td>
+	<c:choose>
+	<c:when test="${not empty entry.product.promotionPrice}">
 	<td><b><format:price priceData="${entry.product.promotionPrice}" displayFreeForZero="true"/></b></td>
+	</c:when>
+	
+	<c:otherwise>
+	<td><b><format:price priceData="${entry.product.price}" displayFreeForZero="true"/></b></td>
+	</c:otherwise>
+	</c:choose>
 	<td><b> ${entry.quantity}*${entry.product.netWeight}${entry.product.unitName}</b></td>
 	<td><b>${entry.product.code}</b></td>
 	<td>

@@ -348,31 +348,34 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
             setOrderDeliveryDays(cartData, cartModel);
             
             double subTotal = 0;
-
-            for (OrderEntryData orderEntryData: cartData.getEntries()){
-              //  BigDecimal basePrice = orderEntryData.getTotalPrice().getValue().divide(BigDecimal.valueOf(orderEntryData.getQuantity()));
-            	
-            	BigDecimal basePrice = orderEntryData.getBasePrice().getValue();
-                PriceData promotionBasePrice = priceDataFactory.create(PriceDataType.BUY,
-                        BigDecimal.valueOf(basePrice.doubleValue()), cartModel.getCurrency().getIsocode());
-                orderEntryData.setPromotionBasePrice(promotionBasePrice);
-                
-                
-                String netWeight = orderEntryData.getProduct().getNetWeight();
-            	
-            	long items = orderEntryData.getQuantity();
-            	
-            	//BigDecimal basePrice = orderEntryData.getBasePrice().getValue();
-            	//long totalWeight = items* Long.valueOf(netWeight);
-            	//Double totalPrice = Long.valueOf(basePrice)*totalWeight;
-            	
-            	Double totalPrice =basePrice.doubleValue()*items;
-            	
-            	subTotal += totalPrice;
-            	
-            	orderEntryData.setTotalPrice(createPrice(cartModel, totalPrice));
-            }
             
+            if (cartData.getEntries()!= null){
+            	
+            	for (OrderEntryData orderEntryData: cartData.getEntries()){
+                    //  BigDecimal basePrice = orderEntryData.getTotalPrice().getValue().divide(BigDecimal.valueOf(orderEntryData.getQuantity()));
+                  	
+                  	BigDecimal basePrice = orderEntryData.getBasePrice().getValue();
+                      PriceData promotionBasePrice = priceDataFactory.create(PriceDataType.BUY,
+                              BigDecimal.valueOf(basePrice.doubleValue()), cartModel.getCurrency().getIsocode());
+                      orderEntryData.setPromotionBasePrice(promotionBasePrice);
+                      
+                      
+                      String netWeight = orderEntryData.getProduct().getNetWeight();
+                  	
+                  	long items = orderEntryData.getQuantity();
+                  	
+                  	//BigDecimal basePrice = orderEntryData.getBasePrice().getValue();
+                  	//long totalWeight = items* Long.valueOf(netWeight);
+                  	//Double totalPrice = Long.valueOf(basePrice)*totalWeight;
+                  	
+                  	Double totalPrice =basePrice.doubleValue()*items;
+                  	
+                  	subTotal += totalPrice;
+                  	
+                  	orderEntryData.setTotalPrice(createPrice(cartModel, totalPrice));
+                  }
+            }
+
             total += subTotal;
             
             if (cartData.getTotalDiscounts()!= null){
@@ -572,8 +575,12 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
 		    netWeight =productData.getNetWeight();
 			
 			// set the total Price
-			
-			BigDecimal priceValue=productData.getPromotionPrice().getValue();
+		    BigDecimal priceValue;
+			if (productData.getPromotionPrice()!= null){
+				priceValue=productData.getPromotionPrice().getValue();
+			} else {
+				priceValue=productData.getPrice().getValue();
+			}
 			
 			Double totalWeight = Double.valueOf(netWeight)* entry.getQuantity();
 			

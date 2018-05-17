@@ -45,7 +45,7 @@
 									
 									 <%-- <c:choose>
 						                <c:when test="${cartData.totalDiscounts.value > 0}"> --%>
-						                    <span><format:price priceData="${cartData.totalDiscounts}"/></span>
+						                    <span>-<format:price priceData="${cartData.totalDiscounts}"/></span>
 						             <%--    </c:when>
 						                <c:otherwise>
 						                     <span class="row">-$0.00</span>
