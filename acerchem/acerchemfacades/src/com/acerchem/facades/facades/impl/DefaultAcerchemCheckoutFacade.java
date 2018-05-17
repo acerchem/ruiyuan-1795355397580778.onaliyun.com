@@ -374,6 +374,10 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
             }
             
             total += subTotal;
+            
+            if (cartData.getTotalDiscounts()!= null){
+            	total -= cartData.getTotalDiscounts().getValue().doubleValue();
+            }
           
             cartData.setSubTotal(createPrice(cartModel, subTotal));
             cartData.setTotalPrice(createPrice(cartModel, total));
@@ -544,11 +548,62 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                 afterPlaceOrder(cartModel, orderModel);
                 if (orderModel != null)
                 {
-                    return getOrderConverter().convert(orderModel);
+                	
+                	OrderData data=entryPriceInit(getOrderConverter().convert(orderModel));
+                	
+                	return data;
                 }
             }
         }
         return null;
+    }
+    
+    
+    private OrderData entryPriceInit(OrderData orderData){
+    	
+    	
+       String netWeight = null;
+       Double subTotal = (double) 0;
+       
+       if (orderData.getEntries() != null){
+       for(OrderEntryData entry:orderData.getEntries()) {
+    	   
+    	   ProductData productData = entry.getProduct();
+		    netWeight =productData.getNetWeight();
+			
+			// set the total Price
+			
+			BigDecimal priceValue=productData.getPromotionPrice().getValue();
+			
+			Double totalWeight = Double.valueOf(netWeight)* entry.getQuantity();
+			
+			Double totalPrice = priceValue.doubleValue()* totalWeight;
+			
+			String currentyIso = entry.getBasePrice().getCurrencyIso();
+			
+			PriceData priceData = getPriceDataFactory().create(PriceDataType.BUY, BigDecimal.valueOf(totalPrice),
+					currentyIso);
+			
+			entry.setTotalPrice(priceData);
+			
+			//-----------------set the sub total 
+			
+			subTotal+= totalPrice;
+			
+		
+    	   
+       }
+        String currentyIso = orderData.getCurrency();
+		
+		PriceData priceData1 = getPriceDataFactory().create(PriceDataType.BUY, BigDecimal.valueOf(subTotal),
+				currentyIso);
+       
+         orderData.setSubTotal(priceData1);
+         
+       }
+    	
+		return orderData;
+    	
     }
 
     @Override

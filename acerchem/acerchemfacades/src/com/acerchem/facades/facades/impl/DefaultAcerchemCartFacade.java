@@ -154,6 +154,8 @@ public class DefaultAcerchemCartFacade extends DefaultCartFacade implements Acer
 			
 			String netWeight = null;
 			
+			
+			Double subTotal=(double) 0;
 			if (data.getEntries()!= null){
 				
 				for(OrderEntryData entry:data.getEntries()){
@@ -183,15 +185,19 @@ public class DefaultAcerchemCartFacade extends DefaultCartFacade implements Acer
 							currentyIso);
 					entry.setTotalPrice(priceData1);
 					
-				}
-				//-----------------set the sub Price
-			     BigDecimal subPrice=data.getSubTotal().getValue();
-		
-				 Double subTotal = subPrice.doubleValue()/ Double.valueOf(netWeight);
+					//-----------------set the sub Price
+				    // BigDecimal subPrice=data.getSubTotal().getValue();
+			
+					  subTotal += price;
+						
 					
+					
+				}
+				
 				PriceData priceData2 = getPriceDataFactory().create(PriceDataType.BUY, BigDecimal.valueOf(subTotal),
-							data.getSubTotal().getCurrencyIso());
-				data.setSubTotal(priceData2);
+						data.getSubTotal().getCurrencyIso());
+			    data.setSubTotal(priceData2);
+				
 			}
 
 			if (recentlyAddedFirst)

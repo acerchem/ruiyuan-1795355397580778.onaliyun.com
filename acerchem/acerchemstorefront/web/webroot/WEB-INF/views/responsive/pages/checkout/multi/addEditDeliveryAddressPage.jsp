@@ -393,14 +393,28 @@
 							    <input type='text' class="form-control2"  id="textDate" /> 
 							      </c:when> 
 		                      <c:otherwise>
-		                      <input type='text' class="form-control2" value ="${cartData.pickUpdate}" id="textDate" /> 
+		                      <input type='text' class="form-control2" value ="${cartData.pickUpdate}" id="textDate" />
 		                        </c:otherwise>
 		                      </c:choose>
 							    <span class="input-group-addon">
 							    </span>
 							</div>
+							
 						
 						</div>
+						
+						<c:if test="${cartData.pickUpdate ne null}"> 
+						<c:if test="${deliveryMode.code=='DELIVERY_GROSS'}">
+						<div class="date-item">
+				 	 		<span class="d-titls">ETA Date:</span>
+							<div class='input-group date' id='etadate'>
+							    <input type='text' class="form-control2"  value="${cartData.waitDeliveiedDate}"/>
+							    <span class="input-group-addon">
+							    </span>
+							</div>
+						</div>
+						</c:if>
+						</c:if>
 						
 					</div>
 
