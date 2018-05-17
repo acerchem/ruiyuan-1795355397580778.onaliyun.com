@@ -90,7 +90,8 @@ INSERT_UPDATE UserGroup;UID[unique=true];groups(uid)[mode=append];locname[lang=e
 #
 INSERT_UPDATE Employee;UID[unique=true];name;groups(uid);description;password
 
-;admin;Customer Support Administrator;customersupportagentgroup;This generic Customer Support Administrator User is assigned and has access to the Backoffice Administrator, Customer Support Manager and Customer Support Agent Group views - to provide administrative support to these later users.;nimda
+#上线前可以删除customersupportadministratorgroup
+;admin;Customer Support Administrator;admingroup,customersupportagentgroup;This generic Customer Support Administrator User is assigned and has access to the Backoffice Administrator, Customer Support Manager and Customer Support Agent Group views - to provide administrative support to these later users.;nimda
 ;CustomerSupportAdministrator;Customer Support Administrator;customersupportadministratorgroup,customersupportagentgroup;This generic Customer Support Administrator User is assigned and has access to the Backoffice Administrator, Customer Support Manager and Customer Support Agent Group views - to provide administrative support to these later users.;1234
 ;CustomerSupportManager;Customer Support Manager;customersupportmanagergroup;This generic Customer Support Manager User is assigned and has access to the Backoffice Customer Support Manager and Customer Support Agent Group views and ASM - to provide restricted Backoffice and ASM customer sales and service manager support.;1234
 ;CustomerSupportAgent;Customer Support Agent;customersupportagentgroup;This generic Customer Support Agent is assigned and has access to the Backoffice Customer Support Agent Group views and ASM - to provide restricted Backoffice and ASM customer sales and service manager support.;1234
