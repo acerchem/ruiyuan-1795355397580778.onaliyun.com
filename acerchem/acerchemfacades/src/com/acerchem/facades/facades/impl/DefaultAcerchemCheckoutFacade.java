@@ -265,7 +265,7 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
             final CartData cartData = getCheckoutCart();
             
             if(getDeliveryModes().getCode().equalsIgnoreCase("DELIVERY_GROSS")){
-            	cartModel.setTotalPrice(cartData.getTotalPrice().getValue().doubleValue()+cartModel.getDeliveryCost());
+            	cartModel.setTotalPrice(cartData.getTotalPrice().getValue().doubleValue());
             } else {
             	cartModel.setTotalPrice(cartData.getTotalPrice().getValue().doubleValue());
             }

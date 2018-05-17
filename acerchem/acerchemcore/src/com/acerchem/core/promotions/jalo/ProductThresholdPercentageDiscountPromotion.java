@@ -48,8 +48,7 @@ public class ProductThresholdPercentageDiscountPromotion extends GeneratedProduc
 	  
 	        while (view.getTotalQuantity(ctx) > 0L)
 	        {
-	          promoContext.startLoggingConsumed(this);
-	          
+	        	promoContext.startLoggingConsumed(this);
 	  
 	          PromotionOrderEntry entry = view.peek(ctx);
 	          BigDecimal quantityToDiscount = BigDecimal.valueOf(entry.getQuantity(ctx));
@@ -58,6 +57,7 @@ public class ProductThresholdPercentageDiscountPromotion extends GeneratedProduc
 	          PromotionThresholdDiscount thresholdDiscount= getProperThreshold(entry,ctx);
 	          if(thresholdDiscount==null){
 	         	 //没有合适的折扣区间
+	        	 promoContext.finishLoggingAndGetConsumed(this, true);
 	         	 continue;
 	          }
 	         	 
