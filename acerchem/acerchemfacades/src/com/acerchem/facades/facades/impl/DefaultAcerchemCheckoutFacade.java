@@ -429,7 +429,7 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                 Double entryUnitCalculateRato = Double.valueOf(aoe.getProduct().getUnitCalculateRato());
                 BigDecimal entryQuantity = (BigDecimal.valueOf(aoe.getQuantity() * Long.parseLong(aoe.getProduct().getNetWeight())));
                 //托盘数量
-                BigDecimal entryTrayAmount = entryQuantity.divide(new BigDecimal(entryUnitCalculateRato),BigDecimal.ROUND_HALF_UP,BigDecimal.ROUND_DOWN);
+                BigDecimal entryTrayAmount = entryQuantity.divide(new BigDecimal(entryUnitCalculateRato));
                 totalUnitCalculateQuantity = totalUnitCalculateQuantity.add(entryTrayAmount);
                 totalUnitCalculateRato = totalUnitCalculateRato.add(BigDecimal.valueOf(entryUnitCalculateRato));
             }
@@ -462,9 +462,9 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                    	Double entryUnitCalculateRato = Double.valueOf(aoe.getProduct().getUnitCalculateRato());
                     BigDecimal entryQuantity = (BigDecimal.valueOf(aoe.getQuantity() * Long.parseLong(aoe.getProduct().getNetWeight())));
                     //托盘数量
-                    BigDecimal entryTrayAmount = entryQuantity.divide(new BigDecimal(entryUnitCalculateRato),BigDecimal.ROUND_HALF_UP,BigDecimal.ROUND_DOWN);
+                    BigDecimal entryTrayAmount = entryQuantity.divide(new BigDecimal(entryUnitCalculateRato));
                    //计算比例
-                   BigDecimal proportion = entryTrayAmount.divide(totalUnitCalculateQuantity, BigDecimal.ROUND_CEILING, BigDecimal.ROUND_HALF_UP);
+                   BigDecimal proportion = entryTrayAmount.divide(totalUnitCalculateQuantity, 6, BigDecimal.ROUND_HALF_UP);
                    //计算entry total 运费
                    entryTotalAdditionalFee = proportion.multiply(totalAdditionalFee);
                    //剩余运费
@@ -476,9 +476,9 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                //BigDecimal entryDeliveryBasePrice = entryTotalAdditionalFee.divide(quantity, BigDecimal.ROUND_HALF_UP, BigDecimal.ROUND_HALF_UP);
                //Double baseRealPrice = BigDecimal.valueOf(basePrice).add(entryDeliveryBasePrice).doubleValue();
                //附加费行总价
-               //totalPrice = totalPrice - orderModel.getTotalDiscounts();
-               Double totalRealPrice = BigDecimal.valueOf(totalPrice).add(entryTotalAdditionalFee).doubleValue();
-               BigDecimal baseRealPrice = BigDecimal.valueOf(totalRealPrice).divide(quantity, BigDecimal.ROUND_HALF_UP, BigDecimal.ROUND_HALF_UP);
+               //totalPrice = totalPrice - orderModel.getTotalDiscounts();	
+               Double totalRealPrice = (BigDecimal.valueOf(totalPrice).add(entryTotalAdditionalFee)).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue();
+               BigDecimal baseRealPrice = BigDecimal.valueOf(totalRealPrice).divide(quantity, 2, BigDecimal.ROUND_HALF_UP);
                aoe.setBaseRealPrice(baseRealPrice.doubleValue());
                aoe.setBasePrice(basePrice);
                aoe.setTotalRealPrice(totalRealPrice);

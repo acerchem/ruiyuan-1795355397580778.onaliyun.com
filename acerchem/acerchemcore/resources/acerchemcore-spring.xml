@@ -311,7 +311,7 @@
 	</bean>
 
 	<bean id="generateOrderConfirmationEmail" parent="abstractGenerateEmailAction">
-		<property name="frontendTemplateName" value="OrderConfirmationEmailTemplate"/>
+		<property name="frontendTemplateName" value="AcerchemSendOrderConfirmEmail"/>
 	</bean>
 
 	<bean id="generateDeliverySentEmail" parent="abstractGenerateEmailAction">
