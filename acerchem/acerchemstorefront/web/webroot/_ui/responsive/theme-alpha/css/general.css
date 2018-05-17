@@ -3082,9 +3082,14 @@ display: inline-table;
 }
 
 /*时间控件*/
+.g-table .datewrap:after{
+	content:'';
+	display: block;
+	clear: both;
+}
 .g-table .datewrap .date-item{
-	width: 35%;
 	padding:40px 20px;
+	float: left;
 }
 .g-table .datewrap .date-item:after{
 	content:'';
@@ -3097,11 +3102,13 @@ display: inline-table;
 .g-table .datewrap .d-titls{
 	display: inline;
 	width: auto;
-	padding-right: 20px 
+	padding-right: 20px ;
+	float: left;
 }
 .g-table .datewrap .input-group{
 	position: relative;
-	width: calc(100% - 85px);
+	width: 230px;
+	float: left;
 }
 .g-table .datewrap .input-group-addon{
 	display: block;

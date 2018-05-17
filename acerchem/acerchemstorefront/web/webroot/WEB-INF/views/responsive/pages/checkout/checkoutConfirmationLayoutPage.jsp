@@ -89,7 +89,7 @@
 					
 					<div class="text">
 					 <c:choose>
-					<c:when test="${orderData.paymentMode eq 'InvoicePayment'}">
+					<c:when test="${orderData.paymentMode eq 'PRE-PAYMENT'}">
 						 PRE-PAYMENT<br/>
 						
 						</c:when>
@@ -130,7 +130,7 @@
 		
 		                        <span>
 									<em>Discount</em>
-									<i>- <format:price priceData="${orderData.orderDiscounts}"/></i>
+									<i>-<format:price priceData="${orderData.totalDiscounts}"/></i>
 								</span>
 		
 		                        <span>

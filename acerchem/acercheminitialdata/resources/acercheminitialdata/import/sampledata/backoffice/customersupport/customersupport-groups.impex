@@ -28,7 +28,7 @@
 #shaun
 INSERT_UPDATE BackofficeRole;UID[unique=true];backOfficeLoginDisabled;authorities
 ;customersupportagentrole;FALSE;customersupportagentrole
-;customersupportadministratorrole;FALSE;customersupportadministratorrole,customersupportagentrole
+;customersupportadministratorrole;FALSE;customersupportadministratorrole
 ;customersupportmanagerrole;FALSE;customersupportmanagerrole
 ;acerchemrole;FALSE;acerchemrole
 ;;;;;

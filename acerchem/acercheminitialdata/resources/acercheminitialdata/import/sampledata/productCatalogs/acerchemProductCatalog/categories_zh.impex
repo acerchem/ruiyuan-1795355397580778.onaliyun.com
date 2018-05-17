@@ -28,6 +28,8 @@ UPDATE Category;code[unique=true];$catalogVersion;name[lang=$lang]
  ;575;;Plant Extract;
  ;576;;Joint Health;
  ;577;;Amino Acid;
+ ;578;;Food Additive;
+ ;579;;Oil;
  #shaun
  ;3510;;ALL;
 

@@ -49,7 +49,7 @@
 			</span>								
 		</div>
 	</td>
-	<td><b><format:price priceData="${entry.product.price}" displayFreeForZero="true"/></b></td>
+	<td><b><format:price priceData="${entry.product.promotionPrice}" displayFreeForZero="true"/></b></td>
 	<td><b> ${entry.quantity}*${entry.product.netWeight}${entry.product.unitName}</b></td>
 	<td><b>${entry.product.code}</b></td>
 	<td>
