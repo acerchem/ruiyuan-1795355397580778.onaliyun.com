@@ -531,6 +531,13 @@
 					<persistence type="property" />
 					<description>别名</description>
 				</attribute>
+				<!--shaun  -->
+				<attribute type="java.lang.String" qualifier="characteristic">
+					<modifiers read="true" write="true" search="false"
+						optional="true" />
+					<persistence type="property" />
+					<description>商品特性1</description>
+				</attribute>
 
 
 				</attributes>

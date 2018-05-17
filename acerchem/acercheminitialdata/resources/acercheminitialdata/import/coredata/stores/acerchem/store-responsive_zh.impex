@@ -17,4 +17,4 @@ $lang=zh
 
 # Create Base Store
 UPDATE BaseStore;uid[unique=true];name[lang=$lang]
- ;acerchem;"冠硕产品店铺"
+ ;acerchem;"Acerchem Store"
