@@ -2625,6 +2625,11 @@ display: inline-table;
 	color: #096735
 }
 
+.prod-cont .prodbase .priceset .old-price{
+	text-decoration: line-through;
+}
+
+
 .prod-cont .prodbase .Summary{
 	padding:16px 0;
 	border-top:1px solid #ddd;

@@ -62,7 +62,7 @@
 		<div class="item-row">
 			<span>Discount Amount</span>
 			
-            <span><format:price priceData="${cartData.totalDiscounts}"/></span>
+            <span>-<format:price priceData="${cartData.totalDiscounts}"/></span>
 		</div>
 
 <c:if test="${not empty cartData.deliveryMode}">
