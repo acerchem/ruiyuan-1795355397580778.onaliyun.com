@@ -1,1 +1,1 @@
-This email is to thank you for supporting our business send you sales contract between you and Ingredients4u, please do not reply directly in this email.
+Contract Email Order Number:${ctx.order.code}
