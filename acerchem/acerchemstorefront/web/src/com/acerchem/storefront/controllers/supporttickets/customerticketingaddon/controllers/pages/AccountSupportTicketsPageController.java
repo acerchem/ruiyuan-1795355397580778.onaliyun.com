@@ -22,15 +22,15 @@ import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.order.CartFacade;
 import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.commercefacades.product.data.ProductData;
+import de.hybris.platform.commerceservices.search.flexiblesearch.PagedFlexibleSearchService;
+import de.hybris.platform.commerceservices.search.flexiblesearch.data.SortQueryData;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.converters.Converters;
 import de.hybris.platform.core.model.product.ProductModel;
-
 import com.acerchem.facade.supportticket.facade.impl.AcerchemFacadeTicketFacadeImpl;
 import com.acerchem.storefront.checkout.steps.validation.impl.AddSupportTicketValidator;
 import com.acerchem.storefront.checkout.steps.validation.impl.SupportTicketForm;
-
 import de.hybris.platform.customerticketingfacades.TicketFacade;
 import de.hybris.platform.customerticketingfacades.data.StatusData;
 import de.hybris.platform.customerticketingfacades.data.TicketCategory;
@@ -39,9 +39,15 @@ import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
+import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.platform.servicelayer.util.ServicesUtil;
+import de.hybris.platform.site.BaseSiteService;
+import de.hybris.platform.ticket.dao.TicketDao;
+import de.hybris.platform.ticket.model.CsTicketModel;
 import de.hybris.platform.ticket.service.UnsupportedAttachmentException;
-
 import java.io.UnsupportedEncodingException;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -111,6 +117,21 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 	public void initBinder(final WebDataBinder binder) {
 		binder.setDisallowedFields(DISALLOWED_FIELDS);
 	}
+	
+	@Resource
+	private UserService userService;
+	
+	@Resource
+	private BaseSiteService baseSiteService;
+	
+	@Resource
+	private Converter<CsTicketModel, TicketData> ticketListConverter;
+	
+	@Resource
+	private TicketDao ticketDao;
+	
+	@Resource
+	private PagedFlexibleSearchService pagedFlexibleSearchService;
 
 	/**
 	 * Lists all tickets
@@ -262,7 +283,7 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 		getListView(pageNumber, showMode, sortCode, ticketAdded, model);
 		return "pages/account/accountPersonalTicketsPage";
 	}
-
+	
 	private String getListView(int pageNumber, ShowMode showMode, String sortCode, boolean ticketAdded, Model model)
 			throws CMSItemNotFoundException {
 		promotionItem(model);
@@ -274,14 +295,62 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
 
 		final PageableData pageableData = createPageableData(pageNumber, 5, sortCode, showMode);
-		final SearchPageData<TicketData> searchPageData = ticketFacade.getTickets(pageableData);
-
+		
+		 ticketDao.findTicketsByCustomerOrderByModifiedTime(userService.getCurrentUser(), baseSiteService.getCurrentBaseSite(), pageableData);
+		
+		 ServicesUtil.validateParameterNotNull(userService.getCurrentUser(), "Customer must not be null");
+		 ServicesUtil.validateParameterNotNull(baseSiteService.getCurrentBaseSite(), "Store must not be null");
+		 Map<String, Object> queryParams = new HashMap();
+		 queryParams.put("user", userService.getCurrentUser());
+		 queryParams.put("baseSite", baseSiteService.getCurrentBaseSite());
+		 queryParams.put("sessionId", getSessionService().getCurrentSession().getSessionId());
+		 
+		 final boolean isAnonymousUser = userService.isAnonymousUser(userService.getCurrentUser());
+		 
+		 String sql1 = "SELECT {pk} FROM {CsTicket} WHERE {customer} = ?user AND {baseSite} = ?baseSite ";
+		 if(isAnonymousUser)
+		 {
+			 sql1 += " AND {sessionId} = ?sessionId ";
+		 }
+		 sql1 += " ORDER BY {modifiedtime} DESC";
+		 
+		 SortQueryData sortQueryData = new SortQueryData();
+		 sortQueryData.setSortCode("byDate");
+		 sortQueryData.setQuery(sql1);
+		 SortQueryData byDateSql= sortQueryData;
+		 
+		 String sql2 = "SELECT {pk} FROM {CsTicket} WHERE {customer} = ?user AND {baseSite} = ?baseSite ";
+		 if(isAnonymousUser)
+		 {
+			 sql2 += " AND {sessionId} = ?sessionId ";
+		 }
+		 sql2 += " ORDER BY {ticketID} DESC";
+		 
+		 SortQueryData sortQueryData2 = new SortQueryData();
+		 sortQueryData2.setSortCode("byTicketId");
+		 sortQueryData2.setQuery(sql2);
+		 SortQueryData byTicketIdSql= sortQueryData2;
+		 
+		 List<SortQueryData> sortQueries = Arrays.asList(new SortQueryData[] {byDateSql,byTicketIdSql});
+		 final SearchPageData<CsTicketModel> TicketModels = pagedFlexibleSearchService.search(sortQueries, "byDate", queryParams, pageableData);
+		
+		final SearchPageData<TicketData> searchPageData = convertPageData(TicketModels, ticketListConverter);
+		
 		populateModel(model, searchPageData, showMode);
 
 		if (ticketAdded) {
 			GlobalMessages.addConfMessage(model, CustomerticketingaddonConstants.TEXT_SUPPORT_TICKETING_ADDED);
 		}
 		return "pages/account/accountSupportTicketsPage";
+	}
+	
+	protected <S, T> SearchPageData<T> convertPageData(final SearchPageData<S> source, final Converter<S, T> converter)
+	{
+		final SearchPageData<T> result = new SearchPageData<T>();
+		result.setPagination(source.getPagination());
+		result.setSorts(source.getSorts());
+		result.setResults(Converters.convertAll(source.getResults(), converter));
+		return result;
 	}
 
 	private String getAddView(Model model,String productId,String productName,String email,String telephone,SupportTicketForm SupportTicketForm) throws CMSItemNotFoundException {
@@ -487,7 +556,6 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 		try {
 			ticketData = ticketFacade.getTicket(XSSEncoder.encodeHTML(ticketId));
 		} catch (UnsupportedEncodingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		model.addAttribute(CustomerticketingaddonConstants.SUPPORT_TICKET_DATA, ticketData);
