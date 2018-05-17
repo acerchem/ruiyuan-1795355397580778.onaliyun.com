@@ -388,7 +388,7 @@ p.western {
    		<tbody>
    			<tr>
    				<td>
-   					Packing: $!{ctx.append.totalData.packingWeight}, Total: $!{ctx.append.totalData.packingCount}drums
+   					PACKING: $!{ctx.upperCasePackageWeightArray}; TOTAL PACKED IN $!{ctx.append.totalData.packingCount} PACKAGES
    				</td>
    			</tr>
    			<tr>
