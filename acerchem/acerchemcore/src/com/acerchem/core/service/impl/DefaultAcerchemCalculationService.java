@@ -10,6 +10,7 @@
  */
 package com.acerchem.core.service.impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -140,7 +141,7 @@ public class DefaultAcerchemCalculationService extends DefaultCalculationService
 		final PriceValue basePrice = convertPriceIfNecessary(pv, order.getNet().booleanValue(), order.getCurrency(), entryTaxes);
 		//entry.setBasePrice(Double.valueOf(basePrice.getValue()));
 		if(order.getUser().getUserLevel() != null && order.getUser().getUserLevel().getDiscount() != null &&  !"".equals(order.getUser().getUserLevel().getDiscount())){
-			double userLevelPrice = (Double.valueOf(basePrice.getValue())* order.getUser().getUserLevel().getDiscount());
+			double userLevelPrice = (BigDecimal.valueOf(basePrice.getValue()).multiply(BigDecimal.valueOf(order.getUser().getUserLevel().getDiscount())).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue() );
 			entry.setBasePrice(userLevelPrice * Double.valueOf(entry.getProduct().getNetWeight()));
 		}else{
 			entry.setBasePrice(Double.valueOf(basePrice.getValue()) * Double.valueOf(entry.getProduct().getNetWeight()));
