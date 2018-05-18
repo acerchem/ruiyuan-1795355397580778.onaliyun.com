@@ -109,10 +109,10 @@ public class DefaultAcerchemCartFacade extends DefaultCartFacade implements Acer
         if (priceData!=null){
             BigDecimal basePrice = priceData.getValue();
             
-            long totalWeight = qty* Long.valueOf(netWeight);
+           // long totalWeight = qty* Long.valueOf(netWeight);
         	//Double totalPrice = Long.valueOf(basePrice)*totalWeight;
         	
-        	 totalPrice =basePrice.doubleValue()*totalWeight;
+        	 totalPrice =basePrice.doubleValue()*qty;
             //cartEntryTotalPrice = basePrice.multiply(BigDecimal.valueOf(qty));
         }
         return totalPrice;
