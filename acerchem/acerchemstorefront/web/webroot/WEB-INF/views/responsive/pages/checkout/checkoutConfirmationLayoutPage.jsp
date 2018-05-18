@@ -15,6 +15,10 @@
 
 <template:page pageTitle="${pageTitle}">
   
+ <c:set var ="a" value="${orderData.subTotal.value}"/>
+ <c:set var="b" value="${orderData.totalDiscounts.value}"/>
+ <c:set var="subTotal" value="${a+b}"/>
+	
  <div class="gen-content maxsucce">
 	<div class="g-cont">
 		<div class="maxstatu">
@@ -110,7 +114,7 @@
 						
 						<span>
 								   <em>Subtotal</em>
-									<i><format:price priceData="${orderData.subTotal}"/></i>
+									<i>${fn:substring(orderData.totalPrice.formattedValue, 0, 1)}${subTotal}</i>
 								</span>
 		
 		                        <span>
