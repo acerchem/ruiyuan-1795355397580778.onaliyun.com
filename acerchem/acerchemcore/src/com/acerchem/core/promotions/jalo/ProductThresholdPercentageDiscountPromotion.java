@@ -57,8 +57,9 @@ public class ProductThresholdPercentageDiscountPromotion extends GeneratedProduc
 	          PromotionThresholdDiscount thresholdDiscount= getProperThreshold(entry,ctx);
 	          if(thresholdDiscount==null){
 	         	 //没有合适的折扣区间
-	        	 promoContext.finishLoggingAndGetConsumed(this, true);
-	         	 continue;
+	        	  view.consume(ctx, quantityToDiscount.longValue()); 
+	        	  promoContext.finishLoggingAndGetConsumed(this, true); 
+	        	  continue;
 	          }
 	         	 
 	          BigDecimal percentageDiscount = new BigDecimal(
