@@ -66,11 +66,11 @@
 								      </c:if>
 								      
 								        <c:if test="${i.index==1}">	
-								      From minQuantity ${message}
+								      order more than ${message}${product.packageType}s
 								      </c:if>
-								        <c:if test="${i.index==2}">	
+								        <%-- <c:if test="${i.index==2}">	
 								       to maxQuantity ${message}
-								      </c:if>
+								      </c:if> --%>
 								    
 								    </c:forEach>
 							    

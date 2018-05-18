@@ -553,9 +553,9 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                 if (orderModel != null)
                 {
                 	
-                	OrderData data=entryPriceInit(getOrderConverter().convert(orderModel));
+                	return getOrderConverter().convert(orderModel);
                 	
-                	return data;
+                	//return data;
                 }
             }
         }
