@@ -114,8 +114,12 @@ public class AcerChemDeliveryNoteEmailContext extends AbstractEmailContext<Order
 		final AddressData  orderAddressData = orderData.getDeliveryAddress();
 		
 		if(orderAddressData != null){
-			addressData.setCountry(orderAddressData.getCountry().getName());
-			addressData.setRegion(orderAddressData.getRegion().getName());
+			if (orderAddressData.getCountry() != null){
+				addressData.setCountry(orderAddressData.getCountry().getName());
+			}
+			if (orderAddressData.getRegion() != null){
+				addressData.setRegion(orderAddressData.getRegion().getName());
+			}
 			addressData.setTown(orderAddressData.getTown());
 			
 			addressData.setContactPhone(orderAddressData.getPhone());
