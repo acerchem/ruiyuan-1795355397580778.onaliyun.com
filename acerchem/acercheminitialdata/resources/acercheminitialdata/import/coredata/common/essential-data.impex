@@ -59,11 +59,11 @@ INSERT_UPDATE Warehouse;code[unique=true];name;vendor(code)[default=default];def
 #;warehouse_w;Warehouse West;
 #;warehouse_n;Warehouse North;
 ;Spain;Spain
-;United Kingdom;United Kingdom
+;UK;UK
 ;Germany;Germany
 #shaun
 ;Europe;Europe
-;Poland;Poland
+;Neele-vat;Neele-vat
 ;Italy;Italy
 
 # Disable preview for email pages

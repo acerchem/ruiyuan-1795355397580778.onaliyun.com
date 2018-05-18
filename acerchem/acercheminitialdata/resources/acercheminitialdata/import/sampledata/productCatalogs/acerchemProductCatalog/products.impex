@@ -57,11 +57,11 @@ INSERT_UPDATE Warehouse;code[unique=true];name[lang=en];name[lang=de];vendor(cod
 #;warehouse_w;Warehouse West;Warehouse West;;true
 #;warehouse_n;Warehouse North;Warehouse North;;true
 ;Spain;Spain;;true
-;United Kingdom;United Kingdom;;true
+;UK;UK;;true
 ;Germany;Germany;;true
 #shaun
 ;Europe;Europe;;true
-;Poland;Poland;;true
+;Neele-vat;Neele-vat;;true
 ;Italy;Italy;;true
 
 INSERT_UPDATE Unit;code[unique=true];name[lang=en];unitType
@@ -94,29 +94,29 @@ INSERT_UPDATE ProductReference;source(code,$catalogVersion)[unique=true];target(
 INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];reserved;avaPreOrderReleaseDay;preOrderReleaseDay
 
 #shaun
-;200;Poland;notSpecified;10;0;0;0;AC05080a;0;20;50
-;200;Poland;notSpecified;10;0;0;0;AC05080b;0;20;50
-;200;Poland;notSpecified;10;0;0;0;AC03390a;0;20;50
-;200;Poland;notSpecified;10;0;0;0;AC03138a;0;20;50
-;200;Poland;notSpecified;10;0;0;0;AC03887a;0;20;50
-;200;Poland;notSpecified;10;0;0;0;AC03142a;0;20;50
-;200;Poland;notSpecified;10;0;0;0;AC02345a;0;20;50
-;200;Poland;notSpecified;10;0;0;0;AC02354a;0;20;50
-;200;Poland;notSpecified;10;0;0;0;AC05003a;0;20;50
-;200;Poland;notSpecified;10;0;0;0;AC02090a;0;20;50
+;200;Neele-vat;notSpecified;10;0;0;0;AC05080a;0;20;50
+;200;Neele-vat;notSpecified;10;0;0;0;AC05080b;0;20;50
+;200;Neele-vat;notSpecified;10;0;0;0;AC03390a;0;20;50
+;200;Neele-vat;notSpecified;10;0;0;0;AC03138a;0;20;50
+;200;Neele-vat;notSpecified;10;0;0;0;AC03887a;0;20;50
+;200;Neele-vat;notSpecified;10;0;0;0;AC03142a;0;20;50
+;200;Neele-vat;notSpecified;10;0;0;0;AC02345a;0;20;50
+;200;Neele-vat;notSpecified;10;0;0;0;AC02354a;0;20;50
+;200;Neele-vat;notSpecified;10;0;0;0;AC05003a;0;20;50
+;200;Neele-vat;notSpecified;10;0;0;0;AC02090a;0;20;50
 
 
 #shaun
-;300;United Kingdom;notSpecified;10;0;0;0;AC05080a;0;20;50
-;300;United Kingdom;notSpecified;10;0;0;0;AC05080b;0;20;50
-;300;United Kingdom;notSpecified;10;0;0;0;AC03390a;0;20;50
-;300;United Kingdom;notSpecified;10;0;0;0;AC03138a;0;20;50
-;300;United Kingdom;notSpecified;10;0;0;0;AC03887a;0;20;50
-;300;United Kingdom;notSpecified;10;0;0;0;AC03142a;0;20;50
-;300;United Kingdom;notSpecified;10;0;0;0;AC02345a;0;20;50
-;300;United Kingdom;notSpecified;10;0;0;0;AC02354a;0;20;50
-;300;United Kingdom;notSpecified;10;0;0;0;AC05003a;0;20;50
-;300;United Kingdom;notSpecified;10;0;0;0;AC02090a;0;20;50
+;300;UK;notSpecified;10;0;0;0;AC05080a;0;20;50
+;300;UK;notSpecified;10;0;0;0;AC05080b;0;20;50
+;300;UK;notSpecified;10;0;0;0;AC03390a;0;20;50
+;300;UK;notSpecified;10;0;0;0;AC03138a;0;20;50
+;300;UK;notSpecified;10;0;0;0;AC03887a;0;20;50
+;300;UK;notSpecified;10;0;0;0;AC03142a;0;20;50
+;300;UK;notSpecified;10;0;0;0;AC02345a;0;20;50
+;300;UK;notSpecified;10;0;0;0;AC02354a;0;20;50
+;300;UK;notSpecified;10;0;0;0;AC05003a;0;20;50
+;300;UK;notSpecified;10;0;0;0;AC02090a;0;20;50
 
 #shaun
 ;300;Europe;notSpecified;10;0;0;0;AC05080a;0;20;50
@@ -137,16 +137,16 @@ UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehou
 #;AC01361;;AC01361:USA;
 #;AC01710;;AC01710:USA;
 #shaun
-;AC05080a;;AC05080a:Poland;
-;AC05080b;;AC05080b:Poland;
-;AC03390a;;AC03390a:Poland;
-;AC03138a;;AC03138a:Poland;
-;AC03887a;;AC03887a:Poland;
-;AC03142a;;AC03142a:Poland;
-;AC02345a;;AC02345a:Poland;
-;AC02354a;;AC02354a:Poland;
-;AC05003a;;AC05003a:Poland;
-;AC02090a;;AC02090a:Poland;
+;AC05080a;;AC05080a:Neele-vat;
+;AC05080b;;AC05080b:Neele-vat;
+;AC03390a;;AC03390a:Neele-vat;
+;AC03138a;;AC03138a:Neele-vat;
+;AC03887a;;AC03887a:Neele-vat;
+;AC03142a;;AC03142a:Neele-vat;
+;AC02345a;;AC02345a:Neele-vat;
+;AC02354a;;AC02354a:Neele-vat;
+;AC05003a;;AC05003a:Neele-vat;
+;AC02090a;;AC02090a:Neele-vat;
 
 
 
