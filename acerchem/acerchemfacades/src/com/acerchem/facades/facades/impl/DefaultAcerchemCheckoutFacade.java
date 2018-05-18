@@ -214,7 +214,7 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                 &&cartModel.getAllPromotionResults().size()>0){
 
         }else if (cartModel.getDeliveryCost()!=null){
-            total = total +cartModel.getDeliveryCost().doubleValue();
+            //total = total +cartModel.getDeliveryCost().doubleValue();
         }
         if(cartModel.getOperateCost()!=null){
             total = total +cartModel.getOperateCost().doubleValue();
@@ -443,7 +443,7 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
             //总附加费用
             BigDecimal totalAdditionalFee = BigDecimal.ZERO;
             if (orderModel.getDeliveryCost()!=null){
-                //totalAdditionalFee = BigDecimal.valueOf(orderModel.getDeliveryCost());
+                totalAdditionalFee = BigDecimal.valueOf(orderModel.getDeliveryCost());
             }
             if (orderModel.getOperateCost()!=null){
                 totalAdditionalFee = totalAdditionalFee.add(BigDecimal.valueOf(orderModel.getOperateCost()));
