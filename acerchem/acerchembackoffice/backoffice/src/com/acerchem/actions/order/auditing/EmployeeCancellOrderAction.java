@@ -31,7 +31,7 @@ import de.hybris.platform.servicelayer.model.ModelService;
 public class EmployeeCancellOrderAction extends AbstractComponentWidgetAdapterAware implements CockpitAction<OrderModel, Object>
 {
 	private static final Logger LOG = Logger.getLogger(EmployeeCancellOrderAction.class);
-	private static final String CURRENT_OBJECT = "currentObject";
+	private static final String CREDIT_PAYMENT_INFO = "CreditPayment";
 	
 	@Resource
 	BusinessProcessService businessProcessService;
@@ -81,17 +81,19 @@ public class EmployeeCancellOrderAction extends AbstractComponentWidgetAdapterAw
 		LOG.info("---------------------------------------"+order.getOrderProcess().iterator().next().getCode());
 		
 		if(order != null){
-			if (OrderStatus.COMPLETED.equals(order.getStatus()) || OrderStatus.DELIVERED.equals(order.getStatus()) || OrderStatus.UNCONFIRMDELIVERY.equals(order.getStatus()))
-			{
-				return new ActionResult("failed");
-			}else{
-				setOrderStatus(order, OrderStatus.CANCELLED);
+//			if (OrderStatus.COMPLETED.equals(order.getStatus()) || OrderStatus.DELIVERED.equals(order.getStatus()) || OrderStatus.UNCONFIRMDELIVERY.equals(order.getStatus()))
+//			{
+//				return new ActionResult("failed");
+//			}else{
 				acerchemStockService.releaseStock(order);
-				defaultCustomerCreditAccountService.updateCreditAccountRepaymentByOrder(order);
+				if(order.getPaymentMode().getCode().equals(CREDIT_PAYMENT_INFO)){
+					defaultCustomerCreditAccountService.updateCreditAccountRepaymentByOrder(order);
+				}
 				getEventService().publishEvent(new OrderCancelledEvent(order.getOrderProcess().iterator().next()));
 				LOG.info("--------------------------------end CancelOrderStatusAction----------------------");
+				setOrderStatus(order, OrderStatus.CANCELLED);
 				return new ActionResult("success");
-			}
+			//}
 		}
 		LOG.info("--------------------end-------------------");
 		return new ActionResult("failed");
