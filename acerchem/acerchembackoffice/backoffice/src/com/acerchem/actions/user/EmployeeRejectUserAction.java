@@ -14,7 +14,7 @@ import javax.annotation.Resource;
 
 import org.apache.log4j.Logger;
 
-import com.acerchem.core.event.ApproveCustomerEvent;
+import com.acerchem.core.event.RejectCustomerEvent;
 import com.acerchem.core.service.AcerchemStockService;
 import com.hybris.cockpitng.actions.ActionContext;
 import com.hybris.cockpitng.actions.ActionResult;
@@ -23,11 +23,7 @@ import com.hybris.cockpitng.engine.impl.AbstractComponentWidgetAdapterAware;
 
 import de.hybris.platform.commerceservices.enums.CustomerType;
 import de.hybris.platform.commerceservices.event.AbstractCommerceUserEvent;
-import de.hybris.platform.commerceservices.event.OrderCancelledEvent;
-import de.hybris.platform.core.enums.OrderStatus;
-import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.CustomerModel;
-import de.hybris.platform.processengine.BusinessProcessService;
 import de.hybris.platform.servicelayer.event.EventService;
 import de.hybris.platform.servicelayer.i18n.CommonI18NService;
 import de.hybris.platform.servicelayer.model.ModelService;
@@ -105,7 +101,7 @@ public class EmployeeRejectUserAction extends AbstractComponentWidgetAdapterAwar
 		// TODO Auto-generated method stub
 				CustomerModel customerModel = (CustomerModel) ctx.getData();
 				LOG.info("===========CustomerModel start=========="+customerModel.getUid());
-				getEventService().publishEvent(initializeEvent(new ApproveCustomerEvent(), customerModel));
+				getEventService().publishEvent(initializeEvent(new RejectCustomerEvent(), customerModel));
 				customerModel.setLoginDisabled(true);
 				customerModel.setUnAudited(false);
 				customerModel.setType(CustomerType.REJECTED);
