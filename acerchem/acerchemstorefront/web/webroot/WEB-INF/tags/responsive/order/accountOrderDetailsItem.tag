@@ -72,7 +72,7 @@
 	<td><b>${entry.product.code}</b></td>
 	<td>
 		<div class="tot">
-		${fn:substring(entry.product.price.formattedValue, 0, 1)}${Total}
+		${fn:substring(entry.product.price.formattedValue, 0, 1)}<fmt:formatNumber type="number" value="${Total}" pattern="#.00"/>
 		<%--	<format:price priceData="${TotalPrice}" displayFreeForZero="true"/>--%>
 			<%-- <i><format:price priceData="${entry.totalPrice}" displayFreeForZero="true"/></i> --%>
 		</div>
