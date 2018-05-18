@@ -3,7 +3,9 @@ package com.acerchem.facades.process.email.context;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
@@ -71,8 +73,9 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 	private String customerCompany;
 
 	private String deliveryCode;
-	
+
 	private String upperCasePackageWeightArray;
+	private String classificationPackageTypeQuantityArray;
 
 	@Resource
 	private ContactInfoService contactInfoService;
@@ -186,10 +189,10 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 		long itemNet = 0;
 		long itemGross = 0;
 
-		//String packageWeight = ""; // 当前认为包裹重量一致
-		//处理不同的packageWeight
+		// String packageWeight = ""; // 当前认为包裹重量一致
+		// 处理不同的packageWeight
 		List<String> packageWeightList = new ArrayList<String>();
-		
+		final Map<String, Long> subPackageTypeAmount = new HashMap<String, Long>();
 		if (CollectionUtils.isNotEmpty(consignments)) {
 			for (final ConsignmentData consignment : consignments) {
 
@@ -240,9 +243,9 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 						pie.setGrossWeight(tempGross);
 						pie.setTotal(false);
 
-						final String punit = StringUtils.defaultString(product.getUnitName(),"kg"); 
-						final String pack = StringUtils.defaultString(product.getPackageWeight()).trim() + punit+"/" +
-						              StringUtils.defaultString(product.getPackageType()).trim();
+						final String punit = StringUtils.defaultString(product.getUnitName(), "kg");
+						final String pack = StringUtils.defaultString(product.getPackageWeight()).trim() + punit + "/"
+								+ StringUtils.defaultString(product.getPackageType()).trim();
 
 						quantity += consignEntry.getQuantity();
 						net += Long.parseLong(tempNet);
@@ -252,7 +255,7 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 						itemGross += Long.parseLong(tempGross);
 						list.add(pie);
 						packageWeightList.add(pack);
-						
+
 						// add warehouse
 						if (StringUtils.isBlank(warehouse)) {
 							final OrderEntryData entryData = consignEntry.getOrderEntry();
@@ -263,6 +266,18 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 									setWarehouse(StringUtils.defaultString(pos.getName(), "&nbsp;"));
 								}
 							}
+						}
+						// sub packageWeight total quantity
+						if (subPackageTypeAmount
+								.get(StringUtils.defaultString(product.getPackageType(), "none")) == null) {
+							subPackageTypeAmount.put(StringUtils.defaultString(product.getPackageType(), "none"),
+									consignEntry.getQuantity());
+						} else {
+							long tempLongValue = subPackageTypeAmount
+									.get(StringUtils.defaultString(product.getPackageType(), "none")).longValue();
+							tempLongValue += consignEntry.getQuantity().longValue();
+							subPackageTypeAmount.put(StringUtils.defaultString(product.getPackageType(), "none"),
+									tempLongValue);
 						}
 
 					}
@@ -280,20 +295,36 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 		totalData.setGrossWeight(String.valueOf(gross));
 
 		totalData.setPackingCount(String.valueOf(quantity));
-		//处理packageweightList组合
-		if(packageWeightList.size() > 0 ) {
+		// 处理packageweightList组合
+		if (packageWeightList.size() > 0) {
 			packageWeightList = AcerChemEmailContextUtils.removeDuplicate(packageWeightList);
-			final String packArrayStr = packageWeightList.toString().replace("[", "").replace("]","");
+			final String packArrayStr = packageWeightList.toString().replace("[", "").replace("]", "");
 			totalData.setPackingWeight(StringUtils.defaultString(packArrayStr, ""));
 			setUpperCasePackageWeightArray(StringUtils.upperCase(packArrayStr));
-		}else{
+		} else {
 			totalData.setPackingWeight("  ");
 		}
-		
+
 		totalData.setShippingMarks("N/M");
 		totalData.setPoNo(" ");
 
 		initAppend.setTotalData(totalData);
+
+		// add classificationTotalPackage amount
+		if (subPackageTypeAmount.size() > 0) {
+			String _packageWeightTotal = "";
+			for (final Map.Entry<String, Long> pwEntry : subPackageTypeAmount.entrySet()) {
+				if (!pwEntry.getKey().equals("none")) {
+					_packageWeightTotal += pwEntry.getValue().longValue() + pwEntry.getKey() + "s,";
+				}
+			}
+			//去掉最后一个","
+			final int pos = _packageWeightTotal.lastIndexOf(",");
+			if (pos > 0){
+				_packageWeightTotal = _packageWeightTotal.substring(0,pos);
+			}
+			setClassificationPackageTypeQuantityArray(_packageWeightTotal);
+		}
 
 		// add default
 		initAppend.setAcerChemCompanyNo("07460051");
@@ -508,6 +539,16 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 
 	public void setUpperCasePackageWeightArray(final String upperCasePackageWeightArray) {
 		this.upperCasePackageWeightArray = upperCasePackageWeightArray;
+	}
+
+	
+
+	public String getClassificationPackageTypeQuantityArray() {
+		return classificationPackageTypeQuantityArray;
+	}
+
+	public void setClassificationPackageTypeQuantityArray(final String classificationPackageTypeQuantityArray) {
+		this.classificationPackageTypeQuantityArray = classificationPackageTypeQuantityArray;
 	}
 
 }
