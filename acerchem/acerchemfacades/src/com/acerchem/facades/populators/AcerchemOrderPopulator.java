@@ -35,6 +35,9 @@ public class AcerchemOrderPopulator extends OrderPopulator {
 		target.setPickUpDate(source.getPickUpDate());
 		target.setPickupDateOfExtended(source.getPickupDateOfExtended());
 		
+		final Double totalDiscounts = source.getTotalDiscounts()==null?0:source.getTotalDiscounts();
+		target.setTotalDiscounts(priceDataFactory.create(PriceDataType.BUY, BigDecimal.valueOf(totalDiscounts.doubleValue()), source.getCurrency().getIsocode()));
+		
         if (source.getStorageCost()!=null){
             target.setStorageCost(priceDataFactory.create(PriceDataType.BUY,
                     BigDecimal.valueOf(source.getStorageCost().doubleValue()), source.getCurrency().getIsocode()));

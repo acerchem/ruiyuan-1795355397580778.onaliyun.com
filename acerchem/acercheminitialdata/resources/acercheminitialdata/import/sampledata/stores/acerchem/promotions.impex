@@ -21,9 +21,9 @@ $regulargroup=regulargroup
 
 #### shaun:Ladder sales price ####
 INSERT_UPDATE PromotionThresholdDiscount;minQuantity[unique=true];maxQuantity[unique=true];percentageDiscount[unique=true];
-;1;5;10;
-;5;10;20;
-;10;15;50;
+;0;5;10;
+;4;10;20;
+;9;15;50;
 
 
 INSERT_UPDATE ProductThresholdPercentageDiscountPromotion;PromotionGroup(Identifier[default=$defaultPromoGrp]);enabled[default=true][unique=true];code[unique=true];title;description;messageFired[lang=en];messageFired[lang=zh];priority;products(code,$catalogVersion);thresholdDiscounts(percentageDiscount)

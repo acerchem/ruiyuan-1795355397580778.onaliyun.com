@@ -12,11 +12,7 @@
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 <spring:htmlEscape defaultHtmlEscape="true" />
 
-<c:set var ="a" value="${entry.product.netWeight}"/>
-<c:set var="b" value="${entry.quantity}"/>
 
-<c:set var="c" value="${entry.product.price}"/>
-<c:set var ="TotalPrice" value="${a*b*c}"/>
 
 <div class="g-table product-table">
 	<div class="g-title">					
@@ -34,6 +30,20 @@
 	<table class="list">
 	
 	<c:forEach items="${orderData.entries}" var="entry" varStatus="loop">
+	
+	<c:set var ="a" value="${entry.product.netWeight}"/>
+	<c:set var="b" value="${entry.quantity}"/>
+	<c:choose>
+	<c:when test="${not empty entry.product.promotionPrice}">
+	<c:set var="c" value="${entry.product.promotionPrice.value}"/>
+	</c:when>
+	
+	<c:otherwise>
+	<c:set var="c" value="${entry.product.price.value}"/>
+	</c:otherwise>
+	
+	</c:choose>
+    <c:set var ="Total" value="${a*b*c}"/>
 	    <tr>
 	<td>
 		<div class="intro">
@@ -62,7 +72,8 @@
 	<td><b>${entry.product.code}</b></td>
 	<td>
 		<div class="tot">
-			<format:price priceData="${entry.totalPrice}" displayFreeForZero="true"/>
+		${fn:substring(entry.product.price.formattedValue, 0, 1)}${Total}
+		<%--	<format:price priceData="${TotalPrice}" displayFreeForZero="true"/>--%>
 			<%-- <i><format:price priceData="${entry.totalPrice}" displayFreeForZero="true"/></i> --%>
 		</div>
 	</td>

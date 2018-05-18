@@ -89,7 +89,7 @@
 				</div>
 			</div>
 
-			<!--  -->
+			<!--  
 			<div class="g-table">
 				<div class="g-title">
 					<span>Express Checkout</span>
@@ -105,6 +105,8 @@
 					</ul>
 				</div>				
 			</div>
+			
+			-->
 		</div>
 		
 		<!-- 
