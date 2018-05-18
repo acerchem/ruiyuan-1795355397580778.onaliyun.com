@@ -65,6 +65,7 @@ public class DefaultAcerchemCalculationService extends DefaultCalculationService
 			// discounts
 			
 			double totalDiscounts = calculateDiscountValues(order, recalculate);
+			totalDiscounts += getProductsDiscountsAmount(order);
 			final double roundedTotalDiscounts = commonI18NService.roundCurrency(totalDiscounts, digits);
 			order.setTotalDiscounts(Double.valueOf(roundedTotalDiscounts));
 			// set total
@@ -156,6 +157,7 @@ public class DefaultAcerchemCalculationService extends DefaultCalculationService
 		if (recalculate || orderRequiresCalculationStrategy.requiresCalculation(order))
 		{
 			
+			
 			final List<DiscountValue> discountValues = order.getGlobalDiscountValues();
 			if (discountValues != null && !discountValues.isEmpty())
 			{
@@ -185,26 +187,27 @@ public class DefaultAcerchemCalculationService extends DefaultCalculationService
 		}
 	}
 	
+	protected double getProductsDiscountsAmount(final AbstractOrderModel source)
+	{
+		double discounts = 0.0d;
+
+		final List<AbstractOrderEntryModel> entries = source.getEntries();
+		if (entries != null)
+		{
+			for (final AbstractOrderEntryModel entry : entries)
+			{
+				final List<DiscountValue> discountValues = entry.getDiscountValues();
+				if (discountValues != null)
+				{
+					for (final DiscountValue dValue : discountValues)
+					{
+						discounts += dValue.getAppliedValue();
+					}
+				}
+			}
+		}
+		return discounts;
+	}
 	
 	
-//	protected List<DiscountValue> findDiscountValues(final AbstractOrderEntryModel entry) throws CalculationException
-//	{
-//		if (findDiscountsStrategies.isEmpty())
-//		{
-//			LOG.warn("No strategies for finding discount values could be found!");
-//			return Collections.<DiscountValue> emptyList();
-//		}
-//		else
-//		{
-//			final List<DiscountValue> result = new ArrayList<DiscountValue>();
-//			if(entry.getDiscountValues() != null){
-//				result.addAll(entry.getDiscountValues());
-//			}
-//			for (final FindDiscountValuesStrategy findStrategy : findDiscountsStrategies)
-//			{
-//				result.addAll(findStrategy.findDiscountValues(entry));
-//			}
-//			return result;
-//		}
-//	}
 }
