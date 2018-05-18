@@ -24,8 +24,16 @@
     		<div class="maxtext">
     		<p class="in-title"><a href="${entryProductUrl}">${fn:escapeXml(product.name)}</a></p>
 				<p class="spec">package:<i>${product.netWeight}${product.unitName} &nbsp ${product.packageType}</i></p>
-				<div class="spset"><span class="price"><format:fromPrice priceData="${entry.basePrice}"/></span>
-				<span class="old-price"><format:fromPrice priceData="${entry.basePrice}"/></span>
+				<div class="spset"><span class="price">
+				<c:if test="${not empty product.promotionPrice}">
+				<format:fromPrice priceData="${product.promotionPrice}"/>
+				</c:if>
+				
+				<c:if test="${empty product.promotionPrice}">
+				<format:fromPrice priceData="${product.price}"/>
+				</c:if>
+				</span>
+				
 				<span class="num">${quantity}</span>
 				</div>
 			</div>
