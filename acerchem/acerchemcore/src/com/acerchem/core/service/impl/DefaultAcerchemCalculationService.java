@@ -65,7 +65,6 @@ public class DefaultAcerchemCalculationService extends DefaultCalculationService
 			// discounts
 			
 			double totalDiscounts = calculateDiscountValues(order, recalculate);
-			totalDiscounts += getProductsDiscountsAmount(order);
 			final double roundedTotalDiscounts = commonI18NService.roundCurrency(totalDiscounts, digits);
 			order.setTotalDiscounts(Double.valueOf(roundedTotalDiscounts));
 			// set total
