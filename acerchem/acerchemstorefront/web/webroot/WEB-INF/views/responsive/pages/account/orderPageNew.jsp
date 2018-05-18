@@ -229,7 +229,7 @@
 		
 		                        <span>
 									<em>Discount</em>
-									<i>- <format:price priceData="${orderData.orderDiscounts}"/></i>
+									<i>-<format:price priceData="${orderData.totalDiscounts}"/></i>
 								</span>
 		
 		                        <span>
