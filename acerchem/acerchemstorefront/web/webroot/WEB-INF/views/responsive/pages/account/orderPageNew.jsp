@@ -147,14 +147,17 @@
 								</span>
                                     </div>
                                 </td>
-                                <td><format:price priceData="${orderEntries.basePrice}" displayFreeForZero="true" /></td>
-                                <td> ${orderEntries.quantity}*${orderEntries.product.netWeight}kg</td>
+                                <td><format:price priceData="${orderEntries.product.promotionPrice}" displayFreeForZero="true" /></td>
+                                <td>${orderEntries.quantity*orderEntries.product.netWeight}${orderEntries.product.unitName}</td>
                                 <td>
                                         ${fn:escapeXml(orderEntries.product.code)}
                                 </td>
                                 <td>
                                     <div class="tot">
-                                        <em><format:price priceData="${orderEntries.totalPrice}" displayFreeForZero="true"/></em>
+                                        <em>
+                                        	${fn:substring(orderEntries.totalPrice.formattedValue, 0, 1)}
+                                    		${orderEntries.product.promotionPrice.value*orderEntries.quantity*orderEntries.product.netWeight}
+                                        </em>
                                     </div>
                                 </td>
                             </tr>
@@ -209,7 +212,10 @@
                             <div class="item">
 								<span>
 									<em>Subtotal</em>
-									<i><format:price priceData="${orderData.subTotal}"/></i>
+									<i>
+										${fn:substring(orderData.subTotal.formattedValue, 0, 1)}
+                                    	${orderData.subTotal.value+orderData.totalDiscounts.value}
+									</i>
 								</span>
 		
 		                        <span>
