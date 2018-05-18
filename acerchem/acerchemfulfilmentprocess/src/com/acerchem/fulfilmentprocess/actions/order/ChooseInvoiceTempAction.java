@@ -79,14 +79,14 @@ public class ChooseInvoiceTempAction extends AbstractAction<OrderProcessModel>
 		if("Neele-vat".equals(order.getEntries().get(0).getDeliveryPointOfService().getWarehouses().get(0).getCode())){
 			LOG.info("-------------------Neele-vat +  TEMP4------------------");
 			return Transition.TEMP4;
-		}else if("UK-vat".equals(order.getEntries().get(0).getDeliveryPointOfService().getWarehouses().get(0).getCode())){
+		}else if("UK".equals(order.getEntries().get(0).getDeliveryPointOfService().getWarehouses().get(0).getCode())){
 			if("GB".equals(addressModel.getCountry().getIsocode())){
-				LOG.info("-------------------GB +  TEMP2------------------");
+				LOG.info("-------------------GB +  TEMP2------------------"+addressModel.getCountry().getIsocode());
 				return Transition.TEMP2;
 			}
 			else
 			{
-				LOG.info("------------------- TEMP3------------------");
+				LOG.info("------------------- TEMP3------------------"+addressModel.getCountry().getIsocode());
 				return Transition.TEMP3;
 			}
 		}
