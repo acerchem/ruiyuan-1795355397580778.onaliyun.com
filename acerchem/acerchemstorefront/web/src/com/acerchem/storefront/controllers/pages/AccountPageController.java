@@ -1403,6 +1403,7 @@ public class AccountPageController extends AbstractSearchPageController
 			for(OrderProcessModel orderProcess:orderProcessList)
 			{
 				fulfilmentProcessDefinitionName = orderProcess.getCode();
+				break;
 			}
 			
 			if(confirm.equals("order")&&!order.getCustomerConfirm())
@@ -1417,7 +1418,7 @@ public class AccountPageController extends AbstractSearchPageController
 			  		modelService.refresh(order);
 			  	}
 			}
-			if(confirm.equals("receipt")&&!order.getCustomerConfirmDelivery())
+			if(confirm.equals("receipt"))
 			{
 				final String eventID = new StringBuilder().append(fulfilmentProcessDefinitionName).append("_ConfirmConsignmentActionEvent").toString();
 				final BusinessProcessEvent event = BusinessProcessEvent.builder(eventID).withChoice("waitForCustomerConfirmConsignment").build();
