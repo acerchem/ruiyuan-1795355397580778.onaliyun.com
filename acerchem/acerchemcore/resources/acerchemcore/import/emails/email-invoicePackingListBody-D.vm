@@ -111,7 +111,7 @@ p.western {
       <td>&nbsp;</td>
     </tr>
     <tr>
-      <td>VAT: CZ26007851</td>
+      <td>VAT: $!{ctx.customer.vatNo}</td>
       <td>&nbsp;</td>
     </tr>
     <tr>
@@ -130,7 +130,7 @@ p.western {
       <td>&nbsp;</td>
     </tr>
     <tr>
-      <td width="57%">SHIP FROM: Rotterdam</td>
+      <td>SHIP FROM: $!{ctx.warehouse}</td>
       <td >SHIP TO: $!{ctx.shipto}</td>
     </tr>
     <tr>
@@ -138,7 +138,7 @@ p.western {
       <td >Currency: USD</td>
     </tr>
     <tr>
-      <td>ACERCHEM UK LTD .VAT No.:GB111785918  </td>
+      <td >ACERCHEM UK LTD .VAT No.:GB111785918  </td>
       <td >ACERCHEM UK LTD. Company No.:07460051</td>
     </tr>
   </tbody>
@@ -171,7 +171,7 @@ p.western {
       <td width="58" > ${ctx.order.totalPrice.formattedValue} </td>
     </tr>
     <tr>
-      <td colspan="5" width="67" height="7" align="left"> TOTAL VALUE: $!{ctx.moneyToWords}. </td>
+      <td colspan="5" width="67" height="7" align="left"> TOTAL VALUE: $!{ctx.usdMoneyToWords}. </td>
     </tr>
 	
   </table>

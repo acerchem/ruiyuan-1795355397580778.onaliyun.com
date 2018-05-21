@@ -137,7 +137,7 @@ p.western {
       <td align="center">SHIP TO: $!{ctx.shipto}</td>
     </tr>
      <tr>
-      <td colspan="2">Pay Terms: $!{ctx.paymentTerms}</td>
+      <td colspan="2">Pay Terms: $!{ctx.bPaymentTerms}</td>
       <td align="center">&nbsp;</td>
     </tr>
   </tbody>
@@ -352,7 +352,7 @@ p.western {
       <td colspan="3" align="center"><font font size="6" style="font-size: 22pt"> <strong> &nbsp; </strong> </font></td>
     </tr>
     <tr>
-      <td colspan="2">INVOICE NO.: ${ctx.order.code}</td>
+      <td colspan="6">INVOICE NO.: ${ctx.order.code}</td>
       
       <td>&nbsp;</td>
     </tr>
@@ -378,7 +378,7 @@ p.western {
     </tr>
     <tr>
       <td>&nbsp;</td>
-      <td>$!{ctx.customerAddressData.regin}</td>
+      <td>$!{ctx.customerAddressData.region}</td>
       <td>&nbsp;</td>
     </tr>
     <tr>
@@ -430,7 +430,7 @@ p.western {
 			  <td width="206" >  ${item.productName} </td>
 			  <td width="82" >  $!{item.batchNo} </td>
 			  <td width="51" > ${item.quantity} </td>
-			  <td width="58" > >$!{item.netWeight} </td>
+			  <td width="58" > $!{item.netWeight} </td>
 			  <td width="88" > $!{item.grossWeight} </td>
 			</tr>
 		#end

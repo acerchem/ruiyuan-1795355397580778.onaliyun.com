@@ -22,14 +22,15 @@ import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 //根据地址集合获得客户联系地址
 public class AcerChemEmailContextUtils {
 
-	//联系地址
+	// 联系地址
 	public static String getCustomerContactAddress(final Collection<AddressModel> collect) {
-		return getCustomerContactAddress(collect,"CONTACT");
+		return getCustomerContactAddress(collect, "CONTACT");
 	}
-	public static String getCustomerContactAddress(final Collection<AddressModel> collect,final String AddressType) {
+
+	public static String getCustomerContactAddress(final Collection<AddressModel> collect, final String AddressType) {
 		if (CollectionUtils.isNotEmpty(collect)) {
 			for (final AddressModel model : collect) {
-				if (getAddressType(AddressType,model)) {
+				if (getAddressType(AddressType, model)) {
 					final String street = StringUtils.defaultString(model.getStreetname(), "");
 					final String streetNum = StringUtils.defaultString(model.getStreetnumber(), "");
 					final String town = StringUtils.defaultString(model.getTown(), "");
@@ -57,19 +58,20 @@ public class AcerChemEmailContextUtils {
 		return "&nbsp;";
 	}
 
-	//联系地址对象
-	public static CustomerContactAddressOfEmailData getCustomerContactAddressData(final Collection<AddressModel> collect) {
-		return getCustomerContactAddressData(collect,"CONTACT");
+	// 联系地址对象
+	public static CustomerContactAddressOfEmailData getCustomerContactAddressData(
+			final Collection<AddressModel> collect) {
+		return getCustomerContactAddressData(collect, "CONTACT");
 	}
-	
-	
-	//SHIPPING/UNLOADING/BILLING/CONTACT
-	public static CustomerContactAddressOfEmailData getCustomerContactAddressData(final Collection<AddressModel> collect,final String AddressType) {
+
+	// SHIPPING/UNLOADING/BILLING/CONTACT
+	public static CustomerContactAddressOfEmailData getCustomerContactAddressData(
+			final Collection<AddressModel> collect, final String AddressType) {
 
 		final CustomerContactAddressOfEmailData data = new CustomerContactAddressOfEmailData();
 		if (CollectionUtils.isNotEmpty(collect)) {
 			for (final AddressModel model : collect) {
-				if (getAddressType(AddressType,model)) {
+				if (getAddressType(AddressType, model)) {
 					final String street = StringUtils.defaultString(model.getStreetname(), "");
 					final String streetNum = StringUtils.defaultString(model.getStreetnumber(), "");
 					final String town = StringUtils.defaultString(model.getTown(), "");
@@ -87,17 +89,17 @@ public class AcerChemEmailContextUtils {
 					if (reginModel != null) {
 						regin = reginModel.getName();
 					}
-					
+
 					data.setRegion(regin);
-					//add contact info
+					// add contact info
 					data.setContactPhone(model.getPhone1());
-					
-					//full username
+
+					// full username
 					final String lastName = StringUtils.defaultString(model.getLastname());
 					final String firstName = StringUtils.defaultString(model.getFirstname());
-					
-					data.setContactUser(firstName + "  "+ lastName);
-					
+
+					data.setContactUser(firstName + "  " + lastName);
+
 					return data;
 
 				}
@@ -106,22 +108,23 @@ public class AcerChemEmailContextUtils {
 		}
 		return data;
 	}
+
 	// type = SHIPPING/UNLOADING/BILLING/CONTACT
-	private static boolean getAddressType(final String type,final AddressModel model){
-		if (model !=null){
-			if (type.equals("SHIPPING")){
+	private static boolean getAddressType(final String type, final AddressModel model) {
+		if (model != null) {
+			if (type.equals("SHIPPING")) {
 				return model.getShippingAddress();
-			}else if (type.equals("UNLOADING")){
+			} else if (type.equals("UNLOADING")) {
 				return model.getUnloadingAddress();
-			}else if (type.equals("BILLING")){
+			} else if (type.equals("BILLING")) {
 				return model.getBillingAddress();
-			}else if (type.equals("CONTACT")){
+			} else if (type.equals("CONTACT")) {
 				return model.getContactAddress();
 			}
 		}
 		return false;
 	}
-	
+
 	// 获得信用期
 	public static String getPaymementTerms(final OrderProcessModel orderProcessModel, final String paymentMode) {
 
@@ -195,7 +198,8 @@ public class AcerChemEmailContextUtils {
 			param = "0";
 		}
 
-		final String prefix = StringUtils.containsIgnoreCase(prefixWord, "$") ? "say us dollors" : prefixWord;
+		final String prefix = StringUtils.containsIgnoreCase(prefixWord, "$") ? "say us dollors"
+				: (StringUtils.containsIgnoreCase(prefixWord, "usd") ? "say u.s. usd " : prefixWord);
 		return StringUtils.upperCase(prefix + " " + getMoneyOfWord(param));
 	}
 
@@ -250,9 +254,9 @@ public class AcerChemEmailContextUtils {
 					if (units != 0) {
 						groupText[i] = groupText[i] + " " + smallNumbers[units];
 					}
-				} else if(tens != 0 || units !=0) {// 十位和个位，小于20的情况
+				} else if (tens != 0 || units != 0) {// 十位和个位，小于20的情况
 					// if (units != 0)
-				     groupText[i] = groupText[i] + smallNumbers[tensUnits];
+					groupText[i] = groupText[i] + smallNumbers[tensUnits];
 
 				}
 			}
@@ -315,10 +319,9 @@ public class AcerChemEmailContextUtils {
 			return StringUtils.isNumeric(num1) && StringUtils.isNumeric(num2);
 		}
 	}
-	
-	//剔除list重复的值
-	public static <T> List<T> removeDuplicate(final List<T> list)
-	{
+
+	// 剔除list重复的值
+	public static <T> List<T> removeDuplicate(final List<T> list) {
 		final HashSet<T> h = new HashSet<T>(list);
 		list.clear();
 		list.addAll(h);
@@ -326,9 +329,9 @@ public class AcerChemEmailContextUtils {
 	}
 
 	public static void main(final String[] args) {
-		//String s = "207.998678";
+		// String s = "207.998678";
 		String s = "18000.0";
-		s = AcerChemEmailContextUtils.getMoneyOfWord(s, "$");
+		s = AcerChemEmailContextUtils.getMoneyOfWord(s, "USD");
 
 		System.out.println(s);
 		// String s = new StringBuilder("aaaa").append("
