@@ -1,6 +1,6 @@
 *{padding:0; margin:0; list-style-type: none; box-sizing: border-box; outline: none; font-family: Tahoma, 'Geneva', sans-serif; font-style: normal; }
 h1,h2,h3,h4,b{font-weight: normal;}
-body{background:#fff;-webkit-text-size-adjust:100%;min-width: 1200px; max-width: 1920px; margin:auto; font-family: Tahoma, Geneva, sans-serif; font-size: 1rem;font-style: normal;font-size: 100%\9;-webkit-font-smoothing: subpixel-antialiased} 
+body{background:#fff;-webkit-text-size-adjust:100%;min-width: 1200px; max-width: 1920px; overflow-x:scroll; margin:auto; font-family: Tahoma, Geneva, sans-serif; font-size: 1rem;font-style: normal;font-size: 100%\9;-webkit-font-smoothing: subpixel-antialiased} 
 a{color:#333;text-decoration:none} 
 
 img{
@@ -219,8 +219,8 @@ button{
 
 /*footer*/
 .footer{background: #222624;color: #666666;font-size: 14px;}
-.footer .container{width: 1200px;margin: 0 auto;}
-.footer .maxadd{width: 27%;  float: left;}
+.footer .container{ width: 82%; margin: 0 auto;}
+.footer .maxadd{width: 27%; margin-right: 17%;  float: left;}
 .footer .maxadd ul{padding:0;}
 .footer .maxadd li{position:relative; padding-bottom: 12px; display: block; }
 .footer .maxadd i{display: block;width: 20px;h;height: 20px;position: absolute;top:0;background: url(maxicon.png);}
@@ -230,18 +230,18 @@ button{
 .footer .maxadd .maxemail{background-position: -13px -434px;}
 .footer .maxadd span{margin-left: 26px; display: block;}
 .footermin{padding:80px 0 58px; position: relative;}
-.footermin .left{width: 92%; margin:auto;}
+.footermin .left{ margin:auto;}
 .footermin .left:after{content:''; display: block; clear:both;}
 .footermin .right{width: 100%; position: absolute; top:30px; left:0}
 .footermin h3{font-size: 20px;color: #fff;padding-bottom: 26px;}
 .footer .maxfootnav{
 	float: left;
-	padding-left:170px;
+	width:16%;
 }
 .footer .maxfootnav ul{padding:0;}
 .footer .maxfootnav a{color: #666;display: block;padding-bottom: 12px;}
 .footer .maxfootnav a:hover{color:#fff;}
-
+.footer .maxfootnav.item3{width: 28%; padding-left: 17%;}
 .gotop{position: fixed; top:86%; right:10px; width:48px; height: 48px; background:rgba(9,103,53,.5); cursor: pointer;}
 .gotop:after{content:''; display: block; height: 100%;  background:url(maxicon.png) no-repeat center 72.3%;}
 .gotop:hover{background: rgb(9,103,53)}

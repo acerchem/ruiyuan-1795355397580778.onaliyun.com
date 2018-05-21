@@ -291,9 +291,17 @@ $(document).ready(function(){
 })
 
 $(document).on('click','#addToCartButton',function(){
-	setTimeout(function(){
-		$('#colorbox').css({width:'100%',height:'100%',left:0,top:0})
-		$('#cboxWrapper , #cboxContent , #cboxLoadedContent').css({width:'',height:'',float:''})
-		console.log('colorbox')
-	},300)
+	
+	function rewinsize(){
+		var colorbox= $('#colorbox').width(),
+		srcwind = $(window).width();
+		setTimeout(function(){
+			$('#colorbox').css({width:'100%',height:'100%',left:0,top:0})
+			$('#cboxWrapper , #cboxContent , #cboxLoadedContent').css({width:'',height:'',float:''})
+			if(colorbox<srcwind){
+				rewinsize()
+			}
+		},300)		
+	}	
+	rewinsize()
 })
