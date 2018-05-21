@@ -127,7 +127,9 @@ public class DefaultAcerchemCalculationService extends DefaultCalculationService
 		{
 			recalculateOrderEntryIfNeeded(e, forceRecalculate);
 			subtotal += (e.getTotalPrice());
-			totalMemberPrice= e.getBaseMemberlPrice()*(Double.valueOf(e.getProduct().getNetWeight())* Double.valueOf(e.getQuantity().toString()));
+			if(e.getBaseMemberlPrice().toString() != null &&  !"".equals(e.getBaseMemberlPrice().toString())){
+				totalMemberPrice= e.getBaseMemberlPrice()*(Double.valueOf(e.getProduct().getNetWeight())* Double.valueOf(e.getQuantity().toString()));
+			}
 			e.setTotalMemberlPrice(totalMemberPrice);
 		}
 		order.setTotalPrice(Double.valueOf(subtotal));
