@@ -35,7 +35,7 @@
 	<c:set var="b" value="${entry.quantity}"/>
 	<c:choose>
 	<c:when test="${not empty entry.product.promotionPrice}">
-	<c:set var="c" value="${entry.product.promotionPrice.value}"/>
+	<c:set var="c" value="${entry.promotionBasePrice.value}"/>
 	</c:when>
 	
 	<c:otherwise>

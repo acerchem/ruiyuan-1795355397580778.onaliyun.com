@@ -114,7 +114,7 @@
 						
 						<span>
 								   <em>Subtotal</em>
-									<i>${fn:substring(orderData.totalPrice.formattedValue, 0, 1)}${subTotal}</i>
+									<i>${fn:substring(orderData.totalPrice.formattedValue, 0, 1)}<fmt:formatNumber type="number" value="${subTotal}" pattern="#.00"/></i>
 								</span>
 		
 		                        <span>
