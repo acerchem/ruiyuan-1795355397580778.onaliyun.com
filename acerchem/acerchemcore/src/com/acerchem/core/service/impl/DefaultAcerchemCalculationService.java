@@ -148,7 +148,7 @@ public class DefaultAcerchemCalculationService extends DefaultCalculationService
 			entry.setBasePrice(BigDecimal.valueOf(userLevelPrice * Double.valueOf(entry.getProduct().getNetWeight())).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
 			entry.setBaseMemberlPrice(userLevelPrice);
 		}else{
-			entry.setBasePrice(Double.valueOf(basePrice.getValue()) * Double.valueOf(entry.getProduct().getNetWeight()));
+			entry.setBasePrice(BigDecimal.valueOf((Double.valueOf(basePrice.getValue()) * Double.valueOf(entry.getProduct().getNetWeight()))).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
 		}
 		//modelService.save(entry);
 		final List<DiscountValue> entryDiscounts = findDiscountValues(entry);
