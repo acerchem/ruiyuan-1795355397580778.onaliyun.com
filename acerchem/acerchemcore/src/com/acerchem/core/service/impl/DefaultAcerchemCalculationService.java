@@ -122,10 +122,13 @@ public class DefaultAcerchemCalculationService extends DefaultCalculationService
 	public void calculateEntries(final AbstractOrderModel order, final boolean forceRecalculate) throws CalculationException
 	{
 		double subtotal = 0.0;
+		double totalMemberPrice = 0.0;
 		for (final AbstractOrderEntryModel e : order.getEntries())
 		{
 			recalculateOrderEntryIfNeeded(e, forceRecalculate);
 			subtotal += (e.getTotalPrice());
+			totalMemberPrice= e.getBaseMemberlPrice()*(Double.valueOf(e.getProduct().getNetWeight())* Double.valueOf(e.getQuantity().toString()));
+			e.setTotalMemberlPrice(totalMemberPrice);
 		}
 		order.setTotalPrice(Double.valueOf(subtotal));
 
@@ -142,7 +145,8 @@ public class DefaultAcerchemCalculationService extends DefaultCalculationService
 		//entry.setBasePrice(Double.valueOf(basePrice.getValue()));
 		if(order.getUser().getUserLevel() != null && order.getUser().getUserLevel().getDiscount() != null &&  !"".equals(order.getUser().getUserLevel().getDiscount())){
 			double userLevelPrice = (BigDecimal.valueOf(basePrice.getValue()).multiply(BigDecimal.valueOf(order.getUser().getUserLevel().getDiscount())).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue() );
-			entry.setBasePrice(userLevelPrice * Double.valueOf(entry.getProduct().getNetWeight()));
+			entry.setBasePrice(BigDecimal.valueOf(userLevelPrice * Double.valueOf(entry.getProduct().getNetWeight())).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
+			entry.setBaseMemberlPrice(userLevelPrice);
 		}else{
 			entry.setBasePrice(Double.valueOf(basePrice.getValue()) * Double.valueOf(entry.getProduct().getNetWeight()));
 		}
