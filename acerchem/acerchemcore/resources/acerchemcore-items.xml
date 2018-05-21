@@ -698,6 +698,16 @@
 						<persistence type="property" />
 						<modifiers />
 					</attribute>
+					<attribute qualifier="baseMemberlPrice" type="java.lang.Double">
+						<description>会员单价</description>
+						<persistence type="property" />
+						<modifiers />
+					</attribute>
+					<attribute qualifier="totalMemberlPrice" type="java.lang.Double">
+						<description>会员总价</description>
+						<persistence type="property" />
+						<modifiers />
+					</attribute>
 				</attributes>
 			</itemtype>
 
