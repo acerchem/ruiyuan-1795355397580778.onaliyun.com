@@ -43,7 +43,7 @@ public class WaitForConfirmPayAction extends AbstractSimpleDecisionAction<OrderP
 			return Transition.NOK;
 		}
 
-		if (order.getEmployeeConfirmPay() || order.getCustomerConfirmPay())
+		if (order.getEmployeeConfirmPay() && order.getCustomerConfirmPay())
 		{
 			setOrderStatus(order, OrderStatus.UNDELIVERED);
 			//setOrderStatus(order, OrderStatus.PAIED);
