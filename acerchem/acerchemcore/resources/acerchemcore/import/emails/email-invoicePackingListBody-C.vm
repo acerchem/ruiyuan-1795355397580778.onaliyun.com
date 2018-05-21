@@ -121,7 +121,7 @@ p.western {
       <td>&nbsp;</td>
     </tr>
     <tr>
-      <td width="57%">SHIP FROM: $!{ctx.warehouse}</td>
+      <td>SHIP FROM: $!{ctx.warehouse}</td>
       <td >SHIP TO: $!{ctx.shipto}</td>
     </tr>
     <tr>

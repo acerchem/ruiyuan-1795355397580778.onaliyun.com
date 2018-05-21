@@ -54,12 +54,15 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 
 	private String currency;
 	private String paymentTerms;
+	private String bPaymentTerms;
+	private String lowCasePaymentTerms;
 
 	private CustomerModel customerModel;
 
 	private String warehouse;
 
 	private String moneyToWords;
+	private String usdMoneyToWords;
 	private CustomerContactAddressOfEmailData customerAddressData;
 
 	private String contactUser;
@@ -105,7 +108,7 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 
 		final String total = orderData.getTotalPrice().getValue().toString();
 		moneyToWords = AcerChemEmailContextUtils.getMoneyOfWord(total, "$");
-
+		usdMoneyToWords = AcerChemEmailContextUtils.getMoneyOfWord(total, "usd");
 		// initContactInfo();
 		initVatTotal();
 
@@ -306,7 +309,7 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 		}
 
 		totalData.setShippingMarks("N/M");
-		totalData.setPoNo(" ");
+		totalData.setPoNo(orderData.getCode());
 
 		initAppend.setTotalData(totalData);
 
@@ -318,10 +321,10 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 					_packageWeightTotal += pwEntry.getValue().longValue() + pwEntry.getKey() + "s,";
 				}
 			}
-			//去掉最后一个","
+			// 去掉最后一个","
 			final int pos = _packageWeightTotal.lastIndexOf(",");
-			if (pos > 0){
-				_packageWeightTotal = _packageWeightTotal.substring(0,pos);
+			if (pos > 0) {
+				_packageWeightTotal = _packageWeightTotal.substring(0, pos);
 			}
 			setClassificationPackageTypeQuantityArray(_packageWeightTotal);
 		}
@@ -366,7 +369,11 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 
 		final String paymentMode = orderData.getPaymentMode();
 		final String terms = AcerChemEmailContextUtils.getPaymementTerms(orderProcessModel, paymentMode);
+		final String bTerms = terms.replace("AFTER SHIPPING DOCUMENTS", "");
+		final String lowcaseTemrs = StringUtils.lowerCase(terms);
+		setLowCasePaymentTerms(lowcaseTemrs);
 		setPaymentTerms(terms);
+		setbPaymentTerms(bTerms);
 	}
 
 	public void initWarehouse() {
@@ -541,14 +548,36 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 		this.upperCasePackageWeightArray = upperCasePackageWeightArray;
 	}
 
-	
-
 	public String getClassificationPackageTypeQuantityArray() {
 		return classificationPackageTypeQuantityArray;
 	}
 
 	public void setClassificationPackageTypeQuantityArray(final String classificationPackageTypeQuantityArray) {
 		this.classificationPackageTypeQuantityArray = classificationPackageTypeQuantityArray;
+	}
+
+	public String getUsdMoneyToWords() {
+		return usdMoneyToWords;
+	}
+
+	public void setUsdMoneyToWords(final String usdMoneyToWords) {
+		this.usdMoneyToWords = usdMoneyToWords;
+	}
+
+	public String getbPaymentTerms() {
+		return bPaymentTerms;
+	}
+
+	public void setbPaymentTerms(final String bPaymentTerms) {
+		this.bPaymentTerms = bPaymentTerms;
+	}
+
+	public String getLowCasePaymentTerms() {
+		return lowCasePaymentTerms;
+	}
+
+	public void setLowCasePaymentTerms(final String lowCasePaymentTerms) {
+		this.lowCasePaymentTerms = lowCasePaymentTerms;
 	}
 
 }
