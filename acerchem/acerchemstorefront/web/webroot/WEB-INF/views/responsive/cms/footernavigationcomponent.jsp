@@ -10,7 +10,7 @@
 			<div class="container">
 				<div class="footermin maxleft">
 					<div class="left">
-						<div class="maxadd">
+						<div class="maxadd item1">
 							<h3>Contact us</h3>
 							<ul>
 							<li><i class="maxadd"></i><span>Baglan Bay Innovation Centre,Baglan Energy Park,Port Talbot,Wales,U.K.SA12 7AX.   </span></li>
@@ -19,7 +19,7 @@
 								<li><i class="maxemail"></i><span>Email: customerservice@acerchem.com</span></li>
 							</ul>
 						</div>
-						<div class="maxfootnav">
+						<div class="maxfootnav item2">
 							<h3>Customer service</h3>
 							<ul>
 								<li><a href="${homeUrl}faq">FAQ</a></li>
@@ -28,7 +28,7 @@
 								<li><a href="${homeUrl}termsConditions">Terms & Condition</a></li>
 							</ul>
 						</div>
-						<div class="maxfootnav">
+						<div class="maxfootnav item3">
 							<h3>Company</h3>
 							<ul>
 								<li><a href="${homeUrl}aboutUs">About</a></li>
@@ -38,7 +38,7 @@
 								<li><a href="${homeUrl}">Privacy</a></li> --%>
 							</ul>
 						</div>
-						<%-- <div class="maxfootnav">
+						<%-- <div class="maxfootnav item4">
 							<h3>Connect</h3>
 							<ul>
 								<li><a href="${homeUrl}">Animal Nutrition</a></li>
