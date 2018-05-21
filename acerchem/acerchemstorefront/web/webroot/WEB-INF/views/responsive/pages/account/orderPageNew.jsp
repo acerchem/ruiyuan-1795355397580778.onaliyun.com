@@ -130,6 +130,21 @@
                         </div>
 
                         <c:forEach items="${orderData.entries}" var="orderEntries">
+                        
+                        <c:set var ="a" value="${orderEntries.product.netWeight}"/>
+							<c:set var="b" value="${orderEntries.quantity}"/>
+							<c:choose>
+							<c:when test="${not empty orderEntries.product.promotionPrice}">
+							<c:set var="c" value="${orderEntries.promotionBasePrice.value}"/>
+							</c:when>
+							
+							<c:otherwise>
+							<c:set var="c" value="${orderEntries.product.price.value}"/>
+							</c:otherwise>
+							
+							</c:choose>
+						    <c:set var ="Total" value="${a*b*c}"/>
+						    
                         <table class="list">
                             <tr>
                                 <td>
@@ -156,7 +171,7 @@
                                     <div class="tot">
                                         <em>
                                         	${fn:substring(orderEntries.totalPrice.formattedValue, 0, 1)}
-                                    		${orderEntries.product.promotionPrice.value*orderEntries.quantity*orderEntries.product.netWeight}
+                                    		<fmt:formatNumber type="number" value="${Total}" pattern="#.00"/>
                                         </em>
                                     </div>
                                 </td>
@@ -214,7 +229,7 @@
 									<em>Subtotal</em>
 									<i>
 										${fn:substring(orderData.subTotal.formattedValue, 0, 1)}
-                                    	${orderData.subTotal.value+orderData.totalDiscounts.value}
+										<fmt:formatNumber type="number" value="${orderData.subTotal.value+orderData.totalDiscounts.value}" pattern="#.00"/>
 									</i>
 								</span>
 		

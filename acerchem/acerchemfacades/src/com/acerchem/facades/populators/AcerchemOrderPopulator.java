@@ -68,9 +68,12 @@ public class AcerchemOrderPopulator extends OrderPopulator {
         		if (targetEntry.getEntryNumber().equals(entry.getEntryNumber())){
         			final Double baseReal = entry.getBaseRealPrice()==null?0:entry.getBaseRealPrice();
         			final Double totalReal = entry.getTotalRealPrice()==null?0:entry.getTotalRealPrice();
+        			final Double baseMemberPrice = entry.getTotalRealPrice()==null?0:entry.getBaseMemberlPrice();
         			targetEntry.setBaseRealPrice(priceDataFactory.create(PriceDataType.BUY, BigDecimal.valueOf(baseReal.doubleValue()), source.getCurrency().getIsocode()));
         			targetEntry.setTotalRealPrice(priceDataFactory.create(PriceDataType.BUY, BigDecimal.valueOf(totalReal.doubleValue()), source.getCurrency().getIsocode()));
         			targetEntry.setTotalWeight(entry.getTotalWeight());
+        			
+        			targetEntry.setPromotionBasePrice(priceDataFactory.create(PriceDataType.BUY, BigDecimal.valueOf(baseMemberPrice.doubleValue()), source.getCurrency().getIsocode()));
         			
         			target.getEntries().remove(i);
         			target.getEntries().add(i,targetEntry);
