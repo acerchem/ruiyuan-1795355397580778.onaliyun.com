@@ -205,7 +205,7 @@ p.western {
 			</tr>
 			<tr>
 				<td style="border-bottom-color: #ffffff" >
-					PACKING: $!{ctx.append.totalData.packingWeight}KG/DRUMS,TOTAL PACKED IN $!{ctx.append.totalData.packingCount} PACKAGES
+					PACKING: $!{ctx.upperCasePackageWeightArray}; TOTAL PACKED IN $!{ctx.append.totalData.packingCount} PACKAGES
 				</td>
 			</tr>
 			

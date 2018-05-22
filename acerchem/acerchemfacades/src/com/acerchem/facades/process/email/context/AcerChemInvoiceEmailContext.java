@@ -1,5 +1,6 @@
 package com.acerchem.facades.process.email.context;
 
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -29,6 +30,9 @@ import de.hybris.platform.commercefacades.order.data.ConsignmentData;
 import de.hybris.platform.commercefacades.order.data.ConsignmentEntryData;
 import de.hybris.platform.commercefacades.order.data.OrderData;
 import de.hybris.platform.commercefacades.order.data.OrderEntryData;
+import de.hybris.platform.commercefacades.product.PriceDataFactory;
+import de.hybris.platform.commercefacades.product.data.PriceData;
+import de.hybris.platform.commercefacades.product.data.PriceDataType;
 import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commercefacades.storelocator.data.PointOfServiceData;
 import de.hybris.platform.core.model.c2l.LanguageModel;
@@ -82,6 +86,9 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 
 	@Resource
 	private ContactInfoService contactInfoService;
+	
+	@Resource
+    private PriceDataFactory priceDataFactory;
 
 	@Override
 	public void init(final OrderProcessModel orderProcessModel, final EmailPageModel emailPageModel) {
@@ -486,13 +493,19 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 
 		final double dVat = dTotal * 0.2;
 		final String vat_ = df.format(dVat);
-		setVatAmount(vat_);
-
+		
+		final PriceData vatPrice = priceDataFactory.create(PriceDataType.BUY, BigDecimal.valueOf(dVat), orderData.getCurrency());
+	//	setVatAmount(vat_);
+		setVatAmount(vatPrice.getFormattedValue());
+		
 		final double dVatTotal = dTotal + dVat;
 		final String vatTotal_ = df.format(dVatTotal);
-		setVatTotal(vatTotal_);
+		
+		final PriceData vatTotalPrice = priceDataFactory.create(PriceDataType.BUY, BigDecimal.valueOf(dVatTotal), orderData.getCurrency());
+		//setVatTotal(vatTotal_);
+		setVatTotal(vatTotalPrice.getFormattedValue());
+		
 		final DecimalFormat df1 = new DecimalFormat("0.00");
-
 		final String formatTotal = df1.format(dVatTotal);
 		final String vatMoney_ = AcerChemEmailContextUtils.getMoneyOfWord(formatTotal, "$");
 
