@@ -309,6 +309,10 @@
 				<explorer-tree:type-node code="CreditTransaction" id="CreditTransaction"/>
 			</explorer-tree:navigation-node>
 			
+			<explorer-tree:navigation-node id="hmc.reportgroup">
+				<explorer-tree:type-node code="OrderReportDetail" id="OrderReportDetail"/>
+			</explorer-tree:navigation-node>
+			
 			<!-- add by alice -->
 			<explorer-tree:navigation-node id="hmc_backoffice-workflow-inbox" position="1" merge-mode="Remove"/>
 			

@@ -139,6 +139,7 @@ public class DefaultAcerchemCalculationService extends DefaultCalculationService
 	protected void resetAllValues(final AbstractOrderEntryModel entry) throws CalculationException
 	{
 		// taxes
+		double memberPrice = 0.0;
 		final Collection<TaxValue> entryTaxes = findTaxValues(entry);
 		entry.setTaxValues(entryTaxes);
 		final PriceValue pv = findBasePrice(entry);
@@ -151,6 +152,7 @@ public class DefaultAcerchemCalculationService extends DefaultCalculationService
 			entry.setBaseMemberlPrice(userLevelPrice);
 		}else{
 			entry.setBasePrice(BigDecimal.valueOf((Double.valueOf(basePrice.getValue()) * Double.valueOf(entry.getProduct().getNetWeight()))).setScale(2, BigDecimal.ROUND_HALF_UP).doubleValue());
+			entry.setBaseMemberlPrice(memberPrice);
 		}
 		//modelService.save(entry);
 		final List<DiscountValue> entryDiscounts = findDiscountValues(entry);

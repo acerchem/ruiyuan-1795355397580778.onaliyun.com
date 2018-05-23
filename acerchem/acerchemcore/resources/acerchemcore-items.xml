@@ -1167,6 +1167,22 @@
 		</itemtype>
 		
 		</typegroup>
+		<typegroup name="Report">
+						<itemtype code="OrderReportDetail"
+			extends="GenericItem" autocreate="true" generate="true">
+			<deployment table="OrderReportDetail" typecode="2610" />
+			<attributes>
+					<attribute qualifier="country" type="Country">
+						<persistence type="property" />
+						<modifiers />
+					</attribute>
+					<attribute qualifier="abstractOrder" type="AbstractOrder">
+						<persistence type="property" />
+						<modifiers />
+					</attribute>
+			</attributes>
+		</itemtype>
+		</typegroup>
 		
 	</itemtypes>
 </items>
