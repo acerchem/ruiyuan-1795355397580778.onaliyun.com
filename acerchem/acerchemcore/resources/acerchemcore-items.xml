@@ -1166,6 +1166,57 @@
 			</attributes>
 		</itemtype>
 		
+		
+		<itemtype code="ProductPriceTrAnasis" autocreate="true"
+				generate="true">
+				<description>商品价格趋势分析</description>
+				<deployment table="ProductPriceTrAnasis" typecode="20299" />
+				<attributes>
+					<attribute qualifier="code" type="java.lang.String">
+						<description>商品编号</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="name" type="java.lang.String">
+						<description>商品名称</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="saleNums" type="java.lang.Integer">
+						<description>销售数量</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="firstWeek" type="java.math.BigDecimal">
+					    <description>第一周</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="secondtWeek" type="java.math.BigDecimal">
+					    <description>第二周</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="thirdWeek" type="java.math.BigDecimal">
+					    <description>第三周</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="fourthWeek" type="java.math.BigDecimal">
+					    <description>第四周</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+					
+					<attribute qualifier="totalAveragePrice" type="java.math.BigDecimal">
+					    <description>总平均价</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+		
+		
 		</typegroup>
 		<typegroup name="Report">
 						<itemtype code="OrderReportDetail"

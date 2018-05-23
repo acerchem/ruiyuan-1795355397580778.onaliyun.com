@@ -438,6 +438,25 @@
 		</explorer-tree:explorer-tree>
 	</context>
 	
+	
+  <explorer-tree:navigation-node id="hmc.reportgroup">
+		    <explorer-tree:type-node code="ProductPriceTrAnasis" id="ProductPriceTrAnasis"/>
+		   </explorer-tree:navigation-node>
+		   
+		   
+   <context merge-by="type" parent="GenericItem" type="ProductPriceTrAnasis" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="code"/>
+			<list-view:column qualifier="name"/>
+			<list-view:column qualifier="saleNums"/>
+			<list-view:column qualifier="firstWeek"/>
+			<list-view:column qualifier="secondtWeek"/>
+			<list-view:column qualifier="thirdWeek"/>
+			<list-view:column qualifier="fourthWeek"/>
+		    <list-view:column qualifier="totalAveragePrice"/>
+		</list-view:list-view>
+	</context>
+	
 	<!-- add by alice -->
 	<context merge-by="type" parent="GenericItem" type="CsTicket" component="listview">
         <list-view:list-view >
