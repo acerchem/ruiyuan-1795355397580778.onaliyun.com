@@ -168,17 +168,17 @@ UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[l
 ;;NextDayDeliveryBanner;Elec_948x60_HomeDeliveryBanner_EN_01.jpg
 
 UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];headline[lang=$lang];$picture[lang=$lang];content[lang=$lang]
-;;AccessoriesBannerComponent;Camera Accessories and Supplies;Elec_228x178_HomeCat_Accessories_EN_01.jpg;"Everything you need to accessorise your camera"
-;;CanonPowershotBannerComponent;Canon PowerShot A480;1934793_1719.jpg;"Affordable, intuitive and fun!"
-;;CarouselCamcorderBanner;New - Ignite your passion for film with the latest HD camcorder...;Elec_468x418_HomeCarouselCamcorder_EN_01.jpg;""
-;;CarouselCyberBanner;What colour are you? Sony Cybershot - a colour for any mood.;Elec_468x418_HomeCarouselCyber_EN_01.jpg;""
-;;CarouselFunBanner;Fun on the run  - Never miss a memory!;Elec_468x418_HomeCarouselFun_EN_01.jpg;""
-;;DigitalCompactCamerasBannerComponent;Digital Compact Cameras;Elec_228x178_HomeCat_DigiCom_EN_01.jpg;"Find the perfect camera to capture those special moments"
-;;DigitalSLRCamerasBannerComponent;Digital SLR Cameras;Elec_228x178_HomeCat_DigiSLR_EN_01.jpg;"See the latest DSLR technology from the leading brands"
-;;KodakEasyshareBannerComponent;Kodak EASYSHARE V1253;1320808-1767.jpg;"Seize the moment with 12 megapixel photos!"
-;;MemoryBannerComponent;Camera and Camcorder Memory;Elec_228x178_HomeCat_Memory_EN_01.jpg;"Exclusive discounts on our memory cards"
-;;SonyCybershotBannerComponent;Sony Cybershot DSC-S930;1992695-Sony-DSC-S930P-11441.jpg;"Compact, easy to use and amazingly affordable."
-;;SonyDSCBannerComponent;Sony DSC-H20;1978440-Sony-DSC-H20-114081.jpg;"Perfect for serious performance in a compact design."
+#;;AccessoriesBannerComponent;Camera Accessories and Supplies;Elec_228x178_HomeCat_Accessories_EN_01.jpg;"Everything you need to accessorise your camera"
+#;;CanonPowershotBannerComponent;Canon PowerShot A480;1934793_1719.jpg;"Affordable, intuitive and fun!"
+#;;CarouselCamcorderBanner;New - Ignite your passion for film with the latest HD camcorder...;Elec_468x418_HomeCarouselCamcorder_EN_01.jpg;""
+#;;CarouselCyberBanner;What colour are you? Sony Cybershot - a colour for any mood.;Elec_468x418_HomeCarouselCyber_EN_01.jpg;""
+#;;CarouselFunBanner;Fun on the run  - Never miss a memory!;Elec_468x418_HomeCarouselFun_EN_01.jpg;""
+#;;DigitalCompactCamerasBannerComponent;Digital Compact Cameras;Elec_228x178_HomeCat_DigiCom_EN_01.jpg;"Find the perfect camera to capture those special moments"
+#;;DigitalSLRCamerasBannerComponent;Digital SLR Cameras;Elec_228x178_HomeCat_DigiSLR_EN_01.jpg;"See the latest DSLR technology from the leading brands"
+#;;KodakEasyshareBannerComponent;Kodak EASYSHARE V1253;1320808-1767.jpg;"Seize the moment with 12 megapixel photos!"
+#;;MemoryBannerComponent;Camera and Camcorder Memory;Elec_228x178_HomeCat_Memory_EN_01.jpg;"Exclusive discounts on our memory cards"
+#;;SonyCybershotBannerComponent;Sony Cybershot DSC-S930;1992695-Sony-DSC-S930P-11441.jpg;"Compact, easy to use and amazingly affordable."
+#;;SonyDSCBannerComponent;Sony DSC-H20;1978440-Sony-DSC-H20-114081.jpg;"Perfect for serious performance in a compact design."
 
 UPDATE ProductCarouselComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
 ;;acerchemHomepageProductCarouselComponent;Our Bestselling Products

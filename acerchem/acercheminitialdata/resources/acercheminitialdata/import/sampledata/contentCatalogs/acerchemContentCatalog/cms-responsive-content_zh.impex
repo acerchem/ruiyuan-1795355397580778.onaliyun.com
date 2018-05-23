@@ -163,17 +163,17 @@ UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[l
 ;;NextDayDeliveryBanner;Elec_948x60_HomeDeliveryBanner_ZH_01.jpg
 
 UPDATE BannerComponent;$contentCV[unique=true];uid[unique=true];headline[lang=$lang];$picture[lang=$lang];content[lang=$lang]
-;;AccessoriesBannerComponent;相机配件与耗材;Elec_228x178_HomeCat_Accessories_ZH_01.jpg;"为您提供装配相机所需的各种配件"
-;;CanonPowershotBannerComponent;佳能 PowerShot A480;1934793_1719.jpg;"实惠、直观、有趣！"
-;;CarouselCamcorderBanner;新品 - 点燃您的激情，精彩影片尽在最新款高清摄像机...;Elec_468x418_HomeCarouselCamcorder_ZH_01.jpg;""
-;;CarouselCyberBanner;您是哪款色彩？索尼 Cybershot – 一款色彩适合各种心情。;Elec_468x418_HomeCarouselCyber_ZH_01.jpg;""
-;;CarouselFunBanner;尽享运动乐趣  - 精彩瞬间不容错过！;Elec_468x418_HomeCarouselFun_ZH_01.jpg;""
-;;DigitalCompactCamerasBannerComponent;小型数码相机;Elec_228x178_HomeCat_DigiCom_ZH_01.jpg;"寻找完美相机，捕捉别样瞬间"
-;;DigitalSLRCamerasBannerComponent;数码单反相机;Elec_228x178_HomeCat_DigiSLR_ZH_01.jpg;"见识前沿品牌的最新数码单反技术"
-;;KodakEasyshareBannerComponent;柯达 EASYSHARE V1253;1320808-1767.jpg;"1200 万像素记录精彩瞬间！"
-;;MemoryBannerComponent;相机和便携式摄像机内存;Elec_228x178_HomeCat_Memory_ZH_01.jpg;"内存卡独家折扣"
-;;SonyCybershotBannerComponent;索尼 Cybershot DSC-S930;1992695-Sony-DSC-S930P-11441.jpg;"紧凑易用、经济又实惠。"
-;;SonyDSCBannerComponent;索尼 DSC-H20;1978440-Sony-DSC-H20-114081.jpg;"设计紧凑，完美演绎卓越性能。"
+#;;AccessoriesBannerComponent;相机配件与耗材;Elec_228x178_HomeCat_Accessories_ZH_01.jpg;"为您提供装配相机所需的各种配件"
+#;;CanonPowershotBannerComponent;佳能 PowerShot A480;1934793_1719.jpg;"实惠、直观、有趣！"
+#;;CarouselCamcorderBanner;新品 - 点燃您的激情，精彩影片尽在最新款高清摄像机...;Elec_468x418_HomeCarouselCamcorder_ZH_01.jpg;""
+#;;CarouselCyberBanner;您是哪款色彩？索尼 Cybershot – 一款色彩适合各种心情。;Elec_468x418_HomeCarouselCyber_ZH_01.jpg;""
+#;;CarouselFunBanner;尽享运动乐趣  - 精彩瞬间不容错过！;Elec_468x418_HomeCarouselFun_ZH_01.jpg;""
+#;;DigitalCompactCamerasBannerComponent;小型数码相机;Elec_228x178_HomeCat_DigiCom_ZH_01.jpg;"寻找完美相机，捕捉别样瞬间"
+#;;DigitalSLRCamerasBannerComponent;数码单反相机;Elec_228x178_HomeCat_DigiSLR_ZH_01.jpg;"见识前沿品牌的最新数码单反技术"
+#;;KodakEasyshareBannerComponent;柯达 EASYSHARE V1253;1320808-1767.jpg;"1200 万像素记录精彩瞬间！"
+#;;MemoryBannerComponent;相机和便携式摄像机内存;Elec_228x178_HomeCat_Memory_ZH_01.jpg;"内存卡独家折扣"
+#;;SonyCybershotBannerComponent;索尼 Cybershot DSC-S930;1992695-Sony-DSC-S930P-11441.jpg;"紧凑易用、经济又实惠。"
+#;;SonyDSCBannerComponent;索尼 DSC-H20;1978440-Sony-DSC-H20-114081.jpg;"设计紧凑，完美演绎卓越性能。"
 
 UPDATE ProductCarouselComponent;$contentCV[unique=true];uid[unique=true];title[lang=$lang]
 ;;acerchemHomepageProductCarouselComponent;畅销产品
