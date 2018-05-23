@@ -104,12 +104,13 @@ INSERT_UPDATE Employee;UID[unique=true];name;groups(uid);description;password
 ;customer.support.7@sap.com;Customer Support 7;customersupportagentgroup;This generic Customer Support Agent is assigned and has access to the Backoffice Customer Support Agent Group views and ASM - to provide restricted Backoffice and ASM customer sales and service manager support.;1234
 ;customer.support.8@sap.com;Customer Support 8;customersupportagentgroup;This generic Customer Support Agent is assigned and has access to the Backoffice Customer Support Agent Group views and ASM - to provide restricted Backoffice and ASM customer sales and service manager support.;1234
 
-;Kevin@acerchem.com;Kevin;Kevingroup,employeegroup,acerchemgroup;Basic product information maintenance addition modification and inventory import;123456
-;Frence@acerchem.com;Frence;Frencegroup,employeegroup,acerchemgroup;Product storage and order shipment logistics information maintenance;123456
-;Winter@acerchem.com;Winter;Wintergroup,employeegroup,acerchemgroup;Product price maintenance customer level discount review;123456
-;Donald@acerchem.com;Donald;employeegroup,acerchemgroup;Reports;123456
-;Lulu@acerchem.com;Lulu;Lulugroup,employeegroup,acerchemgroup;Valet orders;123456
-;Catherine@acerchem.com;Catherine;Catherinegroup,employeegroup,acerchemgroup;Valet orders;123456
+;Kevin.zheng@acerchem.com;Kevin;Kevingroup,employeegroup,acerchemgroup,admingroup,customersupportagentgroup;Basic product information maintenance addition modification and inventory import;123456
+;Donald.tang@acerchem.com;Donald;employeegroup,acerchemgroup,admingroup,customersupportagentgroup;Reports;123456
+;Winter.huang@acerchem.com;Winter;Wintergroup,employeegroup,acerchemgroup,admingroup,customersupportagentgroup;Product price maintenance customer level discount review;123456
+;Frence.wang@acerchem.com;Frence;Frencegroup,employeegroup,acerchemgroup;Product storage and order shipment logistics information maintenance;123456
+;Catherine.pei@acerchem.com;Catherine;Catherinegroup,employeegroup,acerchemgroup;Valet orders;123456
+;LuLu.qian@acerchem.com;Lulu;Lulugroup,employeegroup,acerchemgroup;Valet orders;123456
+;Sophie.zhang@acerchem.com;Sophie;Lulugroup,employeegroup,acerchemgroup;Valet orders;123456
 
 
 
