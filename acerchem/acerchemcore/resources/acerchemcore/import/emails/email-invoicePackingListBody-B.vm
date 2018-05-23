@@ -153,14 +153,26 @@ p.western {
       <td width="58"> Amount</td>
 
     </tr>
+	#set($i = 0)
+	#set($count = $ctx.order.entries.size() + 3)
 	 #foreach( $entry in ${ctx.order.entries} )
+	    #if ($i == 0 )
 		<tr>
-		  <td width="67" height="7"> N/M </td>
+		  <td width="67" height="7" rowspan="$count"> N/M </td>
 		  <td width="206" > ${entry.product.name} </td>
 		  <td width="82" > ${entry.totalWeight} </td>
 		  <td width="51" > ${entry.baseRealPrice.formattedValue} </td>
 		  <td width="58" > ${entry.totalRealPrice.formattedValue} </td>
 		</tr>
+		#else
+		<tr>
+		  <td width="206" > ${entry.product.name} </td>
+		  <td width="82" > ${entry.totalWeight} </td>
+		  <td width="51" > ${entry.baseRealPrice.formattedValue} </td>
+		  <td width="58" > ${entry.totalRealPrice.formattedValue} </td>
+		</tr>
+		#end
+		#set($i = $i+1)
 	#end
     <tr>
     	<td colspan="3" align="left">&nbsp;
@@ -193,7 +205,7 @@ p.western {
 			</tr>
 			<tr>
 				<td style="border-bottom-color: #ffffff" >
-					PACKING: $!{ctx.append.totalData.packingWeight}KG/DRUMS,TOTAL PACKED IN $!{ctx.append.totalData.packingCount} PACKAGES
+					PACKING: $!{ctx.upperCasePackageWeightArray}; TOTAL PACKED IN $!{ctx.append.totalData.packingCount} PACKAGES
 				</td>
 			</tr>
 			

@@ -52,10 +52,6 @@ $lang=en
 $defaultPromoGrp=acerchemPromoGrp
 
 INSERT_UPDATE Warehouse;code[unique=true];name[lang=en];name[lang=de];vendor(code)[default=$vendor];default
-#;warehouse_s;Warehouse South;Warehouse South;;true
-#;warehouse_e;Warehouse East;Warehouse East;;true
-#;warehouse_w;Warehouse West;Warehouse West;;true
-#;warehouse_n;Warehouse North;Warehouse North;;true
 ;Spain;Spain;;true
 ;UK;UK;;true
 ;Germany;Germany;;true
@@ -68,10 +64,7 @@ INSERT_UPDATE Unit;code[unique=true];name[lang=en];unitType
 ;kg;kg;kg
 
 INSERT_UPDATE Product;characteristic;promotionItem;formulaWeight;chemicalInfo;packageWeight;packageType;netWeight;grossWeight;specification;CAS;unitCalculateRato;code[unique=true];$supercategories;manufacturerName;manufacturerAID;unit(code);otherName;ean;variantType(code);$catalogVersion;$approved
-#;20;Drum;12;8;Enterprise Standard;2420-56-6;3;AC05080;576;HP;Coenzyme Q10 98% HPLC;kg;
-#;25;Bag;15;18;USP;50-81-7;5;AC03131;576;HP;Tribulus 90% UV THC FREE;kg;
-#;25;Carton;14;16;EP/USP;2420-56-6;2;AC01361;576;HP;Vitamin C Powder;kg;
-#;10;Drum;6;8;Enterprise Standard;5949-29-10;7;AC01710;576;HP;Alpha Lipoic Acid;kg;
+
 #shaun
 ;Heart & Cardiovascular;true;863.343;C59H90O4;10;Carton;10;14;EP/USP;303-98-0;20;AC05080a;571;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
 ;Heart & Cardiovascular;true;863.343;C59H90O4;10;Carton;10;14;EP/USP;303-98-0;20;AC05080b;571;Kingdomway;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
@@ -132,10 +125,7 @@ INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(co
 
  
 UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehouse(code));vendors(code)
-#;AC05080;;AC05080:USA;
-#;AC03131;;AC03131:USA;
-#;AC01361;;AC01361:USA;
-#;AC01710;;AC01710:USA;
+
 #shaun
 ;AC05080a;;AC05080a:Neele-vat;
 ;AC05080b;;AC05080b:Neele-vat;
@@ -152,10 +142,6 @@ UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehou
 
  # Update allProducts with localisations
 UPDATE Product;code[unique=true];$catalogVersion;name[lang=$lang];summary[lang=$lang];description[lang=$lang]
-#;AC05080;;Coenzyme Q10 98% HPLC;Coenzyme Q10 98% HPLC;Heart & Cardiovascular<br/><br/><b>Includes:</b><br/>- Vitamin <br/>- C59H90O4<br/>- EP/USP
-#;AC03131;;Tribulus 90% UV THC FREE;Tribulus 90% UV THC FREE;Sports Nutrition<br/><br/><b>Includes:</b><br/>- Plant Extract <br/>- 22153-44-2<br/>- Enterprise Standard
-#;AC01361;;Vitamin C Powder;Vitamin C Powder;Sports Nutrition<br/><br/><b>Includes:</b><br/>- Vitamin <br/>- C6H8O6 <br/>- EP/USP
-#;AC01710;;Vitamin C Powder;Vitamin C Powder;Sports Nutrition<br/><br/><b>Includes:</b><br/>- Vitamin <br/>- C6H8O6 <br/>- EP/USP
 #shaun
 ;AC05080a;;Coenzyme Q10 98% HPLC;Manufacturer:Livzon;Yellow to orange crystalline powder<br/>Effective protection of the heart<br/>Enhance human immunity.<br/>Anti-oxidation and anti-aging<br/>
 ;AC05080b;;Coenzyme Q10 98% HPLC;Manufacturer:Kingdomway Low solvent residue;Yellow to orange crystalline powder<br/>Effective protection of the heart<br/>Enhance human immunity.<br/>Anti-oxidation and anti-aging<br/>
@@ -171,40 +157,6 @@ UPDATE Product;code[unique=true];$catalogVersion;name[lang=$lang];summary[lang=$
 
 
 INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=de.hybris.platform.impex.jalo.media.MediaDataTranslator];mime[default='image/jpeg'];$catalogVersion;folder(qualifier)
-;1200Wx1200H;/1200Wx1200H/zhangyin.jpg;$siteResource/images/1200Wx1200H/zhangyin.jpg;;;images
-;515Wx515H;/515Wx515H/zhangyin.jpg;$siteResource/images/515Wx515H/zhangyin.jpg;;;images
-;300Wx300H;/300Wx300H/zhangyin.jpg;$siteResource/images/300Wx300H/zhangyin.jpg;;;images
-;96Wx96H;/96Wx96H/zhangyin.jpg;$siteResource/images/96Wx96H/zhangyin.jpg;;;images
-;65Wx65H;/65Wx65H/zhangyin.jpg;$siteResource/images/65Wx65H/zhangyin.jpg;;;images
-;30Wx30H;/30Wx30H/zhangyin.jpg;$siteResource/images/30Wx30H/zhangyin.jpg;;;images
-
-;1200Wx1200H;/1200Wx1200H/11.png;$siteResource/images/1200Wx1200H/11.png;;;images
-;515Wx515H;/515Wx515H/11.png;$siteResource/images/515Wx515H/11.png;;;images
-;300Wx300H;/300Wx300H/11.png;$siteResource/images/300Wx300H/11.png;;;images
-;96Wx96H;/96Wx96H/11.png;$siteResource/images/96Wx96H/11.png;;;images
-;65Wx65H;/65Wx65H/11.png;$siteResource/images/65Wx65H/11.png;;;images
-;30Wx30H;/30Wx30H/11.png;$siteResource/images/30Wx30H/11.png;;;images
-
-;1200Wx1200H;/1200Wx1200H/12.png;$siteResource/images/1200Wx1200H/12.png;;;images
-;515Wx515H;/515Wx515H/12.png;$siteResource/images/515Wx515H/12.png;;;images
-;300Wx300H;/300Wx300H/12.png;$siteResource/images/300Wx300H/12.png;;;images
-;96Wx96H;/96Wx96H/12.png;$siteResource/images/96Wx96H/12.png;;;images
-;65Wx65H;/65Wx65H/12.png;$siteResource/images/65Wx65H/12.png;;;images
-;30Wx30H;/30Wx30H/12.png;$siteResource/images/30Wx30H/12.png;;;images
-
-;1200Wx1200H;/1200Wx1200H/13.png;$siteResource/images/1200Wx1200H/13.png;;;images
-;515Wx515H;/515Wx515H/13.png;$siteResource/images/515Wx515H/13.png;;;images
-;300Wx300H;/300Wx300H/13.png;$siteResource/images/300Wx300H/13.png;;;images
-;96Wx96H;/96Wx96H/13.png;$siteResource/images/96Wx96H/13.png;;;images
-;65Wx65H;/65Wx65H/13.png;$siteResource/images/65Wx65H/13.png;;;images
-;30Wx30H;/30Wx30H/13.png;$siteResource/images/30Wx30H/13.png;;;images
-
-;1200Wx1200H;/1200Wx1200H/14.png;$siteResource/images/1200Wx1200H/14.png;;;images
-;515Wx515H;/515Wx515H/14.png;$siteResource/images/515Wx515H/14.png;;;images
-;300Wx300H;/300Wx300H/14.png;$siteResource/images/300Wx300H/14.png;;;images
-;96Wx96H;/96Wx96H/14.png;$siteResource/images/96Wx96H/14.png;;;images
-;65Wx65H;/65Wx65H/14.png;$siteResource/images/65Wx65H/14.png;;;images
-;30Wx30H;/30Wx30H/14.png;$siteResource/images/30Wx30H/14.png;;;images
 
 #shaun
 ;1200Wx1200H;/1200Wx1200H/AC05080A.jpg;$siteResource/images/1200Wx1200H/AC05080A.jpg;;;images
@@ -279,11 +231,6 @@ INSERT_UPDATE Media;mediaFormat(qualifier);code[unique=true];@media[translator=d
 
 
 INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion
-;zhangyin;/1200Wx1200H/zhangyin.jpg,/515Wx515H/zhangyin.jpg,/300Wx300H/zhangyin.jpg,/96Wx96H/zhangyin.jpg,/65Wx65H/zhangyin.jpg,/30Wx30H/zhangyin.jpg;
-;Coenzyme Q10 98% HPLC;/1200Wx1200H/11.png,/515Wx515H/11.png,/300Wx300H/11.png,/96Wx96H/11.png,/65Wx65H/11.png,/30Wx30H/11.png;
-;Tribulus 90% UV THC FREE;/1200Wx1200H/12.png,/515Wx515H/12.png,/300Wx300H/12.png,/96Wx96H/12.png,/65Wx65H/12.png,/30Wx30H/12.png;
-;Vitamin C Powder;/1200Wx1200H/13.png,/515Wx515H/13.png,/300Wx300H/13.png,/96Wx96H/13.png,/65Wx65H/13.png,/30Wx30H/13.png;
-;Alpha Lipoic Acid;/1200Wx1200H/14.png,/515Wx515H/14.png,/300Wx300H/14.png,/96Wx96H/14.png,/65Wx65H/14.png,/30Wx30H/14.png;
 #shaun
 ;AC05080A;/1200Wx1200H/AC05080A.jpg,/515Wx515H/AC05080A.jpg,/300Wx300H/AC05080A.jpg,/96Wx96H/AC05080A.jpg,/65Wx65H/AC05080A.jpg,/30Wx30H/AC05080A.jpg;
 ;AC05080B;/1200Wx1200H/AC05080B.jpg,/515Wx515H/AC05080B.jpg,/300Wx300H/AC05080B.jpg,/96Wx96H/AC05080B.jpg,/65Wx65H/AC05080B.jpg,/30Wx30H/AC05080B.jpg;
@@ -300,10 +247,7 @@ INSERT_UPDATE MediaContainer;qualifier[unique=true];$medias;$catalogVersion
 #UPDATE Product;code[unique=true];$picture;$thumbnail;$detail;$others;$normal;$thumbnails;$galleryImages;$catalogVersion
 
 UPDATE Product;code[unique=true];$picture;$galleryImages;$catalogVersion
-#;AC05080;/96Wx96H/11.png;Coenzyme Q10 98% HPLC;
-#;AC03131;/96Wx96H/12.png;Tribulus 90% UV THC FREE;
-#;AC01361;/96Wx96H/13.png;Vitamin C Powder;
-#;AC01710;/96Wx96H/14.png;Alpha Lipoic Acid;
+
 #shaun
 ;AC05080a;/96Wx96H/AC05080A.jpg;AC05080A;
 ;AC05080b;/96Wx96H/AC05080B.jpg;AC05080B;
@@ -342,10 +286,7 @@ INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature5;
 
 
 UPDATE Product;code[unique=true];$approved;$catalogVersion;
-#;AC05080
-#;AC03131
-#;AC01361
-#;AC01710
+
 #shaun
 ;AC05080a
 ;AC05080b
@@ -360,10 +301,7 @@ UPDATE Product;code[unique=true];$approved;$catalogVersion;
 
 
 INSERT_UPDATE PriceRow;startTime[unique=true,dateformat=yyyy-MM-dd HH:mm:ss];endTime[unique=true,dateformat=yyyy-MM-dd HH:mm:ss];productId[unique=true];unit(code[unique=true,default=kg]);currency(isocode)[unique=true];price;minqtd;unitFactor;net
-#;2018-04-26 10:33:33;2021-04-27 10:33:33;AC05080;kg;USD;100;1;1;false
-#;2018-04-26 10:33:33;2021-04-27 10:33:33;AC03131;kg;USD;200;1;1;false
-#;2018-04-26 10:33:33;2021-04-27 10:33:33;AC01361;kg;USD;300;1;1;false
-#;2018-04-26 10:33:33;2021-04-27 10:33:33;AC01710;kg;USD;400;1;1;false
+
 #shaun
 ;2018-04-26 10:33:33;2021-04-27 10:33:33;AC05080a;kg;USD;198;1;1;false
 ;2018-04-26 10:33:33;2021-04-27 10:33:33;AC05080b;kg;USD;198;1;1;false
