@@ -238,23 +238,24 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                    CustomerCreditAccountModel customerCreditAccountModel = defaultCustomerCreditAccountService.getCustomerCreditAccount();
                    if (customerCreditAccountModel== null && paymentModeModel.getCode().equals("CreditPayment")) {
                 	   
-                	   CardTypeData cardTypeData = new CardTypeData();
-                	   
                 	   if(!paymentModeModel.getCode().equals("CreditPayment")){
+                		   
+                		   CardTypeData cardTypeData = new CardTypeData();
                 		   cardTypeData.setCode(paymentModeModel.getCode());
                            cardTypeData.setName(paymentModeModel.getName());
+                           cardTypeDataList.add(cardTypeData);
                 	   }
-                	   cardTypeDataList.add(cardTypeData);
+                	   
                       //信用账户为空就不存在data里
                    }else if (customerCreditAccountModel!=null&& CreditAccountStatusEnum.LOCKED.equals(customerCreditAccountModel.getStatus())){
                 	   
-                       CardTypeData cardTypeData = new CardTypeData();
-                	   
                 	   if(!paymentModeModel.getCode().equals("CreditPayment")){
+                		   CardTypeData cardTypeData = new CardTypeData();
                 		   cardTypeData.setCode(paymentModeModel.getCode());
                            cardTypeData.setName(paymentModeModel.getName());
+                           cardTypeDataList.add(cardTypeData);
                 	   }
-                	   cardTypeDataList.add(cardTypeData);
+                	   
 
                    }else{
                        CardTypeData cardTypeData = new CardTypeData();
