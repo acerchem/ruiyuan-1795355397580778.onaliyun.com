@@ -308,6 +308,7 @@ public class LoginPageController extends AbstractLoginPageController
 		
 		if(success)
 		{
+		    storeCmsPageInModel(model, getCmsPage());
 			return ControllerConstants.Views.Pages.Account.AccountRegisterSuccessPage;
 		}
 		else
