@@ -87,41 +87,41 @@ INSERT_UPDATE ProductReference;source(code,$catalogVersion)[unique=true];target(
 INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];reserved;avaPreOrderReleaseDay;preOrderReleaseDay
 
 #shaun
-;200;Neele-vat;notSpecified;10;0;0;0;AC05080a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;0;AC05080b;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;0;AC03390a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;0;AC03138a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;0;AC03887a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;0;AC03142a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;0;AC02345a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;0;AC02354a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;0;AC05003a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;0;AC02090a;0;20;50
+;200;Neele-vat;notSpecified;10;0;0;100;AC05080a;0;20;50
+;200;Neele-vat;notSpecified;10;0;0;100;AC05080b;0;20;50
+;200;Neele-vat;notSpecified;10;0;0;100;AC03390a;0;20;50
+;200;Neele-vat;notSpecified;10;0;0;100;AC03138a;0;20;50
+;200;Neele-vat;notSpecified;10;0;0;100;AC03887a;0;20;50
+;200;Neele-vat;notSpecified;10;0;0;100;AC03142a;0;20;50
+;200;Neele-vat;notSpecified;10;0;0;100;AC02345a;0;20;50
+;200;Neele-vat;notSpecified;10;0;0;100;AC02354a;0;20;50
+;200;Neele-vat;notSpecified;10;0;0;100;AC05003a;0;20;50
+;200;Neele-vat;notSpecified;10;0;0;100;AC02090a;0;20;50
 
 
 #shaun
-;300;UK;notSpecified;10;0;0;0;AC05080a;0;20;50
-;300;UK;notSpecified;10;0;0;0;AC05080b;0;20;50
-;300;UK;notSpecified;10;0;0;0;AC03390a;0;20;50
-;300;UK;notSpecified;10;0;0;0;AC03138a;0;20;50
-;300;UK;notSpecified;10;0;0;0;AC03887a;0;20;50
-;300;UK;notSpecified;10;0;0;0;AC03142a;0;20;50
-;300;UK;notSpecified;10;0;0;0;AC02345a;0;20;50
-;300;UK;notSpecified;10;0;0;0;AC02354a;0;20;50
-;300;UK;notSpecified;10;0;0;0;AC05003a;0;20;50
-;300;UK;notSpecified;10;0;0;0;AC02090a;0;20;50
+;300;UK;notSpecified;10;0;0;100;AC05080a;0;20;50
+;300;UK;notSpecified;10;0;0;100;AC05080b;0;20;50
+;300;UK;notSpecified;10;0;0;100;AC03390a;0;20;50
+;300;UK;notSpecified;10;0;0;100;AC03138a;0;20;50
+;300;UK;notSpecified;10;0;0;100;AC03887a;0;20;50
+;300;UK;notSpecified;10;0;0;100;AC03142a;0;20;50
+;300;UK;notSpecified;10;0;0;100;AC02345a;0;20;50
+;300;UK;notSpecified;10;0;0;100;AC02354a;0;20;50
+;300;UK;notSpecified;10;0;0;100;AC05003a;0;20;50
+;300;UK;notSpecified;10;0;0;100;AC02090a;0;20;50
 
 #shaun
-;300;Europe;notSpecified;10;0;0;0;AC05080a;0;20;50
-;300;Europe;notSpecified;10;0;0;0;AC05080b;0;20;50
-;300;Europe;notSpecified;10;0;0;0;AC03390a;0;20;50
-;300;Europe;notSpecified;10;0;0;0;AC03138a;0;20;50
-;300;Europe;notSpecified;10;0;0;0;AC03887a;0;20;50
-;300;Europe;notSpecified;10;0;0;0;AC03142a;0;20;50
-;300;Europe;notSpecified;10;0;0;0;AC02345a;0;20;50
-;300;Europe;notSpecified;10;0;0;0;AC02354a;0;20;50
-;300;Europe;notSpecified;10;0;0;0;AC05003a;0;20;50
-;300;Europe;notSpecified;10;0;0;0;AC02090a;0;20;50
+;300;Europe;notSpecified;10;0;0;100;AC05080a;0;20;50
+;300;Europe;notSpecified;10;0;0;100;AC05080b;0;20;50
+;300;Europe;notSpecified;10;0;0;100;AC03390a;0;20;50
+;300;Europe;notSpecified;10;0;0;100;AC03138a;0;20;50
+;300;Europe;notSpecified;10;0;0;100;AC03887a;0;20;50
+;300;Europe;notSpecified;10;0;0;100;AC03142a;0;20;50
+;300;Europe;notSpecified;10;0;0;100;AC02345a;0;20;50
+;300;Europe;notSpecified;10;0;0;100;AC02354a;0;20;50
+;300;Europe;notSpecified;10;0;0;100;AC05003a;0;20;50
+;300;Europe;notSpecified;10;0;0;100;AC02090a;0;20;50
 
  
 UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehouse(code));vendors(code)
