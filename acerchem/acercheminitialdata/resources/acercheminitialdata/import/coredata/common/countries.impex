@@ -351,6 +351,13 @@ INSERT_UPDATE Region;country(isocode);isocode[unique=true];isocodeShort;name[lan
 ;IT;IT-QCS;QCS;"Cosenza"
 ;IT;IT-CRV;CRV;"Crotone"
 ;IT;IT-CUN;CUN;"Cuneo"
+;IT;IT-FRR;FRR;"Ferrara"
+;IT;IT-FLR;FLR;"Firenze"
+;IT;IT-FOG;FOG;"Foggia"
+;IT;IT-CAX;CAX;"Genova"
+;IT;IT-ISE;ISE;"Isernia"
+;IT;IT-LAQ;LAQ;"L&apos,Aquila"
+;IT;IT-SPE;SPE;"La Spezia"
 
 #shaun
 
