@@ -258,4 +258,37 @@
 		<property name="consignmentEntries" type="java.util.List&lt;de.hybris.platform.commercefacades.order.data.ConsignmentEntryData>" />
 		<property name="totalWeight" type="Integer"/>
 	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.order.data.OrderDetailsReportData">
+		<property name="currency" type="String"/>
+		<property name="country" type="String"/>
+		<property name="area" type="String"/>
+		<property name="orderCode" type="String"/>
+		<property name="orderTime" type="java.util.Date"/>
+		<property name="productName" type="String"/>
+		<property name="productQuantity" type="java.lang.Long"/>
+		<property name="orderAmount" type="java.lang.Double"/>
+		<property name="userUid" type="String"/>
+		<property name="deliveryAddress" type="de.hybris.platform.commercefacades.user.data.AddressData"/>
+		<property name="salesman" type="String"/>
+		<property name="supplier" type="String"/>
+	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.order.data.MonthlySalesAnalysis">
+		<property name="country" type="String"/>
+		<property name="januaryAmount" type="java.lang.Double"/>
+		<property name="februaryAmount" type="java.lang.Double"/>
+		<property name="marchAmount" type="java.lang.Double"/>
+		<property name="aprllAmount" type="java.lang.Double"/>
+		<property name="mayAmount" type="java.lang.Double"/>
+		<property name="juneAmount" type="java.lang.Double"/>
+		<property name="julyAmount" type="java.lang.Double"/>
+		<property name="augustAmount" type="java.lang.Double"/>
+		<property name="septemberAmount" type="java.lang.Double"/>
+		<property name="octoberAmount" type="java.lang.Double"/>
+		<property name="novemberAmount" type="java.lang.Double"/>
+		<property name="decemberAmount" type="java.lang.Double"/>
+	</bean>
+	
+	
 </beans>
