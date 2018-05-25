@@ -817,15 +817,19 @@
 					</attribute>
 				</attributes>
 			</itemtype>
-
-			<itemtype code="Customer" autocreate="false" generate="false">
+            
+            <itemtype code="User" autocreate="false" generate="false">
 				<attributes>
 					<attribute qualifier="area" type="CustomerArea">
 						<description>用户区域</description>
-						<modifiers read="true" write="true" search="true"
-							optional="true" />
+						<modifiers read="true" write="true" search="true" optional="true" />
 						<persistence type="property" />
 					</attribute>
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="Customer" autocreate="false" generate="false">
+				<attributes>
                     <attribute qualifier="companyName" type="java.lang.String">
 						<modifiers read="true" write="true" search="true"
 							optional="true" />
