@@ -252,7 +252,7 @@ $(document).ready(function(){
 			
 			invi = $('.invernum .inventory i');
 			
-			emvi = $('.prod-sum i em')
+			emvi = $('.prod-sum .delintro em')
 			
 			cnvi = $('.delivery span em')
 			
@@ -276,12 +276,15 @@ $(document).ready(function(){
 				invi.text(futureInventory);
 				
 				var fdate = "Delivery after " +futureAvailableDate+" days";
+				emvi.text("");
 				emvi.text(fdate);
 			} else {
 				
 				invi.text($("#inventoryId option[value='"+$("#storeMulId").val()+"']").text());
 				
 				var Adate = "Delivery within " +$("#avaReleaseDayId option[value='"+$("#storeMulId").val()+"']").text()+" days";
+				
+				emvi.text("");
 				
 				emvi.text(Adate);
 			}
