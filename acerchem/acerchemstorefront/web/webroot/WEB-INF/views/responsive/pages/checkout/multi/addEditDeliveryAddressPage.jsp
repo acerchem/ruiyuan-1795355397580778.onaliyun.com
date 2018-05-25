@@ -387,10 +387,10 @@
 						<div class="datewrap">
 			 	 		<div class="date-item">
 				 	 		<span class="d-titls">Date:</span>
-							<div class='input-group date' id='strdate'>
+							<div class='input-group date' id='strdate' date-mindate="2018-05-28" date-maxdate="2018-05-30">
 							 <c:choose>
 							<c:when test="${cartData.pickUpdate eq null}"> 
-							    <input type='text' class="form-control2"  id="textDate" /> 
+							    <input type='text' class="form-control2  sd"  id="textDate" /> 
 							      </c:when> 
 		                      <c:otherwise>
 		                      <input type='text' class="form-control2" value ="${cartData.pickUpdate}" id="textDate" />
@@ -924,8 +924,14 @@ $("#dateBtn").on('click',function(){
 
  // 时间控件
 $(document).ready(function() {
+	var sdate = $('#strdate').attr('date-mindate'),
+        edatd = $('#strdate').attr('date-maxdate');
+
      $('#strdate').datetimepicker({
-    	format: 'YYYY-MM-DD'
+    	format: 'YYYY-MM-DD',
+    	defaultDate: sdate,
+        minDate: sdate,
+        maxDate:edatd,
     	
     }).on('dp.change',function(e){
     	

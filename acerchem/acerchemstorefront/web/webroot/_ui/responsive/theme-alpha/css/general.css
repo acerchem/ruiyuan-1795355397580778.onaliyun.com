@@ -3169,6 +3169,14 @@ display: inline-table;
 	text-align: center;
 	padding:0;
 } 
+.g-table .dropdown-menu .disabled{
+	color: #aaa;
+}
+.g-table .dropdown-menu .disabled:hover{
+	cursor: not-allowed;
+	background: transparent;
+	color: #aaa;
+}
 
 .g-table .dropdown-menu td:hover,.g-table .dropdown-menu .active{
 	background: #096735;
