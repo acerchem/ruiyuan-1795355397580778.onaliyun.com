@@ -387,7 +387,7 @@
 						<div class="datewrap">
 			 	 		<div class="date-item">
 				 	 		<span class="d-titls">Date:</span>
-							<div class='input-group date' id='strdate' date-mindate="2018-05-28" date-maxdate="2018-05-30">
+							<div class='input-group date' id='strdate'>
 							 <c:choose>
 							<c:when test="${cartData.pickUpdate eq null}"> 
 							    <input type='text' class="form-control2  sd"  id="textDate" /> 
@@ -924,27 +924,43 @@ $("#dateBtn").on('click',function(){
 
  // 时间控件
 $(document).ready(function() {
-	var sdate = $('#strdate').attr('date-mindate'),
-        edatd = $('#strdate').attr('date-maxdate');
+	
+	
+	var date = new Date();//没有传入值时,默认是当前日期
+	 // alert(date.getMonth().toString().length);
+	  if (date.getMonth().toString().length <2){
+		  date = date.getFullYear() + '-0' + (date.getMonth() + 1) + '-' + date.getDate();
+	  } else {
+		  date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+	  }
+	  
+	  date = dateChange(1,date);
+	  
+	  var endDate = '2018-12-31';
+	  
+	  var isFuture = ${cartData.isUseFutureStock};
+	  
+	if(isFuture){
+		var sdate = dateChange(${cartData.deliveryDays},date),
+        edatd = endDate;
+   	 		
+   	 	}else {
+   	 		
+   	 	var sdate = date,
+        edatd = dateChange(${cartData.deliveryDays},date);
+   	 	}
+	
+	
 
      $('#strdate').datetimepicker({
     	format: 'YYYY-MM-DD',
-    	defaultDate: sdate,
+    	//defaultDate: sdate,
         minDate: sdate,
         maxDate:edatd,
     	
     }).on('dp.change',function(e){
     	
-    	  date = new Date();//没有传入值时,默认是当前日期
-    	 // alert(date.getMonth().toString().length);
-    	  if (date.getMonth().toString().length <2){
-    		  date = date.getFullYear() + '-0' + (date.getMonth() + 1) + '-' + date.getDate();
-    	  } else {
-    		  date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-    	  }
-    	  
-    	  
-    	
+    	 
          var selectDate=$("#textDate").val();
          
     	 if (new Date(date).getTime()==new Date(selectDate).getTime()){
@@ -956,11 +972,11 @@ $(document).ready(function() {
    	 	
    	 	var releaseDate = dateChange(${cartData.deliveryDays},currDate);
    	 	
-   	 	var isFuture = ${cartData.isUseFutureStock};
+   	 	/* var isFuture = ${cartData.isUseFutureStock}; */
    	 	
    	 	//var myBoolean=new Boolean(true);
    	 	
-   	 	if(isFuture){
+   	 	/* if(isFuture){
    	 		
    	 		if (new Date(selectDate).getTime()<new Date(releaseDate).getTime()){
    	 			alert("please select after "+${cartData.deliveryDays}+" pickup date");
@@ -973,7 +989,7 @@ $(document).ready(function() {
    	 			
    	 			return false;
    	 		}
-   	 	}
+   	 	} */
    	 	
    	 	 window.location.href ='<c:url value='/checkout/multi/delivery-address/addPickUpDate?pickUpDate='/>'+selectDate;
    	    	 
