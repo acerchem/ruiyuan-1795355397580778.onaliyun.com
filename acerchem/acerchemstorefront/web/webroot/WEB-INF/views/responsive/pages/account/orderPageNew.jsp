@@ -162,7 +162,18 @@
 								</span>
                                     </div>
                                 </td>
-                                <td><format:price priceData="${orderEntries.product.promotionPrice}" displayFreeForZero="true" /></td>
+                                
+                                <c:choose>
+									<c:when test="${not empty orderEntries.product.promotionPrice}">
+									<td><b><format:price priceData="${orderEntries.product.promotionPrice}" displayFreeForZero="true"/></b></td>
+									</c:when>
+									
+									<c:otherwise>
+									<td><b><format:price priceData="${orderEntries.product.price}" displayFreeForZero="true"/></b></td>
+									</c:otherwise>
+								</c:choose>
+                                
+                                <%-- <td><format:price priceData="${orderEntries.product.promotionPrice}" displayFreeForZero="true" /></td> --%>
                                 <td>${orderEntries.quantity*orderEntries.product.netWeight}${orderEntries.product.unitName}</td>
                                 <td>
                                         ${fn:escapeXml(orderEntries.product.code)}
