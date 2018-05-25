@@ -129,32 +129,35 @@ public class AddToCartController extends AbstractController
 
 					String availableDate = form.getAvailableDate();
 					final CartModificationData cartModification = acerchemCartFacade.addToCart(code, qty,isUseFutureStock,storeId,availableDate);
-					model.addAttribute(QUANTITY_ATTR, Long.valueOf(cartModification.getQuantityAdded()));
-					model.addAttribute("entry", cartModification.getEntry());
-					model.addAttribute("cartCode", cartModification.getCartCode());
-					model.addAttribute("isQuote", cartFacade.getSessionCart().getQuoteData() != null ? Boolean.TRUE : Boolean.FALSE);
-					
-					java.text.DecimalFormat   df   =new   java.text.DecimalFormat("#.00");  
-					
-					// 获得币种符号
-					String currencyIso = cartModification.getEntry().getBasePrice().getCurrencyIso();
-					
-					String suffix = "";
-					if (currencyIso.equalsIgnoreCase("USD")){
-						suffix="$";
-					}
-					 
-					model.addAttribute("cartEntryPrice",suffix+df.format(acerchemCartFacade.getAddToCartPrice(cartModification.getEntry(),qty)));
+				
 
 					if (cartModification.getStatusCode().equalsIgnoreCase(CommerceCartModificationStatus.MAX_ORDER_QUANTITY_EXCEEDED))
 					{
 						model.addAttribute(ERROR_MSG_TYPE, "basket.information.quantity.noItemsAdded." + cartModification.getStatusCode());
 					}
 
-					if (cartModification.getQuantityAdded() < qty)
+					else if (cartModification.getStatusCode().equalsIgnoreCase(CommerceCartModificationStatus.NO_STOCK))
 					{
 						model.addAttribute(ERROR_MSG_TYPE,
 								"basket.information.quantity.reducedNumberOfItemsAdded." + cartModification.getStatusCode());
+					} else {
+						
+						model.addAttribute(QUANTITY_ATTR, Long.valueOf(cartModification.getQuantityAdded()));
+						model.addAttribute("entry", cartModification.getEntry());
+						model.addAttribute("cartCode", cartModification.getCartCode());
+						model.addAttribute("isQuote", cartFacade.getSessionCart().getQuoteData() != null ? Boolean.TRUE : Boolean.FALSE);
+						
+						java.text.DecimalFormat   df   =new   java.text.DecimalFormat("#.00");  
+						
+						// 获得币种符号
+						String currencyIso = cartModification.getEntry().getBasePrice().getCurrencyIso();
+						
+						String suffix = "";
+						if (currencyIso.equalsIgnoreCase("USD")){
+							suffix="$";
+						}
+						 
+						model.addAttribute("cartEntryPrice",suffix+df.format(acerchemCartFacade.getAddToCartPrice(cartModification.getEntry(),qty)));
 					}
 				}
 				catch (final CommerceCartModificationException ex)

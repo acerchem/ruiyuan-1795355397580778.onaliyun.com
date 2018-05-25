@@ -76,19 +76,39 @@ public class DefaultAcerchemCommerceAddToCartStrategy extends DefaultCommerceAdd
             final Integer maxOrderQuantity = productModel.getMaxOrderQuantity();
             final long cartLevel = checkCartLevel(productModel, cartModel, deliveryPointOfService);
             final long cartLevelAfterQuantityChange = actualAllowedQuantityChange + cartLevel;
+            
+            final Integer minOrderQuantity = productModel.getMinOrderQuantity();
+            long diffQuantity = 0;
+            
+            if (isMinOrderQuantitySet(minOrderQuantity))
+			{
+				diffQuantity = cartLevelAfterQuantityChange - minOrderQuantity.longValue();
+
+			}
 
             if (actualAllowedQuantityChange > 0)
             {
-                // We are allowed to add items to the cart
-                final CartEntryModel entryModel = addCartEntry(parameter, actualAllowedQuantityChange);
-                entryModel.setIsUseFutureStock(parameter.getIsUseFutureStock());
-                entryModel.setAvailableDate(parameter.getAvailableDate());
-                getModelService().save(entryModel);
+              
 
-                final String statusCode = getStatusCodeAllowedQuantityChange(actualAllowedQuantityChange, maxOrderQuantity,
-                        quantityToAdd, cartLevelAfterQuantityChange);
+              /*  final String statusCode = getStatusCodeAllowedQuantityChange(actualAllowedQuantityChange, maxOrderQuantity,
+                        quantityToAdd, cartLevelAfterQuantityChange);*/
+                
+                final String statusCode = getStatusCodeDiffQuantityChange(diffQuantity);
+                
+                if (statusCode.equalsIgnoreCase(CommerceCartModificationStatus.MAX_ORDER_QUANTITY_EXCEEDED)){
+                	 modification = createAddToCartResp(parameter, statusCode, createEmptyCartEntry(parameter), 0);
+                } else{
+                	
+                	  // We are allowed to add items to the cart
+                    final CartEntryModel entryModel = addCartEntry(parameter, actualAllowedQuantityChange);
+                    entryModel.setIsUseFutureStock(parameter.getIsUseFutureStock());
+                    entryModel.setAvailableDate(parameter.getAvailableDate());
+                    getModelService().save(entryModel);
+                    
+                	modification = createAddToCartResp(parameter, statusCode, entryModel, actualAllowedQuantityChange);
+                }
 
-                modification = createAddToCartResp(parameter, statusCode, entryModel, actualAllowedQuantityChange);
+                
             }
             else
             {
@@ -108,6 +128,26 @@ public class DefaultAcerchemCommerceAddToCartStrategy extends DefaultCommerceAdd
 
         return modification;
     }
+    
+    protected boolean isMinOrderQuantitySet(final Integer minOrderQuantity)
+	{
+		return minOrderQuantity != null;
+	}
+    
+    
+	protected String getStatusCodeDiffQuantityChange(final long diffQuantity)
+	{
+		// Are we able to add the quantity we requested?
+		if (diffQuantity < 0)
+		{
+			return CommerceCartModificationStatus.MAX_ORDER_QUANTITY_EXCEEDED;
+		}
+		else
+		{
+			return CommerceCartModificationStatus.SUCCESS;
+		}
+
+	}
 
     /**
      * Work out the allowed quantity adjustment for a product in the cart given a requested quantity change.
