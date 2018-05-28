@@ -108,7 +108,7 @@ p.western {
     </tr>
     <tr>
       <td>The Seller: ACERCHEM UK LTD</td>
-      <td>The Buyer: ${ctx.customer.name} </td>
+      <td>The Buyer: $!{ctx.customer.companyName} </td>
     </tr>
     
     <tr>
@@ -190,7 +190,7 @@ p.western {
           <td>
             3.Deliver from: $!{ctx.warehouse} to: 
 			#if(${ctx.deliveryMode} == "DDP")
-				$!{ctx.order.deliveryAddress.formattedAddress}
+				$!{ctx.toShip}
 			#end
           </td>
         </tr>

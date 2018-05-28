@@ -44,11 +44,13 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 	private CustomerModel customerModel;
 
 	private String moneyToWords;
-	
+
 	private String contactUser;
 	private String contactMobile;
-	
+
 	private String deliveryMode;
+
+	private String toShip;
 
 	@Override
 	public void init(final OrderProcessModel orderProcessModel, final EmailPageModel emailPageModel) {
@@ -68,20 +70,20 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 		initPaymentTerms(orderProcessModel);
 
 		customerModel = getCustomer(orderProcessModel);
-		
-		 initDeliveryMode();
+
+		initDeliveryMode();
 
 	}
-	
-	//统一对模式处理为英文
-	private void initDeliveryMode(){
+
+	// 统一对模式处理为英文
+	private void initDeliveryMode() {
 		final String deliveryCode = orderData.getDeliveryMode() == null ? "" : orderData.getDeliveryMode().getCode();
-		if(deliveryCode.equals("DELIVERY_GROSS")){
-			setDeliveryMode("DDP"); 
-		}else if(deliveryCode.equals("DELIVERY_MENTION")){
-			setDeliveryMode("FCA"); 
-		}else{
-			setDeliveryMode("DDP"); //默认DDP
+		if (deliveryCode.equals("DELIVERY_GROSS")) {
+			setDeliveryMode("DDP");
+		} else if (deliveryCode.equals("DELIVERY_MENTION")) {
+			setDeliveryMode("FCA");
+		} else {
+			setDeliveryMode("DDP"); // 默认DDP
 		}
 	}
 
@@ -131,10 +133,11 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 		if (customer != null) {
 			final Collection<AddressModel> addrs = customer.getAddresses();
 			address = AcerChemEmailContextUtils.getCustomerContactAddress(addrs);
-			
-			//增加contact 电话
-			final CustomerContactAddressOfEmailData objCustomAddress = AcerChemEmailContextUtils.getCustomerContactAddressData(addrs);
-			
+
+			// 增加contact 电话
+			final CustomerContactAddressOfEmailData objCustomAddress = AcerChemEmailContextUtils
+					.getCustomerContactAddressData(addrs);
+
 			setContactMobile(objCustomAddress.getContactPhone());
 			setContactUser(objCustomAddress.getContactUser());
 		}
@@ -157,7 +160,7 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 		final List<OrderEntryData> orderEntries = orderData.getEntries();
 
 		long quantity = 0;
-		long sumTotalWeight=0;
+		long sumTotalWeight = 0;
 		if (CollectionUtils.isNotEmpty(orderEntries)) {
 			for (final OrderEntryData orderEntry : orderEntries) {
 
@@ -188,36 +191,42 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 
 				// pie.setPackageWeight( quantity + packageType)
 				pie.setPackageWeight(longQuantity + "/" + StringUtils.defaultString(product.getPackageType()));
-//				if (StringUtils.isNotBlank(product.getPackageWeight())) {
-//					//计算包裹重量,圆整为整数
-//					double entryPackageWeight=0;
-//					if (AcerChemEmailContextUtils.isNumber(product.getPackageWeight())){
-//						final double perPackageWeight = Double.valueOf(product.getPackageWeight());
-//						entryPackageWeight = perPackageWeight * longQuantity;
-//					}
-//					
-//					pie.setPackageWeight(Math.round(entryPackageWeight) + "/" + product.getPackageType());
-//				} else {
-//					pie.setPackageWeight("");
-//				}
+				// if (StringUtils.isNotBlank(product.getPackageWeight())) {
+				// //计算包裹重量,圆整为整数
+				// double entryPackageWeight=0;
+				// if
+				// (AcerChemEmailContextUtils.isNumber(product.getPackageWeight())){
+				// final double perPackageWeight =
+				// Double.valueOf(product.getPackageWeight());
+				// entryPackageWeight = perPackageWeight * longQuantity;
+				// }
+				//
+				// pie.setPackageWeight(Math.round(entryPackageWeight) + "/" +
+				// product.getPackageType());
+				// } else {
+				// pie.setPackageWeight("");
+				// }
 
 				pie.setTotal(false);
-				
-				//增加单位总重量
-				final long pWeight =orderEntry.getTotalWeight()==null?0:orderEntry.getTotalWeight();
+
+				// 增加单位总重量
+				final long pWeight = orderEntry.getTotalWeight() == null ? 0 : orderEntry.getTotalWeight();
 				pie.setTotalWeight(String.valueOf(pWeight));
 
 				quantity += orderEntry.getQuantity();
 				sumTotalWeight += pWeight;
 				list.add(pie);
 
-				// warehouse
+				// warehouse-》改为所在城市
 				if (StringUtils.isBlank(warehouse)) {
 					// String warehouseCode = orderEntry.getWarehouseCode();
 					final PointOfServiceData pos = orderEntry.getDeliveryPointOfService();
 					if (pos != null) {
 
-						setWarehouse(StringUtils.defaultString(pos.getName(), "&nbsp;"));
+						if (pos.getAddress() != null && pos.getAddress().getRegion() != null) {
+
+							setWarehouse(StringUtils.defaultString(pos.getAddress().getRegion().getName(), "&nbsp;"));
+						}
 
 					}
 
@@ -232,7 +241,7 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 
 		String totalPriceStr = "0.00";
 		final ProductTotalDataOfEmail totalData = new ProductTotalDataOfEmail();
-		//totalData.setQuantity(String.valueOf(quantity));
+		// totalData.setQuantity(String.valueOf(quantity));
 		totalData.setQuantity(String.valueOf(sumTotalWeight));
 		final PriceData totalPrice = orderData.getTotalPrice();
 		if (totalPrice != null) {
@@ -332,7 +341,17 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 	public void setDeliveryMode(final String deliveryMode) {
 		this.deliveryMode = deliveryMode;
 	}
-	
-	
+
+	public String getToShip() {
+		String name = "";
+		if (orderData.getDeliveryAddress() != null && orderData.getDeliveryAddress().getCountry() != null) {
+			name = orderData.getDeliveryAddress().getCountry().getName();
+		}
+		return name;
+	}
+
+	public void setToShip(final String toShip) {
+		this.toShip = toShip;
+	}
 
 }

@@ -272,8 +272,9 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 
 							if (entryData != null) {
 								final PointOfServiceData pos = entryData.getDeliveryPointOfService();
-								if (pos != null) {
-									setWarehouse(StringUtils.defaultString(pos.getName(), "&nbsp;"));
+								if (pos.getAddress() != null && pos.getAddress().getRegion() != null) {
+
+									setWarehouse(StringUtils.defaultString(pos.getAddress().getRegion().getName(), "&nbsp;"));
 								}
 							}
 						}
@@ -358,8 +359,9 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 			if (CollectionUtils.isNotEmpty(orderEntries)) {
 				for (final OrderEntryData orderEntry : orderEntries) {
 					final PointOfServiceData pos = orderEntry.getDeliveryPointOfService();
-					if (pos != null) {
-						setWarehouse(StringUtils.defaultString(pos.getName(), "&nbsp;"));
+					if (pos.getAddress() != null && pos.getAddress().getRegion() != null) {
+
+						setWarehouse(StringUtils.defaultString(pos.getAddress().getRegion().getName(), "&nbsp;"));
 						break;
 					}
 				}
@@ -537,7 +539,9 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 		String shipto = "";
 
 		if (getDeliveryCode().equals("DELIVERY_GROSS")) {// 配送 DELIVERY_GROSS
-			shipto = orderData.getDeliveryAddress().getFormattedAddress();
+			if(orderData.getDeliveryAddress() !=null && orderData.getDeliveryAddress().getCountry()!=null){
+			shipto = orderData.getDeliveryAddress().getCountry().getName();
+			}
 		} else {// 自提 DELIVERY_MENTION
 			shipto = "&nbsp;&nbsp;&nbsp;&nbsp;";
 		}
