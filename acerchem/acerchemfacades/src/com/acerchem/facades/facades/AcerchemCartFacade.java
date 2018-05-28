@@ -4,8 +4,11 @@ package com.acerchem.facades.facades;
 import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.commercefacades.order.data.CartModificationData;
 import de.hybris.platform.commercefacades.order.data.OrderEntryData;
+import de.hybris.platform.commercefacades.product.data.PriceData;
+import de.hybris.platform.commercefacades.product.data.PriceDataType;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.util.Date;
 
@@ -36,4 +39,6 @@ public interface AcerchemCartFacade {
     double getAddToCartPrice(OrderEntryData orderEntryData, Long qty);
     
     CartData getSessionCartWithEntryOrdering(boolean recentlyAddedFirst);
+    
+    PriceData createPrice(PriceDataType priceType, BigDecimal value, String currencyIso);
 }

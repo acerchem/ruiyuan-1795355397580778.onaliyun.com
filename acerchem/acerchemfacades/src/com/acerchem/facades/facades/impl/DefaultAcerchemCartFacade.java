@@ -214,5 +214,12 @@ public class DefaultAcerchemCartFacade extends DefaultCartFacade implements Acer
 		}
 		return createEmptyCart();
 	}
+
+
+	@Override
+	public PriceData createPrice(PriceDataType priceType, BigDecimal value, String currencyIso) {
+		
+		return  getPriceDataFactory().create(PriceDataType.BUY, value, currencyIso);
+	}
 }
 

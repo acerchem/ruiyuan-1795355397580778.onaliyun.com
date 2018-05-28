@@ -97,12 +97,12 @@
 		                <c:when test="${modifications ne null}">
 		                   
 		                        <span>Total (<em>${modifications.quantityAdded}</em> items)</span>
-                                <span class="row total">${cartEntryPrice}</span>
+                                <span class="row total"><format:fromPrice priceData="${modifications.entry.basePrice}"/></span>
 		                </c:when>
 		                <c:otherwise>
 		
 		                   <span>Total (<em>${quantity}</em> items)</span>
-		                   <span class="row total">${cartEntryPrice}</span>
+		                   <span class="row total"><format:fromPrice priceData="${entry.basePrice}"/></span>
 		                </c:otherwise>
 		            </c:choose>
 						

@@ -29,6 +29,8 @@ import de.hybris.platform.commercefacades.order.data.DeliveryModeData;
 import de.hybris.platform.commercefacades.order.data.OrderEntryData;
 import de.hybris.platform.commercefacades.product.ProductFacade;
 import de.hybris.platform.commercefacades.product.ProductOption;
+import de.hybris.platform.commercefacades.product.data.PriceData;
+import de.hybris.platform.commercefacades.product.data.PriceDataType;
 import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationStatus;
@@ -52,6 +54,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+
+import java.math.BigDecimal;
 import java.util.*;
 
 
@@ -143,11 +147,17 @@ public class AddToCartController extends AbstractController
 					} else {
 						
 						model.addAttribute(QUANTITY_ATTR, Long.valueOf(cartModification.getQuantityAdded()));
+						
+						double val = acerchemCartFacade.getAddToCartPrice(cartModification.getEntry(),qty);
+						PriceData cartEntryPrice = acerchemCartFacade.createPrice(PriceDataType.BUY, BigDecimal.valueOf(val),
+								cartModification.getEntry().getBasePrice().getCurrencyIso());
+						
+						cartModification.getEntry().setBasePrice(cartEntryPrice);
 						model.addAttribute("entry", cartModification.getEntry());
 						model.addAttribute("cartCode", cartModification.getCartCode());
 						model.addAttribute("isQuote", cartFacade.getSessionCart().getQuoteData() != null ? Boolean.TRUE : Boolean.FALSE);
 						
-						java.text.DecimalFormat   df   =new   java.text.DecimalFormat("#.00");  
+						/*java.text.DecimalFormat   df   =new   java.text.DecimalFormat("#.00");  
 						
 						// 获得币种符号
 						String currencyIso = cartModification.getEntry().getBasePrice().getCurrencyIso();
@@ -155,10 +165,13 @@ public class AddToCartController extends AbstractController
 						String suffix = "";
 						if (currencyIso.equalsIgnoreCase("USD")){
 							suffix="$";
-						}
+						}*/
+						
+						
+				   	}
 						 
-						model.addAttribute("cartEntryPrice",suffix+df.format(acerchemCartFacade.getAddToCartPrice(cartModification.getEntry(),qty)));
-					}
+						//model.addAttribute("cartEntryPrice",suffix+df.format(acerchemCartFacade.getAddToCartPrice(cartModification.getEntry(),qty)));
+					
 				}
 				catch (final CommerceCartModificationException ex)
 				{
