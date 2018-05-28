@@ -254,10 +254,10 @@
 							<div class='input-group date' id='strdate'>
 							 <c:choose>
 							<c:when test="${cartData.pickUpdate eq null}"> 
-							    <input type='text' class="form-control2"  id="textDate" /> 
+							    <input type='text' class="form-control2"  id="textdate" /> 
 							      </c:when> 
 		                      <c:otherwise>
-		                      <input type='text' class="form-control2" value ="${cartData.pickUpdate}" id="textDate" /> 
+		                      <input type='text' class="form-control2" value ="${cartData.pickUpdate}" id="textdate" /> 
 		                        </c:otherwise>
 		                      </c:choose>
 							    <span class="input-group-addon">
@@ -742,37 +742,6 @@ checktot()
 
 
 
-$('#textDate').on('change',function(){
-	
-	var date = new Date();
-	var currDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-	
-	var releaseDate = dateChange(${cartData.deliveryDays},currDate);
-	var selectDate = $('#textDate').val();
-	
-	var isFuture = ${cartData.isUseFutureStock};
-	
-	//var myBoolean=new Boolean(true);
-	
-	if(isFuture){
-		
-		if (new Date(selectDate).getTime()<new Date(releaseDate).getTime()){
-			alert("please select after "+${cartData.deliveryDays}+" pickup date");
-			
-			return false;
-		}
-	}else {
-		if (new Date(selectDate).getTime()>new Date(releaseDate).getTime()){
-			alert("please select within "+${cartData.deliveryDays}+" pickup date");
-			
-			return false;
-		}
-	}
-	
-	 window.location.href ='<c:url value='/checkout/multi/delivery-address/addPickUpDate?pickUpDate='/>'+selectDate;
-	
-});
-
 $(document).ready(function() {
     $('input[type=radio][name=addbook]').change(function() {
     	
@@ -808,11 +777,63 @@ $(document).ready(function() {
     });
 });
 
-//时间控件
+
+// 时间控件
 $(document).ready(function() {
+	
+	
+	var date = new Date();//没有传入值时,默认是当前日期
+	 // alert(date.getMonth().toString().length);
+	  if (date.getMonth().toString().length <2){
+		  date = date.getFullYear() + '-0' + (date.getMonth() + 1) + '-' + date.getDate();
+	  } else {
+		  date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+	  }
+	  
+	  date = dateChange(1,date);
+	  
+	  var endDate = '2018-12-31';
+	  
+	  var isFuture = ${cartData.isUseFutureStock};
+	  
+	if(isFuture){
+		var sdate = dateChange(${cartData.deliveryDays},date),
+       edatd = endDate;
+  	 		
+  	 	}else {
+  	 		
+  	 	var sdate = date,
+       edatd = dateChange(${cartData.deliveryDays},date);
+  	 	}
+	
     $('#strdate').datetimepicker({
-    	format: 'DD/MM/YYYY'
-    });
+   	format: 'YYYY-MM-DD',
+   	defaultDate: sdate,
+       minDate: sdate,
+       maxDate:edatd,
+   	
+   }).on('dp.change',function(e){    	
+   	 
+        var selectDate=$("#textdate").val();
+        
+   	 if (new Date(date).getTime()==new Date(selectDate).getTime()){
+  		 
+  	     }else {
+  	    	    	    	 
+  	    var date = new Date();
+  	 	var currDate = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+  	 	
+  	 	var releaseDate = dateChange(${cartData.deliveryDays},currDate);
+  	 	
+  	 	 window.location.href ='<c:url value='/checkout/multi/delivery-address/addPickUpDate?pickUpDate='/>'+selectDate;
+  	    	 
+  	     } 
+    
+    
+     
+   }); 
+   
+ 
 });
 
 

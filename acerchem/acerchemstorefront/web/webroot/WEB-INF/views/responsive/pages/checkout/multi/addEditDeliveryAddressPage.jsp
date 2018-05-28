@@ -390,10 +390,10 @@
 							<div class='input-group date' id='strdate'>
 							 <c:choose>
 							<c:when test="${cartData.pickUpdate eq null}"> 
-							    <input type='text' class="form-control2  sd"  id="textDate" /> 
+							    <input type='text' class="form-control2  sd"  id="textdate" /> 
 							      </c:when> 
 		                      <c:otherwise>
-		                      <input type='text' class="form-control2" value ="${cartData.pickUpdate}" id="textDate" />
+		                      <input type='text' class="form-control2" value ="${cartData.pickUpdate}" id="textdate" />
 		                        </c:otherwise>
 		                      </c:choose>
 							    <span class="input-group-addon">
@@ -950,18 +950,15 @@ $(document).ready(function() {
         edatd = dateChange(${cartData.deliveryDays},date);
    	 	}
 	
-	
-
      $('#strdate').datetimepicker({
     	format: 'YYYY-MM-DD',
-    	//defaultDate: sdate,
+    	defaultDate: sdate,
         minDate: sdate,
         maxDate:edatd,
     	
-    }).on('dp.change',function(e){
-    	
+    }).on('dp.change',function(e){    	
     	 
-         var selectDate=$("#textDate").val();
+         var selectDate=$("#textdate").val();
          
     	 if (new Date(date).getTime()==new Date(selectDate).getTime()){
    		 
