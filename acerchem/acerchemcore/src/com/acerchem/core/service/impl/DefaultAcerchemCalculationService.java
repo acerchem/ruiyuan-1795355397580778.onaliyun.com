@@ -69,20 +69,19 @@ public class DefaultAcerchemCalculationService extends DefaultCalculationService
 			final double roundedTotalDiscounts = commonI18NService.roundCurrency(totalDiscounts, digits);
 			order.setTotalDiscounts(Double.valueOf(roundedTotalDiscounts));
 			// set total
-			double total =0.0d;
-			total = subtotal + total;
-//			if (order.getDeliveryCost()!=null){
-//				total = subtotal + total + order.getDeliveryCost().doubleValue();
-//			}
+			double total = subtotal;
+			if (order.getDeliveryCost()!=null){
+				total = total + order.getDeliveryCost().doubleValue();
+			}
 			if (order.getPaymentCost()!=null){
 				total = total + order.getPaymentCost().doubleValue();
 			}
-//			if(order.getOperateCost()!=null){
-//				total = total +order.getOperateCost().doubleValue();
-//			}
-//			if (order.getStorageCost()!=null){
-//				total = total +order.getStorageCost().doubleValue();
-//			}
+			if(order.getOperateCost()!=null){
+				total = total +order.getOperateCost().doubleValue();
+			}
+			if (order.getStorageCost()!=null){
+				total = total +order.getStorageCost().doubleValue();
+			}
 			total = total - roundedTotalDiscounts;
 
 			final double totalRounded = commonI18NService.roundCurrency(total, digits);
@@ -107,7 +106,7 @@ public class DefaultAcerchemCalculationService extends DefaultCalculationService
 		{
 			// -----------------------------
 			// first calc all entries
-			calculateEntries(order, false);
+			//calculateEntries(order, false);
 			// -----------------------------
 			// reset own values
 			final Map taxValueMap = resetAllValues(order);
@@ -119,7 +118,7 @@ public class DefaultAcerchemCalculationService extends DefaultCalculationService
 		}
 	}
 	
-	public void calculateEntries(final AbstractOrderModel order, final boolean forceRecalculate) throws CalculationException
+	/*public void calculateEntries(final AbstractOrderModel order, final boolean forceRecalculate) throws CalculationException
 	{
 		double subtotal = 0.0;
 		//double totalMemberPrice = 0.0;
@@ -134,7 +133,7 @@ public class DefaultAcerchemCalculationService extends DefaultCalculationService
 		}
 		order.setTotalPrice(Double.valueOf(subtotal));
 
-	}
+	}*/
 	
 	protected void resetAllValues(final AbstractOrderEntryModel entry) throws CalculationException
 	{
