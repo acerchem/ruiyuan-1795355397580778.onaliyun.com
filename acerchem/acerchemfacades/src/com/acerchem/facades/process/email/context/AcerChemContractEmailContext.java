@@ -190,7 +190,8 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 				}
 
 				// pie.setPackageWeight( quantity + packageType)
-				pie.setPackageWeight(longQuantity + "/" + StringUtils.defaultString(product.getPackageType()));
+				final String punit = StringUtils.defaultString(product.getUnitName(), "kg");
+				pie.setPackageWeight(StringUtils.defaultString(product.getPackageWeight()).trim() + punit + "/" + StringUtils.defaultString(product.getPackageType()));
 				// if (StringUtils.isNotBlank(product.getPackageWeight())) {
 				// //计算包裹重量,圆整为整数
 				// double entryPackageWeight=0;
