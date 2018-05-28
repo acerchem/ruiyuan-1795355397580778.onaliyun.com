@@ -18,17 +18,25 @@ import java.util.Map;
 public class DefaultAcerchemTrayDao extends AbstractItemDao implements AcerchemTrayDao {
 
     private final String GET_COUNTRY_TRAY_FARE_CONF = "select {PK} from {CountryTrayFareConf} where {region}=?region and {trayAmount} =?trayAmount";
+    
+    private final String GET_COUNTRY_MAX = "select {PK} from {CountryTrayFareConf} where {region}=?region order by {trayAmount} desc";
 
     @Override
     public CountryTrayFareConfModel getCouTrayFareConf(RegionModel region, int trayAmount) {
-
-        final Map<String, Object> params = new HashMap<String, Object>();
-        final StringBuilder builder = new StringBuilder(GET_COUNTRY_TRAY_FARE_CONF);
+    	
+    	final Map<String, Object> params = new HashMap<String, Object>();
+        
+    	final StringBuilder builderMax = new StringBuilder(GET_COUNTRY_MAX);
         params.put("region",region.getIsocode());
+    	final SearchResult<CountryTrayFareConfModel> resultMax = getFlexibleSearchService().search(builderMax.toString(),params);
+    	
+        final StringBuilder builder = new StringBuilder(GET_COUNTRY_TRAY_FARE_CONF);
         params.put("trayAmount",trayAmount);
         final SearchResult<CountryTrayFareConfModel> result = getFlexibleSearchService().search(builder.toString(),params);
         if (result!=null && CollectionUtils.isNotEmpty(result.getResult())){
             return result.getResult().get(0);
+        }else if(resultMax!=null && CollectionUtils.isNotEmpty(resultMax.getResult())){
+        	return resultMax.getResult().get(0);
         }
         return null;
     }
