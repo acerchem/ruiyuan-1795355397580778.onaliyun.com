@@ -173,8 +173,7 @@
 									</c:otherwise>
 								</c:choose>
                                 
-                                <%-- <td><format:price priceData="${orderEntries.product.promotionPrice}" displayFreeForZero="true" /></td> --%>
-                                <td>${orderEntries.quantity*orderEntries.product.netWeight}${orderEntries.product.unitName}</td>
+                                <td>${orderEntries.quantity}*${orderEntries.product.netWeight}${orderEntries.product.unitName}</td>
                                 <td>
                                         ${fn:escapeXml(orderEntries.product.code)}
                                 </td>
