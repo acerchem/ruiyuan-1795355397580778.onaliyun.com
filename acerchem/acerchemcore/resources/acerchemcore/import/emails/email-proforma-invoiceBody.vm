@@ -93,7 +93,7 @@ p.western {
       <td>INVOICE NO.: ${ctx.order.code}</td>
       <td>&nbsp;</td>
     </tr>
-	#set ($formattedOrderDate =  $ctx.invoiceDate)
+	#set ($formattedOrderDate =  $ctx.dateTool.format('d/M/yyyy', $ctx.order.created))
     <tr>
       <td>DATE: $!{formattedOrderDate}</td>
       <td>&nbsp;</td>
@@ -221,7 +221,7 @@ p.western {
   </tr>
     <tr class="font1">
     <td colspan="2">
-    BankerÂs Address: 1 Alexandra Road Gorseinon, Swansea SA4 4NJ
+    Banker's Address: 1 Alexandra Road Gorseinon, Swansea SA4 4NJ
     </td>
   </tr>
     <tr class="font1">
