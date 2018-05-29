@@ -26,11 +26,11 @@ UPDATE Category;code[unique=true];$catalogVersion;name[lang=$lang]
  ;1;;Open Catalogue;
  ;571;;Vitamin;
  ;575;;Plant Extract;
- ;576;;Joint Health;
+ ;576;;Supplements;
  ;577;;Amino Acid;
- ;578;;Food Additive;
- ;579;;Oil;
+ ;578;;Protein;
+ ;579;;OEM;
+ ;580;;Joint Health;
  #shaun
- ;3510;;ALL;
 
 

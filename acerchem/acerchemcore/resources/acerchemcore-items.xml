@@ -482,6 +482,13 @@
 						<persistence type="property" />
 						<description>包装形式</description>
 					</attribute>
+					
+					<attribute type="java.lang.String" qualifier="SKU">
+						<modifiers read="true" write="true" search="false"
+							optional="true" />
+						<persistence type="property" />
+						<description>SKU</description>
+					</attribute>
 
 					<attribute type="java.lang.String" qualifier="netWeight">
 						<modifiers read="true" write="true" search="false"
@@ -1049,6 +1056,10 @@
 				<description>保存促销的阶梯信息</description>
 				<deployment table="PromotionThreshold" typecode="30002" />
 				<attributes>
+				<!-- shaun -->
+					<attribute qualifier="code" type="java.lang.Integer">
+						<persistence type="property" />
+					</attribute>
 					<attribute qualifier="minQuantity" type="java.lang.Integer">
 						<persistence type="property" />
 					</attribute>

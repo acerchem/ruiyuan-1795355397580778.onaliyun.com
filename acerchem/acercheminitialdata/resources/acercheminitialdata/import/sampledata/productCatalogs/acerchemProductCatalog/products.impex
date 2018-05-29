@@ -62,20 +62,78 @@ INSERT_UPDATE Warehouse;code[unique=true];name[lang=en];name[lang=de];vendor(cod
 
 INSERT_UPDATE Unit;code[unique=true];name[lang=en];unitType
 ;kg;kg;kg
+;kpcs;kpcs;kpcs
 
 INSERT_UPDATE Product;characteristic;promotionItem;formulaWeight;chemicalInfo;packageWeight;packageType;netWeight;grossWeight;specification;CAS;unitCalculateRato;code[unique=true];$supercategories;manufacturerName;manufacturerAID;unit(code);otherName;ean;variantType(code);$catalogVersion;$approved
 
 #shaun
 ;Heart & Cardiovascular;true;863.343;C59H90O4;10;Carton;10;14;EP/USP;303-98-0;20;AC05080a;571;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
 ;Heart & Cardiovascular;true;863.343;C59H90O4;10;Carton;10;14;EP/USP;303-98-0;20;AC05080b;571;Kingdomway;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
-;Liver protection;true;482.436;C25H22O10;25;Drum;25;28;EP/USP;22888-70-6;20;AC03390a;575;Liverd;Milk Thistle 80% UV (Silybin + Isosilybin 30% HPLC);kg;SILYMARIN Silymarin P.E.;
+;Liver protection;true;482.436;C25H22O10;25;Drum;25;28;EP/USP;65666-07-1;20;AC03390a;575;Liverd;Milk Thistle 80% UV (Silybin + Isosilybin 30% HPLC);kg;SILYMARIN Silymarin P.E.;
 ;Weight management;true;458.372;C22H18O11;25;Drum;25;28;Enterprise Standard;84650-60-2;20;AC03138a;575;Skyherb;Green tea extract Polyphenol 95%, EGCG 45%;kg;Tea polyphenols;
 ;Weight management;true;458.372;C22H18O11;25;Drum;25;28;Enterprise Standard;84650-60-2;20;AC03887a;575;Skyherb;Green tea extract Polyphenol 95%, EGCG 50%;kg;Tea polyphenols;
-;Beauty;true;468.42;C30H12O6;25;Drum;25;28;Enterprise Standard;84929-27-1 ;20;AC03142a;575;CCGB;Grapse Seed extract Procyanidine 95%;kg;Proanthocyanidins;
-;Joint Health;true;297.325;C6H12NKO8S;25;Drum;25;27;EP/USP;31284-96-5;20;AC02345a;576;Rixing;D-Glucosamine Sulphate 2KCL 40-80mesh ;kg;Glucosamine Sulfate Potassium Chloride;
+;Beauty;true;468.420;C30H12O6;25;Drum;25;28;Enterprise Standard;84929-27-1 ;20;AC03142a;575;CCGB;Grapse Seed extract Procyanidine 95%;kg;Proanthocyanidins;
+;Joint Health;true;297.325;C6H12NKO8S;25;Drum;25;26.5;EP/USP;31284-96-5;20;AC02345a;576;Rixing;D-Glucosamine Sulphate 2KCL 40-80mesh ;kg;Glucosamine Sulfate Potassium Chloride;
 ;Joint Health;true;297.325;C6H12NKO8S;25;Drum;25;27;EP/USP;31284-96-5;20;AC02354a;576;Rixing;D-Glucosamine Sulphate 2KCL DC;kg;Glucosamine Sulfate Potassium Chloride particle granule;
-;Joint Health;true;479.368;C13H21NO16S;25;Drum;25;28;Enterprise Standard;9007-28-7;20;AC05003a;576;RKD;Chondroitin Sulphate Bovine CPC 90%;kg;Chondroitin Sulfate;
-;Sports Nutrition;true;146.144;C5H10N2O3;25;Drum;25;28;FCCVI;56-85-9;20;AC02090a;577;Meihua;L-Glutamine;kg;Glutamine;
+;Joint Health;true;479.368;C13H21NO16S;25;Drum;25;27.5;Enterprise Standard;9007-28-7;20;AC05003a;576;RKD;Chondroitin Sulphate Bovine CPC 90%;kg;Chondroitin Sulfate;
+;Sports Nutrition;true;146.144;C5H10N2O3;25;Drum;25;28.2;FCCVI;56-85-9;20;AC02090a;577;Meihua;L-Glutamine;kg;Glutamine;
+
+#
+;Sports Nutrition;false;;;25;Drum;25;26.5;Enterprice Standard;;20;AC02378a;577;Shuguang;L-Glutamine;kg;Branched chain amino acid;
+;Sports Nutrition;false;;;25;Drum;25;27.0;Enterprice Standard;;20;AC02016a;577;Shuguang;L-Glutamine;kg;Branched chain amino acid;
+;Weight management;false;280.4455;C18H32O2;20;Carton;20;21.5;Enterprice Standard;121250-47-3,2420-56-6;25;AC08016a;579;InnoBio;L-Glutamine;kg;Conjugated linoleic acid ;
+;Weight management;false;280.4455;C18H32O2;6;Carton;6;9.0;Enterprice Standard;2420-56-6,121250-47-3;40;AC06172a;579;Nutrasis;L-Glutamine;kpcs;Conjugated linoleic acid;
+;Sports Nutrition;false;149.150;C4H9N3O2·H2O;25;Carton;25;26.6;Enterprice Standard;6020-87-7;20;AC02233a;576;Baosui;L-Glutamine;kg;CREATINE HYDRATE;
+;Sports Nutrition;false;149.150;C4H9N3O2·H2O;25;Carton;25;26.4;Enterprice Standard;6020-87-7;20;AC02233b;576;Chengzhi;L-Glutamine;kg;CREATINE HYDRATE;
+;Sports Nutrition;false;149.150;C4H9N3O2·H2O;25;Carton;25;26.6;Enterprice Standard;6020-87-7;20;AC02236a;576;Baosui;L-Glutamine;kg;CREATINE HYDRATE;
+;Brain Health;false;368.380;C21H20O6;25;Drum;25;28.0;Enterprice Standard;458-37-7;20;AC03514a;575;Ningbo Herb;L-Glutamine;kg;Turmeric root extract;
+;Brain Health;false;368.380;C21H20O6;25;Drum;25;28.0;Enterprice Standard;458-37-7;20;AC03515a;575;Ningbo Herb;L-Glutamine;kg;Turmeric root extract;
+;Joint Health;false;215.630;C6H13NO5.HCl;25;Drum;25;27.0;USP;66-84-2;20;AC02340a;576;Rixing;L-Glutamine;kg; Glucosamine Hydrochloride ;
+;Joint Health;false;297.325;C6H12NKO8S;25;Drum;25;27.0;USP;31284-96-5;20;AC02342a;576;Rixing;L-Glutamine;kg;Glucosamine Sulfate Potassium Chloride;
+;Heart&Cardiovascular;false;150.130;C5H10O5;25;Drum;25;28.0;USP;50-69-1;20;AC02263a;576;Chengzhi;L-Glutamine;kg;ALPHA-D-RIBOFURANOSE;
+;Sports Nutrition;false;;;25;Drum;25;28.0;Enterprice Standard;;20;AC02379a;577;Sanxia;L-Glutamine;kg;Branched chain amino acid;
+;Heart&Cardiovascular;false;;;6;Carton;6;9.0;Enterprice Standard;8016-13-5;40;AC06001a;579;Braveiy;L-Glutamine;kpcs;Fish oil soft capsule;
+;Brain Health;false;;;25;Drum;25;28.0;USP;90045-36-6;20;AC03097a;575;Delekang;L-Glutamine;kg;CINKGO BILOBA P.E.;
+;Weight management;false;;;25;Drum;25;28.0;USP;;20;AC03184a;575;CCGB;L-Glutamine;kg;chlorogenic acid tea polyphenol;
+;Sports Nutrition;false;274.32;C10H18CaO6;25;Drum;25;28.0;USP;135236-72-5;20;AC05170a;576;LONCIN;L-Glutamine;kg;Calcium beta-hydroxy-beta-methylbutyrate;
+;Sports Nutrition;false;180.160;C6H12O6;25;Drum;25;27.0;USP;6917-35-7;20;AC02393a;576;Yuwei;L-Glutamine;kg;Cyclohexanehexol;
+;Sports Nutrition;false;;;25;Drum;25;27.0;Enterprice Standard;;20;AC02395a;577;Shuguang;L-Glutamine;kg;Branched chain amino acid;
+;Sports Nutrition;false;320.2991;C11H20N4O7;25;Drum;25;28.0;Enterprice Standard;16856-18-1;20;AC02005a;577;Jingjing;L-Glutamine;kg;L-ARGININE A-KETOGLUTARATE;
+;Weight management;false;161.200;C7H15NO3;25;Drum;25;27.5;USP;406-76-8;20;AC02047a;577;ChengDa;L-Glutamine;kg;Levocarnitine;
+;Weight management;false;197.6598;C7H16NO3Cl;25;Drum;25;27.5;Enterprice Standard;10017-44-4;20;AC02317a;577;Hengtai;L-Glutamine;kg;DL-Carnitine hydrochloride;
+;Weight management;false;472.490;C18H36N2O12;25;Drum;25;28.0;USP;36687-82-8;20;AC02048a;577;Northeast Pharm;L-Glutamine;kg;L-Carnitine Tartrate;
+;Weight management;false;472.490;C18H36N2O12;25;Drum;25;27.0;USP;36687-82-8;20;AC02048b;577;Huayang;L-Glutamine;kg;L-Carnitine Tartrate;
+;Weight management;false;472.490;C18H36N2O12;25;Drum;25;27.5;USP;36687-82-8;20;AC02048c;577;ChengDa;L-Glutamine;kg;L-Carnitine Tartrate;
+;Sports Nutrition;false;175.190;C6H13N3O3;25;Drum;25;28.0;AJI;372-75-8;20;AC02040a;577;Jingjing;L-Glutamine;kg;;
+;Sports Nutrition;false;309.27316;C10H19N3O8;25;Drum;25;28.0;Enterprice Standard;54940-97-5;20;AC02045a;577;Jingjing;L-Glutamine;kg;Citrulline malate ;
+;Sports Nutrition;false;309.27316;C10H19N3O8;25;Drum;25;28.0;Enterprice Standard;54940-97-5;20;AC02046a;577;Jingjing;L-Glutamine;kg;Citrulline malate ;
+;Sports Nutrition;false;131.170;C6H13NO2;25;Carton;25;26.5;USP;61-90-5;20;AC02145a;577;Jinghai;L-Glutamine;kg;;
+;Sports Nutrition;false;131.170;C6H13NO2;25;Carton;25;26.5;USP;61-90-5;20;AC02175a;577;Jinghai;L-Glutamine;kg;;
+;Sports Nutrition;false;125.150;C2H7NO3S;25;Drum;25;27.0;JP;107-35-7;20;AC02450a;577;Fuchi;L-Glutamine;kg;Cholic acid;
+;Weight management;false;203.23558;C9H17NO4;25;Drum;25;28.0;USP;3040-38-8;20;AC02315a;577;Northeast Pharm;L-Glutamine;kg;Levacecarnine hydrochloride;
+;Weight management;false;203.23558;C9H17NO4;25;Drum;25;27.0;USP;3040-38-8;20;AC02315b;577;Huayang;L-Glutamine;kg;Levacecarnine hydrochloride;
+;Joint Health;false;221.210;C8H15NO6;25;Drum;25;27.0;USP;7512-17-6;20;AC02312a;580;Rixing;L-Glutamine;kg;N-acetyl-Glucosamine;
+;Heart&Cardiovascular;false;;;6;Carton;6;9.0;Enterprice Standard;;40;AC06089a;579;Braveiy;L-Glutamine;kpcs;;
+;Sports Nutrition;false;;;20;Bag;20;21.0;Enterprice Standard;222400-29-5;25;AC07158a;578;Tfull;L-Glutamine;kg;Pea Protein Isolate;
+;Sports Nutrition;false;;;20;Bag;20;21.0;Enterprice Standard;222400-29-5;25;AC07802a;578;Tfull;L-Glutamine;kg;Pea Protein Isolate;
+;Sweetening;false;397.630;C12H19Cl3O8;25;Drum;25;27.0;Enterprice Standard;56038-13-2;20;AC03132a;576;Jinhe;L-Glutamine;kg;;
+;Sports Nutrition;false;;;25;Drum;25;28.0;Enterprice Standard;;20;AC03131a;575;Originherb;L-Glutamine;kg;Tribulus terrestris P.E.;
+;Immune system;false;176.120;C6H8O6;25;Carton;25;26.5;Enterprice Standard;50-81-7;20;AC01363a;571;Jiangshan;L-Glutamine;kg;Ascorbic Acid;
+;Immune system;false;176.120;C6H8O6;25;Carton;25;26.5;EP,USP,BP;50-81-7;20;AC01361a;571;Qiyuan;L-Glutamine;kg;Ascorbic Acid;
+;Heart&Cardiovascular;false;384.6377;C27H44O;25;Carton;25;27.0;Enterprice Standard;67-97-0,8024-19-9,8050-67-7;20;AC01551a;571;LN;L-Glutamine;kg;Cholecalciferol;
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # Insert Product References
@@ -141,19 +199,62 @@ UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehou
 
 
  # Update allProducts with localisations
-UPDATE Product;code[unique=true];$catalogVersion;name[lang=$lang];summary[lang=$lang];description[lang=$lang]
+UPDATE Product;minOrderQuantity;code[unique=true];$catalogVersion;name[lang=$lang];summary[lang=$lang];description[lang=$lang]
 #shaun
-;AC05080a;;Coenzyme Q10 98% HPLC;Manufacturer:Livzon;Yellow to orange crystalline powder<br/>Effective protection of the heart<br/>Enhance human immunity.<br/>Anti-oxidation and anti-aging<br/>
-;AC05080b;;Coenzyme Q10 98% HPLC;Manufacturer:Kingdomway Low solvent residue;Yellow to orange crystalline powder<br/>Effective protection of the heart<br/>Enhance human immunity.<br/>Anti-oxidation and anti-aging<br/>
-;AC03390a;;Milk Thistle 80% UV (Silybin + Isosilybin 30% HPLC);Manufacturer:Liverd with GMP certificate;Yelow to Yellowish-Brown Powder<br/>Protect liver cells from toxic substances<br/>It's called "natural liver protection."<br/>
-;AC03138a;;Green tea extract Polyphenol 95%, EGCG 45%;Manufacturer:Skyherb Low caffeine content;Light Yellow Brownish Powder<br/>Extracted from green tea leaves<br/>Anti-oxidation and scavenging free radicals<br/>
-;AC03887a;;Green tea extract Polyphenol 95%, EGCG 50%;Manufacturer:Skyherb Low caffeine content;Light Yellow Brownish Powder<br/>Extracted from green tea leaves<br/>Anti-oxidation and scavenging free radicals<br/>
-;AC03142a;;Grapse Seed extract Procyanidine 95%;Manufacturer:CCGB Raw material come from Europe;Reddish-brown Powder<br/>Grape seed material comes from Europe<br/>Rich in procyanidins<br/>Anti-oxidation and scavenging free radicals<br/>
-;AC02345a;;D-Glucosamine Sulphate 2KCL 40-80mesh ;Manufacturer:Rixing with BRC certificate;White Crystallion powder<br/>Repair and strengthen articular cartilage<br/>Excellent bone joint protection formula<br/>
-;AC02354a;;D-Glucosamine Sulphate 2KCL DC;Manufacturer:Rixing with BRC certificate;White to off ganular powder<br/>Repair and strengthen articular cartilage<br/>Excellent bone joint protection formula<br/>
-;AC05003a;;Chondroitin Sulphate Bovine CPC 90%;Manufacturer:RKD High purity 100% water soluble;White or almost white powder<br/>Repair and strengthen articular cartilage<br/>Excellent bone joint protection formula<br/>
-;AC02090a;;L-Glutamine;Manufacturer:Meihua;Whitish crystalline powder<br/>Widely used in food additives.<br/>Provide nitrogen source to promote protein synthesis in muscle cells<br/>
+;5;AC05080a;;Coenzyme Q10 98% HPLC;Manufacturer:Livzon High purity;Yellow to orange crystalline powder<br/>Effective protection of the heart<br/>Enhance human immunity.<br/>Anti-oxidation and anti-aging<br/>
+;5;AC05080b;;Coenzyme Q10 98% HPLC;Manufacturer:Kingdomway Low solvent residue;Yellow to orange crystalline powder<br/>Effective protection of the heart<br/>Enhance human immunity.<br/>Anti-oxidation and anti-aging<br/>
+;4;AC03390a;;Milk Thistle 80% UV (Silybin + Isosilybin 30% HPLC);Manufacturer:Liverd with GMP certificate;Yelow to Yellowish-Brown Powder<br/>Protect liver cells from toxic substances<br/>It's called "natural liver protection."<br/>
+;4;AC03138a;;Green tea extract Polyphenol 95%, EGCG 45%;Manufacturer:Skyherb Low caffeine content;Light Yellow Brownish Powder<br/>Extracted from green tea leaves<br/>Anti-oxidation and scavenging free radicals<br/>
+;4;AC03887a;;Green tea extract Polyphenol 95%, EGCG 50%;Manufacturer:Skyherb Low caffeine content;Light Yellow Brownish Powder<br/>Extracted from green tea leaves<br/>Anti-oxidation and scavenging free radicals<br/>
+;4;AC03142a;;Grapse Seed extract Procyanidine 95%;Manufacturer:CCGB Raw material come from Europe;Reddish-brown Powder<br/>Grape seed material comes from Europe<br/>Rich in procyanidins<br/>Anti-oxidation and scavenging free radicals<br/>
+;4;AC02345a;;D-Glucosamine Sulphate 2KCL 40-80mesh ;Manufacturer:Rixing with BRC certificate;White Crystallion powder<br/>Repair and strengthen articular cartilage<br/>Excellent bone joint protection formula<br/>
+;4;AC02354a;;D-Glucosamine Sulphate 2KCL DC;Manufacturer:Rixing with BRC certificate;White to off ganular powder<br/>Repair and strengthen articular cartilage<br/>Excellent bone joint protection formula<br/>
+;4;AC05003a;;Chondroitin Sulphate Bovine CPC 90%;Manufacturer:RKD High purity 100% water soluble;White or almost white powder<br/>Repair and strengthen articular cartilage<br/>Excellent bone joint protection formula<br/>
+;4;AC02090a;;L-Glutamine;Manufacturer:Meihua;Whitish crystalline powder<br/>Widely used in food additives.<br/>Provide nitrogen source to promote protein synthesis in muscle cells<br/>
 
+#TODO
+;4;AC02378a;;BCAA 2:1:1;Manufacturer:Specom;White to off-white powder<br/>
+;4;AC02016a;;BCAA DC 2:1:1;Manufacturer:Shuguang;White to off-white granular<br/>
+;5;AC08016a;;CLA 40% TG Powder;Manufacturer:InnoBio;White or off white free-flowing powder<br/>
+;33;AC06172a;;CLA softgel;Manufacturer:Nutrasis;Clear capsule containing<br/> yellowish transparent oil<br/> 6000pcs/carton<br/>
+;4;AC02233a;;Creatine Monohydrate 200mesh;Manufacturer:Baosui;White Crystalline powder<br/>
+;4;AC02233b;;Creatine Monohydrate 200mesh;Manufacturer:Chengzhi;White Crystalline powder<br/>
+;4;AC02236a;;Creatine Monohydrate 80mesh;Manufacturer:Baosui;White Crystalline powder<br/>
+;4;AC03514a;;Curcumin 95% HPLC Extract DC;Manufacturer:Ningbo Herb Pure Natural;Orange yellow powder<br/> A natural pigment <br/>Enhance body's immunity<br/>
+;4;AC03515a;;Curcumin 95% HPLC Extract Powder;Manufacturer:Ningbo Herb Pure Natural;Orange yellow powder<br/>A natural pigment<br/>Enhance body's immunity<br/>
+;4;AC02340a;;D-Glucosamine HCL 30mesh;Manufacturer:Rixing With BRC Certificate;White Crystallion powder<br/>Repair and strengthen articular cartilage<br/>Excellent bone joint protection formula<br/>
+;4;AC02342a;;D-Glucosamine Sulfate 2KCL 80mesh;Manufacturer:Rixing With BRC Certificate;White Crystallion powder<br/>Repair and strengthen articular cartilage<br/>Excellent bone joint protection formula<br/>
+;4;AC02263a;;D-Ribose USP;Manufacturer:Chengzhi; White crystalline powder<br/>
+;4;AC02379a;;Fermentation IBCAA 2:1:1;Manufacturer:Sanxia;White to off-white powder<br/>
+;33;AC06001a;;Fish oil 1000mg (EE) 18/12;Manufacturer:Braveiy;Capsule skin pale yellow transparent<br/>contents for light yellow oily matter<br/>6000pcs/carton<br/>
+;4;AC03097a;;Ginkgo Biloba Extract 24/6/5 USP;Manufacturer:Delekang Pure Natural,Low pesticide residues;Light yellow brownish powder or light brown powder<br/>
+;4;AC03184a;;Green Coffee Bean Chlorogenic Acids 50% HPLC;Manufacturer:CCGB Low caffeine content;Yellow brown powder<br/> Low pesticide residues<br/>
+;4;AC05170a;;HMB-CA USP;Manufacturer:LONCIN;white powder<br/>
+;4;AC02393a;;Inositol 99% USP;Manufacturer:Yuwei;White Crystalline powder<br/>
+;4;AC02395a;;Instant BCAA Powder 2:1:1;Manufacturer:Shuguang;White to off-white powder<br/>
+;4;AC02005a;;L-Arginine AKG;Manufacturer:Jingjing;White to off-white crystalline powder<br/>
+;4;AC02047a;;L-Carnitine Base USP;Manufacturer:ChengDa With GMP Certificate;White Crystalline<br/> hygroscopic powder<br/>
+;4;AC02317a;;L-Carnitine HCL;Manufacturer:Hengtai;White Crystal or crystalline powder<br/>
+;4;AC02048a;;L-Carnitine L-Tartrate USP;Manufacturer:Northeast Pharm;White Crystalline powder<br/>
+;4;AC02048b;;L-Carnitine L-Tartrate USP;Manufacturer:Huayang;White Crystalline powder<br/>
+;4;AC02048c;;L-Carnitine L-Tartrate USP;Manufacturer:Hengtai;White Crystalline powder<br/>
+;4;AC02040a;;L-Citrulline AJI92;Manufacturer:Shuguang;White Crystalline powder<br/>
+;4;AC02045a;;L-Citrulline DL-Malate 1:1;Manufacturer:Jingjing;White powder<br/>
+;4;AC02046a;;L-Citrulline DL-Malate 2:1 AJI92;Manufacturer:Jingjing;White powder<br/>
+;4;AC02145a;;L-Leucine Instant USP;Manufacturer:Jinghai;White crystalline powder<br/>
+;4;AC02175a;;L-Leucine USP;Manufacturer:Jinghai;White crystalline powder<br/>
+;4;AC02450a;;L-Taurine;Manufacturer:Fuchi;White or class white crystal or powder<br/>
+;4;AC02315a;;N-Acetyl L-Carnitine USP;Manufacturer:Northeast Pharm;White crystalline powder<br/>
+;4;AC02315b;;N-Acetyl L-Carnitine USP;Manufacturer:Huayang;White crystalline powder<br/>
+;4;AC02312a;;N-Acetyl-D-Glucosamine;Manufacturer:Rixing with BRC certificate;White or off powder<br/>
+;33;AC06089a;;Omega 3.6.9 Softgel;Manufacturer:Braveiy;Transparent Softgel<br/>6000pcs/carton<br/>
+;5;AC07158a;;Pea Protein 80%;Manufacturer:Tfull;Yellowish Powder<br/>
+;5;AC07802a;;Pea Protein 85%;Manufacturer:Tfull;Yellowish Powder<br/>
+;4;AC03132a;;Sucralose 98%;Manufacturer:Jinhe;White Crystalline powder<br/>
+;4;AC03131a;;Tribulus 90% UV THC FREE;Manufacturer:Originherb THC Free;Brown-yellow fine powder THC Free<br/>
+;4;AC01363a;;Vitamin C DC 97;Manufacturer:Jiangshan With HPMC;White or Semi-white Granule<br/>
+;4;AC01361a;;Vitamin C Powder;Manufacturer:Qiyuan;White Crystalline powder<br/>
+;4;AC01551a;;Vitamin D3 100,000IU/G CWS;Manufacturer:LN;White,free-flowing powder<br/>
 
 
 
@@ -194,26 +295,115 @@ UPDATE Product;code[unique=true];$approved;$catalogVersion;
 ;AC02354a
 ;AC05003a
 ;AC02090a
+#
+;AC02378a
+;AC02016a
+;AC08016a
+;AC06172a
+;AC02233a
+;AC02233b
+;AC02236a
+;AC03514a
+;AC03515a
+;AC02340a
+;AC02342a
+;AC02263a
+;AC02379a
+;AC06001a
+;AC03097a
+;AC03184a
+;AC05170a
+;AC02393a
+;AC02395a
+;AC02005a
+;AC02047a
+;AC02317a
+;AC02048a
+;AC02048b
+;AC02048c
+;AC02040a
+;AC02045a
+;AC02046a
+;AC02145a
+;AC02175a
+;AC02450a
+;AC02315a
+;AC02315b
+;AC02312a
+;AC06089a
+;AC07158a
+;AC07802a
+;AC03132a
+;AC03131a
+;AC01363a
+;AC01361a
+;AC01551a
+
+
+
 
 
 INSERT_UPDATE PriceRow;startTime[unique=true,dateformat=yyyy-MM-dd HH:mm:ss];endTime[unique=true,dateformat=yyyy-MM-dd HH:mm:ss];productId[unique=true];unit(code[unique=true,default=kg]);currency(isocode)[unique=true];price;minqtd;unitFactor;net
 
 #shaun
-;2018-04-26 10:33:33;2021-04-27 10:33:33;AC05080a;kg;USD;198;1;1;false
-;2018-04-26 10:33:33;2021-04-27 10:33:33;AC05080b;kg;USD;198;1;1;false
-;2018-04-26 10:33:33;2021-04-27 10:33:33;AC03390a;kg;USD;32;1;1;false
-;2018-04-26 10:33:33;2021-04-27 10:33:33;AC03138a;kg;USD;21;1;1;false
-;2018-04-26 10:33:33;2021-04-27 10:33:33;AC03887a;kg;USD;22;1;1;false
-;2018-04-26 10:33:33;2021-04-27 10:33:33;AC03142a;kg;USD;22;1;1;false
+;2018-04-26 10:33:33;2118-04-27 10:33:33;AC05080a;kg;USD;190.00;1;1;false
+;2018-04-26 10:33:33;2118-04-27 10:33:33;AC05080b;kg;USD;190.00;1;1;false
+;2018-04-26 10:33:33;2118-04-27 10:33:33;AC03390a;kg;USD;29.00;1;1;false
+;2018-04-26 10:33:33;2118-04-27 10:33:33;AC03138a;kg;USD;18.50;1;1;false
+;2018-04-26 10:33:33;2118-04-27 10:33:33;AC03887a;kg;USD;18.70;1;1;false
+;2018-04-26 10:33:33;2118-04-27 10:33:33;AC03142a;kg;USD;22.00;1;1;false
 
-;2016-04-27 10:33:33;2017-04-29 10:33:33;AC02345a;kg;USD;7.4;1;1;false
-;2017-04-30 10:33:33;2018-05-01 10:33:33;AC02345a;kg;USD;7.5;1;1;false
-;2018-04-26 10:33:33;2021-04-27 10:33:33;AC02345a;kg;USD;7.6;1;1;false
+;2016-04-27 10:33:33;2017-04-29 10:33:33;AC02345a;kg;USD;7.40;1;1;false
+;2017-04-30 10:33:33;2018-05-01 10:33:33;AC02345a;kg;USD;7.50;1;1;false
+;2018-04-26 10:33:33;2118-04-27 10:33:33;AC02345a;kg;USD;6.90;1;1;false
 
-;2018-04-26 10:33:33;2021-04-27 10:33:33;AC02354a;kg;USD;8.1;1;1;false
-;2018-04-26 10:33:33;2021-04-26 10:33:33;AC05003a;kg;USD;50;1;1;false
-;2018-04-26 10:33:33;2021-04-26 10:33:33;AC02090a;kg;USD;9.1;1;1;false
+;2018-04-26 10:33:33;2118-04-27 10:33:33;AC02354a;kg;USD;7.80;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC05003a;kg;USD;44.00;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02090a;kg;USD;9.70;1;1;false
 
+#
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02378a;kg;USD;12.80;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02016a;kg;USD;13.00;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC08016a;kg;USD;16.50;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC06172a;kg;USD;14.90;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02233a;kg;USD;4.70;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02233b;kg;USD;4.70;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02236a;kg;USD;4.70;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC03514a;kg;USD;75.00;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC03515a;kg;USD;72.00;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02340a;kg;USD;9.30;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02342a;kg;USD;7.60;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02263a;kg;USD;14.00;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02379a;kg;USD;13.50;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC06001a;kg;USD;11.00;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC03097a;kg;USD;93.00;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC03184a;kg;USD;32.00;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC05170a;kg;USD;21.00;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02393a;kg;USD;6.50;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02395a;kg;USD;13.00;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02005a;kg;USD;14.30;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02047a;kg;USD;29.00;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02317a;kg;USD;28.50;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02048a;kg;USD;28.00;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02048b;kg;USD;28.00;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02048c;kg;USD;28.00;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02040a;kg;USD;10.00;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02045a;kg;USD;10.50;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02046a;kg;USD;10.50;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02145a;kg;USD;14.00;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02175a;kg;USD;13.00;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02450a;kg;USD;5.30;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02315a;kg;USD;29.50;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02315b;kg;USD;32.00;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02312a;kg;USD;18.50;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC06089a;kg;USD;9.80;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC07158a;kg;USD;3.90;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC07802a;kg;USD;5.50;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC03132a;kg;USD;32.00;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC03131a;kg;USD;15.50;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC01363a;kg;USD;8.50;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC01361a;kg;USD;7.50;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC01551a;kg;USD;32.00;1;1;false
 
 
 

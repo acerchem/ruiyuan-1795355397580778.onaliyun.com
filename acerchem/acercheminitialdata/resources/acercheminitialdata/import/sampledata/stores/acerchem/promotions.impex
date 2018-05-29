@@ -20,15 +20,121 @@ $regulargroup=regulargroup
 
 
 #### shaun:Ladder sales price ####
-INSERT_UPDATE PromotionThresholdDiscount;minQuantity[unique=true];maxQuantity[unique=true];percentageDiscount[unique=true];
-;0;5;10;
-;4;10;20;
-;9;15;50;
+INSERT_UPDATE PromotionThresholdDiscount;code[unique=true];minQuantity;maxQuantity;percentageDiscount;
+#AC02378a, AC02016a, AC08016a, AC06172a, AC02379a, AC02393a, AC02395a
+;2378100;0;120;0;
+;2378101;120;200;1;
+;2378102;200;399;2;
+;2378103;399;999999999;3;
+
+#AC05003a, AC03390a
+;5003100;0;20;0;
+;5003101;20;40;1;
+;5003102;40;80;2;
+;5003103;80;999999999;3;
+
+#AC05080a, AC05080b, AC03514a, AC03515a
+;5080100;0;10;0;
+;5080101;10;20;1;
+;5080102;20;40;2;
+;5080103;40;999999999;3;
+
+#AC02233a, AC02233b, AC02236a, AC06001a, AC07158a, AC07802a
+;2233100;0;80;0;
+;2233101;80;200;1;
+;2233102;200;399;2;
+;2233103;399;999999999;3;
+
+#AC02340a, AC02342a
+;2340100;0;120;0;
+;2340101;120;200;1;
+;2340102;200;999999999;2;
+
+#AC02345a, AC02354a
+;2345100;0;40;0;
+;2345101;40;80;1;
+;2345102;80;200;2;
+;2345103;200;999999999;3;
+
+#AC02263a
+;2263100;0;80;0;
+;2263101;80;120;1;
+;2263102;120;399;2;
+;2263103;399;999999999;3
+
+#AC03097a, AC03142a, AC03184a, AC03138a, AC03887a, AC02047a, AC02317a, AC02048a, AC02048b, AC02048c, AC02040a, AC02045a, AC02046a
+;3097100;0;20;0;
+;3097101;20;80;1
+;3097102;80;120;2;
+;3097103;120;999999999;3;
+
+#AC05170a, AC02005a, AC03131a
+;5170100;0;80;0;
+;5170101;80;120;1;
+;5170102;120;200;2;
+;5170103;200;999999999;3;
+
+#AC02090a, AC02145a, AC02175a, AC02315a, AC02315b, AC03132a
+;2090100;0;40;0;
+;2090101;40;80;1;
+;2090102;80;120;2;
+;2090103;120;999999999;3
+
+#AC02450a
+;2450100;0;20;0;
+;2450101;20;40;1;
+;2450102;40;120;2;
+;2450103;120;999999999;3;
+
+#AC02312a
+;2312100;0;20;0;
+;2312101;20;80;1;
+;2312102;80;200;2
+;2312103;200;999999999;3;
+
+#AC06089a, AC01363a, AC01361a
+;6089100;0;200;0;
+;6089101;200;399;1;
+;6089102;399;999999999;2;
+
+#AC01551a
+;1551100;0;40;0;
+;1551101;40;120;1;
+;1551102;120;200;2;
+;1551103;200;999999999;3;
 
 
-INSERT_UPDATE ProductThresholdPercentageDiscountPromotion;PromotionGroup(Identifier[default=$defaultPromoGrp]);enabled[default=true][unique=true];code[unique=true];title;description;messageFired[lang=en];messageFired[lang=zh];priority;products(code,$catalogVersion);thresholdDiscounts(percentageDiscount)
+INSERT_UPDATE ProductThresholdPercentageDiscountPromotion;PromotionGroup(Identifier[default=$defaultPromoGrp]);enabled[default=true][unique=true];code[unique=true];title;description;messageFired[lang=en];messageFired[lang=zh];priority;products(code,$catalogVersion);thresholdDiscounts(code)
 
-;;;LadderDiscount;LadderDiscount;LadderDiscount;LadderDiscount;阶梯价优惠;500;AC05080a,AC05080b,AC03390a,AC03138a,AC03887a,AC03142a,AC02345a,AC02354a,AC05003a,AC02090a;10,20,50
+;;;LadderDiscount2378;LadderDiscount2378;LadderDiscount2378;LadderDiscount2378;阶梯价优惠2378;500;AC02378a,AC02016a,AC08016a,AC06172a,AC02379a,AC02393a,AC02395a;2378100,2378101,2378102,2378103;
+
+;;;LadderDiscount5003;LadderDiscount5003;LadderDiscount5003;LadderDiscount5003;阶梯价优惠5003;500;AC05003a,AC03390a;5003100,5003101,5003102,5003103;
+
+;;;LadderDiscount5080;LadderDiscount5080;LadderDiscount5080;LadderDiscount5080;阶梯价优惠5080;500;AC05080a,AC05080b,AC03514a,AC03515a;5080100,5080101,5080102,5080103;
+
+;;;LadderDiscount2233;LadderDiscount2233;LadderDiscount2233;LadderDiscount2233;阶梯价优惠2233;500;AC02233a,AC02233b,AC02236a,AC06001a,AC07158a,AC07802a;2233100,2233101,2233102,2233103;
+
+;;;LadderDiscount2340;LadderDiscount2340;LadderDiscount2340;LadderDiscount2340;阶梯价优惠2340;500;AC02340a,AC02342a;2340100,2340101,2340102;
+
+;;;LadderDiscount2345;LadderDiscount2345;LadderDiscount2345;LadderDiscount2345;阶梯价优惠2345;500;AC02345a,AC02354a;2345100,2345101,2345102,2345103;
+
+;;;LadderDiscount2263;LadderDiscount2263;LadderDiscount2263;LadderDiscount2263;阶梯价优惠2263;500;AC02263a;2263100,2263101,2263102,2263103;
+
+;;;LadderDiscount3097;LadderDiscount3097;LadderDiscount3097;LadderDiscount3097;阶梯价优惠3097;500;AC03097a,AC03142a,AC03184a,AC03138a,AC03887a,AC02047a,AC02317a,AC02048a,AC02048b,AC02048c,AC02040a,AC02045a,AC02046a;3097100,3097101,3097102,3097103;
+
+;;;LadderDiscount5170;LadderDiscount5170;LadderDiscount5170;LadderDiscount5170;阶梯价优惠5170;500;AC05170a,AC02005a,AC03131a;5170100,5170101,5170102,5170103;
+
+;;;LadderDiscount2090;LadderDiscount2090;LadderDiscount2090;LadderDiscount2090;阶梯价优惠2090;500;AC02090a,AC02145a,AC02175a,AC02315a,AC02315b,AC03132a;2090100,2090101,2090102,2090103;
+
+;;;LadderDiscount2450;LadderDiscount2450;LadderDiscount2450;LadderDiscount2450;阶梯价优惠2450;500;AC02450a;2450100,2450101,2450102,2450103;
+
+;;;LadderDiscount2312;LadderDiscount2312;LadderDiscount2312;LadderDiscount2312;阶梯价优惠2312;500;AC02312a;2312100,2312101,2312102,2312103;
+
+;;;LadderDiscount6089;LadderDiscount6089;LadderDiscount6089;LadderDiscount6089;阶梯价优惠6089;500;AC06089a,AC01363a,AC01361a;6089100,6089101,6089102;
+
+;;;LadderDiscount1551;LadderDiscount1551;LadderDiscount1551;LadderDiscount1551;阶梯价优惠1551;500;AC01551a;1551100,1551101,1551102,1551103;
+
+
 
 
 
