@@ -157,7 +157,7 @@
 								</span>
                                         <span class="minflex text">
 									<span class="in-title">${fn:escapeXml(orderEntries.product.name)}</span>
-									<span class="spec">Package:<i>${orderEntries.product.netWeight}kg ${orderEntries.product.packageType}</i></span>
+									<span class="spec">Package:<i>${orderEntries.product.netWeight}kg/${orderEntries.product.packageType}</i></span>
 									<span class="old-price">price:<i><format:price priceData="${orderEntries.basePrice}" displayFreeForZero="true" /></i></span>
 								</span>
                                     </div>
