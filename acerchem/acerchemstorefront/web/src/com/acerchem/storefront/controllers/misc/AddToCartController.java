@@ -152,7 +152,8 @@ public class AddToCartController extends AbstractController
 						PriceData cartEntryPrice = acerchemCartFacade.createPrice(PriceDataType.BUY, BigDecimal.valueOf(val),
 								cartModification.getEntry().getBasePrice().getCurrencyIso());
 						
-						cartModification.getEntry().setBasePrice(cartEntryPrice);
+						//cartModification.getEntry().setBasePrice(cartEntryPrice);
+						cartModification.getEntry().setTotalRealPrice(cartEntryPrice);
 						model.addAttribute("entry", cartModification.getEntry());
 						model.addAttribute("cartCode", cartModification.getCartCode());
 						model.addAttribute("isQuote", cartFacade.getSessionCart().getQuoteData() != null ? Boolean.TRUE : Boolean.FALSE);
