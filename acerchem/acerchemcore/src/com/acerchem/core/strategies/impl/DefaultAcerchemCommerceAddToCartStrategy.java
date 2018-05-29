@@ -243,7 +243,12 @@ public class DefaultAcerchemCommerceAddToCartStrategy extends DefaultCommerceAdd
                         + parameter.getEntryNumber() + ". Give a correct value or " + CommerceCartParameter.DEFAULT_ENTRY_NUMBER
                         + " to accept any suitable entry.");
             }
-//            calculateCartBasePrice(modification.getEntry());
+          // calculateCartBasePrice(modification.getEntry());
+            
+            CommerceCartParameter commerceCartParameter = new CommerceCartParameter();
+            commerceCartParameter.setEnableHooks(true);
+            commerceCartParameter.setCart(parameter.getCart());
+            commerceCartCalculationStrategy.recalculateCart(commerceCartParameter);
         }
         else
         {
