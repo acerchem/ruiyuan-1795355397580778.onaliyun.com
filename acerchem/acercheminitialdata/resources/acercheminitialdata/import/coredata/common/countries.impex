@@ -498,7 +498,7 @@ INSERT_UPDATE Region;country(isocode);isocode[unique=true];isocodeShort;name[lan
 ;CA;CA-YT;YT;"Yukon Territory"
 
 #
-# ISO 3166-2:PL
+# ISO 3166-2:PL Poland
 #
 ;PL;PL-BAP;BAP;"Biała Podlaska"
 ;PL;PL-BIA;BIA;"Białystok"
@@ -508,6 +508,7 @@ INSERT_UPDATE Region;country(isocode);isocode[unique=true];isocodeShort;name[lan
 ;PL;PL-CHZ;CHZ;"Chorzow"
 ;PL;PL-CIE;CIE;"Ciechanow"
 ;PL;PL-DAB;DAB;"Dabrowa Gornicza"
+;PL;PL-DEB;DEB;"Debica"
 ;PL;PL-ELB;ELB;"Elbląg"
 ;PL;PL-GDN;GDN;"Gdansk"
 ;PL;PL-GDY;GDY;"Gdynia"
@@ -534,6 +535,154 @@ INSERT_UPDATE Region;country(isocode);isocode[unique=true];isocodeShort;name[lan
 ;PL;PL-OPO;OPO;"Opole"
 ;PL;PL-OSS;OSS;"Ostrołeka"
 ;PL;PL-PIL;PIL;"Piła"
+;PL;PL-PIO;PIO;"Piotrkow"
+;PL;PL-PLO;PLO;"Plock"
+;PL;PL-POZ;POZ;"Poznan"
+;PL;PL-PRZ;PRZ;"Przemysl"
+;PL;PL-RDM;RDM;"Radom"
+;PL;PL-RDS;RDS;"Ruda Sl"
+;PL;PL-RZE;RZE;"Rzeszow"
+;PL;PL-SDC;SDC;"Siedlce"
+;PL;PL-SOW;SOW;"Siemianowice Sl"
+;PL;PL-SIR;SIR;"Sieradz"
+;PL;PL-SKI;SKI;"Skierniewice"
+;PL;PL-SLP;SLP;"Slupsk"
+;PL;PL-SOP;SOP;"Sopot"
+;PL;PL-SWC;SWC;"Sosnowiec"
+;PL;PL-SWL;SWL;"Suwałki"
+;PL;PL-SWT;SWT;"Swietochłowice"
+;PL;PL-SWI;SWI;"Swinoujscie"
+;PL;PL-SZZ;SZZ;"Szczecin"
+;PL;PL-QEP;QEP;"Tarnobrzeg"
+;PL;PL-TAR;TAR;"Tarnow"
+;PL;PL-TOR;TOR;"Torun"
+;PL;PL-TYY;TYY;"Tychy"
+;PL;PL-WZH;WZH;"Walbrzych"
+;PL;PL-WAW;WAW;"Warszawa"
+;PL;PL-WLO;WLO;"Wlocławek"
+;PL;PL-WRO;WRO;"Wroclaw"
+;PL;PL-ZAB;ZAB;"Zabrze"
+;PL;PL-ZAM;ZAM;"Zamosc"
+;PL;PL-IEG;IEG;"Zielona Gora"
+
+#
+# ISO 3166-2:AT Austria
+#
+;AT;AT-BUR;BUR;"Burgenland"
+;AT;AT-CAT;CAT;"Carinthia"
+;AT;AT-LAU;LAU;"Lower Austria"
+;AT;AT-SZG;SZG;"Salzburg"
+;AT;AT-STY;STY;"Styria"
+;AT;AT-TYR;TYR;"Tyrol"
+;AT;AT-UAU;UAU;"Upper Austria"
+;AT;AT-VDD;VDD;"Vienna"
+;AT;AT-VOR;VOR;"Vorarlberg"
+
+#
+# ISO 3166-2: NL  Netherlands
+#
+;NL;NL-HTB;HTB;"s-Hertogenbosch"
+;NL;NL-AER;AER;"Almere"
+;NL;NL-AME;AME;"Amersfoort"
+;NL;NL-AMS;AMS;"Amsterdam"
+;NL;NL-APE;APE;"Apeldoorn"
+;NL;NL-ARN;ARN;"Arnhem"
+;NL;NL-ASS;ASS;"Assen"
+;NL;NL-BRD;BRD;"Breda"
+;NL;NL-DOR;DOR;"Dordrecht"
+;NL;NL-EDE;EDE;"Ede"
+;NL;NL-EIN;EIN;"Eindhoven"
+;NL;NL-EMM;EMM;"Emmen"
+;NL;NL-ENS;ENS;"Enschede"
+;NL;NL-GRQ;GRQ;"Groningen"
+;NL;NL-HRA;HRA;"Haarlem"
+;NL;NL-HAG;HAG;"Hague"
+;NL;NL-HFD;HFD;"Hoofddorp"
+;NL;NL-LWR;LWR;"Leeuwarden"
+;NL;NL-LID;LID;"Leiden"
+;NL;NL-LEY;LEY;"Lelystad"
+;NL;NL-MST;MST;"Maastricht"
+;NL;NL-MDL;MDL;"Middelburg"
+;NL;NL-NIJ;NIJ;"Nijmegen"
+;NL;NL-RTM;RTM;"Rotterdam"
+;NL;NL-TLB;TLB;"Tilburg"
+;NL;NL-UTC;UTC;"Utrecht"
+;NL;NL-ZTM;ZTM;"Zoetermeer"
+;NL;NL-ZWO;ZWO;"Zwolle"
+;NL;NL-ROT;ROT;"Rotterdam"
+
+#
+# ISO 3166-2:GB United Kingdom
+#
+;GB;GB-BAS;BAS;"Bath"
+;GB;GB-BIR;BIR;"Birmingham"
+;GB;GB-BRD;BRD;"Bradford"
+;GB;GB-BNH;BNH;"Brighton"
+;GB;GB-BST;BST;"Bristol"
+;GB;GB-CAM;CAM;"Cambridge"
+;GB;GB-CNG;CNG;"Canterbury"
+;GB;GB-CAX;CAX;"Carlisle"
+;GB;GB-CEG;CEG;"Chester"
+;GB;GB-CST;CST;"Chichester"
+;GB;GB-COV;COV;"Coventry"
+;GB;GB-DER;DER;"Derby"
+;GB;GB-DUR;DUR;"Durham"
+;GB;GB-ELY;ELY;"Ely"
+;GB;GB-EXE;EXE;"Exeter"
+;GB;GB-GLO;GLO;"Gloucester"
+;GB;GB-HAF;HAF;"Hereford"
+;GB;GB-KUH;KUH;"Kingston upon Hull"
+;GB;GB-LAN;LAN;"Lancaster"
+;GB;GB-LDS;LDS;"Leeds"
+;GB;GB-LCE;LCE;"Leicester"
+;GB;GB-LHF;LHF;"Lichfield"
+;GB;GB-LCN;LCN;"Lincoln"
+;GB;GB-LIV;LIV;"Liverpool"
+;GB;GB-LND;LND;"London"
+;GB;GB-MAN;MAN;"Manchester"
+;GB;GB-NCL;NCL;"Newcastle"
+;GB;GB-NRW;NRW;"Norwich"
+;GB;GB-NGM;NGM;"Nottingham"
+;GB;GB-OXF;OXF;"Oxford"
+;GB;GB-PTE;PTE;"Peterborough"
+;GB;GB-PLY;PLY;"Plymouth"
+;GB;GB-POR;POR;"Portsmouth"
+;GB;GB-PRE;PRE;"Preston"
+;GB;GB-RIP;RIP;"Ripon"
+;GB;GB-TBL;TBL;"Saint Albans"
+;GB;GB-SLF;SLF;"Salford"
+;GB;GB-SLS;SLS;"Salisbury"
+;GB;GB-SHE;SHE;"Sheffield"
+;GB;GB-STH;STH;"Southampton"
+;GB;GB-SOT;SOT;"Stoke-on-Trent"
+;GB;GB-SUN;SUN;"Sunderland"
+;GB;GB-TRU;TRU;"Truro"
+;GB;GB-WKF;WKF;"Wakefield"
+;GB;GB-WLS;WLS;"Wells"
+;GB;GB-WNE;WNE;"Winchester"
+;GB;GB-WOV;WOV;"Wolverhampton"
+;GB;GB-WOR;WOR;"Worcester"
+;GB;GB-YOR;YOR;"York"
+;GB;GB-BFS;BFS;"Belfast"
+;GB;GB-DRY;DRY;"Derry"
+;GB;GB-LSB;LSB;"Lisburn"
+;GB;GB-NYM;NYM;"Newry"
+;GB;GB-ABD;ABD;"Aberdeen"
+;GB;GB-DND;DND;"Dundee"
+;GB;GB-EDH;EDH;"Edinburgh"
+;GB;GB-GLG;GLG;"Glasgow"
+;GB;GB-INV;INV;"Inverness"
+;GB;GB-STG;STG;"Stirling"
+;GB;GB-BAN;BAN;"Bangor"
+;GB;GB-CDF;CDF;"Cardiff"
+;GB;GB-NWP;NWP;"Newport"
+;GB;GB-SWA;SWA;"Swansea"
+;GB;GB-HOC;HOC;"Hockley"
+;GB;GB-ALT;ALT;"Altham"
+;GB;GB-KIN;KIN;"Kingswinford"
+;GB;GB-LUT;LUT;"Lutterworth"
+;GB;GB-IPS;IPS;"Ipswich Suffolk"
+
 
 
 #
@@ -573,6 +722,75 @@ INSERT_UPDATE Region;country(isocode);isocode[unique=true];isocodeShort;name[lan
 ;CN;CN-54;54;"Xizang"
 ;CN;CN-91;91;"Hong Kong"
 ;CN;CN-92;92;"Macao"
+
+
+
+
+#shaun
+# ISO 3166-2:HU Hungary
+#
+INSERT_UPDATE Region;country(isocode);isocode[unique=true];isocodeShort;name[lang=en];active[default=true]
+;HU;HU-BK;BK;"Bacs-Kiskun"
+;HU;HU-BA;BA;"Baranya"
+;HU;HU-BE;BE;"Bekes"
+;HU;HU-BZ;BZ;"Borsod-Abauj-Zemplen"
+;HU;HU-BU;BU;"Budapest"
+;HU;HU-CS;CS;"Csongrad"
+;HU;HU-FE;FE;"Fejer"
+;HU;HU-GS;GS;"Gyor-Moson-Sopron"
+;HU;HU-HB;HB;"Hajdu-Bihar"
+;HU;HU-HE;HE;"Heves"
+;HU;HU-JN;JN;"Jasz-Nagykun-Szolnok"
+;HU;HU-KE;KE;"Komarom-Esztergom"
+;HU;HU-NO;NO;"Nograd"
+;HU;HU-PE;PE;"Pest"
+;HU;HU-SO;SO;"Somogy"
+;HU;HU-SZ;SZ;"Szabolcs-Szatmar-Bereg"
+;HU;HU-TO;TO;"Tolna"
+;HU;HU-VA;VA;"Vas"
+;HU;HU-VE;VE;"Veszprem"
+;HU;HU-ZA;ZA;"Zala"
+;HU;HU-SZA;SZA;"SZada"
+;HU;HU-ZIR;ZIR;"Zirc"
+#shaun
+
+#shaun
+# ISO 3166-2:SK Slovakia
+#
+INSERT_UPDATE Region;country(isocode);isocode[unique=true];isocodeShort;name[lang=en];active[default=true]
+;SK;SK-BBY;BBY;"Banskobystricky"
+;SK;SK-BTS;BTS;"Bratislavsky"
+;SK;SK-KOR;KOR;"Koricky"
+;SK;SK-NRA;NRA;"Nitriansky"
+;SK;SK-POV;POV;"Prerovsky"
+;SK;SK-RIL;RIL;"Rilinsky"
+;SK;SK-TRE;TRE;"Trenriansky"
+;SK;SK-TNA;TNA;"Trnavsky"
+;SK;SK-DKO;DKO;"Dlhe Klcovo"
+;SK;SK-STL;STL;"Stara Lubovna"
+#shaun
+
+#shaun
+# ISO 3166-2:CZ Czech Republic
+#
+INSERT_UPDATE Region;country(isocode);isocode[unique=true];isocodeShort;name[lang=en];active[default=true]
+;CZ;CZ-STK;STK;"Stedoesky kraj"
+;CZ;CZ-JKK;JKK;"Jihoesky kraj"
+;CZ;CZ-PL;PL;"Plzensky kraj"
+;CZ;CZ-KA;KA;"Karlovarsky kraj"
+;CZ;CZ-UST;UST;"ustecky kraj"
+;CZ;CZ-LI;LI;"Liberecky kraj"
+;CZ;CZ-KR;KR;"Kralovehradecky kraj"
+;CZ;CZ-PA;PA;"Pardubicky kraj"
+;CZ;CZ-VY;VY;"Vysoina"
+;CZ;CZ-JK;JK;"Jihomoravsky kraj"
+;CZ;CZ-OL;OL;"Olomoucky kraj"
+;CZ;CZ-ZLI;ZLI;"ZlInsky kraj"
+;CZ;CZ-MOR;MOR;"Moravskoslezsky kraj"
+;CZ;CZ-OLO;OLO;"Olomuouc"
+;CZ;CZ-DOU;DOU;"Dolni Ujezd"
+#shaun
+
 
 
 #
