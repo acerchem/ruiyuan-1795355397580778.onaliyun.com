@@ -191,7 +191,8 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 
 				// pie.setPackageWeight( quantity + packageType)
 				final String punit = StringUtils.defaultString(product.getUnitName(), "kg");
-				pie.setPackageWeight(StringUtils.defaultString(product.getPackageWeight()).trim() + punit + "/" + StringUtils.defaultString(product.getPackageType()));
+				pie.setPackageWeight(StringUtils.defaultString(product.getPackageWeight()).trim() + punit + "/"
+						+ StringUtils.defaultString(product.getPackageType()));
 				// if (StringUtils.isNotBlank(product.getPackageWeight())) {
 				// //计算包裹重量,圆整为整数
 				// double entryPackageWeight=0;
@@ -224,10 +225,7 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 					final PointOfServiceData pos = orderEntry.getDeliveryPointOfService();
 					if (pos != null) {
 
-						if (pos.getAddress() != null && pos.getAddress().getRegion() != null) {
-
-							setWarehouse(StringUtils.defaultString(pos.getAddress().getRegion().getName(), "&nbsp;"));
-						}
+						setWarehouse(StringUtils.defaultString(pos.getDefaultWarehouseRegionName(), "&nbsp;"));
 
 					}
 

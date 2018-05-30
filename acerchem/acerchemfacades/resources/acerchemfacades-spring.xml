@@ -266,12 +266,12 @@
 		<property name="promotionResultService" ref="promotionResultService" />
 		<property name="promotionService" ref="promotionsService" />
 	</bean>
-	
-	<alias name="defaultAcerchemProductPromotionsPopulator" alias="productPromotionsPopulator"/>
+
+	<alias name="defaultAcerchemProductPromotionsPopulator" alias="productPromotionsPopulator" />
 	<bean id="defaultAcerchemProductPromotionsPopulator" parent="baseProductPopulator"
-			class="com.acerchem.facades.populators.AcerchemProductPromotionsPopulator">
-		<property name="promotionsConverter" ref="promotionsConverter"/>
-		<property name="baseSiteService" ref="baseSiteService"/>
+		class="com.acerchem.facades.populators.AcerchemProductPromotionsPopulator">
+		<property name="promotionsConverter" ref="promotionsConverter" />
+		<property name="baseSiteService" ref="baseSiteService" />
 	</bean>
 
 	<!--net weight info -->
@@ -518,14 +518,19 @@
 		class="com.acerchem.facades.populators.AcerchemConsignmentEntryPopulator"
 		parent="defaultConsignmentEntryPopulator">
 	</bean>
- 
-	
-	<bean id="acerchemOrderEntryPopulator" class="com.acerchem.facades.populators.AcerchemOrderEntryPopulator" >
-	
+
+
+	<bean id="acerchemOrderEntryPopulator"
+		class="com.acerchem.facades.populators.AcerchemOrderEntryPopulator">
+
 	</bean>
 	<bean parent="modifyPopulatorList">
 		<property name="list" ref="orderEntryConverter" />
 		<property name="add" ref="acerchemOrderEntryPopulator" />
 	</bean>
 
+    <alias name="acerchemPointOfServicePopulator" alias="pointOfServicePopulator" />
+	<bean id="acerchemPointOfServicePopulator" class="com.acerchem.facades.populators.AcerchemPointOfServicePopulator"
+		parent="defaultPointOfServicePopulator">
+	</bean>
 </beans>

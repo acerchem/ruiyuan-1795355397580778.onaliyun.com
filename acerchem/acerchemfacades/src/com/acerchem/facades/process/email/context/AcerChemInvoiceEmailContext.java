@@ -272,9 +272,9 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 
 							if (entryData != null) {
 								final PointOfServiceData pos = entryData.getDeliveryPointOfService();
-								if (pos.getAddress() != null && pos.getAddress().getRegion() != null) {
+								if (pos != null ) {
 
-									setWarehouse(StringUtils.defaultString(pos.getAddress().getRegion().getName(), "&nbsp;"));
+									setWarehouse(StringUtils.defaultString(pos.getDefaultWarehouseRegionName(), "&nbsp;"));
 								}
 							}
 						}
@@ -359,9 +359,9 @@ public class AcerChemInvoiceEmailContext extends AbstractEmailContext<OrderProce
 			if (CollectionUtils.isNotEmpty(orderEntries)) {
 				for (final OrderEntryData orderEntry : orderEntries) {
 					final PointOfServiceData pos = orderEntry.getDeliveryPointOfService();
-					if (pos.getAddress() != null && pos.getAddress().getRegion() != null) {
+					if (pos != null ) {
 
-						setWarehouse(StringUtils.defaultString(pos.getAddress().getRegion().getName(), "&nbsp;"));
+						setWarehouse(StringUtils.defaultString(pos.getDefaultWarehouseRegionName(), "&nbsp;"));
 						break;
 					}
 				}

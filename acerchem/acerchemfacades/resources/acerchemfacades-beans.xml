@@ -290,5 +290,9 @@
 		<property name="decemberAmount" type="java.lang.Double"/>
 	</bean>
 	
+	<bean class="de.hybris.platform.commercefacades.storelocator.data.PointOfServiceData">
+		<property name="defaultWarehouseRegionName" type="String"/>
+	</bean>
+	
 	
 </beans>
