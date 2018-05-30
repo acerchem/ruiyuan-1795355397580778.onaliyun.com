@@ -112,5 +112,17 @@ INSERT_UPDATE Employee;UID[unique=true];name;groups(uid);description;password
 ;LuLu.qian@acerchem.com;Lulu;Lulugroup,employeegroup,acerchemgroup;Valet orders;123456
 ;Sophie.zhang@acerchem.com;Sophie;Lulugroup,employeegroup,acerchemgroup;Valet orders;123456
 
+;yake.yang@acerchem.com;yake;employeegroup,acerchemgroup,admingroup,customersupportagentgroup;Reports;123456
+;Coco.sun@acerchem.com;Coco;Lulugroup,employeegroup,acerchemgroup;Valet orders;123456
+;Ottilia.tian@acerchem.com;Ottilia;Lulugroup,employeegroup,acerchemgroup;Valet orders;123456
+;Penny.yu@acerchem.com;Penny;Lulugroup,employeegroup,acerchemgroup;Valet orders;123456
+;Rebecca.rui@acerchem.com;Rebecca;Lulugroup,employeegroup,acerchemgroup;Valet orders;123456
+;Sam.zhu@acerchem.com;Sam;Lulugroup,employeegroup,acerchemgroup;Valet orders;123456
+;Mandy.wang@acerchem.com;Mandy;Lulugroup,employeegroup,acerchemgroup;Valet orders;123456
+;Felix.gao@acerchem.com;Felix;Lulugroup,employeegroup,acerchemgroup;Valet orders;123456
+;Sasha.lian@acerchem.com;Sasha;Lulugroup,employeegroup,acerchemgroup;Valet orders;123456
+;Warehouse.eu@acerchem.com;Warehouse;Lulugroup,employeegroup,acerchemgroup;Valet orders;123456
+;Service1.eu@acerchem.com;Service1;Lulugroup,employeegroup,acerchemgroup;Valet orders;123456
+
 
 

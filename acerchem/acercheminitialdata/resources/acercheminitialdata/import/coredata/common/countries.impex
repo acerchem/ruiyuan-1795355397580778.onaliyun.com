@@ -498,6 +498,45 @@ INSERT_UPDATE Region;country(isocode);isocode[unique=true];isocodeShort;name[lan
 ;CA;CA-YT;YT;"Yukon Territory"
 
 #
+# ISO 3166-2:PL
+#
+;PL;PL-BAP;BAP;"Biała Podlaska"
+;PL;PL-BIA;BIA;"Białystok"
+;PL;PL-BZG;BZG;"Bydgoszcz"
+;PL;PL-BYT;BYT;"Bytom"
+;PL;PL-CHO;CHO;"Chełm"
+;PL;PL-CHZ;CHZ;"Chorzow"
+;PL;PL-CIE;CIE;"Ciechanow"
+;PL;PL-DAB;DAB;"Dabrowa Gornicza"
+;PL;PL-ELB;ELB;"Elbląg"
+;PL;PL-GDN;GDN;"Gdansk"
+;PL;PL-GDY;GDY;"Gdynia"
+;PL;PL-GWC;GWC;"Gliwice"
+;PL;PL-GOW;GOW;"Gorzow Wlkp"
+;PL;PL-GRU;GRU;"Grudziadz"
+;PL;PL-JAW;JAW;"Jaworzno"
+;PL;PL-JEG;JEG;"Jelenia Gora"
+;PL;PL-KAL;KAL;"Kalisz"
+;PL;PL-KTW;KTW;"Katowice"
+;PL;PL-KLC;KLC;"Kielce"
+;PL;PL-KON;KON;"Konin"
+;PL;PL-OSZ;OSZ;"Koszalin"
+;PL;PL-KRK;KRK;"Krakow"
+;PL;PL-KRO;KRO;"Krosno"
+;PL;PL-LEG;LEG;"Legnica"
+;PL;PL-LEZ;LEZ;"Leszno"
+;PL;PL-LOD;LOD;"Lodz"
+;PL;PL-QOY;QOY;"Lomza"
+;PL;PL-LUL;LUL;"Lublin"
+;PL;PL-MYL;MYL;"Mysłowice"
+;PL;PL-NOW;NOW;"Nowy Sacz"
+;PL;PL-OLS;OLS;"Olsztyn"
+;PL;PL-OPO;OPO;"Opole"
+;PL;PL-OSS;OSS;"Ostrołeka"
+;PL;PL-PIL;PIL;"Piła"
+
+
+#
 # ISO 3166-2:CN
 #
 ;CN;CN-11;11;"Beijing"

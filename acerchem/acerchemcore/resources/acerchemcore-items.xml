@@ -669,7 +669,7 @@
 			<itemtype code="Warehouse" autocreate="false" generate="false">
 				<description>Extending the Product type from core with additional attributes.</description>
 				<attributes>
-					<attribute qualifier="Area" type="java.lang.String">
+					<attribute qualifier="region" type="Region">
 						<persistence type="property" />
 					</attribute>
 					<attribute qualifier="Address" type="java.lang.String">
