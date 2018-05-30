@@ -746,4 +746,8 @@
 		<property name="emailAddressFetchStrategy" ref="emailAddressFetchStrategy"/>
 	</bean>
 	
+	<!-- Alice:Report -->
+	<alias alias="acerchemOrderDao" name="defaultAcerchemOrderDao"/>
+	<bean id="defaultAcerchemOrderDao" class="com.acerchem.core.dao.impl.AcerchemOrderDaoImpl"/>
+	
 </beans>
