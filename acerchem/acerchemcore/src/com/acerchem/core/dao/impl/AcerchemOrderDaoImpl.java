@@ -26,7 +26,9 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao{
 	private Converter<AddressModel, AddressData> addressConverter;
 	
 	@Override
-	public List<OrderDetailsReportData> getOrderDetails(Integer month,String area,String countryCode,String userName,String orderCode) {
+	public List<OrderDetailsReportData> getOrderDetails(Integer month,String area,String countryCode,String userName,String orderCode,Integer pageNumber) {
+		
+		final Integer pageSize=100;
 		
 		final Map<String, Object> params = new HashMap<String, Object>();
 		String SQL = "select {e.pk} from {OrderEntry as e"+
@@ -66,7 +68,9 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao{
 		final StringBuilder builder = new StringBuilder(SQL);
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(builder.toString());
 		query.addQueryParameters(params);
-		
+		query.setNeedTotal(false);
+		query.setCount(pageSize);
+		query.setStart(pageSize*(pageNumber-1));
 		final SearchResult<OrderEntryModel> result = flexibleSearchService.search(query);
 		
 		
