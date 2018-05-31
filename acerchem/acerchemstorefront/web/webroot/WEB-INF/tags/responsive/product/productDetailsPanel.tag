@@ -289,7 +289,6 @@
 							</div>
 						</div> -->
 						<ul class="g-desclist">
-					    	${product.summary}
 							${product.description}
 						</ul>
 						<div class="g-deswrap">	
