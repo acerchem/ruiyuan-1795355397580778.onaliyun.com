@@ -804,7 +804,6 @@ INSERT_UPDATE Region;country(isocode);isocode[unique=true];isocodeShort;name[lan
 ;IE;IE-CL;CL;"Clare"
 ;IE;IE-CK;CK;"Cork"
 ;IE;IE-DG;DG;"Donegal"
-;IE;IE-DB;DB;"Dublin"
 ;IE;IE-COK;COK;"Co Cork"
 ;IE;IE-GW;GW;"Galway"
 ;IE;IE-DB;DB;"Kerry"
