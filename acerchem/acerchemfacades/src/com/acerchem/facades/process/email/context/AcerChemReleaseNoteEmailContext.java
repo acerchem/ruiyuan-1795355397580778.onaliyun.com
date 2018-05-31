@@ -176,12 +176,12 @@ public class AcerChemReleaseNoteEmailContext extends AbstractEmailContext<OrderP
 						if (!AcerChemEmailContextUtils.isNumber(tempNet)) {
 							tempNet = "0";
 						}else{
-							tempNet = String.valueOf(Long.valueOf(tempNet) * consignEntry.getQuantity());
+							tempNet = String.valueOf(Long.valueOf(Double.valueOf(tempNet).longValue()) * consignEntry.getQuantity());
 						}
 						if (!AcerChemEmailContextUtils.isNumber(tempGross)) {
 							tempGross = "0";
 						}else{
-							tempGross = String.valueOf(Long.valueOf(tempGross) * consignEntry.getQuantity());
+							tempGross = String.valueOf(Long.valueOf(Double.valueOf(tempGross).longValue()) * consignEntry.getQuantity());
 						}
 						pie.setNetWeight(tempNet);
 						pie.setGrossWeight(tempGross);
