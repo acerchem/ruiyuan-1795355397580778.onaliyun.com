@@ -1,5 +1,10 @@
 ##注意此配置仅用于线上系统初始化后手动在hac上执行
 
+REMOVE SolrEndpointUrl; url[unique=true]          ; master; solrServerConfig(name)[unique=true];
+                             ; http://localhost:8983/solr; true  ; standalone-Backoffice 
+                             ; http://localhost:8983/solr; true  ; Default 
+                             ; http://localhost:8983/solr; true  ; Local Standalone
+
 INSERT_UPDATE SolrEndpointUrl; url[unique=true]          ; master; solrServerConfig(name)[unique=true];
                              ; http://172.31.1.199:8983/solr; true  ; standalone-Backoffice 
                              ; http://172.31.1.199:8983/solr; true  ; Default 
