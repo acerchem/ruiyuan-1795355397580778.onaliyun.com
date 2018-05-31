@@ -325,9 +325,10 @@
 									</li>	
 									<li>
 										<span>Manufacturer</span>
-										<c:if test="${not empty product.vendor}">
+										<%-- <c:if test="${not empty product.vendor}">
 										<span>${product.vendor.name}</span>
-										</c:if>
+										</c:if> --%>
+										<span>${product.manufacturer}</span>
 									</li>	
 									
 									<li>
