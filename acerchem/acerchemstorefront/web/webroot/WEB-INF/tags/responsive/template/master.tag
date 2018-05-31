@@ -6,7 +6,7 @@
 <%@ attribute name="pageScripts" required="false" fragment="true" %>
 
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags/responsive/template" %>
-<%@ taglib prefix="analytics" tagdir="/WEB-INF/tags/shared/analytics" %>
+<%-- <%@ taglib prefix="analytics" tagdir="/WEB-INF/tags/shared/analytics" %> --%>
 <%@ taglib prefix="addonScripts" tagdir="/WEB-INF/tags/responsive/common/header" %>
 <%@ taglib prefix="generatedVariables" tagdir="/WEB-INF/tags/shared/variables" %>
 <%@ taglib prefix="debug" tagdir="/WEB-INF/tags/shared/debug" %>
@@ -42,7 +42,7 @@
 
 	<%-- Inject any additional CSS required by the page --%>
 	<jsp:invoke fragment="pageCss"/>
-	<analytics:analytics/>
+	<%-- <analytics:analytics/> --%>
 	<generatedVariables:generatedVariables/>
 </head>
 
