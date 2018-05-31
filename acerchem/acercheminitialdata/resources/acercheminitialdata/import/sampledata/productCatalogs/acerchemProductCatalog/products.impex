@@ -51,14 +51,11 @@ $productCV=catalogVersion(CatalogVersion.catalog(Catalog.id[default=$product-cat
 $lang=en
 $defaultPromoGrp=acerchemPromoGrp
 
-INSERT_UPDATE Warehouse;code[unique=true];name[lang=en];name[lang=de];vendor(code)[default=$vendor];default
-;Spain;Spain;;true
-;UK;UK;;true
-;Germany;Germany;;true
-#shaun
-;Europe;Europe;;true
-;Neele-vat;Neele-vat;;true
-;Italy;Italy;;true
+# Warehouse Alice
+INSERT_UPDATE Warehouse;code[unique=true];name;vendor(code)[default=default];default[default=true]
+;Rotterdam;Rotterdam
+;UK;UK
+
 
 INSERT_UPDATE Unit;code[unique=true];name[lang=en];unitType
 ;kg;kg;kg
@@ -145,58 +142,58 @@ INSERT_UPDATE ProductReference;source(code,$catalogVersion)[unique=true];target(
 INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];reserved;avaPreOrderReleaseDay;preOrderReleaseDay
 
 #shaun
-;200;Neele-vat;notSpecified;10;0;0;100;AC05080a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC05080b;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC03390a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC03138a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC03887a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC03142a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC02345a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC02354a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC05003a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC02090a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC05080a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC05080b;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC03390a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC03138a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC03887a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC03142a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02345a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02354a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC05003a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02090a;0;20;50
 
-;200;Neele-vat;notSpecified;10;0;0;100;AC02378a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC02016a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC08016a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC06172a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC02233a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC02233b;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC02236a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC03514a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC02340a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC02342a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC02263a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC02379a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC06001a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC03097a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC03184a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC05170a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC02393a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC02395a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC02005a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC02047a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC02317a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC02048a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC02048b;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC02048c;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC02040a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC02045a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC02046a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC02145a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC02175a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC02450a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC02315a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC02315b;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC02312a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC06089a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC07158a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC07802a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC03132a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC03131a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC01363a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC01361a;0;20;50
-;200;Neele-vat;notSpecified;10;0;0;100;AC01551a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02378a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02016a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC08016a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC06172a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02233a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02233b;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02236a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC03514a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02340a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02342a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02263a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02379a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC06001a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC03097a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC03184a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC05170a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02393a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02395a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02005a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02047a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02317a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02048a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02048b;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02048c;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02040a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02045a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02046a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02145a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02175a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02450a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02315a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02315b;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02312a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC06089a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC07158a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC07802a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC03132a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC03131a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC01363a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC01361a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC01551a;0;20;50
 
 #shaun
 ;300;UK;notSpecified;10;0;0;100;AC05080a;0;20;50
@@ -210,32 +207,62 @@ INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(co
 ;300;UK;notSpecified;10;0;0;100;AC05003a;0;20;50
 ;300;UK;notSpecified;10;0;0;100;AC02090a;0;20;50
 
-#shaun
-;300;Europe;notSpecified;10;0;0;100;AC05080a;0;20;50
-;300;Europe;notSpecified;10;0;0;100;AC05080b;0;20;50
-;300;Europe;notSpecified;10;0;0;100;AC03390a;0;20;50
-;300;Europe;notSpecified;10;0;0;100;AC03138a;0;20;50
-;300;Europe;notSpecified;10;0;0;100;AC03887a;0;20;50
-;300;Europe;notSpecified;10;0;0;100;AC03142a;0;20;50
-;300;Europe;notSpecified;10;0;0;100;AC02345a;0;20;50
-;300;Europe;notSpecified;10;0;0;100;AC02354a;0;20;50
-;300;Europe;notSpecified;10;0;0;100;AC05003a;0;20;50
-;300;Europe;notSpecified;10;0;0;100;AC02090a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC02378a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC02016a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC08016a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC06172a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC02233a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC02233b;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC02236a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC03514a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC02340a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC02342a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC02263a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC02379a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC06001a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC03097a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC03184a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC05170a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC02393a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC02395a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC02005a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC02047a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC02317a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC02048a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC02048b;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC02048c;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC02040a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC02045a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC02046a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC02145a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC02175a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC02450a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC02315a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC02315b;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC02312a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC06089a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC07158a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC07802a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC03132a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC03131a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC01363a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC01361a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC01551a;0;20;50
 
  
 UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehouse(code));vendors(code)
 
 #shaun
-;AC05080a;;AC05080a:Neele-vat;
-;AC05080b;;AC05080b:Neele-vat;
-;AC03390a;;AC03390a:Neele-vat;
-;AC03138a;;AC03138a:Neele-vat;
-;AC03887a;;AC03887a:Neele-vat;
-;AC03142a;;AC03142a:Neele-vat;
-;AC02345a;;AC02345a:Neele-vat;
-;AC02354a;;AC02354a:Neele-vat;
-;AC05003a;;AC05003a:Neele-vat;
-;AC02090a;;AC02090a:Neele-vat;
+;AC05080a;;AC05080a:Rotterdam;
+;AC05080b;;AC05080b:Rotterdam;
+;AC03390a;;AC03390a:Rotterdam;
+;AC03138a;;AC03138a:Rotterdam;
+;AC03887a;;AC03887a:Rotterdam;
+;AC03142a;;AC03142a:Rotterdam;
+;AC02345a;;AC02345a:Rotterdam;
+;AC02354a;;AC02354a:Rotterdam;
+;AC05003a;;AC05003a:Rotterdam;
+;AC02090a;;AC02090a:Rotterdam;
 
 
 

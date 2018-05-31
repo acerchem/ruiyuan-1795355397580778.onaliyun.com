@@ -682,7 +682,30 @@ INSERT_UPDATE Region;country(isocode);isocode[unique=true];isocodeShort;name[lan
 ;GB;GB-KIN;KIN;"Kingswinford"
 ;GB;GB-LUT;LUT;"Lutterworth"
 ;GB;GB-IPS;IPS;"Ipswich Suffolk"
+;GB;GB-MAF;MAF;"Macclesfield"
+;GB;GB-YKS;YKS;"East Yorkshire"
+;GB;GB-TDG;TDG;"Tredegar"
+;GB;GB-DBH;DBH;"Derbyshire"
+;GB;GB-ESS;ESS;"Essex"
+;GB;GB-AHF;AHF;"Ashford"
+;GB;GB-EGT;EGT;"East Grinstead"
+;GB;GB-MLK;MLK;"Melksham"
+;GB;GB-SKP;SKP;"Skipton"
+;GB;GB-ELP;ELP;"Ellesmere Port"   
+;GB;GB-SFD;SFD;"Stamford"       
+;GB;GB-BUT;BUT;"Burton upon Trent" 
+;GB;GB-COD;COD;"Co Down" 
+;GB;GB-HYD;HYD;"Hyde" 
+;GB;GB-RCO;RCO;"Runcorn" 
+;GB;GB-LRG;LRG;"Liversedge" 
+;GB;GB-RGY;RGY;"Rugeley" 
+;GB;GB-STH;STH;"St Helier" 
 
+;GB;GB-TOW;TOW;"Towcester" 
+;GB;GB-MEL;MEL;"Melmerby" 
+;GB;GB-WYT;WYT;"Wythenshawe" 
+;GB;GB-KIR;KIR;"Kirkham" 
+;GB;GB-BLA;BLA;"Blackpool" 
 
 
 #
@@ -768,9 +791,45 @@ INSERT_UPDATE Region;country(isocode);isocode[unique=true];isocodeShort;name[lan
 ;SK;SK-TNA;TNA;"Trnavsky"
 ;SK;SK-DKO;DKO;"Dlhe Klcovo"
 ;SK;SK-STL;STL;"Stara Lubovna"
-#shaun
+
 
 #shaun
+# ISO 3166-2:IE Ireland
+#
+INSERT_UPDATE Region;country(isocode);isocode[unique=true];isocodeShort;name[lang=en];active[default=true]
+;IE;IE-COC;COC;"Co Clare"
+;IE;IE-DUB;DUB;"Dublin"
+;IE;IE-CW;CW;"Carlow"
+;IE;IE-CV;CV;"Cavan"
+;IE;IE-CL;CL;"Clare"
+;IE;IE-CK;CK;"Cork"
+;IE;IE-DG;DG;"Donegal"
+;IE;IE-DB;DB;"Dublin"
+;IE;IE-COK;COK;"Co Cork"
+;IE;IE-GW;GW;"Galway"
+;IE;IE-DB;DB;"Kerry"
+;IE;IE-KD;KD;"Kildare"
+;IE;IE-KK;KK;"Kilkenny"
+;IE;IE-LA;LA;"Laois"
+;IE;IE-LR;LR;"Leitrim"
+;IE;IE-LM;LM;"Limerick"
+;IE;IE-LF;LF;"Longford"
+;IE;IE-LT;LT;"Louth"
+;IE;IE-MY;MY;"Mayo"
+;IE;IE-MT;MT;"Meath"
+;IE;IE-MG;MG;"Monaghan"
+;IE;IE-OF;OF;"Offaly"
+;IE;IE-RC;RC;"Roscommon"
+;IE;IE-SL;SL;"Sligo"
+;IE;IE-TP;TP;"Tipperary"
+;IE;IE-WF;WF;"Waterford"
+;IE;IE-WM;WM;"Westmeath"
+;IE;IE-WX;WX;"Wexford"
+;IE;IE-WK;WK;"Wicklow"
+
+
+
+
 # ISO 3166-2:CZ Czech Republic
 #
 INSERT_UPDATE Region;country(isocode);isocode[unique=true];isocodeShort;name[lang=en];active[default=true]

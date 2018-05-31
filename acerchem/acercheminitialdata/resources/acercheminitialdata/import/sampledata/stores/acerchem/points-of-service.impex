@@ -74,37 +74,25 @@ INSERT_UPDATE SpecialOpeningDay;openingSchedule(code)[unique=true];date[unique=t
 ;$weekendHours; 23.11.2014 ;true
 ;$weekendHours; 23.12.2014 ;true
 
-
+#Zone Alice
 INSERT_UPDATE Zone;code[unique=true];countries(isocode)
-;ES;ES,DE,IT
-;DE;DE,ES,IT
-;IT;IT,ES,DE
-#shaun
-;DCM;DCM,DE,ES,IT
-;PL;PL,DE,ES,IT,GB
-;GB;GB,DE,ES,IT,PL
+;NL;ES,IT,DE,PL,AT,GB,SK,HU,CZ
+;GB;ES,IT,DE,PL,AT,GB,SK,HU,CZ
+
+#Address Alice
+#INSERT_UPDATE Address;&addrID;town[unique=true];country(isocode);region(isocode);phone1;Lastname
+#;Rotterdam;Shannonweg 80,3197LH Rotterdam,The Netherlands;NL;NL-ROT;0031‐88‐9964593;Mr. Kevin van Rij
+#;UK;Greencarrier PTS Limited,10 Cliff Road, Ipswich SuffolkIP3 0AY UK;GB;GB-IPS;01394 694670;Kirsty martin
+
+INSERT_UPDATE Address;&addrID;streetname;streetnumber;postalcode[unique=true];town[unique=true];country(isocode);region(isocode);phone1;owner(PointOfService.name)[unique=true];Lastname
+;Rotterdam;;;;Shannonweg 80,3197LH Rotterdam,The Netherlands;NL;NL-ROT;0031‐88‐9964593;Rotterdam;Mr. Kevin van Rij
+;UK;;;;Greencarrier PTS Limited,10 Cliff Road, Ipswich SuffolkIP3 0AY UK;GB;GB-IPS;01394 694670;UK;Kirsty martin
 
 
 
 INSERT_UPDATE PointOfService;deliveryZone(code);name[unique=true];type(code);address(&addrID);latitude;longitude;geocodeTimestamp[dateformat=dd-MM-yyyy];$storeImage;openingSchedule(code);baseStore(uid)[default=$storeUid];displayName;features(code)
-;ES;Spain;STORE;addr1;;;29-04-2025;acerchem_store_01;$standardHours;$storeUid;Spain
-;GB;United Kingdom;STORE;addr2;;;29-04-2025;acerchem_store_02;$standardHours;$storeUid;UK
-;DE;Germany;STORE;addr3;;;29-04-2025;acerchem_store_03;$standardHours;$storeUid;Germany
-#shaun
-;PL;Poland;STORE;addr4;;;29-04-2025;acerchem_store_04;$standardHours;$storeUid;Neele-vat
-;DCM;Europe;STORE;addr5;;;29-04-2025;acerchem_store_05;$standardHours;$storeUid;Europe
-;IT;Italy;STORE;addr6;;;29-04-2025;acerchem_store_06;$standardHours;$storeUid;Italy
-
-
-
-INSERT_UPDATE Address;&addrID;streetname;streetnumber;postalcode[unique=true];town[unique=true];country(isocode);region(isocode);phone1;owner(PointOfService.name)[unique=true]
-;addr1;Spain;1;;Spain;ES;;+81 1988 3600;Spain
-;addr2;United Kingdom;44;;United Kingdom;GB;;+81 4649 8891;United Kingdom
-;addr3;Germany;31;;Germany;DE;;+31 6176 3426;Germany
-#shaun
-;addr4;Poland;32;;Poland;PL;;+31 6176 3426;Poland
-;addr5;Europe;33;;Europe;NL;;+31 6176 3426;Europe
-;addr6;Italy;33;;Italy;IT;;+31 6176 3426;Italy
+;NL;Rotterdam;STORE;Rotterdam;;;29-04-2025;acerchem_store_01;$standardHours;$storeUid;Rotterdam
+;GB;UK;STORE;UK;;;29-04-2025;acerchem_store_02;$standardHours;$storeUid;UK
 
 
 
@@ -114,15 +102,9 @@ INSERT_UPDATE StoreLocatorFeature;code[unique=true]
 ;sundayWorkshops
 ;buyOnlinePickupInStore
 
-UPDATE PointOfService;name[unique=true];features(code);
-
-
+#PoS2WarehouseRel Alice
 INSERT_UPDATE PoS2WarehouseRel;source(name)[unique=true];target(code)[unique=true]
-;Spain;Spain
-;United Kingdom;UK
-;Germany;Germany
-#shaun
-;Poland;Neele-vat
-;Europe;Europe
-;Italy;Italy
+;Rotterdam;Rotterdam
+;UK;UK
+
 
