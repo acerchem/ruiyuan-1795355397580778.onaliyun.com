@@ -5,6 +5,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
+
 import javax.annotation.Resource;
 import com.acerchem.core.dao.AcerchemOrderDao;
 import de.hybris.platform.servicelayer.search.SearchResult;
@@ -14,6 +17,7 @@ import de.hybris.platform.commercefacades.user.data.AddressData;
 import de.hybris.platform.core.model.order.OrderEntryModel;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.AddressModel;
+import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
@@ -184,6 +188,24 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao{
 			}
 		}
 		return orderDetails;
+	}
+
+	@Override
+	public Set<String> getAllAreas() {
+		
+		String SQL = "select {pk},{area} from {Customer}";
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(SQL);
+		final SearchResult<CustomerModel> result = flexibleSearchService.search(query);
+		
+		
+		Set<String> areas = new TreeSet<String>();
+		
+		for (CustomerModel customer:result.getResult())
+		{
+			areas.add(customer.getArea().toString());
+		}
+		return areas;
+		
 	}
 	
 }
