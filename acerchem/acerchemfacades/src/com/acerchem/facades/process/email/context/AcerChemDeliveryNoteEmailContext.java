@@ -12,6 +12,7 @@ import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Required;
 
+import com.acerchem.facades.process.email.context.pojo.AcerChemEmailContextUtils;
 import com.acerchem.facades.process.email.context.pojo.CustomerContactAddressOfEmailData;
 import com.acerchem.facades.process.email.context.pojo.DeliveryNoteEmailContextPoJo;
 import com.acerchem.facades.process.email.context.pojo.ProductItemDataOfEmail;
@@ -208,12 +209,12 @@ public class AcerChemDeliveryNoteEmailContext extends AbstractEmailContext<Order
 						pie.setBatchNo(StringUtils.defaultString(consignEntry.getBatchNum()," "));
 						String tempNet = StringUtils.defaultString(product.getNetWeight(),"0");
 						String tempGross = StringUtils.defaultString(product.getGrossWeight(),"0");
-						if(!StringUtils.isNumeric(tempNet)){
+						if(!AcerChemEmailContextUtils.isNumber(tempNet)){
 							tempNet = "0";
 						}else{
 							tempNet = String.valueOf(Long.valueOf(tempNet) * consignEntry.getQuantity());
 						}
-						if(!StringUtils.isNumeric(tempGross)){
+						if(!AcerChemEmailContextUtils.isNumber(tempGross)){
 							tempGross = "0";
 						}else{
 							tempGross = String.valueOf(Long.valueOf(tempGross) * consignEntry.getQuantity());

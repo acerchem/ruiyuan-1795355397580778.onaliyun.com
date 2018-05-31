@@ -173,12 +173,12 @@ public class AcerChemReleaseNoteEmailContext extends AbstractEmailContext<OrderP
 						pie.setBatchNo(StringUtils.defaultString(consignEntry.getBatchNum(), " "));
 						String tempNet = StringUtils.defaultString(product.getNetWeight(), "0");
 						String tempGross = StringUtils.defaultString(product.getGrossWeight(), "0");
-						if (!StringUtils.isNumeric(tempNet)) {
+						if (!AcerChemEmailContextUtils.isNumber(tempNet)) {
 							tempNet = "0";
 						}else{
 							tempNet = String.valueOf(Long.valueOf(tempNet) * consignEntry.getQuantity());
 						}
-						if (!StringUtils.isNumeric(tempGross)) {
+						if (!AcerChemEmailContextUtils.isNumber(tempGross)) {
 							tempGross = "0";
 						}else{
 							tempGross = String.valueOf(Long.valueOf(tempGross) * consignEntry.getQuantity());
