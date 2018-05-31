@@ -37,9 +37,16 @@
     		<p class="spec">package:<i>${entry.product.netWeight}${entry.product.unitName} &nbsp ${entry.product.packageType}</i></p>
     		<div class="spset">
     			<span class="price">
-    			    <format:price priceData="${entry.basePrice}" displayFreeForZero="true" />
+    			   <%--  <format:price priceData="${entry.basePrice}" displayFreeForZero="true" /> --%>
+    			   <c:if test="${not empty entry.product.promotionPrice}">
+						    <format:price priceData="${entry.product.promotionPrice}" displayFreeForZero="true" />
+						</c:if>
+						
+						<c:if test="${empty entry.product.promotionPrice}">
+					    	 <format:price priceData="${entry.product.price}" displayFreeForZero="true" />
+						</c:if>
     			</span>
-    			<span class="num">${entry.quantity}</span>
+    			<span class="num">${entry.quantity*entry.product.netWeight}${entry.product.unitName}</span>
     		</div>
     	</div>
    	</li>
