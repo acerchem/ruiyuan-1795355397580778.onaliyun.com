@@ -77,6 +77,7 @@ ACC.product = {
     },
 
     displayAddToCartPopup: function (cartResult, statusText, xhr, formElement) {
+    	
     	$ajaxCallEvent=true;
         $('#addToCartLayer').remove();
         if (typeof ACC.minicart.updateMiniCartDisplay == 'function') {
@@ -86,7 +87,8 @@ ACC.product = {
 
         ACC.colorbox.open(titleHeader, {
             html: cartResult.addToCartLayer,
-            width: "460px"
+            width: "100%",
+            height:"100%"
         });
 
         var productCode = $('[name=productCodePost]', formElement).val();
