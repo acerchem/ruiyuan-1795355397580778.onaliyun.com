@@ -37,7 +37,7 @@
 					</div>
 					
 					
-					<img src="${media.url}?x-oss-process=image/resize,m_fixed,h_224,w_239"/>
+					<img src="${media.url}?x-oss-process=image/resize,m_fixed,h_270,w_253"/>
 				</a>
 			</li>
 			</c:if>
@@ -49,7 +49,7 @@
 						<p>Essential Nutrients for sports</p>
 						<span>View the details</span>
 					</div>
-					<img src="${media.url}?x-oss-process=image/resize,m_fixed,h_224,w_239"/>
+					<img src="${media.url}?x-oss-process=image/resize,m_fixed,h_270,w_253"/>
 				</a>
 			</li>
 			</c:if>
@@ -61,7 +61,7 @@
 						<p>Factory examination record</p>
 						<span>View the details</span>
 					</div>
-					<img src="${media.url}?x-oss-process=image/resize,m_fixed,h_224,w_239"/>
+					<img src="${media.url}?x-oss-process=image/resize,m_fixed,h_270,w_253"/>
 				</a>
 			</li>
 			</c:if>
@@ -72,7 +72,7 @@
 					<p>Here are some qualification documents</p>
 					<span>Documents</span>
 				</div>
-				<img src="${media.url}?x-oss-process=image/resize,m_fixed,h_224,w_239"/>
+				<img src="${media.url}?x-oss-process=image/resize,m_fixed,h_270,w_253"/>
 				</a>
 			</li>
 			</c:if>
@@ -94,11 +94,11 @@
                         	var email=$("#email").val();
                         	var telephone=$("#telephone").val();
                         	
-                        	var openUrl = ACC.config.encodedContextPath + '/account/add-support-ticket?email='+email+'&telephone='+telephone;//弹出窗口的url
-                        	var iWidth=700; //弹出窗口的宽度;
-                        	var iHeight=700; //弹出窗口的高度;
-                        	var iTop = (window.screen.availHeight-30-iHeight)/2; //获得窗口的垂直位置;
-                        	var iLeft = (window.screen.availWidth-10-iWidth)/2; //获得窗口的水平位置;
+                        	var openUrl = ACC.config.encodedContextPath + '/account/add-support-ticket?email='+email+'&telephone='+telephone;//å¼¹åºçªå£çurl
+                        	var iWidth=700; //å¼¹åºçªå£çå®½åº¦;
+                        	var iHeight=700; //å¼¹åºçªå£çé«åº¦;
+                        	var iTop = (window.screen.availHeight-30-iHeight)/2; //è·å¾çªå£çåç´ä½ç½®;
+                        	var iLeft = (window.screen.availWidth-10-iWidth)/2; //è·å¾çªå£çæ°´å¹³ä½ç½®;
                         	window.open(openUrl,"","height="+iHeight+", width="+iWidth+", top="+iTop+",scrollbars=yes,resizable=yes,toolbar=no,location=no, left="+iLeft); 
                         });
                     })
