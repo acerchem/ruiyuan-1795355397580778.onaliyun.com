@@ -16,7 +16,8 @@
 <body class="gray">
 <div class="sign-header">
 	<a href="${homeUrl}">
-		<img src="${themeResourcePath}/css/acerchem.png" alt="acerchem"/>
+		<%-- <img src="${themeResourcePath}/css/acerchem.png" alt="acerchem"/> --%>
+		<img height="60px" title="hybris Accelerator" alt="hybris Accelerator" src="https://acerchem.oss-us-east-1.aliyuncs.com/image/20180525/8796129394718.jpg"/>
 	</a>
 </div>
 
