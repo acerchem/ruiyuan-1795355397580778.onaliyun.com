@@ -14,8 +14,9 @@
 #
 
 INSERT_UPDATE UserLevel;UID[unique=true];NAME;levelName;levelCode(code);discount;customers
-;D;Silver;"Silver";D;"1";
-;C;Gold;"Gold";C;"0.985";
-;B;Platinum;"Platinum";B;"0.97";
+;E;Copper;"Copper";D;"1.0";
+;D;Silver;"Silver";D;"0.99";
+;C;Gold;"Gold";C;"0.98";
+;B;Platinum;"Platinum";B;"0.965";
 ;A;Diamonds;"Diamonds";A;"0.95";
 
