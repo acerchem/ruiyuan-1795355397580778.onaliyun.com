@@ -6,21 +6,21 @@
 
 	<c:if test='${level eq 81}'>
 			<div class="swiper-slide">
-				<a href="${contextPath}${urlLink}"><img src="${media.url}" /></a>
+				<a href="${contextPath}${urlLink}"><img src="${media.url}?x-oss-process=image/resize,m_fixed,h_490,w_1519" /></a>
 			</div>
 		</c:if>
 		
 		<c:if test='${level eq 82}'>
 			<div class="swiper-slide">
 				
-				<a href="${contextPath}${urlLink}"><img src="${media.url}" /></a>
+				<a href="${contextPath}${urlLink}"><img src="${media.url}?x-oss-process=image/resize,m_fixed,h_490,w_1519" /></a>
 				</div>
 		</c:if>
 		
 		<c:if test='${level eq 83}'>
 			<div class="swiper-slide">
 				
-				<a href="${contextPath}${urlLink}"><img src="${media.url}" /></a>
+				<a href="${contextPath}${urlLink}"><img src="${media.url}?x-oss-process=image/resize,m_fixed,h_490,w_1519" /></a>
 				</div>
 		</c:if>
 
@@ -37,7 +37,7 @@
 					</div>
 					
 					
-					<img src="${media.url}"/>
+					<img src="${media.url}?x-oss-process=image/resize,m_fixed,h_224,w_239"/>
 				</a>
 			</li>
 			</c:if>
@@ -49,7 +49,7 @@
 						<p>Essential Nutrients for sports</p>
 						<span>View the details</span>
 					</div>
-					<img src="${media.url}"/>
+					<img src="${media.url}?x-oss-process=image/resize,m_fixed,h_224,w_239"/>
 				</a>
 			</li>
 			</c:if>
@@ -61,7 +61,7 @@
 						<p>Factory examination record</p>
 						<span>View the details</span>
 					</div>
-					<img src="${media.url}"/>
+					<img src="${media.url}?x-oss-process=image/resize,m_fixed,h_224,w_239"/>
 				</a>
 			</li>
 			</c:if>
@@ -72,7 +72,7 @@
 					<p>Here are some qualification documents</p>
 					<span>Documents</span>
 				</div>
-				<img src="${media.url}"/>
+				<img src="${media.url}?x-oss-process=image/resize,m_fixed,h_224,w_239"/>
 				</a>
 			</li>
 			</c:if>
