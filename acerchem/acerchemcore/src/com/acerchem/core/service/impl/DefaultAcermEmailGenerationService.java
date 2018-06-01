@@ -3,6 +3,7 @@ package com.acerchem.core.service.impl;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -178,18 +179,15 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 		// add attachment by Jayson.wang
 		final File pdfFile = generatePdfToAttachment(emailBody, emailContext.getToDisplayName());
 		EmailAttachmentModel attachment = null;
+		FileInputStream fileInputStream = null;
+		DataInputStream dis = null;
 		if (pdfFile.exists()) {
 			try {
 
-				final FileInputStream fileInputStream = new FileInputStream(pdfFile);
+				fileInputStream = new FileInputStream(pdfFile);
 
-				final DataInputStream dis = new DataInputStream(fileInputStream);
+				dis = new DataInputStream(fileInputStream);
 				attachment = createEmailAttachment(dis, pdfFile.getName(), "application/pdf");
-
-				fileInputStream.close();
-				dis.close();
-
-				pdfFile.delete();
 
 			} catch (final Exception e) {
 				e.printStackTrace();
@@ -207,6 +205,22 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 		final EmailMessageModel emailMessage = getEmailService().createEmailMessage(toEmails, ccAddress,
 				new ArrayList<EmailAddressModel>(), fromAddress, emailContext.getFromEmail(), emailSubject, emailBody,
 				attachments);
+
+		if (fileInputStream != null) {
+			try {
+				fileInputStream.close();
+			} catch (final IOException ioe) {
+				ioe.printStackTrace();
+			}
+		}
+		if (dis != null) {
+			try {
+				dis.close();
+			} catch (final IOException ioe) {
+				ioe.printStackTrace();
+			}
+		}
+		
 
 		return emailMessage;
 	}
@@ -287,7 +301,7 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 		if (StringUtils.isBlank(displayName)) {
 			file = MediaUtil.composeOrGetParent(tempDir, System.currentTimeMillis() + "_" + "email.pdf");
 		} else {
-			file = MediaUtil.composeOrGetParent(tempDir, System.currentTimeMillis() + "_" + displayName + "email.pdf");
+			file = MediaUtil.composeOrGetParent(tempDir, System.currentTimeMillis() + "_" + displayName + ".pdf");
 		}
 
 		CommonConvertTools.HtmlCovertPdf(content, file.getAbsolutePath());
