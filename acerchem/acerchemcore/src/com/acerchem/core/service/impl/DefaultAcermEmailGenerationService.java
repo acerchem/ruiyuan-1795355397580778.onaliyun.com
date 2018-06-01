@@ -189,6 +189,8 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 				dis = new DataInputStream(fileInputStream);
 				attachment = createEmailAttachment(dis, pdfFile.getName(), "application/pdf");
 
+				dis.close();
+				pdfFile.delete();
 			} catch (final Exception e) {
 				e.printStackTrace();
 			}
@@ -206,13 +208,7 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 				new ArrayList<EmailAddressModel>(), fromAddress, emailContext.getFromEmail(), emailSubject, emailBody,
 				attachments);
 
-		if (fileInputStream != null) {
-			try {
-				fileInputStream.close();
-			} catch (final IOException ioe) {
-				ioe.printStackTrace();
-			}
-		}
+		
 		if (dis != null) {
 			try {
 				dis.close();
@@ -220,7 +216,13 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 				ioe.printStackTrace();
 			}
 		}
-		
+		if (fileInputStream != null) {
+			try {
+				fileInputStream.close();
+			} catch (final IOException ioe) {
+				ioe.printStackTrace();
+			}
+		}
 
 		return emailMessage;
 	}
@@ -308,5 +310,7 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 
 		return file;
 	}
+	
+	
 
 }
