@@ -700,12 +700,14 @@ INSERT_UPDATE Region;country(isocode);isocode[unique=true];isocodeShort;name[lan
 ;GB;GB-LRG;LRG;"Liversedge" 
 ;GB;GB-RGY;RGY;"Rugeley" 
 ;GB;GB-STH;STH;"St Helier" 
-
 ;GB;GB-TOW;TOW;"Towcester" 
 ;GB;GB-MEL;MEL;"Melmerby" 
 ;GB;GB-WYT;WYT;"Wythenshawe" 
 ;GB;GB-KIR;KIR;"Kirkham" 
 ;GB;GB-BLA;BLA;"Blackpool" 
+;GB;GB-NCH;NCH;"Northwich" 
+;GB;GB-CHI;CHI;"Cheshire" 
+
 
 
 #
