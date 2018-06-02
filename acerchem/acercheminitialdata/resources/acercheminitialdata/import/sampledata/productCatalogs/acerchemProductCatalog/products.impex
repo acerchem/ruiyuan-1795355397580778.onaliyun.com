@@ -76,49 +76,58 @@ INSERT_UPDATE Product;characteristic;promotionItem;formulaWeight;chemicalInfo;pa
 ;Sports Nutrition;true;146.144;C5H10N2O3;25;Drum;25;28.2;FCCVI;56-85-9;20;AC02090a;577;Meihua;L-Glutamine;kg;Glutamine;
 
 #
-;Sports Nutrition;false;;;25;Drum;25;26.5;Enterprice Standard;;20;AC02378a;577;Shuguang;L-Glutamine;kg;Branched chain amino acid;
-;Sports Nutrition;false;;;25;Drum;25;27.0;Enterprice Standard;;20;AC02016a;577;Shuguang;L-Glutamine;kg;Branched chain amino acid;
-;Weight management;false;280.4455;C18H32O2;20;Carton;20;21.5;Enterprice Standard;121250-47-3,2420-56-6;25;AC08016a;579;InnoBio;L-Glutamine;kg;Conjugated linoleic acid ;
-;Weight management;false;280.4455;C18H32O2;6;Carton;6;9.0;Enterprice Standard;2420-56-6,121250-47-3;40;AC06172a;579;Nutrasis;L-Glutamine;kpcs;Conjugated linoleic acid;
-;Sports Nutrition;false;149.150;C4H9N3O2·H2O;25;Carton;25;26.6;Enterprice Standard;6020-87-7;20;AC02233a;576;Baosui;L-Glutamine;kg;CREATINE HYDRATE;
-;Sports Nutrition;false;149.150;C4H9N3O2·H2O;25;Carton;25;26.4;Enterprice Standard;6020-87-7;20;AC02233b;576;Chengzhi;L-Glutamine;kg;CREATINE HYDRATE;
-;Sports Nutrition;false;149.150;C4H9N3O2·H2O;25;Carton;25;26.6;Enterprice Standard;6020-87-7;20;AC02236a;576;Baosui;L-Glutamine;kg;CREATINE HYDRATE;
-;Brain Health;false;368.380;C21H20O6;25;Drum;25;28.0;Enterprice Standard;458-37-7;20;AC03514a;575;Ningbo Herb;L-Glutamine;kg;Turmeric root extract;
-;Brain Health;false;368.380;C21H20O6;25;Drum;25;28.0;Enterprice Standard;458-37-7;20;AC03515a;575;Ningbo Herb;L-Glutamine;kg;Turmeric root extract;
-;Joint Health;false;215.630;C6H13NO5.HCl;25;Drum;25;27.0;USP;66-84-2;20;AC02340a;576;Rixing;L-Glutamine;kg; Glucosamine Hydrochloride ;
-;Joint Health;false;297.325;C6H12NKO8S;25;Drum;25;27.0;USP;31284-96-5;20;AC02342a;576;Rixing;L-Glutamine;kg;Glucosamine Sulfate Potassium Chloride;
-;Heart&Cardiovascular;false;150.130;C5H10O5;25;Drum;25;28.0;USP;50-69-1;20;AC02263a;576;Chengzhi;L-Glutamine;kg;ALPHA-D-RIBOFURANOSE;
-;Sports Nutrition;false;;;25;Drum;25;28.0;Enterprice Standard;;20;AC02379a;577;Sanxia;L-Glutamine;kg;Branched chain amino acid;
-;Heart&Cardiovascular;false;;;6;Carton;6;9.0;Enterprice Standard;8016-13-5;40;AC06001a;579;Braveiy;L-Glutamine;kpcs;Fish oil soft capsule;
-;Brain Health;false;;;25;Drum;25;28.0;USP;90045-36-6;20;AC03097a;575;Delekang;L-Glutamine;kg;CINKGO BILOBA P.E.;
-;Weight management;false;;;25;Drum;25;28.0;USP;;20;AC03184a;575;CCGB;L-Glutamine;kg;chlorogenic acid tea polyphenol;
-;Sports Nutrition;false;274.32;C10H18CaO6;25;Drum;25;28.0;USP;135236-72-5;20;AC05170a;576;LONCIN;L-Glutamine;kg;Calcium beta-hydroxy-beta-methylbutyrate;
-;Sports Nutrition;false;180.160;C6H12O6;25;Drum;25;27.0;USP;6917-35-7;20;AC02393a;576;Yuwei;L-Glutamine;kg;Cyclohexanehexol;
-;Sports Nutrition;false;;;25;Drum;25;27.0;Enterprice Standard;;20;AC02395a;577;Shuguang;L-Glutamine;kg;Branched chain amino acid;
-;Sports Nutrition;false;320.2991;C11H20N4O7;25;Drum;25;28.0;Enterprice Standard;16856-18-1;20;AC02005a;577;Jingjing;L-Glutamine;kg;L-ARGININE A-KETOGLUTARATE;
-;Weight management;false;161.200;C7H15NO3;25;Drum;25;27.5;USP;406-76-8;20;AC02047a;577;ChengDa;L-Glutamine;kg;Levocarnitine;
-;Weight management;false;197.6598;C7H16NO3Cl;25;Drum;25;27.5;Enterprice Standard;10017-44-4;20;AC02317a;577;Hengtai;L-Glutamine;kg;DL-Carnitine hydrochloride;
-;Weight management;false;472.490;C18H36N2O12;25;Drum;25;28.0;USP;36687-82-8;20;AC02048a;577;Northeast Pharm;L-Glutamine;kg;L-Carnitine Tartrate;
-;Weight management;false;472.490;C18H36N2O12;25;Drum;25;27.0;USP;36687-82-8;20;AC02048b;577;Huayang;L-Glutamine;kg;L-Carnitine Tartrate;
-;Weight management;false;472.490;C18H36N2O12;25;Drum;25;27.5;USP;36687-82-8;20;AC02048c;577;ChengDa;L-Glutamine;kg;L-Carnitine Tartrate;
-;Sports Nutrition;false;175.190;C6H13N3O3;25;Drum;25;28.0;AJI;372-75-8;20;AC02040a;577;Jingjing;L-Glutamine;kg;;
-;Sports Nutrition;false;309.27316;C10H19N3O8;25;Drum;25;28.0;Enterprice Standard;54940-97-5;20;AC02045a;577;Jingjing;L-Glutamine;kg;Citrulline malate ;
-;Sports Nutrition;false;309.27316;C10H19N3O8;25;Drum;25;28.0;Enterprice Standard;54940-97-5;20;AC02046a;577;Jingjing;L-Glutamine;kg;Citrulline malate ;
-;Sports Nutrition;false;131.170;C6H13NO2;25;Carton;25;26.5;USP;61-90-5;20;AC02145a;577;Jinghai;L-Glutamine;kg;;
-;Sports Nutrition;false;131.170;C6H13NO2;25;Carton;25;26.5;USP;61-90-5;20;AC02175a;577;Jinghai;L-Glutamine;kg;;
-;Sports Nutrition;false;125.150;C2H7NO3S;25;Drum;25;27.0;JP;107-35-7;20;AC02450a;577;Fuchi;L-Glutamine;kg;Cholic acid;
-;Weight management;false;203.23558;C9H17NO4;25;Drum;25;28.0;USP;3040-38-8;20;AC02315a;577;Northeast Pharm;L-Glutamine;kg;Levacecarnine hydrochloride;
-;Weight management;false;203.23558;C9H17NO4;25;Drum;25;27.0;USP;3040-38-8;20;AC02315b;577;Huayang;L-Glutamine;kg;Levacecarnine hydrochloride;
-;Joint Health;false;221.210;C8H15NO6;25;Drum;25;27.0;USP;7512-17-6;20;AC02312a;580;Rixing;L-Glutamine;kg;N-acetyl-Glucosamine;
-;Heart&Cardiovascular;false;;;6;Carton;6;9.0;Enterprice Standard;;40;AC06089a;579;Braveiy;L-Glutamine;kpcs;;
-;Sports Nutrition;false;;;20;Bag;20;21.0;Enterprice Standard;222400-29-5;25;AC07158a;578;Tfull;L-Glutamine;kg;Pea Protein Isolate;
-;Sports Nutrition;false;;;20;Bag;20;21.0;Enterprice Standard;222400-29-5;25;AC07802a;578;Tfull;L-Glutamine;kg;Pea Protein Isolate;
-;Sweetening;false;397.630;C12H19Cl3O8;25;Drum;25;27.0;Enterprice Standard;56038-13-2;20;AC03132a;576;Jinhe;L-Glutamine;kg;;
-;Sports Nutrition;false;;;25;Drum;25;28.0;Enterprice Standard;;20;AC03131a;575;Originherb;L-Glutamine;kg;Tribulus terrestris P.E.;
-;Immune system;false;176.120;C6H8O6;25;Carton;25;26.5;Enterprice Standard;50-81-7;20;AC01363a;571;Jiangshan;L-Glutamine;kg;Ascorbic Acid;
-;Immune system;false;176.120;C6H8O6;25;Carton;25;26.5;EP,USP,BP;50-81-7;20;AC01361a;571;Qiyuan;L-Glutamine;kg;Ascorbic Acid;
-;Heart&Cardiovascular;false;384.6377;C27H44O;25;Carton;25;27.0;Enterprice Standard;67-97-0,8024-19-9,8050-67-7;20;AC01551a;571;LN;L-Glutamine;kg;Cholecalciferol;
+;Sports Nutrition;false;;;25;Drum;25;26.5;Enterprice Standard;;20;AC02378a;577;Shuguang;BCAA 2:1:1;kg;Branched chain amino acid;
+;Sports Nutrition;false;;;25;Drum;25;27.0;Enterprice Standard;;20;AC02016a;577;Shuguang;BCAA DC 2：1：1;kg;Branched chain amino acid;
+;Weight management;false;280.4455;C18H32O2;20;Carton;20;21.5;Enterprice Standard;121250-47-3,2420-56-6;25;AC08016a;579;InnoBio;CLA 40% TG Powder;kg;Conjugated linoleic acid ;
+;Weight management;false;280.4455;C18H32O2;6;Carton;6;9.0;Enterprice Standard;2420-56-6,121250-47-3;40;AC06172a;579;Nutrasis;CLA softgel;kpcs;Conjugated linoleic acid;
+;Sports Nutrition;false;149.150;C4H9N3O2·H2O;25;Carton;25;26.6;Enterprice Standard;6020-87-7;20;AC02233a;576;Baosui;Creatine Monohydrate 200mesh;kg;CREATINE HYDRATE;
+;Sports Nutrition;false;149.150;C4H9N3O2·H2O;25;Carton;25;26.4;Enterprice Standard;6020-87-7;20;AC02233b;576;Chengzhi;Creatine Monohydrate 200mesh;kg;CREATINE HYDRATE;
+;Sports Nutrition;false;149.150;C4H9N3O2·H2O;25;Carton;25;26.6;Enterprice Standard;6020-87-7;20;AC02236a;576;Baosui;Creatine Monohydrate 80mesh;kg;CREATINE HYDRATE;
+;Brain Health;false;368.380;C21H20O6;25;Drum;25;28.0;Enterprice Standard;458-37-7;20;AC03514a;575;Ningbo Herb;Curcumin 95% HPLC Extract DC;kg;Turmeric root extract;
+;Brain Health;false;368.380;C21H20O6;25;Drum;25;28.0;Enterprice Standard;458-37-7;20;AC03515a;575;Ningbo Herb;Curcumin 95% HPLC Extract Powder;kg;Turmeric root extract;
+;Joint Health;false;215.630;C6H13NO5.HCl;25;Drum;25;27.0;USP;66-84-2;20;AC02340a;576;Rixing;D-Glucosamine HCL 30mesh;kg; Glucosamine Hydrochloride ;
+;Joint Health;false;297.325;C6H12NKO8S;25;Drum;25;27.0;USP;31284-96-5;20;AC02342a;576;Rixing;D-Glucosamine Sulfate 2KCL 80mesh;kg;Glucosamine Sulfate Potassium Chloride;
+;Heart&Cardiovascular;false;150.130;C5H10O5;25;Drum;25;28.0;USP;50-69-1;20;AC02263a;576;Chengzhi;D-Ribose USP;kg;ALPHA-D-RIBOFURANOSE;
+;Sports Nutrition;false;;;25;Drum;25;28.0;Enterprice Standard;;20;AC02379a;577;Sanxia;Fermentation IBCAA 2:1:1;kg;Branched chain amino acid;
+;Heart&Cardiovascular;false;;;6;Carton;6;9.0;Enterprice Standard;8016-13-5;40;AC06001a;579;Braveiy;Fish oil 1000mg (EE) 18/12;kpcs;Fish oil soft capsule;
+;Brain Health;false;;;25;Drum;25;28.0;USP;90045-36-6;20;AC03097a;575;Delekang;Ginkgo Biloba Extract 24/6/5 USP;kg;CINKGO BILOBA P.E.;
+;Weight management;false;;;25;Drum;25;28.0;USP;;20;AC03184a;575;CCGB;Green Coffee Bean Chlorogenic Acids 50% HPLC;kg;chlorogenic acid tea polyphenol;
+;Sports Nutrition;false;274.32;C10H18CaO6;25;Drum;25;28.0;USP;135236-72-5;20;AC05170a;576;LONCIN;HMB-CA USP;kg;Calcium beta-hydroxy-beta-methylbutyrate;
+;Sports Nutrition;false;180.160;C6H12O6;25;Drum;25;27.0;USP;6917-35-7;20;AC02393a;576;Yuwei;Inositol 99% USP;kg;Cyclohexanehexol;
+;Sports Nutrition;false;;;25;Drum;25;27.0;Enterprice Standard;;20;AC02395a;577;Shuguang;Instant BCAA Powder 2:1:1;kg;Branched chain amino acid;
+;Sports Nutrition;false;320.2991;C11H20N4O7;25;Drum;25;28.0;Enterprice Standard;16856-18-1;20;AC02005a;577;Jingjing;L-Arginine AKG;kg;L-ARGININE A-KETOGLUTARATE;
+;Weight management;false;161.200;C7H15NO3;25;Drum;25;27.5;USP;406-76-8;20;AC02047a;577;ChengDa;L-Carnitine Base USP;kg;Levocarnitine;
+;Weight management;false;197.6598;C7H16NO3Cl;25;Drum;25;27.5;Enterprice Standard;10017-44-4;20;AC02317a;577;Hengtai;L-Carnitine HCL;kg;DL-Carnitine hydrochloride;
+;Weight management;false;472.490;C18H36N2O12;25;Drum;25;28.0;USP;36687-82-8;20;AC02048a;577;Northeast Pharm;L-Carnitine L-Tartrate USP;kg;L-Carnitine Tartrate;
+;Weight management;false;472.490;C18H36N2O12;25;Drum;25;27.0;USP;36687-82-8;20;AC02048b;577;Huayang;L-Carnitine L-Tartrate USP;kg;L-Carnitine Tartrate;
+;Weight management;false;472.490;C18H36N2O12;25;Drum;25;27.5;USP;36687-82-8;20;AC02048c;577;ChengDa;L-Carnitine L-Tartrate USP;kg;L-Carnitine Tartrate;
+;Sports Nutrition;false;175.190;C6H13N3O3;25;Drum;25;28.0;AJI;372-75-8;20;AC02040a;577;Jingjing;L-Citrulline AJI92;kg;;
+;Sports Nutrition;false;309.27316;C10H19N3O8;25;Drum;25;28.0;Enterprice Standard;54940-97-5;20;AC02045a;577;Jingjing;L-Citrulline DL-Malate 1:1;kg;Citrulline malate ;
+;Sports Nutrition;false;309.27316;C10H19N3O8;25;Drum;25;28.0;Enterprice Standard;54940-97-5;20;AC02046a;577;Jingjing;L-Citrulline DL-Malate 2:1 AJI92;kg;Citrulline malate ;
+;Sports Nutrition;false;131.170;C6H13NO2;25;Carton;25;26.5;USP;61-90-5;20;AC02145a;577;Jinghai;L-Leucine Instant USP;kg;;
+;Sports Nutrition;false;131.170;C6H13NO2;25;Carton;25;26.5;USP;61-90-5;20;AC02175a;577;Jinghai;L-Leucine USP;kg;;
+;Sports Nutrition;false;125.150;C2H7NO3S;25;Drum;25;27.0;JP;107-35-7;20;AC02450a;577;Fuchi;L-Taurine;kg;Cholic acid;
+;Weight management;false;203.23558;C9H17NO4;25;Drum;25;28.0;USP;3040-38-8;20;AC02315a;577;Northeast Pharm;N-Acetyl L-Carnitine USP;kg;Levacecarnine hydrochloride;
+;Weight management;false;203.23558;C9H17NO4;25;Drum;25;27.0;USP;3040-38-8;20;AC02315b;577;Huayang;N-Acetyl L-Carnitine USP;kg;Levacecarnine hydrochloride;
+;Joint Health;false;221.210;C8H15NO6;25;Drum;25;27.0;USP;7512-17-6;20;AC02312a;576;Rixing;N-Acetyl-D-Glucosamine ;kg;N-acetyl-Glucosamine;
+;Heart&Cardiovascular;false;;;6;Carton;6;9.0;Enterprice Standard;;40;AC06089a;579;Braveiy;Omega 3.6.9 Softgel;kpcs;;
+;Sports Nutrition;false;;;20;Bag;20;21.0;Enterprice Standard;222400-29-5;25;AC07158a;578;Tfull;Pea Protein 80%;kg;Pea Protein Isolate;
+;Sports Nutrition;false;;;20;Bag;20;21.0;Enterprice Standard;222400-29-5;25;AC07802a;578;Tfull;Pea Protein 85%;kg;Pea Protein Isolate;
+;Sweetening;false;397.630;C12H19Cl3O8;25;Drum;25;27.0;Enterprice Standard;56038-13-2;20;AC03132a;576;Jinhe;Sucralose 98%;kg;;
+;Sports Nutrition;false;;;25;Drum;25;28.0;Enterprice Standard;;20;AC03131a;575;Originherb;Tribulus 90% UV THC FREE;kg;Tribulus terrestris P.E.;
+;Immune system;false;176.120;C6H8O6;25;Carton;25;26.5;Enterprice Standard;50-81-7;20;AC01363a;571;Jiangshan;Vitamin C DC 97;kg;Ascorbic Acid;
+;Immune system;false;176.120;C6H8O6;25;Carton;25;26.5;EP,USP,BP;50-81-7;20;AC01361a;571;Qiyuan;Vitamin C Powder;kg;Ascorbic Acid;
+;Heart&Cardiovascular;false;384.6377;C27H44O;25;Carton;25;27.0;Enterprice Standard;67-97-0,8024-19-9,8050-67-7;20;AC01551a;571;LN;Vitamin D3 100,000IU/G CWS;kg;Cholecalciferol;
 
+#
+;Joint Health;false;479.368;C13H21NO16S;25;Drum;25;27.5;Enterprise Standard;9007-28-7;20;AC05001a;576;Ruikangda;Chondroitin Sulphate Shark;kg;Chondroitin Sulfate;
+;Sports Nutrition;false;;;25;Drum;25;;Enterprice Standard;;20;AC02380a;577;Fufeng;Fermentation BCAA 2:1:1;kg;Branched chain amino acid;
+;Sports Nutrition;false;89.090;C3H7NO2;25;Drum;25;27.5;AJI;56-41-7;20;AC02361a;577;Huaheng;Beta Alanine;kg;;
+;Sports Nutrition;false;174.200;C6H14N4O2;20;Drum;20;21.5;AJI;74-79-3;25;AC02021a;577;DAESANG;L-Arginine Base;kg;L-arginie;
+;Sports Nutrition;false;131.170;C6H13NO2;25;Drum;25;28.2;USP;73-32-5;20;AC02141a;577;Meihua;L-Isoleucine USP24;kg;;
+;Sports Nutrition;false;117.150;C5H11NO2;25;Drum;25;28.2;USP;72-18-4;20;AC02230a;577;Meihua;L-Valine USP;kg;Valine;
+;Sports Nutrition;false;75.070;C2H5NO2;25;Bag;25;25.2;USP;56-40-6;20;AC02101a;577;Changhao;L-Glycine EP Grade;kg;Aminoacetic acid;
+;Sports Nutrition;false;;;20;Bag;20;21.0;Enterprice Standard;;25;AC07002a;578;Yiwanjia;Rice Protein 80% 300MESH;kg;Rice Protein Isolate;
 
 
 
@@ -195,6 +204,15 @@ INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(co
 ;200;Rotterdam;notSpecified;10;0;0;100;AC01361a;0;20;50
 ;200;Rotterdam;notSpecified;10;0;0;100;AC01551a;0;20;50
 
+;200;Rotterdam;notSpecified;10;0;0;100;AC05001a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02380a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02361a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02021a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02141a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02230a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC02101a;0;20;50
+;200;Rotterdam;notSpecified;10;0;0;100;AC07002a;0;20;50
+
 #shaun
 ;300;UK;notSpecified;10;0;0;100;AC05080a;0;20;50
 ;300;UK;notSpecified;10;0;0;100;AC05080b;0;20;50
@@ -249,6 +267,16 @@ INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(co
 ;200;UK;notSpecified;10;0;0;100;AC01361a;0;20;50
 ;200;UK;notSpecified;10;0;0;100;AC01551a;0;20;50
 
+;200;UK;notSpecified;10;0;0;100;AC05001a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC02380a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC02361a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC02021a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC02141a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC02230a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC02101a;0;20;50
+;200;UK;notSpecified;10;0;0;100;AC07002a;0;20;50
+
+
  
 UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehouse(code));vendors(code)
 
@@ -263,6 +291,125 @@ UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehou
 ;AC02354a;;AC02354a:Rotterdam;
 ;AC05003a;;AC05003a:Rotterdam;
 ;AC02090a;;AC02090a:Rotterdam;
+
+;AC02378a;;AC02378a:Rotterdam;
+;AC02016a;;AC02016a:Rotterdam;
+;AC08016a;;AC08016a:Rotterdam;
+;AC06172a;;AC06172a:Rotterdam;
+;AC02233a;;AC02233a:Rotterdam;
+;AC02233b;;AC02233b:Rotterdam;
+;AC02236a;;AC02236a:Rotterdam;
+;AC03514a;;AC03514a:Rotterdam; 
+#;AC03515a;;AC03515a:Rotterdam; 
+;AC02340a;;AC02340a:Rotterdam;
+;AC02342a;;AC02342a:Rotterdam;
+;AC02263a;;AC02263a:Rotterdam;
+;AC02379a;;AC02379a:Rotterdam;
+;AC06001a;;AC06001a:Rotterdam;
+;AC03097a;;AC03097a:Rotterdam;
+;AC03184a;;AC03184a:Rotterdam;
+;AC05170a;;AC05170a:Rotterdam;
+;AC02393a;;AC02393a:Rotterdam;
+;AC02395a;;AC02395a:Rotterdam;
+;AC02005a;;AC02005a:Rotterdam;
+;AC02047a;;AC02047a:Rotterdam;
+;AC02317a;;AC02317a:Rotterdam;
+;AC02048a;;AC02048a:Rotterdam; 
+;AC02048b;;AC02048b:Rotterdam;
+;AC02048c;;AC02048c:Rotterdam;
+;AC02040a;;AC02040a:Rotterdam;
+;AC02045a;;AC02045a:Rotterdam;
+;AC02046a;;AC02046a:Rotterdam;
+;AC02145a;;AC02145a:Rotterdam;
+;AC02175a;;AC02175a:Rotterdam;
+;AC02450a;;AC02450a:Rotterdam;
+;AC02315a;;AC02315a:Rotterdam; 
+;AC02315b;;AC02315b:Rotterdam;
+;AC02312a;;AC02312a:Rotterdam;
+;AC06089a;;AC06089a:Rotterdam;
+;AC07158a;;AC07158a:Rotterdam;
+;AC07802a;;AC07802a:Rotterdam;
+;AC03132a;;AC03132a:Rotterdam;
+;AC03131a;;AC03131a:Rotterdam;
+;AC01363a;;AC01363a:Rotterdam;
+;AC01361a;;AC01361a:Rotterdam;
+;AC01551a;;AC01551a:Rotterdam;
+
+
+
+;AC05001a;;AC05001a:Rotterdam;
+;AC02380a;;AC02380a:Rotterdam;
+;AC02361a;;AC02361a:Rotterdam;
+;AC02021a;;AC02021a:Rotterdam;
+;AC02141a;;AC02141a:Rotterdam;
+;AC02230a;;AC02230a:Rotterdam;
+;AC02101a;;AC02101a:Rotterdam;
+;AC07002a;;AC07002a:Rotterdam;
+
+#shaun
+;AC05080a;;AC05080a:UK;
+;AC05080b;;AC05080b:UK;
+;AC03390a;;AC03390a:UK;
+;AC03138a;;AC03138a:UK;
+;AC03887a;;AC03887a:UK;
+;AC03142a;;AC03142a:UK;
+;AC02345a;;AC02345a:UK;
+;AC02354a;;AC02354a:UK;
+;AC05003a;;AC05003a:UK;
+;AC02090a;;AC02090a:UK;
+
+;AC02378a;;AC02378a:UK;
+;AC02016a;;AC02016a:UK;
+;AC08016a;;AC08016a:UK;
+;AC06172a;;AC06172a:UK;
+;AC02233a;;AC02233a:UK;
+;AC02233b;;AC02233b:UK;
+;AC02236a;;AC02236a:UK;
+;AC03514a;;AC03514a:UK; 
+#;AC03515a;;AC03515a:UK;
+;AC02340a;;AC02340a:UK;
+;AC02342a;;AC02342a:UK;
+;AC02263a;;AC02263a:UK;
+;AC02379a;;AC02379a:UK;
+;AC06001a;;AC06001a:UK;
+;AC03097a;;AC03097a:UK;
+;AC03184a;;AC03184a:UK;
+;AC05170a;;AC05170a:UK;
+;AC02393a;;AC02393a:UK;
+;AC02395a;;AC02395a:UK;
+;AC02005a;;AC02005a:UK;
+;AC02047a;;AC02047a:UK;
+;AC02317a;;AC02317a:UK;
+;AC02048a;;AC02048a:UK; 
+;AC02048b;;AC02048b:UK;
+;AC02048c;;AC02048c:UK;
+;AC02040a;;AC02040a:UK;
+;AC02045a;;AC02045a:UK;
+;AC02046a;;AC02046a:UK;
+;AC02145a;;AC02145a:UK;
+;AC02175a;;AC02175a:UK;
+;AC02450a;;AC02450a:UK;
+;AC02315a;;AC02315a:UK; 
+;AC02315b;;AC02315b:UK;
+;AC02312a;;AC02312a:UK;
+;AC06089a;;AC06089a:UK;
+;AC07158a;;AC07158a:UK;
+;AC07802a;;AC07802a:UK;
+;AC03132a;;AC03132a:UK;
+;AC03131a;;AC03131a:UK;
+;AC01363a;;AC01363a:UK;
+;AC01361a;;AC01361a:UK;
+;AC01551a;;AC01551a:UK;
+
+;AC05001a;;AC05001a:UK;
+;AC02380a;;AC02380a:UK;
+;AC02361a;;AC02361a:UK;
+;AC02021a;;AC02021a:UK;
+;AC02141a;;AC02141a:UK;
+;AC02230a;;AC02230a:UK;
+;AC02101a;;AC02101a:UK;
+;AC07002a;;AC07002a:UK;
+
 
 
 
@@ -290,7 +437,7 @@ UPDATE Product;minOrderQuantity;code[unique=true];$catalogVersion;name[lang=$lan
 ;4;AC02236a;;Creatine Monohydrate 80mesh;Manufacturer:Baosui;White Crystalline powder<br/>
 ;4;AC03514a;;Curcumin 95% HPLC Extract DC;Manufacturer:Ningbo Herb Pure Natural;Orange yellow powder<br/> A natural pigment <br/>Enhance body's immunity<br/>
 ;4;AC03515a;;Curcumin 95% HPLC Extract Powder;Manufacturer:Ningbo Herb Pure Natural;Orange yellow powder<br/>A natural pigment<br/>Enhance body's immunity<br/>
-;4;AC02340a;;D-Glucosamine HCL 30mesh;Manufacturer:Rixing With BRC Certificate;White Crystallion powder<br/>Repair and strengthen articular cartilage<br/>Excellent bone joint protection formula<br/>
+;4;AC02340a;;Vegan D-Glucosamine HCL 30mesh;Manufacturer:Rixing With BRC Certificate;White Crystallion powder<br/>Repair and strengthen articular cartilage<br/>Excellent bone joint protection formula<br/>
 ;4;AC02342a;;D-Glucosamine Sulfate 2KCL 80mesh;Manufacturer:Rixing With BRC Certificate;White Crystallion powder<br/>Repair and strengthen articular cartilage<br/>Excellent bone joint protection formula<br/>
 ;4;AC02263a;;D-Ribose USP;Manufacturer:Chengzhi; White crystalline powder<br/>
 ;4;AC02379a;;Fermentation IBCAA 2:1:1;Manufacturer:Sanxia;White to off-white powder<br/>
@@ -323,6 +470,16 @@ UPDATE Product;minOrderQuantity;code[unique=true];$catalogVersion;name[lang=$lan
 ;4;AC01363a;;Vitamin C DC 97;Manufacturer:Jiangshan With HPMC;White or Semi-white Granule<br/>
 ;4;AC01361a;;Vitamin C Powder;Manufacturer:Qiyuan;White Crystalline powder<br/>
 ;4;AC01551a;;Vitamin D3 100,000IU/G CWS;Manufacturer:LN;White,free-flowing powder<br/>
+
+#
+;4;AC05001a;;Chondroitin Sulphate Shark;Manufacturer:RKD High purity;100% water soluble;White or almost white powder<br/> Repair and strengthen articular cartilage<br/> Excellent bone joint protection formula<br/>
+;4;AC02380a;;Fermentation BCAA 2:1:1;Manufacturer:Fufeng;White to off-white powder<br/>
+;4;AC02361a;;Beta Alanine;Manufacturer:Huaheng;White crystal or crystalline powder<br/>
+;5;AC02021a;;L-Arginine Base;Manufacturer:DAESANG;White or almost white crystalline powder<br/>
+;4;AC02141a;;L-Isoleucine USP24;Manufacturer:Meihua;Whitish crystalline powder<br/>
+;4;AC02230a;;L-Valine USP;Manufacturer:Meihua;Whitish crystalline powder<br/>
+;4;AC02101a;;L-Glycine EP Grade;Manufacturer:Changhao;White crystalline or crystalline powder<br/>
+;5;AC07002a;;Rice Protein 80% 300MESH;Manufacturer:Yiwanjia;Light Yellow Fine Powder<br/>
 
 
 
@@ -407,6 +564,14 @@ UPDATE Product;code[unique=true];$approved;$catalogVersion;
 ;AC01361a
 ;AC01551a
 
+;AC05001a
+;AC02380a
+;AC02361a
+;AC02021a
+;AC02141a
+;AC02230a
+;AC02101a
+;AC07002a
 
 
 
@@ -473,6 +638,14 @@ INSERT_UPDATE PriceRow;startTime[unique=true,dateformat=yyyy-MM-dd HH:mm:ss];end
 ;2018-04-26 10:33:33;2118-04-26 10:33:33;AC01361a;kg;USD;7.50;1;1;false
 ;2018-04-26 10:33:33;2118-04-26 10:33:33;AC01551a;kg;USD;32.00;1;1;false
 
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC05001a;kg;USD;105.00;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02380a;kg;USD;13.00;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02361a;kg;USD;7.60;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02021a;kg;USD;8.50;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02141a;kg;USD;14.50;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02230a;kg;USD;7.20;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02101a;kg;USD;4.50;1;1;false
+;2018-04-26 10:33:33;2118-04-26 10:33:33;AC07002a;kg;USD;4.60;1;1;false
 
 
 
