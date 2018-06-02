@@ -51,6 +51,12 @@ p.western {
 	font-size: 16px;
 	size: 13;
 }
+.font2 {
+	font-weight: bold;
+	font-family: Calibri, sans-serif;
+	font-size: 16px;
+	size: 13;
+}
 </style>
 </head>
 <body lang="en-US" text="#000000" link="#0000ff" dir="ltr">
@@ -64,7 +70,8 @@ p.western {
 		</td>
          <td width="25%">&nbsp;</td>
          <td   align="left" >
-            <font face="Arial, serif" size="4" style="font-size: 14pt; color: #8C8C8C;"><em><strong>ACERCHEM UK LTD</strong></em></font><br/><br/>
+		 <br/>
+            <font face="Arial, serif" size="4" style="font-size: 14pt; color: #8C8C8C;"><em><strong>ACERCHEM UK LTD</strong></em></font><br/>
             <font face="Arial, serif" size="2" style="font-size: 11pt; color: #ACACAB;">Add.: SINGLETON PARK, SWANSEA</font><br/>
             <font face="Arial, serif" size="2" style="font-size: 11pt; color: #A9A9A9;">SA2 8PP, WALES, UK</font><br/>
             <font face="Arial, serif" size="2" style="font-size: 11pt; color: #A9A9A9;">Tel: +44 (0) 1639 792295</font>
@@ -74,7 +81,7 @@ p.western {
         <td style="border-top:#cccccc solid 1px;border-bottom:#cccccc solid 1px;"
 		colspan="4"><font color="#8E8989">
         ACERCHEM UK LTD .VAT No.:GB111785918
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    
         ACERCHEM UK LTD .Company No.:07460051 	
         </font></td>
       </tr>
@@ -94,9 +101,10 @@ p.western {
       <font size="6" style="font-size: 22pt"> <strong> INVOICE </strong> </font>
       </td>
     </tr>
-    <tr>
-      <td colspan="2" align="center"></td>
+	<tr height="10">
+      <td colspan="2" align="center">&nbsp; </td>
     </tr>
+    
     <tr>
       <td>INVOICE NO.: ${ctx.order.code}</td>
       <td>&nbsp;</td>
@@ -112,35 +120,23 @@ p.western {
       <td>&nbsp;</td>
     </tr>
     <tr>
-      <td>$!{ctx.customerAddressData.town}</td>
-      <td>&nbsp;</td>
-    </tr>
-    <tr>
-      <td>$!{ctx.customerAddressData.region}</td>
-      <td>&nbsp;</td>
-    </tr>
-    <tr>
-      <td>$!{ctx.customerAddressData.country}</td>
-      <td>&nbsp;</td>
+      <td colspan="2">Address: ${ctx.customerAddress}</td>
     </tr>
     <tr>
       <td>VAT: $!{ctx.customer.vatNo}</td>
       <td>&nbsp;</td>
     </tr>
+    
     <tr>
-      <td></td>
-      <td>&nbsp;</td>
-    </tr>
-    <tr>
-      <td>SHIP FROM: $!{ctx.warehouse}</td>
+      <td width="50%">SHIP FROM: $!{ctx.warehouse}</td>
       <td >SHIP TO: $!{ctx.shipto}</td>
     </tr>
     <tr>
-      <td>Payment terms: $!{ctx.paymentTerms} </td>
+      <td width="50%">Payment terms: $!{ctx.paymentTerms} </td>
       <td >Currency: USD</td>
     </tr>
     <tr>
-      <td>ACERCHEM UK LTD .VAT No.:GB111785918  </td>
+      <td width="50%">ACERCHEM UK LTD .VAT No.:GB111785918  </td>
       <td >ACERCHEM UK LTD. Company No.:07460051</td>
     </tr>
   </tbody>
@@ -191,7 +187,7 @@ p.western {
   </tr>
 
   <tr class="font1">
-    <td colspan="2">Please wire transfer the above amount to:</td>
+    <td colspan="2" class="font2">Please wire transfer the above amount to:</td>
   </tr>
    <tr class="font1">
     <td width="117">
@@ -226,12 +222,14 @@ p.western {
   </tr>
     <tr class="font1">
     <td colspan="2">
-    Banker's Address: 1 Alexandra Road Gorseinon, Swansea SA4 4NJ
+    <strong> Banker's Address:</strong> 1 Alexandra Road Gorseinon, Swansea SA4 4NJ
     </td>
   </tr>
     <tr class="font1">
     <td>
+	 <strong>
     SWIFT:
+	 </strong>
     </td>
     <td>
     MIDLGB22
@@ -239,15 +237,17 @@ p.western {
   </tr>
     <tr class="font1">
     <td>
+	 <strong>
     Sort code: 
-    </td>
+     </strong>
+	</td>
     <td>
     400515
     </td>
   </tr>
     <tr class="font1">
     <td colspan="2">
-    IBAN: GB59MIDL40051571554850
+    <strong> IBAN: </strong> GB59MIDL40051571554850
     </td>
   </tr>
   <tr class="font1">
@@ -290,7 +290,8 @@ p.western {
 		</td>
          <td width="25%">&nbsp;</td>
          <td   align="left" >
-            <font face="Arial, serif" size="4" style="font-size: 14pt; color: #8C8C8C;"><em><strong>ACERCHEM UK LTD</strong></em></font><br/><br/>
+		 <br/>
+            <font face="Arial, serif" size="4" style="font-size: 14pt; color: #8C8C8C;"><em><strong>ACERCHEM UK LTD</strong></em></font><br/>
             <font face="Arial, serif" size="2" style="font-size: 11pt; color: #ACACAB;">Add.: SINGLETON PARK, SWANSEA</font><br/>
             <font face="Arial, serif" size="2" style="font-size: 11pt; color: #A9A9A9;">SA2 8PP, WALES, UK</font><br/>
             <font face="Arial, serif" size="2" style="font-size: 11pt; color: #A9A9A9;">Tel: +44 (0) 1639 792295</font>
@@ -300,7 +301,7 @@ p.western {
         <td style="border-top:#cccccc solid 1px;border-bottom:#cccccc solid 1px;"
 		colspan="4"><font color="#8E8989">
         ACERCHEM UK LTD .VAT No.:GB111785918
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         ACERCHEM UK LTD .Company No.:07460051 	
         </font></td>
       </tr>
@@ -368,16 +369,16 @@ p.western {
 </table>
 
 #if ($ctx.append.productLists.size() > 0)
-  <table class="table3" width="700" border="1" cellpadding="1" cellspacing="0" align="center" style="text-align: center; border-collapse: collapse" bordercolor="#000000">
+  <table class="font1" width="700" border="1" cellpadding="1" cellspacing="0" align="center" style="text-align: center; border-collapse: collapse" bordercolor="#000000">
     <tr>
-      <td width="67" height="7" class="table2">Product name</td>
+      <td width="67" height="7" >Product name</td>
       
-      <td width="82" class="table2">Batch No.</td>
-      <td width="51" class="table2" > Quantity<br/>
+      <td width="82" >Batch No.</td>
+      <td width="51"  > Quantity<br/>
         (Drum) </td>
-      <td width="58" class="table2" > Netweight<br/>
+      <td width="58"  > Netweight<br/>
         (KGS) </td>
-      <td width="56" class="table2">Gross
+      <td width="56" >Gross
         Weight<br/>
         (KGS) </td>
     </tr>
@@ -396,10 +397,10 @@ p.western {
 	#end
 	#if(${ctx.append.totalData})
 			<tr>
-			  <td colspan="2" align="center" class="table2"> Total </td>
-			  <td width="51" class="table2" > $!{ctx.append.totalData.quantity} </td>
-			  <td width="58" class="table2"> $!{ctx.append.totalData.netWeight} </td>
-			  <td width="88" class="table2"> $!{ctx.append.totalData.grossWeight} </td>
+			  <td colspan="2" align="center" > Total </td>
+			  <td width="51"  > $!{ctx.append.totalData.quantity} </td>
+			  <td width="58" > $!{ctx.append.totalData.netWeight} </td>
+			  <td width="88" > $!{ctx.append.totalData.grossWeight} </td>
 			</tr>
 		
    #end
@@ -415,27 +416,27 @@ p.western {
    		<tbody>
    			<tr>
    				<td>
-   					PACKING: $!{ctx.upperCasePackageWeightArray}; TOTAL PACKED IN $!{ctx.append.totalData.packingCount} PACKAGES
+   					 <strong>PACKING:  </strong>$!{ctx.upperCasePackageWeightArray}; TOTAL PACKED IN $!{ctx.append.totalData.packingCount} PACKAGES
    				</td>
    			</tr>
    			<tr>
    				<td>
-   					Net Weight: $!{ctx.append.totalData.netWeight} KGS.
+   					 <strong>Net Weight: </strong> $!{ctx.append.totalData.netWeight} KGS.
    				</td>
    			</tr>
    			<tr>
    				<td>
-   					Gross Weight: $!{ctx.append.totalData.grossWeight}KGS.
+   					 <strong>Gross Weight: </strong> $!{ctx.append.totalData.grossWeight}KGS.
    				</td>
    			</tr>
    			<tr>
    				<td>
-   					SHIPPING MARKS: N/M
+   					 <strong>SHIPPING MARKS: </strong> N/M
    				</td>
    			</tr>
    			<tr>
    				<td>
-   					PO NO.: $!{ctx.append.totalData.poNo}
+   					 <strong>PO NO.: </strong> $!{ctx.append.totalData.poNo}
    				</td>
    			</tr>
 			<tr class="font1">

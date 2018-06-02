@@ -64,7 +64,8 @@ p.western {
 		</td>
          <td width="25%">&nbsp;</td>
          <td   align="left" >
-            <font face="Arial, serif" size="4" style="font-size: 14pt; color: #8C8C8C;"><em><strong>ACERCHEM UK LTD</strong></em></font><br/><br/>
+		 <br/>
+            <font face="Arial, serif" size="4" style="font-size: 14pt; color: #8C8C8C;"><em><strong>ACERCHEM UK LTD</strong></em></font><br/>
             <font face="Arial, serif" size="2" style="font-size: 11pt; color: #ACACAB;">Add.: SINGLETON PARK, SWANSEA</font><br/>
             <font face="Arial, serif" size="2" style="font-size: 11pt; color: #A9A9A9;">SA2 8PP, WALES, UK</font><br/>
             <font face="Arial, serif" size="2" style="font-size: 11pt; color: #A9A9A9;">Tel: +44 (0) 1639 792295</font>
@@ -74,7 +75,7 @@ p.western {
         <td style="border-top:#cccccc solid 1px;border-bottom:#cccccc solid 1px;"
 		colspan="4"><font color="#8E8989">
         ACERCHEM UK LTD .VAT No.:GB111785918
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  
         ACERCHEM UK LTD .Company No.:07460051 	
         </font></td>
       </tr>
@@ -122,10 +123,6 @@ p.western {
       <td>&nbsp;</td>
     </tr>
     <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-    </tr>
-    <tr>
       <td>KGH Customs Services BV (Fiscal representative)</td>
       <td>&nbsp;</td>
     </tr>
@@ -144,10 +141,7 @@ p.western {
     <tr>
       <td colspan="2">Nil in conformity with article 9 par 2 sub b jo Table II item a 6, Wet OB 1968</td>
     </tr>
-    <tr>
-      <td></td>
-      <td>&nbsp;</td>
-    </tr>
+    
     <tr>
       <td width="57%">SHIP FROM: $!{ctx.warehouse}</td>
       <td >SHIP TO: $!{ctx.shipto}</td>
@@ -218,9 +212,7 @@ p.western {
   <tr class="font1" align="center">
     <td colspan="2">*** This shipment contains NO solid wood packaging materials***</td>
   </tr>
-   <tr class="font1" align="center">
-    <td colspan="2">&nbsp;</td>
-  </tr>
+  
 
   <tr class="font1">
     <td colspan="2">Please wire transfer the above amount to:</td>
@@ -320,7 +312,8 @@ p.western {
 		</td>
          <td width="25%">&nbsp;</td>
          <td   align="left" >
-            <font face="Arial, serif" size="4" style="font-size: 14pt; color: #8C8C8C;"><em><strong>ACERCHEM UK LTD</strong></em></font><br/><br/>
+		 <br/>
+            <font face="Arial, serif" size="4" style="font-size: 14pt; color: #8C8C8C;"><em><strong>ACERCHEM UK LTD</strong></em></font><br/>
             <font face="Arial, serif" size="2" style="font-size: 11pt; color: #ACACAB;">Add.: SINGLETON PARK, SWANSEA</font><br/>
             <font face="Arial, serif" size="2" style="font-size: 11pt; color: #A9A9A9;">SA2 8PP, WALES, UK</font><br/>
             <font face="Arial, serif" size="2" style="font-size: 11pt; color: #A9A9A9;">Tel: +44 (0) 1639 792295</font>
@@ -330,7 +323,7 @@ p.western {
         <td style="border-top:#cccccc solid 1px;border-bottom:#cccccc solid 1px;"
 		colspan="4"><font color="#8E8989">
         ACERCHEM UK LTD .VAT No.:GB111785918
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;     
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;    
         ACERCHEM UK LTD .Company No.:07460051 	
         </font></td>
       </tr>
@@ -383,18 +376,12 @@ p.western {
       <td>VAT: $!{ctx.customer.vatNo}</td>
       <td align="right">&nbsp;</td>
     </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-    </tr>
+   
     <tr>
       <td>SHIP FROM: $!{ctx.warehouse} </td>
       <td>SHIP TO: $!{ctx.shipto}</td>
     </tr>
-    <tr>
-      <td>&nbsp;</td>
-      <td>&nbsp;</td>
-    </tr>
+   
   </tbody>
 </table>
 
