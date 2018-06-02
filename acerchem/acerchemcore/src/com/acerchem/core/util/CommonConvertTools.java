@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
+import org.apache.commons.lang3.StringUtils;
 import org.xhtmlrenderer.pdf.ITextFontResolver;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
@@ -61,6 +62,39 @@ public class CommonConvertTools {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public static String getPdfName(final String subject){
+		
+		final String newSubject = subject.replace("：", ":");
+		String name = "";
+		String orderNumber = newSubject.substring(newSubject.indexOf(":")+1);
+		if (!StringUtils.isNumeric(orderNumber)){
+			orderNumber="0";
+		}
+		if(StringUtils.containsIgnoreCase(newSubject, "contract")){
+			name = "contract";
+		}
+		else if(StringUtils.containsIgnoreCase(newSubject, "proforma")){
+			name = "proformaInvoice";
+		}
+		else if(StringUtils.containsIgnoreCase(newSubject, "invoice")){
+			name = "invoice";
+		}
+		else if(StringUtils.containsIgnoreCase(newSubject, "delivery")){
+			name = "delivery";
+		}
+		
+		else if(StringUtils.containsIgnoreCase(newSubject, "release")){
+			name = "release";
+		}else{
+			name = "unknown";
+		}
+		
+		final StringBuffer buffer = new StringBuffer(name);
+		
+		buffer.append("(").append(orderNumber).append(")");
+		return buffer.toString();
 	}
 
 }
