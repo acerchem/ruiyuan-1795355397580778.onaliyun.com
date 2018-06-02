@@ -40,7 +40,7 @@
 			    		</div>
 						<ul class="slide-item">
 						   <c:forEach items="${galleryImages}" var="container" varStatus="varStatus">
-							<li class="item"><img src="${container.product.url}?x-oss-process=image/resize,m_fixed,h_374,w_378"  alt=""></li>
+							<li class="item"><img src="${container.product.url}"  alt=""></li>
 							
 							</c:forEach>
 						</ul>
