@@ -137,7 +137,7 @@ p.western {
       <td width="50" >Unit</td>
       <td width="80" >Quantity</td>
       <td width="80" >Price</td>
-      <td width="130">Amount</td>
+      <td width="120">Amount</td>
       <td >Package</td>
     </tr>
 		#foreach( $item in ${ctx.append.productLists} )
@@ -193,7 +193,7 @@ p.western {
         </tr>
         <tr>
           <td align="left">
-            3.Deliver from: $!{ctx.warehouse} to: 
+            3.Deliver from $!{ctx.warehouse} to 
 			#if(${ctx.deliveryMode} == "DDP")
 				$!{ctx.toShip}
 			#end
@@ -204,6 +204,11 @@ p.western {
             4.Marks: Product name,batch no,NW,GW,manufacture date,expiraon date
           </td>
         </tr>
+		<tr>
+		<td align="left">
+		&nbsp;
+		</td>
+		</tr>
         <tr>
           <td align="left">
             5.Payment terms:$!{ctx.paymentTerms}
