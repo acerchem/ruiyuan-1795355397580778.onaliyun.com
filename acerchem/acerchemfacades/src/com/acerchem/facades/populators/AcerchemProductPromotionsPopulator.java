@@ -10,19 +10,14 @@
  */
 package com.acerchem.facades.populators;
 
-import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.commercefacades.product.converters.populator.AbstractProductPopulator;
 import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commercefacades.product.data.PromotionData;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.promotions.model.AbstractPromotionModel;
-import de.hybris.platform.promotions.model.PromotionGroupModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.site.BaseSiteService;
-
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Required;
 
 
@@ -62,20 +57,7 @@ public class AcerchemProductPromotionsPopulator<SOURCE extends ProductModel, TAR
 	@Override
 	public void populate(final SOURCE productModel, final TARGET productData) throws ConversionException
 	{
-		final BaseSiteModel baseSiteModel = getBaseSiteService().getCurrentBaseSite();
-		if (baseSiteModel != null)
-		{
-			final PromotionGroupModel defaultPromotionGroup = baseSiteModel.getDefaultPromotionGroup();
-
-			if (defaultPromotionGroup != null)
-			{
-			
-
-				final List<AbstractPromotionModel> promotions = (List<AbstractPromotionModel>) defaultPromotionGroup.getPromotions();
-				productData.setPotentialPromotions(getPromotionsConverter().convertAll(promotions));
-				
-			}
-		}
+		productData.setPotentialPromotions(getPromotionsConverter().convertAll(productModel.getPromotions()));
 	}
 
 }
