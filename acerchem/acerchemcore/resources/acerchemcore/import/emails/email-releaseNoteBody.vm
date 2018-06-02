@@ -198,14 +198,7 @@ p.western {
 			  <td width="58" > $!{item.netWeight} </td>
 			  <td width="88"> $!{item.grossWeight} </td>
 			</tr>
-			#else
-			<tr>
-			  <td colspan="3" width="383" height="3" class="table2">    </td>
-			  <td width="51"  class="table2"> ${item.quantity} </td>
-			  <td width="58"  class="table2"> $!{item.netWeight} </td>
-			  <td width="88"  class="table2"> $!{item.grossWeight} </td>
-			</tr>
-
+			
 			#end
 		#end
 			#if(${ctx.append.totalData})
