@@ -128,16 +128,16 @@ p.western {
     </tr>
   </tbody>
 </table>
-<center style=" margin-left: 5px;">
+
 #if ($ctx.append.productLists.size() > 0)
-    <table class="font2" width="700" border="1" cellpadding="0" cellspacing="0"  style="text-align: center; border-collapse: collapse" bordercolor="#000000">
+    <table class="font2" width="750" border="1" cellpadding="0" cellspacing="0" align="center" style="text-align: center; border-collapse: collapse" bordercolor="#000000">
     <tr>
       <td width="120" height="7">AC Code</td>
       <td width="180" >Name</td>
-      <td width="60" >Unit</td>
+      <td width="50" >Unit</td>
       <td width="80" >Quantity</td>
       <td width="80" >Price</td>
-      <td width="150">Amount</td>
+      <td width="130">Amount</td>
       <td >Package</td>
     </tr>
 		#foreach( $item in ${ctx.append.productLists} )
@@ -165,11 +165,11 @@ p.western {
     
     </table>
   #end
-</center>
+
 <p >
 </p>
-<center>
-    <table class="font1" width="750" frame="void">
+
+    <table class="font1" width="750" align="center" frame="void">
       <tbody>
         <tr>
           <td align="left">
@@ -358,12 +358,12 @@ Seller's  address. The arbitral award is final and binding upon both parties.
         </tr>
       </tbody>
     </table>
-   </center>
+   
    
 <p class="western" style="margin-right: -0.05in"><br/>
 </p>
-<center>
-  <table class="font1" width="750" height="150">
+
+  <table class="font1" width="750" align="center" height="150">
     <tbody>
       <tr>
         <td width="3%">
@@ -402,7 +402,7 @@ Seller's  address. The arbitral award is final and binding upon both parties.
 
   </table>
 
-</center>
+
 <p class="western" style="margin-right: -0.05in"><br/>
 </p>
 </body>
