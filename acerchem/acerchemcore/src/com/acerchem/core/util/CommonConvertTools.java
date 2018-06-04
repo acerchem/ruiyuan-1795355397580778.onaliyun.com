@@ -79,9 +79,7 @@ public class CommonConvertTools {
 			name = "invoice";
 		} else if (StringUtils.containsIgnoreCase(newSubject, "delivery")) {
 			name = "delivery";
-		}
-
-		else if (StringUtils.containsIgnoreCase(newSubject, "release")) {
+		}else if (StringUtils.containsIgnoreCase(newSubject, "release")) {
 			name = "release";
 		} else {
 			name = "unknown";

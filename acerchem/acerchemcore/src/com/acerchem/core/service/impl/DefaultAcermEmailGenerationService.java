@@ -145,7 +145,22 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 					emailMessageModel = createSendEmployeeEmailUNCCMessage(subject.toString(), body.toString(),
 							emailContext);
 					LOG.info("=======================generate2 end====================" + new Date());
-				} else {
+				
+				}else if("AcerchemContractEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
+						||"AcerchemProformaInvoiceEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
+						||"AcerchemDeliveryNoteEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
+						||"AcerchemReleaseNoteEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
+						||"AcerchemInvoicePackingListEmailATemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
+						||"AcerchemInvoicePackingListEmailBTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
+						||"AcerchemInvoicePackingListEmailCTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
+						||"AcerchemInvoicePackingListEmailDTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
+						||"AcerchemInvoicePackingListEmailETemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
+						||"AcerchemInvoicePackingListEmailFTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
+						
+						){
+				
+					emailMessageModel = createEmailMessageWithAttachment(subject.toString(), body.toString(), emailContext);
+				}else {
 					emailMessageModel = createEmailMessage(subject.toString(), body.toString(), emailContext);
 				}
 
@@ -176,7 +191,30 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 		ccAddress.add(ccEmailOneAddressModel);
 		ccAddress.add(ccEmailTwoAddressModel);
 
-		// add attachment by Jayson.wang
+		
+		return getEmailService().createEmailMessage(toEmails, ccAddress,
+				new ArrayList<EmailAddressModel>(), fromAddress, emailContext.getFromEmail(), emailSubject, emailBody,
+				null);
+	}
+	
+	// add attachment by Jayson.wang
+	protected EmailMessageModel createEmailMessageWithAttachment(final String emailSubject, final String emailBody,
+			final AbstractEmailContext<BusinessProcessModel> emailContext) {
+		final List<EmailAddressModel> toEmails = new ArrayList<EmailAddressModel>();
+		final List<EmailAddressModel> ccAddress = new ArrayList<EmailAddressModel>();
+		final EmailAddressModel toAddress = getEmailService().getOrCreateEmailAddressForEmail(emailContext.getToEmail(),
+				emailContext.getToDisplayName());
+		toEmails.add(toAddress);
+		final EmailAddressModel fromAddress = getEmailService()
+				.getOrCreateEmailAddressForEmail(emailContext.getFromEmail(), emailContext.getFromDisplayName());
+		final EmailAddressModel ccEmailOneAddressModel = getEmailService().getOrCreateEmailAddressForEmail(
+				Config.getParameter("mail.ccAddress.one"), Config.getParameter("mail.ccAddress.displayOneName"));
+		final EmailAddressModel ccEmailTwoAddressModel = getEmailService().getOrCreateEmailAddressForEmail(
+				Config.getParameter("mail.ccAddress.two"), Config.getParameter("mail.ccAddress.displayTwoName"));
+		ccAddress.add(ccEmailOneAddressModel);
+		ccAddress.add(ccEmailTwoAddressModel);
+		
+		//获取pdf文件名字，来源于subject
 		final String pdfName = CommonConvertTools.getPdfName(emailSubject);
 		
 		final File pdfFile = generatePdfToAttachment(emailBody, pdfName);
@@ -202,12 +240,23 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 		if (attachment != null) {
 			attachments.add(attachment);
 		}
-		// return getEmailService().createEmailMessage(toEmails, ccAddress, new
-		// ArrayList<EmailAddressModel>(),
-		// fromAddress, emailContext.getFromEmail(), emailSubject, emailBody,
-		// null);
+		
+		//替换email body message
+		String emailBodyMessage = "For email's content, please refer to the attachment of .pdf file.";
+		if (StringUtils.containsIgnoreCase(pdfName, "contract")) {
+			emailBodyMessage = Config.getString("acerchem.emailMessage.contract", "For contract content, please refer to pdf attachment.");
+		} else if (StringUtils.containsIgnoreCase(pdfName, "proforma")) {
+			emailBodyMessage = Config.getString("acerchem.emailMessage.proformaInvoice", "For proforma invoice content, please refer to pdf attachment.");
+		} else if (StringUtils.containsIgnoreCase(pdfName, "invoice")) {
+			emailBodyMessage = Config.getString("acerchem.emailMessage.invoice", "For invoice content, please refer to pdf attachment.");
+		} else if (StringUtils.containsIgnoreCase(pdfName, "delivery")) {
+			emailBodyMessage = Config.getString("acerchem.emailMessage.delivery", "For delivery content, please refer to pdf attachment.");
+		}else if (StringUtils.containsIgnoreCase(pdfName, "release")) {
+			emailBodyMessage = Config.getString("acerchem.emailMessage.release", "For release content, please refer to pdf attachment.");
+		}
+		
 		final EmailMessageModel emailMessage = getEmailService().createEmailMessage(toEmails, ccAddress,
-				new ArrayList<EmailAddressModel>(), fromAddress, emailContext.getFromEmail(), emailSubject, emailBody,
+				new ArrayList<EmailAddressModel>(), fromAddress, emailContext.getFromEmail(), emailSubject, emailBodyMessage,
 				attachments);
 
 		
