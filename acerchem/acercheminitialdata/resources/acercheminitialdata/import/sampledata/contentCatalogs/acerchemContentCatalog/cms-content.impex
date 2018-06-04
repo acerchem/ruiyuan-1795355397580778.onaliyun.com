@@ -71,7 +71,7 @@ INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url
 ;;KodakBrandCategoryLink;Kodak Link;/Brands/Kodak/c/575;KodakBrandCategoryLink;KodakBrandCategoryLink;;575;;
 ;;SamsungBrandCategoryLink;Samsung Link;/Brands/Samsung/c/576;SamsungBrandCategoryLink;SamsungBrandCategoryLink;;576;;
 ;;ToshibaBrandCategoryLink;Toshiba Link;/Brands/Toshiba/c/576;ToshibaBrandCategoryLink;ToshibaBrandCategoryLink;;576;;
-;;FujifilmBrandCategoryLink;Fujifilm Link;/Brands/Fujifilm/c/576;FujifilmBrandCategoryLink;FujifilmBrandCategoryLink;;576;;
+;;FujifilmBrandCategoryLink;Fujifilm Link;/Brands/Fujifilm/c/579;FujifilmBrandCategoryLink;FujifilmBrandCategoryLink;;579;;
 ;;KingstonBrandCategoryLink;Kingston Link;/Brands/Kingston/c/571;KingstonBrandCategoryLink;KingstonBrandCategoryLink;;571;;
 ;;IciduBrandCategoryLink;Icidu Link;/Brands/ICIDU/c/571;IciduBrandCategoryLink;IciduBrandCategoryLink;;571;;
 ;;TDKBrandCategoryLink;TDK Link;/Brands/TDK/c/575;TDKBrandCategoryLink;TDKBrandCategoryLink;;575;;
@@ -82,10 +82,10 @@ INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url
 ;;ComponentsCategoryLink;Components Category Link;/Open-Catalogue/Components/c/575;ComponentsCategoryLink;ComponentsCategoryLink;;575;;
 ;;DigitalCamerasCategoryLink;Digital Cameras Category Link;/Open-Catalogue/Cameras/Digital-Cameras/c/1;DigitalCamerasCategoryLink;DigitalCamerasCategoryLink;;1;;
 ;;FilmCamerasCategoryLink;Film Cameras Category Link;/Open-Catalogue/Cameras/Film-Cameras/c/575;FilmCamerasCategoryLink;FilmCamerasCategoryLink;;575;;
-;;CameraAccessoriesCategoryLink;Camera Accessories Category Link;/Open-Catalogue/Cameras/Camera-Accessories-26-Supplies/c/571;CameraAccessoriesCategoryLink;CameraAccessoriesCategoryLink;;571;;
-;;PowerSuppliesCategoryLink;Power Supplies Category Link;/Open-Catalogue/Components/Power-Supplies/c/575;PowerSuppliesCategoryLink;PowerSuppliesCategoryLink;;575;;
+;;CameraAccessoriesCategoryLink;Camera Accessories Category Link;/Open-Catalogue/Cameras/Camera-Accessories-26-Supplies/c/579;CameraAccessoriesCategoryLink;CameraAccessoriesCategoryLink;;579;;
+;;PowerSuppliesCategoryLink;Power Supplies Category Link;/Open-Catalogue/Components/Power-Supplies/c/578;PowerSuppliesCategoryLink;PowerSuppliesCategoryLink;;578;;
 ;;FlashMemoryCategoryLink;Flash Memory Category Link;/Open-Catalogue/Data-storage/Flash-Memory/c/575;FlashMemoryCategoryLink;FlashMemoryCategoryLink;;575;;
-;;HandheldCamcordersCategoryLink;Handheld Camcorders Category Link;/Open-Catalogue/Cameras/Hand-held-Camcorders/c/571;HandheldCamcordersCategoryLink;HandheldCamcordersCategoryLink;;571;;
+;;HandheldCamcordersCategoryLink;Handheld Camcorders Category Link;/Open-Catalogue/Cameras/Hand-held-Camcorders/c/576;HandheldCamcordersCategoryLink;HandheldCamcordersCategoryLink;;576;;
 ;;SpecialOffersLink;Special Offers Link;"/Open-Catalogue/c/1?q=%3AtopRated%3AallPromotions%3ABOGOFacerchem%3AallPromotions%3A10DiscountCanonEOS450D%3AallPromotions%3AMultiBuyacerchem%3AallPromotions%3APerfectPartneracerchem%3AallPromotions%3AProductBundleacerchem";SpecialOffersLink;SpecialOffersLink;;571;;
 ;;CamerasFlashesCategoryLink;Cameras Flashes Category Link;/Open-Catalogue/Cameras/Camera-Accessories-26-Supplies/Camera-Flashes/c/575;CamerasFlashesCategoryLink;CamerasFlashesCategoryLink;;575;;
 ;;TripodsCategoryLink;Tripods Category Link;/Open-Catalogue/Cameras/Camera-Accessories-26-Supplies/Tripods/c/576;TripodsCategoryLink;TripodsCategoryLink;;576;;

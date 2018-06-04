@@ -604,7 +604,6 @@ INSERT_UPDATE Region;country(isocode);isocode[unique=true];isocodeShort;name[lan
 ;NL;NL-MST;MST;"Maastricht"
 ;NL;NL-MDL;MDL;"Middelburg"
 ;NL;NL-NIJ;NIJ;"Nijmegen"
-;NL;NL-RTM;RTM;"Rotterdam"
 ;NL;NL-TLB;TLB;"Tilburg"
 ;NL;NL-UTC;UTC;"Utrecht"
 ;NL;NL-ZTM;ZTM;"Zoetermeer"

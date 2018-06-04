@@ -28,7 +28,7 @@ UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=
  ;$solrIndexedType;description;"描述"
  ;$solrIndexedType;manufacturerName;"制造商名称"
  ;$solrIndexedType;name;"名称"
- ;$solrIndexedType;price;"价格"
+ #;$solrIndexedType;price;"价格"
  ;$solrIndexedType;summary;"摘要"
 
 # Define the available sorts

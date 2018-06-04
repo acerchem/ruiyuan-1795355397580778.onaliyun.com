@@ -28,7 +28,7 @@ UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=
  ;$solrIndexedType;description;"Description"
  ;$solrIndexedType;manufacturerName;"Manufacturer Name"
  ;$solrIndexedType;name;"Name"
- ;$solrIndexedType;price;"Price"
+ #;$solrIndexedType;price;"Price"
  ;$solrIndexedType;summary;"Summary"
 
 # Define the available sorts
