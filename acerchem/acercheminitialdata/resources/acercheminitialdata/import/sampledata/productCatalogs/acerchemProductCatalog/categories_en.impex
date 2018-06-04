@@ -24,6 +24,7 @@ $lang=en
 # Create Categories
 UPDATE Category;code[unique=true];$catalogVersion;name[lang=$lang]
  ;1;;Open Catalogue;
+ ;2;;acer;
  ;571;;Vitamin;
  ;575;;Plant Extract;
  ;576;;Supplements;

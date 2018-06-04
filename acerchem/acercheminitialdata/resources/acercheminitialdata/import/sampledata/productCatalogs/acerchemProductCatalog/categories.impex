@@ -20,6 +20,7 @@ $categories=target(code, $catalogVersion)[unique=true]
 # Insert Categories
 INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='customergroup'];$catalogVersion
  ;1
+ ;2
  ;571
  ;575
  ;576
@@ -41,15 +42,15 @@ INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='custome
 
 # Insert Category Structure
 INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
- ;571;
- ;575;
- ;576;
- ;577;
- ;578;
- ;579;
- ;580;
+ ;571;2
+ ;575;2
+ ;576;2
+ ;577;2
+ ;578;2
+ ;579;2
+ ;580;2
  
-  ;671;1
+ ;671;1
  ;672;1
  ;673;1
  ;674;1
