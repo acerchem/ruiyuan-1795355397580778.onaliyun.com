@@ -31,8 +31,9 @@ public class CommonConvertTools {
 			final BaseFont bfChinese = BaseFont.createFont("STSong-Light", "UniGB-UCS2-H", false);
 			final Font fontChinese = new Font(bfChinese, 12, Font.NORMAL, Color.GREEN);
 
-			//final String url = new File(inputFile).toURI().toURL().toString();
-			//renderer.setDocument(url);
+			// final String url = new
+			// File(inputFile).toURI().toURL().toString();
+			// renderer.setDocument(url);
 
 			renderer.setDocumentFromString(content);
 			// 解决图片的相对路径问题
@@ -63,37 +64,34 @@ public class CommonConvertTools {
 			}
 		}
 	}
-	
-	public static String getPdfName(final String subject){
-		
+
+	public static String getPdfName(final String subject) {
+
 		final String newSubject = subject.replace("：", ":");
 		String name = "";
-		String orderNumber = newSubject.substring(newSubject.indexOf(":")+1);
-		if (!StringUtils.isNumeric(orderNumber)){
-			orderNumber="0";
-		}
-		if(StringUtils.containsIgnoreCase(newSubject, "contract")){
+		final int pos = newSubject.indexOf(":");
+		final String orderNumber = newSubject.substring(pos + 1);
+		if (StringUtils.containsIgnoreCase(newSubject, "contract")) {
 			name = "contract";
-		}
-		else if(StringUtils.containsIgnoreCase(newSubject, "proforma")){
+		} else if (StringUtils.containsIgnoreCase(newSubject, "proforma")) {
 			name = "proformaInvoice";
-		}
-		else if(StringUtils.containsIgnoreCase(newSubject, "invoice")){
+		} else if (StringUtils.containsIgnoreCase(newSubject, "invoice")) {
 			name = "invoice";
-		}
-		else if(StringUtils.containsIgnoreCase(newSubject, "delivery")){
+		} else if (StringUtils.containsIgnoreCase(newSubject, "delivery")) {
 			name = "delivery";
 		}
-		
-		else if(StringUtils.containsIgnoreCase(newSubject, "release")){
+
+		else if (StringUtils.containsIgnoreCase(newSubject, "release")) {
 			name = "release";
-		}else{
+		} else {
 			name = "unknown";
 		}
-		
+
 		final StringBuffer buffer = new StringBuffer(name);
-		
-		buffer.append("(").append(orderNumber).append(")");
+		// 对于没有冒号的，无订单号，直接取业务名字
+		if (pos > 0) {
+			buffer.append("(").append(orderNumber).append(")");
+		}
 		return buffer.toString();
 	}
 
