@@ -16,7 +16,7 @@
 <body class="gray">
 <div class="sign-header">
 	<a href="${homeUrl}">
-		<img src="${themeResourcePath}/css/acerchem.png" alt="acerchem"/>
+		<img src="${themeResourcePath}/css/logo.png" alt="acerchem"/>
 	</a>
 </div>
 
