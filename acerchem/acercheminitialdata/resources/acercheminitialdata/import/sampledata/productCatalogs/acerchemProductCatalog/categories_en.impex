@@ -32,5 +32,13 @@ UPDATE Category;code[unique=true];$catalogVersion;name[lang=$lang]
  ;579;;OEM;
  ;580;;Joint Health;
  #shaun
-
+ ;671;;Joint Health;
+ ;672;;Sports Nutrition;
+ ;673;;Weight Management;
+ ;674;;Heart&Cardiovascular;
+ ;675;;Brain Health;
+ ;676;;Beauty;
+ ;677;;Liver protection;
+ ;678;;Immune system;
+ ;679;;Sweetening;
 
