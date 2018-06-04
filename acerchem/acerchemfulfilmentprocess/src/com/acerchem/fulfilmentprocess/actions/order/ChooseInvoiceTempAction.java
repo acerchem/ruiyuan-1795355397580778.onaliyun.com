@@ -76,7 +76,7 @@ public class ChooseInvoiceTempAction extends AbstractAction<OrderProcessModel>
 			addressModel=order.getDeliveryAddress();
 		}
 		
-		if("Neele-vat".equals(order.getEntries().get(0).getDeliveryPointOfService().getWarehouses().get(0).getCode())){
+		if("Rotterdam".equals(order.getEntries().get(0).getDeliveryPointOfService().getWarehouses().get(0).getCode())){
 			LOG.info("-------------------Neele-vat +  TEMP4------------------");
 			return Transition.TEMP4;
 		}else if("UK".equals(order.getEntries().get(0).getDeliveryPointOfService().getWarehouses().get(0).getCode())){
@@ -90,6 +90,11 @@ public class ChooseInvoiceTempAction extends AbstractAction<OrderProcessModel>
 				return Transition.TEMP3;
 			}
 		}
-		return Transition.NOK; 
+		else
+		{
+			LOG.info("------------------- No Invoice TempAction Choose-----------------"+addressModel.getCountry().getIsocode());
+			return Transition.NOK; 
+		}
+		
 	}
 }
