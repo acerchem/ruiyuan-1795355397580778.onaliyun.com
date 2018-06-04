@@ -272,19 +272,22 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 			invalid = true;
 			return invalid;
 		}else {
-			AddressData address = cartData.getDeliveryAddress() ;
-			
-			
-			CountryData countryData = address.getCountry();
-			
-			try {
-				acerchemCheckoutFacade.validateCartAddress(countryData);
-			} catch (AcerchemOrderException e) {
-				 GlobalMessages.addErrorMessage(model, e.getMessage());
-				 
-				 invalid = true;
-				 return invalid;
+			if ("DELIVERY_GROSS".equalsIgnoreCase(acerchemCheckoutFacade.getDeliveryModes().getCode())){
+				
+				AddressData address = cartData.getDeliveryAddress() ;
+				
+				CountryData countryData = address.getCountry();
+				
+				try {
+					acerchemCheckoutFacade.validateCartAddress(countryData);
+				} catch (AcerchemOrderException e) {
+					 GlobalMessages.addErrorMessage(model, e.getMessage());
+					 
+					 invalid = true;
+					 return invalid;
+				}
 			}
+			
 			
 		}
 
