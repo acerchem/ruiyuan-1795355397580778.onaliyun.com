@@ -77,7 +77,7 @@ function verification(wrap){//register verification
 			aname = $(this).attr('name'),
 			thistext = $(this).attr('alt');
 		
-		var mymail = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;	
+		var mymail = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;	
 		var mobile = /^\d{0,4}[-]?\d{8,12}$/;
 		var pwd = /^(?=.*?[0-9])(?=.*?[a-z])(?=.*?[A-Z])[0-9a-zA-Z]{6,16}$/;
 		
