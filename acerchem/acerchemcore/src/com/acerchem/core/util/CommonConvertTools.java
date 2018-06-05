@@ -80,17 +80,17 @@ public class CommonConvertTools {
 		final int pos = newSubject.indexOf(":");
 		final String orderNumber = newSubject.substring(pos + 1);
 		if (StringUtils.containsIgnoreCase(newSubject, "contract")) {
-			name = "contract";
+			name = "Contract";
 		} else if (StringUtils.containsIgnoreCase(newSubject, "proforma")) {
-			name = "proformaInvoice";
+			name = "Proforma Invoice";
 		} else if (StringUtils.containsIgnoreCase(newSubject, "invoice")) {
-			name = "invoice";
+			name = "Invoice and Packling List";
 		} else if (StringUtils.containsIgnoreCase(newSubject, "delivery")) {
-			name = "delivery";
+			name = "Delivery Note";
 		} else if (StringUtils.containsIgnoreCase(newSubject, "release")) {
-			name = "release";
+			name = "Release Note";
 		} else {
-			name = "unknown";
+			name = "Unknown";
 		}
 
 		final StringBuffer buffer = new StringBuffer(name);
