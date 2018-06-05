@@ -8,23 +8,25 @@
 
 
 <c:forEach items="${pageData.facets}" var="facet">
-	<c:choose>
-		<c:when test="${facet.code eq 'availableInStores'}">
-				<!--shaun: hybris  Top left corner -->
-			<%-- <nav:facetNavRefinementStoresFacet facetData="${facet}" userLocation="${userLocation}"/>  --%>
-			
-			<div class="gal-centent">
-				<div class=" gall-left" >
-					<h4>Categories</h4>
-				</div>
-			</div>
-				
-				
-		</c:when>
-		<c:otherwise>
-			<nav:facetNavRefinementFacet facetData="${facet}"/> 
-		</c:otherwise>
-	</c:choose>
+ <c:choose>
+  <c:when test="${facet.code eq 'availableInStores'}">
+    <!--shaun: hybris  Top left corner -->
+   <%-- <nav:facetNavRefinementStoresFacet facetData="${facet}" userLocation="${userLocation}"/>  --%>
+   
+   <div class="gal-centent">
+    <div class=" gall-left" >
+     <h4>Categories</h4>
+    </div>
+   </div>
+    
+    
+  </c:when>
+  <c:when test="${facet.code eq 'price'}">
+  </c:when>
+  <c:otherwise>
+   <nav:facetNavRefinementFacet facetData="${facet}"/> 
+  </c:otherwise>
+ </c:choose>
 </c:forEach>
 
 
