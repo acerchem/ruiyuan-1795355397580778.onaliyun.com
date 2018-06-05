@@ -77,7 +77,7 @@ public class ChooseInvoiceTempAction extends AbstractAction<OrderProcessModel>
 		}
 		
 		if("Rotterdam".equals(order.getEntries().get(0).getDeliveryPointOfService().getWarehouses().get(0).getCode())){
-			LOG.info("-------------------Neele-vat +  TEMP4------------------");
+			LOG.info("-------------------Rotterdam +  TEMP4------------------");
 			return Transition.TEMP4;
 		}else if("UK".equals(order.getEntries().get(0).getDeliveryPointOfService().getWarehouses().get(0).getCode())){
 			if("GB".equals(addressModel.getCountry().getIsocode())){
