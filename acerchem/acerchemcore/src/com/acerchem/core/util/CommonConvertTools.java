@@ -66,7 +66,15 @@ public class CommonConvertTools {
 	}
 
 	public static String getPdfName(final String subject) {
+		return getPdfName(subject, false);
+	}
 
+	public static String getPdfName(final String subject, final Boolean isNeedOrderNumber) {
+
+		boolean needOrderNr = false;
+		if (isNeedOrderNumber != null) {
+			needOrderNr = isNeedOrderNumber.booleanValue();
+		}
 		final String newSubject = subject.replace("：", ":");
 		String name = "";
 		final int pos = newSubject.indexOf(":");
@@ -79,16 +87,18 @@ public class CommonConvertTools {
 			name = "invoice";
 		} else if (StringUtils.containsIgnoreCase(newSubject, "delivery")) {
 			name = "delivery";
-		}else if (StringUtils.containsIgnoreCase(newSubject, "release")) {
+		} else if (StringUtils.containsIgnoreCase(newSubject, "release")) {
 			name = "release";
 		} else {
 			name = "unknown";
 		}
 
 		final StringBuffer buffer = new StringBuffer(name);
-		// 对于没有冒号的，无订单号，直接取业务名字
-		if (pos > 0) {
-			buffer.append("(").append(orderNumber).append(")");
+		if (needOrderNr) {
+			// 对于没有冒号的，无订单号，直接取业务名字
+			if (pos > 0) {
+				buffer.append("(").append(orderNumber).append(")");
+			}
 		}
 		return buffer.toString();
 	}

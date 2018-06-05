@@ -110,8 +110,8 @@ div.content {
   </table>
 </div>
 
-<div class="footer">
-	<table class="font1" width="700" frame="void" align="center">
+<div class="footer" style="magin-top:0">
+	<table class="font1" width="700" frame="void" align="center" style="magin-top:0">
 		<tbody>
 			<tr class="font1">
 				<td colspan="2" align="right">

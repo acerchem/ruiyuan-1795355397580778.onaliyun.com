@@ -103,8 +103,8 @@ div.content {
     </tbody>
   </table>
 </div>
-<div class="footer">
-	<table class="font1" width="700" frame="void" align="center">
+<div class="footer" style="magin-top:0">
+	<table class="font1" width="700" frame="void" align="center" style="magin-top:0">
 		<tbody>
 			<tr class="font1">
 				<td colspan="2" align="right">
@@ -426,12 +426,16 @@ div.content {
    					 <strong>SHIPPING MARKS: </strong> N/M
    				</td>
    			</tr>
+			<tr>
+   				<td>
+   					 <strong>SHIPPING MARKS: </strong> N/M
+   				</td>
+   			</tr>
    			<tr>
    				<td>
    					 <strong>PO NO.:  </strong>$!{ctx.append.totalData.poNo}
    				</td>
    			</tr>
-			
    		</tbody>
    	</table>
    

@@ -127,7 +127,7 @@ div.content {
   <table width="260" cellspacing="1" frame="void">
     <tr height="1">
       <td width="60" height="38" style="border-bottom:
-      #000000 solid 1px;">Release  No.: </td>
+      #000000 solid 1px;">Release  No.:${ctx.order.code} </td>
     </tr>
     <tr>
       <td height="40" style="border-bottom:#000000 solid 1px;">Collection  Date: $!{ctx.pickupDate}</td>
