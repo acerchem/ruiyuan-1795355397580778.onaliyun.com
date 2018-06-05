@@ -103,4 +103,19 @@ public class CommonConvertTools {
 		return buffer.toString();
 	}
 
+	public static String getFormatHtml(final String content) {
+		final String html = content.replace("\r\n", "\n").replace("\n\n", "\n");
+		final String arr[] = html.split("\n");
+		final StringBuffer buffer = new StringBuffer();
+		if (arr.length > 0) {
+			for (final String s : arr) {
+				buffer.append("<div>").append(s).append("</div>").append("<br/>");
+			}
+
+			return buffer.toString();
+		} else {
+			return content;
+		}
+	}
+
 }
