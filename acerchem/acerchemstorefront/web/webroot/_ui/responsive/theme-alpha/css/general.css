@@ -3212,3 +3212,8 @@ display: inline-table;
 #cboxLoadedContent{padding:0; margin:0;}
 #cboxContent{background-color:transparent;}
 #colorbox{background-color:rgba(0,26,15,.7)}
+
+
+#cboxClose {
+  display: none
+}
