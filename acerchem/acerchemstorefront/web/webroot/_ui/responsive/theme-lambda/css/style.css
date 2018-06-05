@@ -15203,9 +15203,7 @@ fieldset#startDate .form-group .control-label {
 #cboxPrevious:active,
 #cboxNext:active,
 #cboxSlideshow:active,
-#cboxClose:active {
-  outline: 0;
-}
+
 #cboxPrevious {
   left: 0px;
   background-position: -51px -25px;
@@ -15250,16 +15248,7 @@ fieldset#startDate .form-group .control-label {
   width: 100%;
   vertical-align: middle;
 }
-#cboxClose {
-  position: absolute;
-  right: 13px;
-  top: 10px;
-  background: transparent;
-  border: 0 none;
-  color: #929292;
-  padding: 5px;
-  font-size: 25px;
-}
+
 #cboxLoadedContent {
   margin-top: 88px;
   padding: 15px 40px 30px 40px;
