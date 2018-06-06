@@ -3,8 +3,11 @@ package com.acerchem.core.util;
 import java.awt.Color;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Properties;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
+import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.xhtmlrenderer.pdf.ITextFontResolver;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
@@ -12,6 +15,9 @@ import com.lowagie.text.Font;
 import com.lowagie.text.pdf.BaseFont;
 
 public class CommonConvertTools {
+	private static final Logger LOG = Logger.getLogger(CommonConvertTools.class);
+	
+	private static Properties props=new Properties();
 	public static boolean HtmlCovertPdf(final String content, final String outFile) {
 		FileOutputStream os = null;
 		try {
@@ -54,12 +60,14 @@ public class CommonConvertTools {
 			renderer = null;
 			return true;
 		} catch (final Exception e) {
+			LOG.error(">>>>>>>>>>>>>>html file style error for generaiting pdf file.>>>>>>>>>>>>>>");
 			e.printStackTrace();
 			return false;
 		} finally {
 			try {
 				os.close();
 			} catch (final IOException e) {
+				LOG.error(">>>>>>>>>>>>>>OutputStream close error>>>>>>>>>>>>>>");
 				e.printStackTrace();
 			}
 		}
@@ -118,4 +126,21 @@ public class CommonConvertTools {
 		}
 	}
 
+	public static String getSpecialProperties(final String key,final String defaultStr){
+		if (props != null){
+			return getPropertyFile("acerchemcore/messages/email-pdfEmailBody.properties").getProperty(key, defaultStr);
+		}
+		return defaultStr;
+	}
+	public static Properties getPropertyFile(final String propertyName){  
+	     
+	    try {  
+	        props=PropertiesLoaderUtils.loadAllProperties(propertyName);   
+	    } catch (final IOException e) {
+	    	LOG.error(">>>>>>>>>>>>>>Cannot find property file!>>>>>>>>>>>>>>");
+	        e.printStackTrace();  
+	    }  
+	    return props;  
+	}  
+	
 }

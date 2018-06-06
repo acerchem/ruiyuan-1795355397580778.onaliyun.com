@@ -242,24 +242,33 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 
 		// 替换email body message
 		String emailBodyMessage = "For email's content, please refer to the attachment of .pdf file.";
+		String key = "";
 		if (StringUtils.containsIgnoreCase(pdfName, "contract")) {
-			emailBodyMessage = Config.getString("acerchem.emailMessage.contract",
-					"For contract content, please refer to pdf attachment.");
+
+			emailBodyMessage = "For contract content, please refer to pdf attachment.";
+			key = "contract";
 
 		} else if (StringUtils.containsIgnoreCase(pdfName, "proforma")) {
-			emailBodyMessage = Config.getString("acerchem.emailMessage.proformaInvoice",
-					"For proforma invoice content, please refer to pdf attachment.");
+			emailBodyMessage = "For proforma invoice content, please refer to pdf attachment.";
+			key = "proformaInvoice";
+
 		} else if (StringUtils.containsIgnoreCase(pdfName, "invoice")) {
-			emailBodyMessage = Config.getString("acerchem.emailMessage.invoice",
-					"For invoice content, please refer to pdf attachment.");
+			emailBodyMessage = "For invoice content, please refer to pdf attachment.";
+			key = "invoice";
 		} else if (StringUtils.containsIgnoreCase(pdfName, "delivery")) {
-			emailBodyMessage = Config.getString("acerchem.emailMessage.delivery",
-					"For delivery content, please refer to pdf attachment.");
+			emailBodyMessage = "For delivery content, please refer to pdf attachment.";
+			key = "delivery";
 		} else if (StringUtils.containsIgnoreCase(pdfName, "release")) {
-			emailBodyMessage = Config.getString("acerchem.emailMessage.release",
-					"For release content, please refer to pdf attachment.");
+			emailBodyMessage = "For release content, please refer to pdf attachment.";
+			key = "release";
+		}
+		//final String tempbody = (String) emailContext.getMessages().get(key);
+		final String tempbody = CommonConvertTools.getSpecialProperties(key,emailBodyMessage);
+		if (StringUtils.isNotBlank(tempbody)) {
+			emailBodyMessage = tempbody;
 		}
 		emailBodyMessage = CommonConvertTools.getFormatHtml(emailBodyMessage);
+		//
 		final EmailMessageModel emailMessage = getEmailService().createEmailMessage(toEmails, ccAddress,
 				new ArrayList<EmailAddressModel>(), fromAddress, emailContext.getFromEmail(), emailSubject,
 				emailBodyMessage, attachments);
