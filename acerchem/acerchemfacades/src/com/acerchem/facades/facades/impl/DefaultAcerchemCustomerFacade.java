@@ -14,14 +14,11 @@ import de.hybris.platform.ordersplitting.model.StockLevelModel;
 import de.hybris.platform.ordersplitting.model.WarehouseModel;
 import de.hybris.platform.product.ProductService;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
-import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.stock.StockService;
 import de.hybris.platform.store.services.BaseStoreService;
 import de.hybris.platform.storelocator.model.PointOfServiceModel;
 import de.hybris.platform.storelocator.pos.PointOfServiceService;
-
 import javax.annotation.Resource;
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 
@@ -61,7 +58,8 @@ public class DefaultAcerchemCustomerFacade extends DefaultCustomerFacade impleme
 		final ProductModel productModel = productService.getProductForCode(productCode);
 
 		Collection<StockLevelModel> stockLevels = stockService.getAllStockLevels(productModel);
-
+		
+		Integer maxInventory=0;
 		for (StockLevelModel stockLevelModel : stockLevels){
 			WarehouseModel warehouseModel = stockLevelModel.getWarehouse();
 			for (PointOfServiceModel pos : warehouseModel.getPointsOfService()){
@@ -88,8 +86,16 @@ public class DefaultAcerchemCustomerFacade extends DefaultCustomerFacade impleme
 					}
 					storeOfProductData.setCountryListString(country);
 				}
-
-				dataList.add(storeOfProductData);
+				
+				if(actualAmount>maxInventory)
+				{
+					maxInventory=actualAmount;
+					dataList.add(0,storeOfProductData);
+				}
+				else
+				{
+					dataList.add(storeOfProductData);
+				}
 			}
 		}
 		return dataList;
