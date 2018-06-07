@@ -5,10 +5,11 @@ import java.io.Serializable;
 /**
  * Alice: Form object for Reports
  */
+@SuppressWarnings("serial")
 public class SearchCriteriaFrom implements Serializable{
 
 	private Integer pageNumber;
-	private Integer month;
+	private String month;
 	private String area;
 	private String countryCode;
 	private String userName;
@@ -22,11 +23,11 @@ public class SearchCriteriaFrom implements Serializable{
 		this.pageNumber = pageNumber;
 	}
 	
-	public Integer getMonth() {
+	public String getMonth() {
 		return month;
 	}
 
-	public void setMonth(Integer month) {
+	public void setMonth(String month) {
 		this.month = month;
 	}
 	
