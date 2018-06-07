@@ -27,7 +27,44 @@
 	<!--<context component="component-code" module="acerchembackoffice">-->
 		<!--Please check documentation for code snippets for specific components-->
 	<!--</context>-->
-
+	
+	<context merge-by="type" parent="GenericItem" type="AbstractOrder" component="listview">
+		<list-view:list-view>
+            <list-view:column qualifier="status"/>
+            <list-view:column qualifier="deliveryMode"/>
+		</list-view:list-view>
+	</context>
+	
+	<context merge-by="type" parent="GenericItem" type="AbstractOrder" component="editor-area">
+		<editorArea:editorArea name="">
+			<editorArea:tab name="hmc.positions_and_prices">
+				<editorArea:section name="hmc.common">
+					<editorArea:attribute qualifier="net" merge-mode="Remove"/>
+					<editorArea:attribute qualifier="calculated" merge-mode="Remove"/>
+				</editorArea:section>
+				<editorArea:section name="hmc.positions">
+					<editorArea:attribute qualifier="totalTax" merge-mode="Remove"/>
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.payment_and_delivery">
+				<editorArea:section name="hmc.status">
+					<editorArea:attribute qualifier="exportStatus" merge-mode="Remove"/>
+					<editorArea:attribute qualifier="statusInfo" merge-mode="Remove"/>
+				</editorArea:section>
+				<editorArea:section name="hmc.payment">
+					<editorArea:attribute qualifier="paymentAddress" merge-mode="Remove"/>
+					<editorArea:attribute qualifier="paymentStatus" merge-mode="Remove"/>
+					<editorArea:attribute qualifier="paymentInfo" merge-mode="Remove"/>
+				</editorArea:section>
+				<editorArea:section name="hmc.deliveryadministration">
+					<editorArea:attribute qualifier="deliveryStatus" merge-mode="Remove"/>
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.tab.documents.name" merge-mode="Remove"/>
+			<editorArea:tab name="hmc.tab.abstractorder.vouchers"  merge-mode="Remove"/>
+		</editorArea:editorArea>
+	</context>
+	
 	<context type="Order" component="editorareaactions" merge-by="type" parent="AbstractOrder">
 		<y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
 				<y:group qualifier="common">
@@ -42,6 +79,24 @@
 			</y:actions>
 	</context>
 	
+    <context merge-by="type" parent="AbstractOrder" type="Order" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+        	<editorArea:tab name="hmc.positions_and_prices">
+                <editorArea:section name="hmc.common">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="salesApplication" merge-mode="Remove"/>
+					 <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="site" merge-mode="Remove"/>
+					 <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="store" merge-mode="Remove"/>
+                </editorArea:section>
+            </editorArea:tab>
+            <editorArea:tab name="hmc.properties" merge-mode="remove"/>
+            <editorArea:tab name="hmc.order.fraud.tab" merge-mode="remove"/>
+            <editorArea:tab name="hmc.tab.order.tickets" merge-mode="remove"/>
+            <editorArea:tab name="hmc.order.cronjob.tab" merge-mode="remove"/>
+            <editorArea:tab name="hmc.order.history.tab" merge-mode="remove"/>
+            <editorArea:tab name="hmc.order.consignments.tab" merge-mode="remove"/>
+        </editorArea:editorArea>
+    </context>
+
 	<context merge-by="type" parent="GenericItem" type="ConsignmentEntry" component="listview">
         <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
             <list-view:column qualifier="consignment"/>
@@ -51,7 +106,6 @@
             <list-view:column qualifier="batchNum"/>
         </list-view:list-view>
     </context>
-	
 	
 	<context merge-by="type" parent="GenericItem" type="ConsignmentEntry" component="editor-area">
         <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
@@ -504,38 +558,7 @@
     </context>
     <!-- end -->
 	
-	<context merge-by="type" parent="GenericItem" type="AbstractOrder" component="listview">
-		<list-view:list-view>
-            <list-view:column qualifier="status"/>
-            <list-view:column qualifier="deliveryMode"/>
-		</list-view:list-view>
-	</context>
 	
-	 <context merge-by="type" parent="AbstractOrder" type="Order" component="editor-area">
-        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
-            <editorArea:tab name="hmc.properties" merge-mode="remove">
-				<editorArea:section name="hmc.common">
-					<editorArea:attribute qualifier="quoteReference" readonly="true"/>
-				</editorArea:section>
-			</editorArea:tab>
-            <editorArea:tab name="hmc.order.fraud.tab" merge-mode="remove">
-                <editorArea:section name="hmc.order.fraud.section">
-                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="fraudReports" />
-                </editorArea:section>
-            </editorArea:tab>
-            <editorArea:tab name="hmc.tab.order.tickets" merge-mode="remove">
-                <editorArea:section name="hmc.section.order.tickets"/>
-            </editorArea:tab>
-              <editorArea:tab name="hmc.order.cronjob.tab" merge-mode="remove">
-                <editorArea:section name="hmc.order.cronjob.ordertemplate">
-                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="orderTemplateCronJob"/>
-                </editorArea:section>
-                <editorArea:section name="hmc.order.cronjob.scheduleorder">
-                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="orderScheduleCronJob"/>
-                </editorArea:section>
-            </editorArea:tab>
-        </editorArea:editorArea>
-    </context>
     
     <context component="create-wizard" type="OrderParam">
 		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="OrderParamWizard" title="create.OrderParam.title">
@@ -625,7 +648,6 @@
 			</advanced-search:field-list>
 		</advanced-search:advanced-search>
 	</context>
-	
 	
 	<context merge-by="type" component="editorareaactions" parent="Principal" type="Customer">
 		<y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
