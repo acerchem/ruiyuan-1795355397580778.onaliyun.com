@@ -599,7 +599,7 @@
 	<context type="AbstractOrderEntry" component="base" merge-by="type" parent="GenericItem">
 		<y:base>
 			<y:labels>
-				<y:label>'['+product.code+']'+product.name+'  *'+quantity+unit.name</y:label>
+				<y:label>'['+product.code+']'+product.name+'  *'+quantity+product.packageType</y:label>
 			</y:labels>
 		</y:base>
 	</context>
