@@ -19,10 +19,9 @@
 	<table>
 			<tr>
 				<td>
-					<label>Month</label>
-					<formElement:customSelectBox idKey="month" labelKey="" path="month" mandatory="true" skipBlank="false" skipBlankMessageKey="Month" items="${months}" itemValue="isocode" itemLabel="name" selectedValue="${month}"/>
+					<label style="margin-left: 20px;">Month</label>
+					<input name="month" size="6" type="text" value="${month}" placeholder="eg:201806"/>
 				</td>
-				
 				<td>
 					<label style="margin-left: 20px;">Customer Area</label>
 					<formElement:customSelectBox idKey="area" labelKey="" path="area" mandatory="true" skipBlank="false" skipBlankMessageKey="Area" items="${areas}" itemValue="isocode" itemLabel="name" selectedValue="${area}"/>
