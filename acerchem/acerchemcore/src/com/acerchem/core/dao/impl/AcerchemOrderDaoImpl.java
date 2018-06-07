@@ -10,6 +10,8 @@ import java.util.TreeSet;
 
 import javax.annotation.Resource;
 import com.acerchem.core.dao.AcerchemOrderDao;
+import com.acerchem.core.enums.CustomerArea;
+
 import de.hybris.platform.servicelayer.search.SearchResult;
 import de.hybris.platform.commercefacades.order.data.MonthlySalesAnalysis;
 import de.hybris.platform.commercefacades.order.data.OrderDetailsReportData;
@@ -18,6 +20,7 @@ import de.hybris.platform.core.model.order.OrderEntryModel;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.order.DeliveryModeService;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
@@ -28,6 +31,8 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao{
 	private FlexibleSearchService flexibleSearchService;
 	@Resource
 	private Converter<AddressModel, AddressData> addressConverter;
+	@Resource
+	private DeliveryModeService deliveryModeService;
 	
 	@Override
 	public List<OrderDetailsReportData> getOrderDetails(Integer month,String area,String countryCode,String userName,String orderCode,Integer pageNumber) {
@@ -40,9 +45,11 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao{
 				" JOIN Customer as u ON {u:pk} = {o:user}" +
 				" JOIN Address as a ON {a:pk} = {o:deliveryAddress}" +
 				" JOIN Country as c ON {c:pk} = {a:country}" +
+				" JOIN Address as ua ON {ua:owner} = {u:pk}" +
+				" JOIN Country as uc ON {uc:pk} = {ua:country}" +
 				"} where 1=1 ";
 		
-		if(month>=1&&month<=12)
+		if(month!=null&&month>=1&&month<=12)
 		{
 			SQL += " AND datepart(mm,{o:creationtime}) =?month " ;
 			params.put("month", month);
@@ -50,23 +57,24 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao{
 		if(area!=null&&!area.equals(""))
 		{
 			SQL += " AND {u:area} =?area " ;
-			params.put("area", area);
+			params.put("area", CustomerArea.valueOf(area));
 		}
 		if(countryCode!=null&&!countryCode.equals(""))
 		{
-			SQL += " AND {c:isocode} =?isocode " ;
+			SQL += "AND (({o:deliveryMode}!=?deliveryMode AND {c:isocode} =?isocode) OR ({o:deliveryMode}=?deliveryMode AND {ua:contactAddress} = true AND {uc:isocode} =?isocode))";
+			params.put("deliveryMode", deliveryModeService.getDeliveryModeForCode("DELIVERY_MENTION"));
 			params.put("isocode", countryCode);
 		}
 		if(userName!=null&&!userName.equals(""))
 		{
-			SQL += " AND {u:name} =?userName " ;
-			params.put("userName", userName);
+			SQL += " AND {u:name} like ?userName " ;
+			params.put("userName", "%"+userName+"%");
 		}
 		
 		if(orderCode!=null&&!orderCode.equals(""))
 		{
-			SQL += " AND {o:code} =?orderCode ";
-			params.put("orderCode", orderCode);
+			SQL += " AND {o:code} like ?orderCode ";
+			params.put("orderCode", "%"+orderCode+"%");
 		}
 		
 		final StringBuilder builder = new StringBuilder(SQL);
@@ -108,8 +116,14 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao{
 			detail.setOrderAmount(od.getTotalPrice());
 			detail.setUserUid(od.getOrder().getUser().getUid());
 			detail.setDeliveryAddress(addressConverter.convert(addressModel));
-			detail.setSalesman(od.getOrder().getPlacedBy().getName());
-			detail.setSupplier(od.getProduct().getAcerChemVendor().getName());
+			if(od.getOrder().getPlacedBy()!=null)
+			{
+				detail.setSalesman(od.getOrder().getPlacedBy().getName());
+			}
+			if(od.getProduct().getAcerChemVendor()!=null)
+			{
+				detail.setSupplier(od.getProduct().getAcerChemVendor().getName());
+			}
 			orderDetails.add(detail);
 		}
 		return orderDetails;
@@ -202,7 +216,10 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao{
 		
 		for (CustomerModel customer:result.getResult())
 		{
-			areas.add(customer.getArea().toString());
+			if(customer.getArea()!=null)
+			{
+				areas.add(customer.getArea().toString());
+			}
 		}
 		return areas;
 		
