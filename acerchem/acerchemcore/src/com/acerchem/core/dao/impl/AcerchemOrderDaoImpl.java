@@ -35,7 +35,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao{
 	private DeliveryModeService deliveryModeService;
 	
 	@Override
-	public List<OrderDetailsReportData> getOrderDetails(Integer month,String area,String countryCode,String userName,String orderCode,Integer pageNumber) {
+	public List<OrderDetailsReportData> getOrderDetails(String month,String area,String countryCode,String userName,String orderCode,Integer pageNumber) {
 		
 		final Integer pageSize=100;
 		
@@ -47,11 +47,11 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao{
 				" JOIN Country as c ON {c:pk} = {a:country}" +
 				" JOIN Address as ua ON {ua:owner} = {u:pk}" +
 				" JOIN Country as uc ON {uc:pk} = {ua:country}" +
-				"} where 1=1 ";
+				"} where {ua:contactAddress} = true ";
 		
-		if(month!=null&&month>=1&&month<=12)
+		if(month!=null&&!month.equals(""))
 		{
-			SQL += " AND datepart(mm,{o:creationtime}) =?month " ;
+			SQL += " AND DATE_FORMAT({o:creationtime},'%Y%m') =?month " ;
 			params.put("month", month);
 		}
 		if(area!=null&&!area.equals(""))
@@ -61,7 +61,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao{
 		}
 		if(countryCode!=null&&!countryCode.equals(""))
 		{
-			SQL += "AND (({o:deliveryMode}!=?deliveryMode AND {c:isocode} =?isocode) OR ({o:deliveryMode}=?deliveryMode AND {ua:contactAddress} = true AND {uc:isocode} =?isocode))";
+			SQL += " AND (({o:deliveryMode}!=?deliveryMode AND {c:isocode} =?isocode) OR ({o:deliveryMode}=?deliveryMode AND {uc:isocode} =?isocode))";
 			params.put("deliveryMode", deliveryModeService.getDeliveryModeForCode("DELIVERY_MENTION"));
 			params.put("isocode", countryCode);
 		}
