@@ -133,9 +133,9 @@ public class AcerchemReportsController extends AbstractSearchPageController{//Ab
 	
 	@RequestMapping(value = "/orderDetails", method = RequestMethod.POST)
 	public String getOrderDetails(final SearchCriteriaFrom searchCriteriaFrom,final Model model,@RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode) throws CMSItemNotFoundException {
-		if(searchCriteriaFrom.getPageNumber()==null)
+		if(searchCriteriaFrom.getPageNumber()==null||searchCriteriaFrom.getPageNumber()<1)
 		{
-			searchCriteriaFrom.setPageNumber(0);
+			searchCriteriaFrom.setPageNumber(1);
 		}
 		List<OrderDetailsReportData> searchPageData = acerchemOrderDao.getOrderDetails(searchCriteriaFrom.getMonth(),
 				searchCriteriaFrom.getArea(),searchCriteriaFrom.getCountryCode(),searchCriteriaFrom.getUserName(),searchCriteriaFrom.getOrderCode(),
