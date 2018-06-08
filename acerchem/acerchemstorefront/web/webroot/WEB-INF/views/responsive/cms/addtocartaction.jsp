@@ -33,7 +33,7 @@
 
 <c:if test="${empty showAddToCart ? true : showAddToCart}">
 
-	<c:set var="buttonType">button</c:set>
+	<%-- <c:set var="buttonType">button</c:set>
 	<c:if test="${product.stock.stockLevelStatus.code ne 'outOfStock' }">
 		<c:set var="buttonType">submit</c:set>
 	</c:if>
@@ -51,8 +51,13 @@
 				</button>
 			</ycommerce:testId>
 		</c:otherwise>
+	</c:choose> --%>
 	
-	</c:choose>
+	<ycommerce:testId code="addToCartButton">
+		<button id="addToCartButton" type="submit" class="btn btn-submit" >
+			Add to Cart
+		</button>
+	</ycommerce:testId>
 	
 </c:if>
 	
