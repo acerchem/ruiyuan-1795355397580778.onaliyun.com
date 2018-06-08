@@ -186,6 +186,79 @@
 		</editorArea:editorArea>
 	</context>
 	
+	<context merge-by="type" parent="GenericItem" type="StockLevel" component="listview">
+		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+			<list-view:column qualifier="productCode"/>
+			<list-view:column qualifier="warehouse"/>
+			<list-view:column qualifier="available"/>
+			<list-view:column qualifier="reserved"/>
+			<list-view:column qualifier="preOrder"/>
+		</list-view:list-view>
+	</context>
+	
+	<context component="create-wizard" type="StockLevel">
+        <wz:flow id="StockLevelWizard" title="create.title(ctx.TYPE_CODE)">
+            <wz:prepare id="stockLevelPrepare">
+                <wz:initialize property="newStockLevel" type="ctx.TYPE_CODE"/>
+                <wz:assign property="newStockLevel.product" value="ctx.parentObject" />
+                <wz:assign property="newStockLevel.productCode" value="ctx.productCode"/>
+                <wz:assign property="newStockLevel.warehouse" value="ctx.warehouse"/>
+            </wz:prepare>
+            <wz:step id="step1" label="create.stockLevel.essential.label" sublabel="create.stockLevel.essential.sublabel">
+                <wz:content id="step1.content">
+                    <wz:property-list root="newStockLevel">
+                        <wz:property qualifier="productCode"/>
+                        <wz:property qualifier="warehouse"/>
+                        <wz:property qualifier="available"/>
+                    </wz:property-list>
+                </wz:content>
+                <wz:navigation id="step1.navigation">
+                    <wz:cancel/>
+                    <wz:next visible="newStockLevel.productCode != null and newStockLevel.warehouse != null and
+					    newStockLevel.available != null" default-target="step2"/>
+                    <wz:done visible="newStockLevel.productCode != null and newStockLevel.warehouse != null and
+					    newStockLevel.available != null">
+                        <wz:save property="newStockLevel"/>
+                    </wz:done>
+                </wz:navigation>
+            </wz:step>
+            <wz:step id="step2" label="create.stockLevel.additional.label" sublabel="create.stockLevel.additional.sublabel">
+                <wz:content id="step2.content">
+                    <wz:property-list root="newStockLevel">
+                        <wz:property qualifier="inStockStatus"/>
+                        <wz:property qualifier="nextDeliveryTime"/>
+                        <wz:property qualifier="releaseDate"/>
+                        <wz:property qualifier="bin"/>
+                    </wz:property-list>
+                </wz:content>
+                <wz:navigation id="step2.navigation">
+                    <wz:cancel/>
+                    <wz:back/>
+                    <wz:done>
+                        <wz:save property="newStockLevel"/>
+                    </wz:done>
+                </wz:navigation>
+            </wz:step>
+        </wz:flow>
+    </context>
+	
+	<context merge-by="type" parent="GenericItem" type="StockLevel" component="editor-area">
+        <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
+            <editorArea:essentials>
+                <editorArea:essentialSection name="hmc.essential">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="inStockStatus" merge-mode="remove"/>
+                </editorArea:essentialSection>
+            </editorArea:essentials>
+            <editorArea:tab name="hmc.properties">
+                <editorArea:section name="hmc.section.stocklevel.stock">
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="overSelling" merge-mode="remove"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="releaseDate" merge-mode="remove"/>
+                    <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="nextDeliveryTime" merge-mode="remove"/>
+                </editorArea:section>
+            </editorArea:tab>
+        </editorArea:editorArea>
+    </context>
+    
 	<context merge-by="type" parent="GenericItem" type="ConsignmentEntry" component="listview">
         <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
             <list-view:column qualifier="consignment"/>
@@ -429,16 +502,6 @@
 			<list-view:column qualifier="trayAmount"/>
 			<list-view:column qualifier="price"/>
 			<list-view:column qualifier="deliveriedDay"/>
-		</list-view:list-view>
-	</context>
-
-	<context merge-by="type" parent="GenericItem" type="StockLevel" component="listview">
-		<list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
-			<list-view:column qualifier="productCode"/>
-			<list-view:column qualifier="warehouse"/>
-			<list-view:column qualifier="available"/>
-			<list-view:column qualifier="reserved"/>
-			<list-view:column qualifier="preOrder"/>
 		</list-view:list-view>
 	</context>
 
@@ -732,51 +795,4 @@
         </advanced-search:advanced-search>
     </context>
     
-    <context component="create-wizard" type="StockLevel">
-        <wz:flow id="StockLevelWizard" title="create.title(ctx.TYPE_CODE)">
-            <wz:prepare id="stockLevelPrepare">
-                <wz:initialize property="newStockLevel" type="ctx.TYPE_CODE"/>
-                <wz:assign property="newStockLevel.product" value="ctx.parentObject" />
-                <wz:assign property="newStockLevel.productCode" value="ctx.productCode"/>
-                <wz:assign property="newStockLevel.warehouse" value="ctx.warehouse"/>
-            </wz:prepare>
-            <wz:step id="step1" label="create.stockLevel.essential.label" sublabel="create.stockLevel.essential.sublabel">
-                <wz:content id="step1.content">
-                    <wz:property-list root="newStockLevel">
-                        <wz:property qualifier="productCode"/>
-                        <wz:property qualifier="warehouse"/>
-                        <wz:property qualifier="available"/>
-                    </wz:property-list>
-                </wz:content>
-                <wz:navigation id="step1.navigation">
-                    <wz:cancel/>
-                    <wz:next visible="newStockLevel.productCode != null and newStockLevel.warehouse != null and
-					    newStockLevel.available != null" default-target="step2"/>
-                    <wz:done visible="newStockLevel.productCode != null and newStockLevel.warehouse != null and
-					    newStockLevel.available != null">
-                        <wz:save property="newStockLevel"/>
-                    </wz:done>
-                </wz:navigation>
-            </wz:step>
-            <wz:step id="step2" label="create.stockLevel.additional.label" sublabel="create.stockLevel.additional.sublabel">
-                <wz:content id="step2.content">
-                    <wz:property-list root="newStockLevel">
-                        <wz:property qualifier="inStockStatus"/>
-                        <wz:property qualifier="nextDeliveryTime"/>
-                        <wz:property qualifier="releaseDate"/>
-                        <wz:property qualifier="bin"/>
-                    </wz:property-list>
-                </wz:content>
-                <wz:navigation id="step2.navigation">
-                    <wz:cancel/>
-                    <wz:back/>
-                    <wz:done>
-                        <wz:save property="newStockLevel"/>
-                    </wz:done>
-                </wz:navigation>
-            </wz:step>
-        </wz:flow>
-    </context>
-    
-
 </config>
