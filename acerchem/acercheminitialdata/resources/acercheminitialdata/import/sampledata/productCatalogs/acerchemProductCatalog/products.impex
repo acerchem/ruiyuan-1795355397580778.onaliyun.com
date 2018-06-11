@@ -129,6 +129,28 @@ INSERT_UPDATE Product;characteristic;promotionItem;formulaWeight;chemicalInfo;pa
 ;Sports Nutrition;false;75.070;C2H5NO2;25;Bag;25;25.2;USP;56-40-6;20;AC02101a;577,672;Changhao;L-Glycine EP Grade;kg;Aminoacetic acid;
 ;Sports Nutrition;false;;;20;Bag;20;21.0;Enterprice Standard;;25;AC07002a;578,672;Yiwanjia;Rice Protein 80% 300MESH;kg;Rice Protein Isolate;
 
+#Yake 2018-6-11
+;Joint Health;true;215.630;C6H13NO5.HCl;25;Drum;25;27;USP;66-84-2;20;AC02333a;576,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Sports Nutrition;true;89.090;C3H7NO2;25;Bag;25;25.2;USP;56-41-7;20;AC02011a;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Sports Nutrition;true;133.100;C4H7NO4;25;Drum;25;28;USP;1783-96-6;20;AC02259a;576,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Sports Nutrition;true;131.170;C6H13NO2;25;Drum;25;28.2;USP;61-90-5;20;AC02114a;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Sports Nutrition;true;131.170;C6H13NO2;25;Drum;25;26.5;Enterprice Standard;73-32-5;20;AC02226a;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+
+;Sports Nutrition;true;117.150;C5H11NO2;25;Drum;25;26.5;Enterprice Standard;72-18-4;20;AC02227a;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Super Foods;true;;;25;Drum;25;27;Enterprice Standard;;20;AC05103a;575,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Immune system;true;376.370;C17H20N4O6;25;Drum;25;28.4;USP/EP/BP;83-88-5;20;AC01120a;571,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Immune system;true;376.370;C17H20N4O6;25;Drum;25;28;USP/EP/BP;83-88-5;20;AC01120b;571,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Sports Nutrition;true;;;25;Drum;25;26.5;Enterprice Standard;;20;AC02378b;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+
+;Sports Nutrition;true;;;25;Drum;25;27;Enterprice Standard;;20;AC02378c;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Sports Nutrition;true;;;25;Drum;25;26.5;Enterprice Standard;;20;AC02378d;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Joint Health;true;297.325;C6H12NKO8S;25;Drum;25;27.5;USP;31284-96-5;20;AC02345b;576,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Heart&Cardiovascular;true;150.130;C5H10O5;25;Drum;25;28;USP;50-69-1;20;AC02263b;576,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Sports Nutrition;true;;;25;Drum;25;26.5;Enterprice Standard;;20;AC02395b;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+
+;Sports Nutrition;true;320.2991;C11H20N4O7;25;Drum;25;27.5;Enterprice Standard;16856-18-1;20;AC02005b;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Weight management;true;161.200;C7H15NO3;25;Drum;25;28;USP;406-76-8;20;AC02047b;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Sports Nutrition;true;146.144;C5H10N2O3;25;Drum;25;28;FCCVI;56-85-9;20;AC02090b;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
 
 
 
@@ -480,6 +502,30 @@ UPDATE Product;minOrderQuantity;code[unique=true];$catalogVersion;name[lang=$lan
 ;4;AC02230a;;L-Valine USP;Manufacturer:Meihua;Whitish crystalline powder<br/>
 ;4;AC02101a;;L-Glycine EP Grade;Manufacturer:Changhao;White crystalline or crystalline powder<br/>
 ;5;AC07002a;;Rice Protein 80% 300MESH;Manufacturer:Yiwanjia;Light Yellow Fine Powder<br/>
+
+
+#Yake 2018-6-11
+;4;AC02333a;;D-Glucosamine HCL DC;Manufacturer:Rixing With BRC Certificate;White Crystallion powder<br/>Repair and strengthen articular cartilage<br/>Excellent bone joint protection formula<br/>
+;4;AC02011a;;L-Alanine;Manufacturer:Changhao;White crystalline powder
+;4;AC02259a;;D-Aspartic Acid;Manufacturer:LONCIN;White crystalline powder
+;4;AC02114a;;L-Leucine Vegan;Manufacturer:Meihua;White crystalline powder
+;4;AC02226a;;L-Isoleucine Instant;Manufacturer:Amino Life;Whitish crystalline powder
+
+;4;AC02227a;;L-Valine Instant;Manufacturer:Amino Life;Whitish crystalline powder
+;4;AC05103a;;Conventional Spirulina;Manufacturer:Yijian;Fine dark green powder
+;4;AC01120a;;Vitamin B2;Manufacturer:Guangji;Yellow or orange-yellow crystalline powder
+;4;AC01120b;;Vitamin B2;Manufacturer:PARCHN;Yellow or orange-yellow crystalline powder
+;4;AC02378b;;BCAA 2:1:1;Manufacturer:Sipu;White to off-white powder
+
+;4;AC02378c;;BCAA 2:1:1;Manufacturer:Grand Hoyo;White to off-white powder
+;4;AC02378d;;BCAA 2:1:1;Manufacturer:Amino Life;White to off-white powder
+;4;AC02345b;;D-Glucosamine Sulphate 2KCL 40-80mesh ;Manufacturer:Aoxing;White Crystallion powder<br/>Repair and strengthen articular cartilage<br/>Excellent bone joint protection formula<br/>
+;4;AC02263b;;D-Ribose USP;Manufacturer:Tuoyang; White crystalline powder
+;4;AC02395b;;Instant BCAA Powder 2:1:1;Manufacturer:Amino Life; White to off-white powder
+
+;4;AC02005b;;L-Arginine AKG 2：1;Manufacturer:Hengsheng;White to off-white crystalline powder
+;4;AC02047b;;L-Carnitine Base USP;Manufacturer:Northeast Pharm;White Crystalline hygroscopic powder
+;4;AC02090b;;L-Glutamine;Manufacturer:Fufeng;Whitish crystalline powder<br/>Widely used in food additives<br/>Provide nitrogen source to promote protein synthesis in muscle cells<br/>
 
 
 
