@@ -42,4 +42,4 @@ UPDATE Category;code[unique=true];$catalogVersion;name[lang=$lang]
  ;677;;Liver protection;
  ;678;;Immune system;
  ;679;;Sweetening;
-
+  ;680;;Super Foods;

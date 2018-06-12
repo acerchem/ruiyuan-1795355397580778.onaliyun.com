@@ -63,6 +63,32 @@ INSERT_UPDATE Unit;code[unique=true];name[lang=en];unitType
 
 INSERT_UPDATE Product;characteristic;promotionItem;formulaWeight;chemicalInfo;packageWeight;packageType;netWeight;grossWeight;specification;CAS;unitCalculateRato;code[unique=true];$supercategories;manufacturerName;manufacturerAID;unit(code);otherName;ean;variantType(code);$catalogVersion;$approved
 
+#Yake 2018-6-11
+;Joint Health;true;215.630;C6H13NO5.HCl;25;Drum;25;27;USP;66-84-2;20;AC02333a;576,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Sports Nutrition;true;89.090;C3H7NO2;25;Bag;25;25.2;USP;56-41-7;20;AC02011a;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Sports Nutrition;true;133.100;C4H7NO4;25;Drum;25;28;USP;1783-96-6;20;AC02259a;576,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Sports Nutrition;true;131.170;C6H13NO2;25;Drum;25;28.2;USP;61-90-5;20;AC02114a;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Sports Nutrition;true;131.170;C6H13NO2;25;Drum;25;26.5;Enterprice Standard;73-32-5;20;AC02226a;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Sports Nutrition;true;117.150;C5H11NO2;25;Drum;25;26.5;Enterprice Standard;72-18-4;20;AC02227a;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Super Foods;true;;;25;Drum;25;27;Enterprice Standard;;20;AC05103a;575,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Immune system;true;376.370;C17H20N4O6;25;Drum;25;28.4;USP/EP/BP;83-88-5;20;AC01120a;571,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Immune system;true;376.370;C17H20N4O6;25;Drum;25;28;USP/EP/BP;83-88-5;20;AC01120b;571,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Sports Nutrition;true;;;25;Drum;25;26.5;Enterprice Standard;;20;AC02378b;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Sports Nutrition;true;;;25;Drum;25;27;Enterprice Standard;;20;AC02378c;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Sports Nutrition;true;;;25;Drum;25;26.5;Enterprice Standard;;20;AC02378d;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Joint Health;true;297.325;C6H12NKO8S;25;Drum;25;27.5;USP;31284-96-5;20;AC02345b;576,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Heart&Cardiovascular;true;150.130;C5H10O5;25;Drum;25;28;USP;50-69-1;20;AC02263b;576,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Sports Nutrition;true;;;25;Drum;25;26.5;Enterprice Standard;;20;AC02395b;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Sports Nutrition;true;320.2991;C11H20N4O7;25;Drum;25;27.5;Enterprice Standard;16856-18-1;20;AC02005b;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Weight management;true;161.200;C7H15NO3;25;Drum;25;28;USP;406-76-8;20;AC02047b;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Sports Nutrition;true;146.144;C5H10N2O3;25;Drum;25;28;FCCVI;56-85-9;20;AC02090b;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+
+;Sports Nutrition;true;;;25;Drum;25;28;FCCVI;;20;AC06058a;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Sports Nutrition;true;;;25;Drum;25;28;FCCVI;;20;AC06056a;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Joint Health;true;215.630;C6H13NO5.HCl;25;Drum;25;27;USP;66-84-2;20;AC02340c;576,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Joint Health;true;297.325;C6H12NKO8S;25;Drum;25;27;USP;31284-96-5;20;AC02345c;576,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Sports Nutrition;true;;;25;Drum;25;26.5;Enterprice Standard;;20;AC02378e;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
+;Sports Nutrition;true;;;25;Drum;25;26.5;Enterprice Standard;;20;AC02016b;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
 #shaun
 ;Heart&Cardiovascular;true;863.343;C59H90O4;10;Carton;10;14;EP/USP;303-98-0;20;AC05080a;571,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
 ;Heart&Cardiovascular;true;863.343;C59H90O4;10;Carton;10;14;EP/USP;303-98-0;20;AC05080b;571,674;Kingdomway;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
@@ -74,8 +100,6 @@ INSERT_UPDATE Product;characteristic;promotionItem;formulaWeight;chemicalInfo;pa
 ;Joint Health;true;297.325;C6H12NKO8S;25;Drum;25;27;EP/USP;31284-96-5;20;AC02354a;576,671;Rixing;D-Glucosamine Sulphate 2KCL DC;kg;Glucosamine Sulfate Potassium Chloride particle granule;
 ;Joint Health;true;479.368;C13H21NO16S;25;Drum;25;27.5;Enterprise Standard;9007-28-7;20;AC05003a;576,671;RKD;Chondroitin Sulphate Bovine CPC 90%;kg;Chondroitin Sulfate;
 ;Sports Nutrition;true;146.144;C5H10N2O3;25;Drum;25;28.2;FCCVI;56-85-9;20;AC02090a;577,672;Meihua;L-Glutamine;kg;Glutamine;
-
-#
 ;Sports Nutrition;false;;;25;Drum;25;26.5;Enterprice Standard;;20;AC02378a;577,672;Shuguang;BCAA 2:1:1;kg;Branched chain amino acid;
 ;Sports Nutrition;false;;;25;Drum;25;27.0;Enterprice Standard;;20;AC02016a;577,672;Shuguang;BCAA DC 2：1：1;kg;Branched chain amino acid;
 ;Weight management;false;280.4455;C18H32O2;20;Carton;20;21.5;Enterprice Standard;121250-47-3,2420-56-6;25;AC08016a;579,673;InnoBio;CLA 40% TG Powder;kg;Conjugated linoleic acid ;
@@ -118,7 +142,6 @@ INSERT_UPDATE Product;characteristic;promotionItem;formulaWeight;chemicalInfo;pa
 ;Immune system;false;176.120;C6H8O6;25;Carton;25;26.5;Enterprice Standard;50-81-7;20;AC01363a;571,678;Jiangshan;Vitamin C DC 97;kg;Ascorbic Acid;
 ;Immune system;false;176.120;C6H8O6;25;Carton;25;26.5;EP,USP,BP;50-81-7;20;AC01361a;571,678;Qiyuan;Vitamin C Powder;kg;Ascorbic Acid;
 ;Heart&Cardiovascular;false;384.6377;C27H44O;25;Carton;25;27.0;Enterprice Standard;67-97-0,8024-19-9,8050-67-7;20;AC01551a;571,674;LN;Vitamin D3 100,000IU/G CWS;kg;Cholecalciferol;
-
 #
 ;Joint Health;false;479.368;C13H21NO16S;25;Drum;25;27.5;Enterprise Standard;9007-28-7;20;AC05001a;576,671;Ruikangda;Chondroitin Sulphate Shark;kg;Chondroitin Sulfate;
 ;Sports Nutrition;false;;;25;Drum;25;;Enterprice Standard;;20;AC02380a;577,672;Fufeng;Fermentation BCAA 2:1:1;kg;Branched chain amino acid;
@@ -129,28 +152,6 @@ INSERT_UPDATE Product;characteristic;promotionItem;formulaWeight;chemicalInfo;pa
 ;Sports Nutrition;false;75.070;C2H5NO2;25;Bag;25;25.2;USP;56-40-6;20;AC02101a;577,672;Changhao;L-Glycine EP Grade;kg;Aminoacetic acid;
 ;Sports Nutrition;false;;;20;Bag;20;21.0;Enterprice Standard;;25;AC07002a;578,672;Yiwanjia;Rice Protein 80% 300MESH;kg;Rice Protein Isolate;
 
-#Yake 2018-6-11
-;Joint Health;true;215.630;C6H13NO5.HCl;25;Drum;25;27;USP;66-84-2;20;AC02333a;576,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
-;Sports Nutrition;true;89.090;C3H7NO2;25;Bag;25;25.2;USP;56-41-7;20;AC02011a;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
-;Sports Nutrition;true;133.100;C4H7NO4;25;Drum;25;28;USP;1783-96-6;20;AC02259a;576,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
-;Sports Nutrition;true;131.170;C6H13NO2;25;Drum;25;28.2;USP;61-90-5;20;AC02114a;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
-;Sports Nutrition;true;131.170;C6H13NO2;25;Drum;25;26.5;Enterprice Standard;73-32-5;20;AC02226a;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
-
-;Sports Nutrition;true;117.150;C5H11NO2;25;Drum;25;26.5;Enterprice Standard;72-18-4;20;AC02227a;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
-;Super Foods;true;;;25;Drum;25;27;Enterprice Standard;;20;AC05103a;575,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
-;Immune system;true;376.370;C17H20N4O6;25;Drum;25;28.4;USP/EP/BP;83-88-5;20;AC01120a;571,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
-;Immune system;true;376.370;C17H20N4O6;25;Drum;25;28;USP/EP/BP;83-88-5;20;AC01120b;571,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
-;Sports Nutrition;true;;;25;Drum;25;26.5;Enterprice Standard;;20;AC02378b;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
-
-;Sports Nutrition;true;;;25;Drum;25;27;Enterprice Standard;;20;AC02378c;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
-;Sports Nutrition;true;;;25;Drum;25;26.5;Enterprice Standard;;20;AC02378d;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
-;Joint Health;true;297.325;C6H12NKO8S;25;Drum;25;27.5;USP;31284-96-5;20;AC02345b;576,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
-;Heart&Cardiovascular;true;150.130;C5H10O5;25;Drum;25;28;USP;50-69-1;20;AC02263b;576,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
-;Sports Nutrition;true;;;25;Drum;25;26.5;Enterprice Standard;;20;AC02395b;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
-
-;Sports Nutrition;true;320.2991;C11H20N4O7;25;Drum;25;27.5;Enterprice Standard;16856-18-1;20;AC02005b;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
-;Weight management;true;161.200;C7H15NO3;25;Drum;25;28;USP;406-76-8;20;AC02047b;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
-;Sports Nutrition;true;146.144;C5H10N2O3;25;Drum;25;28;FCCVI;56-85-9;20;AC02090b;577,674;Livzon;Coenzyme Q10 98% HPLC;kg;Co Q10 Ubiquinone;
 
 
 
@@ -166,142 +167,132 @@ INSERT_UPDATE Product;characteristic;promotionItem;formulaWeight;chemicalInfo;pa
 
 # Insert Product References
 INSERT_UPDATE ProductReference;source(code,$catalogVersion)[unique=true];target(code,$catalogVersion)[unique=true];referenceType(code);active;preselected
-
-
-
-
 INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];reserved;avaPreOrderReleaseDay;preOrderReleaseDay
+#shaun
+;150;Rotterdam;notSpecified;10;0;0;0;AC05080a;0;20;50
+;0;Rotterdam;notSpecified;10;0;0;0;AC05080b;0;20;50
+;2100;Rotterdam;notSpecified;10;0;0;0;AC03390a;0;20;50
+;50;Rotterdam;notSpecified;10;0;0;0;AC03138a;0;20;50
+;1950;Rotterdam;notSpecified;10;0;0;0;AC03887a;0;20;50
+;1125;Rotterdam;notSpecified;10;0;0;0;AC03142a;0;20;50
+;2075;Rotterdam;notSpecified;10;0;0;0;AC02345a;0;20;50
+;12650;Rotterdam;notSpecified;10;0;0;0;AC02354a;0;20;50
+;3500;Rotterdam;notSpecified;10;0;0;0;AC05003a;0;20;50
+;325;Rotterdam;notSpecified;10;0;0;0;AC02090a;0;20;50
+;0;Rotterdam;notSpecified;10;0;0;0;AC02378a;0;20;50
+;0;Rotterdam;notSpecified;10;0;0;0;AC02016a;0;20;50
+;0;Rotterdam;notSpecified;10;0;0;0;AC08016a;0;20;50
+;2000;Rotterdam;notSpecified;10;0;0;0;AC06172a;0;20;50
+;0;Rotterdam;notSpecified;10;0;0;0;AC02233a;0;20;50
+;0;Rotterdam;notSpecified;10;0;0;0;AC02233b;0;20;50
+;0;Rotterdam;notSpecified;10;0;0;0;AC02236a;0;20;50
+;450;Rotterdam;notSpecified;10;0;0;0;AC03514a;0;20;50
+;3175;Rotterdam;notSpecified;10;0;0;0;AC02340a;0;20;50
+;50;Rotterdam;notSpecified;10;0;0;0;AC02342a;0;20;50
+;1050;Rotterdam;notSpecified;10;0;0;0;AC02263a;0;20;50
+;0;Rotterdam;notSpecified;10;0;0;0;AC02379a;0;20;50
+;0;Rotterdam;notSpecified;10;0;0;0;AC06001a;0;20;50
+;25;Rotterdam;notSpecified;10;0;0;0;AC03097a;0;20;50
+;0;Rotterdam;notSpecified;10;0;0;0;AC03184a;0;20;50
+;1825;Rotterdam;notSpecified;10;0;0;0;AC05170a;0;20;50
+;4150;Rotterdam;notSpecified;10;0;0;0;AC02393a;0;20;50
+;0;Rotterdam;notSpecified;10;0;0;0;AC02395a;0;20;50
+;0;Rotterdam;notSpecified;10;0;0;0;AC02005a;0;20;50
+;0;Rotterdam;notSpecified;10;0;0;0;AC02047a;0;20;50
+;0;Rotterdam;notSpecified;10;0;0;0;AC02317a;0;20;50
+;25;Rotterdam;notSpecified;10;0;0;3000;AC02048a;0;20;50
+;0;Rotterdam;notSpecified;10;0;0;0;AC02048b;0;20;50
+;0;Rotterdam;notSpecified;10;0;0;0;AC02048c;0;20;50
+;5475;Rotterdam;notSpecified;10;0;0;0;AC02040a;0;20;50
+;0;Rotterdam;notSpecified;10;0;0;0;AC02045a;0;20;50
+;0;Rotterdam;notSpecified;10;0;0;0;AC02046a;0;20;50
+;750;Rotterdam;notSpecified;10;0;0;0;AC02145a;0;20;50
+;25;Rotterdam;notSpecified;10;0;0;0;AC02175a;0;20;50
+;0;Rotterdam;notSpecified;10;0;0;0;AC02450a;0;20;50
+;0;Rotterdam;notSpecified;10;0;0;0;AC02315a;0;20;50
+;0;Rotterdam;notSpecified;10;0;0;3000;AC02315b;0;20;50
+;0;Rotterdam;notSpecified;10;0;0;0;AC02312a;0;20;50
+;0;Rotterdam;notSpecified;10;0;0;0;AC06089a;0;20;50
+;18900;Rotterdam;notSpecified;10;0;0;0;AC07158a;0;20;50
+;0;Rotterdam;notSpecified;10;0;0;0;AC07802a;0;20;50
+;0;Rotterdam;notSpecified;10;0;0;0;AC03132a;0;20;50
+;0;Rotterdam;notSpecified;10;0;0;0;AC03131a;0;20;50
+;0;Rotterdam;notSpecified;10;0;0;0;AC01363a;0;20;50
+;0;Rotterdam;notSpecified;10;0;0;0;AC01361a;0;20;50
+;0;Rotterdam;notSpecified;10;0;0;0;AC01551a;0;20;50
+;1750;Rotterdam;notSpecified;10;0;0;0;AC05001a;0;20;50
+;0;Rotterdam;notSpecified;10;0;0;0;AC02380a;0;20;50
+;1075;Rotterdam;notSpecified;10;0;0;0;AC02361a;0;20;50
+;1000;Rotterdam;notSpecified;10;0;0;0;AC02021a;0;20;50
+;4500;Rotterdam;notSpecified;10;0;0;0;AC02141a;0;20;50
+;4425;Rotterdam;notSpecified;10;0;0;0;AC02230a;0;20;50
+;75;Rotterdam;notSpecified;10;0;0;0;AC02101a;0;20;50
+;0;Rotterdam;notSpecified;10;0;0;19000;AC07002a;0;20;50
+;150;Rotterdam;notSpecified;10;0;0;0;AC03515a;0;20;50
 
 #shaun
-;200;Rotterdam;notSpecified;10;0;0;100;AC05080a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC05080b;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC03390a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC03138a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC03887a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC03142a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02345a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02354a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC05003a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02090a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC05080a;0;20;50
+;300;UK;notSpecified;10;0;0;0;AC05080b;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC03390a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC03138a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC03887a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC03142a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC02345a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC02354a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC05003a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC02090a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC02378a;0;20;50
+;625;UK;notSpecified;10;0;0;0;AC02016a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC08016a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC06172a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC02233a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC02233b;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC02236a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC03514a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC02340a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC02342a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC02263a;0;20;50
+;20525;UK;notSpecified;10;0;0;0;AC02379a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC06001a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC03097a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC03184a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC05170a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC02393a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC02395a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC02005a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC02047a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC02317a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC02048a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC02048b;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC02048c;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC02040a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC02045a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC02046a;0;20;50
+;500;UK;notSpecified;10;0;0;0;AC02145a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC02175a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC02450a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC02315a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC02315b;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC02312a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC06089a;0;20;50
+;300;UK;notSpecified;10;0;0;0;AC07158a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC07802a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC03132a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC03131a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC01363a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC01361a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC01551a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC05001a;0;20;50
+;5000;UK;notSpecified;10;0;0;0;AC02380a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC02361a;0;20;50
+;25;UK;notSpecified;10;0;0;0;AC02021a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC02141a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC02230a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC02101a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC07002a;0;20;50
+;0;UK;notSpecified;10;0;0;0;AC03515a;0;20;50
 
-;200;Rotterdam;notSpecified;10;0;0;100;AC02378a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02016a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC08016a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC06172a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02233a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02233b;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02236a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC03514a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02340a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02342a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02263a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02379a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC06001a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC03097a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC03184a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC05170a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02393a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02395a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02005a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02047a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02317a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02048a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02048b;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02048c;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02040a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02045a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02046a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02145a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02175a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02450a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02315a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02315b;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02312a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC06089a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC07158a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC07802a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC03132a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC03131a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC01363a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC01361a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC01551a;0;20;50
-
-;200;Rotterdam;notSpecified;10;0;0;100;AC05001a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02380a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02361a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02021a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02141a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02230a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC02101a;0;20;50
-;200;Rotterdam;notSpecified;10;0;0;100;AC07002a;0;20;50
-
-#shaun
-;300;UK;notSpecified;10;0;0;100;AC05080a;0;20;50
-;300;UK;notSpecified;10;0;0;100;AC05080b;0;20;50
-;300;UK;notSpecified;10;0;0;100;AC03390a;0;20;50
-;300;UK;notSpecified;10;0;0;100;AC03138a;0;20;50
-;300;UK;notSpecified;10;0;0;100;AC03887a;0;20;50
-;300;UK;notSpecified;10;0;0;100;AC03142a;0;20;50
-;300;UK;notSpecified;10;0;0;100;AC02345a;0;20;50
-;300;UK;notSpecified;10;0;0;100;AC02354a;0;20;50
-;300;UK;notSpecified;10;0;0;100;AC05003a;0;20;50
-;300;UK;notSpecified;10;0;0;100;AC02090a;0;20;50
-
-;200;UK;notSpecified;10;0;0;100;AC02378a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC02016a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC08016a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC06172a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC02233a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC02233b;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC02236a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC03514a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC02340a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC02342a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC02263a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC02379a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC06001a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC03097a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC03184a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC05170a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC02393a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC02395a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC02005a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC02047a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC02317a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC02048a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC02048b;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC02048c;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC02040a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC02045a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC02046a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC02145a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC02175a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC02450a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC02315a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC02315b;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC02312a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC06089a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC07158a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC07802a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC03132a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC03131a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC01363a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC01361a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC01551a;0;20;50
-
-;200;UK;notSpecified;10;0;0;100;AC05001a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC02380a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC02361a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC02021a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC02141a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC02230a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC02101a;0;20;50
-;200;UK;notSpecified;10;0;0;100;AC07002a;0;20;50
-
-
- 
 UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehouse(code));vendors(code)
-
 #shaun
 ;AC05080a;;AC05080a:Rotterdam;
 ;AC05080b;;AC05080b:Rotterdam;
@@ -313,7 +304,6 @@ UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehou
 ;AC02354a;;AC02354a:Rotterdam;
 ;AC05003a;;AC05003a:Rotterdam;
 ;AC02090a;;AC02090a:Rotterdam;
-
 ;AC02378a;;AC02378a:Rotterdam;
 ;AC02016a;;AC02016a:Rotterdam;
 ;AC08016a;;AC08016a:Rotterdam;
@@ -356,9 +346,6 @@ UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehou
 ;AC01363a;;AC01363a:Rotterdam;
 ;AC01361a;;AC01361a:Rotterdam;
 ;AC01551a;;AC01551a:Rotterdam;
-
-
-
 ;AC05001a;;AC05001a:Rotterdam;
 ;AC02380a;;AC02380a:Rotterdam;
 ;AC02361a;;AC02361a:Rotterdam;
@@ -367,7 +354,6 @@ UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehou
 ;AC02230a;;AC02230a:Rotterdam;
 ;AC02101a;;AC02101a:Rotterdam;
 ;AC07002a;;AC07002a:Rotterdam;
-
 #shaun
 ;AC05080a;;AC05080a:UK;
 ;AC05080b;;AC05080b:UK;
@@ -379,7 +365,6 @@ UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehou
 ;AC02354a;;AC02354a:UK;
 ;AC05003a;;AC05003a:UK;
 ;AC02090a;;AC02090a:UK;
-
 ;AC02378a;;AC02378a:UK;
 ;AC02016a;;AC02016a:UK;
 ;AC08016a;;AC08016a:UK;
@@ -422,7 +407,6 @@ UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehou
 ;AC01363a;;AC01363a:UK;
 ;AC01361a;;AC01361a:UK;
 ;AC01551a;;AC01551a:UK;
-
 ;AC05001a;;AC05001a:UK;
 ;AC02380a;;AC02380a:UK;
 ;AC02361a;;AC02361a:UK;
@@ -431,12 +415,35 @@ UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehou
 ;AC02230a;;AC02230a:UK;
 ;AC02101a;;AC02101a:UK;
 ;AC07002a;;AC07002a:UK;
-
-
-
-
  # Update allProducts with localisations
 UPDATE Product;minOrderQuantity;code[unique=true];$catalogVersion;name[lang=$lang];summary[lang=$lang];description[lang=$lang]
+#Yake 2018-6-11
+;4;AC02333a;;D-Glucosamine HCL DC;Manufacturer:Rixing With BRC Certificate;White Crystallion powder<br/>Repair and strengthen articular cartilage<br/>Excellent bone joint protection formula<br/>
+;4;AC02011a;;L-Alanine;Manufacturer:Changhao;White crystalline powder<br/>
+;4;AC02259a;;D-Aspartic Acid;Manufacturer:LONCIN;White crystalline powder<br/>
+;4;AC02114a;;L-Leucine Vegan;Manufacturer:Meihua;White crystalline powder<br/>
+;4;AC02226a;;L-Isoleucine Instant;Manufacturer:Amino Life;Whitish crystalline powder<br/>
+;4;AC02227a;;L-Valine Instant;Manufacturer:Amino Life;Whitish crystalline powder<br/>
+;4;AC05103a;;Conventional Spirulina;Manufacturer:Yijian;Fine dark green powder<br/>
+;4;AC01120a;;Vitamin B2;Manufacturer:Guangji;Yellow or orange-yellow crystalline powder<br/>
+;4;AC01120b;;Vitamin B2;Manufacturer:PARCHN;Yellow or orange-yellow crystalline powder<br/>
+;4;AC02378b;;BCAA 2:1:1;Manufacturer:Sipu;White to off-white powder<br/>
+;4;AC02378c;;BCAA 2:1:1;Manufacturer:Grand Hoyo;White to off-white powder<br/>
+;4;AC02378d;;BCAA 2:1:1;Manufacturer:Amino Life;White to off-white powder<br/>
+;4;AC02345b;;D-Glucosamine Sulphate 2KCL 40-80mesh ;Manufacturer:Aoxing;White Crystallion powder<br/>Repair and strengthen articular cartilage<br/>Excellent bone joint protection formula<br/>
+;4;AC02263b;;D-Ribose USP;Manufacturer:Tuoyang; White crystalline powder<br/>
+;4;AC02395b;;Instant BCAA Powder 2:1:1;Manufacturer:Amino Life; White to off-white powder<br/>
+;4;AC02005b;;L-Arginine AKG 2：1;Manufacturer:Hengsheng;White to off-white crystalline powder<br/>
+;4;AC02047b;;L-Carnitine Base USP;Manufacturer:Northeast Pharm;White Crystalline hygroscopic powder<br/>
+;4;AC02090b;;L-Glutamine;Manufacturer:Fufeng;Whitish crystalline powder<br/>Widely used in food additives<br/>Provide nitrogen source to promote protein synthesis in muscle cells<br/>
+
+;4;AC06058a;;Q10 30mg Softgel;;<br/>
+;4;AC06056a;;Q10 100mg Softgel;;<br/>
+;4;AC02340c;;D-Glucosamine HCL 30mesh;Manufacturer:Health Herb;White Crystallion powder<br/>Repair and strengthen articular cartilage<br/>Excellent bone joint protection formula<br/>
+;4;AC02345c;;D-Glucosamine Sulphate 2KCL 40-80mesh;Manufacturer:Health Herb;White Crystallion powder<br/>Repair and strengthen articular cartilage<br/>Excellent bone joint protection formula<br/>
+;4;AC02378e;;BCAA 2:1:1;Manufacturer:Jinghai;White to off-white powder<br/>
+;4;AC02016b;;BCAA DC 2：1：1;Manufacturer:Amino Life;White to off-white granular<br/>
+
 #shaun
 ;5;AC05080a;;Coenzyme Q10 98% HPLC;Manufacturer:Livzon High purity;Yellow to orange crystalline powder<br/>Effective protection of the heart<br/>Enhance human immunity.<br/>Anti-oxidation and anti-aging<br/>
 ;5;AC05080b;;Coenzyme Q10 98% HPLC;Manufacturer:Kingdomway Low solvent residue;Yellow to orange crystalline powder<br/>Effective protection of the heart<br/>Enhance human immunity.<br/>Anti-oxidation and anti-aging<br/>
@@ -448,7 +455,6 @@ UPDATE Product;minOrderQuantity;code[unique=true];$catalogVersion;name[lang=$lan
 ;4;AC02354a;;D-Glucosamine Sulphate 2KCL DC;Manufacturer:Rixing with BRC certificate;White to off ganular powder<br/>Repair and strengthen articular cartilage<br/>Excellent bone joint protection formula<br/>
 ;4;AC05003a;;Chondroitin Sulphate Bovine CPC 90%;Manufacturer:RKD High purity 100% water soluble;White or almost white powder<br/>Repair and strengthen articular cartilage<br/>Excellent bone joint protection formula<br/>
 ;4;AC02090a;;L-Glutamine;Manufacturer:Meihua;Whitish crystalline powder<br/>Widely used in food additives.<br/>Provide nitrogen source to promote protein synthesis in muscle cells<br/>
-
 #TODO
 ;4;AC02378a;;BCAA 2:1:1;Manufacturer:Specom;White to off-white powder<br/>
 ;4;AC02016a;;BCAA DC 2:1:1;Manufacturer:Shuguang;White to off-white granular<br/>
@@ -492,7 +498,6 @@ UPDATE Product;minOrderQuantity;code[unique=true];$catalogVersion;name[lang=$lan
 ;4;AC01363a;;Vitamin C DC 97;Manufacturer:Jiangshan With HPMC;White or Semi-white Granule<br/>
 ;4;AC01361a;;Vitamin C Powder;Manufacturer:Qiyuan;White Crystalline powder<br/>
 ;4;AC01551a;;Vitamin D3 100,000IU/G CWS;Manufacturer:LN;White,free-flowing powder<br/>
-
 #
 ;4;AC05001a;;Chondroitin Sulphate Shark;Manufacturer:RKD High purity;100% water soluble;White or almost white powder<br/> Repair and strengthen articular cartilage<br/> Excellent bone joint protection formula<br/>
 ;4;AC02380a;;Fermentation BCAA 2:1:1;Manufacturer:Fufeng;White to off-white powder<br/>
@@ -502,33 +507,6 @@ UPDATE Product;minOrderQuantity;code[unique=true];$catalogVersion;name[lang=$lan
 ;4;AC02230a;;L-Valine USP;Manufacturer:Meihua;Whitish crystalline powder<br/>
 ;4;AC02101a;;L-Glycine EP Grade;Manufacturer:Changhao;White crystalline or crystalline powder<br/>
 ;5;AC07002a;;Rice Protein 80% 300MESH;Manufacturer:Yiwanjia;Light Yellow Fine Powder<br/>
-
-
-#Yake 2018-6-11
-;4;AC02333a;;D-Glucosamine HCL DC;Manufacturer:Rixing With BRC Certificate;White Crystallion powder<br/>Repair and strengthen articular cartilage<br/>Excellent bone joint protection formula<br/>
-;4;AC02011a;;L-Alanine;Manufacturer:Changhao;White crystalline powder
-;4;AC02259a;;D-Aspartic Acid;Manufacturer:LONCIN;White crystalline powder
-;4;AC02114a;;L-Leucine Vegan;Manufacturer:Meihua;White crystalline powder
-;4;AC02226a;;L-Isoleucine Instant;Manufacturer:Amino Life;Whitish crystalline powder
-
-;4;AC02227a;;L-Valine Instant;Manufacturer:Amino Life;Whitish crystalline powder
-;4;AC05103a;;Conventional Spirulina;Manufacturer:Yijian;Fine dark green powder
-;4;AC01120a;;Vitamin B2;Manufacturer:Guangji;Yellow or orange-yellow crystalline powder
-;4;AC01120b;;Vitamin B2;Manufacturer:PARCHN;Yellow or orange-yellow crystalline powder
-;4;AC02378b;;BCAA 2:1:1;Manufacturer:Sipu;White to off-white powder
-
-;4;AC02378c;;BCAA 2:1:1;Manufacturer:Grand Hoyo;White to off-white powder
-;4;AC02378d;;BCAA 2:1:1;Manufacturer:Amino Life;White to off-white powder
-;4;AC02345b;;D-Glucosamine Sulphate 2KCL 40-80mesh ;Manufacturer:Aoxing;White Crystallion powder<br/>Repair and strengthen articular cartilage<br/>Excellent bone joint protection formula<br/>
-;4;AC02263b;;D-Ribose USP;Manufacturer:Tuoyang; White crystalline powder
-;4;AC02395b;;Instant BCAA Powder 2:1:1;Manufacturer:Amino Life; White to off-white powder
-
-;4;AC02005b;;L-Arginine AKG 2：1;Manufacturer:Hengsheng;White to off-white crystalline powder
-;4;AC02047b;;L-Carnitine Base USP;Manufacturer:Northeast Pharm;White Crystalline hygroscopic powder
-;4;AC02090b;;L-Glutamine;Manufacturer:Fufeng;Whitish crystalline powder<br/>Widely used in food additives<br/>Provide nitrogen source to promote protein synthesis in muscle cells<br/>
-
-
-
 
 # Classification: Technical details (643)
 $feature1=@Tape size, 1446[$clAttrModifiers];  # Tape size in millimeter (mm)
@@ -552,9 +530,7 @@ INSERT_UPDATE Product;code[unique=true];$feature1;$feature2;$feature3;$feature5;
  #;AC02354a;<ignore>;<ignore>;MiniDV;ICEcat.biz;<ignore>;
 # ;AC05003a;<ignore>;<ignore>;MiniDV;ICEcat.biz;<ignore>;
 
-
 UPDATE Product;code[unique=true];$approved;$catalogVersion;
-
 #shaun
 ;AC05080a
 ;AC05080b
@@ -618,12 +594,7 @@ UPDATE Product;code[unique=true];$approved;$catalogVersion;
 ;AC02230a
 ;AC02101a
 ;AC07002a
-
-
-
-
 INSERT_UPDATE PriceRow;startTime[unique=true,dateformat=yyyy-MM-dd HH:mm:ss];endTime[unique=true,dateformat=yyyy-MM-dd HH:mm:ss];productId[unique=true];unit(code[unique=true,default=kg]);currency(isocode)[unique=true];price;minqtd;unitFactor;net
-
 #shaun
 ;2018-04-26 10:33:33;2118-04-27 10:33:33;AC05080a;kg;USD;190.00;1;1;false
 ;2018-04-26 10:33:33;2118-04-27 10:33:33;AC05080b;kg;USD;190.00;1;1;false
@@ -631,15 +602,12 @@ INSERT_UPDATE PriceRow;startTime[unique=true,dateformat=yyyy-MM-dd HH:mm:ss];end
 ;2018-04-26 10:33:33;2118-04-27 10:33:33;AC03138a;kg;USD;18.50;1;1;false
 ;2018-04-26 10:33:33;2118-04-27 10:33:33;AC03887a;kg;USD;18.70;1;1;false
 ;2018-04-26 10:33:33;2118-04-27 10:33:33;AC03142a;kg;USD;22.00;1;1;false
-
 ;2016-04-27 10:33:33;2017-04-29 10:33:33;AC02345a;kg;USD;7.40;1;1;false
 ;2017-04-30 10:33:33;2018-05-01 10:33:33;AC02345a;kg;USD;7.50;1;1;false
 ;2018-04-26 10:33:33;2118-04-27 10:33:33;AC02345a;kg;USD;6.90;1;1;false
-
 ;2018-04-26 10:33:33;2118-04-27 10:33:33;AC02354a;kg;USD;7.80;1;1;false
 ;2018-04-26 10:33:33;2118-04-26 10:33:33;AC05003a;kg;USD;44.00;1;1;false
 ;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02090a;kg;USD;9.70;1;1;false
-
 #
 ;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02378a;kg;USD;12.80;1;1;false
 ;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02016a;kg;USD;13.00;1;1;false
@@ -692,17 +660,6 @@ INSERT_UPDATE PriceRow;startTime[unique=true,dateformat=yyyy-MM-dd HH:mm:ss];end
 ;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02230a;kg;USD;7.20;1;1;false
 ;2018-04-26 10:33:33;2118-04-26 10:33:33;AC02101a;kg;USD;4.50;1;1;false
 ;2018-04-26 10:33:33;2118-04-26 10:33:33;AC07002a;kg;USD;4.60;1;1;false
-
-
-
-
-
-
-
-
-
-
-
 INSERT_UPDATE StockLevel;available;warehouse(code)[default='Shinbashi',unique=true];inStockStatus(code)[default='notSpecified'];overSelling;preOrder;productCode[unique=true];reserved
 
 INSERT_UPDATE StockLevel;available;warehouse(code)[default='Nakano',unique=true];inStockStatus(code)[default='notSpecified'];overSelling;preOrder;productCode[unique=true];reserved
@@ -712,8 +669,6 @@ INSERT_UPDATE StockLevel;available;warehouse(code)[default='Misato',unique=true]
 INSERT_UPDATE StockLevel;available;warehouse(code)[default='Ichikawa',unique=true];inStockStatus(code)[default='notSpecified'];overSelling;preOrder;productCode[unique=true];reserved
 
 INSERT_UPDATE StockLevel;available;warehouse(code)[default='Chiba',unique=true];inStockStatus(code)[default='notSpecified'];overSelling;preOrder;productCode[unique=true];reserved
-
-
 #shaun
 INSERT_UPDATE StockLevel;available;warehouse(code)[default='Shinbashi',unique=true];inStockStatus(code)[default='notSpecified'];overSelling;preOrder;productCode[unique=true];reserved
 #;8;;;0;0;AC05080a;0

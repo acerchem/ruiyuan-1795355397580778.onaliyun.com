@@ -38,6 +38,7 @@ INSERT_UPDATE Category;code[unique=true];allowedPrincipals(uid)[default='custome
  ;677
  ;678
  ;679
+ ;680
  
 
 # Insert Category Structure
@@ -59,3 +60,4 @@ INSERT_UPDATE CategoryCategoryRelation;$categories;$supercategories
  ;677;1
  ;678;1
  ;679;1
+  ;680;1
