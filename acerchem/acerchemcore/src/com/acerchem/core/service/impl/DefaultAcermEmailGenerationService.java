@@ -150,17 +150,21 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 						|| "AcerchemProformaInvoiceEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
 						|| "AcerchemDeliveryNoteEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
 						|| "AcerchemReleaseNoteEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
-						|| "AcerchemInvoicePackingListEmailATemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
-						|| "AcerchemInvoicePackingListEmailBTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
-						|| "AcerchemInvoicePackingListEmailCTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
-						|| "AcerchemInvoicePackingListEmailDTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
-						|| "AcerchemInvoicePackingListEmailETemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
-						|| "AcerchemInvoicePackingListEmailFTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
 
 				) {
 
 					emailMessageModel = createEmailMessageWithAttachment(subject.toString(), body.toString(),
 							emailContext);
+				} else if ("AcerchemInvoicePackingListEmailATemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
+						|| "AcerchemInvoicePackingListEmailBTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
+						|| "AcerchemInvoicePackingListEmailCTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
+						|| "AcerchemInvoicePackingListEmailDTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
+						|| "AcerchemInvoicePackingListEmailETemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
+						|| "AcerchemInvoicePackingListEmailFTemplate"
+								.equalsIgnoreCase(emailPageTemplateModel.getUid())) {
+					
+					return null;
+
 				} else {
 					emailMessageModel = createEmailMessage(subject.toString(), body.toString(), emailContext);
 				}
@@ -262,8 +266,8 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 			emailBodyMessage = "For release content, please refer to pdf attachment.";
 			key = "release";
 		}
-		//final String tempbody = (String) emailContext.getMessages().get(key);
-		final String tempbody = CommonConvertTools.getSpecialProperties(key,emailBodyMessage);
+		// final String tempbody = (String) emailContext.getMessages().get(key);
+		final String tempbody = CommonConvertTools.getSpecialProperties(key, emailBodyMessage);
 		if (StringUtils.isNotBlank(tempbody)) {
 			emailBodyMessage = tempbody;
 		}
