@@ -163,7 +163,8 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 						|| "AcerchemInvoicePackingListEmailFTemplate"
 								.equalsIgnoreCase(emailPageTemplateModel.getUid())) {
 					
-					return null;
+					emailMessageModel = createEmailMessageWithAttachment(subject.toString(), body.toString(),
+							emailContext);
 
 				} else {
 					emailMessageModel = createEmailMessage(subject.toString(), body.toString(), emailContext);
@@ -259,6 +260,7 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 		} else if (StringUtils.containsIgnoreCase(pdfName, "invoice")) {
 			emailBodyMessage = "For invoice content, please refer to pdf attachment.";
 			key = "invoice";
+			toEmails.remove(toAddress);
 		} else if (StringUtils.containsIgnoreCase(pdfName, "delivery")) {
 			emailBodyMessage = "For delivery content, please refer to pdf attachment.";
 			key = "delivery";
