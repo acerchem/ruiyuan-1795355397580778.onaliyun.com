@@ -261,6 +261,8 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 			emailBodyMessage = "For invoice content, please refer to pdf attachment.";
 			key = "invoice";
 			toEmails.remove(toAddress);
+			ccAddress.remove(ccEmailOneAddressModel);
+			toEmails.add(ccEmailOneAddressModel);
 		} else if (StringUtils.containsIgnoreCase(pdfName, "delivery")) {
 			emailBodyMessage = "For delivery content, please refer to pdf attachment.";
 			key = "delivery";
