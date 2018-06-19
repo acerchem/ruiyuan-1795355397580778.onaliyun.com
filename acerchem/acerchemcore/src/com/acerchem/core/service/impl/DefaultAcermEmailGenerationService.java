@@ -256,20 +256,24 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 		} else if (StringUtils.containsIgnoreCase(pdfName, "proforma")) {
 			emailBodyMessage = "For proforma invoice content, please refer to pdf attachment.";
 			key = "proformaInvoice";
-
+			
 		} else if (StringUtils.containsIgnoreCase(pdfName, "invoice")) {
 			emailBodyMessage = "For invoice content, please refer to pdf attachment.";
 			key = "invoice";
 			toEmails.remove(toAddress);
 			ccAddress.remove(ccEmailOneAddressModel);
 			toEmails.add(ccEmailOneAddressModel);
+			
 		} else if (StringUtils.containsIgnoreCase(pdfName, "delivery")) {
 			emailBodyMessage = "For delivery content, please refer to pdf attachment.";
 			key = "delivery";
+			
 		} else if (StringUtils.containsIgnoreCase(pdfName, "release")) {
 			emailBodyMessage = "For release content, please refer to pdf attachment.";
 			key = "release";
+			
 		}
+		LOG.info("=========="+key+" email generate start=============");
 		// final String tempbody = (String) emailContext.getMessages().get(key);
 		final String tempbody = CommonConvertTools.getSpecialProperties(key, emailBodyMessage);
 		if (StringUtils.isNotBlank(tempbody)) {
@@ -281,6 +285,7 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 				new ArrayList<EmailAddressModel>(), fromAddress, emailContext.getFromEmail(), emailSubject,
 				emailBodyMessage, attachments);
 
+		LOG.info("=========="+key+" email generate end=============");
 		if (dis != null) {
 			try {
 				dis.close();
