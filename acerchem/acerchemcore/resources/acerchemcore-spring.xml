@@ -750,4 +750,7 @@
 	<alias alias="acerchemOrderDao" name="defaultAcerchemOrderDao"/>
 	<bean id="defaultAcerchemOrderDao" class="com.acerchem.core.dao.impl.AcerchemOrderDaoImpl"/>
 	
+	<!-- jh:Report -->
+	<alias name="DefaultAcerchemOrderAnalysisService" alias="acerchemOrderAnalysisService"/>
+	<bean id="DefaultAcerchemOrderAnalysisService" class="com.acerchem.core.service.impl.AcerchemOrderAnalysisServiceImpl"/>
 </beans>

@@ -4,19 +4,27 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Set;
+
 import javax.annotation.Resource;
+
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
 import com.acerchem.core.dao.AcerchemOrderDao;
+import com.acerchem.core.service.AcerchemOrderAnalysisService;
+import com.acerchem.storefront.data.MonthlySalesAnalysisForm;
 import com.acerchem.storefront.data.SearchCriteriaFrom;
+
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractSearchPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.order.CheckoutFacade;
+import de.hybris.platform.commercefacades.order.data.MonthlySalesAnalysis;
 import de.hybris.platform.commercefacades.order.data.OrderDetailsReportData;
 import de.hybris.platform.commercefacades.user.data.CountryData;
 
@@ -27,6 +35,9 @@ public class AcerchemReportsController extends AbstractSearchPageController{//Ab
 	
 	@Resource
 	private AcerchemOrderDao acerchemOrderDao;
+	
+	@Resource
+	private AcerchemOrderAnalysisService acerchemOrderAnalysisService;
 	
 	@Resource(name = "acceleratorCheckoutFacade")
 	private CheckoutFacade checkoutFacade;
@@ -40,11 +51,11 @@ public class AcerchemReportsController extends AbstractSearchPageController{//Ab
 	@ModelAttribute("areas")
 	public Collection<CountryData> getAreas()
 	{
-		Set<String> areas = acerchemOrderDao.getAllAreas();
-		List<CountryData> areaList=new ArrayList<>();
-		for(String aa:areas)
+		final Set<String> areas = acerchemOrderDao.getAllAreas();
+		final List<CountryData> areaList=new ArrayList<>();
+		for(final String aa:areas)
 		{
-			CountryData area=new CountryData();
+			final CountryData area=new CountryData();
 			area.setName(aa);
 			area.setIsocode(aa);
 			areaList.add(area);
@@ -69,7 +80,7 @@ public class AcerchemReportsController extends AbstractSearchPageController{//Ab
 		{
 			searchCriteriaFrom.setPageNumber(1);
 		}
-		List<OrderDetailsReportData> searchPageData = acerchemOrderDao.getOrderDetails(searchCriteriaFrom.getMonth(),
+		final List<OrderDetailsReportData> searchPageData = acerchemOrderDao.getOrderDetails(searchCriteriaFrom.getMonth(),
 				searchCriteriaFrom.getArea(),searchCriteriaFrom.getCountryCode(),searchCriteriaFrom.getUserName(),searchCriteriaFrom.getOrderCode(),
 				searchCriteriaFrom.getPageNumber());
 		model.addAttribute("searchPageData", searchPageData);
@@ -85,6 +96,24 @@ public class AcerchemReportsController extends AbstractSearchPageController{//Ab
 	}
 	
 	 
+	@RequestMapping(value = "/monthlySalesAnalysis", method = RequestMethod.GET)
+	public String showMonthlySalesAnalysisPage(final Model model) throws CMSItemNotFoundException {
+		storeCmsPageInModel(model, getContentPageForLabelOrId("login"));
+		final MonthlySalesAnalysisForm monthlySalesAnalysisForm = new MonthlySalesAnalysisForm();
+		model.addAttribute("monthlySalesAnalysisForm", monthlySalesAnalysisForm);
+		return "pages/reports/monthlySalesAnalysis";
+	}
 	
-	
+	@RequestMapping(value = "/monthlySalesAnalysis", method = RequestMethod.POST)
+	public String getMonthlySalesAnalysisPage( final MonthlySalesAnalysisForm monthlySalesAnalysisForm,final Model model) throws CMSItemNotFoundException {
+		String year = "2018";
+		if (StringUtils.isNotBlank(monthlySalesAnalysisForm.getYear())){
+			year = monthlySalesAnalysisForm.getYear();
+		}
+		final List<MonthlySalesAnalysis> list = acerchemOrderAnalysisService.getMonthlySalesAnalysis(year, monthlySalesAnalysisForm.getArea());
+		
+		model.addAttribute("salesList", list);
+		
+		return "pages/reports/monthlySalesAnalysis";
+	}
 }
