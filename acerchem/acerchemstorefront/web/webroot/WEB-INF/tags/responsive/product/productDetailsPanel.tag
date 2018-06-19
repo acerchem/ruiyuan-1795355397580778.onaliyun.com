@@ -246,7 +246,7 @@
 					<ul class="donlist">
 					
 				 <%-- <c:if test="${fn:length(product.certificates.url) > 0}"> --%>
-				 <c:if test="${product.certificatess ne null}"> 
+				 <c:if test="${product.certificatess ne null && user.name!='Anonymous'}"> 
 					 <c:forEach items="${product.certificatess}" var="data"  varStatus="id"  >
 					 
 				        <li>						
