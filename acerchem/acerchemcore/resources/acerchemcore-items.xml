@@ -196,7 +196,21 @@
 				<modifiers read="true" write="true" search="true" partof="true" optional="true" />
 			</targetElement>
 		</relation>
-
+		
+		<!-- 供应商和用户一对多关系 -->
+		<relation code="AcerchemVendor2Employee" generate="true"
+			localized="false" autocreate="true">
+			<sourceElement qualifier="acerchemVendor" type="Vendor"
+				cardinality="one">
+				<modifiers read="true" write="true" search="true"
+					optional="true" />
+			</sourceElement>
+			<targetElement qualifier="acerchemEmployee" type="Employee"
+				cardinality="many" collectiontype="list" ordered="true">
+				<modifiers read="true" write="true" search="true"
+					optional="true" />
+			</targetElement>
+		</relation>
 	</relations>
 
 	<itemtypes>
@@ -446,7 +460,6 @@
 
 				</attributes>
 			</itemtype>
-
 
 			<!--add by Wangjh end -->
 
@@ -1130,6 +1143,12 @@
 					<attribute qualifier="pickupDateOfExtended" type="java.util.Date">
 						<persistence type="property" />
 						<description>推迟后的配送日期</description>
+					</attribute>
+					
+					<attribute qualifier="orderFinishedDate" type="java.util.Date">
+						<description>订单完成时间</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
 					</attribute>
 				</attributes>
 			</itemtype>
