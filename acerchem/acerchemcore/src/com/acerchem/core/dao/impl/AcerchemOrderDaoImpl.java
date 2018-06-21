@@ -1,6 +1,7 @@
 package com.acerchem.core.dao.impl;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,22 +44,25 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		final Integer pageSize = 100;
 
 		final Map<String, Object> params = new HashMap<String, Object>();
-		String SQL = "select {e.pk} from {OrderEntry as e" + " JOIN Order as o ON {e:order} = {o:pk}"
-				+ " JOIN Customer as u ON {u:pk} = {o:user}" + " JOIN Address as a ON {a:pk} = {o:deliveryAddress}"
-				+ " JOIN Country as c ON {c:pk} = {a:country}" + " JOIN Address as ua ON {ua:owner} = {u:pk}"
+//		String SQL = "select {e.pk} from {OrderEntry as e" + " JOIN Order as o ON {e:order} = {o:pk}"
+//				+ " JOIN Customer as u ON {u:pk} = {o:user}" + " JOIN Address as a ON {a:pk} = {o:deliveryAddress}"
+//				+ " JOIN Country as c ON {c:pk} = {a:country}" + " JOIN Address as ua ON {ua:owner} = {u:pk}"
+//				+ " JOIN Country as uc ON {uc:pk} = {ua:country}" + "} where {ua:contactAddress} = true ";
+		String SQL = "select {e.pk},{ua.pk} from {OrderEntry as e" + " JOIN Order as o ON {e:order} = {o:pk}"
+				+ " JOIN Customer as u ON {u:pk} = {o:user}" +  " JOIN Address as ua ON {ua:owner} = {u:pk}"
 				+ " JOIN Country as uc ON {uc:pk} = {ua:country}" + "} where {ua:contactAddress} = true ";
 
 		if (month != null && !month.equals("")) {
 			SQL += " AND DATE_FORMAT({o:creationtime},'%Y%m') =?month ";
 			params.put("month", month);
 		}
-		if (area != null && !area.equals("")) {
+		if (area != null && !area.equals("") && !area.equals("no")) {
 			SQL += " AND {u:area} =?area ";
 			params.put("area", CustomerArea.valueOf(area));
 		}
-		if (countryCode != null && !countryCode.equals("")) {
-			SQL += " AND (({o:deliveryMode}!=?deliveryMode AND {c:isocode} =?isocode) OR ({o:deliveryMode}=?deliveryMode AND {uc:isocode} =?isocode))";
-			params.put("deliveryMode", deliveryModeService.getDeliveryModeForCode("DELIVERY_MENTION"));
+		if (countryCode != null && !countryCode.equals("")&& !countryCode.equals("no")) {
+			SQL += " AND {uc:isocode} =?isocode";
+			//params.put("deliveryMode", deliveryModeService.getDeliveryModeForCode("DELIVERY_MENTION"));
 			params.put("isocode", countryCode);
 		}
 		if (userName != null && !userName.equals("")) {
@@ -73,25 +77,31 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 
 		final StringBuilder builder = new StringBuilder(SQL);
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(builder.toString());
+		query.setResultClassList(Arrays.asList(OrderEntryModel.class,AddressModel.class));
 		query.addQueryParameters(params);
 		query.setNeedTotal(false);
 		query.setCount(pageSize);
 		query.setStart(pageSize * (pageNumber - 1));
-		final SearchResult<OrderEntryModel> result = flexibleSearchService.search(query);
+		final SearchResult<List<Object>> result = flexibleSearchService.search(query);
 
+		
 		final List<OrderDetailsReportData> orderDetails = new ArrayList<OrderDetailsReportData>();
-		for (final OrderEntryModel od : result.getResult()) {
-			AddressModel addressModel = null;
-			if (od.getOrder().getDeliveryMode().getCode().equals("DELIVERY_MENTION")) {// 自提
-				for (final AddressModel address : od.getOrder().getUser().getAddresses()) {
-					if (address.getContactAddress()) {
-						addressModel = address;
-					}
-				}
-			} else {// 送货
-				addressModel = od.getOrder().getDeliveryAddress();
-			}
+		//for (final OrderEntryModel od : result.getResult()) {
+		for (final List<Object> columnValueForRow:result.getResult()){
+			final OrderEntryModel od =(OrderEntryModel)columnValueForRow.get(0);
+			final AddressModel addressModel = (AddressModel)columnValueForRow.get(1);
+//			AddressModel addressModel = null;
+			//if (od.getOrder().getDeliveryMode().getCode().equals("DELIVERY_MENTION")) {// 自提
+//				for (final AddressModel address : od.getOrder().getUser().getAddresses()) {
+//					if (address.getContactAddress()) {
+//						addressModel = address;
+//					}
+//				}
+//			} else {// 送货
+//				addressModel = od.getOrder().getDeliveryAddress();
+//			}
 
+		
 			final OrderDetailsReportData detail = new OrderDetailsReportData();
 			detail.setCurrency(od.getOrder().getCurrency().getName());
 			if (addressModel != null) {
@@ -130,9 +140,9 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 			SQL += " AND DATE_FORMAT({o:creationtime},'%Y') =?year ";
 			params.put("year", year);
 		}
-		if (area != null && !area.equals("")) {
+		if (area != null && !area.equals("")&& !area.equals("no")) {
 			SQL += " AND {u:area} =?area ";
-			params.put("area", area);
+			params.put("area", CustomerArea.valueOf(area));
 		}
 		SQL += " Order by {u:area} ";
 
