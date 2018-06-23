@@ -272,6 +272,7 @@
 		<property name="deliveryAddress" type="de.hybris.platform.commercefacades.user.data.AddressData"/>
 		<property name="salesman" type="String"/>
 		<property name="supplier" type="String"/>
+		<property name="orderFinishedTime" type="java.util.Date"/>
 	</bean>
 	
 	<bean class="de.hybris.platform.commercefacades.order.data.MonthlySalesAnalysis">
@@ -294,5 +295,18 @@
 		<property name="defaultWarehouseRegionName" type="String"/>
 	</bean>
 	
-	
+	<bean class="de.hybris.platform.commercefacades.vendor.data.InventoryReportData">
+		<property name="productCode" type="String"/>
+		<property name="productName" type="String"/>
+		<property name="inventoryCount" type="java.lang.Integer"/>
+		<property name="futureInventory" type="java.lang.Integer"/>
+	</bean>
+	<bean class="de.hybris.platform.commercefacades.vendor.data.OrderProductReportData">
+		<property name="orderCode" type="String"/>
+		<property name="placeTime" type="java.util.Date"/>
+		<property name="finishedTime" type="java.util.Date"/>
+		<property name="productName" type="String"/>
+		<property name="productQuantity" type="java.lang.Integer"/>
+		<property name="vendorName" type="String"/>
+	</bean>
 </beans>

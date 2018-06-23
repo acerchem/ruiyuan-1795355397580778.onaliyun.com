@@ -6,6 +6,8 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.lang3.StringUtils;
+
 import com.acerchem.core.dao.AcerChemVendorDao;
 
 import de.hybris.platform.core.model.product.ProductModel;
@@ -20,7 +22,7 @@ public class AcerChemVendorDaoImpl implements AcerChemVendorDao {
 	private FlexibleSearchService flexibleSearchService;
 
 	@Override
-	public List<VendorModel> getVendorsByProductName(String productName) {
+	public List<VendorModel> getVendorsByProductName(final String productName) {
 		final String SQL = "select {v.pk} from {" + VendorModel._TYPECODE + " as v JOIN " + ProductModel._TYPECODE
 				+ " as p" + " ON {p." + ProductModel.ACERCHEMVENDOR + "} = {v." + VendorModel.PK + "} }" + " where {p."
 				+ ProductModel.NAME + "} like ?prodName";
@@ -37,7 +39,7 @@ public class AcerChemVendorDaoImpl implements AcerChemVendorDao {
 	}
 
 	@Override
-	public VendorModel getVendorByProductCode(String productCode) {
+	public VendorModel getVendorByProductCode(final String productCode) {
 		final String SQL = "select {v.pk} from {" + VendorModel._TYPECODE + " as v JOIN " + ProductModel._TYPECODE
 				+ " as p" + " ON {p." + ProductModel.ACERCHEMVENDOR + "} = {v." + VendorModel.PK + "} }" + " where {p."
 				+ ProductModel.CODE + "} = ?prodCode";
@@ -52,6 +54,23 @@ public class AcerChemVendorDaoImpl implements AcerChemVendorDao {
 		final SearchResult<VendorModel> result = flexibleSearchService.search(query);
 
 		if (result.getCount() > 0) {
+			return result.getResult().get(0);
+		}
+		return null;
+	}
+
+	@Override
+	public VendorModel getVendorByEmployeeUid(final String uid) {
+		if(StringUtils.isBlank(uid)){
+			return null;
+		}
+		final String SQL ="select {v.pk} from {Vendor as v JOIN Employee as e ON {v.pk}={e.acerchemVendor}} where {e.uid} = ?uid";
+		
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(SQL);
+		query.addQueryParameter("uid", uid);
+		final SearchResult<VendorModel> result = flexibleSearchService.search(query);
+		
+		if (result.getCount() > 0){
 			return result.getResult().get(0);
 		}
 		return null;

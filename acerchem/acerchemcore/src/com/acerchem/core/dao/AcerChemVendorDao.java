@@ -19,4 +19,12 @@ public interface AcerChemVendorDao {
 	 * @return
 	 */
 	public VendorModel getVendorByProductCode(final String productCode);
+	
+	/**
+	 * 通过供应商账户，得到供应商
+	 * @param uid
+	 * @return
+	 */
+	public VendorModel getVendorByEmployeeUid(String uid);
+	
 }

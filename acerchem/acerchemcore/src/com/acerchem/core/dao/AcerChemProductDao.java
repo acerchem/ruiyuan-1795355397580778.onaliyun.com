@@ -1,9 +1,11 @@
 package com.acerchem.core.dao;
 
+import java.util.Date;
 import java.util.List;
 
+import de.hybris.platform.core.model.order.OrderEntryModel;
 import de.hybris.platform.core.model.product.ProductModel;
-import de.hybris.platform.ordersplitting.model.VendorModel;
+import de.hybris.platform.ordersplitting.model.StockLevelModel;
 
 public interface AcerChemProductDao {
 	
@@ -29,6 +31,20 @@ public interface AcerChemProductDao {
 	 */
 	public boolean isExistProductWithVendor(final String productCode,final String vendorCode);
 	
+	/**
+	 * 通过供应商的emloyee账号对应的商品，得到库存产品
+	 * @param employee
+	 * @return
+	 */
+	public List<StockLevelModel> getInventoryProduct(final String uid);
 	
+	/**
+	 * 通过供应商的emloyee账号对应的商品，和下单时间段，得到订单行
+	 * @param uid
+	 * @param startDate
+	 * @param endDate
+	 * @return
+	 */
+	public List<OrderEntryModel> getOrderEntryProduct(String uid,Date startDate, Date endDate);
 
 }

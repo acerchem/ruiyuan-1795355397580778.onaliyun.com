@@ -1,7 +1,10 @@
 package com.acerchem.storefront.controllers.reports;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -17,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.acerchem.core.dao.AcerchemOrderDao;
+import com.acerchem.core.service.AcerChemProductService;
 import com.acerchem.core.service.AcerchemOrderAnalysisService;
 import com.acerchem.storefront.data.MonthlySalesAnalysisForm;
 import com.acerchem.storefront.data.SearchCriteriaFrom;
@@ -28,6 +32,10 @@ import de.hybris.platform.commercefacades.order.CheckoutFacade;
 import de.hybris.platform.commercefacades.order.data.MonthlySalesAnalysis;
 import de.hybris.platform.commercefacades.order.data.OrderDetailsReportData;
 import de.hybris.platform.commercefacades.user.data.CountryData;
+import de.hybris.platform.commercefacades.vendor.data.InventoryReportData;
+import de.hybris.platform.commercefacades.vendor.data.OrderProductReportData;
+import de.hybris.platform.core.model.user.UserModel;
+import de.hybris.platform.servicelayer.user.UserService;
 
 @Controller
 @RequestMapping("/reports")
@@ -42,6 +50,10 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	@Resource(name = "acceleratorCheckoutFacade")
 	private CheckoutFacade checkoutFacade;
 
+	@Resource
+	private UserService userService;
+	@Resource
+	private AcerChemProductService acerChemProductService; 
 	@ModelAttribute("countries")
 	public Collection<CountryData> getCountries() {
 		final List<CountryData> countries = new ArrayList<CountryData>();
@@ -135,5 +147,54 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		// final HSSFSheet sheet=wkb.createSheet("salesAnalysis");
 		return "pages/reports/monthlySalesAnalysis";
 	}
+	
+	@RequestMapping(value = "/vendorInventory", method = RequestMethod.GET)
+	public String showVendorInventoryReport(final Model model){
+		final UserModel employee = userService.getCurrentUser();
+		if (employee == null || employee.getUid().equals("anonymous")){
+			return "redirect:/reports/noSignIn ";
+//		}else{
+//			System.out.println(employee.getUid());
+		}
+		final List<InventoryReportData>  list = acerChemProductService.getInventoryProductByVendor(employee.getUid());
+		
+		model.addAttribute("list",list);
+		
+		return "pages/reports/vendorInventoryAnalysis";
+	}
+	
+	@RequestMapping(value = "/vendorOrderProduct", method = RequestMethod.GET)
+	public String showVendorOrderProduct(final Model model) throws CMSItemNotFoundException {
+		storeCmsPageInModel(model, getContentPageForLabelOrId("login"));
+		//model.addAttribute("list",list);
+		
+		return "pages/reports/vendorOrderProduct";
+	}
+	@RequestMapping(value = "/vendorOrderProduct", method = RequestMethod.POST)
+	public String getVendorOrderProduct(final Model model,@RequestParam("startDate") final String startDate,@RequestParam("endDate") final String endDate) throws CMSItemNotFoundException,ParseException {
+		final UserModel employee = userService.getCurrentUser();
+		if (employee == null || employee.getUid().equals("anonymous")){
+			return "redirect:/reports/noSignIn ";
+		}
+		Date start = new Date();
+		Date end = new Date();
+		final SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
+		if (StringUtils.isNotBlank(startDate)){
+			start = sdf.parse(startDate);
+		}
+		if (StringUtils.isNotBlank(endDate)){
+			end = sdf.parse(endDate);
+		}
+		
+	   final List<OrderProductReportData>  list = acerChemProductService.getOrderProductByVendor(employee.getUid(), start, end);
+	   model.addAttribute("list",list);
+		return "pages/reports/vendorOrderProduct";
+	}
 
+	
+	@RequestMapping(value = "/noSignIn", method = RequestMethod.GET)
+	public String showSignInMessage(final Model model) {
+		
+		return "pages/reports/noSignIn";
+	}
 }

@@ -1,7 +1,10 @@
 package com.acerchem.core.service;
 
+import java.util.Date;
 import java.util.List;
 
+import de.hybris.platform.commercefacades.vendor.data.InventoryReportData;
+import de.hybris.platform.commercefacades.vendor.data.OrderProductReportData;
 import de.hybris.platform.core.model.product.ProductModel;
 
 public interface AcerChemProductService {
@@ -27,4 +30,19 @@ public interface AcerChemProductService {
 	 * @return
 	 */
 	public boolean isExistProductWithVendor(final String productCode,final String vendorCode);
+	/**
+	 * 通过供应商账户，得到供应商产品库存
+	 * @param uid
+	 * @return
+	 */
+	public List<InventoryReportData> getInventoryProductByVendor(String uid);
+	
+	/**
+	 * 通过供应商账户和下单时间段，得到供应商产品所在的订单
+	 * @param uid
+	 * @param startDate
+	 * @param endDate
+	 * @return
+	 */
+	public List<OrderProductReportData> getOrderProductByVendor(String uid,Date startDate,Date endDate);
 }

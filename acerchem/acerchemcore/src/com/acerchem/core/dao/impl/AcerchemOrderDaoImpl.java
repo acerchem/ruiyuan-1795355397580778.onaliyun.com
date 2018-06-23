@@ -112,6 +112,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 			}
 			detail.setOrderCode(od.getOrder().getCode());
 			detail.setOrderTime(od.getOrder().getCreationtime());
+			detail.setOrderFinishedTime(od.getOrder().getOrderFinishedDate());
 			detail.setProductName(od.getProduct().getName());
 			detail.setProductQuantity(od.getQuantity());
 			detail.setOrderAmount(od.getTotalPrice());
