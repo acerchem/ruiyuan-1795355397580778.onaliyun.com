@@ -197,7 +197,7 @@
 			</targetElement>
 		</relation>
 		
-		<!-- 供应商和用户一对多关系 -->
+		<!-- 供应商和用户一对多关系 
 		<relation code="AcerchemVendor2Employee" generate="true"
 			localized="false" autocreate="true">
 			<sourceElement qualifier="acerchemVendor" type="Vendor"
@@ -211,6 +211,7 @@
 					optional="true" />
 			</targetElement>
 		</relation>
+		-->
 	</relations>
 
 	<itemtypes>
@@ -455,6 +456,28 @@
 						<description>折扣</description>
 						<modifiers read="true" write="true" search="true"
 							optional="true" />
+						<persistence type="property" />
+					</attribute>
+
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="Vendor" autocreate="false" generate="false">
+				<attributes>
+					<attribute qualifier="toEmployee" type="Employee">
+						<description>对应员工账号</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+
+				</attributes>
+			</itemtype>
+			
+			<itemtype code="Employee" autocreate="false" generate="false">
+				<attributes>
+					<attribute qualifier="toVendor" type="Vendor">
+						<description>对应供应商</description>
+						<modifiers read="true" write="true" search="true" />
 						<persistence type="property" />
 					</attribute>
 

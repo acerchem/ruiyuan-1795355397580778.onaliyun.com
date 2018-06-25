@@ -89,7 +89,7 @@ public class AcerChemProductDaoImpl implements AcerChemProductDao {
 		}
 		final String SQL = "select {s.pk} from {StockLevel as s} where {s.productCode} IN ({{" +
 				"select {p.code} from {Product as p JOIN Vendor as v ON {p.acerChemVendor} = {v.pk} "
-				+ " JOIN Employee as e ON {e.acerchemVendor} = {v.pk}} " + " where {e.uid} = ?id }})";
+				+ " JOIN Employee as e ON {e.toVendor} = {v.pk}} " + " where {e.pk}={v.toEmployee} and {e.uid} = ?id }})";
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(SQL);
 		
 		query.addQueryParameter("id", uid);
@@ -105,7 +105,7 @@ public class AcerChemProductDaoImpl implements AcerChemProductDao {
 		final String SQL="select {oe.pk} from {OrderEntry as oe JOIN Order as o ON {oe.order}={o.pk} } where " +
 	                 "{o.creationtime} > ?startDate AND {o.creationtime} < ?endDate AND {oe.product} IN ({{ " +
 	                 "select {p.pk} from {Product as p JOIN Vendor as v ON {p.acerChemVendor} = {v.pk} "
-	 				+ " JOIN Employee as e ON {e.acerchemVendor} = {v.pk}} " + " where {e.uid} = ?id }})";
+	 				+ " JOIN Employee as e ON {e.toVendor} = {v.pk}} " + " where {e.pk}={v.toEmployee} and {e.uid} = ?id }})";
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(SQL);
 		
 
