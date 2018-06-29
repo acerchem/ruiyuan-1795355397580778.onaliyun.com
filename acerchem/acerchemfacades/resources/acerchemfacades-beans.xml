@@ -34,7 +34,7 @@
 		<property name="formulaWeight" type="String" />
 		
 		<property name="otherName" type="String" />
-		
+		<property name="minOrderQuantity" type="java.lang.Integer" />
 
 	</bean>
 
