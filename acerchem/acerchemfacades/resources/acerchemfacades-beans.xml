@@ -309,4 +309,9 @@
 		<property name="productQuantity" type="java.lang.Integer"/>
 		<property name="vendorName" type="String"/>
 	</bean>
+	
+	<bean class="de.hybris.platform.commercefacades.user.data.AddressData">
+		<property name="phone2" type="java.lang.String" />
+	</bean>
+
 </beans>
