@@ -204,6 +204,7 @@
 								<span class="set add">+</span>
 								
 							</div>
+							
 							<%-- <c:forEach var="${countrys}" var="data1" begin="0" end="1"> --%>
 						<c:forEach items="${countrys}" var="data"  varStatus="id"  >
 						<c:if test="${id.index==0}">
@@ -219,10 +220,10 @@
                         </select> 
 							
  						</div>
-
+						
 					</div>
-			
 					
+					Minimum:${product.minOrderQuantity}
 					<cms:pageSlot position="AddToCart" var="component" >
 						<cms:component component="${component}" />
 					</cms:pageSlot>
@@ -414,11 +415,11 @@
     $(document).ready(function () {
         $('.click_pop').click(function () {
         var proName="${product.name}".replace('%','%25').replace('+','%2B').replace('&','%26');
-        var openUrl = ACC.config.encodedContextPath + "/account/add-support-ticket?productId=${product.code}&productName="+proName;//å¼¹åºçªå£çurl
-         var iWidth=700; //å¼¹åºçªå£çå®½åº¦;
-         var iHeight=700; //å¼¹åºçªå£çé«åº¦;
-         var iTop = (window.screen.availHeight-30-iHeight)/2; //è·å¾çªå£çåç´ä½ç½®;
-         var iLeft = (window.screen.availWidth-10-iWidth)/2; //è·å¾çªå£çæ°´å¹³ä½ç½®;
+        var openUrl = ACC.config.encodedContextPath + "/account/add-support-ticket?productId=${product.code}&productName="+proName;//Ã¥Â¼Â¹Ã¥ÂÂºÃ§ÂªÂÃ¥ÂÂ£Ã§ÂÂurl
+         var iWidth=700; //Ã¥Â¼Â¹Ã¥ÂÂºÃ§ÂªÂÃ¥ÂÂ£Ã§ÂÂÃ¥Â®Â½Ã¥ÂºÂ¦;
+         var iHeight=700; //Ã¥Â¼Â¹Ã¥ÂÂºÃ§ÂªÂÃ¥ÂÂ£Ã§ÂÂÃ©Â«ÂÃ¥ÂºÂ¦;
+         var iTop = (window.screen.availHeight-30-iHeight)/2; //Ã¨ÂÂ·Ã¥Â¾ÂÃ§ÂªÂÃ¥ÂÂ£Ã§ÂÂÃ¥ÂÂÃ§ÂÂ´Ã¤Â½ÂÃ§Â½Â®;
+         var iLeft = (window.screen.availWidth-10-iWidth)/2; //Ã¨ÂÂ·Ã¥Â¾ÂÃ§ÂªÂÃ¥ÂÂ£Ã§ÂÂÃ¦Â°Â´Ã¥Â¹Â³Ã¤Â½ÂÃ§Â½Â®;
          window.open(openUrl,"","height="+iHeight+", width="+iWidth+", top="+iTop+",scrollbars=yes,resizable=yes,toolbar=no,location=no, left="+iLeft); 
         });
     })
