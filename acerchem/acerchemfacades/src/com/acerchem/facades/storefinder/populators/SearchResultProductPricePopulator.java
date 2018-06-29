@@ -76,6 +76,7 @@ public class SearchResultProductPricePopulator extends SearchResultVariantProduc
 		else
 		{
 			target.setPrice(null);
+			target.setPromotionPrice(null);
 		}
 	}
 
