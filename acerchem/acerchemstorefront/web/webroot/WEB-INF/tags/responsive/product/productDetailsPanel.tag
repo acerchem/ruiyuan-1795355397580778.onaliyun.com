@@ -415,11 +415,11 @@
     $(document).ready(function () {
         $('.click_pop').click(function () {
         var proName="${product.name}".replace('%','%25').replace('+','%2B').replace('&','%26');
-        var openUrl = ACC.config.encodedContextPath + "/account/add-support-ticket?productId=${product.code}&productName="+proName;//Ã¥Â¼Â¹Ã¥ÂÂºÃ§ÂªÂÃ¥ÂÂ£Ã§ÂÂurl
-         var iWidth=700; //Ã¥Â¼Â¹Ã¥ÂÂºÃ§ÂªÂÃ¥ÂÂ£Ã§ÂÂÃ¥Â®Â½Ã¥ÂºÂ¦;
-         var iHeight=700; //Ã¥Â¼Â¹Ã¥ÂÂºÃ§ÂªÂÃ¥ÂÂ£Ã§ÂÂÃ©Â«ÂÃ¥ÂºÂ¦;
-         var iTop = (window.screen.availHeight-30-iHeight)/2; //Ã¨ÂÂ·Ã¥Â¾ÂÃ§ÂªÂÃ¥ÂÂ£Ã§ÂÂÃ¥ÂÂÃ§ÂÂ´Ã¤Â½ÂÃ§Â½Â®;
-         var iLeft = (window.screen.availWidth-10-iWidth)/2; //Ã¨ÂÂ·Ã¥Â¾ÂÃ§ÂªÂÃ¥ÂÂ£Ã§ÂÂÃ¦Â°Â´Ã¥Â¹Â³Ã¤Â½ÂÃ§Â½Â®;
+        var openUrl = ACC.config.encodedContextPath + "/account/add-support-ticket?productId=${product.code}&productName="+proName;
+         var iWidth=700; 
+         var iHeight=700; 
+         var iTop = (window.screen.availHeight-30-iHeight)/2; 
+         var iLeft = (window.screen.availWidth-10-iWidth)/2; 
          window.open(openUrl,"","height="+iHeight+", width="+iWidth+", top="+iTop+",scrollbars=yes,resizable=yes,toolbar=no,location=no, left="+iLeft); 
         });
     })
