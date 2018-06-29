@@ -139,7 +139,7 @@
                         
                        <c:forEach items="${countrys}" var="data"  varStatus="id"  >
 						<c:if test="${id.index==0}">
-							<span class="label-title inventory">Inventory:<i>${data.inventory}</i> <span class="spot">(<em>${data.inventory}</em>)</span></span>
+							<span class="label-title inventory">Inventory:<i id="inventory">${data.inventory}</i> <span class="spot">(<em>${data.inventory}</em>)</span></span>
 							</c:if>	
                         </c:forEach>
 							
@@ -200,7 +200,7 @@
 						<div class="prod-sum">
 							<div class="m-setnum">
 							<span class="set sub">-</span>
-                              <input type="text" id="pdnum" name="pdnum" class="set" value="1">		
+                              <input type="text" id="pdnum" name="pdnum" class="set" value="1" onkeyup="addNum()">		
 								<span class="set add">+</span>
 								
 							</div>
@@ -246,7 +246,7 @@
 					<ul class="donlist">
 					
 				 <%-- <c:if test="${fn:length(product.certificates.url) > 0}"> --%>
-				 <c:if test="${product.certificatess ne null && user.name!='Anonymous'}"> 
+				 <c:if test="${product.certificatess ne null && user.name!='Anonymous'}">
 					 <c:forEach items="${product.certificatess}" var="data"  varStatus="id"  >
 					 
 				        <li>						
@@ -422,6 +422,20 @@
          window.open(openUrl,"","height="+iHeight+", width="+iWidth+", top="+iTop+",scrollbars=yes,resizable=yes,toolbar=no,location=no, left="+iLeft); 
         });
     })
+    
+function addNum()
+{
+	var maxnum = document.getElementById("inventory").innerHTML;
+	var avl = parseInt(document.getElementById('pdnum').value);
+	if(avl>maxnum){
+		maxalert("Cannot be larger than largest inventory!");
+		$('#pdnum').val(maxnum);
+		$('#qty').val(maxnum); 
+	}else{
+		$('#pdnum').val(avl);
+		$('#qty').val(avl); 
+	}
+}
 </script>
 		
 		
