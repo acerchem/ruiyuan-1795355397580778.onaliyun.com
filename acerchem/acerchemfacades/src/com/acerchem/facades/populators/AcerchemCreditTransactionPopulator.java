@@ -1,13 +1,9 @@
 package com.acerchem.facades.populators;
 
 import de.hybris.platform.commercefacades.user.data.CreditTransactionData;
-import de.hybris.platform.commercefacades.user.data.CustomerCreditAccountData;
 import de.hybris.platform.converters.Populator;
-import de.hybris.platform.servicelayer.dto.converter.Converter;
-
 import org.springframework.util.Assert;
 import com.acerchem.core.model.CreditTransactionModel;
-import com.acerchem.core.model.CustomerCreditAccountModel;
 
 /**
  * Converter implementation for {@link de.hybris.platform.core.model.user.UserModel} as source and
@@ -15,8 +11,6 @@ import com.acerchem.core.model.CustomerCreditAccountModel;
  */
 public class AcerchemCreditTransactionPopulator implements Populator<CreditTransactionModel,CreditTransactionData>
 {
-	//private Converter<CustomerCreditAccountModel,CustomerCreditAccountData> creditAccount;
-	
 	@Override
 	public void populate(final CreditTransactionModel source, final CreditTransactionData target)
 	{
@@ -32,14 +26,10 @@ public class AcerchemCreditTransactionPopulator implements Populator<CreditTrans
 		}
 		target.setShouldPaybackTime(source.getShouldPaybackTime());
 		target.setRemark(source.getRemark());
-		
 		target.setOrderCode(source.getOrderCode());
 		target.setProductNumber(source.getProductNumber());
+		target.setCreationtime(source.getCreationtime());
 		
-		/*if (source.getCreditAccount() != null)
-		{
-			target.setCreditAccount(creditAccount.convert(source.getCreditAccount()));
-		}*/
 	}
 	
 }
