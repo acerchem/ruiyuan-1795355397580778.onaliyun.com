@@ -533,4 +533,13 @@
 	<bean id="acerchemPointOfServicePopulator" class="com.acerchem.facades.populators.AcerchemPointOfServicePopulator"
 		parent="defaultPointOfServicePopulator">
 	</bean>
+	
+	<alias name="customAddressPopulator" alias="addressPopulator"/>
+	<bean id="customAddressPopulator" class="com.acerchem.facades.populators.AcerchemAddressPopulator" parent="defaultAddressPopulator">
+	</bean>
+	
+	<alias name="customAddressReversePopulator" alias="addressReversePopulator"/>
+	<bean id="customAddressReversePopulator" class="com.acerchem.facades.populators.AcerchemAddressReversePopulator" parent="defaultAddressReversePopulator">
+	</bean>
+
 </beans>
