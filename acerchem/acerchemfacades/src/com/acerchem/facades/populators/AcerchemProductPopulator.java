@@ -30,6 +30,7 @@ public class AcerchemProductPopulator extends ProductPopulator{
 	public void populate(final ProductModel productModel, final ProductData productData) throws ConversionException
 	{
 		super.populate(productModel, productData);
+		productData.setMinOrderQuantity(productModel.getMinOrderQuantity());
 		productData.setNetWeight(productModel.getNetWeight());
 		productData.setUnitCalculateRato(productModel.getUnitCalculateRato());
 	
