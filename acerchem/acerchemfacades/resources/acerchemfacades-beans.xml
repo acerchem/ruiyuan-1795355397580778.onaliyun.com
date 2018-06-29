@@ -138,6 +138,7 @@
 			信用账户 -->
 		<property name="orderCode" type="java.lang.String" />
 		<property name="productNumber" type="java.lang.Integer" />
+		<property name="creationtime" type="java.util.Date"/><!-- 交易时间 -->
 	</bean>
 	<!-- end -->
 
