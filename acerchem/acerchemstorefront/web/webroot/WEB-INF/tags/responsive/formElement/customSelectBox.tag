@@ -17,7 +17,7 @@
 
 <form:select id="${fn:escapeXml(idKey)}" path="${fn:escapeXml(path)}" tabindex="${fn:escapeXml(tabindex)}" class="required">
 	<c:if test="${skipBlank == null || skipBlank == false}">
-		<option value="" disabled="disabled" ${empty selectedValue ? 'selected="selected"' : ''}>
+		<option value=""  ${empty selectedValue ? 'selected="selected"' : ''}>
 			<spring:theme code='${skipBlankMessageKey}'/>
 		</option>
 	</c:if>
