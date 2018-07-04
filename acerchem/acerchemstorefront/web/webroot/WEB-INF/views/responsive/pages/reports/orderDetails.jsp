@@ -17,8 +17,8 @@
 		<strong>Report Conditions</strong>
 	</legend>
 	<table>
-			<tr>
-				<td>
+			<tr style="white-space:nowrap">
+				<td >
 					<label style="margin-left: 20px;">Month</label>
 					<input name="month" size="6" type="text" value="${month}" placeholder="eg:201806"/>
 				</td>
@@ -39,7 +39,7 @@
 					<input name="userName" size="12" type="text" value="${userName}">
 				</td>
 				<td>
-					<label style="margin-left: 20px;">pageNumber</label>
+					<label style="margin-left: 20px;">Page Number</label>
 					<input name="pageNumber" size="12" type="text" value="${pageNumber}">
 				</td>
 			</tr>
@@ -47,7 +47,7 @@
 </fieldset>
 
 <div class="btn-set">
-	<button type="submit">Show Report</button> <button type="reset">reset</button>
+	<button type="submit">Show Report</button> <button type="reset">Reset</button>
 </div>
 
 <%-- <nav:pagination top="true" msgKey="text.account.supportTickets.page" showCurrentPageInfo="true" hideRefineButton="true" supportShowPaged="${isShowPageAllowed}" supportShowAll="${isShowAllAllowed}" searchPageData="${searchPageData}" searchUrl="/reports/orderDetails"  numberPagesShown="100"/>
