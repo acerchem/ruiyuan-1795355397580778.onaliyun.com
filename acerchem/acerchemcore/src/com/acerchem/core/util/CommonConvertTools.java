@@ -3,6 +3,7 @@ package com.acerchem.core.util;
 import java.awt.Color;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Properties;
 
 import org.apache.commons.lang3.StringUtils;
@@ -143,4 +144,81 @@ public class CommonConvertTools {
 	    return props;  
 	}  
 	
+	//Double计算
+	private static final int DEF_DIV_SCALE = 10;
+
+	/**
+	 * 两个Double数相加
+	 *
+	 * @param v1
+	 * @param v2
+	 * @return Double
+	 */
+	public static Double addDouble(final Double v1, final Double v2)
+	{
+		final BigDecimal b1 = new BigDecimal(v1.toString());
+		final BigDecimal b2 = new BigDecimal(v2.toString());
+		return Double.valueOf(b1.add(b2).doubleValue());
+	}
+
+	/**
+	 * 两个Double数相减
+	 *
+	 * @param v1
+	 * @param v2
+	 * @return Double
+	 */
+	public static Double subDouble(final Double v1, final Double v2)
+	{
+		final BigDecimal b1 = new BigDecimal(v1.toString());
+		final BigDecimal b2 = new BigDecimal(v2.toString());
+		return Double.valueOf(b1.subtract(b2).doubleValue());
+	}
+
+	/**
+	 * 两个Double数相乘
+	 *
+	 * @param v1
+	 * @param v2
+	 * @return Double
+	 */
+	public static Double mulDouble(final Double v1, final Double v2)
+	{
+		final BigDecimal b1 = new BigDecimal(v1.toString());
+		final BigDecimal b2 = new BigDecimal(v2.toString());
+		return Double.valueOf(b1.multiply(b2).doubleValue());
+	}
+
+	/**
+	 * 两个Double数相除
+	 *
+	 * @param v1
+	 * @param v2
+	 * @return Double
+	 */
+	public static Double divDouble(final Double v1, final Double v2)
+	{
+		final BigDecimal b1 = new BigDecimal(v1.toString());
+		final BigDecimal b2 = new BigDecimal(v2.toString());
+		return Double.valueOf(b1.divide(b2, DEF_DIV_SCALE, BigDecimal.ROUND_HALF_UP).doubleValue());
+	}
+
+	/**
+	 * 两个Double数相除，并保留scale位小数
+	 *
+	 * @param v1
+	 * @param v2
+	 * @param scale
+	 * @return Double
+	 */
+	public static Double divDouble(final Double v1, final Double v2, final int scale)
+	{
+		if (scale < 0)
+		{
+			throw new IllegalArgumentException("The scale must be a positive integer or zero");
+		}
+		final BigDecimal b1 = new BigDecimal(v1.toString());
+		final BigDecimal b2 = new BigDecimal(v2.toString());
+		return Double.valueOf(b1.divide(b2, scale, BigDecimal.ROUND_HALF_UP).doubleValue());
+	}
 }

@@ -3,6 +3,9 @@ package com.acerchem.core.dao;
 import java.util.Date;
 import java.util.List;
 
+import com.acerchem.core.report.order.beans.AcerchemProductBuyerBean;
+import com.acerchem.core.report.order.beans.AcerchemProductPriceBean;
+
 import de.hybris.platform.core.model.order.OrderEntryModel;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.ordersplitting.model.StockLevelModel;
@@ -46,5 +49,9 @@ public interface AcerChemProductDao {
 	 * @return
 	 */
 	public List<OrderEntryModel> getOrderEntryProduct(String uid,Date startDate, Date endDate);
+	
+	public List<AcerchemProductPriceBean> getProductWithBaserealPrice(String month);
+	
+	public List<AcerchemProductBuyerBean> getProductSalesForReport(String month,String category,String area,String country);
 
 }

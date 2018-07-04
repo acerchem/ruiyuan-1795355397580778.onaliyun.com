@@ -1,5 +1,9 @@
 package com.acerchem.core.dao.impl;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -7,12 +11,17 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.acerchem.core.dao.AcerChemProductDao;
+import com.acerchem.core.enums.CustomerArea;
+import com.acerchem.core.report.order.beans.AcerchemProductBuyerBean;
+import com.acerchem.core.report.order.beans.AcerchemProductPriceBean;
 
 import de.hybris.platform.core.model.order.OrderEntryModel;
 import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.ordersplitting.model.StockLevelModel;
 import de.hybris.platform.ordersplitting.model.VendorModel;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
@@ -115,6 +124,125 @@ public class AcerChemProductDaoImpl implements AcerChemProductDao {
 		query.addQueryParameter("endDate", endDate);
 		final SearchResult<OrderEntryModel> result = flexibleSearchService.search(query);
 		return result.getResult();
+	}
+
+	@Override
+	public List<AcerchemProductPriceBean> getProductWithBaserealPrice(final String month) {
+		if(StringUtils.isNotBlank(month)){
+		final String SQL = "select {oe.pk},{o.creationtime} from {OrderEntry as oe JOIN Order as o ON {oe.order}={o.pk} } "+
+		             "where DATE_FORMAT({o.creationtime},'%Y%m') =?month order by {o.creationtime}";
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(SQL);
+		
+		query.addQueryParameter("month", month);
+		query.setResultClassList(Arrays.asList(OrderEntryModel.class, Date.class));
+		final SearchResult<List<Object>> result = flexibleSearchService.search(query);
+		
+		final List<List<Object>> list = result.getResult();
+		
+		if (CollectionUtils.isNotEmpty(list)){
+			final List<AcerchemProductPriceBean> resultList = new ArrayList<>();
+			for(final List<Object> item : list){
+				final OrderEntryModel oe = (OrderEntryModel)item.get(0);
+				final Date placeOrderTime = (Date)item.get(1);
+				final AcerchemProductPriceBean bean = new AcerchemProductPriceBean();
+				
+				bean.setProductCode(oe.getProduct().getCode());
+				bean.setProductName(oe.getProduct().getName());
+				bean.setSaleQuantity(oe.getQuantity());
+				bean.setBaseRealPrice(oe.getBasePrice());
+				bean.setOrderPlaceTime(placeOrderTime);
+			
+				//计算周次
+				final Calendar calendar = Calendar.getInstance();
+				calendar.setTime(placeOrderTime);
+				final int week = calendar.get(Calendar.WEEK_OF_MONTH);
+				bean.setWeeknum(week);
+			
+				resultList.add(bean);
+			}
+			return resultList;
+			
+		}
+		
+		
+		}
+		return null;
+	}
+
+	@Override
+	public List<AcerchemProductBuyerBean> getProductSalesForReport(final String month, final String categoryCode, final String area,
+			final String countryCode) {
+		String SQL = "select {e.pk},{ua.pk} from {OrderEntry as e" + " JOIN Order as o ON {e:order} = {o:pk}"
+				+ " JOIN Customer as u ON {u:pk} = {o:user}" + " JOIN Address as ua ON {ua:owner} = {u:pk}"
+				+ " JOIN Country as uc ON {uc:pk} = {ua:country}" + "} where {ua:contactAddress} = true ";
+		final Map<String, Object> params = new HashMap<String, Object>();
+		if (month != null && !month.equals("")) {
+			SQL += " AND DATE_FORMAT({o:creationtime},'%Y%m') =?month ";
+			params.put("month", month);
+		}
+		if (area != null && !area.equals("") && !area.equals("no")) {
+			SQL += " AND {u:area} =?area ";
+			params.put("area", CustomerArea.valueOf(area));
+		}
+		if (countryCode != null && !countryCode.equals("") && !countryCode.equals("no")) {
+			SQL += " AND {uc:isocode} =?isocode";
+			// params.put("deliveryMode",
+			// deliveryModeService.getDeliveryModeForCode("DELIVERY_MENTION"));
+			params.put("isocode", countryCode);
+		}
+		
+		if(StringUtils.isNotBlank(categoryCode)){
+			SQL += " AND {e:product} in ({{" +
+                    "select {p1.pk} from {Product as p1 JOIN CategoryProductRelation as cpr on {cpr.target} = {p1.pk} " +
+                    "JOIN Category as cat on {cpr.source} = {cat.pk}} " + 
+                    "where {cat.code}=?categoryCode}})";
+			
+			params.put("categoryCode", categoryCode);
+		}
+		
+		final StringBuilder builder = new StringBuilder(SQL);
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(builder.toString());
+		
+		query.setResultClassList(Arrays.asList(OrderEntryModel.class, AddressModel.class));
+		query.addQueryParameters(params);
+		
+		final SearchResult<List<Object>> result = flexibleSearchService.search(query);
+		
+		final List<AcerchemProductBuyerBean> reportList = new ArrayList<>();
+		
+		if (CollectionUtils.isNotEmpty(result.getResult())){
+			
+			for(final List<Object> item : result.getResult()){
+				final OrderEntryModel oe = (OrderEntryModel)item.get(0);
+				final AddressModel addr = (AddressModel)item.get(1);
+				
+				final AcerchemProductBuyerBean bean = new AcerchemProductBuyerBean();
+				bean.setAreaOfBuyer(oe.getOrder().getUser().getArea().getCode());
+				bean.setBuyer(oe.getOrder().getUser().getName());
+				
+				bean.setBuyQuantity(oe.getQuantity());
+				
+				//Collection<CategoryModel> cate = oe.getProduct().getSupercategories();
+				//bean.setCategory(category);
+				final Date placeOrderDate = oe.getOrder().getCreationtime();
+				
+				final SimpleDateFormat format = new SimpleDateFormat("yyyyMM");
+				final String orderMonth = format.format(placeOrderDate);
+				bean.setMonth(orderMonth);
+				
+				bean.setProductCode(oe.getProduct().getCode());
+				bean.setProductName(oe.getProduct().getName());
+				
+				if (addr != null) {
+					bean.setCountryOfBuyer(addr.getCountry().getName());
+				}
+				
+				reportList.add(bean);
+			}
+			
+		}
+		
+		return reportList;
 	}
 
 }
