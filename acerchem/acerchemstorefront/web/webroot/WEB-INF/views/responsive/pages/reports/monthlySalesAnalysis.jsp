@@ -19,7 +19,7 @@
 	<table>
 			<tr>
 				<td>
-					<label style="margin-left: 20px;">Month</label>
+					<label style="margin-left: 20px;">Year</label>
 					<input name="year" size="6" type="text" value="${year}" placeholder="2018"/>
 				</td>
 				<td>
