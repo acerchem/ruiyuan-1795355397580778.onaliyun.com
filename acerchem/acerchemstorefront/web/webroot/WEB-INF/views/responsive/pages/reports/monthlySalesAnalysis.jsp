@@ -42,7 +42,7 @@
 	No Monthly Sales Analysis Found
 </c:if>
 <c:if test="${not empty salesList}">
-  <table border="1">
+  <table border="1" cellspacing="0" cellpadding="5">
       <tr>
           <th>Country</th>
           <th>January</th>

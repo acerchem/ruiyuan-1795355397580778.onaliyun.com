@@ -68,6 +68,17 @@
 		<enumtype code="CustomerArea" autocreate="true" generate="true"
 			dynamic="true">
 			<description>用户区域</description>
+			<value code="East_Asia" />
+			<value code="North_Asia" />
+			<value code="Southeast_Asia" />
+			<value code="South_Asia" />
+			<value code="Central_Asia" />
+			<value code="West_Asia" />
+			<value code="South_Europe" />
+			<value code="Western_Europe" />
+			<value code="Northern_Europe" />
+			<value code="Central_Europe" />
+			<value code="Central_America" />
 			<value code="North_America" />
 			<value code="South_America" />
 		</enumtype>

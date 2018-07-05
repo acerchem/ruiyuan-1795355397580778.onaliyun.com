@@ -399,7 +399,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 			throws CMSItemNotFoundException {
 
 		String curMonth = month;
-		if (StringUtils.isBlank(month)) {
+		if (StringUtils.isBlank(month) || month.length()!=6) {
 			final Date d = new Date();
 			final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
 			curMonth = sdf.format(d);

@@ -24,15 +24,15 @@
 				</td>
 				<td>
 					<label style="margin-left: 20px;">Category</label>
-					<formElement:customSelectBox idKey="CategoryCode" labelKey="" path="categoryCode" mandatory="true" skipBlank="false" skipBlankMessageKey="CategoryCode" items="${categories}" itemValue="code" itemLabel="name" selectedValue="${code}"/>
+					<formElement:customSelectBox idKey="CategoryCode" labelKey="" path="categoryCode" mandatory="true" skipBlank="false" skipBlankMessageKey="All" items="${categories}" itemValue="code" itemLabel="name" selectedValue="${code}"/>
 				</td>
 				<td>
 					<label style="margin-left: 20px;">Customer Area</label>
-					<formElement:customSelectBox idKey="area" labelKey="" path="area" mandatory="true" skipBlank="false" skipBlankMessageKey="Area" items="${areas}" itemValue="isocode" itemLabel="name" selectedValue="${area}"/>
+					<formElement:customSelectBox idKey="area" labelKey="" path="area" mandatory="true" skipBlank="false" skipBlankMessageKey="All" items="${areas}" itemValue="isocode" itemLabel="name" selectedValue="${area}"/>
 				</td>
 				<td>
 					<label style="margin-left: 20px;">Country</label>
-					<formElement:customSelectBox idKey="countryIso" labelKey="" path="countryCode" mandatory="true" skipBlank="false" skipBlankMessageKey="address.country" items="${countries}" itemValue="isocode" itemLabel="name" selectedValue="${countryIso}"/>
+					<formElement:customSelectBox idKey="countryIso" labelKey="" path="countryCode" mandatory="true" skipBlank="false" skipBlankMessageKey="All" items="${countries}" itemValue="isocode" itemLabel="name" selectedValue="${countryIso}"/>
 				</td>
 				
 			</tr>
@@ -50,7 +50,7 @@
 	No product Sales Found
 </c:if>
 <c:if test="${not empty list}">
-  <table border="1">
+  <table border="1" cellspacing="0" cellpadding="5">
       <tr>
           <th>Product Code</th>
           <th>Product Name</th>

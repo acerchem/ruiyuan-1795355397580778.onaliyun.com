@@ -52,7 +52,7 @@
 </c:if>
 <c:if test="${not empty list}">
    <div>Bill Analysis:</div>
-  <table border="1">
+  <table border="1" cellspacing="0" cellpadding="5">
       <tr>
           <th >&nbsp;&nbsp; </th>
 		  <th >&nbsp;&nbsp; </th>
@@ -113,7 +113,7 @@
   </table>
    <br/>
    <div>Credit Account Analysis:</div>
-   <table border="1">
+   <table border="1" cellspacing="0" cellpadding="5">
       <tr>
           <th>Customer</th>
           <th>LineOfCredit</th>

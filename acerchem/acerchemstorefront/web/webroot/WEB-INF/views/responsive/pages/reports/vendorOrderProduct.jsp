@@ -52,7 +52,7 @@
 	No Vendor Order Analysis Found
 </c:if>
 <c:if test="${not empty list}">
-  <table border="1">
+  <table border="1" cellspacing="0" cellpadding="5">
       <tr>
           <th>Order Code</th>
           <th>place Time</th>

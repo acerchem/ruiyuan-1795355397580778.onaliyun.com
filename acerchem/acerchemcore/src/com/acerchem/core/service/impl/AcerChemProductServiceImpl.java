@@ -3,7 +3,9 @@ package com.acerchem.core.service.impl;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -113,16 +115,19 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 		final List<AcerchemProductPriceBean> listWithWeek = acerChemProductDao.getProductWithBaserealPrice(month);
 
 		final List<ProductPriceAnalysisData> report = new ArrayList<>();
+		
+		//通过map分组 week
+		final Map<Integer,List<AcerchemProductPriceBean>> map = new HashMap<Integer,List<AcerchemProductPriceBean>>();
+		
+		
+		
 		if (CollectionUtils.isNotEmpty(listWithWeek)) {
 			if (listWithWeek.size() > 0) {
 				// 按code和weeknum组合计算
 				listWithWeek.sort(compatatorbyWeekCode);
 				String code = listWithWeek.get(0).getProductCode();
 				int week = listWithWeek.get(0).getWeeknum();
-				// //month
-				// SimpleDateFormat format = new SimpleDateFormat("yyyyMM");
-				// String month =
-				// format.format(listWithWeek.get(0).getOrderPlaceTime());
+				
 				int count = 0;
 				long quanlity = 0;
 				double price = 0;
@@ -162,15 +167,15 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 
 				final AcerchemProductPriceBean last = listWithWeek.get(listWithWeek.size() - 1);
 
-				final AcerchemProductPriceBean combo = new AcerchemProductPriceBean();
+				final AcerchemProductPriceBean combolast = new AcerchemProductPriceBean();
 
-				combo.setProductCode(last.getProductCode());
-				combo.setProductName(last.getProductName());
-				combo.setWeeknum(last.getWeeknum());
+				combolast.setProductCode(last.getProductCode());
+				combolast.setProductName(last.getProductName());
+				combolast.setWeeknum(last.getWeeknum());
 
-				combo.setBaseRealPrice(Double.valueOf(price / count));
-				combo.setSaleQuantity(Long.valueOf(quanlity));
-				comboList.add(combo);
+				combolast.setBaseRealPrice(Double.valueOf(price / count));
+				combolast.setSaleQuantity(Long.valueOf(quanlity));
+				comboList.add(combolast);
 
 				// 填充最后报表
 				comboList.sort(compatatorbyCodeWeek);
@@ -279,14 +284,9 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 		@Override
 		public int compare(final AcerchemProductPriceBean o1, final AcerchemProductPriceBean o2) {
 			// TODO Auto-generated method stub
-			int n = 0;
-
-			if (o1.getWeeknum() > o2.getWeeknum()) {
-				n = 1;
-			} else if (o1.getWeeknum() == o2.getWeeknum()) {
+			int n = o1.getWeeknum() - o2.getWeeknum();
+			if (n==0 ) {
 				n = o1.getProductCode().compareTo(o2.getProductCode());
-			} else {
-				n = -1;
 			}
 
 			return n;
@@ -299,13 +299,9 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 		@Override
 		public int compare(final AcerchemProductPriceBean o1, final AcerchemProductPriceBean o2) {
 			// TODO Auto-generated method stub
-			int n = 0;
+			int n = o1.getProductCode().compareTo(o2.getProductCode());
 
-			if (o1.getProductCode().compareTo(o2.getProductCode()) > 0) {
-				n = 1;
-			} else if (o1.getProductCode().compareTo(o2.getProductCode()) < 0) {
-				n = -1;
-			} else {
+			if (n==0) {
 				n = o1.getWeeknum() - o2.getWeeknum();
 			}
 

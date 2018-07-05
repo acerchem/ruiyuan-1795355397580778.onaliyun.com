@@ -136,54 +136,54 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 			detail.setOrderFinishedTime(od.getOrder().getOrderFinishedDate());
 			detail.setProductName(od.getProduct().getName());
 			detail.setProductQuantity(od.getQuantity());
-			detail.setOrderAmount(od.getTotalPrice());
+			detail.setOrderAmount(od.getTotalRealPrice());
 			detail.setUserUid(od.getOrder().getUser().getUid());
-			final String deliveryCode = od.getOrder().getDeliveryMode()==null?"":od.getOrder().getDeliveryMode().getCode();
-			
-			if(deliveryCode.equals("DELIVERY_GROSS")) {// 配送 DELIVERY_GROSS)
-				detail.setDeliveryAddress(addressConverter.convert(od.getDeliveryAddress()));
-				
-				
-			}else{
+			final String deliveryCode = od.getOrder().getDeliveryMode() == null ? ""
+					: od.getOrder().getDeliveryMode().getCode();
+
+			if (deliveryCode.equals("DELIVERY_GROSS")) {// 配送 DELIVERY_GROSS)
+				if (od.getDeliveryAddress() != null) {
+					detail.setDeliveryAddress(addressConverter.convert(od.getDeliveryAddress()));
+				}
+
+			} else {
 				detail.setDeliveryAddress(addressConverter.convert(addressModel));
-				//增加仓库地址
+				// 增加仓库地址
 				final PointOfServiceModel pos = od.getDeliveryPointOfService();
-				if(pos !=null){
-					final AddressModel posAddress  = pos.getAddress();
-					if (posAddress != null){
-					    String _temp = "";
-						if(StringUtils.isNotBlank(posAddress.getLine1())){
-							_temp += posAddress.getLine1() +",";
+				if (pos != null) {
+					final AddressModel posAddress = pos.getAddress();
+					if (posAddress != null) {
+						String _temp = "";
+						if (StringUtils.isNotBlank(posAddress.getLine1())) {
+							_temp += posAddress.getLine1() + ",";
 						}
-						if(StringUtils.isNotBlank(posAddress.getLine2())){
-							_temp += posAddress.getLine2() +",";
+						if (StringUtils.isNotBlank(posAddress.getLine2())) {
+							_temp += posAddress.getLine2() + ",";
 						}
-						if(StringUtils.isNotBlank(posAddress.getTown())){
-							_temp += posAddress.getTown() +",";
+						if (StringUtils.isNotBlank(posAddress.getTown())) {
+							_temp += posAddress.getTown() + ",";
 						}
-						if(posAddress.getRegion() != null){
-							if(StringUtils.isNotBlank(posAddress.getRegion().getName())){
-								_temp += posAddress.getRegion().getName() +",";
+						if (posAddress.getRegion() != null) {
+							if (StringUtils.isNotBlank(posAddress.getRegion().getName())) {
+								_temp += posAddress.getRegion().getName() + ",";
 							}
 						}
-						if(StringUtils.isNotBlank(posAddress.getPostalcode())){
-							_temp += posAddress.getPostalcode() +",";
+						if (StringUtils.isNotBlank(posAddress.getPostalcode())) {
+							_temp += posAddress.getPostalcode() + ",";
 						}
-						if(posAddress.getCountry() != null){
-							if(StringUtils.isNotBlank(posAddress.getCountry().getName())){
+						if (posAddress.getCountry() != null) {
+							if (StringUtils.isNotBlank(posAddress.getCountry().getName())) {
 								_temp += posAddress.getCountry().getName();
 							}
 						}
-			       
-					
+
 						final String warehouse = _temp;
-						
+
 						detail.setWarehouse(warehouse);
-			       
+
 					}
 				}
-				 
-				
+
 			}
 			if (od.getOrder().getPlacedBy() != null) {
 				detail.setSalesman(od.getOrder().getPlacedBy().getName());
@@ -236,7 +236,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 
 					if (countryMap.get(countryName) != null) {
 						MonthAmount = countryMap.get(countryName);
-						amount = MonthAmount.get(calendar.get(Calendar.MONTH)+1);
+						amount = MonthAmount.get(calendar.get(Calendar.MONTH) + 1);
 						if (amount == null) {
 							amount = Double.valueOf(0);
 						}
@@ -248,7 +248,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 					// Amount += oo.getTotalPrice();
 					// }
 					amount += oo.getTotalPrice();
-					MonthAmount.put(calendar.get(Calendar.MONTH)+1, amount);
+					MonthAmount.put(calendar.get(Calendar.MONTH) + 1, amount);
 					countryMap.put(countryName, MonthAmount);
 				}
 
@@ -495,25 +495,26 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		if (resultList.size() > 0) {
 			for (final List<Object> item : resultList) {
 				final Double sum = (Double) item.get(0);
-				final CustomerModel u = (CustomerModel) item.get(1);
-				final AddressModel address = (AddressModel) item.get(2);
-				final String areaCode = u == null ? "" : u.getArea().getCode();
+				if (item.get(1) != null) {
+					final CustomerModel u = (CustomerModel) item.get(1);
+					final AddressModel address = (AddressModel) item.get(2);
+					final String areaCode = u == null ? "" : u.getArea().getCode();
 
-				final CustomerSalesAnalysisData data = new CustomerSalesAnalysisData();
-				data.setArea(areaCode);
-				if (address != null) {
-					final String country = address.getCountry() != null ? address.getCountry().getName() : "";
-					data.setCountry(country);
-				}
-				if (u != null) {
-					data.setCustomerName(u.getName());
-				}
-				data.setArea(areaCode);
-				data.setSalesAmount(sum);
+					final CustomerSalesAnalysisData data = new CustomerSalesAnalysisData();
+					data.setArea(areaCode);
+					if (address != null) {
+						final String country = address.getCountry() != null ? address.getCountry().getName() : "";
+						data.setCountry(country);
+					}
+					if (u != null) {
+						data.setCustomerName(u.getName());
+					}
+					data.setArea(areaCode);
+					data.setSalesAmount(sum);
 
-				list.add(data);
+					list.add(data);
+				}
 			}
-
 		}
 
 		return list;
@@ -595,19 +596,21 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 						data.setPrePay(o.getTotalPrice());
 					} else {
 						// 计算账期内外
-						final int remainDays = (int) (currentTime.getTime() - invoiceDate.getTime())
-								/ (1000 * 3600 * 24);
-						final int flag = remainDays - billDays;
-						if (flag < 0) {
-							data.setInPay(o.getTotalPrice());
-						} else if (flag > 0 && flag < 30) {
-							data.setThirtyPayAmount(o.getTotalPrice());
-						} else if (flag > 30 && flag < 60) {
-							data.setSixtyPayAmount(o.getTotalPrice());
-						} else if (flag > 60 && flag < 90) {
-							data.setNinetyPayAmount(o.getTotalPrice());
-						} else {
-							data.setOuterNinetyPayAmount(o.getTotalPrice());
+						if (paymode.equalsIgnoreCase("CreditPayment")) {
+							final int remainDays = (int) (currentTime.getTime() - invoiceDate.getTime())
+									/ (1000 * 3600 * 24);
+							final int flag = remainDays - billDays;
+							if (flag < 0) {
+								data.setInPay(o.getTotalPrice());
+							} else if (flag > 0 && flag < 30) {
+								data.setThirtyPayAmount(o.getTotalPrice());
+							} else if (flag > 30 && flag < 60) {
+								data.setSixtyPayAmount(o.getTotalPrice());
+							} else if (flag > 60 && flag < 90) {
+								data.setNinetyPayAmount(o.getTotalPrice());
+							} else {
+								data.setOuterNinetyPayAmount(o.getTotalPrice());
+							}
 						}
 
 					}

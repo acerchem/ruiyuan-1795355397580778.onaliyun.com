@@ -16,7 +16,7 @@
 	No Inventory Analysis Found
 </c:if>
 <c:if test="${not empty list}">
-  <table border="1">
+  <table border="1" cellspacing="0" cellpadding="5">
       <tr>
           <th>Product Code</th>
           <th>Product Name</th>

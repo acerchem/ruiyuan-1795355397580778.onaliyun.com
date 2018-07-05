@@ -21,7 +21,7 @@
 				
 				<td>
 					<label style="margin-left: 20px;">Customer Area</label>
-					<formElement:customSelectBox idKey="area" labelKey="" path="area" mandatory="true" skipBlank="false" skipBlankMessageKey="Area" items="${areas}" itemValue="isocode" itemLabel="name" selectedValue="${area}"/>
+					<formElement:customSelectBox idKey="area" labelKey="" path="area" mandatory="true" skipBlank="false" skipBlankMessageKey="All" items="${areas}" itemValue="isocode" itemLabel="name" selectedValue="${area}"/>
 				</td>
 				
 				<td>
@@ -29,7 +29,7 @@
 					<input name="customerName" size="12" type="text" value="${customerName}">
 				</td>
 				<td>
-					<label style="margin-left: 20px;">> Order Amount</label>
+					<label style="margin-left: 20px;"> Order Amount ></label>
 					<input name="amount" size="12" type="text" value="${amount}">
 				</td>
 			</tr>
@@ -46,7 +46,7 @@
 	No Customer Sales Analysis Found
 </c:if>
 <c:if test="${not empty list}">
-  <table border="1">
+  <table border="1" cellspacing="0" cellpadding="5">
       <tr>
           <th>Area</th>
 		  <th>Country</th>

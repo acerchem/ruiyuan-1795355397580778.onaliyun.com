@@ -10,7 +10,7 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <template:javaScript/>
-<div class="title">product Price Analysis Report</div>
+<div class="title">Product Price Analysis Report</div>
 <form:form method="post" action="${action}">
 <fieldset>
 	<legend>
@@ -29,17 +29,17 @@
 </fieldset>
 
 <div class="btn-set">
-	<button type="submit">Show Report</button> <button type="reset">reset</button>
+	<button type="submit">Show Report</button> <button type="reset">Reset</button>
 </div>
 
 <%-- <nav:pagination top="true" msgKey="text.account.supportTickets.page" showCurrentPageInfo="true" hideRefineButton="true" supportShowPaged="${isShowPageAllowed}" supportShowAll="${isShowAllAllowed}" searchPageData="${searchPageData}" searchUrl="/reports/orderDetails"  numberPagesShown="100"/>
  --%>		
 </form:form>	
 <c:if test="${empty list}">
-	No product Price Analysis Found
+	No Product Price Analysis Found
 </c:if>
 <c:if test="${not empty list}">
-  <table border="1">
+  <table border="1" cellspacing="0" cellpadding="5">
       <tr>
           <th>&nbsp;</th>
 		  <th>&nbsp;</th>

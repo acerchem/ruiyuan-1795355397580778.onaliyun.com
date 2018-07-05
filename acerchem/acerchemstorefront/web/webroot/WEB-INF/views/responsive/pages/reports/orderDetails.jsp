@@ -24,11 +24,11 @@
 				</td>
 				<td>
 					<label style="margin-left: 20px;">Customer Area</label>
-					<formElement:customSelectBox idKey="area" labelKey="" path="area" mandatory="true" skipBlank="false" skipBlankMessageKey="Area" items="${areas}" itemValue="isocode" itemLabel="name" selectedValue="${area}"/>
+					<formElement:customSelectBox idKey="area" labelKey="" path="area" mandatory="true" skipBlank="false" skipBlankMessageKey="All" items="${areas}" itemValue="isocode" itemLabel="name" selectedValue="${area}"/>
 				</td>
 				<td>
 					<label style="margin-left: 20px;">Country</label>
-					<formElement:customSelectBox idKey="countryIso" labelKey="" path="countryCode" mandatory="true" skipBlank="false" skipBlankMessageKey="address.country" items="${countries}" itemValue="isocode" itemLabel="name" selectedValue="${countryIso}"/>
+					<formElement:customSelectBox idKey="countryIso" labelKey="" path="countryCode" mandatory="true" skipBlank="false" skipBlankMessageKey="All" items="${countries}" itemValue="isocode" itemLabel="name" selectedValue="${countryIso}"/>
 				</td>
 				<td>
 					<label style="margin-left: 20px;">Order Code</label>
@@ -57,7 +57,7 @@
 	No Order Details Found
 </c:if>
 <c:if test="${not empty searchPageData}">
-  <table border="1">
+  <table border="1" cellspacing="0" cellpadding="5" >
       <tr>
           <th>Country</th>
           <th>Area</th>
@@ -89,7 +89,9 @@
 	          <td>${orderDetail.productName}</td>
 	          <td>${orderDetail.productQuantity}</td>
 	          <td>
+	          <c:if test="${not empty orderDetail.orderAmount}">
 	          	USD
+	          	</c:if>
 	          	<fmt:formatNumber type="number" value="${orderDetail.orderAmount}" pattern="#.00"/>
 	          </td>
 	          <td>${orderDetail.userUid}</td>
