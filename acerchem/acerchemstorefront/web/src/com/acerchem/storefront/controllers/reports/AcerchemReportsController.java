@@ -406,10 +406,19 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 
 		}
 
+		final Calendar calendar = Calendar.getInstance();
+		final int iyear = Integer.valueOf(curMonth.substring(0, 4)).intValue();
+		final int imonth = Integer.valueOf(curMonth.substring(5)).intValue();
+		calendar.set(iyear, imonth-1,1);
+		calendar.add(Calendar.MONTH, 1);
+		calendar.add(calendar.DATE, -1);
+		final int maxWeek = calendar.get(Calendar.WEEK_OF_MONTH);
+		
 		final List<ProductPriceAnalysisData> list = acerChemProductService.getProductWithBaserealPrice(curMonth);
 
 		model.addAttribute("list", list);
 		model.addAttribute("month", curMonth);
+		model.addAttribute("maxWeek",maxWeek);
 		return "pages/reports/productPriceAnalysis";
 
 	}

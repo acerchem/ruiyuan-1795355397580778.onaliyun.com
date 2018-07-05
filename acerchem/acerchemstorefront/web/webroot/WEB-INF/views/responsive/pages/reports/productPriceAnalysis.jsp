@@ -44,7 +44,7 @@
           <th>&nbsp;</th>
 		  <th>&nbsp;</th>
 		  <th>&nbsp;</th>
-          <th colspan="6">${month}</th>
+          <th colspan="${maxWeek}">${month}</th>
           <th>&nbsp;</th>
         
       </tr>
@@ -56,8 +56,12 @@
 		   <th>2nd Week</th>
 		   <th>3rd Week</th>
 		   <th>4th Week</th>
+		   <c:if test="${maxWeek >=5}">
 		   <th>5th Week</th>
+		   </c:if>
+		    <c:if test="${maxWeek ==6}">
 		   <th>6th Week</th>
+		    </c:if>
 		   <th>Average price</th>
           
       </tr>
@@ -70,8 +74,12 @@
 			  <td><fmt:formatNumber type="number" value="${detail.secondWeekPrice}" pattern="#.00"/> </td>
 			  <td><fmt:formatNumber type="number" value="${detail.thirdWeekPrice}" pattern="#.00"/> </td>
 			  <td><fmt:formatNumber type="number" value="${detail.fouthWeekPrice}" pattern="#.00"/> </td>
+			  <c:if test="${maxWeek >=5}">
 			  <td><fmt:formatNumber type="number" value="${detail.fifthWeekPrice}" pattern="#.00"/> </td>
+			   </c:if>
+			    <c:if test="${maxWeek ==6}">
 			  <td><fmt:formatNumber type="number" value="${detail.sixthWeekPrice}" pattern="#.00"/> </td>
+			    </c:if>
 			  <td><fmt:formatNumber type="number" value="${detail.averagePrice}" pattern="#.00"/> </td>
 			 
 			  
