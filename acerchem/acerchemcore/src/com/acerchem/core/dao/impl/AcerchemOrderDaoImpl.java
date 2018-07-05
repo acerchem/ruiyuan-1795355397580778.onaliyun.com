@@ -2,11 +2,14 @@ package com.acerchem.core.dao.impl;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 
@@ -15,8 +18,11 @@ import org.apache.commons.lang3.StringUtils;
 
 import com.acerchem.core.dao.AcerchemOrderDao;
 import com.acerchem.core.enums.CustomerArea;
+import com.acerchem.core.model.CustomerCreditAccountModel;
 import com.acerchem.core.util.CommonConvertTools;
 
+import de.hybris.platform.commercefacades.customer.data.CustomerBillAnalysisData;
+import de.hybris.platform.commercefacades.customer.data.CustomerSalesAnalysisData;
 import de.hybris.platform.commercefacades.order.data.MonthlySalesAnalysis;
 import de.hybris.platform.commercefacades.order.data.OrderDetailsReportData;
 import de.hybris.platform.commercefacades.order.data.SalesByEmployeeReportData;
@@ -28,6 +34,7 @@ import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.order.DeliveryModeService;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
+import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
@@ -40,6 +47,9 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 	private Converter<AddressModel, AddressData> addressConverter;
 	@Resource
 	private DeliveryModeService deliveryModeService;
+
+	@Resource
+	private ModelService modelService;
 
 	@Override
 	public List<OrderDetailsReportData> getOrderDetails(final String month, final String area, final String countryCode,
@@ -140,7 +150,6 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 
 	}
 
-	@SuppressWarnings("deprecation")
 	@Override
 	public List<MonthlySalesAnalysis> getMonthlySalesAnalysis(final String year, final String area) {
 
@@ -166,22 +175,36 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		final Map<String, Map<Integer, Double>> countryMap = new HashMap<String, Map<Integer, Double>>();
 		for (final OrderModel oo : result.getResult()) {
 			Map<Integer, Double> MonthAmount = new HashMap<Integer, Double>();
-			Double Amount = Double.valueOf(0);
-			if (oo.getDeliveryAddress() != null && oo.getDeliveryAddress().getCountry() != null
-					&& oo.getDeliveryAddress().getCountry().getName() != null) {
-				if (countryMap.get(oo.getDeliveryAddress().getCountry().getName()) != null) {
-					Amount = countryMap.get(oo.getDeliveryAddress().getCountry().getName())
-							.get(oo.getCreationtime().getMonth());
-					MonthAmount = countryMap.get(oo.getDeliveryAddress().getCountry().getName());
+			Double amount = Double.valueOf(0);
+			final Calendar calendar = Calendar.getInstance();
+			calendar.setTime(oo.getCreationtime());
+
+			final UserModel u = oo.getUser();
+			final List<AddressModel> addresses = u.getAddresses().stream().filter(x -> x.getContactAddress())
+					.collect(Collectors.toList());
+			if (addresses.size() > 0) {
+				final AddressModel address = addresses.get(0);
+				if (address.getCountry() != null) {
+					final String countryName = address.getCountry().getName();
+
+					if (countryMap.get(countryName) != null) {
+						MonthAmount = countryMap.get(countryName);
+						amount = MonthAmount.get(calendar.get(Calendar.MONTH));
+						if (amount == null) {
+							amount = Double.valueOf(0);
+						}
+					}
+					// if (oo.getCurrency().getIsocode().equals("USD")) {
+					// Amount += oo.getTotalPrice() /
+					// oo.getCurrency().getConversion();
+					// } else {
+					// Amount += oo.getTotalPrice();
+					// }
+					amount += oo.getTotalPrice();
+					MonthAmount.put(calendar.get(Calendar.MONTH), amount);
+					countryMap.put(countryName, MonthAmount);
 				}
 
-				if (oo.getCurrency().getIsocode().equals("USD")) {
-					Amount += oo.getTotalPrice() / oo.getCurrency().getConversion();
-				} else {
-					Amount += oo.getTotalPrice();
-				}
-				MonthAmount.put(oo.getCreationtime().getMonth(), Amount);
-				countryMap.put(oo.getDeliveryAddress().getCountry().getName(), MonthAmount);
 			}
 		}
 
@@ -212,7 +235,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 	@Override
 	public Set<String> getAllAreas() {
 
-		//final String SQL = "select {pk},{area} from {Customer}";
+		// final String SQL = "select {pk},{area} from {Customer}";
 		final String SQL = "select {pk} from {Customer}";
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(SQL);
 		final SearchResult<CustomerModel> result = flexibleSearchService.search(query);
@@ -231,18 +254,22 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 	@Override
 	public List<SalesByEmployeeReportData> getEmployeeSales(final String year) {
 
-//		final String paramSql = "";
-//		final String SQL1 = "select sum({o.totalPrice}/{cur.conversion}) ,{o.user},DATE_FORMAT({o.creationtime},'%Y%m') "
-//				+ " from {Order as o JOIN Customer as u ON {u.pk} = {o.user} "
-//				+ " JOIN Currency as cur ON {o.currency} = {cur.pk}} " + " where {cur.isocode}='USD' " + paramSql
-//				+ " group by {o.user},DATE_FORMAT({o.creationtime},'%Y%m')";
-//
-//		final String SQL2 = "select sum({o.totalPrice}) ,{o.user},DATE_FORMAT({o.creationtime},'%Y%m') "
-//				+ " from {Order as o JOIN Customer as u ON {u.pk} = {o.user} "
-//				+ " JOIN Currency as cur ON {o.currency} = {cur.pk}} " + " where {cur.isocode} !='USD' " + paramSql
-//				+ " group by {o.user},DATE_FORMAT({o.creationtime},'%Y%m')";
+		// final String paramSql = "";
+		// final String SQL1 = "select sum({o.totalPrice}/{cur.conversion})
+		// ,{o.user},DATE_FORMAT({o.creationtime},'%Y%m') "
+		// + " from {Order as o JOIN Customer as u ON {u.pk} = {o.user} "
+		// + " JOIN Currency as cur ON {o.currency} = {cur.pk}} " + " where
+		// {cur.isocode}='USD' " + paramSql
+		// + " group by {o.user},DATE_FORMAT({o.creationtime},'%Y%m')";
+		//
+		// final String SQL2 = "select sum({o.totalPrice})
+		// ,{o.user},DATE_FORMAT({o.creationtime},'%Y%m') "
+		// + " from {Order as o JOIN Customer as u ON {u.pk} = {o.user} "
+		// + " JOIN Currency as cur ON {o.currency} = {cur.pk}} " + " where
+		// {cur.isocode} !='USD' " + paramSql
+		// + " group by {o.user},DATE_FORMAT({o.creationtime},'%Y%m')";
 		final Map<String, Object> params = new HashMap<String, Object>();
-		//采用union处理
+		// 采用union处理
 		final StringBuilder SQL = new StringBuilder();
 		SQL.append("select q.a,q.b,q.c from (\n");
 		SQL.append("{{\n");
@@ -280,29 +307,33 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		query.setResultClassList(Arrays.asList(Double.class, UserModel.class, String.class));
 		final SearchResult<List<Object>> result = flexibleSearchService.search(query);
 		final List<List<Object>> resultList = result.getResult();
-//		final FlexibleSearchQuery query1 = new FlexibleSearchQuery(SQL1);
-//		query1.addQueryParameters(params);
-//
-//		query1.setResultClassList(Arrays.asList(Double.class, UserModel.class, String.class));
-//		final SearchResult<List<Object>> result1 = flexibleSearchService.search(query1);
-//
-//		final List<List<Object>> resultList1 = result1.getResult();
-//
-//		final FlexibleSearchQuery query2 = new FlexibleSearchQuery(SQL2);
-//		query2.addQueryParameters(params);
-//
-//		query2.setResultClassList(Arrays.asList(Double.class, UserModel.class, String.class));
-//		final SearchResult<List<Object>> result2 = flexibleSearchService.search(query2);
-//
-//		final List<List<Object>> resultList2 = result2.getResult();
-//
+		// final FlexibleSearchQuery query1 = new FlexibleSearchQuery(SQL1);
+		// query1.addQueryParameters(params);
+		//
+		// query1.setResultClassList(Arrays.asList(Double.class,
+		// UserModel.class, String.class));
+		// final SearchResult<List<Object>> result1 =
+		// flexibleSearchService.search(query1);
+		//
+		// final List<List<Object>> resultList1 = result1.getResult();
+		//
+		// final FlexibleSearchQuery query2 = new FlexibleSearchQuery(SQL2);
+		// query2.addQueryParameters(params);
+		//
+		// query2.setResultClassList(Arrays.asList(Double.class,
+		// UserModel.class, String.class));
+		// final SearchResult<List<Object>> result2 =
+		// flexibleSearchService.search(query2);
+		//
+		// final List<List<Object>> resultList2 = result2.getResult();
+		//
 		final List<SalesByEmployeeReportData> report = getReportList(resultList);
 
 		return report;
 	}
-	
-	//处理返回数据
-	private List<SalesByEmployeeReportData> getReportList(final List<List<Object>> list){
+
+	// 处理返回数据
+	private List<SalesByEmployeeReportData> getReportList(final List<List<Object>> list) {
 		final List<SalesByEmployeeReportData> report = new ArrayList<SalesByEmployeeReportData>();
 		if (CollectionUtils.isNotEmpty(list)) {
 			for (final List<Object> item : list) {
@@ -310,11 +341,11 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 				dataItem.setAmount((Double) item.get(0));
 				dataItem.setEmployee(((UserModel) item.get(1)).getName());
 				dataItem.setMonth((String) item.get(2));
-				
+
 				report.add(dataItem);
 			}
 		}
-		
+
 		return report;
 	}
 
@@ -377,4 +408,160 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 
 		return report;
 	}
+
+	@Override
+	public List<CustomerSalesAnalysisData> getCustomerSalesAnalysis(final String area, final String customerName,
+			final double amount) {
+		final Map<String, Object> params = new HashMap<String, Object>();
+
+		String SQL = "select sum({e.totalRealPrice}),{u.pk},{ua.pk} from {OrderEntry as e"
+				+ " JOIN Order as o ON {e:order} = {o:pk}" + " JOIN Customer as u ON {u:pk} = {o:user}"
+				+ " JOIN Address as ua ON {ua:owner} = {u:pk}" + " JOIN Country as uc ON {uc:pk} = {ua:country}"
+				+ "} where {ua:contactAddress} = true ";
+
+		if (area != null && !area.equals("") && !area.equals("no")) {
+			SQL += " AND {u:area} =?area ";
+			params.put("area", CustomerArea.valueOf(area));
+		}
+
+		if (StringUtils.isNotBlank(customerName)) {
+			SQL += " AND {u:name} like ?userName ";
+			params.put("userName", "%" + customerName + "%");
+		}
+
+		SQL += " group by {u.pk},{ua.pk}";
+
+		if (amount > 0) {
+			SQL += " having sum({e.totalRealPrice}) > ?amount";
+			params.put("amount", amount);
+		}
+
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(SQL);
+		query.addQueryParameters(params);
+
+		query.setResultClassList(Arrays.asList(Double.class, CustomerModel.class, AddressModel.class));
+		final SearchResult<List<Object>> result = flexibleSearchService.search(query);
+		final List<List<Object>> resultList = result.getResult();
+
+		final List<CustomerSalesAnalysisData> list = new ArrayList<CustomerSalesAnalysisData>();
+
+		if (resultList.size() > 0) {
+			for (final List<Object> item : resultList) {
+				final Double sum = (Double) item.get(0);
+				final CustomerModel u = (CustomerModel) item.get(1);
+				final AddressModel address = (AddressModel) item.get(2);
+				final String areaCode = u.getArea().getCode();
+
+				final CustomerSalesAnalysisData data = new CustomerSalesAnalysisData();
+				data.setArea(areaCode);
+				if (address != null) {
+					final String country = address.getCountry() != null ? address.getCountry().getName() : "";
+					data.setCountry(country);
+				}
+				data.setCustomerName(u.getName());
+				data.setArea(areaCode);
+				data.setSalesAmount(sum);
+
+				list.add(data);
+			}
+
+		}
+
+		return list;
+	}
+
+	@Override
+	public List<CustomerBillAnalysisData> getCustomerBillAnalysis(final Date startDate, final Date endDate) {
+
+		// date
+		Date start = startDate;
+		Date end = endDate;
+		if (start == null) {
+			start = Calendar.getInstance().getTime();
+		}
+		if (end == null) {
+			end = Calendar.getInstance().getTime();
+		}
+
+		final String SQL = "select {pk} from {Order} where {creationtime}> ?startDate and {creationtime} < ?endDate ";
+
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(SQL);
+		query.addQueryParameter("startDate", start);
+
+		query.addQueryParameter("endDate", end);
+
+		final SearchResult<OrderModel> result = flexibleSearchService.search(query);
+		final List<OrderModel> list = result.getResult();
+
+		final List<CustomerBillAnalysisData> report = new ArrayList<CustomerBillAnalysisData>();
+
+		if (CollectionUtils.isNotEmpty(list)) {
+			// 当前时间
+			final Date currentTime = Calendar.getInstance().getTime();
+
+			for (final OrderModel o : list) {
+				final CustomerBillAnalysisData data = new CustomerBillAnalysisData();
+
+				data.setOrderCode(o.getCode());
+				data.setCustomerName(o.getUser().getName());
+
+				final CustomerModel customer = (CustomerModel) o.getUser();
+				data.setEmployeeName(customer.getRelatedCustomer().getName());
+				data.setPlaceTime(o.getCreationtime());
+				data.setFinishedTime(o.getOrderFinishedDate());
+
+				// 计算账期
+				int billDays = 0;
+				final CustomerCreditAccountModel creditAccount = customer.getCreditAccount();
+				if (creditAccount != null) {
+					billDays = creditAccount.getBillingInterval();
+					//处理当下客户的信用额度
+					data.setLineOfCredit(creditAccount.getCreditTotalAmount().doubleValue());
+					data.setLineOfUsedCredit(CommonConvertTools.subDouble(creditAccount.getCreditTotalAmount().doubleValue(), creditAccount.getCreaditRemainedAmount().doubleValue()));
+					data.setLineOfResedueCredit(creditAccount.getCreaditRemainedAmount().doubleValue());
+				}
+
+				// 发票时间
+				final String deliveryCode = o.getDeliveryMode() == null ? "" : o.getDeliveryMode().getCode();
+				Date invoiceDate = deliveryCode.equals("DELIVERY_GROSS") ? o.getWaitDeliveiedDate() : o.getPickUpDate();
+				if (invoiceDate == null) {
+					invoiceDate = currentTime;
+				}
+
+				// 计算金额
+				String paymode = "";
+				if(o.getPaymentMode() != null){
+				  paymode = o.getPaymentMode().getCode(); // InvoicePayment--->prepay
+																		
+				}
+				 final String orderStatus = o.getStatus().getCode();// UNPAIED
+				if (paymode.equalsIgnoreCase("InvoicePayment") && orderStatus.equalsIgnoreCase("UNPAIED")) {
+
+					data.setPrePay(o.getTotalPrice());
+				} else {
+					// 计算账期内外
+					final int remainDays = (int) (currentTime.getTime() - invoiceDate.getTime()) / (1000 * 3600 * 24);
+					final int flag = remainDays - billDays;
+					if (flag < 0) {
+						data.setInPay(o.getTotalPrice());
+					} else if (flag > 0 && flag < 30) {
+						data.setThirtyPayAmount(o.getTotalPrice());
+					} else if (flag > 30 && flag < 60) {
+						data.setSixtyPayAmount(o.getTotalPrice());
+					} else if (flag > 60 && flag < 90) {
+						data.setNinetyPayAmount(o.getTotalPrice());
+					} else {
+						data.setOuterNinetyPayAmount(o.getTotalPrice());
+					}
+
+				}
+				report.add(data);
+				
+			}
+
+		}
+
+		return report;
+	}
+
 }

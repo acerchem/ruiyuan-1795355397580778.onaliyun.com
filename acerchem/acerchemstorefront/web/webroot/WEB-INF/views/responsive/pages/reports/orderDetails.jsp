@@ -66,7 +66,7 @@
           <th>ProductName</th>
           <th>ProductQuantity</th>
           <th>OrderAmount</th>
-          <th>UserUid</th>
+          <th>Userid</th>
           <th>DeliveryContact</th>
           <th>DeliveryPhone</th>
           <th>DeliveryAddress</th>

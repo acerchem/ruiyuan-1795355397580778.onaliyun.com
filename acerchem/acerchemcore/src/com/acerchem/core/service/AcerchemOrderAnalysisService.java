@@ -1,7 +1,10 @@
 package com.acerchem.core.service;
 
+import java.util.Date;
 import java.util.List;
 
+import de.hybris.platform.commercefacades.customer.data.CustomerBillAnalysisData;
+import de.hybris.platform.commercefacades.customer.data.CustomerSalesAnalysisData;
 import de.hybris.platform.commercefacades.order.data.MonthlySalesAnalysis;
 import de.hybris.platform.commercefacades.order.data.SalesByEmployeeReportData;
 
@@ -21,5 +24,6 @@ public interface AcerchemOrderAnalysisService {
 	 */
 	public List<SalesByEmployeeReportData> getEmployeeSales(final String year);
 	
-	
+	List<CustomerSalesAnalysisData> getCustomerSalesAnalysis(String area,String customerName,double amount);
+	List<CustomerBillAnalysisData> getCustomerBillAnalysis(Date startDate,Date endDate);
 }

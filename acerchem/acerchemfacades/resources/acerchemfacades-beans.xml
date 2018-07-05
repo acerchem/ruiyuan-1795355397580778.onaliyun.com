@@ -353,9 +353,14 @@
 		<property name="placeTime" type="java.util.Date"/>
 		<property name="finishedTime" type="java.util.Date"/>
 		<property name="prePay" type="java.lang.Double"/>
+		<property name="inPay" type="java.lang.Double"/>
 		<property name="thirtyPayAmount" type="java.lang.Double"/>
 		<property name="sixtyPayAmount" type="java.lang.Double"/>
 		<property name="ninetyPayAmount" type="java.lang.Double"/>
+		<property name="outerNinetyPayAmount" type="java.lang.Double"/>
+		<property name="lineOfCredit" type="java.lang.Double"/>
+		<property name="lineOfUsedCredit" type="java.lang.Double"/>
+		<property name="lineOfResedueCredit" type="java.lang.Double"/>
 		
 	</bean>
 	<bean class="de.hybris.platform.commercefacades.customer.data.CustomerCreditAnalysisData">

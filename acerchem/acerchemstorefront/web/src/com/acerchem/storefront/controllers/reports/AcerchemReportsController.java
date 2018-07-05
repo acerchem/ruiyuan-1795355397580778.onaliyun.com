@@ -30,6 +30,8 @@ import com.acerchem.core.service.AcerchemOrderAnalysisService;
 import com.acerchem.core.util.CommonConvertTools;
 import com.acerchem.storefront.data.AcerchemCategoryBean;
 import com.acerchem.storefront.data.AcerchemEmployeeSalesBean;
+import com.acerchem.storefront.data.CustomerCreditAnalysisForReportBean;
+import com.acerchem.storefront.data.CustomerSalesAnalysisForm;
 import com.acerchem.storefront.data.MonthlySalesAnalysisForm;
 import com.acerchem.storefront.data.ProductSalesForm;
 import com.acerchem.storefront.data.SearchCriteriaFrom;
@@ -41,6 +43,8 @@ import de.hybris.platform.catalog.model.CatalogVersionModel;
 import de.hybris.platform.category.CategoryService;
 import de.hybris.platform.category.model.CategoryModel;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.commercefacades.customer.data.CustomerBillAnalysisData;
+import de.hybris.platform.commercefacades.customer.data.CustomerSalesAnalysisData;
 import de.hybris.platform.commercefacades.order.CheckoutFacade;
 import de.hybris.platform.commercefacades.order.data.MonthlySalesAnalysis;
 import de.hybris.platform.commercefacades.order.data.OrderDetailsReportData;
@@ -86,11 +90,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	@ModelAttribute("countries")
 	public Collection<CountryData> getCountries() {
 		final List<CountryData> countries = new ArrayList<CountryData>();
-		final CountryData areaItem = new CountryData();
-		areaItem.setName("no item");
-		areaItem.setIsocode("no");
-
-		countries.add(areaItem);
+		
 		countries.addAll(checkoutFacade.getDeliveryCountries());
 
 		return countries;
@@ -100,10 +100,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	public Collection<CountryData> getAreas() {
 		final Set<String> areas = acerchemOrderDao.getAllAreas();
 		final List<CountryData> areaList = new ArrayList<CountryData>();
-		final CountryData areaItem = new CountryData();
-		areaItem.setName("no item");
-		areaItem.setIsocode("no");
-		areaList.add(areaItem);
+		
 		for (final String aa : areas) {
 			final CountryData area = new CountryData();
 			area.setName(aa);
@@ -445,6 +442,94 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		return "pages/reports/productSalesRecord";
 		
 		
+	}
+
+	@RequestMapping(value = "/customerSalesAnalysis", method = RequestMethod.GET)
+	public String showCustomerSalesAnalysis(final Model model) throws CMSItemNotFoundException {
+		storeCmsPageInModel(model, getContentPageForLabelOrId("login"));
+		
+
+		final CustomerSalesAnalysisForm customerSalesAnalysisForm = new CustomerSalesAnalysisForm();
+		model.addAttribute("customerSalesAnalysisForm", customerSalesAnalysisForm);
+		
+		return "pages/reports/customerSalesAnalysis";
+
+	}
+	
+	@RequestMapping(value = "/customerSalesAnalysis", method = RequestMethod.POST)
+	public String getCustomerSalesAnalysis(final Model model ,final CustomerSalesAnalysisForm customerSalesAnalysisForm) throws CMSItemNotFoundException {
+		final List<CustomerSalesAnalysisData> list = acerchemOrderAnalysisService.getCustomerSalesAnalysis(customerSalesAnalysisForm.getArea(), customerSalesAnalysisForm.getCustomerName(), customerSalesAnalysisForm.getAmount());
+		
+
+		model.addAttribute("list",list);
+		model.addAttribute("customerSalesAnalysisForm", customerSalesAnalysisForm);
+		
+		return "pages/reports/customerSalesAnalysis";
+
+	}
+	
+	@RequestMapping(value = "/customerBillAnalysis", method = RequestMethod.GET)
+	public String showCustomerBillAnalysis(final Model model) throws CMSItemNotFoundException {
+		storeCmsPageInModel(model, getContentPageForLabelOrId("login"));
+		
+		final SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
+		final Calendar calendar = Calendar.getInstance();
+		
+		final Date end = calendar.getTime();
+		calendar.add(Calendar.DATE, -7);
+		final Date start = calendar.getTime();
+		
+		final String startDate = sdf.format(start);
+		final String endDate = sdf.format(end);
+		model.addAttribute("startDate",startDate);
+		model.addAttribute("endDate",endDate);
+		return "pages/reports/customerBillAnalysis";
+
+	}
+	
+	@RequestMapping(value = "/customerBillAnalysis", method = RequestMethod.POST)
+	public String getCustomerBillAnalysis(final Model model,@RequestParam("startDate") final String startDate,
+			@RequestParam("endDate") final String endDate) throws CMSItemNotFoundException, ParseException {
+		
+		Date start = new Date();
+		Date end = new Date();
+		final SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
+		if (StringUtils.isNotBlank(startDate)) {
+			start = sdf.parse(startDate);
+		}
+		if (StringUtils.isNotBlank(endDate)) {
+			end = sdf.parse(endDate);
+		}
+		
+		final List<CustomerBillAnalysisData> list = acerchemOrderAnalysisService.getCustomerBillAnalysis(start, end);
+		
+		final List<CustomerCreditAnalysisForReportBean> creditList = new ArrayList<CustomerCreditAnalysisForReportBean>();
+		
+		if(list.size() > 0){
+			for(final CustomerBillAnalysisData data : list){
+				
+				final CustomerCreditAnalysisForReportBean bean = new CustomerCreditAnalysisForReportBean();
+				bean.setCustomerName(data.getCustomerName());
+				bean.setLineOfCredit(data.getLineOfCredit());
+				bean.setLineOfResedueCredit(data.getLineOfResedueCredit());
+				bean.setLineOfUsedCredit(data.getLineOfUsedCredit());
+				
+				creditList.add(bean);
+			}
+			
+			final Set<CustomerCreditAnalysisForReportBean> set = new HashSet<CustomerCreditAnalysisForReportBean>();
+			set.addAll(creditList);
+			
+			creditList.clear();
+			creditList.addAll(set);
+			
+		}
+		
+		model.addAttribute("list",list);
+		model.addAttribute("creditList",creditList);
+		
+		return "pages/reports/customerBillAnalysis";
+
 	}
 
 }
