@@ -32,14 +32,14 @@ public class CustomerCreditAnalysisForReportBean {
 	}
 	@Override
 	public int hashCode() {
-		final String lineOfCreditStr = String.valueOf(lineOfCredit);
-		final String hc = customerName + "-" +lineOfCreditStr;
-		return hc.hashCode();
+//		final String lineOfCreditStr = String.valueOf(lineOfCredit);
+//		final String hc = customerName + "-" +lineOfCreditStr;
+		return customerName.hashCode();
 	}
 	@Override
 	public boolean equals(final Object obj) {
 		final CustomerCreditAnalysisForReportBean bean = (CustomerCreditAnalysisForReportBean)obj;
-		return customerName.equals(bean.getCustomerName()) && lineOfCredit == bean.getLineOfCredit();
+		return customerName.equals(bean.getCustomerName()) ;
 	}
 	
 	
