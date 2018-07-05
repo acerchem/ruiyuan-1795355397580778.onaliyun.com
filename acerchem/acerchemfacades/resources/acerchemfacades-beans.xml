@@ -274,6 +274,7 @@
 		<property name="salesman" type="String"/>
 		<property name="supplier" type="String"/>
 		<property name="orderFinishedTime" type="java.util.Date"/>
+		<property name="warehouse" type="String"/>
 	</bean>
 	
 	<bean class="de.hybris.platform.commercefacades.order.data.MonthlySalesAnalysis">

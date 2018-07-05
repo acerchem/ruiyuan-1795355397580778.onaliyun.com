@@ -38,6 +38,7 @@ import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
+import de.hybris.platform.storelocator.model.PointOfServiceModel;
 
 public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 
@@ -137,7 +138,53 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 			detail.setProductQuantity(od.getQuantity());
 			detail.setOrderAmount(od.getTotalPrice());
 			detail.setUserUid(od.getOrder().getUser().getUid());
-			detail.setDeliveryAddress(addressConverter.convert(addressModel));
+			final String deliveryCode = od.getOrder().getDeliveryMode()==null?"":od.getOrder().getDeliveryMode().getCode();
+			
+			if(deliveryCode.equals("DELIVERY_GROSS")) {// 配送 DELIVERY_GROSS)
+				detail.setDeliveryAddress(addressConverter.convert(od.getDeliveryAddress()));
+				
+				
+			}else{
+				detail.setDeliveryAddress(addressConverter.convert(addressModel));
+				//增加仓库地址
+				final PointOfServiceModel pos = od.getDeliveryPointOfService();
+				if(pos !=null){
+					final AddressModel posAddress  = pos.getAddress();
+					if (posAddress != null){
+					    String _temp = "";
+						if(StringUtils.isNotBlank(posAddress.getLine1())){
+							_temp += posAddress.getLine1() +",";
+						}
+						if(StringUtils.isNotBlank(posAddress.getLine2())){
+							_temp += posAddress.getLine2() +",";
+						}
+						if(StringUtils.isNotBlank(posAddress.getTown())){
+							_temp += posAddress.getTown() +",";
+						}
+						if(posAddress.getRegion() != null){
+							if(StringUtils.isNotBlank(posAddress.getRegion().getName())){
+								_temp += posAddress.getRegion().getName() +",";
+							}
+						}
+						if(StringUtils.isNotBlank(posAddress.getPostalcode())){
+							_temp += posAddress.getPostalcode() +",";
+						}
+						if(posAddress.getCountry() != null){
+							if(StringUtils.isNotBlank(posAddress.getCountry().getName())){
+								_temp += posAddress.getCountry().getName();
+							}
+						}
+			       
+					
+						final String warehouse = _temp;
+						
+						detail.setWarehouse(warehouse);
+			       
+					}
+				}
+				 
+				
+			}
 			if (od.getOrder().getPlacedBy() != null) {
 				detail.setSalesman(od.getOrder().getPlacedBy().getName());
 			}
@@ -189,7 +236,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 
 					if (countryMap.get(countryName) != null) {
 						MonthAmount = countryMap.get(countryName);
-						amount = MonthAmount.get(calendar.get(Calendar.MONTH));
+						amount = MonthAmount.get(calendar.get(Calendar.MONTH)+1);
 						if (amount == null) {
 							amount = Double.valueOf(0);
 						}
@@ -201,7 +248,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 					// Amount += oo.getTotalPrice();
 					// }
 					amount += oo.getTotalPrice();
-					MonthAmount.put(calendar.get(Calendar.MONTH), amount);
+					MonthAmount.put(calendar.get(Calendar.MONTH)+1, amount);
 					countryMap.put(countryName, MonthAmount);
 				}
 

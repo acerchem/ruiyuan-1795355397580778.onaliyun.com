@@ -63,10 +63,11 @@
           <th>Area</th>
           <th>OrderCode</th>
           <th>PlaceTime</th>
+          <th>FinishedTime</th>
           <th>ProductName</th>
           <th>ProductQuantity</th>
           <th>OrderAmount</th>
-          <th>Userid</th>
+          <th>UserId</th>
           <th>DeliveryContact</th>
           <th>DeliveryPhone</th>
           <th>DeliveryAddress</th>
@@ -82,34 +83,44 @@
 	          <td>
 	          	<fmt:formatDate value="${orderDetail.orderTime}"  timeStyle="short" type="both"/>
 	          </td>
+	          <td>
+	          	<fmt:formatDate value="${orderDetail.orderFinishedTime}"  timeStyle="short" type="both"/>
+	          </td>
 	          <td>${orderDetail.productName}</td>
 	          <td>${orderDetail.productQuantity}</td>
 	          <td>
-	          	${orderDetail.currency}
+	          	USD
 	          	<fmt:formatNumber type="number" value="${orderDetail.orderAmount}" pattern="#.00"/>
 	          </td>
 	          <td>${orderDetail.userUid}</td>
 	          <td>${orderDetail.deliveryAddress.firstName}${orderDetail.deliveryAddress.lastName}</td>
 	          <td>${orderDetail.deliveryAddress.phone}</td>
 	          <td>
-          		<c:if test="${not empty orderDetail.deliveryAddress.line1}">
-		            ${fn:escapeXml(orderDetail.deliveryAddress.line1)},
-		        </c:if>
-		        <c:if test="${not empty orderDetail.deliveryAddress.line2}">
-		            ${fn:escapeXml(orderDetail.deliveryAddress.line2)},
-		        </c:if>
-				<c:if test="${not empty orderDetail.deliveryAddress.town}">
-		            ${fn:escapeXml(orderDetail.deliveryAddress.town)},
-		        </c:if>
-		        <c:if test="${not empty orderDetail.deliveryAddress.region.name}">
-		            ${fn:escapeXml(orderDetail.deliveryAddress.region.name)},
-		        </c:if>
-				<c:if test="${not empty orderDetail.deliveryAddress.postalCode}">
-		            ${fn:escapeXml(orderDetail.deliveryAddress.postalCode)},
-		        </c:if>
-		        <c:if test="${not empty orderDetail.deliveryAddress.country.name}">
-		            ${fn:escapeXml(orderDetail.deliveryAddress.country.name)}
-       			</c:if>
+	          	<c:choose>
+	          		<c:when test="${not empty orderDetail.warehouse}">
+	          		     ${orderDetail.warehouse}
+	          		</c:when>
+	          		<c:otherwise>
+		          		<c:if test="${not empty orderDetail.deliveryAddress.line1}">
+				            ${fn:escapeXml(orderDetail.deliveryAddress.line1)},
+				        </c:if>
+				        <c:if test="${not empty orderDetail.deliveryAddress.line2}">
+				            ${fn:escapeXml(orderDetail.deliveryAddress.line2)},
+				        </c:if>
+						<c:if test="${not empty orderDetail.deliveryAddress.town}">
+				            ${fn:escapeXml(orderDetail.deliveryAddress.town)},
+				        </c:if>
+				        <c:if test="${not empty orderDetail.deliveryAddress.region.name}">
+				            ${fn:escapeXml(orderDetail.deliveryAddress.region.name)},
+				        </c:if>
+						<c:if test="${not empty orderDetail.deliveryAddress.postalCode}">
+				            ${fn:escapeXml(orderDetail.deliveryAddress.postalCode)},
+				        </c:if>
+				        <c:if test="${not empty orderDetail.deliveryAddress.country.name}">
+				            ${fn:escapeXml(orderDetail.deliveryAddress.country.name)}
+		       			</c:if>
+	       			</c:otherwise>
+	       			</c:choose>
 	          </td>
 	          <td>${orderDetail.salesman}</td>
 	          <td>${orderDetail.supplier}</td>
