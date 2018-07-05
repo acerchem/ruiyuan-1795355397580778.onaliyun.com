@@ -20,7 +20,7 @@
 			<tr>
 				<td>
 					<label style="margin-left: 20px;">Input Month:</label>
-					<input name="year" size="6" type="text" value="${month}" placeholder="201807"/>
+					<input name="month" size="6" type="text" value="${month}" placeholder="201807"/>
 				</td>
 				
 				

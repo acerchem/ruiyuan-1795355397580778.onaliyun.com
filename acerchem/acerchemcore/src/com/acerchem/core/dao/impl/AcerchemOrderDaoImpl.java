@@ -509,7 +509,9 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 					data.setCustomerName(o.getUser().getName());
 
 					final CustomerModel customer = (CustomerModel) o.getUser();
-					data.setEmployeeName(customer.getRelatedCustomer().getName());
+					if (customer.getRelatedCustomer() != null) {
+						data.setEmployeeName(customer.getRelatedCustomer().getName());
+					}
 					data.setPlaceTime(o.getCreationtime());
 					data.setFinishedTime(o.getOrderFinishedDate());
 
