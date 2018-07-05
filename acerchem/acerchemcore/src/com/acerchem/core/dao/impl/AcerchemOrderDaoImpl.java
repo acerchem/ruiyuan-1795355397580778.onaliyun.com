@@ -534,7 +534,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 				  paymode = o.getPaymentMode().getCode(); // InvoicePayment--->prepay
 																		
 				}
-				 final String orderStatus = o.getStatus().getCode();// UNPAIED
+				 final String orderStatus = o.getStatus()==null?"":o.getStatus().getCode();// UNPAIED
 				if (paymode.equalsIgnoreCase("InvoicePayment") && orderStatus.equalsIgnoreCase("UNPAIED")) {
 
 					data.setPrePay(o.getTotalPrice());

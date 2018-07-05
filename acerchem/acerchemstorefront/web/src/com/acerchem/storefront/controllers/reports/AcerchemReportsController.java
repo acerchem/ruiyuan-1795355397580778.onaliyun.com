@@ -527,7 +527,8 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		
 		model.addAttribute("list",list);
 		model.addAttribute("creditList",creditList);
-		
+		model.addAttribute("startDate",startDate);
+		model.addAttribute("endDate",endDate);
 		return "pages/reports/customerBillAnalysis";
 
 	}

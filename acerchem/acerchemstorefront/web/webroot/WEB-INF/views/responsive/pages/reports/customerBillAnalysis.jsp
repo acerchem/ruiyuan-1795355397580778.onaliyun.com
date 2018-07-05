@@ -62,10 +62,10 @@
 		  
           <th>Prepaid</th>
           <th>Bill Period</th>
-          <th>0 - 30</th>
-          <th>30 - 60</th>
-          <th>60 - 90</th>
-          <th> > 90</th>
+          <th>0-30</th>
+          <th>30-60</th>
+          <th>60-90</th>
+          <th> >90</th>
       </tr>
       <tr>
           <th >Order Code</th>
