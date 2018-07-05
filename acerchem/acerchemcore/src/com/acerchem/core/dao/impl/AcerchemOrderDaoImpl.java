@@ -450,7 +450,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 				final Double sum = (Double) item.get(0);
 				final CustomerModel u = (CustomerModel) item.get(1);
 				final AddressModel address = (AddressModel) item.get(2);
-				final String areaCode = u.getArea().getCode();
+				final String areaCode = u == null ? "" : u.getArea().getCode();
 
 				final CustomerSalesAnalysisData data = new CustomerSalesAnalysisData();
 				data.setArea(areaCode);
@@ -458,7 +458,9 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 					final String country = address.getCountry() != null ? address.getCountry().getName() : "";
 					data.setCountry(country);
 				}
-				data.setCustomerName(u.getName());
+				if (u != null) {
+					data.setCustomerName(u.getName());
+				}
 				data.setArea(areaCode);
 				data.setSalesAmount(sum);
 
@@ -502,61 +504,66 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 			for (final OrderModel o : list) {
 				final CustomerBillAnalysisData data = new CustomerBillAnalysisData();
 
-				data.setOrderCode(o.getCode());
-				data.setCustomerName(o.getUser().getName());
+				if (o.getUser() != null) {
+					data.setOrderCode(o.getCode());
+					data.setCustomerName(o.getUser().getName());
 
-				final CustomerModel customer = (CustomerModel) o.getUser();
-				data.setEmployeeName(customer.getRelatedCustomer().getName());
-				data.setPlaceTime(o.getCreationtime());
-				data.setFinishedTime(o.getOrderFinishedDate());
+					final CustomerModel customer = (CustomerModel) o.getUser();
+					data.setEmployeeName(customer.getRelatedCustomer().getName());
+					data.setPlaceTime(o.getCreationtime());
+					data.setFinishedTime(o.getOrderFinishedDate());
 
-				// 计算账期
-				int billDays = 0;
-				final CustomerCreditAccountModel creditAccount = customer.getCreditAccount();
-				if (creditAccount != null) {
-					billDays = creditAccount.getBillingInterval();
-					//处理当下客户的信用额度
-					data.setLineOfCredit(creditAccount.getCreditTotalAmount().doubleValue());
-					data.setLineOfUsedCredit(CommonConvertTools.subDouble(creditAccount.getCreditTotalAmount().doubleValue(), creditAccount.getCreaditRemainedAmount().doubleValue()));
-					data.setLineOfResedueCredit(creditAccount.getCreaditRemainedAmount().doubleValue());
-				}
-
-				// 发票时间
-				final String deliveryCode = o.getDeliveryMode() == null ? "" : o.getDeliveryMode().getCode();
-				Date invoiceDate = deliveryCode.equals("DELIVERY_GROSS") ? o.getWaitDeliveiedDate() : o.getPickUpDate();
-				if (invoiceDate == null) {
-					invoiceDate = currentTime;
-				}
-
-				// 计算金额
-				String paymode = "";
-				if(o.getPaymentMode() != null){
-				  paymode = o.getPaymentMode().getCode(); // InvoicePayment--->prepay
-																		
-				}
-				 final String orderStatus = o.getStatus()==null?"":o.getStatus().getCode();// UNPAIED
-				if (paymode.equalsIgnoreCase("InvoicePayment") && orderStatus.equalsIgnoreCase("UNPAIED")) {
-
-					data.setPrePay(o.getTotalPrice());
-				} else {
-					// 计算账期内外
-					final int remainDays = (int) (currentTime.getTime() - invoiceDate.getTime()) / (1000 * 3600 * 24);
-					final int flag = remainDays - billDays;
-					if (flag < 0) {
-						data.setInPay(o.getTotalPrice());
-					} else if (flag > 0 && flag < 30) {
-						data.setThirtyPayAmount(o.getTotalPrice());
-					} else if (flag > 30 && flag < 60) {
-						data.setSixtyPayAmount(o.getTotalPrice());
-					} else if (flag > 60 && flag < 90) {
-						data.setNinetyPayAmount(o.getTotalPrice());
-					} else {
-						data.setOuterNinetyPayAmount(o.getTotalPrice());
+					// 计算账期
+					int billDays = 0;
+					final CustomerCreditAccountModel creditAccount = customer.getCreditAccount();
+					if (creditAccount != null) {
+						billDays = creditAccount.getBillingInterval();
+						// 处理当下客户的信用额度
+						data.setLineOfCredit(creditAccount.getCreditTotalAmount().doubleValue());
+						data.setLineOfUsedCredit(
+								CommonConvertTools.subDouble(creditAccount.getCreditTotalAmount().doubleValue(),
+										creditAccount.getCreaditRemainedAmount().doubleValue()));
+						data.setLineOfResedueCredit(creditAccount.getCreaditRemainedAmount().doubleValue());
 					}
 
+					// 发票时间
+					final String deliveryCode = o.getDeliveryMode() == null ? "" : o.getDeliveryMode().getCode();
+					Date invoiceDate = deliveryCode.equals("DELIVERY_GROSS") ? o.getWaitDeliveiedDate()
+							: o.getPickUpDate();
+					if (invoiceDate == null) {
+						invoiceDate = currentTime;
+					}
+
+					// 计算金额
+					String paymode = "";
+					if (o.getPaymentMode() != null) {
+						paymode = o.getPaymentMode().getCode(); // InvoicePayment--->prepay
+
+					}
+					final String orderStatus = o.getStatus() == null ? "" : o.getStatus().getCode();// UNPAIED
+					if (paymode.equalsIgnoreCase("InvoicePayment") && orderStatus.equalsIgnoreCase("UNPAIED")) {
+
+						data.setPrePay(o.getTotalPrice());
+					} else {
+						// 计算账期内外
+						final int remainDays = (int) (currentTime.getTime() - invoiceDate.getTime())
+								/ (1000 * 3600 * 24);
+						final int flag = remainDays - billDays;
+						if (flag < 0) {
+							data.setInPay(o.getTotalPrice());
+						} else if (flag > 0 && flag < 30) {
+							data.setThirtyPayAmount(o.getTotalPrice());
+						} else if (flag > 30 && flag < 60) {
+							data.setSixtyPayAmount(o.getTotalPrice());
+						} else if (flag > 60 && flag < 90) {
+							data.setNinetyPayAmount(o.getTotalPrice());
+						} else {
+							data.setOuterNinetyPayAmount(o.getTotalPrice());
+						}
+
+					}
+					report.add(data);
 				}
-				report.add(data);
-				
 			}
 
 		}

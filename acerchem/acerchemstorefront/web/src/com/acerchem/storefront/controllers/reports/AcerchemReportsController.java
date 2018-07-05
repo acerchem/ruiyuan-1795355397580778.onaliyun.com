@@ -458,7 +458,12 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	
 	@RequestMapping(value = "/customerSalesAnalysis", method = RequestMethod.POST)
 	public String getCustomerSalesAnalysis(final Model model ,final CustomerSalesAnalysisForm customerSalesAnalysisForm) throws CMSItemNotFoundException {
-		final List<CustomerSalesAnalysisData> list = acerchemOrderAnalysisService.getCustomerSalesAnalysis(customerSalesAnalysisForm.getArea(), customerSalesAnalysisForm.getCustomerName(), customerSalesAnalysisForm.getAmount());
+		
+		final String area = customerSalesAnalysisForm.getArea()==null?"":customerSalesAnalysisForm.getArea();
+		final String name = customerSalesAnalysisForm.getCustomerName()==null?"":customerSalesAnalysisForm.getCustomerName();
+		final double amount = customerSalesAnalysisForm.getAmount()==null?0:customerSalesAnalysisForm.getAmount();
+		final List<CustomerSalesAnalysisData> list = acerchemOrderAnalysisService.
+				getCustomerSalesAnalysis(area, name, amount);
 		
 
 		model.addAttribute("list",list);
