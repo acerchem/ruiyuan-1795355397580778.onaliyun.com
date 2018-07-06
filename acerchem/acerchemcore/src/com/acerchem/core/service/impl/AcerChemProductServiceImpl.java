@@ -165,7 +165,7 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 				}
 				// 处理最后组合
 
-				final AcerchemProductPriceBean last = listWithWeek.get(listWithWeek.size() - 1);
+				final AcerchemProductPriceBean last = listWithWeek.get(listWithWeek.size()-1);
 
 				final AcerchemProductPriceBean combolast = new AcerchemProductPriceBean();
 
@@ -252,7 +252,7 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 				}
 
 				// 处理最后项
-				final AcerchemProductPriceBean lastReport = listWithWeek.get(listWithWeek.size() - 1);
+				final AcerchemProductPriceBean lastReport = listWithWeek.get(listWithWeek.size()-1);
 				final ProductPriceAnalysisData item = new ProductPriceAnalysisData();
 
 				item.setProductCode(lastReport.getProductCode());
@@ -348,7 +348,7 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 
 				}
 				// 处理最后
-				final AcerchemProductBuyerBean last = list.get(list.size() - 1);
+				final AcerchemProductBuyerBean last = list.get(list.size()-1);
 				final ProductSalesRecordData item = new ProductSalesRecordData();
 
 				item.setProductCode(last.getProductCode());

@@ -217,8 +217,15 @@ public class AcerChemProductDaoImpl implements AcerChemProductDao {
 				final AddressModel addr = (AddressModel)item.get(1);
 				
 				final AcerchemProductBuyerBean bean = new AcerchemProductBuyerBean();
-				bean.setAreaOfBuyer(oe.getOrder().getUser().getArea().getCode());
-				bean.setBuyer(oe.getOrder().getUser().getName());
+				if(oe.getOrder().getUser()!=null){
+					if(oe.getOrder().getUser().getArea()!=null){
+						bean.setAreaOfBuyer(oe.getOrder().getUser().getArea().getCode());
+					}
+					
+					bean.setBuyer(oe.getOrder().getUser().getName());
+				}
+				
+				
 				
 				bean.setBuyQuantity(oe.getQuantity());
 				
@@ -233,8 +240,10 @@ public class AcerChemProductDaoImpl implements AcerChemProductDao {
 				bean.setProductCode(oe.getProduct().getCode());
 				bean.setProductName(oe.getProduct().getName());
 				
-				if (addr != null) {
-					bean.setCountryOfBuyer(addr.getCountry().getName());
+				if (addr != null ) {
+					if(addr.getCountry()!=null){
+						bean.setCountryOfBuyer(addr.getCountry().getName());
+					}
 				}
 				
 				reportList.add(bean);

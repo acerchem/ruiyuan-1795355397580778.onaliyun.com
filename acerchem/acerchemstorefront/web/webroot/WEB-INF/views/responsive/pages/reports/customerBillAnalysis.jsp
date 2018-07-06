@@ -83,12 +83,16 @@
       </tr>
       <c:forEach items="${list}" var="detail">
       	  <tr>
+      	 	  <c:if test="${detail.orderCode eq 'Total'}">
+      	 	  	 <td colspan="5">${detail.orderCode}</td>
+      	 	  </c:if>
+      	 	  <c:if test="!${detail.orderCode eq 'Total'}">
 	          <td>${detail.orderCode}</td>
 			  <td>${detail.customerName}</td>
 			  <td>${detail.employeeName}</td>
 	          <td><fmt:formatDate value="${detail.placeTime}"  timeStyle="short" type="date"/></td>
 	           <td><fmt:formatDate value="${detail.finishedTime}"  timeStyle="short" type="date"/></td>
-			   
+			    </c:if>
 			   <td>
 	          	<fmt:formatNumber type="number" value="${detail.prePay}" pattern="#.00"/>
 	          </td>

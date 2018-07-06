@@ -90,7 +90,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	@ModelAttribute("countries")
 	public Collection<CountryData> getCountries() {
 		final List<CountryData> countries = new ArrayList<CountryData>();
-		
+
 		countries.addAll(checkoutFacade.getDeliveryCountries());
 
 		return countries;
@@ -100,7 +100,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	public Collection<CountryData> getAreas() {
 		final Set<String> areas = acerchemOrderDao.getAllAreas();
 		final List<CountryData> areaList = new ArrayList<CountryData>();
-		
+
 		for (final String aa : areas) {
 			final CountryData area = new CountryData();
 			area.setName(aa);
@@ -398,27 +398,32 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	public String getProductPriceAnalysist(final Model model, @RequestParam("month") final String month)
 			throws CMSItemNotFoundException {
 
+	
 		String curMonth = month;
-		if (StringUtils.isBlank(month) || month.length()!=6) {
+		if (StringUtils.isBlank(curMonth) || month.length() != 7 || month.indexOf("-")<0) {
+			
 			final Date d = new Date();
 			final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
 			curMonth = sdf.format(d);
 
+		}else{
+			curMonth = curMonth.replace("-","");
 		}
 
 		final Calendar calendar = Calendar.getInstance();
 		final int iyear = Integer.valueOf(curMonth.substring(0, 4)).intValue();
 		final int imonth = Integer.valueOf(curMonth.substring(5)).intValue();
-		calendar.set(iyear, imonth-1,1);
+		calendar.set(iyear, imonth - 1, 1);
 		calendar.add(Calendar.MONTH, 1);
 		calendar.add(calendar.DATE, -1);
 		final int maxWeek = calendar.get(Calendar.WEEK_OF_MONTH);
-		
+
 		final List<ProductPriceAnalysisData> list = acerChemProductService.getProductWithBaserealPrice(curMonth);
 
+		curMonth = curMonth.substring(0,4)+"-"+curMonth.substring(4);
 		model.addAttribute("list", list);
 		model.addAttribute("month", curMonth);
-		model.addAttribute("maxWeek",maxWeek);
+		model.addAttribute("maxWeek", maxWeek);
 		return "pages/reports/productPriceAnalysis";
 
 	}
@@ -429,7 +434,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		// model.addAttribute("list",list);
 
 		final Date d = new Date();
-		final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
+		final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
 		final String month = sdf.format(d);
 
 		final ProductSalesForm productSalesForm = new ProductSalesForm();
@@ -440,71 +445,91 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	}
 
 	@RequestMapping(value = "/productSalesRecord", method = RequestMethod.POST)
-	public String getProductSalesRecord(final Model model,final ProductSalesForm productSalesForm) throws CMSItemNotFoundException {
-		
-		
-		final List<ProductSalesRecordData> list = acerChemProductService.getProductSalesForReport(productSalesForm.getMonth(),productSalesForm.getCategoryCode(), productSalesForm.getArea(), productSalesForm.getCountryCode());
-		
+	public String getProductSalesRecord(final Model model, final ProductSalesForm productSalesForm)
+			throws CMSItemNotFoundException {
+
+		String curMonth = productSalesForm.getMonth();
+		if (StringUtils.isBlank(curMonth) || curMonth.length() != 7 || curMonth.indexOf("-")<0) {
+			
+			final Date d = new Date();
+			final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
+			curMonth = sdf.format(d);
+
+		}else{
+			curMonth = curMonth.replace("-","");
+		}
+		System.out.println(curMonth);
+		final List<ProductSalesRecordData> list = acerChemProductService.getProductSalesForReport(
+				curMonth, productSalesForm.getCategoryCode(), productSalesForm.getArea(),
+				productSalesForm.getCountryCode());
+
 		model.addAttribute("list", list);
-		model.addAttribute("productSalesForm", productSalesForm);
+		//重置form
+		final ProductSalesForm newForm = new ProductSalesForm();
+		newForm.setArea(productSalesForm.getArea());
+		newForm.setCategoryCode(productSalesForm.getCategoryCode());
+		newForm.setCountryCode(productSalesForm.getCountryCode());
+		curMonth = curMonth.substring(0,4)+"-"+curMonth.substring(4);
+		newForm.setMonth(curMonth);
 		
+		model.addAttribute("productSalesForm", newForm);
+		model.addAttribute("month", curMonth);
 		return "pages/reports/productSalesRecord";
-		
-		
+
 	}
 
 	@RequestMapping(value = "/customerSalesAnalysis", method = RequestMethod.GET)
 	public String showCustomerSalesAnalysis(final Model model) throws CMSItemNotFoundException {
 		storeCmsPageInModel(model, getContentPageForLabelOrId("login"));
-		
 
 		final CustomerSalesAnalysisForm customerSalesAnalysisForm = new CustomerSalesAnalysisForm();
 		model.addAttribute("customerSalesAnalysisForm", customerSalesAnalysisForm);
-		
+
 		return "pages/reports/customerSalesAnalysis";
 
 	}
-	
+
 	@RequestMapping(value = "/customerSalesAnalysis", method = RequestMethod.POST)
-	public String getCustomerSalesAnalysis(final Model model ,final CustomerSalesAnalysisForm customerSalesAnalysisForm) throws CMSItemNotFoundException {
-		
-		final String area = customerSalesAnalysisForm.getArea()==null?"":customerSalesAnalysisForm.getArea();
-		final String name = customerSalesAnalysisForm.getCustomerName()==null?"":customerSalesAnalysisForm.getCustomerName();
-		final double amount = customerSalesAnalysisForm.getAmount()==null?0:customerSalesAnalysisForm.getAmount();
-		final List<CustomerSalesAnalysisData> list = acerchemOrderAnalysisService.
-				getCustomerSalesAnalysis(area, name, amount);
-		
+	public String getCustomerSalesAnalysis(final Model model, final CustomerSalesAnalysisForm customerSalesAnalysisForm)
+			throws CMSItemNotFoundException {
 
-		model.addAttribute("list",list);
+		final String area = customerSalesAnalysisForm.getArea() == null ? "" : customerSalesAnalysisForm.getArea();
+		final String name = customerSalesAnalysisForm.getCustomerName() == null ? ""
+				: customerSalesAnalysisForm.getCustomerName();
+		final double amount = customerSalesAnalysisForm.getAmount() == null ? 0 : customerSalesAnalysisForm.getAmount();
+		final List<CustomerSalesAnalysisData> list = acerchemOrderAnalysisService.getCustomerSalesAnalysis(area, name,
+				amount);
+
+		model.addAttribute("list", list);
 		model.addAttribute("customerSalesAnalysisForm", customerSalesAnalysisForm);
-		
+
 		return "pages/reports/customerSalesAnalysis";
 
 	}
-	
+
 	@RequestMapping(value = "/customerBillAnalysis", method = RequestMethod.GET)
 	public String showCustomerBillAnalysis(final Model model) throws CMSItemNotFoundException {
 		storeCmsPageInModel(model, getContentPageForLabelOrId("login"));
-		
+
 		final SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
 		final Calendar calendar = Calendar.getInstance();
-		
+
 		final Date end = calendar.getTime();
 		calendar.add(Calendar.DATE, -7);
 		final Date start = calendar.getTime();
-		
+
 		final String startDate = sdf.format(start);
 		final String endDate = sdf.format(end);
-		model.addAttribute("startDate",startDate);
-		model.addAttribute("endDate",endDate);
+		model.addAttribute("startDate", startDate);
+		model.addAttribute("endDate", endDate);
 		return "pages/reports/customerBillAnalysis";
 
 	}
-	
+
 	@RequestMapping(value = "/customerBillAnalysis", method = RequestMethod.POST)
-	public String getCustomerBillAnalysis(final Model model,@RequestParam("startDate") final String startDate,
+	public String getCustomerBillAnalysis(final Model model, @RequestParam("startDate") final String startDate,
 			@RequestParam("endDate") final String endDate) throws CMSItemNotFoundException, ParseException {
-		
+
 		Date start = new Date();
 		Date end = new Date();
 		final SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
@@ -514,35 +539,62 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		if (StringUtils.isNotBlank(endDate)) {
 			end = sdf.parse(endDate);
 		}
-		
+
 		final List<CustomerBillAnalysisData> list = acerchemOrderAnalysisService.getCustomerBillAnalysis(start, end);
-		
+
 		final List<CustomerCreditAnalysisForReportBean> creditList = new ArrayList<CustomerCreditAnalysisForReportBean>();
-		
-		if(list.size() > 0){
-			for(final CustomerBillAnalysisData data : list){
-				
+
+		if (list.size() > 0) {
+
+			Double prePay = Double.valueOf(0);
+			Double inPay = Double.valueOf(0);
+			Double thirtyPayAmount = Double.valueOf(0);
+			Double sixtyPayAmount = Double.valueOf(0);
+			Double ninetyPayAmount = Double.valueOf(0);
+			Double outerNinetyPayAmount = Double.valueOf(0);
+			for (final CustomerBillAnalysisData data : list) {
+
 				final CustomerCreditAnalysisForReportBean bean = new CustomerCreditAnalysisForReportBean();
 				bean.setCustomerName(data.getCustomerName());
 				bean.setLineOfCredit(data.getLineOfCredit());
 				bean.setLineOfResedueCredit(data.getLineOfResedueCredit());
 				bean.setLineOfUsedCredit(data.getLineOfUsedCredit());
-				
+
+				// 增加合计
+				prePay = CommonConvertTools.addDouble(prePay, data.getPrePay());
+				inPay = CommonConvertTools.addDouble(inPay, data.getInPay());
+				thirtyPayAmount = CommonConvertTools.addDouble(thirtyPayAmount, data.getThirtyPayAmount());
+				sixtyPayAmount = CommonConvertTools.addDouble(sixtyPayAmount, data.getSixtyPayAmount());
+				ninetyPayAmount = CommonConvertTools.addDouble(ninetyPayAmount, data.getNinetyPayAmount());
+				outerNinetyPayAmount = CommonConvertTools.addDouble(outerNinetyPayAmount,
+						data.getOuterNinetyPayAmount());
+
 				creditList.add(bean);
 			}
-			
+
 			final Set<CustomerCreditAnalysisForReportBean> set = new HashSet<CustomerCreditAnalysisForReportBean>();
 			set.addAll(creditList);
-			
+
 			creditList.clear();
 			creditList.addAll(set);
+			//增加合计
+			final CustomerBillAnalysisData totalData = new CustomerBillAnalysisData();
+			totalData.setOrderCode("Total");
+			totalData.setPrePay(prePay);
+			totalData.setInPay(inPay);
+			totalData.setThirtyPayAmount(thirtyPayAmount);
+			totalData.setSixtyPayAmount(sixtyPayAmount);
+			totalData.setNinetyPayAmount(ninetyPayAmount);
+			totalData.setOuterNinetyPayAmount(outerNinetyPayAmount);
+			
+			list.add(totalData);
 			
 		}
-		
-		model.addAttribute("list",list);
-		model.addAttribute("creditList",creditList);
-		model.addAttribute("startDate",startDate);
-		model.addAttribute("endDate",endDate);
+
+		model.addAttribute("list", list);
+		model.addAttribute("creditList", creditList);
+		model.addAttribute("startDate", startDate);
+		model.addAttribute("endDate", endDate);
 		return "pages/reports/customerBillAnalysis";
 
 	}

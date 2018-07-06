@@ -8,6 +8,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="nav" tagdir="/WEB-INF/tags/responsive/nav" %>
 <spring:htmlEscape defaultHtmlEscape="true" />
+<link rel="stylesheet" href="${commonResourcePath}/acerchem/easyui.css">  
+
 
 <template:javaScript/>
 <div class="title">product Sales Report</div>
@@ -20,7 +22,8 @@
 			<tr>
 				<td>
 					<label style="margin-left: 20px;">Month</label>
-					<input name="month" size="6" type="text" value="${month}" placeholder="eg:201806"/>
+					<input id="birth_year" class="easyui-datebox" name="month" type="text" value="${month}"  style="width: 100px;padding-left: 10px"/>
+					
 				</td>
 				<td>
 					<label style="margin-left: 20px;">Category</label>
@@ -72,4 +75,7 @@
   </table>
 </c:if>
 
+<script src="${commonResourcePath}/acerchem/jquery-1.8.3.min.js"></script>
+<script src="${commonResourcePath}/acerchem/jquery.easyui.min.js"></script>
+<script src="${commonResourcePath}/acerchem/yearmonth-easyui.js"></script>
 

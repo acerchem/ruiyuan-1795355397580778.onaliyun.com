@@ -32,6 +32,7 @@ import de.hybris.platform.core.model.order.OrderEntryModel;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.core.model.user.EmployeeModel;
 import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.order.DeliveryModeService;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
@@ -188,9 +189,17 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 				}
 
 			}
-			if (od.getOrder().getPlacedBy() != null) {
-				detail.setSalesman(od.getOrder().getPlacedBy().getName());
-			}
+			//商家业务员
+//			if (od.getOrder().getPlacedBy() != null) {
+//				detail.setSalesman(od.getOrder().getPlacedBy().getName());
+//			}
+			 final CustomerModel customer = (CustomerModel)od.getOrder().getUser();
+			 if(customer !=null){
+				final EmployeeModel emp = customer.getRelatedCustomer();
+				if(emp!=null){
+					detail.setSalesman(emp.getName());
+				}
+			 }
 			if (od.getProduct().getAcerChemVendor() != null) {
 				detail.setSupplier(od.getProduct().getAcerChemVendor().getName());
 			}
@@ -503,7 +512,9 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 					final AddressModel address = (AddressModel) item.get(2);
 					String areaCode="";
 					if(u!=null){
-						areaCode = u.getArea().getCode();
+						if(u.getArea()!=null){
+							areaCode = u.getArea().getCode();
+						}
 					}else{
 						LOG.debug(">>>>>>>>>>>>>>customerModel is null>>>>>>>>>>>>>>>>>>");
 					}
