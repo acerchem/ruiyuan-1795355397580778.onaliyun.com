@@ -320,17 +320,17 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 		if (CollectionUtils.isNotEmpty(list)) {
 			if (list.size() > 0) {
 				list.sort(compatatorForSales);
-				String pName = list.get(0).getProductName();
+				String pCode = list.get(0).getProductCode();
 				String customer = list.get(0).getBuyer();
 
 				long quantity = 0;
 				for (int i = 0; i < list.size(); i++) {
 					final AcerchemProductBuyerBean bean = list.get(i);
-					if (pName.equals(bean.getProductName()) && customer.equals(bean.getBuyer())) {
+					if (pCode.equals(bean.getProductCode()) && customer.equals(bean.getBuyer())) {
 						quantity += bean.getBuyQuantity().longValue();
 
 					} else {
-						pName = bean.getProductName();
+						pCode = bean.getProductCode();
 						customer = bean.getBuyer();
 
 						i--;
@@ -369,7 +369,12 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 		@Override
 		public int compare(final AcerchemProductBuyerBean o1, final AcerchemProductBuyerBean o2) {
 
-			return o1.getProductName().compareTo(o2.getProductName());
+			int n= o1.getProductCode().compareTo(o2.getProductCode());
+			if(n==0){
+				n = o1.getBuyer().compareTo(o2.getBuyer());
+			}
+			
+			return n;
 		}
 
 	};

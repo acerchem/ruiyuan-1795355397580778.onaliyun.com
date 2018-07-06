@@ -540,6 +540,11 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 			end = sdf.parse(endDate);
 		}
 
+		//对账单最后选择日期+1，保证当天选到
+		final Calendar cal = Calendar.getInstance();
+		cal.setTime(end);
+		cal.add(Calendar.DATE, 1);
+		end = cal.getTime();
 		final List<CustomerBillAnalysisData> list = acerchemOrderAnalysisService.getCustomerBillAnalysis(start, end);
 
 		final List<CustomerCreditAnalysisForReportBean> creditList = new ArrayList<CustomerCreditAnalysisForReportBean>();
