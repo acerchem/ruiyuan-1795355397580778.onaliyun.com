@@ -223,7 +223,7 @@
 						
 					</div>
 					
-					Minimum: ${product.minOrderQuantity} ${product.packageType}${product.minOrderQuantity>1?"s":""}
+					Minimum: ${product.minOrderQuantity} ${product.packageType} ${product.minOrderQuantity>1?"s":""}
 					<cms:pageSlot position="AddToCart" var="component" >
 						<cms:component component="${component}" />
 					</cms:pageSlot>
