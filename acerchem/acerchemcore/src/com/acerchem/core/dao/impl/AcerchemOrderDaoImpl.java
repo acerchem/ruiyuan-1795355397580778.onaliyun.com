@@ -142,8 +142,8 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 					: od.getOrder().getDeliveryMode().getCode();
 
 			if (deliveryCode.equals("DELIVERY_GROSS")) {// 配送 DELIVERY_GROSS)
-				if (od.getDeliveryAddress() != null) {
-					detail.setDeliveryAddress(addressConverter.convert(od.getDeliveryAddress()));
+				if (od.getOrder().getDeliveryAddress() != null) {
+					detail.setDeliveryAddress(addressConverter.convert(od.getOrder().getDeliveryAddress()));
 				}
 
 			} else {
@@ -498,7 +498,10 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 				if (item.get(1) != null) {
 					final CustomerModel u = (CustomerModel) item.get(1);
 					final AddressModel address = (AddressModel) item.get(2);
-					final String areaCode = u == null ? "" : u.getArea().getCode();
+					String areaCode="";
+					if(u!=null){
+						areaCode = u.getArea().getCode();
+					}
 
 					final CustomerSalesAnalysisData data = new CustomerSalesAnalysisData();
 					data.setArea(areaCode);
