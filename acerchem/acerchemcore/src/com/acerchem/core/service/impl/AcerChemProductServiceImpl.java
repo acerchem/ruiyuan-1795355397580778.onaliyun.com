@@ -369,7 +369,7 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 		@Override
 		public int compare(final AcerchemProductBuyerBean o1, final AcerchemProductBuyerBean o2) {
 
-			return o1.getProductCode().compareTo(o2.getProductCode());
+			return o1.getProductName().compareTo(o2.getProductName());
 		}
 
 	};

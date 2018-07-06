@@ -561,14 +561,26 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 				bean.setLineOfUsedCredit(data.getLineOfUsedCredit());
 
 				// 增加合计
+				if(data.getPrePay()!=null){
 				prePay = CommonConvertTools.addDouble(prePay, data.getPrePay());
+				}
+				if(data.getInPay()!=null){
 				inPay = CommonConvertTools.addDouble(inPay, data.getInPay());
+				}
+				if(data.getThirtyPayAmount() !=null){
 				thirtyPayAmount = CommonConvertTools.addDouble(thirtyPayAmount, data.getThirtyPayAmount());
+				}
+				if(data.getSixtyPayAmount()!=null){
 				sixtyPayAmount = CommonConvertTools.addDouble(sixtyPayAmount, data.getSixtyPayAmount());
+				}
+				if( data.getNinetyPayAmount()!=null){
 				ninetyPayAmount = CommonConvertTools.addDouble(ninetyPayAmount, data.getNinetyPayAmount());
+				}
+				if(data.getOuterNinetyPayAmount()!=null){
 				outerNinetyPayAmount = CommonConvertTools.addDouble(outerNinetyPayAmount,
 						data.getOuterNinetyPayAmount());
 
+				}
 				creditList.add(bean);
 			}
 

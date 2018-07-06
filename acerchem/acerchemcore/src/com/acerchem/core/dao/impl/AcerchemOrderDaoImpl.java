@@ -59,7 +59,6 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 	public List<OrderDetailsReportData> getOrderDetails(final String month, final String area, final String countryCode,
 			final String userName, final String orderCode, final Integer pageNumber) {
 
-		
 		final Integer pageSize = 100;
 
 		final Map<String, Object> params = new HashMap<String, Object>();
@@ -189,17 +188,17 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 				}
 
 			}
-			//商家业务员
-//			if (od.getOrder().getPlacedBy() != null) {
-//				detail.setSalesman(od.getOrder().getPlacedBy().getName());
-//			}
-			 final CustomerModel customer = (CustomerModel)od.getOrder().getUser();
-			 if(customer !=null){
+			// 商家业务员
+			// if (od.getOrder().getPlacedBy() != null) {
+			// detail.setSalesman(od.getOrder().getPlacedBy().getName());
+			// }
+			final CustomerModel customer = (CustomerModel) od.getOrder().getUser();
+			if (customer != null) {
 				final EmployeeModel emp = customer.getRelatedCustomer();
-				if(emp!=null){
+				if (emp != null) {
 					detail.setSalesman(emp.getName());
 				}
-			 }
+			}
 			if (od.getProduct().getAcerChemVendor() != null) {
 				detail.setSupplier(od.getProduct().getAcerChemVendor().getName());
 			}
@@ -510,12 +509,12 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 				if (item.get(1) != null) {
 					final CustomerModel u = (CustomerModel) item.get(1);
 					final AddressModel address = (AddressModel) item.get(2);
-					String areaCode="";
-					if(u!=null){
-						if(u.getArea()!=null){
+					String areaCode = "";
+					if (u != null) {
+						if (u.getArea() != null) {
 							areaCode = u.getArea().getCode();
 						}
-					}else{
+					} else {
 						LOG.debug(">>>>>>>>>>>>>>customerModel is null>>>>>>>>>>>>>>>>>>");
 					}
 
@@ -572,68 +571,70 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 				final CustomerBillAnalysisData data = new CustomerBillAnalysisData();
 
 				if (o.getUser() != null) {
-					data.setOrderCode(o.getCode());
-					data.setCustomerName(o.getUser().getName());
+					if (o.getUser() instanceof CustomerModel) {
+						data.setOrderCode(o.getCode());
+						data.setCustomerName(o.getUser().getName());
 
-					final CustomerModel customer = (CustomerModel) o.getUser();
-					if (customer.getRelatedCustomer() != null) {
-						data.setEmployeeName(customer.getRelatedCustomer().getName());
-					}
-					data.setPlaceTime(o.getCreationtime());
-					data.setFinishedTime(o.getOrderFinishedDate());
+						final CustomerModel customer = (CustomerModel) o.getUser();
+						if (customer.getRelatedCustomer() != null) {
+							data.setEmployeeName(customer.getRelatedCustomer().getName());
+						}
+						data.setPlaceTime(o.getCreationtime());
+						data.setFinishedTime(o.getOrderFinishedDate());
 
-					// 计算账期
-					int billDays = 0;
-					final CustomerCreditAccountModel creditAccount = customer.getCreditAccount();
-					if (creditAccount != null) {
-						billDays = creditAccount.getBillingInterval();
-						// 处理当下客户的信用额度
-						data.setLineOfCredit(creditAccount.getCreditTotalAmount().doubleValue());
-						data.setLineOfUsedCredit(
-								CommonConvertTools.subDouble(creditAccount.getCreditTotalAmount().doubleValue(),
-										creditAccount.getCreaditRemainedAmount().doubleValue()));
-						data.setLineOfResedueCredit(creditAccount.getCreaditRemainedAmount().doubleValue());
-					}
-
-					// 发票时间
-					final String deliveryCode = o.getDeliveryMode() == null ? "" : o.getDeliveryMode().getCode();
-					Date invoiceDate = deliveryCode.equals("DELIVERY_GROSS") ? o.getWaitDeliveiedDate()
-							: o.getPickUpDate();
-					if (invoiceDate == null) {
-						invoiceDate = currentTime;
-					}
-
-					// 计算金额
-					String paymode = "";
-					if (o.getPaymentMode() != null) {
-						paymode = o.getPaymentMode().getCode(); // InvoicePayment--->prepay
-
-					}
-					final String orderStatus = o.getStatus() == null ? "" : o.getStatus().getCode();// UNPAIED
-					if (paymode.equalsIgnoreCase("InvoicePayment") && orderStatus.equalsIgnoreCase("UNPAIED")) {
-
-						data.setPrePay(o.getTotalPrice());
-					} else {
-						// 计算账期内外
-						if (paymode.equalsIgnoreCase("CreditPayment")) {
-							final int remainDays = (int) (currentTime.getTime() - invoiceDate.getTime())
-									/ (1000 * 3600 * 24);
-							final int flag = remainDays - billDays;
-							if (flag < 0) {
-								data.setInPay(o.getTotalPrice());
-							} else if (flag > 0 && flag < 30) {
-								data.setThirtyPayAmount(o.getTotalPrice());
-							} else if (flag > 30 && flag < 60) {
-								data.setSixtyPayAmount(o.getTotalPrice());
-							} else if (flag > 60 && flag < 90) {
-								data.setNinetyPayAmount(o.getTotalPrice());
-							} else {
-								data.setOuterNinetyPayAmount(o.getTotalPrice());
-							}
+						// 计算账期
+						int billDays = 0;
+						final CustomerCreditAccountModel creditAccount = customer.getCreditAccount();
+						if (creditAccount != null) {
+							billDays = creditAccount.getBillingInterval();
+							// 处理当下客户的信用额度
+							data.setLineOfCredit(creditAccount.getCreditTotalAmount().doubleValue());
+							data.setLineOfUsedCredit(
+									CommonConvertTools.subDouble(creditAccount.getCreditTotalAmount().doubleValue(),
+											creditAccount.getCreaditRemainedAmount().doubleValue()));
+							data.setLineOfResedueCredit(creditAccount.getCreaditRemainedAmount().doubleValue());
 						}
 
+						// 发票时间
+						final String deliveryCode = o.getDeliveryMode() == null ? "" : o.getDeliveryMode().getCode();
+						Date invoiceDate = deliveryCode.equals("DELIVERY_GROSS") ? o.getWaitDeliveiedDate()
+								: o.getPickUpDate();
+						if (invoiceDate == null) {
+							invoiceDate = currentTime;
+						}
+
+						// 计算金额
+						String paymode = "";
+						if (o.getPaymentMode() != null) {
+							paymode = o.getPaymentMode().getCode(); // InvoicePayment--->prepay
+
+						}
+						final String orderStatus = o.getStatus() == null ? "" : o.getStatus().getCode();// UNPAIED
+						if (paymode.equalsIgnoreCase("InvoicePayment") && orderStatus.equalsIgnoreCase("UNPAIED")) {
+
+							data.setPrePay(o.getTotalPrice());
+						} else {
+							// 计算账期内外
+							if (paymode.equalsIgnoreCase("CreditPayment")) {
+								final int remainDays = (int) (currentTime.getTime() - invoiceDate.getTime())
+										/ (1000 * 3600 * 24);
+								final int flag = remainDays - billDays;
+								if (flag < 0) {
+									data.setInPay(o.getTotalPrice());
+								} else if (flag > 0 && flag < 30) {
+									data.setThirtyPayAmount(o.getTotalPrice());
+								} else if (flag > 30 && flag < 60) {
+									data.setSixtyPayAmount(o.getTotalPrice());
+								} else if (flag > 60 && flag < 90) {
+									data.setNinetyPayAmount(o.getTotalPrice());
+								} else {
+									data.setOuterNinetyPayAmount(o.getTotalPrice());
+								}
+							}
+
+						}
+						report.add(data);
 					}
-					report.add(data);
 				}
 			}
 
