@@ -15,6 +15,7 @@ import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 
 import com.acerchem.core.dao.AcerchemOrderDao;
 import com.acerchem.core.enums.CustomerArea;
@@ -42,6 +43,7 @@ import de.hybris.platform.storelocator.model.PointOfServiceModel;
 
 public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 
+	private static final Logger LOG = Logger.getLogger(AcerchemOrderDaoImpl.class);
 	@Resource
 	private FlexibleSearchService flexibleSearchService;
 	@Resource
@@ -56,6 +58,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 	public List<OrderDetailsReportData> getOrderDetails(final String month, final String area, final String countryCode,
 			final String userName, final String orderCode, final Integer pageNumber) {
 
+		
 		final Integer pageSize = 100;
 
 		final Map<String, Object> params = new HashMap<String, Object>();
@@ -501,6 +504,8 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 					String areaCode="";
 					if(u!=null){
 						areaCode = u.getArea().getCode();
+					}else{
+						LOG.debug(">>>>>>>>>>>>>>customerModel is null>>>>>>>>>>>>>>>>>>");
 					}
 
 					final CustomerSalesAnalysisData data = new CustomerSalesAnalysisData();
