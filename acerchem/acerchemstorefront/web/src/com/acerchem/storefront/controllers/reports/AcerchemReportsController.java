@@ -186,12 +186,35 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		if (searchCriteriaFrom.getPageNumber() == null || searchCriteriaFrom.getPageNumber() < 1) {
 			searchCriteriaFrom.setPageNumber(1);
 		}
+		
+		String curMonth = searchCriteriaFrom.getMonth();
+		if (StringUtils.isBlank(curMonth) || curMonth.length() != 7 || curMonth.indexOf("-")<0) {
+			
+			final Date d = new Date();
+			final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
+			curMonth = sdf.format(d);
+
+		}else{
+			curMonth = curMonth.replace("-","");
+		}
+		
 		final List<OrderDetailsReportData> searchPageData = acerchemOrderDao.getOrderDetails(
-				searchCriteriaFrom.getMonth(), searchCriteriaFrom.getArea(), searchCriteriaFrom.getCountryCode(),
+				curMonth, searchCriteriaFrom.getArea(), searchCriteriaFrom.getCountryCode(),
 				searchCriteriaFrom.getUserName(), searchCriteriaFrom.getOrderCode(),
 				searchCriteriaFrom.getPageNumber());
+		
+		
+		curMonth = curMonth.substring(0,4)+"-"+curMonth.substring(4);
+		
+		final SearchCriteriaFrom newForm = new SearchCriteriaFrom();
+		newForm.setArea(searchCriteriaFrom.getArea());
+		newForm.setCountryCode(searchCriteriaFrom.getCountryCode());
+		newForm.setMonth(curMonth);
+		newForm.setOrderCode(searchCriteriaFrom.getOrderCode());
+		newForm.setPageNumber(searchCriteriaFrom.getPageNumber());
+		
 		model.addAttribute("searchPageData", searchPageData);
-		model.addAttribute("searchCriteriaFrom", searchCriteriaFrom);
+		model.addAttribute("searchCriteriaFrom", newForm);
 
 		final int numberPagesShown = getSiteConfigService().getInt("pagination.number.results.count", 100);
 		model.addAttribute("numberPagesShown", Integer.valueOf(numberPagesShown));

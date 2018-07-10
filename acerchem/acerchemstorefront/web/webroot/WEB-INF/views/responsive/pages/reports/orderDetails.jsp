@@ -8,6 +8,8 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="nav" tagdir="/WEB-INF/tags/responsive/nav" %>
 <spring:htmlEscape defaultHtmlEscape="true" />
+<link rel="stylesheet" href="${commonResourcePath}/acerchem/easyui.css">  
+
 
 <template:javaScript/>
 <div class="title">Order Details Report</div>
@@ -20,34 +22,35 @@
 			<tr style="white-space:nowrap">
 				<td >
 					<label style="margin-left: 20px;">Month</label>
-					<input name="month" size="6" type="text" value="${month}" placeholder="eg:201806"/>
+					
+					<input id="birth_year" class="easyui-datebox" name="month" type="text" value="${searchCriteriaFrom.month}"  style="width: 100px;padding-left: 10px"/>
 				</td>
 				<td>
 					<label style="margin-left: 20px;">Customer Area</label>
-					<formElement:customSelectBox idKey="area" labelKey="" path="area" mandatory="true" skipBlank="false" skipBlankMessageKey="All" items="${areas}" itemValue="isocode" itemLabel="name" selectedValue="${area}"/>
+					<formElement:customSelectBox idKey="area" labelKey="" path="area" mandatory="true" skipBlank="false" skipBlankMessageKey="All" items="${areas}" itemValue="isocode" itemLabel="name" selectedValue="${searchCriteriaFrom.area}"/>
 				</td>
 				<td>
 					<label style="margin-left: 20px;">Country</label>
-					<formElement:customSelectBox idKey="countryIso" labelKey="" path="countryCode" mandatory="true" skipBlank="false" skipBlankMessageKey="All" items="${countries}" itemValue="isocode" itemLabel="name" selectedValue="${countryIso}"/>
+					<formElement:customSelectBox idKey="countryIso" labelKey="" path="countryCode" mandatory="true" skipBlank="false" skipBlankMessageKey="All" items="${countries}" itemValue="isocode" itemLabel="name" selectedValue="${searchCriteriaFrom.countryCode}"/>
 				</td>
 				<td>
 					<label style="margin-left: 20px;">Order Code</label>
-					<input name="orderCode" size="12" type="text" value="${orderCode}">
+					<input name="orderCode" size="12" type="text" value="${searchCriteriaFrom.orderCode}">
 				</td>
 				<td>
 					<label style="margin-left: 20px;">Customer Name</label>
-					<input name="userName" size="12" type="text" value="${userName}">
+					<input name="userName" size="12" type="text" value="${searchCriteriaFrom.userName}">
 				</td>
 				<td>
 					<label style="margin-left: 20px;">Page Number</label>
-					<input name="pageNumber" size="12" type="text" value="${pageNumber}">
+					<input name="pageNumber" size="12" type="text" value="${searchCriteriaFrom.pageNumber}">
 				</td>
 			</tr>
 	</table>
 </fieldset>
 
 <div class="btn-set">
-	<button type="submit">Show Report</button> <button type="reset">Reset</button>
+	<button type="submit">Show Report</button> 
 </div>
 
 <%-- <nav:pagination top="true" msgKey="text.account.supportTickets.page" showCurrentPageInfo="true" hideRefineButton="true" supportShowPaged="${isShowPageAllowed}" supportShowAll="${isShowAllAllowed}" searchPageData="${searchPageData}" searchUrl="/reports/orderDetails"  numberPagesShown="100"/>
@@ -131,4 +134,7 @@
   </table>
 </c:if>
 
+<script src="${commonResourcePath}/acerchem/jquery-1.8.3.min.js"></script>
+<script src="${commonResourcePath}/acerchem/jquery.easyui.min.js"></script>
+<script src="${commonResourcePath}/acerchem/yearmonth-easyui.js"></script>
 

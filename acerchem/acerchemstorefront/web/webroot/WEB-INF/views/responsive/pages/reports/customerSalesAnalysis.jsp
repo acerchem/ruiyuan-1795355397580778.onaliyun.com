@@ -37,7 +37,7 @@
 </fieldset>
 
 <div class="btn-set">
-	<button type="submit">Show Report</button> <button type="reset">Reset</button>
+	<button type="submit">Show Report</button> 
 </div>
 
 	

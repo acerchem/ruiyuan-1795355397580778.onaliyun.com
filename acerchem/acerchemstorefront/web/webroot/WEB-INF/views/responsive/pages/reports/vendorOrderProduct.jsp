@@ -41,7 +41,7 @@
 
 <div class="btn-set" >
     <br/>
-	<button type="submit">Show Report</button> <button type="reset">reset</button>
+	<button type="submit">Show Report</button> 
 </div>
 
 <%-- <nav:pagination top="true" msgKey="text.account.supportTickets.page" showCurrentPageInfo="true" hideRefineButton="true" supportShowPaged="${isShowPageAllowed}" supportShowAll="${isShowAllAllowed}" searchPageData="${searchPageData}" searchUrl="/reports/orderDetails"  numberPagesShown="100"/>
