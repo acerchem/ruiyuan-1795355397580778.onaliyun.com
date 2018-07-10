@@ -12,7 +12,7 @@
 
 
 <template:javaScript/>
-<div class="title">product Sales Report</div>
+<div class="title">Product Sales Report</div>
 <form:form method="post" commandName="productSalesForm" action="${action}">
 <fieldset>
 	<legend>
@@ -43,7 +43,7 @@
 </fieldset>
 
 <div class="btn-set">
-	<button type="submit">Show Report</button> <button type="reset">reset</button>
+	<button type="submit">Show Report</button> <button type="reset">Reset</button>
 </div>
 
 <%-- <nav:pagination top="true" msgKey="text.account.supportTickets.page" showCurrentPageInfo="true" hideRefineButton="true" supportShowPaged="${isShowPageAllowed}" supportShowAll="${isShowAllAllowed}" searchPageData="${searchPageData}" searchUrl="/reports/orderDetails"  numberPagesShown="100"/>

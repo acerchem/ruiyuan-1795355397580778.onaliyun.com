@@ -129,21 +129,21 @@ public class AcerChemProductDaoImpl implements AcerChemProductDao {
 	@Override
 	public List<AcerchemProductPriceBean> getProductWithBaserealPrice(final String month) {
 		if(StringUtils.isNotBlank(month)){
-		final String SQL = "select {oe.pk},{o.creationtime} from {OrderEntry as oe JOIN Order as o ON {oe.order}={o.pk} } "+
+		final String SQL = "select {oe.pk} from {OrderEntry as oe JOIN Order as o ON {oe.order}={o.pk} } "+
 		             "where DATE_FORMAT({o.creationtime},'%Y%m') =?month order by {o.creationtime}";
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(SQL);
 		
 		query.addQueryParameter("month", month);
-		query.setResultClassList(Arrays.asList(OrderEntryModel.class, Date.class));
-		final SearchResult<List<Object>> result = flexibleSearchService.search(query);
+		//query.setResultClassList(Arrays.asList(OrderEntryModel.class, Date.class));
+		final SearchResult<OrderEntryModel> result = flexibleSearchService.search(query);
 		
-		final List<List<Object>> list = result.getResult();
+		final List<OrderEntryModel> list = result.getResult();
 		
 		if (CollectionUtils.isNotEmpty(list)){
 			final List<AcerchemProductPriceBean> resultList = new ArrayList<>();
-			for(final List<Object> item : list){
-				final OrderEntryModel oe = (OrderEntryModel)item.get(0);
-				final Date placeOrderTime = (Date)item.get(1);
+			for(final OrderEntryModel oe : list){
+				
+				final Date placeOrderTime = oe.getOrder().getCreationtime();
 				final AcerchemProductPriceBean bean = new AcerchemProductPriceBean();
 				
 				bean.setProductCode(oe.getProduct().getCode());

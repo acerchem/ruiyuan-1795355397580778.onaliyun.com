@@ -621,11 +621,11 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 								final int flag = remainDays - billDays;
 								if (flag < 0) {
 									data.setInPay(o.getTotalPrice());
-								} else if (flag > 0 && flag < 30) {
+								} else if (flag >= 0 && flag < 30) {
 									data.setThirtyPayAmount(o.getTotalPrice());
-								} else if (flag > 30 && flag < 60) {
+								} else if (flag >= 30 && flag < 60) {
 									data.setSixtyPayAmount(o.getTotalPrice());
-								} else if (flag > 60 && flag < 90) {
+								} else if (flag >= 60 && flag <= 90) {
 									data.setNinetyPayAmount(o.getTotalPrice());
 								} else {
 									data.setOuterNinetyPayAmount(o.getTotalPrice());

@@ -52,8 +52,8 @@
         
       </tr>
       <tr>
-          <th>Prodcut code</th>
-		  <th>Product name</th>
+          <th>Prodcut Code</th>
+		  <th>Product Name</th>
 		  <th>Quantity</th>
 		   <th>1st Week</th>
 		   <th>2nd Week</th>
@@ -65,7 +65,7 @@
 		    <c:if test="${maxWeek ==6}">
 		   <th>6th Week</th>
 		    </c:if>
-		   <th>Average price</th>
+		   <th>Average Price</th>
           
       </tr>
       <c:forEach items="${list}" var="detail">

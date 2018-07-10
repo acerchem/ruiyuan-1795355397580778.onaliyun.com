@@ -3,13 +3,12 @@ package com.acerchem.core.service.impl;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.log4j.Logger;
 
 import com.acerchem.core.dao.AcerChemProductDao;
 import com.acerchem.core.dao.AcerChemVendorDao;
@@ -29,7 +28,7 @@ import de.hybris.platform.ordersplitting.model.VendorModel;
 import de.hybris.platform.product.ProductService;
 
 public class AcerChemProductServiceImpl implements AcerChemProductService {
-
+	private static final Logger LOG = Logger.getLogger(AcerChemProductServiceImpl.class);
 	@Resource
 	private AcerChemProductDao acerChemProductDao;
 	@Resource
@@ -113,169 +112,287 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 	@Override
 	public List<ProductPriceAnalysisData> getProductWithBaserealPrice(final String month) {
 		final List<AcerchemProductPriceBean> listWithWeek = acerChemProductDao.getProductWithBaserealPrice(month);
+		final List<ProductPriceAnalysisData> report = fillReport(listWithWeek);
+		// 通过weeknum 用map分组
+		// final Map<Integer, List<AcerchemProductPriceBean>> mapList = new
+		// HashMap<Integer, List<AcerchemProductPriceBean>>();
+		// if (CollectionUtils.isNotEmpty(listWithWeek)) {
+		// for (final AcerchemProductPriceBean bean : listWithWeek) {
+		// List<AcerchemProductPriceBean> tempList =
+		// mapList.get(bean.getWeeknum());
+		// if (tempList == null) {
+		// tempList = new ArrayList<>();
+		// tempList.add(bean);
+		// mapList.put(bean.getWeeknum(), tempList);
+		// } else {
+		// tempList.add(bean);
+		// }
+		// }
+		//
+		// //遍历分组，进行排序，并合并同productcode项
+		// final Map<Integer, List<AcerchemProductPriceBean>> mapcompList = new
+		// HashMap<Integer, List<AcerchemProductPriceBean>>();
+		// for(final int weekNum : mapList.keySet()){
+		// final List<AcerchemProductPriceBean> tempList = mapList.get(weekNum);
+		//
+		// tempList.sort(compatatorbyCodeWeek);
+		// //合并
+		// final List<AcerchemProductPriceBean> list = new ArrayList<>();
+		// String code = tempList.get(0).getProductCode();
+		//
+		// int count = 0;
+		// long quanlity = 0;
+		// double price = 0;
+		//
+		// for (int i = 0; i < tempList.size(); i++) {
+		// AcerchemProductPriceBean bean = tempList.get(i);
+		// if (code.equals(bean.getProductCode())) {
+		// count++;
+		// quanlity += bean.getSaleQuantity();
+		// price = CommonConvertTools.addDouble(price,
+		// bean.getBaseRealPrice()).doubleValue();
+		// }else{
+		// code = bean.getProductCode();
+		//
+		// i--;
+		// bean = tempList.get(i);
+		// bean.setBaseRealPrice(Double.valueOf(price / count));
+		// bean.setSaleQuantity(quanlity);
+		// list.add(bean);
+		//
+		// count = 0;
+		// quanlity = 0;
+		// price = 0;
+		// }
+		// }
+		// //处理tmplist最后项
+		// final AcerchemProductPriceBean last =
+		// tempList.get(tempList.size()-1);
+		//
+		// last.setBaseRealPrice(Double.valueOf(price / count));
+		// last.setSaleQuantity(quanlity);
+		// list.add(last);
+		//
+		// mapcompList.put(weekNum, list);
+		// }
+		//
+		// final List<AcerchemProductPriceBean> comboList = new ArrayList<>();
+		// for(final int weekNum : mapcompList.keySet()){
+		// final List<AcerchemProductPriceBean> tempList = mapList.get(weekNum);
+		// comboList.addAll(tempList);
+		// }
 
+		// 填充最后报表
+		// report = fillReport(comboList);
+		// }
+		// if (CollectionUtils.isNotEmpty(listWithWeek)) {
+		// if (listWithWeek.size() > 0) {
+		// // 按code和weeknum组合计算
+		// listWithWeek.sort(compatatorbyWeekCode);
+		// String code = listWithWeek.get(0).getProductCode();
+		// int week = listWithWeek.get(0).getWeeknum();
+		//
+		// int count = 0;
+		// long quanlity = 0;
+		// double price = 0;
+		// final List<AcerchemProductPriceBean> comboList = new ArrayList<>();
+		// // CommonConvertTools
+		//
+		// for (int i = 0; i < listWithWeek.size(); i++) {
+		//
+		// final AcerchemProductPriceBean bean = listWithWeek.get(i);
+		//
+		// LOG.debug(">>>>>" + bean.getProductCode() + "-" + bean.getWeeknum() +
+		// ">>>>>>>>>>>");
+		// if (week == bean.getWeeknum() && code.equals(bean.getProductCode()))
+		// {
+		// count++;
+		// quanlity += bean.getSaleQuantity().longValue();
+		// price = CommonConvertTools.addDouble(price,
+		// bean.getBaseRealPrice()).doubleValue();
+		//
+		// } else {
+		// code = bean.getProductCode();
+		// week = bean.getWeeknum();
+		//
+		// i--;
+		// final AcerchemProductPriceBean pre = listWithWeek.get(i);
+		// final AcerchemProductPriceBean combo = new
+		// AcerchemProductPriceBean();
+		//
+		// combo.setProductCode(pre.getProductCode());
+		// combo.setProductName(pre.getProductName());
+		// combo.setWeeknum(pre.getWeeknum());
+		//
+		// combo.setBaseRealPrice(Double.valueOf(price / count));
+		// combo.setSaleQuantity(Long.valueOf(quanlity));
+		// comboList.add(combo);
+		//
+		// count = 0;
+		// quanlity = 0;
+		// price = 0;
+		//
+		// }
+		// }
+		// // 处理最后组合
+		//
+		// final AcerchemProductPriceBean last =
+		// listWithWeek.get(listWithWeek.size() - 1);
+		//
+		// final AcerchemProductPriceBean combolast = new
+		// AcerchemProductPriceBean();
+		//
+		// combolast.setProductCode(last.getProductCode());
+		// combolast.setProductName(last.getProductName());
+		// combolast.setWeeknum(last.getWeeknum());
+		//
+		// combolast.setBaseRealPrice(Double.valueOf(price / count));
+		// combolast.setSaleQuantity(Long.valueOf(quanlity));
+		// comboList.add(combolast);
+		//
+		//
+		//
+		//
+		// }
+		// }
+		return report;
+	}
+
+	private List<ProductPriceAnalysisData> fillReport(final List<AcerchemProductPriceBean> list) {
 		final List<ProductPriceAnalysisData> report = new ArrayList<>();
-		
-		//通过map分组 week
-		final Map<Integer,List<AcerchemProductPriceBean>> map = new HashMap<Integer,List<AcerchemProductPriceBean>>();
-		
-		
-		
-		if (CollectionUtils.isNotEmpty(listWithWeek)) {
-			if (listWithWeek.size() > 0) {
-				// 按code和weeknum组合计算
-				listWithWeek.sort(compatatorbyWeekCode);
-				String code = listWithWeek.get(0).getProductCode();
-				int week = listWithWeek.get(0).getWeeknum();
-				
-				int count = 0;
-				long quanlity = 0;
-				double price = 0;
-				final List<AcerchemProductPriceBean> comboList = new ArrayList<>();
-				// CommonConvertTools
+		if (CollectionUtils.isNotEmpty(list) && list.size() > 0) {
 
-				for (int i = 0; i < listWithWeek.size(); i++) {
-					final AcerchemProductPriceBean bean = listWithWeek.get(i);
-					if (week == bean.getWeeknum() && code.equals(bean.getProductCode())) {
-						count++;
-						quanlity += bean.getSaleQuantity().longValue();
-						price = CommonConvertTools.addDouble(price, bean.getBaseRealPrice()).doubleValue();
+			list.sort(compatatorbyCodeWeek);
+			String codeReport = list.get(0).getProductCode();
+			long sumQuantity = 0;
+			double one = 0;
+			double two = 0;
+			double three = 0;
+			double four = 0;
+			double five = 0;
+			double six = 0;
+			int xcount = 0;
+			int n1 = 0;
+			int n2 = 0;
+			int n3 = 0;
+			int n4 = 0;
+			int n5 = 0;
+			int n6 = 0;
+
+			// final double xprice=0;
+			for (int i = 0; i < list.size(); i++) {
+				final AcerchemProductPriceBean bean = list.get(i);
+				if (codeReport.equals(bean.getProductCode())) {
+					sumQuantity += bean.getSaleQuantity();
+					if (bean.getWeeknum() == 1) {
+
+						one += bean.getBaseRealPrice();
+						n1++;
+					} else if (bean.getWeeknum() == 2) {
+						two += bean.getBaseRealPrice();
+						n2++;
+					} else if (bean.getWeeknum() == 3) {
+
+						three += bean.getBaseRealPrice();
+						n3++;
+					} else if (bean.getWeeknum() == 4) {
+
+						four += bean.getBaseRealPrice();
+						n4++;
+					} else if (bean.getWeeknum() == 5) {
+
+						five += bean.getBaseRealPrice();
+						n5++;
 
 					} else {
-						code = bean.getProductCode();
-						week = bean.getWeeknum();
 
-						i--;
-						final AcerchemProductPriceBean pre = listWithWeek.get(i);
-						final AcerchemProductPriceBean combo = new AcerchemProductPriceBean();
-
-						combo.setProductCode(pre.getProductCode());
-						combo.setProductName(pre.getProductName());
-						combo.setWeeknum(pre.getWeeknum());
-
-						combo.setBaseRealPrice(Double.valueOf(price / count));
-						combo.setSaleQuantity(Long.valueOf(quanlity));
-						comboList.add(combo);
-
-						count = 0;
-						quanlity = 0;
-						price = 0;
-
+						six += bean.getBaseRealPrice();
+						n6++;
 					}
-				}
-				// 处理最后组合
+					xcount++;
+				} else {
+					codeReport = bean.getProductCode();
 
-				final AcerchemProductPriceBean last = listWithWeek.get(listWithWeek.size()-1);
+					i--;
+					final AcerchemProductPriceBean pre = list.get(i);
+					final ProductPriceAnalysisData item = new ProductPriceAnalysisData();
+					item.setProductCode(pre.getProductCode());
+					item.setProductName(pre.getProductName());
+					item.setSalesQuantity(sumQuantity);
+					item.setMaxWeek(xcount);
 
-				final AcerchemProductPriceBean combolast = new AcerchemProductPriceBean();
-
-				combolast.setProductCode(last.getProductCode());
-				combolast.setProductName(last.getProductName());
-				combolast.setWeeknum(last.getWeeknum());
-
-				combolast.setBaseRealPrice(Double.valueOf(price / count));
-				combolast.setSaleQuantity(Long.valueOf(quanlity));
-				comboList.add(combolast);
-
-				// 填充最后报表
-				comboList.sort(compatatorbyCodeWeek);
-				String codeReport = comboList.get(0).getProductCode();
-				long sumQuantity = 0;
-				double one = 0;
-				double two = 0;
-				double three = 0;
-				double four = 0;
-				double five = 0;
-				double six = 0;
-				int xcount = 0;
-				// final double xprice=0;
-				for (int i = 0; i < comboList.size(); i++) {
-					final AcerchemProductPriceBean bean = comboList.get(i);
-					if (codeReport.equals(bean.getProductCode())) {
-						sumQuantity += bean.getSaleQuantity().longValue();
-						if (bean.getWeeknum() == 1) {
-							xcount++;
-							one += bean.getBaseRealPrice();
-						} else if (bean.getWeeknum() == 2) {
-							xcount++;
-							two += bean.getBaseRealPrice();
-						} else if (bean.getWeeknum() == 3) {
-							xcount++;
-							three += bean.getBaseRealPrice();
-						} else if (bean.getWeeknum() == 4) {
-							xcount++;
-							four += bean.getBaseRealPrice();
-						} else if (bean.getWeeknum() == 5) {
-							xcount++;
-							five += bean.getBaseRealPrice();
-
-						} else {
-							xcount++;
-							six += bean.getBaseRealPrice();
-						}
-
-					} else {
-						codeReport = bean.getProductCode();
-
-						i--;
-						final AcerchemProductPriceBean pre = listWithWeek.get(i);
-						final ProductPriceAnalysisData item = new ProductPriceAnalysisData();
-						item.setProductCode(pre.getProductCode());
-						item.setProductName(pre.getProductName());
-						item.setSalesQuantity(Long.valueOf(sumQuantity));
-						item.setMaxWeek(xcount);
-						final double sumprice = CommonConvertTools
-								.addDouble(
-										CommonConvertTools.addDouble(CommonConvertTools.addDouble(CommonConvertTools
-												.addDouble(CommonConvertTools.addDouble(one, two), three), four), five),
-										six);
+					one = one > 0 ? one / n1 : 0;
+					two = two > 0 ? two / n2 : 0;
+					three = three > 0 ? three / n3 : 0;
+					four = four > 0 ? four / n4 : 0;
+					five = five > 0 ? five / n5 : 0;
+					six = six > 0 ? six / n6 : 0;
+					final double sumprice = CommonConvertTools.addDouble(CommonConvertTools.addDouble(
+							CommonConvertTools.addDouble(
+									CommonConvertTools.addDouble(CommonConvertTools.addDouble(one, two), three), four),
+							five), six);
+					if (sumprice > 0) {
 						item.setAveragePrice(sumprice / xcount);
-
-						item.setFirstWeekPrice(one);
-						item.setSecondWeekPrice(two);
-						item.setThirdWeekPrice(three);
-						item.setFouthWeekPrice(four);
-						item.setFifthWeekPrice(five);
-						item.setSixthWeekPrice(six);
-
-						report.add(item);
-
-						sumQuantity = 0;
-						one = 0;
-						two = 0;
-						three = 0;
-						four = 0;
-						five = 0;
-						six = 0;
-						xcount = 0;
 					}
+					item.setFirstWeekPrice(one);
+					item.setSecondWeekPrice(two);
+					item.setThirdWeekPrice(three);
+					item.setFouthWeekPrice(four);
+					item.setFifthWeekPrice(five);
+					item.setSixthWeekPrice(six);
+
+					report.add(item);
+
+					sumQuantity = 0;
+					one = 0;
+					two = 0;
+					three = 0;
+					four = 0;
+					five = 0;
+					six = 0;
+					xcount = 0;
+					n1 = 0;
+					n2 = 0;
+					n3 = 0;
+					n4 = 0;
+					n5 = 0;
+					n6 = 0;
 				}
-
-				// 处理最后项
-				final AcerchemProductPriceBean lastReport = listWithWeek.get(listWithWeek.size()-1);
-				final ProductPriceAnalysisData item = new ProductPriceAnalysisData();
-
-				item.setProductCode(lastReport.getProductCode());
-				item.setProductName(lastReport.getProductName());
-				item.setSalesQuantity(Long.valueOf(sumQuantity));
-				item.setMaxWeek(xcount);
-				final double sumprice = CommonConvertTools.addDouble(CommonConvertTools.addDouble(
-						CommonConvertTools.addDouble(
-								CommonConvertTools.addDouble(CommonConvertTools.addDouble(one, two), three), four),
-						five), six);
-				item.setAveragePrice(sumprice / xcount);
-
-				item.setFirstWeekPrice(one);
-				item.setSecondWeekPrice(two);
-				item.setThirdWeekPrice(three);
-				item.setFouthWeekPrice(four);
-				item.setFifthWeekPrice(five);
-				item.setSixthWeekPrice(six);
-
-				report.add(item);
-
 			}
+
+			// 处理最后项
+			final AcerchemProductPriceBean lastReport = list.get(list.size() - 1);
+			final ProductPriceAnalysisData item = new ProductPriceAnalysisData();
+
+			item.setProductCode(lastReport.getProductCode());
+			item.setProductName(lastReport.getProductName());
+			item.setSalesQuantity(Long.valueOf(sumQuantity));
+			item.setMaxWeek(xcount);
+
+			one = one > 0 ? one / n1 : 0;
+			two = two > 0 ? two / n2 : 0;
+			three = three > 0 ? three / n3 : 0;
+			four = four > 0 ? four / n4 : 0;
+			five = five > 0 ? five / n5 : 0;
+			six = six > 0 ? six / n6 : 0;
+			final double sumprice = CommonConvertTools
+					.addDouble(CommonConvertTools.addDouble(
+							CommonConvertTools.addDouble(
+									CommonConvertTools.addDouble(CommonConvertTools.addDouble(one, two), three), four),
+							five), six);
+			item.setAveragePrice(sumprice / xcount);
+
+			item.setFirstWeekPrice(one);
+			item.setSecondWeekPrice(two);
+			item.setThirdWeekPrice(three);
+			item.setFouthWeekPrice(four);
+			item.setFifthWeekPrice(five);
+			item.setSixthWeekPrice(six);
+
+			report.add(item);
+
 		}
+
 		return report;
 	}
 
@@ -285,7 +402,7 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 		public int compare(final AcerchemProductPriceBean o1, final AcerchemProductPriceBean o2) {
 			// TODO Auto-generated method stub
 			int n = o1.getWeeknum() - o2.getWeeknum();
-			if (n==0 ) {
+			if (n == 0) {
 				n = o1.getProductCode().compareTo(o2.getProductCode());
 			}
 
@@ -299,9 +416,9 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 		@Override
 		public int compare(final AcerchemProductPriceBean o1, final AcerchemProductPriceBean o2) {
 			// TODO Auto-generated method stub
-			int n = o1.getProductCode().compareTo(o2.getProductCode());
+			int n = o1.getProductCode().trim().compareTo(o2.getProductCode().trim());
 
-			if (n==0) {
+			if (n == 0) {
 				n = o1.getWeeknum() - o2.getWeeknum();
 			}
 
@@ -348,7 +465,7 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 
 				}
 				// 处理最后
-				final AcerchemProductBuyerBean last = list.get(list.size()-1);
+				final AcerchemProductBuyerBean last = list.get(list.size() - 1);
 				final ProductSalesRecordData item = new ProductSalesRecordData();
 
 				item.setProductCode(last.getProductCode());
@@ -369,11 +486,11 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 		@Override
 		public int compare(final AcerchemProductBuyerBean o1, final AcerchemProductBuyerBean o2) {
 
-			int n= o1.getProductCode().compareTo(o2.getProductCode());
-			if(n==0){
+			int n = o1.getProductCode().compareTo(o2.getProductCode());
+			if (n == 0) {
 				n = o1.getBuyer().compareTo(o2.getBuyer());
 			}
-			
+
 			return n;
 		}
 
