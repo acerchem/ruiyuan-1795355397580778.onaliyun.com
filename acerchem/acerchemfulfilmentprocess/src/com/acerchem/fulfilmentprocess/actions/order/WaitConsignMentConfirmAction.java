@@ -10,12 +10,15 @@
  */
 package com.acerchem.fulfilmentprocess.actions.order;
 
+import java.util.Calendar;
+import java.util.Date;
+
+import org.apache.log4j.Logger;
+
 import de.hybris.platform.core.enums.OrderStatus;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 import de.hybris.platform.processengine.action.AbstractSimpleDecisionAction;
-
-import org.apache.log4j.Logger;
 
 
 /**
@@ -28,7 +31,7 @@ import org.apache.log4j.Logger;
 public class WaitConsignMentConfirmAction extends AbstractSimpleDecisionAction<OrderProcessModel>
 {
 	private static final Logger LOG = Logger.getLogger(WaitConsignMentConfirmAction.class);
-
+	
 
 	@Override
 	public Transition executeAction(final OrderProcessModel process)
@@ -43,12 +46,18 @@ public class WaitConsignMentConfirmAction extends AbstractSimpleDecisionAction<O
 
 		if (order.getEmployeeConfirmDelivery() || order.getCustomerConfirmDelivery())
 		{
+			
 			if (order.getPaymentMode().getCode().equals("CreditPayment"))
 			{
 				setOrderStatus(order, OrderStatus.UNPAIED);
 			}else{
 				setOrderStatus(order, OrderStatus.COMPLETED);
 			}
+			
+			
+			order.setOrderFinishedDate(getCurrentTime());
+			getModelService().save(order);
+			
 			return Transition.OK;
 		}
 		else
@@ -56,6 +65,11 @@ public class WaitConsignMentConfirmAction extends AbstractSimpleDecisionAction<O
 			//setOrderStatus(order, OrderStatus.UNCONFIRMDELIVERY);
 			return Transition.NOK;
 		}
+	}
+	
+	private Date getCurrentTime(){
+		final Calendar cal = Calendar.getInstance();
+		return cal.getTime();
 	}
 
 }
