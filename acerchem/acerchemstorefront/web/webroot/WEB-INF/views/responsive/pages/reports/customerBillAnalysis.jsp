@@ -90,8 +90,8 @@
 		          <td>${detail.orderCode}</td>
 				  <td>${detail.customerName}</td>
 				  <td>${detail.employeeName}</td>
-		          <td><fmt:formatDate value="${detail.placeTime}"  timeStyle="short" type="date"/></td>
-		           <td><fmt:formatDate value="${detail.finishedTime}"  timeStyle="short" type="date"/></td>
+		          <td><fmt:formatDate value="${detail.placeTime}"  timeStyle="short" type="both"/></td>
+		           <td><fmt:formatDate value="${detail.finishedTime}"  timeStyle="short" type="both"/></td>
 			    </c:if>
 			   <td>
 	          	<fmt:formatNumber type="number" value="${detail.prePay}" pattern="#.00"/>
