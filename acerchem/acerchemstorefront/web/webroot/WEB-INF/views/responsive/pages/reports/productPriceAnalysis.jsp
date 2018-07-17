@@ -9,10 +9,16 @@
 <%@ taglib prefix="nav" tagdir="/WEB-INF/tags/responsive/nav" %>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <link rel="stylesheet" href="${commonResourcePath}/acerchem/easyui.css">  
+<link rel="stylesheet"
+	href="${commonResourcePath}/acerchem/bootstrap.min.css">
+<link rel="stylesheet"
+	href="${commonResourcePath}/acerchem/bootstrap-table.css">
+
 
 <template:javaScript/>
-
-<div class="title">Product Price Analysis Report</div>
+<div class="container">
+<div class="title"><h2>Product Price Analysis Report</h2></div>
+<hr />
 <form:form method="post" action="${action}">
 <fieldset>
 	<legend>
@@ -30,7 +36,7 @@
 			</tr>
 	</table>
 </fieldset>
-
+<hr />
 <div class="btn-set">
 	<button type="submit">Show Report</button> 
 </div>
@@ -42,7 +48,13 @@
 	No Product Price Analysis Found
 </c:if>
 <c:if test="${not empty list}">
-  <table border="1" cellspacing="0" cellpadding="5">
+<div class="fixed-table-container">
+  
+ <div id="toolbar">
+			<h4>${month}</h4>
+		</div>
+  <table id="table_page">
+  <!-- 
       <tr>
           <th>&nbsp;</th>
 		  <th>&nbsp;</th>
@@ -68,6 +80,7 @@
 		   <th>Average Price</th>
           
       </tr>
+       -->
       <c:forEach items="${list}" var="detail">
       	  <tr>
 	          <td>${detail.productCode}</td>
@@ -77,12 +90,25 @@
 			  <td><fmt:formatNumber type="number" value="${detail.secondWeekPrice}" pattern="#.00"/> </td>
 			  <td><fmt:formatNumber type="number" value="${detail.thirdWeekPrice}" pattern="#.00"/> </td>
 			  <td><fmt:formatNumber type="number" value="${detail.fouthWeekPrice}" pattern="#.00"/> </td>
-			  <c:if test="${maxWeek >=5}">
+			
+			 	<c:choose>
+			 	<c:when test="${maxWeek >=5}">
 			  <td><fmt:formatNumber type="number" value="${detail.fifthWeekPrice}" pattern="#.00"/> </td>
-			   </c:if>
-			    <c:if test="${maxWeek ==6}">
+			  </c:when>
+			  <c:otherwise>
+			  <td> </td>
+			  </c:otherwise>
+			  </c:choose>
+			
+			    <c:choose>
+			 	<c:when test="${maxWeek ==6}">
 			  <td><fmt:formatNumber type="number" value="${detail.sixthWeekPrice}" pattern="#.00"/> </td>
-			    </c:if>
+			  
+			    </c:when>
+			    <c:otherwise>
+			    <td> </td>
+			    </c:otherwise>
+			    </c:choose>
 			  <td><fmt:formatNumber type="number" value="${detail.averagePrice}" pattern="#.00"/> </td>
 			 
 			  
@@ -90,8 +116,19 @@
 	      </tr>
       </c:forEach>
   </table>
+  </div>
 </c:if>
-
-<script src="${commonResourcePath}/acerchem/jquery-1.8.3.min.js"></script>
+</div>
+<script src="${commonResourcePath}/acerchem/jquery-1.9.1.min.js"></script>
+<script src="${commonResourcePath}/acerchem/jquery.base64.js"></script>
 <script src="${commonResourcePath}/acerchem/jquery.easyui.min.js"></script>
 <script src="${commonResourcePath}/acerchem/yearmonth-easyui.js"></script>
+
+<script src="${commonResourcePath}/acerchem/bootstrap.min.js"></script>
+<script src="${commonResourcePath}/acerchem/bootstrap-table.min.js"></script>
+<script src="${commonResourcePath}/acerchem/tableExport.min.js"></script>
+<script
+	src="${commonResourcePath}/acerchem/bootstrap-table-export.min.js"></script>
+<script
+	src="${commonResourcePath}/acerchem/productPriceAnalysis.js"></script>
+

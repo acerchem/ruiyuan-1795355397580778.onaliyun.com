@@ -9,10 +9,17 @@
 <%@ taglib prefix="nav" tagdir="/WEB-INF/tags/responsive/nav" %>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <link rel="stylesheet" href="${commonResourcePath}/acerchem/easyui.css">  
+<link rel="stylesheet"
+	href="${commonResourcePath}/acerchem/bootstrap.min.css">
+<link rel="stylesheet"
+	href="${commonResourcePath}/acerchem/bootstrap-table.css">
+
 
 
 <template:javaScript/>
-<div class="title">Product Sales Report</div>
+<div class="container">
+<div class="title"><h2>Product Sales Report</h2></div>
+<hr />
 <form:form method="post" commandName="productSalesForm" action="${action}">
 <fieldset>
 	<legend>
@@ -41,7 +48,7 @@
 			</tr>
 	</table>
 </fieldset>
-
+<hr />
 <div class="btn-set">
 	<button type="submit">Show Report</button> 
 </div>
@@ -53,7 +60,9 @@
 	No product Sales Found
 </c:if>
 <c:if test="${not empty list}">
-  <table border="1" cellspacing="0" cellpadding="5">
+<div class="fixed-table-container">
+  <table id="table_page">
+  <!-- 
       <tr>
           <th>Product Code</th>
           <th>Product Name</th>
@@ -61,7 +70,7 @@
           <th>Quantity</th>
           
       </tr>
-      
+       -->
       <c:forEach items="${list}" var="orderDetail">
       	  <tr>
 	          <td>${orderDetail.productCode}</td>
@@ -73,9 +82,20 @@
 	      </tr>
       </c:forEach>
   </table>
+  </div>
 </c:if>
-
-<script src="${commonResourcePath}/acerchem/jquery-1.8.3.min.js"></script>
+</div>
+<script src="${commonResourcePath}/acerchem/jquery-1.9.1.min.js"></script>
+<script src="${commonResourcePath}/acerchem/jquery.base64.js"></script>
 <script src="${commonResourcePath}/acerchem/jquery.easyui.min.js"></script>
 <script src="${commonResourcePath}/acerchem/yearmonth-easyui.js"></script>
+
+<script src="${commonResourcePath}/acerchem/bootstrap.min.js"></script>
+<script src="${commonResourcePath}/acerchem/bootstrap-table.min.js"></script>
+<script src="${commonResourcePath}/acerchem/tableExport.min.js"></script>
+<script
+	src="${commonResourcePath}/acerchem/bootstrap-table-export.min.js"></script>
+<script
+	src="${commonResourcePath}/acerchem/productSalesRecord.js"></script>
+
 

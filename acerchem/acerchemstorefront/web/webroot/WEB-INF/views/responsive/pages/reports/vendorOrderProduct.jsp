@@ -9,9 +9,16 @@
 <%@ taglib prefix="nav" tagdir="/WEB-INF/tags/responsive/nav" %>
 <spring:htmlEscape defaultHtmlEscape="true" />
 <link rel="stylesheet" href="${commonResourcePath}/acerchem/jquery-calendar.css">  
-
+<link rel="stylesheet"
+	href="${commonResourcePath}/acerchem/bootstrap.min.css">
+<link rel="stylesheet"
+	href="${commonResourcePath}/acerchem/bootstrap-table.css">
+	
 <template:javaScript/>
-<div class="title">VendorOrder Report</div>
+
+<div class="container">
+<div class="title"><h2>VendorOrder Report</h2></div>
+<hr />
 <form:form method="post"  action="${action}">
 
 
@@ -38,7 +45,7 @@
 			</tr>
 	</table>
 </fieldset>
-
+<hr />
 <div class="btn-set" >
     <br/>
 	<button type="submit">Show Report</button> 
@@ -52,7 +59,9 @@
 	No Vendor Order Analysis Found
 </c:if>
 <c:if test="${not empty list}">
-  <table border="1" cellspacing="0" cellpadding="5">
+<div class="fixed-table-container">
+  <table id="table_page">
+  <!-- 
       <tr>
           <th>Order Code</th>
           <th>place Time</th>
@@ -62,7 +71,7 @@
           <th>vendor</th>
         
       </tr>
-      
+       -->
       <c:forEach items="${list}" var="detail">
       	  <tr>
 	          <td>${detail.orderCode}</td>
@@ -75,10 +84,21 @@
 	      </tr>
       </c:forEach>
   </table>
+  </div>
 </c:if>
 
+</div>
 
-
-<script src="${commonResourcePath}/acerchem/jquery.js"></script>
+<script src="${commonResourcePath}/acerchem/jquery-1.9.1.min.js"></script>
+<script src="${commonResourcePath}/acerchem/jquery.base64.js"></script>
 <script src="${commonResourcePath}/acerchem/jquery-1.8.3.min.js"></script>
 <script src="${commonResourcePath}/acerchem/jquery-calendar.js"></script>
+
+<script src="${commonResourcePath}/acerchem/bootstrap.min.js"></script>
+<script src="${commonResourcePath}/acerchem/bootstrap-table.min.js"></script>
+<script src="${commonResourcePath}/acerchem/tableExport.min.js"></script>
+<script
+	src="${commonResourcePath}/acerchem/bootstrap-table-export.min.js"></script>
+<script
+	src="${commonResourcePath}/acerchem/vendorOrderProduct.js"></script>
+

@@ -8,9 +8,15 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="nav" tagdir="/WEB-INF/tags/responsive/nav" %>
 <spring:htmlEscape defaultHtmlEscape="true" />
+<link rel="stylesheet"
+	href="${commonResourcePath}/acerchem/bootstrap.min.css">
+<link rel="stylesheet"
+	href="${commonResourcePath}/acerchem/bootstrap-table.css">
 
 <template:javaScript/>
-<div class="title">Customer Sales Analysis Report</div>
+<div class="container">
+<div class="title"><h2>Customer Sales Analysis Report</h2></div>
+<hr />
 <form:form method="post" commandName="customerSalesAnalysisForm" action="${action}">
 <fieldset>
 	<legend>
@@ -35,7 +41,7 @@
 			</tr>
 	</table>
 </fieldset>
-
+<hr/>
 <div class="btn-set">
 	<button type="submit">Show Report</button> 
 </div>
@@ -46,7 +52,10 @@
 	No Customer Sales Analysis Found
 </c:if>
 <c:if test="${not empty list}">
-  <table border="1" cellspacing="0" cellpadding="5">
+<div class="fixed-table-container">
+
+  <table id="table_page">
+   <!-- 
       <tr>
           <th>Area</th>
 		  <th>Country</th>
@@ -54,7 +63,7 @@
           <th>OrderAmount</th>
           
       </tr>
-      
+       -->
       <c:forEach items="${list}" var="orderDetail">
       	  <tr>
 			  <td>${orderDetail.area}</td>
@@ -67,6 +76,15 @@
 	      </tr>
       </c:forEach>
   </table>
+  </div>
 </c:if>
-
-
+</div>
+<script src="${commonResourcePath}/acerchem/jquery-1.9.1.min.js"></script>
+<script src="${commonResourcePath}/acerchem/jquery.base64.js"></script>
+<script src="${commonResourcePath}/acerchem/bootstrap.min.js"></script>
+<script src="${commonResourcePath}/acerchem/bootstrap-table.min.js"></script>
+<script src="${commonResourcePath}/acerchem/tableExport.min.js"></script>
+<script
+	src="${commonResourcePath}/acerchem/bootstrap-table-export.min.js"></script>
+<script
+	src="${commonResourcePath}/acerchem/customerSalesAnalysis.js"></script>

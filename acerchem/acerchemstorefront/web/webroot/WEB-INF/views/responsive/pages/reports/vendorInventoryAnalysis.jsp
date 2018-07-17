@@ -8,15 +8,23 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
 <%@ taglib prefix="nav" tagdir="/WEB-INF/tags/responsive/nav" %>
 <spring:htmlEscape defaultHtmlEscape="true" />
+<link rel="stylesheet"
+	href="${commonResourcePath}/acerchem/bootstrap.min.css">
+<link rel="stylesheet"
+	href="${commonResourcePath}/acerchem/bootstrap-table.css">
+
 
 <template:javaScript/>
-<div class="title">InventoryAnalysis Report</div>
-
+<div class="container">
+<div class="title"><h2>InventoryAnalysis Report</h2></div>
+<hr />
 <c:if test="${empty list}">
 	No Inventory Analysis Found
 </c:if>
 <c:if test="${not empty list}">
-  <table border="1" cellspacing="0" cellpadding="5">
+<div class="fixed-table-container">
+  <table id="table_page">
+  <!-- 
       <tr>
           <th>Product Code</th>
           <th>Product Name</th>
@@ -24,7 +32,7 @@
           <th>Future Inventory</th>
           
       </tr>
-      
+       -->
       <c:forEach items="${list}" var="detail">
       	  <tr>
 	          <td>${detail.productCode}</td>
@@ -35,6 +43,16 @@
 	      </tr>
       </c:forEach>
   </table>
+  </div>
 </c:if>
-
+</div>
+<script src="${commonResourcePath}/acerchem/jquery-1.9.1.min.js"></script>
+<script src="${commonResourcePath}/acerchem/jquery.base64.js"></script>
+<script src="${commonResourcePath}/acerchem/bootstrap.min.js"></script>
+<script src="${commonResourcePath}/acerchem/bootstrap-table.min.js"></script>
+<script src="${commonResourcePath}/acerchem/tableExport.min.js"></script>
+<script
+	src="${commonResourcePath}/acerchem/bootstrap-table-export.min.js"></script>
+<script
+	src="${commonResourcePath}/acerchem/vendorInventoryAnalysis.js"></script>
 
