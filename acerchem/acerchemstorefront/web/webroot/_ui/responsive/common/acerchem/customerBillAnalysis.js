@@ -30,6 +30,7 @@ $(document).ready(
 						sortable : true,
 
 						showExport : true, // 是否显示导出按钮
+						exportDataType:"all",
 						buttonsAlign : "right", // 按钮位置
 						exportTypes : [ 'excel' ], // 导出文件类型
 						// toolbar: "#exampleTableEventsToolbar",
@@ -105,8 +106,11 @@ $(document).ready(
 						uniqueId : "c1", // 每一行的唯一标识，一般为主键列
 						sortable : true,
 
+						
+						
 						showExport : true, // 是否显示导出按钮
 						buttonsAlign : "right", // 按钮位置
+						exportDataType:"all",
 						exportTypes : [ 'excel' ], // 导出文件类型
 						// toolbar: "#exampleTableEventsToolbar",
 						icons : {
@@ -123,6 +127,7 @@ $(document).ready(
 									'font-size', 'font-weight' ],
 						// onMsoNumberFormat: DoOnMsoNumberFormat
 						},
+						
 
 						columns : [ {
 							field : 'c1',

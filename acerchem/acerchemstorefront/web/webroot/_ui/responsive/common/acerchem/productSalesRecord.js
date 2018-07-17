@@ -18,6 +18,7 @@ $(document).ready(
 						sortable : true,
 
 						showExport : true, // 是否显示导出按钮
+						exportDataType:"all",
 						buttonsAlign : "right", // 按钮位置
 						exportTypes : [ 'excel' ], // 导出文件类型
 						// toolbar: "#exampleTableEventsToolbar",
