@@ -57,7 +57,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 
 	@Override
 	public List<OrderDetailsReportData> getOrderDetails(final String month, final String area, final String countryCode,
-			final String userName, final String orderCode, final Integer pageNumber) {
+			final String userName, final String orderCode) {
 
 		final Integer pageSize = 100;
 
@@ -102,9 +102,9 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(builder.toString());
 		query.setResultClassList(Arrays.asList(OrderEntryModel.class, AddressModel.class));
 		query.addQueryParameters(params);
-		query.setNeedTotal(false);
-		query.setCount(pageSize);
-		query.setStart(pageSize * (pageNumber - 1));
+		//query.setNeedTotal(false);
+		//query.setCount(pageSize);
+		//query.setStart(pageSize * (pageNumber - 1));
 		final SearchResult<List<Object>> result = flexibleSearchService.search(query);
 
 		final List<OrderDetailsReportData> orderDetails = new ArrayList<OrderDetailsReportData>();

@@ -183,9 +183,9 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	public String getOrderDetails(final SearchCriteriaFrom searchCriteriaFrom, final Model model,
 			@RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode)
 			throws CMSItemNotFoundException {
-		if (searchCriteriaFrom.getPageNumber() == null || searchCriteriaFrom.getPageNumber() < 1) {
+		//if (searchCriteriaFrom.getPageNumber() == null || searchCriteriaFrom.getPageNumber() < 1) {
 			searchCriteriaFrom.setPageNumber(1);
-		}
+	//	}
 		
 		String curMonth = searchCriteriaFrom.getMonth();
 		if (StringUtils.isBlank(curMonth) || curMonth.length() != 7 || curMonth.indexOf("-")<0) {
@@ -200,8 +200,8 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		
 		final List<OrderDetailsReportData> searchPageData = acerchemOrderDao.getOrderDetails(
 				curMonth, searchCriteriaFrom.getArea(), searchCriteriaFrom.getCountryCode(),
-				searchCriteriaFrom.getUserName(), searchCriteriaFrom.getOrderCode(),
-				searchCriteriaFrom.getPageNumber());
+				searchCriteriaFrom.getUserName(), searchCriteriaFrom.getOrderCode()
+				);
 		
 		
 		curMonth = curMonth.substring(0,4)+"-"+curMonth.substring(4);
