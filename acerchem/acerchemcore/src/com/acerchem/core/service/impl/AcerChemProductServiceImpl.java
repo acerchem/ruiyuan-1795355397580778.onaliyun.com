@@ -273,48 +273,50 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 			double five = 0;
 			double six = 0;
 			int xcount = 0;
-			int n1 = 0;
-			int n2 = 0;
-			int n3 = 0;
-			int n4 = 0;
-			int n5 = 0;
-			int n6 = 0;
+			long n1 = 0;
+			long n2 = 0;
+			long n3 = 0;
+			long n4 = 0;
+			long n5 = 0;
+			long n6 = 0;
 
 			// final double xprice=0;
 			for (int i = 0; i < list.size(); i++) {
 				final AcerchemProductPriceBean bean = list.get(i);
 				if (codeReport.equals(bean.getProductCode())) {
-					sumQuantity += bean.getSaleQuantity();
-					sumPrice =  CommonConvertTools.addDouble(sumPrice,bean.getBaseRealPrice()*bean.getSaleQuantity());
+					final long q = bean.getSaleQuantity()==null?0:bean.getSaleQuantity();
+					final double r = bean.getBaseRealPrice()==null?0:bean.getBaseRealPrice();
+					sumQuantity += q;
+					sumPrice =  CommonConvertTools.addDouble(sumPrice,r*q);
 					if (bean.getWeeknum() == 1) {
 
-						one += bean.getBaseRealPrice();
-						n1++;
+						one =  CommonConvertTools.addDouble(one,r*q);
+						n1 += q;
 						xcount = 1;
 					} else if (bean.getWeeknum() == 2) {
-						two += bean.getBaseRealPrice();
-						n2++;
+						two =  CommonConvertTools.addDouble(two,r*q);
+						n2 +=  q;
 						xcount = 2;
 					} else if (bean.getWeeknum() == 3) {
 
-						three += bean.getBaseRealPrice();
-						n3++;
+						three = CommonConvertTools.addDouble(three,r*q);
+						n3 += q;
 						xcount = 3;
 					} else if (bean.getWeeknum() == 4) {
 
-						four += bean.getBaseRealPrice();
-						n4++;
+						four = CommonConvertTools.addDouble(four,r*q);
+						n4 += q;
 						xcount = 4;
 					} else if (bean.getWeeknum() == 5) {
 
-						five += bean.getBaseRealPrice();
-						n5++;
+						five  = CommonConvertTools.addDouble(five,r*q);
+						n5 += q;
 						xcount = 5;
 
 					} else {
 
-						six += bean.getBaseRealPrice();
-						n6++;
+						six = CommonConvertTools.addDouble(six,r*q);
+						n6 += q;
 						xcount = 6;
 					}
 					
@@ -330,12 +332,12 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 					item.setMaxWeek(xcount);
 
 					
-					one = one > 0 ? one / n1 : 0;
-					two = two > 0 ? two / n2 : 0;
-					three = three > 0 ? three / n3 : 0;
-					four = four > 0 ? four / n4 : 0;
-					five = five > 0 ? five / n5 : 0;
-					six = six > 0 ? six / n6 : 0;
+					one = one > 0 && n1 >0 ? one / n1 : 0;
+					two = two > 0 && n2 >0 ? two / n2 : 0;
+					three = three >0 && n3 > 0 ? three / n3 : 0;
+					four = four > 0 && n4 > 0? four / n4 : 0;
+					five = five > 0 && n5 >0? five / n5 : 0;
+					six = six > 0 && n6 >0? six / n6 : 0;
 					
 					if (sumQuantity > 0) {
 						item.setAveragePrice(sumPrice / sumQuantity);
@@ -377,12 +379,12 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 			item.setSalesQuantity(Long.valueOf(sumQuantity));
 			item.setMaxWeek(xcount);
 
-			one = one > 0 ? one / n1 : 0;
-			two = two > 0 ? two / n2 : 0;
-			three = three > 0 ? three / n3 : 0;
-			four = four > 0 ? four / n4 : 0;
-			five = five > 0 ? five / n5 : 0;
-			six = six > 0 ? six / n6 : 0;
+			one = one > 0 && n1 >0 ? one / n1 : 0;
+			two = two > 0 && n2 >0 ? two / n2 : 0;
+			three = three >0 && n3 > 0 ? three / n3 : 0;
+			four = four > 0 && n4 > 0? four / n4 : 0;
+			five = five > 0 && n5 >0? five / n5 : 0;
+			six = six > 0 && n6 >0? six / n6 : 0;
 			
 			if (sumQuantity > 0) {
 				item.setAveragePrice(sumPrice / sumQuantity);
