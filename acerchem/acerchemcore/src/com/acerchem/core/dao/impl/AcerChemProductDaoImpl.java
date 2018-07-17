@@ -149,7 +149,7 @@ public class AcerChemProductDaoImpl implements AcerChemProductDao {
 				bean.setProductCode(oe.getProduct().getCode());
 				bean.setProductName(oe.getProduct().getName());
 				bean.setSaleQuantity(oe.getQuantity());
-				bean.setBaseRealPrice(oe.getBasePrice());
+				bean.setBaseRealPrice(oe.getBaseRealPrice());
 				bean.setOrderPlaceTime(placeOrderTime);
 			
 				//计算周次
