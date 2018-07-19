@@ -17,7 +17,7 @@ input[type='checkbox']{
 	display:none;
 }
 input[type='checkbox']:checked~.checkbox:before{
-	background-color: #096735;
+	background-color: #18639a;
 	border:none;
 }
 input[type='checkbox']:checked~.checkbox:after{
@@ -43,7 +43,7 @@ input[type='submit']{
 }
 
 input[type='submit']:hover{
-	background-color: #096735;
+	background-color: #18639a;
 	color: #fff;
 }
 
@@ -61,7 +61,7 @@ input[type='radio']{
 }
 input[type='radio']:checked{
 	border-width: 6px;
-	border-color: #096735;
+	border-color: #18639a;
 }
 
 input[type='radio'] , .checkbox:before{
@@ -83,12 +83,12 @@ button{
 }
 .maxmore_tit{float: right;}
 .maxmore_tit a{font-size:16px;border:1px solid #aaa;color:#999;padding:0px 4px 1px 4px;}
-.maxmore_tit a:hover{border:1px solid #096735;color:#096735;}
+.maxmore_tit a:hover{border:1px solid #18639a;color:#18639a;}
 
 *{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
 :after,:before{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box}
 .button{border-color: #fff;}
-.button:hover{background: #096735;color: #fff;border-color: #096735;}
+.button:hover{background: #18639a;color: #fff;border-color: #18639a;}
 .max-col{width: 100%;}
 .max-col .container{width: 90%;margin: 0 auto;}
 .maxmain .title:after{
@@ -98,7 +98,7 @@ button{
 	width: 40px; 
 	height: 4px;
 	border-radius: 8px;
-	background-color: #096735;
+	background-color: #18639a;
 }
 
 
@@ -108,8 +108,8 @@ button{
 .maxon_salesul .maximg>img{width: 100%;}
 .maxon_salesul .maximgpor{position: absolute;bottom: 35%;left: 0;z-index: 1;width: 100%;}
 .maxon_salesul .old-price{text-decoration:line-through; color: #999}
-.maxon_salesul .maxtext{font-size: 14px;color: #333;padding: 10px 0;}
-.maxon_salesul .price{padding-right: 10px;font-size: 18px;color:#096735;}
+.maxon_salesul .maxtext{background-color: #00203e;font-size: 14px;color: #fff;padding: 10px 0;}
+.maxon_salesul .price{padding-right: 10px;font-size: 18px;color:#18639a;}
 .maxtext p , .searchlist .pdlist .text span{overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;min-height: 36px;}
 /*.maxswiper_hov{position: absolute;top: 0;width: 100%;text-align: center;height: 320px;background: rgba(0,0,0,0.3);display: none;}
 .maxon_salesul li:hover .maxswiper_hov,.maxon_salesul li:hover .maximgpor a{display: block;}*/
@@ -155,7 +155,7 @@ button{
 .maxon_sales .maxpagin_tit a{font-size:16px;}
 .maxsales_but{font-size: 1rem;padding: 14px 30px;border: 3px solid #fff;display: inline-block;color: #fff;}
 /*top*/
-.maxprosi-top{background: #096735;height: 80px;position: relative; z-index: 9; transition:all 500ms; overflow:hidden;}
+.maxprosi-top{background: #18639a;height: 80px;position: relative; z-index: 9; transition:all 500ms; overflow:hidden;}
 .maxcomment a{color: #fff;font-size: 18px;line-height:50px;}
 .maxcomment{height: 50px;width:596px;margin: 0px auto;overflow: hidden;position: relative;top: 16px;border: 1px #074d27 dashed;}
 .maxcomment ul{padding: 0 60px 0 65px;}
@@ -178,20 +178,20 @@ button{
 .maxtop .maxmenu ul:after{content:''; display: block; clear:both;}
 .maxtop .maxmenu li{position: relative; z-index: 999; float:left;text-align:center;margin-left: 20px; }
 .maxtop .maxmenu li a{ font-size: 1rem; line-height: 60px; display: block;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;}
-.maxtop .maxmenu li.hover a,.maxtop .maxmenu li:hover a{color:#096735;}
+.maxtop .maxmenu li.hover a,.maxtop .maxmenu li:hover a{color:#18639a;}
 .maxtop .maxmenu li ul{display: none; position: absolute; top: 0; left: -20px;z-index: -1;padding-top:60px; min-width: 120%; background-color: #fff;}
 .maxtop .maxmenu li:hover ul{display:block;}
 .maxtop .maxmenu li ul li{display: block; margin:0; padding:0px 20px;float:none;  padding-bottom: 8px; box-sizing: border-box;  text-align: center; }
 .maxtop .maxmenu li ul li a{line-height: 2em; text-align: left; }
 .maxtop .maxmenu li:hover ul li a , .maxtop .maxmenu li.hover ul li a{font-size: 14px;color: #333;font-weight: 500;}
-.maxtop .maxmenu li ul li:hover a{color: #096735}
+.maxtop .maxmenu li ul li:hover a{color: #18639a}
 .maxtop_rig{ width:20%; text-align: right; position: relative;}
 .maxtop_rig li{display: inline-table; padding-left: 15px; min-height: 30px; min-width: 30px; position: relative;vertical-align: top; }
 .maxtop_rig a , .searchlist .btn-submit , .maxlatest .bansearch .maxicon-search{border:none; background: url(maxicon.png);width: 30px;height: 30px;display: block;}
 .maxtop_rig a.maxicon-user{background-position: -10px -172px; display:  table-cell;}
 .maxtop_rig a.maxicon-search , .searchlist .btn-submit{background-position: -10px -227px;}
 .maxtop_rig a.maxicon-cart{background-position: -10px -283px;position: relative;}
-.maxtop_rig a.maxicon-cart em{position: absolute;font-size: 12px;width: 18px;height: 18px;line-height: 18px;text-align: center;border-radius: 50%;right: -5px;background: #096735;color: #fff;}
+.maxtop_rig a.maxicon-cart em{position: absolute;font-size: 12px;width: 18px;height: 18px;line-height: 18px;text-align: center;border-radius: 50%;right: -5px;background: #0d4170;color: #fff;}
 .maxtop_rig .userintro{ color: #999; font-size: 14px; display: table-cell; line-height: 1em; text-align: right: ;}
 .maxtop_rig .userintro button{position: relative; display: inline; border:none; background: transparent; text-align: right; color: #096735; font-size: 12px; line-height: 1.5em;}
 .maxtop_rig .userintro button:after{content:'';  position: absolute; bottom:-2px; right: 0; width: 40px; border-top:1px solid #096735; }
@@ -242,9 +242,9 @@ button{
 .footer .maxfootnav a{color: #666;display: block;padding-bottom: 12px;}
 .footer .maxfootnav a:hover{color:#fff;}
 .footer .maxfootnav.item3{width: 28%; padding-left: 17%;}
-.gotop{position: fixed; top:86%; right:10px; width:48px; height: 48px; background:rgba(9,103,53,.5); cursor: pointer;}
+.gotop{position: fixed; top:86%; right:10px; width:48px; height: 48px; background:rgba(0,25,50,.5); cursor: pointer;}
 .gotop:after{content:''; display: block; height: 100%;  background:url(maxicon.png) no-repeat center 72.3%;}
-.gotop:hover{background: rgb(9,103,53)}
+.gotop:hover{background: rgb(25,100,150)}
 
 .footerbot{padding: 21px 0;border-top: 1px solid #1e211f; text-align: center;}
 ul.share-buttons{
@@ -301,7 +301,7 @@ ul.share-buttons .sr-only{
 	color: #aaa;
 }
 .swiper-active-switch{
-	color: #096735;
+	color: #18639a;
 }
 .maxpagin .hide{
 	display: none;
@@ -337,7 +337,7 @@ ul.share-buttons .sr-only{
 }
 
 .m-pagination a:hover{
-	color:#096735;
+	color:#18639a;
 }
 
 .m-pagination a:after{

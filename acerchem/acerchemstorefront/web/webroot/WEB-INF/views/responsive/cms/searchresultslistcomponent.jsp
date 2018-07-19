@@ -34,7 +34,7 @@
 							<span class="label-title">Sort by</span>
 								<div class="selbox">
 									<form id="sortForm${top ? '1' : '2'}" name="sortForm${top ? '1' : '2'}" method="get" action="#">
-									     <select id="sortOptions${top ? '1' : '2'}" name="sort" class="form-control" style="background-color:#096735;">
+									     <select id="sortOptions${top ? '1' : '2'}" name="sort" class="form-control" style="background-color:#0d4170;">
 									         <option disabled><spring:theme code="${themeMsgKey}.sortTitle"/></option>
 									         <c:forEach items="${searchPageData.sorts}" var="sort">
 									             <option value="${fn:escapeXml(sort.code)}" ${sort.selected? 'selected="selected"' : ''}>

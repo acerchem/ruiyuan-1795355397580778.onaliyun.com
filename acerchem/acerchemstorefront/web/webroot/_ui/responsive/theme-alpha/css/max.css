@@ -5,13 +5,14 @@
 /*banner*/
 .maxlatest{position: relative;}
 .maxlatest .swiper-slide{position:relative;}
+.maxlatest .swiper-slide img{width: 100%;}     /**/
 .maxlatest .pagination{position: absolute;bottom: 6%;z-index: 1; padding:0; }
 .banner{position: relative;}
 .maxon_salesul .banner_btn a{top:-60px;}
 .swiper-container .swiper-wrapper,.swiper-container .swiper-wrapper .swiper-slide{height: auto !important;}
 .pagination {padding:60px 0; left: 0;text-align: center;width: 100%;}
 .banner .swiper-pagination-switch {display: inline-block; *display: inline;zoom:1; width: 30px;height: 4px;border-radius: 2px;background: rgba(0,0,0,.9);margin: 0 3px;cursor: pointer;}
-.banner .swiper-active-switch {background: #096735;}
+.banner .swiper-active-switch {background: #0d4170;}
 .banner .container{position: absolute; top:50%; left: 0; -webkit-transform:translate(0,-50%);transform:translate(0,-50%);}
 .swiper-slide .container{padding: 0 17%;width: 100%; float: left;}
 .swiper-slide .maxtite_ban{color:#fff;width: 40%;float:left;}
@@ -45,7 +46,7 @@
 .maxfactory,.maxmean{margin: 60px 0;width: 100%;}
 .maxfactory:after,.maxmean:after{content:''; display: block; clear:both;}
 .maxfactory li{position: relative; background: #6fa742;color: #fff; width: 23.5%; float: left; margin-left: 2%; padding: 20px;}
-.maxfactory .maxitem4{background: #096735;margin-right:0;}
+.maxfactory .maxitem4{background: #0d4170;margin-right:0;}
 .maxfactory .maxitem1{margin-left:0;}
 .maxfactory .maxitem1{}
 .maxfactory li img{width: 30%;}
@@ -70,15 +71,15 @@ background:-webkit-linear-gradient(top,rgba(0,0,0,0) 20%,rgba(0,0,0,.9) 100%);}
 
 .maxmean .textmessge{ color: #333; text-align: center; padding:52% 16% 0 16%; }
 .maxmean .textmessge p{font-weight: normal;}
-.maxmean .textmessge span{display: block; width: 70%; padding:10px 0; margin: 25px auto; background: #096735; color: #fff;}
+.maxmean .textmessge span{display: block; width: 70%; padding:10px 0; margin: 25px auto; background: #0d4170; color: #fff;}
 
-.maxmean .formtext{background: #096735; padding:20px;}
-.maxmean .formtext div{position: static; font-size: 14px; color: #5fc48f}
+.maxmean .formtext{background: #0d4170; padding:20px;}
+.maxmean .formtext div{position: static; font-size: 14px; color: #7da0be}
 .maxmean .formtext p{ font-weight: normal; color: #fff }
-.maxmean .formtext input{background: #0c4e2b url(maxmeanicon.png) no-repeat left center; border:none; color: #fff; margin-top: 15px; padding-left:30px; font-size: .8rem;}
-.maxmean .formtext input::-webkit-input-placeholder{color: #64cb94}
+.maxmean .formtext input{background: #0c3761 url(maxmeanicon.png) no-repeat left center; border:none; color: #fff; margin-top: 15px; padding-left:30px; font-size: .8rem;}
+.maxmean .formtext input::-webkit-input-placeholder{color: #7da0be}
 .maxmean .formtext input[type="number"]{background-image:url(maxmeanicon2.png);}
-.maxmean .formtext button{display: block; margin-top: 15px; padding:0; background: #70a644; color: #fff; border:none; width: 60%; height:50px ;line-height: 50px;  font-size: 18px;   text-transform: capitalize;  text-align: center; font-weight: normal;}
+.maxmean .formtext button{display: block; margin-top: 15px; padding:0; background: #18639a; color: #fff; border:none; width: 60%; height:50px ;line-height: 50px;  font-size: 18px;   text-transform: capitalize;  text-align: center; font-weight: normal;}
 
 /*maxsales*/
 .maxsales li{width: 33.33%;position: relative;}
@@ -102,10 +103,10 @@ background:-webkit-linear-gradient(top,rgba(0,0,0,0) 20%,rgba(0,0,0,.9) 100%);}
 .maxprodu_sales{margin-top: 53px;}
 /*.maxon_salesul_list li:nth-child(1) .swiper-slide-bg,.maxon_salesul_list li:nth-child(5) .swiper-slide-bg{margin-left:0;}*/
 
-.maxlatest_main{background: #096735; margin-top: 27px; padding:40px 0;}
-.maxlatest_main li{position: relative;background: #096735;}
+.maxlatest_main{background: #0d4170; margin-top: 27px; padding:40px 0;}
+.maxlatest_main li{position: relative;background: #0d4170;}
 .maxlatest_main .container{overflow: hidden;width:70%;position: relative;}
-.maxlatest_main .maxporsit{background: #096735; font-size: 0; text-align: center;}
+.maxlatest_main .maxporsit{background: #0d4170; font-size: 0; text-align: center;}
 .maxlatest_main .maximg_ban , .maxlatest_main .maxtite_ban{display:inline-block; vertical-align: middle;}
 .maxlatest_main .maximg_ban{width: 30%; padding-right: 20px; }
 .maxlatest_main .maxtite_ban{text-align: left; float:none; width: 50%;}
@@ -147,7 +148,7 @@ background:-webkit-linear-gradient(top,rgba(0,0,0,0) 20%,rgba(0,0,0,.9) 100%);}
 .maxlatest_main .banner_btn .arrow-left:hover{background-position: 2px -294px;}
 
 .maxlatest_main .button{margin-top: 30px;}
-.maxlatest_main .button:hover{background: #fff;color: #096735;border-color: #fff;}
+.maxlatest_main .button:hover{background: #fff;color: #0d4170;border-color: #fff;}
 
 .maxfeatured{margin-top: 60px;margin-bottom: 66px;}
 .maxfeatured ul:after{content:''; display: block; clear:both;}
@@ -370,7 +371,7 @@ background:-webkit-linear-gradient(top,rgba(0,0,0,0) 20%,rgba(0,0,0,.9) 100%);}
 
 /*针对style.css的修改*/
 a,button , .maxtop .maxmenu li a{
-    color: #333;
+    color: #333;font-weight: bold;
     text-decoration:none;
 }
 .simple-banner-component img, .maxtop .banner__component img{
@@ -392,7 +393,7 @@ a,button , .maxtop .maxmenu li a{
     cursor: pointer;
 }
 .pagination > .act > span , .pagination > .active > a:hover{
-    color: #096735
+    color: #0d4170
 }
 .pagination > .disabled > span , .pagination > .disabled > span:hover{
     color: #ddd;
@@ -414,17 +415,17 @@ a,button , .maxtop .maxmenu li a{
     margin:60px auto;
 }
 .forgotten-password .btn-primary{
-    background: #096735;
+    background: #0d4170;
     border:1px solid transparent;
 }
 .forgotten-password .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary , .btn-default:hover, .btn-default:focus, .btn-default:active, .btn-default.active, .open .dropdown-toggle.btn-default{
-    background:#0c7f44;
+    background:#0d4170;
     border-color:transparent;
 }
 .btn-default{
     background: transparent;
-    border:1px solid #096735;
-    color: #096735;;
+    border:1px solid #0d4170;
+    color: #0d4170;
 }
 
 .checkout-login .col-md-6 .headline{
@@ -470,7 +471,7 @@ a,button , .maxtop .maxmenu li a{
 }
 
 #cboxContent .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary{
-    background:#0c7f44;
+    background:#0d4170;
     border-color: transparent;
 }
 

@@ -32,10 +32,10 @@
 				</cms:pageSlot>
 	  
 	  <!-- login compent banner -->
-	<cms:pageSlot position="Section4" var="feature">
+<!-- 	<cms:pageSlot position="Section4" var="feature">
 		<cms:component component="${feature}" />
 	</cms:pageSlot>
-	
+	 -->
 
   </div>
   

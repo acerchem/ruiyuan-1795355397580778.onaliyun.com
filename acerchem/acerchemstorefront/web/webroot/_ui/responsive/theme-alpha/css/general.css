@@ -93,7 +93,7 @@ textarea{
 }
 
 .checkbox:hover{
-	color: #096735;
+	color: #0d4170;
 }
 
 .checkbox:before{
@@ -167,25 +167,25 @@ textarea{
 	text-decoration: none;
 	text-transform: capitalize;
 	text-align: center;
-	background-color: #096735;
-	border:1px solid #096735;
+	background-color: #0d4170;
+	border:1px solid #0d4170;
 	color: #fff;
 	font-weight: normal;
 }
 
 .btn-set .btn:hover , .g-cartable .btn-set .btn-leadout:hover{
-	background-color: #0c7f44;
+	background-color: #18639a;
 	border-color:transparent;
 	color: #fff;
 }
 
 .btn-set .btn-line{
 	background-color: transparent;
-	color: #096735;
+	color: #0d4170;
 }
 
 .btn-set .btn-line:hover{
-	border-color:#0c7f44;
+	border-color:#18639a;
 }
 
 /*maxon_salesul*/
@@ -226,7 +226,7 @@ textarea{
 	color: #aaa;
 }
 .swiper-active-switch{
-	color: #096735;
+	color: #0d4170;
 }
 
 .maxon_salesul .maxpagin .hide{
@@ -291,7 +291,7 @@ textarea{
 .maxon_salesul .price{
 	padding-right: 10px;
 	font-size: 18px;
-	color:#096735;
+	color:#0d4170;
 }
 
 .maxon_salesul .old-price{
@@ -329,7 +329,7 @@ textarea{
 }
 
 .m-pagination a:hover{
-	color:#096735;
+	color:#0d4170;
 }
 
 .m-pagination a:after{
@@ -428,7 +428,7 @@ textarea{
 }
 
 .m-setnum span:hover{
-	background-color: #096735;
+	background-color: #0d4170;
 }
 
 .m-setnum input.set{
@@ -490,7 +490,7 @@ textarea{
 	position: absolute;
 	top: 0; 
 	right: 0;
-	color: #096735;
+	color: #0d4170;
 	text-decoration: none;
 }
 
@@ -504,7 +504,7 @@ textarea{
 
 .sign-content a{
 	text-decoration: none;
-	color: #096735;
+	color: #0d4170;
 }
 
 .sign-footer{
@@ -522,7 +522,7 @@ textarea{
 	padding:0 12px;
 }
 .sign-footer a:hover{
-	color: #096735;
+	color: #0d4170;
 }
 .sign-footer a:first-child:after{
 	content: '';
@@ -673,7 +673,7 @@ textarea{
 
 .member-content .base{
 	position: relative;	
-	background-color: #096735;
+	background-color: #0d4170;
 	color: #fff;
 }
 
@@ -712,7 +712,7 @@ textarea{
 }
 
 .member-content .memberlist .now a , .member-content .memberlist a:hover{
-	color: #096735;
+	color: #0d4170;
 }
 .member-content .memberlist a{
 	position: relative;
@@ -758,7 +758,7 @@ textarea{
 	width: 40px; 
 	height: 4px;
 	border-radius: 8px;
-	background-color: #096735;
+	background-color: #0d4170;
 }
 
 .member-content .rigcont .lab-row , .solid-form .lab-row{
@@ -780,17 +780,17 @@ textarea{
 	margin: 24px 0;
 }
 .member-content .rigcont .btn-set.operate .btn{
-	background-color: #6fa742;
-	border-color: #6fa742;
+	background-color: #18639a;
+	border-color: #18639a;
 	width: 160px;
 }
 .member-content .rigcont .btn-set.operate .btn:hover{
-	background-color: #0c7f44;
+	background-color: #18639a;
 
 }
 .member-content .rigcont .btn-set.operate .btn-line{
 	background-color: transparent;
-	border-color:#096735;
+	border-color:#0d4170;
 }
 
 .member-content .g-right .rigcont .btn-set .btn-primary{
@@ -891,8 +891,8 @@ textarea{
 }
 
 .member-content .addbook .def .name{
-	color: #096735;
-	border-color:#096735;
+	color: #0d4170;
+	border-color:#0d4170;
 	display: block;
 	overflow:hidden;
 	text-overflow: ellipsis;
@@ -900,7 +900,7 @@ textarea{
 }
 
 .member-content .addbook .def .setdef{
-	background-color: #096735;
+	background-color: #0d4170;
 }
 .member-content .addbook .def .setdef:before{
 	display: inline-block;
@@ -1010,7 +1010,7 @@ textarea{
 }
 
 .g-table a:hover span{
-	color:#096735;
+	color:#0d4170;
 }
 
 .g-table .text{
@@ -1175,8 +1175,8 @@ textarea{
 	padding:2px 4px;
 	width:100%;
 	font-size: 14px;
-	color:#096735;
-	border:1px solid #096735;
+	color:#0d4170;
+	border:1px solid #0d4170;
 }
 
 .product-table .tot em{
@@ -1210,7 +1210,7 @@ textarea{
 	padding-left:0;
 	width:100%;
 	line-height: 2em;
-	color:#096735;
+	color:#0d4170;
 	text-align: left;
 }
 .g-table .Summary span:before{
@@ -1218,7 +1218,7 @@ textarea{
 	*display: inline;
 	zoom:1;
 	margin:0 10px 0 4px;
-	border-color: #096735
+	border-color: #0d4170
 }
 
 .g-table .ord-total{
@@ -1230,7 +1230,7 @@ textarea{
 }
 
 .g-table .ord-total span:last-child i{
-	color: #096735;
+	color: #0d4170;
 	font-size: 24px;
 }
 
@@ -1266,7 +1266,7 @@ textarea{
 }
 
 .g-table .donlist .load-icon{
-	background: #096735 url(docload-icons.png) no-repeat center bottom;
+	background: #0d4170 url(docload-icons.png) no-repeat center bottom;
 }
 .g-table .donlist .icons:hover{
 	background-color: #70a644;
@@ -1276,25 +1276,25 @@ textarea{
 
 /*==== cart-content  =======*/
 .m-crumbs{
-	background-color: #096735;
+	background-color: #0d4170;
 }
 
 .m-crumbs .link{
 	position: relative;
 	width: 90%;
 	margin:auto;
-	color: #66cc96;
+	color: #7da0be;
 	line-height: 50px;
 }
 .m-crumbs .link a{
-	color: #66cc96;
+	color: #7da0be;
 }
 
 .m-crumbs .link a:hover{
 	color: #fff;
 }
 .m-crumbs .link a:hover:after{
-	color: #66cc96;
+	color: #7da0be;
 }
 .m-crumbs .link a:after{
 	content:'/';
@@ -1344,7 +1344,7 @@ textarea{
 	font-size: 24px;
 }
 .m-pagecard span:hover , .m-pagecard .now{
-	color: #096735;
+	color: #0d4170;
 }
 
 .m-pagecard .now:after{
@@ -1367,7 +1367,7 @@ textarea{
 
 .m-note .title{
 	font-size: 18px;
-	color: #096735;
+	color: #0d4170;
 	line-height: 24px;
 }
 
@@ -1490,7 +1490,7 @@ textarea{
 
 .g-cartable .cart-total .row.total{
 	font-size: 24px;
-	color: #096735;
+	color: #0d4170;
 	white-space: nowrap;
 
 }
@@ -1585,7 +1585,7 @@ textarea{
 }
 
 .gen-content .line-setbtn .btn:hover{
-	background-color: #0c7f44;
+	background-color: #18639a;
 	border-color: transparent;
 	color: #fff;
 }
@@ -1605,7 +1605,7 @@ textarea{
 }
 
 .gen-content .shiplist .now{
-	border-color: #096735;
+	border-color: #0d4170;
 }
 
 .gen-content .shiplist li:first-child , .gen-content .shiplist li:nth-child(3n+1){
@@ -1768,7 +1768,7 @@ textarea{
 
 .gen-content .g-cartable .solid-form .btn-line{
 	margin-right: 20px;
-	border-color:#096735;
+	border-color:#0d4170;
 }
 
 .gen-content .g-cartable .solid-form .indi , .gen-content .g-cartable .solid-form .corp{
@@ -1796,12 +1796,12 @@ textarea{
 }
 
 .gen-content .g-cartable .inv-active{
-	background-color: #096735;
+	background-color: #0d4170;
 	border-color: transparent;
 	color: #fff;
 }
 .gen-content .g-cartable .inv-active:hover{
-	background-color: #0c7f44;
+	background-color: #18639a;
 }
 
 .gen-content .g-cartable .billadd{
@@ -1944,13 +1944,13 @@ textarea{
 	text-overflow: ellipsis;
 }
 .gal-centent .gall-left dd.act,.gal-centent .gall-left dd:hover{
-	color:#096735;
+	color:#0d4170;
 }
 
 .m-term-bor{
 	border: 4px solid #f3f3f3;
 	border-right:none;
-	background-color: #096735;
+	background-color: #0d4170;
 }
 .m-term{
 	position: relative;
@@ -1967,7 +1967,7 @@ textarea{
 	font-weight: normal;
 }
 .gall-left .gall-left span:hover , .gall-left .gall-left a:hover{
-	color: #096735;
+	color: #0d4170;
 	cursor: pointer;
 }
 
@@ -1978,7 +1978,7 @@ textarea{
 	right: 6%;
 	top:0px;
 	padding-left: 105px;
-	background-color: #096735;
+	background-color: #0d4170;
 }
 .m-term-ri .right{
 	float: right;
@@ -1989,7 +1989,7 @@ textarea{
 .m-term-ri .label-title{
 	position: absolute;
 	left: 34px;
-	color: #0d4025;
+	color: #fff	;
 	line-height: 50px;
 }
 .m-term-le li{
@@ -2143,18 +2143,18 @@ display: inline-table;
 
 .maxprompt{
 	font-size: 16px;
-	color: #096735;
+	color: #0d4170;
 	}
 .g-cart i{
 	width:36px;
 	height: 36px;
 	display: block;
 	border-radius: 20px;
-	background: url(maxicon.png) #6fa742;
+	background: url(maxicon.png) #18639a;
 	background-position: -8px -567px;
 }
 .gal-centent .g-cartable .aitem .g-cart:hover i{
-	background: url(maxicon.png) no-repeat #096735;
+	background: url(maxicon.png) no-repeat #0d4170;
 	background-position: -6px -567px;
 }
 .gal-centent .g-cartable .aitem .g-cart:hover i:after{
@@ -2178,7 +2178,7 @@ display: inline-table;
     background-position: center bottom;
 }
 .maxlist-pr .act{
-	color: #096735;
+	color: #0d4170;
 }
 
 .gal-centent .maxon_prom{
@@ -2210,8 +2210,8 @@ display: inline-table;
 	color: #666;
 }
 .gall-right-no span{
-	color: #096735;
-	border-bottom: 1px solid #096735;
+	color: #0d4170;
+	border-bottom: 1px solid #0d4170;
 }
 .gal-centent .gall-right-no {
 	min-height: 800px;
@@ -2245,8 +2245,8 @@ display: inline-table;
 .maxfixed .btn-set .btn-continue{
 	width: 100%;
 	background: transparent;
-	border: 1px solid #096735;
-	color: #096735;
+	border: 1px solid #0d4170;
+	color: #0d4170;
 	margin-top: 21px;
 }
 .maxfixed .item-row span{
@@ -2337,7 +2337,7 @@ display: inline-table;
 	clear: both;
 }
 .maxfixed ul .item:hover .price{
-	color:#096735;
+	color:#0d4170;
 }
 .maxfixed ul .item:hover .old-price{
 	display:block;
@@ -2367,7 +2367,7 @@ display: inline-table;
 	width:100%;
 	line-height: 2em;
 	font-size: 14px;
-	color:#096735;
+	color:#0d4170;
 	text-align: left;
 }
 .maxfixed .Summary span:before{
@@ -2375,7 +2375,7 @@ display: inline-table;
 	*display: inline;
 	zoom:1;
 	margin:0 10px 0 4px;
-	border-color: #096735
+	border-color: #0d4170
 }
 .maxfixed .maxdel{
     background: url(maxicon.png);
@@ -2427,9 +2427,9 @@ display: inline-table;
 	cursor: pointer;
 }
 .pt-num .btn:hover{
-	background:#096735;
+	background:#0d4170;
 	color:#fff;
-	border-color:#096735;
+	border-color:#0d4170;
 }
 .pt-num .num{
 	width: 60px;
@@ -2445,8 +2445,8 @@ display: inline-table;
 	border-right: 0;
 }
 .gal-centent .aitem .g-cart:hover i{
-	background-color: #096735;
-	background:-webkit-gradient(linear,0 100%,from(#6fa742));
+	background-color: #0d4170;
+	background:-webkit-gradient(linear,0 100%,from(#18639a));
 	-webkit-animation:g-cart 1s;
 	-webkit-animation-fill-mode:both;
 	border-radius: 20px;
@@ -2529,7 +2529,7 @@ display: inline-table;
 	
 }
 .m-prodslide .minimg .swiper-active-switch{
-	background-color: #096735;
+	background-color: #0d4170;
 }
 
 .m-prodslide .flip span{
@@ -2607,7 +2607,7 @@ display: inline-table;
 	margin-right: 4px;
 	line-height: 1em;
 	border-radius: 1rem;
-	background-color: #096735;
+	background-color: #0d4170;
 	color: #fff;
 	font-size: 12px;
 }
@@ -2622,7 +2622,7 @@ display: inline-table;
 
 .prod-cont .prodbase .priceset .price{
 	font-size: 24px;
-	color: #096735
+	color: #0d4170
 }
 
 .prod-cont .prodbase .priceset .old-price{
@@ -2648,9 +2648,9 @@ display: inline-table;
 	zoom:1;
 	margin-right: 10px;
 	min-width: 70px;
-	border:1px solid #096735;
+	border:1px solid #0d4170;
 	text-align: center;
-	color: #096735;
+	color: #0d4170;
 }
 .prod-cont .prodbase .specnum{
 	position: relative;
@@ -2764,7 +2764,7 @@ display: inline-table;
 }
 
 .prod-cont .prodbase .btn-cart:hover{
-	background-color: #0c7f44;
+	background-color: #18639a;
 }
 
 .prod-cont .prodbase .btn-cart:before , .prod-cont .product-right .donlist li:after{
@@ -2827,7 +2827,7 @@ display: inline-table;
 	color:#aaa;
 }
 .prod-cont .product-right .donlist li:hover , .prod-cont .product-right .donlist li:hover a{
-	color: #096735;
+	color: #0d4170;
 }
 .prod-cont .product-right .donlist li:after{
 	position: absolute; 
@@ -2868,8 +2868,8 @@ display: inline-table;
 .prod-cont .product-right .tableshare a{
 	width: 30px;
 	height: 30px;
-	
 	background-image: url(sharegray.png);
+	background-size: cover;
 }
 .prod-cont .product-right .tableshare a:hover{
 	background-image: url(sharecolor.png);
@@ -3051,7 +3051,7 @@ display: inline-table;
 
 .maxstatu h3{
 	font-size: 1.4rem;
-	color: #096735;
+	color: #0d4170;
 	margin-bottom: 20px;
 }
 .maxstatu img{
@@ -3061,13 +3061,13 @@ display: inline-table;
 	width: 80px;
 	height: 80px;
 	display: block;
-	border: 2px solid #096735;
+	border: 2px solid #0d4170;
 	border-radius: 50%;
 	margin: 0 auto;
 }
 
 .maxstatu b{
-	color: #096735
+	color: #0d4170
 }
 
 .maxstatu .tipslist{
@@ -3179,7 +3179,7 @@ display: inline-table;
 }
 
 .g-table .dropdown-menu td:hover,.g-table .dropdown-menu .active{
-	background: #096735;
+	background: #0d4170;
 	color: #fff;
 	cursor: pointer;
 }
