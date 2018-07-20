@@ -66,7 +66,7 @@ public class AcerChemVendorDaoImpl implements AcerChemVendorDao {
 		if(StringUtils.isBlank(uid)){
 			return null;
 		}
-		final String SQL ="select {v.pk} from {Vendor as v JOIN Employee as e ON {v.pk}={e.acerchemVendor}} where {e.uid} = ?uid";
+		final String SQL ="select {v.pk} from {Vendor as v JOIN Employee as e ON {v.pk}={e.toVendor}} where {e.uid} = ?uid";
 		
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(SQL);
 		query.addQueryParameter("uid", uid);
