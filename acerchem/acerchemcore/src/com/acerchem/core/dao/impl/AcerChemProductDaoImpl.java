@@ -94,9 +94,7 @@ public class AcerChemProductDaoImpl implements AcerChemProductDao {
 
 	@Override
 	public List<StockLevelModel> getInventoryProduct(final String uid) {
-		if (StringUtils.isBlank(uid)) {
-			return null;
-		}
+		
 		final String SQL = "select {s.pk} from {StockLevel as s} where {s.productCode} IN (?pCodes)";
 		
 		
