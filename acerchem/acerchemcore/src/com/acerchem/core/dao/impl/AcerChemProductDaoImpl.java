@@ -113,11 +113,13 @@ public class AcerChemProductDaoImpl implements AcerChemProductDao {
 		
 		pQuery.setResultClassList(Arrays.asList(String.class));
 		
-		final SearchResult<String> pCodes = flexibleSearchService.search(pQuery);
+		final SearchResult<String> pResult = flexibleSearchService.search(pQuery);
 		
-		if (pCodes ==null) {
-			LOG.debug(">>>>>>>>>>>codes From product related with Vendor is null");
-			return null;
+		List<String> pCodes = new ArrayList<>();
+		if (pResult.getCount()>0) {
+			pCodes = pResult.getResult();
+		}else{
+			LOG.info(">>>>>>>>>>>codes From product related with Vendor is null");
 		}
 		
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(SQL);
