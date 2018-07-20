@@ -2,6 +2,7 @@ package com.acerchem.core.service;
 
 import java.util.List;
 
+import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.ordersplitting.model.VendorModel;
 
 public interface AcerChemVendorService {
@@ -18,4 +19,7 @@ public interface AcerChemVendorService {
 	 * @return
 	 */
 	public VendorModel getVendorByProductCode(final String productCode);
+	
+	public List<VendorModel> getAllVendors();
+	public UserModel getEmployeeByVendorCode(String vendorCode);
 }

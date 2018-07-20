@@ -2,6 +2,7 @@ package com.acerchem.core.dao;
 
 import java.util.List;
 
+import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.ordersplitting.model.VendorModel;
 
 public interface AcerChemVendorDao {
@@ -27,4 +28,6 @@ public interface AcerChemVendorDao {
 	 */
 	public VendorModel getVendorByEmployeeUid(String uid);
 	
+	public List<VendorModel> getAllVendors();
+	public UserModel getEmployeeByVendorCode(String vendorCode);
 }

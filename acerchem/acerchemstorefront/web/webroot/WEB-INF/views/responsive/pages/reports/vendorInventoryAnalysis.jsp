@@ -18,6 +18,31 @@
 <div class="container">
 <div class="title"><h2>InventoryAnalysis Report</h2></div>
 <hr />
+<form:form method="post" commandName="vendorInventoryForm"  action="${action}">
+
+
+<fieldset>
+	<legend>
+		<strong>Report Conditions</strong>
+	</legend>
+	<table>
+			<tr>
+			<td>
+					<label style="margin-left: 20px;">Choose Vendor:</label>
+					<formElement:customSelectBox idKey="vendorCode" labelKey="" path="vendor" mandatory="true" skipBlank="false" skipBlankMessageKey="All" items="${vendors}" itemValue="code" itemLabel="name" selectedValue="${vendorInventoryForm.vendor}"/>
+				</td>
+				
+			
+			</tr>
+	</table>
+</fieldset>
+<hr />
+<div class="btn-set" >
+    <br/>
+	<button type="submit">Show Report</button> 
+</div>	
+</form:form>
+
 <c:if test="${empty list}">
 	No Inventory Analysis Found
 </c:if>

@@ -7,10 +7,12 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.util.Assert;
 
 import com.acerchem.core.dao.AcerChemVendorDao;
 
 import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.ordersplitting.model.VendorModel;
 import de.hybris.platform.servicelayer.search.FlexibleSearchQuery;
 import de.hybris.platform.servicelayer.search.FlexibleSearchService;
@@ -76,4 +78,30 @@ public class AcerChemVendorDaoImpl implements AcerChemVendorDao {
 		return null;
 	}
 
+	@Override
+	public List<VendorModel> getAllVendors() {
+		final String SQL = "select {pk} from {Vendor}";
+		final FlexibleSearchQuery query = new  FlexibleSearchQuery(SQL);
+		
+		final SearchResult<VendorModel> result = flexibleSearchService.search(query);
+		
+		return result.getResult();
+	}
+
+	@Override
+	public UserModel getEmployeeByVendorCode(final String vendorCode) {
+		Assert.notNull(vendorCode);
+		final String SQL = "select {e.pk} from {Employee as e JOIN Vendor as v ON {e.toVendor}={v.pk}} where {v.code}=?code ";
+		final FlexibleSearchQuery query = new  FlexibleSearchQuery(SQL);
+		
+		query.addQueryParameter("code", vendorCode);
+		 final SearchResult<UserModel> result = flexibleSearchService.search(query);
+		 
+		 if(result.getCount()>0){
+			 return result.getResult().get(0);
+		 }
+		return null;
+	}
+
+	
 }

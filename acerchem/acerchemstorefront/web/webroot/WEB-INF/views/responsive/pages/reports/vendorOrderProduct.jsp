@@ -19,7 +19,7 @@
 <div class="container">
 <div class="title"><h2>VendorOrder Report</h2></div>
 <hr />
-<form:form method="post"  action="${action}">
+<form:form method="post" commandName="vendorAnalysisForm"  action="${action}">
 
 
 <fieldset>
@@ -30,17 +30,22 @@
 			<tr>
 			<td>
 				<div> start date:<span>
-				<input type="text" class="calendar" maxlength="19" onfocus="$(this).calendar()" name="startDate"  readonly/>
+				<input type="text" class="calendar" maxlength="19" onfocus="$(this).calendar()" name="startDate"  value="${vendorAnalysisForm.startDate}" readonly/>
 				</span>
 				</div>
 			</td>
 				
 			<td>
 				<div> end date:<span>
-				<input type="text" class="calendar" maxlength="19" onfocus="$(this).calendar()" name="endDate"  readonly/>
+				<input type="text" class="calendar" maxlength="19" onfocus="$(this).calendar()" name="endDate"  value="${vendorAnalysisForm.endDate}" readonly/>
 				</span>
 				</div>
 			</td>	
+			
+				<td>
+					<label style="margin-left: 20px;">Choose Vendor:</label>
+					<formElement:customSelectBox idKey="vendorCode" labelKey="" path="vendor" mandatory="true" skipBlank="false" skipBlankMessageKey="All" items="${vendors}" itemValue="code" itemLabel="name" selectedValue="${vendorAnalysisForm.vendor}"/>
+				</td>
 				
 			</tr>
 	</table>

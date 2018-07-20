@@ -26,8 +26,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.acerchem.core.dao.AcerchemOrderDao;
 import com.acerchem.core.service.AcerChemProductService;
+import com.acerchem.core.service.AcerChemVendorService;
 import com.acerchem.core.service.AcerchemOrderAnalysisService;
 import com.acerchem.core.util.CommonConvertTools;
+import com.acerchem.facades.product.data.VendorData;
 import com.acerchem.storefront.data.AcerchemCategoryBean;
 import com.acerchem.storefront.data.AcerchemEmployeeSalesBean;
 import com.acerchem.storefront.data.CustomerCreditAnalysisForReportBean;
@@ -35,6 +37,8 @@ import com.acerchem.storefront.data.CustomerSalesAnalysisForm;
 import com.acerchem.storefront.data.MonthlySalesAnalysisForm;
 import com.acerchem.storefront.data.ProductSalesForm;
 import com.acerchem.storefront.data.SearchCriteriaFrom;
+import com.acerchem.storefront.data.VendorAnalysisForm;
+import com.acerchem.storefront.data.VendorInventoryForm;
 
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractSearchPageController;
@@ -56,6 +60,7 @@ import de.hybris.platform.commercefacades.vendor.data.InventoryReportData;
 import de.hybris.platform.commercefacades.vendor.data.OrderProductReportData;
 import de.hybris.platform.commerceservices.category.CommerceCategoryService;
 import de.hybris.platform.core.model.user.UserModel;
+import de.hybris.platform.ordersplitting.model.VendorModel;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
 
@@ -87,6 +92,9 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	@Resource
 	private CommerceCategoryService commerceCategoryService;
 
+	@Resource
+	private AcerChemVendorService acerChemVendorService;
+	
 	@ModelAttribute("countries")
 	public Collection<CountryData> getCountries() {
 		final List<CountryData> countries = new ArrayList<CountryData>();
@@ -150,6 +158,24 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		return allCategories;
 	}
 
+	@ModelAttribute("vendors")
+	public Collection<VendorData> getVendors() {
+		final List<VendorData> vendors = new ArrayList<>();
+		final List<VendorModel> list = acerChemVendorService.getAllVendors();
+		if(list != null){
+			for(final VendorModel v : list){
+				final VendorData data = new VendorData();
+				data.setCode(v.getCode());
+				data.setName(v.getName());
+				
+				vendors.add(data);
+			}
+			
+		}
+		
+		return vendors;
+	}
+	
 	private static final Comparator<AcerchemCategoryBean> cateComparator = new Comparator<AcerchemCategoryBean>() {
 
 		@Override
@@ -403,6 +429,78 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		return "pages/reports/noSignIn";
 	}
 
+	////////////temporary start/////////////////////////////
+	@RequestMapping(value = "/vendorInventory/temp", method = RequestMethod.GET)
+	public String getVendorInventoryReportTemp(final Model model) {
+		
+		final VendorInventoryForm form = new VendorInventoryForm();
+		model.addAttribute("vendorInventoryForm", form);
+
+		return "pages/reports/vendorInventoryAnalysis";
+	}
+	@RequestMapping(value = "/vendorInventory/temp", method = RequestMethod.POST)
+	public String showVendorInventoryReportTemp(final Model model,final VendorInventoryForm form) {
+		
+		final String vendorCode = StringUtils.defaultString(form.getVendor());
+		
+		final UserModel employee = acerChemVendorService.getEmployeeByVendorCode(vendorCode);
+		final String uid = employee==null?"":employee.getUid();
+		
+		final List<InventoryReportData> list = acerChemProductService.getInventoryProductByVendor(uid);
+
+		model.addAttribute("list", list);
+
+		return "pages/reports/vendorInventoryAnalysis";
+	}
+	
+	@RequestMapping(value = "/vendorOrderProduct/temp", method = RequestMethod.GET)
+	public String showVendorOrderProductTemp(final Model model)  {
+		
+		final SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
+		final Calendar calendar = Calendar.getInstance();
+		final Date end = calendar.getTime();
+		calendar.set(Calendar.DATE, -7);
+		final Date start = calendar.getTime();
+		
+		final VendorAnalysisForm form = new VendorAnalysisForm();
+
+		
+		form.setStartDate(sdf.format(start));
+		
+		form.setEndDate(sdf.format(end));
+		
+		model.addAttribute("vendorAnalysisForm", form);
+		return "pages/reports/vendorOrderProduct";
+	}
+
+	@RequestMapping(value = "/vendorOrderProduct/temp", method = RequestMethod.POST)
+	public String getVendorOrderProductTemp(final Model model, final VendorAnalysisForm form) throws ParseException {
+        final String vendorCode = StringUtils.defaultString(form.getVendor());
+		
+		final UserModel employee = acerChemVendorService.getEmployeeByVendorCode(vendorCode);
+		final String uid = employee==null?"":employee.getUid();
+		
+		
+		Date start = new Date();
+		Date end = new Date();
+		final SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
+		if (StringUtils.isNotBlank(form.getStartDate())) {
+			start = sdf.parse(form.getStartDate());
+		}
+		if (StringUtils.isNotBlank(form.getEndDate())) {
+			end = sdf.parse(form.getEndDate());
+		}
+
+		final List<OrderProductReportData> list = acerChemProductService.getOrderProductByVendor(uid,
+				start, end);
+		model.addAttribute("list", list);
+		return "pages/reports/vendorOrderProduct";
+	}
+	
+	
+	////////////temporary end/////////////////////////////
+	
+	
 	@RequestMapping(value = "/productPriceAnalysis", method = RequestMethod.GET)
 	public String showProductPriceAnalysist(final Model model) throws CMSItemNotFoundException {
 		storeCmsPageInModel(model, getContentPageForLabelOrId("login"));
@@ -416,6 +514,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		return "pages/reports/productPriceAnalysis";
 
 	}
+	
 
 	@RequestMapping(value = "/productPriceAnalysis", method = RequestMethod.POST)
 	public String getProductPriceAnalysist(final Model model, @RequestParam("month") final String month)
@@ -432,6 +531,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		}else{
 			curMonth = curMonth.replace("-","");
 		}
+		
 
 		final Calendar calendar = Calendar.getInstance();
 		final int iyear = Integer.valueOf(curMonth.substring(0, 4)).intValue();

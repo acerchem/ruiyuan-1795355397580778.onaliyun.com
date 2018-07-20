@@ -13,6 +13,7 @@ import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 
 import com.acerchem.core.dao.AcerChemProductDao;
 import com.acerchem.core.enums.CustomerArea;
@@ -29,7 +30,7 @@ import de.hybris.platform.servicelayer.search.FlexibleSearchService;
 import de.hybris.platform.servicelayer.search.SearchResult;
 
 public class AcerChemProductDaoImpl implements AcerChemProductDao {
-
+	private static final Logger LOG = Logger.getLogger(AcerChemProductDaoImpl.class);
 	@Resource
 	private FlexibleSearchService flexibleSearchService;
 
@@ -96,12 +97,32 @@ public class AcerChemProductDaoImpl implements AcerChemProductDao {
 		if (StringUtils.isBlank(uid)) {
 			return null;
 		}
-		final String SQL = "select {s.pk} from {StockLevel as s} where {s.productCode} IN ({{" +
-				"select {p.code} from {Product as p JOIN Vendor as v ON {p.acerChemVendor} = {v.pk} "
-				+ " JOIN Employee as e ON {e.toVendor} = {v.pk}} " + " where {e.pk}={v.toEmployee} and {e.uid} = ?id }})";
-		final FlexibleSearchQuery query = new FlexibleSearchQuery(SQL);
+		final String SQL = "select {s.pk} from {StockLevel as s} where {s.productCode} IN (?pCodes)";
 		
-		query.addQueryParameter("id", uid);
+		
+		String pSQL = "select {p.code} from {Product as p JOIN Vendor as v ON {p.acerChemVendor} = {v.pk} "
+				+ " JOIN Employee as e ON {e.toVendor} = {v.pk}} " + " where {e.pk}={v.toEmployee}";
+		final Map<String, Object> params = new HashMap<String, Object>();
+		if(StringUtils.isNotBlank(uid)){
+			pSQL += " AND {e.uid}=?id";
+			params.put("id", uid);
+		}
+		
+		final FlexibleSearchQuery pQuery = new FlexibleSearchQuery(pSQL);
+		pQuery.addQueryParameters(params);
+		
+		pQuery.setResultClassList(Arrays.asList(String.class));
+		
+		final SearchResult<String> pCodes = flexibleSearchService.search(pQuery);
+		
+		if (pCodes ==null) {
+			LOG.debug(">>>>>>>>>>>codes From product related with Vendor is null");
+			return null;
+		}
+		
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(SQL);
+		query.addQueryParameter("pCodes", pCodes);
+		
 		final SearchResult<StockLevelModel> result = flexibleSearchService.search(query);
 		return result.getResult();
 	}
