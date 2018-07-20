@@ -26,6 +26,7 @@ import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.ordersplitting.model.StockLevelModel;
 import de.hybris.platform.ordersplitting.model.VendorModel;
 import de.hybris.platform.product.ProductService;
+import de.hybris.platform.product.daos.ProductDao;
 
 public class AcerChemProductServiceImpl implements AcerChemProductService {
 	private static final Logger LOG = Logger.getLogger(AcerChemProductServiceImpl.class);
@@ -36,6 +37,9 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 	@Resource
 	private AcerChemVendorDao acerChemVendorDao;
 
+	@Resource 
+	private ProductDao productDao;
+	
 	@Override
 	public List<ProductModel> getProductByVendorName(final String vendorName) {
 		// TODO Auto-generated method stub
@@ -63,13 +67,8 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 
 			for (final StockLevelModel stock : stocks) {
 				final InventoryReportData item = new InventoryReportData();
-				final ProductModel product = productService.getProductForCode(stock.getProductCode());// because
-																										// of
-																										// StockLevelModel's
-																										// product
-																										// attribute
-																										// invalid
-
+				final ProductModel product = getProduct(stock.getProductCode());
+				if (product != null){
 				item.setProductCode(stock.getProductCode());
 				item.setProductName(product.getName());
 				final int inventory = stock.getAvailable() - stock.getReserved();
@@ -77,13 +76,54 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 				item.setFutureInventory(stock.getPreOrder());
 
 				report.add(item);
-
+				}
 			}
 		}
 
 		return report;
 	}
 
+	@Override
+	public List<InventoryReportData> getInventory(final String vendorCode) {
+		final List<InventoryReportData> report = new ArrayList<InventoryReportData>();
+		final List<StockLevelModel> stocks = acerChemProductDao.getInventory(vendorCode);
+		if (CollectionUtils.isNotEmpty(stocks)) {
+
+			for (final StockLevelModel stock : stocks) {
+				final InventoryReportData item = new InventoryReportData();
+				final ProductModel product = getProduct(stock.getProductCode());
+
+				if (product != null){
+				item.setProductCode(stock.getProductCode());
+				item.setProductName(product.getName());
+				final int inventory = stock.getAvailable() - stock.getReserved();
+				item.setInventoryCount(inventory);
+				item.setFutureInventory(stock.getPreOrder());
+
+				report.add(item);
+				}
+			}
+		}
+
+		return report;
+	}
+	
+	public ProductModel getProduct(final String code){
+		final List<ProductModel> list = productDao.findProductsByCode(code);
+		
+		if (CollectionUtils.isNotEmpty(list) && list.size() >0){
+			for(final ProductModel p :list){
+				
+				if(p.getCatalogVersion().getVersion().equals("Online")){
+					return p;
+				}
+				
+			}
+			
+		}
+		return null;
+	}
+	
 	@Override
 	public List<OrderProductReportData> getOrderProductByVendor(final String uid, final Date startDate,
 			final Date endDate) {
@@ -503,5 +543,8 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 		}
 
 	};
+
+	
+	
 
 }

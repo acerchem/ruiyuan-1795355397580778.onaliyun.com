@@ -117,7 +117,7 @@ public class AcerChemProductDaoImpl implements AcerChemProductDao {
 		if (pResult.getCount()>0) {
 			pCodes = pResult.getResult();
 		}else{
-			LOG.info(">>>>>>>>>>>codes From product related with Vendor is null");
+			LOG.info(">>>>>>>>>>>codes From product related with Vendor is null>>>>>>>>>>>>");
 			return null;
 		}
 		
@@ -128,6 +128,54 @@ public class AcerChemProductDaoImpl implements AcerChemProductDao {
 		return result.getResult();
 	}
 
+	@Override
+	public List<StockLevelModel> getInventory(final String vendorCode) {
+		final String SQL = "select {s.pk} from {StockLevel as s} where {s.productCode} IN (?pCodes)";
+		
+		
+		final List<String> pCodes = getProductCode(vendorCode);
+		if (pCodes==null || pCodes.size() <= 0) {
+			
+			LOG.info(">>>>>>>>>>>codes From product related with Vendor is null>>>>>>>>>>>>>>>");
+			return null;
+		}
+		
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(SQL);
+		query.addQueryParameter("pCodes", pCodes);
+		
+		final SearchResult<StockLevelModel> result = flexibleSearchService.search(query);
+		return result.getResult();
+		
+	}
+	
+	public List<String> getProductCode(final String vendorCode){
+		String pSQL = "select {p.code} from {Product as p JOIN Vendor as v ON {v.pk} = {p.acerChemVendor} } where 1=1 ";
+		final Map<String, Object> params = new HashMap<String, Object>();
+		
+		if(StringUtils.isNotBlank(vendorCode)){
+			pSQL += " AND {v.code}=?code";
+			params.put("code", vendorCode);
+		}
+		
+		final FlexibleSearchQuery pQuery = new FlexibleSearchQuery(pSQL);
+		pQuery.addQueryParameters(params);
+		//pQuery.setDisableCaching(true);
+		pQuery.setResultClassList(Arrays.asList(String.class));
+		
+//		final String SQL = "select {v.pk} from {Vendor as v} where 1=1 ";
+//		final FlexibleSearchQuery query = new FlexibleSearchQuery(SQL);
+//		query.addQueryParameters(params);
+//		final SearchResult<VendorModel> result = flexibleSearchService.search(query);
+//	
+//		if(result.getCount() > 0){
+//			System.out.println(result.getResult().toArray().toString());
+//		}
+		
+		final SearchResult<String> pResult = flexibleSearchService.search(pQuery);
+		return pResult.getResult();
+	}
+	
+	
 	@Override
 	public List<OrderEntryModel> getOrderEntryProduct(final String uid, final Date startDate, final Date endDate) {
 		if (StringUtils.isBlank(uid) || startDate == null || endDate == null ||endDate.before(startDate)) {
@@ -276,4 +324,7 @@ public class AcerChemProductDaoImpl implements AcerChemProductDao {
 		return reportList;
 	}
 
+	
+
+	
 }

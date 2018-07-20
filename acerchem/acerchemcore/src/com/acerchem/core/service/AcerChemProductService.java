@@ -58,4 +58,9 @@ public interface AcerChemProductService {
 
 	public List<ProductSalesRecordData> getProductSalesForReport(final String month, final String categoryCode,
 			final String area, final String countryCode);
+	
+
+	public List<InventoryReportData> getInventory(final String vendorCode);
 }
+
+

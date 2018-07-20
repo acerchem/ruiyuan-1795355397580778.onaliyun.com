@@ -441,13 +441,12 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	@RequestMapping(value = "/vendorInventory/temp", method = RequestMethod.POST)
 	public String showVendorInventoryReportTemp(final Model model,final VendorInventoryForm form) {
 		
-		final String vendorCode = StringUtils.defaultString(form.getVendor());
+		//final String vendorCode = StringUtils.defaultString(form.getVendor());
 		
-		final UserModel employee = acerChemVendorService.getEmployeeByVendorCode(vendorCode);
-		final String uid = employee==null?"":employee.getUid();
-		
-		final List<InventoryReportData> list = acerChemProductService.getInventoryProductByVendor(uid);
-
+		//final UserModel employee = acerChemVendorService.getEmployeeByVendorCode(vendorCode);
+		//final String uid = employee==null?"":employee.getUid();
+		;
+		final List<InventoryReportData> list = acerChemProductService.getInventory(form.getVendor());
 		model.addAttribute("list", list);
 
 		return "pages/reports/vendorInventoryAnalysis";
