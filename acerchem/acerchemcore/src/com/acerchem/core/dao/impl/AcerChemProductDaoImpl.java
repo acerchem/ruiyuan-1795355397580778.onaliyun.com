@@ -120,6 +120,7 @@ public class AcerChemProductDaoImpl implements AcerChemProductDao {
 			pCodes = pResult.getResult();
 		}else{
 			LOG.info(">>>>>>>>>>>codes From product related with Vendor is null");
+			return null;
 		}
 		
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(SQL);
