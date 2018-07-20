@@ -29,14 +29,14 @@
 	<table>
 			<tr>
 			<td>
-				<div> start date:<span>
+				<div> Start Date:<span>
 				<input type="text" class="calendar" maxlength="19" onfocus="$(this).calendar()" name="startDate"  value="${vendorAnalysisForm.startDate}" readonly/>
 				</span>
 				</div>
 			</td>
 				
 			<td>
-				<div> end date:<span>
+				<div> End Date:<span>
 				<input type="text" class="calendar" maxlength="19" onfocus="$(this).calendar()" name="endDate"  value="${vendorAnalysisForm.endDate}" readonly/>
 				</span>
 				</div>
