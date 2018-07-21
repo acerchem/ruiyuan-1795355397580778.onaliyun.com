@@ -61,6 +61,8 @@ public interface AcerChemProductService {
 	
 
 	public List<InventoryReportData> getInventory(final String vendorCode);
+	
+	public List<InventoryReportData> getInventory(final List<InventoryReportData> list);
 }
 
 

@@ -445,8 +445,9 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		
 		//final UserModel employee = acerChemVendorService.getEmployeeByVendorCode(vendorCode);
 		//final String uid = employee==null?"":employee.getUid();
-		;
-		final List<InventoryReportData> list = acerChemProductService.getInventory(form.getVendor());
+		
+		List<InventoryReportData> list = acerChemProductService.getInventory(form.getVendor());
+		list = acerChemProductService.getInventory(list);
 		model.addAttribute("list", list);
 
 		return "pages/reports/vendorInventoryAnalysis";

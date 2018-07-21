@@ -83,6 +83,8 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 		return report;
 	}
 
+	
+	
 	@Override
 	public List<InventoryReportData> getInventory(final String vendorCode) {
 		final List<InventoryReportData> report = new ArrayList<InventoryReportData>();
@@ -107,7 +109,65 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 
 		return report;
 	}
-	
+
+	@Override
+ 	public List<InventoryReportData> getInventory(final List<InventoryReportData> list) {
+		final List<InventoryReportData> report = new ArrayList<InventoryReportData>();
+		if(CollectionUtils.isNotEmpty(list)){
+			if(list.size()>0){
+				list.sort(compatatorInventory);
+				String pCode = list.get(0).getProductCode();
+				int store = 0;
+				int future = 0;
+				final int count = list.size();
+				for (int i =0;i<count;i++){
+					final InventoryReportData data = list.get(i);
+					if(pCode.equals(data.getProductCode())){
+						store += data.getInventoryCount();
+						future += data.getFutureInventory();
+					}else{
+						pCode = data.getProductCode();
+						i--;
+						final String itemCode = list.get(i).getProductCode();
+						final String itemName = list.get(i).getProductName();
+						final InventoryReportData item = new InventoryReportData();
+						item.setProductCode(itemCode);
+						item.setProductName(itemName);
+						item.setFutureInventory(future);
+						item.setInventoryCount(store);
+						
+						report.add(item);
+						store = 0;
+						future = 0;
+					}
+					
+				}
+				
+				//last item union
+				final String lastCode = list.get(count-1).getProductCode();
+				final String lastName = list.get(count -1).getProductName();
+				final InventoryReportData item = new InventoryReportData();
+				item.setProductCode(lastCode);
+				item.setProductName(lastName);
+				item.setFutureInventory(future);
+				item.setInventoryCount(store);
+				
+				report.add(item);
+				
+			}
+		}
+		
+		return report;
+	}
+	private static Comparator<InventoryReportData> compatatorInventory = new Comparator<InventoryReportData>() {
+
+		@Override
+		public int compare(final InventoryReportData o1, final InventoryReportData o2) {
+			// TODO Auto-generated method stub
+			return o1.getProductCode().compareTo(o2.getProductCode());
+		}
+
+	};
 	public ProductModel getProduct(final String code){
 		final List<ProductModel> list = productDao.findProductsByCode(code);
 		
