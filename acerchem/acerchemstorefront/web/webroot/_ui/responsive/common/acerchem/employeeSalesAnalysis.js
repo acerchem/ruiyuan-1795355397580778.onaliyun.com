@@ -43,7 +43,7 @@ $(document).ready(
 							title : 'Month'
 						}, {
 							field : 'c2',
-							title : 'User'
+							title : 'Employee'
 						}, {
 							field : 'c3',
 							title : 'Amount'
