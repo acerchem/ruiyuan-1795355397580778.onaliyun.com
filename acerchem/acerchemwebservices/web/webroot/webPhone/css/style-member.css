@@ -986,3 +986,7 @@ html {
 .member-unpaid li{
     width: 50%;
 }
+
+.g-gallery {
+	margin-bottom:1rem;
+}
