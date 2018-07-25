@@ -74,7 +74,7 @@ $(document).ready(
 							align : 'right'
 						}, {
 							field : 'c9',
-							title : 'UserId',
+							title : 'Customer Name',
 							align : 'left'
 						}, {
 							field : 'c10',

@@ -140,7 +140,9 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 			detail.setProductName(od.getProduct().getName());
 			detail.setProductQuantity(od.getQuantity());
 			detail.setOrderAmount(od.getTotalRealPrice());
-			detail.setUserUid(od.getOrder().getUser().getUid());
+			if(od.getOrder().getUser().getName() != null){
+				detail.setUserUid(od.getOrder().getUser().getName());
+			}
 			final String deliveryCode = od.getOrder().getDeliveryMode() == null ? ""
 					: od.getOrder().getDeliveryMode().getCode();
 
@@ -332,8 +334,9 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		SQL.append("select q.a,q.b,q.c from (\n");
 		SQL.append("{{\n");
 		SQL.append(
-				"select sum({o.totalPrice}/{cur.conversion}) as a,{o.user} as b,DATE_FORMAT({o.creationtime},'%Y%m') as c\n");
+				"select sum({o.totalPrice}/{cur.conversion}) as a,{e.pk} as b,DATE_FORMAT({o.creationtime},'%Y%m') as c\n");
 		SQL.append("from {Order as o JOIN Customer as u ON {u.pk} = {o.user}\n");
+		SQL.append("JOIN Employee as e ON {e.pk}={u.relatedCustomer}\n");
 		SQL.append("JOIN Currency as cur ON {o.currency} = {cur.pk}\n");
 		SQL.append("}\n");
 		SQL.append("where {cur.isocode}='USD'\n");
@@ -341,12 +344,13 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 			SQL.append(" AND DATE_FORMAT({o.creationtime},'%Y') =?year\n");
 			params.put("year", year);
 		}
-		SQL.append("group by {o.user},DATE_FORMAT({o.creationtime},'%Y%m')\n");
+		SQL.append("group by {e.pk},DATE_FORMAT({o.creationtime},'%Y%m')\n");
 		SQL.append("}}\n");
 		SQL.append("UNION\n");
 		SQL.append("{{\n");
-		SQL.append("select sum({o1.totalPrice}) as a,{o1.user} as b,DATE_FORMAT({o1.creationtime},'%Y%m') as c\n");
+		SQL.append("select sum({o1.totalPrice}) as a,{e1.pk} as b,DATE_FORMAT({o1.creationtime},'%Y%m') as c\n");
 		SQL.append("from {Order as o1 JOIN Customer as u1 ON {u1.pk} = {o1.user}\n");
+		SQL.append("JOIN Employee as e1 ON {e1.pk}={u1.relatedCustomer}\n");
 		SQL.append("JOIN Currency as cur1 ON {o1.currency} = {cur1.pk}\n");
 		SQL.append("}\n");
 		SQL.append("where {cur1.isocode}!='USD'\n");
@@ -354,7 +358,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 			SQL.append(" AND DATE_FORMAT({o1.creationtime},'%Y') =?year1\n");
 			params.put("year1", year);
 		}
-		SQL.append("group by {o1.user},DATE_FORMAT({o1.creationtime},'%Y%m')\n");
+		SQL.append("group by {e1.pk},DATE_FORMAT({o1.creationtime},'%Y%m')\n");
 		SQL.append("}}\n");
 		SQL.append(")q\n");
 		SQL.append("order by q.c");
@@ -362,7 +366,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(SQL.toString());
 		query.addQueryParameters(params);
 
-		query.setResultClassList(Arrays.asList(Double.class, UserModel.class, String.class));
+		query.setResultClassList(Arrays.asList(Double.class, EmployeeModel.class, String.class));
 		final SearchResult<List<Object>> result = flexibleSearchService.search(query);
 		final List<List<Object>> resultList = result.getResult();
 		// final FlexibleSearchQuery query1 = new FlexibleSearchQuery(SQL1);
@@ -397,7 +401,9 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 			for (final List<Object> item : list) {
 				final SalesByEmployeeReportData dataItem = new SalesByEmployeeReportData();
 				dataItem.setAmount((Double) item.get(0));
-				dataItem.setEmployee(((UserModel) item.get(1)).getName());
+				if(item.get(1)!=null){
+					dataItem.setEmployee(((EmployeeModel) item.get(1)).getName());
+				}
 				dataItem.setMonth((String) item.get(2));
 
 				report.add(dataItem);
