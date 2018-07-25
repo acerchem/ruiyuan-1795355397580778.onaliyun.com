@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta charset="UTF-8">
+	    <title></title>
+	    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	    <meta name="keywords" content="">
+	    <meta name="description" content="">
+	    <meta name="apple-mobile-web-app-capable" content="no">
+	    <meta name="format-detection" content="telephone=no">
+		<script src="../js/jquery-2.1.1.min.js"></script>
+		<script src="../js/swiper.min.js"></script>
+		<script src="../js/style.js"></script>
+		<script src="../js/jquery.cookie.js"></script>
+		<script src="../js/acerchem.js"></script>
+	    <link rel="stylesheet" type="text/css" href="../css/style-style.css">
+	    <link rel="stylesheet" type="text/css" href="../css/style-member.css">
+		<title></title>
+	</head>
+	<body>
+	
+		<div class="g-main g-gallery">
+			<div class="header bort-bot">
+				<div class="m-left">
+					<a href="javascript:history.back()"></a>
+				</div>
+				<div class="m-center">
+					<h2>New Support Tickets</h2>
+				</div>
+			</div>
+			
+			<div class="g-login m-passwo">
+				<div class="login-form">
+					<form method="post" class="pro-navcon">
+					
+					<div class="form-con">
+						<div class="d-line bort-bot" id="ProName"></div>
+						<div class="d-line bort-bot" id="ProCode"></div>
+						<div class="d-line bort-bot" id="Name"></div>
+						<div class="d-line bort-bot" id="Email"></div>
+						<div class="d-line bort-bot" ><input type="text" name="Phone" placeholder="Telephone / Mobile Phone" value=""></div>
+						<div class="d-line bort-bot" ><input type="text" name="Address" placeholder="Shipping Address" value=""></div>
+						<div class="d-line bort-bot" ><textarea name="Message" placeholder="Message"></textarea></div>
+						<!-- 
+						<ul>
+							<li class="bort-bot" id="ProName"></li>
+							<li class="bort-bot" id= "ProCode"></li>
+							<li class="bort-bot" id="Name"></li>
+							<li class="bort-bot" id= "Email"></li>
+							<li class="bort-bot"><input type="text" name="Phone" placeholder="Telephone / Mobile Phone" value=""></li>
+							<li class="bort-bot"><input type="text" name="Address" placeholder="Shipping Address" value=""></li>
+							<li><textarea name="Message" placeholder="message"></textarea></li>
+						</ul>
+						 -->
+					</div>
+					
+					</form>
+					<div class="g-succbut">
+						<p>&nbsp;</p>
+						<button onclick="addProductTicket();">Confirm</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	<!-- 	
+		<div class="pro-navnews maxmenu-overlay">
+			<div class="pro-navcon">
+				<div class="title" id ="pInfo">
+					 <p>Chondroitin Sulfate USP 90% …</p>
+					<span>product id:88888888</span> 
+				</div>
+				<form method="post">
+					<div class="pro-over">
+						<img src="../img/pro-over.png">
+					</div>
+					<div class="form-con">
+						<ul>
+							<li class="bort-bot" id="ProName"></li>
+							<li class="bort-bot" id= "ProCode"></li>
+							<li class="bort-bot" id="Name"></li>
+							<li class="bort-bot" id= "Email"></li>
+							<li class="bort-bot"><input type="text" name="Phone" placeholder="Telephone / Mobile Phone" value=""></li>
+							<li class="bort-bot"><input type="text" name="Address" placeholder="Shipping Address" value=""></li>
+							<li><textarea name="Message" placeholder="message"></textarea></li>
+						</ul>
+					</div>
+					<button onClick="addProductTicket()">SUBSCRIBE</button>
+				</form>
+			</div>
+	</div>
+	 -->
+	</body>
+	<script type="text/javascript">	
+	function GetQueryString(name)
+	{
+	     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+	     var r = window.location.search.substr(1).match(reg);//search,查询？后面的参数，并匹配正则
+	     if(r!=null)return  unescape(r[2]); return null;
+	}
+</script>
+	<script type="text/javascript">
+	var myurl=GetQueryString("code");
+	getTicketInfo(myurl);
+	</script>
+</html>

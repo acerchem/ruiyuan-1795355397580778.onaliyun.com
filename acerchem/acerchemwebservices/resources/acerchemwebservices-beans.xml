@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!--
+ [y] hybris Platform
+
+ Copyright (c) 2017 SAP SE or an SAP affiliate company.  All rights reserved.
+
+ This software is the confidential and proprietary information of SAP
+ ("Confidential Information"). You shall not disclose such Confidential
+ Information and shall use it only in accordance with the terms of the
+ license agreement you entered into with SAP.
+-->
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="beans.xsd">
+
+    <enum class="com.acerchem.populator.options.PaymentInfoOption">
+        <value>BASIC</value>
+        <value>BILLING_ADDRESS</value>
+    </enum>
+
+    <!--auth response  -->
+    <bean class="com.acerchem.auth.data.LogoutResponse">
+        <property name="success" type="boolean"/>
+    </bean>
+
+    <!-- storesession data -->
+
+    <bean class="com.acerchem.storesession.data.LanguageDataList">
+        <property name="languages"
+                  type="java.util.Collection&lt;de.hybris.platform.commercefacades.storesession.data.LanguageData>"/>
+    </bean>
+
+    <bean class="com.acerchem.storesession.data.CurrencyDataList">
+        <property name="currencies"
+                  type="java.util.Collection&lt;de.hybris.platform.commercefacades.storesession.data.CurrencyData>"/>
+    </bean>
+
+    <!-- order data -->
+
+    <bean class="com.acerchem.order.data.CartDataList">
+        <property name="carts"
+                  type="java.util.List&lt;de.hybris.platform.commercefacades.order.data.CartData>"/>
+    </bean>
+
+    <bean class="com.acerchem.order.data.OrderEntryDataList">
+        <property name="orderEntries"
+                  type="java.util.List&lt;de.hybris.platform.commercefacades.order.data.OrderEntryData>"/>
+    </bean>
+
+    <bean class="com.acerchem.order.data.CardTypeDataList">
+        <property name="cardTypes"
+                  type="java.util.List&lt;de.hybris.platform.commercefacades.order.data.CardTypeData>"/>
+    </bean>
+
+    <bean class="de.hybris.platform.commercefacades.order.data.CartModificationDataList">
+        <property name="cartModificationList"
+                  type="java.util.List&lt;de.hybris.platform.commercefacades.order.data.CartModificationData>"/>
+    </bean>
+
+    <!-- product data -->
+
+    <bean class="com.acerchem.product.data.ProductDataList">
+        <property name="products"
+                  type="java.util.List&lt;de.hybris.platform.commercefacades.product.data.ProductData>"/>
+        <property name="catalog" type="String"/>
+        <property name="version" type="String"/>
+        <property name="totalProductCount" type="int"/>
+        <property name="totalPageCount" type="int"/>
+        <property name="currentPage" type="int"/>
+    </bean>
+
+    <bean class="com.acerchem.product.data.PromotionDataList">
+        <property name="promotions"
+                  type="java.util.List&lt;de.hybris.platform.commercefacades.product.data.PromotionData>"/>
+    </bean>
+
+    <bean class="com.acerchem.product.data.PromotionResultDataList">
+        <property name="promotions"
+                  type="java.util.List&lt;de.hybris.platform.commercefacades.product.data.PromotionResultData>"/>
+    </bean>
+
+    <bean class="com.acerchem.product.data.ReviewDataList">
+        <property name="reviews" type="java.util.List&lt;de.hybris.platform.commercefacades.product.data.ReviewData>"/>
+    </bean>
+
+    <bean class="com.acerchem.product.data.SuggestionDataList">
+        <property name="suggestions"
+                  type="java.util.List&lt;de.hybris.platform.commercefacades.product.data.SuggestionData>"/>
+    </bean>
+
+    <!-- user data -->
+
+    <bean class="com.acerchem.user.data.TitleDataList">
+        <property name="titles" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.TitleData>"/>
+    </bean>
+
+    <bean class="com.acerchem.user.data.CountryDataList">
+        <property name="countries" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.CountryData>"/>
+    </bean>
+
+    <bean class="com.acerchem.user.data.AddressDataList">
+        <property name="addresses" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.AddressData>"/>
+    </bean>
+
+    <!-- voucher data -->
+    <bean class="com.acerchem.voucher.data.VoucherDataList">
+        <property name="vouchers"
+                  type="java.util.List&lt;de.hybris.platform.commercefacades.voucher.data.VoucherData>"/>
+    </bean>
+
+    <!-- validation data -->
+    <bean class="com.acerchem.validation.data.AddressValidationData">
+        <property name="errors" type="de.hybris.platform.webservicescommons.dto.error.ErrorListWsDTO"/>
+        <property name="decision" type="String"/>
+        <property name="suggestedAddressesList"
+                  type="com.acerchem.user.data.AddressDataList"/>
+    </bean>
+
+    <!-- Additional title property for CustomerData -->
+    <bean class="de.hybris.platform.commercefacades.user.data.CustomerData"
+          extends="de.hybris.platform.commercefacades.user.data.PrincipalData">
+        <property name="title" type="String"/>
+    </bean>
+
+    <bean class="com.acerchem.user.data.LoginChangeResponse">
+        <property name="success" type="boolean"/>
+    </bean>
+
+    <bean class="com.acerchem.user.data.PasswordRestoreResponse">
+        <property name="success" type="boolean"/>
+    </bean>
+
+    <!-- update queues -->
+
+    <bean class="com.acerchem.queues.data.ProductExpressUpdateElementData">
+        <property name="code" type="String"/>
+        <property name="catalogId" type="String"/>
+        <property name="catalogVersion" type="String"/>
+    </bean>
+
+    <bean class="com.acerchem.queues.data.ProductExpressUpdateElementDataList">
+        <property name="productExpressUpdateElements"
+                  type="java.util.List&lt;com.acerchem.queues.data.ProductExpressUpdateElementData>"/>
+    </bean>
+
+    <bean class="com.acerchem.queues.data.OrderStatusUpdateElementData">
+        <property name="code" type="String"/>
+        <property name="status" type="String"/>
+        <property name="baseSiteId" type="String"/>
+    </bean>
+
+    <bean class="com.acerchem.queues.data.OrderStatusUpdateElementDataList">
+        <property name="orderStatusUpdateElements"
+                  type="java.util.List&lt;com.acerchem.queues.data.OrderStatusUpdateElementData>"/>
+    </bean>
+    
+    <bean class="de.hybris.platform.commercewebservicescommons.dto.product.ProductWsDTO">
+        <property name="genders" type="java.util.List&lt;com.acerchem.facades.product.data.GenderData>" />
+        <property name="chemicalInfo" type="String" />
+        <property name="unitCalculateRato" type="String" />
+        <property name="promotionPrice" type="de.hybris.platform.commercefacades.product.data.PriceData" />
+        <property name="isAnonymousDisplayPrice" type="java.lang.Boolean" />
+        <property name="packageWeight" type="String" />
+        <property name="packageType" type="String" />
+        <property name="netWeight" type="String" />
+        <property name="grossWeight" type="String" />
+        <property name="unitName" type="String" />
+        <property name="certificates" type="com.acerchem.facades.product.data.CertificatesData"/>
+        <property name="certificatess" type="java.util.List&lt;com.acerchem.facades.product.data.CertificatessData>"/>
+        <property name="vendor" type="com.acerchem.facades.product.data.VendorData"/>
+        <property name="specification" type="String" />
+        <property name="CAS" type="String" />
+        <property name="formulaWeight" type="String" />
+        <property name="otherName" type="String" />
+    </bean>
+    
+    <bean class="de.hybris.platform.commercewebservicescommons.dto.user.UserWsDTO">
+        <property name="addressDataList" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.AddressData>" />
+        <property name="creditAccount" type="de.hybris.platform.commercefacades.user.data.CustomerCreditAccountData" />
+        <property name="companyType" type="java.lang.String" />
+        <property name="companyName" type="java.lang.String" />
+        <property name="establishedIn" type="java.lang.String" />
+        <property name="vatNo" type="java.lang.String" />
+        <property name="haveFinancialReport" type="java.lang.Boolean" />
+        <property name="provideTradeReference" type="java.lang.Boolean" />
+        <property name="employeesNo" type="java.lang.Integer" />
+        <property name="limitCreditAmount" type="java.math.BigDecimal" />
+        <property name="revenue" type="java.math.BigDecimal" />
+        <property name="userLevel" type="de.hybris.platform.commercefacades.user.data.UserLevelData" />
+    </bean>
+    
+    <bean class="de.hybris.platform.commercewebservicescommons.dto.user.AddressWsDTO">
+        <property name="defaultAddress" type="java.lang.Boolean" />
+        <property name="phone2" type="java.lang.String" />
+    </bean>
+    
+    <bean class="de.hybris.platform.commercewebservicescommons.dto.user.RegionListWsDTO">
+        <property name="regions" type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.RegionData>"/>
+    </bean>
+    
+    <bean class="de.hybris.platform.commercewebservicescommons.dto.TicketWsDTO">
+        <property name="id" type="String" />
+        <property name="customerId" type="String" />
+        <property name="cartId" type="String" />
+        <property name="subject" type="String" />
+        <property name="message" type="String" />
+        <property name="messageHistory" type="String" />
+        <property name="creationDate" type="java.util.Date" />
+        <property name="lastModificationDate" type="java.util.Date" />
+        <property name="associatedTo" type="String" />
+        <property name="productId" type="java.lang.String" />
+        <property name="productName" type="java.lang.String" />
+        <property name="yourname" type="java.lang.String" />
+        <property name="telephone" type="java.lang.String" />
+        <property name="address" type="java.lang.String" />
+        <property name="Email" type="java.lang.String" />
+        <property name="ticketEvents" type="java.util.List&lt;de.hybris.platform.customerticketingfacades.data.TicketEventData&gt;" />
+        <property name="status" type="de.hybris.platform.customerticketingfacades.data.StatusData" />
+        <property name="availableStatusTransitions" type="java.util.List&lt;de.hybris.platform.customerticketingfacades.data.StatusData&gt;" />
+        <property name="ticketCategory" type="de.hybris.platform.customerticketingfacades.data.TicketCategory" />
+    </bean>
+    
+    <bean class="de.hybris.platform.commercewebservicescommons.dto.TicketListWsDTO">
+        <property name="tickets" type="java.util.List&lt;de.hybris.platform.customerticketingfacades.data.TicketData>"/>
+        <property name="sorts" type="java.util.List&lt;de.hybris.platform.commerceservices.search.pagedata.SortData>"/>
+        <property name="pagination" type="de.hybris.platform.commerceservices.search.pagedata.PaginationData"/>
+    </bean>
+    
+    <bean class="de.hybris.platform.commercewebservicescommons.dto.order.OrderWsDTO">
+        <property name="paymentMode" type="String"/>
+        <property name="storageCost" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+        <property name="operateCost" type="de.hybris.platform.commercefacades.product.data.PriceData"/>
+    </bean>
+
+    <bean class="de.hybris.platform.commercewebservicescommons.dto.product.StoreOfProductDataListWsDTO">
+        <property name="storeOfProductDataList" type="java.util.List&lt;com.acerchem.facades.product.data.StoreOfProductData>"/>
+    </bean>
+    
+</beans>

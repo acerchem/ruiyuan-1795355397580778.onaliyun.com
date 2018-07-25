@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta charset="UTF-8">
+	    <title></title>
+	    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	    <meta name="keywords" content="">
+	    <meta name="description" content="">
+	    <meta name="apple-mobile-web-app-capable" content="no">
+	    <meta name="format-detection" content="telephone=no">
+		<script src="../js/jquery-2.1.1.min.js"></script>
+		<script src="../js/swiper.min.js"></script>
+		<script src="../js/style.js"></script>
+		<script src="../js/acerchem.js"></script>
+		<script src="../js/jquery.cookie.js"></script>
+	    <link rel="stylesheet" type="text/css" href="../css/style-style.css">
+	    <link rel="stylesheet" type="text/css" href="../css/style-member.css">
+		<title></title>
+	</head>
+	<body>
+		<div class="g-main g-gallery">
+			<div class="header bort-bot">
+				<div class="m-left">
+					<a href="javascript:history.back()"></a>
+				</div>
+				<div class="m-center">
+					<h2>Personal</h2>
+				</div>
+				<!-- 
+				<div class="menu m-right">
+					<button type="button" class="menu-nav">
+						<i class="glyphicon"></i>
+						<span class="maxsr-only">关闭</span>
+					</button>
+					<ul class="menwrap">
+						<li class="bort-bot">
+							<a class="alink">Applications <i></i></a>
+						</li>
+						<li class="bort-bot">
+							<a class="alink">Promotions <i></i></a>
+							<ul class="chilmenu">
+								<li><a href="gallery.html">Events</a></li>
+								<li><a href="gallery.html">News/Blog</a></li>
+								<li><a href="gallery.html">Market Trends</a></li>
+								<li><a href="gallery.html">FAQs</a></li>
+								<li><a href="gallery.html">Tutorial Videos</a></li>
+								<li><a href="gallery.html">Magazine</a></li>
+								<li><a href="gallery.html">Online Subscription</a></li>
+								<li><a href="gallery.html">Affiliations</a></li>
+							</ul>
+						</li>
+						<li class="bort-bot">
+							<a class="alink">Sourcing New Ingredients <i></i></a>
+						</li>
+						<li class="bort-bot">
+							<a class="alink">Innovative Ingredients <i></i></a>
+						</li>
+						<li class="bort-bot">
+							<a class="alink">Info Center <i></i></a>
+						</li>
+					</ul>
+					<div id="maxmenu-overlay" class="maxmenu-overlay" style="display: none"></div>
+				</div>
+				 -->
+			</div>
+			
+			<div class="g-login m-personal">
+				<div class="login-form">
+					<form action="" method="post" class="pro-navcon">
+						<input type="hidden" id="addressId" value=""/>
+						<div class="d-line bort-bot" id="email">
+							<span class="name"></span>
+						</div>
+						<div class="d-line bort-bot" id="companyName">
+							<span class="name"></span>
+						</div>
+						<div class="d-line bort-bot">
+							<input type="text" placeholder="Your Name" id="name" value=""/>
+						</div>
+						<div class="d-line bort-bot">
+							<select id="language">
+								<option value="">Language</option>
+							</select>
+							<div class="arrow"></div>
+						</div>
+						<div class="d-line bort-bot">
+							<select id="currency">
+								<option value="">Currency</option>
+							</select>
+							<div class="arrow"></div>
+						</div>
+						<div class="d-line menu-address">
+							<div class="m-data">
+								<select id="country">
+									<option value="">Country</option>
+								</select>
+								<div class="arrow"></div>
+							</div>
+							<div class="m-data maxright">
+								<select id="region">
+									<option value=>Region</option>
+								</select>
+								<div class="arrow"></div>
+							</div>
+						</div>
+						<div class="d-line bort-top">
+							<input type="text" id="townCity" value=""/>
+						</div>
+					</form>
+						
+						<div class="g-succbut">
+							<button onclick="updatePersonalInfo()">Confirm</button>
+						</div>
+				</div>
+			</div>
+		</div>
+<script type="text/javascript">
+getPersonalInfo();	
+</script>
+	</body>
+</html>

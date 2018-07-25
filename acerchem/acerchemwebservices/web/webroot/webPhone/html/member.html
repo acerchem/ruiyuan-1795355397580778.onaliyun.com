@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta charset="UTF-8">
+	    <title></title>
+	    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	    <meta name="keywords" content="">
+	    <meta name="description" content="">
+	    <meta name="apple-mobile-web-app-capable" content="no">
+	    <meta name="format-detection" content="telephone=no">
+		<script src="../js/jquery-2.1.1.min.js"></script>
+		<script src="../js/swiper.min.js"></script>
+		<script src="../js/style.js"></script>
+		<script src="../js/acerchem.js"></script>
+		<script src="../js/jquery.cookie.js"></script>
+	    <link rel="stylesheet" type="text/css" href="../css/style-style.css">
+	    <link rel="stylesheet" type="text/css" href="../css/style-member.css">
+		<title></title>
+	</head>
+	<body>
+		<div class="g-main">
+			<div class="mem-state">
+				<div class="m-header">
+					<div class="left"><a href="javascript:history.back()"></a></div>
+					<div class="right"><a href="javascript:void(0);" onclick="logout()"></a></div>  
+				</div>
+				<div class="m-con">
+					<div class="name">
+						<div class="maximg">
+							<img src="../img/member-lo.png">
+						</div>
+						<div class="text" id="info">
+							<p id="name">Hello, Anonymous User</p>
+							<span id="level">Regular Members</span>
+						</div>
+					</div>
+					<div class="balance" id="credit">
+						<i></i>
+						<span>0.00</span>
+					</div>
+				</div>
+			</div>
+			
+			<div class="member-full">
+				<ul>
+					<li>
+						<a onclick="$.cookie('orderCode','');$.cookie('status','UNPAIED');" href="member-order.html">
+							<i class="i-unpaid"></i>
+							<span>Unpaid</span>
+						</a>
+					</li>
+					<li>
+						<a onclick="$.cookie('orderCode','');$.cookie('status','PROCESSING');" href="member-order.html">
+							<i class="i-process"></i>
+							<span>In Process</span>
+						</a>
+					</li>
+					<!-- 
+					<li>
+						<a onclick="$.cookie('orderCode','');$.cookie('status','REFUND');" href="member-order.html">
+							<i class="i-refund"></i>
+							<span>Refund</span>
+						</a>
+					</li>
+					 -->
+					<li>
+						<a onclick="$.cookie('orderCode','');$.cookie('status','All');" href="member-order.html">
+							<i class="i-order"></i>
+							<span>Full Order</span>
+						</a>
+					</li>
+				</ul>
+				<div class="search m-order">
+					<input style="float:left;width: 90%;" type="text" id="key" placeholder="Search Order Number"/>
+					<button onclick="searchOrder();" style="float:right;width: 10%;" type="button" class="btn i-search" ><i onclick="searchOrder();"></i></button>
+				</div>
+			</div>
+			
+			<div class="member-credit">
+				<ul>
+					<li>
+						<a href="member-personal.html">
+							<i class="i-unpaid"></i>
+							<span>Personal <br>
+								Information</span>
+						</a>
+					</li>
+					<li>
+						<a href="member-credit.html">
+							<i class="i-process"></i>
+							<span>Credit <br>
+								Account</span>
+						</a>
+					</li>
+					<li>
+						<a onclick="getAddresses()" href="member-address.html">
+							<i class="i-refund"></i>
+							<span>Address <br>
+								Book</span>
+						</a>
+					</li>
+					<li>
+						<a href="member-password.html">
+							<i class="i-order"></i>
+							<span>Modify <br>
+								Password</span>
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="g-product">
+				<div class="g-every g-two member-pro">
+					<div class="maxtitle bort-bot">
+						<i class="icon"></i><span>Promotion Item</span>
+					</div>
+					<div class="g-con swiper-container sw-everytwo">
+						<ul class="swiper-wrapper" id="promotionItem" style="height: 118px;">
+							
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	
+		<div class="maxnav bort-top">
+			<ul>
+				<li class="item-1">
+					<a href="index.html">
+						<i></i>
+						<span>home</span>
+					</a>
+				</li>
+				<li class="item-2">
+					<a href="gallery.html">
+						<i></i>
+						<span>goods</span>
+					</a>
+				</li>
+				<li class="item-4">
+					<a href="member.html" class="active">
+						<i></i>
+						<span>member</span>
+					</a>
+				</li>
+			</ul>
+		</div>	
+	</body>
+<script type="text/javascript">	
+
+getUser();	
+getPromotionItem();	
+
+function logout(){ 
+	$.cookie('userId', null);
+	$.cookie('password', null);
+	$.cookie('rememberMe', null);
+	$.cookie('access_token', null);
+    window.location.href="index.html";
+} 
+</script>
+</html>

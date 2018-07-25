@@ -1,0 +1,988 @@
+html {
+  background: #f3f3f3;
+}
+
+.g-login {
+  background: url(../img/login-bg.png);
+}
+
+.l-header {
+  height: 1rem;
+  overflow: hidden;
+  padding: 0 0.1rem;
+}
+
+.l-header .m-left a {
+  width: 0.6rem;
+  height: 0.48rem;
+  display: block;
+  background: url(../img/checkout-ico.png) no-repeat center;
+  background-size: cover;
+  background-position: center 34%;
+  margin-top: 0.28rem;
+  margin-left: 0.16rem;
+}
+
+.logo-te {
+  text-align: center;
+  color: #fff;
+  padding: 0.15rem 1rem 0.58rem;
+}
+
+.logo-te h2 {
+  font-size: 0.32rem;
+  font-weight: 500;
+  padding-top: 0.15rem;
+}
+
+.logo-te p {
+  font-size: 0.22rem;
+  line-height: 0.32rem;
+  padding-top: 0.04rem;
+}
+
+.logo-te .maximg {
+  background: #fff;
+  display: inline-block;
+  padding: 0.10rem 0.2rem;
+  border-radius: 0.8rem;
+}
+
+.logo-te img {
+  max-height: 0.6rem;
+  max-width: 100%;
+  width: auto;
+}
+
+.g-login input,
+.g-login textarea,
+.g-login select,
+.g-login .city-picker-span {
+  height: 1rem;
+  width: 100%;
+  padding-left: 0.46rem;
+}
+
+.g-login .placeholder,
+.g-login .city-picker-span .title {
+  line-height: 1rem;
+  height: 1rem;
+  font-size: 0.22rem;
+}
+
+.pro-navcon .arrow {
+  top: 0.2rem;
+  width: 0.6rem;
+}
+
+.g-login i {
+  position: absolute;
+  width: 0.4rem;
+  height: 0.4rem;
+  display: block;
+  background: url(../img/login-icon.png) no-repeat center 0;
+  background-size: cover;
+  top: 0.3rem;
+}
+
+.g-login i.name {
+  background-position: center 10.0%;
+}
+
+.g-login i.cont {
+  background-position: center 19.8%;
+}
+
+.g-login i.tel {
+  background-position: center 29.4%;
+}
+
+.g-login i.phone {
+  background-position: center 41.4%;
+}
+
+.g-login i.nation {
+  background-position: center 52.4%;
+}
+
+.g-login i.currency {
+  background-position: center 63.8%;
+}
+
+.g-login i.language {
+  background-position: center 75.0%;
+}
+
+.g-login i.address {
+  background-position: center 52.8%;
+}
+
+.g-login .passwore {
+  background-position: center 86.8%;
+}
+
+.g-login i.none{
+    background: none;
+}
+
+.g-login input::-webkit-input-placeholder,
+.g-login textarea::-webkit-input-placeholder {
+  color: #999;
+}
+
+.mem-full input::-webkit-input-placeholder {
+  text-transform: uppercase;
+}
+
+.login-form {
+  padding: 0.24rem;
+}
+
+.login-form form {
+  background: #fff;
+  border-radius: 0.08rem;
+  padding: 0 0.3rem;
+  margin: 0;
+  width: 100%;
+}
+
+.login-form form .d-line:last-child:before {
+  height: 0;
+}
+
+.g-succbut {
+  position: static;
+  text-align: center;
+  color: #fff;
+}
+
+.g-succbut a {
+  color: #fff;
+}
+
+.g-succbut button,
+.g-succbut-l button {
+  background: #70a644;
+  font-size: 0.28rem;
+  margin: 0;
+  border-radius: 0.08rem;
+  text-transform: uppercase;
+}
+
+.g-succbut-l button {
+  width: 100%;
+  height: 1rem;
+  color: #fff;
+  background: transparent;
+  border: 1px solid #fff;
+}
+
+.g-succbut .tit {
+  font-size: 0.22rem;
+  line-height: 0.32rem;
+  padding: 0.64rem 0 0.6rem;
+}
+
+.g-succbut .g-prompt {
+  padding: 0.44rem 0 0.2rem;
+  font-size: 0.22rem;
+}
+
+.sign-but {
+  padding: 0.8rem 0 2.5rem;
+}
+
+.g-succbut-l {
+  margin-top: 0.4rem;
+}
+
+.login-form .it-shipp a {
+  color: #0a6635;
+}
+
+.login-form .it-shipp {
+  text-align: right;
+  height: 1rem;
+  line-height: 1rem;
+}
+
+.login-form .it-shipp p {
+  float: left;
+  color: #777;
+}
+
+.login-form .con-invo {
+  top: 0.36rem;
+}
+
+.check-add .center {
+  padding: 0.12rem 0 0.26rem;
+}
+
+.borbot-darsh:before {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 1px;
+  border-bottom: 1px dashed #ddd;
+  border-bottom: 1px dashed #000;
+  -webkit-transform: scaleY(0.5);
+  -webkit-transform-origin: 100% 100%;
+  box-sizing: border-box;
+  bottom: 0;
+  left: 0;
+}
+
+.borbot-darsh:before {
+  bottom: 0;
+}
+
+.borbot-darsh {
+  position: relative;
+}
+
+.check-add li {
+  position: relative;
+  padding: 0 0.24rem;
+  border-bottom: 0.16rem solid #f3f3f3;
+}
+
+.handle .radio {
+  width: 50%;
+  display: inline-block;
+  position: relative;
+}
+
+.handle .hand {
+  width: 50%;
+  float: right;
+  text-align: right;
+}
+
+.handle {
+  padding: 0.02rem 0;
+}
+
+.hand span {
+  width: 0.3rem;
+  height: 0.3rem;
+  display: inline-block;
+  background: url(../img/checkout-ico.png) no-repeat;
+  background-position: center 0%;
+  background-size: 180%;
+}
+
+.hand .delect {
+  background-position: center 20%;
+}
+
+.hand .edit {
+  background-position: center 42.2%;
+  margin-right: 0.34rem;
+}
+
+.check-add p {
+  padding-left: 0rem;
+  font-size: 0.22rem;
+}
+
+.check-add h4 {
+  font-size: 0.24rem;
+}
+
+.check-add {
+  padding: 0rem;
+}
+
+.check-add .it-invoice,
+.check-add {
+  border: 0;
+}
+
+.m-succbut {
+  position: fixed;
+  text-align: center;
+  width: 100%;
+  bottom: 0;
+}
+
+.m-succbut button {
+  background: #086936;
+  font-size: 0.32rem;
+  margin: 0;
+  color: #fff;
+  width: 100%;
+  height: 1rem;
+}
+
+.def .con-invo {
+  background: url(../img/checkout-ico.png) no-repeat center 12.4%;
+  background-size: 190%;
+  width: 0.3rem;
+  height: 0.3rem;
+  display: inline-block;
+}
+
+.def .con-invo {
+  background-position: center 7.2%;
+}
+
+.it-invoice .handle .con-invo {
+  top: 0.07rem;
+  left: 0rem;
+}
+
+.it-invoice .def .radio {
+  color: #086936;
+}
+
+.it-invoice .radio span {
+  padding-left: 0.34rem;
+}
+
+
+.g-addres-popup {
+  top: 0;
+}
+
+.g-addres-popup li,.g-editaddres-popup li {
+  padding: 0.21rem 0;
+}
+.g-addres-popup li input,.g-editaddres-popup li input {
+  width: 100%;
+}
+
+.menu-address .maxrig  {
+  top: 0.05rem;
+}
+
+.menu-address .m-data {
+	padding: 0;
+}
+
+.g-addres-popup .g-succbut button,.g-editaddres-popup .g-succbut button {
+  border-radius: 0;
+  background: #096735;
+}
+
+.g-addres-popup .form-con,.g-editaddres-popup .form-con {
+  padding: 0 0.24rem;
+  margin-bottom: 1rem;
+}
+
+.g-addres-popup .arrow ,.g-editaddres-popup .arrow {
+  background: url(../img/icon.png) no-repeat center 35.3%;
+  background-size: cover;
+  width: 0.8rem;
+  height: 0.5rem;
+  display: block;
+  position: absolute;
+  top: 0rem;
+  right: -0.3rem;
+}
+
+.g-addres-popup .title ,.g-editaddres-popup .title {
+  padding: 0 ;
+  margin: 0;
+}
+
+.city-picker-span .title {
+  margin-left: 0;
+  line-height: inherit;
+}
+
+.check-status {
+  text-align: center;
+  padding: 0.4rem 0 0.34rem;
+}
+
+.check-status .status {
+  background: #70a644;
+  color: #fff;
+  display: inline-block;
+  border-radius: 0.24rem;
+  line-height: 0.46rem;
+  padding: 0 0.24rem;
+}
+
+.check-title .item {
+  width: 33.33%;
+  color: #444;
+}
+
+.check-title {
+  display: flex;
+}
+
+.check-title p {
+  font-size: 0.32rem;
+  line-height: 0.32rem;
+  padding-bottom: 0.03rem;
+  padding-top: 0.4rem;
+}
+
+.check-title span {
+  font-size: 0.18rem;
+  display: block;
+}
+
+.mem-credit .data {
+  background: #f3f3f3;
+  color: #777;
+  text-align: center;
+  font-size: 0.22rem;
+  padding: 0.22rem 0 0.04rem;
+  text-transform: uppercase;
+}
+
+.mem-credit .m-data {
+  font-size: 0.22rem;
+  padding: 0.08rem 0rem;
+  margin: 0 0.24rem;
+}
+
+.m-data .date {
+  color: #777;
+  float: right;
+  text-transform: uppercase;
+}
+
+.m-data .num:before {
+  content: '';
+  display: inline-block;
+  background: url(../img/checkout-ico.png) no-repeat center 49.4%;
+  background-size: 200%;
+  width: 0.3rem;
+  height: 0.3rem;
+  vertical-align: -0.04rem;
+  margin-right: 0.06rem;
+}
+
+.m-data,
+.m-con {
+  padding: 0 0.24rem;
+}
+
+.m-con .item {
+  width: 25%;
+  display: block;
+  text-align: center;
+  padding: 0.08rem 0 0.24rem;
+}
+
+.m-con .item p {
+  font-size: 0.2rem;
+  color: #777;
+}
+
+.m-con .item span {
+  font-size: 0.22rem;
+  line-height: 0.22rem;
+  padding-top: 0.02rem;
+  display: block;
+}
+
+.mem-credit .m-con {
+  display: -webkit-box;
+}
+
+.m-order input {
+  width: 100%;
+  height: 0.6rem;
+  border-radius: 0.08rem;
+  padding-left: 0.23rem;
+  background: #f3f3f3;
+}
+
+.m-order {
+  padding: 0.2rem 0.5rem;
+}
+
+.m-order form {
+  position: relative;
+}
+
+.m-order form button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: transparent;
+}
+
+.m-order button i {
+  display: block;
+  width: 0.7rem;
+  height: 0.4rem;
+  margin-top: 0.10rem;
+  background: url(../img/icon.png) no-repeat center 14.8%;
+  background-size: cover;
+}
+
+.m-data .state {
+  float: right;
+}
+
+.tabs {
+  display: flex;
+}
+
+.tabs > li {
+  width: 33.33%;
+  display: inline-block;
+  text-align: center;
+  color: #444;
+  padding: 0.12rem 0;
+  position: relative;
+}
+
+.tabs .uldiv {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  padding: 0;
+  top: 25%;
+  left: 0;
+  transform: initial;
+}
+
+.tabs .uldiv ul {
+  background: #fff;
+  color: #222;
+  text-align: left;
+  padding: 0.3rem 0.24rem;
+}
+
+.tabs .uldiv li {
+  line-height: 0.6rem;
+}
+
+.tabs .ulshow {
+  display: block;
+}
+
+.tabs .select {
+  color: #444;
+}
+
+.tabs .i-icon {
+  width: 0;
+  height: 0;
+  border-left: 0.08rem solid transparent;
+  border-right: 0.08rem solid transparent;
+  border-top: 0.09rem solid #777;
+  display: inline-block;
+}
+
+.tabs .i-icon.top{
+  border-left: 0.08rem solid transparent;
+  border-right: 0.08rem solid transparent;
+  border-top: 0rem solid transparent;
+  border-bottom: 0.09rem solid #777;
+} 
+
+.mem-order .but {
+  width: 50%;
+  float: right;
+  margin-top: 0.16rem;
+  padding-left: 5%;
+}
+
+.order-list .tab-pane{
+	display: none;
+}
+
+.order-list .tab-pane.active{
+	display: block;
+}
+
+.g-gallery .tabs .active a ,.g-gallery .tabs .active .select {
+    color: #086936;
+}
+
+.g-gallery .tabs .active a i,.g-gallery .tabs .active .sldiv i {
+    border-top-color: #086936;
+}
+
+.g-gallery .tabs .active a i.top {
+    border-bottom-color: #086936;
+    border-top-color: transparent;
+}
+
+.mem-order .set {
+  background: #096735;
+}
+
+.mem-order .fund {
+  background: transparent;
+  border: 1px solid #aaa;
+  color: #444;
+}
+
+.mem-order .cance {
+  background: transparent;
+  border: 1px solid #0A6635;
+  color: #0A6635;
+}
+
+.mem-order button {
+  font-size: 0.2rem;
+  text-transform: capitalize;
+  line-height: 0.2rem;
+  padding: 0.14rem 0rem;
+  height: 0.5rem;
+}
+
+.mem-order .item-text {
+  width: 44%;
+  text-align: left;
+}
+
+.mem-order .g-succbut {
+  width: 56%;
+}
+
+.mem-order li {
+  border-top: 0.16rem solid #f3f3f3;
+}
+
+.mem-order .m-data span {
+  font-size: 0.24rem;
+}
+
+.mem-order .m-con .item {
+  display: inline-block;
+}
+
+.mem-order .m-con {
+  display: flex;
+  padding: 0;
+}
+
+.mem-order .m-data {
+  padding: 0.06rem 0rem;
+}
+
+.mem-order .m-col {
+  padding: 0 0.24rem;
+}
+
+.chick-pro .gen-price span {
+  font-size: 0.28rem;
+  text-transform: uppercase;
+}
+
+.chick-pro .gen-price p {
+  font-size: 0.32rem;
+  line-height: 0.32rem;
+}
+
+.succ-list .order-detai li {
+  padding: 0.28rem 0;
+}
+
+.succ-list .order-detai {
+  padding: 0 0.24rem;
+}
+
+.succ-id label {
+  top: 0.6rem;
+}
+
+.addres-popup .center {
+  padding: 0 0.86rem;
+}
+
+.g-detbut {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  display: inline-flex;
+}
+
+.g-detbut button {
+  width: 50%;
+  display: block;
+  font-size: 0.28rem;
+  height: 1rem;
+  line-height: 1rem;
+}
+
+.g-detbut .but-ment {
+  background: #70a644;
+  color: #fff;
+}
+
+.mem-state {
+  background: url(../img/member-bg.jpg) center;
+  background-size: cover;
+  padding: 0 0.24rem;
+}
+
+.mem-state .m-con {
+  display: inline-flex;
+  width: 100%;
+  padding: 0.2rem 0rem 0.5rem;
+}
+
+.mem-state .maximg {
+  width: 0.8rem;
+  height: 0.8rem;
+  float: left;
+  margin-right: 0.18rem;
+}
+
+.mem-state .name {
+  width: 60%;
+}
+
+.mem-state .name p {
+  font-size: 0.32rem;
+  color: #fff;
+  line-height: 0.32rem;
+  padding-bottom: 0.08rem;
+}
+
+.mem-state .name span {
+  font-size: 0.2rem;
+  color: #0f9950;
+  background: #084c28;
+  padding: 0.06rem 0.13rem;
+}
+
+.mem-state .balance {
+  width: 40%;
+  text-align: right;
+  color: #fff;
+  padding-top: 0.4rem;
+}
+
+.mem-state .balance span {
+  font-size: 0.32rem;
+  letter-spacing: 0.01rem;
+  display: inline-block;
+  line-height: 0.32rem;
+}
+
+.mem-state .balance i {
+  width: 0.34rem;
+  height: 0.34rem;
+  display: inline-block;
+  background: url(../img/checkout-ico.png) no-repeat;
+  background-size: 180%;
+  background-position: center 64.6%;
+}
+
+.m-header {
+  height: 1rem;
+}
+
+.m-header a {
+  width: 0.36rem;
+  height: 0.36rem;
+  display: block;
+  background: url(../img/checkout-ico.png) no-repeat;
+  background-size: 180%;
+  margin-top: 0.32rem;
+}
+
+.m-header .left a {
+  background-position: center 34.4%;
+}
+
+.m-header .right a {
+  background-position: center 57%;
+}
+
+.member-full li,
+.member-credit li {
+  width: 25%;
+  display: inline-block;
+  text-align: center;
+}
+
+.member-full {
+  padding: 0.26rem 0;
+  border-bottom: 0.16rem solid #f3f3f3;
+}
+
+.member-full .m-order {
+  padding: 0.2rem 0.5rem 0.04rem;
+}
+
+.member-full ul,
+.member-credit ul {
+  display: inline-flex;
+  width: 100%;
+  padding: 0;
+}
+
+.member-full a {
+  font-size: 0.22rem;
+}
+
+.member-full i {
+  width: 0.54rem;
+  height: 0.54rem;
+  display: inline-block;
+  background: url(../img/mem_icon2.png) no-repeat;
+  background-size: cover;
+}
+
+.member-full .i-unpaid {
+  background-position: center 1%;
+}
+
+.member-full .i-process {
+  background-position: center 33%;
+}
+
+.member-full .i-refund {
+  background-position: center 66%;
+}
+
+.member-full .i-order {
+  background-position: center 99%;
+}
+
+.member-full span {
+  display: block;
+}
+
+.member-credit span {
+  line-height: 0.28rem;
+  font-size: 0.22rem;
+  display: block;
+  margin-top: 0.12rem;
+  letter-spacing: 0.01rem;
+}
+
+.member-credit i {
+  width: 0.5rem;
+  height: 0.5rem;
+  display: inline-block;
+  background: url(../img/mem_icon3.png) no-repeat;
+  background-size: cover;
+}
+
+.member-credit .i-unpaid {
+  background-position: center 2.6%;
+}
+
+.member-credit .i-process {
+  background-position: center 33.9%;
+}
+
+.member-credit .i-refund {
+  background-position: center 66%;
+}
+
+.member-credit .i-order {
+  background-position: center 96.5%;
+}
+
+.member-credit {
+  padding: 0.28rem 0 0.3rem;
+}
+
+.g-product .member-pro .maxtitle span {
+  font-size: 0.28rem;
+  font-weight: 600;
+  color: #222;
+}
+
+.m-personal,
+.m-passwo {
+  background: none;
+}
+
+.m-personal .d-line{
+	overflow: hidden;
+}
+
+.m-personal .login-form,
+.m-personal form,
+.m-passwo .login-form,
+.m-passwo form {
+  padding: 0;
+}
+
+.m-personal .pro-navcon .arrow {
+  right: 0;
+}
+
+.m-personal .g-succbut button,
+.m-passwo .g-succbut button {
+  border-radius: 0;
+  background: #0A6635;
+}
+
+.m-personal .g-succbut {
+  border-top: 0.5rem solid #f3f3f3;
+  padding: 0 0.24rem;
+  background: #f3f3f3;
+}
+
+.m-personal select {
+  color: #222 !important;
+}
+
+.m-personal .placeholder {
+  color: #222;
+}
+
+.m-personal input::-webkit-input-placeholder {
+  color: #222;
+}
+
+.m-personal .name {
+  color: #777;
+  height: 1rem;
+  line-height: 1rem;
+  display: block;
+}
+
+.m-personal input,
+.m-personal select,
+.m-personal .city-picker-span,
+.m-personal .name,
+.m-passwo input,
+.m-passwo textarea,
+.m-passwo select,
+.m-passwo .city-picker-span,
+.m-passwo .name {
+  padding-left: 0.36rem;
+  font-size: 0.24rem;
+}
+.test {
+	padding-left: 0.36rem;
+  	font-size: 0.24rem;
+  	overflow: visible;
+}
+
+
+.m-personal .pitch{
+    color: #222;
+}
+
+.m-passwo .g-succbut button,.m-passwo .m-personal button{
+   text-transform: capitalize;
+   font-size: 0.32rem; 
+}
+.m-passwo .tit {
+  color: #777;
+  text-align: left;
+  padding: 0.22rem 0 1rem;
+  font-size: 0.24rem;
+  line-height: 0.32rem;
+}
+
+.m-passwo .g-succbut {
+  background: #f3f3f3;
+  padding: 0 0.24rem;
+}
+
+.member-unpaid li{
+    width: 50%;
+}

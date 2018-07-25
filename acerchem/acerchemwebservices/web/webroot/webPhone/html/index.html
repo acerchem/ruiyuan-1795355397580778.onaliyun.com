@@ -1,0 +1,163 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="apple-mobile-web-app-capable" content="no">
+    <meta name="format-detection" content="telephone=no">
+	<script src="../js/jquery-2.1.1.min.js"></script>
+	<script src="../js/swiper.min.js"></script>
+	<script src="../js/style.js"></script>
+	<script src="../js/jquery.cookie.js"></script>
+		<script src="../js/acerchem.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/style-style.css">
+</head>
+<body>
+	<div class="g-main">
+	<!-- 
+		<div class="header">
+		
+			<div class="menu left">
+				<button type="button" class="menu-nav">
+					<i class="glyphicon"></i>
+					<span class="maxsr-only">关闭</span>
+				</button>
+				<ul class="menwrap">
+					<li class="bort-bot">
+						<a class="alink">Applications <i></i></a>
+					</li>
+					<li class="bort-bot">
+						<a class="alink">Promotions <i></i></a>
+						<ul class="chilmenu">
+							<li><a href="gallery.html">Events</a></li>
+							<li><a href="gallery.html">News/Blog</a></li>
+							<li><a href="gallery.html">Market Trends</a></li>
+							<li><a href="gallery.html">FAQs</a></li>
+							<li><a href="gallery.html">Tutorial Videos</a></li>
+							<li><a href="gallery.html">Magazine</a></li>
+							<li><a href="gallery.html">Online Subscription</a></li>
+							<li><a href="gallery.html">Affiliations</a></li>
+						</ul>
+					</li>
+					<li class="bort-bot">
+						<a class="alink">Sourcing New Ingredients <i></i></a>
+					</li>
+					<li class="bort-bot">
+						<a class="alink">Innovative Ingredients <i></i></a>
+					</li>
+					<li class="bort-bot">
+						<a class="alink">Info Center <i></i></a>
+					</li>
+				</ul>
+			</div>
+			 
+			
+			<div id="maxmenu-overlay" class="maxmenu-overlay" style="display: none"></div>
+			<div class="left menu-nav navbar-toggle">
+				<a href="#"><i></i></a>
+			</div>
+			<div class="center logo">
+				<img src="../img/logo.png">
+			</div>
+			<div class="right search">
+				<a class="btn"></a>
+				<div class="maxmenu-overlay2"></div>
+			</div>
+		</div>
+		
+		 
+		<div class="search_head">
+			<form action="gallery-search.html" class="bort-top" target="_self">
+				<input type="text" class="key" placeholder="SEARCH"/>
+				<button href="javascript:void(0)" class="btn i-search"></button>
+				<ul class="bort-top">
+					<li>search all china wholesale stores . 45 million products free shipping</li>
+				</ul>
+			</form>
+			<div class="maxmenu-overlay2"></div>
+		</div>
+		-->
+		
+		
+		<div class="swiper-container slider-pic">
+		  <div class="swiper-wrapper">
+		    <div class="swiper-slide"><img src="../img/banner1.jpg"></div>
+		    <div class="swiper-slide"><img src="../img/banner1.jpg"></div>
+		    <div class="swiper-slide"><img src="../img/banner1.jpg"></div>
+		  </div>
+	    	<div class="slide-tit">
+	    		<h3>
+	    		<br>
+	    		</h3>
+				<div class="right search" style="position: relative;">
+					<input type="text" class="key" name="key1" placeholder="SEARCH"/>
+					<button type="submit" style="right:45px;" onclick="window.location.href='gallery-search.html?key='+document.getElementsByName('key1')[0].value;" class="btn i-search"><i></i></button>
+				</div>
+	    		<p><br></p>
+	    	</div>
+		  <div class="pagination"></div>
+		</div>
+		<div class="g-index-pro">
+			<div class="left item">
+				<img src="../img/index_pr1.png">
+				<div class="item-text">
+					<div class="title"><i></i>promo</div>
+					<a href="product.html">
+						<p>Sodium Hyaluronate 1% Solution (25kg Drum) </p>
+						<div class="price"><em>$</em> <b>58</b> <span>15%</span></div>
+					</a>
+				</div>
+			</div>
+			<div class="right item">
+				<img src="../img/index_bg1.png">
+				<div class="item-text">
+					<div class="center">
+						<h3>Factory<br> 
+							Examination Record</h3>
+						<a href="#">DETAILS</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="g-index-let">
+			<div class="g-con">
+				<div class="item-text">
+					<div class="item item-2 login-popup">
+						<p>If you have an opinion or advice</p>
+						<p>Let's contact you to get more information</p>
+						<a href="tickets.html">contact you</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="maxnav bort-top">
+			<ul>
+				<li class="item-1">
+					<a href="index.html" class="active">
+						<i></i>
+						<span>home</span>
+					</a>
+				</li>
+				<li class="item-2">
+					<a href="gallery.html">
+						<i></i>
+						<span>goods</span>
+					</a>
+				</li>
+				<li class="item-4"><!--login-popup-->
+					<a href="sign.html">
+						<i></i>
+						<span>member</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</body>
+<script>
+getCategories();
+</script>
+</html>

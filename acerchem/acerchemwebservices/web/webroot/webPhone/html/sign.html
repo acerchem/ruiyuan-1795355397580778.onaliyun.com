@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta charset="UTF-8">
+	    <title></title>
+	    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	    <meta name="keywords" content="">
+	    <meta name="description" content="">
+	    <meta name="apple-mobile-web-app-capable" content="no">
+	    <meta name="format-detection" content="telephone=no">
+		<script src="../js/jquery-2.1.1.min.js"></script>
+		<script src="../js/swiper.min.js"></script>
+		<script src="../js/style.js"></script>
+		<script src="../js/jquery.cookie.js"></script>
+		<script src="../js/acerchem.js"></script>
+	    <link rel="stylesheet" type="text/css" href="../css/style-style.css">
+	    <link rel="stylesheet" type="text/css" href="../css/style-member.css">
+		<title></title>
+	</head>
+	<body id="login">
+		<div class="g-login">
+			<div class="l-header">
+				<div class="m-left">
+					<a href="javascript:history.back()"></a>
+				</div>
+			</div>
+			<div class="logo-te">
+				<div class="maximg">
+					<img src="../img/logo.png">
+				</div>
+				<div class="text">
+					<h2>Returning Customer</h2>
+					<p>Already have an account? Sign in to returning your account settings.</p>
+				</div>
+			</div>
+			<div class="login-form">
+				<form method="put" class="pro-navcon">
+					<div class="d-line bort-bot">
+					<i class="email"></i>
+					<input type="text" value="" name="username" placeholder="Email Address">
+					</div>
+					<div class="d-line bort-bot">
+					<i class="passwore"></i>
+					<input type="password" value="" name="password" placeholder="Password">
+					</div>
+					<div class="d-line bort-bot it-shipp active">
+						<div class="con-invo"></div>
+						<p>Keep me signed in</p>
+					</div>
+				</form>
+				<div class="sign-but">
+					<div class="g-succbut">
+						<button class="login">Log In</button>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	
+<script type="text/javascript">	
+
+var userId=$.cookie("userId");
+var password=$.cookie("password");
+var rememberMe=$.cookie("rememberMe");
+if(userId != 'null' && password != 'null' && rememberMe != 'null' && rememberMe) {
+	window.location.href="member.html";
+}
+
+//autoLogin();
+
+$('.login').on('click',function(){
+	var userId=document.getElementsByName("username")[0].value;
+	var password=document.getElementsByName("password")[0].value;
+	var rememberMe=$(".login-form .it-shipp").hasClass("active");
+	
+	$.ajax({
+		url: tokenUrl,
+		async: true,
+		type:'post',
+		data:'client_id=mobile_android&client_secret=secret&grant_type=password&username='+userId+'&password='+password,
+		dataType: "json",
+		crossDomain: true,
+		success:function(returndata){
+			console.log("success:"+JSON.stringify(returndata));
+	    	$.cookie("access_token","Bearer "+returndata.access_token);
+	    	$.cookie("userId",userId);
+	    	$.cookie("password",password);
+	    	$.cookie("rememberMe",rememberMe);
+	    	window.location.href="member.html";
+	    },
+	    error:function(returndata){
+	    	console.log("error:"+JSON.stringify(returndata));
+	    	alert('Email or Password is Error!');
+	    }
+	});
+});
+</script>
+</html>

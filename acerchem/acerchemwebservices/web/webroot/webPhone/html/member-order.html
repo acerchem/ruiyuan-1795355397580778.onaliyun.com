@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	    <meta charset="UTF-8">
+	    <title></title>
+	    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+	    <meta name="keywords" content="">
+	    <meta name="description" content="">
+	    <meta name="apple-mobile-web-app-capable" content="no">
+	    <meta name="format-detection" content="telephone=no">
+		<script src="../js/jquery-2.1.1.min.js"></script>
+		<script src="../js/bootstrap.min.js"></script>
+		<script src="../js/swiper.min.js"></script>
+		<script src="../js/style.js"></script>
+		<script src="../js/jquery.cookie.js"></script>
+		<script src="../js/acerchem.js"></script>
+	    <link rel="stylesheet" type="text/css" href="../css/style-style.css">
+	    <link rel="stylesheet" type="text/css" href="../css/style-member.css">
+		<title></title>
+	</head>
+	<body>
+		<div class="g-main g-gallery">
+			<div class="header bort-bot">
+				<div class="m-left">
+					<a href="javascript:history.back()"></a>
+				</div>
+				<div class="m-center">
+					<h2>Your Orders</h2>
+				</div>
+				<!-- 
+				<div class="menu m-right">
+					<button type="button" class="menu-nav">
+						<i class="glyphicon"></i>
+						<span class="maxsr-only">关闭</span>
+					</button>
+					<ul class="menwrap">
+						<li class="bort-bot">
+							<a class="alink">Applications <i></i></a>
+						</li>
+						<li class="bort-bot">
+							<a class="alink">Promotions <i></i></a>
+							<ul class="chilmenu">
+								<li><a href="gallery.html">Events</a></li>
+								<li><a href="gallery.html">News/Blog</a></li>
+								<li><a href="gallery.html">Market Trends</a></li>
+								<li><a href="gallery.html">FAQs</a></li>
+								<li><a href="gallery.html">Tutorial Videos</a></li>
+								<li><a href="gallery.html">Magazine</a></li>
+								<li><a href="gallery.html">Online Subscription</a></li>
+								<li><a href="gallery.html">Affiliations</a></li>
+							</ul>
+						</li>
+						<li class="bort-bot">
+							<a class="alink">Sourcing New Ingredients <i></i></a>
+						</li>
+						<li class="bort-bot">
+							<a class="alink">Innovative Ingredients <i></i></a>
+						</li>
+						<li class="bort-bot">
+							<a class="alink">Info Center<i></i></a>
+						</li>
+					</ul>
+					<div id="maxmenu-overlay" class="maxmenu-overlay" style="display: none"></div>
+				</div>
+				 -->
+			</div>
+			<div class="search m-order">
+				<input style="float:left;width: 90%;" type="text" id="key" placeholder="Search Order Number"/>
+				<button onclick="searchOrder();" style="float:right;width: 10%;" type="button" class="btn i-search" ><i></i></button>
+			</div>
+			<br/>
+			<ul id="myTab" class="tabs bort-top nav nav-tabs">
+			    <li class="dropdown active">
+					<div class="sldiv">  
+					  <span class="select" style="font-size: 10px;">Status</span>
+					  <i class="i-icon"></i>  
+					  <div class="uldiv bort-top">  
+					    <ul>  
+					      <li>All</li>  
+					      <li>UNCONFIRMED</li>  
+					      <li>PROCESSING</li>  
+					      <li>UNPAIED</li>  
+					      <li>COMPLETED</li>  
+					      <li>REFUND</li>
+					    </ul>  
+					  </div>  
+					</div>
+			    </li>
+				<li  href="#Total" style="font-size: 10px;" data-toggle="tab" class="gall-price Total" data-name=""><a>Total<i class="i-icon"></i></a></li>
+				<li href="#Date" style="font-size: 10px;" data-toggle="tab" class="gall-date time" data-name=""><a>Date<i class="i-icon"></i></a></li>
+			</ul>
+			
+			<div id="myTabContent" class="order-list">
+				<div class="tab-pane fade active in" id="Unpaid">
+				<div class="mem-order">
+					<ul id="orders">
+					</ul>
+					<div class="more">
+						<a href="">~ No More ~</a>
+					</div>
+				</div>
+				</div>
+		</div>
+	</div>
+
+<script type="text/javascript">
+// UNCONFIRMED--》UNCONFIRMED,CHECKED_VALID
+// PROCESSING--》 UNDELIVERED,DELIVERED
+// UNPAIED--》 UNPAIED
+// COMPLETED--》COMPLETED
+// REFUND--》CANCELLED
+var orderCode='';
+var statuses='';
+var sort='byDate';
+if($.cookie("orderCode")!=null)
+{
+	orderCode=$.cookie("orderCode");
+	document.getElementById('key').value=$.cookie("orderCode");
+}
+if($.cookie("status")!=null)
+{
+	$('.sldiv .select').text($.cookie("status"));
+	if($.cookie("status")=="UNPAIED")
+	{
+		statuses="UNPAIED";
+	}
+	else if($.cookie("status")=='PROCESSING')
+	{
+		statuses='UNDELIVERED,DELIVERED';
+	}
+	
+	/* else if($.cookie("status")=='REFUND')
+	{
+		statuses='CANCELLED';
+	} */
+}
+getOrder();
+	
+//状态选择
+$('.sldiv .select').on('click',function(){  
+  $(this).siblings('.uldiv').toggleClass('ulshow');
+  $(".g-gallery .tabs li").removeClass('active');
+});  
+$('.sldiv .uldiv ul li').on('click',function(){  
+  statuses=$(this).text();  
+  $('.sldiv .select').text(statuses);  
+  $('.uldiv').removeClass('ulshow'); 
+  $(".g-gallery .dropdown").addClass('active');
+  if(statuses=='All')
+  {
+	  statuses='';
+  }
+  else if(statuses=='PROCESSING')
+  {
+	  statuses='UNDELIVERED,DELIVERED';
+  }
+  else if(statuses=='UNCONFIRMED')
+  {
+	  statuses='UNCONFIRMED,CHECKED_VALID';
+  }
+  /* else if(statuses=='REFUND')
+  {
+	  statuses='CANCELLED';
+  } */
+  getOrder();
+});
+
+//按金额排序
+//按日期降序
+/* 
+$(".i-icon").click(function(){
+	sort='date';
+	getOrder();
+})
+ */
+/* 
+$(".g-gallery .gall-date").click(function(){
+	sort='date';
+	getOrder();
+})
+ */
+
+
+// 排序
+(function(){
+	var arr=[];
+	var arr2 = [];
+	var item = $('#Unpaid ul li');
+	$.each(item,function(index,item){		
+		arr.push($(item).data('total'));
+		//arr2.push($(item).data('time'));
+	})
+	arr.sort();
+	//arr2.sort();
+	$('.gall-price').on('click',function(){
+		
+		if($(this).hasClass('Total')){
+			var data = $(this).attr('data-Total');
+
+			if(data != 'top'){
+				$(this).attr('data-Total','top');
+				for(var i=0;i<arr.length;i++){
+					$('#Unpaid ul').append($('#Unpaid ul li[data-Total="'+arr[i]+'"]'));
+				}
+			}else{
+				
+				$(this).attr('data-Total','bottom');
+				for(var i=arr.length;i>-1;i--){
+					$('#Unpaid ul').append($('#Unpaid ul li[data-Total="'+arr[i]+'"]'));
+				}
+			}
+			
+		}
+		/*
+		else if($(this).hasClass('time')){
+			var data = $(this).attr('data-time');
+
+			if(data != 'top'){
+				$(this).attr('data-time','top');
+				for(var i=0;i<arr2.length;i++){
+					$('#Unpaid ul').append($('#Unpaid ul li[data-time="'+arr2[i]+'"]'));
+				}
+			}else{
+				
+				$(this).attr('data-time','bottom');
+				for(var i=arr2.length;i>-1;i--){
+					$('#Unpaid ul').append($('#Unpaid ul li[data-time="'+arr2[i]+'"]'));
+				}
+			}
+		}
+		*/
+		
+	})
+	
+
+
+})()
+
+</script>
+	</body>
+</html>

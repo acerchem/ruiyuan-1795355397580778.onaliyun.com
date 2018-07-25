@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+    <meta name="viewport" content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+    <meta name="apple-mobile-web-app-capable" content="no">
+    <meta name="format-detection" content="telephone=no">
+	<script src="../js/jquery-2.1.1.min.js"></script>
+	<script src="../js/swiper.min.js"></script>
+	<script src="../js/style.js"></script>
+	<script src="../js/jquery.cookie.js"></script>
+	<script src="../js/acerchem.js"></script>
+    <link rel="stylesheet" type="text/css" href="../css/style-style.css">
+    <link rel="stylesheet" type="text/css" href="../css/style-member.css">
+</head>
+<body>
+	<div class="g-main g-gallery">
+		<div class="header bort-bot">
+			<div class="m-left">
+				<a href="javascript:history.back()"></a>
+			</div>
+			<div class="m-center">
+				<h2>Order Detail</h2>
+			</div>
+		</div>
+		<!--con-->
+		<div class="m-gallery" id="detail">
+		</div>
+	</div>
+</body>
+<script type="text/javascript">	
+var orderId=window.location.search.substr(1);
+showOrder();
+</script>
+</html>
