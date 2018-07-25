@@ -745,7 +745,6 @@ function updateHtml(returndata){
     if(returndata.orders!=null)
     {
         for(var i = 0; i < returndata.orders.length; i++){
-        	alert(returndata.orders[i].total);
         	
             html+='<li data-Total="' + returndata.orders[i].total.formattedValue + '"><div class="m-col"><div class="m-data bort-bot"><a href="member-order-detailed.html?'+returndata.orders[i].code+'"><span class="num">'+returndata.orders[i].code+'</span>';
             html+='<span class="date">due date ：'+formatData(returndata.orders[i].placed)+'</span></a></div><div class="m-con"><div class="item item-text"><p>';
@@ -851,7 +850,7 @@ function addTicket()
                 "telephone":telephone,
                 "address":address,
                 "email":email,
-                "subjet":"Home Advisory",
+                "subject":"Home Advisory",
                 "message":message,
                 "productId":"",
                 "productName":""
