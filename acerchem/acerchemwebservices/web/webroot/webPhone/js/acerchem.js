@@ -437,7 +437,18 @@ function getAddresses()
                         html+='<li>';
                     }
                     html+='<div class="center borbot-darsh"><h4>'+returndata.addresses[i].lastName+'</h4>';
-                    html+='<p>'+returndata.addresses[i].town+','+returndata.addresses[i].region.name+','+returndata.addresses[i].country.name+'</p>';
+                    if(returndata.addresses[i].region != null) {
+                    	html+='<p>'+returndata.addresses[i].town+','+returndata.addresses[i].region.name+',';
+                    }else{
+                    	html+='<p>'+returndata.addresses[i].town+',';
+                    }
+                    
+                    if(returndata.addresses[i].country != null) {
+                    	html+=returndata.addresses[i].country.name+'</p>';
+                    }else{
+                    	html+='</p>';
+                    }
+                    
                     html+='<p>'+returndata.addresses[i].phone+'/'+returndata.addresses[i].phone2+'</p></div>';
                     html+='<div class="handle"><div class="radio" onclick="defaultAddressById('+returndata.addresses[i].id+')"><div class="con-invo"></div><span>Default</span></div>';
                     html+='<div class="hand"><span class="edit editaddres-popup" onclick="getAddressById('+returndata.addresses[i].id+')"></span><span class="delect" onclick="delAddressById('+returndata.addresses[i].id+')"></span></div></div></li>';   
