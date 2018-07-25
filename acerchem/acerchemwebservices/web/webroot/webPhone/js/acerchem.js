@@ -383,7 +383,7 @@ function getPromotionItem()
             var html='';
             var products=returndata.products;
             for(var i = 0; i < products.length; i++){
-                html+='<li class="swiper-slide swiper-slide-visible swiper-slide-active" style="width: 81.6px; height: 118px;"><a href="product.html?code='+products[i].code+'">';
+                html+='<li class="swiper-slide swiper-slide-visible swiper-slide-active" style="width: 7.5rem; height: 8.25rem"><a href="product.html?code='+products[i].code+'">';
                 if(products[i].images != null) {
                 	html+='<div class="maximg"><img   src="'+products[i].images[0].url.substring(23)+'"></div><p>['+products[i].code+']'+products[i].name+'</p><span>';
                 }else{
@@ -1415,7 +1415,12 @@ function getProductInvenroty(code)
         },
         success:function(returndata){
             console.log("success:"+JSON.stringify(returndata));
-            
+            var storeOfProductDataList = returndata.returndata;
+            if(storeOfProductDataList != null) {
+            	for(var i = 0; i < storeOfProductDataList.length; i++) {
+            		
+            	}
+            }
         },
         error:function(returndata){
             console.log("error:"+JSON.stringify(returndata));
@@ -1437,7 +1442,7 @@ function getCategories(code) {
         },
         success:function(returndata){
             console.log("success:"+JSON.stringify(returndata));
-            
+
         },
         error:function(returndata){
             console.log("error:"+JSON.stringify(returndata));
