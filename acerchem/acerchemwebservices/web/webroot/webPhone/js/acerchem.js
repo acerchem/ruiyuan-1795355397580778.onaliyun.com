@@ -1220,9 +1220,60 @@ function getProductsByCode(code)
             additionInfo +='<tr><td class="left">Package Type</td><td class="right">' + returndata.netWeight +returndata.unitName + '/'+  returndata.packageType +'</td></tr>';
             $("#additionalInfo").append(additionInfo);
             
+           /*
             var code = '<span class="news" onclick= "window.location.href=\'productticket-add.html?code=' + returndata.code + '\';"><i></i></span>';
             
             $("#news").append(code);
+            */
+            
+            
+            var ProName = '';
+            var ProCode = '';
+            ProName += '<input type="text" readonly="readonly" name="ProName" value="' +  returndata.name  + '">';
+            ProCode += '<input type="text" readonly="readonly" name="ProCode" value="' +  returndata.code  + '">';
+            $("#ProName").append(ProName);
+            $("#ProCode").append(ProCode);
+            
+            var userId = $.cookie("userId");
+            
+            if(userId != undefined && userId != 'null') {
+                $.ajax({
+                    url:homeUrl+"/users/"+$.cookie("userId"),
+                    type:'get',
+                    dataType: "json",
+                    async: true,
+                    crossDomain: true,
+                    beforeSend: function(request) {
+                        request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+                        request.setRequestHeader("Authorization", $.cookie("access_token"));
+                    },
+                    success:function(returndata){
+                        //console.log("success:"+JSON.stringify(returndata));
+                    	var Name = '';
+                        var Email = '';
+                        Name += '<input type="text"  name="Name" placeholder="Your Name" value="' +  returndata.name  + '">';
+                        Email += '<input type="text" name="Email" placeholder="Email" value="' +  returndata.uid  + '">';
+                        $("#Name").append(Name);
+                        $("#Email").append(Email);
+                    },
+                    error:function(returndata){
+                    	var Name = '';
+                        var Email = '';
+                        Name += '<input type="text"  name="Name" placeholder="Your Name" value="">';
+                        Email += '<input type="text" name="Email" placeholder="Email" value="">';
+                        $("#Name").append(Name);
+                        $("#Email").append(Email);
+                    }
+                });
+            }else{
+            	alert("undefined");
+            	var Name = '';
+                var Email = '';
+                Name += '<input type="text"  name="Name" placeholder="Your Name" value="">';
+                Email += '<input type="text" name="Email" placeholder="Email" value="">';
+                $("#Name").append(Name);
+                $("#Email").append(Email);
+            } 
 
           
         },
