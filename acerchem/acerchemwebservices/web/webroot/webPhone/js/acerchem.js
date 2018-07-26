@@ -1134,9 +1134,9 @@ function getAllProducts()
 //             html+='<li><div class="maximg"><a href="product.html">';
 //              html+='<li><div class="maximg"><a href="'+products[i].url+'">';
                 if(products[i].images != null) {
-                	html+='<img src="'+products[i].images[0].url.substring(23)+'"></a></div><div class="text g-price"><a href="'+products[i].url+'"><p>'+products[i].name+'</p><div class="price"><span>';
+                	html+='<img src="'+products[i].images[0].url.substring(23)+'"></a></div><div class="text g-price"><a href="product.html?code='+products[i].code+'"><p>'+products[i].name+'</p><div class="price"><span>';
                 }else {
-                	html+='<img src=""></a></div><div class="text g-price"><a href="'+products[i].url+'"><p>'+products[i].name+'</p><div class="price"><span>';
+                	html+='<img src=""></a></div><div class="text g-price"><a href="product.html?code='+products[i].code+'"><p>'+products[i].name+'</p><div class="price"><span>';
                 }
                
                 if(products[i].promotionPrice!=null){
