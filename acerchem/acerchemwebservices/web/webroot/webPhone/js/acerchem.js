@@ -150,27 +150,37 @@ function getCreditAccount()
 }
 
 function formatDataTime(fmt) {
+	
+	fmt = fmt.replace(/\-/g, "/").replace("T"," ").substr(0,19);
+	//alert("datetime:" + fmt);
+
+	return fmt;
     //var date = new Date(fmt);
+    
     //alert("datetime:" + date);
    // alert("datetime:" +DateFormat.parseDate(new Date(fmt), 'yyyy/MM/dd hh:mm:ss'));
-    var date = DateFormat.parseDate(new Date(fmt), 'yyyy-MM-dd hh:mm:ss');
-    alert("datetime :" + date);
-    return date;
+    //var date = DateFormat.parseDate(new Date(fmt), 'yyyy/MM/dd hh:mm:ss');
+    //alert("datetime :" + date);
+    //return date;
     
     //return date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear()+" "+date.getHours()+":"+date.getMinutes();
 }
 
 function formatData(fmt) {
     
-	/*
-	var date = new Date(fmt);
-    alert("date:" + date);
+	
+	fmt = fmt.replace(/\-/g, "/").substr(0,10);
+	//alert("date:" + fmt);
+	return fmt;
+	//var date = new Date(fmt);
+	
+    //alert("date:" + date);
     //return date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear();
-    */
+    
     //alert("date :" + DateFormat.parseDate(new Date(fmt), 'yyyy/MM/dd'));
-	var date = DateFormat.parseDate(new Date(fmt), 'yyyy-MM-dd');
-	alert("date :" + date);
-    return date;
+	//var date = DateFormat.parseDate(new Date(fmt), 'yyyy-MM-dd');
+	//alert("date :" + date);
+    //return date;
 }
 
 function formatMoney(num)  
