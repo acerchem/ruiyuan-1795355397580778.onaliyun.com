@@ -57,7 +57,20 @@
 			}
 			return '';
 		},
-
+		
+		/**
+		 * 得到fmt格式的时间
+		 * @param date
+		 * @param fmt
+		 */
+		parseDate: function(date,fmt) {
+			if (typeof fmt == 'undefined') {
+				fmt = 'yyyy/MM/dd';
+			}
+			var dateStr = this.format(date, fmt);
+			return dateStr;
+		},
+		
 		/**
 		 * 得到一天的开始 date类型
 		 * @param date
@@ -78,7 +91,7 @@
 				fmt = 'yyyy-MM-dd';
 			}
 			var dateStr = this.format(date, fmt);
-			dateStr += ' 00:00:00';
+			//dateStr += ' 00:00:00';
 			return dateStr;
 		},
 
