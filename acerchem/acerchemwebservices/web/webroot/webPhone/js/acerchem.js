@@ -1266,7 +1266,7 @@ function getProductsByCode(code)
                     }
                 });
             }else{
-            	alert("undefined");
+            	
             	var Name = '';
                 var Email = '';
                 Name += '<input type="text"  name="Name" placeholder="Your Name" value="">';
