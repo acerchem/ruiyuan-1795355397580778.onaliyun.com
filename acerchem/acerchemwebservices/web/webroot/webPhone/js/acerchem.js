@@ -835,15 +835,7 @@ function addTicket()
     var tel = /^\d{1,}$/;
     var ema = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
     
-    if(!tel.test(telephone)){
-    	 alert('Please enter a valid telephone!')
-         return false;
-    }
-    
-    if(!ema.test(email)) {
-    	alert('Please enter a valid email!')
-        return false;
-    }
+
     
     if(yourname==''||telephone==''||address==''||email==''||message=='')
     {
@@ -852,6 +844,15 @@ function addTicket()
     }
     else
     {
+        if(!tel.test(telephone)){
+       	 alert('Please enter a valid telephone!')
+            return false;
+       }
+       
+       if(!ema.test(email)) {
+       	alert('Please enter a valid email!')
+           return false;
+       }
         $.ajax({
             url:homeUrl+"/tickets/addTicket",
             type:'post',
@@ -1362,15 +1363,6 @@ function addProductTicket()
     var tel = /^\d{1,}$/;
     var ema = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
     
-    if(!ema.test(email)) {
-    	alert('Please enter a valid email!')
-        return false;
-    }
-    if(!tel.test(telephone)){
-    	 alert('Please enter a valid telephone!')
-         return false;
-    }
-    
     if(yourname==''||telephone==''||address==''||email==''||message=='')
     {
         alert('Please fill in the complete!')
@@ -1378,6 +1370,14 @@ function addProductTicket()
     }
     else
     {
+        if(!ema.test(email)) {
+        	alert('Please enter a valid email!')
+            return false;
+        }
+        if(!tel.test(telephone)){
+        	 alert('Please enter a valid telephone!')
+             return false;
+        }
         $.ajax({
             url:homeUrl+"/tickets/addTicket",
             type:'post',
