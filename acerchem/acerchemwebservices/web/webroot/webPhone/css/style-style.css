@@ -2564,6 +2564,7 @@ select::-ms-expand {
   font-size: 0.22rem;
   color: #444;
   line-height: 0.28rem;
+  height:60px;
 }
 
 .swiper-gall .price span {
