@@ -1177,18 +1177,21 @@ function getProductsByCode(code)
             console.log("success:"+JSON.stringify(returndata));
             var productImages = '';
             var images = returndata.images;
-            for(var i = 0; i < images.length; i++) {
-                //productImages += '<li class="swiper-slide"><img src="' + images[i].url.substring(23)+ '" alt="' + images[i].altText +'"></li>';
-                //console.log("success:"+images[i].url.substring(23));
-                if(images[i].galleryIndex != null) {
-                    if(images[i].format == 'product') {
-                        productImages += '<li class="swiper-slide"><img src="' + images[i].url.substring(23)+ '" alt="' + images[i].altText +'"></li>';
-                        //console.log("success:"+images[i].url.substring(23));
+            if(returndata.images != null) {
+                for(var i = 0; i < images.length; i++) {
+                    //productImages += '<li class="swiper-slide"><img src="' + images[i].url.substring(23)+ '" alt="' + images[i].altText +'"></li>';
+                    //console.log("success:"+images[i].url.substring(23));
+                    if(images[i].galleryIndex != null) {
+                        if(images[i].format == 'product') {
+                            productImages += '<li class="swiper-slide"><img src="' + images[i].url.substring(23)+ '" alt="' + images[i].altText +'"></li>';
+                            //console.log("success:"+images[i].url.substring(23));
+                        }
+                        
                     }
                     
                 }
-                
             }
+
             $("#productImages").append(productImages);
             
             var baseInfo = '';
