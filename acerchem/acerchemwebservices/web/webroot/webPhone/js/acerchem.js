@@ -154,6 +154,7 @@ function formatDataTime(fmt) {
     //alert("datetime:" + date);
    // alert("datetime:" +DateFormat.parseDate(new Date(fmt), 'yyyy/MM/dd hh:mm:ss'));
     var date = DateFormat.parseDate(new Date(fmt), 'yyyy/MM/dd hh:mm:ss');
+    alert("datetime :" + date);
     return date;
     
     //return date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear()+" "+date.getHours()+":"+date.getMinutes();
@@ -168,6 +169,7 @@ function formatData(fmt) {
     */
     //alert("date :" + DateFormat.parseDate(new Date(fmt), 'yyyy/MM/dd'));
 	var date = DateFormat.parseDate(new Date(fmt), 'yyyy/MM/dd');
+	alert("date :" + date);
     return date;
 }
 
