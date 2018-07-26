@@ -169,7 +169,7 @@ function formatDataTime(fmt) {
 function formatData(fmt) {
     
 	
-	fmt = fmt.replace(/\-/g, "/").substr(0,10);
+	//fmt = fmt.replace(/\-/g, "/").substr(0,10);
 	//alert("date:" + fmt);
 	return fmt;
 	//var date = new Date(fmt);
@@ -747,8 +747,10 @@ function defaultAddressById(addressId)
     window.location.reload();
 }
 
+
 function getOrder()
 {
+
     $.ajax({
         url:homeUrl+"/users/current/orders",
         type:'get',
@@ -779,10 +781,11 @@ function updateHtml(returndata){
     $("#orders li").remove();
     if(returndata.orders!=null)
     {
+    	console.log("success:"+JSON.stringify(returndata));
         for(var i = 0; i < returndata.orders.length; i++){
         	
             html+='<li data-Total="' + returndata.orders[i].total.formattedValue + '"><div class="m-col"><div class="m-data bort-bot"><a href="member-order-detailed.html?'+returndata.orders[i].code+'"><span class="num">'+returndata.orders[i].code+'</span>';
-            html+='<span class="date">due date ：'+formatData(returndata.orders[i].pickUpDate)+'</span></a></div><div class="m-con"><div class="item item-text"><p>';
+            html+='<span class="date">due date ：'+returndata.orders[i].waitDeliveiedDate+'</span></a></div><div class="m-con"><div class="item item-text"><p>';
             html+=formatDataTime(returndata.orders[i].placed)+'</p><span>'+returndata.orders[i].total.formattedValue+'</span></div><div class="item g-succbut">';
             if(returndata.orders[i].status=='CHECKED_VALID')
             {

@@ -234,4 +234,8 @@
         <property name="storeOfProductDataList" type="java.util.List&lt;com.acerchem.facades.product.data.StoreOfProductData>"/>
     </bean>
     
+    <bean class="de.hybris.platform.commercewebservicescommons.dto.order.OrderHistoryWsDTO">
+    	<property name="waitDeliveiedDate" type="java.lang.String"/>
+    </bean>
+    
 </beans>

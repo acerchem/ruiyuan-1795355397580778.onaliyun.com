@@ -1388,7 +1388,7 @@
             <map>
                 <entry key="BASIC" value="total,guid,status,statusDisplay,code,placed"/>
                 <entry key="DEFAULT"
-                       value="total(DEFAULT),guid,status,statusDisplay,code,placed"/>
+                       value="total(DEFAULT),guid,status,statusDisplay,code,placed,waitDeliveiedDate"/> <!-- snowy add  waitDeliveiedDate-->
                 <entry key="FULL" value="total(FULL),guid,status,statusDisplay,code,placed"/>
             </map>
         </property>
