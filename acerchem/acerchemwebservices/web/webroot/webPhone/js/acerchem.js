@@ -150,15 +150,24 @@ function getCreditAccount()
 }
 
 function formatDataTime(fmt) {
-    var date = new Date(fmt);
-    return date.getFullYear() + "/" + (date.getMonth()+1)+"/" + date.getDate() + + " "+date.getHours()+":"+date.getMinutes();
+    //var date = new Date(fmt);
+    //alert("datetime:" + date);
+   // alert("datetime:" +DateFormat.parseDate(new Date(fmt), 'yyyy/MM/dd hh:mm:ss'));
+    
+    return DateFormat.parseDate(new Date(fmt), 'yyyy/MM/dd hh:mm:ss');
+    
     //return date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear()+" "+date.getHours()+":"+date.getMinutes();
 }
 
 function formatData(fmt) {
-    var date = new Date(fmt);
-    return date.getFullYear() + "/" + (date.getMonth()+1)+"/"+date.getDate();
+	
+	/*
+	var date = new Date(fmt);
+    alert("date:" + date);
     //return date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear();
+    */
+    //alert("date :" + DateFormat.parseDate(new Date(fmt), 'yyyy/MM/dd'));
+    return DateFormat.parseDate(new Date(fmt), 'yyyy/MM/dd');
 }
 
 function formatMoney(num)  
