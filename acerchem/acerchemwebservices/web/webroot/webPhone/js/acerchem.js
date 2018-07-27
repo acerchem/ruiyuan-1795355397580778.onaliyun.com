@@ -337,6 +337,7 @@ function getPersonalInfo()
         },
         success:function(returndata){
             //console.log("contactAddress:"+JSON.stringify(returndata));
+			 alert("contactAddress:"+JSON.stringify(returndata));
             $("#country option[value='"+returndata.country.isocode+"']").attr("selected", true);
             
             document.getElementById('townCity').value = returndata.town;
