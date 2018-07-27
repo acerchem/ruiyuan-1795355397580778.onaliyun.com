@@ -38,9 +38,6 @@ $(document).ready(function(){
 
 
 //banner
-$(document).ready(function(){
-
-
 function picslide(){
 	var mySwiper = new Swiper('.slider-pic',{
 	      pagination: '.pagination',
@@ -64,10 +61,52 @@ function picslide(){
 	})
 }
 
-picslide()
+  //product  
 
-});
+function proswiper(){
+	var pSlide = new Swiper('.product-slide',{
+       pagination: '.pagination',
+       paginationClickable :true,
+	    //loop:true,
+	    autoplay:3000,
+	    speed:600,
+	    calculateHeight : true,
+	    useCSS3Transforms : false   
+  	})
+  	$('.pagination span').on('mouseover',function(){$(this).click();})
+    
+	//切换
+	$(".tabs a").on("click",function(e){
+	    e.preventDefault()
+	    var ain = $(this).index();
+	    var tab = $(this).index();
+	    $(".swiper-tab .m-contain").eq(ain).show().siblings().hide();
+	    $(".m-product .tabs a").eq(tab).addClass('active').siblings().removeClass('active');
+	})
+	
+	$(".tabs a").click(function(e){
+	    e.preventDefault()
+	})
+}
 
+
+function swone(){
+	var mySwiper = new Swiper('.sw-everyone',{
+		slidesPerView : 2.5,
+//				offsetSlidesAfter : 2,
+		calculateHeight : true
+	})
+}
+
+
+function swtwo(){
+	var mySwiper = new Swiper('.sw-everytwo',{
+		slidesPerView : 2.5,
+//				offsetSlidesAfter : 2,
+		calculateHeight : true,
+	})
+}
+	
 
 //菜单按钮
 $(document).ready(function(){
@@ -87,6 +126,8 @@ $(document).ready(function(){
       }
 
     });
+
+
 	$('.header .menwrap .bort-bot').on('click',function(){
 
 		if($(this).hasClass('act')){
@@ -96,7 +137,6 @@ $(document).ready(function(){
 		}
 	 
 	})
-
     
     $(".header .search").click(function(){
 			if($(".header .search").hasClass("active")){
@@ -108,63 +148,14 @@ $(document).ready(function(){
 		$(".search_head").show();
       }
 	})
+
+ });
    
-  //product  
 
-  function proswiper(){
-		var pSlide = new Swiper('.product-slide',{
-	       pagination: '.pagination',
-	       paginationClickable :true,
-		    //loop:true,
-		    autoplay:3000,
-		    speed:600,
-		    calculateHeight : true,
-		    useCSS3Transforms : false   
-	  	})
-	  	$('.pagination span').on('mouseover',function(){$(this).click();})
-	    
-		//切换
-		$(".tabs a").on("click",function(e){
-		    e.preventDefault()
-		    var ain = $(this).index();
-		    var tab = $(this).index();
-		    $(".swiper-tab .m-contain").eq(ain).show().siblings().hide();
-		    $(".m-product .tabs a").eq(tab).addClass('active').siblings().removeClass('active');
-		})
-		
-		$(".tabs a").click(function(e){
-		    e.preventDefault()
-		})
-	}
 
-setTimeout(function(){
-proswiper()
-console.log('proswiper')
-},500)
 	
 //商品详情滑动列表
 
-			function swone(){
-				var mySwiper = new Swiper('.sw-everyone',{
-					slidesPerView : 2.5,
-	//				offsetSlidesAfter : 2,
-					calculateHeight : true
-				})
-			}
-			swone()
-
-			function swtwo(){
-				var mySwiper = new Swiper('.sw-everytwo',{
-					slidesPerView : 2.5,
-	//				offsetSlidesAfter : 2,
-					calculateHeight : true,
-				})
-			}
-			
-			setTimeout(function(){
-				swtwo()
-				console.log('swtwo')
-				},500)
 			
 			//留言弹窗
 			$(".pro-nav .news").click(function(){
@@ -178,27 +169,27 @@ console.log('proswiper')
 			
 			//下载弹窗
 			$(".g-documents .maxrig").click(function(){
-	    $('.g-document-popup').show();
+		   	 $('.g-document-popup').show();
 			})
 			$(".g-popupcon .right").click(function(){
-	    $('.g-document-popup').hide();
+		    	$('.g-document-popup').hide();
 			})
 			
 			
 			//分享弹窗
 			$(".header-top .right").click(function(){
-	    $('.g-share-popup').show();
+	    		$('.g-share-popup').show();
 			})
 			$(".g-popupcon .right").click(function(){
-	    $('.g-share-popup').hide();
+	   			 $('.g-share-popup').hide();
 			})
 			
 			//规格弹窗
 			$(".g-specs .right").click(function(){
-	    $('.g-specs-popup').show();
+	    		$('.g-specs-popup').show();
 			})
 			$(".g-specs-popup .title .right").click(function(){
-	    $('.g-specs-popup').hide();
+	    		$('.g-specs-popup').hide();
 			})
 			
 		//添加购物车弹窗
@@ -341,12 +332,17 @@ console.log('proswiper')
 
 
 
- });
 
 
 
 $(document).ready(function(){
-	
+
+	proswiper()
+	picslide()
+	swone()
+	swtwo()
+	console.log('proswiper')
+
 	//发票弹窗
 	$(".invoup-popup").click(function(){
 	    $('.g-Invoice-popup').show();
