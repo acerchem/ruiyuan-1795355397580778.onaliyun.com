@@ -579,6 +579,8 @@ function getRegions(countryIsoCode,regionIsocode)
                 }
                 $("#region").append(html); 
                 $("#region2").append(html);
+                
+                $("#country option[value='"+countryIsoCode+"']").attr("selected", true);
                 $("#region option[value='"+regionIsocode+"']").attr("selected", true);
                 $("#region2 option[value='"+regionIsocode+"']").attr("selected", true);
                 
