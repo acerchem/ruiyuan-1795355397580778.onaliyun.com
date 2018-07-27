@@ -300,6 +300,31 @@ function getPersonalInfo()
         }
     });
     
+    $.ajax({
+        url:homeUrl+"/users/"+$.cookie("userId"),
+        type:'get',
+        dataType: "json",
+        async: true,
+        crossDomain: true,
+        beforeSend: function(request) {
+            request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.setRequestHeader("Authorization", $.cookie("access_token"));
+        },
+        success:function(returndata){
+            //console.log("success:"+JSON.stringify(returndata));
+            $("#email span").remove();
+            $("#email").append('<span class="name">'+returndata.uid+'</span>');
+            $("#companyName span").remove();
+            $("#companyName").append('<span class="name">'+returndata.companyName+'</span>');
+            document.getElementById('name').value = returndata.name;
+            $("#language option[value='"+returndata.language.isocode+"']").attr("selected", true);
+            $("#currency option[value='"+returndata.currency.isocode+"']").attr("selected", true);
+        },
+        error:function(returndata){
+            console.log("error2:"+JSON.stringify(returndata));
+        }
+    });
+    
     
     $.ajax({
         url:homeUrl+"/users/current/contactAddress",
@@ -331,30 +356,7 @@ function getPersonalInfo()
     });
     
     
-    $.ajax({
-        url:homeUrl+"/users/"+$.cookie("userId"),
-        type:'get',
-        dataType: "json",
-        async: true,
-        crossDomain: true,
-        beforeSend: function(request) {
-            request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            request.setRequestHeader("Authorization", $.cookie("access_token"));
-        },
-        success:function(returndata){
-            //console.log("success:"+JSON.stringify(returndata));
-            $("#email span").remove();
-            $("#email").append('<span class="name">'+returndata.uid+'</span>');
-            $("#companyName span").remove();
-            $("#companyName").append('<span class="name">'+returndata.companyName+'</span>');
-            document.getElementById('name').value = returndata.name;
-            $("#language option[value='"+returndata.language.isocode+"']").attr("selected", true);
-            $("#currency option[value='"+returndata.currency.isocode+"']").attr("selected", true);
-        },
-        error:function(returndata){
-            console.log("error2:"+JSON.stringify(returndata));
-        }
-    });
+
 
     
     
