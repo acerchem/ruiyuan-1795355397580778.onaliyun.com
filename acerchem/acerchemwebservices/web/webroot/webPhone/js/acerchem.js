@@ -337,12 +337,12 @@ function getPersonalInfo()
         },
         success:function(returndata){
             //console.log("contactAddress:"+JSON.stringify(returndata));
-			 alert("contactAddress:"+JSON.stringify(returndata));
+            alert("returndata.country.isocode:"+returndata.country.isocode);
             $("#country option[value='"+returndata.country.isocode+"']").attr("selected", true);
-            
+        
             document.getElementById('townCity').value = returndata.town;
             document.getElementById('addressId').value = returndata.id;
-            console.log("country:"+document.getElementById('country').value);
+            //console.log("country:"+document.getElementById('country').value);
             alert("country:"+document.getElementById('country').value);
             getRegions(returndata.country.isocode,returndata.region.isocode);
         },
@@ -583,6 +583,7 @@ function getRegions(countryIsoCode,regionIsocode)
                 $("#region2 option[value='"+regionIsocode+"']").attr("selected", true);
                 
                 console.log("region:"+ document.getElementById('region').value);
+                alert("country:"+document.getElementById('country').value);
                 alert("region:"+ document.getElementById('region').value);
             }
         },
