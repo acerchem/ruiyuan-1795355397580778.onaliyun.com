@@ -300,6 +300,37 @@ function getPersonalInfo()
         }
     });
     
+    
+    $.ajax({
+        url:homeUrl+"/users/current/contactAddress",
+        type:'get',
+        dataType: "json",
+        async: true,
+        crossDomain: true,
+        beforeSend: function(request) {
+            request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+            request.setRequestHeader("Authorization", $.cookie("access_token"));
+        },
+        success:function(returndata){
+            //console.log("contactAddress:"+JSON.stringify(returndata));
+            alert("returndata.country.isocode:"+returndata.country.isocode);
+            
+            getRegions(returndata.country.isocode,returndata.region.isocode);
+            
+            $("#country option[value='"+returndata.country.isocode+"']").attr("selected", true);
+            
+            document.getElementById('townCity').value = returndata.town;
+            document.getElementById('addressId').value = returndata.id;
+            //console.log("country:"+document.getElementById('country').value);
+            alert("country:"+document.getElementById('country').value);
+            
+        },
+        error:function(returndata){
+            console.log("error11:"+JSON.stringify(returndata));
+        }
+    });
+    
+    
     $.ajax({
         url:homeUrl+"/users/"+$.cookie("userId"),
         type:'get',
@@ -324,32 +355,7 @@ function getPersonalInfo()
             console.log("error2:"+JSON.stringify(returndata));
         }
     });
-    
-    $.ajax({
-        url:homeUrl+"/users/current/contactAddress",
-        type:'get',
-        dataType: "json",
-        async: true,
-        crossDomain: true,
-        beforeSend: function(request) {
-            request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            request.setRequestHeader("Authorization", $.cookie("access_token"));
-        },
-        success:function(returndata){
-            //console.log("contactAddress:"+JSON.stringify(returndata));
-            alert("returndata.country.isocode:"+returndata.country.isocode);
-            $("#country option[value='"+returndata.country.isocode+"']").attr("selected", true);
-        
-            document.getElementById('townCity').value = returndata.town;
-            document.getElementById('addressId').value = returndata.id;
-            //console.log("country:"+document.getElementById('country').value);
-            alert("country:"+document.getElementById('country').value);
-            getRegions(returndata.country.isocode,returndata.region.isocode);
-        },
-        error:function(returndata){
-            console.log("error11:"+JSON.stringify(returndata));
-        }
-    });
+
     
     
 }
@@ -577,17 +583,18 @@ function getRegions(countryIsoCode,regionIsocode)
                 for(var i = 0; i < returndata.regions.length; i++){
                     html+='<option value="'+returndata.regions[i].isocode+'">'+returndata.regions[i].name+'</option>';
                 }
-                $("#region").append(html); 
-                $("#region2").append(html);
-                
-                $("#country option[value='"+countryIsoCode+"']").attr("selected", true);
-                $("#region option[value='"+regionIsocode+"']").attr("selected", true);
-                $("#region2 option[value='"+regionIsocode+"']").attr("selected", true);
-                
-                console.log("region:"+ document.getElementById('region').value);
-                alert("country:"+document.getElementById('country').value);
-                alert("region:"+ document.getElementById('region').value);
             }
+            
+            $("#region").append(html); 
+            $("#region2").append(html);
+            
+          
+            $("#region option[value='"+regionIsocode+"']").attr("selected", true);
+            $("#region2 option[value='"+regionIsocode+"']").attr("selected", true);
+            
+           
+            alert("country:"+document.getElementById('country').value);
+            alert("region:"+ document.getElementById('region').value);
         },
         error:function(returndata){
             console.log("error:"+JSON.stringify(returndata));
