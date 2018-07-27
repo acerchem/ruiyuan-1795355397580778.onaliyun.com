@@ -337,29 +337,21 @@ function getPersonalInfo()
             request.setRequestHeader("Authorization", $.cookie("access_token"));
         },
         success:function(returndata){
-            //console.log("contactAddress:"+JSON.stringify(returndata));
-            alert("returndata.country.isocode:"+returndata.country.isocode);
-            
-            getRegions(returndata.country.isocode,returndata.region.isocode);
-            
-            $("#country option[value='"+returndata.country.isocode+"']").attr("selected", true);
+            console.log("contactAddress:"+JSON.stringify(returndata));
+
+            $("#country option[value='"+returndata.region.countryIso+"']").attr("selected", true);
             
             document.getElementById('townCity').value = returndata.town;
             document.getElementById('addressId').value = returndata.id;
-            //console.log("country:"+document.getElementById('country').value);
-            alert("country:"+document.getElementById('country').value);
             
+            getRegions(returndata.country.isocode,returndata.region.isocode);
+ 
         },
         error:function(returndata){
             console.log("error11:"+JSON.stringify(returndata));
         }
     });
-    
-    
-
-
-    
-    
+     
 }
 
 function updatePersonalInfo()
@@ -566,6 +558,7 @@ $(document).on("change",'#country2', function (){
     getRegions($(this).val(),'');
 })
 
+
 function getRegions(countryIsoCode,regionIsocode)
 {
     $.ajax({
@@ -594,9 +587,6 @@ function getRegions(countryIsoCode,regionIsocode)
             $("#region option[value='"+regionIsocode+"']").attr("selected", true);
             $("#region2 option[value='"+regionIsocode+"']").attr("selected", true);
             
-           
-            alert("country:"+document.getElementById('country').value);
-            alert("region:"+ document.getElementById('region').value);
         },
         error:function(returndata){
             console.log("error:"+JSON.stringify(returndata));
