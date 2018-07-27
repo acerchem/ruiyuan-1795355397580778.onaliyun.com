@@ -338,8 +338,11 @@ function getPersonalInfo()
         success:function(returndata){
             //console.log("contactAddress:"+JSON.stringify(returndata));
             $("#country option[value='"+returndata.country.isocode+"']").attr("selected", true);
+            
             document.getElementById('townCity').value = returndata.town;
             document.getElementById('addressId').value = returndata.id;
+            console.log("country:"+document.getElementById('country').value);
+            alert("country:"+document.getElementById('country').value);
             getRegions(returndata.country.isocode,returndata.region.isocode);
         },
         error:function(returndata){
@@ -577,6 +580,9 @@ function getRegions(countryIsoCode,regionIsocode)
                 $("#region2").append(html);
                 $("#region option[value='"+regionIsocode+"']").attr("selected", true);
                 $("#region2 option[value='"+regionIsocode+"']").attr("selected", true);
+                
+                console.log("region:"+ document.getElementById('region').value);
+                alert("region:"+ document.getElementById('region').value);
             }
         },
         error:function(returndata){
@@ -1086,7 +1092,7 @@ function getPromotionItemforProductPage()
             request.setRequestHeader("Authorization", $.cookie("access_token"));
         },
         success:function(returndata){
-            console.log("success:"+JSON.stringify(returndata));
+            //console.log("success:"+JSON.stringify(returndata));
             var html='';
             var products=returndata.products;
             for(var i = 0; i < products.length; i++){
@@ -1231,6 +1237,8 @@ function getProductsByCode(code)
                 }
             }
             $("#saleInfo").append(saleInfo);
+            
+            
             
             var documents = '';
             var certificatess = returndata.certificatess;
