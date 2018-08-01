@@ -1,0 +1,354 @@
+@charset "utf-8";
+body{
+	font: 14px/1.5 Helvetica, Arial, "冬青黑体", "Hiragino Sans GB", "microsoft yahei", "SimHei", sans-serif;
+	height: 100%;
+}
+*{
+	margin: 0;
+	padding: 0;
+	font-style: normal;
+}
+ul,li{
+	list-style: none;
+}
+a{
+	text-decoration: none;
+	color: #14416e;
+}
+a:hover{
+	color: #d27e28;
+}
+
+input,button,select{
+	color:#94a8bd;
+}
+
+input::-webkit-input-placeholder{
+  color:#94a8bd;
+}
+input::-moz-placeholder{   
+  color:#94a8bd;
+}
+input:-moz-placeholder{   
+  color:#94a8bd;
+}
+input:-ms-input-placeholder{ 
+  color:#94a8bd;
+}
+
+.passport-container{
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: url(bg.jpg);
+}
+.box{
+	width: 940px;
+	height: 565px;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -495px;
+	margin-top: -282px;
+	overflow: hidden;
+}
+.left{
+	float: left;
+}
+.right{
+	float: right;
+}
+.left-logo{
+	width: 50%;
+	float: left;
+	text-align: center;
+	line-height: 565px;
+	background: url(left-bg.jpg) no-repeat center;
+}
+.left-logo img{
+	vertical-align: middle;
+}
+.right-form{
+	width: 50%;
+	height: 565px;
+	float: right;
+	padding: 67px;
+	box-sizing: border-box;
+	background-color: white; 
+	position: relative;
+}
+.right-form .a-back{
+	position: absolute;
+	left: 30px;
+	top: 30px;
+	width: 35px;
+	height: 35px;
+	background:url(arr.png) no-repeat center center;
+}
+.right-form h2{
+	font-size: 32px;
+	font-weight: normal;
+	color: #14416e;
+	text-align: center;
+}
+.right-form form{
+	margin-top: 80px;
+}
+.right-form .c-g{
+	position: relative;
+	margin-top: 30px;
+}
+.right-form .c{
+	display: block;
+	padding: 15px 44px;
+	border-bottom: 1px solid #94a8bd;	
+}
+.right-form .c > span{
+	position: absolute;
+	bottom: -28px;
+	left: 0;
+	color: #d27e28;
+}
+.right-form .c.act{
+	border-bottom: 1px solid #14416e;
+}
+.right-form .c input{
+	font-size: 18px;
+	color: #14416e;
+}
+.right-form .l-icon{
+	display: block;
+	width: 30px;
+	height: 30px;
+	position: absolute;
+	left: 0;
+	top: 10px;	
+}
+.right-form .icon-1{
+	background: url(icon1.png) no-repeat -5px center;
+}
+.right-form .icon-2{
+	background: url(icon2.png) no-repeat -5px center;
+}
+.right-form .icon-3{
+	background: url(icon3.png) no-repeat -5px center;
+}
+.right-form .btn{
+	margin-top: 50px;
+}
+.right-form .btn button{
+	width: 336px;
+	height: 62px;
+	line-height: 62px;
+	background-color: #14416e;
+	font-size: 22px;
+	font-weight: bold;
+	color: #fff;
+	cursor: pointer;
+}
+.right-form .a-link{
+	overflow: hidden;
+	font-size: 15px;
+	margin-top: 15px;
+}
+.right-form #send_vcode{
+	position: absolute;
+	right: 0;
+	top: 15px;
+	font-size: 18px;
+	color: #d27e28;
+	background: none;
+	cursor: pointer;
+}
+
+.right-form #send_vcode span{
+	display: inline-block;
+	padding-left: 10px;
+	border-left: 1px solid #d27e28;
+}
+.right-form #send_vcode[disabled] span{
+	color: #999;
+	border-left: 1px solid #999;
+}
+.popup{
+	width: 260px;
+	height: 60px;
+	line-height: 60px;
+	text-align:center;
+	background: rgba(0,0,0,.7);
+	color: #fff;
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	margin-left: -130px;
+	margin-top: -30px;
+}
+.right-form .lost-form{
+	margin-top: 40px;
+}
+
+/*index*/
+.index-body{
+	background-color: #f5f5f5;
+}
+header{
+	width: 1200px;
+	height: 60px;
+	margin: 0 auto;
+	background-color: #fff;
+	box-shadow: 0px 0 15px rgba(0,0,0,.2);
+  -webkit-box-shadow: 0px 0 15px rgba(0,0,0,.2);
+  -ms-box-shadow: 0px 0 15px rgba(0,0,0,.2);
+  -moz-box-shadow: 0px 0 15px rgba(0,0,0,.2);
+  -o-box-shadow: 0px 0 15px rgba(0,0,0,.2);
+}
+.logo{
+	float: left;
+	width: 250px;
+	height: 40px;
+	margin-top: 10px;
+	text-align:center;
+	border-right: 2px solid #14416e;
+}
+.logo img{
+	width: 50%;
+}
+.head-nav{
+	float: left;
+	margin-left: 20px;
+}
+.head-nav ul li{
+	float: left;
+	position: relative;
+}
+.head-nav ul li > a{
+	font-size: 18px;
+	line-height: 60px;
+	padding: 0 50px;
+	display: inline-block;
+	position: relative;
+	z-index: 2;
+	background: #fff;
+	font-weight: bold;
+}
+.head-nav .col-list{
+	position: absolute;
+	top: 60px;
+	left: 0;
+	width: 100%;
+	background: #fff;
+	padding: 10px 0;
+	box-shadow: 0px 0 15px rgba(0,0,0,.2);
+  -webkit-box-shadow: 0px 0 15px rgba(0,0,0,.2);
+  -ms-box-shadow: 0px 0 15px rgba(0,0,0,.2);
+  -moz-box-shadow: 0px 0 15px rgba(0,0,0,.2);
+  -o-box-shadow: 0px 0 15px rgba(0,0,0,.2);
+}
+.head-nav .col-list a{
+	display: block;
+	height: 45px;
+	line-height: 45px;
+	text-align:center;
+}
+
+.index-container{
+	width: 1200px;
+	margin: 12px auto;
+}
+.index-container .top-select{
+	padding: 20px;
+	background:#14416e;
+	color: #fff;
+	margin-bottom: 12px;
+}
+.index-container table{
+	width: 100%;
+}
+.index-container .top-select select{
+	height: 30px;
+	line-height: 30px;
+	padding: 0 15px 0 6px;
+	border-radius: 20px;
+	color: #14416e;
+	margin-left: 7px;
+	font-size: 15px;
+	min-width: 145px;
+}
+.index-container .top-select .btn button{
+	width: 115px;
+	height: 30px;
+	line-height: 30px;
+	font-size: 15px;
+	cursor: pointer;
+	background-color: #fff;
+	color: #14416e;
+	border-radius: 20px;
+	text-align:center;
+}
+.index-container .content{
+	background-color: #fff;
+	padding: 5px 5px;
+}
+.content .c-title{
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+.content .c-title .left{
+	font-size: 18px;
+	color: #14416e;
+	line-height: 34px;
+	font-weight: bold;
+}
+.content .c-title .right button{
+	width: 115px;
+	height: 34px;
+	line-height: 34px;
+	font-size: 15px;
+	cursor: pointer;
+	background-color: #14416e;
+	color: #fff;
+	border-radius: 20px;
+	text-align:center;
+}
+.index-container .content thead{
+	background-color: #d9e1e8;
+	color: #14416e;
+	font-size: 20px;
+}
+.index-container .content td{
+	border-left: 1px solid rgba(150,150,150,.1);
+	text-align: center;
+	padding: 15px 0;
+	color: #14416e;
+	height: 51px;
+	box-sizing: border-box;
+}
+.index-container .content tbody tr:nth-child(even){
+	background-color: #f0f1f2;
+}
+.index-container .content .first{
+	border: 0;
+}
+.pageview{
+	text-align:center;
+}
+.pageview a{
+	width: 135px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	border: 1px solid #14416e;
+	display: inline-block;
+	font-size: 18px;
+}
+.pageview p{
+	display: inline-block;
+	width: 135px;
+	height: 40px;
+	line-height: 40px;
+	text-align: center;
+	font-size: 18px;
+}
+.pageview p .act{
+	color: #14416e;
+}
