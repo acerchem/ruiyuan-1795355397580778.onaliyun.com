@@ -18,7 +18,6 @@
 		<title></title>
 	</head>
 	<body>
-	
 		<div class="g-main g-gallery">
 			<div class="header bort-bot">
 				<div class="m-left">
@@ -32,17 +31,15 @@
 			<div class="g-login m-passwo">
 				<div class="login-form">
 					<form method="post" class="pro-navcon">
-					
-					<div class="form-con">
-						<div class="d-line bort-bot" id="ProName"></div>
-						<div class="d-line bort-bot" id="ProCode"></div>
-						<div class="d-line bort-bot" id="Name"></div>
-						<div class="d-line bort-bot" id="Email"></div>
-						<div class="d-line bort-bot" ><input type="text" name="Phone" placeholder="Telephone / Mobile Phone" value=""></div>
-						<div class="d-line bort-bot" ><input type="text" name="Address" placeholder="Shipping Address" value=""></div>
-						<div class="d-line bort-bot" ><textarea name="Message" placeholder="Message"></textarea></div>
-					</div>
-					
+						<div class="form-con">
+							<div class="d-line bort-bot" id="ProName"></div>
+							<div class="d-line bort-bot" id="ProCode"></div>
+							<div class="d-line bort-bot" id="Name"></div>
+							<div class="d-line bort-bot" id="Email"></div>
+							<div class="d-line bort-bot" ><input type="text" name="Phone" placeholder="Telephone / Mobile Phone" value=""></div>
+							<div class="d-line bort-bot" ><input type="text" name="Address" placeholder="Shipping Address" value=""></div>
+							<div class="d-line bort-bot" ><textarea name="Message" placeholder="Message"></textarea></div>
+						</div>
 					</form>
 					<div class="g-succbut">
 						<p>&nbsp;</p>
@@ -52,16 +49,14 @@
 			</div>
 		</div>
 	</body>
-	<script type="text/javascript">	
-	function GetQueryString(name)
-	{
-	     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
-	     var r = window.location.search.substr(1).match(reg);//search,查询？后面的参数，并匹配正则
-	     if(r!=null)return  unescape(r[2]); return null;
-	}
+<script type="text/javascript">	
+function GetQueryString(name)
+{
+     var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+     var r = window.location.search.substr(1).match(reg);//search,查询？后面的参数，并匹配正则
+     if(r!=null)return  unescape(r[2]); return null;
+}
+var myurl=GetQueryString("code");
+getTicketInfo(myurl);
 </script>
-	<script type="text/javascript">
-	var myurl=GetQueryString("code");
-	getTicketInfo(myurl);
-	</script>
 </html>
