@@ -42,6 +42,29 @@ public class ProductAcerchemPopulator<SOURCE extends ProductModel, TARGET extend
 		
 		productData.setFormulaWeight(safeToString(getProductAttribute(productModel, ProductModel.FORMULAWEIGHT)));
 		
+//		frank gu
+		productData.setSupplierInfo00(safeToString(getProductAttribute(productModel, ProductModel.ATTRIBUTEZERO)));
+		productData.setSupplierInfo01(safeToString(getProductAttribute(productModel, productModel.DESCRIBEZERO)));
+		productData.setSupplierInfo02(safeToString(getProductAttribute(productModel, productModel.ATTRIBUTEONE)));
+		productData.setSupplierInfo03(safeToString(getProductAttribute(productModel, productModel.DESCRIBEONE)));
+		productData.setSupplierInfo04(safeToString(getProductAttribute(productModel, productModel.ATTRIBUTETWO)));
+		productData.setSupplierInfo05(safeToString(getProductAttribute(productModel, productModel.DESCRIBETWO)));
+		productData.setSupplierInfo06(safeToString(getProductAttribute(productModel, productModel.ATTRIBUTETHREE)));
+		productData.setSupplierInfo07(safeToString(getProductAttribute(productModel, productModel.DESCRIBETHREE)));
+		productData.setSupplierInfo08(safeToString(getProductAttribute(productModel, productModel.ATTRIBUTEFOUR)));
+		productData.setSupplierInfo09(safeToString(getProductAttribute(productModel, productModel.DESCRIBEFOUR)));
+		productData.setSupplierInfo10(safeToString(getProductAttribute(productModel, productModel.ATTRIBUTEFIVE)));
+		productData.setSupplierInfo11(safeToString(getProductAttribute(productModel, productModel.DESCRIBEFIVE)));
+		productData.setSupplierInfo12(safeToString(getProductAttribute(productModel, productModel.ATTRIBUTESIX)));
+		productData.setSupplierInfo13(safeToString(getProductAttribute(productModel, productModel.DESCRIBESIX)));
+		productData.setSupplierInfo14(safeToString(getProductAttribute(productModel, productModel.ATTRIBUTESEVEN)));
+		productData.setSupplierInfo15(safeToString(getProductAttribute(productModel, productModel.DESCRIBESEVEN)));
+		productData.setSupplierInfo16(safeToString(getProductAttribute(productModel, productModel.ATTRIBUTEEIGHT)));
+		productData.setSupplierInfo17(safeToString(getProductAttribute(productModel, productModel.DESCRIBEEIGHT)));
+		productData.setSupplierInfo18(safeToString(getProductAttribute(productModel, productModel.ATTRIBUTENINE)));
+		productData.setSupplierInfo19(safeToString(getProductAttribute(productModel, productModel.DESCRIBENINE)));
+		
+		
 		VendorData data = new VendorData();
 		if (productModel.getAcerChemVendor()!= null){
 			data.setName(productModel.getAcerChemVendor().getName());
