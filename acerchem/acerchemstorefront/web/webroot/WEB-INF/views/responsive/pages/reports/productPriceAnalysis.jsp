@@ -51,7 +51,7 @@
 <c:url value="/reports/vendorOrderProduct/temp"
 	var="vendorOrderProductUrl" />
 	
-	<c:url value="/" var="homeUrl" />
+	<c:url value="/logout" var="homeUrl" />
 					
 <body class="index-body">
 	<header>
