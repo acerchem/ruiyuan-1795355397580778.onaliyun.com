@@ -4,7 +4,7 @@
  * @author: weixin
  */
 
-/* 寮曞叆搴撴枃浠� */
+/* 引入库文件 */
 
 /*! normalize.css v4.1.1 | MIT License | github.com/necolas/normalize.css */
 
@@ -213,7 +213,7 @@ a {
   -webkit-text-decoration-skip: objects;
   /* 2 */
   text-decoration: none;
-  color: #086936;
+  color: #0c4070;
 }
 
 /**
@@ -224,7 +224,7 @@ a {
 a:active,
 a:hover {
   outline-width: 0;
-  color: #086936;
+  color: #0c4070;
 }
 
 /* Text-level semantics
@@ -563,7 +563,7 @@ textarea {
   /* 2 */
 }
 
-/*********杩藉姞鑷畾鏍峰紡*********/
+/*********追加自定样式*********/
 
 * {
   padding: 0;
@@ -685,7 +685,7 @@ a {
 }
 
 a:hover {
-  color: #086936;
+  color: #0c4070;
 }
 
 img {
@@ -994,7 +994,7 @@ img {
 }
 
 .header .menu .chilmenu li:hover a {
-  color: #086936;
+  color: #0c4070;
 }
 
 .slider-pic {
@@ -1244,18 +1244,18 @@ img {
 }
 
 .g-index-let .item-1 a {
-  color: #096735;
-  border: 1px solid #096735;
+  color: #0c4070;
+  border: 1px solid #0c4070;
 }
 
 .g-index-let .item-2 {
   color: #fff;
-  background: #096735;
+  background: #0c4070;
 }
 
 .g-index-let .item-2 a {
   color: #fff;
-  background: #70a644;
+  background: #18629b;
 }
 
 .g-index-let .item a {
@@ -1295,7 +1295,7 @@ img {
 }
 
 .maxnav .active {
-  color: #096735;
+  color: #0c4070;
 }
 
 .maxnav i {
@@ -1319,7 +1319,7 @@ img {
   line-height: 0.28rem;
   color: #fff;
   border-radius: 50%;
-  background: #096735;
+  background: #0c4070;
   border: 1px solid #fff;
 }
 
@@ -1402,7 +1402,7 @@ img {
 }
 
 .product-slide .pagination .swiper-active-switch {
-  background: #086936;
+  background: #0c4070;
   padding: 0.16rem 0.42rem 0 0;
 }
 
@@ -1475,7 +1475,7 @@ img {
 
 .g-price b {
   font-size: 0.42rem;
-  color: #086936;
+  color: #0c4070;
 }
 
 .g-price em {
@@ -1540,12 +1540,12 @@ img {
 .p-sale .title {
   font-size: 0.22rem;
   line-height: 0.4rem;
-  color: #086936;
+  color: #0c4070;
   padding: 0.16rem 0.24rem 0.24rem 0.24rem;
 }
 
 .p-sale .title i {
-  color: #086936;
+  color: #0c4070;
   margin: 0 0.08rem;
 }
 
@@ -1654,11 +1654,11 @@ img {
 }
 
 .m-product a.active {
-  color: #086936;
+  color: #0c4070;
 }
 
 .m-product a.active i {
-  background: #096735;
+  background: #0c4070;
 }
 
 .m-product a i {
@@ -1683,7 +1683,7 @@ img {
 
 .m-product a.active p {
   padding: 0.12rem 0;
-  color: #096735;
+  color: #0c4070;
 }
 
 .m-product .m-contain {
@@ -1978,11 +1978,11 @@ img {
 }
 
 .pro-nav .but-cart {
-  background: #70a644;
+  background: #18629b;
 }
 
 .pro-nav .but-out {
-  background: #086936;
+  background: #0c4070;
 }
 
 .pro-nav span i {
@@ -2049,7 +2049,7 @@ img {
   width: 82.8%;
   margin-left: 8.6%;
   margin-top: 0.54rem;
-  background: #096735;
+  background: #0c4070;
   color: #fff;
   font-size: 0.28rem;
   border-radius: 0.08rem;
@@ -2215,7 +2215,7 @@ select::-ms-expand {
 }
 
 .g-specs-popup .specs-size .act span {
-  background: #086936;
+  background: #0c4070;
   color: #fff;
 }
 
@@ -2352,7 +2352,7 @@ select::-ms-expand {
 }
 
 .specs-display p span {
-  color: #086936;
+  color: #0c4070;
   vertical-align: 0.01rem;
 }
 
@@ -2382,11 +2382,11 @@ select::-ms-expand {
 
 .g-cart-popup button,
 .g-succbut button {
-  background: #086936;
+  background: #0c4070;
 }
 
 .specs-display > button{
-	background: #086936;
+	background: #0c4070;
 }
 
 .g-gallery .header .m-left a {
@@ -2468,19 +2468,19 @@ select::-ms-expand {
 }
 
 .m-gallery .tabs .active a {
-  color: #086936;
+  color: #0c4070;
 }
 
 .m-gallery .tabs .active .caret {
-  border-top: 0.08rem solid #086936;
+  border-top: 0.08rem solid #0c4070;
 }
 .m-gallery .tabs .active.on .caret {
   border-top: 0rem solid transparent;
-  border-bottom: 0.08rem solid #086936;
+  border-bottom: 0.08rem solid #0c4070;
 }
 .g-gallery .tabs .active.on .i-icon {
   border-top: 0rem solid transparent;
-  border-bottom: 0.08rem solid #086936;
+  border-bottom: 0.08rem solid #0c4070;
 }
 
 .m-gallery .tabs li > ul {
@@ -2564,12 +2564,11 @@ select::-ms-expand {
   font-size: 0.22rem;
   color: #444;
   line-height: 0.28rem;
-  height:60px;
 }
 
 .swiper-gall .price span {
   font-size: 0.32rem;
-  color: #086936;
+  color: #0c4070;
 }
 
 .swiper-gall .price em {
@@ -2634,7 +2633,7 @@ select::-ms-expand {
 .gall-irm .title em {
   font-size: 0.22rem;
   float: right;
-  color: #086936;
+  color: #0c4070;
   padding-right: 0.6rem;
   width: 66%;
   text-align: right;
@@ -2673,7 +2672,7 @@ select::-ms-expand {
 }
 
 .gall-irm .gallery-art .act span {
-  background: #086936;
+  background: #0c4070;
   color: #fff;
 }
 
@@ -2807,7 +2806,7 @@ select::-ms-expand {
 }
 
 .gall-pag p {
-  color: #086936;
+  color: #0c4070;
   height: 0.4rem;
 }
 
@@ -2843,7 +2842,7 @@ select::-ms-expand {
 
 .total-price em {
   font-size: 0.28rem;
-  color: #096735;
+  color: #0c4070;
   float: right;
 }
 
@@ -2891,7 +2890,7 @@ select::-ms-expand {
 }
 
 .m-gall-text span {
-  color: #086936;
+  color: #0c4070;
   text-decoration: underline;
 }
 
@@ -2963,7 +2962,7 @@ select::-ms-expand {
 
 .shiplist input[type='radio']:checked {
     border-width: 0.06rem;
-    border-color: #096735;
+    border-color: #0c4070;
 }
 .shiplist input[type='radio'], .checkbox:before {
     width: 0.2rem;
@@ -2984,7 +2983,7 @@ select::-ms-expand {
     vertical-align: middle;
 }
 .shiplist .now {
-    border-color: #096735;
+    border-color: #0c4070;
 }
 .shiplist li {
     float: left;
@@ -3357,7 +3356,7 @@ select::-ms-expand {
 }
 
 .g-popupcon .table {
-  border: 1px solid #086936;
+  border: 1px solid #0c4070;
   overflow: hidden;
 }
 
@@ -3368,11 +3367,11 @@ select::-ms-expand {
   text-align: center;
   text-transform: uppercase;
   padding: 0.1rem 0;
-  color: #086936;
+  color: #0c4070;
 }
 
 .g-popupcon .table .active {
-  background: #086936;
+  background: #0c4070;
   color: #fff;
 }
 
@@ -3435,9 +3434,9 @@ select::-ms-expand {
 }
 .maxpayment .m-data .pitch{
     padding-right: 0.6rem;
-    overflow: hidden;/*瓒呭嚭閮ㄥ垎闅愯棌*/
-    white-space: nowrap;/*涓嶆崲琛�*/
-    text-overflow:ellipsis;/*瓒呭嚭閮ㄥ垎鏂囧瓧浠�...鏄剧ず*/
+    overflow: hidden;/*超出部分隐藏*/
+    white-space: nowrap;/*不换行*/
+    text-overflow:ellipsis;/*超出部分文字以...显示*/
 }
 
 .maxpayment .m-data .maxrig {
@@ -3473,8 +3472,8 @@ select::-ms-expand {
 
 .maxpayment .btn-line {
   background: transparent;
-  border: 1px solid #086936;
-  color: #086936;
+  border: 1px solid #0c4070;
+  color: #0c4070;
 }
 
 .g-addres-popup .left p,
@@ -3654,7 +3653,7 @@ select::-ms-expand {
 }
 
 .cart-id .right {
-  background: #70a644;
+  background: #18629b;
   color: #fff;
   text-transform: uppercase;
   font-size: 0.22rem;
@@ -4048,7 +4047,7 @@ select::-ms-expand {
   color: #999;
 }
 
-/*鏃堕棿鎺т欢*/
+/*时间控件*/
 .g-table .datewrap:after{
     content:'';
     display: block;
@@ -4162,7 +4161,7 @@ select::-ms-expand {
 }
 
 .g-table .dropdown-menu td:hover,.g-table .dropdown-menu .active{
-    background: #096735;
+    background: #0c4070;
     color: #fff;
     cursor: pointer;
 }
