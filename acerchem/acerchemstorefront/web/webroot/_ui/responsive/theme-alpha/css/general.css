@@ -971,7 +971,13 @@ textarea{
 .g-table .list{
 	width:100%;
 }
-
+/*frank*/
+.s-table span{
+	display: table-cell;
+	vertical-align: middle;
+	text-transform: capitalize;
+	width:20%;
+}
 /*span 1/4*/
 .g-table .item span{
 	padding-top: 20px;
@@ -2874,7 +2880,17 @@ display: inline-table;
 .prod-cont .product-right .tableshare a:hover{
 	background-image: url(sharecolor.png);
 }
+/*frank gu*/
+.prod-cont .supplier-info .s-table li{
+	padding:20px 0;
+	line-height: 1em;
+	display: table;
+	width: 100%;
+	margin-bottom: -25px;
+	color: #999;
+}
 
+/*end*/
 .g-proudtable span , .prod-cont .g-desclist li{
 	color: #666;
 }
