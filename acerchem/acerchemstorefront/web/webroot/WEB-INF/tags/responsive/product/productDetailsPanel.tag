@@ -222,7 +222,7 @@
 
 					</div>
 			
-					Minimum: ${product.minOrderQuantity} ${product.packageType} &nbsp;${product.minOrderQuantity>1?"s":""}
+				Minimum: ${product.minOrderQuantity} ${product.packageType} ${product.minOrderQuantity>1?"s":""}
 					<cms:pageSlot position="AddToCart" var="component" >
 						<cms:component component="${component}" />
 					</cms:pageSlot>
@@ -264,7 +264,7 @@
 				<div class="tableshare">
 					<div class="title">Share with a Friend</div>
 					<ul class="share-buttons"></ul>								
-					</div>
+				</div>
 										
 				<!-- frank gu --> 
 				<div class="supplier-info">
