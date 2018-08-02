@@ -166,7 +166,30 @@
 				<editorArea:section name="hmc.tab.product.extendedattributes">
                     <editorArea:attribute qualifier="manufacturerAID"/>
 					<editorArea:attribute qualifier="manufacturerName"/>
+					<!-- frank gu -->
+					<editorArea:attribute qualifier="attributeZero"/>
+					<editorArea:attribute qualifier="describeZero"/>
+					<editorArea:attribute qualifier="attributeOne"/>
+					<editorArea:attribute qualifier="describeOne"/>
+					<editorArea:attribute qualifier="attributeTwo"/>
+					<editorArea:attribute qualifier="describeTwo"/>
+					<editorArea:attribute qualifier="attributeThree"/>
+					<editorArea:attribute qualifier="describeThree"/>
+					<editorArea:attribute qualifier="attributeFour"/>
+					<editorArea:attribute qualifier="describeFour"/>
+					<editorArea:attribute qualifier="attributeFive"/>
+					<editorArea:attribute qualifier="describeFive"/>
+					<editorArea:attribute qualifier="attributeSix"/>
+					<editorArea:attribute qualifier="describeSix"/>
+					<editorArea:attribute qualifier="attributeSeven"/>
+					<editorArea:attribute qualifier="describeSeven"/>
+					<editorArea:attribute qualifier="attributeEight"/>
+					<editorArea:attribute qualifier="describeEight"/>
+					<editorArea:attribute qualifier="attributeNine"/>
+					<editorArea:attribute qualifier="describeNine"/>
 				</editorArea:section>
+
+	
 				<editorArea:section name="hmc.tab.product.multimedia">
 					<editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="galleryImages"/>
 				</editorArea:section>
