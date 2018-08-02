@@ -55,7 +55,6 @@ html {
 }
 
 .g-login input,
-.g-login textarea,
 .g-login select,
 .g-login .city-picker-span {
   height: 1rem;
@@ -162,7 +161,7 @@ html {
 
 .g-succbut button,
 .g-succbut-l button {
-  background: #70a644;
+  background: #18629b;
   font-size: 0.28rem;
   margin: 0;
   border-radius: 0.08rem;
@@ -197,7 +196,7 @@ html {
 }
 
 .login-form .it-shipp a {
-  color: #0a6635;
+  color: #0c4070;
 }
 
 .login-form .it-shipp {
@@ -307,7 +306,7 @@ html {
 }
 
 .m-succbut button {
-  background: #086936;
+  background: #0c4070;
   font-size: 0.32rem;
   margin: 0;
   color: #fff;
@@ -333,7 +332,7 @@ html {
 }
 
 .it-invoice .def .radio {
-  color: #086936;
+  color: #0c4070;
 }
 
 .it-invoice .radio span {
@@ -362,7 +361,7 @@ html {
 
 .g-addres-popup .g-succbut button,.g-editaddres-popup .g-succbut button {
   border-radius: 0;
-  background: #096735;
+  background: #0c4070;
 }
 
 .g-addres-popup .form-con,.g-editaddres-popup .form-con {
@@ -397,7 +396,7 @@ html {
 }
 
 .check-status .status {
-  background: #70a644;
+  background: #18629b;
   color: #fff;
   display: inline-block;
   border-radius: 0.24rem;
@@ -597,20 +596,20 @@ html {
 }
 
 .g-gallery .tabs .active a ,.g-gallery .tabs .active .select {
-    color: #086936;
+    color: #0c4070;
 }
 
 .g-gallery .tabs .active a i,.g-gallery .tabs .active .sldiv i {
-    border-top-color: #086936;
+    border-top-color: #0c4070;
 }
 
 .g-gallery .tabs .active a i.top {
-    border-bottom-color: #086936;
+    border-bottom-color: #0c4070;
     border-top-color: transparent;
 }
 
 .mem-order .set {
-  background: #096735;
+  background: #0c4070;
 }
 
 .mem-order .fund {
@@ -621,8 +620,8 @@ html {
 
 .mem-order .cance {
   background: transparent;
-  border: 1px solid #0A6635;
-  color: #0A6635;
+  border: 1px solid #0c4070;
+  color: #0c4070;
 }
 
 .mem-order button {
@@ -710,7 +709,7 @@ html {
 }
 
 .g-detbut .but-ment {
-  background: #70a644;
+  background: #18629b;
   color: #fff;
 }
 
@@ -746,8 +745,8 @@ html {
 
 .mem-state .name span {
   font-size: 0.2rem;
-  color: #0f9950;
-  background: #084c28;
+  color: #fff;
+  background: #0c4070;
   padding: 0.06rem 0.13rem;
 }
 
@@ -915,7 +914,7 @@ html {
 .m-personal .g-succbut button,
 .m-passwo .g-succbut button {
   border-radius: 0;
-  background: #0A6635;
+  background: #0c4070;
 }
 
 .m-personal .g-succbut {
@@ -948,19 +947,12 @@ html {
 .m-personal .city-picker-span,
 .m-personal .name,
 .m-passwo input,
-.m-passwo textarea,
 .m-passwo select,
 .m-passwo .city-picker-span,
 .m-passwo .name {
   padding-left: 0.36rem;
   font-size: 0.24rem;
 }
-.test {
-	padding-left: 0.36rem;
-  	font-size: 0.24rem;
-  	overflow: visible;
-}
-
 
 .m-personal .pitch{
     color: #222;
@@ -985,8 +977,4 @@ html {
 
 .member-unpaid li{
     width: 50%;
-}
-
-.g-gallery {
-	margin-bottom:1rem;
 }
