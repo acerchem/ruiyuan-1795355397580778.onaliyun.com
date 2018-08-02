@@ -55,14 +55,6 @@
 							<span>In Process</span>
 						</a>
 					</li>
-					<!-- 
-					<li>
-						<a onclick="$.cookie('orderCode','');$.cookie('status','REFUND');" href="member-order.html">
-							<i class="i-refund"></i>
-							<span>Refund</span>
-						</a>
-					</li>
-					 -->
 					<li>
 						<a onclick="$.cookie('orderCode','');$.cookie('status','All');" href="member-order.html">
 							<i class="i-order"></i>
@@ -147,10 +139,8 @@
 		</div>	
 	</body>
 <script type="text/javascript">	
-
 getUser();	
 getPromotionItem();	
-
 function logout(){ 
 	$.cookie('userId', null);
 	$.cookie('password', null);
