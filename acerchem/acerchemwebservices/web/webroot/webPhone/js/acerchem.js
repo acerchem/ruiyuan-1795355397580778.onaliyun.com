@@ -14,7 +14,7 @@ function autoLogin()
             dataType: "json",
             crossDomain: true,
             success:function(returndata){
-                console.log("success:"+JSON.stringify(returndata));
+                //console.log("success:"+JSON.stringify(returndata));
                 $.cookie("access_token","Bearer "+returndata.access_token);
                 window.location.href="member.html";
             },
@@ -99,8 +99,7 @@ function getCreditAccount()
             request.setRequestHeader("Authorization", $.cookie("access_token"));
         },
         success:function(returndata){
-            console.log("success:"+JSON.stringify(returndata));
-            
+            //console.log("success:"+JSON.stringify(returndata));
             var html='';
             html+='<div class="check-status"><span class="status">Status:'+returndata.creditAccount.status+'</span>';
             html+='<div class="check-title"><div class="item"><p>'+returndata.currency.symbol+formatMoney(returndata.creditAccount.creditTotalAmount)+'</p><span>Total Amount</span></div>';
@@ -213,15 +212,13 @@ function getUser()
             request.setRequestHeader("Authorization", $.cookie("access_token"));
         },
         success:function(returndata){
-            console.log("success:"+JSON.stringify(returndata));
+            //console.log("success:"+JSON.stringify(returndata));
         	var html= '';
         	if(returndata.userLevel != null) {
         		html +='<p>Hello, '+returndata.name+'</p><span>'+returndata.userLevel.levelName+' Members</span>';
         	}else{
         		html +='<p>Hello, '+returndata.name+'</p><span> Members</span>';
         	}
-        	
-            
             $("#info p").remove();
             $("#info span").remove();
             $("#info").append(html);
@@ -341,21 +338,16 @@ function getPersonalInfo()
             request.setRequestHeader("Authorization", $.cookie("access_token"));
         },
         success:function(returndata){
-            console.log("contactAddress:"+JSON.stringify(returndata));
-
+            //console.log("contactAddress:"+JSON.stringify(returndata));
             $("#country option[value='"+returndata.region.countryIso+"']").attr("selected", true);
-            
             document.getElementById('townCity').value = returndata.town;
             document.getElementById('addressId').value = returndata.id;
-            
             getRegions(returndata.country.isocode,returndata.region.isocode);
- 
         },
         error:function(returndata){
             console.log("error11:"+JSON.stringify(returndata));
         }
     });
-     
 }
 
 function updatePersonalInfo()
@@ -639,7 +631,7 @@ function newAddress()
                 request.setRequestHeader("Authorization", $.cookie("access_token"));
             },
             success:function(returndata){
-                console.log("success:"+JSON.stringify(returndata));
+                //console.log("success:"+JSON.stringify(returndata));
                 window.location.reload();
             },
             error:function(returndata){
@@ -688,7 +680,7 @@ function updateAddress()
                 request.setRequestHeader("Authorization", $.cookie("access_token"));
             },
             success:function(returndata){
-                console.log("success:"+JSON.stringify(returndata));
+                //console.log("success:"+JSON.stringify(returndata));
                 if(returndata.statusText=="OK")window.location.reload();
             },
             error:function(returndata){
@@ -732,7 +724,7 @@ function delAddressById(addressId)
                         request.setRequestHeader("Authorization", $.cookie("access_token"));
                     },
                     success:function(returndata){
-                        console.log("success:"+JSON.stringify(returndata));
+                        //console.log("success:"+JSON.stringify(returndata));
                         if(returndata.statusText=="OK")window.location.reload();
                     },
                     error:function(returndata){
@@ -853,7 +845,7 @@ function getTickets()
             request.setRequestHeader("Authorization", $.cookie("access_token"));
         },
         success:function(returndata){
-            console.log("success:"+JSON.stringify(returndata));
+            //console.log("success:"+JSON.stringify(returndata));
             var html='';
             if(returndata.tickets!=null)
             {
@@ -887,8 +879,6 @@ function addTicket()
     
     var tel = /^\d{1,}$/;
     var ema = /^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/;
-    
-
     
     if(yourname==''||telephone==''||address==''||email==''||message=='')
     {
@@ -1210,7 +1200,7 @@ function getProductsByCode(code)
             request.setRequestHeader("Authorization", $.cookie("access_token"));
         },
         success:function(returndata){
-            console.log("success:"+JSON.stringify(returndata));
+            //console.log("success:"+JSON.stringify(returndata));
             var productImages = '';
             var images = returndata.images;
             if(returndata.images != null) {
@@ -1258,9 +1248,6 @@ function getProductsByCode(code)
                 }
             }
             $("#saleInfo").append(saleInfo);
-            
-            
-            
             var documents = '';
             var certificatess = returndata.certificatess;
             if(certificatess != null) {
@@ -1286,12 +1273,7 @@ function getProductsByCode(code)
             additionInfo +='<tr><td class="left">Package Type</td><td class="right">' + returndata.netWeight +returndata.unitName + '/'+  returndata.packageType +'</td></tr>';
             $("#additionalInfo").append(additionInfo);
             
-           /*
-            var code = '<span class="news" onclick= "window.location.href=\'productticket-add.html?code=' + returndata.code + '\';"><i></i></span>';
-            
-            $("#news").append(code);
-            */
-            
+            $("#productticket").attr("href","productticket-add.html?code=" + returndata.code); 
             
             var ProName = '';
             var ProCode = '';
@@ -1463,7 +1445,6 @@ function addProductTicket()
                 request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded;charset=UTF-8");
                 request.setRequestHeader("Authorization", $.cookie("access_token"));
             },
-            
             error:function(returndata){
             	//console.log("error:"+JSON.stringify(returndata));
             	//alert("error" + returndata.statusText);
@@ -1495,7 +1476,7 @@ function getCatalogs()
             var catalogs = returndata.catalogs;
             var catalogVersions=catalogs[0].catalogVersions;
             
-            console.log("success:"+JSON.stringify(catalogVersions));
+            //console.log("success:"+JSON.stringify(catalogVersions));
             for(var i = 0; i < catalogVersions.length; i++) {
                 if(catalogVersions[i].id == 'Online') {
                     var categories = catalogVersions[i].categories;
@@ -1541,7 +1522,7 @@ function getProductInvenroty(code)
             request.setRequestHeader("Authorization", $.cookie("access_token"));
         },
         success:function(returndata){
-            console.log("success:"+JSON.stringify(returndata));
+            //console.log("success:"+JSON.stringify(returndata));
             var storeOfProductDataList = returndata.returndata;
             if(storeOfProductDataList != null) {
             	for(var i = 0; i < storeOfProductDataList.length; i++) {
