@@ -127,40 +127,40 @@
 		<property name="discount" type="java.lang.Double" />
 	</bean>
 
-	<!-- alice :ä¿¡ç¨è´¦æ· -->
+	<!-- alice :信用账户 -->
 	<bean
 		class="de.hybris.platform.commercefacades.user.data.CustomerCreditAccountData">
 		<property name="billingInterval" type="java.lang.Integer" /><!-- 
-			è´¦ææ¶é´ -->
+			账期时间 -->
 		<property name="creaditRemainedAmount" type="java.math.BigDecimal" /><!-- 
-			å½åå¯ç¨é¢åº¦ -->
+			当前可用额度 -->
 		<property name="creditTotalAmount" type="java.math.BigDecimal" /><!-- 
-			æ»é¢åº¦ -->
+			总额度 -->
 		<property name="status" type="String" /><!-- LOCKED/NORMAL -->
 		<property name="transactions"
 			type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.CreditTransactionData>" /><!-- 
-			æµæ°´è®°å½ -->
+			流水记录 -->
 	</bean>
 	<!-- end -->
 
-	<!-- alice :ä¿¡ç¨æµæ°´ -->
+	<!-- alice :信用流水 -->
 	<bean
 		class="de.hybris.platform.commercefacades.user.data.CreditTransactionData">
 		<property name="creaditUsedAmount" type="java.math.BigDecimal" /><!-- 
-			æ¶è´¹éé¢ -->
+			消费金额 -->
 		<property name="paybackAmount" type="java.math.BigDecimal" /><!-- 
-			è¿æ¬¾éé¢ -->
-		<property name="isPayback" type="java.lang.Boolean" /><!-- æ¯å¦å·²è¿æ¬¾ -->
-		<property name="paybackTime" type="java.util.Date" /><!-- å®éè¿æ¬¾æ¥æ -->
+			还款金额 -->
+		<property name="isPayback" type="java.lang.Boolean" /><!-- 是否已还款 -->
+		<property name="paybackTime" type="java.util.Date" /><!-- 实际还款日期 -->
 		<property name="shouldPaybackTime" type="java.util.Date" /><!-- 
-			è¿æ¬¾æ¥ -->
-		<property name="remark" type="java.lang.String" /><!-- å¤æ³¨ -->
+			还款日 -->
+		<property name="remark" type="java.lang.String" /><!-- 备注¨ -->
 		<property name="creditAccount"
 			type="de.hybris.platform.commercefacades.user.data.CustomerCreditAccountData" /><!-- 
-			ä¿¡ç¨è´¦æ· -->
+			信用账户 -->
 		<property name="orderCode" type="java.lang.String" />
 		<property name="productNumber" type="java.lang.Integer" />
-		<property name="creationtime" type="java.util.Date"/><!-- äº¤ææ¶é´ -->
+		<property name="creationtime" type="java.util.Date"/><!-- 交易时间´ -->
 	</bean>
 	<!-- end -->
 
