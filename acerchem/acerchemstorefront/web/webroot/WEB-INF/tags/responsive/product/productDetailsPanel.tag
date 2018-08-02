@@ -204,7 +204,6 @@
 								<span class="set add">+</span>
 								
 							</div>
-							
 							<%-- <c:forEach var="${countrys}" var="data1" begin="0" end="1"> --%>
 						<c:forEach items="${countrys}" var="data"  varStatus="id"  >
 						<c:if test="${id.index==0}">
@@ -220,10 +219,10 @@
                         </select> 
 							
  						</div>
-						
+
 					</div>
-					
-					Minimum: ${product.minOrderQuantity} ${product.packageType} ${product.minOrderQuantity>1?"s":""}
+			
+					Minimum: ${product.minOrderQuantity} ${product.packageType} &nbsp;${product.minOrderQuantity>1?"s":""}
 					<cms:pageSlot position="AddToCart" var="component" >
 						<cms:component component="${component}" />
 					</cms:pageSlot>
@@ -264,13 +263,63 @@
 				</div>
 				<div class="tableshare">
 					<div class="title">Share with a Friend</div>
-					<ul class="share-buttons"></ul>
-				</div>
+					<ul class="share-buttons"></ul>								
+					</div>
+										
+				<!-- frank gu --> 
+				<div class="supplier-info">
+					<div class="s-info">														
+								<ul class="s-table">								
+									<li>
+										<span>${product.supplierInfo00}</span>
+										<span>${product.supplierInfo01}</span>
+									</li>	
+									<li>
+										<span>${product.supplierInfo02}</span>
+										<span>${product.supplierInfo03}</span>
+									</li>										
+									<li>
+										<span>${product.supplierInfo04}</span>
+										<span>${product.supplierInfo05}</span>
+									</li>	
+									<li>
+										<span>${product.supplierInfo06}</span>
+										<span>${product.supplierInfo07}</span>
+									</li>	
+									<li>
+										<span>${product.supplierInfo08}</span>
+										<span>${product.supplierInfo09}</span>
+									</li>	
+									<li>
+										<span>${product.supplierInfo10}</span>
+										<span>${product.supplierInfo11}</span>
+									</li>	
+									<li>
+										<span>${product.supplierInfo12}</span>
+										<span>${product.supplierInfo13}</span>
+									</li>	
+									<li>
+										<span>${product.supplierInfo14}</span>
+										<span>${product.supplierInfo15}</span>
+									</li>	
+									<li>
+										<span>${product.supplierInfo16}</span>
+										<span>${product.supplierInfo17}</span>
+									</li>	
+									<li>
+										<span>${product.supplierInfo18}</span>
+										<span>${product.supplierInfo19}</span>
+									</li>	
+										
+								</ul>
+							</div>
+							</div>	
+							<!-- end --> 				 
 			</div>
 			<!-- r end -->	
 		</div>
 		<!-- top end -->
-
+g-deswrap
 		<div class="m-pagecard">
 			<div class="card">
 				<span class="now">Product Description</span>
@@ -415,11 +464,11 @@
     $(document).ready(function () {
         $('.click_pop').click(function () {
         var proName="${product.name}".replace('%','%25').replace('+','%2B').replace('&','%26');
-        var openUrl = ACC.config.encodedContextPath + "/account/add-support-ticket?productId=${product.code}&productName="+proName;
-         var iWidth=700; 
-         var iHeight=700; 
-         var iTop = (window.screen.availHeight-30-iHeight)/2; 
-         var iLeft = (window.screen.availWidth-10-iWidth)/2; 
+        var openUrl = ACC.config.encodedContextPath + "/account/add-support-ticket?productId=${product.code}&productName="+proName;//Ã¥Â¼Â¹Ã¥ÂÂºÃ§ÂªÂÃ¥ÂÂ£Ã§ÂÂurl
+         var iWidth=700; //Ã¥Â¼Â¹Ã¥ÂÂºÃ§ÂªÂÃ¥ÂÂ£Ã§ÂÂÃ¥Â®Â½Ã¥ÂºÂ¦;
+         var iHeight=700; //Ã¥Â¼Â¹Ã¥ÂÂºÃ§ÂªÂÃ¥ÂÂ£Ã§ÂÂÃ©Â«ÂÃ¥ÂºÂ¦;
+         var iTop = (window.screen.availHeight-30-iHeight)/2; //Ã¨ÂÂ·Ã¥Â¾ÂÃ§ÂªÂÃ¥ÂÂ£Ã§ÂÂÃ¥ÂÂÃ§ÂÂ´Ã¤Â½ÂÃ§Â½Â®;
+         var iLeft = (window.screen.availWidth-10-iWidth)/2; //Ã¨ÂÂ·Ã¥Â¾ÂÃ§ÂªÂÃ¥ÂÂ£Ã§ÂÂÃ¦Â°Â´Ã¥Â¹Â³Ã¤Â½ÂÃ§Â½Â®;
          window.open(openUrl,"","height="+iHeight+", width="+iWidth+", top="+iTop+",scrollbars=yes,resizable=yes,toolbar=no,location=no, left="+iLeft); 
         });
     })
