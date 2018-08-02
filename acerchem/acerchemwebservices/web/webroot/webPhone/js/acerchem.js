@@ -763,13 +763,34 @@ function defaultAddressById(addressId)
 
 function getOrder()
 {
+	/* 
+	UNCONFIRMED--》UNCONFIRMED,CHECKED_VALID;
+	PROCESSING--》 UNDELIVERED,DELIVERED
+	UNPAIED--》 UNPAIED
+	COMPLETED--》COMPLETED
+	REFUND--》CANCELLED
+	*/
+	var statuses=$('.sldiv .select').text(); 
+	if(statuses=='UNCONFIRMED'){statuses='UNCONFIRMED,CHECKED_VALID';}
+	else if(statuses=='PROCESSING'){statuses='UNDELIVERED,DELIVERED';}
+	else if(statuses=='REFUND'){statuses='CANCELLED';}
+	else if(statuses!='UNPAIED'&&statuses!='COMPLETED'){statuses='';}
+	
+	var orderCode="";
+	var keys = document.URL.split('key=');
+	if(keys.length>1&&document.getElementsByName("key")[0].value=='')
+	{
+		orderCode=keys[1];
+		document.getElementsByName("key")[0].value=keys[1]+"";
+	}
+	
     $.ajax({
         url:homeUrl+"/users/current/orders",
         type:'get',
         dataType: "json",
         data:{
             "orderCode":orderCode,
-            "sort":sort,
+            "sort":"byDate",
             "statuses":statuses
         },
         async: true,
@@ -793,9 +814,7 @@ function updateHtml(returndata){
     $("#orders li").remove();
     if(returndata.orders!=null)
     {
-    	console.log("success:"+JSON.stringify(returndata));
         for(var i = 0; i < returndata.orders.length; i++){
-        	
             html+='<li data-Total="' + returndata.orders[i].total.value + '" data-time="'+formatData2(returndata.orders[i].placed)+'"><div class="m-col"><div class="m-data bort-bot"><a href="member-order-detailed.html?'+returndata.orders[i].code+'"><span class="num">'+returndata.orders[i].code+'</span>';
             html+='<span class="date">due date ：'+formatData(returndata.orders[i].placed)+'</span></a></div><div class="m-con"><div class="item item-text"><p>';
             html+=formatDataTime(returndata.orders[i].placed)+'</p><span>'+returndata.orders[i].total.formattedValue+'</span></div><div class="item g-succbut">';
@@ -819,12 +838,6 @@ function updateHtml(returndata){
         }
         $("#orders").append(html); 
     }
-    
-}
-
-function searchOrder(){
-    $.cookie("orderCode",document.getElementById('key').value);
-    window.location.href="member-order.html";
 }
 
 function getTickets()
