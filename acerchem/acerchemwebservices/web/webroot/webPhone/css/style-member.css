@@ -55,6 +55,7 @@ html {
 }
 
 .g-login input,
+.g-login textarea,
 .g-login select,
 .g-login .city-picker-span {
   height: 1rem;
@@ -947,12 +948,19 @@ html {
 .m-personal .city-picker-span,
 .m-personal .name,
 .m-passwo input,
+.m-passwo textarea,
 .m-passwo select,
 .m-passwo .city-picker-span,
 .m-passwo .name {
   padding-left: 0.36rem;
   font-size: 0.24rem;
 }
+.test {
+	padding-left: 0.36rem;
+  	font-size: 0.24rem;
+  	overflow: visible;
+}
+
 
 .m-personal .pitch{
     color: #222;
@@ -977,4 +985,8 @@ html {
 
 .member-unpaid li{
     width: 50%;
+}
+
+.g-gallery {
+	margin-bottom:1rem;
 }
