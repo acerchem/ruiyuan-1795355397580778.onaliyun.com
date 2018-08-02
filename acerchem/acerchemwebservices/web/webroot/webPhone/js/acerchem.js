@@ -167,20 +167,24 @@ function formatDataTime(fmt) {
 }
 
 function formatData(fmt) {
-    
-	
-	//fmt = fmt.replace(/\-/g, "/").substr(0,10);
-	//alert("date:" + fmt);
-	return fmt;
-	//var date = new Date(fmt);
-	
-    //alert("date:" + date);
-    //return date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear();
-    
-    //alert("date :" + DateFormat.parseDate(new Date(fmt), 'yyyy/MM/dd'));
-	//var date = DateFormat.parseDate(new Date(fmt), 'yyyy-MM-dd');
-	//alert("date :" + date);
-    //return date;
+	var date = new Date(fmt);
+    return date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate();
+}
+
+function formatData2(fmt) {
+	var date = new Date(fmt);
+	var dateStr=""+date.getFullYear();
+	if(date.getMonth()<9)
+	{
+		dateStr+="0";
+	}
+	dateStr+=date.getMonth()+1;
+	if(date.getDate()<10)
+	{
+		dateStr+="0";
+	}
+	dateStr+=date.getDate();
+    return dateStr;
 }
 
 function formatMoney(num)  
@@ -759,7 +763,6 @@ function defaultAddressById(addressId)
 
 function getOrder()
 {
-
     $.ajax({
         url:homeUrl+"/users/current/orders",
         type:'get',
@@ -793,8 +796,8 @@ function updateHtml(returndata){
     	console.log("success:"+JSON.stringify(returndata));
         for(var i = 0; i < returndata.orders.length; i++){
         	
-            html+='<li data-Total="' + returndata.orders[i].total.formattedValue + '"><div class="m-col"><div class="m-data bort-bot"><a href="member-order-detailed.html?'+returndata.orders[i].code+'"><span class="num">'+returndata.orders[i].code+'</span>';
-            html+='<span class="date">due date ：'+returndata.orders[i].waitDeliveiedDate+'</span></a></div><div class="m-con"><div class="item item-text"><p>';
+            html+='<li data-Total="' + returndata.orders[i].total.value + '" data-time="'+formatData2(returndata.orders[i].placed)+'"><div class="m-col"><div class="m-data bort-bot"><a href="member-order-detailed.html?'+returndata.orders[i].code+'"><span class="num">'+returndata.orders[i].code+'</span>';
+            html+='<span class="date">due date ：'+formatData(returndata.orders[i].placed)+'</span></a></div><div class="m-con"><div class="item item-text"><p>';
             html+=formatDataTime(returndata.orders[i].placed)+'</p><span>'+returndata.orders[i].total.formattedValue+'</span></div><div class="item g-succbut">';
             if(returndata.orders[i].status=='CHECKED_VALID')
             {
@@ -816,6 +819,7 @@ function updateHtml(returndata){
         }
         $("#orders").append(html); 
     }
+    
 }
 
 function searchOrder(){
@@ -1126,13 +1130,22 @@ function getPromotionItemforProductPage()
 
 function getAllProducts()
 {
-    $.ajax({
+	var url=document.URL;
+	var keys = url.split('key=');
+	if(keys.length>1&&document.getElementsByName("key")[0].value=='')
+	{
+		document.getElementsByName("key")[0].value=keys[1]+"";
+	}
+	$.ajax({
         url:homeUrl+"/products/show",
-        type:'get',
+        //url: homeUrl+"/products/search?query=:"+document.getElementsByName("key")[0].value+"&sort="+sort,
+        type:"get",
         dataType: "json",
         async: true,
         crossDomain: true,
-        
+        data:{
+            "key":document.getElementsByName("key")[0].value
+        },
         beforeSend: function(request) {
             request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
             request.setRequestHeader("Authorization", $.cookie("access_token"));
@@ -1142,35 +1155,27 @@ function getAllProducts()
             var html='';
             var products=returndata.products;
             for(var i = 0; i < products.length; i++){
-            	
-            	if( products[i].name != undefined) {
-            		html+='<li data-name="' + products[i].name + '"><div class="maximg"><a href="product.html?code='+products[i].code+'">';
-//                  html+='<li><div class="maximg"><a href="product.html">';
-//                   html+='<li><div class="maximg"><a href="'+products[i].url+'">';
-                     if(products[i].images != null) {
-                     	html+='<img src="'+products[i].images[0].url.substring(23)+'"></a></div><div class="text g-price"><a href="product.html?code='+products[i].code+'"><p>'+products[i].name+'</p><div class="price"><span>';
-                     }else {
-                     	html+='<img src=""></a></div><div class="text g-price"><a href="product.html?code='+products[i].code+'"><p>'+products[i].name+'</p><div class="price"><span>';
-                     }
-                    
-                     if(products[i].promotionPrice!=null){
-                         html+=products[i].promotionPrice.formattedValue + '</span><em>';
-                     }else{
-                         html+='</span><em>';
-                     }
-                     
-                     if(products[i].price!=null){
-                         html+=products[i].price.formattedValue+'</em></div></a></div></li>'
-                     }else{
-                         html+='</em></div></a></div></li>'
-                     }
-            	}else{
-            		console.log("name undefined, code"+ products[i].code);
-            	}
-            	
+        		html+='<li data-name="' + products[i].name + '"><div class="maximg"><a href="product.html?code='+products[i].code+'">';
+                 if(products[i].images != null) {
+                 	html+='<img src="'+products[i].images[0].url.substring(23)+'"></a></div><div class="text g-price"><a href="product.html?code='+products[i].code+'"><p>'+products[i].name+'</p><div class="price"><span>';
+                 }else {
+                 	html+='<img src=""></a></div><div class="text g-price"><a href="product.html?code='+products[i].code+'"><p>'+products[i].name+'</p><div class="price"><span>';
+                 }
+                
+                 if(products[i].promotionPrice!=null){
+                     html+=products[i].promotionPrice.formattedValue + '</span><em>';
+                 }else{
+                     html+='</span><em>';
+                 }
+                 
+                 if(products[i].price!=null){
+                     html+=products[i].price.formattedValue+'</em></div></a></div></li>'
+                 }else{
+                     html+='</em></div></a></div></li>'
+                 }
             }
+            $("#productLists li").remove();
             $("#productLists").append(html); 
-            
         },
         error:function(returndata){
             console.log("error:"+JSON.stringify(returndata));
@@ -1536,54 +1541,6 @@ function getProductInvenroty(code)
         }
     });
 }
-
-function getCategories(code) {
-    $.ajax({
-        url:homeUrl+"/catalogs/category/571",
-        type:'get',
-        dataType: "json",
-        async: true,
-        crossDomain: true,
-        
-        beforeSend: function(request) {
-            request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            request.setRequestHeader("Authorization", $.cookie("access_token"));
-        },
-        success:function(returndata){
-            console.log("success:"+JSON.stringify(returndata));
-
-        },
-        error:function(returndata){
-            console.log("error:"+JSON.stringify(returndata));
-        }
-    });
-}
-
-/*
-function getCategories(code) {
-    $.ajax({
-        url:homeUrl+"/products/search?query=category:571",
-        type:'get',
-        dataType: "json",
-        async: true,
-        crossDomain: true,
-        
-        beforeSend: function(request) {
-            request.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-            request.setRequestHeader("Authorization", $.cookie("access_token"));
-        },
-        success:function(returndata){
-            console.log("success:"+JSON.stringify(returndata));
-            
-        },
-        error:function(returndata){
-            console.log("error:"+JSON.stringify(returndata));
-        }
-    });
-}
-
-*/
-
 
 
 
