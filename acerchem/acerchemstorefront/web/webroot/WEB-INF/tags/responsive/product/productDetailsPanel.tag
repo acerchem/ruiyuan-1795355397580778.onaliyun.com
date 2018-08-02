@@ -319,7 +319,7 @@
 			<!-- r end -->	
 		</div>
 		<!-- top end -->
-g-deswrap
+
 		<div class="m-pagecard">
 			<div class="card">
 				<span class="now">Product Description</span>
