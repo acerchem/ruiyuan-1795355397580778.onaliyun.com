@@ -68,17 +68,6 @@
 		<enumtype code="CustomerArea" autocreate="true" generate="true"
 			dynamic="true">
 			<description>用户区域</description>
-			<value code="East_Asia" />
-			<value code="North_Asia" />
-			<value code="Southeast_Asia" />
-			<value code="South_Asia" />
-			<value code="Central_Asia" />
-			<value code="West_Asia" />
-			<value code="South_Europe" />
-			<value code="Western_Europe" />
-			<value code="Northern_Europe" />
-			<value code="Central_Europe" />
-			<value code="Central_America" />
 			<value code="North_America" />
 			<value code="South_America" />
 		</enumtype>
@@ -207,22 +196,7 @@
 				<modifiers read="true" write="true" search="true" partof="true" optional="true" />
 			</targetElement>
 		</relation>
-		
-		<!-- 供应商和用户一对多关系 
-		<relation code="AcerchemVendor2Employee" generate="true"
-			localized="false" autocreate="true">
-			<sourceElement qualifier="acerchemVendor" type="Vendor"
-				cardinality="one">
-				<modifiers read="true" write="true" search="true"
-					optional="true" />
-			</sourceElement>
-			<targetElement qualifier="acerchemEmployee" type="Employee"
-				cardinality="many" collectiontype="list" ordered="true">
-				<modifiers read="true" write="true" search="true"
-					optional="true" />
-			</targetElement>
-		</relation>
-		-->
+
 	</relations>
 
 	<itemtypes>
@@ -472,28 +446,7 @@
 
 				</attributes>
 			</itemtype>
-			
-			<itemtype code="Vendor" autocreate="false" generate="false">
-				<attributes>
-					<attribute qualifier="toEmployee" type="Employee">
-						<description>对应员工账号</description>
-						<modifiers read="true" write="true" search="true" />
-						<persistence type="property" />
-					</attribute>
 
-				</attributes>
-			</itemtype>
-			
-			<itemtype code="Employee" autocreate="false" generate="false">
-				<attributes>
-					<attribute qualifier="toVendor" type="Vendor">
-						<description>对应供应商</description>
-						<modifiers read="true" write="true" search="true" />
-						<persistence type="property" />
-					</attribute>
-
-				</attributes>
-			</itemtype>
 
 			<!--add by Wangjh end -->
 
@@ -597,11 +550,116 @@
 					<persistence type="property" />
 					<description>商品特性1</description>
 				</attribute>
-
+						<!-- by frank gu  -->
+			     		<attribute qualifier="attributeZero" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <modifiers optional="false" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="describeZero" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <modifiers optional="false" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="attributeOne" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <modifiers optional="false" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="describeOne" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <modifiers optional="false" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="attributeTwo" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <modifiers optional="false" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="describeTwo" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <modifiers optional="false" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="attributeThree" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <modifiers optional="false" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="describeThree" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <modifiers optional="false" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="attributeFour" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <modifiers optional="false" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="describeFour" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <modifiers optional="false" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="attributeFive" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <modifiers optional="false" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="describeFive" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <modifiers optional="false" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="attributeSix" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <modifiers optional="false" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="describeSix" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <modifiers optional="false" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="attributeSeven" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <modifiers optional="false" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="describeSeven" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <modifiers optional="false" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		
+			     		<attribute qualifier="attributeEight" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <modifiers optional="false" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="describeEight" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <modifiers optional="false" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="attributeNine" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <modifiers optional="false" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="describeNine" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <modifiers optional="false" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		
+			   		
 
 				</attributes>
 			</itemtype>
 
+
+  
 			<itemtype code="ProductCarouselComponent" autocreate="false"
 				generate="false">
 				<attributes>
@@ -945,6 +1003,9 @@
 					</attribute>
 				</attributes>
 			</itemtype>
+			
+			
+			
 
 			<itemtype code="PointOfService" autocreate="false" generate="false">
 				<attributes>
@@ -1037,9 +1098,108 @@
 
 			</itemtype>
 
-
-
 		</typegroup>
+	
+		
+		<!-- frank gu -->
+		
+	
+		
+		
+		<!-- <typegroup name="Supplier">
+		<itemtype code="SupplierInfo" autocreate="true" generate="true">
+  		<deployment table="SupplierInfo" typecode="25511" />
+			   		 <attributes>
+			     		<attribute qualifier="info00" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="info01" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="info02" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="info03" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="info04" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="info05" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="info06" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="info07" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="info08" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="info09" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="info10" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="info11" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="info12" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="info13" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="info14" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="info15" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		
+			     		<attribute qualifier="info16" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="info17" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="info18" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		<attribute qualifier="info19" type="java.lang.String" >			    					    		 
+			     		  <persistence type="property" />
+			     		  <description>Supplier information input</description>
+			     		</attribute>
+			     		
+			   		 </attributes>
+			   		 
+				</itemtype>
+		</typegroup> -->
+				<!-- end  -->
+
+ 
+	         
 
 		<!-- shaun.sheng -->
 
@@ -1177,12 +1337,6 @@
 					<attribute qualifier="pickupDateOfExtended" type="java.util.Date">
 						<persistence type="property" />
 						<description>推迟后的配送日期</description>
-					</attribute>
-					
-					<attribute qualifier="orderFinishedDate" type="java.util.Date">
-						<description>订单完成时间</description>
-						<modifiers read="true" write="true" search="true" />
-						<persistence type="property" />
 					</attribute>
 				</attributes>
 			</itemtype>
