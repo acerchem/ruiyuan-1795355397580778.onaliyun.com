@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 	<head>
@@ -27,48 +28,14 @@
 				<div class="m-center">
 					<h2>Your Orders</h2>
 				</div>
-				<!-- 
-				<div class="menu m-right">
-					<button type="button" class="menu-nav">
-						<i class="glyphicon"></i>
-						<span class="maxsr-only">关闭</span>
-					</button>
-					<ul class="menwrap">
-						<li class="bort-bot">
-							<a class="alink">Applications <i></i></a>
-						</li>
-						<li class="bort-bot">
-							<a class="alink">Promotions <i></i></a>
-							<ul class="chilmenu">
-								<li><a href="gallery.html">Events</a></li>
-								<li><a href="gallery.html">News/Blog</a></li>
-								<li><a href="gallery.html">Market Trends</a></li>
-								<li><a href="gallery.html">FAQs</a></li>
-								<li><a href="gallery.html">Tutorial Videos</a></li>
-								<li><a href="gallery.html">Magazine</a></li>
-								<li><a href="gallery.html">Online Subscription</a></li>
-								<li><a href="gallery.html">Affiliations</a></li>
-							</ul>
-						</li>
-						<li class="bort-bot">
-							<a class="alink">Sourcing New Ingredients <i></i></a>
-						</li>
-						<li class="bort-bot">
-							<a class="alink">Innovative Ingredients <i></i></a>
-						</li>
-						<li class="bort-bot">
-							<a class="alink">Info Center<i></i></a>
-						</li>
-					</ul>
-					<div id="maxmenu-overlay" class="maxmenu-overlay" style="display: none"></div>
-				</div>
-				 -->
 			</div>
 			<div class="search m-order">
-				<input style="float:left;width: 90%;" type="text" id="key" placeholder="Search Order Number"/>
-				<button onclick="searchOrder();" style="float:right;width: 10%;" type="button" class="btn i-search" ><i></i></button>
+				<form action="member-order.html" target="_self">
+					<input type="text" id="key" class="key" placeholder="Search Order Number">
+					<button type="button" onclick="searchOrder()" class="btn i-search"><i></i></button>
+				</form>
 			</div>
-			<br/>
+			
 			<ul id="myTab" class="tabs bort-top nav nav-tabs">
 			    <li class="dropdown active">
 					<div class="sldiv">  
@@ -87,13 +54,14 @@
 					</div>
 			    </li>
 				<li  href="#Total" style="font-size: 10px;" data-toggle="tab" class="gall-price Total" data-name=""><a>Total<i class="i-icon"></i></a></li>
-				<li href="#Date" style="font-size: 10px;" data-toggle="tab" class="gall-date time" data-name=""><a>Date<i class="i-icon"></i></a></li>
+				<li href="#Date" style="font-size: 10px;" data-toggle="tab" class="gall-price time" data-name=""><a>Date<i class="i-icon"></i></a></li>
 			</ul>
 			
 			<div id="myTabContent" class="order-list">
 				<div class="tab-pane fade active in" id="Unpaid">
 				<div class="mem-order">
 					<ul id="orders">
+					
 					</ul>
 					<div class="more">
 						<a href="">~ No More ~</a>
@@ -165,22 +133,6 @@ $('.sldiv .uldiv ul li').on('click',function(){
   getOrder();
 });
 
-//按金额排序
-//按日期降序
-/* 
-$(".i-icon").click(function(){
-	sort='date';
-	getOrder();
-})
- */
-/* 
-$(".g-gallery .gall-date").click(function(){
-	sort='date';
-	getOrder();
-})
- */
-
-
 // 排序
 (function(){
 	var arr=[];
@@ -188,10 +140,10 @@ $(".g-gallery .gall-date").click(function(){
 	var item = $('#Unpaid ul li');
 	$.each(item,function(index,item){		
 		arr.push($(item).data('total'));
-		//arr2.push($(item).data('time'));
+		arr2.push($(item).data('time'));
 	})
 	arr.sort();
-	//arr2.sort();
+	arr2.sort();
 	$('.gall-price').on('click',function(){
 		
 		if($(this).hasClass('Total')){
@@ -210,9 +162,7 @@ $(".g-gallery .gall-date").click(function(){
 				}
 			}
 			
-		}
-		/*
-		else if($(this).hasClass('time')){
+		}else if($(this).hasClass('time')){
 			var data = $(this).attr('data-time');
 
 			if(data != 'top'){
@@ -228,14 +178,9 @@ $(".g-gallery .gall-date").click(function(){
 				}
 			}
 		}
-		*/
 		
 	})
-	
-
-
 })()
-
 </script>
 	</body>
 </html>
