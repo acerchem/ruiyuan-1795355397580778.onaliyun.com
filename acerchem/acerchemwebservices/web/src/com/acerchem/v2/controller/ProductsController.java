@@ -11,6 +11,8 @@
 package com.acerchem.v2.controller;
 
 import de.hybris.platform.catalog.enums.ProductReferenceTypeEnum;
+import de.hybris.platform.catalog.model.classification.ClassificationSystemVersionModel;
+import de.hybris.platform.category.model.CategoryModel;
 import de.hybris.platform.commercefacades.catalog.CatalogFacade;
 import de.hybris.platform.commercefacades.product.ProductFacade;
 import de.hybris.platform.commercefacades.product.ProductOption;
@@ -53,7 +55,6 @@ import de.hybris.platform.webservicescommons.errors.exceptions.WebserviceValidat
 import com.acerchem.constants.YcommercewebservicesConstants;
 import com.acerchem.facades.facades.AcerchemCustomerFacade;
 import com.acerchem.facades.product.data.StoreOfProductData;
-import com.acerchem.facades.suggestion.impl.DefaultSimpleSuggestionFacade;
 import com.acerchem.formatters.WsDateFormatter;
 import com.acerchem.product.data.ReviewDataList;
 import com.acerchem.product.data.SuggestionDataList;
@@ -66,6 +67,7 @@ import com.acerchem.validator.PointOfServiceValidator;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
@@ -604,29 +606,29 @@ public class ProductsController extends BaseController
         return productSearchPageWsDTO;
     }
     
-    
-    /*@Resource
-    private Converter<ProductModel, ProductData> productConverter;
-    @Resource
-    private FlexibleSearchService flexibleSearchService;
-    */
     @RequestMapping(value = "/show", method = RequestMethod.GET)
     @CacheControl(directive = CacheControlDirective.PUBLIC, maxAge = 300)
     @ResponseBody
-    public ProductSearchPageWsDTO showAllProducts(@RequestParam(defaultValue = FULL_FIELD_SET) final String fields)
+    public ProductSearchPageWsDTO showAllProducts(@RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields,
+    		@RequestParam(required = false) final String key,
+    		@RequestParam(required = false) final String sort)
     {
-        final String SQL = "SELECT PK FROM {"+ProductModel._TYPECODE+"}";//limit 1,15
+    	String SQL = "SELECT PK FROM {"+ProductModel._TYPECODE+"} ";
+    	if(key!=null && !key.equals(""))
+    	{
+    		SQL+="WHERE {"+ProductModel.CODE+"} like '%" + key + "%' OR {"+ProductModel.NAME+"} like '%" + key + "%' ";
+    	}
+    	SQL+=" ORDER BY {" + ProductModel.CODE + "} ASC ";
+        
         final FlexibleSearchQuery query = new FlexibleSearchQuery(SQL);
-//      query.setNeedTotal(false);
-//      query.setCount(15);
-        query.setNeedTotal(true);
+	    query.setNeedTotal(false);
+	    query.setCount(100);
         final SearchResult<ProductModel> result = flexibleSearchService.search(query);
         List<ProductData> products=Converters.convertAll(result.getResult(), productConverter);
         List<ProductWsDTO> productWsDTOList=new ArrayList<ProductWsDTO>();
         for(ProductData pro:products)
         {
             ProductWsDTO productWsDTO=getDataMapper().map(pro, ProductWsDTO.class, fields);
-            
             productWsDTOList.add(productWsDTO);
         }
         
@@ -682,29 +684,34 @@ public class ProductsController extends BaseController
         return storeOfProductDataList;
         //return getDataMapper().map(storeOfProductDataList, StoreOfProductDataListWsDTO.class, fields);
     }
- 
 
-    @RequestMapping(value = "/categoty/{categoryCode}", method = RequestMethod.GET)
+    @RequestMapping(value = "/category/{categoryCode}", method = RequestMethod.GET)
     @CacheControl(directive = CacheControlDirective.PUBLIC, maxAge = 300)
     @ResponseBody
     public ProductSearchPageWsDTO getProductByCategotyCode(@PathVariable final String categoryCode, @RequestParam(defaultValue = DEFAULT_FIELD_SET) final String fields)
-    {
-        final String SQL = "SELECT PK FROM {"+ProductModel._TYPECODE+"} WHERE {"+ProductModel.SUPERCATEGORIES+"} = " + categoryCode;
-        final FlexibleSearchQuery query = new FlexibleSearchQuery(SQL);
-
-        final SearchResult<ProductModel> result = flexibleSearchService.search(query);
-        List<ProductData> products=Converters.convertAll(result.getResult(), productConverter);
-        List<ProductWsDTO> productWsDTOList=new ArrayList<ProductWsDTO>();
-        for(ProductData pro:products)
-        {
-            ProductWsDTO productWsDTO=getDataMapper().map(pro, ProductWsDTO.class, fields);
-            
-            productWsDTOList.add(productWsDTO);
-        }
-        
-        ProductSearchPageWsDTO productSearchPageWsDTO=new ProductSearchPageWsDTO();
-        productSearchPageWsDTO.setProducts(productWsDTOList);
-        
+    {//571:Vitamin 575:PlantExtract
+    	ProductSearchPageWsDTO productSearchPageWsDTO=new ProductSearchPageWsDTO();
+    	
+    	final StringBuilder SQL = new StringBuilder("SELECT {cat." + CategoryModel.PK + "} FROM {" + CategoryModel._TYPECODE + " AS cat} WHERE {cat." + CategoryModel.CODE + "} = "+categoryCode);
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(SQL);
+	    query.setNeedTotal(true);
+        final SearchResult<CategoryModel> result = flexibleSearchService.search(query);
+        Collection<CategoryModel> categoriesForCode = result.getResult();
+		for (final CategoryModel categoryModel : categoriesForCode)
+		{
+			if ((!(categoryModel.getCatalogVersion() instanceof ClassificationSystemVersionModel)))
+			{
+				List<ProductData> products=Converters.convertAll(categoryModel.getProducts(), productConverter);
+		        List<ProductWsDTO> productWsDTOList=new ArrayList<ProductWsDTO>();
+		        for(ProductData pro:products)
+		        {
+		            ProductWsDTO productWsDTO=getDataMapper().map(pro, ProductWsDTO.class, fields);
+		            productWsDTOList.add(productWsDTO);
+		        }
+		        productSearchPageWsDTO.setProducts(productWsDTOList);
+		        return productSearchPageWsDTO;
+			}
+		}
         return productSearchPageWsDTO;
     }
 }
