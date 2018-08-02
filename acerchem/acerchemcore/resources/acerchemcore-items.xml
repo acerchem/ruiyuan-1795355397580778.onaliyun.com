@@ -1338,6 +1338,11 @@
 						<persistence type="property" />
 						<description>推迟后的配送日期</description>
 					</attribute>
+					<attribute qualifier="orderFinishedDate" type="java.util.Date">
+						<description>订单完成时间</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
 				</attributes>
 			</itemtype>
 			
