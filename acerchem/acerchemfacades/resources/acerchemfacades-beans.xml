@@ -71,30 +71,6 @@
 		<property name="warehouseCode" type="java.lang.String" />
 		<property name="avaReleaseDay" type="java.lang.Integer" />
 	</bean>
-	
-	<!-- add by frank -->
-<!-- <bean class="de.hybris.platform.commercefacades.product.data.ProductData">	
-		<property name="supplierInfo00" type="java.lang.String"/>
-		<property name="supplierInfo01" type="java.lang.String"/>
-		<property name="supplierInfo02" type="java.lang.String"/>
-		<property name="supplierInfo03" type="java.lang.String"/>
-		<property name="supplierInfo04" type="java.lang.String"/>
-		<property name="supplierInfo05" type="java.lang.String"/>
-		<property name="supplierInfo06" type="java.lang.String"/>
-		<property name="supplierInfo07" type="java.lang.String"/>
-		<property name="supplierInfo08" type="java.lang.String"/>
-		<property name="supplierInfo09" type="java.lang.String"/>
-		<property name="supplierInfo10" type="java.lang.String"/>
-		<property name="supplierInfo11" type="java.lang.String"/>
-		<property name="supplierInfo12" type="java.lang.String"/>
-		<property name="supplierInfo13" type="java.lang.String"/>
-		<property name="supplierInfo14" type="java.lang.String"/>
-		<property name="supplierInfo15" type="java.lang.String"/>
-		<property name="supplierInfo16" type="java.lang.String"/>
-		<property name="supplierInfo17" type="java.lang.String"/>
-		<property name="supplierInfo18" type="java.lang.String"/>
-		<property name="supplierInfo19" type="java.lang.String"/>		
-	</bean> -->
 
 	<!-- add by alice -->
 	<bean class="de.hybris.platform.customerticketingfacades.data.TicketData">
@@ -319,6 +295,8 @@
 		<property name="deliveryAddress" type="de.hybris.platform.commercefacades.user.data.AddressData"/>
 		<property name="salesman" type="String"/>
 		<property name="supplier" type="String"/>
+		<property name="orderFinishedTime" type="java.util.Date"/>
+		<property name="warehouse" type="String"/>
 	</bean>
 	
 	<bean class="de.hybris.platform.commercefacades.order.data.MonthlySalesAnalysis">
@@ -336,14 +314,83 @@
 		<property name="novemberAmount" type="java.lang.Double"/>
 		<property name="decemberAmount" type="java.lang.Double"/>
 	</bean>
-	
+	<bean class="de.hybris.platform.commercefacades.order.data.SalesByEmployeeReportData">
+		<property name="month" type="String"/>
+		<property name="employee" type="String"/>
+		<property name="amount" type="java.lang.Double"/>
+	</bean>
 	<bean class="de.hybris.platform.commercefacades.storelocator.data.PointOfServiceData">
 		<property name="defaultWarehouseRegionName" type="String"/>
 	</bean>
 	
+	<bean class="de.hybris.platform.commercefacades.vendor.data.InventoryReportData">
+		<property name="productCode" type="String"/>
+		<property name="productName" type="String"/>
+		<property name="inventoryCount" type="java.lang.Integer"/>
+		<property name="futureInventory" type="java.lang.Integer"/>
+	</bean>
+	<bean class="de.hybris.platform.commercefacades.vendor.data.OrderProductReportData">
+		<property name="orderCode" type="String"/>
+		<property name="placeTime" type="java.util.Date"/>
+		<property name="finishedTime" type="java.util.Date"/>
+		<property name="productName" type="String"/>
+		<property name="productQuantity" type="java.lang.Integer"/>
+		<property name="vendorName" type="String"/>
+	</bean>
+	
+
 	<bean class="de.hybris.platform.commercefacades.user.data.AddressData">
 		<property name="phone2" type="java.lang.String" />
 	</bean>
-	
-	
+
+
+	<bean class="de.hybris.platform.commercefacades.product.data.ProductPriceAnalysisData">
+		<property name="productCode" type="String"/>
+		<property name="productName" type="String"/>
+		<property name="salesQuantity" type="java.lang.Long"/>
+		<property name="firstWeekPrice" type="java.lang.Double"/>
+		<property name="secondWeekPrice" type="java.lang.Double"/>
+		<property name="thirdWeekPrice" type="java.lang.Double"/>
+		<property name="fouthWeekPrice" type="java.lang.Double"/>
+		<property name="fifthWeekPrice" type="java.lang.Double"/>
+		<property name="sixthWeekPrice" type="java.lang.Double"/>
+		<property name="averagePrice" type="java.lang.Double"/>
+		<property name="maxWeek" type="java.lang.Integer"/>
+	</bean>
+	<bean class="de.hybris.platform.commercefacades.product.data.ProductSalesRecordData">
+		<property name="productCode" type="String"/>
+		<property name="productName" type="String"/>
+		<property name="customerName" type="String"/>
+		<property name="salesQuantity" type="java.lang.Long"/>
+	</bean>
+	<bean class="de.hybris.platform.commercefacades.customer.data.CustomerSalesAnalysisData">
+		<property name="area" type="String"/>
+		<property name="country" type="String"/>
+		<property name="customerName" type="String"/>
+		<property name="salesAmount" type="java.lang.Double"/>
+	</bean>
+	<bean class="de.hybris.platform.commercefacades.customer.data.CustomerBillAnalysisData">
+		<property name="orderCode" type="String"/>
+		<property name="customerName" type="String"/>
+		<property name="employeeName" type="String"/>
+		<property name="placeTime" type="java.util.Date"/>
+		<property name="finishedTime" type="java.util.Date"/>
+		<property name="prePay" type="java.lang.Double"/>
+		<property name="inPay" type="java.lang.Double"/>
+		<property name="thirtyPayAmount" type="java.lang.Double"/>
+		<property name="sixtyPayAmount" type="java.lang.Double"/>
+		<property name="ninetyPayAmount" type="java.lang.Double"/>
+		<property name="outerNinetyPayAmount" type="java.lang.Double"/>
+		<property name="lineOfCredit" type="java.lang.Double"/>
+		<property name="lineOfUsedCredit" type="java.lang.Double"/>
+		<property name="lineOfResedueCredit" type="java.lang.Double"/>
+		
+	</bean>
+	<bean class="de.hybris.platform.commercefacades.customer.data.CustomerCreditAnalysisData">
+		<property name="customerName" type="String"/>
+		<property name="lineOfCredit" type="java.lang.Double"/>
+		<property name="lineOfUsedCredit" type="java.lang.Double"/>
+		<property name="lineOfResedueCredit" type="java.lang.Double"/>
+	</bean>
+
 </beans>
