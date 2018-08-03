@@ -139,7 +139,7 @@ public class OrdersController extends BaseCommerceController
 	 */
 	@Secured(
 	{ "ROLE_CUSTOMERGROUP", "ROLE_TRUSTED_CLIENT", "ROLE_CUSTOMERMANAGERGROUP" })
-	@CacheControl(directive = CacheControlDirective.PUBLIC, maxAge = 120)
+	@CacheControl(directive = CacheControlDirective.PUBLIC)
 	@RequestMapping(value = "/users/{userId}/orders", method = RequestMethod.GET)
 	@ResponseBody
 	public OrderHistoryListWsDTO getOrdersForUser(@RequestParam(required = false) final String statuses,
@@ -165,7 +165,7 @@ public class OrdersController extends BaseCommerceController
 				addPaginationField(fields));
 
 		// X-Total-Count header
-		setTotalCountHeader(response, orderHistoryList.getPagination());
+		//setTotalCountHeader(response, orderHistoryList.getPagination());
 
 		return orderHistoryList;
 	}
