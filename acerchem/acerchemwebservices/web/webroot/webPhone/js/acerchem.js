@@ -1,4 +1,3 @@
-
 function autoLogin()
 {
     var userId=$.cookie("userId");
@@ -1256,8 +1255,6 @@ function getProductsByCode(code)
             additionInfo +='<tr><td class="left">Manufacturer</td><td class="right">' + returndata.manufacturer + '</td></tr>';
             additionInfo +='<tr><td class="left">Package Type</td><td class="right">' + returndata.netWeight +returndata.unitName + '/'+  returndata.packageType +'</td></tr>';
             $("#additionalInfo").append(additionInfo);
-            
-            $("#productticket").attr("href","productticket-add.html?code=" + returndata.code); 
             
             var ProName = '';
             var ProCode = '';
