@@ -45,14 +45,14 @@ public interface AcerChemProductService {
 	public List<InventoryReportData> getInventoryProductByVendor(String uid);
 
 	/**
-	 * 通过供应商账户和下单时间段，得到供应商产品所在的订单
+	 * 通过供应商账户代码和下单时间段，得到供应商产品所在的订单
 	 * 
 	 * @param uid
 	 * @param startDate
 	 * @param endDate
 	 * @return
 	 */
-	public List<OrderProductReportData> getOrderProductByVendor(String uid, Date startDate, Date endDate);
+	public List<OrderProductReportData> getOrderProductByVendor(String vendorcode, Date startDate, Date endDate);
 
 	public List<ProductPriceAnalysisData> getProductWithBaserealPrice(final String month);
 

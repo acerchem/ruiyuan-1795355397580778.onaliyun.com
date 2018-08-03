@@ -55,5 +55,7 @@ public interface AcerChemProductDao {
 	public List<AcerchemProductBuyerBean> getProductSalesForReport(String month,String category,String area,String country);
 	
 	public List<StockLevelModel> getInventory(final String vendorCode);
+	
+	public List<OrderEntryModel> getOrderEntryProductByVendorcode(String vendorcode,Date startDate, Date endDate);
 
 }

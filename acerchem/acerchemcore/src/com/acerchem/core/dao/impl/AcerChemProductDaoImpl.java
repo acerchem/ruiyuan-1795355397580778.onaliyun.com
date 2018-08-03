@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 
 import javax.annotation.Resource;
@@ -197,6 +198,30 @@ public class AcerChemProductDaoImpl implements AcerChemProductDao {
 	}
 
 	@Override
+	public List<OrderEntryModel> getOrderEntryProductByVendorcode(final String vendorcode, final Date startDate, final Date endDate) {
+		String SQL="select {oe.pk} from {OrderEntry as oe JOIN Order as o ON {oe.order}={o.pk} } where 1=1";
+		final Map<String, Object> params = new HashMap<String, Object>();
+		if(startDate != null){
+			SQL += " AND {o.creationtime} > ?startDate";
+			params.put("startDate", startDate);
+		}
+		if(endDate != null){
+			SQL += " AND {o.creationtime} < ?endDate";
+			params.put("endDate", endDate);
+		}
+		if(StringUtils.isNotBlank(vendorcode)){
+			SQL += " AND {oe.product} IN ({{ " +
+                "select {p.pk} from {Product as p JOIN Vendor as v ON {p.acerChemVendor} = {v.pk}}  where {v.code}= ?vendorcode }})";
+			params.put("vendorcode", vendorcode);
+		}
+		
+		 final FlexibleSearchQuery query = new FlexibleSearchQuery(SQL);
+		 query.addQueryParameters(params);
+		 final SearchResult<OrderEntryModel> result = flexibleSearchService.search(query);
+		return  result.getResult();
+	}
+
+	@Override
 	public List<AcerchemProductPriceBean> getProductWithBaserealPrice(final String month) {
 		if(StringUtils.isNotBlank(month)){
 		final String SQL = "select {oe.pk} from {OrderEntry as oe JOIN Order as o ON {oe.order}={o.pk} } "+
@@ -222,8 +247,9 @@ public class AcerChemProductDaoImpl implements AcerChemProductDao {
 				bean.setBaseRealPrice(oe.getBaseRealPrice());
 				bean.setOrderPlaceTime(placeOrderTime);
 			
-				//计算周次
-				final Calendar calendar = Calendar.getInstance();
+				//计算周次 获取中国日历的，一个月的第几周 (按 周一 ，1为周的第一天)
+				final Calendar calendar = Calendar.getInstance(Locale.CHINA);
+				calendar.setFirstDayOfWeek(Calendar.MONDAY);
 				calendar.setTime(placeOrderTime);
 				final int week = calendar.get(Calendar.WEEK_OF_MONTH);
 				bean.setWeeknum(week);

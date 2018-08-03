@@ -103,5 +103,19 @@ public class AcerChemVendorDaoImpl implements AcerChemVendorDao {
 		return null;
 	}
 
+	@Override
+	public VendorModel getVendorByCode(final String code) {
+		Assert.notNull(code);
+		final String SQL = "select {pk} from {Vendor} where {code} = ?code";
+		final FlexibleSearchQuery query = new  FlexibleSearchQuery(SQL);
+		query.addQueryParameter("code", code);
+		 final SearchResult<VendorModel> result = flexibleSearchService.search(query);
+		if (result.getCount()>0){
+			return result.getResult().get(0);
+		}
+		return null;
+	}
+	
+	
 	
 }

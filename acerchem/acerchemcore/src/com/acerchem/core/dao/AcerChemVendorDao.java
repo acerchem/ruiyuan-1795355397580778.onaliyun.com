@@ -31,5 +31,6 @@ public interface AcerChemVendorDao {
 	public List<VendorModel> getAllVendors();
 	public UserModel getEmployeeByVendorCode(String vendorCode);
 	
+	public VendorModel getVendorByCode(String code);
 	
 }

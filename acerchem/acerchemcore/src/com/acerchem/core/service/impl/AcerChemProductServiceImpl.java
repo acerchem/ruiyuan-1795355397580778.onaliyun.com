@@ -185,13 +185,13 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 	}
 	
 	@Override
-	public List<OrderProductReportData> getOrderProductByVendor(final String uid, final Date startDate,
+	public List<OrderProductReportData> getOrderProductByVendor(final String vendorcode, final Date startDate,
 			final Date endDate) {
 		final List<OrderProductReportData> report = new ArrayList<OrderProductReportData>();
 
-		final List<OrderEntryModel> orderEntries = acerChemProductDao.getOrderEntryProduct(uid, startDate, endDate);
+		final List<OrderEntryModel> orderEntries = acerChemProductDao.getOrderEntryProductByVendorcode(vendorcode, startDate, endDate);
 		if (CollectionUtils.isNotEmpty(orderEntries)) {
-			final VendorModel vendor = acerChemVendorDao.getVendorByEmployeeUid(uid);
+			final VendorModel vendor = acerChemVendorDao.getVendorByCode(vendorcode);
 			final String vendorName = vendor != null ? vendor.getName() : "";
 			for (final OrderEntryModel oe : orderEntries) {
 				final OrderProductReportData item = new OrderProductReportData();
