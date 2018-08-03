@@ -249,6 +249,7 @@
 		<property name="pickUpDate" type="java.util.Date"/>
 		<property name="deliveyDate" type="java.lang.String" />
 		<property name="waitDeliveiedDate" type="java.lang.String" />
+		<property name="placedStr" type="java.lang.String" />
 	</bean>
 	
 	<bean
