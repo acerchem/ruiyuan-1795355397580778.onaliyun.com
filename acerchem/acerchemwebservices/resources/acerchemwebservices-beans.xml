@@ -236,6 +236,7 @@
     
     <bean class="de.hybris.platform.commercewebservicescommons.dto.order.OrderHistoryWsDTO">
     	<property name="waitDeliveiedDate" type="java.lang.String"/>
+    	<property name="placedStr" type="java.lang.String"/>
     </bean>
     
 </beans>
