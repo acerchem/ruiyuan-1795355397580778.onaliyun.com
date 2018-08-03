@@ -1386,10 +1386,10 @@
                   value="de.hybris.platform.commercewebservicescommons.dto.order.OrderHistoryWsDTO"/>
         <property name="levelMapping">
             <map>
-                <entry key="BASIC" value="total,guid,status,statusDisplay,code,placed"/>
+                <entry key="BASIC" value="total,guid,status,statusDisplay,code,placed,placedStr"/>
                 <entry key="DEFAULT"
-                       value="total(DEFAULT),guid,status,statusDisplay,code,placed,waitDeliveiedDate"/> <!-- snowy add  waitDeliveiedDate-->
-                <entry key="FULL" value="total(FULL),guid,status,statusDisplay,code,placed"/>
+                       value="total(DEFAULT),guid,status,statusDisplay,code,placed,placedStr,waitDeliveiedDate"/> <!-- snowy add  waitDeliveiedDate-->
+                <entry key="FULL" value="total(FULL),guid,status,statusDisplay,code,placed,placedStr"/>
             </map>
         </property>
     </bean>
