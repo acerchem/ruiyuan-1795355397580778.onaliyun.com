@@ -43,60 +43,75 @@ $(document).ready(
 						columns : [ {
 							field : 'c1',
 							title : 'Country',
-							align : 'left'
+							align : 'left',
+							halign: 'center'
 						}, {
 							field : 'c2',
 							title : 'Area',
-								align : 'left'
+							align : 'left',
+							halign: 'center'
 						}, {
 							field : 'c3',
 							title : 'OrderCode',
-							align : 'left'
+							align : 'left',
+							halign: 'center'
 						}, {
 							field : 'c4',
 							title : 'Place  Time',
-							align : 'left'
+							align : 'left',
+							halign: 'center'
 						}, {
 							field : 'c5',
 							title : 'Finished  Time',
-							align : 'left'
+							align : 'left',
+							halign: 'center',
+							halign: 'center'
 						}, {
 							field : 'c6',
 							title : 'Product  Name',
-							align : 'left'
+							align : 'left',
+							halign: 'center'
 						}, {
 							field : 'c7',
 							title : 'Quantity',
-							align : 'right'
+							align : 'right',
+							halign: 'center'
 						}, {
 							field : 'c8',
 							title : 'Order Amount',
-							align : 'right'
+							align : 'right',
+							halign: 'center'
 						}, {
 							field : 'c9',
 							title : 'Customer Name',
-							align : 'left'
+							align : 'left',
+							halign: 'center'
 						}, {
 							field : 'c10',
 							title : 'Contacter',
-							align : 'left'
+							align : 'left',
+							halign: 'center'
 						}, {
 							field : 'c11',
 							title : 'Phone',
-							align : 'left'
+							align : 'left',
+							halign: 'center'
 							
 						}, {
 							field : 'c12',
 							title : 'Contact Address',
-							align : 'left'
+							align : 'left',
+							halign: 'center'
 						}, {
 							field : 'c13',
 							title : 'Salesman',
-							align : 'left'
+							align : 'left',
+							halign: 'center'
 						},{
 							field : 'c14',
 							title : 'Supplier',
-							align : 'left'
+							align : 'left',
+							halign: 'center'
 						},
 
 						]

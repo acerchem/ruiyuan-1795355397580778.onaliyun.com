@@ -39,22 +39,28 @@ $(document).ready(
 
 						columns : [ {
 							field : 'c1',
-							title : 'Order Code'
+							title : 'Order Code',
+							halign: 'center'
 						}, {
 							field : 'c2',
-							title : 'Place Time'
+							title : 'Place Time',
+							halign: 'center'
 						}, {
 							field : 'c3',
-							title : 'Finished Time'
+							title : 'Finished Time',
+							halign: 'center'
 						}, {
 							field : 'c4',
-							title : 'Product Name'
+							title : 'Product Name',
+							halign: 'center'
 						},{
 							field : 'c5',
-							title : 'Quantity'
+							title : 'Quantity',
+							halign: 'center'
 						},{
 							field : 'c6',
-							title : 'Vendor'
+							title : 'Vendor',
+							halign: 'center'
 						},
 						
 						]

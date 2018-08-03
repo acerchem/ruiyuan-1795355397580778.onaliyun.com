@@ -39,16 +39,20 @@ $(document).ready(
 
 						columns : [ {
 							field : 'c1',
-							title : 'Prodcut Code'
+							title : 'Prodcut Code',
+							halign: 'center'
 						}, {
 							field : 'c2',
-							title : 'Product Name'
+							title : 'Product Name',
+							halign: 'center'
 						}, {
 							field : 'c3',
-							title : 'Customer'
+							title : 'Customer',
+							halign: 'center'
 						}, {
 							field : 'c4',
-							title : 'Quantity'
+							title : 'Quantity',
+							halign: 'center'
 						},
 						]
 					});

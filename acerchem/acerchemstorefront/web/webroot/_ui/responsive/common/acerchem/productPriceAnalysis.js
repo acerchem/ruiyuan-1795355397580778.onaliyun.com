@@ -40,34 +40,44 @@ $(document).ready(
 
 						columns : [ {
 							field : 'c1',
-							title : 'Prodcut Code'
+							title : 'Prodcut Code',
+							halign: 'center'
 						}, {
 							field : 'c2',
-							title : 'Product Name'
+							title : 'Product Name',
+							halign: 'center'
 						}, {
 							field : 'c3',
-							title : 'Quantity'
+							title : 'Quantity',
+							halign: 'center'
 						}, {
 							field : 'c4',
-							title : '1st Week'
+							title : '1st Week',
+							halign: 'center'
 						}, {
 							field : 'c5',
-							title : '2nd Week'
+							title : '2nd Week',
+							halign: 'center'
 						}, {
 							field : 'c6',
-							title : '3rd Week'
+							title : '3rd Week',
+							halign: 'center'
 						}, {
 							field : 'c7',
-							title : '4th Week'
+							title : '4th Week',
+							halign: 'center'
 						}, {
 							field : 'c8',
-							title : '5th Week'
+							title : '5th Week',
+							halign: 'center'
 						}, {
 							field : 'c9',
-							title : '6th Week'
+							title : '6th Week',
+							halign: 'center'
 						}, {
 							field : 'c10',
-							title : 'Average Price'
+							title : 'Average Price',
+							halign: 'center'
 						}, 
 
 						]

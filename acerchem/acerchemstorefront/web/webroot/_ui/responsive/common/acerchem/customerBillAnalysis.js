@@ -51,39 +51,50 @@ $(document).ready(
 
 						columns : [ {
 							field : 'c1',
-							title : 'Order Code'
+							title : 'Order Code',
+							halign: 'center'
 						}, {
 							field : 'c2',
-							title : 'Customer'
+							title : 'Customer',
+							halign: 'center'
 						}, {
 							field : 'c3',
-							title : 'Employee'
+							title : 'Employee',
+							halign: 'center'
 						}, {
 							field : 'c4',
-							title : 'Place Time'
+							title : 'Place Time',
+							halign: 'center'
 						}, {
 							field : 'c5',
-							title : 'Finished TIme'
+							title : 'Finished TIme',
+							halign: 'center'
 						},
 
 						{
 							field : 'c6',
-							title : 'Prepaid'
+							title : 'Prepaid',
+							halign: 'center'
 						}, {
 							field : 'c7',
-							title : 'Bill Period'
+							title : 'Bill Period',
+							halign: 'center'
 						}, {
 							field : 'c8',
-							title : '0-30'
+							title : '0-30',
+							halign: 'center'
 						}, {
 							field : 'c9',
-							title : '30-60'
+							title : '30-60',
+							halign: 'center'
 						}, {
 							field : 'c10',
-							title : '60-90'
+							title : '60-90',
+							halign: 'center'
 						}, {
 							field : 'c11',
-							title : '>90'
+							title : '>90',
+							halign: 'center'
 						},
 
 						]

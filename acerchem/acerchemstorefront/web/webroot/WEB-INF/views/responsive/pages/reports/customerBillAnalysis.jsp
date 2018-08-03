@@ -30,96 +30,42 @@
 
 </head>
 <template:javaScript />
-<c:url value="/reports/productPriceAnalysis"
-	var="productPriceAnalysisUrl" />
-<c:url value="/reports/productSalesRecord"
-	var="productSalesRecordUrl" />
-	
-<c:url value="/reports/orderDetails"
-	var="orderDetailsUrl" />
-<c:url value="/reports/monthlySalesAnalysis"
-	var="monthlySalesAnalysisUrl" />			
-<c:url value="/reports/employeeSalesAnalysis"
-	var="employeeSalesAnalysisUrl" />
-	
-<c:url value="/reports/customerSalesAnalysis"
-	var="customerSalesAnalysisUrl" />
-<c:url value="/reports/customerBillAnalysis"
-	var="customerBillAnalysisUrl" />
-	
-<c:url value="/reports/vendorInventory/temp"
-	var="vendorInventoryUrl" />
-<c:url value="/reports/vendorOrderProduct/temp"
-	var="vendorOrderProductUrl" />
-	<c:url value="/logout" var="homeUrl" />	
-	
-	<body class="index-body">
-	<header>
-		<div class="logo">
-		    <a href="${homeUrl}">
-			<img src="${commonResourcePath}/acerchem/images/logo.png" alt="logo">
-			</a>
-		</div>
-		<nav class="head-nav">
-			<ul>
-				<li><a href="">商品销售报表</a>
-					<div class="col-list" style="display: none">
-						<a href="${productPriceAnalysisUrl}">商品价格趋势分析</a> 
-						<a href="${productSalesRecordUrl}">商品销售记录</a>
-					</div>
-				</li>
-				<li><a href="">订单销售分析</a>
-					<div class="col-list" style="display: none">
-						<a href="${orderDetailsUrl}">订单明细表</a> 
-						<a href="${monthlySalesAnalysisUrl}">区域月度销售分析</a> 
-						<a href="${employeeSalesAnalysisUrl}">各业务员完成情况</a>
-
-					</div></li>
-				<li><a href="">用户分析报表</a>
-					<div class="col-list" style="display: none">
-						<a href="${customerSalesAnalysisUrl}">用户购买情况分析</a> 
-						<a href="${customerBillAnalysisUrl}">账龄分析报表</a>
-
-					</div></li>
-				<li><a href="">供应商寄售分析</a>
-					<div class="col-list" style="display: none">
-						<a href="${vendorInventoryUrl}">商品库存</a>
-						 <a href="${vendorOrderProductUrl}">商品订单分析</a>
-
-					</div></li>
-			</ul>
-		</nav>
-	</header>
-	
-<div class="index-container">
-	
-	<form:form method="post" action="${action}">
 
 
-		<div class="top-select">
+<body class="index-body">
+
+    <!-- top -->
+	<jsp:include page="reportMenu.jsp" />
+	<!-- content -->
+	<div class="index-container">
+
+		<form:form method="post" action="${action}">
+
+
+			<div class="top-select">
 				<table border="0" width="100%" cellspacing="0">
 					<tbody>
 						<tr>
-					<td>
-						<div>
-							Start Date:<span> <input type="text" class="calendar"
-								maxlength="19" onfocus="$(this).calendar()" name="startDate"
-								value="${startDate}" readonly />
-							</span>
-						</div>
-					</td>
+							<td>
+								<div>
+									Start Date:<span> <input type="text" class="calendar"
+										maxlength="19" onfocus="$(this).calendar()" name="startDate"
+										value="${startDate}" readonly />
+									</span>
+								</div>
+							</td>
 
-					<td>
-						<div>
-							End Date:<span> <input type="text" class="calendar"
-								maxlength="19" onfocus="$(this).calendar()" name="endDate"
-								value="${endDate}" readonly />
-							</span>
-						</div>
-					</td>
+							<td>
+								<div>
+									End Date:<span> <input type="text" class="calendar"
+										maxlength="19" onfocus="$(this).calendar()" name="endDate"
+										value="${endDate}" readonly />
+									</span>
+								</div>
+							</td>
 
-				<td>
-								<div class="btn" >
+							<td>
+								<div class="btn">
 									<button type="submit">Show Report</button>
 								</div>
 							</td>
@@ -129,25 +75,25 @@
 			</div>
 
 
-	</form:form>
-<div class="content">
+		</form:form>
+		<div class="content">
 			<div class="c-title">
 				<div class="left">用户分析报表/账龄分析报表</div>
 
 			</div>
-	<c:if test="${empty list}">
+			<c:if test="${empty list}">
 	No Customer Bill Analysis Found
 </c:if>
-	<c:if test="${not empty list}">
+			<c:if test="${not empty list}">
 
-		
 
-		<div class="fixed-table-container">
-		<div id="toolbar1">
-			<h4>Bill Analysis:</h4>
-		</div>
-			<table id="table_page1">
-				<!-- 
+
+				<div class="fixed-table-container">
+					<div id="toolbar1">
+						<h4>Bill Analysis:</h4>
+					</div>
+					<table id="table_page1">
+						<!-- 
 		<tr>
 			<th>&nbsp;&nbsp;</th>
 			<th>&nbsp;&nbsp;</th>
@@ -177,45 +123,45 @@
 			<th>&nbsp;&nbsp;</th>
 		</tr>
 		 -->
-				<c:forEach items="${list}" var="detail">
-					<tr class="result">
-						<c:if test="${detail.orderCode eq 'Total'}">
-							<td colspan="5">${detail.orderCode}</td>
-						</c:if>
-						<c:if test="${detail.orderCode ne 'Total'}">
-							<td>${detail.orderCode}</td>
-							<td>${detail.customerName}</td>
-							<td>${detail.employeeName}</td>
-							<td><fmt:formatDate value="${detail.placeTime}"
-									timeStyle="short" type="both" /></td>
-							<td><fmt:formatDate value="${detail.finishedTime}"
-									timeStyle="short" type="both" /></td>
-						</c:if>
-						<td><fmt:formatNumber type="number" value="${detail.prePay}"
-								pattern="#.00" /></td>
-						<td><fmt:formatNumber type="number" value="${detail.inPay}"
-								pattern="#.00" /></td>
-						<td><fmt:formatNumber type="number"
-								value="${detail.thirtyPayAmount}" pattern="#.00" /></td>
-						<td><fmt:formatNumber type="number"
-								value="${detail.sixtyPayAmount}" pattern="#.00" /></td>
-						<td><fmt:formatNumber type="number"
-								value="${detail.ninetyPayAmount}" pattern="#.00" /></td>
-						<td><fmt:formatNumber type="number"
-								value="${detail.outerNinetyPayAmount}" pattern="#.00" /></td>
+						<c:forEach items="${list}" var="detail">
+							<tr class="result">
+								<c:if test="${detail.orderCode eq 'Total'}">
+									<td colspan="5">${detail.orderCode}</td>
+								</c:if>
+								<c:if test="${detail.orderCode ne 'Total'}">
+									<td>${detail.orderCode}</td>
+									<td>${detail.customerName}</td>
+									<td>${detail.employeeName}</td>
+									<td><fmt:formatDate value="${detail.placeTime}"
+											timeStyle="short" type="both" /></td>
+									<td><fmt:formatDate value="${detail.finishedTime}"
+											timeStyle="short" type="both" /></td>
+								</c:if>
+								<td><fmt:formatNumber type="number"
+										value="${detail.prePay}" pattern="#.00" /></td>
+								<td><fmt:formatNumber type="number" value="${detail.inPay}"
+										pattern="#.00" /></td>
+								<td><fmt:formatNumber type="number"
+										value="${detail.thirtyPayAmount}" pattern="#.00" /></td>
+								<td><fmt:formatNumber type="number"
+										value="${detail.sixtyPayAmount}" pattern="#.00" /></td>
+								<td><fmt:formatNumber type="number"
+										value="${detail.ninetyPayAmount}" pattern="#.00" /></td>
+								<td><fmt:formatNumber type="number"
+										value="${detail.outerNinetyPayAmount}" pattern="#.00" /></td>
 
-					</tr>
-				</c:forEach>
-			</table>
+							</tr>
+						</c:forEach>
+					</table>
 
-		</div>
-		<br />
-		<div class="fixed-table-container">
-		<div id="toolbar2">
-			<h4>Credit Account Analysis:</h4>
-		</div>
-		<table id="table_page2">
-		<!-- 
+				</div>
+				<br />
+				<div class="fixed-table-container">
+					<div id="toolbar2">
+						<h4>Credit Account Analysis:</h4>
+					</div>
+					<table id="table_page2">
+						<!-- 
 			<tr>
 				<th>Customer</th>
 				<th>LineOfCredit</th>
@@ -225,47 +171,37 @@
 
 			</tr>
  -->
-			<c:forEach items="${creditList}" var="detail">
-				<tr>
-					<td>${detail.customerName}</td>
-					<td><fmt:formatNumber type="number"
-							value="${detail.lineOfCredit}" pattern="#.00" /></td>
-					<td><fmt:formatNumber type="number"
-							value="${detail.lineOfUsedCredit}" pattern="#.00" /></td>
-					<td><fmt:formatNumber type="number"
-							value="${detail.lineOfResedueCredit}" pattern="#.00" /></td>
+						<c:forEach items="${creditList}" var="detail">
+							<tr>
+								<td>${detail.customerName}</td>
+								<td><fmt:formatNumber type="number"
+										value="${detail.lineOfCredit}" pattern="#.00" /></td>
+								<td><fmt:formatNumber type="number"
+										value="${detail.lineOfUsedCredit}" pattern="#.00" /></td>
+								<td><fmt:formatNumber type="number"
+										value="${detail.lineOfResedueCredit}" pattern="#.00" /></td>
 
-				</tr>
-			</c:forEach>
-		</table>
+							</tr>
+						</c:forEach>
+					</table>
+				</div>
+			</c:if>
 		</div>
-	</c:if>
-</div>
-</div>
+	</div>
 
-<!-- <script src="${commonResourcePath}/acerchem/jquery.js"></script> -->
-<script src="${commonResourcePath}/acerchem/jquery-1.9.1.min.js"></script>
-<script src="${commonResourcePath}/acerchem/jquery.base64.js"></script>
-<script src="${commonResourcePath}/acerchem/jquery-calendar.js"></script>
-<script src="${commonResourcePath}/acerchem/bootstrap.min.js"></script>
-<script src="${commonResourcePath}/acerchem/bootstrap-table.min.js"></script>
+	<!-- <script src="${commonResourcePath}/acerchem/jquery.js"></script> -->
+	<script src="${commonResourcePath}/acerchem/jquery-1.9.1.min.js"></script>
+	<script src="${commonResourcePath}/acerchem/jquery.base64.js"></script>
+	<script src="${commonResourcePath}/acerchem/jquery-calendar.js"></script>
+	<script src="${commonResourcePath}/acerchem/bootstrap.min.js"></script>
+	<script src="${commonResourcePath}/acerchem/bootstrap-table.min.js"></script>
 
-<script src="${commonResourcePath}/acerchem/tableExport.min.js"></script>
-<script
-	src="${commonResourcePath}/acerchem/bootstrap-table-export.min.js"></script>
+	<script src="${commonResourcePath}/acerchem/tableExport.min.js"></script>
+	<script
+		src="${commonResourcePath}/acerchem/bootstrap-table-export.min.js"></script>
 
 
-<script
-	src="${commonResourcePath}/acerchem/customerBillAnalysis.js"></script>
+	<script src="${commonResourcePath}/acerchem/customerBillAnalysis.js"></script>
 
-<script>
-		(function() {
-			$('.head-nav ul li').hover(function() {
-				$(this).find('.col-list').slideDown();
-			}, function() {
-				$(this).find('.col-list').slideUp();
-			})
-		})()
-	</script>
 </body>
 </html>

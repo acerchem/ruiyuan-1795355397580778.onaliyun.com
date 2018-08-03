@@ -40,13 +40,16 @@ $(document).ready(
 
 						columns : [ {
 							field : 'c1',
-							title : 'Month'
+							title : 'Month',
+							halign: 'center'
 						}, {
 							field : 'c2',
-							title : 'Employee'
+							title : 'Employee',
+							halign: 'center'
 						}, {
 							field : 'c3',
-							title : 'Amount'
+							title : 'Amount',
+							halign: 'center'
 						}, 
 
 						]

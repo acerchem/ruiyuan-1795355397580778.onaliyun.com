@@ -39,43 +39,56 @@ $(document).ready(
 
 						columns : [ {
 							field : 'c1',
-							title : 'Country'
+							title : 'Country',
+							halign: 'center'
 						}, {
 							field : 'c2',
-							title : 'January'
+							title : 'January',
+							halign: 'center'
 						}, {
 							field : 'c3',
-							title : 'February'
+							title : 'February',
+							halign: 'center'
 						}, {
 							field : 'c4',
-							title : 'March'
+							title : 'March',
+							halign: 'center'
 						}, {
 							field : 'c5',
-							title : 'April'
+							title : 'April',
+							halign: 'center'
 						}, {
 							field : 'c6',
-							title : 'May'
+							title : 'May',
+							halign: 'center'
 						}, {
 							field : 'c7',
-							title : 'June'
+							title : 'June',
+							halign: 'center'
 						}, {
 							field : 'c8',
-							title : 'July'
+							title : 'July',
+							halign: 'center'
 						}, {
 							field : 'c9',
-							title : 'August'
+							title : 'August',
+							halign: 'center'
 						}, {
 							field : 'c10',
-							title : 'September'
+							title : 'September',
+							halign: 'center'
 						}, {
 							field : 'c11',
-							title : 'October'
+							title : 'October',
+							halign: 'center'
 						}, {
 							field : 'c12',
-							title : 'November'
+							title : 'November',
+							halign: 'center'
 						}, {
 							field : 'c13',
-							title : 'December'
+							title : 'December',
+							halign: 'center'
 						},
 
 						]

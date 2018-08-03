@@ -40,16 +40,20 @@ $(document).ready(
 
 						columns : [ {
 							field : 'c1',
-							title : 'Area'
+							title : 'Area',
+							halign: 'center'
 						}, {
 							field : 'c2',
-							title : 'Country'
+							title : 'Country',
+							halign: 'center'
 						}, {
 							field : 'c3',
-							title : 'Customer'
+							title : 'Customer',
+							halign: 'center'
 						}, {
 							field : 'c4',
-							title : 'OrderAmount'
+							title : 'OrderAmount',
+							halign: 'center'
 						},
 
 						]
