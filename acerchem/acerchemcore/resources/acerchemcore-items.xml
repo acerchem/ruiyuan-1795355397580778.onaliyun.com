@@ -1045,6 +1045,11 @@
 						<persistence type="property" />
 						<defaultvalue>Boolean.TRUE</defaultvalue>
 					</attribute>
+					<attribute qualifier="vendorAccount" type="Vendor">
+						<description>等同供应商的客户账户</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
 				</attributes>
 			</itemtype>
 
