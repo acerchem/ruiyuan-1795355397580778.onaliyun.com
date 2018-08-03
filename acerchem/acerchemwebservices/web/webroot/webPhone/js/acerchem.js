@@ -1,3 +1,4 @@
+
 function autoLogin()
 {
     var userId=$.cookie("userId");
@@ -161,7 +162,7 @@ function formatData(fmt) {
 
 function formatTimeNum(fmt) {
 	if(fmt==null)return "";
-	fmt = fmt.replace(/\-/g, "").replace("T","").replace(/:/g,"").substr(0,14);
+	fmt = fmt.replace("/", "").replace("/", "").replace(" ","").replace(/:/g,"");
 	return fmt;
 }
 
@@ -259,7 +260,7 @@ function getPersonalInfo()
             console.log("error4:"+JSON.stringify(returndata));
         }
     });
-    
+     
     $.ajax({
         url:homeUrl+"/deliverycountries",
         type:'get',
@@ -305,7 +306,6 @@ function getPersonalInfo()
         }
     });
     
-    
     $.ajax({
         url:homeUrl+"/users/current/contactAddress",
         type:'get',
@@ -317,7 +317,7 @@ function getPersonalInfo()
             request.setRequestHeader("Authorization", $.cookie("access_token"));
         },
         success:function(returndata){
-            //console.log("contactAddress:"+JSON.stringify(returndata));
+            console.log("contactAddress:"+JSON.stringify(returndata));
             $("#country option[value='"+returndata.country.isocode+"']").attr("selected", true);
             document.getElementById('townCity').value = returndata.town;
             document.getElementById('addressId').value = returndata.id;
@@ -327,6 +327,7 @@ function getPersonalInfo()
             console.log("error11:"+JSON.stringify(returndata));
         }
     });
+    
 }
 
 function updatePersonalInfo()
@@ -771,8 +772,8 @@ function getOrder()
             request.setRequestHeader("Authorization", $.cookie("access_token"));
         },
         success:function(returndata){
-            //console.log("success:"+JSON.stringify(returndata));
-            updateHtml(returndata);
+            console.log("success:"+JSON.stringify(returndata));
+            updateHtml(returndata,orderCode);
         },
         error:function(returndata){
             console.log("error:"+JSON.stringify(returndata));
@@ -780,15 +781,19 @@ function getOrder()
     });
 }
 
-function updateHtml(returndata){
+function updateHtml(returndata,orderCode){
     var html='';
     $("#orders li").remove();
     if(returndata.orders!=null)
     {
         for(var i = 0; i < returndata.orders.length; i++){
-            html+='<li data-Total="' + returndata.orders[i].total.value + '" data-time="'+formatTimeNum(returndata.orders[i].placed)+'"><div class="m-col"><div class="m-data bort-bot"><a href="member-order-detailed.html?'+returndata.orders[i].code+'"><span class="num">'+returndata.orders[i].code+'</span>';
+        	if(orderCode!=null&&orderCode!=""&&returndata.orders[i].code.indexOf(orderCode) == -1)
+    		{
+        		continue;
+    		}
+            html+='<li data-Total="' + returndata.orders[i].total.value + '" data-time="'+formatTimeNum(returndata.orders[i].placedStr)+'"><div class="m-col"><div class="m-data bort-bot"><a href="member-order-detailed.html?'+returndata.orders[i].code+'"><span class="num">'+returndata.orders[i].code+'</span>';
             html+='<span class="date">due date ：'+formatData(returndata.orders[i].waitDeliveiedDate)+'</span></a></div><div class="m-con"><div class="item item-text"><p>';
-            html+=formatDataTime(returndata.orders[i].placed)+'</p><span>'+returndata.orders[i].total.formattedValue+'</span></div><div class="item g-succbut">';
+            html+=returndata.orders[i].placedStr+'</p><span>'+returndata.orders[i].total.formattedValue+'</span></div><div class="item g-succbut">';
             if(returndata.orders[i].status=='CHECKED_VALID')
             {
                 html+='<div class="but"><button class="fund">UNCONFIRMED</button></div>';
