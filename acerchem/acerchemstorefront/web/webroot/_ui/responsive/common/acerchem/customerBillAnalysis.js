@@ -142,16 +142,20 @@ $(document).ready(
 
 						columns : [ {
 							field : 'c1',
-							title : 'Customer'
+							title : 'Customer',
+							halign: 'center'
 						}, {
 							field : 'c2',
-							title : 'LineOfCredit'
+							title : 'LineOfCredit',
+							halign: 'center'
 						}, {
 							field : 'c3',
-							title : 'UsedCredit'
+							title : 'UsedCredit',
+							halign: 'center'
 						}, {
 							field : 'c4',
-							title : 'ResidueCredit'
+							title : 'ResidueCredit',
+							halign: 'center'
 						},
 
 						]
