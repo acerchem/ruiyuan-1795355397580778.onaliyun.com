@@ -149,41 +149,21 @@ function getCreditAccount()
 }
 
 function formatDataTime(fmt) {
-	
+	if(fmt==null)return "";
 	fmt = fmt.replace(/\-/g, "/").replace("T"," ").substr(0,19);
-	//alert("datetime:" + fmt);
-
 	return fmt;
-    //var date = new Date(fmt);
-    
-    //alert("datetime:" + date);
-   // alert("datetime:" +DateFormat.parseDate(new Date(fmt), 'yyyy/MM/dd hh:mm:ss'));
-    //var date = DateFormat.parseDate(new Date(fmt), 'yyyy/MM/dd hh:mm:ss');
-    //alert("datetime :" + date);
-    //return date;
-    
-    //return date.getDate()+"/"+(date.getMonth()+1)+"/"+date.getFullYear()+" "+date.getHours()+":"+date.getMinutes();
 }
 
 function formatData(fmt) {
-	var date = new Date(fmt);
-    return date.getFullYear()+"/"+(date.getMonth()+1)+"/"+date.getDate();
+	if(fmt==null)return "";
+	fmt = fmt.replace(/\-/g, "/").substr(0,10);
+	return fmt;
 }
 
-function formatData2(fmt) {
-	var date = new Date(fmt);
-	var dateStr=""+date.getFullYear();
-	if(date.getMonth()<9)
-	{
-		dateStr+="0";
-	}
-	dateStr+=date.getMonth()+1;
-	if(date.getDate()<10)
-	{
-		dateStr+="0";
-	}
-	dateStr+=date.getDate();
-    return dateStr;
+function formatTimeNum(fmt) {
+	if(fmt==null)return "";
+	fmt = fmt.replace(/\-/g, "").replace("T","").replace(/:/g,"").substr(0,14);
+	return fmt;
 }
 
 function formatMoney(num)  
@@ -807,8 +787,8 @@ function updateHtml(returndata){
     if(returndata.orders!=null)
     {
         for(var i = 0; i < returndata.orders.length; i++){
-            html+='<li data-Total="' + returndata.orders[i].total.value + '" data-time="'+formatData2(returndata.orders[i].placed)+'"><div class="m-col"><div class="m-data bort-bot"><a href="member-order-detailed.html?'+returndata.orders[i].code+'"><span class="num">'+returndata.orders[i].code+'</span>';
-            html+='<span class="date">due date ：'+formatData(returndata.orders[i].placed)+'</span></a></div><div class="m-con"><div class="item item-text"><p>';
+            html+='<li data-Total="' + returndata.orders[i].total.value + '" data-time="'+formatTimeNum(returndata.orders[i].placed)+'"><div class="m-col"><div class="m-data bort-bot"><a href="member-order-detailed.html?'+returndata.orders[i].code+'"><span class="num">'+returndata.orders[i].code+'</span>';
+            html+='<span class="date">due date ：'+formatData(returndata.orders[i].waitDeliveiedDate)+'</span></a></div><div class="m-con"><div class="item item-text"><p>';
             html+=formatDataTime(returndata.orders[i].placed)+'</p><span>'+returndata.orders[i].total.formattedValue+'</span></div><div class="item g-succbut">';
             if(returndata.orders[i].status=='CHECKED_VALID')
             {
