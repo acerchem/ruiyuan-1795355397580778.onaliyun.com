@@ -1,4 +1,3 @@
-
 function autoLogin()
 {
     var userId=$.cookie("userId");
@@ -319,7 +318,7 @@ function getPersonalInfo()
         },
         success:function(returndata){
             //console.log("contactAddress:"+JSON.stringify(returndata));
-            $("#country option[value='"+returndata.region.countryIso+"']").attr("selected", true);
+            $("#country option[value='"+returndata.country.isocode+"']").attr("selected", true);
             document.getElementById('townCity').value = returndata.town;
             document.getElementById('addressId').value = returndata.id;
             getRegions(returndata.country.isocode,returndata.region.isocode);
