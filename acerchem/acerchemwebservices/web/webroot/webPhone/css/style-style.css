@@ -13,60 +13,6 @@
  * 2. Prevent adjustments of font size after orientation changes in IE and iOS.
  */
 
-		.talk_con{
-            width:600px;
-            height:500px;
-            border:1px solid #666;
-            margin:50px auto 0;
-            background:#f9f9f9;
-        }
-        .whotalk{
-            width:80px;
-            height:30px;
-            float:left;
-            outline:none;
-        }
-        .talk_word{
-            width:420px;
-            height:26px;
-            padding:0px;
-            float:left;
-            margin-left:10px;
-            outline:none;
-            text-indent:10px;
-        }        
-        .talk_sub{
-            width:56px;
-            height:30px;
-            float:left;
-            margin-left:10px;
-        }
-        .atalk{
-           margin:10px; 
-        }
-        .atalk span{
-            display:inline-block;
-            background:#0181cc;
-            border-radius:10px;
-            color:#fff;
-            padding:5px 10px;
-        }
-        .btalk{
-            margin:10px;
-            text-align:right;
-        }
-        .btalk span{
-            display:inline-block;
-            background:#ef8201;
-            border-radius:10px;
-            color:#fff;
-            padding:5px 10px;
-        }
-        .talk_input{
-            width:90%;
-            margin:2% auto 0;
-        }
-
 html {
   font-family: sans-serif;
   /* 1 */
@@ -859,7 +805,7 @@ img {
   height: 100%;
   min-height: 100%;
   position: fixed;
-  background: rgba(0, 26, 12, 0.89);
+  background: rgba(10, 50, 88, 0.89);
   z-index: 6;
   display: none;
   left: 0;
@@ -1228,6 +1174,7 @@ img {
 }
 
 .g-index-let .g-con {
+  height: 100%;
   padding: 0.32rem 7%;
   background-size: cover;
   background: url(../img/index_bg2.png) no-repeat center;
@@ -1236,6 +1183,8 @@ img {
 .g-index-let .item-text {
   text-align: center;
   background: #fff;
+  height: 100%
+
 }
 
 .g-index-let .item-text p,
@@ -1264,11 +1213,13 @@ img {
 }
 
 .g-index-let .item p {
+  height: 50%;
   padding-bottom: 0.04rem;
 }
 
 .g-index-let .item {
-  padding: 0.16rem 0 0.32rem;
+  padding: 0.32rem;
+  height: 50%;
 }
 
 .maxnav {
@@ -2564,7 +2515,6 @@ select::-ms-expand {
   font-size: 0.22rem;
   color: #444;
   line-height: 0.28rem;
-  height:60px;
 }
 
 .swiper-gall .price span {
@@ -2621,7 +2571,7 @@ select::-ms-expand {
 }
 
 .gall-but .gall-irm {
-  background: #086936;
+  background: #0c4070;
 }
 
 .gall-irm h4 {
@@ -3989,14 +3939,14 @@ select::-ms-expand {
   text-decoration: none;
   text-transform: capitalize;
   text-align: center;
-  background-color: #096735;
-  border: 1px solid #096735;
+  background-color: #0c4070;
+  border: 1px solid #0c4070;
   color: #fff;
 }
 
 .btn-set .btn-line {
   background-color: transparent;
-  color: #096735;
+  color: #0c4070;
 }
 
 .selbox {
