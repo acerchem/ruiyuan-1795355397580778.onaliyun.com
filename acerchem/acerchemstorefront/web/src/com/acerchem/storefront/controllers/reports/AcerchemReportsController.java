@@ -97,7 +97,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 
 	@Resource
 	private AcerChemVendorService acerChemVendorService;
-	
+
 	@ModelAttribute("countries")
 	public Collection<CountryData> getCountries() {
 		final List<CountryData> countries = new ArrayList<CountryData>();
@@ -165,20 +165,20 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	public Collection<VendorData> getVendors() {
 		final List<VendorData> vendors = new ArrayList<>();
 		final List<VendorModel> list = acerChemVendorService.getAllVendors();
-		if(list != null){
-			for(final VendorModel v : list){
+		if (list != null) {
+			for (final VendorModel v : list) {
 				final VendorData data = new VendorData();
 				data.setCode(v.getCode());
 				data.setName(v.getName());
-				
+
 				vendors.add(data);
 			}
-			
+
 		}
-		
+
 		return vendors;
 	}
-	
+
 	private static final Comparator<AcerchemCategoryBean> cateComparator = new Comparator<AcerchemCategoryBean>() {
 
 		@Override
@@ -201,21 +201,30 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	private ResourceBreadcrumbBuilder accountBreadcrumbBuilder;
 
 	@RequestMapping(value = "/orderDetails", method = RequestMethod.GET)
-	public String showOrderDetailsPage(final Model model,final RedirectAttributes attr) throws CMSItemNotFoundException {
-		if(isVendorAccount()){
-			attr.addFlashAttribute("myMessage","订单明细表");
+	public String showOrderDetailsPage(final Model model, final RedirectAttributes attr)
+			throws CMSItemNotFoundException {
+		if (isVendorAccount()) {
+			attr.addFlashAttribute("myMessage", "订单明细表");
 			return "redirect:/reports/message";
 		}
-		
-		
+
 		storeCmsPageInModel(model, getContentPageForLabelOrId("login"));
+		//init
 		final Date d = new Date();
-		final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+		final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
 		final String curMonth = sdf.format(d);
-		
+
+		final List<OrderDetailsReportData> searchPageData = acerchemOrderDao.getOrderDetails(curMonth,
+				null, null, null,null);
 		final SearchCriteriaFrom searchCriteriaFrom = new SearchCriteriaFrom();
 		searchCriteriaFrom.setMonth(curMonth);
+		
+		model.addAttribute("searchPageData", searchPageData);
 		model.addAttribute("searchCriteriaFrom", searchCriteriaFrom);
+		
+		final int numberPagesShown = getSiteConfigService().getInt("pagination.number.results.count", 100);
+		model.addAttribute("numberPagesShown", Integer.valueOf(numberPagesShown));
+		model.addAttribute("isShowPageAllowed", false);
 		return "pages/reports/orderDetails";
 	}
 
@@ -223,36 +232,35 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	public String getOrderDetails(final SearchCriteriaFrom searchCriteriaFrom, final Model model,
 			@RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode)
 			throws CMSItemNotFoundException {
-		//if (searchCriteriaFrom.getPageNumber() == null || searchCriteriaFrom.getPageNumber() < 1) {
-			searchCriteriaFrom.setPageNumber(1);
-	//	}
-		
+		// if (searchCriteriaFrom.getPageNumber() == null ||
+		// searchCriteriaFrom.getPageNumber() < 1) {
+		searchCriteriaFrom.setPageNumber(1);
+		// }
+
 		String curMonth = searchCriteriaFrom.getMonth();
-		if (StringUtils.isBlank(curMonth) || curMonth.length() != 7 || curMonth.indexOf("-")<0) {
-			
+		if (StringUtils.isBlank(curMonth) || curMonth.length() != 7 || curMonth.indexOf("-") < 0) {
+
 			final Date d = new Date();
 			final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
 			curMonth = sdf.format(d);
 
-		}else{
-			curMonth = curMonth.replace("-","");
+		} else {
+			curMonth = curMonth.replace("-", "");
 		}
-		
-		final List<OrderDetailsReportData> searchPageData = acerchemOrderDao.getOrderDetails(
-				curMonth, searchCriteriaFrom.getArea(), searchCriteriaFrom.getCountryCode(),
-				searchCriteriaFrom.getUserName(), searchCriteriaFrom.getOrderCode()
-				);
-		
-		
-		curMonth = curMonth.substring(0,4)+"-"+curMonth.substring(4);
-		
+
+		final List<OrderDetailsReportData> searchPageData = acerchemOrderDao.getOrderDetails(curMonth,
+				searchCriteriaFrom.getArea(), searchCriteriaFrom.getCountryCode(), searchCriteriaFrom.getUserName(),
+				searchCriteriaFrom.getOrderCode());
+
+		curMonth = curMonth.substring(0, 4) + "-" + curMonth.substring(4);
+
 		final SearchCriteriaFrom newForm = new SearchCriteriaFrom();
 		newForm.setArea(searchCriteriaFrom.getArea());
 		newForm.setCountryCode(searchCriteriaFrom.getCountryCode());
 		newForm.setMonth(curMonth);
 		newForm.setOrderCode(searchCriteriaFrom.getOrderCode());
 		newForm.setPageNumber(searchCriteriaFrom.getPageNumber());
-		
+
 		model.addAttribute("searchPageData", searchPageData);
 		model.addAttribute("searchCriteriaFrom", newForm);
 
@@ -264,15 +272,25 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	}
 
 	@RequestMapping(value = "/monthlySalesAnalysis", method = RequestMethod.GET)
-	public String showMonthlySalesAnalysisPage(final Model model,final RedirectAttributes attr) throws CMSItemNotFoundException {
-		if(isVendorAccount()){
-			attr.addFlashAttribute("myMessage","区域月度销售分析");
+	public String showMonthlySalesAnalysisPage(final Model model, final RedirectAttributes attr)
+			throws CMSItemNotFoundException {
+		if (isVendorAccount()) {
+			attr.addFlashAttribute("myMessage", "区域月度销售分析");
 			return "redirect:/reports/message";
 		}
-		
+
 		storeCmsPageInModel(model, getContentPageForLabelOrId("login"));
+		//init
+		final Calendar calendar = Calendar.getInstance();
+		final String year = String.valueOf(calendar.get(Calendar.YEAR));
+		
 		final MonthlySalesAnalysisForm monthlySalesAnalysisForm = new MonthlySalesAnalysisForm();
+		monthlySalesAnalysisForm.setYear(year);
+		
+		 final List<MonthlySalesAnalysis> list = acerchemOrderAnalysisService.getMonthlySalesAnalysis(year,null);
+		
 		model.addAttribute("monthlySalesAnalysisForm", monthlySalesAnalysisForm);
+		model.addAttribute("salesList", list);
 		return "pages/reports/monthlySalesAnalysis";
 	}
 
@@ -287,7 +305,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 				monthlySalesAnalysisForm.getArea());
 
 		model.addAttribute("salesList", list);
-
+		model.addAttribute("monthlySalesAnalysisForm", monthlySalesAnalysisForm);
 		return "pages/reports/monthlySalesAnalysis";
 	}
 
@@ -300,44 +318,52 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	}
 
 	@RequestMapping(value = "/employeeSalesAnalysis", method = RequestMethod.GET)
-	public String showEmployeeSalesAnalysisPage(final Model model ,final RedirectAttributes attr) throws CMSItemNotFoundException {
-		if(isVendorAccount()){
-			attr.addFlashAttribute("myMessage","各业务员完成情况");
+	public String showEmployeeSalesAnalysisPage(final Model model, final RedirectAttributes attr)
+			throws CMSItemNotFoundException {
+		if (isVendorAccount()) {
+			attr.addFlashAttribute("myMessage", "各业务员完成情况");
 			return "redirect:/reports/message";
 		}
 		storeCmsPageInModel(model, getContentPageForLabelOrId("login"));
+		//init
 		final String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+		
+		List<SalesByEmployeeReportData> list = acerchemOrderAnalysisService.getEmployeeSales(year);
+		list = getEmployeeSalesAnalysisSum(list);
+		
 		model.addAttribute("curYear", year);
-		// model.addAttribute("monthlySalesAnalysisForm",
-		// monthlySalesAnalysisForm);
+		model.addAttribute("salesList", list);
 		return "pages/reports/employeeSalesAnalysis";
 	}
 
 	@RequestMapping(value = "/employeeSalesAnalysis", method = RequestMethod.POST)
 	public String getEmployeeSalesAnalysisPage(final Model model, @RequestParam("year") final String year) {
 
-		 final List<SalesByEmployeeReportData> list = acerchemOrderAnalysisService.getEmployeeSales(year);
+		List<SalesByEmployeeReportData> list = acerchemOrderAnalysisService.getEmployeeSales(year);
 
-		// final List<AcerchemEmployeeSalesBean> crosstab =
-		// getCrossTableFromEmployeeSales(list);
-		if(list.size()>0){
-			Double total = Double.valueOf(0);
-			for(final SalesByEmployeeReportData data:list){
-				total = CommonConvertTools.addDouble(total, data.getAmount());
-			}
-			//add total
-			final SalesByEmployeeReportData totalData = new SalesByEmployeeReportData();
-			totalData.setMonth("Total");
-			totalData.setAmount(total);
-			
-			list.add(totalData);
-			
-		}
+		list = getEmployeeSalesAnalysisSum(list);
 		model.addAttribute("salesList", list);
-
+		model.addAttribute("curYear", year);
 		return "pages/reports/employeeSalesAnalysis";
 	}
 
+	private List<SalesByEmployeeReportData> getEmployeeSalesAnalysisSum(final List<SalesByEmployeeReportData> list) {
+		final List<SalesByEmployeeReportData> sumList = list;
+		if (list.size() > 0) {
+			Double total = Double.valueOf(0);
+			for (final SalesByEmployeeReportData data : list) {
+				total = CommonConvertTools.addDouble(total, data.getAmount());
+			}
+			// add total
+			final SalesByEmployeeReportData totalData = new SalesByEmployeeReportData();
+			totalData.setMonth("Total");
+			totalData.setAmount(total);
+
+			sumList.add(totalData);
+
+		}
+		return sumList;
+	}
 	// private List<String,String> getK(){
 	// List<String,String> l = new ArrayList<>();
 	//
@@ -465,112 +491,120 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		return "pages/reports/noSignIn";
 	}
 
-	@RequestMapping(value="/message",method = RequestMethod.GET)
-	public String getMessagePage(final Model model,@ModelAttribute("myMessage") final String message){
-		
-		//final String message = (String) model.asMap().get("reportMessage");
-		
-		model.addAttribute("reportMessage", "您没有权限查看"+message);
+	@RequestMapping(value = "/message", method = RequestMethod.GET)
+	public String getMessagePage(final Model model, @ModelAttribute("myMessage") final String message) {
+
+		// final String message = (String) model.asMap().get("reportMessage");
+
+		model.addAttribute("reportMessage", "您没有权限查看" + message);
 		return "pages/reports/reportMessage";
 	}
-	////////////temporary start/////////////////////////////
+
+	//////////// temporary start/////////////////////////////
 	@RequestMapping(value = "/vendorInventory/temp", method = RequestMethod.GET)
 	public String getVendorInventoryReportTemp(final Model model) {
-		
+
+		// init
+		List<InventoryReportData> list = acerChemProductService.getInventory("");
+
 		final VendorInventoryForm form = new VendorInventoryForm();
 		final UserModel user = userService.getCurrentUser();
-		if(user instanceof CustomerModel){
-			final CustomerModel customer = (CustomerModel)user;
-			final VendorModel  vendor = customer.getVendorAccount();
-			if(vendor != null){
+		if (user instanceof CustomerModel) {
+			final CustomerModel customer = (CustomerModel) user;
+			final VendorModel vendor = customer.getVendorAccount();
+			if (vendor != null) {
 				final String vendorcode = vendor.getCode();
 				form.setVendor(vendorcode);
 				form.setVendorFlag(true);
 				form.setVendorName(vendor.getName());
-				
-				//默认有数据
-				List<InventoryReportData> list = acerChemProductService.getInventory(form.getVendor());
-				list = acerChemProductService.getInventory(list);
-				model.addAttribute("list", list);
+
+				list = acerChemProductService.getInventory(form.getVendor());
 
 			}
 		}
-		
-		
+		list = acerChemProductService.getInventory(list);
+		model.addAttribute("list", list);
 		model.addAttribute("vendorInventoryForm", form);
 
 		return "pages/reports/vendorInventoryAnalysis";
 	}
+
 	@RequestMapping(value = "/vendorInventory/temp", method = RequestMethod.POST)
-	public String showVendorInventoryReportTemp(final Model model,final VendorInventoryForm form) {
-		
-		//final String vendorCode = StringUtils.defaultString(form.getVendor());
-		
-		//final UserModel employee = acerChemVendorService.getEmployeeByVendorCode(vendorCode);
-		//final String uid = employee==null?"":employee.getUid();
-		
+	public String showVendorInventoryReportTemp(final Model model, final VendorInventoryForm form) {
+
+		// final String vendorCode =
+		// StringUtils.defaultString(form.getVendor());
+
+		// final UserModel employee =
+		// acerChemVendorService.getEmployeeByVendorCode(vendorCode);
+		// final String uid = employee==null?"":employee.getUid();
+
 		List<InventoryReportData> list = acerChemProductService.getInventory(form.getVendor());
 		list = acerChemProductService.getInventory(list);
 		model.addAttribute("list", list);
 
 		final VendorInventoryForm newform = new VendorInventoryForm();
 		final UserModel user = userService.getCurrentUser();
-		if(user instanceof CustomerModel){
-			final CustomerModel customer = (CustomerModel)user;
-			final VendorModel  vendor = customer.getVendorAccount();
-			if(vendor != null){
+		if (user instanceof CustomerModel) {
+			final CustomerModel customer = (CustomerModel) user;
+			final VendorModel vendor = customer.getVendorAccount();
+			if (vendor != null) {
 				final String vendorcode = vendor.getCode();
 				newform.setVendor(vendorcode);
 				newform.setVendorFlag(true);
 				newform.setVendorName(vendor.getName());
-			}else{
+			} else {
 				newform.setVendor(form.getVendor());
 			}
 		}
 		model.addAttribute("vendorInventoryForm", newform);
 		return "pages/reports/vendorInventoryAnalysis";
 	}
-	
+
 	@RequestMapping(value = "/vendorOrderProduct/temp", method = RequestMethod.GET)
-	public String showVendorOrderProductTemp(final Model model)  {
-		
+	public String showVendorOrderProductTemp(final Model model) {
+
 		final SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
 		final Calendar calendar = Calendar.getInstance();
 		final Date end = calendar.getTime();
 		calendar.set(Calendar.DATE, -7);
 		final Date start = calendar.getTime();
-		
+
 		final VendorAnalysisForm form = new VendorAnalysisForm();
 
-		
 		form.setStartDate(sdf.format(start));
-		
+
 		form.setEndDate(sdf.format(end));
-		
+
+		// init
+		List<OrderProductReportData> list = acerChemProductService.getOrderProductByVendor(null, start, end);
 		final UserModel user = userService.getCurrentUser();
-		if(user instanceof CustomerModel){
-			final CustomerModel customer = (CustomerModel)user;
-			final VendorModel  vendor = customer.getVendorAccount();
-			if(vendor != null){
+		if (user instanceof CustomerModel) {
+			final CustomerModel customer = (CustomerModel) user;
+			final VendorModel vendor = customer.getVendorAccount();
+			if (vendor != null) {
 				final String vendorcode = vendor.getCode();
 				form.setVendor(vendorcode);
 				form.setVendorFlag(true);
 				form.setVendorName(vendor.getName());
+
+				list = acerChemProductService.getOrderProductByVendor(vendorcode, start, end);
 			}
 		}
-		
+
+		model.addAttribute("list", list);
 		model.addAttribute("vendorAnalysisForm", form);
 		return "pages/reports/vendorOrderProduct";
 	}
 
 	@RequestMapping(value = "/vendorOrderProduct/temp", method = RequestMethod.POST)
 	public String getVendorOrderProductTemp(final Model model, final VendorAnalysisForm form) throws ParseException {
-        final String vendorCode = StringUtils.defaultString(form.getVendor());
-		
-//		final UserModel employee = acerChemVendorService.getEmployeeByVendorCode(vendorCode);
-//		final String uid = employee==null?"":employee.getUid();
-		
-		
+		final String vendorCode = StringUtils.defaultString(form.getVendor());
+
+		// final UserModel employee =
+		// acerChemVendorService.getEmployeeByVendorCode(vendorCode);
+		// final String uid = employee==null?"":employee.getUid();
+
 		Date start = new Date();
 		Date end = new Date();
 		final SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
@@ -581,39 +615,38 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 			end = sdf.parse(form.getEndDate());
 		}
 
-		final List<OrderProductReportData> list = acerChemProductService.getOrderProductByVendor(vendorCode,
-				start, end);
+		final List<OrderProductReportData> list = acerChemProductService.getOrderProductByVendor(vendorCode, start,
+				end);
 		model.addAttribute("list", list);
-		//reset form
+		// reset form
 		VendorAnalysisForm newform = new VendorAnalysisForm();
 		final UserModel user = userService.getCurrentUser();
-		if(user instanceof CustomerModel){
-			final CustomerModel customer = (CustomerModel)user;
-			final VendorModel  vendor = customer.getVendorAccount();
-			if(vendor != null){
+		if (user instanceof CustomerModel) {
+			final CustomerModel customer = (CustomerModel) user;
+			final VendorModel vendor = customer.getVendorAccount();
+			if (vendor != null) {
 				final String vendorcode = vendor.getCode();
 				newform.setVendor(vendorcode);
 				newform.setVendorFlag(true);
 				newform.setVendorName(vendor.getName());
 				newform.setStartDate(sdf.format(start));
 				newform.setEndDate(sdf.format(end));
-			}else{
+			} else {
 				newform = form;
 			}
 		}
-		
+
 		model.addAttribute("vendorAnalysisForm", newform);
 		return "pages/reports/vendorOrderProduct";
 	}
-	
-	
-	////////////temporary end/////////////////////////////
-	
-	
+
+	//////////// temporary end/////////////////////////////
+
 	@RequestMapping(value = "/productPriceAnalysis", method = RequestMethod.GET)
-	public String showProductPriceAnalysist(final Model model,final RedirectAttributes attr) throws CMSItemNotFoundException {
-		if(isVendorAccount()){
-			attr.addFlashAttribute("myMessage","商品价格趋势分析");
+	public String showProductPriceAnalysist(final Model model, final RedirectAttributes attr)
+			throws CMSItemNotFoundException {
+		if (isVendorAccount()) {
+			attr.addFlashAttribute("myMessage", "商品价格趋势分析");
 			return "redirect:/reports/message";
 		}
 		storeCmsPageInModel(model, getContentPageForLabelOrId("login"));
@@ -623,28 +656,39 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
 		final String month = sdf.format(d);
 
+		// init
+
+		final Calendar calendar = Calendar.getInstance(Locale.CHINA);
+		calendar.setFirstDayOfWeek(Calendar.MONDAY);
+		final int iyear = Integer.valueOf(month.substring(0, 4)).intValue();
+		final int imonth = Integer.valueOf(month.substring(5)).intValue();
+		calendar.set(iyear, imonth, 1);
+
+		calendar.add(calendar.DATE, -1);
+		final int maxWeek = calendar.get(Calendar.WEEK_OF_MONTH);
+		final List<ProductPriceAnalysisData> list = acerChemProductService.getProductWithBaserealPrice(month);
+
+		model.addAttribute("list", list);
 		model.addAttribute("month", month);
+		model.addAttribute("maxWeek", maxWeek);
 		return "pages/reports/productPriceAnalysis";
 
 	}
-	
 
 	@RequestMapping(value = "/productPriceAnalysis", method = RequestMethod.POST)
 	public String getProductPriceAnalysist(final Model model, @RequestParam("month") final String month)
 			throws CMSItemNotFoundException {
 
-	
 		String curMonth = month;
-		if (StringUtils.isBlank(curMonth) || month.length() != 7 || month.indexOf("-")<0) {
-			
+		if (StringUtils.isBlank(curMonth) || month.length() != 7 || month.indexOf("-") < 0) {
+
 			final Date d = new Date();
 			final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
 			curMonth = sdf.format(d);
 
-		}else{
-			curMonth = curMonth.replace("-","");
+		} else {
+			curMonth = curMonth.replace("-", "");
 		}
-		
 
 		final Calendar calendar = Calendar.getInstance(Locale.CHINA);
 		calendar.setFirstDayOfWeek(Calendar.MONDAY);
@@ -657,7 +701,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 
 		final List<ProductPriceAnalysisData> list = acerChemProductService.getProductWithBaserealPrice(curMonth);
 
-		curMonth = curMonth.substring(0,4)+"-"+curMonth.substring(4);
+		curMonth = curMonth.substring(0, 4) + "-" + curMonth.substring(4);
 		model.addAttribute("list", list);
 		model.addAttribute("month", curMonth);
 		model.addAttribute("maxWeek", maxWeek);
@@ -666,18 +710,23 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	}
 
 	@RequestMapping(value = "/productSalesRecord", method = RequestMethod.GET)
-	public String showProductSalesRecord(final Model model,final RedirectAttributes attr) throws CMSItemNotFoundException {
-		if(isVendorAccount()){
-			attr.addFlashAttribute("myMessage","商品销售记录");
+	public String showProductSalesRecord(final Model model, final RedirectAttributes attr)
+			throws CMSItemNotFoundException {
+		if (isVendorAccount()) {
+			attr.addFlashAttribute("myMessage", "商品销售记录");
 			return "redirect:/reports/message";
 		}
-		
+
 		storeCmsPageInModel(model, getContentPageForLabelOrId("login"));
 		// model.addAttribute("list",list);
 
+		// init
 		final Date d = new Date();
 		final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
 		final String month = sdf.format(d);
+
+		final List<ProductSalesRecordData> list = acerChemProductService.getProductSalesForReport(month, null, null,
+				null);
 
 		final ProductSalesForm productSalesForm = new ProductSalesForm();
 		model.addAttribute("productSalesForm", productSalesForm);
@@ -691,29 +740,28 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 			throws CMSItemNotFoundException {
 
 		String curMonth = productSalesForm.getMonth();
-		if (StringUtils.isBlank(curMonth) || curMonth.length() != 7 || curMonth.indexOf("-")<0) {
-			
+		if (StringUtils.isBlank(curMonth) || curMonth.length() != 7 || curMonth.indexOf("-") < 0) {
+
 			final Date d = new Date();
 			final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
 			curMonth = sdf.format(d);
 
-		}else{
-			curMonth = curMonth.replace("-","");
+		} else {
+			curMonth = curMonth.replace("-", "");
 		}
 		System.out.println(curMonth);
-		final List<ProductSalesRecordData> list = acerChemProductService.getProductSalesForReport(
-				curMonth, productSalesForm.getCategoryCode(), productSalesForm.getArea(),
-				productSalesForm.getCountryCode());
+		final List<ProductSalesRecordData> list = acerChemProductService.getProductSalesForReport(curMonth,
+				productSalesForm.getCategoryCode(), productSalesForm.getArea(), productSalesForm.getCountryCode());
 
 		model.addAttribute("list", list);
-		//重置form
+		// 重置form
 		final ProductSalesForm newForm = new ProductSalesForm();
 		newForm.setArea(productSalesForm.getArea());
 		newForm.setCategoryCode(productSalesForm.getCategoryCode());
 		newForm.setCountryCode(productSalesForm.getCountryCode());
-		curMonth = curMonth.substring(0,4)+"-"+curMonth.substring(4);
+		curMonth = curMonth.substring(0, 4) + "-" + curMonth.substring(4);
 		newForm.setMonth(curMonth);
-		
+
 		model.addAttribute("productSalesForm", newForm);
 		model.addAttribute("month", curMonth);
 		return "pages/reports/productSalesRecord";
@@ -721,16 +769,20 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	}
 
 	@RequestMapping(value = "/customerSalesAnalysis", method = RequestMethod.GET)
-	public String showCustomerSalesAnalysis(final Model model,final RedirectAttributes attr) throws CMSItemNotFoundException {
-		if(isVendorAccount()){
-			attr.addFlashAttribute("myMessage","用户购买情况分析");
+	public String showCustomerSalesAnalysis(final Model model, final RedirectAttributes attr)
+			throws CMSItemNotFoundException {
+		if (isVendorAccount()) {
+			attr.addFlashAttribute("myMessage", "用户购买情况分析");
 			return "redirect:/reports/message";
 		}
 		storeCmsPageInModel(model, getContentPageForLabelOrId("login"));
 
+		// init
+		final List<CustomerSalesAnalysisData> list = acerchemOrderAnalysisService.getCustomerSalesAnalysis(null, null,
+				0);
 		final CustomerSalesAnalysisForm customerSalesAnalysisForm = new CustomerSalesAnalysisForm();
 		model.addAttribute("customerSalesAnalysisForm", customerSalesAnalysisForm);
-
+		model.addAttribute("list", list);
 		return "pages/reports/customerSalesAnalysis";
 
 	}
@@ -754,22 +806,37 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	}
 
 	@RequestMapping(value = "/customerBillAnalysis", method = RequestMethod.GET)
-	public String showCustomerBillAnalysis(final Model model,final RedirectAttributes attr) throws CMSItemNotFoundException {
-		if(isVendorAccount()){
-			attr.addFlashAttribute("myMessage","账龄分析报表");
+	public String showCustomerBillAnalysis(final Model model, final RedirectAttributes attr)
+			throws CMSItemNotFoundException {
+		if (isVendorAccount()) {
+			attr.addFlashAttribute("myMessage", "账龄分析报表");
 			return "redirect:/reports/message";
 		}
 		storeCmsPageInModel(model, getContentPageForLabelOrId("login"));
 
+		// init
 		final SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
 		final Calendar calendar = Calendar.getInstance();
 
-		final Date end = calendar.getTime();
+		Date end = calendar.getTime();
 		calendar.add(Calendar.DATE, -7);
 		final Date start = calendar.getTime();
 
 		final String startDate = sdf.format(start);
 		final String endDate = sdf.format(end);
+		// init
+		// 对账单最后选择日期+1，保证最后一天选到
+		final Calendar cal = Calendar.getInstance();
+		cal.setTime(end);
+		cal.add(Calendar.DATE, 1);
+		end = cal.getTime();
+		List<CustomerBillAnalysisData> list = acerchemOrderAnalysisService.getCustomerBillAnalysis(start, end);
+		final List<CustomerCreditAnalysisForReportBean> creditList = getCustomerCredit(list);
+
+		list = getCustomerBillAnalysisSum(list);
+
+		model.addAttribute("list", list);
+		model.addAttribute("creditList", creditList);
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);
 		return "pages/reports/customerBillAnalysis";
@@ -790,15 +857,27 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 			end = sdf.parse(endDate);
 		}
 
-		//对账单最后选择日期+1，保证当天选到
+		// 对账单最后选择日期+1，保证最后一天选到
 		final Calendar cal = Calendar.getInstance();
 		cal.setTime(end);
 		cal.add(Calendar.DATE, 1);
 		end = cal.getTime();
-		final List<CustomerBillAnalysisData> list = acerchemOrderAnalysisService.getCustomerBillAnalysis(start, end);
+		List<CustomerBillAnalysisData> list = acerchemOrderAnalysisService.getCustomerBillAnalysis(start, end);
 
-		final List<CustomerCreditAnalysisForReportBean> creditList = new ArrayList<CustomerCreditAnalysisForReportBean>();
+		final List<CustomerCreditAnalysisForReportBean> creditList = getCustomerCredit(list);
 
+		list = getCustomerBillAnalysisSum(list);
+
+		model.addAttribute("list", list);
+		model.addAttribute("creditList", creditList);
+		model.addAttribute("startDate", startDate);
+		model.addAttribute("endDate", endDate);
+		return "pages/reports/customerBillAnalysis";
+
+	}
+
+	private List<CustomerBillAnalysisData> getCustomerBillAnalysisSum(final List<CustomerBillAnalysisData> list) {
+		
 		if (list.size() > 0) {
 
 			Double prePay = Double.valueOf(0);
@@ -809,42 +888,31 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 			Double outerNinetyPayAmount = Double.valueOf(0);
 			for (final CustomerBillAnalysisData data : list) {
 
-				final CustomerCreditAnalysisForReportBean bean = new CustomerCreditAnalysisForReportBean();
-				bean.setCustomerName(data.getCustomerName());
-				bean.setLineOfCredit(data.getLineOfCredit());
-				bean.setLineOfResedueCredit(data.getLineOfResedueCredit());
-				bean.setLineOfUsedCredit(data.getLineOfUsedCredit());
-
-				// 增加合计
-				if(data.getPrePay()!=null){
-				prePay = CommonConvertTools.addDouble(prePay, data.getPrePay());
+				// 计算合计
+				if (data.getPrePay() != null) {
+					prePay = CommonConvertTools.addDouble(prePay, data.getPrePay());
 				}
-				if(data.getInPay()!=null){
-				inPay = CommonConvertTools.addDouble(inPay, data.getInPay());
+				if (data.getInPay() != null) {
+					inPay = CommonConvertTools.addDouble(inPay, data.getInPay());
 				}
-				if(data.getThirtyPayAmount() !=null){
-				thirtyPayAmount = CommonConvertTools.addDouble(thirtyPayAmount, data.getThirtyPayAmount());
+				if (data.getThirtyPayAmount() != null) {
+					thirtyPayAmount = CommonConvertTools.addDouble(thirtyPayAmount, data.getThirtyPayAmount());
 				}
-				if(data.getSixtyPayAmount()!=null){
-				sixtyPayAmount = CommonConvertTools.addDouble(sixtyPayAmount, data.getSixtyPayAmount());
+				if (data.getSixtyPayAmount() != null) {
+					sixtyPayAmount = CommonConvertTools.addDouble(sixtyPayAmount, data.getSixtyPayAmount());
 				}
-				if( data.getNinetyPayAmount()!=null){
-				ninetyPayAmount = CommonConvertTools.addDouble(ninetyPayAmount, data.getNinetyPayAmount());
+				if (data.getNinetyPayAmount() != null) {
+					ninetyPayAmount = CommonConvertTools.addDouble(ninetyPayAmount, data.getNinetyPayAmount());
 				}
-				if(data.getOuterNinetyPayAmount()!=null){
-				outerNinetyPayAmount = CommonConvertTools.addDouble(outerNinetyPayAmount,
-						data.getOuterNinetyPayAmount());
+				if (data.getOuterNinetyPayAmount() != null) {
+					outerNinetyPayAmount = CommonConvertTools.addDouble(outerNinetyPayAmount,
+							data.getOuterNinetyPayAmount());
 
 				}
-				creditList.add(bean);
+
 			}
 
-			final Set<CustomerCreditAnalysisForReportBean> set = new HashSet<CustomerCreditAnalysisForReportBean>();
-			set.addAll(creditList);
-
-			creditList.clear();
-			creditList.addAll(set);
-			//增加合计
+			// 增加合计
 			final CustomerBillAnalysisData totalData = new CustomerBillAnalysisData();
 			totalData.setOrderCode("Total");
 			totalData.setPrePay(prePay);
@@ -853,29 +921,48 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 			totalData.setSixtyPayAmount(sixtyPayAmount);
 			totalData.setNinetyPayAmount(ninetyPayAmount);
 			totalData.setOuterNinetyPayAmount(outerNinetyPayAmount);
-			
+
 			list.add(totalData);
-			
+
 		}
 
-		model.addAttribute("list", list);
-		model.addAttribute("creditList", creditList);
-		model.addAttribute("startDate", startDate);
-		model.addAttribute("endDate", endDate);
-		return "pages/reports/customerBillAnalysis";
-
+		return list;
 	}
-	
-	private boolean isVendorAccount(){
+
+	public List<CustomerCreditAnalysisForReportBean> getCustomerCredit(final List<CustomerBillAnalysisData> list) {
+		final List<CustomerCreditAnalysisForReportBean> creditList = new ArrayList<CustomerCreditAnalysisForReportBean>();
+		if (list.size() > 0) {
+			for (final CustomerBillAnalysisData data : list) {
+
+				final CustomerCreditAnalysisForReportBean bean = new CustomerCreditAnalysisForReportBean();
+				bean.setCustomerName(data.getCustomerName());
+				bean.setLineOfCredit(data.getLineOfCredit());
+				bean.setLineOfResedueCredit(data.getLineOfResedueCredit());
+				bean.setLineOfUsedCredit(data.getLineOfUsedCredit());
+
+				creditList.add(bean);
+			}
+
+			final Set<CustomerCreditAnalysisForReportBean> set = new HashSet<CustomerCreditAnalysisForReportBean>();
+			set.addAll(creditList);
+
+			creditList.clear();
+			creditList.addAll(set);
+
+		}
+		return creditList;
+	}
+
+	private boolean isVendorAccount() {
 		final UserModel user = userService.getCurrentUser();
-		if(user instanceof CustomerModel){
-			final CustomerModel customer = (CustomerModel)user;
-			final VendorModel  vendor = customer.getVendorAccount();
-			if(vendor != null){
+		if (user instanceof CustomerModel) {
+			final CustomerModel customer = (CustomerModel) user;
+			final VendorModel vendor = customer.getVendorAccount();
+			if (vendor != null) {
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 

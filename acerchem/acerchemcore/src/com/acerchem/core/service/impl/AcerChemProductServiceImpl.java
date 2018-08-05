@@ -8,6 +8,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.acerchem.core.dao.AcerChemProductDao;
@@ -191,17 +192,22 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 
 		final List<OrderEntryModel> orderEntries = acerChemProductDao.getOrderEntryProductByVendorcode(vendorcode, startDate, endDate);
 		if (CollectionUtils.isNotEmpty(orderEntries)) {
-			final VendorModel vendor = acerChemVendorDao.getVendorByCode(vendorcode);
-			final String vendorName = vendor != null ? vendor.getName() : "";
+//			final VendorModel vendor = acerChemVendorDao.getVendorByCode(vendorcode);
+//			final String vendorName = vendor != null ? vendor.getName() : "";
 			for (final OrderEntryModel oe : orderEntries) {
 				final OrderProductReportData item = new OrderProductReportData();
 
+				final VendorModel vendor = oe.getProduct().getAcerChemVendor();
+				if(vendor!=null){
+					final String vendorName = StringUtils.isNotBlank(vendor.getName() ) ? vendor.getName() : "";
+					item.setVendorName(vendorName);
+				}
 				item.setOrderCode(oe.getOrder().getCode());
 				item.setFinishedTime(oe.getOrder().getOrderFinishedDate());
 				item.setPlaceTime(oe.getOrder().getCreationtime());
 				item.setProductName(oe.getProduct().getName());
 				item.setProductQuantity(oe.getQuantity().intValue());
-				item.setVendorName(vendorName);
+				
 
 				report.add(item);
 			}
