@@ -28,7 +28,8 @@
 
 </head>
 <template:javaScript />
-
+<c:url value="/reports/monthlySalesAnalysis"
+	var="action" />
 <body class="index-body">
 	<!-- top -->
 	<jsp:include page="reportMenu.jsp" />

@@ -30,7 +30,8 @@
 
 </head>
 <template:javaScript />
-
+<c:url value="/reports/vendorOrderProduct/temp"
+	var="action" />
 <body class="index-body">
 	<!-- top -->
     <jsp:include page="reportMenu.jsp"/>

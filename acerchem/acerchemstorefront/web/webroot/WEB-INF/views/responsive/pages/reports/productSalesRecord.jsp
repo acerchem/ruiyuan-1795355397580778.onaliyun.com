@@ -29,7 +29,8 @@
 </head>
 
 <template:javaScript />
-
+<c:url value="/reports/productSalesRecord"
+	var="action" />
 <body class="index-body">
 	
 	<!-- top -->

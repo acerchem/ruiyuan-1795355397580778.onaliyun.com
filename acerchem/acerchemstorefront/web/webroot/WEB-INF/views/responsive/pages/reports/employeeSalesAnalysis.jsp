@@ -28,7 +28,8 @@
 </head>
 
 <template:javaScript />
-
+<c:url value="/reports/employeeSalesAnalysis"
+	var="action" />
 
 <body class="index-body">
 

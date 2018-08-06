@@ -28,7 +28,8 @@
 </head>
 
 <template:javaScript />
-
+<c:url value="/reports/vendorInventory/temp"
+	var="action" />
 <body class="index-body">
 	
 	<!-- top -->

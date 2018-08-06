@@ -30,7 +30,8 @@
 
 </head>
 <template:javaScript />
-
+<c:url value="/reports/customerBillAnalysis"
+	var="action" />
 
 <body class="index-body">
 

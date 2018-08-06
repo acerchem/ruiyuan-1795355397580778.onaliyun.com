@@ -29,7 +29,8 @@
 
 </head>
 <template:javaScript />
-
+<c:url value="/reports/orderDetails"
+	var="action" />
 <body class="index-body">
 	<!-- top -->
     <jsp:include page="reportMenu.jsp"/>
