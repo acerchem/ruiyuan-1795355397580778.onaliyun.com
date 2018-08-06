@@ -1,3 +1,4 @@
+
 function autoLogin()
 {
     var userId=$.cookie("userId");
@@ -317,10 +318,12 @@ function getPersonalInfo()
         },
         success:function(returndata){
             console.log("contactAddress:"+JSON.stringify(returndata));
-            $("#country option[value='"+returndata.country.isocode+"']").attr("selected", true);
             document.getElementById('townCity').value = returndata.town;
             document.getElementById('addressId').value = returndata.id;
             getRegions(returndata.country.isocode,returndata.region.isocode);
+            //$("#country option[value='"+returndata.country.isocode+"']").attr("selected", true);
+            
+            $("#country").append('<option value="'+returndata.countries[i].isocode+'" selected="true">'+returndata.countries[i].name+'11111</option>'); 
         },
         error:function(returndata){
             console.log("error11:"+JSON.stringify(returndata));
@@ -1197,9 +1200,7 @@ function getProductsByCode(code)
                             productImages += '<li class="swiper-slide"><img src="' + images[i].url.substring(23)+ '" alt="' + images[i].altText +'"></li>';
                             //console.log("success:"+images[i].url.substring(23));
                         }
-                        
                     }
-                    
                 }
             }
 
@@ -1220,15 +1221,13 @@ function getProductsByCode(code)
             
             var saleInfo = '';
             var potentialPromotions = returndata.potentialPromotions;
-            if(potentialPromotions != null) {
-                for(var i =0; i < potentialPromotions.length; i++){
-                    var firedMessages = potentialPromotions[i].firedMessages;
-                    if(firedMessages != null) {
-                        for(var j= 0; j < firedMessages.length; j++) {
-                            var info = firedMessages[j];
-                            var infoResult = info.split(",");
-                            saleInfo += infoResult[0] + '% off order more than ' + infoResult[1] + ' ' + returndata.packageType + 's <br/>';
-                        }
+            if(potentialPromotions != null&&potentialPromotions.length>0) {
+                var firedMessages = potentialPromotions[0].firedMessages;
+                if(firedMessages != null) {
+                    for(var j= 0; j < firedMessages.length; j++) {
+                        var info = firedMessages[j];
+                        var infoResult = info.split(",");
+                        saleInfo += infoResult[0] + '% off order more than ' + infoResult[1] + ' ' + returndata.packageType + 's <br/>';
                     }
                 }
             }
@@ -1505,19 +1504,24 @@ function getProductInvenroty(code)
             request.setRequestHeader("Authorization", $.cookie("access_token"));
         },
         success:function(returndata){
-            //console.log("success:"+JSON.stringify(returndata));
-            var storeOfProductDataList = returndata.returndata;
-            if(storeOfProductDataList != null) {
-            	for(var i = 0; i < storeOfProductDataList.length; i++) {
+            console.log("success:"+JSON.stringify(returndata));
+            var html ='';
+            if(returndata.storeOfProductDataList != null) {
+            	for(var i = 0; i < returndata.storeOfProductDataList.length; i++) {
             		
+            		html+='<li class="bort-top"><div class="title">'+returndata.storeOfProductDataList[i].storeName+'</div></li>';
+            		html+='<li class="bort-top"><div class="left"><p>Inventory:<span>'+returndata.storeOfProductDataList[i].inventory+' Drum</span></p><p>(Delivery within '+returndata.storeOfProductDataList[i].avaReleaseDay+' days)</p></div></li>';
+            		html+='<li class="bort-top"><div class="left"><p>Future Inventory:<span>'+returndata.storeOfProductDataList[i].futureInventory+' Drum</span></p><p>(Delivery after '+returndata.storeOfProductDataList[i].futureAvailableDate+' days)</p></div></li>';
+            		html+='<li class="bort-top"><div class="left"><p>Delivery From:<span>'+returndata.storeOfProductDataList[i].storeName+'</span></p></div></li>';
+            		html+='<li class="bort-top"><div class="left"><p class="maxday">Delivery area:<span>'+returndata.storeOfProductDataList[i].countryListString+'</span></p></div></li>';
             	}
             }
+            $("#proInv li").remove();
+            $("#proInv").append(html);
         },
         error:function(returndata){
             console.log("error:"+JSON.stringify(returndata));
         }
     });
 }
-
-
 
