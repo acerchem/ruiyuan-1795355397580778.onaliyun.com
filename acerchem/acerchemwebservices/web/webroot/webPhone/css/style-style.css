@@ -2164,7 +2164,7 @@ select::-ms-expand {
 
 .g-specs-popup {
   bottom: 0;
-  z-index: 6;
+  z-index: 10;
 }
 
 .g-specs-popup .specs-size li {
