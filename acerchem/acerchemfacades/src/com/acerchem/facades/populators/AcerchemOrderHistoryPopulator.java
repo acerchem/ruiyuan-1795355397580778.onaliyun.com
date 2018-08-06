@@ -22,8 +22,7 @@ public class AcerchemOrderHistoryPopulator extends OrderHistoryPopulator impleme
 		target.setCustomerConfirmDelivery(source.getCustomerConfirmDelivery());
 		target.setEmployeeConfirmDelivery(source.getEmployeeConfirmDelivery());
 		target.setPickUpDate(source.getPickUpDate());
-		target.setPlacedStr(new SimpleDateFormat("yyyy/MM/dd hh:mm:ss").format(source.getCreationtime()));
-		
+		target.setPlacedStr(new SimpleDateFormat("d/M/yyyy hh:mm:ss").format(source.getCreationtime()));
 		 // added by Jayson.wang
         SimpleDateFormat sdf = new SimpleDateFormat("d/M/yyyy");
         if(source.getDeliveyDate()!=null){
