@@ -1,4 +1,3 @@
-
 function autoLogin()
 {
     var userId=$.cookie("userId");
@@ -555,6 +554,8 @@ function getRegions(countryIsoCode,regionIsocode)
                     html+='<option value="'+returndata.regions[i].isocode+'">'+returndata.regions[i].name+'</option>';
                 }
             }
+            
+            $("#country option[value='"+countryIsoCode+"']").attr("selected", true);
             
             $("#region").append(html); 
             $("#region2").append(html);
