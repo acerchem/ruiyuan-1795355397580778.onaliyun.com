@@ -1,4 +1,3 @@
-
 function autoLogin()
 {
     var userId=$.cookie("userId");
@@ -323,7 +322,7 @@ function getPersonalInfo()
             getRegions(returndata.country.isocode,returndata.region.isocode);
             //$("#country option[value='"+returndata.country.isocode+"']").attr("selected", true);
             
-            $("#country").append('<option value="'+returndata.countries[i].isocode+'" selected="true">'+returndata.countries[i].name+'11111</option>'); 
+            $("#country").append('<option value="'+returndata.country.isocode+'" selected="true">'+returndata.country.name+'</option>');  
         },
         error:function(returndata){
             console.log("error11:"+JSON.stringify(returndata));
