@@ -210,7 +210,9 @@
 			</list>
 		</property>
 		<property name="listRedirectUrlsForceDefaultTarget">
-			<list></list>
+			<list>
+			<value>/reports/</value>
+			</list>
 		</property>
 	</bean>
 
@@ -239,7 +241,9 @@
 			</list>
 		</property>
 		<property name="listRedirectUrlsForceDefaultTarget">
-			<list></list>
+			<list>
+			<value>/reports/</value>
+			</list>
 		</property>
 	</bean>
 
@@ -318,8 +322,9 @@
     	<property name="parameterName" value="CSRFToken" />
 	</bean>
 	
-	<util:list id="csrfAllowedUrlPatternsList" />
-	
+	<util:list id="csrfAllowedUrlPatternsList" >
+	<value>/reports/.*?</value>
+	</util:list>
 	<alias name="defaultCsrfProtectionMatcher" alias="csrfProtectionMatcher"/>
 	<bean id="defaultCsrfProtectionMatcher" class="com.acerchem.storefront.security.CsrfProtectionMatcher">
 		<property name="csrfAllowedUrlPatterns" ref="csrfAllowedUrlPatternsList"/>
