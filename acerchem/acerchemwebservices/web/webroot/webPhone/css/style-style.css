@@ -1192,16 +1192,15 @@ img {
   -webkit-transform: translateY(-50%);
   transform: translateY(-50%);
 }
-.g-index-let .item-1{
-  background: #fff;
-}
 
 .g-index-let .item-text p,
 .g-index-let .item-text a {
   font-size: 0.28rem;
 }
 
-
+.g-index-let .item-1{
+  background: #fff;
+}
 
 .g-index-let .item-1 a {
   color: #0c4070;
