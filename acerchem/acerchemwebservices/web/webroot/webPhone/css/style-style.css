@@ -1174,6 +1174,8 @@ img {
 }
 
 .g-index-let .g-con {
+  position: relative;
+  min-height: 4rem;
   height: 100%;
   padding: 0.32rem 7%;
   background-size: cover;
@@ -1181,16 +1183,25 @@ img {
 }
 
 .g-index-let .item-text {
+  position: absolute;
+  top:50%;
+  left: 10%;
+  z-index: 3;
+  width: 80%;
   text-align: center;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+}
+.g-index-let .item-1{
   background: #fff;
-  height: 100%
-
 }
 
 .g-index-let .item-text p,
 .g-index-let .item-text a {
   font-size: 0.28rem;
 }
+
+
 
 .g-index-let .item-1 a {
   color: #0c4070;
@@ -1212,20 +1223,19 @@ img {
   padding: 0.08rem 0.5rem;
 }
 
-.g-index-let .item p {
-  height: 50%;
+.g-index-let .item p {  
+  line-height: 1.5em;
   padding-bottom: 0.04rem;
 }
 
 .g-index-let .item {
-  padding: 0.32rem;
-  height: 50%;
+  padding: 0.5rem;
 }
 
 .maxnav {
   left: 0;
   bottom: 0;
-  z-index: 1;
+  z-index: 9;
   width: 100%;
   padding: 0.16rem 0 0;
   position: fixed;
@@ -1856,7 +1866,7 @@ img {
 
 .g-every li {
   width: 3rem;
-  height: 3rem;
+  height: 4rem;
   float: left;
   text-align: center;
   padding-left: 0.24rem;
@@ -1867,6 +1877,7 @@ img {
 }
 
 .g-every .g-con p {
+  height: .56rem;
   color: #444;
   font-size: 0.22rem;
   line-height: 0.28rem;
@@ -1879,6 +1890,7 @@ img {
 }
 
 .g-every .g-con span {
+  display: block;
   font-size: 0.26rem;
   line-height: 0.32rem;
   width: 100%;
@@ -1886,9 +1898,14 @@ img {
 }
 
 .g-every .g-con ul {
+  width: 1000%;
   margin: 0.16rem 0 0.26rem;
 }
-
+.g-every .g-con ul:after{
+  content:'';
+  display: block;
+  clear: both;
+}
 .g-every.g-two {
   border-bottom: 0.16rem solid #f3f3f3;
 }
