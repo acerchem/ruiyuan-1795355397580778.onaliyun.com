@@ -1,3 +1,4 @@
+
 function autoLogin()
 {
     var userId=$.cookie("userId");
@@ -828,18 +829,18 @@ function getTickets()
             request.setRequestHeader("Authorization", $.cookie("access_token"));
         },
         success:function(returndata){
-            //console.log("success:"+JSON.stringify(returndata));
+            console.log("success:"+JSON.stringify(returndata));
             var html='';
             if(returndata.tickets!=null)
             {
                 for(var i = 0; i < returndata.tickets.length; i++)
                 {
-                    html+='<li onclick="window.location.href=\'ticket-detail.html?'+returndata.tickets[i].id+'\'"><p class="data">'+formatDataTime(returndata.tickets[i].creationDate)+'</p>';
+                    html+='<li onclick="window.location.href=\'ticket-detail.html?'+returndata.tickets[i].id+'\'"><p class="data">'+returndata.tickets[i].creationDateStr+'</p>';
                     html+='<div class="m-data bort-bot"><span class="num">'+returndata.tickets[i].id+'</span><span class="date"></span></div>';
                     html+='<div class="m-con">';
                     html+='<div class="item" style="width:33%;"><p>Subject</p><span>'+returndata.tickets[i].subject+'</span></div>';
                     html+='<div class="item" style="width:33%;"><p>Status</p><span>'+returndata.tickets[i].status.id+'</span></div>';
-                    html+='<div class="item" style="width:33%;"><p>Last modified</p><span>'+formatDataTime(returndata.tickets[i].lastModificationDate)+'</span></div>';
+                    html+='<div class="item" style="width:33%;"><p>Last modified</p><span>'+returndata.tickets[i].lastModificationDateStr+'</span></div>';
                     html+='</div></li>';
                 }
             }
@@ -936,11 +937,11 @@ function showTicket()
             {
                 if(events[i].addedByAgent)
                 {
-                    html+='<div class="atalk">Customer Support on '+formatDataTime(events[i].startDateTime)+'<br/><span id="asay">'+events[i].text+'</span></div>';
+                    html+='<div class="atalk">Customer Support on '+events[i].startDateTimeStr+'<br/><span id="asay">'+events[i].text+'</span></div>';
                 }
                 else
                 {
-                    html+='<div class="btalk">'+events[i].author+' on '+formatDataTime(events[i].startDateTime)+'<br/><span id="bsay">'+events[i].text+'</span></div>';
+                    html+='<div class="btalk">'+events[i].author+' on '+events[i].startDateTimeStr+'<br/><span id="bsay">'+events[i].text+'</span></div>';
                 }
             }
             $("#words div").remove();
