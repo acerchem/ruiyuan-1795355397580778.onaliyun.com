@@ -303,7 +303,26 @@
 		<property name="priceDataFactory" ref="priceDataFactory" />
 	</bean>
 	<!-- End -->
-
+	
+	<!-- add by alice -->
+	<bean id="acerchemTicketPopulator" class="com.acerchem.facades.populators.AcerchemTicketPopulator">
+		<property name="statusMapping" ref="statusMapping"/>
+	</bean>
+	
+	<alias name="acerchemTicketConverter" alias="ticketListConverter"/>
+    <bean id="acerchemTicketConverter" parent="defaultTicketListConverter">
+        <lookup-method name="createTarget" bean="ticketData"/>
+        <property name="populators">
+            <list>
+                <ref bean="acerchemTicketPopulator"/>
+            </list>
+        </property>
+    </bean>
+    
+    <alias name="acerchemTicketEventPopulator" alias="ticketEventPopulator"/>
+	<bean id="acerchemTicketEventPopulator" parent="defaultTicketEventPopulator" class="com.acerchem.facades.populators.AcerchemTicketEventPopulator">
+	</bean>
+	<!-- end -->
 
 	<!--shaun: 添加远期库存 -->
 	<alias name="defaultAcerchemStockPopulator" alias="acerchemStockPopulator" />
