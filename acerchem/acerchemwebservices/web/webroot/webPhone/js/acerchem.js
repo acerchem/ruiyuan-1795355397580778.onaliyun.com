@@ -745,7 +745,15 @@ function getOrder()
 	COMPLETED--》COMPLETED
 	REFUND--》CANCELLED
 	*/
-	var statuses=$('.sldiv .select').text(); 
+	var statuses="";
+	if($('.sldiv .select').text()!="Status")
+	{
+		statuses=$('.sldiv .select').text();
+	}
+	else if(document.URL.split('status=').length>1)
+	{
+		statuses=document.URL.split('status=')[1];
+	}
 	if(statuses=='UNCONFIRMED'){statuses='UNCONFIRMED,CHECKED_VALID';}
 	else if(statuses=='PROCESSING'){statuses='UNDELIVERED,DELIVERED';}
 	else if(statuses=='REFUND'){statuses='CANCELLED';}
