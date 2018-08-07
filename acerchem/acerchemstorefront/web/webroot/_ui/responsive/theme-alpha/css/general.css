@@ -1,4 +1,3 @@
-
 body{
 	font-size: 14px;
 	line-height: 1.5em;
@@ -2131,7 +2130,7 @@ display: inline-table;
 
 .gal-centent .slide-item .aitem .img{
 	width: 100%;
-	min-height: 220px;
+	/*min-height: 220px;*/
 	line-height: 1em;
 	font-size: 0;
 	text-align: center;
@@ -2476,18 +2475,22 @@ display: inline-table;
 .prod-cont{
 	padding: 0;
 	display: table;
+	position: relative;
+	width: 100%;
+	max-width: 1440px;
 }
 .prod-cont.down-cont{
 	display: block;
 }
 .prod-cont .g-cell{
 	padding: 40px 0;
-	width: 76%;
+    width: 1180px;
+	display: inline-block;
 }
 
 .m-prodslide{
 	position: relative;
-	width: 580px;
+	width: 698px!important;
 	float: left;
 }
 .m-prodslide:after{
@@ -2501,7 +2504,7 @@ display: inline-table;
 }
 
 .m-prodslide .slidewrap{
-	width: 82%;
+	width: 580px;
 	overflow: hidden;
 }
 .m-prodslide .slidewrap .slide-item{
@@ -2522,7 +2525,7 @@ display: inline-table;
 }
 .m-prodslide .minwrap{
 	position: relative;
-	width: 18%;
+	width: 114px;
 	overflow: hidden;
 }
 .m-prodslide .minimg{
@@ -2568,7 +2571,7 @@ display: inline-table;
 
 .prod-cont .prodbase{
 	padding:0 40px;
-	width: 49%;
+	width: 400px;
 	float: left;
 }
 /**/
@@ -2619,7 +2622,7 @@ display: inline-table;
 }
 
 .prod-cont .prodbase .priceset{
-	margin: 20px 0;
+	margin: 14px 0;
 }
 
 .prod-cont .prodbase .priceset span{
@@ -2639,11 +2642,16 @@ display: inline-table;
 .prod-cont .prodbase .Summary{
 	padding:16px 0;
 	border-top:1px solid #ddd;
+	overflow: hidden;
 }
 .prod-cont .prodbase .Summary span{
 	display: block;
 	margin-bottom: 8px;
 	line-height: 1.4em;
+	float: left;
+	width: 50%;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 .prod-cont .prodbase .Summary span:last-child{
 	margin-bottom: 0;
@@ -2703,6 +2711,7 @@ display: inline-table;
 .prod-cont .prodbase .label-title{
 	display: block;
 	margin-bottom: 2px;
+	width: 450px;
 }
 .prod-cont .prodbase  select{
 	height: 30px;
@@ -2711,6 +2720,9 @@ display: inline-table;
 
 .prod-cont .prodbase .invernum{
 	position: relative;
+	width: 50%;
+	float: left;
+	height: 65px;
 }
 
 .prod-cont .prodbase .inventory i{
@@ -2784,7 +2796,10 @@ display: inline-table;
 }
 
 .prod-cont .prodbase .delivery{
-	margin:16px auto;
+/* margin:16px auto; */
+	width: 50%;
+	height: 66px;
+	float: left;
 }
 .prod-cont .prodbase .delivery:after{
 	display: block;
@@ -2800,10 +2815,13 @@ display: inline-table;
 
 /*right*/
 .prod-cont .product-right{
-	padding-left:40px;
-	padding-right: 40px;
-	width: 24%;
+	padding-left: 10px;
+	padding-right: 10px;
+	width: 250px;
 	border-left: 4px solid #f3f3f3;
+	/* position: absolute; */
+	/* top: 0; */
+	/* right: 0; */
 }
 
 .prod-cont .product-right .qclist .g-title , .prod-cont .product-right .qclist .donlist{
@@ -2894,7 +2912,7 @@ display: inline-table;
 .g-proudtable span , .prod-cont .g-desclist li{
 	color: #666;
 }
-
+.g-proudtable{position:relative;}
 .g-proudtable .g-cell{
 	padding-right: 40px;
 }
