@@ -1,3 +1,4 @@
+
 body{
 	font-size: 14px;
 	line-height: 1.5em;
@@ -90,7 +91,15 @@ textarea{
 	font-size: 14px;
 	font-weight: normal;
 }
-
+.invernum .checkbox:before{
+	width: 16px;
+	height: 16px;
+	vertical-align: middle;
+}
+.invernum .checkbox{
+	font-size:12px;
+	padding-left: 25px;
+}
 .checkbox:hover{
 	color: #0d4170;
 }
@@ -149,7 +158,7 @@ textarea{
 }
 
 .btn-set{
-	margin-top: 40px;
+	margin-top: 0;
 	font-size: 0;
 	line-height: 0;
 }
@@ -476,7 +485,36 @@ textarea{
 .sign-content .flex:first-child, .solid-form .flex-wrap .flex:first-child{
 	margin:0;
 }
-
+@media (max-width: 1400px){
+	.prod-cont .prodbase{
+	width:420px!important;
+	}
+	
+}
+@media (max-width: 1350px){
+	.prod-cont .prodbase{
+	width:400px!important;
+	}
+	
+}
+@media (max-width: 1280px){
+	.prod-cont .prodbase{
+	width:380px!important;
+	}
+	
+}
+@media (max-width: 1230px){
+	.prod-cont .prodbase{
+	width:360px!important;
+	}
+	
+}
+@media (max-width: 1180px){
+	.prod-cont .prodbase{
+	width:350px!important;
+	}
+	
+}
 .sign-content .label-title{
 	display: block;
 	margin-bottom: 10px;
@@ -1378,8 +1416,9 @@ textarea{
 
 /**/
 
-.g-cont{ 
-	width: 90%;
+.g-cont{
+	width: 100%;
+	max-width: 1440px;
 	margin:auto;
 	padding:40px 0;
 }
@@ -2130,8 +2169,9 @@ display: inline-table;
 
 .gal-centent .slide-item .aitem .img{
 	width: 100%;
-	/*min-height: 220px;*/
-	line-height: 1em;
+	min-height: 100px;
+	margin-bottom: 6px;
+	line-height: 0;
 	font-size: 0;
 	text-align: center;
 }
@@ -2475,22 +2515,18 @@ display: inline-table;
 .prod-cont{
 	padding: 0;
 	display: table;
-	position: relative;
-	width: 100%;
-	max-width: 1440px;
 }
 .prod-cont.down-cont{
 	display: block;
 }
 .prod-cont .g-cell{
 	padding: 40px 0;
-    width: 1180px;
-	display: inline-block;
+	width: 80%;
 }
 
 .m-prodslide{
 	position: relative;
-	width: 698px!important;
+	width: 600px!important;
 	float: left;
 }
 .m-prodslide:after{
@@ -2504,7 +2540,8 @@ display: inline-table;
 }
 
 .m-prodslide .slidewrap{
-	width: 580px;
+	width: 480px!important;
+	height: 480px;
 	overflow: hidden;
 }
 .m-prodslide .slidewrap .slide-item{
@@ -2513,7 +2550,7 @@ display: inline-table;
 }
 
 .m-prodslide .slidewrap img{
-	padding:0 2px;
+	
 	width: 100%;
 }
 .m-prodslide .slide-item .item,.m-prodslide .minimg span{
@@ -2522,10 +2559,11 @@ display: inline-table;
 }
 .m-prodslide .slide-item .item{
 	float: left;
+	height: 480px!important;
 }
 .m-prodslide .minwrap{
 	position: relative;
-	width: 114px;
+	width: 110px;
 	overflow: hidden;
 }
 .m-prodslide .minimg{
@@ -2571,15 +2609,17 @@ display: inline-table;
 
 .prod-cont .prodbase{
 	padding:0 40px;
-	width: 400px;
+	width: 538px;
 	float: left;
 }
 /**/
 .prod-cont .prodbase .g-title p{
-	font-size: 24px;
+	font-size: 18px;
 	color: #333;
 	line-height: 1.2em;
-	margin-bottom: 10px;
+	margin-bottom: 5px;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 
 .prod-cont .prodbase .g-title .min{
@@ -2588,7 +2628,7 @@ display: inline-table;
 
 .prod-cont .prodbase .g-title span{
 	display: block;
-	font-size: 16px;
+	font-size: 12px;
 	color: #666;
 }
 .prod-cont .prodbase .g-title .mintitle{
@@ -2599,7 +2639,6 @@ display: inline-table;
 	text-overflow:ellipsis;
 	-webkit-box-orient:vertical;
 	-webkit-line-clamp:2;
-
 }
 .prod-cont.down-cont{
 	padding-bottom: 40px
@@ -2607,7 +2646,7 @@ display: inline-table;
 
 .prod-cont .prodbase .g-title .sku{
 	display: block;
-	margin-bottom: 10px;
+	margin-bottom: 5px;
 }
 
 .prod-cont .prodbase .g-title .sku:before{
@@ -2622,7 +2661,7 @@ display: inline-table;
 }
 
 .prod-cont .prodbase .priceset{
-	margin: 14px 0;
+	margin: 10px 0;
 }
 
 .prod-cont .prodbase .priceset span{
@@ -2640,36 +2679,36 @@ display: inline-table;
 
 
 .prod-cont .prodbase .Summary{
-	padding:16px 0;
+	padding: 8px 0;
 	border-top:1px solid #ddd;
-	overflow: hidden;
+	height: 113px;
 }
 .prod-cont .prodbase .Summary span{
 	display: block;
 	margin-bottom: 8px;
 	line-height: 1.4em;
-	float: left;
-	width: 50%;
-	text-overflow: ellipsis;
-	overflow: hidden;
+	font-size: 12px;
 }
 .prod-cont .prodbase .Summary span:last-child{
 	margin-bottom: 0;
 }
 .prod-cont .prodbase .Summary i{
 	display: inline-block;
-	*display:inline;
+	*
+	display:inline;
 	zoom:1;
 	margin-right: 10px;
 	min-width: 70px;
 	border:1px solid #0d4170;
 	text-align: center;
 	color: #0d4170;
+	font-size: 12px;
 }
 .prod-cont .prodbase .specnum{
 	position: relative;
-	padding-top: 16px;
+	padding-top: 5px;
 	border-top:1px solid #ddd;
+	font-size: 12px;
 }
 
 .prod-cont .prodbase .spec label{
@@ -2711,7 +2750,7 @@ display: inline-table;
 .prod-cont .prodbase .label-title{
 	display: block;
 	margin-bottom: 2px;
-	width: 450px;
+	line-height: 1.2;
 }
 .prod-cont .prodbase  select{
 	height: 30px;
@@ -2720,9 +2759,6 @@ display: inline-table;
 
 .prod-cont .prodbase .invernum{
 	position: relative;
-	width: 50%;
-	float: left;
-	height: 65px;
 }
 
 .prod-cont .prodbase .inventory i{
@@ -2732,7 +2768,7 @@ display: inline-table;
 	display: none;
 }
 .prod-cont .prodbase .prod-sum{
-	margin-top:16px;
+	margin-top: 6px;
 }
 .prod-cont .prodbase .delintro{
 	position: absolute;
@@ -2796,10 +2832,7 @@ display: inline-table;
 }
 
 .prod-cont .prodbase .delivery{
-/* margin:16px auto; */
-	width: 50%;
-	height: 66px;
-	float: left;
+	margin: 5px auto;
 }
 .prod-cont .prodbase .delivery:after{
 	display: block;
@@ -2815,13 +2848,10 @@ display: inline-table;
 
 /*right*/
 .prod-cont .product-right{
-	padding-left: 10px;
-	padding-right: 10px;
-	width: 250px;
+	padding-left:40px;
+	padding-right: 40px;
+	width: 24%;
 	border-left: 4px solid #f3f3f3;
-	/* position: absolute; */
-	/* top: 0; */
-	/* right: 0; */
 }
 
 .prod-cont .product-right .qclist .g-title , .prod-cont .product-right .qclist .donlist{
@@ -2840,7 +2870,7 @@ display: inline-table;
 .prod-cont .product-right .donlist{
 	padding:10px 0;
 	padding-left: 20px;
-	min-height: 300px;
+	min-height: 92px;
 }
 .prod-cont .product-right .donlist li , .prod-cont .g-desclist li{
 	position: relative;
@@ -2900,7 +2930,7 @@ display: inline-table;
 }
 /*frank gu*/
 .prod-cont .supplier-info .s-table li{
-	padding:20px 0;
+	padding:16px 0;
 	line-height: 1em;
 	display: table;
 	width: 100%;
@@ -2912,7 +2942,7 @@ display: inline-table;
 .g-proudtable span , .prod-cont .g-desclist li{
 	color: #666;
 }
-.g-proudtable{position:relative;}
+
 .g-proudtable .g-cell{
 	padding-right: 40px;
 }
