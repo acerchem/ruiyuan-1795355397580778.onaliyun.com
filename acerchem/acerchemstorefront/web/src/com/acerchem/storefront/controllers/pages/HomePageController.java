@@ -10,11 +10,8 @@
  */
 package com.acerchem.storefront.controllers.pages;
 
-import java.util.Optional;
-
 import javax.annotation.Resource;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,7 +23,6 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.Abstrac
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
-import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.servicelayer.user.UserService;
 
 /**
@@ -47,19 +43,7 @@ public class HomePageController extends AbstractPageController {
 			return REDIRECT_PREFIX + ROOT;
 		}
 
-		//control report user root login start
-		final UserModel user = userService.getCurrentUser();
-
-		if (CollectionUtils.isNotEmpty(user.getGroups())) {
-			final Optional optional = user.getGroups().stream().filter(group -> group.getUid().equals("reportgroup"))
-					.findAny();
-			if (optional.isPresent()) {
-				return REDIRECT_PREFIX + ROOT + "logout";
-			}
-
-		}
-
-		//control report user root login end
+	
 		storeCmsPageInModel(model, getContentPageForLabelOrId(null));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(null));
 		updatePageTitle(model, getContentPageForLabelOrId(null));

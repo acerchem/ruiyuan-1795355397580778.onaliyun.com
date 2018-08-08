@@ -24,7 +24,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 import java.util.Set;
 
 import javax.annotation.Resource;
@@ -121,7 +120,6 @@ import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.core.model.user.CustomerModel;
-import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 import de.hybris.platform.processengine.BusinessProcessEvent;
 import de.hybris.platform.processengine.BusinessProcessService;
@@ -890,19 +888,6 @@ public class AccountPageController extends AbstractSearchPageController
 	@RequireHardLogIn
 	public String editProfile(final Model model) throws CMSItemNotFoundException
 	{
-		//control report user root login start
-		final UserModel user = userService.getCurrentUser();
-
-		if (CollectionUtils.isNotEmpty(user.getGroups())) {
-			final Optional optional = user.getGroups().stream().filter(group -> group.getUid().equals("reportgroup"))
-					.findAny();
-			if (optional.isPresent()) {
-				return REDIRECT_PREFIX + ROOT + "logout";
-			}
-
-		}
-
-		//control report user root login end
 		promotionItem(model);
 		model.addAttribute("countryData", checkoutFacade.getDeliveryCountries());
 		final AbstractPageModel cmsPage = cmsPageService.getPageForLabelOrId("add-edit-address");

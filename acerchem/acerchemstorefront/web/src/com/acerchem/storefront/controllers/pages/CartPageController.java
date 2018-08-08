@@ -23,7 +23,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
@@ -76,7 +75,6 @@ import de.hybris.platform.commercefacades.voucher.exceptions.VoucherOperationExc
 import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
 import de.hybris.platform.commerceservices.order.CommerceSaveCartException;
 import de.hybris.platform.core.enums.QuoteState;
-import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.enumeration.EnumerationService;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.site.BaseSiteService;
@@ -149,19 +147,7 @@ public class CartPageController extends AbstractCartPageController
 	@RequestMapping(method = RequestMethod.GET)
 	public String showCart(final Model model) throws CMSItemNotFoundException
 	{
-		//control report user root login start
-				final UserModel user = userService.getCurrentUser();
 
-				if (CollectionUtils.isNotEmpty(user.getGroups())) {
-					final Optional optional = user.getGroups().stream().filter(group -> group.getUid().equals("reportgroup"))
-							.findAny();
-					if (optional.isPresent()) {
-						return REDIRECT_PREFIX + ROOT + "logout";
-					}
-
-				}
-
-				//control report user root login end
 		return prepareCartUrl(model);
 	}
 

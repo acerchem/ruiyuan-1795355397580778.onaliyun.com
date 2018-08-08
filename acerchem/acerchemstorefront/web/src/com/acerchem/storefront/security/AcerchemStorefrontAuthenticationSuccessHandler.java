@@ -52,7 +52,7 @@ public class AcerchemStorefrontAuthenticationSuccessHandler extends SavedRequest
 	
 	@Resource
 	private UserService userService;
-
+	
 	private static final Logger LOG = Logger.getLogger(AcerchemStorefrontAuthenticationSuccessHandler.class);
 
 	@Override
@@ -93,7 +93,7 @@ public class AcerchemStorefrontAuthenticationSuccessHandler extends SavedRequest
 					String redirectUrl = Config.getString("website.acerchem.https","https://acerchem.ibreakingpoint.com:9002");
 				
 					redirectUrl += "/report";
-				
+					
 					response.sendRedirect(redirectUrl);
 					return;
 				}

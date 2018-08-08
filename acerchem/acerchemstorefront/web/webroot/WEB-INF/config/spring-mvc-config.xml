@@ -80,6 +80,7 @@
 		<bean class="com.acerchem.storefront.interceptors.beforecontroller.SetLanguageBeforeControllerHandler" />
 		<bean class="com.acerchem.storefront.interceptors.beforecontroller.SetUiExperienceBeforeControllerHandler" />
 		<bean class="com.acerchem.storefront.interceptors.beforecontroller.ThemeBeforeControllerHandler" />
+		<bean class="com.acerchem.storefront.interceptors.beforecontroller.ReportUserCheckBeforeControllerHandler" />
 	</util:list>
 	
 	<alias name="defaultBeforeViewHandlersList" alias="beforeViewHandlersList" />

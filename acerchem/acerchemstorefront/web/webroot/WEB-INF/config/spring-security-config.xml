@@ -294,7 +294,6 @@
 		<constructor-arg name="rememberMeServices" ref="rememberMeServices"/>
 		<constructor-arg name="authenticationManager" ref="authenticationManager"/>
 	</bean>
-
 	
 	<alias name="defaultRememberMeServices" alias="rememberMeServices"/>
 	<bean id="defaultRememberMeServices" class="com.acerchem.storefront.security.AcceleratorRememberMeServices" >
