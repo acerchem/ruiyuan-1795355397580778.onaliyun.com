@@ -10,6 +10,38 @@
  */
 package com.acerchem.storefront.controllers.pages;
 
+import java.io.IOException;
+import java.io.StringWriter;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
+
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.StreamUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.ObjectError;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.acerchem.facades.facades.AcerchemCartFacade;
+import com.acerchem.storefront.controllers.ControllerConstants;
+
 import de.hybris.platform.acceleratorfacades.cart.action.CartEntryAction;
 import de.hybris.platform.acceleratorfacades.cart.action.CartEntryActionFacade;
 import de.hybris.platform.acceleratorfacades.cart.action.exceptions.CartEntryActionException;
@@ -44,40 +76,11 @@ import de.hybris.platform.commercefacades.voucher.exceptions.VoucherOperationExc
 import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
 import de.hybris.platform.commerceservices.order.CommerceSaveCartException;
 import de.hybris.platform.core.enums.QuoteState;
+import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.enumeration.EnumerationService;
+import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.site.BaseSiteService;
 import de.hybris.platform.util.Config;
-
-import com.acerchem.facades.facades.AcerchemCartFacade;
-import com.acerchem.storefront.controllers.ControllerConstants;
-
-import java.io.IOException;
-import java.io.StringWriter;
-import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.validation.Valid;
-
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.StreamUtils;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.ObjectError;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 /**
@@ -135,6 +138,8 @@ public class CartPageController extends AbstractCartPageController
 	@Resource(name = "acerchemCartFacade")
 	private AcerchemCartFacade acerchemCartFacade;
 
+	@Resource
+	private UserService userService;
 	@ModelAttribute("showCheckoutStrategies")
 	public boolean isCheckoutStrategyVisible()
 	{
@@ -144,6 +149,19 @@ public class CartPageController extends AbstractCartPageController
 	@RequestMapping(method = RequestMethod.GET)
 	public String showCart(final Model model) throws CMSItemNotFoundException
 	{
+		//control report user root login start
+				final UserModel user = userService.getCurrentUser();
+
+				if (CollectionUtils.isNotEmpty(user.getGroups())) {
+					final Optional optional = user.getGroups().stream().filter(group -> group.getUid().equals("reportgroup"))
+							.findAny();
+					if (optional.isPresent()) {
+						return REDIRECT_PREFIX + ROOT + "logout";
+					}
+
+				}
+
+				//control report user root login end
 		return prepareCartUrl(model);
 	}
 
@@ -163,6 +181,7 @@ public class CartPageController extends AbstractCartPageController
 	}
 	
 	
+	@Override
 	protected void createProductList(final Model model) throws CMSItemNotFoundException
 	{
 		final CartData cartData = acerchemCartFacade.getSessionCartWithEntryOrdering(false);

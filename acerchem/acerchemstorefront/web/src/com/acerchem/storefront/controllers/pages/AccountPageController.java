@@ -10,6 +10,53 @@
  */
 package com.acerchem.storefront.controllers.pages;
 
+import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
+
+import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.Set;
+
+import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
+
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.util.ObjectUtils;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.Validator;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.acerchem.core.model.CountryTrayFareConfModel;
+import com.acerchem.core.model.CustomerCreditAccountModel;
+import com.acerchem.core.service.AcerchemStockService;
+import com.acerchem.core.service.AcerchemTrayService;
+import com.acerchem.service.customercreditaccount.DefaultCustomerCreditAccountService;
+import com.acerchem.storefront.controllers.ControllerConstants;
+import com.acerchem.storefront.data.CustomRegisterForm;
+import com.acerchem.storefront.filters.StorefrontFilter;
+
 import de.hybris.platform.acceleratorfacades.ordergridform.OrderGridFormFacade;
 import de.hybris.platform.acceleratorfacades.product.data.ReadOnlyOrderGridData;
 import de.hybris.platform.acceleratorservices.storefront.data.MetaElementData;
@@ -74,6 +121,7 @@ import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 import de.hybris.platform.processengine.BusinessProcessEvent;
 import de.hybris.platform.processengine.BusinessProcessService;
@@ -89,52 +137,6 @@ import de.hybris.platform.store.BaseStoreModel;
 import de.hybris.platform.store.services.BaseStoreService;
 import de.hybris.platform.tx.Transaction;
 import de.hybris.platform.util.Config;
-
-import com.acerchem.core.model.CountryTrayFareConfModel;
-import com.acerchem.core.model.CustomerCreditAccountModel;
-import com.acerchem.core.service.AcerchemStockService;
-import com.acerchem.core.service.AcerchemTrayService;
-import com.acerchem.service.customercreditaccount.DefaultCustomerCreditAccountService;
-import com.acerchem.storefront.controllers.ControllerConstants;
-import com.acerchem.storefront.data.CustomRegisterForm;
-import com.acerchem.storefront.filters.StorefrontFilter;
-
-import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNullStandardMessage;
-
-import java.math.BigDecimal;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import javax.annotation.Resource;
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.StringUtils;
-import org.apache.log4j.Logger;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.util.ObjectUtils;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.Validator;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 /**
  * Controller for home page
@@ -358,14 +360,14 @@ public class AccountPageController extends AbstractSearchPageController
 			{ orderDetails.getCode() }, "Order {0}", getI18nService().getCurrentLocale()), null));
 			model.addAttribute(BREADCRUMBS_ATTR, breadcrumbs);
 			
-			Date pickupDate=orderDetails.getPickupDateOfExtended()!=null?orderDetails.getPickupDateOfExtended():orderDetails.getPickUpDate();
-			Calendar c = Calendar.getInstance(); 
+			final Date pickupDate=orderDetails.getPickupDateOfExtended()!=null?orderDetails.getPickupDateOfExtended():orderDetails.getPickUpDate();
+			final Calendar c = Calendar.getInstance(); 
 			c.setTime(pickupDate); 
 		    c.set(Calendar.DATE,c.get(Calendar.DATE)-Integer.valueOf(Config.getParameter("cancel.order.day"))); 
-		    Date date=c.getTime();
+		    final Date date=c.getTime();
 		    
-			Calendar today = Calendar.getInstance(); 
-		    Date todaydate=today.getTime();
+			final Calendar today = Calendar.getInstance(); 
+		    final Date todaydate=today.getTime();
 		    
 		    model.addAttribute("canCancel",todaydate.before(date));
 
@@ -888,6 +890,19 @@ public class AccountPageController extends AbstractSearchPageController
 	@RequireHardLogIn
 	public String editProfile(final Model model) throws CMSItemNotFoundException
 	{
+		//control report user root login start
+		final UserModel user = userService.getCurrentUser();
+
+		if (CollectionUtils.isNotEmpty(user.getGroups())) {
+			final Optional optional = user.getGroups().stream().filter(group -> group.getUid().equals("reportgroup"))
+					.findAny();
+			if (optional.isPresent()) {
+				return REDIRECT_PREFIX + ROOT + "logout";
+			}
+
+		}
+
+		//control report user root login end
 		promotionItem(model);
 		model.addAttribute("countryData", checkoutFacade.getDeliveryCountries());
 		final AbstractPageModel cmsPage = cmsPageService.getPageForLabelOrId("add-edit-address");
@@ -926,12 +941,12 @@ public class AccountPageController extends AbstractSearchPageController
 		final Collection<AddressModel> amlist = customer.getAddresses();
 		if(amlist!=null&&amlist.size()>0)
 		{
-			for(AddressModel am:amlist)
+			for(final AddressModel am:amlist)
 			{
 				System.out.println("am.getVisibleInAddressBook()====="+am.getVisibleInAddressBook());
 				if(am.getVisibleInAddressBook()!=null&&!am.getVisibleInAddressBook())
 				{
-					AddressForm address=new AddressForm();
+					final AddressForm address=new AddressForm();
 					address.setCountryIso(am.getCountry().getIsocode());
 					if(am.getRegion()!=null){address.setRegionIso(am.getRegion().getIsocode());}
 					address.setAddressId(am.getPk().toString());
@@ -988,9 +1003,9 @@ public class AccountPageController extends AbstractSearchPageController
 				form.setProvideTradeReference(aidField.indexOf("provideTradeReference")!=-1);
 			}
 			
-			String contactCountryIso=form.getContactAddress().getCountryIso();
-			String contactRegionIso=form.getContactAddress().getRegionIso();
-			CountryModel contactCountry=commonI18NService.getCountry(contactCountryIso);
+			final String contactCountryIso=form.getContactAddress().getCountryIso();
+			final String contactRegionIso=form.getContactAddress().getRegionIso();
+			final CountryModel contactCountry=commonI18NService.getCountry(contactCountryIso);
 			
 			final CustomerModel user = (CustomerModel) userService.getCurrentUser();
 			
@@ -1044,7 +1059,7 @@ public class AccountPageController extends AbstractSearchPageController
 			return REDIRECT_PREFIX + StringUtils.replace((String) request.getSession().getAttribute(StorefrontFilter.ORIGINAL_REFERER), 
 					"/" + previousLanguage + "/", "/" + storeSessionFacade.getCurrentLanguage().getIsocode() + "/");
 		}
-		catch(Exception exception)
+		catch(final Exception exception)
 		{
 			model.addAttribute("regions", i18NFacade.getRegionsForCountryIso(form.getContactAddress().getCountryIso()));
 			model.addAttribute("CustomRegisterForm",form);
@@ -1157,7 +1172,7 @@ public class AccountPageController extends AbstractSearchPageController
 		promotionItem(model);
 		final PageableData pageableData = createPageableData(page, 10, sortCode, showMode);
 		final Map<String, Object> queryParams = new HashMap<String, Object>();
-		queryParams.put("customer", (CustomerModel) userService.getCurrentUser());
+		queryParams.put("customer", userService.getCurrentUser());
 		queryParams.put("store", baseStoreService.getCurrentBaseStore());
 
 		String FIND_ORDERS_BY_CUSTOMER_STORE_QUERY = "SELECT {" + OrderModel.PK + "},{"
@@ -1259,7 +1274,7 @@ public class AccountPageController extends AbstractSearchPageController
 			{
 				if (defaultAddress != null && defaultAddress.getPk() != null && defaultAddress.getPk().equals(address.getPk()))
 				{
-					AddressData addressData=addressConverter.convert(address);
+					final AddressData addressData=addressConverter.convert(address);
 					addressData.setDefaultAddress(true);
 					result.add(0,addressData);
 				}
@@ -1329,28 +1344,28 @@ public class AccountPageController extends AbstractSearchPageController
 		final BaseStoreModel baseStoreModel = baseStoreService.getCurrentBaseStore();
 		final OrderModel order =  customerAccountService.getOrderForCode((CustomerModel) userService.getCurrentUser(), orderCode,baseStoreModel);
 		
-		Integer maxday = Integer.valueOf(Config.getParameter("cancel.order.day"));
+		final Integer maxday = Integer.valueOf(Config.getParameter("cancel.order.day"));
 		
-		Calendar c = Calendar.getInstance(); 
+		final Calendar c = Calendar.getInstance(); 
 		c.setTime(order.getPickUpDate()); 
 	    c.set(Calendar.DATE,c.get(Calendar.DATE)+days); 
-	    Date date=c.getTime();
+	    final Date date=c.getTime();
 		if(order.getPickupDateOfExtended()==null&&maxday>=days)
 		{
-		    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		    final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		    String waitDelivereyDate = sdf.format(date);
-		    Calendar ca = Calendar.getInstance();
+		    final Calendar ca = Calendar.getInstance();
 		    try 
 		    {
 		    	ca.setTime(sdf.parse(waitDelivereyDate));
 		    	ca.add(Calendar.DATE, getTotalPriceForCart(order));// num为增加的天数，可以改变的
 		    	waitDelivereyDate = sdf.format(ca.getTime());
-		    	Date endDate = sdf.parse(waitDelivereyDate);
+		    	final Date endDate = sdf.parse(waitDelivereyDate);
 		    	order.setWaitDeliveiedDate(endDate);
 		    	order.setPickupDateOfExtended(date);
 		  		modelService.save(order);
 		  		modelService.refresh(order);
-		    } catch (ParseException e1) {
+		    } catch (final ParseException e1) {
 		    	e1.printStackTrace();
 		    }
 		}
@@ -1361,22 +1376,22 @@ public class AccountPageController extends AbstractSearchPageController
 	@Resource
 	private AcerchemTrayService acerchemTrayService;
 	
-	private  Integer getTotalPriceForCart(AbstractOrderModel order){
+	private  Integer getTotalPriceForCart(final AbstractOrderModel order){
 		 RegionModel regionModel = null;
 		 CountryTrayFareConfModel countryTrayFareConf  = null;
 		BigDecimal totalTrayAmount = BigDecimal.ZERO;
 		if (order!=null){
-			for (AbstractOrderEntryModel aoe : order.getEntries()){
+			for (final AbstractOrderEntryModel aoe : order.getEntries()){
 				if (aoe.getDeliveryPointOfService().getAddress()!=null) {
 					regionModel = aoe.getOrder().getDeliveryAddress().getRegion();
 				}
-				ProductModel productModel = aoe.getProduct();
-				String unitCalculateRato = productModel.getUnitCalculateRato();
+				final ProductModel productModel = aoe.getProduct();
+				final String unitCalculateRato = productModel.getUnitCalculateRato();
 				if (ObjectUtils.isEmpty(unitCalculateRato)){
 					
 				}
-				  Long quantity = (aoe.getQuantity())*(Long.parseLong(aoe.getProduct().getNetWeight()));
-				BigDecimal entryTrayAmount = BigDecimal.valueOf(quantity).divide(new BigDecimal(unitCalculateRato),BigDecimal.ROUND_HALF_UP,BigDecimal.ROUND_DOWN);
+				  final Long quantity = (aoe.getQuantity())*(Long.parseLong(aoe.getProduct().getNetWeight()));
+				final BigDecimal entryTrayAmount = BigDecimal.valueOf(quantity).divide(new BigDecimal(unitCalculateRato),BigDecimal.ROUND_HALF_UP,BigDecimal.ROUND_DOWN);
 				totalTrayAmount =totalTrayAmount.add(entryTrayAmount);
 			}
 		}
@@ -1392,15 +1407,15 @@ public class AccountPageController extends AbstractSearchPageController
 	@Resource
 	private AcerchemStockService acerchemStockService;
 	
-	public void confirm(String orderCode,String confirm)
+	public void confirm(final String orderCode,final String confirm)
 	{
 		final BaseStoreModel baseStoreModel = baseStoreService.getCurrentBaseStore();
 		final OrderModel order =  customerAccountService.getOrderForCode((CustomerModel) userService.getCurrentUser(), orderCode,baseStoreModel);
-		Collection<OrderProcessModel> orderProcessList = order.getOrderProcess();
+		final Collection<OrderProcessModel> orderProcessList = order.getOrderProcess();
 		if (orderProcessList != null)
 		{
 			String fulfilmentProcessDefinitionName="";
-			for(OrderProcessModel orderProcess:orderProcessList)
+			for(final OrderProcessModel orderProcess:orderProcessList)
 			{
 				fulfilmentProcessDefinitionName = orderProcess.getCode();
 				break;
@@ -1410,7 +1425,7 @@ public class AccountPageController extends AbstractSearchPageController
 			{
 				final String eventID = new StringBuilder().append(fulfilmentProcessDefinitionName).append("_ConfirmActionEvent").toString();
 				final BusinessProcessEvent event = BusinessProcessEvent.builder(eventID).withChoice("waitForCustomerConfirm").build();
-				Boolean falg=businessProcessService.triggerEvent(event);  
+				final Boolean falg=businessProcessService.triggerEvent(event);  
 			  	if(falg)
 			  	{
 			  		order.setCustomerConfirm(true);
@@ -1422,7 +1437,7 @@ public class AccountPageController extends AbstractSearchPageController
 			{
 				final String eventID = new StringBuilder().append(fulfilmentProcessDefinitionName).append("_ConfirmConsignmentActionEvent").toString();
 				final BusinessProcessEvent event = BusinessProcessEvent.builder(eventID).withChoice("waitForCustomerConfirmConsignment").build();
-				Boolean falg=businessProcessService.triggerEvent(event);  
+				final Boolean falg=businessProcessService.triggerEvent(event);  
 			  	if(falg)
 			  	{
 			  		order.setCustomerConfirmDelivery(true);
@@ -1434,7 +1449,7 @@ public class AccountPageController extends AbstractSearchPageController
 			{
 				final String eventID = new StringBuilder().append(fulfilmentProcessDefinitionName).append("_ConfirmPayActionEvent").toString();
 				final BusinessProcessEvent event = BusinessProcessEvent.builder(eventID).withChoice("waitForCustomerConfirmPay").build();
-				Boolean falg=businessProcessService.triggerEvent(event);  
+				final Boolean falg=businessProcessService.triggerEvent(event);  
 			  	if(falg)
 			  	{
 			  		order.setCustomerConfirmPay(true);
@@ -1443,14 +1458,14 @@ public class AccountPageController extends AbstractSearchPageController
 			  	}
 			}
 			
-			Date pickupDate=order.getPickupDateOfExtended()!=null?order.getPickupDateOfExtended():order.getPickUpDate();
-			Calendar c = Calendar.getInstance(); 
+			final Date pickupDate=order.getPickupDateOfExtended()!=null?order.getPickupDateOfExtended():order.getPickUpDate();
+			final Calendar c = Calendar.getInstance(); 
 			c.setTime(pickupDate); 
 		    c.set(Calendar.DATE,c.get(Calendar.DATE)-Integer.valueOf(Config.getParameter("cancel.order.day"))); 
-		    Date date=c.getTime();
+		    final Date date=c.getTime();
 		    
-			Calendar today = Calendar.getInstance(); 
-		    Date todaydate=today.getTime();
+			final Calendar today = Calendar.getInstance(); 
+		    final Date todaydate=today.getTime();
 		    
 			if(confirm.equals("cancel")&&todaydate.before(date))
 			{
@@ -1462,7 +1477,7 @@ public class AccountPageController extends AbstractSearchPageController
 				modelService.refresh(order);
 			    acerchemStockService.releaseStock(order);
 			    
-			    CustomerCreditAccountModel customerCreditAccount=defaultCustomerCreditAccountService.updateCreditAccountRepaymentByOrder(order);
+			    final CustomerCreditAccountModel customerCreditAccount=defaultCustomerCreditAccountService.updateCreditAccountRepaymentByOrder(order);
 			    
 			    if(customerCreditAccount==null)
 			    {
