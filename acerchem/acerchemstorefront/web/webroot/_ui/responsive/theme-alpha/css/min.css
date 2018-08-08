@@ -30,8 +30,8 @@ input[type='text'],input[type='number'], input[type='password'] ,input[type='sub
 	height: 50px;
 	line-height: 50px;
 	font-size: 16px;
-	color: #fff;
-	border:1.1px solid #fff;
+	color: #999;
+	border:1.1px solid #ddd;
 	cursor:pointer;
 	font-weight: normal;
 }
