@@ -140,8 +140,13 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 			detail.setProductName(od.getProduct().getName());
 			detail.setProductQuantity(od.getQuantity());
 			detail.setOrderAmount(od.getTotalRealPrice());
-			if(od.getOrder().getUser().getName() != null){
-				detail.setUserUid(od.getOrder().getUser().getName());
+			//modified userid to customer's companyname
+			if(od.getOrder().getUser() != null){
+				final CustomerModel customer = (CustomerModel)od.getOrder().getUser();
+				if (StringUtils.isNotBlank(customer.getCompanyName())){
+					detail.setUserUid(customer.getCompanyName());
+				}
+				
 			}
 			final String deliveryCode = od.getOrder().getDeliveryMode() == null ? ""
 					: od.getOrder().getDeliveryMode().getCode();

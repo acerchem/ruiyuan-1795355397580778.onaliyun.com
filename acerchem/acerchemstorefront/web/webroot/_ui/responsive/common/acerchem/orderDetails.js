@@ -83,8 +83,8 @@ $(document).ready(
 							halign: 'center'
 						}, {
 							field : 'c9',
-							title : 'Customer Name',
-							align : 'left',
+							title : 'Customer Company',
+							align : 'center',
 							halign: 'center'
 						}, {
 							field : 'c10',
