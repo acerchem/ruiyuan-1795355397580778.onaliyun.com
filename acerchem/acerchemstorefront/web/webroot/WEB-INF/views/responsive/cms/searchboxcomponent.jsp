@@ -20,7 +20,8 @@
 				<input type="text" id="js-site-search-input"
 					class="form-control js-site-search-input" name="text" value=""
                     maxlength="100" placeholder="${searchPlaceholder}"
-					data-options='{"autocompleteUrl" : "${autocompleteUrl}","minCharactersBeforeRequest" : "${component.minCharactersBeforeRequest}","waitTimeBeforeRequest" : "${component.waitTimeBeforeRequest}","displayProductImages" : ${component.displayProductImages}}'>
+					data-options='{"autocompleteUrl" : "${autocompleteUrl}","minCharactersBeforeRequest" : "${component.minCharactersBeforeRequest}","waitTimeBeforeRequest" : "${component.waitTimeBeforeRequest}","displayProductImages" : ${component.displayProductImages}}'
+					style="background:none;">
 
 			<span class="input-group-btn"> 
 					<button class="btn btn-link js_search_button" type="submit" disabled="true">
