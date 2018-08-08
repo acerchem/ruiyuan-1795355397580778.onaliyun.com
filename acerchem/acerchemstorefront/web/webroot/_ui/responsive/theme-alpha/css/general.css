@@ -1288,10 +1288,10 @@ textarea{
 .g-table .donlist li{
 	margin-left:20px;
 	margin-bottom: 20px;
-	width:240px;
+	width: 204px!important;
 	line-height: 40px;
 	float: left;
-	background-color: #fff; 
+	background-color: #fff;
 }
 .g-table .donlist span , .g-table .donlist a{
 	display:table-cell;
@@ -2848,8 +2848,8 @@ display: inline-table;
 
 /*right*/
 .prod-cont .product-right{
-	padding-left:40px;
-	padding-right: 40px;
+	padding-left: 30px;
+	padding-right: 30px;
 	width: 24%;
 	border-left: 4px solid #f3f3f3;
 }
@@ -2896,6 +2896,9 @@ display: inline-table;
 .prod-cont .product-right .donlist a{
 	display: block;
 	border:none;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	padding-right: 30px;
 }
 .prod-cont .product-right .btn-set {
 	margin:0;
@@ -3265,8 +3268,10 @@ display: inline-table;
 	display: none
 }
 
-
-
+/* frank补充  搜索框颜色 */
+#js-site-search-input::-webkit-input-placeholder {color: #fff; }
+#js-site-search-input::-moz-placeholder {color:#fff; }
+#js-site-search-input::-ms-input-placeholder {color: #fff ; }
 
 
 /*补充style.css*/
