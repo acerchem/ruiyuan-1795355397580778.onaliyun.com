@@ -1,5 +1,6 @@
 //var home="https://acerchem.local:9002";
-var home = "https://acerchem.ibreakingpoint.com:9002"
+//var home = "https://acerchem.ibreakingpoint.com:9002"
+var home = "https://ingredients4u.com"
 var homeUrl=home+"/acerchemwebservices/v2/acerchem";
 var tokenUrl=home+"/authorizationserver/oauth/token";
 
