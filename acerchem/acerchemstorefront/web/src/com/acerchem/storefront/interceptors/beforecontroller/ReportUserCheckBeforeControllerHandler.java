@@ -22,10 +22,10 @@ public class ReportUserCheckBeforeControllerHandler implements BeforeControllerH
 	@Override
 	public boolean beforeController(final HttpServletRequest request, final HttpServletResponse response, final HandlerMethod handler)
 			throws Exception {
-		//final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-		//final UserModel user = userService.getUserForUID(authentication.getPrincipal().toString());
-		final UserModel user = userService.getCurrentUser();
-
+//		final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+//		final UserModel principal = userService.getUserForUID(authentication.getPrincipal().toString());
+		if (request.isSecure()){
+		 final UserModel user = userService.getCurrentUser();
 		if (CollectionUtils.isNotEmpty(user.getGroups())) {
 			final Optional optional = user.getGroups().stream().filter(group -> group.getUid().equals("reportgroup"))
 					.findAny();
@@ -42,7 +42,7 @@ public class ReportUserCheckBeforeControllerHandler implements BeforeControllerH
 			}
 
 		}
-		
+		}
 		
 		return true;
 	}

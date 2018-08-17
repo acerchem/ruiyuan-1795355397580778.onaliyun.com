@@ -40,15 +40,59 @@ $(document).ready(
 
 						columns : [ {
 							field : 'c1',
-							title : 'Month',
-							halign: 'center'
-						}, {
-							field : 'c2',
 							title : 'Employee',
 							halign: 'center'
 						}, {
+							field : 'c2',
+							title : 'JAN',
+							halign: 'center'
+						}, {
 							field : 'c3',
-							title : 'Amount',
+							title : 'FEB',
+							halign: 'center'
+						}, {
+							field : 'c4',
+							title : 'MAR',
+							halign: 'center'
+						}, {
+							field : 'c5',
+							title : 'APR',
+							halign: 'center'
+						}, {
+							field : 'c6',
+							title : 'MAY',
+							halign: 'center'
+						}, {
+							field : 'c7',
+							title : 'JUN',
+							halign: 'center'
+						}, {
+							field : 'c8',
+							title : 'JUL',
+							halign: 'center'
+						}, {
+							field : 'c9',
+							title : 'AUG',
+							halign: 'center'
+						}, {
+							field : 'c10',
+							title : 'SEP',
+							halign: 'center'
+						}, {
+							field : 'c11',
+							title : 'OCT',
+							halign: 'center'
+						}, {
+							field : 'c12',
+							title : 'NOV',
+							halign: 'center'
+						}, {
+							field : 'c13',
+							title : 'DEC',
+							halign: 'center'
+						}, {
+							field : 'c14',
+							title : 'Total',
 							halign: 'center'
 						}, 
 

@@ -83,11 +83,20 @@
        -->
 					<c:forEach items="${salesList}" var="detail">
 						<tr>
-							<td>${detail.month}</td>
-
-							<td>${detail.employee}</td>
-							<td><fmt:formatNumber type="number" value="${detail.amount}"
-									pattern="#.00" /></td>
+							<td>${detail.empName}</td>
+							<td><fmt:formatNumber type="number" value="${detail.janAmount}" pattern="#.00" /></td>
+							<td><fmt:formatNumber type="number" value="${detail.febAmount}" pattern="#.00" /></td>
+							<td><fmt:formatNumber type="number" value="${detail.marAmount}" pattern="#.00" /></td>
+							<td><fmt:formatNumber type="number" value="${detail.aprAmount}" pattern="#.00" /></td>
+							<td><fmt:formatNumber type="number" value="${detail.mayAmount}" pattern="#.00" /></td>
+							<td><fmt:formatNumber type="number" value="${detail.junAmount}" pattern="#.00" /></td>
+							<td><fmt:formatNumber type="number" value="${detail.julAmount}" pattern="#.00" /></td>
+							<td><fmt:formatNumber type="number" value="${detail.augAmount}" pattern="#.00" /></td>
+							<td><fmt:formatNumber type="number" value="${detail.sepAmount}" pattern="#.00" /></td>
+							<td><fmt:formatNumber type="number" value="${detail.octAmount}" pattern="#.00" /></td>
+							<td><fmt:formatNumber type="number" value="${detail.novAmount}" pattern="#.00" /></td>
+							<td><fmt:formatNumber type="number" value="${detail.decAmount}" pattern="#.00" /></td>
+							<td><fmt:formatNumber type="number" value="${detail.subTotal}" pattern="#.00" /></td>		
 
 						</tr>
 					</c:forEach>

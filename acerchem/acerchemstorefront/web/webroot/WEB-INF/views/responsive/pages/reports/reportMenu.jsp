@@ -40,9 +40,9 @@
 <body class="index-body">
 	<header>
 		<div class="logo">
-			<a href="${homeUrl}">
+			
 			<img src="${commonResourcePath}/acerchem/images/logo.png" alt="logo">
-			</a>
+			
 		</div>
 		<nav class="head-nav">
 			<ul>
@@ -71,8 +71,16 @@
 						 <a href="${vendorOrderProductUrl}">商品订单分析</a>
 
 					</div></li>
+					
 			</ul>
 		</nav>
+		<div class="exit">
+			<a href="${homeUrl}">
+			   <img src="${commonResourcePath}/acerchem/images/arr.png" alt="Return">
+			 </a>
+	          
+		</div>
+		
 	</header>
 	
 

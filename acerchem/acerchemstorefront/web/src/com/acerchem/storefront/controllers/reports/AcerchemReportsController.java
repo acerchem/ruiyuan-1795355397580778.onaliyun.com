@@ -36,6 +36,7 @@ import com.acerchem.storefront.data.AcerchemCategoryBean;
 import com.acerchem.storefront.data.AcerchemEmployeeSalesBean;
 import com.acerchem.storefront.data.CustomerCreditAnalysisForReportBean;
 import com.acerchem.storefront.data.CustomerSalesAnalysisForm;
+import com.acerchem.storefront.data.EmployeeMonthlySalesBean;
 import com.acerchem.storefront.data.MonthlySalesAnalysisForm;
 import com.acerchem.storefront.data.ProductSalesForm;
 import com.acerchem.storefront.data.SearchCriteriaFrom;
@@ -66,6 +67,7 @@ import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.ordersplitting.model.VendorModel;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
+import reactor.util.CollectionUtils;
 
 @Controller
 @RequestMapping("/reports")
@@ -209,19 +211,19 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		}
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId("login"));
-		//init
+		// init
 		final Date d = new Date();
 		final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
 		final String curMonth = sdf.format(d);
 
-		final List<OrderDetailsReportData> searchPageData = acerchemOrderDao.getOrderDetails(curMonth,
-				null, null, null,null);
+		final List<OrderDetailsReportData> searchPageData = acerchemOrderDao.getOrderDetails(curMonth, null, null, null,
+				null);
 		final SearchCriteriaFrom searchCriteriaFrom = new SearchCriteriaFrom();
 		searchCriteriaFrom.setMonth(curMonth);
-		
+
 		model.addAttribute("searchPageData", searchPageData);
 		model.addAttribute("searchCriteriaFrom", searchCriteriaFrom);
-		
+
 		final int numberPagesShown = getSiteConfigService().getInt("pagination.number.results.count", 100);
 		model.addAttribute("numberPagesShown", Integer.valueOf(numberPagesShown));
 		model.addAttribute("isShowPageAllowed", false);
@@ -280,15 +282,15 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		}
 
 		storeCmsPageInModel(model, getContentPageForLabelOrId("login"));
-		//init
+		// init
 		final Calendar calendar = Calendar.getInstance();
 		final String year = String.valueOf(calendar.get(Calendar.YEAR));
-		
+
 		final MonthlySalesAnalysisForm monthlySalesAnalysisForm = new MonthlySalesAnalysisForm();
 		monthlySalesAnalysisForm.setYear(year);
-		
-		 final List<MonthlySalesAnalysis> list = acerchemOrderAnalysisService.getMonthlySalesAnalysis(year,null);
-		
+
+		final List<MonthlySalesAnalysis> list = acerchemOrderAnalysisService.getMonthlySalesAnalysis(year, null);
+
 		model.addAttribute("monthlySalesAnalysisForm", monthlySalesAnalysisForm);
 		model.addAttribute("salesList", list);
 		return "pages/reports/monthlySalesAnalysis";
@@ -325,12 +327,12 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 			return "redirect:/reports/message";
 		}
 		storeCmsPageInModel(model, getContentPageForLabelOrId("login"));
-		//init
+		// init
 		final String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
-		
-		List<SalesByEmployeeReportData> list = acerchemOrderAnalysisService.getEmployeeSales(year);
-		list = getEmployeeSalesAnalysisSum(list);
-		
+
+		final List<SalesByEmployeeReportData> listPrincipal = acerchemOrderAnalysisService.getEmployeeSales(year);
+		final List<EmployeeMonthlySalesBean> list = getCrossTabOfEmployeeSalesAnalysis(listPrincipal);
+
 		model.addAttribute("curYear", year);
 		model.addAttribute("salesList", list);
 		return "pages/reports/employeeSalesAnalysis";
@@ -339,13 +341,134 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	@RequestMapping(value = "/employeeSalesAnalysis", method = RequestMethod.POST)
 	public String getEmployeeSalesAnalysisPage(final Model model, @RequestParam("year") final String year) {
 
-		List<SalesByEmployeeReportData> list = acerchemOrderAnalysisService.getEmployeeSales(year);
-
-		list = getEmployeeSalesAnalysisSum(list);
+		final List<SalesByEmployeeReportData> listPrincipal = acerchemOrderAnalysisService.getEmployeeSales(year);
+		final List<EmployeeMonthlySalesBean> list = getCrossTabOfEmployeeSalesAnalysis(listPrincipal);
+		// list = getEmployeeSalesAnalysisSum(list);
 		model.addAttribute("salesList", list);
 		model.addAttribute("curYear", year);
 		return "pages/reports/employeeSalesAnalysis";
 	}
+
+	private List<EmployeeMonthlySalesBean> getCrossTabOfEmployeeSalesAnalysis(
+			final List<SalesByEmployeeReportData> list) {
+		final List<EmployeeMonthlySalesBean> crossReport = new ArrayList<EmployeeMonthlySalesBean>();
+
+		if (list.size() > 0) {
+			final Map<String, List<SalesByEmployeeReportData>> mapList = new HashMap<String, List<SalesByEmployeeReportData>>();
+			// 按照employee分组
+			for (final SalesByEmployeeReportData data : list) {
+				List<SalesByEmployeeReportData> tempList = mapList.get(data.getEmployee());
+				if (CollectionUtils.isEmpty(tempList)) {
+					tempList = new ArrayList<SalesByEmployeeReportData>();
+					tempList.add(data);
+					mapList.put(data.getEmployee(), tempList);
+				} else {
+					tempList.add(data);
+				}
+			}
+
+			// 遍历map,add to crossReport
+			Double janTotal = Double.valueOf(0);
+			Double febTotal = Double.valueOf(0);
+			Double marTotal = Double.valueOf(0);
+			Double aprTotal = Double.valueOf(0);
+			Double mayTotal = Double.valueOf(0);
+			Double junTotal = Double.valueOf(0);
+			Double julTotal = Double.valueOf(0);
+			Double augTotal = Double.valueOf(0);
+			Double sepTotal = Double.valueOf(0);
+			Double octTotal = Double.valueOf(0);
+			Double novTotal = Double.valueOf(0);
+			Double decTotal = Double.valueOf(0);
+
+			Double gTotal = Double.valueOf(0);
+			for (final String employee : mapList.keySet()) {
+				final EmployeeMonthlySalesBean bean = new EmployeeMonthlySalesBean();
+				bean.setEmpName(employee);
+				final List<SalesByEmployeeReportData> tmp = mapList.get(employee);
+				Double total = Double.valueOf(0);
+
+				for (final SalesByEmployeeReportData data : tmp) {
+					if (data.getMonth().substring(4).equals("01")) {
+						bean.setJanAmount(data.getAmount());
+						janTotal = CommonConvertTools.addDouble(janTotal, data.getAmount());
+
+					} else if (data.getMonth().substring(4).equals("02")) {
+						bean.setFebAmount(data.getAmount());
+						febTotal = CommonConvertTools.addDouble(febTotal, data.getAmount());
+					} else if (data.getMonth().substring(4).equals("03")) {
+						bean.setMarAmount(data.getAmount());
+						marTotal = CommonConvertTools.addDouble(marTotal, data.getAmount());
+					} else if (data.getMonth().substring(4).equals("04")) {
+						bean.setAprAmount(data.getAmount());
+						aprTotal = CommonConvertTools.addDouble(aprTotal, data.getAmount());
+					} else if (data.getMonth().substring(4).equals("05")) {
+						bean.setMayAmount(data.getAmount());
+						mayTotal = CommonConvertTools.addDouble(mayTotal, data.getAmount());
+					} else if (data.getMonth().substring(4).equals("06")) {
+						bean.setJunAmount(data.getAmount());
+						junTotal = CommonConvertTools.addDouble(junTotal, data.getAmount());
+					} else if (data.getMonth().substring(4).equals("07")) {
+						bean.setJulAmount(data.getAmount());
+						julTotal = CommonConvertTools.addDouble(julTotal, data.getAmount());
+					} else if (data.getMonth().substring(4).equals("08")) {
+						bean.setAugAmount(data.getAmount());
+						augTotal = CommonConvertTools.addDouble(augTotal, data.getAmount());
+					} else if (data.getMonth().substring(4).equals("09")) {
+						bean.setSepAmount(data.getAmount());
+						sepTotal = CommonConvertTools.addDouble(sepTotal, data.getAmount());
+					} else if (data.getMonth().substring(4).equals("10")) {
+						bean.setOctAmount(data.getAmount());
+						octTotal = CommonConvertTools.addDouble(octTotal, data.getAmount());
+					} else if (data.getMonth().substring(4).equals("11")) {
+						bean.setNovAmount(data.getAmount());
+						novTotal = CommonConvertTools.addDouble(novTotal, data.getAmount());
+					} else if (data.getMonth().substring(4).equals("12")) {
+						bean.setDecAmount(data.getAmount());
+						decTotal = CommonConvertTools.addDouble(decTotal, data.getAmount());
+					}
+					total = CommonConvertTools.addDouble(total, data.getAmount());
+
+				}
+
+				gTotal = CommonConvertTools.addDouble(gTotal, total);
+				bean.setSubTotal(total);
+				crossReport.add(bean);
+			}
+			// gTotal
+			final EmployeeMonthlySalesBean gBean = new EmployeeMonthlySalesBean();
+			gBean.setEmpName("Total");
+			gBean.setJanAmount(janTotal);
+			gBean.setFebAmount(febTotal);
+			gBean.setMarAmount(marTotal);
+			gBean.setAprAmount(aprTotal);
+			gBean.setMayAmount(mayTotal);
+			gBean.setJunAmount(junTotal);
+			gBean.setJulAmount(julTotal);
+			gBean.setAugAmount(augTotal);
+			gBean.setSepAmount(sepTotal);
+			gBean.setOctAmount(octTotal);
+			gBean.setNovAmount(novTotal);
+			gBean.setDecAmount(decTotal);
+			gBean.setSubTotal(gTotal);
+			crossReport.add(gBean);
+
+		}
+		return crossReport;
+	}
+
+	private static Comparator<SalesByEmployeeReportData> ComparatorByEmpName = new Comparator<SalesByEmployeeReportData>() {
+
+		@Override
+		public int compare(final SalesByEmployeeReportData o1, final SalesByEmployeeReportData o2) {
+			int n = o1.getEmployee().compareTo(o2.getEmployee());
+			if (n == 0) {
+				n = o1.getMonth().compareTo(o2.getMonth());
+			}
+			return n;
+		}
+
+	};
 
 	private List<SalesByEmployeeReportData> getEmployeeSalesAnalysisSum(final List<SalesByEmployeeReportData> list) {
 		final List<SalesByEmployeeReportData> sumList = list;
@@ -364,6 +487,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		}
 		return sumList;
 	}
+
 	// private List<String,String> getK(){
 	// List<String,String> l = new ArrayList<>();
 	//
@@ -877,7 +1001,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	}
 
 	private List<CustomerBillAnalysisData> getCustomerBillAnalysisSum(final List<CustomerBillAnalysisData> list) {
-		
+
 		if (list.size() > 0) {
 
 			Double prePay = Double.valueOf(0);
