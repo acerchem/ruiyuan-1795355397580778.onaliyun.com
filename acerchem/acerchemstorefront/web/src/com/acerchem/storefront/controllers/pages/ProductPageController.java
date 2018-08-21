@@ -461,6 +461,22 @@ public class ProductPageController extends AbstractPageController
 	protected void populateProductData(final ProductData productData, final Model model)
 	{
 		model.addAttribute("galleryImages", getGalleryImages(productData));
+		 Integer priority=0;
+		  PromotionData pd=null;
+		  System.out.println("Promotion List:" + productData.getPotentialPromotions().size() );
+		  if(productData.getPotentialPromotions()!= null) {
+		    for (PromotionData promotion : productData.getPotentialPromotions()) {
+		     if(promotion.getPriority()>=priority) {
+		        pd=promotion;
+		        priority=promotion.getPriority();
+		      }
+		     
+		    }
+		    
+		    Collection<PromotionData> pdlist = new ArrayList<PromotionData>();
+		    pdlist.add(pd);
+		    productData.setPotentialPromotions(pdlist);
+		  }
 		model.addAttribute("product", productData);
 		if (productData.getConfigurable())
 		{
