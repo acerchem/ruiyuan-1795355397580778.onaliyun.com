@@ -86,7 +86,7 @@ public class AcerchemPromotionsPopulator implements Populator<ProductThresholdPe
 		target.setDescription(getPromotionService().getPromotionDescription(source));
 		target.setPromotionType(source.getPromotionType());
 		//processPromotionMessages(source, target);
-		
+		target.setPriority(source.getPriority());
 
 		if (source.getThresholdDiscounts()!= null){
 			
