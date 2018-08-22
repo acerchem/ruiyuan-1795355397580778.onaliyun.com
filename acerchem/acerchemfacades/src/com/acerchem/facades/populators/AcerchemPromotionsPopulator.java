@@ -13,6 +13,7 @@ package com.acerchem.facades.populators;
 import de.hybris.platform.commercefacades.product.data.PromotionData;
 import de.hybris.platform.converters.Populator;
 import de.hybris.platform.core.model.order.CartModel;
+import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.order.CartService;
 import de.hybris.platform.promotions.PromotionResultService;
 import de.hybris.platform.promotions.PromotionsService;
@@ -20,10 +21,12 @@ import de.hybris.platform.promotions.model.AbstractPromotionModel;
 import de.hybris.platform.promotions.model.ProductPromotionModel;
 import de.hybris.platform.promotions.model.PromotionResultModel;
 import de.hybris.platform.promotions.result.PromotionOrderResults;
+import de.hybris.platform.servicelayer.user.UserService;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.util.Assert;
@@ -41,6 +44,8 @@ public class AcerchemPromotionsPopulator implements Populator<ProductThresholdPe
 	private CartService cartService;
 	private PromotionsService promotionService;
 	private PromotionResultService promotionResultService;
+	@Resource
+	private UserService userService;
 
 	@Required
 	public void setPromotionResultService(final PromotionResultService promotionResultService)
@@ -87,8 +92,11 @@ public class AcerchemPromotionsPopulator implements Populator<ProductThresholdPe
 		target.setPromotionType(source.getPromotionType());
 		//processPromotionMessages(source, target);
 		target.setPriority(source.getPriority());
+	/*Frank*/
+		final UserModel user = userService.getCurrentUser();
+		final boolean isAnonymousUser = userService.isAnonymousUser(user);
 
-		if (source.getThresholdDiscounts()!= null){
+		if (source.getThresholdDiscounts()!= null&&!isAnonymousUser){
 			
 			List<String> promotions= new ArrayList<String>();
 			
@@ -100,6 +108,8 @@ public class AcerchemPromotionsPopulator implements Populator<ProductThresholdPe
 			}
 			
 			target.setFiredMessages(promotions);
+		}else{
+			target.setDescription(null);
 		}
 		
 	
