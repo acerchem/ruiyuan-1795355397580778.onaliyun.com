@@ -10,12 +10,17 @@
  */
 package com.acerchem.facades.populators;
 
+import java.math.BigDecimal;
+import javax.annotation.Resource;
+
 import com.acerchem.facades.product.data.VendorData;
 
 import de.hybris.platform.commercefacades.product.converters.populator.AbstractProductPopulator;
+import de.hybris.platform.commercefacades.product.data.PriceData;
 import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.core.model.product.UnitModel;
+import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 import de.hybris.platform.servicelayer.user.UserService;
 
