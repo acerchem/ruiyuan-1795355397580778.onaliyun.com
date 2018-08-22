@@ -1229,7 +1229,17 @@ function getProductsByCode(code)
             var saleInfo = '';
             var potentialPromotions = returndata.potentialPromotions;
             if(potentialPromotions != null&&potentialPromotions.length>0) {
-                var firedMessages = potentialPromotions[0].firedMessages;
+            	//console.log("potentialPromotions length:"+potentialPromotions.length);
+            	var priority = 0;
+            	var firedMessages = '';
+            	for(var i =0; i <potentialPromotions.length; i ++) {
+            		if(potentialPromotions[i].priority >priority) {
+            			priority = potentialPromotions[i].priority;
+            			firedMessages = potentialPromotions[i].firedMessages;
+            		}
+            	}
+            	//console.log("potentialPromotions priority:"+ priority);
+                //firedMessages = potentialPromotions[0].firedMessages;
                 if(firedMessages != null) {
                     for(var j= 0; j < firedMessages.length; j++) {
                         var info = firedMessages[j];
