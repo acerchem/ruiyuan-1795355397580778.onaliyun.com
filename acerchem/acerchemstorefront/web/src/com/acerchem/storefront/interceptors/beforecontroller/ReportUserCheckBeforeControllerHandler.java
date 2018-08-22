@@ -34,10 +34,11 @@ public class ReportUserCheckBeforeControllerHandler implements BeforeControllerH
 						.filter(group -> group.getUid().equals("reportgroup")).findAny();
 				if (optional.isPresent()) {
 					if (!request.getServletPath().contains("/login")) {
-						if (!request.getServletPath().contains("/report")) {
+						if (!request.getServletPath().contains("/report") &&!request.getServletPath().contains("/favicon.ico") ) {
 							LOG.info("requestUrl:" + request.getServletPath());
 							gotoLogout(request, response);
 							return false;
+							
 						}
 					}
 				}
