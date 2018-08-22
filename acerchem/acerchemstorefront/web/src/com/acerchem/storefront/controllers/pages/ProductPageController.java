@@ -465,7 +465,7 @@ public class ProductPageController extends AbstractPageController
 		model.addAttribute("galleryImages", getGalleryImages(productData));
 		 Integer priority=0;
 		  PromotionData pd=null;
-		  System.out.println("Promotion List:" + productData.getPotentialPromotions().size() );
+		  
 		  if(productData.getPotentialPromotions()!= null) {
 		    for (PromotionData promotion : productData.getPotentialPromotions()) {
 		     if(promotion.getPriority()>=priority) {
