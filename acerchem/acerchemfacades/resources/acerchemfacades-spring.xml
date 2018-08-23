@@ -561,4 +561,7 @@
 	<bean id="customAddressReversePopulator" class="com.acerchem.facades.populators.AcerchemAddressReversePopulator" parent="defaultAddressReversePopulator">
 	</bean>
 
+    <alias name="acerchemProductSummaryPopulator" alias="productSummaryPopulator"/>
+	<bean id="acerchemProductSummaryPopulator" parent="defaultProductSummaryPopulator" class="com.acerchem.facades.populators.AcerchemProductSummaryPopulator"/>
+	
 </beans>
