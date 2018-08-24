@@ -1431,6 +1431,7 @@ img {
 
 .g-price .price {
   overflow: hidden;
+  height: 40px;
 }
 
 .g-price b {
@@ -2551,7 +2552,7 @@ select::-ms-expand {
 }
 
 .swiper-gall .price {
-  margin-top: -0.08rem;
+  /* margin-top: -0.08rem; */
 }
 
 .m-gallery {
