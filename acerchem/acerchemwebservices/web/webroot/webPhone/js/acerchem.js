@@ -1152,6 +1152,7 @@ function getAllProducts()
             //console.log("success:"+JSON.stringify(returndata));
             var html='';
             var products=returndata.products;
+            /*
             for(var i = 0; i < products.length; i++){
         		html+='<li data-name="' + products[i].name + '"><div class="maximg"><a href="product.html?code='+products[i].code+'">';
                  if(products[i].images != null) {
@@ -1171,6 +1172,26 @@ function getAllProducts()
                  }else{
                      html+='</em></div></a></div></li>'
                  }
+            }
+            */
+            for(var i = 0; i < products.length; i++){
+            	if(products[i].name != null) {
+                	if(products[i].images != null) {
+                		html+='<li data-name="' + products[i].name + '"><div class="maximg"><a href="product.html?code='+products[i].code+'">';
+                		html+='<img src="'+products[i].images[0].url.substring(23)+'"></a></div><div class="text g-price"><a href="product.html?code='+products[i].code+'"><p>'+products[i].name+'</p><div class="price"><span>';
+                    	if(products[i].promotionPrice!=null){
+                    		html+=products[i].promotionPrice.formattedValue + '</span><em>';
+                    	}else{
+                    		html+='</span><em>';
+                    	}
+                     
+                    	if(products[i].price!=null){
+                    		html+=products[i].price.formattedValue+'</em></div></a></div></li>'
+                    	}else{
+                    		html+='</em></div></a></div></li>'
+                    	}
+                	}
+            	}
             }
             $("#productLists li").remove();
             $("#productLists").append(html); 
