@@ -1214,6 +1214,34 @@ function getProductsByCode(code)
             $("#productImages").append(productImages);
             
             var baseInfo = '';
+            if(returndata.name != null) {
+            	baseInfo+= '<p>' + returndata.name + '</p>';
+            }
+            
+            baseInfo += '<div class="price"><div class="left"><i class="icon"></i><span>';
+            if(returndata.code != null) {
+            	baseInfo+= returndata.code;
+            }
+            baseInfo+= '</span></div></div>';
+            
+            
+            if(returndata.summary != null) {
+            	baseInfo+='<span>' + returndata.summary + '</span>';
+            }
+            
+            baseInfo += '<div class="price"><div class="left"><b>';
+            if(returndata.promotionPrice!=null){
+                baseInfo+= returndata.promotionPrice.formattedValue;
+            }
+            baseInfo+='</b><em>';
+            
+            if(returndata.price!=null){
+                baseInfo+=returndata.price.formattedValue;
+            }
+            
+            baseInfo+='</em></div></div>';
+            
+            /*
             baseInfo += '<div class="price"><div class="left"><b>';
             if(returndata.promotionPrice!=null){
                 baseInfo+=returndata.promotionPrice.formattedValue;
@@ -1224,12 +1252,13 @@ function getProductsByCode(code)
             }
             
             if(returndata.summary != null) {
-            	baseInfo+='</em></div><div class="right"><i class="icon"></i><span>' + returndata.code + 
+            	baseInfo+='</em></div><div class="left"><i class="icon"></i><span>' + returndata.code + 
                 '</span></div></div><p>' + returndata.name + '</p><span>' + returndata.summary + '</span>';
             }else{
-            	baseInfo+='</em></div><div class="right"><i class="icon"></i><span>' + returndata.code + 
+            	baseInfo+='</em></div><div class="left"><i class="icon"></i><span>' + returndata.code + 
                 '</span></div></div><p>' + returndata.name + '</p><span></span>';
             }
+            */
             
             $("#baseInfo").append(baseInfo);
             
