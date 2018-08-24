@@ -1222,8 +1222,15 @@ function getProductsByCode(code)
             if(returndata.price!=null){
                 baseInfo+=returndata.price.formattedValue;
             }
-            baseInfo+='</em></div><div class="right"><i class="icon"></i><span>' + returndata.code + 
-            '</span></div></div><p>' + returndata.name + '</p><span>' + returndata.summary + '</span>';
+            
+            if(returndata.summary != null) {
+            	baseInfo+='</em></div><div class="right"><i class="icon"></i><span>' + returndata.code + 
+                '</span></div></div><p>' + returndata.name + '</p><span>' + returndata.summary + '</span>';
+            }else{
+            	baseInfo+='</em></div><div class="right"><i class="icon"></i><span>' + returndata.code + 
+                '</span></div></div><p>' + returndata.name + '</p><span></span>';
+            }
+            
             $("#baseInfo").append(baseInfo);
             
             var saleInfo = '';
