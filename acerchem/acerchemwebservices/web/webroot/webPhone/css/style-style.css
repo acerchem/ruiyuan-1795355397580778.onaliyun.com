@@ -1431,7 +1431,7 @@ img {
 
 .g-price .price {
   overflow: hidden;
-  height: 40px;
+  height: 30px;
 }
 
 .g-price b {
@@ -2533,7 +2533,8 @@ select::-ms-expand {
 .swiper-gall .text p {
   font-size: 0.22rem;
   color: #444;
-  line-height: 0.28rem;
+  line-height: 0.4rem;
+  height: 33px;
 }
 
 .swiper-gall .price span {
