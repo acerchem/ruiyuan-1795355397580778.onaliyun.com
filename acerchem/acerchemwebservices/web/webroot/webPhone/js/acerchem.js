@@ -1178,7 +1178,16 @@ function getAllProducts()
             	if(products[i].name != null) {
                 	if(products[i].images != null) {
                 		html+='<li data-name="' + products[i].name + '"><div class="maximg"><a href="product.html?code='+products[i].code+'">';
-                		html+='<img src="'+products[i].images[0].url.substring(23)+'"></a></div><div class="text g-price"><a href="product.html?code='+products[i].code+'"><p>'+products[i].name+'</p><div class="price"><span>';
+                		
+                    	var urlStr = products[i].images[0].url.substring(23);
+                		if(urlStr.indexOf("aliyuncs.com")!= -1) {
+                			urlStr = urlStr + "?x-oss-process=image/resize,m_fixed,h_181,w_181";
+                			html+='<img src="'+urlStr+'"></a></div><div class="text g-price"><a href="product.html?code='+products[i].code+'"><p>'+products[i].name+'</p><div class="price"><span>';
+                			//console.log("urlStr:"+urlStr);
+                		}else{
+                			html+='<img src="'+products[i].images[0].url.substring(23)+'"></a></div><div class="text g-price"><a href="product.html?code='+products[i].code+'"><p>'+products[i].name+'</p><div class="price"><span>';
+                		}
+                    	
                     	if(products[i].promotionPrice!=null){
                     		html+=products[i].promotionPrice.formattedValue + '</span><em>';
                     	}else{
