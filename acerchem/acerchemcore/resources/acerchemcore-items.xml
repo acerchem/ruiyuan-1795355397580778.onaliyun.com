@@ -601,103 +601,103 @@
 				<!-- add by frank gu  -->
 				<attribute qualifier="attributeZero" type="java.lang.String" >			    					    		 
 					  <persistence type="property" />
-					  <modifiers optional="false" />
+					  <modifiers optional="true" />
 					  <description>Supplier information input</description>
 					</attribute>
 					<attribute qualifier="describeZero" type="java.lang.String" >			    					    		 
 					  <persistence type="property" />
-					  <modifiers optional="false" />
+					  <modifiers optional="true" />
 					  <description>Supplier information input</description>
 					</attribute>
 					<attribute qualifier="attributeOne" type="java.lang.String" >			    					    		 
 					  <persistence type="property" />
-					  <modifiers optional="false" />
+					  <modifiers optional="true" />
 					  <description>Supplier information input</description>
 					</attribute>
 					<attribute qualifier="describeOne" type="java.lang.String" >			    					    		 
 					  <persistence type="property" />
-					  <modifiers optional="false" />
+					  <modifiers optional="true" />
 					  <description>Supplier information input</description>
 					</attribute>
 					<attribute qualifier="attributeTwo" type="java.lang.String" >			    					    		 
 					  <persistence type="property" />
-					  <modifiers optional="false" />
+					  <modifiers optional="true" />
 					  <description>Supplier information input</description>
 					</attribute>
 					<attribute qualifier="describeTwo" type="java.lang.String" >			    					    		 
 					  <persistence type="property" />
-					  <modifiers optional="false" />
+					  <modifiers optional="true" />
 					  <description>Supplier information input</description>
 					</attribute>
 					<attribute qualifier="attributeThree" type="java.lang.String" >			    					    		 
 					  <persistence type="property" />
-					  <modifiers optional="false" />
+					  <modifiers optional="true" />
 					  <description>Supplier information input</description>
 					</attribute>
 					<attribute qualifier="describeThree" type="java.lang.String" >			    					    		 
 					  <persistence type="property" />
-					  <modifiers optional="false" />
+					  <modifiers optional="true" />
 					  <description>Supplier information input</description>
 					</attribute>
 					<attribute qualifier="attributeFour" type="java.lang.String" >			    					    		 
 					  <persistence type="property" />
-					  <modifiers optional="false" />
+					  <modifiers optional="true" />
 					  <description>Supplier information input</description>
 					</attribute>
 					<attribute qualifier="describeFour" type="java.lang.String" >			    					    		 
 					  <persistence type="property" />
-					  <modifiers optional="false" />
+					  <modifiers optional="true" />
 					  <description>Supplier information input</description>
 					</attribute>
 					<attribute qualifier="attributeFive" type="java.lang.String" >			    					    		 
 					  <persistence type="property" />
-					  <modifiers optional="false" />
+					  <modifiers optional="true" />
 					  <description>Supplier information input</description>
 					</attribute>
 					<attribute qualifier="describeFive" type="java.lang.String" >			    					    		 
 					  <persistence type="property" />
-					  <modifiers optional="false" />
+					  <modifiers optional="true" />
 					  <description>Supplier information input</description>
 					</attribute>
 					<attribute qualifier="attributeSix" type="java.lang.String" >			    					    		 
 					  <persistence type="property" />
-					  <modifiers optional="false" />
+					  <modifiers optional="true" />
 					  <description>Supplier information input</description>
 					</attribute>
 					<attribute qualifier="describeSix" type="java.lang.String" >			    					    		 
 					  <persistence type="property" />
-					  <modifiers optional="false" />
+					  <modifiers optional="true" />
 					  <description>Supplier information input</description>
 					</attribute>
 					<attribute qualifier="attributeSeven" type="java.lang.String" >			    					    		 
 					  <persistence type="property" />
-					  <modifiers optional="false" />
+					  <modifiers optional="true" />
 					  <description>Supplier information input</description>
 					</attribute>
 					<attribute qualifier="describeSeven" type="java.lang.String" >			    					    		 
 					  <persistence type="property" />
-					  <modifiers optional="false" />
+					  <modifiers optional="true" />
 					  <description>Supplier information input</description>
 					</attribute>
 					
 					<attribute qualifier="attributeEight" type="java.lang.String" >			    					    		 
 					  <persistence type="property" />
-					  <modifiers optional="false" />
+					  <modifiers optional="true" />
 					  <description>Supplier information input</description>
 					</attribute>
 					<attribute qualifier="describeEight" type="java.lang.String" >			    					    		 
 					  <persistence type="property" />
-					  <modifiers optional="false" />
+					  <modifiers optional="true" />
 					  <description>Supplier information input</description>
 					</attribute>
 					<attribute qualifier="attributeNine" type="java.lang.String" >			    					    		 
 					  <persistence type="property" />
-					  <modifiers optional="false" />
+					  <modifiers optional="true" />
 					  <description>Supplier information input</description>
 					</attribute>
 					<attribute qualifier="describeNine" type="java.lang.String" >			    					    		 
 					  <persistence type="property" />
-					  <modifiers optional="false" />
+					  <modifiers optional="true" />
 					  <description>Supplier information input</description>
 					</attribute>
 					<!-- end -->
