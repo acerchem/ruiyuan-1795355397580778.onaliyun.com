@@ -250,7 +250,7 @@
 					 <c:forEach items="${product.certificatess}" var="data"  varStatus="id"  >
 					 
 				        <li>						
-							<a href="${data.url}" >${data.altText}</a>
+							<a href="${data.url}" target="_blank">${data.altText}</a>
 						</li>
 						
 					 </c:forEach>
