@@ -189,7 +189,14 @@ public class DefaultAcerchemCommerceAddToCartStrategy extends DefaultCommerceAdd
                 }
             }
         }else {
-            stockLevel = getAvailableStockLevel(productModel, pointOfServiceModel);
+            //stockLevel = getAvailableStockLevel(productModel, pointOfServiceModel);
+            for (StockLevelModel stockLevelModel : productModel.getStockLevels())
+            {
+        		if(stockLevelModel.getAvailable()>0)
+        		{
+        			stockLevel = stockLevelModel.getAvailable();
+        		}
+            }
         }
 
         // How many will we have in our cart if we add quantity
