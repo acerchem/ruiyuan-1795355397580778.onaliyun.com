@@ -88,16 +88,14 @@ public class AcerchemPromotionsPopulator implements Populator<ProductThresholdPe
 
 		target.setCode(source.getCode());
 		target.setEndDate(source.getEndDate());
-		final UserModel user = userService.getCurrentUser();
-		final boolean isAnonymousUser = userService.isAnonymousUser(user);
-		if (!isAnonymousUser) {
-			target.setDescription(getPromotionService().getPromotionDescription(source));
-		}
+		target.setDescription(getPromotionService().getPromotionDescription(source));		
 		target.setPromotionType(source.getPromotionType());
 		//processPromotionMessages(source, target);
 		target.setPriority(source.getPriority());
+		final UserModel user = userService.getCurrentUser();
+		final boolean isAnonymousUser = userService.isAnonymousUser(user);
 
-		if (source.getThresholdDiscounts()!= null){
+		if (source.getThresholdDiscounts()!= null&&!isAnonymousUser){
 			
 			List<String> promotions= new ArrayList<String>();
 			
@@ -109,9 +107,10 @@ public class AcerchemPromotionsPopulator implements Populator<ProductThresholdPe
 			}
 			
 			target.setFiredMessages(promotions);
+		}else{
+			target.setDescription(null);
 		}
-		
-	}
+}
 
 	protected void processPromotionMessages(final AbstractPromotionModel source, final PromotionData prototype)
 	{
