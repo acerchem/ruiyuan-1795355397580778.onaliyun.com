@@ -51,64 +51,38 @@ public class ProductAcerchemPopulator<SOURCE extends ProductModel, TARGET extend
 		productData.setFormulaWeight(safeToString(getProductAttribute(productModel, ProductModel.FORMULAWEIGHT)));
 		
 //		frank gu
-		productData.setSupplierInfo00(safeToString(getProductAttribute(productModel, ProductModel.ATTRIBUTEZERO)));
-		productData.setSupplierInfo01(safeToString(getProductAttribute(productModel, ProductModel.DESCRIBEZERO)));
-		productData.setSupplierInfo02(safeToString(getProductAttribute(productModel, ProductModel.ATTRIBUTEONE)));
-		productData.setSupplierInfo03(safeToString(getProductAttribute(productModel, ProductModel.DESCRIBEONE)));
-		productData.setSupplierInfo04(safeToString(getProductAttribute(productModel, ProductModel.ATTRIBUTETWO)));
-		productData.setSupplierInfo05(safeToString(getProductAttribute(productModel, ProductModel.DESCRIBETWO)));
-		productData.setSupplierInfo06(safeToString(getProductAttribute(productModel, ProductModel.ATTRIBUTETHREE)));
-		productData.setSupplierInfo07(safeToString(getProductAttribute(productModel, ProductModel.DESCRIBETHREE)));
-		productData.setSupplierInfo08(safeToString(getProductAttribute(productModel, ProductModel.ATTRIBUTEFOUR)));
-		productData.setSupplierInfo09(safeToString(getProductAttribute(productModel, ProductModel.DESCRIBEFOUR)));
-		productData.setSupplierInfo10(safeToString(getProductAttribute(productModel, ProductModel.ATTRIBUTEFIVE)));
-		productData.setSupplierInfo11(safeToString(getProductAttribute(productModel, ProductModel.DESCRIBEFIVE)));
-		productData.setSupplierInfo12(safeToString(getProductAttribute(productModel, ProductModel.ATTRIBUTESIX)));
-		productData.setSupplierInfo13(safeToString(getProductAttribute(productModel, ProductModel.DESCRIBESIX)));
-		productData.setSupplierInfo14(safeToString(getProductAttribute(productModel, ProductModel.ATTRIBUTESEVEN)));
-		productData.setSupplierInfo15(safeToString(getProductAttribute(productModel, ProductModel.DESCRIBESEVEN)));
-		productData.setSupplierInfo16(safeToString(getProductAttribute(productModel, ProductModel.ATTRIBUTEEIGHT)));
-		productData.setSupplierInfo17(safeToString(getProductAttribute(productModel, ProductModel.DESCRIBEEIGHT)));
-		productData.setSupplierInfo18(safeToString(getProductAttribute(productModel, ProductModel.ATTRIBUTENINE)));
-		productData.setSupplierInfo19(safeToString(getProductAttribute(productModel, ProductModel.DESCRIBENINE)));
-		
 		final UserModel user = userService.getCurrentUser();
 		final boolean isAnonymousUser = userService.isAnonymousUser(user);
+		if(!isAnonymousUser)
+		{
+			productData.setSupplierInfo00(safeToString(getProductAttribute(productModel, ProductModel.ATTRIBUTEZERO)));
+			productData.setSupplierInfo01(safeToString(getProductAttribute(productModel, ProductModel.DESCRIBEZERO)));
+			productData.setSupplierInfo02(safeToString(getProductAttribute(productModel, ProductModel.ATTRIBUTEONE)));
+			productData.setSupplierInfo03(safeToString(getProductAttribute(productModel, ProductModel.DESCRIBEONE)));
+			productData.setSupplierInfo04(safeToString(getProductAttribute(productModel, ProductModel.ATTRIBUTETWO)));
+			productData.setSupplierInfo05(safeToString(getProductAttribute(productModel, ProductModel.DESCRIBETWO)));
+			productData.setSupplierInfo06(safeToString(getProductAttribute(productModel, ProductModel.ATTRIBUTETHREE)));
+			productData.setSupplierInfo07(safeToString(getProductAttribute(productModel, ProductModel.DESCRIBETHREE)));
+			productData.setSupplierInfo08(safeToString(getProductAttribute(productModel, ProductModel.ATTRIBUTEFOUR)));
+			productData.setSupplierInfo09(safeToString(getProductAttribute(productModel, ProductModel.DESCRIBEFOUR)));
+			productData.setSupplierInfo10(safeToString(getProductAttribute(productModel, ProductModel.ATTRIBUTEFIVE)));
+			productData.setSupplierInfo11(safeToString(getProductAttribute(productModel, ProductModel.DESCRIBEFIVE)));
+			productData.setSupplierInfo12(safeToString(getProductAttribute(productModel, ProductModel.ATTRIBUTESIX)));
+			productData.setSupplierInfo13(safeToString(getProductAttribute(productModel, ProductModel.DESCRIBESIX)));
+			productData.setSupplierInfo14(safeToString(getProductAttribute(productModel, ProductModel.ATTRIBUTESEVEN)));
+			productData.setSupplierInfo15(safeToString(getProductAttribute(productModel, ProductModel.DESCRIBESEVEN)));
+			productData.setSupplierInfo16(safeToString(getProductAttribute(productModel, ProductModel.ATTRIBUTEEIGHT)));
+			productData.setSupplierInfo17(safeToString(getProductAttribute(productModel, ProductModel.DESCRIBEEIGHT)));
+			productData.setSupplierInfo18(safeToString(getProductAttribute(productModel, ProductModel.ATTRIBUTENINE)));
+			productData.setSupplierInfo19(safeToString(getProductAttribute(productModel, ProductModel.DESCRIBENINE)));
+		}
+		
 		VendorData data = new VendorData();
-		if (productModel.getAcerChemVendor()!= null&&!isAnonymousUser){
+		if (productModel.getAcerChemVendor()!= null){
 			data.setName(productModel.getAcerChemVendor().getName());
 	        data.setCode(productModel.getAcerChemVendor().getCode());
-	        
 	        productData.setVendor(data);
-		}else
-			{
-				productData.setSupplierInfo00(null);
-				productData.setSupplierInfo01(null);
-				productData.setSupplierInfo02(null);
-				productData.setSupplierInfo03(null);
-				productData.setSupplierInfo04(null);			
-				productData.setSupplierInfo05(null);
-				productData.setSupplierInfo06(null);
-				productData.setSupplierInfo07(null);
-				productData.setSupplierInfo08(null);
-				productData.setSupplierInfo09(null);
-				productData.setSupplierInfo10(null);
-				productData.setSupplierInfo11(null);
-				productData.setSupplierInfo12(null);
-				productData.setSupplierInfo13(null);
-				productData.setSupplierInfo14(null);
-				productData.setSupplierInfo15(null);
-				productData.setSupplierInfo16(null);
-				productData.setSupplierInfo17(null);
-				productData.setSupplierInfo18(null);
-				productData.setSupplierInfo19(null);	
-				
-			}
-	      
-		
-	    
-				
-		
+		}
 		UnitModel uModel = productModel.getUnit();
 		if (uModel != null){
 			productData.setUnitName(uModel.getName());
