@@ -82,12 +82,10 @@ import de.hybris.platform.ordersplitting.model.VendorModel;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
 
-
 @Controller
 @RequestMapping("/reports")
 public class AcerchemReportsController extends AbstractSearchPageController {// AbstractPageController
 
-	
 	@Resource
 	private AcerchemOrderDao acerchemOrderDao;
 
@@ -228,8 +226,6 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 			return "redirect:/reports/message";
 		}
 
-		
-		
 		storeCmsPageInModel(model, getContentPageForLabelOrId("login"));
 		// init
 		final Date d = new Date();
@@ -241,7 +237,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		final SearchCriteriaFrom searchCriteriaFrom = new SearchCriteriaFrom();
 		searchCriteriaFrom.setMonth(curMonth);
 
-		model.addAttribute("isDocMenu",  isVisibleDocMenu());
+		model.addAttribute("isDocMenu", isVisibleDocMenu());
 		model.addAttribute("searchPageData", searchPageData);
 		model.addAttribute("searchCriteriaFrom", searchCriteriaFrom);
 
@@ -290,7 +286,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		final int numberPagesShown = getSiteConfigService().getInt("pagination.number.results.count", 100);
 		model.addAttribute("numberPagesShown", Integer.valueOf(numberPagesShown));
 		model.addAttribute("isShowPageAllowed", false);
-		model.addAttribute("isDocMenu",  isVisibleDocMenu());
+		model.addAttribute("isDocMenu", isVisibleDocMenu());
 		return "pages/reports/orderDetails";
 	}
 
@@ -314,7 +310,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 
 		model.addAttribute("monthlySalesAnalysisForm", monthlySalesAnalysisForm);
 		model.addAttribute("salesList", list);
-		model.addAttribute("isDocMenu",  isVisibleDocMenu());
+		model.addAttribute("isDocMenu", isVisibleDocMenu());
 		return "pages/reports/monthlySalesAnalysis";
 	}
 
@@ -330,7 +326,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 
 		model.addAttribute("salesList", list);
 		model.addAttribute("monthlySalesAnalysisForm", monthlySalesAnalysisForm);
-		model.addAttribute("isDocMenu",  isVisibleDocMenu());
+		model.addAttribute("isDocMenu", isVisibleDocMenu());
 		return "pages/reports/monthlySalesAnalysis";
 	}
 
@@ -339,7 +335,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 
 		// final HSSFWorkbook wkb = new HSSFWorkbook();
 		// final HSSFSheet sheet=wkb.createSheet("salesAnalysis");
-		
+
 		return "pages/reports/monthlySalesAnalysis";
 	}
 
@@ -356,7 +352,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 
 		final List<SalesByEmployeeReportData> listPrincipal = acerchemOrderAnalysisService.getEmployeeSales(year);
 		final List<EmployeeMonthlySalesBean> list = getCrossTabOfEmployeeSalesAnalysis(listPrincipal);
-		model.addAttribute("isDocMenu",  isVisibleDocMenu());
+		model.addAttribute("isDocMenu", isVisibleDocMenu());
 		model.addAttribute("curYear", year);
 		model.addAttribute("salesList", list);
 		return "pages/reports/employeeSalesAnalysis";
@@ -370,7 +366,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		// list = getEmployeeSalesAnalysisSum(list);
 		model.addAttribute("salesList", list);
 		model.addAttribute("curYear", year);
-		model.addAttribute("isDocMenu",  isVisibleDocMenu());
+		model.addAttribute("isDocMenu", isVisibleDocMenu());
 		return "pages/reports/employeeSalesAnalysis";
 	}
 
@@ -599,7 +595,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		final List<InventoryReportData> list = acerChemProductService.getInventoryProductByVendor(employee.getUid());
 
 		model.addAttribute("list", list);
-		model.addAttribute("isDocMenu",  isVisibleDocMenu());
+		model.addAttribute("isDocMenu", isVisibleDocMenu());
 
 		return "pages/reports/vendorInventoryAnalysis";
 	}
@@ -608,7 +604,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	public String showVendorOrderProduct(final Model model) throws CMSItemNotFoundException {
 		storeCmsPageInModel(model, getContentPageForLabelOrId("login"));
 		// model.addAttribute("list",list);
-		model.addAttribute("isDocMenu",  isVisibleDocMenu());
+		model.addAttribute("isDocMenu", isVisibleDocMenu());
 		return "pages/reports/vendorOrderProduct";
 	}
 
@@ -632,13 +628,13 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		final List<OrderProductReportData> list = acerChemProductService.getOrderProductByVendor(employee.getUid(),
 				start, end);
 		model.addAttribute("list", list);
-		model.addAttribute("isDocMenu",  isVisibleDocMenu());
+		model.addAttribute("isDocMenu", isVisibleDocMenu());
 		return "pages/reports/vendorOrderProduct";
 	}
 
 	@RequestMapping(value = "/noSignIn", method = RequestMethod.GET)
 	public String showSignInMessage(final Model model) {
-		model.addAttribute("isDocMenu",  isVisibleDocMenu());
+		model.addAttribute("isDocMenu", isVisibleDocMenu());
 		return "pages/reports/noSignIn";
 	}
 
@@ -646,8 +642,8 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	public String getMessagePage(final Model model, @ModelAttribute("myMessage") final String message) {
 
 		// final String message = (String) model.asMap().get("reportMessage");
-		model.addAttribute("isDocMenu",  isVisibleDocMenu());
-		model.addAttribute("reportMessage",  message);
+		model.addAttribute("isDocMenu", isVisibleDocMenu());
+		model.addAttribute("reportMessage", message);
 		return "pages/reports/reportMessage";
 	}
 
@@ -676,7 +672,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		list = acerChemProductService.getInventory(list);
 		model.addAttribute("list", list);
 		model.addAttribute("vendorInventoryForm", form);
-		model.addAttribute("isDocMenu",  isVisibleDocMenu());
+		model.addAttribute("isDocMenu", isVisibleDocMenu());
 		return "pages/reports/vendorInventoryAnalysis";
 	}
 
@@ -709,7 +705,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 			}
 		}
 		model.addAttribute("vendorInventoryForm", newform);
-		model.addAttribute("isDocMenu",  isVisibleDocMenu());
+		model.addAttribute("isDocMenu", isVisibleDocMenu());
 		return "pages/reports/vendorInventoryAnalysis";
 	}
 
@@ -746,7 +742,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 
 		model.addAttribute("list", list);
 		model.addAttribute("vendorAnalysisForm", form);
-		model.addAttribute("isDocMenu",  isVisibleDocMenu());
+		model.addAttribute("isDocMenu", isVisibleDocMenu());
 		return "pages/reports/vendorOrderProduct";
 	}
 
@@ -790,7 +786,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		}
 
 		model.addAttribute("vendorAnalysisForm", newform);
-		model.addAttribute("isDocMenu",  isVisibleDocMenu());
+		model.addAttribute("isDocMenu", isVisibleDocMenu());
 		return "pages/reports/vendorOrderProduct";
 	}
 
@@ -825,7 +821,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		model.addAttribute("list", list);
 		model.addAttribute("month", month);
 		model.addAttribute("maxWeek", maxWeek);
-		model.addAttribute("isDocMenu",  isVisibleDocMenu());
+		model.addAttribute("isDocMenu", isVisibleDocMenu());
 		return "pages/reports/productPriceAnalysis";
 
 	}
@@ -860,7 +856,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		model.addAttribute("list", list);
 		model.addAttribute("month", curMonth);
 		model.addAttribute("maxWeek", maxWeek);
-		model.addAttribute("isDocMenu",  isVisibleDocMenu());
+		model.addAttribute("isDocMenu", isVisibleDocMenu());
 		return "pages/reports/productPriceAnalysis";
 
 	}
@@ -887,7 +883,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		final ProductSalesForm productSalesForm = new ProductSalesForm();
 		model.addAttribute("productSalesForm", productSalesForm);
 		model.addAttribute("month", month);
-		model.addAttribute("isDocMenu",  isVisibleDocMenu());
+		model.addAttribute("isDocMenu", isVisibleDocMenu());
 		return "pages/reports/productSalesRecord";
 
 	}
@@ -921,7 +917,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 
 		model.addAttribute("productSalesForm", newForm);
 		model.addAttribute("month", curMonth);
-		model.addAttribute("isDocMenu",  isVisibleDocMenu());
+		model.addAttribute("isDocMenu", isVisibleDocMenu());
 		return "pages/reports/productSalesRecord";
 
 	}
@@ -941,7 +937,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		final CustomerSalesAnalysisForm customerSalesAnalysisForm = new CustomerSalesAnalysisForm();
 		model.addAttribute("customerSalesAnalysisForm", customerSalesAnalysisForm);
 		model.addAttribute("list", list);
-		model.addAttribute("isDocMenu",  isVisibleDocMenu());
+		model.addAttribute("isDocMenu", isVisibleDocMenu());
 		return "pages/reports/customerSalesAnalysis";
 
 	}
@@ -959,7 +955,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 
 		model.addAttribute("list", list);
 		model.addAttribute("customerSalesAnalysisForm", customerSalesAnalysisForm);
-		model.addAttribute("isDocMenu",  isVisibleDocMenu());
+		model.addAttribute("isDocMenu", isVisibleDocMenu());
 		return "pages/reports/customerSalesAnalysis";
 
 	}
@@ -998,7 +994,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		model.addAttribute("creditList", creditList);
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);
-		model.addAttribute("isDocMenu",  isVisibleDocMenu());
+		model.addAttribute("isDocMenu", isVisibleDocMenu());
 		return "pages/reports/customerBillAnalysis";
 
 	}
@@ -1032,7 +1028,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		model.addAttribute("creditList", creditList);
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);
-		model.addAttribute("isDocMenu",  isVisibleDocMenu());
+		model.addAttribute("isDocMenu", isVisibleDocMenu());
 		return "pages/reports/customerBillAnalysis";
 
 	}
@@ -1130,19 +1126,19 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	@RequestMapping(value = "/docAdd", method = RequestMethod.GET)
 	public String showDocAdd(final Model model, final RedirectAttributes attr) throws CMSItemNotFoundException {
 
-		model.addAttribute("isDocMenu",  isVisibleDocMenu());
+		model.addAttribute("isDocMenu", isVisibleDocMenu());
 		return "pages/reports/docAdd";
 	}
 
 	@RequestMapping(value = "/docAdd", method = RequestMethod.POST)
 	public String addDoc(final Model model, final RedirectAttributes attr, final HttpServletRequest request,
 			final HttpServletResponse response) throws ServletException, IOException {
-		
-//		if (!isVisibleDocMenu()) {
-//			attr.addFlashAttribute("myMessage", "没有权限!");
-//			return "redirect:/reports/message";
-//		}
-		
+
+		// if (!isVisibleDocMenu()) {
+		// attr.addFlashAttribute("myMessage", "没有权限!");
+		// return "redirect:/reports/message";
+		// }
+
 		// 得到上传文件的保存目录，将上传的文件存放于WEB-INF目录下，不允许外界直接访问，保证上传文件的安全
 		final String savePath = request.getServletContext().getRealPath("/WEB-INF/upload");
 		// 上传时生成的临时文件保存目录
@@ -1152,167 +1148,168 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 			// 创建临时目录
 			tmpFile.mkdir();
 		}
-		//消息提示
+		// 消息提示
 		String message = "";
 		InputStream in = null;
-		 try{
-			//使用Apache文件上传组件处理文件上传步骤：
-             //1、创建一个DiskFileItemFactory工厂
-             final DiskFileItemFactory factory = new DiskFileItemFactory();
-             //设置工厂的缓冲区的大小，当上传的文件大小超过缓冲区的大小时，就会生成一个临时文件存放到指定的临时目录当中。
-             factory.setSizeThreshold(1024*100);//设置缓冲区的大小为100KB，如果不指定，那么缓冲区的大小默认是10KB
-             //设置上传时生成的临时文件的保存目录
-             factory.setRepository(tmpFile);
-             //2、创建一个文件上传解析器
-             final ServletFileUpload upload = new ServletFileUpload(factory);
-             upload.setProgressListener(new ProgressListener(){
-                 @Override
+		try {
+			// 使用Apache文件上传组件处理文件上传步骤：
+			// 1、创建一个DiskFileItemFactory工厂
+			final DiskFileItemFactory factory = new DiskFileItemFactory();
+			// 设置工厂的缓冲区的大小，当上传的文件大小超过缓冲区的大小时，就会生成一个临时文件存放到指定的临时目录当中。
+			factory.setSizeThreshold(1024 * 100);// 设置缓冲区的大小为100KB，如果不指定，那么缓冲区的大小默认是10KB
+			// 设置上传时生成的临时文件的保存目录
+			factory.setRepository(tmpFile);
+			// 2、创建一个文件上传解析器
+			final ServletFileUpload upload = new ServletFileUpload(factory);
+			upload.setProgressListener(new ProgressListener() {
+				@Override
 				public void update(final long pBytesRead, final long pContentLength, final int arg2) {
-                     System.out.println("文件大小为：" + pContentLength + ",当前已处理：" + pBytesRead);
-                    
-                 }
-             });
-              //解决上传文件名的中文乱码
-             upload.setHeaderEncoding("UTF-8"); 
-             //3、判断提交上来的数据是否是上传表单的数据
-             if(!ServletFileUpload.isMultipartContent(request)){
-                 //按照传统方式获取数据
-            	 message= "文件上传数据不正确！";
-            	 attr.addFlashAttribute("myMessage", message);
-     			return "redirect:/reports/message";
-             }
-			 
-             //设置上传单个文件的大小的最大值，目前是设置为1024*1024字节，也就是1MB
-           //  upload.setFileSizeMax(3*1024*1024);
-             //设置上传文件总量的最大值，最大值=同时上传的多个文件的大小的最大值的和，目前设置为10MB
-            // upload.setSizeMax(1024*1024*10);
-             //4、使用ServletFileUpload解析器解析上传数据，解析结果返回的是一个List<FileItem>集合，每一个FileItem对应一个Form表单的输入项
-             final List<FileItem> list = upload.parseRequest(request);
-             
-             final DocMessageForm fileForm = new DocMessageForm();
-             
-             for(final FileItem item : list){
-                 //如果fileitem中封装的是普通输入项的数据
-                 if(item.isFormField()){
-                     final String name = item.getFieldName();
-                     
-                     
-                     //解决普通输入项的数据的中文乱码问题
-                     String value = item.getString("UTF-8");
-                     //value = new String(value.getBytes("iso8859-1"),"UTF-8");
-                   //  System.out.println(name + "=" + value);
-                     if(name.equals("title")){
-                    	 if(StringUtils.isBlank(value)){
-                      	   value = "Not populating Title";	 
-                      	 }
-                    	 fileForm.setTitle(value);
-                     }else if(name.equals("author")){
-                    	 if(StringUtils.isBlank(value)){
-                        	   value = "Anonymous";	 
-                        	 }
-                    	 fileForm.setAuthor(value);
-                     }
-                 }else{//如果fileitem中封装的是上传文件
-                     //得到上传的文件名称，
-                     String filename = item.getName();
-                    // System.out.println(filename);
-                     if(filename==null || filename.trim().equals("")){
-                         continue;
-                     }
-                     //注意：不同的浏览器提交的文件名是不一样的，有些浏览器提交上来的文件名是带有路径的，如：  c:\a\b\1.txt，而有些只是单纯的文件名，如：1.txt
-                     //处理获取到的上传文件的文件名的路径部分，只保留文件名部分
-                     filename = filename.substring(filename.lastIndexOf("\\")+1);
-                     //得到上传文件的扩展名
-                     final String fileExtName = filename.substring(filename.lastIndexOf(".")+1);
-                     //如果需要限制上传的文件类型，那么可以通过文件的扩展名来判断上传的文件类型是否合法
-                  //   System.out.println("上传的文件的扩展名是："+fileExtName);
-                     //获取item中的上传文件的输入流
-                    in = item.getInputStream();
-                     fileForm.setFileins(in);
-                     //得到文件保存的名称
-                     final String saveFilename = filename;
-                     fileForm.setFilename(saveFilename);
-                     if(fileExtName.equalsIgnoreCase("pdf")){
-                    	 fileForm.setMimeType("application/pdf");
-                     }else if(fileExtName.equalsIgnoreCase("doc")){
-                    	 fileForm.setMimeType("application/msword");
-//                     }else if(fileExtName.equalsIgnoreCase("docx")){
-//                    	 fileForm.setMimeType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
-                     }else{
-                    	 message = "文件上传类型 "+fileExtName+" 不正确！";
-                    	  attr.addFlashAttribute("myMessage", message);
-		          		return "redirect:/reports/message";
-                    	 
-                     }
-                    
-                     
+					System.out.println("文件大小为：" + pContentLength + ",当前已处理：" + pBytesRead);
 
-//                     //关闭输入流
-//                     in.close();
-//                     //关闭输出流
-//                     out.close();
-                     //删除处理文件上传时生成的临时文件
-                     //item.delete();
-                     message = "文件上传成功！";
-                 }
-             }
-             acerchemDocMessageService.addDocMessage(fileForm.getFileins(),fileForm.getFilename(),fileForm.getMimeType(),fileForm.getAuthor(), fileForm.getTitle()); 
-			 
-		 }catch (final Exception e) {
-			                     message= "文件上传失败！";
-			                     e.printStackTrace();
-			                   
-			                      
-			                  }finally{
-			                	  if (in != null){
-			                		  in.close();
-			                	  }
-			                  }
+				}
+			});
+			// 解决上传文件名的中文乱码
+			upload.setHeaderEncoding("UTF-8");
+			// 3、判断提交上来的数据是否是上传表单的数据
+			if (!ServletFileUpload.isMultipartContent(request)) {
+				// 按照传统方式获取数据
+				message = "文件上传数据不正确！";
+				attr.addFlashAttribute("myMessage", message);
+				return "redirect:/reports/message";
+			}
 
-		  attr.addFlashAttribute("myMessage", message);
-			return "redirect:/reports/message";
+			// 设置上传单个文件的大小的最大值，目前是设置为1024*1024*4字节，也就是4MB
+			 upload.setFileSizeMax(4*1024*1024);
+			// 设置上传文件总量的最大值，最大值=同时上传的多个文件的大小的最大值的和，目前设置为10MB
+			 upload.setSizeMax(1024*1024*10);
+			// 4、使用ServletFileUpload解析器解析上传数据，解析结果返回的是一个List<FileItem>集合，每一个FileItem对应一个Form表单的输入项
+			final List<FileItem> list = upload.parseRequest(request);
+
+			final DocMessageForm fileForm = new DocMessageForm();
+
+			for (final FileItem item : list) {
+				// 如果fileitem中封装的是普通输入项的数据
+				if (item.isFormField()) {
+					final String name = item.getFieldName();
+
+					// 解决普通输入项的数据的中文乱码问题
+					String value = item.getString("UTF-8");
+					// value = new String(value.getBytes("iso8859-1"),"UTF-8");
+					// System.out.println(name + "=" + value);
+					if (name.equals("title")) {
+						if (StringUtils.isBlank(value)) {
+							value = "Not populating Title";
+						}
+						fileForm.setTitle(value);
+					} else if (name.equals("author")) {
+						if (StringUtils.isBlank(value)) {
+							value = "Anonymous";
+						}
+						fileForm.setAuthor(value);
+					}
+				} else {// 如果fileitem中封装的是上传文件
+
+					if (item.getSize() > 4 * 1024 * 1024) { // >4M 不允许上传
+						message = "文件大小超过4M,请选择小些的文件！";
+						attr.addFlashAttribute("myMessage", message);
+						return "redirect:/reports/message";
+					}
+					// 得到上传的文件名称，
+					String filename = item.getName();
+					// System.out.println(filename);
+					if (filename == null || filename.trim().equals("")) {
+						continue;
+					}
+					// 注意：不同的浏览器提交的文件名是不一样的，有些浏览器提交上来的文件名是带有路径的，如：
+					// c:\a\b\1.txt，而有些只是单纯的文件名，如：1.txt
+					// 处理获取到的上传文件的文件名的路径部分，只保留文件名部分
+					filename = filename.substring(filename.lastIndexOf("\\") + 1);
+					// 得到上传文件的扩展名
+					final String fileExtName = filename.substring(filename.lastIndexOf(".") + 1);
+					// 如果需要限制上传的文件类型，那么可以通过文件的扩展名来判断上传的文件类型是否合法
+					// System.out.println("上传的文件的扩展名是："+fileExtName);
+					// 获取item中的上传文件的输入流
+					in = item.getInputStream();
+					fileForm.setFileins(in);
+					// 得到文件保存的名称
+					final String saveFilename = filename;
+					fileForm.setFilename(saveFilename);
+					if (fileExtName.equalsIgnoreCase("pdf")) {
+						fileForm.setMimeType("application/pdf");
+					} else if (fileExtName.equalsIgnoreCase("doc")) {
+						fileForm.setMimeType("application/msword");
+						// }else if(fileExtName.equalsIgnoreCase("docx")){
+						// fileForm.setMimeType("application/vnd.openxmlformats-officedocument.wordprocessingml.document");
+					} else {
+						message = "文件上传类型 " + fileExtName + " 不正确！";
+						attr.addFlashAttribute("myMessage", message);
+						return "redirect:/reports/message";
+
+					}
+
+					// //关闭输入流
+					// in.close();
+					// //关闭输出流
+					// out.close();
+					// 删除处理文件上传时生成的临时文件
+					// item.delete();
+					message = "文件上传成功！";
+				}
+			}
+			acerchemDocMessageService.addDocMessage(fileForm.getFileins(), fileForm.getFilename(),
+					fileForm.getMimeType(), fileForm.getAuthor(), fileForm.getTitle());
+
+		} catch (final Exception e) {
+			message = "文件上传失败！";
+			e.printStackTrace();
+
+		} finally {
+			if (in != null) {
+				in.close();
+			}
+		}
+
+		attr.addFlashAttribute("myMessage", message);
+		return "redirect:/reports/message";
 	}
-	
-	
+
 	@RequestMapping(value = "/docList", method = RequestMethod.GET)
 	public String showDocList(final Model model, final RedirectAttributes attr) throws CMSItemNotFoundException {
 
-//		if (!isVisibleDocMenu()) {
-//			attr.addFlashAttribute("myMessage", "没有权限!");
-//			return "redirect:/reports/message";
-//		}
+		// if (!isVisibleDocMenu()) {
+		// attr.addFlashAttribute("myMessage", "没有权限!");
+		// return "redirect:/reports/message";
+		// }
 		final List<AcerchemDocMessageModel> list = acerchemDocMessageService.getDocMessageList();
-		model.addAttribute("docList",list);
-		model.addAttribute("isDocMenu",  isVisibleDocMenu());
+		model.addAttribute("docList", list);
+		model.addAttribute("isDocMenu", isVisibleDocMenu());
 		return "pages/reports/docList";
 	}
 
 	@RequestMapping(value = "/docDel", method = RequestMethod.GET)
-	public String delDoc(final Model model, final RedirectAttributes attr,final HttpServletRequest request,
+	public String delDoc(final Model model, final RedirectAttributes attr, final HttpServletRequest request,
 			final HttpServletResponse response) throws CMSItemNotFoundException {
 
 		final String articecode = request.getParameter("delCode");
-		
+
 		acerchemDocMessageService.delDocMessage(articecode);
 		final List<AcerchemDocMessageModel> list = acerchemDocMessageService.getDocMessageList();
-		model.addAttribute("docList",list);
-		model.addAttribute("isDocMenu",  isVisibleDocMenu());
+		model.addAttribute("docList", list);
+		model.addAttribute("isDocMenu", isVisibleDocMenu());
 		return "pages/reports/docList";
 	}
 
-	
-
-	private String isVisibleDocMenu(){
-		String s= "no";
+	private String isVisibleDocMenu() {
+		String s = "no";
 		final UserModel user = userService.getCurrentUser();
 		if (CollectionUtils.isNotEmpty(user.getGroups())) {
-			final Optional optional = user.getGroups().stream()
-					.filter(group -> group.getUid().equals("docgroup")).findAny();
+			final Optional optional = user.getGroups().stream().filter(group -> group.getUid().equals("docgroup"))
+					.findAny();
 			if (optional.isPresent()) {
-					s="yes";		
-				}
+				s = "yes";
+			}
 		}
-		return  s;
+		return s;
 	}
-	
+
 }
