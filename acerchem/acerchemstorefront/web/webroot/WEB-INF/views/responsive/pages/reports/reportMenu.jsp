@@ -43,6 +43,7 @@
 	var="docDelUrl" />	
 <c:url value="/logout" var="homeUrl" />	
 
+
 <body class="index-body">
 	<header>
 		<div class="logo">
@@ -77,13 +78,14 @@
 						 <a href="${vendorOrderProductUrl}">商品订单分析</a>
 
 					</div></li>
-					
+					<c:if test="${param.section eq 'yes'}">
 					<li><a href="">推文管理</a>
 					<div class="col-list" style="display: none">
 						<a href="${docAddUrl}">推文增加</a>
 						 <a href="${docDelUrl}">推文删除</a>
 
 					</div></li>
+					</c:if>
 					
 					
 			</ul>

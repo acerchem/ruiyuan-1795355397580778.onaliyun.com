@@ -24,7 +24,9 @@
 <c:url value="/reports/docAdd" var="addUrl" />
 <body class="index-body">
 	<!-- top -->
-	<jsp:include page="reportMenu.jsp" />
+	<jsp:include page="reportMenu.jsp" >
+    	<jsp:param name="section"  value="${isDocMenu}" />
+    </jsp:include>
 	<!-- content -->
 	<div class="index-container">
 
@@ -33,13 +35,12 @@
 			enctype="multipart/form-data" method="post">
 			<table class="grid">
 				<tr height="30px">
-					<td>文章标题:<input type="text" name="title" maxlength="100"
-						size="100">
+					<td>文章标题:<input type="text" name="title" size="20">
 					
 					</td>
 				</tr>
 				<tr height="30px">
-					<td>文章作者:<input type="text" name="author">
+					<td>文章作者:<input type="text" name="author" size="20">
 					</td>
 				</tr>
 				<tr height="30px">

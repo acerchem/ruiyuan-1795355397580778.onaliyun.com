@@ -36,7 +36,9 @@
 <body class="index-body">
 
     <!-- top -->
-	<jsp:include page="reportMenu.jsp" />
+	<jsp:include page="reportMenu.jsp" >
+    	<jsp:param name="section"  value="${isDocMenu}" />
+    </jsp:include>
 	<!-- content -->
 	<div class="index-container">
 

@@ -1,10 +1,7 @@
 package com.acerchem.storefront.controllers.reports;
 
-import java.util.Optional;
-
 import javax.annotation.Resource;
 
-import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractPageController;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.cms2.model.pages.AbstractPageModel;
-import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.servicelayer.user.UserService;
 
 /**
@@ -34,7 +30,6 @@ public class ReportHomePageController extends AbstractPageController{
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(null));
 		updatePageTitle(model, getContentPageForLabelOrId(null));
 		
-		model.addAttribute("isDocMenu", isVisibleDocMenu());
 		
 		return REDIRECT_PREFIX + "/reports/message";
 	}
@@ -43,17 +38,4 @@ public class ReportHomePageController extends AbstractPageController{
 		storeContentPageTitleInModel(model, getPageTitleResolver().resolveHomePageTitle(cmsPage.getTitle()));
 	}
 	
-	private String isVisibleDocMenu(){
-		 String s="not";
-		final UserModel user = userService.getCurrentUser();
-		if (CollectionUtils.isNotEmpty(user.getGroups())) {
-			final Optional optional = user.getGroups().stream()
-					.filter(group -> group.getUid().equals("docgroup")).findAny();
-			if (optional.isPresent()) {
-					s="yes";	
-					System.out.println(s);
-				}
-		}
-		return  s;
-	}
 }

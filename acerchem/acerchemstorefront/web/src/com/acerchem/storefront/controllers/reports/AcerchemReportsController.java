@@ -228,6 +228,8 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 			return "redirect:/reports/message";
 		}
 
+		
+		
 		storeCmsPageInModel(model, getContentPageForLabelOrId("login"));
 		// init
 		final Date d = new Date();
@@ -239,6 +241,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		final SearchCriteriaFrom searchCriteriaFrom = new SearchCriteriaFrom();
 		searchCriteriaFrom.setMonth(curMonth);
 
+		model.addAttribute("isDocMenu",  isVisibleDocMenu());
 		model.addAttribute("searchPageData", searchPageData);
 		model.addAttribute("searchCriteriaFrom", searchCriteriaFrom);
 
@@ -287,7 +290,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		final int numberPagesShown = getSiteConfigService().getInt("pagination.number.results.count", 100);
 		model.addAttribute("numberPagesShown", Integer.valueOf(numberPagesShown));
 		model.addAttribute("isShowPageAllowed", false);
-
+		model.addAttribute("isDocMenu",  isVisibleDocMenu());
 		return "pages/reports/orderDetails";
 	}
 
@@ -311,6 +314,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 
 		model.addAttribute("monthlySalesAnalysisForm", monthlySalesAnalysisForm);
 		model.addAttribute("salesList", list);
+		model.addAttribute("isDocMenu",  isVisibleDocMenu());
 		return "pages/reports/monthlySalesAnalysis";
 	}
 
@@ -326,6 +330,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 
 		model.addAttribute("salesList", list);
 		model.addAttribute("monthlySalesAnalysisForm", monthlySalesAnalysisForm);
+		model.addAttribute("isDocMenu",  isVisibleDocMenu());
 		return "pages/reports/monthlySalesAnalysis";
 	}
 
@@ -334,6 +339,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 
 		// final HSSFWorkbook wkb = new HSSFWorkbook();
 		// final HSSFSheet sheet=wkb.createSheet("salesAnalysis");
+		
 		return "pages/reports/monthlySalesAnalysis";
 	}
 
@@ -350,7 +356,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 
 		final List<SalesByEmployeeReportData> listPrincipal = acerchemOrderAnalysisService.getEmployeeSales(year);
 		final List<EmployeeMonthlySalesBean> list = getCrossTabOfEmployeeSalesAnalysis(listPrincipal);
-
+		model.addAttribute("isDocMenu",  isVisibleDocMenu());
 		model.addAttribute("curYear", year);
 		model.addAttribute("salesList", list);
 		return "pages/reports/employeeSalesAnalysis";
@@ -364,6 +370,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		// list = getEmployeeSalesAnalysisSum(list);
 		model.addAttribute("salesList", list);
 		model.addAttribute("curYear", year);
+		model.addAttribute("isDocMenu",  isVisibleDocMenu());
 		return "pages/reports/employeeSalesAnalysis";
 	}
 
@@ -592,6 +599,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		final List<InventoryReportData> list = acerChemProductService.getInventoryProductByVendor(employee.getUid());
 
 		model.addAttribute("list", list);
+		model.addAttribute("isDocMenu",  isVisibleDocMenu());
 
 		return "pages/reports/vendorInventoryAnalysis";
 	}
@@ -600,7 +608,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	public String showVendorOrderProduct(final Model model) throws CMSItemNotFoundException {
 		storeCmsPageInModel(model, getContentPageForLabelOrId("login"));
 		// model.addAttribute("list",list);
-
+		model.addAttribute("isDocMenu",  isVisibleDocMenu());
 		return "pages/reports/vendorOrderProduct";
 	}
 
@@ -624,12 +632,13 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		final List<OrderProductReportData> list = acerChemProductService.getOrderProductByVendor(employee.getUid(),
 				start, end);
 		model.addAttribute("list", list);
+		model.addAttribute("isDocMenu",  isVisibleDocMenu());
 		return "pages/reports/vendorOrderProduct";
 	}
 
 	@RequestMapping(value = "/noSignIn", method = RequestMethod.GET)
 	public String showSignInMessage(final Model model) {
-
+		model.addAttribute("isDocMenu",  isVisibleDocMenu());
 		return "pages/reports/noSignIn";
 	}
 
@@ -637,7 +646,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	public String getMessagePage(final Model model, @ModelAttribute("myMessage") final String message) {
 
 		// final String message = (String) model.asMap().get("reportMessage");
-
+		model.addAttribute("isDocMenu",  isVisibleDocMenu());
 		model.addAttribute("reportMessage",  message);
 		return "pages/reports/reportMessage";
 	}
@@ -667,7 +676,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		list = acerChemProductService.getInventory(list);
 		model.addAttribute("list", list);
 		model.addAttribute("vendorInventoryForm", form);
-
+		model.addAttribute("isDocMenu",  isVisibleDocMenu());
 		return "pages/reports/vendorInventoryAnalysis";
 	}
 
@@ -700,6 +709,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 			}
 		}
 		model.addAttribute("vendorInventoryForm", newform);
+		model.addAttribute("isDocMenu",  isVisibleDocMenu());
 		return "pages/reports/vendorInventoryAnalysis";
 	}
 
@@ -736,6 +746,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 
 		model.addAttribute("list", list);
 		model.addAttribute("vendorAnalysisForm", form);
+		model.addAttribute("isDocMenu",  isVisibleDocMenu());
 		return "pages/reports/vendorOrderProduct";
 	}
 
@@ -779,6 +790,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		}
 
 		model.addAttribute("vendorAnalysisForm", newform);
+		model.addAttribute("isDocMenu",  isVisibleDocMenu());
 		return "pages/reports/vendorOrderProduct";
 	}
 
@@ -813,6 +825,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		model.addAttribute("list", list);
 		model.addAttribute("month", month);
 		model.addAttribute("maxWeek", maxWeek);
+		model.addAttribute("isDocMenu",  isVisibleDocMenu());
 		return "pages/reports/productPriceAnalysis";
 
 	}
@@ -847,6 +860,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		model.addAttribute("list", list);
 		model.addAttribute("month", curMonth);
 		model.addAttribute("maxWeek", maxWeek);
+		model.addAttribute("isDocMenu",  isVisibleDocMenu());
 		return "pages/reports/productPriceAnalysis";
 
 	}
@@ -873,6 +887,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		final ProductSalesForm productSalesForm = new ProductSalesForm();
 		model.addAttribute("productSalesForm", productSalesForm);
 		model.addAttribute("month", month);
+		model.addAttribute("isDocMenu",  isVisibleDocMenu());
 		return "pages/reports/productSalesRecord";
 
 	}
@@ -906,6 +921,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 
 		model.addAttribute("productSalesForm", newForm);
 		model.addAttribute("month", curMonth);
+		model.addAttribute("isDocMenu",  isVisibleDocMenu());
 		return "pages/reports/productSalesRecord";
 
 	}
@@ -925,6 +941,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		final CustomerSalesAnalysisForm customerSalesAnalysisForm = new CustomerSalesAnalysisForm();
 		model.addAttribute("customerSalesAnalysisForm", customerSalesAnalysisForm);
 		model.addAttribute("list", list);
+		model.addAttribute("isDocMenu",  isVisibleDocMenu());
 		return "pages/reports/customerSalesAnalysis";
 
 	}
@@ -942,7 +959,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 
 		model.addAttribute("list", list);
 		model.addAttribute("customerSalesAnalysisForm", customerSalesAnalysisForm);
-
+		model.addAttribute("isDocMenu",  isVisibleDocMenu());
 		return "pages/reports/customerSalesAnalysis";
 
 	}
@@ -981,6 +998,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		model.addAttribute("creditList", creditList);
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);
+		model.addAttribute("isDocMenu",  isVisibleDocMenu());
 		return "pages/reports/customerBillAnalysis";
 
 	}
@@ -1014,6 +1032,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		model.addAttribute("creditList", creditList);
 		model.addAttribute("startDate", startDate);
 		model.addAttribute("endDate", endDate);
+		model.addAttribute("isDocMenu",  isVisibleDocMenu());
 		return "pages/reports/customerBillAnalysis";
 
 	}
@@ -1111,6 +1130,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	@RequestMapping(value = "/docAdd", method = RequestMethod.GET)
 	public String showDocAdd(final Model model, final RedirectAttributes attr) throws CMSItemNotFoundException {
 
+		model.addAttribute("isDocMenu",  isVisibleDocMenu());
 		return "pages/reports/docAdd";
 	}
 
@@ -1118,10 +1138,10 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	public String addDoc(final Model model, final RedirectAttributes attr, final HttpServletRequest request,
 			final HttpServletResponse response) throws ServletException, IOException {
 		
-		if (!isVisibleDocMenu()) {
-			attr.addFlashAttribute("myMessage", "没有权限!");
-			return "redirect:/reports/message";
-		}
+//		if (!isVisibleDocMenu()) {
+//			attr.addFlashAttribute("myMessage", "没有权限!");
+//			return "redirect:/reports/message";
+//		}
 		
 		// 得到上传文件的保存目录，将上传的文件存放于WEB-INF目录下，不允许外界直接访问，保证上传文件的安全
 		final String savePath = request.getServletContext().getRealPath("/WEB-INF/upload");
@@ -1257,12 +1277,13 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	@RequestMapping(value = "/docList", method = RequestMethod.GET)
 	public String showDocList(final Model model, final RedirectAttributes attr) throws CMSItemNotFoundException {
 
-		if (!isVisibleDocMenu()) {
-			attr.addFlashAttribute("myMessage", "没有权限!");
-			return "redirect:/reports/message";
-		}
+//		if (!isVisibleDocMenu()) {
+//			attr.addFlashAttribute("myMessage", "没有权限!");
+//			return "redirect:/reports/message";
+//		}
 		final List<AcerchemDocMessageModel> list = acerchemDocMessageService.getDocMessageList();
 		model.addAttribute("docList",list);
+		model.addAttribute("isDocMenu",  isVisibleDocMenu());
 		return "pages/reports/docList";
 	}
 
@@ -1275,22 +1296,23 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		acerchemDocMessageService.delDocMessage(articecode);
 		final List<AcerchemDocMessageModel> list = acerchemDocMessageService.getDocMessageList();
 		model.addAttribute("docList",list);
+		model.addAttribute("isDocMenu",  isVisibleDocMenu());
 		return "pages/reports/docList";
 	}
 
 	
 
-	private boolean isVisibleDocMenu(){
-		 boolean b= false;
+	private String isVisibleDocMenu(){
+		String s= "no";
 		final UserModel user = userService.getCurrentUser();
 		if (CollectionUtils.isNotEmpty(user.getGroups())) {
 			final Optional optional = user.getGroups().stream()
 					.filter(group -> group.getUid().equals("docgroup")).findAny();
 			if (optional.isPresent()) {
-					b=true;		
+					s="yes";		
 				}
 		}
-		return  b;
+		return  s;
 	}
 	
 }
