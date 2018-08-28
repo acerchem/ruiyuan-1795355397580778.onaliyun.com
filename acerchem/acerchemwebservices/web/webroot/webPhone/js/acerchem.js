@@ -1185,9 +1185,24 @@ function getAllProducts()
                 			html+='<img src="'+urlStr+'"></a></div><div class="text g-price"><a href="product.html?code='+products[i].code+'"><p>'+products[i].name+'</p><div class="price"><span>';
                 			//console.log("urlStr:"+urlStr);
                 		}else{
-                			html+='<img src="'+products[i].images[0].url.substring(23)+'"></a></div><div class="text g-price"><a href="product.html?code='+products[i].code+'"><p>'+products[i].name+'</p><div class="price"><span>';
+                			html+='<img src="'+products[i].images[0].url.substring(23)+'"></a></div><div class="text g-price"><a href="product.html?code='+products[i].code+'"><p>'+products[i].name+'</p><div class="price">';
                 		}
-                    	
+                		
+                		if(products[i].promotionPrice!=null){
+                    		html+= '<span>' + products[i].promotionPrice.formattedValue + '</span>';
+                    		if(products[i].price!=null) {
+                    			html+='<em>' + products[i].price.formattedValue+'</em></div></a></div></li>'
+                    		}else{
+                    			html+= '</div></a></div></li>';
+                    		}
+                    	}else{
+                    		if(products[i].price!=null) {
+                    			html+= '<span>' +  products[i].price.formattedValue+'</span></div></a></div></li>'
+                    		}else{
+                    			html+='</div></a></div></li>'
+                    		}
+                    	}
+                    	/*
                     	if(products[i].promotionPrice!=null){
                     		html+=products[i].promotionPrice.formattedValue + '</span><em>';
                     	}else{
@@ -1199,6 +1214,7 @@ function getAllProducts()
                     	}else{
                     		html+='</em></div></a></div></li>'
                     	}
+                    	*/
                 	}
             	}
             }
@@ -1248,6 +1264,30 @@ function getProductsByCode(code)
             	baseInfo+= '<p>' + returndata.name + '</p>';
             }
             
+            baseInfo += '<i class="icon"></i><span>';
+            if(returndata.code != null) {
+            	baseInfo+= returndata.code;
+            }
+            baseInfo+= '</span>';
+            
+            if(returndata.summary != null) {
+            	baseInfo+='<p>' + returndata.summary + '</p>';
+            }
+            baseInfo += '<div class="price"><div class="left">';
+            if(returndata.promotionPrice!=null){
+                baseInfo+= '<b>' +  returndata.promotionPrice.formattedValue + '</b>';
+                if(returndata.price!=null) {
+                	baseInfo+= '<em>' + returndata.price.formattedValue + '</em></div></div>';
+                }
+            }else{
+            	if(returndata.price!=null) {
+            		baseInfo+='<b>' + returndata.price.formattedValue +  '</b></div></div>';
+            	}else{
+            		baseInfo += '</div></div>';
+            	}
+            }
+            
+            /*
             baseInfo += '<div class="price"><div class="left"><i class="icon"></i><span>';
             if(returndata.code != null) {
             	baseInfo+= returndata.code;
@@ -1270,6 +1310,7 @@ function getProductsByCode(code)
             }
             
             baseInfo+='</em></div></div>';
+            */
             
             /*
             baseInfo += '<div class="price"><div class="left"><b>';
