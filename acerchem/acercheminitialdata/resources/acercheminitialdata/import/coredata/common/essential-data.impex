@@ -74,6 +74,7 @@ INSERT_UPDATE MediaFolder;qualifier[unique=true];path[unique=true]
 ;images;images
 ;email-body;email-body
 ;email-attachments;email-attachments
+;doc-message;doc-message
 
 # Media formats
 INSERT_UPDATE MediaFormat;qualifier[unique=true]
