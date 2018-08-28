@@ -753,4 +753,10 @@
 	<!-- jh:Report -->
 	<alias name="DefaultAcerchemOrderAnalysisService" alias="acerchemOrderAnalysisService"/>
 	<bean id="DefaultAcerchemOrderAnalysisService" class="com.acerchem.core.service.impl.AcerchemOrderAnalysisServiceImpl"/>
+	
+	
+	<bean id="acerchemDocMessageDao" class="com.acerchem.core.dao.impl.AcerchemDocMessageDaoImpl"/>
+	<bean id="acerchemDocMessageService" class="com.acerchem.core.service.impl.AcerchemDocMessageServiceImpl">
+		<property name="docMessageMediaFolderName" value="doc-message"/>
+	</bean>
 </beans>

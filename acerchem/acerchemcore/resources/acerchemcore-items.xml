@@ -1391,6 +1391,32 @@
 				</attributes>
 			</itemtype>
 		
+		<itemtype code="AcerchemDocMessage" autocreate="true" generate="true"
+				extends="Media">
+				<deployment table="AcerchemDocMessage" typecode="20315" />
+				<attributes>
+					<attribute qualifier="articleCode" type="java.lang.String">
+						<description>ID</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="title" type="java.lang.String">
+						<description>标题</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="author" type="java.lang.String">
+						<description>作者</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+					<attribute qualifier="tags" type="java.lang.String">
+						<description>标签（逗号分割）</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
 		
 		</typegroup>
 		<typegroup name="Report">
