@@ -1149,7 +1149,7 @@ function getAllProducts()
             request.setRequestHeader("Authorization", $.cookie("access_token"));
         },
         success:function(returndata){
-            //console.log("success:"+JSON.stringify(returndata));
+            console.log("success:"+JSON.stringify(returndata));
             var html='';
             var products=returndata.products;
             /*
