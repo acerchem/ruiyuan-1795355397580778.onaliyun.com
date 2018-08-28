@@ -18,7 +18,7 @@
 				<c:forEach items="${articles}" var="article">
 					<tr class="responsive-table-item">
 						<td class="responsive-table-cell" style="padding:10px 10px;font-size:14px;">
-							<a href="${article.url}">
+							<a href="${article.url}" target="_blank">
 								${article.title}
 							</a>
 						</td>
