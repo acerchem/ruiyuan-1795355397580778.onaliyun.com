@@ -226,7 +226,7 @@ header{
 }
 .head-nav{
 	float: left;
-	margin-left: 20px;
+	margin-left: 5px;
 }
 .head-nav ul li{
 	float: left;
@@ -235,7 +235,7 @@ header{
 .head-nav ul li > a{
 	font-size: 18px;
 	line-height: 60px;
-	padding: 0 50px;
+	padding: 0 30px;
 	display: inline-block;
 	position: relative;
 	z-index: 2;
@@ -361,5 +361,15 @@ header{
 	font-size: 18px;
 }
 .pageview p .act{
+	color: #14416e;
+}
+.formfont{
+	font-size: 18px;
+	line-height: 20px;
+	color: #14416e;
+}
+.formfont input{
+	font-size: 18px;
+	line-height: 20px;
 	color: #14416e;
 }

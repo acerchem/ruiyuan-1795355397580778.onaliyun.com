@@ -1,6 +1,7 @@
 <%@ page trimDirectiveWhitespaces="true" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
+
 <spring:htmlEscape defaultHtmlEscape="true" />
 <!DOCTYPE html>
 <html lang="en">
@@ -36,7 +37,12 @@
 	var="vendorInventoryUrl" />
 <c:url value="/reports/vendorOrderProduct/temp"
 	var="vendorOrderProductUrl" />
+<c:url value="/reports/docAdd"
+	var="docAddUrl" />	
+<c:url value="/reports/docList"
+	var="docDelUrl" />	
 <c:url value="/logout" var="homeUrl" />	
+
 <body class="index-body">
 	<header>
 		<div class="logo">
@@ -71,6 +77,14 @@
 						 <a href="${vendorOrderProductUrl}">商品订单分析</a>
 
 					</div></li>
+					
+					<li><a href="">推文管理</a>
+					<div class="col-list" style="display: none">
+						<a href="${docAddUrl}">推文增加</a>
+						 <a href="${docDelUrl}">推文删除</a>
+
+					</div></li>
+					
 					
 			</ul>
 		</nav>
