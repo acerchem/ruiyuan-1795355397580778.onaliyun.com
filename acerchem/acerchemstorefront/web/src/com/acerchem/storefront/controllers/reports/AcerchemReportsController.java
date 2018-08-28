@@ -1118,7 +1118,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	public String addDoc(final Model model, final RedirectAttributes attr, final HttpServletRequest request,
 			final HttpServletResponse response) throws ServletException, IOException {
 		
-		if (isVisibleDocMenu()) {
+		if (!isVisibleDocMenu()) {
 			attr.addFlashAttribute("myMessage", "没有权限!");
 			return "redirect:/reports/message";
 		}
@@ -1257,7 +1257,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	@RequestMapping(value = "/docList", method = RequestMethod.GET)
 	public String showDocList(final Model model, final RedirectAttributes attr) throws CMSItemNotFoundException {
 
-		if (isVisibleDocMenu()) {
+		if (!isVisibleDocMenu()) {
 			attr.addFlashAttribute("myMessage", "没有权限!");
 			return "redirect:/reports/message";
 		}

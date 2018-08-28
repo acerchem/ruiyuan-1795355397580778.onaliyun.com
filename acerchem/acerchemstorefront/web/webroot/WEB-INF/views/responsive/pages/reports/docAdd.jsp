@@ -33,8 +33,8 @@
 			enctype="multipart/form-data" method="post">
 			<table class="grid">
 				<tr height="30px">
-					<td>文章标题:<input type="text" name="title" maxlength="150"
-						size="150">
+					<td>文章标题:<input type="text" name="title" maxlength="100"
+						size="100">
 					
 					</td>
 				</tr>
