@@ -1268,7 +1268,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 			acerchemDocMessageService.addDocMessage(fileForm.getFileins(), fileForm.getFilename(),
 					fileForm.getMimeType(), fileForm.getAuthor(), fileForm.getTitle());
 			}else{
-				message = "没有选择好上传文件！";
+				message = "没有选择好文件，请重新选择文件上传！";
 			}
 
 		} catch (final FileSizeLimitExceededException e) {
