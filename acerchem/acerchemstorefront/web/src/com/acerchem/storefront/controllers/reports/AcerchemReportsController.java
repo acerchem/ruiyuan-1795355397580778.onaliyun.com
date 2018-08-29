@@ -1263,8 +1263,13 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 					message = "文件上传成功！";
 				}
 			}
+			//保证一定有文件,网络流不会阻塞
+			if(fileForm.getFileins()!=null && fileForm.getFileins().available() >0 ){
 			acerchemDocMessageService.addDocMessage(fileForm.getFileins(), fileForm.getFilename(),
 					fileForm.getMimeType(), fileForm.getAuthor(), fileForm.getTitle());
+			}else{
+				message = "没有选择好上传文件！";
+			}
 
 		} catch (final FileSizeLimitExceededException e) {
 			message = "文件大小超过" + UPLOADED_FILE_MAX_SIZE + "M,请选择小些的文件！";
