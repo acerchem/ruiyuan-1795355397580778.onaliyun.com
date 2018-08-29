@@ -25,7 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.fileupload.FileItem;
-import org.apache.commons.fileupload.ProgressListener;
+import org.apache.commons.fileupload.FileUploadBase.FileSizeLimitExceededException;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.lang3.StringUtils;
@@ -81,6 +81,7 @@ import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.ordersplitting.model.VendorModel;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.user.UserService;
+import de.hybris.platform.util.Config;
 
 @Controller
 @RequestMapping("/reports")
@@ -115,6 +116,9 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 
 	@Resource
 	private AcerchemDocMessageService acerchemDocMessageService;
+
+	private final static int UPLOADED_FILE_MAX_SIZE = Config.getInt("uploaded.file.max.size", 4);
+	private final static int UPLOADED_FILE_MAX_COUNT = Config.getInt("uploaded.file.max.count", 5);
 
 	@ModelAttribute("countries")
 	public Collection<CountryData> getCountries() {
@@ -1161,13 +1165,15 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 			factory.setRepository(tmpFile);
 			// 2、创建一个文件上传解析器
 			final ServletFileUpload upload = new ServletFileUpload(factory);
-			upload.setProgressListener(new ProgressListener() {
-				@Override
-				public void update(final long pBytesRead, final long pContentLength, final int arg2) {
-					System.out.println("文件大小为：" + pContentLength + ",当前已处理：" + pBytesRead);
-
-				}
-			});
+			// upload.setProgressListener(new ProgressListener() {
+			// @Override
+			// public void update(final long pBytesRead, final long
+			// pContentLength, final int arg2) {
+			// //System.out.println("文件大小为：" + pContentLength + ",当前已处理：" +
+			// pBytesRead);
+			//
+			// }
+			// });
 			// 解决上传文件名的中文乱码
 			upload.setHeaderEncoding("UTF-8");
 			// 3、判断提交上来的数据是否是上传表单的数据
@@ -1178,10 +1184,10 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 				return "redirect:/reports/message";
 			}
 
-			// 设置上传单个文件的大小的最大值，目前是设置为1024*1024*4字节，也就是4MB
-			 upload.setFileSizeMax(4*1024*1024);
+			// 设置上传单个文件的大小的最大值，
+			upload.setFileSizeMax(UPLOADED_FILE_MAX_SIZE * 1024 * 1024);
 			// 设置上传文件总量的最大值，最大值=同时上传的多个文件的大小的最大值的和，目前设置为10MB
-			 upload.setSizeMax(1024*1024*10);
+			upload.setSizeMax(1024 * 1024 * UPLOADED_FILE_MAX_SIZE * UPLOADED_FILE_MAX_COUNT);
 			// 4、使用ServletFileUpload解析器解析上传数据，解析结果返回的是一个List<FileItem>集合，每一个FileItem对应一个Form表单的输入项
 			final List<FileItem> list = upload.parseRequest(request);
 
@@ -1209,11 +1215,12 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 					}
 				} else {// 如果fileitem中封装的是上传文件
 
-					if (item.getSize() > 4 * 1024 * 1024) { // >4M 不允许上传
-						message = "文件大小超过4M,请选择小些的文件！";
-						attr.addFlashAttribute("myMessage", message);
-						return "redirect:/reports/message";
-					}
+					// if (item.getSize() > UPLOADED_FILE_MAX_SIZE * 1024 *
+					// 1024) { // >4M 不允许上传
+					// message = "文件大小超过"+UPLOADED_FILE_MAX_SIZE+"M,请选择小些的文件！";
+					// attr.addFlashAttribute("myMessage", message);
+					// return "redirect:/reports/message";
+					// }
 					// 得到上传的文件名称，
 					String filename = item.getName();
 					// System.out.println(filename);
@@ -1259,6 +1266,8 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 			acerchemDocMessageService.addDocMessage(fileForm.getFileins(), fileForm.getFilename(),
 					fileForm.getMimeType(), fileForm.getAuthor(), fileForm.getTitle());
 
+		} catch (final FileSizeLimitExceededException e) {
+			message = "文件大小超过" + UPLOADED_FILE_MAX_SIZE + "M,请选择小些的文件！";
 		} catch (final Exception e) {
 			message = "文件上传失败！";
 			e.printStackTrace();
