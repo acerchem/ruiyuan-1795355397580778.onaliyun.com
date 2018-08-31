@@ -482,7 +482,6 @@ function addNum()
 		$('#pdnum').val(maxnum);
 		$('#qty').val(maxnum); 
 	}else{
-		$('#pdnum').val(avl);
 		$('#qty').val(avl); 
 	}
 }
