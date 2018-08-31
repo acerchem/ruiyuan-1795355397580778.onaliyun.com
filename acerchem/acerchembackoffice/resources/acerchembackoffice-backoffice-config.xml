@@ -537,11 +537,11 @@
 				<explorer-tree:type-node code="CustomerCreditAccount" id="CustomerCreditAccount"/>
 				<explorer-tree:type-node code="CreditTransaction" id="CreditTransaction"/>
 			</explorer-tree:navigation-node>
-			
-			<explorer-tree:navigation-node id="hmc.reportgroup">
-				<explorer-tree:type-node code="OrderReportDetail" id="OrderReportDetail"/>
+			<!-- add by wangjh -->
+			<explorer-tree:navigation-node id="hmc.commerce.vendor">
+				<explorer-tree:type-node code="Vendor" id="hmc_commerce_vendor"/>
 			</explorer-tree:navigation-node>
-			
+			<!-- end by wangjh -->
 			<!-- add by alice -->
 			<explorer-tree:navigation-node id="hmc_backoffice-workflow-inbox" position="1" merge-mode="Remove"/>
 			
@@ -732,8 +732,36 @@
         </editorArea:editorArea>
     </context>
     <!-- end -->
+	 <!-- start by wangjh -->
+	 <context component="create-wizard" type="Vendor">
+		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="VendorWizard" title="create.Vendor.title">
+			<wz:prepare id="VendorPrepare">
+				<wz:initialize property="newVendor" type="Vendor"/>
+			</wz:prepare>
+			<wz:step id="step1" label="create.Vendor.general.label" >
+				<wz:content id="step1.content">
+					<wz:property-list root="newVendor">
+						<wz:property qualifier="code" />
+						<wz:property qualifier="name" />
+					</wz:property-list>
+				</wz:content>
+				<wz:navigation id="step1.navigation">
+					<wz:cancel/>
+					<wz:done>
+						<wz:save property="newVendor"/>
+					</wz:done>
+				</wz:navigation>
+			</wz:step>
+		</wz:flow>
+	</context>
 	
-	
+	<context merge-by="type" parent="GenericItem" type="Vendor" component="listview">
+        <list-view:list-view xmlns:list-view="http://www.hybris.com/cockpitng/component/listView">
+            <list-view:column qualifier="code"/>
+            <list-view:column qualifier="name"/>
+        </list-view:list-view>
+    </context>
+    <!-- end -->
     
     <context component="create-wizard" type="OrderParam">
 		<wz:flow xmlns:wz="http://www.hybris.com/cockpitng/config/wizard-config" id="OrderParamWizard" title="create.OrderParam.title">
