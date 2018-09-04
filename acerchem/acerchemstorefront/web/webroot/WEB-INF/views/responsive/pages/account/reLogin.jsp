@@ -15,11 +15,9 @@ function reLogin(){
 	$.ajax({
 		url: ACC.config.encodedContextPath + '/logout',
 		async: true,
-		dataType: "html",
-		success: function (data) {
-			window.location.href ='<c:url value='/login'/>'
-	    }
+		dataType: "html"
 	});
+	window.location.href ='<c:url value='/login'/>';
 } 
 </script>
 	
