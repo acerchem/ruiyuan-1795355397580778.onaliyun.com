@@ -1128,9 +1128,14 @@ public class AccountPageController extends AbstractSearchPageController
 		}
 		else
 		{
-			GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.CONF_MESSAGES_HOLDER,
-					"text.account.confirmation.password.updated", null);
-			return REDIRECT_TO_PASSWORD_UPDATE_PAGE;
+			//GlobalMessages.addFlashMessage(redirectAttributes, GlobalMessages.CONF_MESSAGES_HOLDER,
+			//		"text.account.confirmation.password.updated", null);
+			//return REDIRECT_TO_PASSWORD_UPDATE_PAGE;
+			
+			storeCmsPageInModel(model, getContentPageForLabelOrId(UPDATE_PASSWORD_CMS_PAGE));
+			setUpMetaDataForContentPage(model, getContentPageForLabelOrId(UPDATE_PASSWORD_CMS_PAGE));
+			model.addAttribute(BREADCRUMBS_ATTR, accountBreadcrumbBuilder.getBreadcrumbs("text.account.profile.updatePasswordForm"));
+			return "/pages/account/reLogin";
 		}
 	}
 	
