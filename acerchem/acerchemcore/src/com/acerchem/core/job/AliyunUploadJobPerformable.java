@@ -10,6 +10,7 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.acerchem.core.enums.ImageFailedActionType;
@@ -135,9 +136,14 @@ public class AliyunUploadJobPerformable extends AbstractJobPerformable<CronJobMo
 					// aliyun path
 					final SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
 					final String temp_ = df.format(new Date());
-					//final String keySuffix = localPath.substring(localPath.lastIndexOf(".") + 1);
+					final String keySuffix = localPath.substring(localPath.lastIndexOf(".") + 1);
 
-					final String filename = file.getName();
+					String filename = file.getName();
+					if(root.contains(DOCROOT)){
+						filename = media.getCode() + "-" + StringUtils.defaultString(media.getAltText(),"default") + "."+ keySuffix;
+					}else if(root.contains(IMAGEROOT)){
+						filename = media.getPk().getLong().toString() + "." + keySuffix;
+					}
 					// aliyun relation path>>> application/yyyymmdd/
 					//final String key = root + "/" + temp_ + "/" + media.getPk().getLong().toString() + "." + keySuffix;
 					final String key = root + "/" + temp_ + "/" + filename;
