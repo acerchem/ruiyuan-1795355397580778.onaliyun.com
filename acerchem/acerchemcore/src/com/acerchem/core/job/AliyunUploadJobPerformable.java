@@ -10,7 +10,6 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 
 import com.acerchem.core.enums.ImageFailedActionType;
@@ -140,7 +139,7 @@ public class AliyunUploadJobPerformable extends AbstractJobPerformable<CronJobMo
 
 					String filename = file.getName();
 					if(root.contains(DOCROOT)){
-						filename = media.getCode() + "-" + StringUtils.defaultString(media.getAltText(),"default") + "."+ keySuffix;
+						//filename = media.getCode() + "-" + StringUtils.defaultString(media.getAltText(),"default") + "."+ keySuffix;
 					}else if(root.contains(IMAGEROOT)){
 						filename = media.getPk().getLong().toString() + "." + keySuffix;
 					}
