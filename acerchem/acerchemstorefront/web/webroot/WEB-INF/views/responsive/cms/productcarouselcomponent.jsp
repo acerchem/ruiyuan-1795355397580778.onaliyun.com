@@ -23,8 +23,18 @@
 		   		<div class="maxtext">
 		    		<p class="in-title">${fn:escapeXml(product.name)} (${product.netWeight}kg ${product.packageType})</p>
 		    		<div class="spset">
-		    			<span class="price">${product.promotionPrice.formattedValue}</span>
+		    		
+		    		<c:choose>
+							<c:when test="${not empty product.promotionPrice}">
+							
+			  					<span class="price">${product.promotionPrice.formattedValue}</span>
 		    			<span class="old-price">${product.price.formattedValue}</span>
+							</c:when>
+						<c:otherwise>
+							<span class="price">${product.price.formattedValue}</span>
+						</c:otherwise>
+						</c:choose>
+						
 		    		</div>
 		    	</div>
 			</li>
@@ -50,9 +60,17 @@
 		    			<a href="${productUrl}"><product:productPrimaryImage product="${product}" format="product"/></a>
 		    		</div>
 		    		<div class="maxtext">
-			    		<p>${fn:escapeXml(product.name)} (${product.netWeight}kg ${product.packageType})</p>
-			    		<span class="price">${product.promotionPrice.formattedValue}</span>
+		    			<p>${fn:escapeXml(product.name)} (${product.netWeight}kg ${product.packageType})</p>
+		    			<c:choose>
+		    			
+							<c:when test="${not empty product.promotionPrice}">							
+			  					<span class="price">${product.promotionPrice.formattedValue}</span>
 		    			<span class="old-price">${product.price.formattedValue}</span>
+							</c:when>
+						<c:otherwise>
+							<span class="price">${product.price.formattedValue}</span>
+						</c:otherwise>
+						</c:choose>
 			    	</div>
 		    	</div>
 	    	</c:forEach>
