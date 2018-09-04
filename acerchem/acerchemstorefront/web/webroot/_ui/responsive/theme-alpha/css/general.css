@@ -1904,6 +1904,10 @@ textarea{
 	vertical-align: initial;
 }
 
+.gen-content .gen-right .check-item .spset span.old-price,.prod-cont .product-right .pdlist span.old-price{
+	text-decoration: line-through;
+}
+
 .gen-content .gen-right .check-item .spset span{
 	margin-right: 4px;
 }
