@@ -60,23 +60,23 @@ public class AliyunUploadJobPerformable extends AbstractJobPerformable<CronJobMo
 	private final String lsBucketName = Config.getString("aliyun.bucketName", "acerchem");
 
 	@Override
-	public PerformResult perform(CronJobModel cronJob) {
+	public PerformResult perform(final CronJobModel cronJob) {
 		// TODO Auto-generated method stub
 		try {
 			if (!IS_NOUPLOAD) {
-				List<String> imageParams = new ArrayList<String>();
+				final List<String> imageParams = new ArrayList<String>();
 				imageParams.add("image/jpeg");
 				imageParams.add("image/png");
 				imageParams.add("image/gif");
 				imageParams.add("image/bmp");
 
 				// 每次MAX_IMAGE个图片文件数据处理
-				List<MediaModel> medias = acerChemMediaService.getMediasOfLimit(imageParams, MAX_IMAGE, "Online",
+				final List<MediaModel> medias = acerChemMediaService.getMediasOfLimit(imageParams, MAX_IMAGE, "Online",
 						"acerchem");
 
 				if (CollectionUtils.isNotEmpty(medias)) {
 
-					for (MediaModel media : medias) {
+					for (final MediaModel media : medias) {
 						LOG.info("****>>>version=" + media.getCatalogVersion().getVersion());
 						uploadFileSendProcessor(media, IMAGEROOT);
 					}
@@ -85,18 +85,18 @@ public class AliyunUploadJobPerformable extends AbstractJobPerformable<CronJobMo
 
 				// doc
 				if (SYN_UPLOAD_DOC) {
-					List<String> docParams = new ArrayList<String>();
+					final List<String> docParams = new ArrayList<String>();
 					docParams.add("application/pdf");
 					docParams.add("application/msexcel");
 					docParams.add("application/msword");
 
 					// 每次MAX_DOC个资质文件数据处理
-					List<MediaModel> docMedias = acerChemMediaService.getMediasOfLimit(docParams, MAX_DOC, "Online",
+					final List<MediaModel> docMedias = acerChemMediaService.getMediasOfLimit(docParams, MAX_DOC, "Online",
 							"acerchem");
 
 					if (CollectionUtils.isNotEmpty(docMedias)) {
 
-						for (MediaModel docmedia : docMedias) {
+						for (final MediaModel docmedia : docMedias) {
 							uploadFileSendProcessor(docmedia, DOCROOT);
 						}
 
@@ -104,7 +104,7 @@ public class AliyunUploadJobPerformable extends AbstractJobPerformable<CronJobMo
 				}
 			}
 
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 
@@ -118,33 +118,34 @@ public class AliyunUploadJobPerformable extends AbstractJobPerformable<CronJobMo
 			// 初始化upload参数
 			UploadFileDefault.initializeParameters(lsEndpoint, lsAccessKeyId, lsAccessKeySecret, lsBucketName);
 
-			OSSClient client = UploadFileDefault.openClient();
+			final OSSClient client = UploadFileDefault.openClient();
 			try {
 				// get localfile path
-				String localPath = media.getLocation();
+				final String localPath = media.getLocation();
 
 				LOG.info("****>>>RelativePath=" + localPath);
 				// get parent fileDir
-				File mainDataDir = MediaUtil.getLocalStorageDataDir();
+				final File mainDataDir = MediaUtil.getLocalStorageDataDir();
 				// get local file
-				File file = MediaUtil.composeOrGetParent(mainDataDir, localPath);
+				final File file = MediaUtil.composeOrGetParent(mainDataDir, localPath);
 				LOG.info("****>>>AbsolutePath=" + file.getAbsolutePath());
 
 				if (file.exists()) {
 
 					// aliyun path
-					SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
-					String temp_ = df.format(new Date());
-					String keySuffix = localPath.substring(localPath.lastIndexOf(".") + 1);
+					final SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd");
+					final String temp_ = df.format(new Date());
+					//final String keySuffix = localPath.substring(localPath.lastIndexOf(".") + 1);
 
+					final String filename = file.getName();
 					// aliyun relation path>>> application/yyyymmdd/
-					String key = root + "/" + temp_ + "/" + media.getPk().getLong().toString() + "." + keySuffix;
-
+					//final String key = root + "/" + temp_ + "/" + media.getPk().getLong().toString() + "." + keySuffix;
+					final String key = root + "/" + temp_ + "/" + filename;
 					// upload aliyun
-					boolean uploadFlag = UploadFileDefault.uploadFile(file, key, client);
+					final boolean uploadFlag = UploadFileDefault.uploadFile(file, key, client);
 
 					// synchronize to save media with aliyunUrl
-					String aliyunUrl = DOMAIN + "/" + key;
+					final String aliyunUrl = DOMAIN + "/" + key;
 					if (uploadFlag) {
 
 						LOG.info("****upload end>>>>synsave to Media start*****");
@@ -181,28 +182,28 @@ public class AliyunUploadJobPerformable extends AbstractJobPerformable<CronJobMo
 					LOG.info("****>>>Files can't find!*****");
 
 				}
-			} catch (IOException e) {
+			} catch (final IOException e) {
 				e.printStackTrace();
 			} finally {
 				UploadFileDefault.closeClient(client);
 			}
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 
 	}
 
 	// 上传失败处理--保存上传的文件路径和aliyun的key路径
-	private void uploadFailedProccess(MediaModel media, String aliyunPath) {
+	private void uploadFailedProccess(final MediaModel media, final String aliyunPath) {
 		try {
 
-			ImageFailedActionType actionType = enumerationService.getEnumerationValue(ImageFailedActionType.class,
+			final ImageFailedActionType actionType = enumerationService.getEnumerationValue(ImageFailedActionType.class,
 					"ADD");
 			// String fileName = media.getLocation();
 			// if (fileName == null)
 			// return;
 
-			String fileName = aliyunPath.substring(aliyunPath.lastIndexOf("/") + 1);
+			final String fileName = aliyunPath.substring(aliyunPath.lastIndexOf("/") + 1);
 
 			String status = "0";
 			ImageFailedRecordModel failedRecord = acerChemImageFailedRecoredService
@@ -231,7 +232,7 @@ public class AliyunUploadJobPerformable extends AbstractJobPerformable<CronJobMo
 			}
 
 			modelService.save(failedRecord);
-		} catch (Exception e) {
+		} catch (final Exception e) {
 			e.printStackTrace();
 		}
 
