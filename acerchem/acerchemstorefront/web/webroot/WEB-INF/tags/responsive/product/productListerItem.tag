@@ -22,7 +22,7 @@
 	
 			<!-- 图片 -->
 			<div class="img">
-				<a href="${productUrl}"  >  
+				<a href="${productUrl}" target="_blank">  
 					<product:productPrimaryImage product="${product}" format="thumbnail"/>
 				</a>
 			</div>
@@ -41,7 +41,7 @@
 				 <div class="addtocart">
 					<div id="actions-container-for-${fn:escapeXml(component.uid)}" class="row">
 						<%-- <action:actions element="div" parentComponent="${component}"/> --%>
-						<a href="${productUrl}">
+						<a href="${productUrl}" target="_blank">
            		  			<div class="g-cart " id="addToCartDiv1451563" >
 				            	<i></i>
 			                </div>
