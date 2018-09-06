@@ -102,14 +102,34 @@
                               <br/>
                               
                               <c:if test="${not empty orderData.deliveryAddress.line1}">
-                              ${fn:escapeXml(orderData.deliveryAddress.line1)}
+                              	${fn:escapeXml(orderData.deliveryAddress.line1)}
                               </c:if>
                               
                               <c:if test="${not empty orderData.deliveryAddress.line2}">
                                   &nbsp;
                                   ${fn:escapeXml(orderData.deliveryAddress.line2)}
                               </c:if>
-                              &nbsp;${fn:escapeXml(orderData.deliveryAddress.town)}&nbsp;${fn:escapeXml(orderData.deliveryAddress.region.name)}&nbsp;${fn:escapeXml(orderData.deliveryAddress.country.name)}&nbsp;${fn:escapeXml(orderData.deliveryAddress.postalCode)}
+                              
+                              <c:if test="${not empty orderData.deliveryAddress.town}">
+                                  &nbsp;
+                                  ${fn:escapeXml(orderData.deliveryAddress.town)}
+                              </c:if>
+                              
+                              <c:if test="${not empty orderData.deliveryAddress.region.name}">
+                              	&nbsp;
+                              	${fn:escapeXml(orderData.deliveryAddress.region.name)}
+                              </c:if>
+                              
+                              <c:if test="${not empty orderData.deliveryAddress.country.name}">
+                              	&nbsp;
+                              	${fn:escapeXml(orderData.deliveryAddress.country.name)}
+                              </c:if>
+                              
+                              <c:if test="${not empty orderData.deliveryAddress.postalCode}">
+                              	&nbsp;
+                              	${fn:escapeXml(orderData.deliveryAddress.postalCode)}
+                              </c:if>
+                              
                               <br/>
                               ${fn:escapeXml(orderData.deliveryAddress.phone)}
 
