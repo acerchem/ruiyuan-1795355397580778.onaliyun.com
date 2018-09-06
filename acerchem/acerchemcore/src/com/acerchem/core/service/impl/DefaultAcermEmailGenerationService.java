@@ -51,6 +51,12 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 	@Resource
 	private EmailService emailService;
 
+	private final static boolean SEND_CUSTOMER_EMAIL_CONTRACT = Config.getBoolean("email.sendcustomer.contract",false);
+	private final static boolean SEND_CUSTOMER_EMAIL_PROFORMA = Config.getBoolean("email.sendcustomer.proforma",false);
+	private final static boolean SEND_CUSTOMER_EMAIL_INVOICE = Config.getBoolean("email.sendcustomer.invoice",false);
+	private final static boolean SEND_CUSTOMER_EMAIL_DELIVERY = Config.getBoolean("email.sendcustomer.delivery",false);
+	private final static boolean SEND_CUSTOMER_EMAIL_RELEASE = Config.getBoolean("email.sendcustomer.release",false);
+	
 	@Override
 	public EmailMessageModel generate(final BusinessProcessModel businessProcessModel,
 			final EmailPageModel emailPageModel) {
@@ -252,25 +258,46 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 
 			emailBodyMessage = "For contract content, please refer to pdf attachment.";
 			key = "contract";
+			if (!SEND_CUSTOMER_EMAIL_CONTRACT){
+				toEmails.remove(toAddress);
+				ccAddress.remove(ccEmailOneAddressModel);
+				toEmails.add(ccEmailOneAddressModel);
+			}
 
 		} else if (StringUtils.containsIgnoreCase(pdfName, "proforma")) {
 			emailBodyMessage = "For proforma invoice content, please refer to pdf attachment.";
 			key = "proformaInvoice";
+			if(!SEND_CUSTOMER_EMAIL_PROFORMA){
+				toEmails.remove(toAddress);
+				ccAddress.remove(ccEmailOneAddressModel);
+				toEmails.add(ccEmailOneAddressModel);
+			}
 			
 		} else if (StringUtils.containsIgnoreCase(pdfName, "invoice")) {
 			emailBodyMessage = "For invoice content, please refer to pdf attachment.";
 			key = "invoice";
-			toEmails.remove(toAddress);
-			ccAddress.remove(ccEmailOneAddressModel);
-			toEmails.add(ccEmailOneAddressModel);
-			
+			if(!SEND_CUSTOMER_EMAIL_INVOICE){
+				toEmails.remove(toAddress);
+				ccAddress.remove(ccEmailOneAddressModel);
+				toEmails.add(ccEmailOneAddressModel);
+			}
 		} else if (StringUtils.containsIgnoreCase(pdfName, "delivery")) {
 			emailBodyMessage = "For delivery content, please refer to pdf attachment.";
 			key = "delivery";
+			if(!SEND_CUSTOMER_EMAIL_DELIVERY){
+				toEmails.remove(toAddress);
+				ccAddress.remove(ccEmailOneAddressModel);
+				toEmails.add(ccEmailOneAddressModel);
+			}
 			
 		} else if (StringUtils.containsIgnoreCase(pdfName, "release")) {
 			emailBodyMessage = "For release content, please refer to pdf attachment.";
 			key = "release";
+			if(!SEND_CUSTOMER_EMAIL_RELEASE){
+				toEmails.remove(toAddress);
+				ccAddress.remove(ccEmailOneAddressModel);
+				toEmails.add(ccEmailOneAddressModel);
+			}
 			
 		}
 		LOG.info("=========="+key+" email generate start=============");
