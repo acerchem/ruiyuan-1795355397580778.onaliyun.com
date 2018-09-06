@@ -99,18 +99,19 @@
                                   ${fn:escapeXml(orderData.deliveryAddress.firstName)}&nbsp;${fn:escapeXml(orderData.deliveryAddress.lastName)}
                                --%>
                               ${fn:escapeXml(companyName)}
-                              <br>
-                                  ${fn:escapeXml(orderData.deliveryAddress.line1)}
+                              <br/>
+                              
+                              <c:if test="${not empty orderData.deliveryAddress.line1}">
+                              ${fn:escapeXml(orderData.deliveryAddress.line1)}
+                              </c:if>
+                              
                               <c:if test="${not empty orderData.deliveryAddress.line2}">
                                   &nbsp;
                                   ${fn:escapeXml(orderData.deliveryAddress.line2)}
                               </c:if>
-                              &nbsp;
-                                  ${fn:escapeXml(orderData.deliveryAddress.town)}&nbsp;${fn:escapeXml(orderData.deliveryAddress.region.name)}
-                              &nbsp;
-                                  ${fn:escapeXml(orderData.deliveryAddress.country.name)}&nbsp;${fn:escapeXml(orderData.deliveryAddress.postalCode)}
+                              &nbsp;${fn:escapeXml(orderData.deliveryAddress.town)}&nbsp;${fn:escapeXml(orderData.deliveryAddress.region.name)}&nbsp;${fn:escapeXml(orderData.deliveryAddress.country.name)}&nbsp;${fn:escapeXml(orderData.deliveryAddress.postalCode)}
                               <br/>
-                                  ${fn:escapeXml(orderData.deliveryAddress.phone)}
+                              ${fn:escapeXml(orderData.deliveryAddress.phone)}
 
                         </div>
                     </div>
