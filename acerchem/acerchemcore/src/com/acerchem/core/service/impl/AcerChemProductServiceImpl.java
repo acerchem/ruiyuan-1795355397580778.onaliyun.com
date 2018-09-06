@@ -24,8 +24,8 @@ import de.hybris.platform.commercefacades.vendor.data.InventoryReportData;
 import de.hybris.platform.commercefacades.vendor.data.OrderProductReportData;
 import de.hybris.platform.core.model.order.OrderEntryModel;
 import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.ordersplitting.model.StockLevelModel;
-import de.hybris.platform.ordersplitting.model.VendorModel;
 import de.hybris.platform.product.ProductService;
 import de.hybris.platform.product.daos.ProductDao;
 
@@ -197,10 +197,17 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 			for (final OrderEntryModel oe : orderEntries) {
 				final OrderProductReportData item = new OrderProductReportData();
 
-				final VendorModel vendor = oe.getProduct().getAcerChemVendor();
-				if(vendor!=null){
-					final String vendorName = StringUtils.isNotBlank(vendor.getName() ) ? vendor.getName() : "";
-					item.setVendorName(vendorName);
+//				final VendorModel vendor = oe.getProduct().getAcerChemVendor();
+//				if(vendor!=null){
+//					final String vendorName = StringUtils.isNotBlank(vendor.getName() ) ? vendor.getName() : "";
+//					item.setVendorName(vendorName);
+//				}
+				//modified vendor->customer company
+				if(oe.getOrder().getUser()!=null){
+				  final CustomerModel customer = (CustomerModel)oe.getOrder().getUser();
+				  final String company = StringUtils.defaultString(customer.getCompanyName());
+				  item.setVendorName(company);
+				  
 				}
 				item.setOrderCode(oe.getOrder().getCode());
 				item.setFinishedTime(oe.getOrder().getOrderFinishedDate());

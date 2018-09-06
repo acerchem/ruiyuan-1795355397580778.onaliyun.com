@@ -59,7 +59,7 @@ $(document).ready(
 							halign: 'center'
 						},{
 							field : 'c6',
-							title : 'Vendor',
+							title : 'Company', //modified to company,list populate with company of customer;
 							halign: 'center'
 						},
 						
