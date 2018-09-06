@@ -92,10 +92,13 @@
                             <span>Pickup Address</span>
                         </div>
                         <div class="text">
+                               <%-- Snowy Xu 2018-09-06
                               <c:if test="${not empty orderData.deliveryAddress.title}">
                                   ${fn:escapeXml(orderData.deliveryAddress.title)}&nbsp;
                               </c:if>
                                   ${fn:escapeXml(orderData.deliveryAddress.firstName)}&nbsp;${fn:escapeXml(orderData.deliveryAddress.lastName)}
+                               --%>
+                              ${fn:escapeXml(companyName)}
                               <br>
                                   ${fn:escapeXml(orderData.deliveryAddress.line1)}
                               <c:if test="${not empty orderData.deliveryAddress.line2}">

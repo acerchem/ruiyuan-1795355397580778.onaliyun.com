@@ -351,6 +351,10 @@ public class AccountPageController extends AbstractSearchPageController
 			model.addAttribute("maxday", Integer.valueOf(Config.getParameter("cancel.order.day")));
 			final OrderData orderDetails = orderFacade.getOrderDetailsForCode(orderCode);
 			model.addAttribute("orderData", orderDetails);
+			
+			final CustomerModel customer = (CustomerModel) userService.getCurrentUser();
+			model.addAttribute("companyName", customer.getCompanyName());
+			
             final List<Breadcrumb> breadcrumbs = accountBreadcrumbBuilder.getBreadcrumbs(null);
 			breadcrumbs.add(new Breadcrumb("/my-account/orders", getMessageSource().getMessage("text.account.orderHistory", null,
 					getI18nService().getCurrentLocale()), null));
