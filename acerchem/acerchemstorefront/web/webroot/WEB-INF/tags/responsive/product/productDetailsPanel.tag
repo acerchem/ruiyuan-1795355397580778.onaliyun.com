@@ -365,7 +365,7 @@
 									</li>
 								</ul>
 							</div>
-							<div class="g-descblock">
+							<div class="g-descblockLeft">
 							<div class="title">&nbsp &nbsp</div>
 								
 								<ul class="g-table">								

@@ -98,5 +98,9 @@ public class ProductPricePopulator1<SOURCE extends ProductModel, TARGET extends 
 			productData.setPurchasable(Boolean.FALSE);
 		}
 		/*End*/
+		if (isAnonymousUser) {
+			productData.setManufacturer(null);
+		}
+		
 	}
 }

@@ -8,6 +8,11 @@ table{
 	width: 100%;
 }
 
+meta {
+	name:viewport; 
+	content:width=device-width,initial-scale=1
+}
+
 textarea{
 	padding:10px;
 	border:1px solid #ddd;
@@ -198,7 +203,7 @@ textarea{
 /*maxon_salesul*/
 .maxon_salesul{
 	position: relative;
-	padding:40px 20px;
+	/* padding:40px 20px; */
 	padding-right: 0;
 	background: #fff;
 	border-top:4px solid #f3f3f3;
@@ -280,7 +285,7 @@ textarea{
 	float:left;
 }
  .maxon_salesul .slide-item .item .img{
- 	padding:6%;
+ 	margin-bottom: 2px;
  }
 
 .maxon_salesul .slide-item .maxtext p{
@@ -292,6 +297,13 @@ textarea{
 	margin-bottom: 10px;
 	height: 50px;
 
+}
+
+.maxon_salesul .mintitle{
+	font-size: 12px;
+	position:relative;
+	bottom:20px;
+	
 }
 
 
@@ -2142,6 +2154,9 @@ textarea{
 	width: 100%;
 	line-height: 1em;
 	color:#666;
+	position:relative;
+	left:70px;
+	top:20px
 }
 .gal-centent .maxon_prom .old-price{
 	
@@ -2173,7 +2188,7 @@ display: inline-table;
 .gal-centent .slide-item .aitem .img{
 	width: 100%;
 	min-height: 100px;
-	margin-bottom: 6px;
+	margin-bottom: 2px;
 	line-height: 0;
 	font-size: 0;
 	text-align: center;
@@ -2194,12 +2209,12 @@ display: inline-table;
 	color: #0d4170;
 	}
 .g-cart i{
-	width:36px;
-	height: 36px;
+	width:32px;
+	height: 32px;
 	display: block;
-	border-radius: 20px;
+	border-radius: 16px;
 	background: url(maxicon.png) #18639a;
-	background-position: -8px -567px;
+	background-position: -9px -566px;
 }
 .gal-centent .g-cartable .aitem .g-cart:hover i{
 	background: url(maxicon.png) no-repeat #0d4170;
@@ -2956,9 +2971,7 @@ display: inline-table;
 .prod-cont .g-desclist{
 	padding: 40px 0 40px 20px;
 }
-.prod-cont .g-deswrap{
-	border:1px solid #ddd;
-}
+
 .prod-cont .g-deswrap:after{
 	content:'';
 	clear: both;
@@ -2968,6 +2981,14 @@ display: inline-table;
 	padding:40px 0;
 	width: 48%;
 	float: left;
+}
+.prod-cont .g-descblockLeft{
+	padding:40px 0;
+	width: 45%;
+	float: left;
+	position:relative;
+	top: 180px;
+	right:532px;
 }
 .prod-cont .g-descblock .title{
 	padding-left: 20px;
@@ -2984,10 +3005,25 @@ display: inline-table;
 	width: 100%;
 
 }
+.prod-cont .g-descblockLeft .g-table li{
+	padding:10px 0;
+	background-color: #f3f3f3;
+	line-height: 3em;
+	display: table;
+	width: 100%;
+
+}
+.prod-cont .g-descblockLeft .g-table li:nth-child(2n){
+	background-color: transparent;
+}
 .prod-cont .g-descblock .g-table li:nth-child(2n){
 	background-color: transparent;
 }
 .prod-cont .g-descblock .g-table span{
+	width: 50%;
+	line-height: 1.5em;
+}
+.prod-cont .g-descblockLeft .g-table span{
 	width: 50%;
 	line-height: 1.5em;
 }
@@ -3275,7 +3311,6 @@ display: inline-table;
 .maxlatest #js-site-search-input::-webkit-input-placeholder {color: #fff; }
 .maxlatest #js-site-search-input::-moz-placeholder {color:#fff; }
 .maxlatest #js-site-search-input::-ms-input-placeholder {color: #fff ; }
-
 
 /*补充style.css*/
 #cboxTopLeft , #cboxTopRight , #cboxTitle .headline , #cboxTopCenter {display: none;}

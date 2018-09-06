@@ -9,14 +9,15 @@
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 
 <ycommerce:testId code="searchPage_price_label_${product.code}">
-
+		<span class="mintitle">${product.manufacturer}</span>
 		<%-- if product is multidimensional with different prices, show range, else, show unique price --%>
 		<c:choose>
 			<c:when test="${not empty product.promotionPrice}">
+			
 			  <span class="old-price">  <format:fromPrice priceData="${product.price}"/></span>
 			   <span class="price"> <format:fromPrice priceData="${product.promotionPrice}"/></span>
 			</c:when>
-			<c:otherwise>
+			<c:otherwise>				
 				<span class="price"> <format:fromPrice priceData="${product.price}"/></span>
 			</c:otherwise>
 		</c:choose>

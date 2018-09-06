@@ -14,7 +14,7 @@
 		Everyone is Buying
 	</div>
 	<ul class="pdlist">
-		<c:forEach items="${productData}" var="product">
+		<c:forEach items="${productData}" var="product" end="5">
 			<c:url value="${product.url}" var="productUrl"/>
 			<li class="both">
 				<div class="img">
@@ -27,7 +27,7 @@
 		    		<c:choose>
 							<c:when test="${not empty product.promotionPrice}">
 							
-			  					<span class="price">${product.promotionPrice.formattedValue}</span>
+			  			<span class="price">${product.promotionPrice.formattedValue}</span>
 		    			<span class="old-price">${product.price.formattedValue}</span>
 							</c:when>
 						<c:otherwise>

@@ -59,8 +59,7 @@ public class SearchResultProductPricePopulator extends SearchResultVariantProduc
 		{
 			final PriceData priceData = getPriceDataFactory().create(priceType, BigDecimal.valueOf(info.getPriceValue().getValue()),
 					info.getPriceValue().getCurrencyIso());
-			target.setPrice(priceData);
-
+			target.setPrice(priceData);		
             UserLevelModel userLevel = user.getUserLevel();
             if(userLevel!=null){
                 Double discount = userLevel.getDiscount();
@@ -77,6 +76,11 @@ public class SearchResultProductPricePopulator extends SearchResultVariantProduc
 		{
 			target.setPrice(null);
 			target.setPromotionPrice(null);
+			
+		}
+		
+		if(isAnonymousUser){
+			target.setManufacturer(null);
 		}
 	}
 

@@ -103,12 +103,12 @@ button{
 
 
 
-.maxon_salesul{position: relative;padding-top: 4px;overflow: hidden;margin-bottom: 50px;box-sizing: border-box;-moz-box-sizing:border-box; -webkit-box-sizing:border-box; }
+.maxon_salesul{position: relative;padding-top: 4px;overflow: hidden;box-sizing: border-box;-moz-box-sizing:border-box; -webkit-box-sizing:border-box; }
 .maxon_salesul .maximg{position: relative;overflow: hidden;}
 .maxon_salesul .maximg>img{width: 100%;}
 .maxon_salesul .maximgpor{position: absolute;bottom: 35%;left: 0;z-index: 1;width: 100%;}
 .maxon_salesul .old-price{text-decoration:line-through; color: #999}
-.maxon_salesul .maxtext{background-color: #00203e;font-size: 14px;color: #fff;padding: 10px 0;}
+.maxon_salesul .maxtext{background-color: #00203e;font-size: 14px;color: #fff;padding: 10px 5px;}
 .maxon_salesul .price{padding-right: 10px;font-size: 18px;color:#18639a;}
 .maxtext p , .searchlist .pdlist .text span{overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;min-height: 36px;}
 /*.maxswiper_hov{position: absolute;top: 0;width: 100%;text-align: center;height: 320px;background: rgba(0,0,0,0.3);display: none;}
@@ -229,11 +229,11 @@ button{
 .footer .maxadd .maxphone{background-position: -13px -406px;}
 .footer .maxadd .maxemail{background-position: -13px -434px;}
 .footer .maxadd span{margin-left: 26px; display: block;}
-.footermin{padding:80px 0 58px; position: relative;}
+.footermin{padding:70px 0 5px; position: relative;}
 .footermin .left{ margin:auto;}
 .footermin .left:after{content:''; display: block; clear:both;}
 .footermin .right{width: 100%; position: absolute; top:30px; left:0}
-.footermin h3{font-size: 20px;color: #fff;padding-bottom: 26px;}
+.footermin h3{font-size: 20px;color: #fff;padding-bottom: 2px;}
 .footer .maxfootnav{
 	float: left;
 	width:16%;
@@ -246,7 +246,7 @@ button{
 .gotop:after{content:''; display: block; height: 100%;  background:url(maxicon.png) no-repeat center 72.3%;}
 .gotop:hover{background: rgb(25,100,150)}
 
-.footerbot{padding: 21px 0;border-top: 1px solid #1e211f; text-align: center;}
+.footerbot{padding: 15px 0;border-top: 1px solid #1e211f; text-align: center;}
 ul.share-buttons{
   list-style: none;
   padding: 0;
