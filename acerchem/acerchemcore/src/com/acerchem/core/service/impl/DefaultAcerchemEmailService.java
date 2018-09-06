@@ -1,11 +1,13 @@
 package com.acerchem.core.service.impl;
 
+import java.io.DataInputStream;
 import java.util.Date;
 import java.util.List;
 
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 import org.apache.log4j.Logger;
+import org.jgroups.util.UUID;
 
 import de.hybris.platform.acceleratorservices.email.impl.DefaultEmailService;
 import de.hybris.platform.acceleratorservices.model.email.EmailAddressModel;
@@ -81,6 +83,8 @@ public class DefaultAcerchemEmailService extends DefaultEmailService {
 		return false;
 	}
 	
+	
+	@Override
 	protected void logInfo(final EmailMessageModel message, final EmailException e)
 	{
 		LOG.warn("Could not send e-mail pk [" + message.getPk() + "] subject [" + message.getSubject() + "] cause: "
@@ -90,4 +94,21 @@ public class DefaultAcerchemEmailService extends DefaultEmailService {
 			LOG.debug(e);
 		}
 	}
+
+	@Override
+	public EmailAttachmentModel createEmailAttachment(final DataInputStream masterDataStream, final String filename,
+			final String mimeType) {
+		final EmailAttachmentModel attachment = getModelService().create(EmailAttachmentModel.class);
+		//modified setcode(finlename0->setcode(uuid);
+		attachment.setCode(UUID.randomUUID().toString());
+		attachment.setMime(mimeType);
+		attachment.setRealFileName(filename);
+		attachment.setCatalogVersion(getCatalogVersion());
+		getModelService().save(attachment);
+
+		getMediaService().setStreamForMedia(attachment, masterDataStream, filename, mimeType, getEmailAttachmentsMediaFolder());
+		return attachment;
+	}
+	
+	
 }
