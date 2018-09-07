@@ -32,7 +32,7 @@ import de.hybris.platform.commerceservices.order.CommerceCartModificationExcepti
 import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.order.InvalidCartException;
 import de.hybris.platform.payment.AdapterException;
-
+import com.acerchem.core.service.AcerchemStockService;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
@@ -72,7 +72,8 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 	 
 	@Resource
 	private AcerchemTrayFacade acerchemTrayFacade;
-
+    @Resource
+	private AcerchemStockService acerchemStockService;
 	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	@RequireHardLogIn
 	@Override
@@ -198,7 +199,7 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 		}
 
 		//Validate the cart
-		if (validateCart(redirectModel))
+		if (acerchemStockService.validateCart(redirectModel))
 		{
 			// Invalid cart. Bounce back to the cart page.
 			return REDIRECT_PREFIX + "/cart";
