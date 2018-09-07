@@ -2157,11 +2157,11 @@ display: inline-table;
     padding-right: 8px;
 }
 .g-cart{
-	height: 36px;
+	height: 30px;
 	cursor: pointer;
 	position: absolute;
-	right: 0;
-	bottom: 8px;
+	right: 2px;
+	bottom: 5px;
 }
 .gal-centent .gall-right .maxtext{
 	
@@ -2975,6 +2975,12 @@ display: inline-table;
 	padding: 40px 0 40px 20px;
 }
 
+<<<<<<< Updated upstream
+=======
+/* .prod-cont .g-deswrap{
+	border:1px solid #ddd;
+} */
+>>>>>>> Stashed changes
 
 .prod-cont .g-deswrap:after{
 	content:'';
@@ -2986,14 +2992,7 @@ display: inline-table;
 	width: 48%;
 	float: left;
 }
-.prod-cont .g-descblockLeft{
-	padding:40px 0;
-	width: 45%;
-	float: left;
-	position:relative;
-	top: 180px;
-	right:532px;
-}
+
 .prod-cont .g-descblock .title{
 	padding-left: 20px;
 }
@@ -3009,17 +3008,7 @@ display: inline-table;
 	width: 100%;
 
 }
-.prod-cont .g-descblockLeft .g-table li{
-	padding:10px 0;
-	background-color: #f3f3f3;
-	line-height: 3em;
-	display: table;
-	width: 100%;
 
-}
-.prod-cont .g-descblockLeft .g-table li:nth-child(2n){
-	background-color: transparent;
-}
 .prod-cont .g-descblock .g-table li:nth-child(2n){
 	background-color: transparent;
 }
@@ -3027,10 +3016,7 @@ display: inline-table;
 	width: 50%;
 	line-height: 1.5em;
 }
-.prod-cont .g-descblockLeft .g-table span{
-	width: 50%;
-	line-height: 1.5em;
-}
+
 .prod-cont .m-cardwrap{
 	display: none;
 }

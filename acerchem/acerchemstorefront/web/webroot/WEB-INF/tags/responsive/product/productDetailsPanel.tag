@@ -363,13 +363,6 @@
 										<span>Chemical Formula</span>
 										<span>${product.chemicalInfo}</span>
 									</li>
-								</ul>
-							</div>
-							<div class="g-descblockLeft">
-							<div class="title">&nbsp &nbsp</div>
-								
-								<ul class="g-table">								
-									
 									
 									<li>
 										<span>Molecular Weight</span>
@@ -387,9 +380,10 @@
 										<span>Package Type</span>
 										<span> ${product.netWeight}${product.unitName}/${product.packageType}</span>
 									</li>	
-												
+									
 								</ul>
 							</div>
+							
 						</div>
 					</div>
 					<!-- descr end -->
