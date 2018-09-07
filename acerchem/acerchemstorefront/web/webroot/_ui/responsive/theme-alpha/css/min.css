@@ -108,7 +108,7 @@ button{
 .maxon_salesul .maximg>img{width: 100%;}
 .maxon_salesul .maximgpor{position: absolute;bottom: 35%;left: 0;z-index: 1;width: 100%;}
 .maxon_salesul .old-price{text-decoration:line-through; color: #999}
-.maxon_salesul .maxtext{background-color: #00203e;font-size: 14px;color: #fff;padding: 10px 5px;}
+.maxon_salesul .maxtext{background-color: #00203e;font-size: 14px;color: #fff;padding: 5px 0px 0px 5px;}
 .maxon_salesul .price{padding-right: 10px;font-size: 18px;color:#18639a;}
 .maxtext p , .searchlist .pdlist .text span{overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;min-height: 36px;}
 /*.maxswiper_hov{position: absolute;top: 0;width: 100%;text-align: center;height: 320px;background: rgba(0,0,0,0.3);display: none;}

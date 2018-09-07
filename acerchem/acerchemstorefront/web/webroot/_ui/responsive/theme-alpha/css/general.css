@@ -280,8 +280,8 @@ textarea{
 	float:left;
 }
  .maxon_salesul .slide-item .item .img{
- 	/* margin-bottom: 2px; */
- 	padding:6%;
+ 	margin-bottom: 2px;
+ 	/* padding:6%; */
  }
 
 .maxon_salesul .slide-item .maxtext p{
@@ -291,8 +291,8 @@ textarea{
 	overflow:hidden;
 	text-overflow: ellipsis;
 	margin-bottom: 10px;
-	height: 50px;
-
+	height: 40px;
+	
 }
 
 
@@ -2178,8 +2178,8 @@ display: inline-table;
 .gal-centent .gall-right .maxtext .mintitle{
 	display: block;
 	line-height: 1em;
-	font-size: 12px;
-	margin-bottom: 10px;
+	font-size: 10px;
+	margin-bottom: 5px;
 }
 
 .gal-centent .slide-item .aitem{
