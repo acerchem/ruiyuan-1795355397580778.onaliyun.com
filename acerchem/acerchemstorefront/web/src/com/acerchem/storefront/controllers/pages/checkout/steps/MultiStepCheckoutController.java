@@ -29,7 +29,7 @@ import de.hybris.platform.commercefacades.product.ProductOption;
 import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
 import com.acerchem.storefront.controllers.ControllerConstants;
-
+import com.acerchem.core.service.AcerchemStockService;
 import java.util.Arrays;
 import java.util.Map;
 import java.util.Optional;
@@ -60,7 +60,8 @@ public class MultiStepCheckoutController extends AbstractCheckoutStepController
 
 	@Resource(name = "orderGridFormFacade")
 	private OrderGridFormFacade orderGridFormFacade;
-
+    @Resource
+	private AcerchemStockService acerchemStockService;
 	@Override
 	@RequestMapping(method = RequestMethod.GET)
 	@PreValidateQuoteCheckoutStep
@@ -68,7 +69,7 @@ public class MultiStepCheckoutController extends AbstractCheckoutStepController
 	public String enterStep(final Model model, final RedirectAttributes redirectAttributes) throws CMSItemNotFoundException, // NOSONAR
 			CommerceCartModificationException
 	{
-		if (validateCart(redirectAttributes))
+		if (acerchemStockService.validateCart(redirectAttributes))
 		{
 			return REDIRECT_CART_URL;
 		}
