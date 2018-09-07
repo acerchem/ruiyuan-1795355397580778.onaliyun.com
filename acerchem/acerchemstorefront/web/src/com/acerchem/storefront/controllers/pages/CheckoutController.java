@@ -34,6 +34,8 @@ import de.hybris.platform.commerceservices.customer.DuplicateUidException;
 import de.hybris.platform.commerceservices.util.ResponsiveUtils;
 import de.hybris.platform.servicelayer.exceptions.ModelNotFoundException;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
+
+import com.acerchem.core.service.AcerchemStockService;
 import com.acerchem.storefront.controllers.ControllerConstants;
 
 import java.util.Arrays;
@@ -90,6 +92,9 @@ public class CheckoutController extends AbstractCheckoutController
 
 	@Resource(name = "autoLoginStrategy")
 	private AutoLoginStrategy autoLoginStrategy;
+	
+	@Resource
+	private AcerchemStockService acerchemStockService;
 
 	@ExceptionHandler(ModelNotFoundException.class)
 	public String handleModelNotFoundException(final ModelNotFoundException exception, final HttpServletRequest request)
@@ -103,7 +108,7 @@ public class CheckoutController extends AbstractCheckoutController
 	{
 		if (getCheckoutFlowFacade().hasValidCart())
 		{
-			if (validateCart(redirectModel))
+			if (acerchemStockService.validateCart(redirectModel))
 			{
 				return REDIRECT_PREFIX + "/cart";
 			}
