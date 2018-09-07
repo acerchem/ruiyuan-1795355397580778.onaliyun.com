@@ -45,8 +45,14 @@
 				<table border="0" width="100%" cellspacing="0">
 					<tbody>
 						<tr>
-							<td><span>Year</span> <input name="year" size="6"
-								type="text" value="${year}" placeholder="2018" /></td>
+							<td>
+								<span>Select Year</span> 
+								<formElement:customSelectBox
+									 idKey="year" labelKey="" path="year" mandatory="true"
+									skipBlank="true" skipBlankMessageKey="" items="${selectYears}"
+									itemValue="code" itemLabel="name" selectedValue="code" />
+								</td>
+								<input id="select_year" type="hidden" name="field＿name" value="${monthlySalesAnalysisForm.year}"> 
 							<td><span>Customer Area</span> <formElement:customSelectBox
 									idKey="area" labelKey="" path="area" mandatory="true"
 									skipBlank="false" skipBlankMessageKey="All" items="${areas}"

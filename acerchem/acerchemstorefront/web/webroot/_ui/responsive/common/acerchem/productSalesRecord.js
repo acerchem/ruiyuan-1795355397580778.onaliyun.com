@@ -29,7 +29,7 @@ $(document).ready(
 						},
 						exportOptions : {
 							// ignoreColumn: [0,1], //忽略某一列的索引
-							fileName : 'ProductSalesRecord', // 文件名称设置
+							fileName : 'ProductSalesRecord-'+$("#birth_year").val(), // 文件名称设置
 							worksheetName : 'sheet1', // 表格工作区名称
 							tableName : 'ProductRecord',
 							excelstyles : [ 'background-color', 'color',

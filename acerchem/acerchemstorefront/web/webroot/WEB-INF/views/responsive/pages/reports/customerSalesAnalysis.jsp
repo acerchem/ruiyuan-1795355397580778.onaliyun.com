@@ -17,7 +17,8 @@
 <meta http-equiv="content-type" content="text/html; charset=utf-8">
 <title></title>
 
-
+<link rel="stylesheet"
+	href="${commonResourcePath}/acerchem/jquery-calendar.css">
 <link rel="stylesheet"
 	href="${commonResourcePath}/acerchem/bootstrap.min.css">
 <link rel="stylesheet"
@@ -45,18 +46,34 @@
 				<table border="0" width="100%" cellspacing="0">
 					<tbody>
 						<tr>
+<td>
+								<div>
+									Start Date:<span> <input type="text" class="calendar"
+										maxlength="19" onfocus="$(this).calendar()" name="startDate"
+										value="${customerSalesAnalysisForm.startDate}" readonly />
+									</span>
+								</div>
+							</td>
 
+							<td>
+								<div>
+									End Date:<span> <input type="text" class="calendar"
+										maxlength="19" onfocus="$(this).calendar()" name="endDate"
+										value="${customerSalesAnalysisForm.endDate}" readonly />
+									</span>
+								</div>
+							</td>
 						<td><label style="margin-left: 20px;">Customer Area</label> <formElement:customSelectBox
 								idKey="area" labelKey="" path="area" mandatory="true"
 								skipBlank="false" skipBlankMessageKey="All" items="${areas}"
-								itemValue="isocode" itemLabel="name" selectedValue="${area}" />
+								itemValue="isocode" itemLabel="name" selectedValue="${customerSalesAnalysisForm.area}" />
 						</td>
 
 						<td><label style="margin-left: 20px;">Customer Name</label> <input
-							name="customerName" size="12" type="text" value="${customerName}">
+							name="customerName" size="12" type="text" value="${customerSalesAnalysisForm.customerName}">
 						</td>
 						<td><label style="margin-left: 20px;"> Order Amount ></label>
-							<input name="amount" size="12" type="text" value="${amount}">
+							<input name="amount" size="12" type="text" value="${customerSalesAnalysisForm.amount}">
 						</td>
 					<td>
 								<div class="btn" >
@@ -109,6 +126,7 @@
 	</div>
 	<script src="${commonResourcePath}/acerchem/jquery-1.9.1.min.js"></script>
 	<script src="${commonResourcePath}/acerchem/jquery.base64.js"></script>
+	<script src="${commonResourcePath}/acerchem/jquery-calendar.js"></script>
 	<script src="${commonResourcePath}/acerchem/bootstrap.min.js"></script>
 	<script src="${commonResourcePath}/acerchem/bootstrap-table.min.js"></script>
 	<script src="${commonResourcePath}/acerchem/tableExport.min.js"></script>

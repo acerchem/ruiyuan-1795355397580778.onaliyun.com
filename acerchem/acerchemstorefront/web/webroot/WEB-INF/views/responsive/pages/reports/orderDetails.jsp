@@ -64,9 +64,9 @@
 								size="12" type="text" value="${searchCriteriaFrom.orderCode}">
 							</td>
 							
-							<td><span>Customer Name</span> 
-							<input name="userName"
-								size="12" type="text" value="${searchCriteriaFrom.userName}">
+							<td><span>Customer CompanyName</span> 
+							<input name="cutomerCompanyName"
+								size="12" type="text" value="${searchCriteriaFrom.cutomerCompanyName}">
 							</td>
 							<td>
 								<div class="btn">

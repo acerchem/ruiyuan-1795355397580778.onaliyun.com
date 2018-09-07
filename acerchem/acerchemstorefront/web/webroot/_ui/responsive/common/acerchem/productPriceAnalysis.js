@@ -30,7 +30,7 @@ $(document).ready(
 						},
 						exportOptions : {
 							// ignoreColumn: [0,1], //忽略某一列的索引
-							fileName : 'ProductPriceAnalysis', // 文件名称设置
+							fileName : 'ProductPriceAnalysis-'+$("#birth_year").val(), // 文件名称设置
 							worksheetName : 'sheet1', // 表格工作区名称
 							tableName : 'ProductPrice',
 							excelstyles : [ 'background-color', 'color',

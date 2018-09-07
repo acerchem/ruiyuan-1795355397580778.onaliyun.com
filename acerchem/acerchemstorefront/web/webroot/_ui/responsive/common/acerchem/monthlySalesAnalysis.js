@@ -29,7 +29,7 @@ $(document).ready(
 						},
 						exportOptions : {
 							// ignoreColumn: [0,1], //忽略某一列的索引
-							fileName : 'MonthlySalesAnalysis', // 文件名称设置
+							fileName : 'MonthlySalesAnalysis-'+$("#select_year").val(), // 文件名称设置
 							worksheetName : 'sheet1', // 表格工作区名称
 							tableName : 'MonthlySales',
 							excelstyles : [ 'background-color', 'color',
