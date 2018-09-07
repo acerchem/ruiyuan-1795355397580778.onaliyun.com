@@ -2975,9 +2975,6 @@ display: inline-table;
 	padding: 40px 0 40px 20px;
 }
 
-.prod-cont .g-deswrap{
-	border:1px solid #ddd;
-}
 
 .prod-cont .g-deswrap:after{
 	content:'';
