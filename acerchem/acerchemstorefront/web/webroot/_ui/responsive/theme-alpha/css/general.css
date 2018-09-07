@@ -8,11 +8,6 @@ table{
 	width: 100%;
 }
 
-meta {
-	name:viewport; 
-	content:width=device-width,initial-scale=1
-}
-
 textarea{
 	padding:10px;
 	border:1px solid #ddd;
@@ -285,7 +280,8 @@ textarea{
 	float:left;
 }
  .maxon_salesul .slide-item .item .img{
- 	margin-bottom: 2px;
+ 	/* margin-bottom: 2px; */
+ 	padding:6%;
  }
 
 .maxon_salesul .slide-item .maxtext p{
@@ -297,13 +293,6 @@ textarea{
 	margin-bottom: 10px;
 	height: 50px;
 
-}
-
-.maxon_salesul .mintitle{
-	font-size: 12px;
-	position:relative;
-	bottom:20px;
-	
 }
 
 
@@ -1991,7 +1980,7 @@ textarea{
 	margin-top: 34px;
 }
 .gal-centent .gall-left dd{
-	padding-left:10px;
+	padding-left:0px;
 	color:#666;
 	font-size: 14px;
 	padding-top: 6px;
@@ -2154,9 +2143,9 @@ textarea{
 	width: 100%;
 	line-height: 1em;
 	color:#666;
-	position:relative;
+	/* position:relative;
 	left:70px;
-	top:20px
+	top:20px */
 }
 .gal-centent .maxon_prom .old-price{
 	
@@ -2175,8 +2164,22 @@ display: inline-table;
 	bottom: 8px;
 }
 .gal-centent .gall-right .maxtext{
+	
+		
+	
 	position:relative;
 	overflow: hidden;
+}
+
+.gal-centent .gall-right .maxtext span{
+	display: inline;
+	color:#fff;
+}
+.gal-centent .gall-right .maxtext .mintitle{
+	display: block;
+	line-height: 1em;
+	font-size: 12px;
+	margin-bottom: 10px;
 }
 
 .gal-centent .slide-item .aitem{
@@ -2970,6 +2973,10 @@ display: inline-table;
 
 .prod-cont .g-desclist{
 	padding: 40px 0 40px 20px;
+}
+
+.prod-cont .g-deswrap{
+	border:1px solid #ddd;
 }
 
 .prod-cont .g-deswrap:after{

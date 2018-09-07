@@ -242,7 +242,7 @@ button{
 .footer .maxfootnav a{color: #666;display: block;padding-bottom: 12px;}
 .footer .maxfootnav a:hover{color:#fff;}
 .footer .maxfootnav.item3{width: 28%; padding-left: 17%;}
-.gotop{position: fixed; top:86%; right:10px; width:48px; height: 48px; background:rgba(0,25,50,.5); cursor: pointer;}
+.gotop{position: fixed; top:86%; right:4px; width:46px; height: 46px; background:rgba(0,25,50,.5); cursor: pointer;}
 .gotop:after{content:''; display: block; height: 100%;  background:url(maxicon.png) no-repeat center 72.3%;}
 .gotop:hover{background: rgb(25,100,150)}
 

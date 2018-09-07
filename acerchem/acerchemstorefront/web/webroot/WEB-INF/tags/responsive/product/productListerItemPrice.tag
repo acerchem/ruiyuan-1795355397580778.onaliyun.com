@@ -13,9 +13,8 @@
 		<%-- if product is multidimensional with different prices, show range, else, show unique price --%>
 		<c:choose>
 			<c:when test="${not empty product.promotionPrice}">
-			
-			  <span class="old-price">  <format:fromPrice priceData="${product.price}"/></span>
 			   <span class="price"> <format:fromPrice priceData="${product.promotionPrice}"/></span>
+			  <span class="old-price">  <format:fromPrice priceData="${product.price}"/></span>			
 			</c:when>
 			<c:otherwise>				
 				<span class="price"> <format:fromPrice priceData="${product.price}"/></span>
