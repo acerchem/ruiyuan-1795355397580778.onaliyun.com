@@ -24,6 +24,6 @@ public interface AcerchemOrderAnalysisService {
 	 */
 	public List<SalesByEmployeeReportData> getEmployeeSales(final String year);
 	
-	List<CustomerSalesAnalysisData> getCustomerSalesAnalysis(String area,String customerName,double amount);
+	List<CustomerSalesAnalysisData> getCustomerSalesAnalysis(String area,String customerName,double amount,Date startDate,Date endDate);
 	List<CustomerBillAnalysisData> getCustomerBillAnalysis(Date startDate,Date endDate);
 }

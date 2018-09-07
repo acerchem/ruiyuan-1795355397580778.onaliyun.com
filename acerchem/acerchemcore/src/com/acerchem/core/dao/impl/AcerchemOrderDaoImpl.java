@@ -57,7 +57,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 
 	@Override
 	public List<OrderDetailsReportData> getOrderDetails(final String month, final String area, final String countryCode,
-			final String userName, final String orderCode) {
+			final String customerCompanyName, final String orderCode) {
 
 		final Integer pageSize = 100;
 
@@ -88,9 +88,10 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 			// deliveryModeService.getDeliveryModeForCode("DELIVERY_MENTION"));
 			params.put("isocode", countryCode);
 		}
-		if (userName != null && !userName.equals("")) {
-			SQL += " AND {u:name} like ?userName ";
-			params.put("userName", "%" + userName + "%");
+		//username filter-》company filter
+		if (customerCompanyName != null && !customerCompanyName.equals("")) {
+			SQL += " AND {u:companyName} like ?companyName ";
+			params.put("companyName", "%" + customerCompanyName + "%");
 		}
 
 		if (orderCode != null && !orderCode.equals("")) {
@@ -106,7 +107,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		//query.setCount(pageSize);
 		//query.setStart(pageSize * (pageNumber - 1));
 		final SearchResult<List<Object>> result = flexibleSearchService.search(query);
-
+ 
 		final List<OrderDetailsReportData> orderDetails = new ArrayList<OrderDetailsReportData>();
 		// for (final OrderEntryModel od : result.getResult()) {
 		for (final List<Object> columnValueForRow : result.getResult()) {
@@ -480,7 +481,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 
 	@Override
 	public List<CustomerSalesAnalysisData> getCustomerSalesAnalysis(final String area, final String customerName,
-			final double amount) {
+			final double amount,final Date startDate,final Date endDate) {
 		final Map<String, Object> params = new HashMap<String, Object>();
 
 		String SQL = "select sum({e.totalRealPrice}),{u.pk},{ua.pk} from {OrderEntry as e"
@@ -498,6 +499,15 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 			params.put("userName", "%" + customerName + "%");
 		}
 
+		if(startDate !=null){
+			SQL += " AND {o:creationtime}>= ?startDate ";
+			params.put("startDate", startDate);
+		}
+		
+		if(endDate != null){
+			SQL += " AND {o:creationtime}<= ?endDate ";
+			params.put("endDate", endDate);
+		}
 		SQL += " group by {u.pk},{ua.pk}";
 
 		if (amount > 0) {
