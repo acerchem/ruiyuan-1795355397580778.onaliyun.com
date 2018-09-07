@@ -59,10 +59,9 @@ $(document).ready(
 							halign: 'center'
 						},{
 							field : 'c6',
-							title : 'Customer Company', //modified to company,list populate with company of customer;
+							title : 'Customer Company',
 							halign: 'center'
 						},
-						
 						]
 					});
 

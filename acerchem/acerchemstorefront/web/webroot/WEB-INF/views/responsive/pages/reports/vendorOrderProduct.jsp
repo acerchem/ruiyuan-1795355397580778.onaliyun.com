@@ -139,7 +139,7 @@
 
 	<script src="${commonResourcePath}/acerchem/jquery-1.9.1.min.js"></script>
 	<script src="${commonResourcePath}/acerchem/jquery.base64.js"></script>
-	<script src="${commonResourcePath}/acerchem/jquery-1.8.3.min.js"></script>
+	
 	<script src="${commonResourcePath}/acerchem/jquery-calendar.js"></script>
 
 	<script src="${commonResourcePath}/acerchem/bootstrap.min.js"></script>
