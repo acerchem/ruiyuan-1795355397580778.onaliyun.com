@@ -37,7 +37,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
+import com.acerchem.core.service.AcerchemStockService;
 import com.acerchem.facades.facades.AcerchemCartFacade;
 import com.acerchem.storefront.controllers.ControllerConstants;
 
@@ -120,7 +120,8 @@ public class CartPageController extends AbstractCartPageController
 
 	@Resource(name = "saveCartFormValidator")
 	private SaveCartFormValidator saveCartFormValidator;
-
+    @Resource
+	private AcerchemStockService acerchemStockService;
 	@Resource(name = "csvFacade")
 	private CsvFacade csvFacade;
 
@@ -213,7 +214,7 @@ public class CartPageController extends AbstractCartPageController
 		}
 
 
-		if (validateCart(redirectModel))
+		if (acerchemStockService.validateCart(redirectModel))
 		{
 			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER, CART_CHECKOUT_ERROR, null);
 			return REDIRECT_CART_URL;
