@@ -173,6 +173,11 @@ $(document).ready(function(){
 		switch(aclass){
 			case 'set sub':
 				avl = parseInt(ainp.val());
+				
+				if(isNaN(parseInt(ainp.val()))){					
+					avl=0;					
+				}
+				
 				if(avl<=1){
 					maxalert('A minimum of one pieceï¼');
 					$(this).css('background-color','#ddd')
@@ -193,7 +198,11 @@ $(document).ready(function(){
 				avl = parseInt(ainp.val());
 				$(this).css('background-color','');
 				$(this).siblings('span').css('background-color','');
-
+				
+				if(isNaN(parseInt(ainp.val()))){					
+					avl=0;					
+				}
+				
 				if(avl>=maxnum){
 					maxalert("It's already the largest inventory.");
 					break;
