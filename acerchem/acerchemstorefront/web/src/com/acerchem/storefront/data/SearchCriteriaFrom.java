@@ -12,14 +12,15 @@ public class SearchCriteriaFrom implements Serializable{
 	private String month;
 	private String area;
 	private String countryCode;
-	private String userName;
+	private String userName;   
 	private String orderCode;
+	private String cutomerCompanyName;
 	
 	public Integer getPageNumber() {
 		return pageNumber;
 	}
 
-	public void setPageNumber(Integer pageNumber) {
+	public void setPageNumber(final Integer pageNumber) {
 		this.pageNumber = pageNumber;
 	}
 	
@@ -27,7 +28,7 @@ public class SearchCriteriaFrom implements Serializable{
 		return month;
 	}
 
-	public void setMonth(String month) {
+	public void setMonth(final String month) {
 		this.month = month;
 	}
 	
@@ -35,7 +36,7 @@ public class SearchCriteriaFrom implements Serializable{
 		return area;
 	}
 
-	public void setArea(String area) {
+	public void setArea(final String area) {
 		this.area = area;
 	}
 	
@@ -43,7 +44,7 @@ public class SearchCriteriaFrom implements Serializable{
 		return countryCode;
 	}
 
-	public void setCountryCode(String countryCode) {
+	public void setCountryCode(final String countryCode) {
 		this.countryCode = countryCode;
 	}
 	
@@ -51,7 +52,7 @@ public class SearchCriteriaFrom implements Serializable{
 		return userName;
 	}
 
-	public void setUserName(String userName) {
+	public void setUserName(final String userName) {
 		this.userName = userName;
 	}
 	
@@ -59,8 +60,16 @@ public class SearchCriteriaFrom implements Serializable{
 		return orderCode;
 	}
 
-	public void setOrderCode(String orderCode) {
+	public void setOrderCode(final String orderCode) {
 		this.orderCode = orderCode;
+	}
+
+	public String getCutomerCompanyName() {
+		return cutomerCompanyName;
+	}
+
+	public void setCutomerCompanyName(final String cutomerCompanyName) {
+		this.cutomerCompanyName = cutomerCompanyName;
 	}
 
 }

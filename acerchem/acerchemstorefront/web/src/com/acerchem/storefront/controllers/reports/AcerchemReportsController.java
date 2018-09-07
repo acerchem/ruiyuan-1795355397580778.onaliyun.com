@@ -51,11 +51,13 @@ import com.acerchem.storefront.data.CustomerCreditAnalysisForReportBean;
 import com.acerchem.storefront.data.CustomerSalesAnalysisForm;
 import com.acerchem.storefront.data.DocMessageForm;
 import com.acerchem.storefront.data.EmployeeMonthlySalesBean;
+import com.acerchem.storefront.data.EmployeeSalesAnalysisForm;
 import com.acerchem.storefront.data.MonthlySalesAnalysisForm;
 import com.acerchem.storefront.data.ProductSalesForm;
 import com.acerchem.storefront.data.SearchCriteriaFrom;
 import com.acerchem.storefront.data.VendorAnalysisForm;
 import com.acerchem.storefront.data.VendorInventoryForm;
+import com.acerchem.storefront.data.YearPoJo;
 
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractSearchPageController;
@@ -200,6 +202,24 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 
 		return vendors;
 	}
+	
+	@ModelAttribute("selectYears")
+	public Collection<YearPoJo> getYears(){
+		final List<YearPoJo> years = new ArrayList<YearPoJo>();
+		
+			final int curYear = Calendar.getInstance().get(Calendar.YEAR);
+			final int maxCount = 10;
+			for(int i =0;i<maxCount;i++){
+				final String year = String.valueOf(curYear - i);
+				final YearPoJo data = new YearPoJo();
+				data.setCode(year);
+				data.setName(year);
+				years.add(data);
+			}
+			
+		
+		return years;
+	}
 
 	private static final Comparator<AcerchemCategoryBean> cateComparator = new Comparator<AcerchemCategoryBean>() {
 
@@ -272,7 +292,8 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		}
 
 		final List<OrderDetailsReportData> searchPageData = acerchemOrderDao.getOrderDetails(curMonth,
-				searchCriteriaFrom.getArea(), searchCriteriaFrom.getCountryCode(), searchCriteriaFrom.getUserName(),
+				//注意，改做company name参数过滤了
+				searchCriteriaFrom.getArea(), searchCriteriaFrom.getCountryCode(), searchCriteriaFrom.getCutomerCompanyName(),
 				searchCriteriaFrom.getOrderCode());
 
 		curMonth = curMonth.substring(0, 4) + "-" + curMonth.substring(4);
@@ -283,7 +304,8 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		newForm.setMonth(curMonth);
 		newForm.setOrderCode(searchCriteriaFrom.getOrderCode());
 		newForm.setPageNumber(searchCriteriaFrom.getPageNumber());
-
+		newForm.setCutomerCompanyName(searchCriteriaFrom.getCutomerCompanyName());
+		
 		model.addAttribute("searchPageData", searchPageData);
 		model.addAttribute("searchCriteriaFrom", newForm);
 
@@ -353,23 +375,28 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		storeCmsPageInModel(model, getContentPageForLabelOrId("login"));
 		// init
 		final String year = String.valueOf(Calendar.getInstance().get(Calendar.YEAR));
+		
+		final EmployeeSalesAnalysisForm employeeSalesAnalysisForm = new EmployeeSalesAnalysisForm();
+		employeeSalesAnalysisForm.setYear(year);
 
 		final List<SalesByEmployeeReportData> listPrincipal = acerchemOrderAnalysisService.getEmployeeSales(year);
 		final List<EmployeeMonthlySalesBean> list = getCrossTabOfEmployeeSalesAnalysis(listPrincipal);
+		
+		
 		model.addAttribute("isDocMenu", isVisibleDocMenu());
-		model.addAttribute("curYear", year);
+		model.addAttribute("employeeSalesAnalysisForm", employeeSalesAnalysisForm);
 		model.addAttribute("salesList", list);
 		return "pages/reports/employeeSalesAnalysis";
 	}
 
 	@RequestMapping(value = "/employeeSalesAnalysis", method = RequestMethod.POST)
-	public String getEmployeeSalesAnalysisPage(final Model model, @RequestParam("year") final String year) {
+	public String getEmployeeSalesAnalysisPage(final Model model, final EmployeeSalesAnalysisForm employeeSalesAnalysisForm) {
 
-		final List<SalesByEmployeeReportData> listPrincipal = acerchemOrderAnalysisService.getEmployeeSales(year);
+		final List<SalesByEmployeeReportData> listPrincipal = acerchemOrderAnalysisService.getEmployeeSales(employeeSalesAnalysisForm.getYear());
 		final List<EmployeeMonthlySalesBean> list = getCrossTabOfEmployeeSalesAnalysis(listPrincipal);
 		// list = getEmployeeSalesAnalysisSum(list);
 		model.addAttribute("salesList", list);
-		model.addAttribute("curYear", year);
+		model.addAttribute("employeeSalesAnalysisForm", employeeSalesAnalysisForm);
 		model.addAttribute("isDocMenu", isVisibleDocMenu());
 		return "pages/reports/employeeSalesAnalysis";
 	}
@@ -936,9 +963,22 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		storeCmsPageInModel(model, getContentPageForLabelOrId("login"));
 
 		// init
+				final SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
+				final Calendar calendar = Calendar.getInstance();
+
+				final Date end = calendar.getTime();
+				calendar.add(Calendar.DATE, -7);
+				final Date start = calendar.getTime();
+
+				final String startDate = sdf.format(start);
+				final String endDate = sdf.format(end);
+				
+		
 		final List<CustomerSalesAnalysisData> list = acerchemOrderAnalysisService.getCustomerSalesAnalysis(null, null,
-				0);
+				0,start,end);
 		final CustomerSalesAnalysisForm customerSalesAnalysisForm = new CustomerSalesAnalysisForm();
+		customerSalesAnalysisForm.setStartDate(startDate);
+		customerSalesAnalysisForm.setEndDate(endDate);
 		model.addAttribute("customerSalesAnalysisForm", customerSalesAnalysisForm);
 		model.addAttribute("list", list);
 		model.addAttribute("isDocMenu", isVisibleDocMenu());
@@ -947,15 +987,26 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	}
 
 	@RequestMapping(value = "/customerSalesAnalysis", method = RequestMethod.POST)
-	public String getCustomerSalesAnalysis(final Model model, final CustomerSalesAnalysisForm customerSalesAnalysisForm)
-			throws CMSItemNotFoundException {
-
-		final String area = customerSalesAnalysisForm.getArea() == null ? "" : customerSalesAnalysisForm.getArea();
+	public String getCustomerSalesAnalysis(final Model model, final CustomerSalesAnalysisForm customerSalesAnalysisForm) 
+			throws CMSItemNotFoundException, ParseException {
+	final String area = customerSalesAnalysisForm.getArea() == null ? "" : customerSalesAnalysisForm.getArea();
 		final String name = customerSalesAnalysisForm.getCustomerName() == null ? ""
 				: customerSalesAnalysisForm.getCustomerName();
 		final double amount = customerSalesAnalysisForm.getAmount() == null ? 0 : customerSalesAnalysisForm.getAmount();
+		
+		Date start = new Date();
+		Date end = new Date();
+		final SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
+		if (StringUtils.isNotBlank(customerSalesAnalysisForm.getStartDate())) {
+			start = sdf.parse(customerSalesAnalysisForm.getStartDate());
+		}
+		if (StringUtils.isNotBlank(customerSalesAnalysisForm.getEndDate())) {
+			end = sdf.parse(customerSalesAnalysisForm.getEndDate());
+		}
+		
+		
 		final List<CustomerSalesAnalysisData> list = acerchemOrderAnalysisService.getCustomerSalesAnalysis(area, name,
-				amount);
+				amount,start,end);
 
 		model.addAttribute("list", list);
 		model.addAttribute("customerSalesAnalysisForm", customerSalesAnalysisForm);
@@ -1325,5 +1376,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		}
 		return s;
 	}
+	
+	
 
 }
