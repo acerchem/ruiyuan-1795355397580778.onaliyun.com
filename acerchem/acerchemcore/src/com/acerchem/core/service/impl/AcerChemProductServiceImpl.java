@@ -38,9 +38,9 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 	@Resource
 	private AcerChemVendorDao acerChemVendorDao;
 
-	@Resource 
+	@Resource
 	private ProductDao productDao;
-	
+
 	@Override
 	public List<ProductModel> getProductByVendorName(final String vendorName) {
 		// TODO Auto-generated method stub
@@ -69,14 +69,14 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 			for (final StockLevelModel stock : stocks) {
 				final InventoryReportData item = new InventoryReportData();
 				final ProductModel product = getProduct(stock.getProductCode());
-				if (product != null){
-				item.setProductCode(stock.getProductCode());
-				item.setProductName(product.getName());
-				final int inventory = stock.getAvailable() - stock.getReserved();
-				item.setInventoryCount(inventory);
-				item.setFutureInventory(stock.getPreOrder());
+				if (product != null) {
+					item.setProductCode(stock.getProductCode());
+					item.setProductName(product.getName());
+					final int inventory = stock.getAvailable() - stock.getReserved();
+					item.setInventoryCount(inventory);
+					item.setFutureInventory(stock.getPreOrder());
 
-				report.add(item);
+					report.add(item);
 				}
 			}
 		}
@@ -84,8 +84,6 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 		return report;
 	}
 
-	
-	
 	@Override
 	public List<InventoryReportData> getInventory(final String vendorCode) {
 		final List<InventoryReportData> report = new ArrayList<InventoryReportData>();
@@ -96,14 +94,14 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 				final InventoryReportData item = new InventoryReportData();
 				final ProductModel product = getProduct(stock.getProductCode());
 
-				if (product != null){
-				item.setProductCode(stock.getProductCode());
-				item.setProductName(product.getName());
-				final int inventory = stock.getAvailable() - stock.getReserved();
-				item.setInventoryCount(inventory);
-				item.setFutureInventory(stock.getPreOrder());
+				if (product != null) {
+					item.setProductCode(stock.getProductCode());
+					item.setProductName(product.getName());
+					final int inventory = stock.getAvailable() - stock.getReserved();
+					item.setInventoryCount(inventory);
+					item.setFutureInventory(stock.getPreOrder());
 
-				report.add(item);
+					report.add(item);
 				}
 			}
 		}
@@ -112,21 +110,21 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 	}
 
 	@Override
- 	public List<InventoryReportData> getInventory(final List<InventoryReportData> list) {
+	public List<InventoryReportData> getInventory(final List<InventoryReportData> list) {
 		final List<InventoryReportData> report = new ArrayList<InventoryReportData>();
-		if(CollectionUtils.isNotEmpty(list)){
-			if(list.size()>0){
+		if (CollectionUtils.isNotEmpty(list)) {
+			if (list.size() > 0) {
 				list.sort(compatatorInventory);
 				String pCode = list.get(0).getProductCode();
 				int store = 0;
 				int future = 0;
 				final int count = list.size();
-				for (int i =0;i<count;i++){
+				for (int i = 0; i < count; i++) {
 					final InventoryReportData data = list.get(i);
-					if(pCode.equals(data.getProductCode())){
+					if (pCode.equals(data.getProductCode())) {
 						store += data.getInventoryCount();
 						future += data.getFutureInventory();
-					}else{
+					} else {
 						pCode = data.getProductCode();
 						i--;
 						final String itemCode = list.get(i).getProductCode();
@@ -136,30 +134,31 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 						item.setProductName(itemName);
 						item.setFutureInventory(future);
 						item.setInventoryCount(store);
-						
+
 						report.add(item);
 						store = 0;
 						future = 0;
 					}
-					
+
 				}
-				
-				//last item union
-				final String lastCode = list.get(count-1).getProductCode();
-				final String lastName = list.get(count -1).getProductName();
+
+				// last item union
+				final String lastCode = list.get(count - 1).getProductCode();
+				final String lastName = list.get(count - 1).getProductName();
 				final InventoryReportData item = new InventoryReportData();
 				item.setProductCode(lastCode);
 				item.setProductName(lastName);
 				item.setFutureInventory(future);
 				item.setInventoryCount(store);
-				
+
 				report.add(item);
-				
+
 			}
 		}
-		
+
 		return report;
 	}
+
 	private static Comparator<InventoryReportData> compatatorInventory = new Comparator<InventoryReportData>() {
 
 		@Override
@@ -169,52 +168,63 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 		}
 
 	};
-	public ProductModel getProduct(final String code){
+
+	public ProductModel getProduct(final String code) {
 		final List<ProductModel> list = productDao.findProductsByCode(code);
-		
-		if (CollectionUtils.isNotEmpty(list) && list.size() >0){
-			for(final ProductModel p :list){
-				
-				if(p.getCatalogVersion().getVersion().equals("Online")){
+
+		if (CollectionUtils.isNotEmpty(list) && list.size() > 0) {
+			for (final ProductModel p : list) {
+
+				if (p.getCatalogVersion().getVersion().equals("Online")) {
 					return p;
 				}
-				
+
 			}
-			
+
 		}
 		return null;
 	}
-	
+
 	@Override
 	public List<OrderProductReportData> getOrderProductByVendor(final String vendorcode, final Date startDate,
 			final Date endDate) {
 		final List<OrderProductReportData> report = new ArrayList<OrderProductReportData>();
 
-		final List<OrderEntryModel> orderEntries = acerChemProductDao.getOrderEntryProductByVendorcode(vendorcode, startDate, endDate);
+		final List<OrderEntryModel> orderEntries = acerChemProductDao.getOrderEntryProductByVendorcode(vendorcode,
+				startDate, endDate);
 		if (CollectionUtils.isNotEmpty(orderEntries)) {
-//			final VendorModel vendor = acerChemVendorDao.getVendorByCode(vendorcode);
-//			final String vendorName = vendor != null ? vendor.getName() : "";
+			// final VendorModel vendor =
+			// acerChemVendorDao.getVendorByCode(vendorcode);
+			// final String vendorName = vendor != null ? vendor.getName() : "";
 			for (final OrderEntryModel oe : orderEntries) {
 				final OrderProductReportData item = new OrderProductReportData();
 
-//				final VendorModel vendor = oe.getProduct().getAcerChemVendor();
-//				if(vendor!=null){
-//					final String vendorName = StringUtils.isNotBlank(vendor.getName() ) ? vendor.getName() : "";
-//					item.setVendorName(vendorName);
-//				}
-				//modified vendor->customer company
-				if(oe.getOrder().getUser()!=null){
-				  final CustomerModel customer = (CustomerModel)oe.getOrder().getUser();
-				  final String company = StringUtils.defaultString(customer.getCompanyName());
-				  item.setVendorName(company);
-				  
+				// final VendorModel vendor =
+				// oe.getProduct().getAcerChemVendor();
+				// if(vendor!=null){
+				// final String vendorName =
+				// StringUtils.isNotBlank(vendor.getName() ) ? vendor.getName()
+				// : "";
+				// item.setVendorName(vendorName);
+				// }
+				// modified vendor->customer company
+				if (oe.getOrder().getUser() != null) {
+					//如果该订单是客户所下，则显示公司，否则，显示用户名字
+					String displayName = "";
+					if (oe.getOrder().getUser() instanceof CustomerModel) {
+						final CustomerModel customer = (CustomerModel) oe.getOrder().getUser();
+						displayName = StringUtils.defaultString(customer.getCompanyName());
+						
+					}else{
+						displayName = oe.getOrder().getUser().getName();
+					}
+					item.setVendorName(displayName);
 				}
 				item.setOrderCode(oe.getOrder().getCode());
 				item.setFinishedTime(oe.getOrder().getOrderFinishedDate());
 				item.setPlaceTime(oe.getOrder().getCreationtime());
 				item.setProductName(oe.getProduct().getName());
 				item.setProductQuantity(oe.getQuantity().intValue());
-				
 
 				report.add(item);
 			}
@@ -397,42 +407,42 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 			for (int i = 0; i < list.size(); i++) {
 				final AcerchemProductPriceBean bean = list.get(i);
 				if (codeReport.equals(bean.getProductCode())) {
-					final long q = bean.getSaleQuantity()==null?0:bean.getSaleQuantity();
-					final double r = bean.getBaseRealPrice()==null?0:bean.getBaseRealPrice();
+					final long q = bean.getSaleQuantity() == null ? 0 : bean.getSaleQuantity();
+					final double r = bean.getBaseRealPrice() == null ? 0 : bean.getBaseRealPrice();
 					sumQuantity += q;
-					sumPrice =  CommonConvertTools.addDouble(sumPrice,r*q);
+					sumPrice = CommonConvertTools.addDouble(sumPrice, r * q);
 					if (bean.getWeeknum() == 1) {
 
-						one =  CommonConvertTools.addDouble(one,r*q);
+						one = CommonConvertTools.addDouble(one, r * q);
 						n1 += q;
 						xcount = 1;
 					} else if (bean.getWeeknum() == 2) {
-						two =  CommonConvertTools.addDouble(two,r*q);
-						n2 +=  q;
+						two = CommonConvertTools.addDouble(two, r * q);
+						n2 += q;
 						xcount = 2;
 					} else if (bean.getWeeknum() == 3) {
 
-						three = CommonConvertTools.addDouble(three,r*q);
+						three = CommonConvertTools.addDouble(three, r * q);
 						n3 += q;
 						xcount = 3;
 					} else if (bean.getWeeknum() == 4) {
 
-						four = CommonConvertTools.addDouble(four,r*q);
+						four = CommonConvertTools.addDouble(four, r * q);
 						n4 += q;
 						xcount = 4;
 					} else if (bean.getWeeknum() == 5) {
 
-						five  = CommonConvertTools.addDouble(five,r*q);
+						five = CommonConvertTools.addDouble(five, r * q);
 						n5 += q;
 						xcount = 5;
 
 					} else {
 
-						six = CommonConvertTools.addDouble(six,r*q);
+						six = CommonConvertTools.addDouble(six, r * q);
 						n6 += q;
 						xcount = 6;
 					}
-					
+
 				} else {
 					codeReport = bean.getProductCode();
 
@@ -444,14 +454,13 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 					item.setSalesQuantity(sumQuantity);
 					item.setMaxWeek(xcount);
 
-					
-					one = one > 0 && n1 >0 ? one / n1 : 0;
-					two = two > 0 && n2 >0 ? two / n2 : 0;
-					three = three >0 && n3 > 0 ? three / n3 : 0;
-					four = four > 0 && n4 > 0? four / n4 : 0;
-					five = five > 0 && n5 >0? five / n5 : 0;
-					six = six > 0 && n6 >0? six / n6 : 0;
-					
+					one = one > 0 && n1 > 0 ? one / n1 : 0;
+					two = two > 0 && n2 > 0 ? two / n2 : 0;
+					three = three > 0 && n3 > 0 ? three / n3 : 0;
+					four = four > 0 && n4 > 0 ? four / n4 : 0;
+					five = five > 0 && n5 > 0 ? five / n5 : 0;
+					six = six > 0 && n6 > 0 ? six / n6 : 0;
+
 					if (sumQuantity > 0) {
 						item.setAveragePrice(sumPrice / sumQuantity);
 					}
@@ -464,7 +473,7 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 
 					report.add(item);
 
-					//sumprice = Double.valueOf(0);
+					// sumprice = Double.valueOf(0);
 					sumQuantity = 0;
 					sumPrice = 0;
 					one = 0;
@@ -492,13 +501,13 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 			item.setSalesQuantity(Long.valueOf(sumQuantity));
 			item.setMaxWeek(xcount);
 
-			one = one > 0 && n1 >0 ? one / n1 : 0;
-			two = two > 0 && n2 >0 ? two / n2 : 0;
-			three = three >0 && n3 > 0 ? three / n3 : 0;
-			four = four > 0 && n4 > 0? four / n4 : 0;
-			five = five > 0 && n5 >0? five / n5 : 0;
-			six = six > 0 && n6 >0? six / n6 : 0;
-			
+			one = one > 0 && n1 > 0 ? one / n1 : 0;
+			two = two > 0 && n2 > 0 ? two / n2 : 0;
+			three = three > 0 && n3 > 0 ? three / n3 : 0;
+			four = four > 0 && n4 > 0 ? four / n4 : 0;
+			five = five > 0 && n5 > 0 ? five / n5 : 0;
+			six = six > 0 && n6 > 0 ? six / n6 : 0;
+
 			if (sumQuantity > 0) {
 				item.setAveragePrice(sumPrice / sumQuantity);
 			}
@@ -616,8 +625,5 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 		}
 
 	};
-
-	
-	
 
 }
