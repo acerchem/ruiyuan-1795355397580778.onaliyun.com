@@ -63,16 +63,16 @@
 									</span>
 								</div>
 							</td>
-						<td><label style="margin-left: 20px;">Customer Area</label> <formElement:customSelectBox
+						<td><span style="margin-left: 5px;">Customer Area</span> <formElement:customSelectBox
 								idKey="area" labelKey="" path="area" mandatory="true"
 								skipBlank="false" skipBlankMessageKey="All" items="${areas}"
 								itemValue="isocode" itemLabel="name" selectedValue="${customerSalesAnalysisForm.area}" />
 						</td>
 
-						<td><label style="margin-left: 20px;">Customer Name</label> <input
+						<td><span>Customer Name</span> <input
 							name="customerName" size="12" type="text" value="${customerSalesAnalysisForm.customerName}">
 						</td>
-						<td><label style="margin-left: 20px;"> Order Amount ></label>
+						<td><span> Order Amount ></span>
 							<input name="amount" size="12" type="text" value="${customerSalesAnalysisForm.amount}">
 						</td>
 					<td>

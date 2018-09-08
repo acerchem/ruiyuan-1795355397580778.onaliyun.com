@@ -24,6 +24,9 @@ input,button,select{
 	border-radius: 20px;
 	padding:0 5px;
 }
+span{
+	padding:0 5px;
+}
 
 input::-webkit-input-placeholder{
   color:#94a8bd;

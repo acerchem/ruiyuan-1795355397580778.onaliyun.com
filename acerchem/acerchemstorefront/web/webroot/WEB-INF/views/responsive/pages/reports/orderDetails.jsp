@@ -50,12 +50,12 @@
 								value="${searchCriteriaFrom.month}"
 								style="width: 100px; padding-left: 10px" /></td>
 								
-							<td><span>Customer Area</span> <formElement:customSelectBox
+							<td><span style="margin-left: 5px;"> Customer Area</span> <formElement:customSelectBox
 									idKey="area" labelKey="" path="area" mandatory="true"
 									skipBlank="false" skipBlankMessageKey="All" items="${areas}"
 									itemValue="isocode" itemLabel="name"
 									selectedValue="${searchCriteriaFrom.area}" /></td>
-							<td><span>Country</span> <formElement:customSelectBox
+							<td><span style="margin-left: 5px;">Country</span> <formElement:customSelectBox
 									idKey="countryIso" labelKey="" path="countryCode"
 									mandatory="true" skipBlank="false" skipBlankMessageKey="All"
 									items="${countries}" itemValue="isocode" itemLabel="name"
