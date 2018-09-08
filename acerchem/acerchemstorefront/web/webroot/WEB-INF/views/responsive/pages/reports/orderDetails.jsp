@@ -69,6 +69,7 @@
 								size="12" type="text" value="${searchCriteriaFrom.cutomerCompanyName}">
 							</td>
 							<td>
+							<span></span>
 								<div class="btn">
 									<button type="submit">Show Report</button>
 								</div>

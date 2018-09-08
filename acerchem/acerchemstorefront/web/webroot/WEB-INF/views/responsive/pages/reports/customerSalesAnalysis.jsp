@@ -76,6 +76,7 @@
 							<input name="amount" size="12" type="text" value="${customerSalesAnalysisForm.amount}">
 						</td>
 					<td>
+					<span></span>
 								<div class="btn" >
 									<button type="submit">Show Report</button>
 								</div>
