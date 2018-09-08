@@ -50,13 +50,13 @@
 								<formElement:customSelectBox
 									 idKey="year" labelKey="" path="year" mandatory="true"
 									skipBlank="true" skipBlankMessageKey="" items="${selectYears}"
-									itemValue="code" itemLabel="name" selectedValue="code" />
+									itemValue="code" itemLabel="name" selectedValue="${monthlySalesAnalysisForm.year}" />
 								</td>
 								<input id="select_year" type="hidden" name="field＿name" value="${monthlySalesAnalysisForm.year}"> 
 							<td><span>Customer Area</span> <formElement:customSelectBox
 									idKey="area" labelKey="" path="area" mandatory="true"
 									skipBlank="false" skipBlankMessageKey="All" items="${areas}"
-									itemValue="isocode" itemLabel="name" selectedValue="${isocode}" />
+									itemValue="isocode" itemLabel="name" selectedValue="${monthlySalesAnalysisForm.area}" />
 							</td>
 
 							<td>

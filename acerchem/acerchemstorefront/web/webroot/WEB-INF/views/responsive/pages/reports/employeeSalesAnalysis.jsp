@@ -51,7 +51,7 @@
 							<formElement:customSelectBox
 									 idKey="year" labelKey="" path="year" mandatory="true"
 									skipBlank="true" skipBlankMessageKey="" items="${selectYears}"
-									itemValue="code" itemLabel="name" selectedValue="code" />
+									itemValue="code" itemLabel="name" selectedValue="${employeeSalesAnalysisForm.year}" />
 								</td>
 								<input id="select_year" type="hidden" name="field＿name" value="${employeeSalesAnalysisForm.year}">
 							

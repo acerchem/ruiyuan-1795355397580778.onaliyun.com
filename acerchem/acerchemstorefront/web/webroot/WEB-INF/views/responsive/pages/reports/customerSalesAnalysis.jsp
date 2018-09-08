@@ -49,8 +49,8 @@
 <td>
 								<div>
 									Start Date:<span> <input type="text" class="calendar"
-										maxlength="19" onfocus="$(this).calendar()" name="startDate"
-										value="${customerSalesAnalysisForm.startDate}" readonly />
+										maxlength="12" onfocus="$(this).calendar()" name="startDate"
+										value="${customerSalesAnalysisForm.startDate}" size="12" readonly />
 									</span>
 								</div>
 							</td>
@@ -58,8 +58,8 @@
 							<td>
 								<div>
 									End Date:<span> <input type="text" class="calendar"
-										maxlength="19" onfocus="$(this).calendar()" name="endDate"
-										value="${customerSalesAnalysisForm.endDate}" readonly />
+										maxlength="12" onfocus="$(this).calendar()" name="endDate"
+										value="${customerSalesAnalysisForm.endDate}" size="12" readonly />
 									</span>
 								</div>
 							</td>

@@ -61,12 +61,12 @@
 									items="${countries}" itemValue="isocode" itemLabel="name"
 									selectedValue="${searchCriteriaFrom.countryCode}" /></td>
 							<td><span>Order Code</span> <input name="orderCode"
-								size="12" type="text" value="${searchCriteriaFrom.orderCode}">
+								size="20" type="text" value="${searchCriteriaFrom.orderCode}">
 							</td>
 							
 							<td><span>Customer CompanyName</span> 
 							<input name="cutomerCompanyName"
-								size="12" type="text" value="${searchCriteriaFrom.cutomerCompanyName}">
+								size="20" type="text" value="${searchCriteriaFrom.cutomerCompanyName}">
 							</td>
 							<td>
 							<span></span>
