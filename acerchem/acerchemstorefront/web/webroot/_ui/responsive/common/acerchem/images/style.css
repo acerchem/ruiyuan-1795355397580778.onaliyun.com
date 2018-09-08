@@ -21,6 +21,8 @@ a:hover{
 
 input,button,select{
 	color:#94a8bd;
+	border-radius: 20px;
+	padding:0 5px;
 }
 
 input::-webkit-input-placeholder{
