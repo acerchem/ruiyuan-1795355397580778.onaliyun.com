@@ -36,6 +36,7 @@
             <list-view:column qualifier="user.companyName"/>
             <list-view:column qualifier="currency"/>
             <list-view:column qualifier="pickUpDate"/>
+            <list-view:column qualifier="deliveryMode"/>
             <list-view:column qualifier="orderFinishedDate"/>
 		</list-view:list-view>
 	</context>
