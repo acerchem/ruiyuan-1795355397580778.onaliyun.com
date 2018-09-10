@@ -30,14 +30,19 @@
 	
 	<context merge-by="type" parent="GenericItem" type="AbstractOrder" component="listview">
 		<list-view:list-view>
+			<list-view:column qualifier="user" merge-mode="Remove"/>
+			<list-view:column qualifier="user.name" position="3"/>
             <list-view:column qualifier="status"/>
-            <list-view:column qualifier="deliveryMode"/>
+            <list-view:column qualifier="user.companyName"/>
+            <list-view:column qualifier="currency"/>
+            <list-view:column qualifier="pickUpDate"/>
+            <list-view:column qualifier="orderFinishedDate"/>
 		</list-view:list-view>
 	</context>
 	
 	<context merge-by="type" parent="GenericItem" type="AbstractOrder" component="editor-area">
 		<editorArea:editorArea name="">
-			<editorArea:tab name="hmc.positions_and_prices">
+			<editorArea:tab name="hmc.positions_and_prices" merge-mode="Remove">
 				<editorArea:section name="hmc.common">
 					<editorArea:attribute qualifier="net" merge-mode="Remove"/>
 					<editorArea:attribute qualifier="calculated" merge-mode="Remove"/>
@@ -58,6 +63,15 @@
 				</editorArea:section>
 				<editorArea:section name="hmc.deliveryadministration">
 					<editorArea:attribute qualifier="deliveryStatus" merge-mode="Remove"/>
+				</editorArea:section>
+				
+				<editorArea:section name="hmc.common" position="0">
+					<editorArea:attribute qualifier="currency"/>
+					<editorArea:attribute qualifier="paymentCost"/>
+					<editorArea:attribute qualifier="deliveryCost"/>
+					<editorArea:attribute qualifier="totalPrice"/>
+					<editorArea:attribute qualifier="totalTaxValues"/>
+					<editorArea:attribute qualifier="entries"/>
 				</editorArea:section>
 			</editorArea:tab>
 			<editorArea:tab name="hmc.tab.documents.name" merge-mode="Remove"/>
@@ -81,7 +95,7 @@
 	
     <context merge-by="type" parent="AbstractOrder" type="Order" component="editor-area">
         <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">
-        	<editorArea:tab name="hmc.positions_and_prices">
+        	<editorArea:tab name="hmc.positions_and_prices" merge-mode="Remove">
                 <editorArea:section name="hmc.common">
                     <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="salesApplication" merge-mode="Remove"/>
 					 <editorArea:attribute xmlns="http://www.hybris.com/cockpitng/component/editorArea" qualifier="site" merge-mode="Remove"/>
@@ -100,7 +114,15 @@
     <context type="AbstractOrderEntry" component="base" merge-by="type" parent="GenericItem">
 		<y:base>
 			<y:labels>
-				<y:label>'['+product.code+']'+product.name+'  *'+quantity+product.packageType</y:label>
+				<y:label>'['+product.code+']'+product.manufacturerAID+'  *'+quantity+product.packageType</y:label>
+			</y:labels>
+		</y:base>
+	</context>
+	
+	<context merge-by="type" parent="GenericItem" type="Address" component="base">
+		<y:base>
+			<y:labels>
+				<y:label>'[' + lastname + '] ' + region.name + ',' + town + ',' + country.name</y:label>
 			</y:labels>
 		</y:base>
 	</context>
