@@ -1388,7 +1388,7 @@ public class AccountPageController extends AbstractSearchPageController {
 						tx.rollback();
 						LOG.info(
 								">>>>>>>>>cancel order no proceed,because update customerCreditAccount is null >>>>>>>>>");
-						return;
+						
 					}else{
 						tx.commit();
 						LOG.info(">>>>>>>>>cancel order end>>>>>>>>>");
