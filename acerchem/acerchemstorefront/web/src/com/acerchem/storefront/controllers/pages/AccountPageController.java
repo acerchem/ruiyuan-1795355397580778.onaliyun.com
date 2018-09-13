@@ -1463,6 +1463,8 @@ public class AccountPageController extends AbstractSearchPageController
 		    
 			if(confirm.equals("cancel")&&todaydate.before(date))
 			{
+				LOG.info(">>>>>>>>>cancel order start>>>>>>>>>");
+				
 				final Transaction tx = Transaction.current();
 				tx.begin();
 				
@@ -1476,10 +1478,12 @@ public class AccountPageController extends AbstractSearchPageController
 			    if(customerCreditAccount==null)
 			    {
 			    	tx.rollback();
+			    	LOG.info(">>>>>>>>>cancel order no proceed,because update customerCreditAccount is null >>>>>>>>>");
 			    }
 			    else
 			    {
 			    	tx.commit();
+			    	LOG.info(">>>>>>>>>cancel order end>>>>>>>>>");
 			    }
 			    
 			}
