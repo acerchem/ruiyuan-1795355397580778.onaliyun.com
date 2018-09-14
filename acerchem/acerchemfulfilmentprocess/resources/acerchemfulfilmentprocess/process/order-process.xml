@@ -12,6 +12,11 @@
 <process xmlns="http://www.hybris.de/xsd/processdefinition" start="checkOrder" name="order-process" processClass="de.hybris.platform.orderprocessing.model.OrderProcessModel">
 
 	<action id="checkOrder" bean="checkOrderAction">
+		<transition name="OK" to="creditPayMode"/>
+		<transition name="NOK" to="error"/>
+	</action>
+	<!-- 订单创建后，如果是信用模式，就进行信用扣款 -->
+	<action id="creditPayMode" bean="creditPayModeAction">
 		<transition name="OK" to="sendOrderPlacedNotification"/>
 		<transition name="NOK" to="error"/>
 	</action>
@@ -48,14 +53,19 @@
 	</action>
 	
 	<action id="choosePayMode" bean="choosePayModeAction">
+		<!-- 信用扣款给提前到订单创建后 ，改为如果是信用模式，直接到发货状态
 		<transition name="OK" to="creditPayMode"/>
+		
+		<action id="creditPayMode" bean="creditPayModeAction">
+		<transition name="OK" to="waitUpdateConsignmentStatus"/>
+		<transition name="NOK" to="error"/>
+	     </action>
+		 -->
+		 <transition name="OK" to="waitUpdateConsignmentStatus"/>
 		<transition name="NOK" to="linePayMode"/>
 	</action>
 	
-	<action id="creditPayMode" bean="creditPayModeAction">
-		<transition name="OK" to="waitUpdateConsignmentStatus"/>
-		<transition name="NOK" to="error"/>
-	</action>
+	
 	
 	<action id="linePayMode" bean="linePayModeAction">
 		<transition name="OK" to="generateFormInvoiceEmail"/>

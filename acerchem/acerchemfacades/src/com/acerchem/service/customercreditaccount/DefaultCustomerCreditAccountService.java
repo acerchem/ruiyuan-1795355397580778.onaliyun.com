@@ -1,11 +1,12 @@
 package com.acerchem.service.customercreditaccount;
 
+import java.math.BigDecimal;
+import java.util.List;
+
 import com.acerchem.core.model.CreditTransactionModel;
 import com.acerchem.core.model.CustomerCreditAccountModel;
 
 import de.hybris.platform.core.model.order.OrderModel;
-import java.math.BigDecimal;
-import java.util.List;
 
 public interface DefaultCustomerCreditAccountService {
     /**
@@ -42,5 +43,14 @@ public interface DefaultCustomerCreditAccountService {
      */
     CustomerCreditAccountModel updateCreditAccountRepaymentByOrder(OrderModel order);
 
+    /**
+     * 重构还款接口
+     * @param creditTransaction
+     * @param isCancelOrder
+     * @return
+     */
+    CustomerCreditAccountModel updateCustomerCreditAccountRepayment(CreditTransactionModel creditTransaction,boolean isCancelOrder);
+    
+    CustomerCreditAccountModel updateCreditAccountRepaymentByOrder(OrderModel order,boolean isCancelOrder);
 
 }

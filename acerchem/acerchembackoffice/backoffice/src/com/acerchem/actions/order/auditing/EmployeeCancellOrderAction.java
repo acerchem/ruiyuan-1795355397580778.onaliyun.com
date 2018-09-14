@@ -52,7 +52,7 @@ public class EmployeeCancellOrderAction extends AbstractComponentWidgetAdapterAw
 		return eventService;
 	}
 
-	public void setEventService(EventService eventService) {
+	public void setEventService(final EventService eventService) {
 		this.eventService = eventService;
 	
 	}
@@ -60,7 +60,7 @@ public class EmployeeCancellOrderAction extends AbstractComponentWidgetAdapterAw
 		return acerchemStockService;
 	}
 
-	public void setAcerchemStockService(AcerchemStockService acerchemStockService) {
+	public void setAcerchemStockService(final AcerchemStockService acerchemStockService) {
 		this.acerchemStockService = acerchemStockService;
 	}
 
@@ -68,16 +68,16 @@ public class EmployeeCancellOrderAction extends AbstractComponentWidgetAdapterAw
 		return businessProcessService;
 	}
 
-	public void setBusinessProcessService(BusinessProcessService businessProcessService) {
+	public void setBusinessProcessService(final BusinessProcessService businessProcessService) {
 		this.businessProcessService = businessProcessService;
 	}
 
 
 	@Override
-	public ActionResult<Object> perform(ActionContext<OrderModel> ctx) {
+	public ActionResult<Object> perform(final ActionContext<OrderModel> ctx) {
 		// TODO Auto-generated method stub
 		LOG.info("--------------------start-------------------");
-		OrderModel order = (OrderModel) ctx.getData();
+		final OrderModel order = ctx.getData();
 		LOG.info("---------------------------------------"+order.getOrderProcess().iterator().next().getCode());
 		
 		if(order != null){
@@ -87,7 +87,7 @@ public class EmployeeCancellOrderAction extends AbstractComponentWidgetAdapterAw
 //			}else{
 				acerchemStockService.releaseStock(order);
 				if(order.getPaymentMode().getCode().equals(CREDIT_PAYMENT_INFO)){
-					defaultCustomerCreditAccountService.updateCreditAccountRepaymentByOrder(order);
+					defaultCustomerCreditAccountService.updateCreditAccountRepaymentByOrder(order,true);
 				}
 				getEventService().publishEvent(new OrderCancelledEvent(order.getOrderProcess().iterator().next()));
 				LOG.info("--------------------------------end CancelOrderStatusAction----------------------");
@@ -99,7 +99,7 @@ public class EmployeeCancellOrderAction extends AbstractComponentWidgetAdapterAw
 		return new ActionResult("failed");
 	}
 	
-	private void setOrderStatus(OrderModel order, OrderStatus orderStatus) {
+	private void setOrderStatus(final OrderModel order, final OrderStatus orderStatus) {
 		       order.setStatus(orderStatus);
 		      this.modelService.save(order);
     }

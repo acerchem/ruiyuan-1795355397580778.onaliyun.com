@@ -100,6 +100,7 @@ import de.hybris.platform.commercefacades.user.data.TitleData;
 import de.hybris.platform.commercefacades.user.exceptions.PasswordMismatchException;
 import de.hybris.platform.commerceservices.customer.CustomerAccountService;
 import de.hybris.platform.commerceservices.customer.DuplicateUidException;
+import de.hybris.platform.commerceservices.event.OrderCancelledEvent;
 import de.hybris.platform.commerceservices.search.flexiblesearch.PagedFlexibleSearchService;
 import de.hybris.platform.commerceservices.search.flexiblesearch.data.SortQueryData;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
@@ -124,6 +125,7 @@ import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 import de.hybris.platform.processengine.BusinessProcessEvent;
 import de.hybris.platform.processengine.BusinessProcessService;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
+import de.hybris.platform.servicelayer.event.EventService;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.servicelayer.i18n.CommonI18NService;
 import de.hybris.platform.servicelayer.model.ModelService;
@@ -235,6 +237,9 @@ public class AccountPageController extends AbstractSearchPageController {
 
 	@Resource(name = "addressDataUtil")
 	private AddressDataUtil addressDataUtil;
+	
+	@Resource
+	private EventService eventService;
 
 	protected PasswordValidator getPasswordValidator() {
 		return passwordValidator;
@@ -349,7 +354,9 @@ public class AccountPageController extends AbstractSearchPageController {
 					? orderDetails.getPickupDateOfExtended() : orderDetails.getPickUpDate();
 			final Calendar c = Calendar.getInstance();
 			c.setTime(pickupDate);
-			c.set(Calendar.DATE, c.get(Calendar.DATE) - Integer.valueOf(Config.getParameter("cancel.order.day")));
+			//修改为含缺省值，为1天
+			c.set(Calendar.DATE, c.get(Calendar.DATE) - Config.getInt("cancel.order.day",
+					1));
 			final Date date = c.getTime();
 
 			final Calendar today = Calendar.getInstance();
@@ -1369,7 +1376,9 @@ public class AccountPageController extends AbstractSearchPageController {
 
 			if (confirm.equals("cancel") && todaydate.before(date)) {
 				LOG.info(">>>>>>>>>cancel order start>>>>>>>>>");
-
+				
+				eventService.publishEvent(new OrderCancelledEvent(orderProcessList.iterator().next()));
+				
 				final Transaction tx = Transaction.current();
 				tx.begin();
 				
@@ -1381,13 +1390,11 @@ public class AccountPageController extends AbstractSearchPageController {
 					tx.commit();
 					LOG.info(">>>>>>>>>cancel order end>>>>>>>>>");
 				} else {
-					final CustomerCreditAccountModel customerCreditAccount = defaultCustomerCreditAccountService
-							.updateCreditAccountRepaymentByOrder(order);
+					final CustomerCreditAccountModel customerCreditAccount = defaultCustomerCreditAccountService.updateCreditAccountRepaymentByOrder(order,true);
 
 					if (customerCreditAccount == null) {
 						tx.rollback();
-						LOG.info(
-								">>>>>>>>>cancel order no proceed,because update customerCreditAccount is null >>>>>>>>>");
+						LOG.info(">>>>>>>>>cancel order can't proceed,because update customerCreditAccount is null >>>>>>>>>");
 						
 					}else{
 						tx.commit();
