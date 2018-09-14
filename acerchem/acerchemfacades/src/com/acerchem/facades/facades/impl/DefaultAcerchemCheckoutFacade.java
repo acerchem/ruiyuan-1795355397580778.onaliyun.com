@@ -509,7 +509,7 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
 
             }
             
-            BigDecimal orderTotalPrice = totalAdditionalFee.add(BigDecimal.valueOf(orderModel.getTotalPrice()));
+            BigDecimal orderTotalPrice = totalAdditionalFee;
             for(AbstractOrderEntryModel entry:orderModel.getEntries())
             {
             	orderTotalPrice = orderTotalPrice.add(BigDecimal.valueOf(entry.getTotalPrice()));
