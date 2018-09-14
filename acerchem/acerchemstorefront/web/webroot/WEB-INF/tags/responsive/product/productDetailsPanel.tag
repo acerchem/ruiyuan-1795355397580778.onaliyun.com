@@ -139,7 +139,7 @@
                         
                        <c:forEach items="${countrys}" var="data"  varStatus="id"  >
 						<c:if test="${id.index==0}">
-							<span class="label-title inventory">Inventory:<i id="inventory">${data.inventory}</i> <span class="spot">(<em>${data.inventory}</em>)</span></span>
+							<span class="label-title inventory">Inventory:<i id="inventory">${data.inventory}&nbsp${product.packageType}</i> <span class="spot">(<em>${data.inventory}</em>)</span></span>
 							</c:if>	
                         </c:forEach>
 							
