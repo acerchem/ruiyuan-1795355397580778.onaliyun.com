@@ -21,6 +21,7 @@ import com.acerchem.core.enums.CustomerArea;
 import com.acerchem.core.report.order.beans.AcerchemProductBuyerBean;
 import com.acerchem.core.report.order.beans.AcerchemProductPriceBean;
 
+import de.hybris.platform.core.enums.OrderStatus;
 import de.hybris.platform.core.model.order.OrderEntryModel;
 import de.hybris.platform.core.model.product.ProductModel;
 import de.hybris.platform.core.model.user.AddressModel;
@@ -201,6 +202,10 @@ public class AcerChemProductDaoImpl implements AcerChemProductDao {
 	public List<OrderEntryModel> getOrderEntryProductByVendorcode(final String vendorcode, final Date startDate, final Date endDate) {
 		String SQL="select {oe.pk} from {OrderEntry as oe JOIN Order as o ON {oe.order}={o.pk} } where 1=1";
 		final Map<String, Object> params = new HashMap<String, Object>();
+		
+		//增加订单状态不等于cancelled
+		SQL += " and {o:status}<>?status";
+		params.put("status", OrderStatus.valueOf("Cancelled"));
 		if(startDate != null){
 			SQL += " AND {o.creationtime} > ?startDate";
 			params.put("startDate", startDate);
@@ -225,10 +230,13 @@ public class AcerChemProductDaoImpl implements AcerChemProductDao {
 	public List<AcerchemProductPriceBean> getProductWithBaserealPrice(final String month) {
 		if(StringUtils.isNotBlank(month)){
 		final String SQL = "select {oe.pk} from {OrderEntry as oe JOIN Order as o ON {oe.order}={o.pk} } "+
-		             "where DATE_FORMAT({o.creationtime},'%Y%m') =?month order by {o.creationtime}";
+		             "where DATE_FORMAT({o.creationtime},'%Y%m') =?month and {o.status}<>?status order by {o.creationtime} ";
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(SQL);
 		
+		
 		query.addQueryParameter("month", month);
+		//增加订单状态不等于cancelled
+		query.addQueryParameter("status",  OrderStatus.valueOf("Cancelled"));
 		//query.setResultClassList(Arrays.asList(OrderEntryModel.class, Date.class));
 		final SearchResult<OrderEntryModel> result = flexibleSearchService.search(query);
 		
@@ -272,6 +280,10 @@ public class AcerChemProductDaoImpl implements AcerChemProductDao {
 				+ " JOIN Customer as u ON {u:pk} = {o:user}" + " JOIN Address as ua ON {ua:owner} = {u:pk}"
 				+ " JOIN Country as uc ON {uc:pk} = {ua:country}" + "} where {ua:contactAddress} = true ";
 		final Map<String, Object> params = new HashMap<String, Object>();
+		//增加订单状态不等于cancelled
+		SQL += " and {o:status}<>?status";
+		params.put("status", OrderStatus.valueOf("Cancelled"));
+		
 		if (month != null && !month.equals("")) {
 			SQL += " AND DATE_FORMAT({o:creationtime},'%Y%m') =?month ";
 			params.put("month", month);

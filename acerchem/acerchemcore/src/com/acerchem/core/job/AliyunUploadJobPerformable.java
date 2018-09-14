@@ -129,7 +129,7 @@ public class AliyunUploadJobPerformable extends AbstractJobPerformable<CronJobMo
 				final File mainDataDir = MediaUtil.getLocalStorageDataDir();
 				// get local file
 				final File file = MediaUtil.composeOrGetParent(mainDataDir, localPath);
-				LOG.info("****>>>AbsolutePath=" + file.getAbsolutePath());
+				//LOG.info("****>>>AbsolutePath=" + file.getAbsolutePath());
 
 				if (file.exists()) {
 

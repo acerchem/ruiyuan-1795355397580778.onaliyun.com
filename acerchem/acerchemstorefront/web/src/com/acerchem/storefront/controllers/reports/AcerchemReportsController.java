@@ -745,6 +745,10 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 
 		final SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
 		final Calendar calendar = Calendar.getInstance();
+		calendar.set(Calendar.HOUR_OF_DAY,0);
+		calendar.set(Calendar.MINUTE,0);
+		calendar.set(Calendar.SECOND,0);
+		calendar.set(Calendar.MILLISECOND,0);
 		final Date end = calendar.getTime();
 		calendar.set(Calendar.DATE, -7);
 		final Date start = calendar.getTime();
@@ -850,7 +854,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		final List<ProductPriceAnalysisData> list = acerChemProductService.getProductWithBaserealPrice(month);
 
 		model.addAttribute("list", list);
-		model.addAttribute("month", month);
+		model.addAttribute("month", month.substring(0,4)+"-"+month.substring(4));
 		model.addAttribute("maxWeek", maxWeek);
 		model.addAttribute("isDocMenu", isVisibleDocMenu());
 		return "pages/reports/productPriceAnalysis";
@@ -885,7 +889,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 
 		curMonth = curMonth.substring(0, 4) + "-" + curMonth.substring(4);
 		model.addAttribute("list", list);
-		model.addAttribute("month", curMonth);
+		model.addAttribute("month", curMonth.substring(0,4)+"-"+curMonth.substring(4));
 		model.addAttribute("maxWeek", maxWeek);
 		model.addAttribute("isDocMenu", isVisibleDocMenu());
 		return "pages/reports/productPriceAnalysis";
@@ -905,7 +909,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 
 		// init
 		final Date d = new Date();
-		final SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM");
+		final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
 		final String month = sdf.format(d);
 
 		final List<ProductSalesRecordData> list = acerChemProductService.getProductSalesForReport(month, null, null,
@@ -913,8 +917,9 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 
 		final ProductSalesForm productSalesForm = new ProductSalesForm();
 		model.addAttribute("productSalesForm", productSalesForm);
-		model.addAttribute("month", month);
+		model.addAttribute("month", month.substring(0,4)+"-"+month.substring(4));
 		model.addAttribute("isDocMenu", isVisibleDocMenu());
+		model.addAttribute("list", list);
 		return "pages/reports/productSalesRecord";
 
 	}
@@ -965,7 +970,10 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		// init
 				final SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
 				final Calendar calendar = Calendar.getInstance();
-
+				calendar.set(Calendar.HOUR_OF_DAY,0);
+				calendar.set(Calendar.MINUTE,0);
+				calendar.set(Calendar.SECOND,0);
+				calendar.set(Calendar.MILLISECOND,0);
 				final Date end = calendar.getTime();
 				calendar.add(Calendar.DATE, -7);
 				final Date start = calendar.getTime();
@@ -1027,7 +1035,10 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		// init
 		final SimpleDateFormat sdf = new SimpleDateFormat("M/d/yyyy");
 		final Calendar calendar = Calendar.getInstance();
-
+		calendar.set(Calendar.HOUR_OF_DAY,0);
+		calendar.set(Calendar.MINUTE,0);
+		calendar.set(Calendar.SECOND,0);
+		calendar.set(Calendar.MILLISECOND,0);
 		Date end = calendar.getTime();
 		calendar.add(Calendar.DATE, -7);
 		final Date start = calendar.getTime();

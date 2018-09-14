@@ -28,6 +28,7 @@ import de.hybris.platform.commercefacades.order.data.MonthlySalesAnalysis;
 import de.hybris.platform.commercefacades.order.data.OrderDetailsReportData;
 import de.hybris.platform.commercefacades.order.data.SalesByEmployeeReportData;
 import de.hybris.platform.commercefacades.user.data.AddressData;
+import de.hybris.platform.core.enums.OrderStatus;
 import de.hybris.platform.core.model.order.OrderEntryModel;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.AddressModel;
@@ -74,6 +75,9 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 				+ " JOIN Customer as u ON {u:pk} = {o:user}" + " JOIN Address as ua ON {ua:owner} = {u:pk}"
 				+ " JOIN Country as uc ON {uc:pk} = {ua:country}" + "} where {ua:contactAddress} = true ";
 
+		//增加订单状态不等于cancelled
+		SQL += " and {o:status}<>?status";
+		params.put("status", OrderStatus.valueOf("Cancelled"));
 		if (month != null && !month.equals("")) {
 			SQL += " AND DATE_FORMAT({o:creationtime},'%Y%m') =?month ";
 			params.put("month", month);
@@ -222,6 +226,10 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		final Map<String, Object> params = new HashMap<String, Object>();
 		String SQL = "select {o.pk} from {Order as o JOIN Customer as u ON {u:pk} = {o:user}} where 1=1 ";
 
+		//增加订单状态不等于cancelled
+		SQL += " and {o:status}<>?status";
+		params.put("status", OrderStatus.valueOf("Cancelled"));
+		
 		if (year != null && StringUtils.isNumeric(year) && Integer.valueOf(year) > 0) {
 			SQL += " AND DATE_FORMAT({o:creationtime},'%Y') =?year ";
 			params.put("year", year);
@@ -346,6 +354,10 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		SQL.append("JOIN Currency as cur ON {o.currency} = {cur.pk}\n");
 		SQL.append("}\n");
 		SQL.append("where {cur.isocode}='USD'\n");
+		
+		//增加订单状态不等于cancelled
+		SQL.append(" and {o:status}<>?status\n");
+		params.put("status", OrderStatus.valueOf("Cancelled"));
 		if (year != null && StringUtils.isNumeric(year) && Integer.valueOf(year) > 0) {
 			SQL.append(" AND DATE_FORMAT({o.creationtime},'%Y') =?year\n");
 			params.put("year", year);
@@ -360,6 +372,9 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		SQL.append("JOIN Currency as cur1 ON {o1.currency} = {cur1.pk}\n");
 		SQL.append("}\n");
 		SQL.append("where {cur1.isocode}!='USD'\n");
+		//增加订单状态不等于cancelled
+		SQL.append(" and {o1:status}<>?status\n");
+		params.put("status", OrderStatus.valueOf("Cancelled"));
 		if (year != null && StringUtils.isNumeric(year) && Integer.valueOf(year) > 0) {
 			SQL.append(" AND DATE_FORMAT({o1.creationtime},'%Y') =?year1\n");
 			params.put("year1", year);
@@ -489,6 +504,9 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 				+ " JOIN Address as ua ON {ua:owner} = {u:pk}" + " JOIN Country as uc ON {uc:pk} = {ua:country}"
 				+ "} where {ua:contactAddress} = true ";
 
+		//增加订单状态不等于cancelled
+		SQL += " and {o:status}<>?status";
+		params.put("status", OrderStatus.valueOf("Cancelled"));
 		if (area != null && !area.equals("") && !area.equals("no")) {
 			SQL += " AND {u:area} =?area ";
 			params.put("area", CustomerArea.valueOf(area));
@@ -572,12 +590,15 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 			end = Calendar.getInstance().getTime();
 		}
 
-		final String SQL = "select {pk} from {Order} where {creationtime}> ?startDate and {creationtime} < ?endDate ";
+		final String SQL = "select {pk} from {Order} where {creationtime}> ?startDate and {creationtime} < ?endDate  and {status}<>?status";
 
+		
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(SQL);
 		query.addQueryParameter("startDate", start);
 
 		query.addQueryParameter("endDate", end);
+		//增加订单状态不等于cancelled
+		query.addQueryParameter("status", OrderStatus.valueOf("Cancelled"));
 
 		final SearchResult<OrderModel> result = flexibleSearchService.search(query);
 		final List<OrderModel> list = result.getResult();
