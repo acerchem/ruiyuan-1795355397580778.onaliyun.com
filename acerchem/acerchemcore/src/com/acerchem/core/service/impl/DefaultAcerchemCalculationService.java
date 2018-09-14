@@ -70,22 +70,30 @@ public class DefaultAcerchemCalculationService extends DefaultCalculationService
 			order.setTotalDiscounts(Double.valueOf(roundedTotalDiscounts));
 			// set total
 			double total = subtotal;
+			System.out.println("subtotal========="+subtotal);
 			if (order.getDeliveryCost()!=null){
 				total = total + order.getDeliveryCost().doubleValue();
+				System.out.println("DeliveryCost========="+order.getDeliveryCost().doubleValue());
 			}
 			if (order.getPaymentCost()!=null){
 				total = total + order.getPaymentCost().doubleValue();
+				System.out.println("PaymentCost========="+order.getPaymentCost().doubleValue());
 			}
 			if(order.getOperateCost()!=null){
 				total = total +order.getOperateCost().doubleValue();
+				System.out.println("OperateCost========="+order.getOperateCost().doubleValue());
 			}
 			if (order.getStorageCost()!=null){
 				total = total +order.getStorageCost().doubleValue();
+				System.out.println("StorageCost========="+order.getStorageCost().doubleValue());
 			}
 			total = total - roundedTotalDiscounts;
+			System.out.println("total========="+total+";roundedTotalDiscounts==="+roundedTotalDiscounts);
 
 			final double totalRounded = commonI18NService.roundCurrency(total, digits);
 			order.setTotalPrice(Double.valueOf(totalRounded));
+			System.out.println("order.getTotalPrice()=========="+order.getTotalPrice());
+			
 			// taxes
 			final double totalTaxes = calculateTotalTaxValues(//
 					order, recalculate, //
