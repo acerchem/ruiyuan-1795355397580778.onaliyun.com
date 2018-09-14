@@ -444,7 +444,7 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
 	//分摊价格
 	public void apportionmentCartPrice(OrderModel orderModel){
         if (!ObjectUtils.isEmpty(orderModel)){
-            System.out.println("orderModel.getCode()===="+orderModel.getCode());
+            System.out.println("orderModel.getCode()===="+orderModel.getCode()+";orderModel.getTotalPrice()===="+orderModel.getTotalPrice());
             //总托盘比例
             BigDecimal totalUnitCalculateRato = BigDecimal.ZERO;
             //总托盘数量
@@ -508,11 +508,16 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                aoe.setTotalRealPrice(totalRealPrice);
 
             }
-            System.out.println("totalAdditionalFee===="+totalAdditionalFee+";orderModel.getTotalPrice()=========="+orderModel.getTotalPrice());
+            
             BigDecimal orderTotalPrice = totalAdditionalFee.add(BigDecimal.valueOf(orderModel.getTotalPrice()));
-            orderTotalPrice = orderTotalPrice.subtract(BigDecimal.valueOf(orderModel.getDeliveryCost()));
+            for(AbstractOrderEntryModel entry:orderModel.getEntries())
+            {
+            	orderTotalPrice = orderTotalPrice.add(BigDecimal.valueOf(entry.getTotalPrice()));
+            }
+            orderTotalPrice = orderTotalPrice.subtract(BigDecimal.valueOf(orderModel.getTotalDiscounts()));
             orderModel.setTotalPrice(orderTotalPrice.doubleValue());
-            System.out.println("orderModel.getDeliveryCost()===="+orderModel.getDeliveryCost()+";orderModel.getTotalPrice()=========="+orderModel.getTotalPrice());
+            System.out.println("totalAdditionalFee===="+totalAdditionalFee+";totalDiscounts===="+orderModel.getTotalDiscounts()+";totalPrice=========="+orderModel.getTotalPrice());
+            
             getModelService().saveAll(orderModel.getEntries());
             getModelService().saveAll(orderModel);
         }
