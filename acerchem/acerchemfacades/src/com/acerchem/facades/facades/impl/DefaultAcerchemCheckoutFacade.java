@@ -511,6 +511,7 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
             BigDecimal orderTotalPrice = totalAdditionalFee.add(BigDecimal.valueOf(orderModel.getTotalPrice()));
             orderTotalPrice = orderTotalPrice.subtract(BigDecimal.valueOf(orderModel.getDeliveryCost()));
             orderModel.setTotalPrice(orderTotalPrice.doubleValue());
+            System.out.println("orderModel.getDeliveryCost()===="+orderModel.getDeliveryCost()+";orderModel.getTotalPrice()=========="+orderModel.getTotalPrice());
             getModelService().saveAll(orderModel.getEntries());
             getModelService().saveAll(orderModel);
         }
