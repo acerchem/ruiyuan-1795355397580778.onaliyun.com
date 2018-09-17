@@ -69,7 +69,7 @@
 						<div class="btn-set operate">
 							<a class="btn btn-enter" href="${confirmOrder}${orderData.code}?confirm=receipt" style="${!orderData.customerConfirmDelivery && orderData.status=='DELIVERED'?'':'display: none;'}">Confirm Delivery</a>
 							<a class="btn btn-enter" href="${confirmOrder}${orderData.code}?confirm=payment" style="${!orderData.customerConfirmPay && orderData.status=='UNPAIED' && orderData.paymentMode=='PRE-PAYMENT'?'':'display: none;'}">Confirm Payment</a>
-							<a class="btn btn-line" href="${confirmOrder}${orderData.code}?confirm=cancel" style="${canCancel&&orderData.status!='CANCELLED'&&orderData.status!='DELIVERED'&&orderData.status!='COMPLETED'&&((orderData.status!='COMPLETED'&&orderData.paymentMode!='PRE-PAYMENT')||orderData.paymentMode=='PRE-PAYMENT')?'':'display: none;'}" class="cancelOrder">Cancel Order</a>
+							<a class="btn btn-line" href="${confirmOrder}${orderData.code}?confirm=cancel" style="${canCancel&&orderData.status!='CANCELLED'&&orderData.status!='DELIVERED'&&orderData.status!='COMPLETED'&&((orderData.status!='UNPAIED'&&orderData.paymentMode!='PRE-PAYMENT')||orderData.paymentMode=='PRE-PAYMENT')?'':'display: none;'}" class="cancelOrder">Cancel Order</a>
 						</div>
 					</div>
 					<!-- end -->
