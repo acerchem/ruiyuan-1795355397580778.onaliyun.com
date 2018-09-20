@@ -26,5 +26,10 @@
 		<property name="modelService" ref="modelService"/>
 	</bean>
   	
+  	<alias name="alpsDefaultPromotionsTabEditorAreaRenderer" alias="promotionsTabEditorAreaRenderer"/>
+	<bean id="alpsDefaultPromotionsTabEditorAreaRenderer" class="com.acerchem.services.CustomerPromotionsTabEditorAreaRenderer"
+		  parent="abstractEditorAreaComponentRenderer">
+		<property name="promotionsService" ref="promotionsService"/>
+	</bean>
 
 </beans>
