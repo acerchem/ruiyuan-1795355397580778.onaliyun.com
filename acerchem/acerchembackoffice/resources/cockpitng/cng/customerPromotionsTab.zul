@@ -1,39 +1,25 @@
 <div id="promo-abstractorderPromotionsTab" sclass="yw-editorarea-tabbox-tabpanels-tabpanel-groupbox">
 	<groupbox sclass="yw-editorarea-tabbox-tabpanels-tabpanel-groupbox firedproductpromotions">
-		<caption sclass="yw-editorarea-tabbox-tabpanels-tabpanel-groupbox-caption" label="${c:l('hmc.msg.poe.firedproductpromotions')}" />
-		<div forEach="${arg.promotionResults.firedProductPromotions}">
-			<div sclass="${(each.applied?'promo-applied':'promo-notApplied')}">
-				<div sclass="promo-heading">
-					<label if="${each.applied}" sclass="promo-result" value="${c:l('hmc.msg.poe.applied')}" />
-					<label if="${!each.applied}" sclass="promo-result" value="${c:l('hmc.msg.poe.notapplied')}" />
-					<label sclass="promo-code" value="${each.promotion.code}" />
-					<label sclass="promo-description" value="${each.description}" />
-				</div>
-				<grid>
-					<columns>
-						<column label="${c:l('hmc.msg.poe.header.quantity')}" sort="auto" />
-						<column label="${c:l('hmc.msg.poe.header.unit')}" sort="auto" />
-						<column label="${c:l('hmc.msg.poe.header.productCode')}" sort="auto" />
-						<column label="${c:l('hmc.msg.poe.header.productName')}" sort="auto" />
-						<column label="${c:l('hmc.msg.poe.header.baseprice')}" sort="auto" />
-						<column label="${c:l('hmc.msg.poe.header.totalprice')}" sort="auto" />
-						<column label="${c:l('hmc.msg.poe.header.adjustedbaseprice')}" sort="auto" />
-						<column label="${c:l('hmc.msg.poe.header.adjustedtotalprice')}" sort="auto" />
-					</columns>
-					<rows>
-						<row forEach="${each.consumedEntries}">
-							<label value="${each.quantity}" />
-							<label value="${each.product.getAttribute('packageType')}" />
-							<label value="${each.product.code}" />
-							<label value="${each.product.name}" />
-							<label value="${each.unitPrice}" />
-							<label value="${each.entryPrice}" />
-							<label value="${each.adjustedUnitPrice}" />
-							<label value="${each.adjustedEntryPrice}" />
-						</row>
-					</rows>
-				</grid>
-			</div>
-		</div>
+		<grid>
+			<columns>
+				
+				<column label="${c:l('hmc.msg.poe.header.productCode')}" sort="auto" />
+				<column label="${c:l('hmc.msg.poe.header.productName')}" sort="auto" />
+				<column label="${c:l('hmc.msg.poe.header.price')}" sort="auto" />
+				<column label="${c:l('hmc.msg.poe.header.quantity')}" sort="auto" />
+				<column label="${c:l('hmc.msg.poe.header.package')}" sort="auto" />
+				<column label="${c:l('hmc.msg.poe.header.totalprice')}" sort="auto" />
+			</columns>
+			<rows>
+				<row forEach="${arg.orderEntry}">
+					<label value="${each.product.code}"/>
+					<label value="${each.product.name}"/>
+					<label value="${each.basePrice}"/>
+					<label value="${each.quantity}"/>
+					<label value="${each.product.netWeight}${each.product.unit.code}/${each.product.packageType}"/>
+					<label value="${each.totalPrice}"/>
+				</row>
+			</rows>
+		</grid>
 	</groupbox>
 </div>
