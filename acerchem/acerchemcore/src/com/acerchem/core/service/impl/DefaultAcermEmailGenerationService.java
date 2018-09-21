@@ -172,7 +172,10 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 					emailMessageModel = createEmailMessageWithAttachment(subject.toString(), body.toString(),
 							emailContext);
 
-				} else {
+				}else if("OrderCancelledEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())) {
+					emailMessageModel = createEmailMessageOfOrderCancelled(subject.toString(), body.toString(), emailContext);
+				}
+				else {
 					emailMessageModel = createEmailMessage(subject.toString(), body.toString(), emailContext);
 				}
 
@@ -201,6 +204,28 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 		final EmailAddressModel ccEmailTwoAddressModel = getEmailService().getOrCreateEmailAddressForEmail(
 				Config.getParameter("mail.ccAddress.two"), Config.getParameter("mail.ccAddress.displayTwoName"));
 		ccAddress.add(ccEmailOneAddressModel);
+		ccAddress.add(ccEmailTwoAddressModel);
+
+		return getEmailService().createEmailMessage(toEmails, ccAddress, new ArrayList<EmailAddressModel>(),
+				fromAddress, emailContext.getFromEmail(), emailSubject, emailBody, null);
+	}
+	
+	protected EmailMessageModel createEmailMessageOfOrderCancelled(final String emailSubject, final String emailBody,
+			final AbstractEmailContext<BusinessProcessModel> emailContext) {
+		final List<EmailAddressModel> toEmails = new ArrayList<EmailAddressModel>();
+		final List<EmailAddressModel> ccAddress = new ArrayList<EmailAddressModel>();
+//		final EmailAddressModel toAddress = getEmailService().getOrCreateEmailAddressForEmail(emailContext.getToEmail(),
+//				emailContext.getToDisplayName());
+//		toEmails.add(toAddress);
+		final EmailAddressModel fromAddress = getEmailService()
+				.getOrCreateEmailAddressForEmail(emailContext.getFromEmail(), emailContext.getFromDisplayName());
+		final EmailAddressModel ccEmailOneAddressModel = getEmailService().getOrCreateEmailAddressForEmail(
+				Config.getParameter("mail.ccAddress.one"), Config.getParameter("mail.ccAddress.displayOneName"));
+		final EmailAddressModel ccEmailTwoAddressModel = getEmailService().getOrCreateEmailAddressForEmail(
+				Config.getParameter("mail.ccAddress.two"), Config.getParameter("mail.ccAddress.displayTwoName"));
+		
+		//ccAddress.add(ccEmailOneAddressModel);
+		toEmails.add(ccEmailOneAddressModel);
 		ccAddress.add(ccEmailTwoAddressModel);
 
 		return getEmailService().createEmailMessage(toEmails, ccAddress, new ArrayList<EmailAddressModel>(),
