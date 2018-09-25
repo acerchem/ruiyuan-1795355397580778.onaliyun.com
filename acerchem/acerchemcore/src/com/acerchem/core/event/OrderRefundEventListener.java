@@ -10,27 +10,28 @@
  */
 package com.acerchem.core.event;
 
+import org.springframework.beans.factory.annotation.Required;
+
 import de.hybris.platform.acceleratorservices.site.AbstractAcceleratorSiteEventListener;
 import de.hybris.platform.basecommerce.model.site.BaseSiteModel;
 import de.hybris.platform.commerceservices.enums.SiteChannel;
-import de.hybris.platform.commerceservices.event.OrderCancelledEvent;
+import de.hybris.platform.commerceservices.event.OrderRefundEvent;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 import de.hybris.platform.processengine.BusinessProcessService;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.servicelayer.util.ServicesUtil;
 
-import org.springframework.beans.factory.annotation.Required;
-
-
-public class OrderRefundEventListener extends AbstractAcceleratorSiteEventListener<OrderCancelledEvent>
+//modified OrderRefund event trigger OrderCancelledEvent change to orderRefundEvent
+public class OrderRefundEventListener extends AbstractAcceleratorSiteEventListener<OrderRefundEvent>
 {
 
 	private ModelService modelService;
 	private BusinessProcessService businessProcessService;
 
+	
 	@Override
-	protected void onSiteEvent(final OrderCancelledEvent event)
+	protected void onSiteEvent(final OrderRefundEvent event)
 	{
 		final OrderModel orderModel = event.getProcess().getOrder();
 		final OrderProcessModel orderProcessModel = (OrderProcessModel) getBusinessProcessService().createProcess(
@@ -65,7 +66,7 @@ public class OrderRefundEventListener extends AbstractAcceleratorSiteEventListen
 	}
 
 	@Override
-	protected SiteChannel getSiteChannelForEvent(final OrderCancelledEvent event)
+	protected SiteChannel getSiteChannelForEvent(final OrderRefundEvent event)
 	{
 		final OrderModel order = event.getProcess().getOrder();
 		ServicesUtil.validateParameterNotNullStandardMessage("event.order", order);
