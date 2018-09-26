@@ -122,6 +122,10 @@ public class SearchPageController extends AbstractSearchPageController
 			{
 				// nothing to do - the exception is logged in SearchSolrQueryPopulator
 			}
+			catch(Exception e)
+			{
+				System.out.println("solr Exception======"+e);
+			}
 			
 
 			if (searchPageData == null)
