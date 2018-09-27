@@ -955,6 +955,10 @@ public class AccountPageController extends AbstractSearchPageController {
 			if (contactRegionIso != null && contactRegionIso != "") {
 				am2.setRegion(commonI18NService.getRegion(contactCountry, contactRegionIso));
 			}
+			else
+			{
+				am2.setRegion(null);
+			}
 			am2.setTown(form.getContactAddress().getTownCity());
 
 			user.setSessionLanguage(commonI18NService.getLanguage(form.getLanguage()));
