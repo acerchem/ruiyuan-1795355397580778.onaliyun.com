@@ -946,6 +946,9 @@ $(document).ready(function() {
 	else{
 		date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 	}
+	
+	$("#textdate").val(date);//设置默认日期
+	
 	  var endDate = '2018-12-31';
 	  
 	  var isFuture = ${cartData.isUseFutureStock};
