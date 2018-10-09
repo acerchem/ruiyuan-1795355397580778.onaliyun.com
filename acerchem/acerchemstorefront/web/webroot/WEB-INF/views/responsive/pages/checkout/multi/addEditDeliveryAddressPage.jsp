@@ -673,16 +673,22 @@ function formreq(wrap,parwrap,aspan,newval,ap,inputarep,addinput,inputval){//add
 }
 
 
-function dateChange(num, date) {
-    if (!date) {
-        date = new Date();//没有传入值时,默认是当前日期
-        date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-    }
-    date += " 00:00:00";//设置为当天凌晨12点
-    date = Date.parse(new Date(date))/1000;//转换为时间戳
-    date += (86400) * num;//修改后的时间戳
-    var newDate = new Date(parseInt(date) * 1000);//转换为时间
-    return newDate.getFullYear() + '-' + (newDate.getMonth() + 1) + '-' + newDate.getDate();
+function dateChange(num, date1) {
+	date = new Date(date1);
+	date.setDate(date.getDate()+num);
+	if (date.getMonth()<9&&date.getDate()<=9){
+		date = date.getFullYear() + '-0' + (date.getMonth() + 1) + '-0' + date.getDate();
+	}
+	else if(date.getMonth()>=9&&date.getDate()<=9){
+		date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-0' + date.getDate();
+	}
+	else if (date.getMonth()<9&&date.getDate()>9){
+		date = date.getFullYear() + '0-' + (date.getMonth() + 1) + '-' + date.getDate();
+	}
+	else{
+		date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+	}
+	return date;
 }
 
 $(".newadd.solid-form .btn-submit").on('click',function(){ // 新增地址
@@ -927,15 +933,19 @@ $(document).ready(function() {
 	
 	
 	var date = new Date();//没有传入值时,默认是当前日期
-	 // alert(date.getMonth().toString().length);
-	  if (date.getMonth().toString().length <2){
-		  date = date.getFullYear() + '-0' + (date.getMonth() + 1) + '-' + date.getDate();
-	  } else {
-		  date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-	  }
-	  
-	  date = dateChange(1,date);
-	  
+	date.setDate(date.getDate()+1);
+	if (date.getMonth()<9&&date.getDate()<=9){
+		date = date.getFullYear() + '-0' + (date.getMonth() + 1) + '-0' + date.getDate();
+	}
+	else if(date.getMonth()>=9&&date.getDate()<=9){
+		date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-0' + date.getDate();
+	}
+	else if (date.getMonth()<9&&date.getDate()>9){
+		date = date.getFullYear() + '0-' + (date.getMonth() + 1) + '-' + date.getDate();
+	}
+	else{
+		date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
+	}
 	  var endDate = '2018-12-31';
 	  
 	  var isFuture = ${cartData.isUseFutureStock};
