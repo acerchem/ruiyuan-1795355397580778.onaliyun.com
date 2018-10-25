@@ -947,21 +947,23 @@ $(document).ready(function() {
 		date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
 	}
 	
-	$("#textdate").val(date);//设置默认日期
 	
-	  var endDate = '2018-12-31';
+	
+	  var endDate = null;
 	  
 	  var isFuture = ${cartData.isUseFutureStock};
 	  
 	if(isFuture){
 		var sdate = dateChange(${cartData.deliveryDays},date),
         edatd = endDate;
-   	 		
-   	 	}else {
-   	 		
-   	 	var sdate = date,
-        edatd = dateChange(${cartData.deliveryDays},date);
-   	 	}
+ 	}else {
+ 	 	var sdate = date,
+      	edatd = dateChange(${cartData.deliveryDays},date);
+ 	}
+	
+	if($("#textdate").val()==null){
+		$("#textdate").val(sdate);//设置默认日期
+	}
 	
      $('#strdate').datetimepicker({
     	format: 'YYYY-MM-DD',
