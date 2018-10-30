@@ -674,6 +674,7 @@ function formreq(wrap,parwrap,aspan,newval,ap,inputarep,addinput,inputval){//add
 
 
 function dateChange(num, date1) {
+    alert(date+"==num=="+num+"==="+date.getMonth()+"==="+date.getDate()+"==="+date.getDate());
 	date = new Date(date1);
 	date.setDate(date.getDate()+num);
 	if (date.getMonth()<9&&date.getDate()<=9){
@@ -683,7 +684,7 @@ function dateChange(num, date1) {
 		date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-0' + date.getDate();
 	}
 	else if (date.getMonth()<9&&date.getDate()>9){
-		date = date.getFullYear() + '0-' + (date.getMonth() + 1) + '-' + date.getDate();
+		date = date.getFullYear() + '-0' + (date.getMonth() + 1) + '-' + date.getDate();
 	}
 	else{
 		date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
@@ -963,9 +964,6 @@ $(document).ready(function() {
 	
 	//设置默认日期
 	$("#textdate").val(sdate);
-	
-	$("#textdate").val("20181121");
-	
 	if("${cartData.pickUpdate}"!="")
 	{
 		var pickUpdate=new Date('${cartData.pickUpdate}');
