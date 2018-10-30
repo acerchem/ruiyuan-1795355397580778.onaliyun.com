@@ -966,12 +966,10 @@ $(document).ready(function() {
 	if("${cartData.pickUpdate}"!="")
 	{
 		var pickUpdate=new Date('${cartData.pickUpdate}');
-		alert(sdate+"==${cartData.pickUpdate}=="+edatd);
 		if(pickUpdate!=null
 				&&((edatd!=null&&pickUpdate<(new Date(edatd)))||edatd==null)
 				&&((sdate!=null&&pickUpdate>(new Date(sdate)))||sdate==null)
 				){
-			alert("123");
 			$("#textdate").val("${cartData.pickUpdate}");
 		}
 	}
