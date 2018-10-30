@@ -963,12 +963,18 @@ $(document).ready(function() {
 	
 	//设置默认日期
 	$("#textdate").val(sdate);
+	
+	$("#textdate").val("20181121");
+	
 	if("${cartData.pickUpdate}"!="")
 	{
-		var pickUpdate=moment("${cartData.pickUpdate}");
+		var pickUpdate=new Date('${cartData.pickUpdate}');
+		alert(sdate+"==${cartData.pickUpdate}=="+edatd);
 		if(pickUpdate!=null
-				&&((edatd!=null&&pickUpdate.isBefore(edatd))||edatd==null)
-				&&((sdate!=null&&pickUpdate.isAfter(sdate))||sdate==null)){
+				&&((edatd!=null&&pickUpdate<(new Date(edatd)))||edatd==null)
+				&&((sdate!=null&&pickUpdate>(new Date(sdate)))||sdate==null)
+				){
+			alert("123");
 			$("#textdate").val("${cartData.pickUpdate}");
 		}
 	}
