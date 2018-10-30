@@ -962,13 +962,15 @@ $(document).ready(function() {
  	}
 	
 	//设置默认日期
-	var pickUpdate=moment("${cartData.pickUpdate}");
-	if(pickUpdate!=null
-			&&((edatd!=null&&pickUpdate.isBefore(edatd))||edatd==null)
-			&&((sdate!=null&&pickUpdate.isAfter(sdate))||sdate==null)){
-		$("#textdate").val("${cartData.pickUpdate}");
-	}else{
-		$("#textdate").val(sdate);
+	$("#textdate").val(sdate);
+	if("${cartData.pickUpdate}"!="")
+	{
+		var pickUpdate=moment("${cartData.pickUpdate}");
+		if(pickUpdate!=null
+				&&((edatd!=null&&pickUpdate.isBefore(edatd))||edatd==null)
+				&&((sdate!=null&&pickUpdate.isAfter(sdate))||sdate==null)){
+			$("#textdate").val("${cartData.pickUpdate}");
+		}
 	}
 	
      $('#strdate').datetimepicker({
