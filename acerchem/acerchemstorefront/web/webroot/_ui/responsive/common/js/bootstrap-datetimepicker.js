@@ -1292,9 +1292,9 @@
             if (!parsedDate.isValid()) {
                 throw new TypeError('minDate() Could not parse date parameter: ' + date);
             }
-            if (options.maxDate && parsedDate.isAfter(options.maxDate)) {
-                //throw new TypeError('minDate() date parameter is after options.maxDate: ' + parsedDate.format(actualFormat));
-            }
+            /*if (options.maxDate && parsedDate.isAfter(options.maxDate)) {
+                throw new TypeError('minDate() date parameter is after options.maxDate: ' + parsedDate.format(actualFormat));
+            }*/
             options.minDate = parsedDate;
             if (options.minDate.isAfter(date)) {
                 setValue(options.minDate);
@@ -1313,7 +1313,7 @@
             }
             var parsedDate = parseInputDate(defaultDate);
             if (!parsedDate.isValid()) {
-                //throw new TypeError('defaultDate() Could not parse date parameter: ' + defaultDate);
+                throw new TypeError('defaultDate() Could not parse date parameter: ' + defaultDate);
             }
             if (!isValid(parsedDate)) {
                 //throw new TypeError('defaultDate() date passed is invalid according to component setup validations');
