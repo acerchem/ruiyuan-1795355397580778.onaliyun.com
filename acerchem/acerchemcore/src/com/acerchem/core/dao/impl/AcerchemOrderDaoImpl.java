@@ -71,12 +71,17 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		// ON {ua:owner} = {u:pk}"
 		// + " JOIN Country as uc ON {uc:pk} = {ua:country}" + "} where
 		// {ua:contactAddress} = true ";
+//		String SQL = "select {e.pk},{ua.pk} from {OrderEntry as e" + " JOIN Order as o ON {e:order} = {o:pk}"
+//				+ " JOIN Customer as u ON {u:pk} = {o:user}" + " JOIN Address as ua ON {ua:owner} = {u:pk}"
+//				+ " JOIN Country as uc ON {uc:pk} = {ua:country}" + "} where {ua:contactAddress} = true ";
 		String SQL = "select {e.pk},{ua.pk} from {OrderEntry as e" + " JOIN Order as o ON {e:order} = {o:pk}"
 				+ " JOIN Customer as u ON {u:pk} = {o:user}" + " JOIN Address as ua ON {ua:owner} = {u:pk}"
-				+ " JOIN Country as uc ON {uc:pk} = {ua:country}" + "} where {ua:contactAddress} = true ";
+				+ " JOIN Country as uc ON {uc:pk} = {ua:country}" + "} where ";
+
 
 		//增加订单状态不等于cancelled
-		SQL += " and {o:status}<>?status";
+//		SQL += " and {o:status}<>?status";
+		SQL += " {o:status}<>?status";
 		params.put("status", OrderStatus.valueOf("Cancelled"));
 		if (month != null && !month.equals("")) {
 			SQL += " AND DATE_FORMAT({o:creationtime},'%Y%m') =?month ";
