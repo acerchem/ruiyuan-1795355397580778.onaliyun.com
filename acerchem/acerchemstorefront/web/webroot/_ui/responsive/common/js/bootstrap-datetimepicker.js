@@ -1293,7 +1293,7 @@
                 throw new TypeError('minDate() Could not parse date parameter: ' + date);
             }
             if (options.maxDate && parsedDate.isAfter(options.maxDate)) {
-                throw new TypeError('minDate() date parameter is after options.maxDate: ' + parsedDate.format(actualFormat));
+                //throw new TypeError('minDate() date parameter is after options.maxDate: ' + parsedDate.format(actualFormat));
             }
             options.minDate = parsedDate;
             if (options.minDate.isAfter(date)) {
