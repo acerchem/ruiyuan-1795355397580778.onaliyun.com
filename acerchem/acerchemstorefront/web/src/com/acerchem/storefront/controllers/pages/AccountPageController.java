@@ -881,8 +881,7 @@ public class AccountPageController extends AbstractSearchPageController {
 		final Collection<AddressModel> amlist = customer.getAddresses();
 		if (amlist != null && amlist.size() > 0) {
 			for (final AddressModel am : amlist) {
-				System.out.println("am.getVisibleInAddressBook()=====" + am.getVisibleInAddressBook());
-				if (am.getVisibleInAddressBook() != null && !am.getVisibleInAddressBook()) {
+				if (am.getContactAddress()) {
 					final AddressForm address = new AddressForm();
 					address.setCountryIso(am.getCountry().getIsocode());
 					if (am.getRegion() != null) {
@@ -949,6 +948,7 @@ public class AccountPageController extends AbstractSearchPageController {
 				am2 = modelService.create(AddressModel.class);
 				am2.setOwner(user);
 				am2.setVisibleInAddressBook(false);
+				am2.setContactAddress(true);
 			}
 			am2.setLastname(form.getName());
 			am2.setCountry(contactCountry);
