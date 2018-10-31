@@ -29,6 +29,7 @@ import org.apache.commons.fileupload.FileUploadBase.FileSizeLimitExceededExcepti
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
 import org.apache.commons.fileupload.servlet.ServletFileUpload;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -89,6 +90,8 @@ import de.hybris.platform.util.Config;
 @RequestMapping("/reports")
 public class AcerchemReportsController extends AbstractSearchPageController {// AbstractPageController
 
+	private static final Logger LOG = Logger.getLogger(AcerchemReportsController.class);
+	
 	@Resource
 	private AcerchemOrderDao acerchemOrderDao;
 
@@ -133,7 +136,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 
 	@ModelAttribute("areas")
 	public Collection<CountryData> getAreas() {
-		final Set<String> areas = acerchemOrderDao.getAllAreas();
+		final Set<String> areas = acerchemOrderAnalysisService.getAllAreas();
 		final List<CountryData> areaList = new ArrayList<CountryData>();
 
 		for (final String aa : areas) {
@@ -256,13 +259,18 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
 		final String curMonth = sdf.format(d);
 
-		final List<OrderDetailsReportData> searchPageData = acerchemOrderDao.getOrderDetails(curMonth, null, null, null,
+//		final List<OrderDetailsReportData> searchPageData = acerchemOrderDao.getOrderDetails(curMonth, null, null, null,
+//				null);
+		final List<OrderDetailsReportData> reports = acerchemOrderAnalysisService.getOrderDetails(curMonth, null, null, null,
 				null);
+		
+		LOG.info(">>>>>>>OrderDetailsReport: Count="+reports.size());
+		
 		final SearchCriteriaFrom searchCriteriaFrom = new SearchCriteriaFrom();
 		searchCriteriaFrom.setMonth(curMonth);
 
 		model.addAttribute("isDocMenu", isVisibleDocMenu());
-		model.addAttribute("searchPageData", searchPageData);
+		model.addAttribute("searchPageData", reports);
 		model.addAttribute("searchCriteriaFrom", searchCriteriaFrom);
 
 		final int numberPagesShown = getSiteConfigService().getInt("pagination.number.results.count", 100);
@@ -291,7 +299,12 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 			curMonth = curMonth.replace("-", "");
 		}
 
-		final List<OrderDetailsReportData> searchPageData = acerchemOrderDao.getOrderDetails(curMonth,
+//		final List<OrderDetailsReportData> searchPageData = acerchemOrderDao.getOrderDetails(curMonth,
+//				//注意，改做company name参数过滤了
+//				searchCriteriaFrom.getArea(), searchCriteriaFrom.getCountryCode(), searchCriteriaFrom.getCutomerCompanyName(),
+//				searchCriteriaFrom.getOrderCode());
+		
+		final List<OrderDetailsReportData> reports = acerchemOrderAnalysisService.getOrderDetails(curMonth,
 				//注意，改做company name参数过滤了
 				searchCriteriaFrom.getArea(), searchCriteriaFrom.getCountryCode(), searchCriteriaFrom.getCutomerCompanyName(),
 				searchCriteriaFrom.getOrderCode());
@@ -306,7 +319,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		newForm.setPageNumber(searchCriteriaFrom.getPageNumber());
 		newForm.setCutomerCompanyName(searchCriteriaFrom.getCutomerCompanyName());
 		
-		model.addAttribute("searchPageData", searchPageData);
+		model.addAttribute("searchPageData", reports);
 		model.addAttribute("searchCriteriaFrom", newForm);
 
 		final int numberPagesShown = getSiteConfigService().getInt("pagination.number.results.count", 100);

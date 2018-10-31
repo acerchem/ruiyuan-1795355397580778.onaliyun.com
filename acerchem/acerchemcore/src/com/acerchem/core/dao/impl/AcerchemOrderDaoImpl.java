@@ -108,6 +108,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 			params.put("orderCode", "%" + orderCode + "%");
 		}
 
+		SQL += " ORDER BY {o:code}";
 		final StringBuilder builder = new StringBuilder(SQL);
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(builder.toString());
 		query.setResultClassList(Arrays.asList(OrderEntryModel.class, AddressModel.class));
@@ -119,6 +120,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
  
 		final List<OrderDetailsReportData> orderDetails = new ArrayList<OrderDetailsReportData>();
 		// for (final OrderEntryModel od : result.getResult()) {
+		LOG.info(">>>>>>>>>OrderDetailsReport originalCount="+result.getCount());
 		for (final List<Object> columnValueForRow : result.getResult()) {
 			final OrderEntryModel od = (OrderEntryModel) columnValueForRow.get(0);
 			final AddressModel addressModel = (AddressModel) columnValueForRow.get(1);
