@@ -106,7 +106,7 @@
                         
                         <select id="futureInventoryId" style="display: none;">
 						<c:forEach items="${countrys}" var="data"  varStatus="id"  >
-						<option value ="${data.storeId}">${data.futureInventory}</option>
+						<option value ="${data.storeId}">${data.futureInventory}&nbsp${product.packageType}</option>
 						
                         </c:forEach>
                         </select> 
@@ -132,14 +132,14 @@
 						
 						<select id="inventoryId" style="display: none;">
 						<c:forEach items="${countrys}" var="data"  varStatus="id"  >
-						<option value ="${data.storeId}">${data.inventory}</option>
+						<option value ="${data.storeId}">${data.inventory}&nbsp${product.packageType}</option>
 						
                         </c:forEach>
                         </select> 
                         
                        <c:forEach items="${countrys}" var="data"  varStatus="id"  >
 						<c:if test="${id.index==0}">
-							<span class="label-title inventory">Inventory:<i id="inventory">${data.inventory}&nbsp${product.packageType}</i> <span class="spot">(<em>${data.inventory}</em>)</span></span>
+							<span class="label-title inventory">Inventory:<i id="inventory">${data.inventory}&nbsp${product.packageType}</i> <span class="spot">(<em>${data.inventory}&nbsp${product.packageType}</em>)</span></span>
 							</c:if>	
                         </c:forEach>
 							
