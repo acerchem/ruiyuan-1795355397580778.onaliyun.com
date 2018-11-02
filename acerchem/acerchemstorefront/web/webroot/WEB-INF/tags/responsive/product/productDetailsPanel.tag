@@ -106,7 +106,10 @@
                         
                         <select id="futureInventoryId" style="display: none;">
 						<c:forEach items="${countrys}" var="data"  varStatus="id"  >
-						<option value ="${data.storeId}">${data.futureInventory}&nbsp${product.packageType}</option>
+						<c:set var ="a" value="${data.futureInventory}"/>
+						<c:set var="b" value="${product.netWeight}"/>
+						<c:set var ="Total" value="${a*b}"/>
+						<option value ="${data.storeId}">${data.futureInventory}&nbsp${product.packageType}${data.futureInventory>1?"s":""}&nbsp/&nbsp${Total}${product.unitName}${Total>1?"s":""}</option>
 						
                         </c:forEach>
                         </select> 
@@ -132,14 +135,20 @@
 						
 						<select id="inventoryId" style="display: none;">
 						<c:forEach items="${countrys}" var="data"  varStatus="id"  >
-						<option value ="${data.storeId}">${data.inventory}&nbsp${product.packageType}</option>
+						<c:set var ="a" value="${data.inventory}"/>
+						<c:set var="b" value="${product.netWeight}"/>
+						<c:set var ="Total" value="${a*b}"/>
+						<option value ="${data.storeId}">${data.inventory}&nbsp${product.packageType}${data.inventory>1?"s":""}&nbsp/&nbsp${Total}${product.unitName}${Total>1?"s":""}</option>
 						
                         </c:forEach>
                         </select> 
                         
                        <c:forEach items="${countrys}" var="data"  varStatus="id"  >
 						<c:if test="${id.index==0}">
-							<span class="label-title inventory">Inventory:<i id="inventory">${data.inventory}&nbsp${product.packageType}</i> <span class="spot">(<em>${data.inventory}&nbsp${product.packageType}</em>)</span></span>
+						<c:set var ="a" value="${data.inventory}"/>
+						<c:set var="b" value="${product.netWeight}"/>
+						<c:set var ="Total" value="${a*b}"/>
+							<span class="label-title inventory">Inventory:<i id="inventory">${data.inventory}&nbsp${product.packageType}${data.inventory>1?"s":""}&nbsp/&nbsp${Total}${product.unitName}${Total>1?"s":""}</i> <span class="spot">(<em>${data.inventory}&nbsp${product.packageType}</em>)</span></span>
 							</c:if>	
                         </c:forEach>
 							
