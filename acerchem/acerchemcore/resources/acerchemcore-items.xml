@@ -1291,7 +1291,13 @@
 						<description>订单完成时间</description>
 						<modifiers read="true" write="true" search="true" />
 						<persistence type="property" />
-					</attribute>		
+					</attribute>	
+					<!-- Snowy Add 2018-11-02 -->
+					<attribute qualifier="orderRemark" type="java.lang.String">
+							<description>订单备注</description>
+							<modifiers read="true" write="true" search="true" />
+							<persistence type="property" />
+					</attribute>					
 				</attributes>
 			</itemtype>
 			

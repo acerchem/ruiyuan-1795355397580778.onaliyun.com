@@ -73,6 +73,7 @@
 					<editorArea:attribute qualifier="totalPrice"/>
 					<editorArea:attribute qualifier="totalTaxValues"/>
 					<editorArea:attribute qualifier="entries"/>
+					<editorArea:attribute qualifier="orderRemark"/>
 				</editorArea:section>
 			</editorArea:tab>
 			<editorArea:tab name="hmc.tab.documents.name" merge-mode="Remove"/>

@@ -240,6 +240,8 @@
 		<property name="deliveyDate" type="java.lang.String" />
 		<property name="waitDeliveiedDate" type="java.lang.String" />
 		<property name="pickupDateOfExtended" type="java.util.Date"/>
+		<!-- Snowy Add 2018-11-02 -->
+		<property name="orderRemark" type="java.lang.String" />
 	</bean>
 	
 	<bean class="de.hybris.platform.commercefacades.order.data.OrderHistoryData">

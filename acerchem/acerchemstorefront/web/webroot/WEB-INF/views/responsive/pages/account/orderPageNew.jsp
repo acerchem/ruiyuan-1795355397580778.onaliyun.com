@@ -73,6 +73,17 @@
 						</div>
 					</div>
 					<!-- end -->
+					
+					<!-- Snowy Add 2018-11-02 -->
+					<div class="g-table">
+                        <div class="g-title">
+                            <span>Order Remark</span>
+                        </div>
+                        <div class="text">
+                            ${orderData.orderRemark}
+                        </div>
+                    </div>
+                    <!-- End -->
                 
 					<div class="g-table">
                         <div class="g-title">
