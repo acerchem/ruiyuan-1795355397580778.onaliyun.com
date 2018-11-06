@@ -16,6 +16,7 @@ import de.hybris.platform.acceleratorservices.model.email.EmailMessageModel;
 
 public class DefaultAcerchemEmailService extends DefaultEmailService {
 	private static final Logger LOG = Logger.getLogger(DefaultAcerchemEmailService.class);
+	public static final String EMAIL_SSLSMTP_PORT_KEY = "mail.sslsmtp.port";
 	
 	@Override
 	public boolean send(final EmailMessageModel message)
@@ -27,6 +28,7 @@ public class DefaultAcerchemEmailService extends DefaultEmailService {
 
 		final boolean sendEnabled = getConfigurationService().getConfiguration().getBoolean(EMAILSERVICE_SEND_ENABLED_CONFIG_KEY,
 				true);
+		final int sslSmtpSport = getConfigurationService().getConfiguration().getInt(EMAIL_SSLSMTP_PORT_KEY, 465);
 		if (sendEnabled)
 		{
 			try
@@ -34,6 +36,11 @@ public class DefaultAcerchemEmailService extends DefaultEmailService {
 				final HtmlEmail email = getPerConfiguredEmail();
 				email.setCharset("UTF-8");
 
+				//-------add ssl smtp by Jayson.wang start--------
+				email.setSSL(true);
+				email.setSslSmtpPort(String.valueOf(sslSmtpSport));
+				//-------add ssl smtp by Jayson.wang end ----------
+				
 				final List<EmailAddressModel> toAddresses = message.getToAddresses();
 				setAddresses(message, email, toAddresses);
 
