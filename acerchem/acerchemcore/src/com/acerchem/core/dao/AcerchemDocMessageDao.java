@@ -7,5 +7,6 @@ import com.acerchem.core.model.AcerchemDocMessageModel;
 public interface AcerchemDocMessageDao {
 
 	List<AcerchemDocMessageModel> getDocMessageList(String acerchemCode);
-	List<AcerchemDocMessageModel> getDocMessageAllList();
+	List<AcerchemDocMessageModel> getDocMessageAllList(String searching);
+	
 }

@@ -22,7 +22,7 @@ import de.hybris.platform.core.model.media.MediaFolderModel;
 import de.hybris.platform.servicelayer.media.MediaService;
 import de.hybris.platform.servicelayer.model.ModelService;
 
-public class AcerchemDocMessageServiceImpl implements AcerchemDocMessageService {
+public class AcerchemDocMessageServiceImpl	 implements AcerchemDocMessageService {
 
 	private String docMessageMediaFolderName;
 	@Resource
@@ -60,6 +60,7 @@ public class AcerchemDocMessageServiceImpl implements AcerchemDocMessageService 
 //		
 //	}
 	
+	
 	protected MediaFolderModel getDocMessageMediaFolder()
 	{
 		final MediaFolderModel folder = mediaService.getFolder(getDocMessageMediaFolderName());
@@ -79,10 +80,16 @@ public class AcerchemDocMessageServiceImpl implements AcerchemDocMessageService 
 	}
 
 	@Override
+	public List<AcerchemDocMessageModel> getDocMessageList(String searching) {
+		// TODO Auto-generated method stub
+		return acerchemDocMessageDao.getDocMessageAllList(searching);
+	}
+/*	@Override
 	public List<AcerchemDocMessageModel> getDocMessageList() {
 		// TODO Auto-generated method stub
 		return acerchemDocMessageDao.getDocMessageAllList();
-	}
+	}*/
+	
 	
 	protected CatalogVersionModel getCatalogVersion()
 	{

@@ -1,6 +1,8 @@
 package com.acerchem.core.dao.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -32,15 +34,20 @@ public class AcerchemDocMessageDaoImpl implements AcerchemDocMessageDao {
 	}
 
 	@Override
-	public List<AcerchemDocMessageModel> getDocMessageAllList() {
-		final String SQL = "select {pk} from {AcerchemDocMessage} order by {creationtime} DESC";
-		final FlexibleSearchQuery query = new FlexibleSearchQuery(SQL);
-		
-		final SearchResult<AcerchemDocMessageModel> result = flexibleSearchService.search(query);
-
-		
+	public List<AcerchemDocMessageModel> getDocMessageAllList(String searching) {
+		//传入条件
+		Map<String, Object> map=new HashMap<>();
+		//其实就是字符串拼
+		if (searching==null) {
+			searching="";
+		}
+		map.put("searching","%"+searching+"%");
+		final String SQL = "select {pk} from {AcerchemDocMessage} where {AcerchemDocMessage.Title} Like  ?searching order by {creationtime} DESC";	
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(SQL,map);		
+		final SearchResult<AcerchemDocMessageModel> result = flexibleSearchService.search(query);		
 		return result.getResult();
 		
 	}
+
 
 }

@@ -9,6 +9,18 @@
 <div class="gen-content maxsucce">
 	<div class="g-cont">
 		<div class="maxstatu">
+		
+		<div>
+			<form action="article">
+			 <input name="searching" type="text" value="${searching}" placeholder="search">
+			<span class="input-group-btn"> 
+					<button class="btn btn-link js_search_button"  type="submit" >
+					<span class="glyphicon glyphicon-search"></span>
+					</button>
+			</span> 
+			</form>	
+		</div>
+	
 			<table>
 				<tr>
 					<th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;text-align:center;">article Title</th>

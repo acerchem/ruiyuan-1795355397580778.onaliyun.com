@@ -205,7 +205,6 @@
 						
 						</div>
 						
-
 						<div class="prod-sum">
 							<div class="m-setnum">
 							<span class="set sub">-</span>
@@ -216,7 +215,12 @@
 							<%-- <c:forEach var="${countrys}" var="data1" begin="0" end="1"> --%>
 						<c:forEach items="${countrys}" var="data"  varStatus="id"  >
 						<c:if test="${id.index==0}">
-							    <i class="delint"><em>${product.packageType}</em></i><i class="delintro"><em>Delivery within &nbsp ${data.avaReleaseDay} &nbsp days</em></i>
+						
+								<input disabled="disabled" hidden="hidden" id="myNetWeight" value="${product.netWeight}">
+								
+							    <i class="delint"><em>${product.packageType}&nbsp/&nbsp<span id="allmyNetWeight">${product.netWeight}</span>${product.unitName}</em></i>
+							    <i class="delintro"><em>Delivery within &nbsp ${data.avaReleaseDay} &nbsp days</em></i>
+							  
 						</c:if>	
                         </c:forEach>
                         <input type="hidden" value="" name="avaReleaseDay"  id="avaReleaseDay">
@@ -388,7 +392,8 @@
 									<li>
 										<span>Package Type</span>
 										<span> ${product.netWeight}${product.unitName}/${product.packageType}</span>
-									</li>	
+										
+									</li>
 									
 								</ul>
 							</div>

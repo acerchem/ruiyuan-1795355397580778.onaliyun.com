@@ -1369,7 +1369,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		// attr.addFlashAttribute("myMessage", "没有权限!");
 		// return "redirect:/reports/message";
 		// }
-		final List<AcerchemDocMessageModel> list = acerchemDocMessageService.getDocMessageList();
+		final List<AcerchemDocMessageModel> list = acerchemDocMessageService.getDocMessageList(null);
 		model.addAttribute("docList", list);
 		model.addAttribute("isDocMenu", isVisibleDocMenu());
 		return "pages/reports/docList";
@@ -1382,7 +1382,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		final String articecode = request.getParameter("delCode");
 
 		acerchemDocMessageService.delDocMessage(articecode);
-		final List<AcerchemDocMessageModel> list = acerchemDocMessageService.getDocMessageList();
+		final List<AcerchemDocMessageModel> list = acerchemDocMessageService.getDocMessageList(null);
 		model.addAttribute("docList", list);
 		model.addAttribute("isDocMenu", isVisibleDocMenu());
 		return "pages/reports/docList";

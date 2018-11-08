@@ -163,6 +163,14 @@ $(document).ready(function(){
 		$('#qty').val(pdnum);
 	});
 	
+	
+	function addString(){
+       var i=$("#pdnum").val();
+       var netWeight = $("#myNetWeight").val();
+       $("#allmyNetWeight").html(i*netWeight);
+	}
+	
+	
 	//m-setnum
 	$('.m-setnum span').on('click',function(){
 		var aclass=$(this).attr('class'),
@@ -193,6 +201,9 @@ $(document).ready(function(){
 				}
 				ainp.val(avl-1);
 				$('#qty').val(avl-1);
+				
+				
+				
 				break;
 			case 'set add':
 				avl = parseInt(ainp.val());
@@ -217,8 +228,10 @@ $(document).ready(function(){
 				}
 				ainp.val(avl+1);
 				$('#qty').val(avl+1);
+				
 				break;	
 		}
+		addString();
 		
 	})
 
