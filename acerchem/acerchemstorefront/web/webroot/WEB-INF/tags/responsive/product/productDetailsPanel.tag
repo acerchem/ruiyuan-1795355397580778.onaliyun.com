@@ -353,6 +353,9 @@
 								These statements have not been evaluated by the Food and Drug Administration. This product is not intended to diagnose, treat, cure or prevent any disease. <br/>*All product pictures are for display purposes only, it may not reflect the exact product color or mesh size, please refer to spec sheet for details.
 							</div>
 						</div> -->
+						
+						product status:${product.discontinued?'discontinued':'undiscontinued'}
+						
 						<ul class="g-desclist">
 							${product.description}
 						</ul>
