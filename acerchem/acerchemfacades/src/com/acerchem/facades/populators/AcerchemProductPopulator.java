@@ -33,7 +33,8 @@ public class AcerchemProductPopulator extends ProductPopulator{
 		productData.setMinOrderQuantity(productModel.getMinOrderQuantity());
 		productData.setNetWeight(productModel.getNetWeight());
 		productData.setUnitCalculateRato(productModel.getUnitCalculateRato());
-	
+	    productData.setDiscontinued(productModel.isDiscontinued());
+	    
 		final PriceDataType priceType;
 		final PriceInformation info;
 		if (CollectionUtils.isEmpty(productModel.getVariants()))
