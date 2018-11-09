@@ -34,6 +34,7 @@ public class ProductAcerchemPopulator<SOURCE extends ProductModel, TARGET extend
 	@Override
 	public void populate(final SOURCE productModel, final TARGET productData) throws ConversionException
 	{
+	    productData.setDiscontinued(productModel.isDiscontinued());
 		productData.setChemicalInfo(safeToString(getProductAttribute(productModel, ProductModel.CHEMICALINFO)));
 		productData.setUnitCalculateRato(safeToString(getProductAttribute(productModel, ProductModel.CHEMICALINFO)));
 		
