@@ -798,6 +798,11 @@
 						<persistence type="property" />
 						<defaultvalue>Boolean.FALSE</defaultvalue>
 					</attribute>
+					<attribute qualifier="discontinued" type="boolean">
+						<modifiers optional="false" initial="false" />
+						<persistence type="property" />
+						<defaultvalue>Boolean.FALSE</defaultvalue>
+					</attribute>
 				</attributes>
 			</itemtype>
 			<!-- End -->
