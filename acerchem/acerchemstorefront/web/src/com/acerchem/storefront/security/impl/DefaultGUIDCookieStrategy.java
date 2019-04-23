@@ -36,7 +36,9 @@ public class DefaultGUIDCookieStrategy implements GUIDCookieStrategy
 
 	private final SecureRandom random;
 	private final MessageDigest sha;
-
+	
+   private String channelControl;
+   
 	private CookieGenerator cookieGenerator;
 
 	public DefaultGUIDCookieStrategy() throws NoSuchAlgorithmException
@@ -50,12 +52,13 @@ public class DefaultGUIDCookieStrategy implements GUIDCookieStrategy
 	@Override
 	public void setCookie(final HttpServletRequest request, final HttpServletResponse response)
 	{
-		if (!request.isSecure())
+		if (checkChannelAndSecure(request))
 		{
 			// We must not generate the cookie for insecure requests, otherwise there is not point doing this at all
 			throw new IllegalStateException("Cannot set GUIDCookie on an insecure request!");
 		}
 
+		
 		final String guid = createGUID();
 
 		getCookieGenerator().addCookie(response, guid);
@@ -70,7 +73,7 @@ public class DefaultGUIDCookieStrategy implements GUIDCookieStrategy
 	@Override
 	public void deleteCookie(final HttpServletRequest request, final HttpServletResponse response)
 	{
-		if (!request.isSecure())
+		if (checkChannelAndSecure(request))
 		{
 			LOG.error("Cannot remove secure GUIDCookie during an insecure request. I should have been called from a secure page.");
 		}
@@ -81,6 +84,18 @@ public class DefaultGUIDCookieStrategy implements GUIDCookieStrategy
 		}
 	}
 
+	/**
+	 * 是否使用http来保存guid cookie
+	 * @param request
+	 * @return
+	 */
+	protected boolean checkChannelAndSecure(final HttpServletRequest request){
+		if(getChannelControl()!=null && "any".equals(getChannelControl())){
+			return false;
+		}
+		return !request.isSecure();
+	}
+	
 	protected String createGUID()
 	{
 		final String randomNum = String.valueOf(getRandom().nextInt());
@@ -113,4 +128,22 @@ public class DefaultGUIDCookieStrategy implements GUIDCookieStrategy
 	{
 		return sha;
 	}
+
+	/**
+	 * @return the channelControl
+	 */
+	public String getChannelControl()
+	{
+		return channelControl;
+	}
+
+	/**
+	 * @param channelControl the channelControl to set
+	 */
+	public void setChannelControl(String channelControl)
+	{
+		this.channelControl = channelControl;
+	}
+	
+	
 }

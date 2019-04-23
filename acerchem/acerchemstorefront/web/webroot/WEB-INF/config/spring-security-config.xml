@@ -87,15 +87,15 @@
 		<security:remember-me key="acerchemstorefront" services-ref="rememberMeServices" />
 
 		<!-- SSL / AUTHENTICATED pages -->
-		<security:intercept-url pattern="/my-account/addressform" access="hasAnyRole('ROLE_ANONYMOUS','ROLE_CUSTOMERGROUP')" requires-channel="https" />
-		<security:intercept-url pattern="/checkout/multi/billingaddressform" access="hasAnyRole('ROLE_ANONYMOUS','ROLE_CUSTOMERGROUP')" requires-channel="https" />
-		<security:intercept-url pattern="/my-account*" access="hasRole('ROLE_CUSTOMERGROUP')" requires-channel="https" />
-		<security:intercept-url pattern="/my-account/order/*/getReadOnlyProductVariantMatrix" access="hasAnyRole('ROLE_ANONYMOUS','ROLE_CUSTOMERGROUP')" requires-channel="https" />
-		<security:intercept-url pattern="/my-account/**" access="hasRole('ROLE_CUSTOMERGROUP')" requires-channel="https" />
-		<security:intercept-url pattern="/quote/**" access="hasRole('ROLE_CUSTOMERGROUP')" requires-channel="https" />
-		<security:intercept-url pattern="/reports/**" access="hasRole('ROLE_REPORTGROUP')" requires-channel="https" />
-		
-		<security:intercept-url pattern="/**" requires-channel="https" /> <!-- Everything should be secure -->
+		<security:intercept-url pattern="/my-account/addressform" access="hasAnyRole('ROLE_ANONYMOUS','ROLE_CUSTOMERGROUP')"  requires-channel="#{configurationService.configuration.getString('webservicescommons.required.channel', 'https')}"/>
+		<security:intercept-url pattern="/checkout/multi/billingaddressform" access="hasAnyRole('ROLE_ANONYMOUS','ROLE_CUSTOMERGROUP')" requires-channel="#{configurationService.configuration.getString('webservicescommons.required.channel', 'https')}" />
+		<security:intercept-url pattern="/my-account*" access="hasRole('ROLE_CUSTOMERGROUP')" requires-channel="#{configurationService.configuration.getString('webservicescommons.required.channel', 'https')}" />
+		<security:intercept-url pattern="/my-account/order/*/getReadOnlyProductVariantMatrix" access="hasAnyRole('ROLE_ANONYMOUS','ROLE_CUSTOMERGROUP')" requires-channel="#{configurationService.configuration.getString('webservicescommons.required.channel', 'https')}" />
+		<security:intercept-url pattern="/my-account/**" access="hasRole('ROLE_CUSTOMERGROUP')"  requires-channel="#{configurationService.configuration.getString('webservicescommons.required.channel', 'https')}"/>
+		<security:intercept-url pattern="/quote/**" access="hasRole('ROLE_CUSTOMERGROUP')"  requires-channel="#{configurationService.configuration.getString('webservicescommons.required.channel', 'https')}" />
+        <security:intercept-url pattern="/reports/**" access="hasRole('ROLE_REPORTGROUP')" requires-channel="#{configurationService.configuration.getString('webservicescommons.required.channel', 'https')}" />
+
+		<security:intercept-url pattern="/**"  requires-channel="#{configurationService.configuration.getString('webservicescommons.required.channel', 'https')}" /> <!-- Everything should be secure -->
 
 		<security:form-login
 				login-page="/login"
@@ -136,6 +136,7 @@
 	<bean id="guidCookieStrategy" class="com.acerchem.storefront.security.impl.DefaultGUIDCookieStrategy"
 	      >
 		<property name="cookieGenerator" ref="guidCookieGenerator" />
+		<property name="channelControl" value="#{configurationService.configuration.getString('webservicescommons.required.channel', 'https')}"/>
 	</bean>
 	
 	<alias name="defaultGuestCheckoutCartCleanStrategy" alias="guestCheckoutCartCleanStrategy"/>
