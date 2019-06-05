@@ -6,22 +6,48 @@
 
 	<c:if test='${level eq 81}'>
 			<div class="swiper-slide">
-				<a href="${contextPath}${urlLink}"><img src="${media.url}?x-oss-process=image/resize,m_fixed,h_490,w_1519" /></a>
+				<c:choose>
+					<c:when test="${fn:contains(media.url, '?')}">
+						<a href="${contextPath}${urlLink}">
+							<img width="1519px" height="490px" src="${media.url}&x-oss-process=image/resize,m_fixed,h_490,w_1519" />
+						</a>
+					</c:when>
+					<c:otherwise>
+						<a href="${contextPath}${urlLink}">
+							<img width="1519px" height="490px" src="${media.url}?x-oss-process=image/resize,m_fixed,h_490,w_1519" /></a>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</c:if>
 		
 		<c:if test='${level eq 82}'>
 			<div class="swiper-slide">
-				
-				<a href="${contextPath}${urlLink}"><img src="${media.url}?x-oss-process=image/resize,m_fixed,h_490,w_1519" /></a>
-				</div>
+				<c:choose>
+					<c:when test="${fn:contains(media.url, '?')}">
+						<a href="${contextPath}${urlLink}">
+							<img width="1519px" height="490px" src="${media.url}&x-oss-process=image/resize,m_fixed,h_490,w_1519" /></a>
+					</c:when>
+					<c:otherwise>
+						<a href="${contextPath}${urlLink}">
+							<img width="1519px" height="490px" src="${media.url}?x-oss-process=image/resize,m_fixed,h_490,w_1519" /></a>
+					</c:otherwise>
+				</c:choose>
+			</div>
 		</c:if>
 		
 		<c:if test='${level eq 83}'>
 			<div class="swiper-slide">
-				
-				<a href="${contextPath}${urlLink}"><img src="${media.url}?x-oss-process=image/resize,m_fixed,h_490,w_1519" /></a>
-				</div>
+				<c:choose>
+					<c:when test="${fn:contains(media.url, '?')}">
+						<a href="${contextPath}${urlLink}">
+							<img width="1519px" height="490px" src="${media.url}&x-oss-process=image/resize,m_fixed,h_490,w_1519" /></a>
+					</c:when>
+					<c:otherwise>
+						<a href="${contextPath}${urlLink}">
+							<img width="1519px" height="490px" src="${media.url}?x-oss-process=image/resize,m_fixed,h_490,w_1519" /></a>
+					</c:otherwise>
+				</c:choose>
+			</div>
 		</c:if>
 
 		<c:if test='${level eq 1}'>
@@ -35,9 +61,17 @@
 						<!-- <label><i>15</i>%</label>
 						<em><i>$58</i></em> -->
 					</div>
-					
-					
-					<img src="${media.url}?x-oss-process=image/resize,m_fixed,h_270,w_253"/>
+
+					<c:choose>
+						<c:when test="${fn:contains(media.url, '?')}">
+							<a href="${contextPath}${urlLink}">
+								<img width="253px" height="270px" src="${media.url}&x-oss-process=image/resize,m_fixed,h_270,w_253" /></a>
+						</c:when>
+						<c:otherwise>
+							<a href="${contextPath}${urlLink}">
+								<img width="253px" height="270px" src="${media.url}?x-oss-process=image/resize,m_fixed,h_270,w_253" /></a>
+						</c:otherwise>
+					</c:choose>
 				</a>
 			</li>
 			</c:if>
@@ -49,7 +83,17 @@
 						<p>Essential Nutrients for sports</p>
 						<span>View the details</span>
 					</div>
-					<img src="${media.url}?x-oss-process=image/resize,m_fixed,h_270,w_253"/>
+
+					<c:choose>
+						<c:when test="${fn:contains(media.url, '?')}">
+							<a href="${contextPath}${urlLink}">
+								<img width="253px" height="270px" src="${media.url}&x-oss-process=image/resize,m_fixed,h_270,w_253" /></a>
+						</c:when>
+						<c:otherwise>
+							<a href="${contextPath}${urlLink}">
+								<img width="253px" height="270px" src="${media.url}?x-oss-process=image/resize,m_fixed,h_270,w_253" /></a>
+						</c:otherwise>
+					</c:choose>
 				</a>
 			</li>
 			</c:if>
@@ -61,18 +105,37 @@
 						<p>Factory examination record</p>
 						<span>View the details</span>
 					</div>
-					<img src="${media.url}?x-oss-process=image/resize,m_fixed,h_270,w_253"/>
+
+					<c:choose>
+						<c:when test="${fn:contains(media.url, '?')}">
+							<a href="${contextPath}${urlLink}">
+								<img width="253px" height="270px" src="${media.url}&x-oss-process=image/resize,m_fixed,h_270,w_253" /></a>
+						</c:when>
+						<c:otherwise>
+							<a href="${contextPath}${urlLink}">
+								<img width="253px" height="270px" src="${media.url}?x-oss-process=image/resize,m_fixed,h_270,w_253" /></a>
+						</c:otherwise>
+					</c:choose>
 				</a>
 			</li>
 			</c:if>
 			<c:if test='${level eq 4}'>
 			<li class="item4">
 				<a href="${contextPath}/article">
-				<div class="textmessge">
-					<p>Here are some qualification documents</p>
-					<span>Documents</span>
-				</div>
-				<img src="${media.url}?x-oss-process=image/resize,m_fixed,h_270,w_253"/>
+					<div class="textmessge">
+						<p>Here are some qualification documents</p>
+						<span>Documents</span>
+					</div>
+					<c:choose>
+						<c:when test="${fn:contains(media.url, '?')}">
+							<a href="${contextPath}${urlLink}">
+								<img width="253px" height="270px" src="${media.url}&x-oss-process=image/resize,m_fixed,h_270,w_253" /></a>
+						</c:when>
+						<c:otherwise>
+							<a href="${contextPath}${urlLink}">
+								<img width="253px" height="270px" src="${media.url}?x-oss-process=image/resize,m_fixed,h_270,w_253" /></a>
+						</c:otherwise>
+					</c:choose>
 				</a>
 			</li>
 			</c:if>
