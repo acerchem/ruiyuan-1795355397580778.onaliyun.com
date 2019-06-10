@@ -99,7 +99,7 @@
 		</constructor-arg>
 	</bean>
 
-	<bean id="accMediaFilter" class="de.hybris.platform.servicelayer.web.WebAppMediaFilter">
+	<bean id="accMediaFilter" class="com.acerchem.storefront.filters.AcerWebAppMediaFilter">
 		<property name="mediaPermissionService" ref="mediaPermissionService"/>
 		<property name="modelService" ref="modelService"/>
 		<property name="userService" ref="userService"/>
