@@ -14,6 +14,7 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 <spring:url value="/checkout/multi/summary/placeOrder" var="placeOrderUrl"/>
+<spring:url value="/quote/create" var="quoteOrderUrl"/>
 
 
 <c:set var="hasShippedItems" value="${cartData.deliveryItemsQuantity > 0}" />
@@ -111,10 +112,10 @@
 	</div>					
 </div>		
 
-<form:form action="${placeOrderUrl}" id="placeOrderForm1" commandName="placeOrderForm">	
+<form:form action="${placeOrderUrl}" id="placeOrderForm1" commandName="placeOrderForm">
 
 <input type="hidden" name="paymentCode" id="paymentCode" value=""/>
- 				
+
  <label>
  <input type="checkbox" name="termsCheck" id="termsCheck">
  	<span class="checkbox" >
@@ -124,13 +125,21 @@
 
 
 
-<div class="btn-set">	
+<div class="btn-set">
   <button id="placeOrder" type="submit" class="btn btn-submit">
       Place Order
   </button>
   </div>
 
-</form:form>						
+</form:form>
+
+<form:form action="${quoteOrderUrl}" id="quoteForm1" method="get" commandName="quoteForm">
+	<div class="btn-set">
+		<button id="placeOrder" type="submit" class="btn btn-submit">
+			<spring:theme code="checkout.summary.placeQuote" />
+		</button>
+	</div>
+</form:form>
 </div>
 
 </div>

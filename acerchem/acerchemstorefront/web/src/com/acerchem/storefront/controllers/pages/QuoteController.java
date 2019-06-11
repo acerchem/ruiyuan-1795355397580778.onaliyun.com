@@ -10,6 +10,7 @@
  */
 package com.acerchem.storefront.controllers.pages;
 
+import com.acerchem.facades.quote.AcerchemQuoteFacade;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.constants.WebConstants;
@@ -71,12 +72,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.SmartValidator;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.support.RequestContextUtils;
 
@@ -136,6 +132,9 @@ public class QuoteController extends AbstractCartPageController
 	@Resource(name = "priceDataFactory")
 	private PriceDataFactory priceDataFactory;
 
+	@Resource
+	private AcerchemQuoteFacade acerchemQuoteFacade;
+
 	/**
 	 * Creates a new quote based on session cart.
 	 *
@@ -144,6 +143,7 @@ public class QuoteController extends AbstractCartPageController
 	 */
 	@RequestMapping(value = "/create", method = RequestMethod.GET)
 	@RequireHardLogIn
+	@ResponseBody
 	public String createQuote(final RedirectAttributes redirectModel)
 	{
 		try
@@ -164,15 +164,12 @@ public class QuoteController extends AbstractCartPageController
 
 			removeCoupons(redirectModel);
 
-			final QuoteData quoteData = getQuoteFacade().initiateQuote();
-
-			return String.format(REDIRECT_QUOTE_EDIT_URL, urlEncode(quoteData.getCode()));
+			acerchemQuoteFacade.directSendQuote();
+			return "Thanks for your inquiry. The quotation will be sent to your email in a few minutes. Please check";
 		}
 		catch (final IllegalArgumentException | CannotCloneException | ModelSavingException e)
 		{
-			LOG.error("Unable to create quote", e);
-			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER, QUOTE_CREATE_ERROR, null);
-			return REDIRECT_CART_URL;
+			return "error sending quotation";
 		}
 	}
 

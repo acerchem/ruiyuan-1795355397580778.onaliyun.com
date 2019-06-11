@@ -83,9 +83,12 @@ UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript
  ;acerchem_Email_Order_Refund_Subject;"Order Refund Email Subject";$emailResource/email-orderRefundSubject.vm
  ;acerchem_Email_Ready_For_Pickup_Body;"Ready For Pickup Email Body";$emailResource/email-readyForPickupBody.vm
  ;acerchem_Email_Ready_For_Pickup_Subject;"Ready For Pickup Email Subject";$emailResource/email-readyForPickupSubject.vm
+ ;QuoteBuyerSubmissionEmailTemplate_Subject;"Quote Buyer Submission Email Template Subject";$emailResource/email-quoteBuyerSubmissionSubject.vm
+ ;QuoteBuyerSubmissionEmailTemplate_Body;"Quote Buyer Submission Email Template Subject";$emailResource/email-quoteBuyerSubmissionBody.vm
 
 # Email Pages
 UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];fromEmail[lang=$lang];fromName[lang=$lang]
+ ;;quoteBuyerSubmissionEmail;"customerservice@acerchem.com";"Customer Services Team"
  ;;CustomerRegistrationEmail;"customerservice@acerchem.com";"Customer Services Team"
  ;;DeliverySentEmail;"customerservice@acerchem.com";"Customer Services Team"
  ;;ForgottenPasswordEmail;"customerservice@acerchem.com";"Customer Services Team"

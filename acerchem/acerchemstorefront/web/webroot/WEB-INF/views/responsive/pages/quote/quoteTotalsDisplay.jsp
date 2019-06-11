@@ -1,6 +1,9 @@
 <%@ taglib prefix="order" tagdir="/WEB-INF/tags/responsive/order" %>
 <%@ taglib prefix="quote" tagdir="/WEB-INF/tags/responsive/quote" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <%--
     ~ /*
@@ -18,17 +21,60 @@
 --%>
 
 <c:if test="${not empty quoteData}">
-    <div class="account-orderdetail">
-        <div class="account-orderdetail__footer">
-            <div class="row">
-                <div class="col-sm-6 col-md-7 col-lg-8">
-                    <order:appliedVouchers order="${quoteData}" />
-                    <order:receivedPromotions order="${quoteData}" />
-                </div>
-                <div class="col-sm-6 col-md-5 col-lg-4">
-                    <quote:quoteTotals order="${quoteData}" />
-                </div>
+    <!-- Summary -->
+    <div class="g-table">
+        <div class="g-title">
+            <span>Summary</span>
+        </div>
+        <div class="list ord-total">
+            <div class="item">
+                <span>
+                    <em>Subtotal</em>
+                    <i>
+                        ${fn:substring(quoteData.subTotal.formattedValue, 0, 1)}
+                        <fmt:formatNumber type="number" value="${quoteData.subTotal.value+quoteData.totalDiscounts.value}" pattern="#.00"/>
+                    </i>
+                </span>
+                <span>
+                    <em>Delivery</em>
+                    <i><format:price priceData="${quoteData.deliveryCost}"/></i>
+                </span>
+
+                <span>
+                    <em>Release Cost</em>
+                    <c:choose>
+                        <c:when test="${quoteData.storageCost!=null}">
+                            <i><format:price priceData="${quoteData.storageCost}"/></i>
+                        </c:when>
+                        <c:otherwise>
+                            <i>$0.00</i>
+                        </c:otherwise>
+                    </c:choose>
+                </span>
+
+                <span>
+                    <em>Handling Charge</em>
+                    <c:choose>
+                        <c:when test="${quoteData.operateCost!=null}">
+                            <i><format:price priceData="${quoteData.operateCost}"/></i>
+                        </c:when>
+                        <c:otherwise>
+                            <i>$0.00</i>
+                        </c:otherwise>
+                    </c:choose>
+                </span>
+
+                <span>
+                    <em>Discount</em>
+                    <i>-<format:price priceData="${quoteData.totalDiscounts}"/></i>
+                </span>
+
+                <span>
+                    <em>Total</em>
+                    <i><format:price priceData="${quoteData.totalPrice}"/></i>
+                </span>
             </div>
         </div>
     </div>
+
 </c:if>

@@ -106,6 +106,7 @@ public class MyQuotesController extends AbstractSearchPageController
 		storeCmsPageInModel(model, getContentPageForLabelOrId(MY_QUOTES_CMS_PAGE));
 		setUpMetaDataForContentPage(model, getContentPageForLabelOrId(MY_QUOTES_CMS_PAGE));
 		model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_NOFOLLOW);
+		model.addAttribute("nowPage", "quotes");
 		return getViewForPage(model);
 	}
 

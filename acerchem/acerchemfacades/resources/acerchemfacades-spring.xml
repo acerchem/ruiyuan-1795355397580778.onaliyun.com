@@ -561,6 +561,15 @@
 	<bean id="customAddressReversePopulator" class="com.acerchem.facades.populators.AcerchemAddressReversePopulator" parent="defaultAddressReversePopulator">
 	</bean>
 
+	<bean id="acerchemQuoteFacade" class="com.acerchem.facades.quote.impl.AcerchemQuoteFacadeImpl" parent="defaultQuoteFacade"/>
+
+	<alias name="acerchemQuotePopulator" alias="quotePopulator"/>
+	<bean id="acerchemQuotePopulator"
+		  class="com.acerchem.facades.populators.AcerchemQuotePopulator"
+		  parent="baseOrderPopulator">
+		<property name="commerceOrderService" ref="commerceOrderService"/>
+	</bean>
+
     <alias name="acerchemProductSummaryPopulator" alias="productSummaryPopulator"/>
 	<bean id="acerchemProductSummaryPopulator" parent="defaultProductSummaryPopulator" class="com.acerchem.facades.populators.AcerchemProductSummaryPopulator"/>
 	
