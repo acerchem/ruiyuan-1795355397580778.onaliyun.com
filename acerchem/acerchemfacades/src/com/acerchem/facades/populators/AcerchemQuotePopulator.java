@@ -20,6 +20,7 @@ public class AcerchemQuotePopulator extends QuotePopulator implements Populator<
 			paymentModeData.setCode(source.getPaymentMode().getCode());
 			target.setPaymentModeData(paymentModeData);
 		}
+		addPrincipalInformation(source,target);
 		super.populate(source, target);
 	}
 }

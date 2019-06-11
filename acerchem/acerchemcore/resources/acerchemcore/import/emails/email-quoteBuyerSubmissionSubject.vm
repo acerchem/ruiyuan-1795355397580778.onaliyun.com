@@ -1,1 +1,1 @@
-﻿${ctx.messages.getMessage('emailSubject', ${ctx.quote.code})}
+﻿${ctx.messages.getMessage('emailSubject', ${ctx.quote.creationTime})}

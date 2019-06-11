@@ -88,7 +88,7 @@ UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript
 
 # Email Pages
 UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];fromEmail[lang=$lang];fromName[lang=$lang]
- ;;quoteBuyerSubmissionEmail;"customerservice@acerchem.com";"Customer Services Team"
+ ;;quoteBuyerSubmissionEmail;"281423889@qq.com";"Customer Services Team"
  ;;CustomerRegistrationEmail;"customerservice@acerchem.com";"Customer Services Team"
  ;;DeliverySentEmail;"customerservice@acerchem.com";"Customer Services Team"
  ;;ForgottenPasswordEmail;"customerservice@acerchem.com";"Customer Services Team"

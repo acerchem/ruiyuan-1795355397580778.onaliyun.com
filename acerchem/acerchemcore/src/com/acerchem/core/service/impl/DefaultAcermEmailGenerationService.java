@@ -199,12 +199,18 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 		toEmails.add(toAddress);
 		final EmailAddressModel fromAddress = getEmailService()
 				.getOrCreateEmailAddressForEmail(emailContext.getFromEmail(), emailContext.getFromDisplayName());
-		final EmailAddressModel ccEmailOneAddressModel = getEmailService().getOrCreateEmailAddressForEmail(
-				Config.getParameter("mail.ccAddress.one"), Config.getParameter("mail.ccAddress.displayOneName"));
-		final EmailAddressModel ccEmailTwoAddressModel = getEmailService().getOrCreateEmailAddressForEmail(
-				Config.getParameter("mail.ccAddress.two"), Config.getParameter("mail.ccAddress.displayTwoName"));
-		ccAddress.add(ccEmailOneAddressModel);
-		ccAddress.add(ccEmailTwoAddressModel);
+		if(StringUtils.isNotBlank(Config.getString("mail.ccAddress.one","")))
+		{
+			final EmailAddressModel ccEmailOneAddressModel = getEmailService()
+					.getOrCreateEmailAddressForEmail(Config.getParameter("mail.ccAddress.one"), Config.getParameter("mail.ccAddress.displayOneName"));
+			ccAddress.add(ccEmailOneAddressModel);
+		}
+		if(StringUtils.isNotBlank(Config.getString("mail.ccAddress.two","")))
+		{
+			final EmailAddressModel ccEmailTwoAddressModel = getEmailService()
+					.getOrCreateEmailAddressForEmail(Config.getParameter("mail.ccAddress.two"), Config.getParameter("mail.ccAddress.displayTwoName"));
+			ccAddress.add(ccEmailTwoAddressModel);
+		}
 
 		return getEmailService().createEmailMessage(toEmails, ccAddress, new ArrayList<EmailAddressModel>(),
 				fromAddress, emailContext.getFromEmail(), emailSubject, emailBody, null);
