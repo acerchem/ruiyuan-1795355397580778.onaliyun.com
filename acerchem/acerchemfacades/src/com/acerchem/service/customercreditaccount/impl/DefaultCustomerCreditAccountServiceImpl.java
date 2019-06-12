@@ -101,7 +101,7 @@ public class DefaultCustomerCreditAccountServiceImpl implements DefaultCustomerC
 																												// DELIVERY_MENTION
 									c.setTime(orderModel.getPickUpDate());
 								} else {// 送货 DELIVERY_GROSS
-									c.setTime(orderModel.getWaitDeliveiedDate());
+									c.setTime(orderModel.getWaitDeliveriedDate());
 								}
 								c.set(Calendar.DATE, c.get(Calendar.DATE) + billingInterval);
 								final Date date = c.getTime();

@@ -646,7 +646,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 
 						// 发票时间
 						final String deliveryCode = o.getDeliveryMode() == null ? "" : o.getDeliveryMode().getCode();
-						Date invoiceDate = deliveryCode.equals("DELIVERY_GROSS") ? o.getWaitDeliveiedDate()
+						Date invoiceDate = deliveryCode.equals("DELIVERY_GROSS") ? o.getWaitDeliveriedDate()
 								: o.getPickUpDate();
 						if (invoiceDate == null) {
 							invoiceDate = currentTime;
