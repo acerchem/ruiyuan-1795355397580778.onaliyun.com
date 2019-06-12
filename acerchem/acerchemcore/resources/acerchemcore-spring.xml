@@ -50,7 +50,6 @@
         <property name="priceService" ref="priceService"/>
     </bean>
 
-
 	<bean id="acerchemCategorySource" parent="abstractCategorySource">
 		<property name="rootCategory" value="1"/>
 		<!-- '1' is the root icecat category -->
@@ -758,5 +757,22 @@
 	<bean id="acerchemDocMessageDao" class="com.acerchem.core.dao.impl.AcerchemDocMessageDaoImpl"/>
 	<bean id="acerchemDocMessageService" class="com.acerchem.core.service.impl.AcerchemDocMessageServiceImpl">
 		<property name="docMessageMediaFolderName" value="doc-message"/>
+	</bean>
+
+	<bean id="productWarehouseDao" class="com.acerchem.core.dao.impl.DefaultAcerchemProductWarehouseDao">
+		<property name="flexibleSearchService" ref="flexibleSearchService"></property>
+	</bean>
+
+	<bean id="productWarehouseService" class="com.acerchem.core.service.impl.DefaultAcerchemProductWarehouseService">
+		<property name="productWarehouseDao" ref="productWarehouseDao"></property>
+	</bean>
+
+	<bean id="warehouseCodeValueProvider" class="com.acerchem.core.search.solrfacetsearch.provider.impl.WarehouseCodeValueProvider"  parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+		<property name="productWarehouseService" ref="productWarehouseService"/>
+	</bean>
+
+	<bean id="warehouseFacetDisplayNameProvider" class="com.acerchem.core.search.solrfacetsearch.provider.impl.WarehouseFacetDisplayNameProvider">
+		<property name="warehouseService" ref="warehouseService"/>
 	</bean>
 </beans>

@@ -292,6 +292,12 @@ INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(co
 ;0;UK;notSpecified;10;0;0;0;AC07002a;0;20;50
 ;0;UK;notSpecified;10;0;0;0;AC03515a;0;20;50
 
+INSERT_UPDATE StockLevel;available;warehouse(code)[unique=true];inStockStatus(code);maxPreOrder;maxStockLevelHistoryCount;overSelling;preOrder;productCode[unique=true];reserved;avaPreOrderReleaseDay;preOrderReleaseDay
+#shaun
+                        ;150;default;notSpecified;10;0;0;0;AC05080a;0;20;50
+                        ;0;default;notSpecified;10;0;0;0;AC05080b;0;20;50
+                        ;2100;default;notSpecified;10;0;0;0;AC03390a;0;20;50
+
 UPDATE Product;code[unique=true];$catalogVersion;stockLevels(productCode,warehouse(code));vendors(code)
 #shaun
 ;AC05080a;;AC05080a:Rotterdam;

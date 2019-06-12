@@ -213,6 +213,17 @@
 			</targetElement>
 		</relation>
 		-->
+
+		<!--客户查看仓库权限关系-->
+		<relation code="CustomerWarehouseRelation" generate="true" localized="false" autocreate="true">
+			<deployment table="Customer2Warehouse" typecode="1205"/>
+			<sourceElement type="customer" qualifier="Customer" collectiontype="set" cardinality="many" ordered="false">
+				<modifiers read="true" write="true" optional="true" search="true"/>
+			</sourceElement>
+			<targetElement type="Warehouse" qualifier="Warehouse" collectiontype="set" cardinality="many" ordered="false">
+				<modifiers read="true" write="true" optional="true" search="true"/>
+			</targetElement>
+		</relation>
 	</relations>
 
 	<itemtypes>

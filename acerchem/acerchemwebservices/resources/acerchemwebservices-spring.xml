@@ -264,5 +264,13 @@
     
     <alias name="webTicketFacadeImpl" alias="webDefaultTicketFacade" />
 	<bean id="webTicketFacadeImpl" parent="defaultCustomerTicketingFacade" class="com.acerchem.supportticket.impl.AcerchemFacadeTicketFacadeImpl" />
-	
+
+	<!--自定义solr搜索功能：添加customer仓库条件-->
+	<alias name="customSolrSearchRequestResponsePopulator" alias="solrSearchRequestResponsePopulator" />
+	<bean id="customSolrSearchRequestResponsePopulator"
+		  class="com.acerchem.customer.populator.SolrSearchResponsePopulator">
+		<property name="userService" ref="userService"/>
+		<property name="solrFacetSearchService" ref="solrFacetSearchService" />
+		<property name="solrKeywordRedirectService" ref="solrKeywordRedirectService" />
+	</bean>
 </beans>
