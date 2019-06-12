@@ -53,12 +53,12 @@ public class AcerchemOrderPopulator extends OrderPopulator {
             target.setPickUpdate(sdf.format(source.getPickUpDate()));
         }
         
-        if(source.getDeliveyDate()!=null){
-        	target.setDeliveyDate(sdf.format(source.getDeliveyDate()));
+        if(source.getDeliveryDate()!=null){
+        	target.setDeliveyDate(sdf.format(source.getDeliveryDate()));
         }
         
-        if(source.getWaitDeliveiedDate()!=null){
-        	target.setWaitDeliveiedDate(sdf.format(source.getWaitDeliveiedDate()));
+        if(source.getWaitDeliveriedDate()!=null){
+        	target.setWaitDeliveiedDate(sdf.format(source.getWaitDeliveriedDate()));
         }
         
         //add orderEntry's baseRealPrice and totalRealPrice by Jayson.wang

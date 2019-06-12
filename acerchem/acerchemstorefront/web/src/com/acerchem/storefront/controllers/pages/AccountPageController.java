@@ -865,7 +865,6 @@ public class AccountPageController extends AbstractSearchPageController {
 		final CustomerModel customer = (CustomerModel) userService.getCurrentUser();
 		CustomRegisterForm.setName(customer.getName());
 		CustomRegisterForm.setEmail(customer.getUid());
-		;
 		CustomRegisterForm.setCompanyType(customer.getCompanyType());
 		CustomRegisterForm.setCompanyName(customer.getCompanyName());
 		CustomRegisterForm.setEstablishedIn(customer.getEstablishedIn());
@@ -984,7 +983,6 @@ public class AccountPageController extends AbstractSearchPageController {
 
 			final String previousLanguage = storeSessionFacade.getCurrentLanguage().getIsocode();
 			storeSessionFacade.setCurrentLanguage(form.getLanguage());
-			;
 			if (!userFacade.isAnonymousUser()) {
 				userFacade.syncSessionLanguage();
 			}
@@ -1271,7 +1269,7 @@ public class AccountPageController extends AbstractSearchPageController {
 				ca.add(Calendar.DATE, getTotalPriceForCart(order));// num为增加的天数，可以改变的
 				waitDelivereyDate = sdf.format(ca.getTime());
 				final Date endDate = sdf.parse(waitDelivereyDate);
-				order.setWaitDeliveiedDate(endDate);
+				order.setWaitDeliveriedDate(endDate);
 				order.setPickupDateOfExtended(date);
 				modelService.save(order);
 				modelService.refresh(order);

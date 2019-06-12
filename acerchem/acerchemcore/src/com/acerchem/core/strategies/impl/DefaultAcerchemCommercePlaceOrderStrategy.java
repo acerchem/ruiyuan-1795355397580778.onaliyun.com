@@ -124,7 +124,7 @@ public class DefaultAcerchemCommercePlaceOrderStrategy extends DefaultCommercePl
 						ca.add(Calendar.DATE, getTotalPriceForCart(orderModel));// 
 						waitDelivereyDate = sdf.format(ca.getTime());
 						Date endDate = sdf.parse(waitDelivereyDate);
-						orderModel.setWaitDeliveiedDate(endDate);
+						orderModel.setWaitDeliveriedDate(endDate);
 					} catch (ParseException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
