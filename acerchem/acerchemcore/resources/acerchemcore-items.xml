@@ -188,16 +188,6 @@
 					optional="true" />
 			</targetElement>
 		</relation>
-        
-        <!-- 客户和信用账户关系建立 -->
-		<relation code="CreditAccount2Customer" generate="true" localized="false" autocreate="true">
-			<sourceElement qualifier="creditAccount" type="CustomerCreditAccount" cardinality="one" >
-				<modifiers read="true" write="true" search="true" optional="true" />
-			</sourceElement>
-			<targetElement qualifier="customer" type="Customer" cardinality="many" collectiontype="list" ordered="true">
-				<modifiers read="true" write="true" search="true" optional="true" />
-			</targetElement>
-		</relation>
 
         <relation code="UserPhoneNumberRelation" localized="false" generate="true" autocreate="true">
 			<sourceElement type="User" qualifier="user" cardinality="one">
@@ -913,6 +903,11 @@
 						<persistence type="property" />
 						<defaultvalue>0</defaultvalue>
 					</attribute>
+					<attribute qualifier="customer" type="Customer">
+						<description>对应用户</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
 					<attribute qualifier="creaditRemainedAmount" type="java.math.BigDecimal">
 						<description>可用额度</description>
 						<modifiers read="true" write="true" search="true" />
@@ -1003,6 +998,12 @@
 							optional="true" />
 						<persistence type="property" />
 						<description>Type of Company</description>
+					</attribute>
+					<attribute qualifier="creditAccount" type="CustomerCreditAccount">
+						<modifiers read="true" write="true" search="true"
+								   optional="true" />
+						<persistence type="property" />
+						<description>Type of Credit Account</description>
 					</attribute>
 					<attribute qualifier="establishedIn" type="java.lang.String">
 						<description>Established in</description>
