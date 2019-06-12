@@ -135,13 +135,34 @@
 
 <form:form action="${quoteOrderUrl}" id="quoteForm1" method="get" commandName="quoteForm">
 	<div class="btn-set">
-		<button id="placeOrder" type="submit" class="btn btn-submit">
+		<button id="placeQuote" type="button" class="btn btn-submit">
 			<spring:theme code="checkout.summary.placeQuote" />
 		</button>
 	</div>
 </form:form>
 </div>
 
+</div>
+
+<div class="quote-popup" style="display: none;">
+	<div>
+	<div class="quote-popup-html g-cartable maxfixed maxfixed-bg" style="display: block;">
+		<div class="indwrap">
+			<div class="cart-total">
+				<div class="title">Quote</div>
+				<form action="">
+					<div class="maxfixed-over  product-table">
+						<div class="quote_popup_msg">
+							StoreId is different with others.</div>
+					</div>
+					<div class="btn-set">
+						<a class="btn btn-close" href="javascript:void(0);">Close</a>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	</div>
 </div>
 
 <div id="light" class="white_content" >

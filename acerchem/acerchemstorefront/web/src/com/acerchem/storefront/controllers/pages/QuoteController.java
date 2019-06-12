@@ -51,12 +51,7 @@ import de.hybris.platform.servicelayer.internal.model.impl.ItemModelCloneCreator
 import com.acerchem.storefront.util.QuoteExpirationTimeConverter;
 
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.Optional;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
@@ -141,35 +136,43 @@ public class QuoteController extends AbstractCartPageController
 	 * @param redirectModel
 	 * @return Mapping to quote page.
 	 */
-	@RequestMapping(value = "/create", method = RequestMethod.GET)
+	@RequestMapping(value = "/create", method = RequestMethod.GET, produces = "application/json")
 	@RequireHardLogIn
 	@ResponseBody
-	public String createQuote(final RedirectAttributes redirectModel)
+	public Map<String, String> createQuote(final RedirectAttributes redirectModel)
 	{
+		Map<String, String> returnMap = new HashMap<>();
+		returnMap.put("success","true");
 		try
 		{
 			if (!getCartFacade().hasEntries())
 			{
 				// No session cart or empty session cart. Bounce back to the cart page.
 				LOG.debug("Missing or empty cart");
-				GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER, QUOTE_EMPTY_CART_ERROR, null);
-				return REDIRECT_CART_URL;
+				returnMap.put("success","false");
+				returnMap.put("message","error sending quotation");
+				return returnMap;
 			}
 
 			if (validateCart(redirectModel))
 			{
-				GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER, QUOTE_CREATE_ERROR, null);
-				return REDIRECT_CART_URL;
+				returnMap.put("success","false");
+				returnMap.put("message","error sending quotation");
+				return returnMap;
 			}
 
 			removeCoupons(redirectModel);
 
 			acerchemQuoteFacade.directSendQuote();
-			return "Thanks for your inquiry. The quotation will be sent to your email in a few minutes. Please check";
+			returnMap.put("success","false");
+			returnMap.put("message","Thanks for your inquiry. The quotation will be sent to your email in a few minutes. Please check");
+			return returnMap;
 		}
 		catch (final IllegalArgumentException | CannotCloneException | ModelSavingException e)
 		{
-			return "error sending quotation";
+			returnMap.put("success","false");
+			returnMap.put("message","error sending quotation");
+			return returnMap;
 		}
 	}
 

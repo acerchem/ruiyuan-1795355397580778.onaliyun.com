@@ -66,7 +66,7 @@
 	<%-- Inject CMS Components from addons using the placeholder slot--%>
 	<addonScripts:addonScripts/>
 
-
+	<template:footJavaScript/>
 </body>
 
 <debug:debugFooter/>

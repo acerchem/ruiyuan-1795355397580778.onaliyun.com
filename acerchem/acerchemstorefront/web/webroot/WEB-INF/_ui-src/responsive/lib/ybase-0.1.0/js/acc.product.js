@@ -86,8 +86,10 @@ ACC.product = {
 
         ACC.colorbox.open(titleHeader, {
             html: cartResult.addToCartLayer,
-            width: "460px"
+            width: "100%",
+            height: "100%"
         });
+        ACC.colorbox.resize();
 
         var productCode = $('[name=productCodePost]', formElement).val();
         var quantityField = $('[name=qty]', formElement).val();
