@@ -174,6 +174,8 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 
 				}else if("OrderCancelledEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())) {
 					emailMessageModel = createEmailMessageOfOrderCancelled(subject.toString(), body.toString(), emailContext);
+				}else if("QuoteBuyerSubmissionEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())) {
+					emailMessageModel = createEmailMessageWithAttachmentForQuote(subject.toString(), body.toString(), emailContext);
 				}
 				else {
 					emailMessageModel = createEmailMessage(subject.toString(), body.toString(), emailContext);
@@ -236,6 +238,63 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 
 		return getEmailService().createEmailMessage(toEmails, ccAddress, new ArrayList<EmailAddressModel>(),
 				fromAddress, emailContext.getFromEmail(), emailSubject, emailBody, null);
+	}
+
+	protected EmailMessageModel createEmailMessageWithAttachmentForQuote(final String emailSubject, final String emailBody,
+			final AbstractEmailContext<BusinessProcessModel> emailContext) {
+		String[] emailBodys = emailBody.split(Config.getString("email.with.attachments.content.separation.flag","---"));
+
+		// 获取pdf文件名字，来源于subject
+		final String pdfName = CommonConvertTools.getPdfName(emailSubject);
+
+		final File pdfFile = generatePdfToAttachment(emailBodys[0], pdfName);
+		EmailAttachmentModel attachment = null;
+		FileInputStream fileInputStream = null;
+		DataInputStream dis = null;
+		if (pdfFile.exists()) {
+			try {
+
+				fileInputStream = new FileInputStream(pdfFile);
+
+				dis = new DataInputStream(fileInputStream);
+				attachment = createEmailAttachment(dis, pdfFile.getName(), "application/pdf");
+
+				dis.close();
+				pdfFile.delete();
+			} catch (final Exception e) {
+				e.printStackTrace();
+			}
+
+		}
+
+		final List<EmailAddressModel> toEmails = new ArrayList<EmailAddressModel>();
+		final List<EmailAddressModel> ccAddress = new ArrayList<EmailAddressModel>();
+		final EmailAddressModel toAddress = getEmailService().getOrCreateEmailAddressForEmail(emailContext.getToEmail(),
+				emailContext.getToDisplayName());
+		toEmails.add(toAddress);
+		final EmailAddressModel fromAddress = getEmailService()
+				.getOrCreateEmailAddressForEmail(emailContext.getFromEmail(), emailContext.getFromDisplayName());
+		if(StringUtils.isNotBlank(Config.getString("mail.ccAddress.one","")))
+		{
+			final EmailAddressModel ccEmailOneAddressModel = getEmailService()
+					.getOrCreateEmailAddressForEmail(Config.getParameter("mail.ccAddress.one"), Config.getParameter("mail.ccAddress.displayOneName"));
+			ccAddress.add(ccEmailOneAddressModel);
+		}
+		if(StringUtils.isNotBlank(Config.getString("mail.ccAddress.two","")))
+		{
+			final EmailAddressModel ccEmailTwoAddressModel = getEmailService()
+					.getOrCreateEmailAddressForEmail(Config.getParameter("mail.ccAddress.two"), Config.getParameter("mail.ccAddress.displayTwoName"));
+			ccAddress.add(ccEmailTwoAddressModel);
+		}
+
+		final List<EmailAttachmentModel> attachments = new ArrayList<EmailAttachmentModel>();
+		if (attachment != null) {
+			attachments.add(attachment);
+		}
+
+		String contentEmailBoday = emailBodys.length>1?emailBodys[1]:emailBodys[0];
+		return getEmailService().createEmailMessage(toEmails, ccAddress, new ArrayList<EmailAddressModel>(),
+				fromAddress, emailContext.getFromEmail(), emailSubject, contentEmailBoday, attachments);
 	}
 
 	// add attachment by Jayson.wang

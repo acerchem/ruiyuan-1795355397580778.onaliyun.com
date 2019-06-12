@@ -98,6 +98,8 @@ public class CommonConvertTools {
 			name = "Delivery Note";
 		} else if (StringUtils.containsIgnoreCase(newSubject, "release")) {
 			name = "Release Note";
+		} else if (StringUtils.containsIgnoreCase(newSubject, "Quotation")) {
+			name = "Quotation Note";
 		} else {
 			name = "Unknown";
 		}

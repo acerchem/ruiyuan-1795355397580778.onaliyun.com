@@ -134,6 +134,12 @@
 		<property name="discount" type="java.lang.Double" />
 	</bean>
 
+	<bean class="de.hybris.platform.commercefacades.quote.data.QuoteData"
+		  extends="de.hybris.platform.commercefacades.order.data.AbstractOrderData">
+		<property name="waitDeliveiedDate" type="java.lang.String" />
+		<property name="userCompanyName" type="java.lang.String" />
+	</bean>
+
 	<!-- alice :信用账户 -->
 	<bean
 		class="de.hybris.platform.commercefacades.user.data.CustomerCreditAccountData">

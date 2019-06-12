@@ -95,7 +95,7 @@ public class DefaultAcerchemEmailService extends DefaultEmailService {
 	protected void logInfo(final EmailMessageModel message, final EmailException e)
 	{
 		LOG.warn("Could not send e-mail pk [" + message.getPk() + "] subject [" + message.getSubject() + "] cause: "
-				+ e.getMessage());
+				+ e.getMessage(),e);
 		if (LOG.isDebugEnabled())
 		{
 			LOG.debug(e);
