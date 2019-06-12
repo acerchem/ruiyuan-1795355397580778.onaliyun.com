@@ -138,7 +138,7 @@
 		  extends="de.hybris.platform.commercefacades.order.data.AbstractOrderData">
 		<property name="waitDeliveiedDate" type="java.lang.String" />
 		<property name="userCompanyName" type="java.lang.String" />
-		<property name="billingInterval" type="java.lang.String" />
+		<property name="billingInterval" type="java.lang.Integer" />
 	</bean>
 
 	<!-- alice :信用账户 -->

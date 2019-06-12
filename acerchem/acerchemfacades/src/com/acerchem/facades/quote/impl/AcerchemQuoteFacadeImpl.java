@@ -48,7 +48,7 @@ public class AcerchemQuoteFacadeImpl extends DefaultQuoteFacade implements Acerc
 		quoteActionValidationStrategy.validate(QuoteAction.SUBMIT, quoteModel, userModel);
 		quoteMetadataValidationStrategy.validate(QuoteAction.SUBMIT, quoteModel, userModel);
 		quoteUpdateStateStrategy.updateQuoteState(QuoteAction.SUBMIT, quoteModel, userModel);
-		quoteModel.setWaitDeliveiedDate(cartModel.getPickUpDate());
+		if(cartModel.getPickUpDate()!=null) quoteModel.setWaitDeliveriedDate(cartModel.getPickUpDate());
 		getModelService().save(quoteModel);
 
 		final QuoteBuyerSubmitEvent quoteBuyerSubmitEvent = new QuoteBuyerSubmitEvent(quoteModel, userModel,

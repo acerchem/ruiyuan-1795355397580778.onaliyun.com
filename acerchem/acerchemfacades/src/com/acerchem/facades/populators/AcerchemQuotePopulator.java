@@ -5,6 +5,7 @@ import de.hybris.platform.commercefacades.order.converters.populator.QuotePopula
 import de.hybris.platform.commercefacades.quote.data.QuoteData;
 import de.hybris.platform.converters.Populator;
 import de.hybris.platform.core.model.order.QuoteModel;
+import de.hybris.platform.core.model.user.CustomerModel;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -24,16 +25,20 @@ public class AcerchemQuotePopulator extends QuotePopulator implements Populator<
 			target.setPaymentModeData(paymentModeData);
 		}
 		addPrincipalInformation(source,target);
-		if(source.getWaitDeliveiedDate()!=null)
+		if(source.getWaitDeliveriedDate()!=null)
 		{
 			SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd'th',YYYY");
-			target.setWaitDeliveiedDate(dateFormat.format(source.getWaitDeliveiedDate()));
+			target.setWaitDeliveiedDate(dateFormat.format(source.getWaitDeliveriedDate()));
 		}else{
 			target.setWaitDeliveiedDate("");
 		}
 		if(source.getUser()!=null)
 		{
 			target.setUserCompanyName(source.getUser().getCompanyName());
+			if(source.getUser() instanceof CustomerModel){
+				CustomerModel customerModel = (CustomerModel)source.getUser();
+				if(customerModel.getCreditAccount().getBillingInterval()!=null) target.setBillingInterval(customerModel.getCreditAccount().getBillingInterval());
+			}
 		}
 		super.populate(source, target);
 	}

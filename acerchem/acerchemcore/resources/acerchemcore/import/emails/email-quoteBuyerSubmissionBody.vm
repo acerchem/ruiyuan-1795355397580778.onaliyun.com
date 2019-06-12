@@ -69,7 +69,14 @@
                             FCA
                         #end
                     </li>
-                    <li><span>Payment Terms</span>:T/T in advance</li>
+                    <li><span>Payment Terms</span>:
+                        #if (${ctx.quote.billingInterval} < 1)
+                        T/T in advance
+                        #end
+                        #if (${ctx.quote.billingInterval} > 0)
+                            T/T ${ctx.quote.billingInterval} days atter invoice date
+                        #end
+                        </li>
                     <li><span>Shipping Date</span>:${ctx.quote.waitDeliveiedDate}</li>
                 </ul>
             </div>
@@ -90,7 +97,7 @@
                     <td>$entry.quantity</td>
                     <td>$entry.product.code</td>
                     <td>$entry.product.name</td>
-                    <td>$entry.product.netWeight/$entry.product.packageType</td>
+                    <td>$entry.product.netWeight/$entry.product.unitName</td>
                     <td>$entry.basePrice.formattedValue</td>
                 </tr>
 #end
