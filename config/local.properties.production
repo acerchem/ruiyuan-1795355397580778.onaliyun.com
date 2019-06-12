@@ -77,7 +77,7 @@ mail.from=customerservice@acerchem.com
 mail.smtp.server=smtp.exmail.qq.com
 mail.smtp.port=25
 mail.smtp.user=customerservice@acerchem.com
-mail.smtp.password=1qaz2wsX
+mail.smtp.password=Acer9752&
 mail.smtp.auth=true
 mail.debug=true
 
