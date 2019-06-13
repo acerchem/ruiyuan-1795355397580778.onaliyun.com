@@ -94,11 +94,11 @@
                 </tr>
 #foreach( $entry in ${ctx.quote.entries} )
                 <tr>
-                    <td>$entry.quantity</td>
-                    <td>$entry.product.code</td>
-                    <td>$entry.product.name</td>
-                    <td>$entry.product.netWeight/$entry.product.unitName</td>
-                    <td>$entry.basePrice.formattedValue</td>
+                    <td style="text-align: center;">$entry.quantity</td>
+                    <td style="text-align: center;">$entry.product.code</td>
+                    <td style="text-align: center;">$entry.product.name</td>
+                    <td style="text-align: center;">$entry.product.netWeight/$entry.product.unitName</td>
+                    <td style="text-align: center;">$entry.basePrice.formattedValue</td>
                 </tr>
 #end
             </table>
