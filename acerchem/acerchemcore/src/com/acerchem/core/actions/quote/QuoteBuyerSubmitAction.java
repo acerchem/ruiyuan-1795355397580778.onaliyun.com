@@ -47,11 +47,11 @@ public class QuoteBuyerSubmitAction extends AbstractSimpleDecisionAction<QuotePr
 		final QuoteUserType quoteUserType = (QuoteUserType) processParameterHelper
 				.getProcessParameterByName(process, QUOTE_USER_TYPE).getValue();
 
-		final QuoteModel quoteModel = getQuoteService().getCurrentQuoteForCode(process.getQuoteCode());
+		//final QuoteModel quoteModel = getQuoteService().getCurrentQuoteForCode(process.getQuoteCode());
 
 		if (QuoteUserType.BUYER.equals(quoteUserType))
 		{
-			getCommerceQuoteService().createQuoteSnapshotWithState(quoteModel, QuoteState.SELLER_REQUEST);
+			//getCommerceQuoteService().createQuoteSnapshotWithState(quoteModel, QuoteState.SELLER_REQUEST);
 			result = Transition.OK;
 		}
 		else

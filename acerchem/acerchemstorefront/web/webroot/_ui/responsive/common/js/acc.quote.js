@@ -1,5 +1,5 @@
 ACC.quote = {
-
+	_lock: false,
 	_autoload : [
 		[ "bindAddComment", $("#js-quote-comments").length != 0 ],
 		[ "bindAddEntryComment", $(".js-quote-entry-comments").length != 0],
@@ -17,8 +17,38 @@ ACC.quote = {
 		[ "bindCheckoutConfirmation", $(".js-quote-checkout-btn").length != 0],
 		[ "bindEditConfirmation", $(".js-quote-warning-btn").length != 0],
 		[ "bindQuoteDiscount", $(".js-quote-discount-link").length != 0],
-		[ "bindNewCartClick", $(".new__cart--link").length != 0]
+		[ "bindNewCartClick", $(".new__cart--link").length != 0],
+        [ "bindSendQuoteClick", $("#quoteForm1").length != 0]
 	],
+
+    bindSendQuoteClick: function(){
+        $("#quoteForm1 #placeQuote").click(function(){
+        	if(!ACC.quote._lock) {
+                ACC.quote._lock = true;
+                $.ajax({
+                    url: $("#quoteForm1").attr("action"),
+                    data: {},
+                    type: "get",
+                    success: function (data) {
+                    	var popupHtml = $(".quote-popup").html();
+                    	var popupHtmlObj = $(popupHtml);
+                        popupHtmlObj.find(".quote_popup_msg").html(data.message)
+                        ACC.colorbox.open("quote", {
+                            html: popupHtmlObj.html(),
+                            width: "100%",
+							heheight: "100%"
+                        });
+                        //ACC.colorbox.resize();
+                        ACC.quote._lock = false;
+                        $(".quote-popup-html .btn-close").click(function(){
+                            ACC.colorbox.close();
+						})
+                    }
+                })
+            }
+			return false;
+		})
+	},
 
 	bindEditQuoteButton: function(){
 		$(".js-quote-edit-btn").on("click", function(){

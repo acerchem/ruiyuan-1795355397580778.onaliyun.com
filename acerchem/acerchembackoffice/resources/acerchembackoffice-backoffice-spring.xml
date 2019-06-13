@@ -32,4 +32,6 @@
 		<property name="promotionsService" ref="promotionsService"/>
 	</bean>
 
+	<bean id="acerchemQuoteEntryRenderer" class="com.acerchem.services.AcerchemQuoteEntryRenderer">
+	</bean>
 </beans>

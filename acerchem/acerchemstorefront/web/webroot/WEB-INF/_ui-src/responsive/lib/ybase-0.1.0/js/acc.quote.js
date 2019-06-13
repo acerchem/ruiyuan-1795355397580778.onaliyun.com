@@ -38,7 +38,7 @@ ACC.quote = {
                             width: "100%",
 							heheight: "100%"
                         });
-                        ACC.colorbox.resize();
+                        //ACC.colorbox.resize();
                         ACC.quote._lock = false;
                         $(".quote-popup-html .btn-close").click(function(){
                             ACC.colorbox.close();

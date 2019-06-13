@@ -172,6 +172,7 @@ public class QuoteController extends AbstractCartPageController
 		{
 			returnMap.put("success","false");
 			returnMap.put("message","error sending quotation");
+			LOG.info(e.getMessage(),e);
 			return returnMap;
 		}
 	}

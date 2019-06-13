@@ -10,12 +10,20 @@ import de.hybris.platform.commerceservices.order.strategies.QuoteActionValidatio
 import de.hybris.platform.commerceservices.order.strategies.QuoteMetadataValidationStrategy;
 import de.hybris.platform.commerceservices.order.strategies.QuoteUpdateExpirationTimeStrategy;
 import de.hybris.platform.commerceservices.order.strategies.QuoteUpdateStateStrategy;
+import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.CartModel;
+import de.hybris.platform.core.model.order.QuoteEntryModel;
 import de.hybris.platform.core.model.order.QuoteModel;
+import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.servicelayer.event.EventService;
+import org.apache.commons.collections4.CollectionUtils;
 
 import javax.annotation.Resource;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class AcerchemQuoteFacadeImpl extends DefaultQuoteFacade implements AcerchemQuoteFacade
@@ -48,11 +56,34 @@ public class AcerchemQuoteFacadeImpl extends DefaultQuoteFacade implements Acerc
 		quoteActionValidationStrategy.validate(QuoteAction.SUBMIT, quoteModel, userModel);
 		quoteMetadataValidationStrategy.validate(QuoteAction.SUBMIT, quoteModel, userModel);
 		quoteUpdateStateStrategy.updateQuoteState(QuoteAction.SUBMIT, quoteModel, userModel);
+		assignQuoteToentrys(quoteModel);
 		if(cartModel.getPickUpDate()!=null) quoteModel.setWaitDeliveriedDate(cartModel.getPickUpDate());
 		getModelService().save(quoteModel);
 
 		final QuoteBuyerSubmitEvent quoteBuyerSubmitEvent = new QuoteBuyerSubmitEvent(quoteModel, userModel,
 				QuoteUserType.BUYER);
 		eventService.publishEvent(quoteBuyerSubmitEvent);
+	}
+
+	protected void assignQuoteToentrys(QuoteModel quoteModel){
+		if(CollectionUtils.isNotEmpty(quoteModel.getEntries()))
+		{
+			List<AbstractOrderEntryModel> entryModels = new ArrayList<>(quoteModel.getEntries());
+			entryModels = entryModels.stream().filter(entry -> entry instanceof QuoteEntryModel)
+					.map(entry -> {
+						QuoteEntryModel quoteEntry = (QuoteEntryModel)entry;
+						//quoteEntry.setCreationtime(new Date());
+						quoteEntry.setUser(quoteModel.getUser());
+						if(quoteModel.getUser() instanceof CustomerModel)
+						{
+							quoteEntry.setSalesman(((CustomerModel)quoteModel.getUser()).getEmployee());
+						}else{
+							quoteEntry.setSalesman(quoteModel.getUser());
+						}
+						return quoteEntry;
+					}).collect(Collectors.toList());
+			getModelService().saveAll(entryModels);
+			quoteModel.setEntries(entryModels);
+		}
 	}
 }
