@@ -1292,3 +1292,26 @@ UPDATE MultipleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture
 ;;TwoBannerComponent;maxmean2Preview
 ;;ThreeBannerComponent;maxmean3Preview
 ;;FourBannerComponent;maxmean4Preview
+
+# CMS Link Components
+INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url;&linkRef;&componentRef;target(code)[default='sameWindow'];$category;$product;
+                              ;;AboutUsNavLink;About Us Nav Link;/aboutUs;AboutUsNavLink;AboutUsNavLink;;;;
+                              ;;RepositoryNavLink;Repository Nav;/aboutUs;RepositoryNavLink;RepositoryNavLink;;;;
+                              ;;AcerContactUsNavLink;Contact Us Nav;/contactUs;AcerContactUsNavLink;AcerContactUsNavLink;;;;
+
+INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);&nodeRef;children(uid,$contentCV)
+                               ;acerchemCategoryNavNode;;Categories;acerchemNavNode;acerchemCategoryNavNode;AboutUsNavNode,DigitalCamerasNavNode,RepositoryNavNode,ContactUsNavNode
+                               ;AboutUsNavNode;;About Us;acerchemCategoryNavNode;AboutUsNavNode;;
+                               ;RepositoryNavNode;;Repository;acerchemCategoryNavNode;RepositoryNavNode;;
+                               ;ContactUsNavNode;;Contact Us;acerchemCategoryNavNode;ContactUsNavNode;;
+
+INSERT_UPDATE CMSLinkComponent;uid[unique=true];Linkname[lang=en];$contentCV[unique=true]
+                              ;AboutUsNavLink;About Us
+                              ;DigitalCamerasCategoryLink;Product
+                              ;RepositoryNavLink;Repository
+                              ;AcerContactUsNavLink;"Contact Us"
+
+INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;navigationNode(&nodeRef);item(&linkRef);
+                                ;AboutUsNavNodeEntry;;About Us;AboutUsNavNode;AboutUsNavLink
+                                ;RepositoryNavEntry;;Repository;RepositoryNavNode;RepositoryNavLink
+                                ;ContactUsNavEntry;;Contact Us;ContactUsNavNode;AcerContactUsNavLink

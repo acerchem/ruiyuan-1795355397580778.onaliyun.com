@@ -46,9 +46,13 @@
 				</div>
 			</form>
 		</div>
-		
 	</div>
 	<div class="maxmain max-col">
+		<div>
+			<h2 style="text-align: center;margin-top: 30px;font-size: 30px;font-weight: bold;">EXPLORE OUR CATALOG</h2>
+			<span style="display: block;margin: 0 auto;width: 330px;border-bottom: 2px solid #666;"></span>
+		</div>
+
 		<div class="container">
 			<div class="maxmean">
 				<ul>

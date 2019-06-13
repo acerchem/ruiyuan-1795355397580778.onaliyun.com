@@ -6,19 +6,19 @@
 
 	<c:if test='${level eq 81}'>
 		<div class="swiper-slide">
-			<a href="${contextPath}${urlLink}"><img src="${media.url}?x-oss-process=image/resize,m_fixed,h_490,w_1519" /></a>
+			<a href="${contextPath}${urlLink}"><img src="${media.url}?x-oss-process=image/resize,m_fixed,h_300,w_1440" /></a>
 		</div>
 	</c:if>
 
 	<c:if test='${level eq 82}'>
 		<div class="swiper-slide">
-			<a href="${contextPath}${urlLink}"><img src="${media.url}?x-oss-process=image/resize,m_fixed,h_490,w_1519" /></a>
+			<a href="${contextPath}${urlLink}"><img src="${media.url}?x-oss-process=image/resize,m_fixed,h_300,w_1440" /></a>
 		</div>
 	</c:if>
 
 	<c:if test='${level eq 83}'>
 		<div class="swiper-slide">
-			<a href="${contextPath}${urlLink}"><img src="${media.url}?x-oss-process=image/resize,m_fixed,h_490,w_1519" /></a>
+			<a href="${contextPath}${urlLink}"><img src="${media.url}?x-oss-process=image/resize,m_fixed,h_300,w_1440" /></a>
 		</div>
 	</c:if>
 
@@ -35,7 +35,7 @@
 				</div>
 
 
-				<img src="${media.url}?x-oss-process=image/resize,m_fixed,h_270,w_253"/>
+				<img src="${media.url}?x-oss-process=image/resize,m_fixed,h_260,w_253"/>
 			</a>
 		</li>
 	</c:if>
@@ -47,7 +47,7 @@
 					<p>Essential Nutrients for sports</p>
 					<span>View the details</span>
 				</div>
-				<img src="${media.url}?x-oss-process=image/resize,m_fixed,h_270,w_253"/>
+				<img src="${media.url}?x-oss-process=image/resize,m_fixed,h_260,w_253"/>
 			</a>
 		</li>
 	</c:if>
@@ -59,7 +59,7 @@
 					<p>Factory examination record</p>
 					<span>View the details</span>
 				</div>
-				<img src="${media.url}?x-oss-process=image/resize,m_fixed,h_270,w_253"/>
+				<img src="${media.url}?x-oss-process=image/resize,m_fixed,h_260,w_253"/>
 			</a>
 		</li>
 	</c:if>
@@ -70,7 +70,7 @@
 					<p>Here are some qualification documents</p>
 					<span>Documents</span>
 				</div>
-				<img src="${media.url}?x-oss-process=image/resize,m_fixed,h_270,w_253"/>
+				<img src="${media.url}?x-oss-process=image/resize,m_fixed,h_260,w_253"/>
 			</a>
 		</li>
 	</c:if>
