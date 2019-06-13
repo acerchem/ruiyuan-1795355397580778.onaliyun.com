@@ -5,6 +5,11 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
+<%@ taglib prefix="user" tagdir="/WEB-INF/tags/responsive/user"%>
+
+<c:url value="/" var="homeUrl"/>
+<c:url value="/login" var="loginUrl"/>
+<c:url value="/login/register" var="registerUrl"/>
 
 <div class="g-cont prod-cont">
 			<!-- left -->
@@ -12,8 +17,8 @@
 				<!-- slide -->
 				<div class="m-prodslide">
 					<div class="minwrap">
-						<div class="flip"> 
-				    		<span class="up"></span> 
+						<div class="flip">
+				    		<span class="up"></span>
 							<span class="down"></span>
 					    </div>
 						<div class="minimg">
@@ -27,11 +32,11 @@
 						<ul class="slide-item">
 							 <c:forEach items="${galleryImages}" var="container" varStatus="varStatus">
 							<li class="item"><img src="${container.product.url}"  alt=""></li>
-							
+
 							</c:forEach>
 						</ul>
-					</div>						
-				</div>					
+					</div>
+				</div>
 				<!-- s end -->
 				
 				<!-- base -->
@@ -66,209 +71,231 @@
 							    <span class="price"><format:fromPrice priceData="${product.promotionPrice}"/></span>
 							    <span class="old-price"><format:fromPrice priceData="${product.price}"/></span>
 							</c:if>
-							
+
 							<c:if test="${empty product.promotionPrice}">
 						    	<span class="price"><format:fromPrice priceData="${product.price}"/></span>
 							</c:if>
 						</div>
-						
+
 						<div class="Summary">
 							<c:forEach items="${product.potentialPromotions}" var="promotion"  varStatus="id"  >
-							    <c:if test="${id.index==0}">	
-							    <c:if test="${promotion.firedMessages ne null}"> 
+							    <c:if test="${id.index==0}">
+							    <c:if test="${promotion.firedMessages ne null}">
 								    <c:forEach items="${promotion.firedMessages}" var="messages" >
 								    <c:set value="${ fn:split(messages, ',') }" var="arr"  />
 								     <span>
 									    <c:forEach items="${arr}" var="message" varStatus="i" >
-									      <c:if test="${i.index==0}">	
+									      <c:if test="${i.index==0}">
 									          <i>${message}% off</i>
 									      </c:if>
-									      
-									        <c:if test="${i.index==1}">	
+
+									        <c:if test="${i.index==1}">
 									      order more than ${message}${product.packageType}s
 									      </c:if>
-									        <%-- <c:if test="${i.index==2}">	
+									        <%-- <c:if test="${i.index==2}">
 									       to maxQuantity ${message}
 									      </c:if> --%>
-									    
+
 									    </c:forEach>
-								    
+
 								        </span>
 								    </c:forEach>
 								    </c:if>
 								</c:if>
 							</c:forEach>
 						</div>
-						
+						<c:if test="${user.name ne 'Anonymous'}">
 						<div class="specnum">
 							 <div class="spec">
 							 <!-- <label>
-									<span class="label-title">Specifications</span>	
+									<span class="label-title">Specifications</span>
 									<div class="selbox">
 										<input type="hidden" class="required" value="" name="spec" alt="Please Select nation">
 										<span class="pitch"></span>
 										<ul class="select">
 											<li data-val="25">25kg</li>
 											<li data-val="50">50kg</li>
-											<li data-val="75">75kg</li>						
+											<li data-val="75">75kg</li>
 										</ul>
-									</div>	
+									</div>
 								</label>
 								 -->
-								 
+
 						  <select id="futureAvailableDateId" style="display: none;">
 							<c:forEach items="${countrys}" var="data"  varStatus="id"  >
 							<option value ="${data.storeId}">${data.futureAvailableDate}</option>
-							
+
 	                        </c:forEach>
-	                        </select> 
-	                        
+	                        </select>
+
 	                        <select id="futureInventoryId" style="display: none;">
 							<c:forEach items="${countrys}" var="data"  varStatus="id"  >
 							<c:set var ="a" value="${data.futureInventory}"/>
 							<c:set var="b" value="${product.netWeight}"/>
 							<c:set var ="Total" value="${a*b}"/>
 							<option value ="${data.storeId}">${data.futureInventory}&nbsp${product.packageType}${data.futureInventory>1?"s":""}&nbsp/&nbsp${Total}${product.unitName}${Total>1?"s":""}</option>
-							
+
 	                        </c:forEach>
-	                        </select> 
-	                        
+	                        </select>
+
 								<c:forEach items="${countrys}" var="data"  varStatus="id"  >
-							<c:if test="${id.index==0}">	
+							<c:if test="${id.index==0}">
 								<label class="futday">
-									<span class="label-title">Future days</span>	
+									<span class="label-title">Future days</span>
 									<div class="selbox" id="selectId">
 										<input type="hidden" value="" name="futday" alt="Please Select nation" id="futday">
 										<span class="pitch"></span>
 										<ul class="select" >
 											<li data-val="${data.futureInventory}">${data.futureAvailableDate}</li>
-															
+
 										</ul>
-									</div>	
-								</label>	
-								</c:if>	
-	                        </c:forEach>					
-							</div> 
-							
+									</div>
+								</label>
+								</c:if>
+	                        </c:forEach>
+							</div>
+
 							<div class="invernum">
-							
+
 							<select id="inventoryId" style="display: none;">
 							<c:forEach items="${countrys}" var="data"  varStatus="id"  >
 							<c:set var ="a" value="${data.inventory}"/>
 							<c:set var="b" value="${product.netWeight}"/>
 							<c:set var ="Total" value="${a*b}"/>
 							<option value ="${data.storeId}">${data.inventory}&nbsp${product.packageType}${data.inventory>1?"s":""}&nbsp/&nbsp${Total}${product.unitName}${Total>1?"s":""}</option>
-							
+
 	                        </c:forEach>
-	                        </select> 
-	                        
+	                        </select>
+
 	                       <c:forEach items="${countrys}" var="data"  varStatus="id"  >
 							<c:if test="${id.index==0}">
 							<c:set var ="a" value="${data.inventory}"/>
 							<c:set var="b" value="${product.netWeight}"/>
 							<c:set var ="Total" value="${a*b}"/>
 								<span class="label-title inventory">Inventory:<i id="inventory">${data.inventory}&nbsp${product.packageType}${data.inventory>1?"s":""}&nbsp/&nbsp${Total}${product.unitName}${Total>1?"s":""}</i> <span class="spot">(<em>${data.inventory}&nbsp${product.packageType}</em>)</span></span>
-								</c:if>	
+								</c:if>
 	                        </c:forEach>
-								
+
 								<label>
 									<input type="checkbox" name="Keep" id="checkfutureId">
 									<span class="checkbox">Display future inventory</span>
-								</label>							
+								</label>
 							</div>
-						 
+
 							<div class="delivery flex-wrap">
 								<span class="label-title">Delivery From:</span>
 								<div class="flex">
-								
+
 									<select id="storeMulId">
 									<c:forEach items="${countrys}" var="data"  >
 									<option value ="${data.storeId}">${data.storeName}</option>
 									    </c:forEach>
 									</select>
-									
+
 								</div>
-								
+
 								<c:forEach items="${countrys}" var="data"  varStatus="id"  >
 								<c:if test="${id.index==0}">
 								   <input type="hidden" value="${data.storeId}" name="storeHidId"  id="storeHidId">
-						        </c:if>	
+						        </c:if>
 		                       </c:forEach>
-								
-								
-							
+
+
+
 							</div>
-							
+
 							<div class="delivery flex-wrap">
-							
+
 							<select id="countryId" style="display: none;">
 							<c:forEach items="${countrys}" var="data">
 							<option value ="${data.storeId}">${data.countryListString}</option>
-							
+
 	                        </c:forEach>
-	                        </select> 
-							
+	                        </select>
+
 							<c:forEach items="${countrys}" var="data"  varStatus="id"  >
 								<c:if test="${id.index==0}">
 								    <c:forEach items="${data.countryDataList}" var="country"  varStatus="vs"  >
-								    
+
 								      <c:set var="myVar" value="${stat.first ? '' : myVar} ${country.name}" />
-								      
+
 								    </c:forEach>
-								    
-								    
-						        </c:if>	
+
+
+						        </c:if>
 		                       </c:forEach>
-	                        
+
 								<span class="label-title">Delivery area: <em>${myVar}</em></span>
-							
+
 							</div>
-							
+
 							<div class="prod-sum">
 								<div class="m-setnum">
 								<span class="set sub">-</span>
-	                              <input type="text" id="pdnum" name="pdnum" class="set" value="1" onkeyup="addNum()">		
+	                              <input type="text" id="pdnum" name="pdnum" class="set" value="1" onkeyup="addNum()">
 									<span class="set add">+</span>
-									
+
 								</div>
 								<%-- <c:forEach var="${countrys}" var="data1" begin="0" end="1"> --%>
 							<c:forEach items="${countrys}" var="data"  varStatus="id"  >
 							<c:if test="${id.index==0}">
-							
+
 									<input disabled="disabled" hidden="hidden" id="myNetWeight" value="${product.netWeight}">
-									
+
 								    <i class="delint"><em>${product.packageType}&nbsp/&nbsp<span id="allmyNetWeight">${product.netWeight}</span>${product.unitName}</em></i>
 								    <i class="delintro"><em>Delivery within &nbsp ${data.avaReleaseDay} &nbsp days</em></i>
-								  
-							</c:if>	
+
+							</c:if>
 	                        </c:forEach>
 	                        <input type="hidden" value="" name="avaReleaseDay"  id="avaReleaseDay">
 	                        <select id="avaReleaseDayId" style="display: none;">
 							<c:forEach items="${countrys}" var="data"  varStatus="id"  >
 							<option value ="${data.storeId}">${data.avaReleaseDay}</option>
-							
+
 	                        </c:forEach>
-	                        </select> 
-								
+	                        </select>
+
 	 						</div>
-	
+
 						</div>
-				
-					<!-- Minimum: ${product.minOrderQuantity} ${product.packageType} ${product.minOrderQuantity>1?"s":""} -->
-					MoQ: ${product.minOrderQuantity}&nbsp;${product.packageType} ${product.minOrderQuantity>1?"s":""}
-						
-						
+							<!-- Minimum: ${product.minOrderQuantity} ${product.packageType} ${product.minOrderQuantity>1?"s":""} -->
+							MoQ: ${product.minOrderQuantity}&nbsp;${product.packageType} ${product.minOrderQuantity>1?"s":""}
+
+
 							<cms:pageSlot position="AddToCart" var="component" >
 								<cms:component component="${component}" />
 							</cms:pageSlot>
-						
-						
-						
-						<!-- <div class="btn-set">
+
+
+
+							<!-- <div class="btn-set">
 							<button class="btn btn-submit">Check Out</button>
-							<button class="btn btn-cart">Add to Cart</button>							
-						</div> 
-	 -->
+							<button class="btn btn-cart">Add to Cart</button>
+							</div>
+							-->
+						</c:if>
+						<c:if test="${user.name eq 'Anonymous'}">
+							<div style="background-color: #f3f3f3;margin-top: -40px;padding-top: 55px;padding-left: 40px; padding-bottom: 55px;">
+								<h4 style="font-weight: bold"> LOG IN TO VIEW DETAIL.</h4><br/>
+								Enjoy 24/7 service to all in-stock products.<br/>
+								View competitive price and inventory.<br/>
+								Looking for QC documents and quotation sheet.<br/>
+
+								<div class="register__section">
+									<div style="display: inline-block;border-width: 1px;margin-top: 10px;padding: 10px;width: 150px!important;background-color: #ccdb29!important;text-align: center;">
+										<a href="${loginUrl}" style="cursor: pointer;">
+											<span>LOG IN</span>
+										</a>
+									</div>
+									<div style="display: inline-block;border-width: 1px;margin-top: 10px;padding: 10px;width: 150px!important;background-color: #008c95!important;text-align: center;">
+										<a href="${registerUrl}">
+											<span style="color: #fff">REGISTER</span>
+										</a>
+									</div>
+								</div>
+							</div>
+						</c:if>
+
 					</div>
 					<!-- b end -->
 				</c:if>
