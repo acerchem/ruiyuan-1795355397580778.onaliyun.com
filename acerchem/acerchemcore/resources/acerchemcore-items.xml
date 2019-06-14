@@ -1135,11 +1135,6 @@
 						<persistence type="property" />
 						<modifiers />
 					</attribute>
-					<attribute qualifier="deliveryTime" type="java.util.Date">
-						<description>Delivery Time</description>
-						<persistence type="property" />
-						<modifiers />
-					</attribute>
 					<attribute qualifier="payConfirm" type="java.lang.Boolean">
 						<description>flag for payConfirm</description>
 						<persistence type="property" />

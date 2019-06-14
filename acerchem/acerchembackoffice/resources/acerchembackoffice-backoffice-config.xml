@@ -80,7 +80,10 @@
 			</editorArea:tab>
 			<editorArea:tab name="hmc.deliveryadministration">
 				<editorArea:section name="hmc.deliveryadministration">
-					<editorArea:attribute qualifier="deliveryAddress"/>
+					<editorArea:attribute qualifier="deliveryNo"/>
+					<editorArea:attribute qualifier="deliveryVehicleNumber"/>
+					<editorArea:attribute qualifier="deliveryDriverPhone"/>
+					<editorArea:attribute qualifier="deliveryDate"/>
 					<editorArea:attribute qualifier="deliveryMode"/>
 					<editorArea:attribute qualifier="deliveryStatus"/>
 				</editorArea:section>

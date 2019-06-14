@@ -66,11 +66,6 @@ public class OrderForEmployeeCofirmDeliveryAction extends AbstractComponentWidge
 			actionResult.setResultMessage("devliery deiver phone is null");
 			return actionResult;
 		}
-		if(order.getDeliveryTime()==null){
-			actionResult.setResultCode("error");
-			actionResult.setResultMessage("devliery time is null");
-			return actionResult;
-		}
 		LOG.info("---------------------------------------"+order.getOrderProcess().iterator().next().getCode());
 		final String eventID = new StringBuilder()//
 		          .append(order.getOrderProcess().iterator().next().getCode())//
