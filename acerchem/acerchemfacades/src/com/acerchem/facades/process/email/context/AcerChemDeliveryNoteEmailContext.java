@@ -51,6 +51,22 @@ public class AcerChemDeliveryNoteEmailContext extends AbstractEmailContext<Order
 	private String deliveryVehicleNumber;
 	private String deliveryDriverPhone;
 	private String deliveryDate;
+
+	public String getDeliveryNo() {
+		return deliveryNo;
+	}
+
+	public String getDeliveryVehicleNumber() {
+		return deliveryVehicleNumber;
+	}
+
+	public String getDeliveryDriverPhone() {
+		return deliveryDriverPhone;
+	}
+
+	public String getDeliveryDate() {
+		return deliveryDate;
+	}
 	
 	@Resource
 	private ContactInfoService contactInfoService;
