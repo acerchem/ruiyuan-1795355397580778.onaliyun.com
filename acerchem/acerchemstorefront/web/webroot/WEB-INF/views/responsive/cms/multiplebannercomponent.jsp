@@ -6,19 +6,19 @@
 
 	<c:if test='${level eq 81}'>
 		<div class="swiper-slide">
-			<a href="${contextPath}${urlLink}"><img src="${media.url}?x-oss-process=image/resize,m_fixed,h_325,w_1440" /></a>
+			<a href="${contextPath}${urlLink}"><img width="1440px" height="325px" src="${media.url}?x-oss-process=image/resize,m_fixed,h_325,w_1440" /></a>
 		</div>
 	</c:if>
 
 	<c:if test='${level eq 82}'>
 		<div class="swiper-slide">
-			<a href="${contextPath}${urlLink}"><img src="${media.url}?x-oss-process=image/resize,m_fixed,h_325,w_1440" /></a>
+			<a href="${contextPath}${urlLink}"><img width="1440px" height="325px" src="${media.url}?x-oss-process=image/resize,m_fixed,h_325,w_1440" /></a>
 		</div>
 	</c:if>
 
 	<c:if test='${level eq 83}'>
 		<div class="swiper-slide">
-			<a href="${contextPath}${urlLink}"><img src="${media.url}?x-oss-process=image/resize,m_fixed,h_325,w_1440" /></a>
+			<a href="${contextPath}${urlLink}"><img width="1440px" height="325px" src="${media.url}?x-oss-process=image/resize,m_fixed,h_325,w_1440" /></a>
 		</div>
 	</c:if>
 
