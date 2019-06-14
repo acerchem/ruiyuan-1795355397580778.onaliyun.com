@@ -278,6 +278,22 @@ div.content {
    					<br/><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAUCAYAAACAl21KAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADaSURBVDhPrZQBDYUgFEWpYAbCmMUKNLABDUhgAgtYgAZ0eH+H4R8i/o/K3ZiDyeHdy1MlndQfNM+zeO/T7L6+ICBa6wgMIaTVdh2sGWNk2zaZpkmWZUmrbTqAqAQYAgQQcItOYWMt38y8xe4JhKgkF/mx5pxLK2dVQdiqZbSuawTyLFUFobKqXNbamGVu9xKEDaXUz0G77L13CRrHsbp5H1T8tyLyqW1mcEBzRpRcAoZhuHdr9EwJKYOt6QDiZU7eAdh41NkECABrj781rhHI668fQJf/0TuJfACUb/BLcj5HOAAAAABJRU5ErkJggg==" height="15" width="14" />
    					Others: book in before delivery, Please Call 30 minutes before arrive<br/>
    					<img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAUCAYAAACAl21KAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADaSURBVDhPrZQBDYUgFEWpYAbCmMUKNLABDUhgAgtYgAZ0eH+H4R8i/o/K3ZiDyeHdy1MlndQfNM+zeO/T7L6+ICBa6wgMIaTVdh2sGWNk2zaZpkmWZUmrbTqAqAQYAgQQcItOYWMt38y8xe4JhKgkF/mx5pxLK2dVQdiqZbSuawTyLFUFobKqXNbamGVu9xKEDaXUz0G77L13CRrHsbp5H1T8tyLyqW1mcEBzRpRcAoZhuHdr9EwJKYOt6QDiZU7eAdh41NkECABrj781rhHI668fQJf/0TuJfACUb/BLcj5HOAAAAABJRU5ErkJggg==" height="15" width="14" />
+                    Delivery No: ${ctx.deliveryNo}
+                    <br/>
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAUCAYAAACAl21KAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADaSURBVDhPrZQBDYUgFEWpYAbCmMUKNLABDUhgAgtYgAZ0eH+H4R8i/o/K3ZiDyeHdy1MlndQfNM+zeO/T7L6+ICBa6wgMIaTVdh2sGWNk2zaZpkmWZUmrbTqAqAQYAgQQcItOYWMt38y8xe4JhKgkF/mx5pxLK2dVQdiqZbSuawTyLFUFobKqXNbamGVu9xKEDaXUz0G77L13CRrHsbp5H1T8tyLyqW1mcEBzRpRcAoZhuHdr9EwJKYOt6QDiZU7eAdh41NkECABrj781rhHI668fQJf/0TuJfACUb/BLcj5HOAAAAABJRU5ErkJggg==" height="15" width="14">
+                    </img>
+                    Delivery Vehicle Number: ${ctx.deliveryVehicleNumber}
+                    <br/>
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAUCAYAAACAl21KAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADaSURBVDhPrZQBDYUgFEWpYAbCmMUKNLABDUhgAgtYgAZ0eH+H4R8i/o/K3ZiDyeHdy1MlndQfNM+zeO/T7L6+ICBa6wgMIaTVdh2sGWNk2zaZpkmWZUmrbTqAqAQYAgQQcItOYWMt38y8xe4JhKgkF/mx5pxLK2dVQdiqZbSuawTyLFUFobKqXNbamGVu9xKEDaXUz0G77L13CRrHsbp5H1T8tyLyqW1mcEBzRpRcAoZhuHdr9EwJKYOt6QDiZU7eAdh41NkECABrj781rhHI668fQJf/0TuJfACUb/BLcj5HOAAAAABJRU5ErkJggg==" height="15" width="14">
+                    </img>
+                    Delivery Driver Phone: ${ctx.deliveryVehicleNumber}
+                    <br/>
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAUCAYAAACAl21KAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADaSURBVDhPrZQBDYUgFEWpYAbCmMUKNLABDUhgAgtYgAZ0eH+H4R8i/o/K3ZiDyeHdy1MlndQfNM+zeO/T7L6+ICBa6wgMIaTVdh2sGWNk2zaZpkmWZUmrbTqAqAQYAgQQcItOYWMt38y8xe4JhKgkF/mx5pxLK2dVQdiqZbSuawTyLFUFobKqXNbamGVu9xKEDaXUz0G77L13CRrHsbp5H1T8tyLyqW1mcEBzRpRcAoZhuHdr9EwJKYOt6QDiZU7eAdh41NkECABrj781rhHI668fQJf/0TuJfACUb/BLcj5HOAAAAABJRU5ErkJggg==" height="15" width="14">
+                    </img>
+                    Delivery Date: ${ctx.deliveryDate}
+                    <br/>
+                    <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABIAAAAUCAYAAACAl21KAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAADaSURBVDhPrZQBDYUgFEWpYAbCmMUKNLABDUhgAgtYgAZ0eH+H4R8i/o/K3ZiDyeHdy1MlndQfNM+zeO/T7L6+ICBa6wgMIaTVdh2sGWNk2zaZpkmWZUmrbTqAqAQYAgQQcItOYWMt38y8xe4JhKgkF/mx5pxLK2dVQdiqZbSuawTyLFUFobKqXNbamGVu9xKEDaXUz0G77L13CRrHsbp5H1T8tyLyqW1mcEBzRpRcAoZhuHdr9EwJKYOt6QDiZU7eAdh41NkECABrj781rhHI668fQJf/0TuJfACUb/BLcj5HOAAAAABJRU5ErkJggg==" height="15" width="14">
+                    </img>
    					 *Please inspect the situation of delivery including package, quantity before sign the POD*
     </td>
   </tr>

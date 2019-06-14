@@ -1,5 +1,6 @@
 package com.acerchem.facades.process.email.context;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
@@ -46,6 +47,10 @@ public class AcerChemDeliveryNoteEmailContext extends AbstractEmailContext<Order
 	
 	private String contactUser;
 	private String contactMobile;
+	private String deliveryNo;
+	private String deliveryVehicleNumber;
+	private String deliveryDriverPhone;
+	private String deliveryDate;
 	
 	@Resource
 	private ContactInfoService contactInfoService;
@@ -53,7 +58,13 @@ public class AcerChemDeliveryNoteEmailContext extends AbstractEmailContext<Order
 	@Override
 	public void init(final OrderProcessModel orderProcessModel, final EmailPageModel emailPageModel) {
 		super.init(orderProcessModel, emailPageModel);
-		orderData = getOrderConverter().convert(orderProcessModel.getOrder());
+		OrderModel orderModel = orderProcessModel.getOrder();
+		orderData = getOrderConverter().convert(orderModel);
+		deliveryNo = orderModel.getDeliveryNo();
+		deliveryVehicleNumber = orderModel.getDeliveryVehicleNumber();
+		deliveryDriverPhone = orderModel.getDeliveryDriverPhone();
+		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd'th',YYYY");
+		deliveryDate = simpleDateFormat.format(orderModel.getDeliveryDate());
 
 		//orderData.getWaitDeliveiedDate();
 		// orderData.getConsignments()
