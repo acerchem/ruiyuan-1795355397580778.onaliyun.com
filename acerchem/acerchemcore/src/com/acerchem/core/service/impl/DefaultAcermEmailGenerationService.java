@@ -15,6 +15,7 @@ import javax.annotation.Resource;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.core.model.user.EmployeeModel;
+import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang3.StringUtils;
@@ -183,7 +184,7 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 				}else if("OrderCancelledEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())) {
 					emailMessageModel = createEmailMessageOfOrderCancelled(subject.toString(), body.toString(), emailContext);
 				}else if("QuoteBuyerSubmissionEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())) {
-					emailMessageModel = createEmailMessageWithAttachmentForQuote(subject.toString(), body.toString(), emailContext);
+					emailMessageModel = createEmailMessageWithAttachmentForQuote(subject.toString(), body.toString(), emailContext, businessProcessModel);
 				}else if ("RemindEmployeeEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())){
 
 					emailMessageModel = createEmployeeEmailMessageWithAttachment(subject.toString(), body.toString(),
@@ -253,7 +254,7 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 	}
 
 	protected EmailMessageModel createEmailMessageWithAttachmentForQuote(final String emailSubject, final String emailBody,
-			final AbstractEmailContext<BusinessProcessModel> emailContext) {
+			final AbstractEmailContext<BusinessProcessModel> emailContext, final BusinessProcessModel businessProcessModel) {
 		String[] emailBodys = emailBody.split(Config.getString("email.with.attachments.content.separation.flag","---"));
 
 		// 获取pdf文件名字，来源于subject
@@ -297,6 +298,19 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 			final EmailAddressModel ccEmailTwoAddressModel = getEmailService()
 					.getOrCreateEmailAddressForEmail(Config.getParameter("mail.ccAddress.two"), Config.getParameter("mail.ccAddress.displayTwoName"));
 			ccAddress.add(ccEmailTwoAddressModel);
+		}
+
+		if(businessProcessModel instanceof OrderProcessModel){
+			OrderModel orderModel = ((OrderProcessModel)businessProcessModel).getOrder();
+			UserModel user = orderModel.getUser();
+			if(user instanceof CustomerModel){
+				CustomerModel customerModel = (CustomerModel)user;
+				if(customerModel.getEmployee()!=null){
+					final EmailAddressModel ccEmailEmployeeAddressModel = getEmailService()
+							.getOrCreateEmailAddressForEmail(customerModel.getEmployee().getUid(), customerModel.getEmployee().getName());
+					ccAddress.add(ccEmailEmployeeAddressModel);
+				}
+			}
 		}
 
 		final List<EmailAttachmentModel> attachments = new ArrayList<EmailAttachmentModel>();
