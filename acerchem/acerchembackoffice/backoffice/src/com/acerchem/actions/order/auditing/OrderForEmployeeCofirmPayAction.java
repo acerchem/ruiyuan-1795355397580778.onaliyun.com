@@ -73,9 +73,6 @@ public class OrderForEmployeeCofirmPayAction extends AbstractComponentWidgetAdap
 		if(order.getEmployeeConfirmPay()!=null&&order.getEmployeeConfirmPay()){
 			return false;
 		}
-		if(order.getCustomerConfirmPay()!=null&&order.getCustomerConfirmPay()){
-			return false;
-		}
 		return true;
 	}
 }
