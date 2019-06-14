@@ -61,6 +61,10 @@
 					</cms:pageSlot>
 				</ul>
 				<div style="clear: both;"></div>
+				<div>
+					<h2 style="text-align: center;margin-top: 30px;font-size: 30px;font-weight: bold;">BENEFITS AND INTERACTION</h2>
+					<span style="display: block;margin: 0 auto;width: 330px;border-bottom: 2px solid #666;"></span>
+				</div>
 				<ul class="maxmean">
 					<cms:pageSlot position="Section5" var="component">
 						<cms:component component="${component}" />
