@@ -22,5 +22,6 @@
     <outputType>java.lang.Object</outputType>
 
     <iconUri>icons/confirmPay.png</iconUri>
+    <iconDisabledUri>icons/confirmPay_disable.png</iconDisabledUri>
 
 </action-definition>

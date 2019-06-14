@@ -102,6 +102,14 @@ public class EmployeeCancellOrderAction extends AbstractComponentWidgetAdapterAw
 	private void setOrderStatus(final OrderModel order, final OrderStatus orderStatus) {
 		       order.setStatus(orderStatus);
 		      this.modelService.save(order);
-    }
-	
+	}
+
+
+	public boolean canPerform(ActionContext<OrderModel> ctx) {
+		OrderModel order = (OrderModel) ctx.getData();
+		if(OrderStatus.CANCELLED.equals(order.getStatus())){
+			return false;
+		}
+		return true;
+	}
 }

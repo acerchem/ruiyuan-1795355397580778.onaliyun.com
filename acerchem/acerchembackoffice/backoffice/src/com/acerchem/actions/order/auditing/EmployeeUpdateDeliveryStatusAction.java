@@ -68,5 +68,12 @@ public class EmployeeUpdateDeliveryStatusAction extends AbstractComponentWidgetA
 		order.setStatus(orderStatus);
 		this.modelService.save(order);
 	}
-	
+
+	public boolean canPerform(ActionContext<OrderModel> ctx) {
+		OrderModel order = (OrderModel) ctx.getData();
+		if(OrderStatus.DELIVERED.equals(order.getStatus())){
+			return false;
+		}
+		return true;
+	}
 }

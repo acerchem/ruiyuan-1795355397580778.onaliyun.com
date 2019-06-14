@@ -63,5 +63,12 @@ public class OrderForEmployeeCofirmPayAction extends AbstractComponentWidgetAdap
 		LOG.info("--------------------end-------------------"+order.getEmployeeConfirmPay());
 		return new ActionResult("success");
 	}
-	
+
+	public boolean canPerform(ActionContext<OrderModel> ctx) {
+		OrderModel order = (OrderModel) ctx.getData();
+		if(order.getEmployeeConfirmPay()){
+			return false;
+		}
+		return true;
+	}
 }

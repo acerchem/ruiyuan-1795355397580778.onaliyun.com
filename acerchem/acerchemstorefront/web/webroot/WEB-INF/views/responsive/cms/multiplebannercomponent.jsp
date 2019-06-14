@@ -76,7 +76,8 @@
 	</c:if>
 	<c:if test='${level eq 6}'>
 		<li class="item">
-			<a href="${component.urlLink}">
+			<c:url value="${fn:escapeXml(component.urlLink)}" var="mediaBoxUrl" />
+			<a href="${mediaBoxUrl}">
 				<img height="260px" width="253px" src="${media.url}?x-oss-process=image/resize,m_fixed,h_260,w_253"/>
 				<div>
 					<span>${component.name}</span>

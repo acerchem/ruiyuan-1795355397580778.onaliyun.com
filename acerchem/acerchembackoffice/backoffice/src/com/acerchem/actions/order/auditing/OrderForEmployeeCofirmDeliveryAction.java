@@ -63,5 +63,12 @@ public class OrderForEmployeeCofirmDeliveryAction extends AbstractComponentWidge
 		LOG.info("--------------------end-------------------"+order.getEmployeeConfirmDelivery());
 		return new ActionResult("success");
 	}
-	
+
+	public boolean canPerform(ActionContext<OrderModel> ctx) {
+		OrderModel order = (OrderModel) ctx.getData();
+		if(order.getEmployeeConfirmDelivery()){
+			return false;
+		}
+		return true;
+	}
 }

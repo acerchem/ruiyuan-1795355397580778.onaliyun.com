@@ -63,5 +63,12 @@ public class OrderForAllCofirmAction extends AbstractComponentWidgetAdapterAware
 		LOG.info("--------------------end-------------------"+order.getEmployeeConfirm());
 		return new ActionResult("success");
 	}
-	
+
+	public boolean canPerform(ActionContext<OrderModel> ctx) {
+		OrderModel order = (OrderModel) ctx.getData();
+		if(order.getEmployeeConfirm()){
+			return false;
+		}
+		return true;
+	}
 }

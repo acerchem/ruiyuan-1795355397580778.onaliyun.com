@@ -825,14 +825,14 @@ INSERT_UPDATE MultipleBannerComponent;$contentCV[unique=true];displayLevel;uid[u
 ;;3;ThreeBannerComponent;Three Banner Component;ThreeBannerComponent;3;/Open-Catalogue/Cameras/Digital-Cameras/c/575
 ;;4;FourBannerComponent;Four Banner Component;FourBannerComponent;4;/Open-Catalogue/Cameras/Film-Cameras/c/571
 ;;5;FiveBannerComponent;FiveBannerComponent;FiveBannerComponent;5;/Open-Catalogue/Data-storage/Flash-Memory/c/575
-;;6;HomepageCategoryBanner1Component;Amino Acids;HomepageCategoryBanner1Component;6;/Open-Catalogue/Data-storage/Flash-Memory/c/571
-;;6;HomepageCategoryBanner2Component;Protein;HomepageCategoryBanner2Component;6;/Open-Catalogue/Data-storage/Flash-Memory/c/571
-;;6;HomepageCategoryBanner3Component;Plant Extract;HomepageCategoryBanner3Component;6;/Open-Catalogue/Data-storage/Flash-Memory/c/571
-;;6;HomepageCategoryBanner4Component;Super Foods;HomepageCategoryBanner4Component;6;/Open-Catalogue/Data-storage/Flash-Memory/c/571
+;;6;HomepageCategoryBanner1Component;Amino Acids;HomepageCategoryBanner1Component;6;/Open-Catalogue/Data-storage/Flash-Memory/c/577
+;;6;HomepageCategoryBanner2Component;Protein;HomepageCategoryBanner2Component;6;/Open-Catalogue/Data-storage/Flash-Memory/c/578
+;;6;HomepageCategoryBanner3Component;Plant Extract;HomepageCategoryBanner3Component;6;/Open-Catalogue/Data-storage/Flash-Memory/c/575
+;;6;HomepageCategoryBanner4Component;Super Foods;HomepageCategoryBanner4Component;6;/Open-Catalogue/Data-storage/Flash-Memory/c/680
 ;;6;HomepageCategoryBanner5Component;Vitamin;HomepageCategoryBanner5Component;6;/Open-Catalogue/Data-storage/Flash-Memory/c/571
-;;6;HomepageCategoryBanner6Component;Food Ingredients;HomepageCategoryBanner6Component;6;/Open-Catalogue/Data-storage/Flash-Memory/c/571
-;;6;HomepageCategoryBanner7Component;Supplements;HomepageCategoryBanner7Component;6;/Open-Catalogue/Data-storage/Flash-Memory/c/571
-;;6;HomepageCategoryBanner8Component;OEM;HomepageCategoryBanner8Component;6;/Open-Catalogue/Data-storage/Flash-Memory/c/571
+;;6;HomepageCategoryBanner6Component;Food Ingredients;HomepageCategoryBanner6Component;6;/Open-Catalogue/Data-storage/Flash-Memory/c/680
+;;6;HomepageCategoryBanner7Component;Supplements;HomepageCategoryBanner7Component;6;/Open-Catalogue/Data-storage/Flash-Memory/c/576
+;;6;HomepageCategoryBanner8Component;OEM;HomepageCategoryBanner8Component;6;/Open-Catalogue/Data-storage/Flash-Memory/c/579
 
 
 UPDATE MultipleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]

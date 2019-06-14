@@ -52,7 +52,9 @@
 					<editorArea:attribute qualifier="totalTax" merge-mode="Remove"/>
 				</editorArea:section>
 			</editorArea:tab>
-			<editorArea:tab name="hmc.payment_and_delivery">
+			<editorArea:tab name="hmc.payment_and_delivery" merge-mode="Remove">
+			</editorArea:tab>
+			<editorArea:tab name="hmc.payment">
 				<editorArea:section name="hmc.status">
 					<editorArea:attribute qualifier="exportStatus" merge-mode="Remove"/>
 					<editorArea:attribute qualifier="statusInfo" merge-mode="Remove"/>
@@ -62,8 +64,8 @@
 					<editorArea:attribute qualifier="paymentStatus" merge-mode="Remove"/>
 					<editorArea:attribute qualifier="paymentInfo" merge-mode="Remove"/>
 				</editorArea:section>
-				<editorArea:section name="hmc.deliveryadministration">
-					<editorArea:attribute qualifier="deliveryStatus" merge-mode="Remove"/>
+				<editorArea:section name="hmc.deliveryadministration" merge-mode="Remove">
+					<editorArea:attribute qualifier="deliveryStatus"/>
 				</editorArea:section>
 				
 				<editorArea:section name="hmc.common" position="0">
@@ -74,6 +76,13 @@
 					<editorArea:attribute qualifier="totalTaxValues"/>
 					<editorArea:attribute qualifier="entries"/>
 					<editorArea:attribute qualifier="orderRemark"/>
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.deliveryadministration">
+				<editorArea:section name="hmc.deliveryadministration">
+					<editorArea:attribute qualifier="deliveryAddress"/>
+					<editorArea:attribute qualifier="deliveryMode"/>
+					<editorArea:attribute qualifier="deliveryStatus"/>
 				</editorArea:section>
 			</editorArea:tab>
 			<editorArea:tab name="hmc.tab.documents.name" merge-mode="Remove"/>
