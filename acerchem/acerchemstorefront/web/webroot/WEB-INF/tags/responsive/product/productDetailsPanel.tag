@@ -275,21 +275,21 @@
 							-->
 						</c:if>
 						<c:if test="${user.name eq 'Anonymous'}">
-							<div style="background-color: #f3f3f3;margin-top: -40px;padding-top: 55px;padding-left: 40px; padding-bottom: 55px;">
+							<div style="background-color: #f3f3f3;margin-top: -60px;padding-top: 55px;padding-left: 40px; padding-bottom: 55px;">
 								<h4 style="font-weight: bold"> LOG IN TO VIEW DETAIL.</h4><br/>
 								Enjoy 24/7 service to all in-stock products.<br/>
 								View competitive price and inventory.<br/>
 								Looking for QC documents and quotation sheet.<br/>
 
 								<div class="register__section">
-									<div style="display: inline-block;border-width: 1px;margin-top: 10px;padding: 10px;width: 150px!important;background-color: #ccdb29!important;text-align: center;">
-										<a href="${loginUrl}" style="cursor: pointer;">
-											<span>LOG IN</span>
+									<div style="display: inline-block;border-width: 1px;margin-top: 10px;padding: 10px;width: 150px!important;background-color: #0d4170!important;text-align: center;cursor: pointer;">
+										<a href="${loginUrl}" style="font-weight: normal;">
+											<span style="color: #fff; font-size: 14px;">LOG IN</span>
 										</a>
 									</div>
-									<div style="display: inline-block;border-width: 1px;margin-top: 10px;padding: 10px;width: 150px!important;background-color: #008c95!important;text-align: center;">
-										<a href="${registerUrl}">
-											<span style="color: #fff">REGISTER</span>
+									<div style="display: inline-block;border-width: 1px;margin-top: 10px;padding: 10px;width: 150px!important;background-color: #0d4170!important;text-align: center;cursor: pointer;">
+										<a href="${registerUrl}" style="font-weight: normal;">
+											<span style="color: #fff; font-size: 14px;">REGISTER</span>
 										</a>
 									</div>
 								</div>

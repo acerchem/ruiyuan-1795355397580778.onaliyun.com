@@ -703,6 +703,31 @@
 					  <description>Supplier information input</description>
 					</attribute>
 					<!-- end -->
+					<!--add by able.li-->
+					<attribute autocreate="true" qualifier="originCountry" type="Country">
+						<persistence type="property"/>
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<description>原产国</description>
+					</attribute>
+
+					<attribute autocreate="true" qualifier="halal" type="boolean">
+						<persistence type="property"/>
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<description>Supplier information</description>
+					</attribute>
+
+					<attribute autocreate="true" qualifier="kosher" type="boolean">
+						<persistence type="property"/>
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<description>Supplier information</description>
+					</attribute>
+
+					<attribute autocreate="true" qualifier="organic" type="boolean">
+						<persistence type="property"/>
+						<modifiers read="true" write="true" search="true" optional="true"/>
+						<description>Supplier information</description>
+					</attribute>
+					<!--end-->
 				</attributes>
 			</itemtype>
 
