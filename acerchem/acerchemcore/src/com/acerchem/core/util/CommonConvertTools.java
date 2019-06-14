@@ -100,7 +100,13 @@ public class CommonConvertTools {
 			name = "Release Note";
 		} else if (StringUtils.containsIgnoreCase(newSubject, "Quotation")) {
 			name = "Quotation Note";
-		} else {
+		} else if(StringUtils.containsIgnoreCase(newSubject, "Employee")){
+			name = "Employee";
+		}else if(StringUtils.containsIgnoreCase(newSubject, "firstRemind")){
+			name = "FirstRemind";
+		}else if(StringUtils.containsIgnoreCase(newSubject, "onceRemind")){
+			name = "OnceRemind";
+		}else {
 			name = "Unknown";
 		}
 

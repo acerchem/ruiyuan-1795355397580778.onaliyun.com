@@ -1,0 +1,1 @@
+firstRemind Email Order Number: ${ctx.order.code}

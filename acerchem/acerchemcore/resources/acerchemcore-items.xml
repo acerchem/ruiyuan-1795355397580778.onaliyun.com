@@ -1153,6 +1153,22 @@
 						<persistence type="property" />
 						<modifiers />
 					</attribute>
+
+					<attribute qualifier="firstTimeRemindDate" type="java.util.Date">
+						<description>初次提醒</description>
+						<persistence type="property" />
+						<modifiers />
+					</attribute>
+					<attribute qualifier="OnceAgainRemindDate" type="java.util.Date">
+						<description>再次提醒</description>
+						<persistence type="property" />
+						<modifiers />
+					</attribute>
+					<attribute qualifier="lastTimeRemindDate" type="java.util.Date">
+						<description>最后一次提醒</description>
+						<persistence type="property" />
+						<modifiers />
+					</attribute>
 				</attributes>
 
 			</itemtype>
