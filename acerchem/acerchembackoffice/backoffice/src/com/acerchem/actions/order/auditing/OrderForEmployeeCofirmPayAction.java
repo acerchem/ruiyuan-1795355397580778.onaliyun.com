@@ -66,6 +66,7 @@ public class OrderForEmployeeCofirmPayAction extends AbstractComponentWidgetAdap
 
 	public boolean canPerform(ActionContext<OrderModel> ctx) {
 		OrderModel order = (OrderModel) ctx.getData();
+		if(order==null) return false;
 		if(order.getEmployeeConfirm()==null||!order.getEmployeeConfirm()){
 			return false;
 		}

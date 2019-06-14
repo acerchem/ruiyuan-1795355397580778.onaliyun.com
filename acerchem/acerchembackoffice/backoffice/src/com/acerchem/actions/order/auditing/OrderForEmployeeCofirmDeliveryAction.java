@@ -83,6 +83,7 @@ public class OrderForEmployeeCofirmDeliveryAction extends AbstractComponentWidge
 
 	public boolean canPerform(ActionContext<OrderModel> ctx) {
 		OrderModel order = (OrderModel) ctx.getData();
+		if(order==null) return false;
 		if(order.getStatus()!=null&&OrderStatus.UNPAIED.equals(order.getStatus())){
 			return false;
 		}

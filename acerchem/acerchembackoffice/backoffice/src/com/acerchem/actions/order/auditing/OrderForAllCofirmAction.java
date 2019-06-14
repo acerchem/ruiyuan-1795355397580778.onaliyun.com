@@ -67,6 +67,7 @@ public class OrderForAllCofirmAction extends AbstractComponentWidgetAdapterAware
 
 	public boolean canPerform(ActionContext<OrderModel> ctx) {
 		OrderModel order = (OrderModel) ctx.getData();
+		if(order==null) return false;
 		if(order.getStatus()!=null&&OrderStatus.CANCELLED.equals(order.getStatus())){
 			return false;
 		}

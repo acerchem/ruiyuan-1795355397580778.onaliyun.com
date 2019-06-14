@@ -73,6 +73,7 @@ public class EmployeeUpdateDeliveryStatusAction extends AbstractComponentWidgetA
 
 	public boolean canPerform(ActionContext<OrderModel> ctx) {
 		OrderModel order = (OrderModel) ctx.getData();
+		if(order==null) return false;
 		if(!order.getEmployeeConfirmDelivery()){
 			return false;
 		}
