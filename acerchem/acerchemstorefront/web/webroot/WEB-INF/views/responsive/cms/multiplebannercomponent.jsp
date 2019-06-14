@@ -6,19 +6,19 @@
 
 	<c:if test='${level eq 81}'>
 		<div class="swiper-slide">
-			<a href="${contextPath}${urlLink}"><img src="${media.url}?x-oss-process=image/resize,m_fixed,h_300,w_1440" /></a>
+			<a href="${contextPath}${urlLink}"><img src="${media.url}?x-oss-process=image/resize,m_fixed,h_325,w_1440" /></a>
 		</div>
 	</c:if>
 
 	<c:if test='${level eq 82}'>
 		<div class="swiper-slide">
-			<a href="${contextPath}${urlLink}"><img src="${media.url}?x-oss-process=image/resize,m_fixed,h_300,w_1440" /></a>
+			<a href="${contextPath}${urlLink}"><img src="${media.url}?x-oss-process=image/resize,m_fixed,h_325,w_1440" /></a>
 		</div>
 	</c:if>
 
 	<c:if test='${level eq 83}'>
 		<div class="swiper-slide">
-			<a href="${contextPath}${urlLink}"><img src="${media.url}?x-oss-process=image/resize,m_fixed,h_300,w_1440" /></a>
+			<a href="${contextPath}${urlLink}"><img src="${media.url}?x-oss-process=image/resize,m_fixed,h_325,w_1440" /></a>
 		</div>
 	</c:if>
 
@@ -71,6 +71,16 @@
 					<span>Documents</span>
 				</div>
 				<img src="${media.url}?x-oss-process=image/resize,m_fixed,h_260,w_253"/>
+			</a>
+		</li>
+	</c:if>
+	<c:if test='${level eq 6}'>
+		<li class="item">
+			<a href="${component.urlLink}">
+				<img src="${media.url}?x-oss-process=image/resize,m_fixed,h_260,w_253"/>
+				<div>
+					<span>${component.name}</span>
+				</div>
 			</a>
 		</li>
 	</c:if>

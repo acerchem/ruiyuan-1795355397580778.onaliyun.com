@@ -54,8 +54,14 @@
 		</div>
 
 		<div class="container">
-			<div class="maxmean">
-				<ul>
+			<div>
+				<ul class="category-media">
+					<cms:pageSlot position="Section6" var="component6">
+						<cms:component component="${component6}" />
+					</cms:pageSlot>
+				</ul>
+				<div style="clear: both;"></div>
+				<ul class="maxmean">
 					<cms:pageSlot position="Section5" var="component">
 						<cms:component component="${component}" />
 					</cms:pageSlot>

@@ -41,10 +41,19 @@ INSERT_UPDATE Media;$contentCV[unique=true];code[unique=true];realfilename;@medi
 ;;/acerchemimages/maxbanner-2.jpg;maxbanner-2.jpg;$siteResource/acerchemimages/maxbanner-2.jpg;image/jpeg;;
 ;;/acerchemimages/maxbanner-3.png;maxbanner-3.png;$siteResource/acerchemimages/maxbanner-3.png;image/png;;
 
-;;maxmean1Preview;maxbanner-bg.jpg;$siteResource/acerchemimages/maxmean1.jpg;image/jpeg;;
-;;maxmean2Preview;maxbanner-bg.jpg;$siteResource/acerchemimages/maxmean2.jpg;image/jpeg;;
-;;maxmean3Preview;maxbanner-bg.jpg;$siteResource/acerchemimages/maxmean3.jpg;image/jpeg;;
+;;maxmean1Preview;1-promotion.jpg;$siteResource/images/banners/homepage/1-promotion.jpg;image/jpeg;;
+;;maxmean2Preview;2-promotion.jpg;$siteResource/images/banners/homepage/2-promotion.jpg;image/jpeg;;
+;;maxmean3Preview;3-promotion.jpg;$siteResource/images/banners/homepage/3-promotion.jpg;image/jpeg;;
 ;;maxmean4Preview;maxbanner-bg.jpg;$siteResource/acerchemimages/maxmean4.jpg;image/jpeg;;
+
+;;/images/banners/homepage/1_Amino_Acids.jpg;1_Amino_Acids.jpg;$siteResource/images/banners/homepage/1-amino-acids.jpg;image/jpeg;;
+;;/images/banners/homepage/2_Protein.jpg;2_Protein.jpg;$siteResource/images/banners/homepage/2_Protein.jpg;image/jpeg;;
+;;/images/banners/homepage/3_Plant_Extract.jpg;3_Plant_Extract.jpg;$siteResource/images/banners/homepage/3_Plant_Extract.jpg;image/jpeg;;
+;;/images/banners/homepage/4_Super_Foods.jpg;4_Super_Foods.jpg;$siteResource/images/banners/homepage/4_Super_Foods.jpg;image/jpeg;;
+;;/images/banners/homepage/5_Vitamin.jpg;5_Vitamin.jpg;$siteResource/images/banners/homepage/5_Vitamin.jpg;image/jpeg;;
+;;/images/banners/homepage/6_Food_Ingredients.png;6_Food_Ingredients.png;$siteResource/images/banners/homepage/6_Food_Ingredients.png;image/png;;
+;;/images/banners/homepage/7_Supplements.jpg;7_Supplements.jpg;$siteResource/images/banners/homepage/7_Supplements.jpg;image/jpeg;;
+;;/images/banners/homepage/8_OEM.jpg;8_OEM.jpg;$siteResource/images/banners/homepage/8_OEM.jpg;image/jpeg;;
 
 # Site Logo Component
 INSERT_UPDATE SimpleBannerComponent;$contentCV[unique=true];uid[unique=true];name;&componentRef;urlLink
@@ -1284,10 +1293,18 @@ INSERT_UPDATE MultipleBannerComponent;$contentCV[unique=true];displayLevel;uid[u
 ;;4;FourBannerComponent;Four Banner Component;FourBannerComponent;4;/Open-Catalogue/Cameras/Film-Cameras/c/576
 ;;5;FiveBannerComponent;FiveBannerComponent;FiveBannerComponent;5;/Open-Catalogue/Data-storage/Flash-Memory/c/571
 
-UPDATE MultipleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
+INSERT_UPDATE MultipleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
 ;;HomepageSwiperOneBannerComponent;/acerchemimages/maxbanner-1.jpg
 ;;HomepageSwiperTwoBannerComponent;/acerchemimages/maxbanner-2.jpg
 ;;HomepageSwiperThreeBannerComponent;/acerchemimages/maxbanner-3.png
+;;HomepageCategoryBanner1Component;/images/banners/homepage/1_Amino_Acids.jpg
+;;HomepageCategoryBanner2Component;/images/banners/homepage/2_Protein.jpg
+;;HomepageCategoryBanner3Component;/images/banners/homepage/3_Plant_Extract.jpg
+;;HomepageCategoryBanner4Component;/images/banners/homepage/4_Super_Foods.jpg
+;;HomepageCategoryBanner5Component;/images/banners/homepage/5_Vitamin.jpg
+;;HomepageCategoryBanner6Component;/images/banners/homepage/6_Food_Ingredients.png
+;;HomepageCategoryBanner7Component;/images/banners/homepage/7_Supplements.jpg
+;;HomepageCategoryBanner8Component;/images/banners/homepage/8_OEM.jpg
 ;;OneBannerComponent;maxmean1Preview
 ;;TwoBannerComponent;maxmean2Preview
 ;;ThreeBannerComponent;maxmean3Preview
@@ -1300,10 +1317,10 @@ INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url
                               ;;AcerContactUsNavLink;Contact Us Nav;/contactUs;AcerContactUsNavLink;AcerContactUsNavLink;;;;
 
 INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);&nodeRef;children(uid,$contentCV)
-                               ;acerchemCategoryNavNode;;Categories;acerchemNavNode;acerchemCategoryNavNode;AboutUsNavNode,DigitalCamerasNavNode,RepositoryNavNode,ContactUsNavNode
+                               ;acerchemCategoryNavNode;;Categories;acerchemNavNode;acerchemCategoryNavNode;AboutUsNavNode,DigitalCamerasNavNode,RepositoryNavNode,AcerContactUsNavNode
                                ;AboutUsNavNode;;About Us;acerchemCategoryNavNode;AboutUsNavNode;;
                                ;RepositoryNavNode;;Repository;acerchemCategoryNavNode;RepositoryNavNode;;
-                               ;ContactUsNavNode;;Contact Us;acerchemCategoryNavNode;ContactUsNavNode;;
+                               ;AcerContactUsNavNode;;Contact Us;acerchemCategoryNavNode;AcerContactUsNavNode;;
 
 INSERT_UPDATE CMSLinkComponent;uid[unique=true];Linkname[lang=en];$contentCV[unique=true]
                               ;AboutUsNavLink;About Us

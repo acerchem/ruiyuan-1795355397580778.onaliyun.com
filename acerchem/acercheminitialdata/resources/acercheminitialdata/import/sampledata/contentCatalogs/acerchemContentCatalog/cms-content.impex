@@ -456,6 +456,7 @@ INSERT_UPDATE ContentSlot;$contentCV[unique=true];uid[unique=true];name;active;c
 ;;Section3Slot-Homepage;Section3 Slot for Homepage;true;AcerchemIndexSearchBoxComponent
 ;;Section4Slot-Homepage;Section4 Slot for Homepage;true;ReturningCustomerLoginComponent
 ;;Section5Slot-Homepage;Section5 Slot for Homepage;true;OneBannerComponent,TwoBannerComponent,ThreeBannerComponent,FourBannerComponent,FiveBannerComponent
+;;Section6Slot-Homepage;Section6 Slot for Homepage;true;HomepageCategoryBanner1Component,HomepageCategoryBanner2Component,HomepageCategoryBanner3Component,HomepageCategoryBanner4Component,HomepageCategoryBanner5Component,HomepageCategoryBanner6Component,HomepageCategoryBanner7Component,HomepageCategoryBanner8Component
 
 
 INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];position[unique=true];page(uid,$contentCV)[unique=true][default='homepage'];contentSlot(uid,$contentCV)[unique=true]
@@ -466,6 +467,7 @@ INSERT_UPDATE ContentSlotForPage;$contentCV[unique=true];uid[unique=true];positi
 ;;Section3-Homepage;Section3;;Section3Slot-Homepage
 ;;Section4-Homepage;Section4;;Section4Slot-Homepage
 ;;Section5-Homepage;Section5;;Section5Slot-Homepage
+;;Section6-Homepage;Section6;;Section6Slot-Homepage
 
 
 ###### acerchem Camera Accessories and Supplies Category Landing Page ######
@@ -823,6 +825,14 @@ INSERT_UPDATE MultipleBannerComponent;$contentCV[unique=true];displayLevel;uid[u
 ;;3;ThreeBannerComponent;Three Banner Component;ThreeBannerComponent;3;/Open-Catalogue/Cameras/Digital-Cameras/c/575
 ;;4;FourBannerComponent;Four Banner Component;FourBannerComponent;4;/Open-Catalogue/Cameras/Film-Cameras/c/571
 ;;5;FiveBannerComponent;FiveBannerComponent;FiveBannerComponent;5;/Open-Catalogue/Data-storage/Flash-Memory/c/575
+;;6;HomepageCategoryBanner1Component;Amino Acids;HomepageCategoryBanner1Component;6;/Open-Catalogue/Data-storage/Flash-Memory/c/571
+;;6;HomepageCategoryBanner2Component;Protein;HomepageCategoryBanner2Component;6;/Open-Catalogue/Data-storage/Flash-Memory/c/571
+;;6;HomepageCategoryBanner3Component;Plant Extract;HomepageCategoryBanner3Component;6;/Open-Catalogue/Data-storage/Flash-Memory/c/571
+;;6;HomepageCategoryBanner4Component;Super Foods;HomepageCategoryBanner4Component;6;/Open-Catalogue/Data-storage/Flash-Memory/c/571
+;;6;HomepageCategoryBanner5Component;Vitamin;HomepageCategoryBanner5Component;6;/Open-Catalogue/Data-storage/Flash-Memory/c/571
+;;6;HomepageCategoryBanner6Component;Food Ingredients;HomepageCategoryBanner6Component;6;/Open-Catalogue/Data-storage/Flash-Memory/c/571
+;;6;HomepageCategoryBanner7Component;Supplements;HomepageCategoryBanner7Component;6;/Open-Catalogue/Data-storage/Flash-Memory/c/571
+;;6;HomepageCategoryBanner8Component;OEM;HomepageCategoryBanner8Component;6;/Open-Catalogue/Data-storage/Flash-Memory/c/571
 
 
 UPDATE MultipleBannerComponent;$contentCV[unique=true];uid[unique=true];$picture[lang=$lang]
@@ -842,10 +852,10 @@ INSERT_UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];name;url
                               ;;AcerContactUsNavLink;Contact Us Nav;/contactUs;AcerContactUsNavLink;AcerContactUsNavLink;;;;
 
 INSERT_UPDATE CMSNavigationNode;uid[unique=true];$contentCV[unique=true];name;parent(uid, $contentCV);&nodeRef;children(uid,$contentCV)
-                               ;acerchemCategoryNavNode;;Categories;acerchemNavNode;acerchemCategoryNavNode;AboutUsNavNode,DigitalCamerasNavNode,RepositoryNavNode,ContactUsNavNode
+                               ;acerchemCategoryNavNode;;Categories;acerchemNavNode;acerchemCategoryNavNode;AboutUsNavNode,DigitalCamerasNavNode,RepositoryNavNode,AcerContactUsNavNode
                                ;AboutUsNavNode;;About Us;acerchemCategoryNavNode;AboutUsNavNode;;
                                ;RepositoryNavNode;;Repository;acerchemCategoryNavNode;RepositoryNavNode;;
-                               ;ContactUsNavNode;;Contact Us;acerchemCategoryNavNode;ContactUsNavNode;;
+                               ;AcerContactUsNavNode;;Contact Us;acerchemCategoryNavNode;AcerContactUsNavNode;;
 
 INSERT_UPDATE CMSLinkComponent;uid[unique=true];Linkname[lang=en];$contentCV[unique=true]
                               ;AboutUsNavLink;About Us
@@ -856,4 +866,4 @@ INSERT_UPDATE CMSLinkComponent;uid[unique=true];Linkname[lang=en];$contentCV[uni
 INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;navigationNode(&nodeRef);item(&linkRef);
                                 ;AboutUsNavNodeEntry;;About Us;AboutUsNavNode;AboutUsNavLink
                                 ;RepositoryNavEntry;;Repository;RepositoryNavNode;RepositoryNavLink
-                                ;ContactUsNavEntry;;Contact Us;ContactUsNavNode;AcerContactUsNavLink
+                                ;ContactUsNavEntry;;Contact Us;AcerContactUsNavNode;AcerContactUsNavLink
