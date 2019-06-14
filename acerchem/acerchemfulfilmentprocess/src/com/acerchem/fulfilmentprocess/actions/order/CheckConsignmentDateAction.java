@@ -16,7 +16,10 @@ import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 import de.hybris.platform.processengine.action.AbstractSimpleDecisionAction;
 import de.hybris.platform.processengine.action.AbstractSimpleDecisionAction.Transition;
 
+import de.hybris.platform.servicelayer.model.ModelService;
 import org.apache.log4j.Logger;
+
+import javax.annotation.Resource;
 
 
 /**
@@ -30,7 +33,9 @@ public class CheckConsignmentDateAction extends AbstractSimpleDecisionAction<Ord
 {
 	private static final Logger LOG = Logger.getLogger(CheckConsignmentDateAction.class);
 
-	
+	@Resource
+	private ModelService modelService;
+
 	@Override
 	public Transition executeAction(final OrderProcessModel process)
 	{
@@ -45,6 +50,8 @@ public class CheckConsignmentDateAction extends AbstractSimpleDecisionAction<Ord
 			if(orderEntry.getConsignmentEntries().size()>0){
 				return Transition.OK;
 			}else{
+				order.setEmployeeConfirmDelivery(false);
+				modelService.save(order);
 				return Transition.NOK;
 			}
 		}
@@ -54,6 +61,8 @@ public class CheckConsignmentDateAction extends AbstractSimpleDecisionAction<Ord
 		}
 		else
 		{
+			order.setEmployeeConfirmDelivery(false);
+			modelService.save(order);
 			return Transition.NOK;
 		}
 	}
