@@ -35,7 +35,7 @@
 				</div>
 
 
-				<img src="${media.url}?x-oss-process=image/resize,m_fixed,h_260,w_253"/>
+				<img height="260px" width="253px" src="${media.url}?x-oss-process=image/resize,m_fixed,h_260,w_253"/>
 			</a>
 		</li>
 	</c:if>
@@ -47,7 +47,7 @@
 					<p>Essential Nutrients for sports</p>
 					<span>View the details</span>
 				</div>
-				<img src="${media.url}?x-oss-process=image/resize,m_fixed,h_260,w_253"/>
+				<img height="260px" width="253px" src="${media.url}?x-oss-process=image/resize,m_fixed,h_260,w_253"/>
 			</a>
 		</li>
 	</c:if>
@@ -59,7 +59,7 @@
 					<p>Factory examination record</p>
 					<span>View the details</span>
 				</div>
-				<img src="${media.url}?x-oss-process=image/resize,m_fixed,h_260,w_253"/>
+				<img height="260px" width="253px" src="${media.url}?x-oss-process=image/resize,m_fixed,h_260,w_253"/>
 			</a>
 		</li>
 	</c:if>
@@ -70,14 +70,14 @@
 					<p>Here are some qualification documents</p>
 					<span>Documents</span>
 				</div>
-				<img src="${media.url}?x-oss-process=image/resize,m_fixed,h_260,w_253"/>
+				<img height="260px" width="253px" src="${media.url}?x-oss-process=image/resize,m_fixed,h_260,w_253"/>
 			</a>
 		</li>
 	</c:if>
 	<c:if test='${level eq 6}'>
 		<li class="item">
 			<a href="${component.urlLink}">
-				<img src="${media.url}?x-oss-process=image/resize,m_fixed,h_260,w_253"/>
+				<img height="260px" width="253px" src="${media.url}?x-oss-process=image/resize,m_fixed,h_260,w_253"/>
 				<div>
 					<span>${component.name}</span>
 				</div>

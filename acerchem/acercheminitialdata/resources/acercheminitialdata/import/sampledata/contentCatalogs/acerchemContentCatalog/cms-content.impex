@@ -866,4 +866,4 @@ INSERT_UPDATE CMSLinkComponent;uid[unique=true];Linkname[lang=en];$contentCV[uni
 INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;navigationNode(&nodeRef);item(&linkRef);
                                 ;AboutUsNavNodeEntry;;About Us;AboutUsNavNode;AboutUsNavLink
                                 ;RepositoryNavEntry;;Repository;RepositoryNavNode;RepositoryNavLink
-                                ;ContactUsNavEntry;;Contact Us;AcerContactUsNavNode;AcerContactUsNavLink
+                                ;AcerContactUsNavEntry;;Contact Us;AcerContactUsNavNode;AcerContactUsNavLink

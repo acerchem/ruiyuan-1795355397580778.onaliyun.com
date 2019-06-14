@@ -72,7 +72,7 @@ background:-webkit-linear-gradient(top,rgba(0,0,0,0) 20%,rgba(0,0,0,.9) 100%);}
 
 .maxmean .textmessge{ color: #333; text-align: center; padding:52% 16% 0 16%; }
 .maxmean .textmessge p{font-weight: normal;}
-.maxmean .textmessge span{display: block; width: 70%; padding:10px 0; margin: 25px auto; background: #0d4170; color: #fff;}
+.maxmean .textmessge span{display: block; width: 70%; padding:10px 0; margin: 0 auto; background: #0d4170; color: #fff;}
 
 .maxmean .formtext{background: #0d4170; padding:20px;}
 .maxmean .formtext div{position: static; font-size: 14px; color: #7da0be}
