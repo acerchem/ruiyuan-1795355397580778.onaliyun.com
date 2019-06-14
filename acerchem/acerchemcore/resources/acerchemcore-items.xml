@@ -1063,6 +1063,30 @@
 						<modifiers read="true" write="true" search="true" />
 						<persistence type="property" />
 					</attribute>
+
+					<attribute qualifier="financialContact" type="Employee">
+						<description>财务联系人</description>
+						<modifiers read="true" write="true" search="true"/>
+						<persistence type="property" />
+					</attribute>
+
+					<attribute qualifier="RDContact" type="Employee">
+						<description>RD联系人</description>
+						<modifiers read="true" write="true" search="true"/>
+						<persistence type="property" />
+					</attribute>
+
+					<attribute qualifier="CEO" type="Employee">
+						<description>CEO</description>
+						<modifiers read="true" write="true" search="true"/>
+						<persistence type="property" />
+					</attribute>
+
+					<attribute qualifier="qualityContact" type="Employee">
+						<description>仓库联系人</description>
+						<modifiers read="true" write="true" search="true"/>
+						<persistence type="property" />
+					</attribute>
 				</attributes>
 			</itemtype>
 
