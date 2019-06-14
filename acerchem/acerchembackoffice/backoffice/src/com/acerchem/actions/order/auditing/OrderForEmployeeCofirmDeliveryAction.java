@@ -50,6 +50,27 @@ public class OrderForEmployeeCofirmDeliveryAction extends AbstractComponentWidge
 		// TODO Auto-generated method stub
 		LOG.info("--------------------start-------------------");
 		OrderModel order = (OrderModel) ctx.getData();
+		ActionResult actionResult = new ActionResult("success");
+		if(order.getDeliveryNo()==null){
+			actionResult.setResultCode("error");
+			actionResult.setResultMessage("devliery No. is null");
+			return actionResult;
+		}
+		if(order.getDeliveryVehicleNumber()==null){
+			actionResult.setResultCode("error");
+			actionResult.setResultMessage("devliery vehicle number is null");
+			return actionResult;
+		}
+		if(order.getDeliveryDriverPhone()==null){
+			actionResult.setResultCode("error");
+			actionResult.setResultMessage("devliery deiver phone is null");
+			return actionResult;
+		}
+		if(order.getDeliveryTime()==null){
+			actionResult.setResultCode("error");
+			actionResult.setResultMessage("devliery time is null");
+			return actionResult;
+		}
 		LOG.info("---------------------------------------"+order.getOrderProcess().iterator().next().getCode());
 		final String eventID = new StringBuilder()//
 		          .append(order.getOrderProcess().iterator().next().getCode())//

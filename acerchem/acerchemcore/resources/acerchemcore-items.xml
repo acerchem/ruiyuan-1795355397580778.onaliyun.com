@@ -1096,6 +1096,26 @@
 						<defaultvalue>Boolean.FALSE</defaultvalue>
 						<modifiers />
 					</attribute>
+					<attribute qualifier="deliveryNo" type="java.lang.String">
+						<description>Delivery No.</description>
+						<persistence type="property" />
+						<modifiers />
+					</attribute>
+					<attribute qualifier="deliveryVehicleNumber" type="java.lang.String">
+						<description>Delivery Vehicle Number</description>
+						<persistence type="property" />
+						<modifiers />
+					</attribute>
+					<attribute qualifier="deliveryDriverPhone" type="java.lang.String">
+						<description>Delivery Driver Phone</description>
+						<persistence type="property" />
+						<modifiers />
+					</attribute>
+					<attribute qualifier="deliveryTime" type="java.util.Date">
+						<description>Delivery Time</description>
+						<persistence type="property" />
+						<modifiers />
+					</attribute>
 					<attribute qualifier="payConfirm" type="java.lang.Boolean">
 						<description>flag for payConfirm</description>
 						<persistence type="property" />

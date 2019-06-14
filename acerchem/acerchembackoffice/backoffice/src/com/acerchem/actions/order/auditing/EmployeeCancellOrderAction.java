@@ -110,7 +110,7 @@ public class EmployeeCancellOrderAction extends AbstractComponentWidgetAdapterAw
 		if(order.getEmployeeConfirm()!=null && order.getEmployeeConfirm()){
 			return false;
 		}
-		if(OrderStatus.CANCELLED.equals(order.getStatus())){
+		if(order.getStatus()!=null&&OrderStatus.CANCELLED.equals(order.getStatus())){
 			return false;
 		}
 		return true;

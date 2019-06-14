@@ -40,7 +40,7 @@ UPDATE CMSLinkComponent;$contentCV[unique=true];uid[unique=true];linkName[lang=$
 ;;ColourFilmsCategoryLink;"others"
 ;;ComponentsCategoryLink;"部件"
 ;;ContactUsLink;"联系我们"
-;;DigitalCamerasCategoryLink;"All"
+;;DigitalCamerasCategoryLink;"Product"
 ;;DigitalCompactsCategoryLink;"紧凑型相机"
 ;;DigitalSLRCategoryLink;"ace"
 ;;DocumentationLink;"文档"
