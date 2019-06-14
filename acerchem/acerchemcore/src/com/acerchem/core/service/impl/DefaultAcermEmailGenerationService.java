@@ -56,7 +56,10 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 	private final static boolean SEND_CUSTOMER_EMAIL_INVOICE = Config.getBoolean("email.sendcustomer.invoice",false);
 	private final static boolean SEND_CUSTOMER_EMAIL_DELIVERY = Config.getBoolean("email.sendcustomer.delivery",false);
 	private final static boolean SEND_CUSTOMER_EMAIL_RELEASE = Config.getBoolean("email.sendcustomer.release",false);
-	
+	private final static boolean SEND_CUSTOMER_EMAIL_EMPLOYEE = Config.getBoolean("email.sendcustomer.employee",false);
+	private final static boolean SEND_CUSTOMER_EMAIL_FIRST = Config.getBoolean("email.sendcustomer.first",false);
+	private final static boolean SEND_CUSTOMER_EMAIL_ONCE = Config.getBoolean("email.sendcustomer.once",false);
+
 	@Override
 	public EmailMessageModel generate(final BusinessProcessModel businessProcessModel,
 			final EmailPageModel emailPageModel) {
@@ -156,7 +159,9 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 						|| "AcerchemProformaInvoiceEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
 						|| "AcerchemDeliveryNoteEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
 						|| "AcerchemReleaseNoteEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
-
+						|| "RemindEmployeeEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
+						|| "FirstRemindEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
+						|| "OnceRemindEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
 				) {
 
 					emailMessageModel = createEmailMessageWithAttachment(subject.toString(), body.toString(),
@@ -389,6 +394,33 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 				toEmails.add(ccEmailOneAddressModel);
 			}
 			
+		}else if (StringUtils.containsIgnoreCase(pdfName, "employee")) {
+			emailBodyMessage = "For employee content, please refer to pdf attachment.";
+			key = "employee";
+			if(!SEND_CUSTOMER_EMAIL_EMPLOYEE){
+				toEmails.remove(toAddress);
+				ccAddress.remove(ccEmailOneAddressModel);
+				toEmails.add(ccEmailOneAddressModel);
+			}
+
+		}else if (StringUtils.containsIgnoreCase(pdfName, "firstRemind")) {
+			emailBodyMessage = "For first remind content, please refer to pdf attachment.";
+			key = "firstRemind";
+			if(!SEND_CUSTOMER_EMAIL_FIRST){
+				toEmails.remove(toAddress);
+				ccAddress.remove(ccEmailOneAddressModel);
+				toEmails.add(ccEmailOneAddressModel);
+			}
+
+		}else if (StringUtils.containsIgnoreCase(pdfName, "onceRemind")) {
+			emailBodyMessage = "For once remind content, please refer to pdf attachment.";
+			key = "onceRemind";
+			if(!SEND_CUSTOMER_EMAIL_ONCE){
+				toEmails.remove(toAddress);
+				ccAddress.remove(ccEmailOneAddressModel);
+				toEmails.add(ccEmailOneAddressModel);
+			}
+
 		}
 		LOG.info("=========="+key+" email generate start=============");
 		// final String tempbody = (String) emailContext.getMessages().get(key);
