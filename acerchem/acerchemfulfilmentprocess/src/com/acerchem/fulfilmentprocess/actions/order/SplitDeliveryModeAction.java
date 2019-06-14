@@ -12,10 +12,14 @@ package com.acerchem.fulfilmentprocess.actions.order;
 
 import de.hybris.platform.core.enums.OrderStatus;
 import de.hybris.platform.core.model.order.OrderModel;
+import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 import de.hybris.platform.processengine.action.AbstractSimpleDecisionAction;
 
 import org.apache.log4j.Logger;
+
+import java.util.Calendar;
+import java.util.Date;
 
 
 /**
@@ -45,6 +49,18 @@ public class SplitDeliveryModeAction extends AbstractSimpleDecisionAction<OrderP
 
 		if (order.getDeliveryMode().getCode().equals(DELIVERY_GROSS))
 		{
+			CustomerModel user = (CustomerModel) order.getUser();
+			//获取当前用户的信用付款天数
+			Integer billingInterval = user.getCreditAccount().getBillingInterval();
+			if (null != billingInterval){
+				//第一次提醒时间
+				order.setFirstTimeRemindDate(getDate(billingInterval,14));
+				//第二次提醒时间
+				order.setOnceAgainRemindDate(getDate(billingInterval,7));
+				//最后催款时间
+				order.setLastTimeRemindDate(getDate(billingInterval,-7));
+			}
+
 			setOrderStatus(order, OrderStatus.DELIVERED);
 			return Transition.OK;
 		}
@@ -53,6 +69,14 @@ public class SplitDeliveryModeAction extends AbstractSimpleDecisionAction<OrderP
 			setOrderStatus(order, OrderStatus.DELIVERED);
 			return Transition.NOK;
 		}
+	}
+
+	private Date getDate(int creditDays,int remindDays){
+		//获取提醒时间
+		int day = creditDays - remindDays;
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.DATE, day);
+		return calendar.getTime();
 	}
 
 }

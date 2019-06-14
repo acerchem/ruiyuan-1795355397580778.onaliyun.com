@@ -46,6 +46,15 @@ UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript
  ;acerchem_Email_Release_Note_Body;"Release Note Body";$emailResource/email-releaseNoteBody.vm
  ;acerchem_Email_Release_Note_Subject;"Release Note Subject";$emailResource/email-releaseNoteSubject.vm
 
+ ;acerchem_Email_Remind_Employee_Invoice_Body;"Remind Employee Invoice Body";$emailResource/email-remindEmployee-invoiceBody.vm
+ ;acerchem_Email_Remind_Employee_Invoice_Subject;"Remind Employee Invoice Subject";$emailResource/email-remindEmployee-invoiceSubject.vm
+
+ ;acerchem_Email_First_Remind_Invoice_Body;"First Remind Invoice Body";$emailResource/email-firstRemind-invoiceBody.vm
+ ;acerchem_Email_First_Remind_Invoice_Subject;"First Remind Employee Invoice Subject";$emailResource/email-firstRemind-invoiceSubject.vm
+
+ ;acerchem_Email_Once_Remind_Invoice_Body;"Once Remind Invoice Body";$emailResource/email-onceRemind-invoiceBody.vm
+ ;acerchem_Email_Once_Remind_Invoice_Subject;"Once Remind Invoice Subject";$emailResource/email-onceRemind-invoiceSubject.vm
+
  ;acerchem_Email_invoicePackingList_BodyA;"InvoicePackingList BodyA";$emailResource/email-invoicePackingListBody-A.vm
  ;acerchem_Email_invoicePackingList_BodyB;"InvoicePackingList BodyB";$emailResource/email-invoicePackingListBody-B.vm
  ;acerchem_Email_invoicePackingList_BodyC;"InvoicePackingList BodyC";$emailResource/email-invoicePackingListBody-C.vm
@@ -100,28 +109,31 @@ UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];fromEmail[lang=$lang];
  ;;OrderPartiallyRefundedEmail;"customerservice@acerchem.com";"Customer Services Team"
  ;;OrderRefundEmail;"customerservice@acerchem.com";"Customer Services Team"
  ;;ReadyForPickupEmail;"customerservice@acerchem.com";"Customer Services Team"
- 
+
  #shaun
   ;;SendEmployeeRegisterEmail;"customerservice@acerchem.com";"Customer Services Team"
  ;;SendOrderConfirmEmail;"customerservice@acerchem.com";"Customer Services Team"
- 
+
  ;;CustomerRegistrationAuditPassEmail;"customerservice@acerchem.com";"Customer Services Team"
  ;;CustomerRegistrationAuditFalureEmail;"customerservice@acerchem.com";"Customer Services Team"
- 
+
  ;;ContractEmail;"customerservice@acerchem.com";"Customer Services Team"
  ;;DeliveryNoteEmail;"customerservice@acerchem.com";"Customer Services Team"
  ;;InvoiceEmail;"customerservice@acerchem.com";"Customer Services Team"
  ;;ProformaInvoiceEmail;"customerservice@acerchem.com";"Customer Services Team"
  ;;ReleaseNoteEmail;"customerservice@acerchem.com";"Customer Services Team"
- 
+
  ;;InvoicePackingListEmailA;"customerservice@acerchem.com";"Customer Services Team"
  ;;InvoicePackingListEmailB;"customerservice@acerchem.com";"Customer Services Team"
  ;;InvoicePackingListEmailC;"customerservice@acerchem.com";"Customer Services Team"
  ;;InvoicePackingListEmailD;"customerservice@acerchem.com";"Customer Services Team"
  ;;InvoicePackingListEmailE;"customerservice@acerchem.com";"Customer Services Team"
  ;;InvoicePackingListEmailF;"customerservice@acerchem.com";"Customer Services Team"
- 
- 
- 
- 
- 
+
+ ;;RemindEmployeeEmail;"customerservice@acerchem.com";"Customer Services Team"
+ ;;FirstRemindEmail;"customerservice@acerchem.com";"Customer Services Team"
+ ;;OnceRemindEmail;"customerservice@acerchem.com";"Customer Services Team"
+
+
+
+

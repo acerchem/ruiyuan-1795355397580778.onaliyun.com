@@ -69,7 +69,9 @@ INSERT_UPDATE EmailPageTemplate;$contentCV[unique=true];uid[unique=true];name;ac
 ;;NotPickedUpConsignmentCanceledEmailTemplate;Not Picked Up Consignment Canceled Email Template;true;notPickedUpConsignmentCanceledEmail;acerchem_Email_NotPickedUpConsignment_Canceled_Subject;acerchem_Email_NotPickedUpConsignment_Canceled_Body;EmailPage
 ;;QuoteBuyerSubmissionEmailTemplate;Quote Buyer Submission Email Template;true;quoteBuyerSubmissionEmail;QuoteBuyerSubmissionEmailTemplate_Subject;QuoteBuyerSubmissionEmailTemplate_Body;EmailPage
 
-
+;;RemindEmployeeEmailTemplate;Remind Employee Email Template;true;RemindEmployeeEmail;acerchem_Email_Remind_Employee_Invoice_Subject;acerchem_Email_Remind_Employee_Invoice_Body;EmailPage
+;;FirstRemindEmailTemplate;First Remind Email Template;true;FirstRemindEmail;acerchem_Email_First_Remind_Invoice_Subject;acerchem_Email_First_Remind_Invoice_Body;EmailPage
+;;OnceRemindEmailTemplate;Once Remind Email Template;true;OnceRemindEmail;acerchem_Email_Once_Remind_Invoice_Subject;acerchem_Email_Once_Remind_Invoice_Body;EmailPage
 
 # Templates for CMS Cockpit Page Edit
 UPDATE EmailPageTemplate;$contentCV[unique=true];uid[unique=true];velocityTemplate[translator=de.hybris.platform.commerceservices.impex.impl.FileLoaderValueTranslator]
@@ -276,7 +278,9 @@ INSERT_UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];name;masterTemp
 ;;NotPickedUpConsignmentCanceledEmail;Not Picked Up Consignment Canceled Email;NotPickedUpConsignmentCanceledEmailTemplate;true;
 ;;quoteBuyerSubmissionEmail;Quote Buyer Submission Email;QuoteBuyerSubmissionEmailTemplate;true;
 
-
+;;RemindEmployeeEmail;Remind EmployeeEmail;RemindEmployeeEmailTemplate;true;
+;;FirstRemindEmail;First Remind Email;FirstRemindEmailTemplate;true;
+;;OnceRemindEmail;Once Remind Email;OnceRemindEmailTemplate;true;
 
 
 
@@ -313,6 +317,16 @@ INSERT_UPDATE RendererTemplate;code[unique=true];contextClass;rendererType(code)
 ;acerchem_Email_Proforma_Invoice_Subject;$emailPackageName.AcerChemInvoiceEmailContext
 ;acerchem_Email_Release_Note_Body;$emailPackageName.AcerChemReleaseNoteEmailContext
 ;acerchem_Email_Release_Note_Subject;$emailPackageName.AcerChemReleaseNoteEmailContext
+
+;acerchem_Email_Remind_Employee_Invoice_Body;$emailPackageName.AcerChemInvoiceEmailContext
+;acerchem_Email_Remind_Employee_Invoice_Subject;$emailPackageName.AcerChemInvoiceEmailContext
+
+;acerchem_Email_First_Remind_Invoice_Body;$emailPackageName.AcerChemInvoiceEmailContext
+;acerchem_Email_First_Remind_Invoice_Subject;$emailPackageName.AcerChemInvoiceEmailContext
+
+;acerchem_Email_Once_Remind_Invoice_Body;$emailPackageName.AcerChemInvoiceEmailContext
+;acerchem_Email_Once_Remind_Invoice_Subject;$emailPackageName.AcerChemInvoiceEmailContext
+
 
 ;acerchem_Email_invoicePackingList_BodyA;$emailPackageName.AcerChemInvoiceEmailContext
 ;acerchem_Email_invoicePackingList_BodyB;$emailPackageName.AcerChemInvoiceEmailContext

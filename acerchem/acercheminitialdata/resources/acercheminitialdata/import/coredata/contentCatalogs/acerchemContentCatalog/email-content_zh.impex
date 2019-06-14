@@ -44,6 +44,16 @@ UPDATE RendererTemplate;code[unique=true];description[lang=$lang];templateScript
  ;acerchem_Email_Release_Note_Body;"Release Note Body";$emailResource/email-releaseNoteBody.vm
  ;acerchem_Email_Release_Note_Subject;"Release Note Subject";$emailResource/email-releaseNoteSubject.vm
 
+ ;acerchem_Email_Remind_Employee_Invoice_Body;"Remind Employee Invoice Body";$emailResource/email-remindEmployee-invoiceBody.vm
+ ;acerchem_Email_Remind_Employee_Invoice_Subject;"Remind Employee Invoice Subject";$emailResource/email-remindEmployee-invoiceSubject.vm
+
+ ;acerchem_Email_First_Remind_Invoice_Body;"First Remind Invoice Body";$emailResource/email-firstRemind-invoiceBody.vm
+ ;acerchem_Email_First_Remind_Invoice_Subject;"First Remind Employee Invoice Subject";$emailResource/email-firstRemind-invoiceSubject.vm
+
+ ;acerchem_Email_Once_Remind_Invoice_Body;"Once Remind Invoice Body";$emailResource/email-onceRemind-invoiceBody.vm
+ ;acerchem_Email_Once_Remind_Invoice_Subject;"Once Remind Invoice Subject";$emailResource/email-onceRemind-invoiceSubject.vm
+
+
  ;acerchem_Email_invoicePackingList_BodyA;"InvoicePackingList BodyA";$emailResource/email-invoicePackingListBody-A.vm
  ;acerchem_Email_invoicePackingList_BodyB;"InvoicePackingList BodyB";$emailResource/email-invoicePackingListBody-B.vm
  ;acerchem_Email_invoicePackingList_BodyC;"InvoicePackingList BodyC";$emailResource/email-invoicePackingListBody-C.vm
@@ -116,3 +126,7 @@ UPDATE EmailPage;$contentCV[unique=true];uid[unique=true];fromEmail[lang=$lang];
  ;;OrderPartiallyRefundedEmail;"customerservice@acerchem.com";"客服团队"
  ;;OrderRefundEmail;"customerservice@acerchem.com";"客服团队"
  ;;ReadyForPickupEmail;"customerservice@acerchem.com";"客服团队"
+
+ ;;RemindEmployeeEmail;"customerservice@acerchem.com";"客服团队"
+ ;;FirstRemindEmail;"customerservice@acerchem.com";"客服团队"
+ ;;OnceRemindEmail;"customerservice@acerchem.com";"客服团队"
