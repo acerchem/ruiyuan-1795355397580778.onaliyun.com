@@ -16,8 +16,11 @@ import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 import de.hybris.platform.processengine.action.AbstractSimpleDecisionAction;
 import com.acerchem.fulfilmentprocess.CheckOrderService;
 
+import de.hybris.platform.servicelayer.model.ModelService;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
+
+import javax.annotation.Resource;
 
 
 /**
@@ -31,6 +34,8 @@ public class WaitForConfirmPayAction extends AbstractSimpleDecisionAction<OrderP
 {
 	private static final Logger LOG = Logger.getLogger(WaitForConfirmPayAction.class);
 
+	@Resource
+	private ModelService modelService;
 
 	@Override
 	public Transition executeAction(final OrderProcessModel process)
@@ -51,6 +56,8 @@ public class WaitForConfirmPayAction extends AbstractSimpleDecisionAction<OrderP
 		}
 		else
 		{
+			order.setEmployeeConfirmPay(false);
+			modelService.save(order);
 			//setOrderStatus(order, OrderStatus.UNPAIED);
 			return Transition.NOK;
 		}

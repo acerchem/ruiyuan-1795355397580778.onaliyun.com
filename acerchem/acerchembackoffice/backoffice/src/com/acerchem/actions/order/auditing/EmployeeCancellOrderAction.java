@@ -107,6 +107,9 @@ public class EmployeeCancellOrderAction extends AbstractComponentWidgetAdapterAw
 
 	public boolean canPerform(ActionContext<OrderModel> ctx) {
 		OrderModel order = (OrderModel) ctx.getData();
+		if(order.getEmployeeConfirm()!=null && order.getEmployeeConfirm()){
+			return false;
+		}
 		if(OrderStatus.CANCELLED.equals(order.getStatus())){
 			return false;
 		}

@@ -128,7 +128,7 @@ UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$la
 ;;BrandsNavNode;"品牌"
 ;;CameraAccessoriesNavNode;"OEM"
 ;;CamerasNavNode;"相机"
-;;DigitalCamerasNavNode;"ALL"
+;;DigitalCamerasNavNode;"Product"
 ;;acerchemNavNode;"电子产品站点"
 ;;FilmCamerasNavNode;"Vitamin"
 ;;FlashMemoryNavNode;"Plant Extract"

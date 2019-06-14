@@ -12,6 +12,7 @@ package com.acerchem.actions.order.auditing;
 
 import javax.annotation.Resource;
 
+import de.hybris.platform.core.enums.OrderStatus;
 import org.apache.log4j.Logger;
 
 import com.hybris.cockpitng.actions.ActionContext;
@@ -66,7 +67,10 @@ public class OrderForAllCofirmAction extends AbstractComponentWidgetAdapterAware
 
 	public boolean canPerform(ActionContext<OrderModel> ctx) {
 		OrderModel order = (OrderModel) ctx.getData();
-		if(order.getEmployeeConfirm()){
+		if(OrderStatus.CANCELLED.equals(order.getStatus())){
+			return false;
+		}
+		if(order.getEmployeeConfirm()!=null&&order.getEmployeeConfirm()){
 			return false;
 		}
 		return true;

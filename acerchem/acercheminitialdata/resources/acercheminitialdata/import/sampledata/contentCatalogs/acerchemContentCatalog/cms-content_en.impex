@@ -130,7 +130,7 @@ UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$la
 ;;BrandsNavNode;"Brands"
 ;;CameraAccessoriesNavNode;"OEM"
 ;;CamerasNavNode;"Cameras"
-;;DigitalCamerasNavNode;"ALL"
+;;DigitalCamerasNavNode;"Product"
 ;;acerchemNavNode;"acerchem Site"
 ;;FilmCamerasNavNode;"Vitamin"
 ;;FlashMemoryNavNode;"Plant Extract"

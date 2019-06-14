@@ -22,5 +22,6 @@
     <outputType>java.lang.Object</outputType>
 
     <iconUri>icons/cancelOrder.png</iconUri>
+    <iconDisabledUri>icons/cancelOrder_disable.png</iconDisabledUri>
 
 </action-definition>

@@ -12,6 +12,8 @@ package com.acerchem.actions.order.auditing;
 
 import javax.annotation.Resource;
 
+import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
+import de.hybris.platform.processengine.action.AbstractSimpleDecisionAction;
 import org.apache.log4j.Logger;
 
 import com.hybris.cockpitng.actions.ActionContext;
@@ -55,7 +57,7 @@ public class EmployeeUpdateDeliveryStatusAction extends AbstractComponentWidgetA
 		final String eventID = new StringBuilder()//
 		          .append(processCode)//
 		          .append("_")//
-		    .append("ConfirmConsignmentStatusActionEvent")//
+		    .append("ConfirmConsignmentActionEvent")//
 		    .toString();
 		final BusinessProcessEvent event = BusinessProcessEvent.builder(eventID)
 			    .withChoice("waitForEmployeeConfirmConsignmentStatus").build();
@@ -71,7 +73,10 @@ public class EmployeeUpdateDeliveryStatusAction extends AbstractComponentWidgetA
 
 	public boolean canPerform(ActionContext<OrderModel> ctx) {
 		OrderModel order = (OrderModel) ctx.getData();
-		if(OrderStatus.DELIVERED.equals(order.getStatus())){
+		if(!order.getEmployeeConfirmDelivery()){
+			return false;
+		}
+		if(!OrderStatus.DELIVERED.equals(order.getStatus())){
 			return false;
 		}
 		return true;

@@ -12,6 +12,7 @@ package com.acerchem.actions.order.auditing;
 
 import javax.annotation.Resource;
 
+import de.hybris.platform.core.enums.OrderStatus;
 import org.apache.log4j.Logger;
 
 import com.hybris.cockpitng.actions.ActionContext;
@@ -53,7 +54,7 @@ public class OrderForEmployeeCofirmDeliveryAction extends AbstractComponentWidge
 		final String eventID = new StringBuilder()//
 		          .append(order.getOrderProcess().iterator().next().getCode())//
 		          .append("_")//
-		    .append("ConfirmConsignmentActionEvent")//
+		    .append("ConfirmConsignmentStatusActionEvent")//
 		    .toString();
 		final BusinessProcessEvent event = BusinessProcessEvent.builder(eventID)
 			    .withChoice("waitForEmployeeConfirmConsignment").build();
@@ -66,7 +67,13 @@ public class OrderForEmployeeCofirmDeliveryAction extends AbstractComponentWidge
 
 	public boolean canPerform(ActionContext<OrderModel> ctx) {
 		OrderModel order = (OrderModel) ctx.getData();
-		if(order.getEmployeeConfirmDelivery()){
+		if(order.getStatus()!=null&&OrderStatus.UNPAIED.equals(order.getStatus())){
+			return false;
+		}
+		if((order.getEmployeeConfirmPay()==null && order.getCustomerConfirmPay()==null) || (order.getEmployeeConfirmPay()!=null && !order.getEmployeeConfirmPay()) && (order.getCustomerConfirmPay()!=null && !order.getCustomerConfirmPay())){
+			return false;
+		}
+		if(order.getEmployeeConfirmDelivery()!=null&&order.getEmployeeConfirmDelivery()){
 			return false;
 		}
 		return true;

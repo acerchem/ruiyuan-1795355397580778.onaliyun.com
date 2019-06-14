@@ -110,7 +110,7 @@
 	
 	<wait id="waitUpdateConsignmentStatus" prependProcessCode="true" then="failed">
 	 	<case event="ConfirmConsignmentStatusActionEvent">
-            <choice id="waitForEmployeeConfirmConsignmentStatus" then="checkConsignmentDate"/>
+            <choice id="waitForEmployeeConfirmConsignment" then="checkConsignmentDate"/>
             <choice id="cancelOrderConfirm" then="cancelOrderStatus"/>
         </case>
 	</wait>
@@ -178,7 +178,7 @@
 	<wait id="waitForAllConsignmentConfirm" prependProcessCode="true" then="failed">
         <case event="ConfirmConsignmentActionEvent">
             <choice id="waitForCustomerConfirmConsignment" then="waitConsignMentConfirm"/>
-            <choice id="waitForEmployeeConfirmConsignment" then="waitConsignMentConfirm"/>
+            <choice id="waitForEmployeeConfirmConsignmentStatus" then="waitConsignMentConfirm"/>
         </case>
     </wait> 
     

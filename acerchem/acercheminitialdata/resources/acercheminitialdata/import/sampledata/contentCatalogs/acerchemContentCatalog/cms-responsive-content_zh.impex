@@ -109,7 +109,7 @@ UPDATE CMSNavigationNode;$contentCV[unique=true];uid[unique=true];title[lang=$la
 ;;BrandLinksNavNode;"MMM"
 ;;BrandsNavNode;"品牌"
 ;;CameraAccessoriesNavNode;"OEM"
-;;DigitalCamerasNavNode;"ALL"
+;;DigitalCamerasNavNode;"Product"
 ;;acerchemNavNode;"电子产品站点"
 ;;FilmCamerasNavNode;"Vitamin"
 ;;FlashMemoryNavNode;"Plant Extract"
