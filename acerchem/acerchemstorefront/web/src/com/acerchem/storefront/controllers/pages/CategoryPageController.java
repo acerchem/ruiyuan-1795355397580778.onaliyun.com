@@ -64,76 +64,76 @@ public class CategoryPageController extends AbstractCategoryPageController {
                            @RequestParam(value = "sort", required = false) final String sortCode, final Model model,
                            final HttpServletRequest request, final HttpServletResponse response) throws UnsupportedEncodingException {
     	
-    	//return performSearchAndGetResultsPage(categoryCode, searchQuery, page, showMode, sortCode, model, request, response);
+   	 return performSearchAndGetResultsPage(categoryCode, searchQuery, page, showMode, sortCode, model, request, response);
 		
-    	final CategoryModel category = getCommerceCategoryService().getCategoryForCode(categoryCode);
-    	List<ProductData> products=new ArrayList<>();
-    	products.addAll(Converters.convertAll(category.getProducts(), productConverter));
-    	if(category.getAllSubcategories()!=null)
-    	{
-    		for(CategoryModel Subcategory:category.getAllSubcategories())
-        	{
-        		products.addAll(Converters.convertAll(Subcategory.getProducts(), productConverter));
-        	}
-    	}
-    	
-		final String redirection = checkRequestUrl(request, response, getCategoryModelUrlResolver().resolve(category));
-		if (StringUtils.isNotEmpty(redirection))
-		{
-			return redirection;
-		}
-
-		final CategoryPageModel categoryPage = getCategoryPage(category);
-
-		final CategorySearchEvaluator categorySearch = new CategorySearchEvaluator(categoryCode, searchQuery, page, showMode,
-				sortCode, categoryPage);
-
-		ProductCategorySearchPageData<SearchStateData, ProductData, CategoryData> searchPageData = null;
-		try
-		{
-			categorySearch.doSearch();
-			searchPageData = categorySearch.getSearchPageData();
-		}
-		catch (final ConversionException e) // NOSONAR
-		{
-			searchPageData = createEmptySearchResult(categoryCode);
-		}
-		catch (final Exception e) // NOSONAR
-		{
-			searchPageData = new ProductCategorySearchPageData<>();
-    		searchPageData.setResults(products);
-			searchPageData.setPagination(createEmptyPagination());
-			searchPageData.setCategoryCode(categoryCode);
-		}
-
-		final boolean showCategoriesOnly = categorySearch.isShowCategoriesOnly();
-
-		storeCmsPageInModel(model, categorySearch.getCategoryPage());
-		storeContinueUrl(request);
-
-		populateModel(model, searchPageData, showMode);
-		model.addAttribute(WebConstants.BREADCRUMBS_KEY, getSearchBreadcrumbBuilder().getBreadcrumbs(categoryCode, searchPageData));
-		model.addAttribute("showCategoriesOnly", Boolean.valueOf(showCategoriesOnly));
-		model.addAttribute("categoryName", category.getName());
-		model.addAttribute("pageType", PageType.CATEGORY.name());
-		model.addAttribute("userLocation", getCustomerLocationService().getUserLocation());
-
-		updatePageTitle(category, model);
-
-		final RequestContextData requestContextData = getRequestContextData(request);
-		requestContextData.setCategory(category);
-		requestContextData.setSearch(searchPageData);
-
-		if (searchQuery != null)
-		{
-			model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_FOLLOW);
-		}
-
-		final String metaKeywords = MetaSanitizerUtil.sanitizeKeywords(category.getKeywords());
-		final String metaDescription = MetaSanitizerUtil.sanitizeDescription(category.getDescription());
-		setUpMetaData(model, metaKeywords, metaDescription);
-
-		return getViewPage(categorySearch.getCategoryPage());
+//    	final CategoryModel category = getCommerceCategoryService().getCategoryForCode(categoryCode);
+//    	List<ProductData> products=new ArrayList<>();
+//    	products.addAll(Converters.convertAll(category.getProducts(), productConverter));
+//    	if(category.getAllSubcategories()!=null)
+//    	{
+//    		for(CategoryModel Subcategory:category.getAllSubcategories())
+//        	{
+//        		products.addAll(Converters.convertAll(Subcategory.getProducts(), productConverter));
+//        	}
+//    	}
+//    	
+//		final String redirection = checkRequestUrl(request, response, getCategoryModelUrlResolver().resolve(category));
+//		if (StringUtils.isNotEmpty(redirection))
+//		{
+//			return redirection;
+//		}
+//
+//		final CategoryPageModel categoryPage = getCategoryPage(category);
+//
+//		final CategorySearchEvaluator categorySearch = new CategorySearchEvaluator(categoryCode, searchQuery, page, showMode,
+//				sortCode, categoryPage);
+//
+//		ProductCategorySearchPageData<SearchStateData, ProductData, CategoryData> searchPageData = null;
+//		try
+//		{
+//			categorySearch.doSearch();
+//			searchPageData = categorySearch.getSearchPageData();
+//		}
+//		catch (final ConversionException e) // NOSONAR
+//		{
+//			searchPageData = createEmptySearchResult(categoryCode);
+//		}
+//		catch (final Exception e) // NOSONAR
+//		{
+//			searchPageData = new ProductCategorySearchPageData<>();
+//    		searchPageData.setResults(products);
+//			searchPageData.setPagination(createEmptyPagination());
+//			searchPageData.setCategoryCode(categoryCode);
+//		}
+//
+//		final boolean showCategoriesOnly = categorySearch.isShowCategoriesOnly();
+//
+//		storeCmsPageInModel(model, categorySearch.getCategoryPage());
+//		storeContinueUrl(request);
+//
+//		populateModel(model, searchPageData, showMode);
+//		model.addAttribute(WebConstants.BREADCRUMBS_KEY, getSearchBreadcrumbBuilder().getBreadcrumbs(categoryCode, searchPageData));
+//		model.addAttribute("showCategoriesOnly", Boolean.valueOf(showCategoriesOnly));
+//		model.addAttribute("categoryName", category.getName());
+//		model.addAttribute("pageType", PageType.CATEGORY.name());
+//		model.addAttribute("userLocation", getCustomerLocationService().getUserLocation());
+//
+//		updatePageTitle(category, model);
+//
+//		final RequestContextData requestContextData = getRequestContextData(request);
+//		requestContextData.setCategory(category);
+//		requestContextData.setSearch(searchPageData);
+//
+//		if (searchQuery != null)
+//		{
+//			model.addAttribute(ThirdPartyConstants.SeoRobots.META_ROBOTS, ThirdPartyConstants.SeoRobots.NOINDEX_FOLLOW);
+//		}
+//
+//		final String metaKeywords = MetaSanitizerUtil.sanitizeKeywords(category.getKeywords());
+//		final String metaDescription = MetaSanitizerUtil.sanitizeDescription(category.getDescription());
+//		setUpMetaData(model, metaKeywords, metaDescription);
+//
+//		return getViewPage(categorySearch.getCategoryPage());
     }
 
     @ResponseBody

@@ -1,9 +1,11 @@
 $(document).ready(function(){
+	
 	inputint()
 
 	var wrap = '.maxon_salesul .slide-wrap';
-	maxon_salesul(wrap)
-
+	try{
+	maxon_salesul(wrap);
+	}catch(){}
 
 
 	// m-prodslide

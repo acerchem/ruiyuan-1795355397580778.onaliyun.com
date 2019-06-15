@@ -9,12 +9,14 @@
 
 <c:if test="${not empty pageData.breadcrumbs}">
 
-		<!-- shuan -->
-	<%-- <div class="facet__name js-facet-name">
+	<div class="facet js-facet">
+
+	<div class="facet__name js-facet-name">
 		<span class="glyphicon facet__arrow"></span>
 		<spring:theme code="search.nav.applied.facets"/>
-	</div> --%>
-			<ul class="m-term-le">
+	</div>
+		<div class="facet__values js-facet-values">
+			<ul class="facet__list">
 				<c:forEach items="${pageData.breadcrumbs}" var="breadcrumb">
 					<li>
 						<c:url value="${breadcrumb.removeQuery.url}" var="removeQueryUrl"/>
@@ -22,5 +24,7 @@
 					</li>
 				</c:forEach>
 			</ul>
-	
+		</div>
+	</div>
+
 </c:if>

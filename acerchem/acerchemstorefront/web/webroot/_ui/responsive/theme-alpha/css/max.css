@@ -458,7 +458,7 @@ a,button , .maxtop .maxmenu li a{
 }
 
 .glyphicon-remove:before{
-    font-size: 0;
+    /* font-size: 0;  
     background: url(maxicon.png);
     width: 30px;
     height: 18px;
@@ -466,7 +466,8 @@ a,button , .maxtop .maxmenu li a{
     background-position: -10px -534px;
     float: right;
     margin-left: 3px;
-    cursor: pointer;
+    cursor: pointer; */
+    color:#ec7205
 }
 
 .global-alerts .alert-danger , .global-alerts .alert-warning , .global-alerts .alert-info{
