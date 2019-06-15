@@ -155,7 +155,6 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 				final StringWriter body = new StringWriter();
 				getRendererService().render(bodyRenderTemplate, emailContext, body);
 
-//				LOG.info("发送邮件模版============================> "+ emailPageTemplateModel.getUid());
 
 				if ("CustomerRegistrationEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())) {
 					LOG.info("=======================generate2 start====================" + new Date());
@@ -163,10 +162,7 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 							emailContext);
 					LOG.info("=======================generate2 end====================" + new Date());
 
-				} else if ("AcerchemContractEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
-						|| "AcerchemProformaInvoiceEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
-						|| "AcerchemDeliveryNoteEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
-						|| "AcerchemReleaseNoteEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
+				} else if ("AcerchemReleaseNoteEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
 				) {
 
 					emailMessageModel = createEmailMessageWithAttachment(subject.toString(), body.toString(),
@@ -194,6 +190,11 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 							emailContext);
 				}else if ("OnceRemindEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())){
 					emailMessageModel = createOnceEmailMessageWithAttachment(subject.toString(), body.toString(),
+							emailContext,businessProcessModel);
+				}else if ("AcerchemContractEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
+						|| "AcerchemProformaInvoiceEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())
+						|| "AcerchemDeliveryNoteEmailTemplate".equalsIgnoreCase(emailPageTemplateModel.getUid())){
+					emailMessageModel = createEmailccEmployeeMessageWithAttachment(subject.toString(), body.toString(),
 							emailContext,businessProcessModel);
 				}
 				else {
@@ -735,10 +736,10 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 					toEmailAdd = financialContact.getUid();
 					displayName = financialContact.getDisplayName();
 				}else {
-					LOG.info("financialContact emailAddress is null , send error");
+					LOG.info("financialContact emailAddress is null , cc send error");
 				}
 			}else {
-				LOG.info("financialContact is null , send error");
+				LOG.info("financialContact is null , cc send error");
 			}
 		}
 
@@ -821,5 +822,137 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 
 		return emailMessage;
 	}
+
+	/**
+	 * 创建邮件并抄送给业务员
+	 * @param emailSubject
+	 * @param emailBody
+	 * @param emailContext
+	 * @param businessProcessModel
+	 * @return
+	 */
+	protected EmailMessageModel createEmailccEmployeeMessageWithAttachment(final String emailSubject, final String emailBody,
+																	 final AbstractEmailContext<BusinessProcessModel> emailContext,BusinessProcessModel businessProcessModel) {
+
+		final List<EmailAddressModel> toEmails = new ArrayList<EmailAddressModel>();
+		final List<EmailAddressModel> ccAddress = new ArrayList<EmailAddressModel>();
+
+		OrderProcessModel orderProcessModel=(OrderProcessModel)businessProcessModel;
+		OrderModel order = orderProcessModel.getOrder();
+		String toEmailAdd = "";
+		String displayName = "";
+		if (null != order){
+			CustomerModel customerModel = (CustomerModel)order.getUser();
+			EmployeeModel employee = customerModel.getEmployee();
+			if (employee != null){
+				if(StringUtils.isNotBlank(employee.getUid())){
+					toEmailAdd = employee.getUid();
+					displayName = employee.getDisplayName();
+				}else {
+					LOG.info("cc employee emailAddress is null , cc send error");
+				}
+			}else {
+				LOG.info("cc employee is null , cc send error");
+			}
+		}
+
+		final EmailAddressModel toAddress = getEmailService().getOrCreateEmailAddressForEmail(emailContext.getToEmail(),
+				"");
+		toEmails.add(toAddress);
+		final EmailAddressModel fromAddress = getEmailService()
+				.getOrCreateEmailAddressForEmail(emailContext.getFromEmail(), emailContext.getFromDisplayName());
+		final EmailAddressModel ccEmailOneAddressModel = getEmailService().getOrCreateEmailAddressForEmail(
+				toEmailAdd,displayName);
+		ccAddress.add(ccEmailOneAddressModel);
+
+		// 获取pdf文件名字，来源于subject
+		final String pdfName = CommonConvertTools.getPdfName(emailSubject);
+
+		final File pdfFile = generatePdfToAttachment(emailBody, pdfName);
+		EmailAttachmentModel attachment = null;
+		FileInputStream fileInputStream = null;
+		DataInputStream dis = null;
+		if (pdfFile.exists()) {
+			try {
+
+				fileInputStream = new FileInputStream(pdfFile);
+
+				dis = new DataInputStream(fileInputStream);
+				attachment = createEmailAttachment(dis, pdfFile.getName(), "application/pdf");
+
+				dis.close();
+				pdfFile.delete();
+			} catch (final Exception e) {
+				e.printStackTrace();
+			}
+
+		}
+		final List<EmailAttachmentModel> attachments = new ArrayList<EmailAttachmentModel>();
+		if (attachment != null) {
+			attachments.add(attachment);
+		}
+
+		// 替换email body message
+		String emailBodyMessage = "For email's content, please refer to the attachment of .pdf file.";
+		String key = "";
+		if (StringUtils.containsIgnoreCase(pdfName, "contract")) {
+			emailBodyMessage = "For contract content, please refer to pdf attachment.";
+			key = "contract";
+			if (!SEND_CUSTOMER_EMAIL_CONTRACT){
+				toEmails.remove(toAddress);
+				ccAddress.remove(ccEmailOneAddressModel);
+				toEmails.add(ccEmailOneAddressModel);
+			}
+
+		}else if (StringUtils.containsIgnoreCase(pdfName, "proforma")) {
+			emailBodyMessage = "For proforma invoice content, please refer to pdf attachment.";
+			key = "proformaInvoice";
+			if(!SEND_CUSTOMER_EMAIL_PROFORMA){
+				toEmails.remove(toAddress);
+				ccAddress.remove(ccEmailOneAddressModel);
+				toEmails.add(ccEmailOneAddressModel);
+		}else if (StringUtils.containsIgnoreCase(pdfName, "delivery")) {
+				emailBodyMessage = "For delivery content, please refer to pdf attachment.";
+				key = "delivery";
+				if(!SEND_CUSTOMER_EMAIL_DELIVERY){
+					toEmails.remove(toAddress);
+					ccAddress.remove(ccEmailOneAddressModel);
+					toEmails.add(ccEmailOneAddressModel);
+				}
+
+			}
+
+		}
+		LOG.info("=========="+key+" email generate start=============");
+		// final String tempbody = (String) emailContext.getMessages().get(key);
+		final String tempbody = CommonConvertTools.getSpecialProperties(key, emailBodyMessage);
+		if (StringUtils.isNotBlank(tempbody)) {
+			emailBodyMessage = tempbody;
+		}
+		emailBodyMessage = CommonConvertTools.getFormatHtml(emailBodyMessage);
+		//
+		final EmailMessageModel emailMessage = getEmailService().createEmailMessage(toEmails, ccAddress,
+				new ArrayList<EmailAddressModel>(), fromAddress, emailContext.getFromEmail(), emailSubject,
+				emailBodyMessage, attachments);
+
+		LOG.info("=========="+key+" email generate end=============");
+		if (dis != null) {
+			try {
+				dis.close();
+			} catch (final IOException ioe) {
+				ioe.printStackTrace();
+			}
+		}
+		if (fileInputStream != null) {
+			try {
+				fileInputStream.close();
+			} catch (final IOException ioe) {
+				ioe.printStackTrace();
+			}
+		}
+
+		return emailMessage;
+	}
+
 
 }
