@@ -23,6 +23,9 @@ INSERT_UPDATE ServicelayerJob;code[unique=true];springId[unique=true]
 INSERT_UPDATE Trigger;cronjob(code)[unique=true];cronExpression
 # Run the cleanUpFraudOrderCronJob at 0:00 on Sunday
 ; cleanUpFraudOrderCronJob; 0 0 0 ? * 1
+; sendRemindEmailJob; 0 0 0 1/1 * ?
+; onceRemindEmailJob; 0 0 0 1/1 * ?
+; firstRemindEmailJob; 0 0 0 1/1 * ?
 
 
 
