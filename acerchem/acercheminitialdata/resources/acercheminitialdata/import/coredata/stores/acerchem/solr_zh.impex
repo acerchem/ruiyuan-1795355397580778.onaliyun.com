@@ -30,6 +30,7 @@ UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=
  ;$solrIndexedType;name;"名称"
  #;$solrIndexedType;price;"价格"
  ;$solrIndexedType;summary;"摘要"
+ ;$solrIndexedType;warehouseCode;"工厂"
 
 # Define the available sorts
 UPDATE SolrSort;indexedType(identifier)[unique=true];code[unique=true];name[lang=$lang]
