@@ -79,9 +79,9 @@ public class SendRemindEmailJob extends AbstractJobPerformable<CronJobModel>
 		final SearchResult<OrderModel> search = flexibleSearchService.search(searchQuery);
 		List<OrderModel> result = search.getResult();
 		if (CollectionUtils.isNotEmpty(result)){
-			for (OrderModel order:result){
-				createProcess(order);
-			}
+			result.stream()
+					.filter(e->e.getPaymentMode().getCode().equals("CreditPayment"))
+					.forEach(e-> createProcess(e));
 		}
 		return new PerformResult(CronJobResult.SUCCESS, CronJobStatus.FINISHED);
 	}

@@ -49,17 +49,20 @@ public class SplitDeliveryModeAction extends AbstractSimpleDecisionAction<OrderP
 
 		if (order.getDeliveryMode().getCode().equals(DELIVERY_GROSS))
 		{
-			CustomerModel user = (CustomerModel) order.getUser();
-			//获取当前用户的信用付款天数
-			Integer billingInterval = user.getCreditAccount().getBillingInterval();
-			if (null != billingInterval){
-				//第一次提醒时间
-				order.setFirstTimeRemindDate(getDate(billingInterval,14));
-				//第二次提醒时间
-				order.setOnceAgainRemindDate(getDate(billingInterval,7));
-				//最后催款时间
-				order.setLastTimeRemindDate(getDate(billingInterval,-7));
-			}
+			if(order.getPaymentMode().getCode().equals("CreditPayment")){
+				CustomerModel user = (CustomerModel) order.getUser();
+				//获取当前用户的信用付款天数
+				Integer billingInterval = user.getCreditAccount().getBillingInterval();
+				if (null != billingInterval){
+					//第一次提醒时间
+					order.setFirstTimeRemindDate(getDate(billingInterval,14));
+					//第二次提醒时间
+					order.setOnceAgainRemindDate(getDate(billingInterval,7));
+					//最后催款时间
+					order.setLastTimeRemindDate(getDate(billingInterval,-7));
+				}
+		}
+
 
 			setOrderStatus(order, OrderStatus.DELIVERED);
 			return Transition.OK;
