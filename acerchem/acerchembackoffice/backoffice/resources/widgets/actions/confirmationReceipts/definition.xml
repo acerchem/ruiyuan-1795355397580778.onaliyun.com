@@ -21,7 +21,7 @@
     <inputType>de.hybris.platform.core.model.order.OrderModel</inputType>
     <outputType>java.lang.Object</outputType>
 
-    <iconUri>icons/receipts.png</iconUri>
-    <iconDisabledUri>icons/receipts_disable.png</iconDisabledUri>
+    <iconUri>icons/receipts1.png</iconUri>
+    <iconDisabledUri>icons/receipts_disable1.png</iconDisabledUri>
 
 </action-definition>

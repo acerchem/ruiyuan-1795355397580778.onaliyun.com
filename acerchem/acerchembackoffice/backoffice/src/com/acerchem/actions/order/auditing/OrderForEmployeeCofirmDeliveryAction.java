@@ -97,6 +97,10 @@ public class OrderForEmployeeCofirmDeliveryAction extends AbstractComponentWidge
 		if(order.getStatus()!=null&&OrderStatus.UNPAIED.equals(order.getStatus())){
 			return false;
 		}
+		if (order.getEmployeeConfirm()!=null && !order.getEmployeeConfirm())
+		{
+			return false;
+		}
 		if(order.getPaymentMode()!=null && !order.getPaymentMode().getCode().equals("CreditPayment"))
 		{
 			if ((order.getEmployeeConfirmPay() == null && order.getCustomerConfirmPay() == null)
