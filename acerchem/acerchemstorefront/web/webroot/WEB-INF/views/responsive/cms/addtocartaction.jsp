@@ -54,7 +54,7 @@
 	</c:choose> --%>
 	
 	<ycommerce:testId code="addToCartButton">
-		<button id="addToCartButton" type="submit" class="btn btn-submit" >
+		<button id="addToCartButton" type="submit" class="btn btn-submit" <c:if test="${!product.purchasable}">disabled</c:if> >
 			Add to Cart
 		</button>
 	</ycommerce:testId>
