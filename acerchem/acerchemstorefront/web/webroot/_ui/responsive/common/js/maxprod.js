@@ -177,9 +177,22 @@ $(document).ready(function(){
 	$('.m-setnum span').on('click',function(){
 		var aclass=$(this).attr('class'),
 			ainp = $(this).siblings('input'),
-			maxnum =parseInt($('.invernum .inventory i').text()),
 			delin = $('.specnum .prod-sum .delintro'),
 			avl = null;
+		
+		if(document.getElementById("inventory")==null){
+	    	//no inventory
+	    	return;
+	    }
+		var maxnum = document.getElementById("inventory").innerHTML;
+		if(maxnum==null){
+			maxnum=100000;
+		}
+		var minnum = document.getElementById("minInventory").innerHTML;
+		if(minnum==null){
+			minnum=1;
+		}
+		
 		switch(aclass){
 			case 'set sub':
 				avl = parseInt(ainp.val());
@@ -188,7 +201,7 @@ $(document).ready(function(){
 					avl=0;					
 				}
 				
-				if(avl<=1){
+				if(avl<=minnum){
 					maxalert('A minimum of one pieceï¼');
 					$(this).css('background-color','#ddd')
 					break;

@@ -172,7 +172,7 @@
 							<c:set var ="a" value="${data.inventory}"/>
 							<c:set var="b" value="${product.netWeight}"/>
 							<c:set var ="Total" value="${a*b}"/>
-								<span class="label-title inventory">Inventory:<i id="inventory">${data.inventory}&nbsp${product.packageType}${data.inventory>1?"s":""}&nbsp/&nbsp${Total}${product.unitName}${Total>1?"s":""}</i> <span class="spot">(<em>${data.inventory}&nbsp${product.packageType}</em>)</span></span>
+								<span class="label-title inventory">Inventory:<i id="inventory">${data.inventory}</i>&nbsp${product.packageType}${data.inventory>1?"s":""}&nbsp/&nbsp${Total}${product.unitName}${Total>1?"s":""} <span class="spot">(<em>${data.inventory}&nbsp${product.packageType}</em>)</span></span>
 								</c:if>
 	                        </c:forEach>
 
@@ -232,7 +232,7 @@
 							<div class="prod-sum">
 								<div class="m-setnum">
 								<span class="set sub">-</span>
-	                              <input type="text" id="pdnum" name="pdnum" class="set" value="1" onkeyup="addNum()">
+	                              <input type="text" id="pdnum" name="pdnum" class="set" value="${product.minOrderQuantity}" onkeyup="addNum()">
 									<span class="set add">+</span>
 
 								</div>
@@ -259,7 +259,7 @@
 
 						</div>
 							<!-- Minimum: ${product.minOrderQuantity} ${product.packageType} ${product.minOrderQuantity>1?"s":""} -->
-							MoQ: ${product.minOrderQuantity}&nbsp;${product.packageType} ${product.minOrderQuantity>1?"s":""}
+							MoQ: <i id="minInventory">${product.minOrderQuantity}</i>&nbsp;${product.packageType} ${product.minOrderQuantity>1?"s":""}
 
 
 							<cms:pageSlot position="AddToCart" var="component" >
@@ -535,18 +535,30 @@
     
 function addNum()
 {
+    if(document.getElementById("inventory")==null){
+    	//no inventory
+    	return;
+    }	
 	var maxnum = document.getElementById("inventory").innerHTML;
-	var index=maxnum.indexOf('&nbsp;');	
-	if(index>0){
-		maxnum=maxnum.substr(0,index);
-		var avl = parseInt(document.getElementById('pdnum').value);
-		if(avl>maxnum){
-			maxalert("Cannot be larger than largest inventory!");
-			$('#pdnum').val(maxnum);
-			$('#qty').val(maxnum); 
-		}else{
-			$('#qty').val(avl); 
-		}
+	if(maxnum==null){
+		maxnum=100000;
+	}
+	var minnum = document.getElementById("minInventory").innerHTML;
+	if(minnum==null){
+		minnum=1;
+	}
+	var avl = parseInt(document.getElementById('pdnum').value);
+	if(avl>maxnum){
+		maxalert("Cannot be larger than largest inventory!");
+		$('#pdnum').val(maxnum);
+		$('#qty').val(maxnum); 
+	}else if(avl<minnum){
+		maxalert("Cannot be less than less inventory!");
+		$('#pdnum').val(minnum);
+		$('#qty').val(minnum); 
+	}
+	else{
+		$('#qty').val(avl); 
 	}
 }
 </script>
