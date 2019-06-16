@@ -453,16 +453,24 @@
 										</div>
 										<div class="into">
 											<em>${data.name}</em>
-										</div>	
+										</div>
 									</label>
+
 								</li>
 
 								</c:forEach>
-								
+                                <c:if test="${isOption}">
+									<li style="width: 54%;display:inline-block;border:0px; ">
+										<div style="background-color: #f2dede; margin:-24% -1%;position: relative;left:95%;padding:6px;font-size:15px;color: black">
+											Unfortunately there is insufficient credit limit for your account,
+											please contact our customer service for further follow-up.
+										</div>
+									</li>
+                                </c:if>
 							    </c:if>
 							</ul>
-							
-				   </div>
+
+                </div>
 				<!-- end -->
 
 				<!-- Final Review -->
