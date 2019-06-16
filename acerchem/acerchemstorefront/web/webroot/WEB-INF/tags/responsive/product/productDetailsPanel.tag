@@ -232,7 +232,7 @@
 							<div class="prod-sum">
 								<div class="m-setnum">
 								<span class="set sub">-</span>
-	                              <input type="text" id="pdnum" name="pdnum" class="set" value="${product.minOrderQuantity}" onkeyup="addNum()">
+	                              <input type="text" id="pdnum" name="pdnum" class="set" value="${product.minOrderQuantity}" onkeyup="addNum()" <c:if test="${!product.purchasable}">readonly="readonly"</c:if>>
 									<span class="set add">+</span>
 
 								</div>

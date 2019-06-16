@@ -1,11 +1,43 @@
+.product-facet-box{
+	padding: 35px 30px 30px 30px;
+}
+
+.product-facet-box .block-title strong {
+	font-family: Montserrat-Medium, 'sans-serif';
+	font-size: 23px;
+	line-height: 28px;
+	width: 100%;
+	display: inline-block;
+	padding-bottom: 18px;
+	text-transform: capitalize;
+}
+
+.product-facet-box a{
+	font-size: 13px;
+	font-weight:normal;
+	color:#153a59;
+}
+
+.fa-angle-down:before {
+	//content: "\f107";
+}
+
+.product-facet-box .block-title{
+	font-size: 18px;
+	font-weight: bold;
+	color: #154259;
+	margin-left: -5px;
+	border-bottom: 1px solid #d2d0cd;
+}
+
 .product__facet {
   margin: 0;
-  border-right: 1px solid @border-color-3;
+  //border-right: 1px solid @border-color-3;
   padding: 0;
 }
 
 .product__facet .facet {
-  padding: 45px 30px 30px 30px;
+  padding: 15px 10px 15px 10px;
   border-bottom: 1px solid @border-color-3;
   .clearfix;
 
@@ -14,7 +46,7 @@
   }
 
   .facet__name {
-	font-size: 18px;
+	font-size: 14px;
 	font-weight: bold;
 	color: @headline-color;
 	margin-left: -5px;
@@ -37,8 +69,8 @@
 
 	.facet__list__mark {
 	  display: inline-block;
-	  width: 20px;
-	  height: 20px;
+	  width: 15px;
+	  height: 15px;
 	  padding: 0;
 	  margin-right:  (@grid-gutter-width/2);
 	  border: 1px solid @input-border-color;
