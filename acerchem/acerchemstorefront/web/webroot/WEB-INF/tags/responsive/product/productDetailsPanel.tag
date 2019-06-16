@@ -536,13 +536,17 @@
 function addNum()
 {
 	var maxnum = document.getElementById("inventory").innerHTML;
-	var avl = parseInt(document.getElementById('pdnum').value);
-	if(avl>maxnum){
-		maxalert("Cannot be larger than largest inventory!");
-		$('#pdnum').val(maxnum);
-		$('#qty').val(maxnum); 
-	}else{
-		$('#qty').val(avl); 
+	var index=maxnum.indexOf('&nbsp;');	
+	if(index>0){
+		maxnum=maxnum.substr(0,index);
+		var avl = parseInt(document.getElementById('pdnum').value);
+		if(avl>maxnum){
+			maxalert("Cannot be larger than largest inventory!");
+			$('#pdnum').val(maxnum);
+			$('#qty').val(maxnum); 
+		}else{
+			$('#qty').val(avl); 
+		}
 	}
 }
 </script>
