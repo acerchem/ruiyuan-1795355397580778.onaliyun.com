@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 import org.apache.solr.common.SolrException;
 import org.springframework.beans.factory.annotation.Required;
 
-import java.util.Collections;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -79,6 +79,10 @@ public class SolrSearchResponsePopulator<FACET_SEARCH_CONFIG_TYPE, INDEXED_TYPE_
                 Set<String> codeSet = warehouseModelSet.stream().map(WarehouseModel::getCode).collect(Collectors.toSet());
                 searchQuery.addFilterQuery("warehouseCode_string_mv", SearchQuery.Operator.AND, codeSet);
                 LOG.info("search paramallPromotions : " + searchQuery.getUserQuery() + ":" + codeSet.toString());
+            } else {
+                Set<String> codeSet = new HashSet<>();
+                codeSet.add("nil");
+                searchQuery.addFilterQuery("warehouseCode_string_mv", SearchQuery.Operator.AND, codeSet);
             }
             final SearchResult searchResult = getSolrFacetSearchService().search(searchQuery);
             if (searchResult instanceof SolrSearchResult)
