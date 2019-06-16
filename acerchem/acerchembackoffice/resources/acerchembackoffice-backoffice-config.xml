@@ -135,6 +135,19 @@
 			</na:notifications>
 		</na:notification-area>
 	</context>
+
+	<context component="notification-area" source="com.acerchem.actions.order.auditing.OrderReceiptsCredit" merge-by="source">
+		<na:notification-area>
+			<na:notifications eventType="MissCreditPoints" level="FAILURE">
+				<na:message>com.acerchem.actions.order.auditing.OrderReceiptsCredit.MissCreditPoints</na:message>
+				<na:references linksEnabled="false"/>
+			</na:notifications>
+			<na:notifications eventType="SUCCESS" level="SUCCESS">
+				<na:message>com.acerchem.actions.order.auditing.OrderReceiptsCredit.Success</na:message>
+				<na:references linksEnabled="false"/>
+			</na:notifications>
+		</na:notification-area>
+	</context>
 	
     <context merge-by="type" parent="AbstractOrder" type="Order" component="editor-area">
         <editorArea:editorArea xmlns:editorArea="http://www.hybris.com/cockpitng/component/editorArea">

@@ -67,6 +67,8 @@ public class ProcessingofreceiptsAction extends AbstractSimpleDecisionAction<Ord
 						modelService.save(order);
 						modelService.save(customerCreditAccount);
 					}
+				}else{
+					return Transition.NOK;
 				}
 			}
 			return Transition.OK;
