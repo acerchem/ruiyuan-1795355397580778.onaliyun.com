@@ -51,7 +51,7 @@ public class OrderReceiptsCreditAction extends AbstractComponentWidgetAdapterAwa
 		order.setEmployeeConfirmDelivery(true);
 		this.modelService.save(order);
 		LOG.info("--------------------end-------------------"+order.getEmployeeConfirmDelivery());
-		NotificationUtils.notifyUser(this.getNotificationSource(ctx), "SUCCESS", NotificationEvent.Level.FAILURE, new Object[0]);
+		NotificationUtils.notifyUser(this.getNotificationSource(ctx), "SUCCESS", NotificationEvent.Level.SUCCESS, new Object[0]);
 		return actionResult;
 	}
 
