@@ -63,11 +63,27 @@
 		<property name="resource" value="classpath:/acerchemfulfilmentprocess/process/return-process.xml"/>
 	</bean>
 
+	<bean id="serverRemindProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/acerchemfulfilmentprocess/process/order-serverRemind-process.xml"/>
+	</bean>
+
+
+	<bean id="firstRemindProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/acerchemfulfilmentprocess/process/order-firstRemind-process.xml"/>
+	</bean>
+
+
+	<bean id="onceRemindProcessDefinitionResource" class="de.hybris.platform.processengine.definition.ProcessDefinitionResource" >
+		<property name="resource" value="classpath:/acerchemfulfilmentprocess/process/order-onceRemind-process.xml"/>
+	</bean>
 	<!-- Process Actions -->
 
 	<import resource="/acerchemfulfilmentprocess/process/order-process-spring.xml"/>
 	<import resource="/acerchemfulfilmentprocess/process/consignment-process-spring.xml"/>
 	<import resource="/acerchemfulfilmentprocess/process/return-process-spring.xml"/>
+	<import resource="/acerchemfulfilmentprocess/process/order-serverRemind-spring.xml"/>
+	<import resource="/acerchemfulfilmentprocess/process/order-firstRemind-spring.xml"/>
+	<import resource="/acerchemfulfilmentprocess/process/order-onceRemind-spring.xml"/>
 
 	<!-- Order Check Service -->
 	<!-- Performs some basic validation for the order as part of the first stage of the process. -->
@@ -117,6 +133,27 @@
 	<!--  Jobs -->
 	
 	<bean id="cleanUpFraudOrderJob" class="com.acerchem.fulfilmentprocess.jobs.CleanUpFraudOrderJob"  >
+		<property name="modelService" ref="modelService"/>
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+		<property name="sessionService" ref="sessionService"/>
+	</bean>
+
+	<bean id="sendRemindEmailJob" class="com.acerchem.fulfilmentprocess.jobs.SendRemindEmailJob"  >
+		<property name="modelService" ref="modelService"/>
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+		<property name="sessionService" ref="sessionService"/>
+	</bean>
+
+	<bean id="onceRemindEmailJob" class="com.acerchem.fulfilmentprocess.jobs.OnceRemindEmailJob"  >
+		<property name="modelService" ref="modelService"/>
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+		<property name="businessProcessService" ref="businessProcessService"/>
+		<property name="sessionService" ref="sessionService"/>
+	</bean>
+
+	<bean id="firstRemindEmailJob" class="com.acerchem.fulfilmentprocess.jobs.FirstRemindEmailJob"  >
 		<property name="modelService" ref="modelService"/>
 		<property name="flexibleSearchService" ref="flexibleSearchService"/>
 		<property name="businessProcessService" ref="businessProcessService"/>

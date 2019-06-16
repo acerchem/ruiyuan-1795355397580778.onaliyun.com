@@ -401,8 +401,17 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
           
             cartData.setSubTotal(createPrice(cartModel, subTotal));
             cartData.setTotalPrice(createPrice(cartModel, total));
-            
-            
+
+            //信用支付是否可选
+            Boolean isOption = false;
+            CustomerCreditAccountModel customerCreditAccountModel = defaultCustomerCreditAccountService.getCustomerCreditAccount();
+            if (customerCreditAccountModel!=null && customerCreditAccountModel.getCreaditRemainedAmount()!=null){
+                double creaditReaminAmount = customerCreditAccountModel.getCreaditRemainedAmount().doubleValue();
+                if(total > creaditReaminAmount){
+                    isOption = true;
+                }
+            }
+            cartData.setCreditIsOption(isOption);
         }
         return cartData;
     }

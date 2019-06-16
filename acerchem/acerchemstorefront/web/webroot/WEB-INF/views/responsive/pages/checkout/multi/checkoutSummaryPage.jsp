@@ -18,6 +18,7 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
  <c:set var="deliveryAddress" value="${cartData.deliveryAddress}"/>
 <c:set var="deliveryMode" value="${cartData.deliveryMode}"/>
+<c:set var="isOption" value="${cartData.creditIsOption}"/>
 
 <template:page pageTitle="${pageTitle}" hideHeaderLinks="true">
 
@@ -300,47 +301,52 @@
 						
 							    <c:forEach items="${paymentInfos}" var="data" >
 									<c:if test="${not empty paymentModeData}">
-										<c:if test="${data.code==paymentModeData.code}">
-										<li class="now">
-											<label>
-										<div class="into int">
-											<input type="radio" name="paymentmethod"  checked="checked" value="${data.code}">
-										</div>
-										<div class="into">
-											<em>${data.name}</em>
-										</div>	
-									</label>
-									</li>
-									</c:if>
-									
+									<%-- <c:if test="${data.code==paymentModeData.code}">
+                                    <li class="now">
+                                        <label>
+                                    <div class="into int">
+                                        <input type="radio" name="paymentmethod"  checked="checked" value="${data.code}">
+                                    </div>
+                                    <div class="into">
+                                        <em>${data.name}</em>
+                                    </div>
+                                </label>
+                                </li>
+                                </c:if> --%>
 									<c:if test="${data.code!=paymentModeData.code}">
 										<li class="now">
 											<label>
 										<div class="into int">
-											<input type="radio" name="paymentmethod"   value="${data.code}">
+											<c:choose>
+												<c:when test="${'CreditPayment' == data.code}">
+													<input type="radio" name="paymentmethod"   value="${data.code}" <c:if test="${isOption}">disabled</c:if>/>
+												</c:when>
+												<c:otherwise>
+													<input type="radio" name="paymentmethod"   value="${data.code}">
+												</c:otherwise>
+											</c:choose>
 										</div>
 										<div class="into">
 											<em>${data.name}</em>
-										</div>	
+										</div>
 									</label>
 									</li>
 									</c:if>
-									
-									  </c:if>
-									  
-									  <c:if test="${empty paymentModeData}">
-									      	<li class="now">
-											<label>
-												<div class="into int">
-													<input type="radio" name="paymentmethod" value="${data.code}">
-												</div>
-												<div class="into">
-													<em>${data.name}</em>
-												</div>	
-											</label>
-											</li>
-									  </c:if>
- 						
+								</c:if>
+
+                                <%-- <c:if test="${empty paymentModeData}">
+                                         <li class="now">
+                                       <label>
+                                           <div class="into int">
+                                               <input type="radio" name="paymentmethod" value="${data.code}">
+                                           </div>
+                                           <div class="into">
+                                               <em>${data.name}</em>
+                                           </div>
+                                       </label>
+                                       </li>
+                                 </c:if>--%>
+
 							</c:forEach>
 							</ul>
 							

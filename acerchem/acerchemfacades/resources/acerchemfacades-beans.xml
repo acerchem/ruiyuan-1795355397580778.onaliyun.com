@@ -410,4 +410,7 @@
 		<property name="lineOfResedueCredit" type="java.lang.Double"/>
 	</bean>
 
+	<bean class="de.hybris.platform.commercefacades.order.data.CartData">
+		<property name="creditIsOption" type="Boolean"></property>
+	</bean>
 </beans>
