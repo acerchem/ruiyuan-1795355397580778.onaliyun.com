@@ -34,7 +34,7 @@
 				</c:if>
 				</span>
 				
-				<span class="num">${quantity}</span>
+				<span class="num" style="padding:0 4%">${quantity}</span>
 				</div>
 			</div>
     	</li>
