@@ -165,6 +165,7 @@
 	<bean id="checkConsignmentDateAction" class="com.acerchem.fulfilmentprocess.actions.order.CheckConsignmentDateAction"  parent="abstractAction"/>
 	<bean id="chooseInvoiceTempAction" class="com.acerchem.fulfilmentprocess.actions.order.ChooseInvoiceTempAction"  parent="abstractAction"/>
 	<bean id="cancelOrderStatusAction" class="com.acerchem.fulfilmentprocess.actions.order.CancelOrderStatusAction"  parent="abstractAction"/>
-	
+	<bean id="checkIfNeedCreditReceiptsAction" class="com.acerchem.fulfilmentprocess.actions.order.CheckIfNeedCreditReceiptsAction"  parent="abstractAction"/>
+	<bean id="processingofreceiptsAction" class="com.acerchem.fulfilmentprocess.actions.order.ProcessingofreceiptsAction"  parent="abstractAction"/>
 	
 </beans>

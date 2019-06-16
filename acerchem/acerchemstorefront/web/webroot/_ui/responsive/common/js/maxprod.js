@@ -5,7 +5,7 @@ $(document).ready(function(){
 	var wrap = '.maxon_salesul .slide-wrap';
 	try{
 	maxon_salesul(wrap);
-	}catch(){}
+	}catch(e){}
 
 
 	// m-prodslide

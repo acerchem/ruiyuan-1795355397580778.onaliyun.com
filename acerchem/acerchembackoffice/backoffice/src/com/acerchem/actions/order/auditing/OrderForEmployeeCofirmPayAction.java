@@ -14,6 +14,7 @@ import javax.annotation.Resource;
 
 import com.hybris.backoffice.widgets.notificationarea.event.NotificationEvent;
 import com.hybris.backoffice.widgets.notificationarea.event.NotificationUtils;
+import de.hybris.platform.core.enums.OrderStatus;
 import org.apache.log4j.Logger;
 
 import com.hybris.cockpitng.actions.ActionContext;
@@ -86,6 +87,9 @@ public class OrderForEmployeeCofirmPayAction extends AbstractComponentWidgetAdap
 		OrderModel order = (OrderModel) ctx.getData();
 		if(order==null) return false;
 		if(order.getEmployeeConfirm()==null || !order.getEmployeeConfirm()){
+			return false;
+		}
+		if(order.getPaymentMode()!=null && order.getPaymentMode().getCode().equals("CreditPayment")){
 			return false;
 		}
 		if((order.getEmployeeConfirmPay()!=null && order.getEmployeeConfirmPay())

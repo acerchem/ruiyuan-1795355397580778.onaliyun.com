@@ -231,7 +231,23 @@
 		<transition name="OK" to="success"/>
 		<transition name="NOK" to="error"/>
 	</action>
-	
+
+	<action id="checkIfNeedCreditReceipts" bean="checkIfNeedCreditReceiptsAction">
+		<transition name="OK" to="waitForCreditReceiptsConfirm"/>
+		<transition name="NOK" to="success"/>
+	</action>
+
+	<wait id="waitForCreditReceiptsConfirm" prependProcessCode="true" then="failed">
+		<case event="waitForCreditReceiptsConfirmEvent">
+			<choice id="waitForEmCreditReceiptsConfirm" then="processingofreceipts"/>
+		</case>
+	</wait>
+
+	<action id="processingofreceipts" bean="processingofreceiptsAction">
+		<transition name="OK" to="success"/>
+		<transition name="NOK" to="error"/>
+	</action>
+
 	<end id="error" state="ERROR">All went wrong.</end>
 	<end id="failed" state="FAILED">Order not placed.</end>
 	<end id="success" state="SUCCEEDED">Order placed.</end>

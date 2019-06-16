@@ -55,19 +55,20 @@
 			<editorArea:tab name="hmc.payment_and_delivery" merge-mode="Remove">
 			</editorArea:tab>
 			<editorArea:tab name="hmc.payment">
-				<editorArea:section name="hmc.status">
-					<editorArea:attribute qualifier="exportStatus" merge-mode="Remove"/>
-					<editorArea:attribute qualifier="statusInfo" merge-mode="Remove"/>
-				</editorArea:section>
 				<editorArea:section name="hmc.payment">
+					<editorArea:attribute qualifier="paymentMode"/>
+					<editorArea:attribute qualifier="creditPointsPaid"/>
 					<editorArea:attribute qualifier="paymentAddress" merge-mode="Remove"/>
 					<editorArea:attribute qualifier="paymentStatus" merge-mode="Remove"/>
 					<editorArea:attribute qualifier="paymentInfo" merge-mode="Remove"/>
 				</editorArea:section>
+				<editorArea:section name="hmc.status">
+					<editorArea:attribute qualifier="exportStatus" merge-mode="Remove"/>
+					<editorArea:attribute qualifier="statusInfo" merge-mode="Remove"/>
+				</editorArea:section>
 				<editorArea:section name="hmc.deliveryadministration" merge-mode="Remove">
 					<editorArea:attribute qualifier="deliveryStatus"/>
 				</editorArea:section>
-				
 				<editorArea:section name="hmc.common" position="0">
 					<editorArea:attribute qualifier="currency"/>
 					<editorArea:attribute qualifier="paymentCost"/>
@@ -673,7 +674,7 @@
 				<explorer-tree:type-node code="ViewType" id="hmc_typenode_viewtype" merge-mode="Remove"/>
 				<explorer-tree:type-node code="SearchRestriction" id="hmc_typenode_searchrestriction" merge-mode="Remove"/>
 				<explorer-tree:type-node code="SystemSetupAudit" id="hmc_typenode_systemsetupaudit" merge-mode="Remove"/>
-				<explorer-tree:navigation-node id="hmc.solrfacetsearch" merge-mode="Remove">
+				<explorer-tree:navigation-node id="hmc.solrfacetsearch">
 					<explorer-tree:type-node code="SolrFacetSearchConfig" id="hmc_type_tree_solrfacetsearchconfig" />
 					<explorer-tree:type-node code="SolrIndexedType" id="hmc_type_tree_solrindexedtype" />
 					<explorer-tree:type-node code="SolrValueRangeSet" id="hmc_type_tree_solrvaluerangeset" />

@@ -52,8 +52,6 @@ public class WaitConsignMentConfirmAction extends AbstractSimpleDecisionAction<O
 				setOrderStatus(order, OrderStatus.UNPAIED);
 			}else{
 				setOrderStatus(order, OrderStatus.COMPLETED);
-				
-				
 			}
 			
 			order.setOrderFinishedDate(getCurrentTime());
