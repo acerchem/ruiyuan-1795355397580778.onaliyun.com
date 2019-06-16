@@ -43,7 +43,7 @@
 	<ycommerce:testId code="addToCartPopup" >
 		<div class="g-cartable maxfixed maxfixed-bg" style="display: block;">
 	<div class="indwrap">
-		<div class="cart-total">
+		<div class="cart-total" style="width: 50%;">
 			<div class="title">Shopping Cart</div>
 			<form action="">
 				<div class="maxfixed-over  product-table">
@@ -91,7 +91,7 @@
 				
 				<!-- 判断优惠 end-->
 				<div class="list">
-					<div class="item-row">
+					<div class="item-row" style="padding:0 4%">
 							
 		            <c:choose>
 		                <c:when test="${modifications ne null}">
