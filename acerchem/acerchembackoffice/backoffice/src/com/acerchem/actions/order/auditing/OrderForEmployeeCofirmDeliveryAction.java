@@ -12,7 +12,11 @@ package com.acerchem.actions.order.auditing;
 
 import javax.annotation.Resource;
 
+import com.hybris.backoffice.widgets.notificationarea.event.NotificationEvent;
+import com.hybris.backoffice.widgets.notificationarea.event.NotificationUtils;
 import de.hybris.platform.core.enums.OrderStatus;
+import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
+import de.hybris.platform.processengine.action.AbstractSimpleDecisionAction;
 import org.apache.log4j.Logger;
 
 import com.hybris.cockpitng.actions.ActionContext;
@@ -24,6 +28,9 @@ import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.processengine.BusinessProcessEvent;
 import de.hybris.platform.processengine.BusinessProcessService;
 import de.hybris.platform.servicelayer.model.ModelService;
+
+import java.util.EnumSet;
+
 
 public class OrderForEmployeeCofirmDeliveryAction extends AbstractComponentWidgetAdapterAware implements CockpitAction<OrderModel, Object>
 {
@@ -50,6 +57,18 @@ public class OrderForEmployeeCofirmDeliveryAction extends AbstractComponentWidge
 		// TODO Auto-generated method stub
 		LOG.info("--------------------start-------------------");
 		OrderModel order = (OrderModel) ctx.getData();
+		Boolean needConsignment = false;
+		for(AbstractOrderEntryModel orderEntry :order.getEntries()){
+			if(orderEntry.getConsignmentEntries().size()<1){
+				needConsignment = true;
+			}
+		}
+		if(needConsignment){
+			ActionResult actionResult = new ActionResult("success");
+			actionResult.setStatusFlags(EnumSet.of(ActionResult.StatusFlag.OBJECT_MODIFIED));
+			NotificationUtils.notifyUser(this.getNotificationSource(ctx), "MissConsignment", NotificationEvent.Level.FAILURE, new Object[0]);
+			return actionResult;
+		}
 		ActionResult actionResult = new ActionResult("success");
 		LOG.info("---------------------------------------"+order.getOrderProcess().iterator().next().getCode());
 		final String eventID = new StringBuilder()//
@@ -63,7 +82,13 @@ public class OrderForEmployeeCofirmDeliveryAction extends AbstractComponentWidge
 			  order.setEmployeeConfirmDelivery(true);
 			  this.modelService.save(order);
 		LOG.info("--------------------end-------------------"+order.getEmployeeConfirmDelivery());
-		return new ActionResult("success");
+		actionResult.setStatusFlags(EnumSet.of(ActionResult.StatusFlag.OBJECT_MODIFIED));
+		NotificationUtils.notifyUser(this.getNotificationSource(ctx), "SUCCESS", NotificationEvent.Level.SUCCESS, new Object[0]);
+		return actionResult;
+	}
+
+	protected String getNotificationSource(ActionContext<?> actionContext) {
+		return NotificationUtils.getWidgetNotificationSource(actionContext);
 	}
 
 	public boolean canPerform(ActionContext<OrderModel> ctx) {

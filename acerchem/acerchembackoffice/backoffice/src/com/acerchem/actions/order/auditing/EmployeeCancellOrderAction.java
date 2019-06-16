@@ -28,6 +28,9 @@ import de.hybris.platform.processengine.BusinessProcessService;
 import de.hybris.platform.servicelayer.event.EventService;
 import de.hybris.platform.servicelayer.model.ModelService;
 
+import java.util.EnumSet;
+
+
 public class EmployeeCancellOrderAction extends AbstractComponentWidgetAdapterAware implements CockpitAction<OrderModel, Object>
 {
 	private static final Logger LOG = Logger.getLogger(EmployeeCancellOrderAction.class);
@@ -92,11 +95,15 @@ public class EmployeeCancellOrderAction extends AbstractComponentWidgetAdapterAw
 				getEventService().publishEvent(new OrderCancelledEvent(order.getOrderProcess().iterator().next()));
 				LOG.info("--------------------------------end CancelOrderStatusAction----------------------");
 				setOrderStatus(order, OrderStatus.CANCELLED);
-				return new ActionResult("success");
+				ActionResult actionResult = new ActionResult("success");
+				actionResult.setStatusFlags(EnumSet.of(ActionResult.StatusFlag.OBJECT_MODIFIED));
+				return actionResult;
 			//}
 		}
 		LOG.info("--------------------end-------------------");
-		return new ActionResult("failed");
+		ActionResult actionResult = new ActionResult("failed");
+		actionResult.setStatusFlags(EnumSet.of(ActionResult.StatusFlag.OBJECT_MODIFIED));
+		return actionResult;
 	}
 	
 	private void setOrderStatus(final OrderModel order, final OrderStatus orderStatus) {
