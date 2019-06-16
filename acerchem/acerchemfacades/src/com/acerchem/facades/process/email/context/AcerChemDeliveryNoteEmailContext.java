@@ -79,8 +79,11 @@ public class AcerChemDeliveryNoteEmailContext extends AbstractEmailContext<Order
 		deliveryNo = orderModel.getDeliveryNo();
 		deliveryVehicleNumber = orderModel.getDeliveryVehicleNumber();
 		deliveryDriverPhone = orderModel.getDeliveryDriverPhone();
-		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd'th',YYYY");
-		deliveryDate = simpleDateFormat.format(orderModel.getDeliveryDate());
+		if(orderModel.getDeliveryDate()!=null)
+		{
+			SimpleDateFormat simpleDateFormat = new SimpleDateFormat("MMM dd'th',YYYY");
+			deliveryDate = simpleDateFormat.format(orderModel.getDeliveryDate());
+		}
 
 		//orderData.getWaitDeliveiedDate();
 		// orderData.getConsignments()

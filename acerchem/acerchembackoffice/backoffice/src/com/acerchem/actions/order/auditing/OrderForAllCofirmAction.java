@@ -25,6 +25,9 @@ import de.hybris.platform.processengine.BusinessProcessEvent;
 import de.hybris.platform.processengine.BusinessProcessService;
 import de.hybris.platform.servicelayer.model.ModelService;
 
+import java.util.EnumSet;
+
+
 public class OrderForAllCofirmAction extends AbstractComponentWidgetAdapterAware implements CockpitAction<OrderModel, Object>
 {
 	private static final Logger LOG = Logger.getLogger(OrderForAllCofirmAction.class);
@@ -62,7 +65,9 @@ public class OrderForAllCofirmAction extends AbstractComponentWidgetAdapterAware
 			  order.setEmployeeConfirm(true);
 			  this.modelService.save(order);
 		LOG.info("--------------------end-------------------"+order.getEmployeeConfirm());
-		return new ActionResult("success");
+		ActionResult actionResult = new ActionResult("success");
+		actionResult.setStatusFlags(EnumSet.of(ActionResult.StatusFlag.OBJECT_MODIFIED));
+		return actionResult;
 	}
 
 	public boolean canPerform(ActionContext<OrderModel> ctx) {

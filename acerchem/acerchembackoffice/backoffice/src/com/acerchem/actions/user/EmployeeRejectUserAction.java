@@ -30,6 +30,9 @@ import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.site.BaseSiteService;
 import de.hybris.platform.store.services.BaseStoreService;
 
+import java.util.EnumSet;
+
+
 public class EmployeeRejectUserAction extends AbstractComponentWidgetAdapterAware implements CockpitAction<CustomerModel, Object>
 {
 	private static final Logger LOG = Logger.getLogger(EmployeeRejectUserAction.class);
@@ -107,7 +110,9 @@ public class EmployeeRejectUserAction extends AbstractComponentWidgetAdapterAwar
 				customerModel.setType(CustomerType.REJECTED);
 				modelService.save(customerModel);
 				LOG.info("===========CustomerModel end==========");
-				return new ActionResult<Object>("success");
+		ActionResult actionResult = new ActionResult("success");
+		actionResult.setStatusFlags(EnumSet.of(ActionResult.StatusFlag.OBJECT_MODIFIED));
+		return actionResult;
 	}
 	
 	protected AbstractCommerceUserEvent initializeEvent(final AbstractCommerceUserEvent event, final CustomerModel customerModel)

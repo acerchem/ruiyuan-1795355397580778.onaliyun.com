@@ -27,6 +27,9 @@ import de.hybris.platform.processengine.BusinessProcessEvent;
 import de.hybris.platform.processengine.BusinessProcessService;
 import de.hybris.platform.servicelayer.model.ModelService;
 
+import java.util.EnumSet;
+
+
 public class EmployeeUpdateDeliveryStatusAction extends AbstractComponentWidgetAdapterAware implements CockpitAction<OrderModel, Object>
 {
 	private static final Logger LOG = Logger.getLogger(EmployeeUpdateDeliveryStatusAction.class);
@@ -63,7 +66,9 @@ public class EmployeeUpdateDeliveryStatusAction extends AbstractComponentWidgetA
 			    .withChoice("waitForEmployeeConfirmConsignmentStatus").build();
 			  getBusinessProcessService().triggerEvent(event);
 		LOG.info("--------------------end EmployeeUpdateDeliveryStatusAction-------------------");
-		return new ActionResult("success");
+		ActionResult actionResult = new ActionResult("success");
+		actionResult.setStatusFlags(EnumSet.of(ActionResult.StatusFlag.OBJECT_MODIFIED));
+		return actionResult;
 	}
 	
 	private void setOrderStatus(OrderModel order, OrderStatus orderStatus) {
