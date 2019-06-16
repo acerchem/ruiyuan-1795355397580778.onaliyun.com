@@ -101,13 +101,14 @@
 					<y:action action-id="com.acerchem.actions.order.auditing.EmployeeCancellOrder" property="currentObject"/>
 					<y:action action-id="com.acerchem.actions.order.auditing" property="currentObject"/>
 					<y:action action-id="com.acerchem.actions.order.auditing.EmployeeconfirmPay" property="currentObject"/>
-					<!-- <y:action action-id="com.acerchem.actions.order.auditing.EmployeeUpdateDeliveryInfo" property="currentObject"/> -->
-
 					<y:action action-id="com.acerchem.actions.order.auditing.EmployeeconfirmDelivery" property="currentObject"/>
 					<y:action action-id="com.acerchem.actions.order.auditing.EmployeeUpdateDeliveryStatus" property="currentObject"/>
+					<y:action action-id="com.acerchem.actions.order.auditing.OrderReceiptsCredit" property="currentObject"/>
 				</y:group>
 			</y:actions>
 	</context>
+	<!-- <y:action action-id="com.acerchem.actions.order.auditing.EmployeeUpdateDeliveryInfo" property="currentObject"/> -->
+
 
 	<context component="notification-area" source="com.acerchem.actions.order.auditing.EmployeeconfirmPay" merge-by="source">
 		<na:notification-area>

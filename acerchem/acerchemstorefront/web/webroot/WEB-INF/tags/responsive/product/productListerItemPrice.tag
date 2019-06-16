@@ -9,7 +9,7 @@
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 
 <ycommerce:testId code="searchPage_price_label_${product.code}">
-		<span class="mintitle">${product.manufacturer}</span>
+		<span class="mintitle">${product.code}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;${product.manufacturer}</span>
 		<%-- if product is multidimensional with different prices, show range, else, show unique price --%>
 		<c:choose>
 			<c:when test="${not empty product.promotionPrice}">
