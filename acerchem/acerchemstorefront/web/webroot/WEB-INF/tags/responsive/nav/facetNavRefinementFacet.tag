@@ -17,7 +17,7 @@
 		</div>
 
 
-		<div class="facet__values js-facet-values js-facet-form">
+		<div class="facet__values js-facet-values js-facet-form" style="display: none;">
 
 			<c:if test="${not empty facetData.topValues}">
 				<ul class="facet__list js-facet-list js-facet-top-values">
@@ -79,11 +79,14 @@
 						</c:if>
 						<c:if test="${not facetData.multiSelect}">
 							<c:url value="${facetValue.query.url}" var="facetValueQueryUrl"/>
-							<span class="facet__text">
-								<a href="${facetValueQueryUrl}">${fn:escapeXml(facetValue.name)}</a>
-								<ycommerce:testId code="facetNav_count">
-									<span class="facet__value__count"><spring:theme code="search.nav.facetValueCount" arguments="${facetValue.count}"/></span>
-								</ycommerce:testId>
+							<span class="facet__list__label">
+											<span class="facet__list__mark"></span>
+								<span class="facet__text">
+									<a href="${facetValueQueryUrl}">${fn:escapeXml(facetValue.name)}</a>
+									<ycommerce:testId code="facetNav_count">
+										<span class="facet__value__count"><spring:theme code="search.nav.facetValueCount" arguments="${facetValue.count}"/></span>
+									</ycommerce:testId>
+								</span>
 							</span>
 						</c:if>
 					</li>
