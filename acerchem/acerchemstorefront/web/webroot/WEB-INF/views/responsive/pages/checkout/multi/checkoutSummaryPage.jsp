@@ -320,6 +320,7 @@
 											<c:choose>
 												<c:when test="${'CreditPayment' == data.code}">
 													<input type="radio" name="paymentmethod"   value="${data.code}" <c:if test="${isOption}">disabled</c:if>/>
+													<c:set var="isflag" value="1"/>
 												</c:when>
 												<c:otherwise>
 													<input type="radio" name="paymentmethod"   value="${data.code}">
@@ -348,7 +349,7 @@
                                  </c:if>--%>
 
 							</c:forEach>
-							<c:if test="${isOption}">
+							<c:if test="${isOption && not empty isflag}">
 								<li style="width: 54%;display:inline-block;border:0px; ">
 									<div style="background-color: #f2dede; margin:-24% -1%;position: relative;left:95%;padding:6px;font-size:15px;color: black">
 										Unfortunately there is insufficient credit limit for your account,
