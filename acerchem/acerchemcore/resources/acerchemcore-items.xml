@@ -15,6 +15,9 @@
 			autocreate="true" generate="true" type="set" />
 		<collectiontype code="PromotionThresholdDiscountList" elementtype="PromotionThresholdDiscount"
 			autocreate="true" generate="true" type="list" />
+
+		<collectiontype code="CertificationCollection" elementtype="CertifacationEnum"
+			autocreate="true" generate="true" type="list" />
 	</collectiontypes>
 
 	<enumtypes>
@@ -103,6 +106,13 @@
 			<value code="UNDELIVERED" />
 			<value code="UNCONFIRMDELIVERY" />
 			<value code="PROCESSING" />
+		</enumtype>
+
+		<enumtype code="CertifacationEnum" autocreate="true"
+				  generate="true" dynamic="true">
+			<value code="HALAL" />
+			<value code="KOSHER" />
+			<value code="ORGANIC" />
 		</enumtype>
 		
 		<enumtype code="CustomerType" generate="true"  autocreate="false" dynamic="true">
@@ -711,23 +721,29 @@
 						<description>原产国</description>
 					</attribute>
 
-					<attribute autocreate="true" qualifier="halal" type="boolean">
+					<attribute autocreate="true" qualifier="certifications" type="CertificationCollection">
 						<persistence type="property"/>
 						<modifiers read="true" write="true" search="true" optional="true"/>
-						<description>Supplier information</description>
+						<description>资质证明</description>
 					</attribute>
 
-					<attribute autocreate="true" qualifier="kosher" type="boolean">
-						<persistence type="property"/>
-						<modifiers read="true" write="true" search="true" optional="true"/>
-						<description>Supplier information</description>
-					</attribute>
+					<!--<attribute autocreate="true" qualifier="halal" type="boolean">-->
+						<!--<persistence type="property"/>-->
+						<!--<modifiers read="true" write="true" search="true" optional="true"/>-->
+						<!--<description>Supplier information</description>-->
+					<!--</attribute>-->
 
-					<attribute autocreate="true" qualifier="organic" type="boolean">
-						<persistence type="property"/>
-						<modifiers read="true" write="true" search="true" optional="true"/>
-						<description>Supplier information</description>
-					</attribute>
+					<!--<attribute autocreate="true" qualifier="kosher" type="boolean">-->
+						<!--<persistence type="property"/>-->
+						<!--<modifiers read="true" write="true" search="true" optional="true"/>-->
+						<!--<description>Supplier information</description>-->
+					<!--</attribute>-->
+
+					<!--<attribute autocreate="true" qualifier="organic" type="boolean">-->
+						<!--<persistence type="property"/>-->
+						<!--<modifiers read="true" write="true" search="true" optional="true"/>-->
+						<!--<description>Supplier information</description>-->
+					<!--</attribute>-->
 					<!--end-->
 				</attributes>
 			</itemtype>

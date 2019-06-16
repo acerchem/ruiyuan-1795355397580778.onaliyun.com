@@ -26,11 +26,13 @@ UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=
  ;$solrIndexedType;category;"类别"
  ;$solrIndexedType;code;"代码"
  ;$solrIndexedType;description;"描述"
- ;$solrIndexedType;manufacturerName;"制造商名称"
+ ;$solrIndexedType;manufacturerName;"工厂"
  ;$solrIndexedType;name;"名称"
  #;$solrIndexedType;price;"价格"
  ;$solrIndexedType;summary;"摘要"
- ;$solrIndexedType;warehouseCode;"工厂"
+# ;$solrIndexedType;manufacturerName;"工厂"
+;$solrIndexedType;certifications;"资质证明"
+;$solrIndexedType;originCountry;"原产国"
 
 # Define the available sorts
 UPDATE SolrSort;indexedType(identifier)[unique=true];code[unique=true];name[lang=$lang]

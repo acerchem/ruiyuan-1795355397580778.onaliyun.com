@@ -780,6 +780,10 @@
 		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
 	</bean>
 
+	<bean id="productCertificationsValueProvider" class="com.acerchem.core.search.solrfacetsearch.provider.impl.ProductCertificationsValueProvider"  parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+	</bean>
+
 	<bean id="productCountryFacetDisplayNameProvider" class="com.acerchem.core.search.solrfacetsearch.provider.impl.ProductCountryFacetDisplayNameProvider">
 		<property name="commonI18NService" ref="commonI18NService"/>
 	</bean>

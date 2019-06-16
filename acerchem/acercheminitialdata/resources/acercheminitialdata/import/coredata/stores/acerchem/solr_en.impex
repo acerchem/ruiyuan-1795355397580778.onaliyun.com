@@ -26,12 +26,14 @@ UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=
  ;$solrIndexedType;category;"Application"
  ;$solrIndexedType;code;"Code"
  ;$solrIndexedType;description;"Description"
- ;$solrIndexedType;manufacturerName;"Manufacturer Name"
+ ;$solrIndexedType;manufacturerName;"Factory"
  ;$solrIndexedType;name;"Name"
  #;$solrIndexedType;price;"Price"
  ;$solrIndexedType;summary;"Summary"
- ;$solrIndexedType;warehouseCode;"Factory"
- 
+# ;$solrIndexedType;manufacturerName;"Factory"
+ ;$solrIndexedType;certifications;"Certifications"
+ ;$solrIndexedType;originCountry;"Origin of Country"
+
 
 # Define the available sorts
 UPDATE SolrSort;indexedType(identifier)[unique=true];code[unique=true];name[lang=$lang]
