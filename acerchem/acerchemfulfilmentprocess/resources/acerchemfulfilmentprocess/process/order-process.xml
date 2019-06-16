@@ -245,7 +245,7 @@
 
 	<action id="processingofreceipts" bean="processingofreceiptsAction">
 		<transition name="OK" to="success"/>
-		<transition name="NOK" to="error"/>
+		<transition name="NOK" to="waitForCreditReceiptsConfirm"/>
 	</action>
 
 	<end id="error" state="ERROR">All went wrong.</end>

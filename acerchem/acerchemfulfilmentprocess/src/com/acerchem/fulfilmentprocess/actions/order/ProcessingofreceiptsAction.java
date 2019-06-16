@@ -1,5 +1,6 @@
 package com.acerchem.fulfilmentprocess.actions.order;
 
+import com.acerchem.core.model.CreditTransactionModel;
 import com.acerchem.core.model.CustomerCreditAccountModel;
 import de.hybris.platform.core.enums.OrderStatus;
 import de.hybris.platform.core.model.order.OrderModel;
@@ -7,10 +8,14 @@ import de.hybris.platform.core.model.user.CustomerModel;
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 import de.hybris.platform.processengine.action.AbstractSimpleDecisionAction;
 import de.hybris.platform.servicelayer.model.ModelService;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.log4j.Logger;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Optional;
 
 
 public class ProcessingofreceiptsAction extends AbstractSimpleDecisionAction<OrderProcessModel>
@@ -39,13 +44,29 @@ public class ProcessingofreceiptsAction extends AbstractSimpleDecisionAction<Ord
 				CustomerCreditAccountModel customerCreditAccount= customer.getCreditAccount();
 				modelService.refresh(customerCreditAccount);
 				BigDecimal creaditRemainedAmount = customerCreditAccount.getCreaditRemainedAmount();
-				creaditRemainedAmount = creaditRemainedAmount.add(BigDecimal.valueOf(creditPointPaid));
-				BigDecimal creaditTotalAmount = customerCreditAccount.getCreditTotalAmount();
-				if(creaditRemainedAmount.compareTo(creaditTotalAmount) < 1){
-					customerCreditAccount.setCreaditRemainedAmount(creaditRemainedAmount);
-					order.setStatus(OrderStatus.COMPLETED);
-					modelService.save(order);
-					modelService.save(customerCreditAccount);
+				if(creditPointPaid!=null)
+				{
+					creaditRemainedAmount = creaditRemainedAmount.add(BigDecimal.valueOf(creditPointPaid));
+					BigDecimal creaditTotalAmount = customerCreditAccount.getCreditTotalAmount();
+					if (creaditRemainedAmount.compareTo(creaditTotalAmount) < 1)
+					{
+						customerCreditAccount.setCreaditRemainedAmount(creaditRemainedAmount);
+						order.setStatus(OrderStatus.COMPLETED);
+						if(CollectionUtils.isNotEmpty(customerCreditAccount.getTransactions())){
+							Optional<CreditTransactionModel> transactionModelOptional = new ArrayList<>(customerCreditAccount.getTransactions()).stream()
+									.filter(creditTransactionModel -> creditTransactionModel.getOrderCode().equals(order.getCode()))
+									.findAny();
+							if(transactionModelOptional.isPresent()){
+								CreditTransactionModel creditTransactionModel = transactionModelOptional.get();
+								creditTransactionModel.setIsPayback(true);
+								creditTransactionModel.setPaybackAmount(BigDecimal.valueOf(creditPointPaid));
+								creditTransactionModel.setPaybackTime(new Date());
+								modelService.save(creditTransactionModel);
+							}
+						}
+						modelService.save(order);
+						modelService.save(customerCreditAccount);
+					}
 				}
 			}
 			return Transition.OK;
