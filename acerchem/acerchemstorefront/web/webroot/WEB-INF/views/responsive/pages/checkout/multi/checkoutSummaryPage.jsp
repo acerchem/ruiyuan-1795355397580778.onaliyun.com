@@ -807,25 +807,24 @@ $(document).ready(function() {
 	  
 	  date = dateChange(1,date);
 	  
-	  var endDate = '2018-12-31';
+	var endDate = '2018-12-31';
 	  
-	  var isFuture = ${cartData.isUseFutureStock};
-	  
+	var isFuture = ${cartData.isUseFutureStock};
+	var deliveryDays = ${cartData.deliveryDays};
+	if(deliveryDays=='') deliveryDays=20;
 	if(isFuture){
-		var sdate = dateChange(${cartData.deliveryDays},date),
-       edatd = endDate;
-  	 		
-  	 	}else {
-  	 		
-  	 	var sdate = date,
-       edatd = dateChange(${cartData.deliveryDays},date);
-  	 	}
+		 var sdate = dateChange(deliveryDays,date),
+		 edatd = endDate;
+	}else {
+		var sdate = date,
+		edatd = dateChange(deliveryDays,date);
+	}
 	
     $('#strdate').datetimepicker({
    	format: 'YYYY-MM-DD',
    	defaultDate: sdate,
        minDate: sdate,
-       maxDate:edatd,
+       maxDate:edatd
    	
    }).on('dp.change',function(e){    	
    	 
