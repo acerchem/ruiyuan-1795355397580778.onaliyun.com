@@ -93,7 +93,7 @@ public class AcerchemStorefrontAuthenticationSuccessHandler extends SavedRequest
 					clearAuthenticationAttributes(request);
 					String redirectUrl = Config.getString("website.acerchem.https","https://acerchem.ibreakingpoint.com:9002");
 				
-					redirectUrl += "/reports/productPriceAnalysis";
+					redirectUrl += Config.getString("reportgroup.default.redirect.url","/reports/productPriceAnalysis");
 					 
 					response.sendRedirect(redirectUrl);
 					return;
