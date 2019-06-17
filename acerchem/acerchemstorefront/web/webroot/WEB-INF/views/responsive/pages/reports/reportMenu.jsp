@@ -47,9 +47,9 @@
 <body class="index-body">
 	<header>
 		<div class="logo">
-			
-			<img src="${commonResourcePath}/acerchem/images/logo.png" alt="logo">
-			
+			<a href="/acerchemstorefront/acerchem/en/">
+				<img src="${commonResourcePath}/acerchem/images/logo.png" alt="logo">
+			</a>
 		</div>
 		<nav class="head-nav">
 			<ul>
