@@ -282,16 +282,16 @@
 								Looking for QC documents and quotation sheet.<br/>
 
 								<div class="register__section">
-									<div style="display: inline-block;border-width: 1px;margin-top: 10px;padding: 10px;width: 150px!important;background-color: #0d4170!important;text-align: center;cursor: pointer;">
-										<a href="${loginUrl}" style="font-weight: normal;">
+									<a href="${loginUrl}" style="font-weight: normal;">
+										<div style="display: inline-block;border-width: 1px;margin-top: 10px;padding: 10px;width: 150px!important;background-color: #0d4170!important;text-align: center;cursor: pointer;">
 											<span style="color: #fff; font-size: 14px;">LOG IN</span>
-										</a>
-									</div>
-									<div style="display: inline-block;border-width: 1px;margin-top: 10px;padding: 10px;width: 150px!important;background-color: #0d4170!important;text-align: center;cursor: pointer;">
-										<a href="${registerUrl}" style="font-weight: normal;">
+										</div>
+									</a>
+									<a href="${registerUrl}" style="font-weight: normal;">
+										<div style="display: inline-block;border-width: 1px;margin-top: 10px;padding: 10px;width: 150px!important;background-color: #0d4170!important;text-align: center;cursor: pointer;">
 											<span style="color: #fff; font-size: 14px;">REGISTER</span>
-										</a>
-									</div>
+										</div>
+									</a>
 								</div>
 							</div>
 						</c:if>
