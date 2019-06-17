@@ -88,12 +88,12 @@ public class AcerchemStorefrontAuthenticationSuccessHandler extends SavedRequest
 			final UserModel user = userService.getCurrentUser();
 			
 			if(CollectionUtils.isNotEmpty(user.getGroups())){
-				final Optional optional = user.getGroups().stream().filter(group->group.getUid().equals("reportgroup")).findAny();
+				final Optional optional = user.getGroups().stream().filter(group->StringUtils.isNotBlank(group.getUid())).filter(group->group.getUid().toLowerCase().equals("reportgroup")).findAny();
 				if(optional.isPresent()){
 					clearAuthenticationAttributes(request);
 					String redirectUrl = Config.getString("website.acerchem.https","https://acerchem.ibreakingpoint.com:9002");
 				
-					redirectUrl += "/report";
+					redirectUrl += "/reports/productPriceAnalysis";
 					 
 					response.sendRedirect(redirectUrl);
 					return;
