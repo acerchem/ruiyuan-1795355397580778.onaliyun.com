@@ -1332,3 +1332,35 @@ INSERT_UPDATE CMSNavigationEntry;uid[unique=true];$contentCV[unique=true];name;n
                                 ;AboutUsNavNodeEntry;;About Us;AboutUsNavNode;AboutUsNavLink
                                 ;RepositoryNavEntry;;Repository;RepositoryNavNode;RepositoryNavLink
                                 ;ContactUsNavEntry;;Contact Us;ContactUsNavNode;AcerContactUsNavLink
+
+
+INSERT_UPDATE ContentSlotName;name[unique=true];template(uid,$contentCV)[unique=true][default='LandingPage2Template'];validComponentTypes(code);compTypeGroup(code)
+ ;SiteLogo;;;logo
+ ;HeaderLinks;;;headerlinks
+ ;SearchBox;;;searchbox
+ ;MiniCart;;;minicart
+ ;NavigationBar;;;navigation
+ ;Section1;;;wide
+ ;Section2A;;;narrow
+ ;Section2B;;;narrow
+ ;Section2C;;;wide
+ ;Section3;;;wide
+ ;Section4;;;narrow
+ ;Section5;;;wide
+ ;Section6;;;wide
+ ;Footer;;;footer
+ ;TopHeaderSlot;;;wide
+ ;BottomHeaderSlot;;;wide
+ ;PlaceholderContentSlot;;;
+
+INSERT_UPDATE ContentSlotForTemplate;$contentCV[unique=true];uid[unique=true];position[unique=true];pageTemplate(uid,$contentCV)[unique=true][default='LandingPage2Template'];contentSlot(uid,$contentCV)[unique=true];allowOverwrite
+;;SiteLogo-LandingPage2;SiteLogo;;SiteLogoSlot;true
+;;HomepageLink-LandingPage2;HomepageNavLink;;HomepageNavLinkSlot;true
+;;NavigationBar-LandingPage2;NavigationBar;;NavigationBarSlot;true
+;;MiniCart-LandingPage2;MiniCart;;MiniCartSlot;true
+;;Footer-LandingPage2;Footer;;FooterSlot;true
+;;HeaderLinks-LandingPage2;HeaderLinks;;HeaderLinksSlot;true
+;;SearchBox-LandingPage2;SearchBox;;SearchBoxSlot;true
+;;TopHeaderSlot-LandingPage2;TopHeaderSlot;;TopHeaderSlot;true
+;;BottomHeaderSlot-LandingPage2;BottomHeaderSlot;;BottomHeaderSlot;true
+;;PlaceholderContentSlot-LandingPage2;PlaceholderContentSlot;;PlaceholderContentSlot;true

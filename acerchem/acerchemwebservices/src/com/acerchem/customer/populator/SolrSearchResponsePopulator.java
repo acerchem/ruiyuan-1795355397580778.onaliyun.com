@@ -77,7 +77,7 @@ public class SolrSearchResponsePopulator<FACET_SEARCH_CONFIG_TYPE, INDEXED_TYPE_
             Set<WarehouseModel> warehouseModelSet = customerModel.getWarehouse();
             if (CollectionUtils.isNotEmpty(warehouseModelSet)) {
                 Set<String> codeSet = warehouseModelSet.stream().map(WarehouseModel::getCode).collect(Collectors.toSet());
-                searchQuery.addFilterQuery("warehouseCode_string_mv", SearchQuery.Operator.AND, codeSet);
+                searchQuery.addFilterQuery("warehouseCode_string_mv", SearchQuery.Operator.OR, codeSet);
                 LOG.info("search paramallPromotions : " + searchQuery.getUserQuery() + ":" + codeSet.toString());
             } else {
                 Set<String> codeSet = new HashSet<>();

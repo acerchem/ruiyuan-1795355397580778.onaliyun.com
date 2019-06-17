@@ -30,9 +30,10 @@ UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=
  ;$solrIndexedType;name;"Name"
  #;$solrIndexedType;price;"Price"
  ;$solrIndexedType;summary;"Summary"
-# ;$solrIndexedType;manufacturerName;"Factory"
+ #;$solrIndexedType;manufacturerName;"Factory"
  ;$solrIndexedType;certifications;"Certifications"
  ;$solrIndexedType;originCountry;"Origin of Country"
+;$solrIndexedType;warehouseCode;"Warehouse"
 
 
 # Define the available sorts
