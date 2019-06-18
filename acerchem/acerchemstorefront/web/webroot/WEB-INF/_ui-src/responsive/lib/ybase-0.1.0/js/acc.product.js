@@ -91,7 +91,7 @@ ACC.product = {
             closeButton:true,
         });
         ACC.colorbox.resize();
-        $("#cboxClose").css({"display":"block","left":"-25.8%","top":"21.8%"});
+        $("#cboxClose").css({"display":"block","padding":"11% 26.5%"});
         var productCode = $('[name=productCodePost]', formElement).val();
         var quantityField = $('[name=qty]', formElement).val();
 

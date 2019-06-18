@@ -83,6 +83,7 @@ ACC.product = {
             ACC.minicart.updateMiniCartDisplay();
         }
         var titleHeader = $('#addToCartTitle').html();
+
         ACC.colorbox.open(titleHeader, {
             html: cartResult.addToCartLayer,
             width: "100%",
@@ -90,8 +91,8 @@ ACC.product = {
             closeButton:true,
         });
         ACC.colorbox.resize();
-        $("#cboxClose").css({"display":"block","left":"-25.8%","top":"21.8%"});
-
+        //position: relative;left:-26%;top:-77%; padding:11.5% 27%
+        $("#cboxClose").css({"display":"block","padding":"11% 26.5%"});
         var productCode = $('[name=productCodePost]', formElement).val();
         var quantityField = $('[name=qty]', formElement).val();
 
