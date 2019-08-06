@@ -273,7 +273,7 @@
 	</util:list>
 
 	<bean id="logoutSuccessHandler" class="de.hybris.platform.acceleratorstorefrontcommons.security.StorefrontLogoutSuccessHandler" >
-		<property name="defaultTargetUrl" value=""/>
+		<property name="defaultTargetUrl" value="/"/>
 		<property name="guidCookieStrategy" ref="guidCookieStrategy"/>
 		<property name="useReferer" value="true"/>
 		<property name="restrictedPages" ref="logoutRestrictedPages"/>
