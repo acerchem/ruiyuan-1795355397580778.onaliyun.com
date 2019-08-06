@@ -156,7 +156,6 @@
 							</div>
 
 							<div class="invernum">
-
 							<select id="inventoryId" style="display: none;">
 							<c:forEach items="${countrys}" var="data"  varStatus="id"  >
 							<c:set var ="a" value="${data.inventory}"/>
@@ -172,12 +171,13 @@
 							<c:set var ="a" value="${data.inventory}"/>
 							<c:set var="b" value="${product.netWeight}"/>
 							<c:set var ="Total" value="${a*b}"/>
-								<span class="label-title inventory">Inventory:<i id="inventory">${data.inventory}</i>&nbsp${product.packageType}${data.inventory>1?"s":""}&nbsp/&nbsp${Total}${product.unitName}${Total>1?"s":""} <span class="spot">(<em>${data.inventory}&nbsp${product.packageType}</em>)</span></span>
-								</c:if>
+								<span class="label-title inventory">Inventory:<i id="inventory">${data.inventory}&nbsp${product.packageType}${data.inventory>1?"s":""}&nbsp/&nbsp${Total}${product.unitName}${Total>1?"s":""} <span class="spot">(<em>${data.inventory}&nbsp${product.packageType}</em>)</span></span>
+								</i>
+							</c:if>
 	                        </c:forEach>
 
 								<label>
-									<input type="checkbox" name="Keep" id="checkfutureId">
+									<input type="checkbox" name="Keep" id="checkfutureId" onclick="test()">
 									<span class="checkbox">Display future inventory</span>
 								</label>
 							</div>
@@ -560,6 +560,10 @@ function addNum()
 	else{
 		$('#qty').val(avl); 
 	}
+}
+
+function test() {
+	// alert("11");
 }
 </script>
 		
