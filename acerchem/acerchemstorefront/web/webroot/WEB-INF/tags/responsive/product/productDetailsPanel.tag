@@ -177,7 +177,7 @@
 	                        </c:forEach>
 
 								<label>
-									<input type="checkbox" name="Keep" id="checkfutureId" onclick="test()">
+									<input type="checkbox" name="Keep" id="checkfutureId">
 									<span class="checkbox">Display future inventory</span>
 								</label>
 							</div>
@@ -562,9 +562,6 @@ function addNum()
 	}
 }
 
-function test() {
-	// alert("11");
-}
 </script>
 		
 		
