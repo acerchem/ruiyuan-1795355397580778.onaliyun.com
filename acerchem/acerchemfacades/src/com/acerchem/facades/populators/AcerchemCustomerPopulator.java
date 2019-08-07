@@ -1,25 +1,24 @@
 package com.acerchem.facades.populators;
 
+import com.acerchem.core.model.CustomerCreditAccountModel;
+import com.acerchem.core.model.UserLevelModel;
 import de.hybris.platform.commercefacades.user.converters.populator.CustomerPopulator;
-import de.hybris.platform.commercefacades.user.data.AddressData;
-import de.hybris.platform.commercefacades.user.data.CustomerCreditAccountData;
-import de.hybris.platform.commercefacades.user.data.CustomerData;
-import de.hybris.platform.commercefacades.user.data.UserLevelData;
+import de.hybris.platform.commercefacades.user.data.*;
 import de.hybris.platform.converters.Populator;
 import de.hybris.platform.core.model.user.AddressModel;
 import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.ordersplitting.model.WarehouseModel;
 import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
 import org.springframework.beans.factory.annotation.Required;
-import com.acerchem.core.model.CustomerCreditAccountModel;
-import com.acerchem.core.model.UserLevelModel;
 
 public class AcerchemCustomerPopulator extends CustomerPopulator implements Populator<CustomerModel, CustomerData>
 {
 	private Converter<AddressModel,AddressData> addressConverter;
 	private Converter<CustomerCreditAccountModel,CustomerCreditAccountData> creditAccountConverter;
 	private Converter<UserLevelModel,UserLevelData> userLevelConverter;
-	
+	private Converter<WarehouseModel, AcerchemWarehouseData> warehouseConverter;
+
 	@Override
 	public void populate(CustomerModel source, CustomerData target) throws ConversionException {
 		super.populate(source,target);
@@ -43,6 +42,10 @@ public class AcerchemCustomerPopulator extends CustomerPopulator implements Popu
 		{
 			target.setUserLevel(userLevelConverter.convert(source.getUserLevel()));
 		}
+
+		if (source.getWarehouse() != null && !source.getWarehouse().isEmpty()) {
+			target.setWarehouseList(warehouseConverter.convertAll(source.getWarehouse()));
+		}
 	}
 
 	@Required
@@ -59,6 +62,13 @@ public class AcerchemCustomerPopulator extends CustomerPopulator implements Popu
 	public void setUserLevelConverter(Converter<UserLevelModel, UserLevelData> userLevelConverter) {
 		this.userLevelConverter = userLevelConverter;
 	}
-	
+
+	public final Converter<WarehouseModel, AcerchemWarehouseData> getWarehouseConverter() {
+		return warehouseConverter;
+	}
+
+	public final void setWarehouseConverter(Converter<WarehouseModel, AcerchemWarehouseData> warehouseConverter) {
+		this.warehouseConverter=warehouseConverter;
+	}
 }
 
