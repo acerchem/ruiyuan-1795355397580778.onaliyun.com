@@ -74,14 +74,25 @@
 							</div>
 						</div>
 						<div class="priceset">
+
+
 						    <c:if test="${not empty product.promotionPrice}">
 							    <span class="price"><format:fromPrice priceData="${product.promotionPrice}"/></span>
 							    <span class="old-price"><format:fromPrice priceData="${product.price}"/></span>
 							</c:if>
 
 							<c:if test="${empty product.promotionPrice}">
-						    	<span class="price"><format:fromPrice priceData="${product.price}"/></span>
+								<c:choose>
+									<c:when test="${product.price.value <= 0}">
+										--
+									</c:when>
+									<c:otherwise>
+										<span class="price"><format:fromPrice priceData="${product.price}"/></span>
+									</c:otherwise>
+								</c:choose>
+
 							</c:if>
+
 						</div>
 
 						<div class="Summary">
@@ -270,11 +281,11 @@
 							<!-- Minimum: ${product.minOrderQuantity} ${product.packageType} ${product.minOrderQuantity>1?"s":""} -->
 							MoQ: <i id="minInventory">${product.minOrderQuantity}</i>&nbsp;${product.packageType} ${product.minOrderQuantity>1?"s":""}
 
-
-							<cms:pageSlot position="AddToCart" var="component" >
-								<cms:component component="${component}" />
-							</cms:pageSlot>
-
+							<c:if test="${not empty product.price.value && product.price.value > 0}">
+								<cms:pageSlot position="AddToCart" var="component" >
+									<cms:component component="${component}" />
+								</cms:pageSlot>
+							</c:if>
 
 
 							<!-- <div class="btn-set">
