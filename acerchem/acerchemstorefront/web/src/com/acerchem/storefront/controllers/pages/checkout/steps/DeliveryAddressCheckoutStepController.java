@@ -91,7 +91,6 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 			e.printStackTrace();
 		}
 
-
 		return ControllerConstants.Views.Pages.MultiStepCheckout.AddEditDeliveryAddressPage;
 	}
 
@@ -495,7 +494,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 				Calendar ca = Calendar.getInstance();
 				try {
 					ca.setTime(sdf1.parse(waitDelivereyDate));
-					ca.add(Calendar.DATE, acerchemCheckoutFacade.getTotalPriceForCart(cartData));// 
+					ca.add(Calendar.DATE, acerchemCheckoutFacade.getTotalPriceForCart(cartData));//
 					waitDelivereyDate = sdf1.format(ca.getTime());
 					cartData.setWaitDeliveiedDate(waitDelivereyDate);
 					//Date endDate = sdf.parse(waitDelivereyDate);
@@ -514,7 +513,12 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		model.addAttribute(SHOW_SAVE_TO_ADDRESS_BOOK_ATTR, Boolean.TRUE);
 		model.addAttribute(WebConstants.BREADCRUMBS_KEY, getResourceBreadcrumbBuilder().getBreadcrumbs(getBreadcrumbKey()));
 		model.addAttribute("metaRobots", "noindex,nofollow");
-		
+		//发货日期时间段
+		model.addAttribute("minDelivereyDays",Config.getInt("cart.delivereyDays.min",2));
+		model.addAttribute("maxDelivereyDays",Config.getInt("cart.delivereyDays.max",9));
+		CartModel cartmodel = acerchemCheckoutFacade.getCartModel();
+		model.addAttribute("delivereyDays",acerchemTrayFacade.getDeliveryDaysForCart(cartmodel));//根据地址算出运送时间
+
 		
 		addressForm.setCountryIso("US");
 		if (StringUtils.isNotBlank(addressForm.getCountryIso()))

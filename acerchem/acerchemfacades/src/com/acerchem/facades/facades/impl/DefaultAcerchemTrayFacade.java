@@ -4,6 +4,8 @@ import java.math.BigDecimal;
 
 import javax.annotation.Resource;
 
+import de.hybris.platform.core.model.order.CartModel;
+import de.hybris.platform.core.model.user.AddressModel;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import org.springframework.util.ObjectUtils;
@@ -96,6 +98,30 @@ public class DefaultAcerchemTrayFacade implements AcerchemTrayFacade {
             totalTrayPrice = countryTrayFareConf.getPrice();
         }
         return totalTrayPrice;
+    }
+
+    @Override
+    public int getDeliveryDaysForCart(CartModel cartModel) {
+
+        RegionModel regionModel = null;
+        CountryTrayFareConfModel countryTrayFareConf = null;
+        AddressModel addressModel = null;
+        if(cartModel != null){
+            addressModel = cartModel.getDeliveryAddress();
+        }
+        if(addressModel!=null){
+            CountryModel countryModel = commonI18NService.getCountry(cartModel.getDeliveryAddress().getCountry().getIsocode());
+            if(addressModel.getRegion() != null){
+                regionModel =  commonI18NService.getRegion(countryModel, addressModel.getRegion().getIsocode());
+            }
+        }
+        if(regionModel != null){
+            countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(regionModel, -1);
+        }
+        if (countryTrayFareConf!=null){
+            return countryTrayFareConf.getDeliveriedDay();
+        }
+        return 0;
     }
 
 }

@@ -12,6 +12,7 @@ package com.acerchem.storefront.controllers.pages.checkout.steps;
 
 import com.acerchem.facades.facades.AcerchemCheckoutFacade;
 import com.acerchem.facades.facades.AcerchemOrderException;
+import com.acerchem.facades.facades.AcerchemTrayFacade;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.PreValidateCheckoutStep;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.PreValidateQuoteCheckoutStep;
 import de.hybris.platform.acceleratorstorefrontcommons.annotations.RequireHardLogIn;
@@ -21,6 +22,7 @@ import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.checkou
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.util.GlobalMessages;
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
 import de.hybris.platform.commercefacades.order.data.CartData;
+import de.hybris.platform.core.model.order.CartModel;
 import com.acerchem.storefront.controllers.ControllerConstants;
 
 import org.apache.commons.lang.StringUtils;
@@ -31,6 +33,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import de.hybris.platform.util.Config;
 import javax.annotation.Resource;
 
 
@@ -42,6 +45,9 @@ public class DeliveryMethodCheckoutStepController extends AbstractCheckoutStepCo
 
 	@Resource(name = "defaultAcerchemCheckoutFacade")
 	private AcerchemCheckoutFacade acerchemCheckoutFacade;
+
+	@Resource
+	private AcerchemTrayFacade acerchemTrayFacade;
 
 	@RequestMapping(value = "/choose", method = RequestMethod.GET)
 	@RequireHardLogIn
@@ -90,6 +96,12 @@ public class DeliveryMethodCheckoutStepController extends AbstractCheckoutStepCo
 			final CartData cartData = acerchemCheckoutFacade.getCheckoutCart();
 			model.addAttribute("paymentInfos", acerchemCheckoutFacade.getSupportedCardTypes(selectedDeliveryMethod));
 			model.addAttribute("cartData", cartData);
+			//发货日期时间段
+			model.addAttribute("minDelivereyDays",Config.getInt("cart.delivereyDays.min",2));
+			model.addAttribute("maxDelivereyDays",Config.getInt("cart.delivereyDays.max",9));
+			CartModel cartModel = acerchemCheckoutFacade.getCartModel();
+			model.addAttribute("delivereyDays",acerchemTrayFacade.getDeliveryDaysForCart(cartModel));//根据地址算出运送时间
+			acerchemCheckoutFacade.
 		}
 
 		return getCheckoutStep().nextStep();

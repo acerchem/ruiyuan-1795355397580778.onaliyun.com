@@ -409,7 +409,7 @@
 						<div class="date-item">
 				 	 		<span class="d-titls">ETA Date:</span>
 							<div class='input-group date' id='etadate'>
-							    <input type='text' class="form-control2"  value="${cartData.waitDeliveiedDate}"/>
+							    <input type='text' class="form-control2"  value="${cartData.waitDeliveiedDate}" id="etadatev"/>
 							    <span class="input-group-addon">
 							    </span>
 							</div>
@@ -453,7 +453,7 @@
 											</c:choose>
 										</div>
 										<div class="into">
-											<em>${data.name}</em>
+											<em>222${data.name}</em>
 										</div>
 									</label>
 
@@ -948,50 +948,42 @@ $("#dateBtn").on('click',function(){
 
  // 时间控件
 $(document).ready(function() {
-	
-	
+
 	var date = new Date();//没有传入值时,默认是当前日期
-	date.setDate(date.getDate()+1);
-	if (date.getMonth()<9&&date.getDate()<=9){
-		date = date.getFullYear() + '-0' + (date.getMonth() + 1) + '-0' + date.getDate();
-	}
-	else if(date.getMonth()>=9&&date.getDate()<=9){
-		date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-0' + date.getDate();
-	}
-	else if (date.getMonth()<9&&date.getDate()>9){
-		date = date.getFullYear() + '-0' + (date.getMonth() + 1) + '-' + date.getDate();
-	}
-	else{
-		date = date.getFullYear() + '-' + (date.getMonth() + 1) + '-' + date.getDate();
-	}
-	
-	
-	
-	  var endDate = null;
+    var minDelivereyDays = ${minDelivereyDays};
+    var maxDelivereyDays = ${maxDelivereyDays};
+	date = dateChange(minDelivereyDays,date);
+
+    var endDate = null;
 	  
-	  var isFuture = ${cartData.isUseFutureStock};
+    var isFuture = ${cartData.isUseFutureStock};
 	  
 	if(isFuture){
-		var sdate = dateChange(${cartData.deliveryDays},date),
-        edatd = endDate;
+		var sdate = dateChange(${cartData.deliveryDays},date);
  	}else {
- 	 	var sdate = date,
-      	edatd = dateChange(${cartData.deliveryDays},date);
+ 	 	var sdate = date;
  	}
+    edatd = dateChange(maxDelivereyDays-minDelivereyDays,sdate);
 	
 	//设置默认日期
 	$("#textdate").val(sdate);
+
 	if("${cartData.pickUpdate}"!="")
 	{
 		var pickUpdate=new Date('${cartData.pickUpdate}');
 		if(pickUpdate!=null
-				&&((edatd!=null&&pickUpdate<(new Date(edatd)))||edatd==null)
-				&&((sdate!=null&&pickUpdate>(new Date(sdate)))||sdate==null)
+				&&((edatd!=null&&pickUpdate<=(new Date(edatd)))||edatd==null)
+				&&((sdate!=null&&pickUpdate>=(new Date(sdate)))||sdate==null)
 				){
 			$("#textdate").val("${cartData.pickUpdate}");
 		}
 	}
-	
+	if($("#etadatev")){
+	    var ETADate = dateChange(${delivereyDays},$("#textdate").val());
+        $("#etadatev").val(ETADate);
+    }
+
+
      $('#strdate').datetimepicker({
     	format: 'YYYY-MM-DD',
     	defaultDate: sdate,
