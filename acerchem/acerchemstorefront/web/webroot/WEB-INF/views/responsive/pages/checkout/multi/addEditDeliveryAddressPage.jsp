@@ -453,7 +453,7 @@
 											</c:choose>
 										</div>
 										<div class="into">
-											<em>222${data.name}</em>
+											<em>${data.name}</em>
 										</div>
 									</label>
 
