@@ -84,7 +84,8 @@ function verification(wrap){//register verification
 		if(aval)
 		{		
 			if(aname=='email'&&!mymail.test(aval)){				
-				maxalert('Please enter a valid mailbox!')
+				// maxalert('Please enter a valid mailbox!')
+				maxalert('Please use company email address');
 				return false;
 			}
 			
@@ -119,28 +120,29 @@ function verification(wrap){//register verification
 				return false;	
 			}
 		}
-		else
-		{
-			if(aname=='shipAddress.countryIso'){				
-				maxalert('Please Select Shipping country!')
-				return false;
-			}
-			else if(aname=='shipAddress.regionIso'){				
-				$(this).addClass('tg');
-			}
-			else if(aname=='contactAddress.countryIso'){				
-				maxalert('Please Select Contact country!')
-				return false;
-			}
-			else if(aname=='contactAddress.regionIso'){				
-				$(this).addClass('tg');
-			}
-			else
-			{
-				maxalert(thistext)
-				return false;
-			}
-		}
+
+		// else
+		// {
+		// 	if(aname=='shipAddress.countryIso'){
+		// 		maxalert('Please Select Shipping country!')
+		// 		return false;
+		// 	}
+		// 	else if(aname=='shipAddress.regionIso'){
+		// 		$(this).addClass('tg');
+		// 	}
+		// 	else if(aname=='contactAddress.countryIso'){
+		// 		maxalert('Please Select Contact country!')
+		// 		return false;
+		// 	}
+		// 	else if(aname=='contactAddress.regionIso'){
+		// 		$(this).addClass('tg');
+		// 	}
+		// 	else
+		// 	{
+		// 		maxalert(thistext)
+		// 		return false;
+		// 	}
+		// }
 	})	
 }
 

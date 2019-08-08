@@ -15,7 +15,8 @@
 <%@ attribute name="mandatory" required="false" type="java.lang.Boolean" %>
 <%@ attribute name="selectCSSClass" required="false" type="java.lang.String" %>
 
-<form:select id="${fn:escapeXml(idKey)}" path="${fn:escapeXml(path)}" tabindex="${fn:escapeXml(tabindex)}" class="required">
+<%--<form:select id="${fn:escapeXml(idKey)}" path="${fn:escapeXml(path)}" tabindex="${fn:escapeXml(tabindex)}" class="required">--%>
+<form:select id="${fn:escapeXml(idKey)}" path="${fn:escapeXml(path)}" tabindex="${fn:escapeXml(tabindex)}">
 	<c:if test="${skipBlank == null || skipBlank == false}">
 		<option value=""  ${empty selectedValue ? 'selected="selected"' : ''}>
 			<spring:theme code='${skipBlankMessageKey}'/>

@@ -52,7 +52,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.security.web.savedrequest.HttpSessionRequestCache;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -293,6 +293,8 @@ public class LoginPageController extends AbstractLoginPageController
 		{
 			GlobalMessages.addErrorMessage(model, "register.failed: Please confirm whether the information you filled in is correct!");
 			System.out.print("register exception==="+exception);
+			exception.printStackTrace();
+
 		}
 		finally
 		{
@@ -313,7 +315,11 @@ public class LoginPageController extends AbstractLoginPageController
 		}
 		else
 		{
-			model.addAttribute("regions", i18NFacade.getRegionsForCountryIso(form.getContactAddress().getCountryIso()));
+			if (StringUtils.isNotBlank(form.getContactAddress().getCountryIso())){
+				model.addAttribute("regions", i18NFacade.getRegionsForCountryIso(form.getContactAddress().getCountryIso()));
+			}else {
+				model.addAttribute("regions","");
+			}
 			model.addAttribute("CustomRegisterForm",form);
 			storeCmsPageInModel(model, getCmsPage());
 			return ControllerConstants.Views.Pages.Account.AccountRegisterPage;
@@ -327,12 +333,18 @@ public class LoginPageController extends AbstractLoginPageController
 		user.setUid(form.getEmail().toLowerCase());
 		user.setName(form.getName());
 		user.setLoginDisabled(true);
+
+		user.setVatNo(form.getVatNo());
+
 		modelService.save(user);
-		
+
 		String shipCountryIso=form.getShipAddress().getCountryIso();
 		String shipRegionIso=form.getShipAddress().getRegionIso();
-		CountryModel shipCountry=commonI18NService.getCountry(shipCountryIso);
-		
+		CountryModel shipCountry = null;
+		if (StringUtils.isNotBlank(shipCountryIso)){
+			shipCountry = commonI18NService.getCountry(shipCountryIso);
+		}
+
 		AddressModel am=modelService.create(AddressModel.class);
 		am.setContactAddress(false);
 		am.setShippingAddress(true);
@@ -342,7 +354,7 @@ public class LoginPageController extends AbstractLoginPageController
 		am.setPhone1(form.getTelephone());
 		am.setCellphone(form.getTelephone());
 		am.setCountry(shipCountry);
-		if(shipRegionIso!=null)
+		if(StringUtils.isNotBlank(shipRegionIso))
 		{
 			am.setRegion(commonI18NService.getRegion(shipCountry,shipRegionIso));
 		}
@@ -351,7 +363,11 @@ public class LoginPageController extends AbstractLoginPageController
 		
 		String contactCountryIso=form.getContactAddress().getCountryIso();
 		String contactRegionIso=form.getContactAddress().getRegionIso();
-		CountryModel contactCountry=commonI18NService.getCountry(contactCountryIso);
+		CountryModel contactCountry = null;
+		if (StringUtils.isNotBlank(contactCountryIso)){
+			contactCountry = commonI18NService.getCountry(contactCountryIso);
+		}
+
 		AddressModel am2=modelService.create(AddressModel.class);
 		am2.setContactAddress(true);
 		am2.setShippingAddress(false);
@@ -360,7 +376,7 @@ public class LoginPageController extends AbstractLoginPageController
 		am2.setPhone1(form.getTelephone());
 		am2.setCellphone(form.getTelephone());
 		am2.setCountry(contactCountry);
-		if(contactRegionIso!=null)
+		if(StringUtils.isNotBlank(contactRegionIso))
 		{
 			am2.setRegion(commonI18NService.getRegion(contactCountry,contactRegionIso));
 		}
