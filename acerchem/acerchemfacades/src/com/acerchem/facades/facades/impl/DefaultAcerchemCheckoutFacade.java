@@ -150,9 +150,7 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
             if (DELIVERY_MENTION.equals(deliveryModeModel.getCode())){
                 deliveryCost = new PriceValue(cartModel.getCurrency().getIsocode(), 0.0d, true);
             }else if (DELIVERY_GROSS.equals(deliveryModeModel.getCode())){
-                BigDecimal fee = BigDecimal.valueOf(0.0d);
-                //add by taolq
-                //fee =  BigDecimal.valueOf(acerchemTrayFacade.getTotalPriceForCart(cartModel));
+                BigDecimal fee = BigDecimal.valueOf(acerchemTrayFacade.getTotalPriceForCart(getCheckoutCart(),getDeliveryAddress(cartModel)));
                 deliveryCost = new PriceValue(cartModel.getCurrency().getIsocode(), fee.doubleValue(), true);
             }
 
@@ -658,6 +656,16 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
             {
                  return getAddressConverter().convert(deliveryAddress);
             }
+        }
+        return null;
+    }
+
+    protected AddressData getDeliveryAddress(CartModel cart)
+    {
+        final AddressModel deliveryAddress = cart.getDeliveryAddress();
+        if (deliveryAddress != null)
+        {
+            return getAddressConverter().convert(deliveryAddress);
         }
         return null;
     }
