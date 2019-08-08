@@ -101,7 +101,6 @@ public class DeliveryMethodCheckoutStepController extends AbstractCheckoutStepCo
 			model.addAttribute("maxDelivereyDays",Config.getInt("cart.delivereyDays.max",9));
 			CartModel cartModel = acerchemCheckoutFacade.getCartModel();
 			model.addAttribute("delivereyDays",acerchemTrayFacade.getDeliveryDaysForCart(cartModel));//根据地址算出运送时间
-			acerchemCheckoutFacade.
 		}
 
 		return getCheckoutStep().nextStep();
