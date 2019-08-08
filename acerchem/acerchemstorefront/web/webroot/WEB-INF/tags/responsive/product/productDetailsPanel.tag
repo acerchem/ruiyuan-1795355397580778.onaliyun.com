@@ -14,7 +14,7 @@
 <c:set var="userWarehouse"></c:set>
 <c:if test="${not empty user.warehouseList}">
 	<c:forEach items="${user.warehouseList}" var="warehouse">
-		<c:set value="${userWarehouse}${';'}${warehouse.name}" var="userWarehouse"></c:set>
+		<c:set value="${userWarehouse}${';'}${warehouse.code}" var="userWarehouse"></c:set>
 	</c:forEach>
 </c:if>
 
@@ -193,9 +193,9 @@
 								<span class="label-title">Delivery From:</span>
 								<div class="flex">
 
-									<select id="storeMulId">
+                                    <select id="storeMulId">
 									<c:forEach items="${countrys}" var="data"  >
-										<c:if test="${userWarehouse.contains(data.storeName)}">
+										<c:if test="${userWarehouse.contains(data.storeId)}">
 											<option value ="${data.storeId}">${data.storeName}</option>
 										</c:if>
 									</c:forEach>
