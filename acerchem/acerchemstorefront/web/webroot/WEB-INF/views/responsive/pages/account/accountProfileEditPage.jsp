@@ -125,13 +125,13 @@
 		
 		<label>
 			<span class='label-title' style="font-weight:normal;">Revenue</span>	
-			<input id="register.revenue" type="text" name='revenue' value="${customRegisterForm.revenue}"/>
+			<input id="register.revenue" type="text" name='revenue' value="${customRegisterForm.revenue}" onkeypress="if(!this.value.match(/^[\+\-]?\d*?\.?\d*?$/))this.value=this.t_value;else this.t_value=this.value;if(this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?)?$/))this.o_value=this.value" onkeyup="if(!this.value.match(/^[\+\-]?\d*?\.?\d*?$/))this.value=this.t_value;else this.t_value=this.value;if(this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?)?$/))this.o_value=this.value" onblur="if(!this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?|\.\d*?)?$/))this.value=this.o_value;else{if(this.value.match(/^\.\d+$/))this.value=0+this.value;if(this.value.match(/^\.$/))this.value=0;this.o_value=this.value}"/>
 			<div style="color:#F00"><form:errors path="revenue"/></div>
 		</label>
 		
 		<label>
-			<span class='label-title' style="font-weight:normal;">No. of Employees</span>	
-			<input id="register.employeesNo" type="text" name='employeesNo' value="${customRegisterForm.employeesNo}"/>
+			<span class='label-title' style="font-weight:normal;">No. of Employees</span>
+			<input id="register.employeesNo" type="text" name='employeesNo' value="${customRegisterForm.employeesNo}" onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/>
 			<div style="color:#F00"><form:errors path="employeesNo"/></div>
 		</label>
 		
