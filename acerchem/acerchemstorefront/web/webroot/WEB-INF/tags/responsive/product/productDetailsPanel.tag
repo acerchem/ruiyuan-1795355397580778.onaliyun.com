@@ -11,6 +11,13 @@
 <c:url value="/login" var="loginUrl"/>
 <c:url value="/login/register" var="registerUrl"/>
 
+<c:set var="userWarehouse"></c:set>
+<c:if test="${not empty user.warehouseList}">
+	<c:forEach items="${user.warehouseList}" var="warehouse">
+		<c:set value="${userWarehouse}${';'}${warehouse.code}" var="userWarehouse"></c:set>
+	</c:forEach>
+</c:if>
+
 <div class="g-cont prod-cont">
 			<!-- left -->
 			<div class="g-cell">
@@ -186,10 +193,12 @@
 								<span class="label-title">Delivery From:</span>
 								<div class="flex">
 
-									<select id="storeMulId">
+                                    <select id="storeMulId">
 									<c:forEach items="${countrys}" var="data"  >
-									<option value ="${data.storeId}">${data.storeName}</option>
-									    </c:forEach>
+										<c:if test="${userWarehouse.contains(data.storeId)}">
+											<option value ="${data.storeId}">${data.storeName}</option>
+										</c:if>
+									</c:forEach>
 									</select>
 
 								</div>
