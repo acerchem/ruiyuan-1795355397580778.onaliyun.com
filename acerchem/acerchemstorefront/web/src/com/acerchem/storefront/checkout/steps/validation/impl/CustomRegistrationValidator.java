@@ -52,40 +52,40 @@ public class CustomRegistrationValidator implements Validator
 		
 		//final String mobileNumber = registerForm.getMobileNumber();
 		//final String contacts = registerForm.getContacts();
-		final AddressForm shipCountry = registerForm.getShipAddress();
-		final AddressForm contactCountry = registerForm.getContactAddress();
-		
-		if(shipCountry==null||shipCountry.getCountryIso()==null)
-		{
-			errors.rejectValue("shipAddress.countryIso", "register.shipAddress.invalid");
-		}
-		else
-		{
-			validateNullValue(errors, shipCountry.getCountryIso(), "shipAddress.countryIso", "register.shipAddress.countryIso.invalid");
-			validateNullValue(errors, shipCountry.getTownCity(), "shipAddress.townCity", "register.shipAddress.townCity.invalid");
+//		final AddressForm shipCountry = registerForm.getShipAddress();
+//		final AddressForm contactCountry = registerForm.getContactAddress();
+//
+//		if(shipCountry==null||shipCountry.getCountryIso()==null)
+//		{
+//			errors.rejectValue("shipAddress.countryIso", "register.shipAddress.invalid");
+//		}
+//		else
+//		{
+//			validateNullValue(errors, shipCountry.getCountryIso(), "shipAddress.countryIso", "register.shipAddress.countryIso.invalid");
+//			validateNullValue(errors, shipCountry.getTownCity(), "shipAddress.townCity", "register.shipAddress.townCity.invalid");
+//
+//			List<RegionData> regions=i18NFacade.getRegionsForCountryIso(shipCountry.getCountryIso());
+//			if(regions.size()>0)
+//			{
+//				validateNullValue(errors, shipCountry.getRegionIso(), "shipAddress.regionIso", "register.shipAddress.regionIso.invalid");
+//			}
+//		}
 			
-			List<RegionData> regions=i18NFacade.getRegionsForCountryIso(shipCountry.getCountryIso());
-			if(regions.size()>0)
-			{
-				validateNullValue(errors, shipCountry.getRegionIso(), "shipAddress.regionIso", "register.shipAddress.regionIso.invalid");
-			}
-		}
-			
-		if(contactCountry==null)
-		{
-			errors.rejectValue("contactAddress.countryIso", "register.contactAddress.invalid");
-		}
-		else
-		{
-			validateNullValue(errors, contactCountry.getCountryIso(), "contactAddress.countryIso", "register.contactAddress.countryIso.invalid");
-			validateNullValue(errors, contactCountry.getTownCity(), "contactAddress.townCity", "register.contactAddress.townCity.invalid");
-			
-			List<RegionData> regions=i18NFacade.getRegionsForCountryIso(contactCountry.getCountryIso());
-			if(regions.size()>0)
-			{
-				validateNullValue(errors, contactCountry.getRegionIso(), "contactAddress.regionIso", "register.contactAddress.regionIso.invalid");
-			}
-		}
+//		if(contactCountry==null)
+//		{
+//			errors.rejectValue("contactAddress.countryIso", "register.contactAddress.invalid");
+//		}
+//		else
+//		{
+//			validateNullValue(errors, contactCountry.getCountryIso(), "contactAddress.countryIso", "register.contactAddress.countryIso.invalid");
+//			validateNullValue(errors, contactCountry.getTownCity(), "contactAddress.townCity", "register.contactAddress.townCity.invalid");
+//
+//			List<RegionData> regions=i18NFacade.getRegionsForCountryIso(contactCountry.getCountryIso());
+//			if(regions.size()>0)
+//			{
+//				validateNullValue(errors, contactCountry.getRegionIso(), "contactAddress.regionIso", "register.contactAddress.regionIso.invalid");
+//			}
+//		}
 		
 		validateEmail(errors, email);
 		validatePassword(errors, pwd);

@@ -29,7 +29,6 @@
 	</div>
 	
 	<form:form method="post" commandName="customRegisterForm" name="customRegisterForm"  action="${action}">
-	
 		<label>
 			<span class='label-title'>Email<span style="color:red;font-size: 150%;"> *</span></span>	
 			<input id="email" type="text" name='email' value="${customRegisterForm.email}"  alt='Please Enter Email' class="required">
@@ -63,7 +62,8 @@
 		<label>
 			<div class="flex-wrap select-wrap">
 				<div class="flex">
-					<span class='label-title'>Currency<span style="color:red;font-size: 150%;"> *</span></span>	
+					<%--<span class='label-title'>Currency<span style="color:red;font-size: 150%;"> *</span></span>--%>
+					<span class='label-title'>Currency</span>
 					<div class="selbox">
 							<select name="currency" id="currency">
 								<c:forEach items="${currencies}" var="curr">
@@ -76,7 +76,8 @@
 					</div>	
 				</div>
 				<div class="flex">
-					<span class='label-title'>Language<span style="color:red;font-size: 150%;"> *</span></span>	
+					<%--<span class='label-title'>Language<span style="color:red;font-size: 150%;"> *</span></span>--%>
+					<span class='label-title'>Language</span>
 					<div class="selbox">
 							<select name="language" id="language">
 								<c:forEach items="${languages}" var="lang">
@@ -119,7 +120,8 @@
 		</label>
 
 		<label>
-			<span class='label-title'>Contact Address<span style="color:red;font-size: 150%;"> *</span></span>	
+			<%--<span class='label-title'>Contact Address<span style="color:red;font-size: 150%;"> *</span></span>	--%>
+			<span class='label-title'>Contact Address</span>
 			<div class="flex-wrap">
 				<div class="flex">					
 					<div class="selbox">
@@ -138,12 +140,13 @@
 					</div>	
 				</div>
 			</div>
-			<input type="text" id="contactAddress.townCity" name='contactAddress.townCity' value="${customRegisterForm.contactAddress.townCity}" class="lab-row required" placeholder="Detailed address" alt='Please Enter Contact Detailed Address'/>
+			<input type="text" id="contactAddress.townCity" name='contactAddress.townCity' value="${customRegisterForm.contactAddress.townCity}" class="lab-row" placeholder="Detailed address" alt='Please Enter Contact Detailed Address'/>
 			<div style="color:#F00"><form:errors path="contactAddress.townCity"/></div>
 		</label>
 		
 		<label>
-			<span class='label-title'>Shipping Address<span style="color:red;font-size: 150%;"> *</span></span>	
+			<%--<span class='label-title'>Shipping Address<span style="color:red;font-size: 150%;"> *</span></span>	--%>
+			<span class='label-title'>Shipping Address</span>
 			<div class="flex-wrap">
 				<div class="flex">					
 					<div class="selbox">
@@ -162,8 +165,14 @@
 					</div>	
 				</div>
 			</div>
-			<input type="text" id="shipAddress.townCity" name='shipAddress.townCity' value="${customRegisterForm.shipAddress.townCity}" placeholder="Detailed address" alt='Please Enter Shipping Detailed Address' class="lab-row required"/>
+			<input type="text" id="shipAddress.townCity" name='shipAddress.townCity' value="${customRegisterForm.shipAddress.townCity}" placeholder="Detailed address" alt='Please Enter Shipping Detailed Address' class="lab-row"/>
 			<div style="color:#F00"><form:errors path="shipAddress.townCity"/></div>
+		</label>
+
+		<label>
+			<span class='label-title'>Vat No</span>
+			<input id="vatNo" type="text" name='vatNo' value=""  alt='Please Enter Your vatNo'/>
+			<div style="color:#F00"><form:errors path="vatNo"/></div>
 		</label>
 		
 		<input type="hidden" id="recaptchaChallangeAnswered" value="${requestScope.recaptchaChallangeAnswered}" />
@@ -462,9 +471,10 @@ $(document).on("change",'#selectContactCountry select', function (){
 	
 inputint()	
 $('.btn-submit').on('click',function(){
-	
+
 	var id = document.getElementsByName('aidField');
 	var value = new Array();
+	debugger;
 	for(var i = 0; i < id.length; i++){
 	     if(id[i].checked)
 	     value.push(id[i].value);

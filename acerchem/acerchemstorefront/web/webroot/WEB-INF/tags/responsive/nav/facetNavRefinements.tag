@@ -6,7 +6,6 @@
 <%@ taglib prefix="nav" tagdir="/WEB-INF/tags/responsive/nav" %>
 
 <c:forEach items="${pageData.facets}" var="facet">
-
 	<c:choose>
 		<c:when test="${facet.code eq 'availableInStores'}">
 			<nav:facetNavRefinementStoresFacet facetData="${facet}" userLocation="${userLocation}"/>
@@ -14,7 +13,7 @@
 		<c:otherwise>
 			<nav:facetNavRefinementFacet facetData="${facet}"/>
 		</c:otherwise>
-	</c:choose> 
+	</c:choose>
 </c:forEach>
 
 

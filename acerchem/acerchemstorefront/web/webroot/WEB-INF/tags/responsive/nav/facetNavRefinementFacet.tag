@@ -8,6 +8,13 @@
 
 <spring:htmlEscape defaultHtmlEscape="true" />
 
+<c:set var="userWarehouse"></c:set>
+<c:if test="${not empty user.warehouseList}">
+	<c:forEach items="${user.warehouseList}" var="warehouse">
+		<c:set value="${userWarehouse}${';'}${warehouse.name}" var="userWarehouse"></c:set>
+	</c:forEach>
+</c:if>
+
 <c:if test="${not empty facetData.values}">
 <ycommerce:testId code="facetNav_title_${facetData.name}">
 	<div class="facet js-facet">
@@ -16,14 +23,13 @@
 			<spring:theme code="search.nav.facetTitle" arguments="${facetData.name}"/>
 		</div>
 
-
 		<div class="facet__values js-facet-values js-facet-form" style="display: none;">
 
 			<c:if test="${not empty facetData.topValues}">
 				<ul class="facet__list js-facet-list js-facet-top-values">
 					<c:forEach items="${facetData.topValues}" var="facetValue">
-						<li>
-							<c:if test="${facetData.multiSelect}">
+						<c:if test="${facetData.multiSelect and userWarehouse.contains(facetValue.name)}">
+							<li>
 								<form action="#" method="get">
 									<input type="hidden" name="q" value="${facetValue.query.query.value}"/>
 									<input type="hidden" name="text" value="${searchPageData.freeTextSearch}"/>
@@ -40,8 +46,10 @@
 										</span>
 									</label>
 								</form>
-							</c:if>
-							<c:if test="${not facetData.multiSelect}">
+							</li>
+						</c:if>
+						<c:if test="${not facetData.multiSelect}">
+							<li>
 								<c:url value="${facetValue.query.url}" var="facetValueQueryUrl"/>
 								<span class="facet__text">
 									<a href="${facetValueQueryUrl}&amp;text=${fn:escapeXml(searchPageData.freeTextSearch)}">${fn:escapeXml(facetValue.name)}</a>&nbsp;
@@ -49,15 +57,17 @@
 										<span class="facet__value__count"><spring:theme code="search.nav.facetValueCount" arguments="${facetValue.count}"/></span>
 									</ycommerce:testId>
 								</span>
-							</c:if>
-						</li>
+							</li>
+						</c:if>
 					</c:forEach>
 				</ul>
 			</c:if>
 			<ul class="facet__list js-facet-list <c:if test="${not empty facetData.topValues}">facet__list--hidden js-facet-list-hidden</c:if>">
 				<c:forEach items="${facetData.values}" var="facetValue">
-					<li>
-						<c:if test="${facetData.multiSelect}">
+						<%--<span >${userWarehouse}</span>--%>
+					<%--<span >${facetValue.name}</span>--%>
+					<c:if test="${facetData.multiSelect and userWarehouse.contains(facetValue.name)}">
+						<li>
 							<ycommerce:testId code="facetNav_selectForm">
 							<form action="#" method="get">
 								<input type="hidden" name="q" value="${facetValue.query.query.value}"/>
@@ -76,8 +86,10 @@
 								</label>
 							</form>
 							</ycommerce:testId>
-						</c:if>
-						<c:if test="${not facetData.multiSelect}">
+						</li>
+					</c:if>
+					<c:if test="${not facetData.multiSelect}">
+						<li>
 							<c:url value="${facetValue.query.url}" var="facetValueQueryUrl"/>
 							<span class="facet__list__label">
 											<span class="facet__list__mark"></span>
@@ -88,8 +100,8 @@
 									</ycommerce:testId>
 								</span>
 							</span>
-						</c:if>
-					</li>
+						</li>
+					</c:if>
 				</c:forEach>
 			</ul>
 

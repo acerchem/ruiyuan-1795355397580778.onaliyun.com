@@ -342,13 +342,26 @@
 		</property>
 	</bean>
 
+	<bean id="acerchemWarehouseConverter" parent="abstractPopulatingConverter">
+		<property name="targetClass" value="de.hybris.platform.commercefacades.user.data.AcerchemWarehouseData"/>
+		<property name="populators">
+			<list>
+				<ref bean="defaultAcerchemWarehousePopulator"></ref>
+			</list>
+		</property>
+	</bean>
+
+	<bean id="defaultAcerchemWarehousePopulator" class="com.acerchem.facades.populators.AcerchemWarehousePopulator">
+	</bean>
+
 	<!-- add by alice -->
 	<alias name="defaultAcerchemCustomerPopulator" alias="customerPopulator" />
 	<bean id="defaultAcerchemCustomerPopulator" parent="defaultCustomerPopulator"
-		class="com.acerchem.facades.populators.AcerchemCustomerPopulator">
+	class="com.acerchem.facades.populators.AcerchemCustomerPopulator">
 		<property name="addressConverter" ref="addressConverter" />
 		<property name="creditAccountConverter" ref="creditAccountConverter" />
 		<property name="userLevelConverter" ref="userLevelConverter" />
+		<property name="warehouseConverter" ref="acerchemWarehouseConverter" />
 	</bean>
 
 	<alias name="defaultAcerchemCustomerConverter" alias="acerchemCustomerConverter" />

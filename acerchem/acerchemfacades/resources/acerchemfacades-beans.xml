@@ -126,6 +126,13 @@
 		<property name="revenue" type="java.math.BigDecimal" />
 		<property name="userLevel"
 			type="de.hybris.platform.commercefacades.user.data.UserLevelData" />
+		<property name="warehouseList"
+				  type="java.util.List&lt;de.hybris.platform.commercefacades.user.data.AcerchemWarehouseData>" />
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.user.data.AcerchemWarehouseData">
+		<property name="code" type="java.lang.String" />
+		<property name="name" type="java.lang.String" />
 	</bean>
 
 	<bean class="de.hybris.platform.commercefacades.user.data.UserLevelData">
