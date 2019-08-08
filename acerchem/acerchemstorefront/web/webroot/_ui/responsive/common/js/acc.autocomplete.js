@@ -104,7 +104,7 @@ ACC.autocomplete = {
 	
 		$search = $(".js-site-search-input");
 		if($search.length>0){
-			$search.yautocomplete()
+			//$search.yautocomplete()
 		}
 
 	},
