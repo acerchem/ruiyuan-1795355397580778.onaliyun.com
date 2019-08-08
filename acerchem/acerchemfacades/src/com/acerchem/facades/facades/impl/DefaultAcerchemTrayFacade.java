@@ -62,7 +62,7 @@ public class DefaultAcerchemTrayFacade implements AcerchemTrayFacade {
         CountryTrayFareConfModel countryTrayFareConf = null;
         //托盘数量
         BigDecimal totalTrayAmount = BigDecimal.ZERO;
-        if (cartData!=null){
+        if (cartData != null && addressData != null){
 
             for (OrderEntryData aoe : cartData.getEntries()){
 
