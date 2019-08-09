@@ -10,6 +10,7 @@
 
 <div class="title">Personal Information</div>
 <div class="rigcont">
+
     <form:form method="post" commandName="customRegisterForm" class="both" id="personal" action="${action}">
 		<label>
 			<span class='label-title' style="font-weight:normal;">Email<span style="color:red;font-size: 100%;"> *</span></span>	
@@ -124,8 +125,9 @@
 		</label>
 		
 		<label>
-			<span class='label-title' style="font-weight:normal;">Revenue</span>	
-			<input id="register.revenue" type="text" name='revenue' value="${customRegisterForm.revenue}" onkeypress="if(!this.value.match(/^[\+\-]?\d*?\.?\d*?$/))this.value=this.t_value;else this.t_value=this.value;if(this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?)?$/))this.o_value=this.value" onkeyup="if(!this.value.match(/^[\+\-]?\d*?\.?\d*?$/))this.value=this.t_value;else this.t_value=this.value;if(this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?)?$/))this.o_value=this.value" onblur="if(!this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?|\.\d*?)?$/))this.value=this.o_value;else{if(this.value.match(/^\.\d+$/))this.value=0+this.value;if(this.value.match(/^\.$/))this.value=0;this.o_value=this.value}"/>
+			<span class='label-title' style="font-weight:normal;">Revenue</span>
+			<input id="register.revenue" type="hidden" name='revenue' value="${customRegisterForm.revenue}"/>
+			<input id="revenue" type="text" value="${customRegisterForm.revenue}" onkeypress="if(!this.value.match(/^[\+\-]?\d*?\.?\d*?$/))this.value=this.t_value;else this.t_value=this.value;if(this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?)?$/))this.o_value=this.value" onkeyup="if(!this.value.match(/^[\+\-]?\d*?\.?\d*?$/))this.value=this.t_value;else this.t_value=this.value;if(this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?)?$/))this.o_value=this.value" onblur="if(!this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?|\.\d*?)?$/))this.value=this.o_value;else{if(this.value.match(/^\.\d+$/))this.value=0+this.value;if(this.value.match(/^\.$/))this.value=0;this.o_value=this.value}"/>
 			<div style="color:#F00"><form:errors path="revenue"/></div>
 		</label>
 		
@@ -136,8 +138,9 @@
 		</label>
 		
 		<label>
-			<span class='label-title' style="font-weight:normal;">The credit limit you will need for your business</span>	
-			<input id="register.limitCreditAmount" type="text" name='limitCreditAmount' value="${customRegisterForm.limitCreditAmount}"/>
+			<span class='label-title' style="font-weight:normal;">The credit limit you will need for your business</span>
+			<input id="register.limitCreditAmount" type="hidden" name='limitCreditAmount' value="${customRegisterForm.limitCreditAmount}"/>
+			<input id="limitCreditAmount" type="text" value="${customRegisterForm.limitCreditAmount}" onkeypress="if(!this.value.match(/^[\+\-]?\d*?\.?\d*?$/))this.value=this.t_value;else this.t_value=this.value;if(this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?)?$/))this.o_value=this.value" onkeyup="if(!this.value.match(/^[\+\-]?\d*?\.?\d*?$/))this.value=this.t_value;else this.t_value=this.value;if(this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?)?$/))this.o_value=this.value" onblur="if(!this.value.match(/^(?:[\+\-]?\d+(?:\.\d+)?|\.\d*?)?$/))this.value=this.o_value;else{if(this.value.match(/^\.\d+$/))this.value=0+this.value;if(this.value.match(/^\.$/))this.value=0;this.o_value=this.value}"/>
 			<div style="color:#F00"><form:errors path="limitCreditAmount"/></div>
 		</label>
 		
@@ -167,6 +170,8 @@
 
 <script type="text/javascript">
 $('.btn-submit').on('click',function(){
+	$("[name='revenue']").val($("#revenue").val());
+	$("[name='limitCreditAmount']").val($("#limitCreditAmount").val());
 	var req = $('#personal');
 	verification(req);
 })
@@ -192,6 +197,14 @@ $(document).on("change",'#selectContactCountry select', function (){
 }) 
 
  $(document).ready(function() {
+	 var revenue = $("#revenue").val();
+	 var revenueArr = revenue.split('.');
+	 $("#revenue").val(revenueArr[0]+"."+revenueArr[1].substring(0,2));
+	 var limitCreditAmount = $("#limitCreditAmount").val();
+	 var limitCreditAmountArr = limitCreditAmount.split('.');
+	 $("#limitCreditAmount").val(limitCreditAmountArr[0]+"."+limitCreditAmountArr[1].substring(0,2));
+
+
     $('#currency').change(function() {
     	
     	var currencyValue= this.value;
