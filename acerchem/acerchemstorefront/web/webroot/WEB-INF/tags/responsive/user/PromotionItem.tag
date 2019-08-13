@@ -19,7 +19,7 @@
             <c:forEach items="${promotionItem}" var="pro">
              	<c:url value="${pro.url}" var="productUrl"/>
              	<div class="item">	    		
-		    		<div class="img">
+		    		<div class="img" style="height: 120px;">
 		    			<a href="${productUrl}">
 		    				<img src="${pro.images.get(0).url}" alt=""  style="height: 120px; width:100%;">
 		    		  	</a>
