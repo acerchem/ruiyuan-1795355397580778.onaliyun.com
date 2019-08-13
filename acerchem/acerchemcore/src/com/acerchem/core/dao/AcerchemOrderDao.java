@@ -13,7 +13,8 @@ import de.hybris.platform.commercefacades.order.data.SalesByEmployeeReportData;
 public interface AcerchemOrderDao {
 	
 	Set<String> getAllAreas();
-	List<OrderDetailsReportData> getOrderDetails(String month,String area,String countryCode,String customerCompanyname,String orderCode);
+	List<OrderDetailsReportData> getOrderDetails(String month,String area,String countryCode,String customerCompanyname,String orderCode);;
+	List<OrderDetailsReportData> getOrderDetails(String month,String area,String countryCode,String customerCompanyname,String orderCode,String vendorCode);
 	List<MonthlySalesAnalysis> getMonthlySalesAnalysis(String year,String area);
 	List<SalesByEmployeeReportData> getEmployeeSales(String year);
 	

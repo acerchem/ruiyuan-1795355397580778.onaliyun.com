@@ -51,9 +51,13 @@ public interface AcerChemProductDao {
 	public List<OrderEntryModel> getOrderEntryProduct(String uid,Date startDate, Date endDate);
 	
 	public List<AcerchemProductPriceBean> getProductWithBaserealPrice(String month);
+
+	public List<AcerchemProductPriceBean> getProductWithBaserealPrice(String month,String vendorCode);
 	
 	public List<AcerchemProductBuyerBean> getProductSalesForReport(String month,String category,String area,String country);
-	
+
+	public List<AcerchemProductBuyerBean> getProductSalesForReport(String month,String category,String area,String country,String vendorCode);
+
 	public List<StockLevelModel> getInventory(final String vendorCode);
 	
 	public List<OrderEntryModel> getOrderEntryProductByVendorcode(String vendorcode,Date startDate, Date endDate);

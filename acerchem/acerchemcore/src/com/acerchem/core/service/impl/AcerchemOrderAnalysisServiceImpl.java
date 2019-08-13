@@ -53,7 +53,12 @@ public class AcerchemOrderAnalysisServiceImpl implements AcerchemOrderAnalysisSe
 		// TODO Auto-generated method stub
 		return acerchemOrderDao.getOrderDetails(month, area, countryCode, customerCompanyname, orderCode);
 	}
-	
+	@Override
+	public List<OrderDetailsReportData> getOrderDetails(final String month, final String area, final String countryCode,
+														final String customerCompanyname, final String orderCode,String vendorCode) {
+		// TODO Auto-generated method stub
+		return acerchemOrderDao.getOrderDetails(month, area, countryCode, customerCompanyname, orderCode,vendorCode);
+	}
 
 	
 }

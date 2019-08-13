@@ -228,6 +228,173 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 	}
 
 	@Override
+	public List<OrderDetailsReportData> getOrderDetails(final String month, final String area, final String countryCode,
+														final String customerCompanyName, final String orderCode,String vendorCode) {
+
+		final Integer pageSize = 100;
+
+		final Map<String, Object> params = new HashMap<String, Object>();
+		String SQL = "select {e.pk},{ua.pk} from {OrderEntry as e"
+				+ " JOIN Order as o ON {e:order} = {o:pk}"
+				+ " JOIN Customer as u ON {u:pk} = {o:user}"
+				+ " JOIN Address as ua ON {ua:owner} = {u:pk}"
+				+ " JOIN Country as uc ON {uc:pk} = {ua:country}"
+				+ " JOIN Product as p ON {e:product} = {p:pk} "
+				+ " JOIN Vendor as v ON {v.pk} = {p.acerChemVendor}"+ "}" +
+		" where {ua:contactAddress} = true "
+					+"and {v.code}=?code ";
+
+
+		//增加订单状态不等于cancelled
+		SQL += " and {o:status}<>?status";
+//		SQL += " {o:status}<>?status";
+		params.put("status", OrderStatus.valueOf("Cancelled"));
+		params.put("code", vendorCode);
+		if (month != null && !month.equals("")) {
+			SQL += " AND DATE_FORMAT({o:creationtime},'%Y%m') =?month ";
+			params.put("month", month);
+		}
+		if (area != null && !area.equals("") && !area.equals("no")) {
+			SQL += " AND {u:area} =?area ";
+			params.put("area", CustomerArea.valueOf(area));
+		}
+		if (countryCode != null && !countryCode.equals("") && !countryCode.equals("no")) {
+			SQL += " AND {uc:isocode} =?isocode";
+			// params.put("deliveryMode",
+			// deliveryModeService.getDeliveryModeForCode("DELIVERY_MENTION"));
+			params.put("isocode", countryCode);
+		}
+		//username filter-》company filter
+		if (customerCompanyName != null && !customerCompanyName.equals("")) {
+			SQL += " AND {u:companyName} like ?companyName ";
+			params.put("companyName", "%" + customerCompanyName + "%");
+		}
+
+		if (orderCode != null && !orderCode.equals("")) {
+			SQL += " AND {o:code} like ?orderCode ";
+			params.put("orderCode", "%" + orderCode + "%");
+		}
+
+		SQL += " ORDER BY {o:code}";
+		final StringBuilder builder = new StringBuilder(SQL);
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(builder.toString());
+		query.setResultClassList(Arrays.asList(OrderEntryModel.class, AddressModel.class));
+		query.addQueryParameters(params);
+		//query.setNeedTotal(false);
+		//query.setCount(pageSize);
+		//query.setStart(pageSize * (pageNumber - 1));
+		final SearchResult<List<Object>> result = flexibleSearchService.search(query);
+
+		final List<OrderDetailsReportData> orderDetails = new ArrayList<OrderDetailsReportData>();
+		// for (final OrderEntryModel od : result.getResult()) {
+		LOG.info(">>>>>>>>>OrderDetailsReport originalCount="+result.getCount());
+		for (final List<Object> columnValueForRow : result.getResult()) {
+			final OrderEntryModel od = (OrderEntryModel) columnValueForRow.get(0);
+			final AddressModel addressModel = (AddressModel) columnValueForRow.get(1);
+			// AddressModel addressModel = null;
+			// if
+			// (od.getOrder().getDeliveryMode().getCode().equals("DELIVERY_MENTION"))
+			// {// 自提
+			// for (final AddressModel address :
+			// od.getOrder().getUser().getAddresses()) {
+			// if (address.getContactAddress()) {
+			// addressModel = address;
+			// }
+			// }
+			// } else {// 送货
+			// addressModel = od.getOrder().getDeliveryAddress();
+			// }
+
+			final OrderDetailsReportData detail = new OrderDetailsReportData();
+			detail.setCurrency(od.getOrder().getCurrency().getName());
+			if (addressModel != null) {
+				detail.setCountry(addressModel.getCountry().getName());
+			}
+			if (od.getOrder().getUser().getArea() != null) {
+				detail.setArea(od.getOrder().getUser().getArea().toString());
+			}
+			detail.setOrderCode(od.getOrder().getCode());
+			detail.setOrderTime(od.getOrder().getCreationtime());
+			detail.setOrderFinishedTime(od.getOrder().getOrderFinishedDate());
+			detail.setProductName(od.getProduct().getName());
+			detail.setProductQuantity(od.getQuantity());
+			detail.setOrderAmount(od.getTotalRealPrice());
+			//modified userid to customer's companyname
+			if(od.getOrder().getUser() != null){
+				final CustomerModel customer = (CustomerModel)od.getOrder().getUser();
+				if (StringUtils.isNotBlank(customer.getCompanyName())){
+					detail.setUserUid(customer.getCompanyName());
+				}
+
+			}
+			final String deliveryCode = od.getOrder().getDeliveryMode() == null ? ""
+					: od.getOrder().getDeliveryMode().getCode();
+
+			if (deliveryCode.equals("DELIVERY_GROSS")) {// 配送 DELIVERY_GROSS)
+				if (od.getOrder().getDeliveryAddress() != null) {
+					detail.setDeliveryAddress(addressConverter.convert(od.getOrder().getDeliveryAddress()));
+				}
+
+			} else {
+				detail.setDeliveryAddress(addressConverter.convert(addressModel));
+				// 增加仓库地址
+				final PointOfServiceModel pos = od.getDeliveryPointOfService();
+				if (pos != null) {
+					final AddressModel posAddress = pos.getAddress();
+					if (posAddress != null) {
+						String _temp = "";
+						if (StringUtils.isNotBlank(posAddress.getLine1())) {
+							_temp += posAddress.getLine1() + ",";
+						}
+						if (StringUtils.isNotBlank(posAddress.getLine2())) {
+							_temp += posAddress.getLine2() + ",";
+						}
+						if (StringUtils.isNotBlank(posAddress.getTown())) {
+							_temp += posAddress.getTown() + ",";
+						}
+						if (posAddress.getRegion() != null) {
+							if (StringUtils.isNotBlank(posAddress.getRegion().getName())) {
+								_temp += posAddress.getRegion().getName() + ",";
+							}
+						}
+						if (StringUtils.isNotBlank(posAddress.getPostalcode())) {
+							_temp += posAddress.getPostalcode() + ",";
+						}
+						if (posAddress.getCountry() != null) {
+							if (StringUtils.isNotBlank(posAddress.getCountry().getName())) {
+								_temp += posAddress.getCountry().getName();
+							}
+						}
+
+						final String warehouse = _temp;
+
+						detail.setWarehouse(warehouse);
+
+					}
+				}
+
+			}
+			// 商家业务员
+			// if (od.getOrder().getPlacedBy() != null) {
+			// detail.setSalesman(od.getOrder().getPlacedBy().getName());
+			// }
+			final CustomerModel customer = (CustomerModel) od.getOrder().getUser();
+			if (customer != null) {
+				final EmployeeModel emp = customer.getRelatedCustomer();
+				if (emp != null) {
+					detail.setSalesman(emp.getName());
+				}
+			}
+			if (od.getProduct().getAcerChemVendor() != null) {
+				detail.setSupplier(od.getProduct().getAcerChemVendor().getName());
+			}
+			orderDetails.add(detail);
+		}
+		return orderDetails;
+
+	}
+
+	@Override
 	public List<MonthlySalesAnalysis> getMonthlySalesAnalysis(final String year, final String area) {
 
 		final Map<String, Object> params = new HashMap<String, Object>();

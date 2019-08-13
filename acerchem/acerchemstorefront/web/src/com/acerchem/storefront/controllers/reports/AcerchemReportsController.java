@@ -248,7 +248,8 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	@RequestMapping(value = "/orderDetails", method = RequestMethod.GET)
 	public String showOrderDetailsPage(final Model model, final RedirectAttributes attr)
 			throws CMSItemNotFoundException {
-		if (isVendorAccount()) {
+		VendorModel vendor = getCurrentUserVendor();
+		if (vendor == null ) {
 			attr.addFlashAttribute("myMessage", "没有权限查看订单明细表");
 			return "redirect:/reports/message";
 		}
@@ -262,7 +263,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 //		final List<OrderDetailsReportData> searchPageData = acerchemOrderDao.getOrderDetails(curMonth, null, null, null,
 //				null);
 		final List<OrderDetailsReportData> reports = acerchemOrderAnalysisService.getOrderDetails(curMonth, null, null, null,
-				null);
+				null,vendor.getCode());
 		
 		LOG.info(">>>>>>>OrderDetailsReport: Count="+reports.size());
 		
@@ -281,8 +282,13 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 
 	@RequestMapping(value = "/orderDetails", method = RequestMethod.POST)
 	public String getOrderDetails(final SearchCriteriaFrom searchCriteriaFrom, final Model model,
-			@RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode)
+			@RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode, final RedirectAttributes attr)
 			throws CMSItemNotFoundException {
+		VendorModel vendor = getCurrentUserVendor();
+		if (vendor == null ) {
+			attr.addFlashAttribute("myMessage", "没有权限查看订单明细表");
+			return "redirect:/reports/message";
+		}
 		// if (searchCriteriaFrom.getPageNumber() == null ||
 		// searchCriteriaFrom.getPageNumber() < 1) {
 		searchCriteriaFrom.setPageNumber(1);
@@ -307,7 +313,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		final List<OrderDetailsReportData> reports = acerchemOrderAnalysisService.getOrderDetails(curMonth,
 				//注意，改做company name参数过滤了
 				searchCriteriaFrom.getArea(), searchCriteriaFrom.getCountryCode(), searchCriteriaFrom.getCutomerCompanyName(),
-				searchCriteriaFrom.getOrderCode());
+				searchCriteriaFrom.getOrderCode(),vendor.getCode());
 
 		curMonth = curMonth.substring(0, 4) + "-" + curMonth.substring(4);
 
@@ -843,12 +849,14 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	@RequestMapping(value = "/productPriceAnalysis", method = RequestMethod.GET)
 	public String showProductPriceAnalysist(final Model model, final RedirectAttributes attr)
 			throws CMSItemNotFoundException {
-		if (isVendorAccount()) {
+		VendorModel vendor = getCurrentUserVendor();
+		if (vendor == null ) {
 			attr.addFlashAttribute("myMessage", "没有权限查看商品价格趋势分析");
 			return "redirect:/reports/message";
 		}
 		storeCmsPageInModel(model, getContentPageForLabelOrId("login"));
 		// model.addAttribute("list",list);
+
 
 		final Date d = new Date();
 		final SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
@@ -864,7 +872,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 
 		calendar.add(calendar.DATE, -1);
 		final int maxWeek = calendar.get(Calendar.WEEK_OF_MONTH);
-		final List<ProductPriceAnalysisData> list = acerChemProductService.getProductWithBaserealPrice(month);
+		final List<ProductPriceAnalysisData> list = acerChemProductService.getProductWithBaserealPrice(month,vendor.getCode());
 
 		model.addAttribute("list", list);
 		model.addAttribute("month", month.substring(0,4)+"-"+month.substring(4));
@@ -875,9 +883,13 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	}
 
 	@RequestMapping(value = "/productPriceAnalysis", method = RequestMethod.POST)
-	public String getProductPriceAnalysist(final Model model, @RequestParam("month") final String month)
+	public String getProductPriceAnalysist(final Model model, @RequestParam("month") final String month, final RedirectAttributes attr)
 			throws CMSItemNotFoundException {
-
+		VendorModel vendor = getCurrentUserVendor();
+		if (vendor == null ) {
+			attr.addFlashAttribute("myMessage", "没有权限查看商品价格趋势分析");
+			return "redirect:/reports/message";
+		}
 		String curMonth = month;
 		if (StringUtils.isBlank(curMonth) || month.length() != 7 || month.indexOf("-") < 0) {
 
@@ -898,11 +910,11 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		calendar.add(calendar.DATE, -1);
 		final int maxWeek = calendar.get(Calendar.WEEK_OF_MONTH);
 
-		final List<ProductPriceAnalysisData> list = acerChemProductService.getProductWithBaserealPrice(curMonth);
+		final List<ProductPriceAnalysisData> list = acerChemProductService.getProductWithBaserealPrice(curMonth,vendor.getCode());
 
 		curMonth = curMonth.substring(0, 4) + "-" + curMonth.substring(4);
 		model.addAttribute("list", list);
-		model.addAttribute("month", curMonth.substring(0,4)+"-"+curMonth.substring(4));
+		model.addAttribute("month", curMonth);
 		model.addAttribute("maxWeek", maxWeek);
 		model.addAttribute("isDocMenu", isVisibleDocMenu());
 		return "pages/reports/productPriceAnalysis";
@@ -912,7 +924,8 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	@RequestMapping(value = "/productSalesRecord", method = RequestMethod.GET)
 	public String showProductSalesRecord(final Model model, final RedirectAttributes attr)
 			throws CMSItemNotFoundException {
-		if (isVendorAccount()) {
+		VendorModel vendor = getCurrentUserVendor();
+		if (vendor == null ) {
 			attr.addFlashAttribute("myMessage", "没有权限查看商品销售记录");
 			return "redirect:/reports/message";
 		}
@@ -926,7 +939,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		final String month = sdf.format(d);
 
 		final List<ProductSalesRecordData> list = acerChemProductService.getProductSalesForReport(month, null, null,
-				null);
+				null,vendor.getCode());
 
 		final ProductSalesForm productSalesForm = new ProductSalesForm();
 		model.addAttribute("productSalesForm", productSalesForm);
@@ -938,8 +951,14 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 	}
 
 	@RequestMapping(value = "/productSalesRecord", method = RequestMethod.POST)
-	public String getProductSalesRecord(final Model model, final ProductSalesForm productSalesForm)
+	public String getProductSalesRecord(final Model model, final ProductSalesForm productSalesForm, final RedirectAttributes attr)
 			throws CMSItemNotFoundException {
+
+		VendorModel vendor = getCurrentUserVendor();
+		if (vendor == null ) {
+			attr.addFlashAttribute("myMessage", "没有权限查看商品销售记录");
+			return "redirect:/reports/message";
+		}
 
 		String curMonth = productSalesForm.getMonth();
 		if (StringUtils.isBlank(curMonth) || curMonth.length() != 7 || curMonth.indexOf("-") < 0) {
@@ -953,7 +972,7 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 		}
 		System.out.println(curMonth);
 		final List<ProductSalesRecordData> list = acerChemProductService.getProductSalesForReport(curMonth,
-				productSalesForm.getCategoryCode(), productSalesForm.getArea(), productSalesForm.getCountryCode());
+				productSalesForm.getCategoryCode(), productSalesForm.getArea(), productSalesForm.getCountryCode(),vendor.getCode());
 
 		model.addAttribute("list", list);
 		// 重置form
@@ -1195,11 +1214,19 @@ public class AcerchemReportsController extends AbstractSearchPageController {// 
 			final CustomerModel customer = (CustomerModel) user;
 			final VendorModel vendor = customer.getVendorAccount();
 			if (vendor != null) {
-				return true;
+				return false;
 			}
 		}
+		return true;
+	}
 
-		return false;
+	private VendorModel getCurrentUserVendor(){
+		final UserModel user = userService.getCurrentUser();
+		if (user instanceof CustomerModel) {
+			final CustomerModel customer = (CustomerModel) user;
+			return customer.getVendorAccount();
+		}
+		return null;
 	}
 
 	@RequestMapping(value = "/docAdd", method = RequestMethod.GET)

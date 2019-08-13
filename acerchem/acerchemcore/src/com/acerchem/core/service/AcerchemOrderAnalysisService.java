@@ -31,4 +31,5 @@ public interface AcerchemOrderAnalysisService {
 	
 	Set<String> getAllAreas();
 	List<OrderDetailsReportData> getOrderDetails(String month,String area,String countryCode,String customerCompanyname,String orderCode);
+	List<OrderDetailsReportData> getOrderDetails(String month,String area,String countryCode,String customerCompanyname,String orderCode,String vendorCode);
 }

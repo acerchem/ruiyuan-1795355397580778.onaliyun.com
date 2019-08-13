@@ -381,6 +381,14 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 		return report;
 	}
 
+
+	@Override
+	public List<ProductPriceAnalysisData> getProductWithBaserealPrice(final String month,final String vendorCode){
+		final List<AcerchemProductPriceBean> listWithWeek = acerChemProductDao.getProductWithBaserealPrice(month,vendorCode);
+		final List<ProductPriceAnalysisData> report = fillReport(listWithWeek);
+		return report;
+	}
+
 	private List<ProductPriceAnalysisData> fillReport(final List<AcerchemProductPriceBean> list) {
 		final List<ProductPriceAnalysisData> report = new ArrayList<>();
 		if (CollectionUtils.isNotEmpty(list) && list.size() > 0) {
@@ -610,6 +618,61 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 		}
 		return report;
 	}
+
+	@Override
+	public List<ProductSalesRecordData> getProductSalesForReport(final String month, final String categoryCode,
+																 final String area, final String countryCode,final String vendorCode) {
+		final List<AcerchemProductBuyerBean> list = acerChemProductDao.getProductSalesForReport(month, categoryCode,
+				area, countryCode,vendorCode);
+
+		final List<ProductSalesRecordData> report = new ArrayList<>();
+		if (CollectionUtils.isNotEmpty(list)) {
+			if (list.size() > 0) {
+				list.sort(compatatorForSales);
+				String pCode = list.get(0).getProductCode();
+				String customer = list.get(0).getBuyer();
+
+				long quantity = 0;
+				for (int i = 0; i < list.size(); i++) {
+					final AcerchemProductBuyerBean bean = list.get(i);
+					if (pCode.equals(bean.getProductCode()) && customer.equals(bean.getBuyer())) {
+						quantity += bean.getBuyQuantity().longValue();
+
+					} else {
+						pCode = bean.getProductCode();
+						customer = bean.getBuyer();
+
+						i--;
+						final AcerchemProductBuyerBean old = list.get(i);
+						final ProductSalesRecordData item = new ProductSalesRecordData();
+
+						item.setProductCode(old.getProductCode());
+						item.setProductName(old.getProductName());
+						item.setCustomerName(old.getBuyer());
+						item.setSalesQuantity(quantity);
+
+						report.add(item);
+						quantity = 0;
+					}
+
+				}
+				// 处理最后
+				final AcerchemProductBuyerBean last = list.get(list.size() - 1);
+				final ProductSalesRecordData item = new ProductSalesRecordData();
+
+				item.setProductCode(last.getProductCode());
+				item.setProductName(last.getProductName());
+				item.setCustomerName(last.getBuyer());
+				item.setSalesQuantity(quantity);
+
+				report.add(item);
+
+			}
+
+		}
+		return report;
+	}
+
 
 	private static Comparator<AcerchemProductBuyerBean> compatatorForSales = new Comparator<AcerchemProductBuyerBean>() {
 
