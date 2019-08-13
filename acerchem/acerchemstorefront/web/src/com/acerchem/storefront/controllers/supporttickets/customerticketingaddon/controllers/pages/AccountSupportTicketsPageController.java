@@ -11,6 +11,14 @@
  */
 package com.acerchem.storefront.controllers.supporttickets.customerticketingaddon.controllers.pages;
 
+import com.acerchem.facade.supportticket.facade.impl.AcerchemFacadeTicketFacadeImpl;
+import com.acerchem.storefront.checkout.steps.validation.impl.AddSupportTicketValidator;
+import com.acerchem.storefront.checkout.steps.validation.impl.SupportTicketForm;
+import com.google.common.collect.Maps;
+import com.sap.security.core.server.csi.XSSEncoder;
+import de.hybris.platform.acceleratorservices.email.EmailService;
+import de.hybris.platform.acceleratorservices.model.email.EmailAddressModel;
+import de.hybris.platform.acceleratorservices.model.email.EmailMessageModel;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.Breadcrumb;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.ResourceBreadcrumbBuilder;
 import de.hybris.platform.acceleratorstorefrontcommons.constants.WebConstants;
@@ -22,15 +30,14 @@ import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commercefacades.order.CartFacade;
 import de.hybris.platform.commercefacades.order.data.CartData;
 import de.hybris.platform.commercefacades.product.data.ProductData;
+import de.hybris.platform.commercefacades.user.data.CustomerData;
 import de.hybris.platform.commerceservices.search.flexiblesearch.PagedFlexibleSearchService;
 import de.hybris.platform.commerceservices.search.flexiblesearch.data.SortQueryData;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.converters.Converters;
 import de.hybris.platform.core.model.product.ProductModel;
-import com.acerchem.facade.supportticket.facade.impl.AcerchemFacadeTicketFacadeImpl;
-import com.acerchem.storefront.checkout.steps.validation.impl.AddSupportTicketValidator;
-import com.acerchem.storefront.checkout.steps.validation.impl.SupportTicketForm;
+import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.customerticketingfacades.TicketFacade;
 import de.hybris.platform.customerticketingfacades.data.StatusData;
 import de.hybris.platform.customerticketingfacades.data.TicketCategory;
@@ -45,15 +52,7 @@ import de.hybris.platform.site.BaseSiteService;
 import de.hybris.platform.ticket.dao.TicketDao;
 import de.hybris.platform.ticket.model.CsTicketModel;
 import de.hybris.platform.ticket.service.UnsupportedAttachmentException;
-import java.io.UnsupportedEncodingException;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
-
-import javax.annotation.Resource;
-
+import de.hybris.platform.util.Config;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -63,15 +62,14 @@ import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.Validator;
 import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.InitBinder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import com.google.common.collect.Maps;
-import com.sap.security.core.server.csi.XSSEncoder;
-import de.hybris.platform.commercefacades.user.data.CustomerData;
+
+import javax.annotation.Resource;
+import java.io.StringWriter;
+import java.io.UnsupportedEncodingException;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Controller for Customer Support tickets.
@@ -132,6 +130,9 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 	
 	@Resource
 	private PagedFlexibleSearchService pagedFlexibleSearchService;
+
+	@Resource(name = "emailService")
+	private EmailService emailService;
 
 	/**
 	 * Lists all tickets
@@ -297,7 +298,15 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 		final PageableData pageableData = createPageableData(pageNumber, 5, sortCode, showMode);
 		
 		 ticketDao.findTicketsByCustomerOrderByModifiedTime(userService.getCurrentUser(), baseSiteService.getCurrentBaseSite(), pageableData);
-		
+
+		UserModel userModel = userService.getCurrentUser();
+		if ("anonymous".equals(userModel.getUid())){
+//			(SupportTicketForm)model.asMap().get("supportTicketForm");
+			EmailMessageModel emailMessageModel = this.createEmailMessage("测试");
+			this.sendEmail(emailMessageModel);
+			return "pages/account/accountSendSuccessPage";
+		}
+
 		 ServicesUtil.validateParameterNotNull(userService.getCurrentUser(), "Customer must not be null");
 		 ServicesUtil.validateParameterNotNull(baseSiteService.getCurrentBaseSite(), "Store must not be null");
 		 Map<String, Object> queryParams = new HashMap();
@@ -413,8 +422,8 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 	 */
 	@RequestMapping(value = "/support-ticket/" + SUPPORT_TICKET_CODE_PATH_VARIABLE_PATTERN, method = RequestMethod.GET)
 	public String getSupportTicket(@PathVariable("ticketId") final String ticketId, final Model model,
-			@RequestParam(value = "ticketUpdated", required = false, defaultValue = "false") final boolean ticketUpdated,
-			final RedirectAttributes redirectModel) throws CMSItemNotFoundException {
+								   @RequestParam(value = "ticketUpdated", required = false, defaultValue = "false") final boolean ticketUpdated,
+								   final RedirectAttributes redirectModel) throws CMSItemNotFoundException {
 		promotionItem(model);
 		storeCmsPageInModel(model,getContentPageForLabelOrId(CustomerticketingaddonConstants.UPDATE_SUPPORT_TICKET_PAGE));
 		setUpMetaDataForContentPage(model,getContentPageForLabelOrId(CustomerticketingaddonConstants.UPDATE_SUPPORT_TICKET_PAGE));
@@ -658,5 +667,25 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 		model.addAttribute("promotionItem", Converters.convertAll(result.getResult(), productConverter));
 		
 	}
-	
+
+
+
+	public EmailMessageModel createEmailMessage(final String emailBody) {
+		final List<EmailAddressModel> toEmails = new ArrayList<EmailAddressModel>();
+		final List<EmailAddressModel> ccAddress = new ArrayList<EmailAddressModel>();
+		String fromEmail = Config.getParameter("mail.from");
+		final EmailAddressModel fromAddress = emailService
+				.getOrCreateEmailAddressForEmail(fromEmail, "customerservice");
+		final EmailAddressModel ccEmailOneAddressModel = emailService.getOrCreateEmailAddressForEmail(
+				Config.getParameter("mail.ccAddress.one"), Config.getParameter("mail.ccAddress.displayOneName"));
+		toEmails.add(ccEmailOneAddressModel);
+
+		return emailService.createEmailMessage(toEmails, ccAddress, new ArrayList<EmailAddressModel>(),
+				fromAddress, fromEmail, "Support Tickets", emailBody, null);
+	}
+
+
+	public boolean sendEmail(EmailMessageModel message){
+		return emailService.send(message);
+	}
 }
