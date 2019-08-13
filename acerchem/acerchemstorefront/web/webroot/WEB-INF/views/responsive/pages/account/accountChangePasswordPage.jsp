@@ -15,8 +15,26 @@
 		<formElement:formPasswordBox idKey="newPassword" labelKey="" path="newPassword" inputCSS="form-control" mandatory="true" />
 		<span class='label-title'>Confirm Password</span>
 		<formElement:formPasswordBox idKey="checkNewPassword" labelKey="" path="checkNewPassword" inputCSS="form-control" mandatory="true" />
-		<div class="btn-set">				
-			<button type="submit" class="btn btn-primary btn-block">Confirm</button>
-		</div>
 	</form:form>
+	<div class="btn-set">
+		<button type="submit" class="btn btn-primary btn-block" id="confirmBtn">Confirm</button>
+	</div>
 </div>
+
+<script type="text/javascript">
+	$('#confirmBtn').on('click',function(){
+		var pwd = /^(?=.*?[0-9])(?=.*?[a-z])(?=.*?[A-Z])[0-9a-zA-Z]{6,16}$/;
+		var newPassword = $("#newPassword").val();
+		if(newPassword.length<6 || newPassword.length>16 ||!pwd.test(newPassword)) {
+			$("#pwdError").text('Password should be a combination of 6-16 lower case letters,uppercase letter and numbers!');
+			maxalert('Password should be a combination of 6-16 lower case letters,uppercase letter and numbers!');
+			return;
+		}
+		var checkNewPassword = $("#checkNewPassword").val();
+		if(newPassword == checkNewPassword){
+			$('#password').submit();
+		}else {
+			maxalert("Different passwords");
+		}
+	})
+</script>

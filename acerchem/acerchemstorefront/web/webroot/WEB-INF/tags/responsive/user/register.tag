@@ -474,7 +474,6 @@ $('.btn-submit').on('click',function(){
 
 	var id = document.getElementsByName('aidField');
 	var value = new Array();
-	debugger;
 	for(var i = 0; i < id.length; i++){
 	     if(id[i].checked)
 	     value.push(id[i].value);
