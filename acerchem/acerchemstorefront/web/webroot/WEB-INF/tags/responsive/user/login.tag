@@ -47,4 +47,14 @@
 		</ycommerce:testId>
 	</div>
 </form:form>
+<script>
+
+	$(function(){
+
+		$("#cboxLoadingOverlay").remove();
+		$("#cboxLoadingGraphic").remove();
+
+	})
+
+</script>
 </body>
