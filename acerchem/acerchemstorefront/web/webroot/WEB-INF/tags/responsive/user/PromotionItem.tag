@@ -18,10 +18,10 @@
 		    <div class="slide-item both">
             <c:forEach items="${promotionItem}" var="pro">
              	<c:url value="${pro.url}" var="productUrl"/>
-             	<div class="item">	    		
-		    		<div class="img" style="height: 120px;">
+             	<div class="item" style=" height: 271px;" >
+		    		<div class="img" style="height: 190px;">
 		    			<a href="${productUrl}">
-		    				<img src="${pro.images.get(0).url}" alt=""  style="height: 120px; width:100%;">
+		    				<img src="${pro.images.get(0).url}" alt=""  style="height: 190px; width:100%;">
 		    		  	</a>
 		    		</div>
 		    		<div class="maxtext">
