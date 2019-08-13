@@ -14,7 +14,6 @@
 
 <script type="text/javascript">
 	$().ready(function(){
-		alert("11111");
 		$("body").css("height","1441px");
 	});
 </script>
