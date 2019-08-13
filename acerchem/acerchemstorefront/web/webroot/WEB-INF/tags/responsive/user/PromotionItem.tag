@@ -11,7 +11,7 @@
 			</div>	
 		</div>
 		<div class="banner_btn"> 
-    		<span class="arrow-left"></span> 
+    		<span class="arrow-left"></span>
 			<span class="arrow-right"></span>
 	    </div>
 	    <div class="slide-wrap">
@@ -19,9 +19,9 @@
             <c:forEach items="${promotionItem}" var="pro">
              	<c:url value="${pro.url}" var="productUrl"/>
              	<div class="item">	    		
-		    		<div class="img" style="height:120px;">
+		    		<div class="img">
 		    			<a href="${productUrl}">
-		    				<img src="${pro.images.get(0).url}" alt="">
+		    				<img src="${pro.images.get(0).url}" alt=""  style="height: 120px; width:100%;">
 		    		  	</a>
 		    		</div>
 		    		<div class="maxtext">
