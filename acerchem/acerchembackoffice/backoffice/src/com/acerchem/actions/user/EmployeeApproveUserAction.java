@@ -111,13 +111,16 @@ public class EmployeeApproveUserAction extends AbstractComponentWidgetAdapterAwa
 	public ActionResult<Object> perform(ActionContext<CustomerModel> ctx) {
 		// TODO Auto-generated method stub
 		CustomerModel customerModel = (CustomerModel) ctx.getData();
-		LOG.info("===========CustomerModel start=========="+customerModel.getUid());
-		getEventService().publishEvent(initializeEvent(new ApproveCustomerEvent(), customerModel));
-		customerModel.setLoginDisabled(false);
-		customerModel.setUnAudited(false);
-		customerModel.setType(CustomerType.APPROVED);
-		modelService.save(customerModel);
-		LOG.info("===========CustomerModel end==========");
+		if(customerModel!=null&&!CustomerType.APPROVED.equals(customerModel.getType()))
+		{
+			LOG.info("===========CustomerModel start==========" + customerModel.getUid());
+			getEventService().publishEvent(initializeEvent(new ApproveCustomerEvent(), customerModel));
+			customerModel.setLoginDisabled(false);
+			customerModel.setUnAudited(false);
+			customerModel.setType(CustomerType.APPROVED);
+			modelService.save(customerModel);
+			LOG.info("===========CustomerModel end==========");
+		}
 		return new ActionResult<Object>("success");
 	}
 	
