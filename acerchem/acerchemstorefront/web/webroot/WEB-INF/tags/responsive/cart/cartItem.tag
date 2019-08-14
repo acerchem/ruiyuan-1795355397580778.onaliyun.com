@@ -11,6 +11,7 @@
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ taglib prefix="order" tagdir="/WEB-INF/tags/responsive/order" %>
+<%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags" %>
 
 
 <%--
@@ -70,17 +71,32 @@
 				
 				<td>
 					<div class="m-setnum">
-					<!-- 
-						<span class="set sub">-</span>
-						<input type="text" name="pdnum" class="set" value="${entry.quantity}">
-						<span class="set add">+</span>
-						 -->
-						 ${entry.quantity}
+						<span class="set add">
+							<c:url value="/cart/minusOne" var="cartMinusOneUrl"/>
+                            <form:form id="minusCartForm${entry.product.code}" action="${cartMinusOneUrl}" method="post" >
+								<input type="hidden" name="productCodePost" value="${fn:escapeXml(entry.product.code)}"/>
+								<input type="hidden" name="storeId" value="${entry.deliveryPointOfService.name}"/>
+								<%--<input type="hidden" name="stockLevel" value="${entry.product.}"/>--%>
+								<input type="hidden" name="entryNumber" value="${entry.entryNumber}"/>
+								<input type="hidden" name="qty" value="${entry.quantity - 1}"/>
+								<input type="hidden" name="stockThreshold" value="${entry.product.minOrderQuantity}"/>
+								<button type="button" onclick="minusQuantity('minusCartForm', '${entry.product.code}')">-</button>
+							</form:form>
+						</span>
+						<input type="text" id="pdnum${entry.product.code}" name="pdnum" class="set" value="${entry.quantity}" onblur="updateQuantity('minusCartForm', '${entry.product.code}')">
+						<span class="set add">
+                            <c:url value="/cart/addOne" var="cartAddOneUrl"/>
+                            <form:form id="addCartForm${entry.product.code}" action="${cartAddOneUrl}" method="post" >
+                                <input type="hidden" name="productCodePost" value="${fn:escapeXml(entry.product.code)}"/>
+                                <input type="hidden" name="storeId" value="${entry.deliveryPointOfService.name}"/>
+                                <button type="submit">+</button>
+                            </form:form>
+                        </span>
 					</div>
 				</td>
 				
 				<td>
-					<div class="m-setnum">
+					<div class="m-setnum" id="totalWeight">
 					<!-- 
 						<span class="set sub">-</span>
 						<input type="text" name="pdnum" class="set" value="${entry.quantity}">
@@ -91,7 +107,7 @@
 				</td>
 				
 				<td>
-					<div class="tot">
+					<div class="tot" id="totalPrice">
 						<em>
 						<format:price priceData="${entry.totalPrice}" displayFreeForZero="true"/>
 						</em>
@@ -121,4 +137,32 @@
 				</td>
 			</tr>
  </c:if>
- 
+
+<script type="text/javascript" >
+	function minusQuantity(formName, productCode) {
+		let cartForm = document.getElementById(formName + productCode);
+		let avl = cartForm.qty.value;
+		let stockThreshold = cartForm.stockThreshold.value;
+		if(avl<stockThreshold){
+			maxalert("Cannot be less than the stock threshold!");
+			return;
+		}
+		cartForm.qty.value = avl;
+		cartForm.submit();
+	}
+	function updateQuantity(formName, productCode)
+	{
+		let cartForm = document.getElementById(formName + productCode);
+		let avl = document.getElementById("pdnum" + productCode).value;
+		let stockThreshold = cartForm.stockThreshold.value;
+		if(avl<stockThreshold){
+			maxalert("Cannot be less than the stock threshold!");
+			document.getElementById("pdnum" + productCode).value = stockThreshold;
+			cartForm.qty.value = stockThreshold;
+			return;
+		}
+		cartForm.qty.value = avl;
+		cartForm.submit();
+	}
+
+</script>
