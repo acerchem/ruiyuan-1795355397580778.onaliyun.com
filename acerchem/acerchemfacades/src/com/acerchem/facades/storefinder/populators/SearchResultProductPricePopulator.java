@@ -44,15 +44,20 @@ public class SearchResultProductPricePopulator extends SearchResultVariantProduc
 		target.setCode(this.<String> getValue(source, "code"));
 		target.setName(this.<String> getValue(source, "name"));
 		Object arrayList = this.<Object> getValue(source, "manufacturerName");
-		if(arrayList instanceof List)
+		if(arrayList!=null)
 		{
-			List<String> namelist = (List<String>)arrayList;
-			if (arrayList != null && CollectionUtils.isNotEmpty(namelist))
+			if (arrayList instanceof List)
 			{
-				target.setManufacturer(namelist.get(0));
+				List<String> namelist = (List<String>) arrayList;
+				if (arrayList != null && CollectionUtils.isNotEmpty(namelist))
+				{
+					target.setManufacturer(namelist.get(0));
+				}
 			}
-		}else{
-			target.setManufacturer(arrayList.toString());
+			else
+			{
+				target.setManufacturer(arrayList.toString());
+			}
 		}
 		target.setDescription(this.<String> getValue(source, "description"));
 		target.setSummary(this.<String> getValue(source, "summary"));
