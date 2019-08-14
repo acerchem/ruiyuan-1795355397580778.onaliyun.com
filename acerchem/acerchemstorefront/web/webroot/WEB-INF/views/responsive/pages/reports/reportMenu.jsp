@@ -1,5 +1,6 @@
 <%@ page trimDirectiveWhitespaces="true" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 
 
 <spring:htmlEscape defaultHtmlEscape="true" />
@@ -61,16 +62,18 @@
 				</li>
 				<li><a href="">订单销售分析</a>
 					<div class="col-list" style="display: none">
-						<a href="${orderDetailsUrl}">订单明细表</a> 
-						<a href="${monthlySalesAnalysisUrl}">区域月度销售分析</a> 
-						<a href="${employeeSalesAnalysisUrl}">各业务员完成情况</a>
-
+						<a href="${orderDetailsUrl}">订单明细表</a>
+						<sec:authorize access="hasAnyRole('ROLE_EMPLOYEEGROUP')">
+							<a href="${monthlySalesAnalysisUrl}">区域月度销售分析</a>
+							<a href="${employeeSalesAnalysisUrl}">各业务员完成情况</a>
+						</sec:authorize>
 					</div></li>
 				<li><a href="">用户分析报表</a>
 					<div class="col-list" style="display: none">
-						<a href="${customerSalesAnalysisUrl}">用户购买情况分析</a> 
-						<a href="${customerBillAnalysisUrl}">账龄分析报表</a>
-
+						<a href="${customerSalesAnalysisUrl}">用户购买情况分析</a>
+						<sec:authorize access="hasAnyRole('ROLE_EMPLOYEEGROUP')">
+							<a href="${customerBillAnalysisUrl}">账龄分析报表</a>
+						</sec:authorize>
 					</div></li>
 				<li><a href="">供应商寄售分析</a>
 					<div class="col-list" style="display: none">
