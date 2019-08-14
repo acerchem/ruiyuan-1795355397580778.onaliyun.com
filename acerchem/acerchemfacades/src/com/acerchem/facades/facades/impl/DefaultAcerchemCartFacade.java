@@ -17,11 +17,13 @@ import de.hybris.platform.commerceservices.order.CommerceCartModification;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
 import de.hybris.platform.commerceservices.service.data.CommerceCartParameter;
 import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
+import de.hybris.platform.core.model.order.CartEntryModel;
 import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.product.ProductModel;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.util.ObjectUtils;
+import org.springframework.util.StringUtils;
 
 import java.math.BigDecimal;
 import java.text.ParseException;
@@ -47,9 +49,10 @@ public class DefaultAcerchemCartFacade extends DefaultCartFacade implements Acer
         }
         if (hasSessionCart()){
             CartModel cartModel = getCartService().getSessionCart();
-            if(!acerchemValidatePointOfService(storeId,cartModel)){
-                return "basket.error.storeId.different";
-            }
+            /** 2019-08-09 disable store check*/
+//            if(!acerchemValidatePointOfService(storeId,cartModel)){
+//                return "basket.error.storeId.different";
+//            }
             if (!acerchemValidateProduct(isUseFutureStock,cartModel,productCode)){
                 return "basket.error.product.stock.different";
             }
@@ -58,6 +61,25 @@ public class DefaultAcerchemCartFacade extends DefaultCartFacade implements Acer
         return null;
     }
 
+    @Override
+    public String acerchemValidateCartData(String productCode, long quantity, boolean isUseFutureStock,String storeId) {
+        String validateCart=acerchemValidateCart(productCode, isUseFutureStock, storeId);
+        if (!StringUtils.isEmpty(validateCart)) {
+            return validateCart;
+        }
+
+        CartModel cartModel = getCartService().getSessionCart();
+        List<AbstractOrderEntryModel> orderEntryModels = cartModel.getEntries();
+        if (orderEntryModels != null && !orderEntryModels.isEmpty()) {
+            for (AbstractOrderEntryModel orderEntryModel : orderEntryModels) {
+                ProductModel product=orderEntryModel.getProduct();
+                if (productCode.equalsIgnoreCase(product.getCode()) && quantity < product.getMinOrderQuantity()) {
+                    return "basket.error.product.stockthreshold.different";
+                }
+            }
+        }
+        return null;
+    }
 
     @Override
     public CartModificationData addToCart(String code, long quantity, boolean isUseFutureStock,String storeId,String availableDate) throws CommerceCartModificationException{

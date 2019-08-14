@@ -18,6 +18,7 @@ import java.util.Date;
 public interface AcerchemCartFacade {
 
     String acerchemValidateCart(String productCode,boolean isUseFutureStock,String storeId);
+    String acerchemValidateCartData(String productCode, long quantity,boolean isUseFutureStock,String storeId);
 
     /**
      * Method for adding a product to cart.

@@ -48,6 +48,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -70,6 +71,7 @@ public class AddToCartController extends AbstractController
 	private static final String ERROR_MSG_TYPE = "errorMsg";
 	private static final String QUANTITY_INVALID_BINDING_MESSAGE_KEY = "basket.error.quantity.invalid.binding";
 	private static final String SHOWN_PRODUCT_COUNT = "acerchemstorefront.storefront.minicart.shownProductCount";
+	private static final String REDIRECT_CART_URL = REDIRECT_PREFIX + "/cart";
 
 	private static final Logger LOG = Logger.getLogger(AddToCartController.class);
 
@@ -91,9 +93,106 @@ public class AddToCartController extends AbstractController
 	@Resource(name = "defaultAcerchemCheckoutFacade")
 	private AcerchemCheckoutFacade acerchemCheckoutFacade;
 
-	@RequestMapping(value = "/cart/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/cart/add", method = RequestMethod.POST)
+    @RequireHardLogIn
+    public String addToCart(@RequestParam("productCodePost") final String code, final Model model,
+                            @Valid final AcerchemAddToCartForm form, final BindingResult bindingErrors)
+    {
+        if (bindingErrors.hasErrors())
+        {
+            return getViewWithBindingErrorMessages(model, bindingErrors);
+        }
+
+        long qty = form.getQty();
+
+        int tag = form.getTag();
+
+        if (tag==1){
+            form.setIsUseFutureStock(true);
+        } else {
+            form.setIsUseFutureStock(false);
+        }
+
+        if (qty <= 0)
+        {
+            model.addAttribute(ERROR_MSG_TYPE, "basket.error.quantity.invalid");
+            model.addAttribute(QUANTITY_ATTR, Long.valueOf(0L));
+        }
+        else
+        {
+
+            //each cartEntry warehouse must be same
+            final boolean isUseFutureStock = form.getIsUseFutureStock();
+            String storeId = form.getStoreId();
+            String errorMsg = acerchemCartFacade.acerchemValidateCart(code,isUseFutureStock,storeId);
+
+            if (errorMsg!=null){
+                GlobalMessages.addErrorMessage(model, errorMsg);
+                model.addAttribute(ERROR_MSG_TYPE, errorMsg);
+            }else{
+                try
+                {
+
+                    String availableDate = form.getAvailableDate();
+                    final CartModificationData cartModification = acerchemCartFacade.addToCart(code, qty,isUseFutureStock,storeId,availableDate);
+
+
+                    if (cartModification.getStatusCode().equalsIgnoreCase(CommerceCartModificationStatus.MAX_ORDER_QUANTITY_EXCEEDED))
+                    {
+                        model.addAttribute(ERROR_MSG_TYPE, "basket.information.quantity.noItemsAdded." + cartModification.getStatusCode());
+                    }
+
+                    else if (cartModification.getStatusCode().equalsIgnoreCase(CommerceCartModificationStatus.NO_STOCK))
+                    {
+                        model.addAttribute(ERROR_MSG_TYPE,
+                                "basket.information.quantity.reducedNumberOfItemsAdded." + cartModification.getStatusCode());
+                    } else {
+
+                        model.addAttribute(QUANTITY_ATTR, Long.valueOf(cartModification.getQuantityAdded()));
+
+                        double val = acerchemCartFacade.getAddToCartPrice(cartModification.getEntry(),qty);
+                        PriceData cartEntryPrice = acerchemCartFacade.createPrice(PriceDataType.BUY, BigDecimal.valueOf(val),
+                                cartModification.getEntry().getBasePrice().getCurrencyIso());
+
+                        //cartModification.getEntry().setBasePrice(cartEntryPrice);
+                        cartModification.getEntry().setTotalRealPrice(cartEntryPrice);
+                        model.addAttribute("entry", cartModification.getEntry());
+                        model.addAttribute("cartCode", cartModification.getCartCode());
+                        model.addAttribute("isQuote", cartFacade.getSessionCart().getQuoteData() != null ? Boolean.TRUE : Boolean.FALSE);
+
+						/*java.text.DecimalFormat   df   =new   java.text.DecimalFormat("#.00");
+
+						// 获得币种符号
+						String currencyIso = cartModification.getEntry().getBasePrice().getCurrencyIso();
+
+						String suffix = "";
+						if (currencyIso.equalsIgnoreCase("USD")){
+							suffix="$";
+						}*/
+
+
+                    }
+
+                    //model.addAttribute("cartEntryPrice",suffix+df.format(acerchemCartFacade.getAddToCartPrice(cartModification.getEntry(),qty)));
+
+                }
+                catch (final CommerceCartModificationException ex)
+                {
+                    logDebugException(ex);
+                    model.addAttribute(ERROR_MSG_TYPE, "basket.error.occurred");
+                    model.addAttribute(QUANTITY_ATTR, Long.valueOf(0L));
+                }
+            }
+        }
+
+        model.addAttribute("product", productFacade.getProductForCodeAndOptions(code, Arrays.asList(ProductOption.BASIC)));
+
+        return ControllerConstants.Views.Fragments.Cart.AddToCartPopup;
+    }
+
+	@RequestMapping(value = "/cart/addOne", method = RequestMethod.POST)
 	@RequireHardLogIn
-	public String addToCart(@RequestParam("productCodePost") final String code, final Model model,
+	public String addOneEntryToCart(@RequestParam("productCodePost") final String code, final Model model,
 							@Valid final AcerchemAddToCartForm form, final BindingResult bindingErrors)
 	{
 		if (bindingErrors.hasErrors())
@@ -102,9 +201,9 @@ public class AddToCartController extends AbstractController
 		}
 
 		long qty = form.getQty();
-		
+
 		int tag = form.getTag();
-		
+
 		if (tag==1){
 			form.setIsUseFutureStock(true);
 		} else {
@@ -133,46 +232,9 @@ public class AddToCartController extends AbstractController
 
 					String availableDate = form.getAvailableDate();
 					final CartModificationData cartModification = acerchemCartFacade.addToCart(code, qty,isUseFutureStock,storeId,availableDate);
-				
 
-					if (cartModification.getStatusCode().equalsIgnoreCase(CommerceCartModificationStatus.MAX_ORDER_QUANTITY_EXCEEDED))
-					{
-						model.addAttribute(ERROR_MSG_TYPE, "basket.information.quantity.noItemsAdded." + cartModification.getStatusCode());
-					}
+					checkCartModificationStatus(model, qty, cartModification);
 
-					else if (cartModification.getStatusCode().equalsIgnoreCase(CommerceCartModificationStatus.NO_STOCK))
-					{
-						model.addAttribute(ERROR_MSG_TYPE,
-								"basket.information.quantity.reducedNumberOfItemsAdded." + cartModification.getStatusCode());
-					} else {
-						
-						model.addAttribute(QUANTITY_ATTR, Long.valueOf(cartModification.getQuantityAdded()));
-						
-						double val = acerchemCartFacade.getAddToCartPrice(cartModification.getEntry(),qty);
-						PriceData cartEntryPrice = acerchemCartFacade.createPrice(PriceDataType.BUY, BigDecimal.valueOf(val),
-								cartModification.getEntry().getBasePrice().getCurrencyIso());
-						
-						//cartModification.getEntry().setBasePrice(cartEntryPrice);
-						cartModification.getEntry().setTotalRealPrice(cartEntryPrice);
-						model.addAttribute("entry", cartModification.getEntry());
-						model.addAttribute("cartCode", cartModification.getCartCode());
-						model.addAttribute("isQuote", cartFacade.getSessionCart().getQuoteData() != null ? Boolean.TRUE : Boolean.FALSE);
-						
-						/*java.text.DecimalFormat   df   =new   java.text.DecimalFormat("#.00");  
-						
-						// 获得币种符号
-						String currencyIso = cartModification.getEntry().getBasePrice().getCurrencyIso();
-						
-						String suffix = "";
-						if (currencyIso.equalsIgnoreCase("USD")){
-							suffix="$";
-						}*/
-						
-						
-				   	}
-						 
-						//model.addAttribute("cartEntryPrice",suffix+df.format(acerchemCartFacade.getAddToCartPrice(cartModification.getEntry(),qty)));
-					
 				}
 				catch (final CommerceCartModificationException ex)
 				{
@@ -185,10 +247,104 @@ public class AddToCartController extends AbstractController
 
 		model.addAttribute("product", productFacade.getProductForCodeAndOptions(code, Arrays.asList(ProductOption.BASIC)));
 
-		return ControllerConstants.Views.Fragments.Cart.AddToCartPopup;
+		return REDIRECT_PREFIX + "/cart";
 	}
-	
-	
+
+	@RequestMapping(value = "/cart/minusOne", method = RequestMethod.POST)
+	@RequireHardLogIn
+	public String minusOneEntryToCart(@RequestParam("productCodePost") final String code, final Model model,
+									@Valid final AcerchemAddToCartForm form, final BindingResult bindingErrors)
+	{
+		if (bindingErrors.hasErrors())
+		{
+			return getViewWithBindingErrorMessages(model, bindingErrors);
+		}
+
+		long qty = form.getQty();
+
+		int tag = form.getTag();
+
+		if (tag==1){
+			form.setIsUseFutureStock(true);
+		} else {
+			form.setIsUseFutureStock(false);
+		}
+
+		if (qty <= 0)
+		{
+			model.addAttribute(ERROR_MSG_TYPE, "basket.error.quantity.invalid");
+			model.addAttribute(QUANTITY_ATTR, Long.valueOf(0L));
+		}
+		else
+		{
+
+			//each cartEntry warehouse must be same
+			final boolean isUseFutureStock = form.getIsUseFutureStock();
+			String storeId = form.getStoreId();
+			String errorMsg = acerchemCartFacade.acerchemValidateCartData(code, qty,isUseFutureStock,storeId);
+
+			if (errorMsg!=null){
+				GlobalMessages.addErrorMessage(model, errorMsg);
+				model.addAttribute(ERROR_MSG_TYPE, errorMsg);
+				GlobalMessages.addMessage(model, GlobalMessages.ERROR_MESSAGES_HOLDER, errorMsg, null);
+				return REDIRECT_CART_URL;
+			}else{
+				try
+				{
+
+					String availableDate = form.getAvailableDate();
+					final CartModificationData cartModification = cartFacade.updateCartEntry(getOrderEntryData(qty, code, form.getEntryNumber()));
+
+
+					checkCartModificationStatus(model, qty, cartModification);
+
+				}
+				catch (final CommerceCartModificationException ex)
+				{
+					logDebugException(ex);
+					model.addAttribute(ERROR_MSG_TYPE, "basket.error.occurred");
+					model.addAttribute(QUANTITY_ATTR, Long.valueOf(0L));
+				}
+			}
+		}
+
+		model.addAttribute("product", productFacade.getProductForCodeAndOptions(code, Arrays.asList(ProductOption.BASIC)));
+
+		return REDIRECT_PREFIX + "/cart";
+	}
+
+	private void checkCartModificationStatus(Model model, long qty, CartModificationData cartModification) {
+		if (cartModification.getStatusCode().equalsIgnoreCase(CommerceCartModificationStatus.MAX_ORDER_QUANTITY_EXCEEDED)) {
+			model.addAttribute(ERROR_MSG_TYPE, "basket.information.quantity.noItemsAdded." + cartModification.getStatusCode());
+		} else if (cartModification.getStatusCode().equalsIgnoreCase(CommerceCartModificationStatus.NO_STOCK)) {
+			model.addAttribute(ERROR_MSG_TYPE,
+					"basket.information.quantity.reducedNumberOfItemsAdded." + cartModification.getStatusCode());
+		} else {
+
+			model.addAttribute(QUANTITY_ATTR, Long.valueOf(cartModification.getQuantityAdded()));
+
+			double val=acerchemCartFacade.getAddToCartPrice(cartModification.getEntry(), qty);
+			PriceData cartEntryPrice=acerchemCartFacade.createPrice(PriceDataType.BUY, BigDecimal.valueOf(val),
+					cartModification.getEntry().getBasePrice().getCurrencyIso());
+
+			//cartModification.getEntry().setBasePrice(cartEntryPrice);
+			cartModification.getEntry().setTotalRealPrice(cartEntryPrice);
+			model.addAttribute("entry", cartModification.getEntry());
+			model.addAttribute("cartCode", cartModification.getCartCode());
+			model.addAttribute("isQuote", cartFacade.getSessionCart().getQuoteData() != null ? Boolean.TRUE : Boolean.FALSE);
+
+		}
+	}
+
+	protected OrderEntryData getOrderEntryData(final long quantity, final String productCode, final Integer entryNumber)
+	{
+		final OrderEntryData orderEntry = new OrderEntryData();
+		orderEntry.setQuantity(quantity);
+		orderEntry.setProduct(new ProductData());
+		orderEntry.getProduct().setCode(productCode);
+		orderEntry.setEntryNumber(entryNumber);
+		return orderEntry;
+	}
 	
 	@RequestMapping(value = "/cart/add", method = RequestMethod.GET)
 	@RequireHardLogIn
