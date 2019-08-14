@@ -213,10 +213,14 @@ public class CartPageController extends AbstractCartPageController
 			return REDIRECT_CART_URL;
 		}
 
-
-		if (acerchemStockService.validateCart(redirectModel))
-		{
-			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER, CART_CHECKOUT_ERROR, null);
+		try {
+			if (acerchemStockService.validateCart(redirectModel))
+			{
+				GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER, CART_CHECKOUT_ERROR, null);
+				return REDIRECT_CART_URL;
+			}
+		} catch (Exception e) {
+			GlobalMessages.addFlashMessage(redirectModel, GlobalMessages.ERROR_MESSAGES_HOLDER, e.getMessage());
 			return REDIRECT_CART_URL;
 		}
 

@@ -23,6 +23,7 @@ public class AcerchemAddToCartForm
 	private String availableDate;
 	
 	private int tag;
+	private Integer entryNumber;
 
 	/**
 	 * @return the tag
@@ -70,5 +71,13 @@ public class AcerchemAddToCartForm
 	public long getQty()
 	{
 		return qty;
+	}
+
+	public void setEntryNumber(Integer entryNumber) {
+		this.entryNumber = entryNumber;
+	}
+
+	public Integer getEntryNumber() {
+		return this.entryNumber;
 	}
 }

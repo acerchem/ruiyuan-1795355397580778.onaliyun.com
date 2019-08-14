@@ -3,7 +3,9 @@ package com.acerchem.core.service.impl;
 import static de.hybris.platform.servicelayer.util.ServicesUtil.validateParameterNotNull;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.annotation.Resource;
 
@@ -128,7 +130,21 @@ public class DefaultAcerchemStockService extends DefaultStockService implements 
 				parameter.setCart(cartService.getSessionCart());
 				final CartModel cartModel = parameter.getCart();
 				validateParameterNotNull(cartModel, "Cart model cannot be null");
-				
+
+				List<AbstractOrderEntryModel> orders = cartModel.getEntries();
+				if (orders != null && !orders.isEmpty()) {
+					Set<String> soureWarehouse = new HashSet<>();
+					for (AbstractOrderEntryModel model : orders) {
+						String name=model.getDeliveryPointOfService().getName();
+						soureWarehouse.add(name);
+					}
+
+					if (soureWarehouse.size() > 1) {
+//						return true;
+						throw new IllegalArgumentException("basket.error.storeId.different");
+					}
+				}
+
 				final List<CommerceCartModification> modifications1 = new ArrayList<CommerceCartModification>();
 				final boolean callHooks = cartValidationHooks != null
 						&& (parameter.isEnableHooks() && configurationService.getConfiguration().getBoolean(
@@ -140,6 +156,7 @@ public class DefaultAcerchemStockService extends DefaultStockService implements 
 						cartValidationHooks.stream().forEach(hook -> hook.beforeValidateCart(parameter, modifications1));
 					}
 				}
+
 
 				final ItemModel customer = cartModel.getUser();
 				Boolean isGuestUserCart = customer instanceof CustomerModel && CustomerType.GUEST.equals(((CustomerModel) customer).getType());
@@ -196,6 +213,7 @@ public class DefaultAcerchemStockService extends DefaultStockService implements 
 		catch (final Exception e)
 		{
 			LOGGER.error("Failed to validate cart", e);
+			throw e;
 		}
 		if (!modifications.isEmpty())
 		{
