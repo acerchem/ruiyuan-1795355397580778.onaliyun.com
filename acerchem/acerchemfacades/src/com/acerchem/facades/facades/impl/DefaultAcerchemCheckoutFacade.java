@@ -510,6 +510,8 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                aoe.setBaseRealPrice(baseRealPrice.doubleValue());
                aoe.setBasePrice(basePrice);
                aoe.setTotalRealPrice(totalRealPrice);
+               aoe.setDeliveryMode(orderModel.getDeliveryMode());
+               aoe.setChosenVendor(aoe.getProduct().getAcerChemVendor());
                if(aoe instanceof OrderEntryModel){
                    ((OrderEntryModel)aoe).setUser(orderModel.getUser());
                    UserModel customer = orderModel.getUser();
