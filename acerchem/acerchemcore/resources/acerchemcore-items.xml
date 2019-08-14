@@ -1416,6 +1416,22 @@
 				</attributes>
 			</itemtype>
 
+			<itemtype code="OrderEntry"
+					  extends="AbstractOrderEntry"
+					  jaloclass="de.hybris.platform.jalo.order.QuoteEntry"
+					  autocreate="false"
+					  generate="false">
+				<attributes>
+					<attribute qualifier="user" type="User">
+						<persistence type="property" />
+						<description>客户</description>
+					</attribute>
+					<attribute qualifier="salesman" type="User">
+						<persistence type="property" />
+						<description>业务员</description>
+					</attribute>
+				</attributes>
+			</itemtype>
 
 			<itemtype code="QuoteEntry"
 					  extends="AbstractOrderEntry"

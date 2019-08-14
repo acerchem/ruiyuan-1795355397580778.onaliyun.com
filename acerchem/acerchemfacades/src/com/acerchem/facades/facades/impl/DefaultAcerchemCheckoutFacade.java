@@ -22,11 +22,7 @@ import de.hybris.platform.commercefacades.user.data.RegionData;
 import de.hybris.platform.commerceservices.service.data.CommerceCheckoutParameter;
 import de.hybris.platform.core.model.c2l.CountryModel;
 import de.hybris.platform.core.model.c2l.RegionModel;
-import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
-import de.hybris.platform.core.model.order.AbstractOrderModel;
-import de.hybris.platform.core.model.order.CartEntryModel;
-import de.hybris.platform.core.model.order.CartModel;
-import de.hybris.platform.core.model.order.OrderModel;
+import de.hybris.platform.core.model.order.*;
 import de.hybris.platform.core.model.order.delivery.DeliveryModeModel;
 import de.hybris.platform.core.model.order.payment.PaymentModeModel;
 import de.hybris.platform.core.model.product.ProductModel;
@@ -476,12 +472,13 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                 totalAdditionalFee = totalAdditionalFee.add(BigDecimal.valueOf(orderModel.getStorageCost()));
             }
 
-            int size = orderModel.getEntries().size();
+            List<AbstractOrderEntryModel> abstractorderEntry = new ArrayList<>(orderModel.getEntries());
+            int size = abstractorderEntry.size();
             //
             BigDecimal remainTotalDeliveryCost =totalAdditionalFee;
 
             for (int i =0 ; i<size ; i++){
-                AbstractOrderEntryModel aoe = orderModel.getEntries().get(i);
+                AbstractOrderEntryModel aoe = abstractorderEntry.get(i);
                 Double basePrice = getAbstractOrderEntryBasePrice(aoe);
                 Double totalPrice = aoe.getTotalPrice();
 
@@ -513,7 +510,14 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                aoe.setBaseRealPrice(baseRealPrice.doubleValue());
                aoe.setBasePrice(basePrice);
                aoe.setTotalRealPrice(totalRealPrice);
-
+               if(aoe instanceof OrderEntryModel){
+                   ((OrderEntryModel)aoe).setUser(orderModel.getUser());
+                   UserModel customer = orderModel.getUser();
+                   if(customer!=null && customer instanceof CustomerModel)
+                   {
+                       ((OrderEntryModel) aoe).setSalesman(((CustomerModel)customer).getEmployee());
+                   }
+               }
             }
             
             BigDecimal orderTotalPrice = totalAdditionalFee;

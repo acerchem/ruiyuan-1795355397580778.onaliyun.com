@@ -213,7 +213,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 			// }
 			final CustomerModel customer = (CustomerModel) od.getOrder().getUser();
 			if (customer != null) {
-				final EmployeeModel emp = customer.getRelatedCustomer();
+				final EmployeeModel emp = customer.getEmployee();
 				if (emp != null) {
 					detail.setSalesman(emp.getName());
 				}
@@ -375,12 +375,12 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 
 			}
 			// 商家业务员
-			// if (od.getOrder().getPlacedBy() != null) {
+			// if (od.getOrder().getPlacedBy() != null) {1
 			// detail.setSalesman(od.getOrder().getPlacedBy().getName());
 			// }
 			final CustomerModel customer = (CustomerModel) od.getOrder().getUser();
 			if (customer != null) {
-				final EmployeeModel emp = customer.getRelatedCustomer();
+				final EmployeeModel emp = customer.getEmployee();
 				if (emp != null) {
 					detail.setSalesman(emp.getName());
 				}
@@ -792,8 +792,8 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 						data.setCustomerName(o.getUser().getName());
 
 						final CustomerModel customer = (CustomerModel) o.getUser();
-						if (customer.getRelatedCustomer() != null) {
-							data.setEmployeeName(customer.getRelatedCustomer().getName());
+						if (customer.getEmployee() != null) {
+							data.setEmployeeName(customer.getEmployee().getName());
 						}
 						data.setPlaceTime(o.getCreationtime());
 						data.setFinishedTime(o.getOrderFinishedDate());
