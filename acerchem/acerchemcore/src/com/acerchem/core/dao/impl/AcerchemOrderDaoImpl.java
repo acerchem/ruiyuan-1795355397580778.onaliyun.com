@@ -306,7 +306,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 			// }
 
 			final OrderDetailsReportData detail = new OrderDetailsReportData();
-			detail.setCurrency(od.getOrder().getCurrency().getName());
+			detail.setCurrency(od.getOrder().getCurrency().getIsocode());
 			if (addressModel != null) {
 				detail.setCountry(addressModel.getCountry().getName());
 			}

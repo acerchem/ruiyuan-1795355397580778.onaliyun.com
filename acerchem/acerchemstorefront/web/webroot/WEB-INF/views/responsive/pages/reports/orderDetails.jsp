@@ -120,10 +120,11 @@
 										type="both" /></td>
 								<td>${orderDetail.productName}</td>
 								<td>${orderDetail.productQuantity}</td>
-								<td><c:if test="${not empty orderDetail.orderAmount}">
-	          	USD
-	          	</c:if> <fmt:formatNumber type="number"
-										value="${orderDetail.orderAmount}" pattern="#.00" /></td>
+								<td>
+									<c:if test="${not empty orderDetail.orderAmount}">
+										${orderDetail.currency}&nbsp;
+									</c:if>
+									<fmt:formatNumber type="number" value="${orderDetail.orderAmount}" pattern="#.00" /></td>
 								<td>${orderDetail.userUid}</td>
 								<td>${orderDetail.deliveryAddress.firstName}${orderDetail.deliveryAddress.lastName}</td>
 								<td>${orderDetail.deliveryAddress.phone}</td>
