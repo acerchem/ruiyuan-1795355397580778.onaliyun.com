@@ -23,12 +23,15 @@
 	 </div>
 	 
 	 <nav:topNavigation />
-
+		<c:url value="/my-account/update-profile" var="accUrl"/>
 	<div class="maxtop_rig">
 		<ul>
+<sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')" >
+		<li style="min-width: 59px;width: 30px;"><a style="background: none;font-size: 12px;line-height: 18px;text-align: center;width: 100%;" href="${accUrl}">My Account</a></li>
+</sec:authorize>
 		<li>
 			<sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')" >
-			
+
 			<c:set var="maxNumberChars" value="25" />
 				<c:if test="${fn:length(user.firstName) gt maxNumberChars}">
 					<c:set target="${user}" property="firstName"
@@ -38,9 +41,10 @@
 						<button onclick="logout()">logout</button>
 				</span>
 			</sec:authorize>
-	 		<c:url value="/my-account/update-profile" var="accUrl"/>
+
 			<a class="maxicon-user" href="${accUrl}"></a>
 	 	</li>
+
 			<li>
 			
 			<cms:pageSlot position="MiniCart" var="cart" >

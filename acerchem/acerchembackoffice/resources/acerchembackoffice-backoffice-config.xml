@@ -907,6 +907,30 @@
 			<list-view:column qualifier="type"/>
 		</list-view:list-view>
 	</context>
+
+	<context merge-by="type" parent="User" type="Customer" component="editor-area">
+		<editorArea:editorArea name="">
+			<editorArea:tab name="hmc.addresses" position="2">
+				<editorArea:section name="hmc.addresses">
+					<editorArea:attribute qualifier="defaultShipmentAddress"/>
+					<editorArea:attribute qualifier="defaultPaymentAddress"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+
+	<context type="Customer" component="editorAreaDynamicForms" merge-by="module">
+		<df:dynamicForms>
+			<df:attribute id="snapshot-dsAddress" qualifier="defaultShipmentAddress" triggeredOn="defaultShipmentAddress" visibleIf="true" />
+			<df:attribute id="snapshot-dpAddress" qualifier="defaultPaymentAddress" triggeredOn="defaultPaymentAddress" visibleIf="true" />
+			<df:section id="snapshot-carts" qualifier="customersupport_backoffice_tab_customer_associations_section_carts" triggeredOn="carts" visibleIf="!carts.isEmpty()" />
+			<df:section id="snapshot-savedCarts" qualifier="customersupport_backoffice_tab_customer_associations_section_savedCarts" triggeredOn="savedCarts" visibleIf="!savedCarts.isEmpty()" />
+			<df:section id="snapshot-orders" qualifier="customersupport_backoffice_tab_customer_associations_section_orders" triggeredOn="orders" visibleIf="!orders.isEmpty()" />
+			<df:attribute id="snapshot-dpInfo" qualifier="defaultPaymentInfo" triggeredOn="defaultPaymentInfo" visibleIf="!paymentInfos.isEmpty()" />
+			<df:section id="snapshot-paymentInfos" qualifier="customersupport_backoffice_tab_customer_associations_section_paymentMethods" triggeredOn="paymentInfos" visibleIf="!paymentInfos.isEmpty()" />
+			<df:section id="snapshot-reviews" qualifier="customersupportbackoffice.customer.section.reviews" triggeredOn="customerReviews" visibleIf="!customerReviews.isEmpty()" />
+		</df:dynamicForms>
+	</context>
 	
 	<context merge-by="type" parent="User" type="Customer" component="advanced-search">
         <advanced-search:advanced-search>

@@ -23,7 +23,7 @@
 	 </div>
 	 
 	 <nav:topNavigation />
-
+	<c:url value="/my-account/update-profile" var="accUrl"/>
 	<div class="maxtop_rig">
 		<ul>
 		<li>
@@ -31,6 +31,9 @@
 					<cms:component component="${component}"/>
 				</cms:pageSlot>
 		</li>
+		<sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')" >
+			<li style="min-width: 59px;width: 30px;"><a style="background: none;font-size: 12px;line-height: 18px;text-align: center;width: 100%;" href="${accUrl}">My Account</a></li>
+		</sec:authorize>
 		<li>
 			<sec:authorize access="!hasAnyRole('ROLE_ANONYMOUS')" >
 			
@@ -43,9 +46,11 @@
 						<button onclick="logout()">logout</button>
 				</span>
 			</sec:authorize>
-	 		<c:url value="/my-account/update-profile" var="accUrl"/>
+
 			<a class="maxicon-user" href="${accUrl}"></a>
+
 	 	</li>
+			
 			<li>
 			
 			<cms:pageSlot position="MiniCart" var="cart" >
