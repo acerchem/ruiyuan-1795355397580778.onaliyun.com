@@ -117,7 +117,7 @@
 <input type="hidden" name="paymentCode" id="paymentCode" value=""/>
 
  <label>
- <input type="checkbox" name="termsCheck" id="termsCheck">
+ <input type="checkbox" checked="checked" name="termsCheck" id="termsCheck">
  	<span class="checkbox" >
 	<a href="javascript:openText()" style="color: red" >Sales agreement</a>
 	</span>
