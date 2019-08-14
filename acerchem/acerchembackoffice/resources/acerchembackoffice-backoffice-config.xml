@@ -190,6 +190,9 @@
 				<advanced-search:field name="modifiedtime" selected="true"/>
 				<advanced-search:field name="user" selected="true"/>
 				<advanced-search:field name="salesman" selected="true"/>
+				<advanced-search:field name="deliveryPointOfService" selected="true"/>
+				<advanced-search:field name="deliveryMode" selected="true"/>
+				<advanced-search:field name="chosenVendor" selected="true"/>
 			</advanced-search:field-list>
 		</advanced-search:advanced-search>
 	</context>
