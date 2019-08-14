@@ -88,24 +88,6 @@ public class SearchPageController extends AbstractSearchPageController
 	{
 		if (StringUtils.isNotBlank(searchText))
 		{
-		    String str = searchText;  
-            StringBuffer sb = new StringBuffer();  
-            int i;  
-            for(i = 0; i <= str.length()-1;i ++){//遍历字符串  
-                char ch;  
-                //通过str.charAt(i)遍历出字符串中每个字符  
-                if(str.charAt(i) >= 'a' && str.charAt(i) <= 'z'){//判断字符是否在a-z之间（小写）  
-                    ch = (char) (str.charAt(i)-32);               //如果为小写则转换为相应大写,赋值给ch  
-                } 
-                else
-                {
-                	ch = str.charAt(i);
-                }
-                sb.append(ch);                                    //将字符追加到sb序列  
-              }                        
-            searchText=sb.toString(); //将StringBuffer转换为String类型
-		    
-		    
 			final PageableData pageableData = createPageableData(0, getSearchPageSize(), null, ShowMode.Page);
 
 			final SearchStateData searchState = new SearchStateData();
