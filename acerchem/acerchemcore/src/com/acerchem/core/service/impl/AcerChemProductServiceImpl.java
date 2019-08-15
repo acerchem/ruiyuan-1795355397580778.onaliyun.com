@@ -1,9 +1,6 @@
 package com.acerchem.core.service.impl;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 import javax.annotation.Resource;
 
@@ -228,6 +225,12 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 
 				report.add(item);
 			}
+			Collections.sort(report, new Comparator<OrderProductReportData>() {
+				@Override
+				public int compare(OrderProductReportData o1, OrderProductReportData o2) {
+					return o2.getOrderCode().compareTo(o1.getOrderCode());
+				}
+			});
 		}
 		return report;
 	}

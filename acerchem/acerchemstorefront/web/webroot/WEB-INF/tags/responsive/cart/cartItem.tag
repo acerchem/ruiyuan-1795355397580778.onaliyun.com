@@ -83,7 +83,7 @@
 								<button type="button" onclick="minusQuantity('minusCartForm', '${entry.product.code}')">-</button>
 							</form:form>
 						</span>
-						<input type="text" id="pdnum${entry.product.code}" name="pdnum" class="set" value="${entry.quantity}" onblur="updateQuantity('minusCartForm', '${entry.product.code}')">
+						<input type="text" id="pdnum${entry.product.code}" name="pdnum${entry.product.code}" class="set" value="${entry.quantity}" onblur="updateQuantity('minusCartForm', '${entry.product.code}')">
 						<span class="set add">
                             <c:url value="/cart/addOne" var="cartAddOneUrl"/>
                             <form:form id="addCartForm${entry.product.code}" action="${cartAddOneUrl}" method="post" >
@@ -141,9 +141,9 @@
 <script type="text/javascript" >
 	function minusQuantity(formName, productCode) {
 		let cartForm = document.getElementById(formName + productCode);
-		let avl = cartForm.qty.value;
-		let stockThreshold = cartForm.stockThreshold.value;
-		if(avl<stockThreshold){
+		let avl = cartForm.qty.value ? cartForm.qty.value : '0';
+		let stockThreshold = cartForm.stockThreshold.value ? cartForm.stockThreshold.value : '0';
+		if(parseInt(avl)<parseInt(stockThreshold)){
 			maxalert("Cannot be less than the stock threshold!");
 			return;
 		}
@@ -153,9 +153,9 @@
 	function updateQuantity(formName, productCode)
 	{
 		let cartForm = document.getElementById(formName + productCode);
-		let avl = document.getElementById("pdnum" + productCode).value;
-		let stockThreshold = cartForm.stockThreshold.value;
-		if(avl<stockThreshold){
+		let avl = document.getElementById("pdnum" + productCode).value ? document.getElementById("pdnum" + productCode).value : '0';
+		let stockThreshold = cartForm.stockThreshold.value ? cartForm.stockThreshold.value : '0' ;
+		if(parseInt(avl)<parseInt(stockThreshold)){
 			maxalert("Cannot be less than the stock threshold!");
 			document.getElementById("pdnum" + productCode).value = stockThreshold;
 			cartForm.qty.value = stockThreshold;
