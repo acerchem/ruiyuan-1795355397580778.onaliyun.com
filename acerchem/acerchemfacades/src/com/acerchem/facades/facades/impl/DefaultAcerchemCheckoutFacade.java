@@ -186,9 +186,15 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                     AddressModel addressModel = cartModel.getEntries().get(0).getDeliveryPointOfService().getAddress();
                     cartModel.setDeliveryAddress(addressModel);
                 }else{
+                    /**
                     List<AddressModel> deliveryAddresses = getDeliveryService().getSupportedDeliveryAddressesForOrder(cartModel,true);
                     if (deliveryAddresses !=null && deliveryAddresses.size()>0){
                         cartModel.setDeliveryAddress(deliveryAddresses.get(0));
+                    }**/
+                    UserModel user = cartModel.getUser();
+                    if(user != null && user instanceof CustomerModel){
+                        AddressModel addressModel = ((CustomerModel)user).getDefaultShipmentAddress();
+                        cartModel.setDeliveryAddress(addressModel);
                     }
                 }
                 //促销那块会把操作费，存储费不加上，在此处计算总价格和单价
