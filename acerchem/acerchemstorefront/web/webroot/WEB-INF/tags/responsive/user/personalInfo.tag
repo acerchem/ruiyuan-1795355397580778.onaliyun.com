@@ -11,7 +11,7 @@
 
 <div class="g-left">
 	<div class="base">
-		<div class="top both">
+		<div class="top both" style="color: #fff;">
 			<span><img src="${themeResourcePath}/css/vip.png"></span>
 			<span>${user.userLevel.levelName}<br/>Member</span>
 		</div>

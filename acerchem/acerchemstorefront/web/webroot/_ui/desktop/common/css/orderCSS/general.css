@@ -675,7 +675,7 @@ textarea{
 	right: 20px;
 	z-index: 9;
 	padding:14px;
-	background:url(out-icon.png) no-repeat center top;
+	background:url(out-icon.png) no-repeat center bottom;
 	cursor: pointer;
 }
 
