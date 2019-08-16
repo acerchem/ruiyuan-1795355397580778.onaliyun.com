@@ -424,10 +424,10 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
             for (AbstractOrderEntryModel aoe: cartModel.getEntries()){
                 if (isUsefutureStock){
                     StockLevelModel stockLevelModel = stockService.getStockLevel(aoe.getProduct(),aoe.getDeliveryPointOfService().getWarehouses().get(0));
-                    deliveryDayList.add(stockLevelModel.getPreOrderReleaseDay());
+                    deliveryDayList.add(stockLevelModel.getPreOrderReleaseDay() == null ? 1 : stockLevelModel.getPreOrderReleaseDay() );
                 }else{
                     StockLevelModel stockLevelModel = stockService.getStockLevel(aoe.getProduct(),aoe.getDeliveryPointOfService().getWarehouses().get(0));
-                    deliveryDayList.add(stockLevelModel.getAvaPreOrderReleaseDay());
+                    deliveryDayList.add(stockLevelModel.getAvaPreOrderReleaseDay() == null ? 1 : stockLevelModel.getAvaPreOrderReleaseDay() );
                 }
             }
             if (isUsefutureStock){
