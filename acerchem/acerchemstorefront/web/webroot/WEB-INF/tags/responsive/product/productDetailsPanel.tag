@@ -6,6 +6,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 <%@ taglib prefix="user" tagdir="/WEB-INF/tags/responsive/user"%>
+<style type="text/css">
+	.up:hover
+	{
+		display: block;
+	}
+</style>
 
 <c:url value="/" var="homeUrl"/>
 <c:url value="/login" var="loginUrl"/>
@@ -25,7 +31,7 @@
 				<div class="m-prodslide">
 					<div class="minwrap">
 						<div class="flip">
-				    		<span class="up"></span>
+				    		<span class="up" style="display: none"></span>
 							<span class="down"></span>
 					    </div>
 						<div class="minimg">
