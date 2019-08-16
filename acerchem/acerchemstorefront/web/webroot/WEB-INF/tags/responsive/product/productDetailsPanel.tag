@@ -7,8 +7,7 @@
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 <%@ taglib prefix="user" tagdir="/WEB-INF/tags/responsive/user"%>
 <style type="text/css">
-	.flip:hover
-	{
+	.flip:hover .up {
 		display: block;
 	}
 </style>
