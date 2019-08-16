@@ -120,6 +120,11 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		final boolean addressRequiresReview = getAddressVerificationResultHandler().handleResult(verificationResult, newAddress,
 				model, redirectModel, bindingResult, getAddressVerificationFacade().isCustomerAllowedToIgnoreAddressSuggestions(),
 				"checkout.multi.address.updated");
+		//发货日期时间段
+		model.addAttribute("minDelivereyDays",Config.getInt("cart.delivereyDays.min",2));
+		model.addAttribute("maxDelivereyDays",Config.getInt("cart.delivereyDays.max",9));
+		CartModel cartmodel = acerchemCheckoutFacade.getCartModel();
+		model.addAttribute("delivereyDays",acerchemTrayFacade.getDeliveryDaysForCart(cartmodel));//根据地址算出运送时间
 
 		if (addressRequiresReview)
 		{
@@ -456,7 +461,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		cartData.setDeliveryMode(acerchemCheckoutFacade.getDeliveryModes());
 		
 		//model.addAttribute("deliveryMode", acerchemCheckoutFacade.getDeliveryModes());
-		
+
 		model.addAttribute("cartData", cartData);
 		model.addAttribute("addressForm", addressForm);
 		if (cartData.getDeliveryMode()!=null) {
@@ -464,14 +469,14 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		}else{
 			model.addAttribute("paymentInfos",acerchemCheckoutFacade.getSupportedCardTypes("DELIVERY_GROSS"));
 		}
-		
+
 
 		if (cartData.getDeliveryMode()!=null&&"DELIVERY_MENTION".equals(cartData.getDeliveryMode().getCode())) {
 			model.addAttribute("deliveryAddresses", acerchemCheckoutFacade.getDeliveryAddresses());
 		}else{
 			model.addAttribute("deliveryAddresses", getDeliveryAddresses(cartData.getDeliveryAddress()));
-			
-			
+
+
 			 double deliveryCost=acerchemTrayFacade.getTotalPriceForCart(cartData, cartData.getDeliveryAddress());
 			 CartModel cartModel = acerchemCheckoutFacade.getCartModel();
 		     cartData.setDeliveryCost(acerchemCheckoutFacade.createPrice(cartModel, deliveryCost));
