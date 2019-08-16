@@ -23,10 +23,10 @@
 			<div class="g-cell">
 				<!-- slide -->
 				<div class="m-prodslide">
-					<div class="minwrap">
+					<div class="minwrap" onmouseover="show();" onmouseleave="hide();">
 						<div class="flip">
-				    		<span class="up"></span>
-							<span class="down"></span>
+				    		<span class="up" style="display: none"></span>
+							<span class="down" style="display: none"></span>
 					    </div>
 						<div class="minimg">
 						</div>
@@ -581,6 +581,17 @@ function addNum()
 		$('#qty').val(avl); 
 	}
 }
+
+
+function show() {
+	$(".up").show();
+	$(".down").show();
+}
+
+	function hide() {
+		$(".up").hide();
+		$(".down").hide();
+	}
 
 </script>
 		
