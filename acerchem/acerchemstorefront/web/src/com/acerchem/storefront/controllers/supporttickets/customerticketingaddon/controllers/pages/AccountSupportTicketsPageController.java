@@ -605,7 +605,8 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 		try {
 			ticketData = ticketFacade.getTicket(XSSEncoder.encodeHTML(ticketId));
 		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
+			LOG.error(e.getMessage(),e);
+//			e.printStackTrace();
 		}
 		model.addAttribute(CustomerticketingaddonConstants.SUPPORT_TICKET_DATA, ticketData);
 		return "pages/account/accountUpdateSupportTicketPage";

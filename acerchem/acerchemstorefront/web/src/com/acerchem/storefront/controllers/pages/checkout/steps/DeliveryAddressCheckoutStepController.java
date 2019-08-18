@@ -21,6 +21,7 @@ import java.util.Set;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -62,6 +63,7 @@ import de.hybris.platform.util.Config;
 @RequestMapping(value = "/checkout/multi/delivery-address")
 public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepController
 {
+	private static final Logger LOG = Logger.getLogger(DeliveryAddressCheckoutStepController.class);
 	private static final String DELIVERY_ADDRESS = "delivery-address";
 	private static final String SHOW_SAVE_TO_ADDRESS_BOOK_ATTR = "showSaveToAddressBook";
 
@@ -88,7 +90,8 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 			populateCommonModelAttributes(model, cartData, new AddressForm());
 		} catch (AcerchemOrderException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+//			e.printStackTrace();
+			LOG.error(e.getMessage(),e);
 		}
 
 		return ControllerConstants.Views.Pages.MultiStepCheckout.AddEditDeliveryAddressPage;
@@ -506,7 +509,8 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 					//orderModel.setWaitDeliveiedDate(endDate);
 				} catch (ParseException e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+//					e1.printStackTrace();
+					LOG.error(e1.getMessage(),e1);
 				}
 				
 		     }

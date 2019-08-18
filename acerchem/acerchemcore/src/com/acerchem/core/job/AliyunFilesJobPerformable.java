@@ -28,8 +28,11 @@ import de.hybris.platform.servicelayer.config.ConfigurationService;
 import de.hybris.platform.servicelayer.cronjob.AbstractJobPerformable;
 import de.hybris.platform.servicelayer.cronjob.PerformResult;
 import de.hybris.platform.util.MediaUtil;
+import org.apache.log4j.Logger;
 
 public class AliyunFilesJobPerformable extends AbstractJobPerformable<CronJobModel> {
+
+	private static final Logger LOG = Logger.getLogger(AliyunFilesJobPerformable.class);
 
 	@Resource
 	private ConfigurationService configurationService;
@@ -127,14 +130,16 @@ public class AliyunFilesJobPerformable extends AbstractJobPerformable<CronJobMod
 
 					}
 				} catch (IOException e) {
-					e.printStackTrace();
+//					e.printStackTrace();
+					LOG.error(e.getMessage(),e);
 				} finally {
 					System.out.println("*****upload finished*****");
 					UploadFileDefault.closeClient(client);
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			LOG.error(e.getMessage(),e);
 		}
 
 		return new PerformResult(CronJobResult.SUCCESS, CronJobStatus.FINISHED);

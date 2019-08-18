@@ -12,6 +12,7 @@
 package com.acerchem.v2.controller;
 
 import de.hybris.platform.cms2.exceptions.CMSItemNotFoundException;
+import de.hybris.platform.cms2lib.components.FunctionButtonComponent;
 import de.hybris.platform.commercefacades.customer.CustomerFacade;
 import de.hybris.platform.commerceservices.search.flexiblesearch.PagedFlexibleSearchService;
 import de.hybris.platform.commerceservices.search.flexiblesearch.data.SortQueryData;
@@ -42,6 +43,7 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -59,7 +61,9 @@ import com.sap.security.core.server.csi.XSSEncoder;
 @Controller
 @RequestMapping(value = "/{baseSiteId}/tickets")
 public class TicketsController extends BaseCommerceController {
-	
+
+	private final static Logger LOG = Logger.getLogger( TicketsController.class.getName() );
+
 	public static final int MAX_PAGE_LIMIT = 100;
 	private static final String SUPPORT_TICKET_CODE_PATH_VARIABLE_PATTERN = "{ticketId:.*}";
 
@@ -204,7 +208,8 @@ public class TicketsController extends BaseCommerceController {
 			ticket.setStatus(ticketData.getStatus());
 			ticket.setTicketEvents(ticketData.getTicketEvents());
 		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
+			LOG.error(e.getMessage(),e);
+//			e.printStackTrace();
 		}
 		return ticket;
 	}

@@ -35,6 +35,7 @@ import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.tx.AfterSaveEvent;
 import de.hybris.platform.tx.AfterSaveListener;
 import de.hybris.platform.util.MediaUtil;
+import org.apache.log4j.Logger;
 
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
@@ -43,6 +44,8 @@ import java.util.concurrent.Executors;
 import java.util.function.Supplier;
 
 public class MediaImageSaveEventListener implements AfterSaveListener {
+
+	private static final Logger LOG = Logger.getLogger(MediaImageSaveEventListener.class);
 
 	@Resource
 	private ModelService modelService;
@@ -137,7 +140,8 @@ public class MediaImageSaveEventListener implements AfterSaveListener {
 								"Preventing no resoure,After saved Event again,Occurring thread cross over? check it in future...");
 
 					} catch (Exception e) {
-						e.printStackTrace();
+//						e.printStackTrace();
+						LOG.error(e.getMessage(),e);
 					}
 				}
 
@@ -230,12 +234,14 @@ public class MediaImageSaveEventListener implements AfterSaveListener {
 				// }
 
 			} catch (IOException e) {
-				e.printStackTrace();
+//				e.printStackTrace();
+				LOG.error(e.getMessage(),e);
 			} finally {
 				UploadFileDefault.closeClient(client);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			LOG.error(e.getMessage(),e);
 		}
 
 	}
@@ -280,7 +286,8 @@ public class MediaImageSaveEventListener implements AfterSaveListener {
 
 			modelService.save(failedRecord);
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			LOG.error(e.getMessage(),e);
 		}
 
 	}
