@@ -86,6 +86,11 @@ public class SearchPageController extends AbstractSearchPageController
 	public String textSearch(@RequestParam(value = "text", defaultValue = "") String searchText,
 			final HttpServletRequest request, final Model model) throws CMSItemNotFoundException
 	{
+
+		if(StringUtils.isNotBlank(searchText)){
+			searchText = searchText.toLowerCase();
+		}
+
 		if (StringUtils.isNotBlank(searchText))
 		{
 			final PageableData pageableData = createPageableData(0, getSearchPageSize(), null, ShowMode.Page);
