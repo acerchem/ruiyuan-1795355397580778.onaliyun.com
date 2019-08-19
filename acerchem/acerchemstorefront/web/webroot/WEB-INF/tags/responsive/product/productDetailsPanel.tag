@@ -6,6 +6,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="format" tagdir="/WEB-INF/tags/shared/format" %>
 <%@ taglib prefix="user" tagdir="/WEB-INF/tags/responsive/user"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <c:url value="/" var="homeUrl"/>
 <c:url value="/login" var="loginUrl"/>
@@ -203,10 +204,9 @@
 							<div class="delivery flex-wrap">
 								<span class="label-title">Delivery From:</span>
 								<div class="flex">
-
                                     <select id="storeMulId">
 									<c:forEach items="${countrys}" var="data"  >
-										<c:if test="${userWarehouse.contains(data.storeId)}">
+										<c:if test="${fn:containsIgnoreCase(userWarehouse, data.storeId)}">
 											<option value ="${data.storeId}">${data.storeName}</option>
 										</c:if>
 									</c:forEach>

@@ -28,7 +28,7 @@
 			<c:if test="${not empty facetData.topValues}">
 				<ul class="facet__list js-facet-list js-facet-top-values">
 					<c:forEach items="${facetData.topValues}" var="facetValue">
-						<c:if test="${facetData.multiSelect and userWarehouse.contains(facetValue.name)}">
+						<c:if test="${facetData.multiSelect and fn:containsIgnoreCase(userWarehouse, facetValue.name)}">
 							<li>
 								<form action="#" method="get">
 									<input type="hidden" name="q" value="${facetValue.query.query.value}"/>
