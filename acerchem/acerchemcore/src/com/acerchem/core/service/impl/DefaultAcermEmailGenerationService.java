@@ -282,7 +282,8 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 				dis.close();
 				pdfFile.delete();
 			} catch (final Exception e) {
-				e.printStackTrace();
+				LOG.error(e.getMessage(),e);
+//				e.printStackTrace();
 			}
 
 		}
@@ -366,7 +367,8 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 				dis.close();
 				pdfFile.delete();
 			} catch (final Exception e) {
-				e.printStackTrace();
+				LOG.error(e.getMessage(),e);
+//				e.printStackTrace();
 			}
 
 		}
@@ -441,14 +443,16 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 			try {
 				dis.close();
 			} catch (final IOException ioe) {
-				ioe.printStackTrace();
+				LOG.error(ioe.getMessage(),ioe);
+//				ioe.printStackTrace();
 			}
 		}
 		if (fileInputStream != null) {
 			try {
 				fileInputStream.close();
 			} catch (final IOException ioe) {
-				ioe.printStackTrace();
+				LOG.error(ioe.getMessage(),ioe);
+//				ioe.printStackTrace();
 			}
 		}
 
@@ -590,7 +594,8 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 				dis.close();
 				pdfFile.delete();
 			} catch (final Exception e) {
-				e.printStackTrace();
+				LOG.error(e.getMessage(),e);
+//				e.printStackTrace();
 			}
 
 		}
@@ -627,14 +632,16 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 			try {
 				dis.close();
 			} catch (final IOException ioe) {
-				ioe.printStackTrace();
+				LOG.error(ioe.getMessage(),ioe);
+//				ioe.printStackTrace();
 			}
 		}
 		if (fileInputStream != null) {
 			try {
 				fileInputStream.close();
 			} catch (final IOException ioe) {
-				ioe.printStackTrace();
+				LOG.error(ioe.getMessage(),ioe);
+//				ioe.printStackTrace();
 			}
 		}
 
@@ -668,7 +675,8 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 				dis.close();
 				pdfFile.delete();
 			} catch (final Exception e) {
-				e.printStackTrace();
+				LOG.error(e.getMessage(),e);
+//				e.printStackTrace();
 			}
 
 		}
@@ -704,14 +712,16 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 			try {
 				dis.close();
 			} catch (final IOException ioe) {
-				ioe.printStackTrace();
+				LOG.error(ioe.getMessage(),ioe);
+//				ioe.printStackTrace();
 			}
 		}
 		if (fileInputStream != null) {
 			try {
 				fileInputStream.close();
 			} catch (final IOException ioe) {
-				ioe.printStackTrace();
+				LOG.error(ioe.getMessage(),ioe);
+//				ioe.printStackTrace();
 			}
 		}
 
@@ -770,7 +780,8 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 				dis.close();
 				pdfFile.delete();
 			} catch (final Exception e) {
-				e.printStackTrace();
+				LOG.error(e.getMessage(),e);
+//				e.printStackTrace();
 			}
 
 		}
@@ -809,14 +820,16 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 			try {
 				dis.close();
 			} catch (final IOException ioe) {
-				ioe.printStackTrace();
+				LOG.error(ioe.getMessage(),ioe);
+//				ioe.printStackTrace();
 			}
 		}
 		if (fileInputStream != null) {
 			try {
 				fileInputStream.close();
 			} catch (final IOException ioe) {
-				ioe.printStackTrace();
+				LOG.error(ioe.getMessage(),ioe);
+//				ioe.printStackTrace();
 			}
 		}
 
@@ -883,7 +896,8 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 				dis.close();
 				pdfFile.delete();
 			} catch (final Exception e) {
-				e.printStackTrace();
+				LOG.error(e.getMessage(),e);
+//				e.printStackTrace();
 			}
 
 		}
@@ -940,14 +954,16 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 			try {
 				dis.close();
 			} catch (final IOException ioe) {
-				ioe.printStackTrace();
+				LOG.error(ioe.getMessage(),ioe);
+//				ioe.printStackTrace();
 			}
 		}
 		if (fileInputStream != null) {
 			try {
 				fileInputStream.close();
 			} catch (final IOException ioe) {
-				ioe.printStackTrace();
+				LOG.error(ioe.getMessage(),ioe);
+//				ioe.printStackTrace();
 			}
 		}
 

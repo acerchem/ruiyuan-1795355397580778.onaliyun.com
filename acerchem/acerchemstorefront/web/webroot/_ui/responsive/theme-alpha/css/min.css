@@ -185,7 +185,7 @@ button{
 .maxtop .maxmenu li ul li a{line-height: 2em; text-align: left; }
 .maxtop .maxmenu li:hover ul li a , .maxtop .maxmenu li.hover ul li a{font-size: 14px;color: #333;font-weight: 500;}
 .maxtop .maxmenu li ul li:hover a{color: #18639a}
-.maxtop_rig{ width:20%; text-align: right; position: relative;}
+.maxtop_rig{ width:30%; text-align: right; position: relative;}
 .maxtop_rig li{display: inline-table; padding-left: 15px; min-height: 30px; min-width: 30px; position: relative;vertical-align: top; }
 .maxtop_rig a , .searchlist .btn-submit , .maxlatest .bansearch .maxicon-search{border:none; background: url(maxicon.png);width: 30px;height: 30px;display: block;}
 .maxtop_rig a.maxicon-user{background-position: -10px -172px; display:  table-cell;}

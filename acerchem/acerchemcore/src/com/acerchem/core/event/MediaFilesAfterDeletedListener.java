@@ -17,8 +17,11 @@ import de.hybris.platform.servicelayer.event.events.AfterItemRemovalEvent;
 import de.hybris.platform.servicelayer.event.impl.AbstractEventListener;
 import de.hybris.platform.servicelayer.model.ModelService;
 import de.hybris.platform.util.Config;
+import org.apache.log4j.Logger;
 
 public class MediaFilesAfterDeletedListener extends AbstractEventListener<AfterItemRemovalEvent> {
+
+	private static final Logger LOG = Logger.getLogger(MediaFilesAfterDeletedListener.class);
 
 	@Resource(name = "configurationService")
 	private ConfigurationService configurationService;
@@ -76,7 +79,8 @@ public class MediaFilesAfterDeletedListener extends AbstractEventListener<AfterI
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
+//			e.printStackTrace();
+			LOG.error(e.getMessage(),e);
 		}
 
 	}

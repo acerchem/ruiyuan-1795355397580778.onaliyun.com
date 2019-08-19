@@ -102,7 +102,8 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 			model.addAttribute("deliveryMethods", acerchemCheckoutFacade.getAllDeliveryModes());
 		} catch (AcerchemOrderException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+//			e.printStackTrace();
+			LOGGER.error(e.getMessage(),e);
 		}
 		if (cartData.getDeliveryMode()!=null) {
 			model.addAttribute("paymentInfos", acerchemCheckoutFacade.getSupportedCardTypes(cartData.getDeliveryMode().getCode()));
@@ -134,7 +135,8 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 				deliveryCost = acerchemTrayFacade.getTotalPriceForCart(cartData, cartData.getDeliveryAddress());
 			} catch (AcerchemOrderException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+//				e.printStackTrace();
+				LOGGER.error(e.getMessage(),e);
 			}
 			 CartModel cartModel = acerchemCheckoutFacade.getCartModel();
 		     cartData.setDeliveryCost(acerchemCheckoutFacade.createPrice(cartModel, deliveryCost));
@@ -162,7 +164,8 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 						//orderModel.setWaitDeliveiedDate(endDate);
 					} catch (ParseException e1) {
 						// TODO Auto-generated catch block
-						e1.printStackTrace();
+//						e1.printStackTrace();
+						LOGGER.error(e1.getMessage(),e1);
 					}
 					
 			     }

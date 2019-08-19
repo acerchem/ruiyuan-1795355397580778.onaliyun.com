@@ -117,7 +117,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		//query.setCount(pageSize);
 		//query.setStart(pageSize * (pageNumber - 1));
 		final SearchResult<List<Object>> result = flexibleSearchService.search(query);
- 
+
 		final List<OrderDetailsReportData> orderDetails = new ArrayList<OrderDetailsReportData>();
 		// for (final OrderEntryModel od : result.getResult()) {
 		LOG.info(">>>>>>>>>OrderDetailsReport originalCount="+result.getCount());
@@ -158,7 +158,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 				if (StringUtils.isNotBlank(customer.getCompanyName())){
 					detail.setUserUid(customer.getCompanyName());
 				}
-				
+
 			}
 			final String deliveryCode = od.getOrder().getDeliveryMode() == null ? ""
 					: od.getOrder().getDeliveryMode().getCode();
@@ -275,7 +275,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 			params.put("orderCode", "%" + orderCode + "%");
 		}
 
-		SQL += " ORDER BY {o:code}";
+		SQL += " ORDER BY {o:code} desc";
 		final StringBuilder builder = new StringBuilder(SQL);
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(builder.toString());
 		query.setResultClassList(Arrays.asList(OrderEntryModel.class, AddressModel.class));
@@ -403,7 +403,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		//增加订单状态不等于cancelled
 		SQL += " and {o:status}<>?status";
 		params.put("status", OrderStatus.valueOf("Cancelled"));
-		
+
 		if (year != null && StringUtils.isNumeric(year) && Integer.valueOf(year) > 0) {
 			SQL += " AND DATE_FORMAT({o:creationtime},'%Y') =?year ";
 			params.put("year", year);
@@ -528,7 +528,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		SQL.append("JOIN Currency as cur ON {o.currency} = {cur.pk}\n");
 		SQL.append("}\n");
 		SQL.append("where {cur.isocode}='USD'\n");
-		
+
 		//增加订单状态不等于cancelled
 		SQL.append(" and {o:status}<>?status\n");
 		params.put("status", OrderStatus.valueOf("Cancelled"));
@@ -695,7 +695,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 			SQL += " AND {o:creationtime}>= ?startDate ";
 			params.put("startDate", startDate);
 		}
-		
+
 		if(endDate != null){
 			SQL += " AND {o:creationtime}<= ?endDate ";
 			params.put("endDate", endDate);
@@ -766,7 +766,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 
 		final String SQL = "select {pk} from {Order} where {creationtime}> ?startDate and {creationtime} < ?endDate  and {status}<>?status";
 
-		
+
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(SQL);
 		query.addQueryParameter("startDate", start);
 

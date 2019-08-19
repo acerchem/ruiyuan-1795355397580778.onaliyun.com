@@ -68,6 +68,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.annotation.Resource;
 import java.io.StringWriter;
 import java.io.UnsupportedEncodingException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -298,12 +299,51 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 		final PageableData pageableData = createPageableData(pageNumber, 5, sortCode, showMode);
 		
 		 ticketDao.findTicketsByCustomerOrderByModifiedTime(userService.getCurrentUser(), baseSiteService.getCurrentBaseSite(), pageableData);
-
 		UserModel userModel = userService.getCurrentUser();
 		if ("anonymous".equals(userModel.getUid())){
-//			(SupportTicketForm)model.asMap().get("supportTicketForm");
-			EmailMessageModel emailMessageModel = this.createEmailMessage("测试");
-			this.sendEmail(emailMessageModel);
+			Map<String, Object> map = model.asMap();
+			try {
+				SupportTicketForm supportTicketForm = (SupportTicketForm) map.get("supportTicketForm");
+				StringBuilder sb = new StringBuilder();
+				sb.append("Dear  Ingredients4U,");
+				sb.append("</br>");
+				sb.append("<p>");
+				sb.append("Name:");
+				sb.append(supportTicketForm.getYourname()!=null?supportTicketForm.getYourname():"");
+				sb.append("</p>");
+				sb.append("<p>");
+				sb.append("Telephone/Mobile  Phone:");
+				sb.append(supportTicketForm.getTelephone()!=null?supportTicketForm.getTelephone():"");
+				sb.append("</p>");
+				sb.append("<p>");
+				sb.append("Shipping  Address:");
+				sb.append(supportTicketForm.getAddress()!=null?supportTicketForm.getAddress():"");
+				sb.append("</p>");
+				sb.append("<p>");
+				sb.append("Email:");
+				sb.append(supportTicketForm.getEmail()!=null?supportTicketForm.getEmail():"");
+				sb.append("<p>");
+				sb.append("Message  Information:");
+				sb.append("</p>");
+				sb.append(supportTicketForm.getMessage()!=null?supportTicketForm.getMessage():"");
+				sb.append("</br>");
+				sb.append("Please  check  and  reply  as  soon  as  possible.");
+				//Inquiry  from  Ingredient4U-XXXX(Name)-年月日
+				StringBuilder title = new StringBuilder();
+				title.append("Inquiry  from  Ingredient4U");
+				if (StringUtils.isNotBlank(supportTicketForm.getYourname())){
+					title.append("-");
+					title.append(supportTicketForm.getYourname());
+				}
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+				title.append("-");
+				title.append(sdf.format(new Date()));
+
+				EmailMessageModel emailMessageModel = this.createEmailMessage(sb.toString(),title.toString());
+				this.sendEmail(emailMessageModel);
+			}catch (Exception e){
+				LOG.error(e.getMessage(),e);
+			}
 			return "pages/account/accountSendSuccessPage";
 		}
 
@@ -565,7 +605,8 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 		try {
 			ticketData = ticketFacade.getTicket(XSSEncoder.encodeHTML(ticketId));
 		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
+			LOG.error(e.getMessage(),e);
+//			e.printStackTrace();
 		}
 		model.addAttribute(CustomerticketingaddonConstants.SUPPORT_TICKET_DATA, ticketData);
 		return "pages/account/accountUpdateSupportTicketPage";
@@ -670,7 +711,7 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 
 
 
-	public EmailMessageModel createEmailMessage(final String emailBody) {
+	public EmailMessageModel createEmailMessage(final String emailBody,String title) {
 		final List<EmailAddressModel> toEmails = new ArrayList<EmailAddressModel>();
 		final List<EmailAddressModel> ccAddress = new ArrayList<EmailAddressModel>();
 		String fromEmail = Config.getParameter("mail.from");
@@ -681,7 +722,7 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 		toEmails.add(ccEmailOneAddressModel);
 
 		return emailService.createEmailMessage(toEmails, ccAddress, new ArrayList<EmailAddressModel>(),
-				fromAddress, fromEmail, "Support Tickets", emailBody, null);
+				fromAddress, fromEmail, title, emailBody, null);
 	}
 
 

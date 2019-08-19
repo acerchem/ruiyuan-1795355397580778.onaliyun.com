@@ -293,9 +293,9 @@
 									<i>-<format:price priceData="${orderData.totalDiscounts}"/></i>
 								</span>
 		
-		                        <span>
+		                        <span style="padding-left: 20px;">
 									<em>Total</em>
-									<i><format:price priceData="${orderData.totalPrice}"/></i>
+									<i style="font-size: 20px;"><format:price priceData="${orderData.totalPrice}"/></i>
 								</span>
 		                     </div>
 		                 </div>

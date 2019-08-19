@@ -21,8 +21,8 @@
 	<div class="rigcont">
 		<c:if test="${not empty searchPageData.sorts}">
 			<form name="sortForm1" method="get" action="#" class="both" id="sortForm1">
-				<label style="width: 160px;font-weight:normal;">
-					<span>Order Sort</span>	
+				<label style="width: 145px;font-weight:normal;">
+					<span>Order Sort</span>
 	                    <select id="sortOptions1" name="sort">
 	                    	<option value="code" ${sort=='code'? 'selected="selected"' : ''}>Order Number</option>
 	                    	<option value="date" ${sort=='date'? 'selected="selected"' : ''}>Date</option>
@@ -35,12 +35,17 @@
 	                        <input type="hidden" name="q" value="${searchPageData.currentQuery.query.value}"/>
 	                    </c:catch>
 				</label>
-				<label style="font-weight:normal;">
-					<input type="text" name='key' class="lab-row" placeholder="Search Order Number"/>
-				</label>				
+				<label style="font-weight:normal;width: 610px;">
+					<input type="text" name='key' class="lab-row" placeholder="Search Order Number" style="width: 65%;"/>
+					<button type="button" class="btn btn-default" style=" width: 28%;margin-left: 5px;" onclick="search()">Search</button>
+				</label>
     		</form>
     	</c:if>
-    
+        <script>
+        function search() {
+            window.location.href="${contextPath}/acerchem/en/my-account/orders?sort="+$("#sortOptions1").val()+"&key="+$("[name='key']").val();
+        }
+        </script>
 		<table>
 			<tr>
 				<th style="text-transform: capitalize;color: #333;font-size: 16px;background: #f3f3f3;">Order Number</th>
@@ -62,7 +67,7 @@
 						<%-- <td class="status" style="padding:10px 10px;font-size:14px;">
 							<spring:theme code="text.account.order.status.display.${order.statusDisplay}"/>
 						</td> --%>
-						<td class="responsive-table-cell" style="padding:10px 10px;font-size:14px;">
+						<td class="responsive-table-cell" style="	padding:10px 10px;font-size:14px;">
 							<fmt:formatDate value="${order.placed}" dateStyle="medium" timeStyle="short" type="both"/>
 						</td>
 						<td class="responsive-table-cell responsive-table-cell-bold" style="padding:10px 10px;font-size:14px;">

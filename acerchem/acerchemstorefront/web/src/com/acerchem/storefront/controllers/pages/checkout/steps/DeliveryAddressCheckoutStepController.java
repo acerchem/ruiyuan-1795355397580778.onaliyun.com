@@ -21,6 +21,7 @@ import java.util.Set;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -62,6 +63,7 @@ import de.hybris.platform.util.Config;
 @RequestMapping(value = "/checkout/multi/delivery-address")
 public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepController
 {
+	private static final Logger LOG = Logger.getLogger(DeliveryAddressCheckoutStepController.class);
 	private static final String DELIVERY_ADDRESS = "delivery-address";
 	private static final String SHOW_SAVE_TO_ADDRESS_BOOK_ATTR = "showSaveToAddressBook";
 
@@ -88,7 +90,8 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 			populateCommonModelAttributes(model, cartData, new AddressForm());
 		} catch (AcerchemOrderException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+//			e.printStackTrace();
+			LOG.error(e.getMessage(),e);
 		}
 
 		return ControllerConstants.Views.Pages.MultiStepCheckout.AddEditDeliveryAddressPage;
@@ -120,6 +123,11 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		final boolean addressRequiresReview = getAddressVerificationResultHandler().handleResult(verificationResult, newAddress,
 				model, redirectModel, bindingResult, getAddressVerificationFacade().isCustomerAllowedToIgnoreAddressSuggestions(),
 				"checkout.multi.address.updated");
+		//发货日期时间段
+		model.addAttribute("minDelivereyDays",Config.getInt("cart.delivereyDays.min",2));
+		model.addAttribute("maxDelivereyDays",Config.getInt("cart.delivereyDays.max",9));
+		CartModel cartmodel = acerchemCheckoutFacade.getCartModel();
+		model.addAttribute("delivereyDays",acerchemTrayFacade.getDeliveryDaysForCart(cartmodel));//根据地址算出运送时间
 
 		if (addressRequiresReview)
 		{
@@ -456,7 +464,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		cartData.setDeliveryMode(acerchemCheckoutFacade.getDeliveryModes());
 		
 		//model.addAttribute("deliveryMode", acerchemCheckoutFacade.getDeliveryModes());
-		
+
 		model.addAttribute("cartData", cartData);
 		model.addAttribute("addressForm", addressForm);
 		if (cartData.getDeliveryMode()!=null) {
@@ -464,14 +472,14 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		}else{
 			model.addAttribute("paymentInfos",acerchemCheckoutFacade.getSupportedCardTypes("DELIVERY_GROSS"));
 		}
-		
+
 
 		if (cartData.getDeliveryMode()!=null&&"DELIVERY_MENTION".equals(cartData.getDeliveryMode().getCode())) {
 			model.addAttribute("deliveryAddresses", acerchemCheckoutFacade.getDeliveryAddresses());
 		}else{
 			model.addAttribute("deliveryAddresses", getDeliveryAddresses(cartData.getDeliveryAddress()));
-			
-			
+
+
 			 double deliveryCost=acerchemTrayFacade.getTotalPriceForCart(cartData, cartData.getDeliveryAddress());
 			 CartModel cartModel = acerchemCheckoutFacade.getCartModel();
 		     cartData.setDeliveryCost(acerchemCheckoutFacade.createPrice(cartModel, deliveryCost));
@@ -501,7 +509,8 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 					//orderModel.setWaitDeliveiedDate(endDate);
 				} catch (ParseException e1) {
 					// TODO Auto-generated catch block
-					e1.printStackTrace();
+//					e1.printStackTrace();
+					LOG.error(e1.getMessage(),e1);
 				}
 				
 		     }
