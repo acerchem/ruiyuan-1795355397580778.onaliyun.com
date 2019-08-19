@@ -41,20 +41,21 @@ public class PersonalInfoValidator implements Validator
 		final String companyName = registerForm.getCompanyName();
 		final AddressForm contactCountry = registerForm.getContactAddress();
 		
-		if(contactCountry==null||contactCountry.getCountryIso()==null)
-		{
-			errors.rejectValue("contactAddress.countryIso", "register.contactAddress.invalid");
-		}
-		else
-		{
-			validateNullValue(errors, contactCountry.getCountryIso(), "contactAddress.countryIso", "register.contactAddress.countryIso.invalid");
-			validateNullValue(errors, contactCountry.getTownCity(), "contactAddress.townCity", "register.contactAddress.townCity.invalid");
-			List<RegionData> regions=i18NFacade.getRegionsForCountryIso(contactCountry.getCountryIso());
-			if(regions.size()>0)
-			{
-				validateNullValue(errors, contactCountry.getRegionIso(), "contactAddress.regionIso", "register.contactAddress.regionIso.invalid");
-			}
-		}
+//		if(contactCountry==null||contactCountry.getCountryIso()==null)
+//		{
+//			errors.rejectValue("contactAddress.countryIso", "register.contactAddress.invalid");
+//		}
+//		else
+//		{
+//			validateNullValue(errors, contactCountry.getCountryIso(), "contactAddress.countryIso", "register.contactAddress.countryIso.invalid");
+//			validateNullValue(errors, contactCountry.getTownCity(), "contactAddress.townCity", "register.contactAddress.townCity.invalid");
+
+//			List<RegionData> regions=i18NFacade.getRegionsForCountryIso(contactCountry.getCountryIso());
+//			if(regions.size()>0)
+//			{
+//				validateNullValue(errors, contactCountry.getRegionIso(), "contactAddress.regionIso", "register.contactAddress.regionIso.invalid");
+//			}
+//		}
 		
 		validateNullValue(errors, name, "name", "register.name.invalid");
 		validateNullValue(errors, currency, "currency", "register.currency.invalid");

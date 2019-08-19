@@ -82,7 +82,8 @@
 		<label>
 			<div class="flex-wrap select-wrap">
 				<div class="flex">		
-					<span class='label-title' style="font-weight:normal;">Contact Address<span style="color:red;font-size: 100%;"> *</span></span>	
+					<%--<span class='label-title' style="font-weight:normal;">Contact Address<span style="color:red;font-size: 100%;"> *</span></span>	--%>
+					<span class='label-title' style="font-weight:normal;">Contact Address</span>
 					<div class="selbox" id="selectContactCountry" data-address-code="${fn:escapeXml(addressData.id)}" data-country-iso-code="${fn:escapeXml(addressData.country.isocode)}">
 						<formElement:customSelectBox idKey="register.contactAddressCountry" labelKey="address.country" path="contactAddress.countryIso" mandatory="true" skipBlank="false" skipBlankMessageKey="address.country" items="${countries}" itemValue="isocode" selectedValue="${customRegisterForm.contactAddress.countryIso}"/>
 						<div style="color:#F00"><form:errors path="contactAddress.countryIso"/></div>
@@ -100,7 +101,7 @@
 		
 		<label>
 			<span class='label-title'></span>
-			<input type="text" id="register.contactAddressDetail" name='contactAddress.townCity' value="${customRegisterForm.contactAddress.townCity}" class="lab-row required" placeholder="Detailed address" alt='Please Enter Contact Detailed Address'/>
+			<input type="text" id="register.contactAddressDetail" name='contactAddress.townCity' value="${customRegisterForm.contactAddress.townCity}" class="lab-row" placeholder="Detailed address" alt='Please Enter Contact Detailed Address'/>
 			<div style="color:#F00"><form:errors path="contactAddress.townCity"/></div>
 		</label>	
 		
@@ -198,12 +199,16 @@ $(document).on("change",'#selectContactCountry select', function (){
 
  $(document).ready(function() {
 	 var revenue = $("#revenue").val();
-	 var revenueArr = revenue.split('.');
-	 $("#revenue").val(revenueArr[0]+"."+revenueArr[1].substring(0,2));
+	 if (revenue!=''){
+		 var revenueArr = revenue.split('.');
+		 $("#revenue").val(revenueArr[0]+"."+revenueArr[1].substring(0,2));
+	 }
 	 var limitCreditAmount = $("#limitCreditAmount").val();
-	 var limitCreditAmountArr = limitCreditAmount.split('.');
-	 $("#limitCreditAmount").val(limitCreditAmountArr[0]+"."+limitCreditAmountArr[1].substring(0,2));
+	 if(limitCreditAmount!=''){
+		 var limitCreditAmountArr = limitCreditAmount.split('.');
+		 $("#limitCreditAmount").val(limitCreditAmountArr[0]+"."+limitCreditAmountArr[1].substring(0,2));
 
+	 }
 
     $('#currency').change(function() {
     	

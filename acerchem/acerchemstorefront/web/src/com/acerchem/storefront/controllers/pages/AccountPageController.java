@@ -882,7 +882,9 @@ public class AccountPageController extends AbstractSearchPageController {
 			for (final AddressModel am : amlist) {
 				if (am.getContactAddress()) {
 					final AddressForm address = new AddressForm();
-					address.setCountryIso(am.getCountry().getIsocode());
+					if (am.getCountry()!=null && StringUtils.isNotBlank(am.getCountry().getIsocode())){
+						address.setCountryIso(am.getCountry().getIsocode());
+					}
 					if (am.getRegion() != null) {
 						address.setRegionIso(am.getRegion().getIsocode());
 					}
@@ -890,7 +892,9 @@ public class AccountPageController extends AbstractSearchPageController {
 					address.setTownCity(am.getTown());
 					CustomRegisterForm.setContactAddress(address);
 					// CustomRegisterForm.setContacts(am.getLastname());
-					model.addAttribute("regions", i18NFacade.getRegionsForCountryIso(am.getCountry().getIsocode()));
+					if (am.getCountry()!=null && StringUtils.isNotBlank(am.getCountry().getIsocode())){
+						model.addAttribute("regions", i18NFacade.getRegionsForCountryIso(am.getCountry().getIsocode()));
+					}
 				}
 			}
 		}
@@ -933,10 +937,14 @@ public class AccountPageController extends AbstractSearchPageController {
 				form.setHaveFinancialReport(aidField.indexOf("haveFinancialReport") != -1);
 				form.setProvideTradeReference(aidField.indexOf("provideTradeReference") != -1);
 			}
+			CountryModel contactCountry = null;
+			if (null != form.getContactAddress() && StringUtils.isNotBlank(form.getContactAddress().getCountryIso())){
+				contactCountry = commonI18NService.getCountry(form.getContactAddress().getCountryIso());
+			}
 
-			final String contactCountryIso = form.getContactAddress().getCountryIso();
-			final String contactRegionIso = form.getContactAddress().getRegionIso();
-			final CountryModel contactCountry = commonI18NService.getCountry(contactCountryIso);
+//			final String contactCountryIso = form.getContactAddress().getCountryIso();
+//			final String contactRegionIso = form.getContactAddress().getRegionIso();
+//			final CountryModel contactCountry = commonI18NService.getCountry(contactCountryIso);
 
 			final CustomerModel user = (CustomerModel) userService.getCurrentUser();
 
@@ -951,13 +959,20 @@ public class AccountPageController extends AbstractSearchPageController {
 			}
 			am2.setLastname(form.getName());
 			am2.setCountry(contactCountry);
-			if (contactRegionIso != null && contactRegionIso != "") {
-				am2.setRegion(commonI18NService.getRegion(contactCountry, contactRegionIso));
-			}
-			else
-			{
+
+//			final String contactRegionIso = form.getContactAddress().getRegionIso();
+			if (null != form.getContactAddress() && StringUtils.isNotBlank(form.getContactAddress().getRegionIso())){
+				am2.setRegion(commonI18NService.getRegion(contactCountry, form.getContactAddress().getRegionIso()));
+			}else {
 				am2.setRegion(null);
 			}
+//			if (contactRegionIso != null && contactRegionIso != "") {
+//				am2.setRegion(commonI18NService.getRegion(contactCountry, contactRegionIso));
+//			}
+//			else
+//			{
+//				am2.setRegion(null);
+//			}
 			am2.setTown(form.getContactAddress().getTownCity());
 
 			user.setSessionLanguage(commonI18NService.getLanguage(form.getLanguage()));
@@ -976,7 +991,9 @@ public class AccountPageController extends AbstractSearchPageController {
 			modelService.saveAll(user, am2);
 
 			GlobalMessages.addInfoMessage(model, "form.global.success");
-			model.addAttribute("regions", i18NFacade.getRegionsForCountryIso(form.getContactAddress().getCountryIso()));
+			if (null != form.getContactAddress() && StringUtils.isNotBlank(form.getContactAddress().getCountryIso())){
+				model.addAttribute("regions", i18NFacade.getRegionsForCountryIso(form.getContactAddress().getCountryIso()));
+			}
 			model.addAttribute("CustomRegisterForm", form);
 			model.addAttribute("nowPage", "update-profile");
 			storeCmsPageInModel(model, getContentPageForLabelOrId("update-profile"));
@@ -991,7 +1008,11 @@ public class AccountPageController extends AbstractSearchPageController {
 					(String) request.getSession().getAttribute(StorefrontFilter.ORIGINAL_REFERER),
 					"/" + previousLanguage + "/", "/" + storeSessionFacade.getCurrentLanguage().getIsocode() + "/");
 		} catch (final Exception exception) {
-			model.addAttribute("regions", i18NFacade.getRegionsForCountryIso(form.getContactAddress().getCountryIso()));
+			if (null != form.getContactAddress() && StringUtils.isNotBlank(form.getContactAddress().getCountryIso())){
+				model.addAttribute("regions", i18NFacade.getRegionsForCountryIso(form.getContactAddress().getCountryIso()));
+			}else {
+				model.addAttribute("regions", "");
+			}
 			model.addAttribute("CustomRegisterForm", form);
 			model.addAttribute("nowPage", "update-profile");
 			storeCmsPageInModel(model, getContentPageForLabelOrId("update-profile"));
