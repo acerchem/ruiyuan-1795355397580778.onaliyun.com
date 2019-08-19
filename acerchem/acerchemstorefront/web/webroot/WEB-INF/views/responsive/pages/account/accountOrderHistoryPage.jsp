@@ -36,8 +36,8 @@
 	                    </c:catch>
 				</label>
 				<label style="font-weight:normal;width: 610px;">
-					<input type="text" name='key' class="lab-row" placeholder="Search Order Number" style="width: 65%;"/>
-					<button type="button" class="btn btn-default" style=" width: 28%;margin-left: 5px;" onclick="search()">Search</button>
+					<input type="text" name='key' class="lab-row" placeholder="Search Order Number" style="width: 65%;margin-top: 4%;margin-left: -4%;"/>
+					<button type="button" class="btn btn-default" style=" width: 28%;margin-left: 2%;margin-top: -1%;" onclick="search()">Search</button>
 				</label>
     		</form>
     	</c:if>
