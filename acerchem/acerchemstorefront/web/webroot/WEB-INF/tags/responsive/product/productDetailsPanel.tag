@@ -207,9 +207,9 @@
                                     <span>${userWarehouse}</span>
                                     <select id="storeMulId">
 									<c:forEach items="${countrys}" var="data"  >
-										<c:if test="${fn:containsIgnoreCase(userWarehouse, data.storeId)}">
+										<%--<c:if test="${fn:containsIgnoreCase(userWarehouse, data.storeId)}">--%>
 											<option value ="${data.storeId}">${data.storeId}${data.storeName}</option>
-										</c:if>
+										<%--</c:if>--%>
 									</c:forEach>
 									</select>
 
