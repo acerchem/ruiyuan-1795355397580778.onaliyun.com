@@ -54,18 +54,31 @@
 									idKey="CategoryCode" labelKey="" path="categoryCode"
 									mandatory="true" skipBlank="false" skipBlankMessageKey="All"
 									items="${categories}" itemValue="code" itemLabel="name"
-									selectedValue="${code}" /></td>
+									selectedValue="${newForm.code}" /></td>
 							<td><span>Customer Area</span> <formElement:customSelectBox
 									idKey="area" labelKey="" path="area" mandatory="true"
 									skipBlank="false" skipBlankMessageKey="All" items="${areas}"
-									itemValue="isocode" itemLabel="name" selectedValue="${area}" />
+									itemValue="isocode" itemLabel="name" selectedValue="${newForm.area}" />
 							</td>
 							<td><span>Country</span> <formElement:customSelectBox
 									idKey="countryIso" labelKey="" path="countryCode"
 									mandatory="true" skipBlank="false" skipBlankMessageKey="All"
 									items="${countries}" itemValue="isocode" itemLabel="name"
-									selectedValue="${countryIso}" /></td>
- 
+									selectedValue="${newForm.countryIso}" /></td>
+						</tr>
+						<tr>
+							<td>
+								<span>Product Name</span>
+								<input name="productName" size="12" type="text" value="${newForm.productName}">
+							</td>
+							<td>
+								<span>Product code</span>
+								<input name="productCode" size="12" type="text" value="${newForm.productCode}">
+							</td>
+							<td>
+								<span>Employee Name</span>
+								<input name="employeeName" size="12" type="text" value="${newForm.employeeName}">
+							</td>
 							<td>
 								<div class="btn">
 									<button type="submit">Show Report</button>

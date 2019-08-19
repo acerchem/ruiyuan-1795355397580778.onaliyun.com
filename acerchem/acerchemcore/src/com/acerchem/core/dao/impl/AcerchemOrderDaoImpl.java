@@ -229,27 +229,38 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 
 	@Override
 	public List<OrderDetailsReportData> getOrderDetails(final String month, final String area, final String countryCode,
-														final String customerCompanyName, final String orderCode,String vendorCode) {
+														final String customerCompanyName, final String orderCode,
+														final String vendorCode,final String productName,final String productCode,
+														final String productCharacteristic,final String warehouseCode,
+														final String employeeName,final String deliveryModeCode) {
 
 		final Integer pageSize = 100;
 
 		final Map<String, Object> params = new HashMap<String, Object>();
-		String SQL = "select {e.pk},{ua.pk} from {OrderEntry as e"
+		String SQL = "select {e.pk},{ua.pk} from {"
+				+ " OrderEntry as e"
 				+ " JOIN Order as o ON {e:order} = {o:pk}"
 				+ " JOIN Customer as u ON {u:pk} = {o:user}"
 				+ " JOIN Address as ua ON {ua:owner} = {u:pk}"
 				+ " JOIN Country as uc ON {uc:pk} = {ua:country}"
-				+ " JOIN Product as p ON {e:product} = {p:pk} "
-				+ " JOIN Vendor as v ON {v.pk} = {p.acerChemVendor}"+ "}" +
-		" where {ua:contactAddress} = true "
-					+"and {v.code}=?code ";
+				+ " JOIN Product as p ON {e:product} = {p:pk} ";
+				if(StringUtils.isNotBlank(vendorCode)) {
+					SQL += " JOIN Vendor as v ON {v.pk} = {p.acerChemVendor}" ;
+				}
+				if(StringUtils.isNotBlank(employeeName)){
+					SQL += " JOIN Employee as emp on {emp.pk} = {u:employee}";
+				}
+				if(StringUtils.isNotBlank(deliveryModeCode)){
+					SQL += " JOIN DeliveryMode as dm on {dm:pk} = {o:deliveryMode}";
+				}
+				SQL += "}";
+		SQL += " where {ua:contactAddress} = true ";
 
 
 		//增加订单状态不等于cancelled
 		SQL += " and {o:status}<>?status";
 //		SQL += " {o:status}<>?status";
 		params.put("status", OrderStatus.valueOf("Cancelled"));
-		params.put("code", vendorCode);
 		if (month != null && !month.equals("")) {
 			SQL += " AND DATE_FORMAT({o:creationtime},'%Y%m') =?month ";
 			params.put("month", month);
@@ -273,6 +284,41 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		if (orderCode != null && !orderCode.equals("")) {
 			SQL += " AND {o:code} like ?orderCode ";
 			params.put("orderCode", "%" + orderCode + "%");
+		}
+
+		if(StringUtils.isNotBlank(vendorCode)){
+			SQL += " AND {v.code}=?code ";
+			params.put("code", vendorCode);
+		}
+
+		if(StringUtils.isNotBlank(productName)){
+			SQL += " AND {p.name} like ?productName";
+			params.put("productName","%"+productName+"%");
+		}
+
+		if(StringUtils.isNotBlank(productCode)){
+			SQL += " AND {p.code} like ?productCode";
+			params.put("productCode","%"+productCode+"%");
+		}
+
+		if(StringUtils.isNotBlank(productCharacteristic)){
+			SQL += " AND {p.characteristic} like ?productCharacteristic";
+			params.put("productCharacteristic","%"+productCharacteristic+"%");
+		}
+
+		if(StringUtils.isNotBlank(warehouseCode)){
+			SQL += " AND {p.code} in (?pCodeWH)";
+			params.put("pCodeWH",getProductCodeByWarehouse(warehouseCode));
+		}
+
+		if(StringUtils.isNotBlank(employeeName)){
+			SQL += " AND {emp.name} like ?employeeName";
+			params.put("employeeName","%"+employeeName+"%");
+		}
+
+		if(StringUtils.isNotBlank(deliveryModeCode)){
+			SQL += " AND {dm.code} = ?deliveryModeCode";
+			params.put("deliveryModeCode",deliveryModeCode);
 		}
 
 		SQL += " ORDER BY {o:code} desc";
@@ -752,7 +798,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 	}
 
 	@Override
-	public List<CustomerBillAnalysisData> getCustomerBillAnalysis(final Date startDate, final Date endDate) {
+	public List<CustomerBillAnalysisData> getCustomerBillAnalysis(final Date startDate, final Date endDate,String customerName,String employeeName) {
 
 		// date
 		Date start = startDate;
@@ -764,16 +810,32 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 			end = Calendar.getInstance().getTime();
 		}
 
-		final String SQL = "select {pk} from {Order} where {creationtime}> ?startDate and {creationtime} < ?endDate  and {status}<>?status";
+		String SQL = "select {pk} from {" +
+                "Order as o " +
+                "JOIN Customer as u ON {u:pk} = {o:user} ";
+                if(StringUtils.isNotBlank(employeeName)) {
+                    SQL += "JOIN Employee as e on {e:pk} = {u:employee}";
+                }
+               SQL +=  "} " +
+            "where {o:creationtime}> ?startDate and {o:creationtime} < ?endDate  and {o:status}<>?status";
 
 
-		final FlexibleSearchQuery query = new FlexibleSearchQuery(SQL);
-		query.addQueryParameter("startDate", start);
-
-		query.addQueryParameter("endDate", end);
+        final Map<String, Object> params = new HashMap<String, Object>();
+        params.put("startDate", start);
+        params.put("endDate", end);
+		if(StringUtils.isNotBlank(customerName)){
+		    SQL += " AND {u:name} like ?customerName ";
+            params.put("customerName", "%" + customerName + "%");
+        }
+        if(StringUtils.isNotBlank(employeeName)){
+            SQL += " AND {e:name} like ?employeeName ";
+            params.put("employeeName", "%" + employeeName + "%");
+        }
 		//增加订单状态不等于cancelled
-		query.addQueryParameter("status", OrderStatus.valueOf("Cancelled"));
+        params.put("status", OrderStatus.valueOf("Cancelled"));
 
+        final FlexibleSearchQuery query = new FlexibleSearchQuery(SQL);
+        query.addQueryParameters(params);
 		final SearchResult<OrderModel> result = flexibleSearchService.search(query);
 		final List<OrderModel> list = result.getResult();
 
@@ -857,6 +919,15 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		}
 
 		return report;
+	}
+
+	public List<String> getProductCodeByWarehouse(final String warehouseCode){
+		final String SQL = "select {productCode} from {StockLevel as s JOIN Warehouse as w on {w:pk} = {s:warehouse}} where {w.code} = ?code";
+		final FlexibleSearchQuery pQuery = new FlexibleSearchQuery(SQL);
+		pQuery.addQueryParameter("code",warehouseCode);
+		pQuery.setResultClassList(Arrays.asList(String.class));
+		final SearchResult<String> pResult = flexibleSearchService.search(pQuery);
+		return pResult.getResult();
 	}
 
 }

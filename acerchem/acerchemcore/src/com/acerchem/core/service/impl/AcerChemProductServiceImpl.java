@@ -570,9 +570,9 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 
 	@Override
 	public List<ProductSalesRecordData> getProductSalesForReport(final String month, final String categoryCode,
-			final String area, final String countryCode) {
+			final String area, final String countryCode,final String productName,final String productCode,final String employeeName) {
 		final List<AcerchemProductBuyerBean> list = acerChemProductDao.getProductSalesForReport(month, categoryCode,
-				area, countryCode);
+				area, countryCode,productName,productCode,employeeName);
 
 		final List<ProductSalesRecordData> report = new ArrayList<>();
 		if (CollectionUtils.isNotEmpty(list)) {
@@ -623,10 +623,11 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 	}
 
 	@Override
-	public List<ProductSalesRecordData> getProductSalesForReport(final String month, final String categoryCode,
-																 final String area, final String countryCode,final String vendorCode) {
+	public List<ProductSalesRecordData> getProductSalesForReport(final String month, final String categoryCode,final String area,
+																 final String countryCode,final String productName,final String productCode,
+																 final String employeeName,final String vendorCode) {
 		final List<AcerchemProductBuyerBean> list = acerChemProductDao.getProductSalesForReport(month, categoryCode,
-				area, countryCode,vendorCode);
+				area, countryCode,productName,productCode,employeeName,vendorCode);
 
 		final List<ProductSalesRecordData> report = new ArrayList<>();
 		if (CollectionUtils.isNotEmpty(list)) {

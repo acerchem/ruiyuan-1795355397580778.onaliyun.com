@@ -32,4 +32,9 @@ public class DefaultAcerchemProductWarehouseService implements AcerchemProductWa
     public List<WarehouseModel> getProductWarehouse(ProductModel product) {
         return productWarehouseDao.getProductWarehouseByProductCode(product.getCode());
     }
+
+    @Override
+    public List<WarehouseModel> getAllProductWarehouse() {
+        return productWarehouseDao.getAllProductWarehouse();
+    }
 }

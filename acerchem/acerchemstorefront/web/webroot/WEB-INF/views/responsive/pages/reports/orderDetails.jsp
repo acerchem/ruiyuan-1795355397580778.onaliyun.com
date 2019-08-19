@@ -60,16 +60,63 @@
 									mandatory="true" skipBlank="false" skipBlankMessageKey="All"
 									items="${countries}" itemValue="isocode" itemLabel="name"
 									selectedValue="${searchCriteriaFrom.countryCode}" /></td>
-							<td><span>Order Code</span> <input name="orderCode"
-								size="20" type="text" value="${searchCriteriaFrom.orderCode}">
+							<td><span>Order Code</span>
+								<input name="orderCode"size="20" type="text" value="${searchCriteriaFrom.orderCode}">
 							</td>
-							
-							<td><span>Customer CompanyName</span> 
-							<input name="cutomerCompanyName"
-								size="20" type="text" value="${searchCriteriaFrom.cutomerCompanyName}">
-							</td>
+
 							<td>
-							<span></span>
+								<span>Customer CompanyName</span>
+								<input name="cutomerCompanyName"size="20" type="text" value="${searchCriteriaFrom.cutomerCompanyName}">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span>Vendor</span>
+								<formElement:customSelectBox idKey="vendorCode" labelKey=""
+									 path="vendorCode" mandatory="true" skipBlank="false"
+									 skipBlankMessageKey="All" items="${vendors}" itemValue="code"
+									 itemLabel="name" selectedValue="${searchCriteriaFrom.vendorCode}" />
+							</td>
+
+							<td>
+								<span>Product Name</span>
+								<input name="productName"size="20" type="text" value="${searchCriteriaFrom.productName}">
+							</td>
+
+							<td>
+								<span>Product Code</span>
+								<input name="productCode"size="20" type="text" value="${searchCriteriaFrom.productCode}">
+							</td>
+
+							<td>
+								<span>Product Characteristic</span>
+								<input name="productCharacteristic"size="20" type="text" value="${searchCriteriaFrom.productCharacteristic}">
+							</td>
+
+							<td>
+								<span>Product Warehouse</span>
+								<formElement:customSelectBox idKey="warehouseCode" labelKey=""
+									 path="warehouseCode" mandatory="true" skipBlank="false"
+									 skipBlankMessageKey="All" items="${warehouses}" itemValue="code"
+									 itemLabel="name" selectedValue="${searchCriteriaFrom.warehouseCode}" />
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<span>Employee Name</span>
+								<input name="employeeName"size="20" type="text" value="${searchCriteriaFrom.employeeName}">
+							</td>
+
+							<td>
+								<span>Delivery Mode</span>
+								<formElement:customSelectBox idKey="deliveryModeCode" labelKey=""
+									 path="deliveryModeCode" mandatory="true" skipBlank="false"
+									 skipBlankMessageKey="All" items="${deliveryModes}" itemValue="code"
+									 itemLabel="name" selectedValue="${searchCriteriaFrom.deliveryModeCode}" />
+							</td>
+							<td></td><td></td>
+							<td>
+								<span></span>
 								<div class="btn">
 									<button type="submit">Show Report</button>
 								</div>

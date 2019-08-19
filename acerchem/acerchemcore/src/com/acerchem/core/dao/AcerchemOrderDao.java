@@ -14,11 +14,13 @@ public interface AcerchemOrderDao {
 	
 	Set<String> getAllAreas();
 	List<OrderDetailsReportData> getOrderDetails(String month,String area,String countryCode,String customerCompanyname,String orderCode);;
-	List<OrderDetailsReportData> getOrderDetails(String month,String area,String countryCode,String customerCompanyname,String orderCode,String vendorCode);
+	List<OrderDetailsReportData> getOrderDetails(String month,String area,String countryCode,String customerCompanyname,String orderCode,
+												 String vendorCode,String productName,String productCode,String productCharacteristic,
+												 String warehouseCode,String employeeName,String deliveryModeCode);
 	List<MonthlySalesAnalysis> getMonthlySalesAnalysis(String year,String area);
 	List<SalesByEmployeeReportData> getEmployeeSales(String year);
-	
+
 	List<CustomerSalesAnalysisData> getCustomerSalesAnalysis(String area,String customerName,double amount,Date startDate,Date endDate);
-	List<CustomerBillAnalysisData> getCustomerBillAnalysis(Date startDate,Date endDate);
+	List<CustomerBillAnalysisData> getCustomerBillAnalysis(Date startDate,Date endDate,String customerName,String employeeName);
 	
 }

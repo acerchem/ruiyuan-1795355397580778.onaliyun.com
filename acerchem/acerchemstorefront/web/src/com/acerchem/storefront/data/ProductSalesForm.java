@@ -6,6 +6,9 @@ public class ProductSalesForm {
 	private String categoryCode;
 	private String area;
 	private String countryCode;
+	private String productName;
+	private String productCode;
+	private String employeeName;
 	public String getMonth() {
 		return month;
 	}
@@ -30,6 +33,22 @@ public class ProductSalesForm {
 	public void setCountryCode(final String countryCode) {
 		this.countryCode = countryCode;
 	}
-	
-	
+	public String getProductName() {
+		return productName;
+	}
+	public void setProductName(String productName) {
+		this.productName = productName;
+	}
+	public String getProductCode() {
+		return productCode;
+	}
+	public void setProductCode(String productCode) {
+		this.productCode = productCode;
+	}
+	public String getEmployeeName() {
+		return employeeName;
+	}
+	public void setEmployeeName(String employeeName) {
+		this.employeeName = employeeName;
+	}
 }

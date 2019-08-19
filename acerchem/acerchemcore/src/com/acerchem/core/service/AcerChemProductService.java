@@ -59,10 +59,11 @@ public interface AcerChemProductService {
 	public List<ProductPriceAnalysisData> getProductWithBaserealPrice(final String month,final String vendorCode);
 
 	public List<ProductSalesRecordData> getProductSalesForReport(final String month, final String categoryCode,
-			final String area, final String countryCode);
+			final String area, final String countryCode,final String productName,final String productCode,final String employeeName);
 
 	public List<ProductSalesRecordData> getProductSalesForReport(final String month, final String categoryCode,
-																 final String area, final String countryCode,final String vendorCode);
+																 final String area, final String countryCode,final String productName,
+																 final String productCode,final String employeeName,final String vendorCode);
 
 	public List<InventoryReportData> getInventory(final String vendorCode);
 	

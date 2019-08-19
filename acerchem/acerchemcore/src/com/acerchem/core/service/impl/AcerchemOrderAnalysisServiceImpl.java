@@ -38,9 +38,9 @@ public class AcerchemOrderAnalysisServiceImpl implements AcerchemOrderAnalysisSe
 		return acerchemOrderDao.getCustomerSalesAnalysis(area, customerName, amount,startDate,endDate);
 	}
 	@Override
-	public List<CustomerBillAnalysisData> getCustomerBillAnalysis(final Date startDate, final Date endDate) {
+	public List<CustomerBillAnalysisData> getCustomerBillAnalysis(final Date startDate, final Date endDate,String customerName,String employeeName) {
 		// TODO Auto-generated method stub
-		return acerchemOrderDao.getCustomerBillAnalysis(startDate, endDate);
+		return acerchemOrderDao.getCustomerBillAnalysis(startDate, endDate,customerName,employeeName);
 	}
 	@Override
 	public Set<String> getAllAreas() {
@@ -55,9 +55,13 @@ public class AcerchemOrderAnalysisServiceImpl implements AcerchemOrderAnalysisSe
 	}
 	@Override
 	public List<OrderDetailsReportData> getOrderDetails(final String month, final String area, final String countryCode,
-														final String customerCompanyname, final String orderCode,String vendorCode) {
+														final String customerCompanyname, final String orderCode,
+														final String vendorCode,final String productName,final String productCode,
+														final String productCharacteristic,final String warehouseCode,
+														final String employeeName,final String deliveryModeCode) {
 		// TODO Auto-generated method stub
-		return acerchemOrderDao.getOrderDetails(month, area, countryCode, customerCompanyname, orderCode,vendorCode);
+		return acerchemOrderDao.getOrderDetails(month, area, countryCode, customerCompanyname, orderCode,vendorCode,productName,
+				productCode,productCharacteristic,warehouseCode,employeeName,deliveryModeCode);
 	}
 
 	

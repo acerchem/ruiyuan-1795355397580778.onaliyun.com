@@ -10,5 +10,6 @@ public interface AcerchemProductWarehouseDao {
 	
 
 	List<WarehouseModel> getProductWarehouseByProductCode(String productCode);
-	
+
+	List<WarehouseModel> getAllProductWarehouse();
 }

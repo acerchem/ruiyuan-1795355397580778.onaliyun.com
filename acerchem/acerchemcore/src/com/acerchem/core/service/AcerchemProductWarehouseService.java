@@ -11,4 +11,6 @@ import java.util.List;
 public interface AcerchemProductWarehouseService {
 
     List<WarehouseModel> getProductWarehouse(ProductModel product);
+
+    List<WarehouseModel> getAllProductWarehouse();
 }

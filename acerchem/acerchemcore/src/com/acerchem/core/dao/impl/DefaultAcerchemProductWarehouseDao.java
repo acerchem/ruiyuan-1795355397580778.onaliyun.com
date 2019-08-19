@@ -32,4 +32,12 @@ public class DefaultAcerchemProductWarehouseDao implements AcerchemProductWareho
 		SearchResult<WarehouseModel> searchResult=flexibleSearchService.search(searchQuery);
 		return searchResult.getResult();
 	}
+
+	@Override
+	public List<WarehouseModel> getAllProductWarehouse() {
+		final String SQL = " select {pk} from {Warehouse}";
+		FlexibleSearchQuery searchQuery = new FlexibleSearchQuery(SQL);
+		SearchResult<WarehouseModel> searchResult = flexibleSearchService.search(searchQuery);
+		return searchResult.getResult();
+	}
 }
