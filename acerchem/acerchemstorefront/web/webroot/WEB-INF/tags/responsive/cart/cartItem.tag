@@ -49,7 +49,8 @@
 							<span class="in-title">${fn:escapeXml(entry.product.name)}</span>
 							<span class="spec">package:<i>${entry.product.netWeight}${entry.product.unitName}/${entry.product.packageType}</i></span>	
 							<span class="old-price">price:<i><format:price priceData="${entry.basePrice}" displayFreeForZero="true"/></i></span>
-						</span>								
+							<span class="old-price">Delivery From:<i>${entry.deliveryPointOfService.name}</i></span>
+						</span>
 					</div>
 				</td>
 				<td>
