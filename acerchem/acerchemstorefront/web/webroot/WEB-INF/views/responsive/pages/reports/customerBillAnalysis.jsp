@@ -66,7 +66,18 @@
 									</span>
 								</div>
 							</td>
-
+							<td>
+								<div>
+									<span>Customer Name</span>
+									<input name="customerName" size="12" type="text" value="${customerName}">
+								</div>
+							</td>
+							<td>
+								<div>
+									<span>Employee Name</span>
+									<input name="employeeName" size="12" type="text" value="${employeeName}">
+								</div>
+							</td>
 							<td>
 								<div class="btn">
 									<button type="submit">Show Report</button>
