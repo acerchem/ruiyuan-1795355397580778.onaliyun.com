@@ -68,9 +68,17 @@ public class DefaultCustomerCreditAccountServiceImpl implements DefaultCustomerC
 
 	@Override
 	public CustomerCreditAccountModel updateCustomerCreditAccountConsume(final OrderModel orderModel,
-			final BigDecimal money) {
+			BigDecimal money) {
 
 		if (money != null && money.compareTo(BigDecimal.ZERO) > 0) {
+
+			if(orderModel.getCurrency() == null || orderModel.getCurrency().getConversion() == null || orderModel.getCurrency().getConversion() <= 0.0d ){
+				LOG.info("updateCustomerCreditAccountConsume Currency ERROR money=" + money
+						+ " | orderModel.getCurrency() is null =" + orderModel.getCurrency() == null + "  | orderModel.getCurrency().getConversion() = " + orderModel.getCurrency().getConversion());
+				return null;
+			}
+			//转换汇率
+			money = money.divide(new BigDecimal(orderModel.getCurrency().getConversion()),2, BigDecimal.ROUND_HALF_UP);
 
 			final CustomerModel userModel = (CustomerModel) userService.getUserForUID(orderModel.getUser().getUid());
 			if (userModel != null) {
