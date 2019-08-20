@@ -8,8 +8,8 @@
 <spring:htmlEscape defaultHtmlEscape="true" />
 
 <c:if test="${not empty spellingSuggestion}">
-	<div class="searchSpellingSuggestionPrompt">
+	<%--<div class="searchSpellingSuggestionPrompt">
 		<c:url value="${spellingSuggestion.query.url}" var="spellingSuggestionQueryUrl"/>
 		<spring:theme code="search.spellingSuggestion.prompt" />&nbsp;<a href="${spellingSuggestionQueryUrl}">${fn:escapeXml(spellingSuggestion.suggestion)}</a>?
-	</div>
+	</div>--%>
 </c:if>
