@@ -699,25 +699,49 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 			StringBuilder sb = new StringBuilder();
 			sb.append("Dear  Ingredients4U,");
 			sb.append("</br>");
-			sb.append("<p>");
-			sb.append("Name:");
-			sb.append(supportTicketForm.getYourname()!=null?supportTicketForm.getYourname():"");
-			sb.append("</p>");
-			sb.append("<p>");
-			sb.append("Telephone/Mobile  Phone:");
-			sb.append(supportTicketForm.getTelephone()!=null?supportTicketForm.getTelephone():"");
-			sb.append("</p>");
-			sb.append("<p>");
-			sb.append("Shipping  Address:");
-			sb.append(supportTicketForm.getAddress()!=null?supportTicketForm.getAddress():"");
-			sb.append("</p>");
-			sb.append("<p>");
-			sb.append("Email:");
-			sb.append(supportTicketForm.getEmail()!=null?supportTicketForm.getEmail():"");
-			sb.append("<p>");
-			sb.append("Message  Information:");
-			sb.append("</p>");
-			sb.append(supportTicketForm.getMessage()!=null?supportTicketForm.getMessage():"");
+			if (StringUtils.isNotBlank(supportTicketForm.getYourname())){
+				sb.append("<p>");
+				sb.append("Name:");
+				sb.append(supportTicketForm.getYourname());
+				sb.append("</p>");
+			}
+			if (StringUtils.isNotBlank(supportTicketForm.getTelephone())){
+				sb.append("<p>");
+				sb.append("Telephone/Mobile  Phone:");
+				sb.append(supportTicketForm.getTelephone());
+				sb.append("</p>");
+			}
+			if (StringUtils.isNotBlank(supportTicketForm.getAddress())){
+				sb.append("<p>");
+				sb.append("Shipping  Address:");
+				sb.append(supportTicketForm.getAddress());
+				sb.append("</p>");
+			}
+			if (StringUtils.isNotBlank(supportTicketForm.getEmail())){
+				sb.append("<p>");
+				sb.append("Email:");
+				sb.append(supportTicketForm.getEmail());
+				sb.append("</p>");
+			}
+			if (StringUtils.isNotBlank(supportTicketForm.getProductId())){
+				sb.append("<p>");
+				sb.append("Product ID:");
+				sb.append(supportTicketForm.getProductId());
+				sb.append("</p>");
+			}
+			if (StringUtils.isNotBlank(supportTicketForm.getProductName())){
+				sb.append("<p>");
+				sb.append("Product Name:");
+				sb.append(supportTicketForm.getProductName());
+				sb.append("</p>");
+			}
+			if (StringUtils.isNotBlank(supportTicketForm.getMessage())){
+				sb.append("<p>");
+				sb.append("Message  Information:");
+				sb.append("</p>");
+				sb.append(supportTicketForm.getMessage()!=null?supportTicketForm.getMessage():"");
+		}
+
 			sb.append("</br>");
 			sb.append("Please  check  and  reply  as  soon  as  possible.");
 			return sb.toString();
