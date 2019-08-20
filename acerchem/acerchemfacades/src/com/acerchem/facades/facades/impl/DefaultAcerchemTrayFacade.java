@@ -63,7 +63,7 @@ public class DefaultAcerchemTrayFacade implements AcerchemTrayFacade {
         RegionModel regionModel = null;
         CountryTrayFareConfModel countryTrayFareConf = null;
         //托盘数量
-        BigDecimal totalTrayAmount = BigDecimal.ZERO;
+        int totalTrayAmount = 0;
         if (cartData != null && addressData != null){
 
             for (OrderEntryData aoe : cartData.getEntries()){
@@ -79,9 +79,9 @@ public class DefaultAcerchemTrayFacade implements AcerchemTrayFacade {
                 Long quantity = aoe.getQuantity();
 
                 //托盘数量
-                BigDecimal entryTrayAmount = BigDecimal.valueOf(quantity).divide(new BigDecimal(unitCalculateRato),0,BigDecimal.ROUND_DOWN);
-                totalTrayAmount =totalTrayAmount.add(entryTrayAmount);
-                LOG.debug( productModel.getCode() + " quantity:"+quantity.intValue() + ",unitCalculateRato:"+unitCalculateRato + ",entryTrayAmount:"+entryTrayAmount.doubleValue() + "         totalTrayAmount:"+totalTrayAmount);
+                int entryTrayAmount = BigDecimal.valueOf(quantity).divide(new BigDecimal(unitCalculateRato),0,BigDecimal.ROUND_UP).intValue();
+                totalTrayAmount += entryTrayAmount;
+                LOG.debug( productModel.getCode() + " quantity:"+quantity.intValue() + ",unitCalculateRato:"+unitCalculateRato + ",entryTrayAmount:"+entryTrayAmount + "         totalTrayAmount:"+totalTrayAmount);
 //                if(totalTrayAmount.intValue() > 20){
 //                	totalTrayAmount = new BigDecimal(20);
 //                }
@@ -91,15 +91,16 @@ public class DefaultAcerchemTrayFacade implements AcerchemTrayFacade {
             	regionModel =  commonI18NService.getRegion(countryModel, addressData.getRegion().getIsocode());
             }
         }
-        int totalTrayCount = totalTrayAmount.setScale(0,BigDecimal.ROUND_HALF_UP).intValue();
-        LOG.debug("totalTrayCount:"+totalTrayCount);
+        LOG.debug("totalTrayAmount:"+totalTrayAmount);
         if(regionModel != null){
-        	countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(regionModel,totalTrayCount);
+        	countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(regionModel,totalTrayAmount);
             if (countryTrayFareConf!=null){
                 totalTrayPrice = countryTrayFareConf.getPrice();
-            }else{
-                LOG.error("地区未配置托盘价格，regionModel.getIsocode()="+regionModel.getIsocode());
-                throw new AcerchemOrderException(errorCode,"Do not get the delivery cost information，please contact with I4U.");
+
+                totalTrayPrice = new BigDecimal(totalTrayPrice).divide(new BigDecimal(commonI18NService.getCurrentCurrency().getConversion()),2,BigDecimal.ROUND_HALF_UP).doubleValue();
+//            }else{
+//                LOG.error("地区未配置托盘价格，regionModel.getIsocode()="+regionModel.getIsocode());
+//                throw new AcerchemOrderException(errorCode,"Do not get the delivery cost information，please contact with I4U.");
             }
         }
         return totalTrayPrice;

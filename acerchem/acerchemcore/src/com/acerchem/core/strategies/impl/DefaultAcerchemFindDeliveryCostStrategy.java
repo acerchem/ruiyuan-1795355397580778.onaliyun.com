@@ -104,6 +104,7 @@ public class DefaultAcerchemFindDeliveryCostStrategy extends DefaultFindDelivery
 				if (orderTotalPrice <= Double.valueOf(orderStandardFee)){
 					String orderOperationFee = configurationService.getConfiguration().getString(ORDER_OPERATION_FEE,defaultOrderOperationFee);
 					operationFee = operationFee.add(BigDecimal.valueOf(Double.valueOf(orderOperationFee)));
+					operationFee = operationFee.divide(new BigDecimal(order.getCurrency().getConversion()),2,BigDecimal.ROUND_HALF_UP);
 				}
 				order.setOperateCost(operationFee.doubleValue());
 
@@ -111,7 +112,8 @@ public class DefaultAcerchemFindDeliveryCostStrategy extends DefaultFindDelivery
 				if (DELIVERY_MENTION.equals(deliveryModeModel.getCode())){
 					//存储费
 					String deliveryMetionPrice = configurationService.getConfiguration().getString(DELIVERY_MENTION_FEE,defaultStorageFee);
-					order.setStorageCost(Double.valueOf(deliveryMetionPrice));
+					Double storageCost = new BigDecimal(deliveryMetionPrice).divide(new BigDecimal(order.getCurrency().getConversion()),2,BigDecimal.ROUND_HALF_UP).doubleValue();
+					order.setStorageCost(storageCost);
 					order.setDeliveryCost(0.0d);
 					//运费为0
 					deliveryCost = new PriceValue(order.getCurrency().getIsocode(), 0.0d , true);
