@@ -37,6 +37,8 @@ import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.search.pagedata.SearchPageData;
 import de.hybris.platform.converters.Converters;
 import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.core.model.user.EmployeeModel;
 import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.customerticketingfacades.TicketFacade;
 import de.hybris.platform.customerticketingfacades.data.StatusData;
@@ -301,45 +303,11 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 		 ticketDao.findTicketsByCustomerOrderByModifiedTime(userService.getCurrentUser(), baseSiteService.getCurrentBaseSite(), pageableData);
 		UserModel userModel = userService.getCurrentUser();
 		if ("anonymous".equals(userModel.getUid())){
-			Map<String, Object> map = model.asMap();
-			try {
-				SupportTicketForm supportTicketForm = (SupportTicketForm) map.get("supportTicketForm");
-				StringBuilder sb = new StringBuilder();
-				sb.append("Dear  Ingredients4U,");
-				sb.append("</br>");
-				sb.append("<p>");
-				sb.append("Name:");
-				sb.append(supportTicketForm.getYourname()!=null?supportTicketForm.getYourname():"");
-				sb.append("</p>");
-				sb.append("<p>");
-				sb.append("Telephone/Mobile  Phone:");
-				sb.append(supportTicketForm.getTelephone()!=null?supportTicketForm.getTelephone():"");
-				sb.append("</p>");
-				sb.append("<p>");
-				sb.append("Shipping  Address:");
-				sb.append(supportTicketForm.getAddress()!=null?supportTicketForm.getAddress():"");
-				sb.append("</p>");
-				sb.append("<p>");
-				sb.append("Email:");
-				sb.append(supportTicketForm.getEmail()!=null?supportTicketForm.getEmail():"");
-				sb.append("<p>");
-				sb.append("Message  Information:");
-				sb.append("</p>");
-				sb.append(supportTicketForm.getMessage()!=null?supportTicketForm.getMessage():"");
-				sb.append("</br>");
-				sb.append("Please  check  and  reply  as  soon  as  possible.");
-				//Inquiry  from  Ingredient4U-XXXX(Name)-年月日
-				StringBuilder title = new StringBuilder();
-				title.append("Inquiry  from  Ingredient4U");
-				if (StringUtils.isNotBlank(supportTicketForm.getYourname())){
-					title.append("-");
-					title.append(supportTicketForm.getYourname());
-				}
-				SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
-				title.append("-");
-				title.append(sdf.format(new Date()));
 
-				EmailMessageModel emailMessageModel = this.createEmailMessage(sb.toString(),title.toString());
+			try {
+				Map<String, Object> map = model.asMap();
+				SupportTicketForm supportTicketForm = (SupportTicketForm) map.get("supportTicketForm");
+				EmailMessageModel emailMessageModel = this.createEmailMessage(getEmailBody(supportTicketForm),getEmailTitle(supportTicketForm));
 				this.sendEmail(emailMessageModel);
 			}catch (Exception e){
 				LOG.error(e.getMessage(),e);
@@ -349,6 +317,23 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 
 		 ServicesUtil.validateParameterNotNull(userService.getCurrentUser(), "Customer must not be null");
 		 ServicesUtil.validateParameterNotNull(baseSiteService.getCurrentBaseSite(), "Store must not be null");
+
+		 //新增发送业务员
+		CustomerModel customerModel = (CustomerModel)userModel;
+		EmployeeModel employee = customerModel.getEmployee();
+		if (null != employee && StringUtils.isNotBlank(employee.getUid())){
+			try {
+				Map<String, Object> map = model.asMap();
+				SupportTicketForm supportTicketForm = (SupportTicketForm) map.get("supportTicketForm");
+				EmailMessageModel emailMessageModel = this.createEmailMessage(getEmailBody(supportTicketForm),getEmailTitle(supportTicketForm),employee.getUid(),"".equals(employee.getDisplayName())?"":employee.getDisplayName());
+				this.sendEmail(emailMessageModel);
+			}catch (Exception e){
+				LOG.error(e.getMessage(),e);
+			}
+		}else {
+			LOG.info("employee is null , send error");
+		}
+
 		 Map<String, Object> queryParams = new HashMap();
 		 queryParams.put("user", userService.getCurrentUser());
 		 queryParams.put("baseSite", baseSiteService.getCurrentBaseSite());
@@ -710,15 +695,67 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 	}
 
 
+	public String getEmailBody(SupportTicketForm supportTicketForm){
+			StringBuilder sb = new StringBuilder();
+			sb.append("Dear  Ingredients4U,");
+			sb.append("</br>");
+			sb.append("<p>");
+			sb.append("Name:");
+			sb.append(supportTicketForm.getYourname()!=null?supportTicketForm.getYourname():"");
+			sb.append("</p>");
+			sb.append("<p>");
+			sb.append("Telephone/Mobile  Phone:");
+			sb.append(supportTicketForm.getTelephone()!=null?supportTicketForm.getTelephone():"");
+			sb.append("</p>");
+			sb.append("<p>");
+			sb.append("Shipping  Address:");
+			sb.append(supportTicketForm.getAddress()!=null?supportTicketForm.getAddress():"");
+			sb.append("</p>");
+			sb.append("<p>");
+			sb.append("Email:");
+			sb.append(supportTicketForm.getEmail()!=null?supportTicketForm.getEmail():"");
+			sb.append("<p>");
+			sb.append("Message  Information:");
+			sb.append("</p>");
+			sb.append(supportTicketForm.getMessage()!=null?supportTicketForm.getMessage():"");
+			sb.append("</br>");
+			sb.append("Please  check  and  reply  as  soon  as  possible.");
+			return sb.toString();
+	}
+
+	public String getEmailTitle(SupportTicketForm supportTicketForm){
+		//Inquiry  from  Ingredient4U-XXXX(Name)-年月日
+		StringBuilder title = new StringBuilder();
+		title.append("Inquiry  from  Ingredient4U");
+		if (StringUtils.isNotBlank(supportTicketForm.getYourname())){
+			title.append("-");
+			title.append(supportTicketForm.getYourname());
+		}
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy年MM月dd日");
+		title.append("-");
+		title.append(sdf.format(new Date()));
+		return title.toString();
+	}
+
+
+
+	public EmailMessageModel createEmailMessage(final String emailBody,String title,String toAddress,String displayName){
+		return getEmailMessage(emailBody,title,toAddress,displayName);
+	}
 
 	public EmailMessageModel createEmailMessage(final String emailBody,String title) {
+		String toAddress = Config.getParameter("mail.ccAddress.one");
+		String displayName = Config.getParameter("mail.ccAddress.displayOneName");
+		return getEmailMessage(emailBody,title,toAddress,displayName);
+	}
+
+	public EmailMessageModel getEmailMessage(final String emailBody,String title,String toAddress,String displayName){
 		final List<EmailAddressModel> toEmails = new ArrayList<EmailAddressModel>();
 		final List<EmailAddressModel> ccAddress = new ArrayList<EmailAddressModel>();
 		String fromEmail = Config.getParameter("mail.from");
 		final EmailAddressModel fromAddress = emailService
 				.getOrCreateEmailAddressForEmail(fromEmail, "customerservice");
-		final EmailAddressModel ccEmailOneAddressModel = emailService.getOrCreateEmailAddressForEmail(
-				Config.getParameter("mail.ccAddress.one"), Config.getParameter("mail.ccAddress.displayOneName"));
+		final EmailAddressModel ccEmailOneAddressModel = emailService.getOrCreateEmailAddressForEmail(toAddress, displayName);
 		toEmails.add(ccEmailOneAddressModel);
 
 		return emailService.createEmailMessage(toEmails, ccAddress, new ArrayList<EmailAddressModel>(),

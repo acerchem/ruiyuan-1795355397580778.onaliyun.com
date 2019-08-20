@@ -19,6 +19,14 @@
 	</c:forEach>
 </c:if>
 
+<style type="text/css">
+	.remind{
+		color: red;
+		cursor:pointer;
+		font-size: 4px;
+	}
+</style>
+
 <div class="g-cont prod-cont">
 			<!-- left -->
 			<div class="g-cell">
@@ -85,7 +93,7 @@
 							<c:if test="${empty product.promotionPrice}">
 								<c:choose>
 									<c:when test="${product.price.value <= 0}">
-										--
+										<a class="remind" href="javascript:void(0);" onclick="messageClick();">Price:Suspend quotation,plsease send massage to I4U to get the newest price.<a/>
 									</c:when>
 									<c:otherwise>
 										<span class="price"><format:fromPrice priceData="${product.price}"/></span>
@@ -343,7 +351,7 @@
 					</c:if>
 					</ul>
 					<div class="btn-set line-setbtn">       
-					      <a class="click_pop btn btn-showlist" href="javascript:void(0)">Message Consultation</a>
+					      <a class="click_pop btn btn-showlist" href="javascript:void(0);" onclick="messageClick();">Message Consultation</a>
 					</div> 		
 				</div>
 				<div class="tableshare">
@@ -542,17 +550,28 @@
 <script type="text/javascript" >
     //send message
     $(document).ready(function () {
-        $('.click_pop').click(function () {
-        var proName="${product.name}".replace('%','%25').replace('+','%2B').replace('&','%26');
-         var openUrl = ACC.config.encodedContextPath + "/account/add-support-ticket?productId=${product.code}&productName="+proName;
-         var iWidth=700; 
-         var iHeight=700; 
-         var iTop = (window.screen.availHeight-30-iHeight)/2; 
-         var iLeft = (window.screen.availWidth-10-iWidth)/2; 
-         window.open(openUrl,"","height="+iHeight+", width="+iWidth+", top="+iTop+",scrollbars=yes,resizable=yes,toolbar=no,location=no, left="+iLeft); 
-        });
+
+        <%--$('.click_pop').click(function () {--%>
+        <%--var proName="${product.name}".replace('%','%25').replace('+','%2B').replace('&','%26');--%>
+         <%--var openUrl = ACC.config.encodedContextPath + "/account/add-support-ticket?productId=${product.code}&productName="+proName;--%>
+         <%--var iWidth=700; --%>
+         <%--var iHeight=700; --%>
+         <%--var iTop = (window.screen.availHeight-30-iHeight)/2; --%>
+         <%--var iLeft = (window.screen.availWidth-10-iWidth)/2; --%>
+         <%--window.open(openUrl,"","height="+iHeight+", width="+iWidth+", top="+iTop+",scrollbars=yes,resizable=yes,toolbar=no,location=no, left="+iLeft); --%>
+        <%--});--%>
     })
-    
+	function messageClick(){
+		var proName="${product.name}".replace('%','%25').replace('+','%2B').replace('&','%26');
+		var openUrl = ACC.config.encodedContextPath + "/account/add-support-ticket?productId=${product.code}&productName="+proName;
+		var iWidth=700;
+		var iHeight=700;
+		var iTop = (window.screen.availHeight-30-iHeight)/2;
+		var iLeft = (window.screen.availWidth-10-iWidth)/2;
+		window.open(openUrl,"","height="+iHeight+", width="+iWidth+", top="+iTop+",scrollbars=yes,resizable=yes,toolbar=no,location=no, left="+iLeft);
+	}
+
+
 function addNum()
 {
     if(document.getElementById("inventory")==null){
