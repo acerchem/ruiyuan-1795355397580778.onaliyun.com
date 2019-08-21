@@ -1412,7 +1412,14 @@
 							<description>订单备注</description>
 							<modifiers read="true" write="true" search="true" />
 							<persistence type="property" />
-					</attribute>					
+					</attribute>
+
+					<attribute qualifier="employeeNo" type="java.lang.String">
+						<description>业务员编号</description>
+						<modifiers read="true" write="true" search="true" />
+						<persistence type="property" />
+					</attribute>
+
 				</attributes>
 			</itemtype>
 

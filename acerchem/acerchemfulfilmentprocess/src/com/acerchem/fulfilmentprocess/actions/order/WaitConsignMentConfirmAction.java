@@ -13,6 +13,9 @@ package com.acerchem.fulfilmentprocess.actions.order;
 import java.util.Calendar;
 import java.util.Date;
 
+import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.core.model.user.EmployeeModel;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 
 import de.hybris.platform.core.enums.OrderStatus;
@@ -55,7 +58,14 @@ public class WaitConsignMentConfirmAction extends AbstractSimpleDecisionAction<O
 			}
 			
 			order.setOrderFinishedDate(getCurrentTime());
-			
+
+			//新增业务员PK
+			CustomerModel customerModel = (CustomerModel)order.getUser();
+			EmployeeModel employee = customerModel.getEmployee();
+			if (null != employee && StringUtils.isNotBlank(employee.getPk().toString())){
+				order.setEmployeeNo(employee.getPk().toString());
+			}
+
 			getModelService().save(order);
 			
 			return Transition.OK;

@@ -570,7 +570,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		SQL.append(
 				"select sum({o.totalPrice}/{cur.conversion}) as a,{e.pk} as b,DATE_FORMAT({o.creationtime},'%Y%m') as c\n");
 		SQL.append("from {Order as o JOIN Customer as u ON {u.pk} = {o.user}\n");
-		SQL.append("JOIN Employee as e ON {e.pk}={u.relatedCustomer}\n");
+		SQL.append("JOIN Employee as e ON {e.pk}={o.employeeNo}\n");
 		SQL.append("JOIN Currency as cur ON {o.currency} = {cur.pk}\n");
 		SQL.append("}\n");
 		SQL.append("where {cur.isocode}='USD'\n");
@@ -588,7 +588,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		SQL.append("{{\n");
 		SQL.append("select sum({o1.totalPrice}) as a,{e1.pk} as b,DATE_FORMAT({o1.creationtime},'%Y%m') as c\n");
 		SQL.append("from {Order as o1 JOIN Customer as u1 ON {u1.pk} = {o1.user}\n");
-		SQL.append("JOIN Employee as e1 ON {e1.pk}={u1.relatedCustomer}\n");
+		SQL.append("JOIN Employee as e1 ON {e1.pk}={o1.employeeNo}\n");
 		SQL.append("JOIN Currency as cur1 ON {o1.currency} = {cur1.pk}\n");
 		SQL.append("}\n");
 		SQL.append("where {cur1.isocode}!='USD'\n");
