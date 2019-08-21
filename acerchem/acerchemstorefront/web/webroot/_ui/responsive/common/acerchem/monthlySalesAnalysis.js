@@ -89,7 +89,11 @@ $(document).ready(
 							field : 'c13',
 							title : 'December',
 							halign: 'center'
-						},
+						}, {
+							field : 'c14',
+							title : 'CountryTotal',
+							halign: 'center'
+						}
 
 						]
 					});
