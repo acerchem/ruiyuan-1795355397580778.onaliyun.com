@@ -337,6 +337,7 @@
 		<property name="octoberAmount" type="java.lang.Double"/>
 		<property name="novemberAmount" type="java.lang.Double"/>
 		<property name="decemberAmount" type="java.lang.Double"/>
+		<property name="totalAmount" type="java.lang.Double"/>
 	</bean>
 	<bean class="de.hybris.platform.commercefacades.order.data.SalesByEmployeeReportData">
 		<property name="month" type="String"/>
@@ -419,5 +420,9 @@
 
 	<bean class="de.hybris.platform.commercefacades.order.data.CartData">
 		<property name="creditIsOption" type="Boolean"></property>
+	</bean>
+
+	<bean class="de.hybris.platform.commercefacades.storesession.data.CurrencyData">
+		<property name="conversion" type="java.lang.Double"></property>
 	</bean>
 </beans>

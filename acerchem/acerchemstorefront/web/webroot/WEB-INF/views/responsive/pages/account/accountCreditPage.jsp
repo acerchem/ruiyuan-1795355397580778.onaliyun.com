@@ -18,7 +18,7 @@
             		<tr>
             			<td align="right" style="color: #999;width: 33%">Credit Total Amount</td>
             			<td align="left" style="color: #333;">
-            				$<fmt:formatNumber value="${customerCreditAccountData.creditTotalAmount=='0E-8'?'0':customerCreditAccountData.creditTotalAmount}" maxFractionDigits="2" minFractionDigits="2"/> 
+            				$<fmt:formatNumber value="${customerCreditAccountData.creditTotalAmount=='0E-8'?'0':customerCreditAccountData.creditTotalAmount}" maxFractionDigits="2" minFractionDigits="2"/>
             			</td>
             			<td align="right" style="color: #999;">Status</td>
             			<td align="left" style="color: #333;">${customerCreditAccountData.status}</td>
@@ -26,7 +26,7 @@
             		<tr>
             			<td align="right" style="color: #999;">Creadit Remained Amount</td>
             			<td align="left" style="color: #333;">
-            				$<fmt:formatNumber value="${customerCreditAccountData.creaditRemainedAmount=='0E-8'?'0':customerCreditAccountData.creaditRemainedAmount}" maxFractionDigits="2" minFractionDigits="2"/> 
+            				$<fmt:formatNumber value="${customerCreditAccountData.creaditRemainedAmount=='0E-8'?'0':customerCreditAccountData.creaditRemainedAmount}" maxFractionDigits="2" minFractionDigits="2"/>
             			</td>
             			<td align="right" style="color: #999;">Payment Term</td>
             			<td align="left" style="color: #333;">${customerCreditAccountData.billingInterval}</td>

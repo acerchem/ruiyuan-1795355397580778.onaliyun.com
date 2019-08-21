@@ -125,7 +125,8 @@
 										value="${detail.novemberAmount}" pattern="#.00" /></td>
 								<td><fmt:formatNumber type="number"
 										value="${detail.decemberAmount}" pattern="#.00" /></td>
-
+								<td><fmt:formatNumber type="number"
+                                        value="${detail.totalAmount}" pattern="#.00" /></td>
 							</tr>
 						</c:forEach>
 					</table>

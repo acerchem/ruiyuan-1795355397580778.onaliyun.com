@@ -238,7 +238,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		final Integer pageSize = 100;
 
 		final Map<String, Object> params = new HashMap<String, Object>();
-		String SQL = "select {e.pk},{ua.pk} from {"
+		String SQL = "select {e.pk},{ua.pk},{emp.pk} from {"
 				+ " OrderEntry as e"
 				+ " JOIN Order as o ON {e:order} = {o:pk}"
 				+ " JOIN Customer as u ON {u:pk} = {o:user}"
@@ -249,7 +249,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 					SQL += " JOIN Vendor as v ON {v.pk} = {p.acerChemVendor}" ;
 				}
 				if(StringUtils.isNotBlank(employeeName)){
-					SQL += " JOIN Employee as emp on {emp.pk} = {u:employee}";
+					SQL += " JOIN Employee as emp on {emp.pk} = {o:employeeNo}";
 				}
 				if(StringUtils.isNotBlank(deliveryModeCode)){
 					SQL += " JOIN DeliveryMode as dm on {dm:pk} = {o:deliveryMode}";
@@ -338,6 +338,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		for (final List<Object> columnValueForRow : result.getResult()) {
 			final OrderEntryModel od = (OrderEntryModel) columnValueForRow.get(0);
 			final AddressModel addressModel = (AddressModel) columnValueForRow.get(1);
+			final EmployeeModel employeeModel = (EmployeeModel) columnValueForRow.get(2);
 			// AddressModel addressModel = null;
 			// if
 			// (od.getOrder().getDeliveryMode().getCode().equals("DELIVERY_MENTION"))
@@ -425,12 +426,12 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 			// if (od.getOrder().getPlacedBy() != null) {1
 			// detail.setSalesman(od.getOrder().getPlacedBy().getName());
 			// }
-			final CustomerModel customer = (CustomerModel) od.getOrder().getUser();
-			if (customer != null) {
-				final EmployeeModel emp = customer.getEmployee();
-				if (emp != null) {
-					detail.setSalesman(emp.getName());
-				}
+//			final CustomerModel customer = (CustomerModel) od.getOrder().getUser();
+			if (employeeModel != null) {
+//				final EmployeeModel emp = customer.getEmployee();
+//				if (emp != null) {
+					detail.setSalesman(employeeModel.getName());
+//				}
 			}
 			if (od.getProduct().getAcerChemVendor() != null) {
 				detail.setSupplier(od.getProduct().getAcerChemVendor().getName());
@@ -495,8 +496,15 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 					// } else {
 					// Amount += oo.getTotalPrice();
 					// }
-					amount += new BigDecimal(oo.getTotalPrice()).divide(new BigDecimal(oo.getCurrency().getConversion()),2,BigDecimal.ROUND_HALF_UP).doubleValue();
+					final double price = new BigDecimal(oo.getTotalPrice()).divide(new BigDecimal(oo.getCurrency().getConversion()),2,BigDecimal.ROUND_HALF_UP).doubleValue();
+					amount += price;
 					MonthAmount.put(calendar.get(Calendar.MONTH) + 1, amount);
+                    Double countryTotal = MonthAmount.get(20);
+					if(countryTotal == null){
+					    countryTotal = Double.valueOf(0);
+                    }
+                    countryTotal += price;
+                    MonthAmount.put(20,countryTotal);
 					countryMap.put(countryName, MonthAmount);
 				}
 
@@ -504,7 +512,9 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		}
 
 		final List<MonthlySalesAnalysis> orderDetails = new ArrayList<MonthlySalesAnalysis>();
-		for (final String country : countryMap.keySet()) {
+		final  MonthlySalesAnalysis total = new MonthlySalesAnalysis();
+        final Map<Integer, Double> totalMonthMap = new HashMap<>();
+        for (final String country : countryMap.keySet()) {
 			if (countryMap.get(country) != null) {
 				final Map<Integer, Double> MonthMap = countryMap.get(country);
 				final MonthlySalesAnalysis detail = new MonthlySalesAnalysis();
@@ -521,9 +531,33 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 				detail.setOctoberAmount(MonthMap.get(10) != null ? MonthMap.get(10) : 0);
 				detail.setNovemberAmount(MonthMap.get(11) != null ? MonthMap.get(11) : 0);
 				detail.setDecemberAmount(MonthMap.get(12) != null ? MonthMap.get(12) : 0);
+				detail.setTotalAmount(MonthMap.get(20) != null ? MonthMap.get(20) : 0);
 				orderDetails.add(detail);
+				for(final int month : MonthMap.keySet()){
+                    Double amount = totalMonthMap.get(month);
+                    if(amount == null){
+                        amount = Double.valueOf(0);
+                    }
+                    amount += MonthMap.get(month);
+                    totalMonthMap.put(month,amount);
+                }
 			}
 		}
+        total.setCountry("Total");
+        total.setJanuaryAmount(totalMonthMap.get(1) != null ? totalMonthMap.get(1) : 0);
+        total.setFebruaryAmount(totalMonthMap.get(2) != null ? totalMonthMap.get(2) : 0);
+        total.setMarchAmount(totalMonthMap.get(3) != null ? totalMonthMap.get(3) : 0);
+        total.setAprllAmount(totalMonthMap.get(4) != null ? totalMonthMap.get(4) : 0);
+        total.setMayAmount(totalMonthMap.get(5) != null ? totalMonthMap.get(5) : 0);
+        total.setJuneAmount(totalMonthMap.get(6) != null ? totalMonthMap.get(6) : 0);
+        total.setJulyAmount(totalMonthMap.get(7) != null ? totalMonthMap.get(7) : 0);
+        total.setAugustAmount(totalMonthMap.get(8) != null ? totalMonthMap.get(8) : 0);
+        total.setSeptemberAmount(totalMonthMap.get(9) != null ? totalMonthMap.get(9) : 0);
+        total.setOctoberAmount(totalMonthMap.get(10) != null ? totalMonthMap.get(10) : 0);
+        total.setNovemberAmount(totalMonthMap.get(11) != null ? totalMonthMap.get(11) : 0);
+        total.setDecemberAmount(totalMonthMap.get(12) != null ? totalMonthMap.get(12) : 0);
+        total.setTotalAmount(totalMonthMap.get(20) != null ? totalMonthMap.get(20) : 0);
+        orderDetails.add(total);
 		return orderDetails;
 	}
 
@@ -845,6 +879,9 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		final SearchResult<OrderModel> result = flexibleSearchService.search(query);
 		final List<OrderModel> list = result.getResult();
 
+
+
+
 		final List<CustomerBillAnalysisData> report = new ArrayList<CustomerBillAnalysisData>();
 
 		if (CollectionUtils.isNotEmpty(list)) {
@@ -860,9 +897,11 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 						data.setCustomerName(o.getUser().getName());
 
 						final CustomerModel customer = (CustomerModel) o.getUser();
-						if (customer.getEmployee() != null) {
-							data.setEmployeeName(customer.getEmployee().getName());
+//						if (customer.getEmployee() != null) {
+						if (StringUtils.isNotBlank(o.getEmployeeNo())){
+							data.setEmployeeName(getEmployeeName(o.getEmployeeNo()));
 						}
+//						}
 						data.setPlaceTime(o.getCreationtime());
 						data.setFinishedTime(o.getOrderFinishedDate());
 
@@ -936,4 +975,18 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		return pResult.getResult();
 	}
 
+	private String getEmployeeName(String employeeNo){
+		String userSql = "select {PK} from {User} where {PK} = ?employeeNo ";
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(userSql);
+		final Map<String, Object> params = new HashMap<String, Object>();
+		params.put("employeeNo", employeeNo);
+		query.addQueryParameters(params);
+		SearchResult<UserModel> search = flexibleSearchService.search(query);
+		int size = search.getResult().size();
+		String name = "";
+		if (size>0){
+			name = search.getResult().get(0).getName();
+		}
+		return name;
+	}
 }

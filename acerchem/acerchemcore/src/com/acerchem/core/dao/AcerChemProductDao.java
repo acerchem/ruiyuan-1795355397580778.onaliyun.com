@@ -50,9 +50,9 @@ public interface AcerChemProductDao {
 	 */
 	public List<OrderEntryModel> getOrderEntryProduct(String uid,Date startDate, Date endDate);
 
-	public List<AcerchemProductPriceBean> getProductWithBaserealPrice(String month);
+	public List<AcerchemProductPriceBean> getProductWithBaserealPrice(String month,String productName,String productCode);
 
-	public List<AcerchemProductPriceBean> getProductWithBaserealPrice(String month,String vendorCode);
+	public List<AcerchemProductPriceBean> getProductWithBaserealPrice(String month,String productName,String productCode,String vendorCode);
 
 	public List<AcerchemProductBuyerBean> getProductSalesForReport(String month,String category,String area,String country,String productName,String productCode,String employeeName);
 
