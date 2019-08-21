@@ -51,7 +51,7 @@ public class DefaultAcerchemFindDeliveryCostStrategy extends DefaultFindDelivery
 	//默认存储费
 	private final String defaultStorageFee = "30";
 	private final String defaultOrderOperationFee = "100";
-	private final String defaultOrderStandardFee = "10000";
+	private final String defaultOrderStandardFee = "3000";
 
 	@Resource
 	private ConfigurationService configurationService;
@@ -100,8 +100,9 @@ public class DefaultAcerchemFindDeliveryCostStrategy extends DefaultFindDelivery
 				double orderTotalPrice  = order.getTotalPrice();
 				String orderStandardFee = configurationService.getConfiguration().getString(ORDER_STANDARD_CRITICAL_FEE,defaultOrderStandardFee);
 				BigDecimal operationFee = BigDecimal.ZERO;
+                double orderStandardFeeNew = new BigDecimal(orderStandardFee).multiply(new BigDecimal(order.getCurrency().getConversion())).setScale(2,BigDecimal.ROUND_HALF_UP).doubleValue();
 				//add operate fee
-				if (orderTotalPrice <= Double.valueOf(orderStandardFee)){
+				if (orderTotalPrice <= orderStandardFeeNew){
 					String orderOperationFee = configurationService.getConfiguration().getString(ORDER_OPERATION_FEE,defaultOrderOperationFee);
 					operationFee = operationFee.add(BigDecimal.valueOf(Double.valueOf(orderOperationFee)));
 					operationFee = operationFee.multiply(new BigDecimal(order.getCurrency().getConversion()));
