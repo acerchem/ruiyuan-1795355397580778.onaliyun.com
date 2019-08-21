@@ -610,7 +610,7 @@
 					<!--<property name="propertyName" value="keywords" />-->
 					<!--<property name="boost" value="20" />-->
 				<!--</bean>-->
-				<bean class="com.acerchem.facades.querybuilder.impl.DefaultTermTextQueryBuilder">
+				<bean class="de.hybris.platform.commerceservices.search.solrfacetsearch.querybuilder.impl.DefaultFreeTextQueryBuilder">
 					<property name="propertyName" value="categoryName" />
 					<property name="boost" value="10" />
 				</bean>
