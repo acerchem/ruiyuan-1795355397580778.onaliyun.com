@@ -878,6 +878,9 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		final SearchResult<OrderModel> result = flexibleSearchService.search(query);
 		final List<OrderModel> list = result.getResult();
 
+
+
+
 		final List<CustomerBillAnalysisData> report = new ArrayList<CustomerBillAnalysisData>();
 
 		if (CollectionUtils.isNotEmpty(list)) {
@@ -893,9 +896,11 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 						data.setCustomerName(o.getUser().getName());
 
 						final CustomerModel customer = (CustomerModel) o.getUser();
-						if (customer.getEmployee() != null) {
-							data.setEmployeeName(customer.getEmployee().getName());
+//						if (customer.getEmployee() != null) {
+						if (StringUtils.isNotBlank(o.getEmployeeNo())){
+							data.setEmployeeName(getEmployeeName(o.getEmployeeNo()));
 						}
+//						}
 						data.setPlaceTime(o.getCreationtime());
 						data.setFinishedTime(o.getOrderFinishedDate());
 
@@ -969,4 +974,18 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		return pResult.getResult();
 	}
 
+	private String getEmployeeName(String employeeNo){
+		String userSql = "select {PK} from {User} where {PK} = ?employeeNo ";
+		final FlexibleSearchQuery query = new FlexibleSearchQuery(userSql);
+		final Map<String, Object> params = new HashMap<String, Object>();
+		params.put("employeeNo", employeeNo);
+		query.addQueryParameters(params);
+		SearchResult<UserModel> search = flexibleSearchService.search(query);
+		int size = search.getResult().size();
+		String name = "";
+		if (size>0){
+			name = search.getResult().get(0).getName();
+		}
+		return name;
+	}
 }
