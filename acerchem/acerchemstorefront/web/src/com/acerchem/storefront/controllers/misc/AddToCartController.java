@@ -200,7 +200,7 @@ public class AddToCartController extends AbstractController
 			return getViewWithBindingErrorMessages(model, bindingErrors);
 		}
 
-		long qty = form.getQty();
+		long qty = 1;
 
 		int tag = form.getTag();
 

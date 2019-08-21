@@ -68,29 +68,32 @@
 					  </c:otherwise>
 				</c:choose>	 --%>
 				</td>
-				
-				
+
 				<td>
 					<div class="m-setnum">
 						<span class="set add">
 							<c:url value="/cart/minusOne" var="cartMinusOneUrl"/>
-                            <form:form id="minusCartForm${entry.product.code}" action="${cartMinusOneUrl}" method="post" >
+                            <form:form id="minusCartForm${entry.product.code}${entry.deliveryPointOfService.name}" action="${cartMinusOneUrl}" method="post" >
 								<input type="hidden" name="productCodePost" value="${fn:escapeXml(entry.product.code)}"/>
 								<input type="hidden" name="storeId" value="${entry.deliveryPointOfService.name}"/>
 								<%--<input type="hidden" name="stockLevel" value="${entry.product.}"/>--%>
 								<input type="hidden" name="entryNumber" value="${entry.entryNumber}"/>
 								<input type="hidden" name="qty" value="${entry.quantity - 1}"/>
+								<input type="hidden" name="stockLevel" value="${entry.product.stock.stockLevel}"/>
 								<input type="hidden" name="stockThreshold" value="${entry.product.minOrderQuantity}"/>
-								<button type="button" onclick="minusQuantity('minusCartForm', '${entry.product.code}')">-</button>
+								<button type="button" onclick="minusQuantity('minusCartForm', '${entry.product.code}', '${entry.deliveryPointOfService.name}')">-</button>
 							</form:form>
 						</span>
-						<input type="text" id="pdnum${entry.product.code}" name="pdnum${entry.product.code}" class="set" value="${entry.quantity}" onblur="updateQuantity('minusCartForm', '${entry.product.code}')">
+						<input type="text" id="pdnum${entry.product.code}${entry.deliveryPointOfService.name}" name="pdnum${entry.product.code}${entry.deliveryPointOfService.name}" class="set" value="${entry.quantity}" onblur="updateQuantity('minusCartForm', '${entry.product.code}', '${entry.deliveryPointOfService.name}')">
 						<span class="set add">
                             <c:url value="/cart/addOne" var="cartAddOneUrl"/>
-                            <form:form id="addCartForm${entry.product.code}" action="${cartAddOneUrl}" method="post" >
+                            <form:form id="addCartForm${entry.product.code}${entry.deliveryPointOfService.name}" action="${cartAddOneUrl}" method="post" >
                                 <input type="hidden" name="productCodePost" value="${fn:escapeXml(entry.product.code)}"/>
                                 <input type="hidden" name="storeId" value="${entry.deliveryPointOfService.name}"/>
-                                <button type="submit">+</button>
+								<input type="hidden" name="qty" value="${entry.quantity}"/>
+								<input type="hidden" name="stockLevelCode" value="${entry.product.stock.stockLevel}"/>
+								<input type="hidden" name="stockThreshold" value="${entry.product.minOrderQuantity}"/>
+								<button type="button" onclick="updateQuantity('addCartForm', '${entry.product.code}', '${entry.deliveryPointOfService.name}')">+</button>
                             </form:form>
                         </span>
 					</div>
@@ -140,10 +143,10 @@
  </c:if>
 
 <script type="text/javascript" >
-	function minusQuantity(formName, productCode) {
-		let cartForm = document.getElementById(formName + productCode);
-		let avl = cartForm.qty.value ? cartForm.qty.value : '0';
-		let stockThreshold = cartForm.stockThreshold.value ? cartForm.stockThreshold.value : '0';
+	function minusQuantity(formName, productCode, storeId) {
+		let cartForm = document.getElementById(formName + productCode + storeId);
+		let avl = cartForm.qty ? cartForm.qty.value : '0';
+		let stockThreshold = cartForm.stockThreshold ? cartForm.stockThreshold.value : '0';
 		if(parseInt(avl)<parseInt(stockThreshold)){
 			maxalert("Cannot be less than the stock threshold!");
 			return;
@@ -151,17 +154,24 @@
 		cartForm.qty.value = avl;
 		cartForm.submit();
 	}
-	function updateQuantity(formName, productCode)
+	function updateQuantity(formName, productCode, storeId)
 	{
-		let cartForm = document.getElementById(formName + productCode);
-		let avl = document.getElementById("pdnum" + productCode).value ? document.getElementById("pdnum" + productCode).value : '0';
-		let stockThreshold = cartForm.stockThreshold.value ? cartForm.stockThreshold.value : '0' ;
+		let cartForm = document.getElementById(formName + productCode + storeId);
+		let avl = document.getElementById("pdnum" + productCode + storeId).value ? document.getElementById("pdnum" + productCode + storeId).value : '0';
+		let stockThreshold = cartForm.stockThreshold ? cartForm.stockThreshold.value : '0' ;
+		let stockLevel = cartForm.stockLevel ? cartForm.stockLevel.value : '0' ;
 		if(parseInt(avl)<parseInt(stockThreshold)){
 			maxalert("Cannot be less than the stock threshold!");
-			document.getElementById("pdnum" + productCode).value = stockThreshold;
+			document.getElementById("pdnum" + productCode + storeId).value = stockThreshold;
 			cartForm.qty.value = stockThreshold;
 			return;
 		}
+		// if (parseInt(avl) > parseInt(stockLevel)) {
+		// 	maxalert("Cannot be larger than the stock level!");
+		// 	document.getElementById("pdnum" + productCode).value = stockThreshold;
+		// 	cartForm.qty.value = stockThreshold;
+		// 	return;
+		// }
 		cartForm.qty.value = avl;
 		cartForm.submit();
 	}

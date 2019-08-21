@@ -3,6 +3,7 @@ package com.acerchem.facades.facades.impl;
 import com.acerchem.core.service.AcerchemCommerCartService;
 import com.acerchem.facades.facades.AcerchemCartFacade;
 
+import de.hybris.platform.basecommerce.enums.StockLevelStatus;
 import de.hybris.platform.commercefacades.order.EntryGroupData;
 import de.hybris.platform.commercefacades.order.data.AddToCartParams;
 import de.hybris.platform.commercefacades.order.data.CartData;
@@ -13,13 +14,18 @@ import de.hybris.platform.commercefacades.product.ProductOption;
 import de.hybris.platform.commercefacades.product.data.PriceData;
 import de.hybris.platform.commercefacades.product.data.PriceDataType;
 import de.hybris.platform.commercefacades.product.data.ProductData;
+import de.hybris.platform.commercefacades.storesession.StoreSessionFacade;
 import de.hybris.platform.commerceservices.order.CommerceCartModification;
 import de.hybris.platform.commerceservices.order.CommerceCartModificationException;
 import de.hybris.platform.commerceservices.service.data.CommerceCartParameter;
+import de.hybris.platform.commerceservices.stock.CommerceStockService;
 import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.CartEntryModel;
 import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.ordersplitting.model.StockLevelModel;
+import de.hybris.platform.ordersplitting.model.WarehouseModel;
+import de.hybris.platform.product.ProductService;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.util.ObjectUtils;
@@ -28,11 +34,7 @@ import org.springframework.util.StringUtils;
 import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -41,6 +43,7 @@ import java.util.stream.Collectors;
 public class DefaultAcerchemCartFacade extends DefaultCartFacade implements AcerchemCartFacade {
 
     private AcerchemCommerCartService acerchemCommerCartService;
+    private ProductService productService;
 
     @Override
     public String  acerchemValidateCart(String productCode,boolean isUseFutureStock,String storeId) {
@@ -53,10 +56,65 @@ public class DefaultAcerchemCartFacade extends DefaultCartFacade implements Acer
 //            if(!acerchemValidatePointOfService(storeId,cartModel)){
 //                return "basket.error.storeId.different";
 //            }
-            if (!acerchemValidateProduct(isUseFutureStock,cartModel,productCode)){
-                return "basket.error.product.stock.different";
-            }
+//            if (!acerchemValidateProduct(isUseFutureStock,cartModel,productCode)){
+//                return "basket.error.product.stock.different";
+//            }
 
+            String checkMsg=acerchemValidateProductStockLevel(isUseFutureStock, cartModel, productCode, storeId);
+            if (!StringUtils.isEmpty(checkMsg)){
+                return checkMsg;
+            }
+        }
+        return null;
+    }
+
+    private String acerchemValidateProductStockLevel(boolean isUseFutureStock, CartModel cartModel, String productCode, String storeId) {
+        if (CollectionUtils.isNotEmpty(cartModel.getEntries())){
+            for (AbstractOrderEntryModel aoe : cartModel.getEntries()) {
+
+                ProductModel product=aoe.getProduct();
+                if (productCode.equals(product.getCode())){
+                    if (isUseFutureStock !=aoe.getIsUseFutureStock()) {
+                        return "basket.error.product.stock.different";
+                    }
+                }
+                List<WarehouseModel> warehouseModels = aoe.getDeliveryPointOfService().getWarehouses();
+                for (WarehouseModel warehouseModel : warehouseModels) {
+                    if (warehouseModel.getCode().equalsIgnoreCase(storeId)) {
+                        for (StockLevelModel stockLevelModel : warehouseModel.getStockLevels()) {
+                            int available=stockLevelModel.getAvailable();
+                            if (isUseFutureStock) {
+                                available += stockLevelModel.getPreOrder();
+                            }
+                            if (stockLevelModel.getWarehouse().getCode().equalsIgnoreCase(storeId)
+                                    && stockLevelModel.getProductCode().equalsIgnoreCase(productCode)
+                                    && available - stockLevelModel.getReserved() <= 0){
+                                return "basket.information.quantity.noItemsAdded.noStock";
+                            }
+                        }
+                    }
+                }
+//                ProductModel product=aoe.getProduct();
+//                if (productCode.equals(product.getCode())){
+//                    if (isUseFutureStock !=aoe.getIsUseFutureStock()) {
+//                        return "basket.error.product.stock.different";
+//                    }
+//                    Set<StockLevelModel> stockLevels=product.getStockLevels();
+//                    if (CollectionUtils.isNotEmpty(stockLevels)) {
+//                        for (StockLevelModel stockLevelModel : stockLevels) {
+//                            int available=stockLevelModel.getAvailable();
+//                            if (isUseFutureStock) {
+//                                available += stockLevelModel.getPreOrder();
+//                            }
+//                            if (stockLevelModel.getWarehouse().getCode().equalsIgnoreCase(storeId)
+//                                    && available - stockLevelModel.getReserved() <= 0){
+//                                return "basket.information.quantity.noItemsAdded.noStock";
+//                            }
+//                        }
+//                        return "basket.error.product.stock.different";
+//                    }
+//                }
+            }
         }
         return null;
     }
@@ -150,18 +208,6 @@ public class DefaultAcerchemCartFacade extends DefaultCartFacade implements Acer
         return isSamePOS;
     }
 
-    private boolean acerchemValidateProduct(boolean isUseFutureStock, CartModel cartModel,String productCode){
-        boolean isCanAddProduct = true;
-        if (CollectionUtils.isNotEmpty(cartModel.getEntries())){
-            for (AbstractOrderEntryModel aoe : cartModel.getEntries()){
-                if (productCode.equals(aoe.getProduct().getCode())&& isUseFutureStock !=aoe.getIsUseFutureStock()){
-                    return false;
-                }
-            }
-        }
-        return isCanAddProduct;
-    }
-
     @Required
     public void setAcerchemCommerCartService(AcerchemCommerCartService acerchemCommerCartService) {
         this.acerchemCommerCartService = acerchemCommerCartService;
@@ -207,9 +253,7 @@ public class DefaultAcerchemCartFacade extends DefaultCartFacade implements Acer
 							currentyIso);
 					entry.setTotalPrice(priceData1);
 					
-					//-----------------set the sub Price
-				    // BigDecimal subPrice=data.getSubTotal().getValue();
-			
+
 					  subTotal += price;
 						
 					
