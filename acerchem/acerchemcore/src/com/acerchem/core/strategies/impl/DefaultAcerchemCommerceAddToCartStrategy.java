@@ -181,7 +181,7 @@ public class DefaultAcerchemCommerceAddToCartStrategy extends DefaultCommerceAdd
                 // If any stock level is flagged as FORCEOUTOFSTOCK then we skip over it
                 if (!InStockStatus.FORCEOUTOFSTOCK.equals(stockLevelModel.getInStockStatus()))
                 {
-                    final long availableToSellQuantity = stockLevelModel.getPreOrder();
+                    final long availableToSellQuantity = stockLevelModel.getPreOrder() - stockLevelModel.getReserved();
                     if (availableToSellQuantity > 0 || !stockLevelModel.isTreatNegativeAsZero())
                     {
                         stockLevel += availableToSellQuantity;
@@ -192,9 +192,10 @@ public class DefaultAcerchemCommerceAddToCartStrategy extends DefaultCommerceAdd
             //stockLevel = getAvailableStockLevel(productModel, pointOfServiceModel);
             for (StockLevelModel stockLevelModel : productModel.getStockLevels())
             {
-        		if(stockLevelModel.getAvailable()>0)
+                int availableStock=stockLevelModel.getAvailable() - stockLevelModel.getReserved();
+                if(availableStock >0)
         		{
-        			stockLevel = stockLevelModel.getAvailable();
+        			stockLevel =availableStock;
         		}
             }
         }
