@@ -495,8 +495,15 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 					// } else {
 					// Amount += oo.getTotalPrice();
 					// }
-					amount += new BigDecimal(oo.getTotalPrice()).divide(new BigDecimal(oo.getCurrency().getConversion()),2,BigDecimal.ROUND_HALF_UP).doubleValue();
+					final double price = new BigDecimal(oo.getTotalPrice()).divide(new BigDecimal(oo.getCurrency().getConversion()),2,BigDecimal.ROUND_HALF_UP).doubleValue();
+					amount += price;
 					MonthAmount.put(calendar.get(Calendar.MONTH) + 1, amount);
+                    Double countryTotal = MonthAmount.get(20);
+					if(countryTotal == null){
+					    countryTotal = Double.valueOf(0);
+                    }
+                    countryTotal += price;
+                    MonthAmount.put(20,countryTotal);
 					countryMap.put(countryName, MonthAmount);
 				}
 
@@ -504,7 +511,9 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		}
 
 		final List<MonthlySalesAnalysis> orderDetails = new ArrayList<MonthlySalesAnalysis>();
-		for (final String country : countryMap.keySet()) {
+		final  MonthlySalesAnalysis total = new MonthlySalesAnalysis();
+        final Map<Integer, Double> totalMonthMap = new HashMap<>();
+        for (final String country : countryMap.keySet()) {
 			if (countryMap.get(country) != null) {
 				final Map<Integer, Double> MonthMap = countryMap.get(country);
 				final MonthlySalesAnalysis detail = new MonthlySalesAnalysis();
@@ -521,9 +530,33 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 				detail.setOctoberAmount(MonthMap.get(10) != null ? MonthMap.get(10) : 0);
 				detail.setNovemberAmount(MonthMap.get(11) != null ? MonthMap.get(11) : 0);
 				detail.setDecemberAmount(MonthMap.get(12) != null ? MonthMap.get(12) : 0);
+				detail.setTotalAmount(MonthMap.get(20) != null ? MonthMap.get(20) : 0);
 				orderDetails.add(detail);
+				for(final int month : MonthMap.keySet()){
+                    Double amount = totalMonthMap.get(month);
+                    if(amount == null){
+                        amount = Double.valueOf(0);
+                    }
+                    amount += MonthMap.get(month);
+                    totalMonthMap.put(month,amount);
+                }
 			}
 		}
+        total.setCountry("Total");
+        total.setJanuaryAmount(totalMonthMap.get(1) != null ? totalMonthMap.get(1) : 0);
+        total.setFebruaryAmount(totalMonthMap.get(2) != null ? totalMonthMap.get(2) : 0);
+        total.setMarchAmount(totalMonthMap.get(3) != null ? totalMonthMap.get(3) : 0);
+        total.setAprllAmount(totalMonthMap.get(4) != null ? totalMonthMap.get(4) : 0);
+        total.setMayAmount(totalMonthMap.get(5) != null ? totalMonthMap.get(5) : 0);
+        total.setJuneAmount(totalMonthMap.get(6) != null ? totalMonthMap.get(6) : 0);
+        total.setJulyAmount(totalMonthMap.get(7) != null ? totalMonthMap.get(7) : 0);
+        total.setAugustAmount(totalMonthMap.get(8) != null ? totalMonthMap.get(8) : 0);
+        total.setSeptemberAmount(totalMonthMap.get(9) != null ? totalMonthMap.get(9) : 0);
+        total.setOctoberAmount(totalMonthMap.get(10) != null ? totalMonthMap.get(10) : 0);
+        total.setNovemberAmount(totalMonthMap.get(11) != null ? totalMonthMap.get(11) : 0);
+        total.setDecemberAmount(totalMonthMap.get(12) != null ? totalMonthMap.get(12) : 0);
+        total.setTotalAmount(totalMonthMap.get(20) != null ? totalMonthMap.get(20) : 0);
+        orderDetails.add(total);
 		return orderDetails;
 	}
 
