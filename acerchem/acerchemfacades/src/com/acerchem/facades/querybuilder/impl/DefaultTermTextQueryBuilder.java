@@ -87,7 +87,7 @@ public class DefaultTermTextQueryBuilder extends AbstractFreeTextQueryBuilder {
 //            {
                 addFreeTextQuery(searchQuery, field, value.toLowerCase(), "", boost);
 //                addFreeTextQuery(searchQuery, field, value.toLowerCase(), "*", boost / 2.0d);
-                addFreeTextQuery(searchQuery, field, value.toLowerCase(), "~", boost / 2.0d);
+//                addFreeTextQuery(searchQuery, field, value.toLowerCase(), "~", boost / 2.0d);
 //            }
 //        }
 //        else
