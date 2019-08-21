@@ -590,7 +590,7 @@
 	<bean id="acerchemCommerceSearchTextPopulator" class="com.acerchem.facades.populators.AcerchemSearchTextPopulator" parent="defaultCommerceSearchTextPopulator">
 		<property name="freeTextQueryBuilders">
 			<list>
-				<bean class="de.hybris.platform.commerceservices.search.solrfacetsearch.querybuilder.impl.DefaultFreeTextQueryBuilder">
+				<bean class="com.acerchem.facades.querybuilder.impl.DefaultTermTextQueryBuilder">
 					<property name="propertyName" value="code" />
 					<property name="boost" value="1000" />
 				</bean>
@@ -598,19 +598,19 @@
 					<property name="propertyName" value="name" />
 					<property name="boost" value="50" />
 				</bean>
-				<bean class="de.hybris.platform.commerceservices.search.solrfacetsearch.querybuilder.impl.DefaultFreeTextQueryBuilder">
+				<bean class="com.acerchem.facades.querybuilder.impl.DefaultTermTextQueryBuilder">
 					<property name="propertyName" value="manufacturerName" />
 					<property name="boost" value="40" />
 				</bean>
-				<bean
-					class="de.hybris.platform.commerceservices.search.solrfacetsearch.querybuilder.impl.ClassificationFreeTextQueryBuilder">
-					<property name="boost" value="30" />
-				</bean>
-				<bean class="de.hybris.platform.commerceservices.search.solrfacetsearch.querybuilder.impl.DefaultFreeTextQueryBuilder">
-					<property name="propertyName" value="keywords" />
-					<property name="boost" value="20" />
-				</bean>
-				<bean class="de.hybris.platform.commerceservices.search.solrfacetsearch.querybuilder.impl.DefaultFreeTextQueryBuilder">
+				<!--<bean-->
+					<!--class="de.hybris.platform.commerceservices.search.solrfacetsearch.querybuilder.impl.ClassificationFreeTextQueryBuilder">-->
+					<!--<property name="boost" value="30" />-->
+				<!--</bean>-->
+				<!--<bean class="de.hybris.platform.commerceservices.search.solrfacetsearch.querybuilder.impl.DefaultFreeTextQueryBuilder">-->
+					<!--<property name="propertyName" value="keywords" />-->
+					<!--<property name="boost" value="20" />-->
+				<!--</bean>-->
+				<bean class="com.acerchem.facades.querybuilder.impl.DefaultTermTextQueryBuilder">
 					<property name="propertyName" value="categoryName" />
 					<property name="boost" value="10" />
 				</bean>
