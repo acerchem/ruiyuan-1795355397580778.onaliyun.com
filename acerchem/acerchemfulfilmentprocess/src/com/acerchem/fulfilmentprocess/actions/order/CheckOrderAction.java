@@ -12,10 +12,13 @@ package com.acerchem.fulfilmentprocess.actions.order;
 
 import de.hybris.platform.core.enums.OrderStatus;
 import de.hybris.platform.core.model.order.OrderModel;
+import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.core.model.user.EmployeeModel;
 import de.hybris.platform.orderprocessing.model.OrderProcessModel;
 import de.hybris.platform.processengine.action.AbstractSimpleDecisionAction;
 import com.acerchem.fulfilmentprocess.CheckOrderService;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
@@ -44,6 +47,18 @@ public class CheckOrderAction extends AbstractSimpleDecisionAction<OrderProcessM
 			LOG.error("Missing the order, exiting the process");
 			return Transition.NOK;
 		}
+
+		try {
+			//新增业务员PK
+			CustomerModel customerModel = (CustomerModel)order.getUser();
+			EmployeeModel employee = customerModel.getEmployee();
+			if (null != employee && StringUtils.isNotBlank(employee.getPk().toString())){
+				order.setEmployeeNo(employee.getPk().toString());
+			}
+		}catch (Exception e){
+			LOG.error(e.getMessage(),e);
+		}
+
 		setOrderStatus(order, OrderStatus.UNCONFIRMED);
 		return Transition.OK;
 	}
