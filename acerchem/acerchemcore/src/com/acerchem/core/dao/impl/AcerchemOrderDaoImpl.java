@@ -323,7 +323,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		SQL += " ORDER BY {o:code} desc";
 		final StringBuilder builder = new StringBuilder(SQL);
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(builder.toString());
-		query.setResultClassList(Arrays.asList(OrderEntryModel.class, AddressModel.class));
+		query.setResultClassList(Arrays.asList(OrderEntryModel.class, AddressModel.class,EmployeeModel.class));
 		query.addQueryParameters(params);
 		//query.setNeedTotal(false);
 		//query.setCount(pageSize);
