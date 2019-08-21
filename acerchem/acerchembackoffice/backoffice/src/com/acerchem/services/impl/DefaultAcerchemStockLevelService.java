@@ -52,8 +52,8 @@ public class DefaultAcerchemStockLevelService implements StockLevelService {
             }
 
             if (stockLevel != null) {
-                stockLevel.setAvailable(stockLevel.getAvailable() - totalQuantity);
-                stockLevel.setReserved(stockLevel.getReserved() - totalQuantity);
+                stockLevel.setAvailable(stockLevel.getAvailable() - totalQuantity < 1 ? 0 : stockLevel.getAvailable() - totalQuantity);
+                stockLevel.setReserved(stockLevel.getReserved() - totalQuantity < 1 ? 0 : stockLevel.getReserved() - totalQuantity);
                 modelService.save(stockLevel);
             }
         }
