@@ -18,7 +18,7 @@ public interface AcerchemOrderDao {
 												 String vendorCode,String productName,String productCode,String productCharacteristic,
 												 String warehouseCode,String employeeName,String deliveryModeCode);
 	List<MonthlySalesAnalysis> getMonthlySalesAnalysis(String year,String area);
-	List<SalesByEmployeeReportData> getEmployeeSales(String year);
+	List<SalesByEmployeeReportData> getEmployeeSales(String year,String employeeName);
 
 	List<CustomerSalesAnalysisData> getCustomerSalesAnalysis(String area,String customerName,double amount,Date startDate,Date endDate);
 	List<CustomerBillAnalysisData> getCustomerBillAnalysis(Date startDate,Date endDate,String customerName,String employeeName);

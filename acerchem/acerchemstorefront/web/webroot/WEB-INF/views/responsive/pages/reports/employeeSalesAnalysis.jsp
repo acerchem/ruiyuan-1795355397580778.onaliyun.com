@@ -56,9 +56,13 @@
 								<input id="select_year" type="hidden" name="field＿name" value="${employeeSalesAnalysisForm.year}">
 							
 							</td>
-
-
-					<td>
+							<td>
+								<div>
+									<span>Employee Name</span>
+									<input name="employeeName" size="12" type="text" value="${employeeSalesAnalysisForm.employeeName}">
+								</div>
+							</td>
+							<td>
 								<div class="btn" >
 									<button type="submit">Show Report</button>
 								</div>

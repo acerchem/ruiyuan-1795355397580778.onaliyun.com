@@ -28,9 +28,9 @@ public class AcerchemOrderAnalysisServiceImpl implements AcerchemOrderAnalysisSe
 		return acerchemOrderDao.getMonthlySalesAnalysis(year, area);
 	}
 	@Override
-	public List<SalesByEmployeeReportData> getEmployeeSales(final String year) {
+	public List<SalesByEmployeeReportData> getEmployeeSales(final String year,final String employeeName) {
 		// TODO Auto-generated method stub
-		return acerchemOrderDao.getEmployeeSales(year);
+		return acerchemOrderDao.getEmployeeSales(year,employeeName);
 	}
 	@Override
 	public List<CustomerSalesAnalysisData> getCustomerSalesAnalysis(final String area, final String customerName, final double amount,final Date startDate,final Date endDate) {

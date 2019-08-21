@@ -244,12 +244,10 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 				+ " JOIN Customer as u ON {u:pk} = {o:user}"
 				+ " JOIN Address as ua ON {ua:owner} = {u:pk}"
 				+ " JOIN Country as uc ON {uc:pk} = {ua:country}"
-				+ " JOIN Product as p ON {e:product} = {p:pk} ";
+				+ " JOIN Product as p ON {e:product} = {p:pk}"
+                + " LEFT JOIN Employee as emp on {emp.pk} = {o:employeeNo} ";
 				if(StringUtils.isNotBlank(vendorCode)) {
 					SQL += " JOIN Vendor as v ON {v.pk} = {p.acerChemVendor}" ;
-				}
-				if(StringUtils.isNotBlank(employeeName)){
-					SQL += " JOIN Employee as emp on {emp.pk} = {o:employeeNo}";
 				}
 				if(StringUtils.isNotBlank(deliveryModeCode)){
 					SQL += " JOIN DeliveryMode as dm on {dm:pk} = {o:deliveryMode}";
@@ -259,9 +257,10 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 
 
 		//增加订单状态不等于cancelled
-		SQL += " and {o:status}<>?status";
+		SQL += " and {o:status} = ?status";
 //		SQL += " {o:status}<>?status";
-		params.put("status", OrderStatus.valueOf("Cancelled"));
+//		params.put("status", OrderStatus.valueOf("Cancelled"));
+		params.put("status", OrderStatus.valueOf("Completed"));
 		if (month != null && !month.equals("")) {
 			SQL += " AND DATE_FORMAT({o:creationtime},'%Y%m') =?month ";
 			params.put("month", month);
@@ -325,7 +324,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		SQL += " ORDER BY {o:code} desc";
 		final StringBuilder builder = new StringBuilder(SQL);
 		final FlexibleSearchQuery query = new FlexibleSearchQuery(builder.toString());
-		query.setResultClassList(Arrays.asList(OrderEntryModel.class, AddressModel.class));
+		query.setResultClassList(Arrays.asList(OrderEntryModel.class, AddressModel.class,EmployeeModel.class));
 		query.addQueryParameters(params);
 		//query.setNeedTotal(false);
 		//query.setCount(pageSize);
@@ -449,9 +448,10 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		String SQL = "select {o.pk} from {Order as o JOIN Customer as u ON {u:pk} = {o:user}} where 1=1 ";
 
 		//增加订单状态不等于cancelled
-		SQL += " and {o:status}<>?status";
-		params.put("status", OrderStatus.valueOf("Cancelled"));
-
+//		SQL += " and {o:status}<>?status";
+//		params.put("status", OrderStatus.valueOf("Cancelled"));
+		SQL += " and {o:status} = ?status";
+		params.put("status", OrderStatus.valueOf("Completed"));
 		if (year != null && StringUtils.isNumeric(year) && Integer.valueOf(year) > 0) {
 			SQL += " AND DATE_FORMAT({o:creationtime},'%Y') =?year ";
 			params.put("year", year);
@@ -581,7 +581,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 	}
 
 	@Override
-	public List<SalesByEmployeeReportData> getEmployeeSales(final String year) {
+	public List<SalesByEmployeeReportData> getEmployeeSales(final String year,final String employeeName) {
 
 		// final String paramSql = "";
 		// final String SQL1 = "select sum({o.totalPrice}/{cur.conversion})
@@ -611,12 +611,17 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		SQL.append("where {cur.isocode}!='USD'\n");
 
 		//增加订单状态不等于cancelled
-		SQL.append(" and {o:status}<>?status\n");
-		params.put("status", OrderStatus.valueOf("Cancelled"));
+		SQL.append(" and {o:status} = ?status\n");
+//		params.put("status", OrderStatus.valueOf("Cancelled"));
+		params.put("status", OrderStatus.valueOf("Completed"));
 		if (year != null && StringUtils.isNumeric(year) && Integer.valueOf(year) > 0) {
 			SQL.append(" AND DATE_FORMAT({o.creationtime},'%Y') =?year\n");
 			params.put("year", year);
 		}
+        if(StringUtils.isNotBlank(employeeName)){
+            SQL.append(" AND {e:name} like ?employeeName ");
+            params.put("employeeName", "%" + employeeName + "%");
+        }
 		SQL.append("group by {e.pk},DATE_FORMAT({o.creationtime},'%Y%m')\n");
 		SQL.append("}}\n");
 		SQL.append("UNION\n");
@@ -628,12 +633,17 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		SQL.append("}\n");
 		SQL.append("where {cur1.isocode}='USD'\n");
 		//增加订单状态不等于cancelled
-		SQL.append(" and {o1:status}<>?status\n");
-		params.put("status", OrderStatus.valueOf("Cancelled"));
+		SQL.append(" and {o1:status} = ?status\n");
+//		params.put("status", OrderStatus.valueOf("Cancelled"));
+		params.put("status", OrderStatus.valueOf("Completed"));
 		if (year != null && StringUtils.isNumeric(year) && Integer.valueOf(year) > 0) {
 			SQL.append(" AND DATE_FORMAT({o1.creationtime},'%Y') =?year1\n");
 			params.put("year1", year);
 		}
+        if(StringUtils.isNotBlank(employeeName)){
+            SQL.append(" AND {e1:name} like ?employeeName ");
+            params.put("employeeName", "%" + employeeName + "%");
+        }
 		SQL.append("group by {e1.pk},DATE_FORMAT({o1.creationtime},'%Y%m')\n");
 		SQL.append("}}\n");
 		SQL.append(")q\n");
@@ -778,12 +788,12 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		}
 
 		if(startDate !=null){
-			SQL += " AND {o:creationtime}>= ?startDate ";
+			SQL += " AND {o:creationtime} >= ?startDate ";
 			params.put("startDate", startDate);
 		}
 
 		if(endDate != null){
-			SQL += " AND {o:creationtime}<= ?endDate ";
+			SQL += " AND {o:creationtime} <= ?endDate ";
 			params.put("endDate", endDate);
 		}
 		SQL += " group by {u.pk},{ua.pk}";
@@ -935,23 +945,25 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 						final String orderStatus = o.getStatus() == null ? "" : o.getStatus().getCode();// UNPAIED
 						if (paymode.equalsIgnoreCase("InvoicePayment") && orderStatus.equalsIgnoreCase("UNPAIED")) {
 
-							data.setPrePay(o.getTotalPrice());
+							double totalPrice = new BigDecimal(o.getTotalPrice()).divide(new BigDecimal(o.getCurrency().getConversion()),2,BigDecimal.ROUND_HALF_UP).doubleValue();
+							data.setPrePay(totalPrice);
 						} else {
 							// 计算账期内外
 							if (paymode.equalsIgnoreCase("CreditPayment")) {
 								final int remainDays = (int) (currentTime.getTime() - invoiceDate.getTime())
 										/ (1000 * 3600 * 24);
 								final int flag = remainDays - billDays;
+								double totalPrice = new BigDecimal(o.getTotalPrice()).divide(new BigDecimal(o.getCurrency().getConversion()),2,BigDecimal.ROUND_HALF_UP).doubleValue();
 								if (flag < 0) {
 									data.setInPay(o.getTotalPrice());
 								} else if (flag >= 0 && flag < 30) {
-									data.setThirtyPayAmount(o.getTotalPrice());
+									data.setThirtyPayAmount(totalPrice);
 								} else if (flag >= 30 && flag < 60) {
-									data.setSixtyPayAmount(o.getTotalPrice());
+									data.setSixtyPayAmount(totalPrice);
 								} else if (flag >= 60 && flag <= 90) {
-									data.setNinetyPayAmount(o.getTotalPrice());
+									data.setNinetyPayAmount(totalPrice);
 								} else {
-									data.setOuterNinetyPayAmount(o.getTotalPrice());
+									data.setOuterNinetyPayAmount(totalPrice);
 								}
 							}
 
