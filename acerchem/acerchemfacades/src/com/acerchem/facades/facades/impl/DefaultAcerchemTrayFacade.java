@@ -97,7 +97,7 @@ public class DefaultAcerchemTrayFacade implements AcerchemTrayFacade {
             if (countryTrayFareConf!=null){
                 totalTrayPrice = countryTrayFareConf.getPrice();
 
-                totalTrayPrice = new BigDecimal(totalTrayPrice).divide(new BigDecimal(commonI18NService.getCurrentCurrency().getConversion()),2,BigDecimal.ROUND_HALF_UP).doubleValue();
+                totalTrayPrice = new BigDecimal(totalTrayPrice).multiply(new BigDecimal(commonI18NService.getCurrentCurrency().getConversion())).doubleValue();
 //            }else{
 //                LOG.error("地区未配置托盘价格，regionModel.getIsocode()="+regionModel.getIsocode());
 //                throw new AcerchemOrderException(errorCode,"Do not get the delivery cost information，please contact with I4U.");
