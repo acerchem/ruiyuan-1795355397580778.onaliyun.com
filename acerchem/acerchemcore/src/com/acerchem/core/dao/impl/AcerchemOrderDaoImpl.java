@@ -720,9 +720,14 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 			final double amount,final Date startDate,final Date endDate) {
 		final Map<String, Object> params = new HashMap<String, Object>();
 
-		String SQL = "select sum({e.totalRealPrice}),{u.pk},{ua.pk} from {OrderEntry as e"
-				+ " JOIN Order as o ON {e:order} = {o:pk}" + " JOIN Customer as u ON {u:pk} = {o:user}"
-				+ " JOIN Address as ua ON {ua:owner} = {u:pk}" + " JOIN Country as uc ON {uc:pk} = {ua:country}"
+		String SQL = "select sum({e.totalRealPrice}/{cur.conversion}),{u.pk},{ua.pk} " +
+                "from {"
+                + " OrderEntry as e"
+				+ " JOIN Order as o ON {e:order} = {o:pk}"
+                + " JOIN Customer as u ON {u:pk} = {o:user}"
+				+ " JOIN Address as ua ON {ua:owner} = {u:pk}"
+                + " JOIN Country as uc ON {uc:pk} = {ua:country}"
+                + " JOIN Currency as cur ON {o.currency} = {cur.pk}"
 				+ "} where {ua:contactAddress} = true ";
 
 		//增加订单状态不等于cancelled
