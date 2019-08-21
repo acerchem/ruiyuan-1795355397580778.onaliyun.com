@@ -24,7 +24,7 @@ public interface AcerchemOrderAnalysisService {
 	 * @param year
 	 * @return
 	 */
-	public List<SalesByEmployeeReportData> getEmployeeSales(final String year);
+	public List<SalesByEmployeeReportData> getEmployeeSales(final String year,String employeeName);
 	
 	List<CustomerSalesAnalysisData> getCustomerSalesAnalysis(String area,String customerName,double amount,Date startDate,Date endDate);
 	List<CustomerBillAnalysisData> getCustomerBillAnalysis(Date startDate,Date endDate,String customerName,String employeeName);

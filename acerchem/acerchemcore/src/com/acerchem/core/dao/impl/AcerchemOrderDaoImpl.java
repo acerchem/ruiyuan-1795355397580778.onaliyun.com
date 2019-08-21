@@ -244,12 +244,10 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 				+ " JOIN Customer as u ON {u:pk} = {o:user}"
 				+ " JOIN Address as ua ON {ua:owner} = {u:pk}"
 				+ " JOIN Country as uc ON {uc:pk} = {ua:country}"
-				+ " JOIN Product as p ON {e:product} = {p:pk} ";
+				+ " JOIN Product as p ON {e:product} = {p:pk}"
+                + " LEFT JOIN Employee as emp on {emp.pk} = {o:employeeNo} ";
 				if(StringUtils.isNotBlank(vendorCode)) {
 					SQL += " JOIN Vendor as v ON {v.pk} = {p.acerChemVendor}" ;
-				}
-				if(StringUtils.isNotBlank(employeeName)){
-					SQL += " JOIN Employee as emp on {emp.pk} = {o:employeeNo}";
 				}
 				if(StringUtils.isNotBlank(deliveryModeCode)){
 					SQL += " JOIN DeliveryMode as dm on {dm:pk} = {o:deliveryMode}";
@@ -581,7 +579,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 	}
 
 	@Override
-	public List<SalesByEmployeeReportData> getEmployeeSales(final String year) {
+	public List<SalesByEmployeeReportData> getEmployeeSales(final String year,final String employeeName) {
 
 		// final String paramSql = "";
 		// final String SQL1 = "select sum({o.totalPrice}/{cur.conversion})
@@ -617,6 +615,10 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 			SQL.append(" AND DATE_FORMAT({o.creationtime},'%Y') =?year\n");
 			params.put("year", year);
 		}
+        if(StringUtils.isNotBlank(employeeName)){
+            SQL.append(" AND {e:name} like ?employeeName ");
+            params.put("employeeName", "%" + employeeName + "%");
+        }
 		SQL.append("group by {e.pk},DATE_FORMAT({o.creationtime},'%Y%m')\n");
 		SQL.append("}}\n");
 		SQL.append("UNION\n");
@@ -634,6 +636,10 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 			SQL.append(" AND DATE_FORMAT({o1.creationtime},'%Y') =?year1\n");
 			params.put("year1", year);
 		}
+        if(StringUtils.isNotBlank(employeeName)){
+            SQL.append(" AND {e1:name} like ?employeeName ");
+            params.put("employeeName", "%" + employeeName + "%");
+        }
 		SQL.append("group by {e1.pk},DATE_FORMAT({o1.creationtime},'%Y%m')\n");
 		SQL.append("}}\n");
 		SQL.append(")q\n");
