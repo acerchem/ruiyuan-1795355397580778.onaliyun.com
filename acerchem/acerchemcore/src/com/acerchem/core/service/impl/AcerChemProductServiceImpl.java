@@ -236,8 +236,8 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 	}
 
 	@Override
-	public List<ProductPriceAnalysisData> getProductWithBaserealPrice(final String month) {
-		final List<AcerchemProductPriceBean> listWithWeek = acerChemProductDao.getProductWithBaserealPrice(month);
+	public List<ProductPriceAnalysisData> getProductWithBaserealPrice(final String month,final String productName,final String productCode) {
+		final List<AcerchemProductPriceBean> listWithWeek = acerChemProductDao.getProductWithBaserealPrice(month,productName,productCode);
 		final List<ProductPriceAnalysisData> report = fillReport(listWithWeek);
 		// 通过weeknum 用map分组
 		// final Map<Integer, List<AcerchemProductPriceBean>> mapList = new
@@ -386,8 +386,8 @@ public class AcerChemProductServiceImpl implements AcerChemProductService {
 
 
 	@Override
-	public List<ProductPriceAnalysisData> getProductWithBaserealPrice(final String month,final String vendorCode){
-		final List<AcerchemProductPriceBean> listWithWeek = acerChemProductDao.getProductWithBaserealPrice(month,vendorCode);
+	public List<ProductPriceAnalysisData> getProductWithBaserealPrice(final String month,final String productName,final String productCode,final String vendorCode){
+		final List<AcerchemProductPriceBean> listWithWeek = acerChemProductDao.getProductWithBaserealPrice(month,productName,productCode,vendorCode);
 		final List<ProductPriceAnalysisData> report = fillReport(listWithWeek);
 		return report;
 	}

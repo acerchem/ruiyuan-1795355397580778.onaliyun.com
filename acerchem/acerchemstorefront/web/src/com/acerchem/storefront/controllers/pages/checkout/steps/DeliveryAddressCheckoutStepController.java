@@ -10,6 +10,7 @@
  */
 package com.acerchem.storefront.controllers.pages.checkout.steps;
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -17,6 +18,7 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.Map;
 
 import javax.annotation.Resource;
 
@@ -72,7 +74,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 
 	@Resource(name = "defaultAcerchemCheckoutFacade")
 	private AcerchemCheckoutFacade acerchemCheckoutFacade;
-	
+
 	@Resource
 	private AcerchemTrayFacade acerchemTrayFacade;
 
@@ -102,10 +104,10 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	public String add(final AddressForm addressForm, final BindingResult bindingResult, final Model model,
 			final RedirectAttributes redirectModel) throws CMSItemNotFoundException
 	{
-		
+
 
 		getAddressValidator().validate(addressForm, bindingResult);
-	
+
 
 		if (bindingResult.hasErrors())
 		{
@@ -137,9 +139,9 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		getUserFacade().addAddress(newAddress);
 
 		acerchemCheckoutFacade.setDeliveryAddress(newAddress);
-		
+
 		return enterStep(model, redirectModel);
-	
+
 	}
 
 	protected void processAddressVisibilityAndDefault(final AddressForm addressForm, final AddressData newAddress)
@@ -336,8 +338,8 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 	 *           - the id of the delivery address.
 	 *
 	 * @return - a URL to the page to load.
-	 * @throws CMSItemNotFoundException 
-	 * @throws AcerchemOrderException 
+	 * @throws CMSItemNotFoundException
+	 * @throws AcerchemOrderException
 	 */
 	@RequestMapping(value = "/select", method = RequestMethod.GET)
 	@RequireHardLogIn
@@ -348,13 +350,13 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		if (StringUtils.isNotBlank(selectedAddressCode))
 		{
 			final AddressData selectedAddressData = getCheckoutFacade().getDeliveryAddressForCode(selectedAddressCode);
-			
+
 	      /*  double deliveryCost=acerchemTrayFacade.getTotalPriceForCart(cartData, selectedAddressData);
 	        CartModel cartModel = acerchemCheckoutFacade.getCartModel();
 	        cartData.setDeliveryCost(acerchemCheckoutFacade.createPrice(cartModel, deliveryCost));*/
-			
+
 			final boolean hasSelectedAddressData = selectedAddressData != null;
-			
+
 			boolean isValid = true;
 			if (hasSelectedAddressData)
 			{
@@ -363,10 +365,10 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 					acerchemCheckoutFacade.validateCartAddress(countryData);
 				}catch (AcerchemOrderException e){
                     GlobalMessages.addErrorMessage(model, e.getMessage());
-                    
+
                     isValid= false;
 				}
-				
+
 				if (isValid){
 				    acerchemCheckoutFacade.setDeliveryAddress(selectedAddressData);
 				}
@@ -376,8 +378,8 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		return enterStep(model, redirectAttributes);
 
 	}
-	
-	
+
+
 	@RequestMapping(value = "/region", method = RequestMethod.GET, produces = "application/json")
 	@ResponseBody
 	public List<RegionData> doSelectRegion(@RequestParam("countryIso" ) final String countryIso,
@@ -385,16 +387,16 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 										) throws CMSItemNotFoundException {
 
 		//return  getI18NFacade().getRegionsForCountryIso(countryIso);
-		
+
 		List<RegionData> regions =getI18NFacade().getRegionsForCountryIso(countryIso);
-		
-       // response.getWriter().write("123");  
-		
+
+       // response.getWriter().write("123");
+
 		return regions;
 
-		
+
 	}
-	
+
 
     @RequestMapping(value = "/addPickUpDate", method = RequestMethod.GET)
     @RequireHardLogIn
@@ -402,7 +404,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 
         //保存收货时间
         acerchemCheckoutFacade.savePickUpDateForOrder(pickUpDate);
-        
+
         final CartData cartData = acerchemCheckoutFacade.getCheckoutCart();
 
 		populateCommonModelAttributes(model, cartData, new AddressForm());
@@ -460,9 +462,9 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 //			model.addAttribute("errorMsg",e.getMessage());
 			GlobalMessages.addErrorMessage(model, e.getMessage());
 		}
-		
+
 		cartData.setDeliveryMode(acerchemCheckoutFacade.getDeliveryModes());
-		
+
 		//model.addAttribute("deliveryMode", acerchemCheckoutFacade.getDeliveryModes());
 
 		model.addAttribute("cartData", cartData);
@@ -481,22 +483,23 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 
 
 			 double deliveryCost=acerchemTrayFacade.getTotalPriceForCart(cartData, cartData.getDeliveryAddress());
+			 //
 			 CartModel cartModel = acerchemCheckoutFacade.getCartModel();
 		     cartData.setDeliveryCost(acerchemCheckoutFacade.createPrice(cartModel, deliveryCost));
-		     
-		    
+
+
 		     if (deliveryCost>0){
-		    	 
+
 		    	 double total=0;
 		    	 total= cartData.getDeliveryCost().getValue().doubleValue()+cartData.getTotalPrice().getValue().doubleValue();
-		    	 
+
 		    	 cartData.setTotalPrice(acerchemCheckoutFacade.createPrice(cartModel, total));
 		     }
-		     
+
 		     // set the waitDelivereyDate
 		     if (cartData.getPickUpdate() != null){
 		     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-		     
+
 		     SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
 				String waitDelivereyDate = cartData.getPickUpdate();
 				Calendar ca = Calendar.getInstance();
@@ -512,8 +515,15 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 //					e1.printStackTrace();
 					LOG.error(e1.getMessage(),e1);
 				}
-				
+
 		     }
+		}
+
+		if(cartData.getDeliveryMode() != null && "DELIVERY_GROSS".equals(cartData.getDeliveryMode().getCode()) && cartData.getDeliveryCost().getValue().compareTo(BigDecimal.ZERO) <= 0 ){
+			Map<String, Object> modelMap = model.asMap();
+			if (!modelMap.containsKey(GlobalMessages.ERROR_MESSAGES_HOLDER)){
+				GlobalMessages.addInfoMessage(model,"Do not get the delivery cost information，please contact with I4U.");
+			}
 		}
 
 		model.addAttribute("noAddress", Boolean.valueOf(getCheckoutFlowFacade().hasNoDeliveryAddress()));
@@ -525,8 +535,8 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		//发货日期时间段
 		model.addAttribute("minDelivereyDays",Config.getInt("cart.delivereyDays.min",2));
 		model.addAttribute("maxDelivereyDays",Config.getInt("cart.delivereyDays.max",9));
-		CartModel cartmodel = acerchemCheckoutFacade.getCartModel();
-		model.addAttribute("delivereyDays",acerchemTrayFacade.getDeliveryDaysForCart(cartmodel));//根据地址算出运送时间
+//		CartModel cartmodel = acerchemCheckoutFacade.getCartModel();
+		model.addAttribute("delivereyDays",cartData.getDeliveryDays());//根据地址算出运送时间
 
 		
 		addressForm.setCountryIso("US");

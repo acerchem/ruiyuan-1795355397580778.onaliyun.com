@@ -34,4 +34,7 @@
 
 	<bean id="acerchemQuoteEntryRenderer" class="com.acerchem.services.AcerchemQuoteEntryRenderer">
 	</bean>
+
+	<bean id="stockLevelService" class="com.acerchem.services.impl.DefaultAcerchemStockLevelService">
+	</bean>
 </beans>

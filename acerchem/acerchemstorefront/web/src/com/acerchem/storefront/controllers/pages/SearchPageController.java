@@ -87,9 +87,9 @@ public class SearchPageController extends AbstractSearchPageController
 			final HttpServletRequest request, final Model model) throws CMSItemNotFoundException
 	{
 
-		if(StringUtils.isNotBlank(searchText)){
-			searchText = searchText.toLowerCase();
-		}
+//		if(StringUtils.isNotBlank(searchText)){
+//			searchText = searchText.toLowerCase();
+//		}
 
 		if (StringUtils.isNotBlank(searchText))
 		{

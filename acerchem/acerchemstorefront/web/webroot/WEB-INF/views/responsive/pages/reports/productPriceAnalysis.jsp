@@ -48,7 +48,15 @@
 							<td><span>Input Month:</span> <input id="birth_year"
 								class="easyui-datebox" name="month" type="text" value="${month}"
 								style="width: 100px; padding-left: 10px" /></td>
+							<td>
+								<span>Product Name</span>
+								<input name="productName"size="20" type="text" value="${productName}">
+							</td>
 
+							<td>
+								<span>Product Code</span>
+								<input name="productCode"size="20" type="text" value="${productCode}">
+							</td>
 							<td>
 								<div class="btn" >
 									<button type="submit">Show Report</button>
