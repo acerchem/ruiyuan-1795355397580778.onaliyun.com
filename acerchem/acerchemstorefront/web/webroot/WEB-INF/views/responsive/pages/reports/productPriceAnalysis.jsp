@@ -107,7 +107,7 @@
 							<tr>
 								<td>${detail.productCode}</td>
 								<td>${detail.productName}</td>
-								<td>${detail.salesQuantity}</td>
+								<%--<td>${detail.salesQuantity}</td>--%>
 								<td><fmt:formatNumber type="number"
 										value="${detail.firstWeekPrice}" pattern="#.00" /></td>
 								<td><fmt:formatNumber type="number"

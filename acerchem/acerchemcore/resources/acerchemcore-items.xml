@@ -1456,6 +1456,37 @@
 					</attribute>
 				</attributes>
 			</itemtype>
+
+			<itemtype code="ProductThePrice" autocreate="true"
+					  generate="true">
+				<deployment table="ProductThePrice" typecode="20300" />
+			<attributes>
+				<attribute qualifier="productCode" type="java.lang.String">
+					<persistence type="property" />
+					<modifiers optional="false" />
+				</attribute>
+                <attribute qualifier="productName" type="java.lang.String">
+                    <persistence type="property" />
+                    <modifiers optional="false" />
+                </attribute>
+				<attribute qualifier="price" type="java.lang.Double">
+					<persistence type="property" />
+					<modifiers optional="false" />
+				</attribute>
+				<attribute qualifier="year" type="java.lang.Integer">
+					<persistence type="property" />
+					<modifiers optional="false" />
+				</attribute>
+				<attribute qualifier="month" type="java.lang.Integer">
+					<persistence type="property" />
+					<modifiers optional="false" />
+				</attribute>
+				<attribute qualifier="weeks" type="java.lang.Integer">
+					<persistence type="property" />
+					<modifiers optional="false" />
+				</attribute>
+			</attributes>
+			</itemtype>
 			
 			
 			
