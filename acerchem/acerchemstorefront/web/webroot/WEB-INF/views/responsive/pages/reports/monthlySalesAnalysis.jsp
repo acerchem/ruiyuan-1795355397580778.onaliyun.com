@@ -99,12 +99,7 @@
       </tr>
        -->
 						<c:forEach items="${salesList}" var="detail">
-                            <c:if test="{detail.country == 'total'}">
-                                <tr style="background-color: #e9e9e9;font-weight: bold;">
-                            </c:if>
-                            <c:if test="{detail.country != 'total'}">
-                                <tr>
-                            </c:if>
+							<tr>
 								<td>${detail.country}</td>
 								<td><fmt:formatNumber type="number"
 										value="${detail.januaryAmount}" pattern="#.00" /></td>

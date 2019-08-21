@@ -36,7 +36,14 @@ $(document).ready(
 									'font-size', 'font-weight' ],
 						// onMsoNumberFormat: DoOnMsoNumberFormat
 						},
-
+						rowStyle:function (row, index) {
+							debugger;
+							var style = {};
+							if(row.c1 == 'Total'){
+								style={css:{'background-color':'#e9e9e9','font-weight':'bold'}};
+							}
+							return style;
+						},
 						columns : [ {
 							field : 'c1',
 							title : 'Country',

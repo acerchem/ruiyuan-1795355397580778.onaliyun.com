@@ -54,9 +54,9 @@ public interface AcerChemProductService {
 	 */
 	public List<OrderProductReportData> getOrderProductByVendor(String vendorcode, Date startDate, Date endDate);
 
-	public List<ProductPriceAnalysisData> getProductWithBaserealPrice(final String month);
+	public List<ProductPriceAnalysisData> getProductWithBaserealPrice(final String month,final String productName,final String productCode);
 
-	public List<ProductPriceAnalysisData> getProductWithBaserealPrice(final String month,final String vendorCode);
+	public List<ProductPriceAnalysisData> getProductWithBaserealPrice(final String month,final String productName,final String productCode, final String vendorCode);
 
 	public List<ProductSalesRecordData> getProductSalesForReport(final String month, final String categoryCode,
 			final String area, final String countryCode,final String productName,final String productCode,final String employeeName);

@@ -238,7 +238,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		final Integer pageSize = 100;
 
 		final Map<String, Object> params = new HashMap<String, Object>();
-		String SQL = "select {e.pk},{ua.pk} from {"
+		String SQL = "select {e.pk},{ua.pk},{emp.pk} from {"
 				+ " OrderEntry as e"
 				+ " JOIN Order as o ON {e:order} = {o:pk}"
 				+ " JOIN Customer as u ON {u:pk} = {o:user}"
@@ -249,7 +249,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 					SQL += " JOIN Vendor as v ON {v.pk} = {p.acerChemVendor}" ;
 				}
 				if(StringUtils.isNotBlank(employeeName)){
-					SQL += " JOIN Employee as emp on {emp.pk} = {u:employee}";
+					SQL += " JOIN Employee as emp on {emp.pk} = {o:employeeNo}";
 				}
 				if(StringUtils.isNotBlank(deliveryModeCode)){
 					SQL += " JOIN DeliveryMode as dm on {dm:pk} = {o:deliveryMode}";
@@ -338,6 +338,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		for (final List<Object> columnValueForRow : result.getResult()) {
 			final OrderEntryModel od = (OrderEntryModel) columnValueForRow.get(0);
 			final AddressModel addressModel = (AddressModel) columnValueForRow.get(1);
+			final EmployeeModel employeeModel = (EmployeeModel) columnValueForRow.get(2);
 			// AddressModel addressModel = null;
 			// if
 			// (od.getOrder().getDeliveryMode().getCode().equals("DELIVERY_MENTION"))
@@ -425,12 +426,12 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 			// if (od.getOrder().getPlacedBy() != null) {1
 			// detail.setSalesman(od.getOrder().getPlacedBy().getName());
 			// }
-			final CustomerModel customer = (CustomerModel) od.getOrder().getUser();
-			if (customer != null) {
-				final EmployeeModel emp = customer.getEmployee();
-				if (emp != null) {
-					detail.setSalesman(emp.getName());
-				}
+//			final CustomerModel customer = (CustomerModel) od.getOrder().getUser();
+			if (employeeModel != null) {
+//				final EmployeeModel emp = customer.getEmployee();
+//				if (emp != null) {
+					detail.setSalesman(employeeModel.getName());
+//				}
 			}
 			if (od.getProduct().getAcerChemVendor() != null) {
 				detail.setSupplier(od.getProduct().getAcerChemVendor().getName());
@@ -853,7 +854,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
                 "Order as o " +
                 "JOIN Customer as u ON {u:pk} = {o:user} ";
                 if(StringUtils.isNotBlank(employeeName)) {
-                    SQL += "JOIN Employee as e on {e:pk} = {o:employeeNo}";
+                    SQL += "JOIN Employee as e on {e:pk} = {u:employee}";
                 }
                SQL +=  "} " +
             "where {o:creationtime}> ?startDate and {o:creationtime} < ?endDate  and {o:status}<>?status";
