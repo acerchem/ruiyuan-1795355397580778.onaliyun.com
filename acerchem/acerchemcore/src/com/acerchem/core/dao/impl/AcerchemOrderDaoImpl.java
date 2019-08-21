@@ -574,7 +574,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		SQL.append("JOIN Employee as e ON {e.pk}={o.employeeNo}\n");
 		SQL.append("JOIN Currency as cur ON {o.currency} = {cur.pk}\n");
 		SQL.append("}\n");
-		SQL.append("where {cur.isocode}='USD'\n");
+		SQL.append("where {cur.isocode}!='USD'\n");
 
 		//增加订单状态不等于cancelled
 		SQL.append(" and {o:status}<>?status\n");
@@ -592,7 +592,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 		SQL.append("JOIN Employee as e1 ON {e1.pk}={o1.employeeNo}\n");
 		SQL.append("JOIN Currency as cur1 ON {o1.currency} = {cur1.pk}\n");
 		SQL.append("}\n");
-		SQL.append("where {cur1.isocode}!='USD'\n");
+		SQL.append("where {cur1.isocode}='USD'\n");
 		//增加订单状态不等于cancelled
 		SQL.append(" and {o1:status}<>?status\n");
 		params.put("status", OrderStatus.valueOf("Cancelled"));
