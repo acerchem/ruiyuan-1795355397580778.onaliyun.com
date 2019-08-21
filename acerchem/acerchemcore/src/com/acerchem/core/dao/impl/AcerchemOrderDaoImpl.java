@@ -1,5 +1,6 @@
 package com.acerchem.core.dao.impl;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
@@ -494,7 +495,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 					// } else {
 					// Amount += oo.getTotalPrice();
 					// }
-					amount += oo.getTotalPrice();
+					amount += new BigDecimal(oo.getTotalPrice()).divide(new BigDecimal(oo.getCurrency().getConversion()),2,BigDecimal.ROUND_HALF_UP).doubleValue();
 					MonthAmount.put(calendar.get(Calendar.MONTH) + 1, amount);
 					countryMap.put(countryName, MonthAmount);
 				}
