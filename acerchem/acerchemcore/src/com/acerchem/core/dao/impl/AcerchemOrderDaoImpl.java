@@ -853,7 +853,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
                 "Order as o " +
                 "JOIN Customer as u ON {u:pk} = {o:user} ";
                 if(StringUtils.isNotBlank(employeeName)) {
-                    SQL += "JOIN Employee as e on {e:pk} = {u:employee}";
+                    SQL += "JOIN Employee as e on {e:pk} = {o:employeeNo}";
                 }
                SQL +=  "} " +
             "where {o:creationtime}> ?startDate and {o:creationtime} < ?endDate  and {o:status}<>?status";
