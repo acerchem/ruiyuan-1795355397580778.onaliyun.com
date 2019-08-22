@@ -57,10 +57,10 @@ public class CategoryPageController extends AbstractCategoryPageController {
         if (CollectionUtils.isNotEmpty(facetDataList)) {
             for (FacetData<SearchStateData> facetData : facetDataList) {
                 if (CollectionUtils.isNotEmpty(facetData.getTopValues())) {
-                    Collections.sort(facetData.getTopValues(), (v0, v1)-> v0.getName().compareToIgnoreCase(v1.getName()));
+                    Collections.sort(facetData.getTopValues(), (v0, v1)-> v0.getCode().compareToIgnoreCase(v1.getCode()));
                 }
                 if (CollectionUtils.isNotEmpty(facetData.getValues())) {
-                    Collections.sort(facetData.getValues(), (v0, v1)-> v0.getName().compareToIgnoreCase(v1.getName()));
+                    Collections.sort(facetData.getValues(), (v0, v1)-> v0.getCode().compareToIgnoreCase(v1.getCode()));
                 }
             }
         }
