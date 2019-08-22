@@ -10,7 +10,8 @@
 <%@ taglib prefix="cms" uri="http://hybris.com/tld/cmstags" %>
 <%@ taglib prefix="cts" tagdir="/WEB-INF/tags/responsive/user"%>
 <%@ taglib prefix="template" tagdir="/WEB-INF/tags/responsive/template"%>
-<c:url value="/account/support-ticket/${ticketData.id}" var="addSupportTicket"/>
+<%--<c:url value="/account/support-ticket/${ticketData.id}" var="addSupportTicket"/>--%>
+<c:url value="/account/support-ticket-update/${ticketData.id}" var="addSupportTicket"/>
 
 <template:master pageTitle="${pageTitle}">
 <div style="margin:5% 5% 10% 5%;">
@@ -148,9 +149,8 @@
                      </form:select> 
                  </div> --%>
                  <formElement:formTextArea idKey="message" labelKey="MESSAGE" path="message" areaCSS="form-control js-add-message" labelCSS=""/>
-				 <button class="btn btn-primary btn-block" id="updateTicket" type="submit" >send</button>
             </form:form>
-			
+            <button class="btn btn-primary btn-block" id="updateTicket" type="submit" >send</button>
             <c:choose>
                 <c:when test="${not empty ticketData.messageHistory}">
                     <div class="form-group">
