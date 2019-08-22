@@ -64,6 +64,9 @@
 			</c:if>
 			<ul class="facet__list js-facet-list <c:if test="${not empty facetData.topValues}">facet__list--hidden js-facet-list-hidden</c:if>" style="max-height: 500px;overflow-y: scroll;">
 				<c:forEach items="${facetData.values}" var="facetValue">
+					<span>${userWarehouse}</span>
+					<span>${facetValue.name}</span>
+					<span>${facetValue.code}</span>
 					<c:if test="${facetData.multiSelect and (facetData.code!='warehouseCode' or (facetData.code=='warehouseCode' and fn:containsIgnoreCase(userWarehouse, facetValue.name)))}">
 						<li>
 							<ycommerce:testId code="facetNav_selectForm">
