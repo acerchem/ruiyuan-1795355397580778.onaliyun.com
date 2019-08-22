@@ -74,10 +74,16 @@
 							</td>
 							<td>
 								<div>
-									<span>Order Code</span>
-									<input name="orderCode" size="12" type="text" value="${orderCode}">
+									<span>Employee Name</span>
+									<input name="employeeName" size="12" type="text" value="${employeeName}">
 								</div>
 							</td>
+                            <td>
+                                <div>
+                                    <span>Order Code</span>
+                                    <input name="orderCode" size="12" type="text" value="${orderCode}">
+                                </div>
+                            </td>
 							<td>
 								<div class="btn">
 									<button type="submit">Show Report</button>
