@@ -46,11 +46,13 @@ $(document).ready(
 							field : 'c2',
 							title : 'Product Name',
 							halign: 'center'
-						}, {
-							field : 'c3',
-							title : 'Quantity',
-							halign: 'center'
-						}, {
+						},
+						// 	{
+						// 	field : 'c3',
+						// 	title : 'Quantity',
+						// 	halign: 'center'
+						// },
+							{
 							field : 'c4',
 							title : '1st Week',
 							halign: 'center'

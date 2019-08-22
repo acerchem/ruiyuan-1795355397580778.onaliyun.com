@@ -284,6 +284,12 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 				
 				try {
 					acerchemCheckoutFacade.validateCartAddress(countryData);
+
+					if(acerchemTrayFacade.getTotalPriceForCart(cartData, cartData.getDeliveryAddress()) <= 0.0d){
+						GlobalMessages.addErrorMessage(model,"Do not get the delivery cost information，please contact with I4U.");
+						invalid = true;
+						return invalid;
+					}
 				} catch (AcerchemOrderException e) {
 					 GlobalMessages.addErrorMessage(model, e.getMessage());
 					 
