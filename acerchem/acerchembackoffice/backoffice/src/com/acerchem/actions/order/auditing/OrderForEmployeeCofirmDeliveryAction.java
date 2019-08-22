@@ -10,25 +10,22 @@
  */
 package com.acerchem.actions.order.auditing;
 
-import javax.annotation.Resource;
-
+import com.acerchem.services.StockLevelService;
 import com.hybris.backoffice.widgets.notificationarea.event.NotificationEvent;
 import com.hybris.backoffice.widgets.notificationarea.event.NotificationUtils;
-import de.hybris.platform.core.enums.OrderStatus;
-import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
-import de.hybris.platform.processengine.action.AbstractSimpleDecisionAction;
-import org.apache.log4j.Logger;
-
 import com.hybris.cockpitng.actions.ActionContext;
 import com.hybris.cockpitng.actions.ActionResult;
 import com.hybris.cockpitng.actions.CockpitAction;
 import com.hybris.cockpitng.engine.impl.AbstractComponentWidgetAdapterAware;
-
+import de.hybris.platform.core.enums.OrderStatus;
+import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.processengine.BusinessProcessEvent;
 import de.hybris.platform.processengine.BusinessProcessService;
 import de.hybris.platform.servicelayer.model.ModelService;
+import org.apache.log4j.Logger;
 
+import javax.annotation.Resource;
 import java.util.EnumSet;
 
 
@@ -42,7 +39,10 @@ public class OrderForEmployeeCofirmDeliveryAction extends AbstractComponentWidge
 	
 	@Resource
 	private ModelService modelService;
-	
+
+	@Resource
+	private StockLevelService stockLevelService;
+
 	public BusinessProcessService getBusinessProcessService() {
 		return businessProcessService;
 	}
@@ -78,9 +78,18 @@ public class OrderForEmployeeCofirmDeliveryAction extends AbstractComponentWidge
 		    .toString();
 		final BusinessProcessEvent event = BusinessProcessEvent.builder(eventID)
 			    .withChoice("waitForEmployeeConfirmConsignment").build();
-			  getBusinessProcessService().triggerEvent(event);
-			  order.setEmployeeConfirmDelivery(true);
-			  this.modelService.save(order);
+		getBusinessProcessService().triggerEvent(event);
+		order.setEmployeeConfirmDelivery(true);
+		this.modelService.save(order);
+
+		try {
+			/**
+			 * 重置可用数量和保留数量
+			 */
+			stockLevelService.resetAmountByOrder(order);
+		} catch (Exception e) {
+			LOG.info("stockLevelService.resetAmountByOrder exception " + e.getMessage());
+		}
 		LOG.info("--------------------end-------------------"+order.getEmployeeConfirmDelivery());
 		actionResult.setStatusFlags(EnumSet.of(ActionResult.StatusFlag.OBJECT_MODIFIED));
 		NotificationUtils.notifyUser(this.getNotificationSource(ctx), "SUCCESS", NotificationEvent.Level.SUCCESS, new Object[0]);
