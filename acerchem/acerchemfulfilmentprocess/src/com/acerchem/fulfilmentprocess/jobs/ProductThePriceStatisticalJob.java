@@ -48,7 +48,7 @@ public class ProductThePriceStatisticalJob extends AbstractJobPerformable<CronJo
             search.getResult().stream().forEach(e->{
                 ProductThePriceModel model = new ProductThePriceModel();
                 model.setProductCode(e.getProduct().getCode());
-                model.setProductName(StringUtils.isNotBlank(e.getProduct().getName())?e.getProduct().getName():"");
+                model.setProductName(StringUtils.isNotBlank(e.getProduct().getOtherName())?e.getProduct().getOtherName():"");
                 model.setPrice(e.getPrice());
                 model.setYear(year);
                 model.setMonth(month);
