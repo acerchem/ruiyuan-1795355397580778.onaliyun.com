@@ -860,7 +860,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 			end = Calendar.getInstance().getTime();
 		}
 
-		String SQL = "select {pk} from {" +
+		String SQL = "select {o.pk} from {" +
                 "Order as o " +
                 "JOIN Customer as u ON {u:pk} = {o:user} ";
                 if(StringUtils.isNotBlank(employeeName)) {
