@@ -489,7 +489,7 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 	 * @param bindingResult
 	 * @return View String
 	 */
-	@RequestMapping(value = "/support-ticket/"+ SUPPORT_TICKET_CODE_PATH_VARIABLE_PATTERN, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
+	@RequestMapping(value = "/support-ticket-update/"+ SUPPORT_TICKET_CODE_PATH_VARIABLE_PATTERN, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
 	public String updateSupportTicket(final SupportTicketForm supportTicketForm,final BindingResult bindingResult,
 			@PathVariable("ticketId") final String ticketId, final Model model,
 			@RequestParam(value = "ticketUpdated", required = false, defaultValue = "false") final boolean ticketUpdated,
@@ -530,7 +530,8 @@ public class AccountSupportTicketsPageController extends AbstractSearchPageContr
 		if (ticketUpdated) {
 			GlobalMessages.addConfMessage(model, CustomerticketingaddonConstants.TEXT_SUPPORT_TICKETING_ADDED);
 		}
-		return returnPage(model,ticketId);
+//		return returnPage(model,ticketId);
+		return "redirect:/account/support-ticket/"+ticketId;
 	}
 	
 	@RequestMapping(value = "/personal-ticket/"+ SUPPORT_TICKET_CODE_PATH_VARIABLE_PATTERN, method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
