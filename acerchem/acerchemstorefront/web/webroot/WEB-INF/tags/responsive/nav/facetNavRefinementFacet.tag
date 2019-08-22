@@ -28,7 +28,7 @@
 			<c:if test="${not empty facetData.topValues}">
 				<ul class="facet__list js-facet-list js-facet-top-values">
 					<c:forEach items="${facetData.topValues}" var="facetValue">
-						<c:if test="${facetData.multiSelect and fn:containsIgnoreCase(userWarehouse, facetValue.name)}">
+						<c:if test="${facetData.multiSelect and fn:containsIgnoreCase(userWarehouse, facetValue.code)}">
 							<li>
 								<form action="#" method="get">
 									<input type="hidden" name="q" value="${facetValue.query.query.value}"/>
@@ -65,7 +65,7 @@
 			<ul class="facet__list js-facet-list <c:if test="${not empty facetData.topValues}">facet__list--hidden js-facet-list-hidden</c:if>" style="max-height: 500px;overflow-y: scroll;">
 				<c:forEach items="${facetData.values}" var="facetValue">
 					<span>${userWarehouse}:${facetValue.name}:${facetValue.code}</span>
-					<c:if test="${facetData.multiSelect and (facetData.code!='warehouseCode' or (facetData.code=='warehouseCode' and fn:containsIgnoreCase(userWarehouse, facetValue.name)))}">
+					<c:if test="${facetData.multiSelect and (facetData.code!='warehouseCode' or (facetData.code=='warehouseCode' and fn:containsIgnoreCase(userWarehouse, facetValue.code)))}">
 						<li>
 							<ycommerce:testId code="facetNav_selectForm">
 							<form action="#" method="get">
