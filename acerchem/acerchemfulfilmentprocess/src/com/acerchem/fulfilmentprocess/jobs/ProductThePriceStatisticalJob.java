@@ -38,7 +38,7 @@ public class ProductThePriceStatisticalJob extends AbstractJobPerformable<CronJo
         int month = cal.get(Calendar.MONTH)+ 1;
         int week = cal.get(Calendar.WEEK_OF_MONTH);//获取到当前时间是第几周
 
-        String query = "select {pr.pk} from {PriceRow as pr left join Product as pt on {pr.productId} = {pt.code} }  where " +
+        String query = "select {pr.pk} from {PriceRow as pr left join Product as pt on {pr.product} = {pt.pk} }  where " +
                 "({pr.startTime} >= ?currentTime  and {pr.endTime} < ?currentTime ) or ({pr.startTime} is null and {pr.endTime} is null)";
         final FlexibleSearchQuery searchQuery = new FlexibleSearchQuery(query);
         searchQuery.addQueryParameter("currentTime", format);
