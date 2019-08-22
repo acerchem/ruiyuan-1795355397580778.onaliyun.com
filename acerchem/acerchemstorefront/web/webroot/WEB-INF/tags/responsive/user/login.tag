@@ -30,7 +30,7 @@
 		<formElement:formInputBox idKey="j_username" labelKey="login.email" path="j_username" mandatory="true" />
 		<formElement:formPasswordBox idKey="j_password" labelKey="login.password" path="j_password" inputCSS="form-control" mandatory="true" />
 		<label>
-			<input type="checkbox" name="remember-me">
+			<input type="checkbox" name="remember-me" id="ck">
 			<span class="checkbox">Keep me signed in</span><!-- alice: need update -->
 			<a  href="#" data-link="<c:url value='/login/pw/request'/>" class="js-password-forgotten" data-cbox-title="<spring:theme code="forgottenPwd.title"/>">
 				<spring:theme code="login.link.forgottenPwd" />
@@ -38,7 +38,7 @@
 		</label>
 		<ycommerce:testId code="loginAndCheckoutButton">
 			<div class="btn-set">
-				<button type="submit" class="btn">
+				<button type="submit" class="btn" id="loginbtn">
 					<spring:theme code="login.login" />
 				</button>
 				<c:url value="/login/register" var="registerUrl"/>
@@ -49,12 +49,39 @@
 </form:form>
 <script>
 
-	$(function(){
+	$(function() {
 
 		$("#cboxLoadingOverlay").remove();
 		$("#cboxLoadingGraphic").remove();
 
-	})
+		if ($.cookie('isChecked') == '1'){
+			$("input[type='checkbox']").attr('checked', true);
+			$("#j_username").val($.cookie('username'));
+			$("#j_password").val($.cookie('password'));
+		}else {
+			$("input[type='checkbox']").attr('checked', false);
+			$("#j_username").val('');
+			$("#j_password").val('');
+		}
 
+		//设置用户是否选择记住密码
+		$("#ck").click(function () {
+			if ($(this).is(":checked")) {
+				$.cookie('isChecked', "1");
+			} else {
+				$.cookie('isChecked', "2");
+			}
+		})
+		$("#loginbtn").click(function () {
+			if ($.cookie('isChecked') == '1'){
+				$.cookie('username', $("#j_username").val());
+				$.cookie('password', $("#j_password").val());
+			}else {
+				$.removeCookie('username');
+				$.removeCookie('password');
+			}
+		})
+
+	})
 </script>
 </body>
