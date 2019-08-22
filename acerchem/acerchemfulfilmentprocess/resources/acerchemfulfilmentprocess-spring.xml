@@ -160,4 +160,10 @@
 		<property name="sessionService" ref="sessionService"/>
 	</bean>
 
+	<bean id="productThePriceStatisticalJob" class="com.acerchem.fulfilmentprocess.jobs.ProductThePriceStatisticalJob"  >
+		<property name="modelService" ref="modelService"/>
+		<property name="flexibleSearchService" ref="flexibleSearchService"/>
+		<property name="sessionService" ref="sessionService"/>
+	</bean>
+
 </beans>
