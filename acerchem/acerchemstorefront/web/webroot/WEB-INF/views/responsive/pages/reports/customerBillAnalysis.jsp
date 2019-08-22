@@ -74,8 +74,8 @@
 							</td>
 							<td>
 								<div>
-									<span>Employee Name</span>
-									<input name="employeeName" size="12" type="text" value="${employeeName}">
+									<span>Order Code</span>
+									<input name="orderCode" size="12" type="text" value="${orderCode}">
 								</div>
 							</td>
 							<td>

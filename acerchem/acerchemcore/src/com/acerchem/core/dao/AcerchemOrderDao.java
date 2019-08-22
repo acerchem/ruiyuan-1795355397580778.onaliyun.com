@@ -21,6 +21,6 @@ public interface AcerchemOrderDao {
 	List<SalesByEmployeeReportData> getEmployeeSales(String year,String employeeName);
 
 	List<CustomerSalesAnalysisData> getCustomerSalesAnalysis(String area,String customerName,double amount,Date startDate,Date endDate);
-	List<CustomerBillAnalysisData> getCustomerBillAnalysis(Date startDate,Date endDate,String customerName,String employeeName);
+	List<CustomerBillAnalysisData> getCustomerBillAnalysis(Date startDate,Date endDate,String customerName,String employeeName,String orderCode);
 	
 }

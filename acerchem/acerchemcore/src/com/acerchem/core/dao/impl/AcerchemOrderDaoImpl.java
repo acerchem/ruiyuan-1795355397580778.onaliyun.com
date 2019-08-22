@@ -848,7 +848,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 	}
 
 	@Override
-	public List<CustomerBillAnalysisData> getCustomerBillAnalysis(final Date startDate, final Date endDate,String customerName,String employeeName) {
+	public List<CustomerBillAnalysisData> getCustomerBillAnalysis(final Date startDate, final Date endDate,String customerName,String employeeName,String orderCode) {
 
 		// date
 		Date start = startDate;
@@ -873,6 +873,10 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
         final Map<String, Object> params = new HashMap<String, Object>();
         params.put("startDate", start);
         params.put("endDate", end);
+        if(StringUtils.isNotBlank(orderCode)){
+            SQL += " AND {o:code} like ?orderCode ";
+            params.put("orderCode", "%" + orderCode + "%");
+        }
 		if(StringUtils.isNotBlank(customerName)){
 		    SQL += " AND {u:name} like ?customerName ";
             params.put("customerName", "%" + customerName + "%");
@@ -955,7 +959,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 								final int flag = remainDays - billDays;
 								double totalPrice = new BigDecimal(o.getTotalPrice()).divide(new BigDecimal(o.getCurrency().getConversion()),2,BigDecimal.ROUND_HALF_UP).doubleValue();
 								if (flag < 0) {
-									data.setInPay(o.getTotalPrice());
+									data.setInPay(totalPrice);
 								} else if (flag >= 0 && flag < 30) {
 									data.setThirtyPayAmount(totalPrice);
 								} else if (flag >= 30 && flag < 60) {
