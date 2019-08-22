@@ -13,9 +13,9 @@ import org.springframework.beans.factory.annotation.Required;
  * @contact abel0130@163.com
  * @date 2019-08-21
  */
-public class DefaultTermTextQueryBuilder extends AbstractFreeTextQueryBuilder {
+public class DefaultFullTextQueryBuilder extends AbstractFreeTextQueryBuilder {
 
-    private static final Logger LOG = Logger.getLogger(DefaultTermTextQueryBuilder.class);
+    private static final Logger LOG = Logger.getLogger(DefaultFullTextQueryBuilder.class);
     private String propertyName;
     private int boost;
 
@@ -75,7 +75,7 @@ public class DefaultTermTextQueryBuilder extends AbstractFreeTextQueryBuilder {
                                     final double boost)
     {
         final String field = indexedProperty.getName();
-        addFreeTextQuery(searchQuery, field, value.toLowerCase(), "", boost);
+        addFreeTextQuery(searchQuery, field, value.toLowerCase(), "*", boost / 2.0d);
     }
 
 }
