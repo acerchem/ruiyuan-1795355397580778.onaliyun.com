@@ -11,39 +11,26 @@
 package com.acerchem.storefront.controllers.pages;
 
 
-import de.hybris.platform.acceleratorservices.controllers.page.PageType;
-import de.hybris.platform.acceleratorservices.data.RequestContextData;
-import de.hybris.platform.acceleratorstorefrontcommons.constants.WebConstants;
-import de.hybris.platform.acceleratorstorefrontcommons.controllers.ThirdPartyConstants;
 import de.hybris.platform.acceleratorstorefrontcommons.controllers.pages.AbstractCategoryPageController;
-import de.hybris.platform.acceleratorstorefrontcommons.util.MetaSanitizerUtil;
-import de.hybris.platform.category.model.CategoryModel;
-import de.hybris.platform.cms2.model.pages.CategoryPageModel;
 import de.hybris.platform.commercefacades.product.data.CategoryData;
 import de.hybris.platform.commercefacades.product.data.ProductData;
 import de.hybris.platform.commercefacades.search.data.SearchStateData;
+import de.hybris.platform.commerceservices.search.facetdata.FacetData;
 import de.hybris.platform.commerceservices.search.facetdata.FacetRefinement;
 import de.hybris.platform.commerceservices.search.facetdata.ProductCategorySearchPageData;
-import de.hybris.platform.converters.Converters;
 import de.hybris.platform.core.model.product.ProductModel;
-import de.hybris.platform.servicelayer.dto.converter.ConversionException;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
-import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.List;
+import org.apache.commons.collections.CollectionUtils;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.lang.StringUtils;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import java.io.UnsupportedEncodingException;
+import java.util.Collections;
+import java.util.List;
 
 
 /**
@@ -63,9 +50,24 @@ public class CategoryPageController extends AbstractCategoryPageController {
                            @RequestParam(value = "show", defaultValue = "Page") final ShowMode showMode,
                            @RequestParam(value = "sort", required = false) final String sortCode, final Model model,
                            final HttpServletRequest request, final HttpServletResponse response) throws UnsupportedEncodingException {
-    	
-   	 return performSearchAndGetResultsPage(categoryCode, searchQuery, page, showMode, sortCode, model, request, response);
-		
+
+        String result = performSearchAndGetResultsPage(categoryCode, searchQuery, page, showMode, sortCode, model, request, response);
+        ProductCategorySearchPageData<SearchStateData, ProductData, CategoryData> pageData = (ProductCategorySearchPageData<SearchStateData, ProductData, CategoryData>) model.asMap().get("searchPageData");
+        List<FacetData<SearchStateData>> facetDataList = pageData.getFacets();
+        if (CollectionUtils.isNotEmpty(facetDataList)) {
+            for (FacetData<SearchStateData> facetData : facetDataList) {
+                if (CollectionUtils.isNotEmpty(facetData.getTopValues())) {
+                    Collections.sort(facetData.getTopValues(), (v0, v1)-> v0.getName().compareToIgnoreCase(v1.getName()));
+                }
+                if (CollectionUtils.isNotEmpty(facetData.getValues())) {
+                    Collections.sort(facetData.getValues(), (v0, v1)-> v0.getName().compareToIgnoreCase(v1.getName()));
+                }
+            }
+        }
+
+        model.addAttribute("searchPageData", pageData);
+        return result;
+
 //    	final CategoryModel category = getCommerceCategoryService().getCategoryForCode(categoryCode);
 //    	List<ProductData> products=new ArrayList<>();
 //    	products.addAll(Converters.convertAll(category.getProducts(), productConverter));
