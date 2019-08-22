@@ -3,9 +3,16 @@
  */
 package com.acerchem.handle;
 
+import java.util.Collections;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
+import com.hybris.backoffice.widgets.notificationarea.event.NotificationEvent;
+import com.hybris.backoffice.widgets.notificationarea.event.NotificationEvent.Level;
+import com.hybris.backoffice.widgets.notificationarea.event.NotificationUtils;
+import com.hybris.cockpitng.engine.WidgetInstanceManager;
+import de.hybris.platform.core.model.order.AbstractOrderEntryModel;
 import org.apache.log4j.Logger;
 
 import com.hybris.cockpitng.config.jaxb.wizard.CustomType;
@@ -44,6 +51,16 @@ public class AcerchemSaveConsignmentHandler implements FlowActionHandler
 		consignmentModel.setCode(String.valueOf(new Date().getTime()));
 		consignmentModel.setStatus(ConsignmentStatus.DELIVERING);
 		if(consignmentEntryModel.getOrderEntry() != null){
+			AbstractOrderEntryModel entryModel = consignmentEntryModel.getOrderEntry();
+			Long entryTotalQuantity = 0l;
+			for (ConsignmentEntryModel entry : entryModel.getConsignmentEntries()) {
+				entryTotalQuantity += entry.getQuantity();
+			}
+			if(entryTotalQuantity > (entryModel.getQuantity() - consignmentEntryModel.getQuantity())){
+				NotificationUtils.notifyUser("com.acerchem.actions.order.entry.consignmentCredit.createNewConsignmentEntryQuantityFailure", "createNewConsignmentEntryQuantityFailure", Level.FAILURE, new Object[]{});
+				return ;
+			}
+
 			if(consignmentEntryModel.getOrderEntry().getOrder() != null && consignmentEntryModel.getOrderEntry().getOrder().getDeliveryMode() != null){
 				if(consignmentEntryModel.getOrderEntry().getOrder().getDeliveryMode().getCode().equals("DELIVERY_MENTION")){
 					if(consignmentEntryModel.getOrderEntry().getDeliveryPointOfService() != null && consignmentEntryModel.getOrderEntry().getDeliveryPointOfService().getWarehouses() != null){

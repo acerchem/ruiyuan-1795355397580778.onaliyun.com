@@ -402,15 +402,24 @@
 					<wz:property-list root="newConsignmentEntry" merge-mode="replace">
 						<wz:property qualifier="orderEntry"  />
 						<wz:property qualifier="quantity"  />
-						<wz:property qualifier="batchNum"  />
+						<wz:property qualifier="batchNum"   />
 					</wz:property-list>
 				</wz:content>
 				<wz:navigation id="step1.navigation">
 					<wz:cancel/>
-						<wz:custom label="Done"  handler="acerchemSaveConsignmentHandler"/>
+					<wz:custom label="Done"  handler="acerchemSaveConsignmentHandler" visible="newConsignmentEntry.batchNum != null AND newConsignmentEntry.quantity != null"/>
 				</wz:navigation>
 			</wz:step>
 		</wz:flow>
+	</context>
+
+	<context component="notification-area" source="com.acerchem.actions.order.entry.consignmentCredit.createNewConsignmentEntryQuantityFailure" merge-by="source">
+		<na:notification-area>
+			<na:notifications eventType="createNewConsignmentEntryQuantityFailure" level="FAILURE">
+				<na:message>com.acerchem.actions.order.entry.consignmentCredit.createNewConsignmentEntryQuantityFailure</na:message>
+				<na:references linksEnabled="false"/>
+			</na:notifications>
+		</na:notification-area>
 	</context>
 	
 	<context component="create-wizard" type="UserLevel">
