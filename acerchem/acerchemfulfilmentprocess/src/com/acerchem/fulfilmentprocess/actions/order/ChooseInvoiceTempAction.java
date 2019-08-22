@@ -93,7 +93,7 @@ public class ChooseInvoiceTempAction extends AbstractAction<OrderProcessModel>
 		else
 		{
 			LOG.info("------------------- No Invoice TempAction Choose-----------------"+addressModel.getCountry().getIsocode());
-			return Transition.NOK; 
+			return Transition.TEMP3;
 		}
 		
 	}
