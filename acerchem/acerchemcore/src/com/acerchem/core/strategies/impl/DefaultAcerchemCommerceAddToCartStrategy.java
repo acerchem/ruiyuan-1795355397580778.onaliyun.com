@@ -181,7 +181,7 @@ public class DefaultAcerchemCommerceAddToCartStrategy extends DefaultCommerceAdd
                 // If any stock level is flagged as FORCEOUTOFSTOCK then we skip over it
                 if (!InStockStatus.FORCEOUTOFSTOCK.equals(stockLevelModel.getInStockStatus()))
                 {
-                    final long availableToSellQuantity = stockLevelModel.getPreOrder() - stockLevelModel.getReserved();
+                    final long availableToSellQuantity = stockLevelModel.getPreOrder();
                     if (availableToSellQuantity > 0 || !stockLevelModel.isTreatNegativeAsZero())
                     {
                         stockLevel += availableToSellQuantity;
