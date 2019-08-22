@@ -11,7 +11,7 @@
 <c:set var="userWarehouse"></c:set>
 <c:if test="${not empty user.warehouseList}">
 	<c:forEach items="${user.warehouseList}" var="warehouse">
-		<c:set value="${userWarehouse}${';'}${warehouse.name}" var="userWarehouse"></c:set>
+		<c:set value="${userWarehouse}${';'}${warehouse.code}" var="userWarehouse"></c:set>
 	</c:forEach>
 </c:if>
 
