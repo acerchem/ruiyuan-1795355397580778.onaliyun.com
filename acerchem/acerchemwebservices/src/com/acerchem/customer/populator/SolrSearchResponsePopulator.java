@@ -13,7 +13,7 @@ import org.apache.log4j.Logger;
 import org.apache.solr.common.SolrException;
 import org.springframework.beans.factory.annotation.Required;
 
-import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -76,8 +76,9 @@ public class SolrSearchResponsePopulator<FACET_SEARCH_CONFIG_TYPE, INDEXED_TYPE_
 
             Set<WarehouseModel> warehouseModelSet = customerModel.getWarehouse();
             if (CollectionUtils.isNotEmpty(warehouseModelSet)) {
-                Set<String> codeSet = warehouseModelSet.stream().map(WarehouseModel::getCode).collect(Collectors.toSet());
-                searchQuery.addFilterQuery("warehouseCode_string_mv", SearchQuery.Operator.OR, codeSet);
+                List<String> codeSet = warehouseModelSet.stream().map(WarehouseModel::getCode).collect(Collectors.toList());
+//                searchQuery.addFilterQuery("warehouseCode_string_mv", SearchQuery.Operator.OR, codeSet);
+                searchQuery.addQuery("warehouseCode_string_mv", codeSet.toArray(new String[]{}));
                 LOG.info("search paramallPromotions : " + searchQuery.getUserQuery() + ":" + codeSet.toString());
             } else {
                 searchQuery.addQuery("warehouseCode_string_mv", "--");

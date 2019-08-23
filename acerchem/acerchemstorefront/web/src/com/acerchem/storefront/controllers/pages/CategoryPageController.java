@@ -19,7 +19,10 @@ import de.hybris.platform.commerceservices.search.facetdata.FacetData;
 import de.hybris.platform.commerceservices.search.facetdata.FacetRefinement;
 import de.hybris.platform.commerceservices.search.facetdata.ProductCategorySearchPageData;
 import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.core.model.user.UserModel;
 import de.hybris.platform.servicelayer.dto.converter.Converter;
+import de.hybris.platform.servicelayer.user.UserService;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -42,6 +45,9 @@ public class CategoryPageController extends AbstractCategoryPageController {
 	
 	@Resource
 	private Converter<ProductModel, ProductData> productConverter;
+
+	@Resource
+    private UserService userService;
 	
     @RequestMapping(value = CATEGORY_CODE_PATH_VARIABLE_PATTERN, method = RequestMethod.GET)
     public String category(@PathVariable("categoryCode") final String categoryCode, // NOSONAR
@@ -68,6 +74,13 @@ public class CategoryPageController extends AbstractCategoryPageController {
         }
 
         model.addAttribute("searchPageData", pageData);
+        UserModel currentUser=userService.getCurrentUser();
+        if (currentUser != null && currentUser instanceof CustomerModel) {
+            if (CollectionUtils.isEmpty(((CustomerModel) currentUser).getWarehouse())) {
+                model.addAttribute("searchPageData", null);
+            }
+        }
+
         return result;
 
 //    	final CategoryModel category = getCommerceCategoryService().getCategoryForCode(categoryCode);
