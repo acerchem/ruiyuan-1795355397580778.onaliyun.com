@@ -80,9 +80,7 @@ public class SolrSearchResponsePopulator<FACET_SEARCH_CONFIG_TYPE, INDEXED_TYPE_
                 searchQuery.addFilterQuery("warehouseCode_string_mv", SearchQuery.Operator.OR, codeSet);
                 LOG.info("search paramallPromotions : " + searchQuery.getUserQuery() + ":" + codeSet.toString());
             } else {
-                Set<String> codeSet = new HashSet<>();
-                codeSet.add("nil");
-                searchQuery.addFilterQuery("warehouseCode_string_mv", SearchQuery.Operator.AND, codeSet);
+                searchQuery.addQuery("warehouseCode_string_mv", "--");
             }
             final SearchResult searchResult = getSolrFacetSearchService().search(searchQuery);
             if (searchResult instanceof SolrSearchResult)
