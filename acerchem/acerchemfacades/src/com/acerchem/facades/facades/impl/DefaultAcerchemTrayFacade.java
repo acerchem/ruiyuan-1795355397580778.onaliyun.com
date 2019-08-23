@@ -86,9 +86,11 @@ public class DefaultAcerchemTrayFacade implements AcerchemTrayFacade {
 //                	totalTrayAmount = new BigDecimal(20);
 //                }
             }
-            CountryModel countryModel = commonI18NService.getCountry(addressData.getCountry().getIsocode());
-            if(addressData.getRegion() != null){
-            	regionModel =  commonI18NService.getRegion(countryModel, addressData.getRegion().getIsocode());
+            if(addressData.getCountry() != null) {
+                CountryModel countryModel = commonI18NService.getCountry(addressData.getCountry().getIsocode());
+                if (addressData.getRegion() != null) {
+                    regionModel = commonI18NService.getRegion(countryModel, addressData.getRegion().getIsocode());
+                }
             }
         }
         LOG.debug("totalTrayAmount:"+totalTrayAmount);
