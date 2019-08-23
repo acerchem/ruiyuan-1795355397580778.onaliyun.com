@@ -743,7 +743,12 @@ public class AccountPageController extends AbstractSearchPageController {
 	@RequireHardLogIn
 	public String removeAddress(@PathVariable("addressCode") final String addressCode,
 			final RedirectAttributes redirectModel) {
-		final AddressData addressData = new AddressData();
+		AddressData addressData = userFacade.getAddressForCode(addressCode);
+		if(addressData.isDefaultAddress()){
+			GlobalMessages.addErrorMessage(redirectModel,"account.confirmation.address.removed.default");
+			return REDIRECT_TO_ADDRESS_BOOK_PAGE;
+		}
+		addressData = new AddressData();
 		addressData.setId(addressCode);
 		userFacade.removeAddress(addressData);
 
