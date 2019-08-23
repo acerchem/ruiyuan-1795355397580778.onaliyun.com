@@ -53,14 +53,16 @@ public class CategoryPageController extends AbstractCategoryPageController {
 
         String result = performSearchAndGetResultsPage(categoryCode, searchQuery, page, showMode, sortCode, model, request, response);
         ProductCategorySearchPageData<SearchStateData, ProductData, CategoryData> pageData = (ProductCategorySearchPageData<SearchStateData, ProductData, CategoryData>) model.asMap().get("searchPageData");
-        List<FacetData<SearchStateData>> facetDataList = pageData.getFacets();
-        if (CollectionUtils.isNotEmpty(facetDataList)) {
-            for (FacetData<SearchStateData> facetData : facetDataList) {
-                if (CollectionUtils.isNotEmpty(facetData.getTopValues())) {
-                    Collections.sort(facetData.getTopValues(), (v0, v1)-> v0.getCode().compareToIgnoreCase(v1.getCode()));
-                }
-                if (CollectionUtils.isNotEmpty(facetData.getValues())) {
-                    Collections.sort(facetData.getValues(), (v0, v1)-> v0.getCode().compareToIgnoreCase(v1.getCode()));
+        if(pageData != null) {
+            List<FacetData<SearchStateData>> facetDataList = pageData.getFacets();
+            if (CollectionUtils.isNotEmpty(facetDataList)) {
+                for (FacetData<SearchStateData> facetData : facetDataList) {
+                    if (CollectionUtils.isNotEmpty(facetData.getTopValues())) {
+                        Collections.sort(facetData.getTopValues(), (v0, v1) -> v0.getCode().compareToIgnoreCase(v1.getCode()));
+                    }
+                    if (CollectionUtils.isNotEmpty(facetData.getValues())) {
+                        Collections.sort(facetData.getValues(), (v0, v1) -> v0.getCode().compareToIgnoreCase(v1.getCode()));
+                    }
                 }
             }
         }
