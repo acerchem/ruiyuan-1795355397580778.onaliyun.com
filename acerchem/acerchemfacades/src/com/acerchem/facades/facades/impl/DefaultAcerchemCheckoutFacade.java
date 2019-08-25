@@ -194,7 +194,19 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
                     UserModel user = cartModel.getUser();
                     if(user != null && user instanceof CustomerModel){
                         AddressModel addressModel = ((CustomerModel)user).getDefaultShipmentAddress();
-                        cartModel.setDeliveryAddress(addressModel);
+                        if(addressModel!=null)
+                        {
+                            cartModel.setDeliveryAddress(addressModel);
+                        }else{
+                            Collection<AddressModel> addressList = ((CustomerModel)user).getAddresses();
+                            for(AddressModel cAddressModel : addressList){
+                                if(!cAddressModel.getContactAddress())
+                                {
+                                    cartModel.setDeliveryAddress(cAddressModel);
+                                    break;
+                                }
+                            }
+                        }
                     }
                 }
                 //促销那块会把操作费，存储费不加上，在此处计算总价格和单价
@@ -742,7 +754,12 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
 	            cartModel.setDeliveryCost(deliveryCost);
 	            
 	      if(cartModel.getDeliveryMode() != null && cartModel.getDeliveryMode().getCode().equalsIgnoreCase("DELIVERY_MENTION")){
-	    	  cartModel.setDeliveryAddress(getWareHoseAddresses().get(0));
+             List<? extends AddressModel> addressModelList = getWareHoseAddresses();
+           if(addressModelList!=null && CollectionUtils.isNotEmpty(addressModelList))
+           {
+               AddressModel cAddressModel = addressModelList.get(0);
+               cartModel.setDeliveryAddress(cAddressModel);
+           }
 	      }
 	            
 		 

@@ -10,6 +10,7 @@
  */
 package com.acerchem.storefront.controllers.pages;
 
+import com.acerchem.facades.product.data.StoreOfProductData;
 import de.hybris.platform.acceleratorfacades.futurestock.FutureStockFacade;
 import de.hybris.platform.acceleratorservices.controllers.page.PageType;
 import de.hybris.platform.acceleratorstorefrontcommons.breadcrumb.impl.ProductBreadcrumbBuilder;
@@ -38,20 +39,17 @@ import de.hybris.platform.commercefacades.product.data.ReviewData;
 import de.hybris.platform.commerceservices.search.pagedata.PageableData;
 import de.hybris.platform.commerceservices.url.UrlResolver;
 import de.hybris.platform.core.model.product.ProductModel;
+import de.hybris.platform.core.model.user.CustomerModel;
+import de.hybris.platform.core.model.user.UserModel;
+import de.hybris.platform.ordersplitting.model.WarehouseModel;
 import de.hybris.platform.product.ProductService;
 import de.hybris.platform.servicelayer.exceptions.UnknownIdentifierException;
 import de.hybris.platform.servicelayer.user.UserService;
 import de.hybris.platform.util.Config;
 
 import java.io.UnsupportedEncodingException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -159,8 +157,15 @@ public class ProductPageController extends AbstractPageController
 		model.addAttribute("pageType", PageType.PRODUCT.name());
 		model.addAttribute("futureStockEnabled", Boolean.valueOf(Config.getBoolean(FUTURE_STOCK_ENABLED, false)));
 
-
-		model.addAttribute("countrys", acerchemCustomerFacade.getAllPos(productCode));
+		List<StoreOfProductData> storeOfProductData = acerchemCustomerFacade.getAllPos(productCode);
+		UserModel userModel = userService.getCurrentUser();
+		if(userModel!=null && userModel instanceof CustomerModel)
+		{
+			Set<WarehouseModel> warehouseModels = ((CustomerModel) userModel).getWarehouse();
+			List<String> warehouseCode = warehouseModels.stream().map(warehouseModel->warehouseModel.getCode()).collect(Collectors.toList());
+			storeOfProductData = storeOfProductData.stream().filter(item->warehouseCode.contains(item.getStoreId())).collect(Collectors.toList());
+		}
+		model.addAttribute("countrys", storeOfProductData);
 
 		model.addAttribute("stocks", acerchemStockFacade.getAllStockDataByProduct(productCode));
 
