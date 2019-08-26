@@ -15,7 +15,7 @@ public interface AcerchemTrayFacade {
      * @param trayAmount
      * @return
      */
-    double getBasePriceByCountryAndTray(String countryIsoCode,String regionIsoCode, int trayAmount);
+    double getBasePriceByCountryAndTray(String countryIsoCode,String postCode, int trayAmount);
 
     /**
      * 计算购物车内所有商品的托盘总价

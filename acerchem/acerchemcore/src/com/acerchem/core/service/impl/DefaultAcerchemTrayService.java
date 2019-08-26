@@ -20,9 +20,9 @@ public class DefaultAcerchemTrayService implements AcerchemTrayService {
     private AcerchemTrayDao acerchemTrayDao;
 
     @Override
-    public CountryTrayFareConfModel getPriceByCountryAndTray(RegionModel regionModel, int quantity) {
+    public CountryTrayFareConfModel getPriceByCountryAndTray(CountryModel country, String postcode, int quantity) {
 
-        CountryTrayFareConfModel countryTrayFareConf = acerchemTrayDao.getCouTrayFareConf(regionModel,quantity);
+        CountryTrayFareConfModel countryTrayFareConf = acerchemTrayDao.getCouTrayFareConf(country, postcode,quantity);
 
         return countryTrayFareConf;
     }

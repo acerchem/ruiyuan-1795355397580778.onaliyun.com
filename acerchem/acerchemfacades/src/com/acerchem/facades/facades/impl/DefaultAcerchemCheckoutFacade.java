@@ -771,8 +771,9 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
 		
 		final CartModel cartModel = getCartService().getSessionCart();
 	 	RegionData regionData = null;
-	 	
-	 	RegionModel regionModel = null;
+
+       CountryModel countryModel = null;
+       String postCode = null;
 		CountryTrayFareConfModel countryTrayFareConf  = null;
 		//��������
 		BigDecimal totalTrayAmount = BigDecimal.ZERO;
@@ -798,8 +799,9 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
 			}
 		}
 		if(regionData != null){
-			regionModel =cartModel.getDeliveryAddress().getRegion();
-			countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(regionModel, (int) Math.ceil(totalTrayAmount.doubleValue()));
+			 countryModel =cartModel.getDeliveryAddress().getCountry();
+          postCode = cartModel.getDeliveryAddress().getPostalcode();
+			 countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(countryModel, postCode, (int) Math.ceil(totalTrayAmount.doubleValue()));
 		}
 		if(countryTrayFareConf != null){
 			return countryTrayFareConf.getDeliveriedDay();

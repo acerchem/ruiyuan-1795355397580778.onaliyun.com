@@ -159,9 +159,10 @@ public class DefaultAcerchemFindDeliveryCostStrategy extends DefaultFindDelivery
 		}
 		if(order.getDeliveryAddress()!=null)
 		{
-			regionModel = order.getDeliveryAddress().getRegion();
+			String postalcode = order.getDeliveryAddress().getPostalcode();
+			CountryModel countryModel = order.getDeliveryAddress().getCountry();
 			if(regionModel != null){
-				countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(regionModel, (int) Math.ceil(totalTrayAmount.doubleValue()));
+				countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(countryModel, postalcode, (int) Math.ceil(totalTrayAmount.doubleValue()));
 				if (countryTrayFareConf!=null){
 					totalTrayPrice = countryTrayFareConf.getPrice();
 				}

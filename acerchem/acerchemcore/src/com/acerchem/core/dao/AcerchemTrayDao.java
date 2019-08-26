@@ -9,7 +9,7 @@ import de.hybris.platform.core.model.c2l.RegionModel;
  */
 public interface AcerchemTrayDao {
 
-    CountryTrayFareConfModel getCouTrayFareConf(RegionModel regionModel,int quantity);
+    CountryTrayFareConfModel getCouTrayFareConf(CountryModel country, String postcode,int quantity);
     
     
 }

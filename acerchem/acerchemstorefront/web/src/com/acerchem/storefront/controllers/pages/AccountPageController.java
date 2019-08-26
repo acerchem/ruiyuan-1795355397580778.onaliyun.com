@@ -1311,13 +1311,14 @@ public class AccountPageController extends AbstractSearchPageController {
 	private AcerchemTrayService acerchemTrayService;
 
 	private Integer getTotalPriceForCart(final AbstractOrderModel order) {
-		RegionModel regionModel = null;
+		CountryModel countryModel = null;
+		String postCode = null;
 		CountryTrayFareConfModel countryTrayFareConf = null;
 		BigDecimal totalTrayAmount = BigDecimal.ZERO;
 		if (order != null) {
 			for (final AbstractOrderEntryModel aoe : order.getEntries()) {
 				if (aoe.getDeliveryPointOfService().getAddress() != null) {
-					regionModel = aoe.getOrder().getDeliveryAddress().getRegion();
+					countryModel = aoe.getOrder().getDeliveryAddress().getCountry();
 				}
 				final ProductModel productModel = aoe.getProduct();
 				final String unitCalculateRato = productModel.getUnitCalculateRato();
@@ -1330,8 +1331,8 @@ public class AccountPageController extends AbstractSearchPageController {
 				totalTrayAmount = totalTrayAmount.add(entryTrayAmount);
 			}
 		}
-		if (regionModel != null) {
-			countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(regionModel,
+		if (countryModel != null) {
+			countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(countryModel, postCode,
 					(int) Math.ceil(totalTrayAmount.doubleValue()));
 		}
 		if (countryTrayFareConf != null) {
