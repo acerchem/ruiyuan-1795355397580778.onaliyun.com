@@ -46,11 +46,10 @@ public class DefaultAcerchemTrayFacade implements AcerchemTrayFacade {
     private ModelService modelService;
 
     @Override
-    public double getBasePriceByCountryAndTray(String countryIsoCode,String regionIsoCode, int trayAmount){
+    public double getBasePriceByCountryAndTray(String countryIsoCode, String postCode, int trayAmount){
         double price = 0.0;
         CountryModel countryModel = commonI18NService.getCountry(countryIsoCode);
-        RegionModel regionModel =  commonI18NService.getRegion(countryModel, regionIsoCode);
-        CountryTrayFareConfModel countryTrayFareConf =  acerchemTrayService.getPriceByCountryAndTray(regionModel, trayAmount);
+        CountryTrayFareConfModel countryTrayFareConf =  acerchemTrayService.getPriceByCountryAndTray(countryModel, postCode, trayAmount);
         if (countryTrayFareConf!=null){
             price = countryTrayFareConf.getPrice();
         }
@@ -60,7 +59,8 @@ public class DefaultAcerchemTrayFacade implements AcerchemTrayFacade {
     @Override
     public double getTotalPriceForCart(CartData cartData,AddressData addressData) throws AcerchemOrderException {
         double totalTrayPrice = 0.0d;
-        RegionModel regionModel = null;
+        String postCode = null;
+        CountryModel countryModel = null;
         CountryTrayFareConfModel countryTrayFareConf = null;
         //托盘数量
         int totalTrayAmount = 0;
@@ -87,15 +87,15 @@ public class DefaultAcerchemTrayFacade implements AcerchemTrayFacade {
 //                }
             }
             if(addressData.getCountry() != null) {
-                CountryModel countryModel = commonI18NService.getCountry(addressData.getCountry().getIsocode());
+                countryModel = commonI18NService.getCountry(addressData.getCountry().getIsocode());
                 if (addressData.getRegion() != null) {
-                    regionModel = commonI18NService.getRegion(countryModel, addressData.getRegion().getIsocode());
+                    postCode = addressData.getPostalCode();
                 }
             }
         }
         LOG.debug("totalTrayAmount:"+totalTrayAmount);
-        if(regionModel != null){
-        	countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(regionModel,totalTrayAmount);
+        if(postCode != null){
+        	countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(countryModel, postCode,totalTrayAmount);
             if (countryTrayFareConf!=null){
                 totalTrayPrice = countryTrayFareConf.getPrice();
 
@@ -111,20 +111,21 @@ public class DefaultAcerchemTrayFacade implements AcerchemTrayFacade {
     @Override
     public int getDeliveryDaysForCart(CartModel cartModel) {
 
-        RegionModel regionModel = null;
+        String postCode = null;
+        CountryModel countryModel = null;
         CountryTrayFareConfModel countryTrayFareConf = null;
         AddressModel addressModel = null;
         if(cartModel != null){
             addressModel = cartModel.getDeliveryAddress();
         }
         if(addressModel != null && cartModel.getDeliveryAddress() != null && cartModel.getDeliveryAddress().getCountry() != null){
-            CountryModel countryModel = commonI18NService.getCountry(cartModel.getDeliveryAddress().getCountry().getIsocode());
+            countryModel = commonI18NService.getCountry(cartModel.getDeliveryAddress().getCountry().getIsocode());
             if(addressModel.getRegion() != null){
-                regionModel =  commonI18NService.getRegion(countryModel, addressModel.getRegion().getIsocode());
+                postCode =  addressModel.getPostalcode();
             }
         }
-        if(regionModel != null){
-            countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(regionModel, -1);
+        if(postCode != null){
+            countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(countryModel, postCode, -1);
         }
         if (countryTrayFareConf!=null){
             return countryTrayFareConf.getDeliveriedDay();

@@ -2,6 +2,7 @@ package com.acerchem.core.service;
 
 import com.acerchem.core.model.CountryTrayFareConfModel;
 
+import de.hybris.platform.core.model.c2l.CountryModel;
 import de.hybris.platform.core.model.c2l.RegionModel;
 
 /**
@@ -9,5 +10,5 @@ import de.hybris.platform.core.model.c2l.RegionModel;
  */
 public interface AcerchemTrayService {
 
-    CountryTrayFareConfModel getPriceByCountryAndTray(RegionModel regionModel,int amount);
+    CountryTrayFareConfModel getPriceByCountryAndTray(CountryModel country, String postcode,int amount);
 }

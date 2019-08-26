@@ -74,24 +74,29 @@
 <c:forEach items="${addressData}" var="address">
 	<div class="display-none">
     	<div id="popup_confirm_address_removal_${fn:escapeXml(address.id)}" class="account-address-removal-popup">
-     		<div class="text">Whether to delete this address ?</div>
-     		<br/>
-     		<div class="modal-actions">
-            	<div class="row">
-                	<ycommerce:testId code="addressRemove_delete_button">
-                    	<div class="col-xs-12 col-sm-6 col-sm-push-6">
-                        	<a class="btn btn-primary btn-block" data-address-id="${fn:escapeXml(address.id)}" href="remove-address/${fn:escapeXml(address.id)}">
-                                <spring:theme code="text.address.delete" />
-                            </a>
-                        </div>
-                    </ycommerce:testId>
-	                <div class="col-xs-12 col-sm-6 col-sm-pull-6">
-		                <a class="btn btn-default btn-block closeColorBox" data-address-id="${fn:escapeXml(address.id)}">
-		                    <spring:theme code="text.button.cancel"/>
-		                </a>
-		             </div>
-	       	  	</div>
-       		</div>
+			<div style="    width: 50%;
+    margin: 15% 25% 0 25%;
+    background-color: #fff;
+    padding: 15px;">
+				<div class="text">Whether to delete this address ?</div>
+				<br/>
+				<div class="modal-actions">
+					<div class="row">
+						<ycommerce:testId code="addressRemove_delete_button">
+							<div class="col-xs-12 col-sm-6 col-sm-push-6">
+								<a class="btn btn-primary btn-block" data-address-id="${fn:escapeXml(address.id)}" href="remove-address/${fn:escapeXml(address.id)}">
+									<spring:theme code="text.address.delete" />
+								</a>
+							</div>
+						</ycommerce:testId>
+						<div class="col-xs-12 col-sm-6 col-sm-pull-6">
+							<a class="btn btn-default btn-block closeColorBox" data-address-id="${fn:escapeXml(address.id)}">
+								<spring:theme code="text.button.cancel"/>
+							</a>
+						 </div>
+					</div>
+				</div>
+			</div>
      	</div>
     </div>
 </c:forEach>

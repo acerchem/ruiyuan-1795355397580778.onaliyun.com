@@ -308,8 +308,16 @@ ACC.address = {
 				href: "#popup_confirm_address_removal_" + addressId,
 				onComplete: function ()
 				{
-
 					$(this).colorbox.resize();
+                    var colorbox= $('#colorbox').width(),
+                        srcwind = $(window).width();
+                    setTimeout(function(){
+                        $('#colorbox').css({width:'100%',height:'100%',left:0,top:0})
+                        $('#cboxWrapper , #cboxContent , #cboxLoadedContent').css({width:'',height:'',float:''})
+                        if(colorbox<srcwind){
+                            rewinsize()
+                        }
+                    },50)
 				}
 			});
 

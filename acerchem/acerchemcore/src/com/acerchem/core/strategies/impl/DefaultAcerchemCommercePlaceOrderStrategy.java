@@ -23,6 +23,7 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import de.hybris.platform.core.model.c2l.CountryModel;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 import org.springframework.transaction.annotation.Transactional;
@@ -195,6 +196,8 @@ public class DefaultAcerchemCommercePlaceOrderStrategy extends DefaultCommercePl
 	
 	 private  Integer getTotalPriceForCart(AbstractOrderModel order){
 		 	RegionModel regionModel = null;
+		   CountryModel countryModel = null;
+		   String postCode = null;
 			CountryTrayFareConfModel countryTrayFareConf  = null;
 			//��������
 			BigDecimal totalTrayAmount = BigDecimal.ZERO;
@@ -203,7 +206,8 @@ public class DefaultAcerchemCommercePlaceOrderStrategy extends DefaultCommercePl
 				for (AbstractOrderEntryModel aoe : order.getEntries()){
 
 					if (aoe.getDeliveryPointOfService().getAddress()!=null) {
-						regionModel = aoe.getOrder().getDeliveryAddress().getRegion();
+						countryModel = aoe.getOrder().getDeliveryAddress().getCountry();
+						postCode = aoe.getOrder().getDeliveryAddress().getPostalcode();
 					}
 					ProductModel productModel = aoe.getProduct();
 					//�Ȼ�ȡ���̱������ڼ�������
@@ -220,7 +224,7 @@ public class DefaultAcerchemCommercePlaceOrderStrategy extends DefaultCommercePl
 				}
 			}
 			if(regionModel != null){
-				countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(regionModel, (int) Math.ceil(totalTrayAmount.doubleValue()));
+				countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(countryModel, postCode, (int) Math.ceil(totalTrayAmount.doubleValue()));
 			}
 			if(countryTrayFareConf != null){
 				return countryTrayFareConf.getDeliveriedDay();
