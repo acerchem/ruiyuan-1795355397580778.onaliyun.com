@@ -77,30 +77,30 @@
                             T/T ${ctx.quote.billingInterval} days atter invoice date
                         #end
                         </li>
-                    <li><span>Shipping Date</span>:${ctx.quote.waitDeliveriedDate}</li>
+                    <li><span>Shipping Date</span>:${ctx.quote.waitDeliveiedDate}</li>
                 </ul>
             </div>
         </td>
     </tr>
     <tr>
         <td colspan="2" align="left" valign="top" style="background-color: #ffffff;padding-top:20px;padding-bottom:20px;padding-left:20px;padding-right:20px;">
-            <table class="font2" width="750" border="1" cellpadding="0" cellspacing="0" align="center" style="text-align: center; border-collapse: collapse" bordercolor="#000000">
+            <table class="font2" width="550" border="1" cellpadding="0" cellspacing="0" align="center" style="text-align: center; border-collapse: collapse" bordercolor="#000000">
                 <tr>
-                    <td width="120" height="7">AC Code</td>
-                    <td width="180" >Name</td>
-                    <td width="50" >Unit</td>
-                    <td width="80" >Quantity</td>
-                    <td width="80" >Price</td>
-                    <td width="120">Amount</td>
+                    <td width="100" height="7">AC Code</td>
+                    <td width="160" >Name</td>
+                    <td width="30" >Unit</td>
+                    <td width="60" >Quantity</td>
+                    <td width="60" >Price</td>
+                    <td width="100">Amount</td>
                     <td >Package</td>
                 </tr>
                 #foreach( $item in ${ctx.quote.entries} )
                     <tr>
                         <td > ${item.product.code} </td>
                         <td > ${item.product.name} </td>
-                        <td > $!{item.unit.name} </td>
-                        <td > $!{item.totalWeight} </td>
-                        <td > ${item.basePrice}</td>
+                        <td > $!{item.unitname} </td>
+                        <td > $!{item.product.totalWeight} </td>
+                        <td > ${item.basePrice.value}</td>
                         <td > ${item.quantity} </td>
                         <td > $!{item.product.packageWeight} </td>
                     </tr>
