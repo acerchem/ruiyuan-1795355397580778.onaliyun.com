@@ -117,7 +117,7 @@ public class DefaultAcerchemTrayFacade implements AcerchemTrayFacade {
         if(cartModel != null){
             addressModel = cartModel.getDeliveryAddress();
         }
-        if(addressModel!=null){
+        if(addressModel != null && cartModel.getDeliveryAddress() != null && cartModel.getDeliveryAddress().getCountry() != null){
             CountryModel countryModel = commonI18NService.getCountry(cartModel.getDeliveryAddress().getCountry().getIsocode());
             if(addressModel.getRegion() != null){
                 regionModel =  commonI18NService.getRegion(countryModel, addressModel.getRegion().getIsocode());
