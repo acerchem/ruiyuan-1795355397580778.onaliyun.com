@@ -224,9 +224,8 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 					// String warehouseCode = orderEntry.getWarehouseCode();
 					final PointOfServiceData pos = orderEntry.getDeliveryPointOfService();
 					if (pos != null) {
-
-						setWarehouse(StringUtils.defaultString(pos.getDefaultWarehouseRegionName(), "&nbsp;"));
-
+//						setWarehouse(StringUtils.defaultString(pos.getDefaultWarehouseRegionName(), "&nbsp;"));
+						setWarehouse(StringUtils.defaultString(pos.getAddress().getCountry().getName(), "&nbsp;"));
 					}
 
 				}
