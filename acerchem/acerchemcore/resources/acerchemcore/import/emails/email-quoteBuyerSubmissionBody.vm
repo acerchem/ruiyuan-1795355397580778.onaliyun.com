@@ -77,14 +77,14 @@
                             T/T ${ctx.quote.billingInterval} days atter invoice date
                         #end
                         </li>
-                    <li><span>Shipping Date</span>:${ctx.quote.waitDeliveiedDate}</li>
+                    <li><span>Shipping Date</span>:${ctx.quote.waitDeliveiedDate}</li>email-quoteBuyerSubmissionBody.vm
                 </ul>
             </div>
         </td>
     </tr>
     <tr>
         <td colspan="2" align="left" valign="top" style="background-color: #ffffff;padding-top:20px;padding-bottom:20px;padding-left:20px;padding-right:20px;">
-            <table class="font2" width="550" border="1" cellpadding="0" cellspacing="0" align="center" style="text-align: center; border-collapse: collapse" bordercolor="#000000">
+            <table class="font2" width="620" border="1" cellpadding="0" cellspacing="0" align="center" style="text-align: center; border-collapse: collapse" bordercolor="#000000">
                 <tr>
                     <td width="100" height="7">AC Code</td>
                     <td width="160" >Name</td>
@@ -121,7 +121,7 @@
         </td>
     </tr>
     <tr>
-        <td>
+        <td colspan="2" style="background-color: #ffffff;padding-top:20px;padding-bottom:20px;padding-left:20px;padding-right:20px;">
             REMARK:Exact order price and stock depends on Ingredients4U website.
         </td>
     </tr>
