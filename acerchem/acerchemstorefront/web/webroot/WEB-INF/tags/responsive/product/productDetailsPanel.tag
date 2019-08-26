@@ -271,7 +271,6 @@
 									<input disabled="disabled" hidden="hidden" id="myNetWeight" value="${product.netWeight}">
 
 								    <i class="delint"><em>${product.packageType}&nbsp/&nbsp<span id="allmyNetWeight">${product.netWeight}</span>${product.unitName}</em></i>
-								    <i class="delintro"><em>Delivery within &nbsp ${data.avaReleaseDay} &nbsp days</em></i>
 
 							</c:if>
 	                        </c:forEach>

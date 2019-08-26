@@ -925,6 +925,10 @@
 						<persistence type="property" />
 						<modifiers />
 					</attribute>
+					<attribute qualifier="postCode" type="java.lang.Integer">
+						<persistence type="property" />
+						<modifiers />
+					</attribute>
 					<attribute qualifier="trayAmount" type="java.lang.Integer">
 						<persistence type="property" />
 						<modifiers />

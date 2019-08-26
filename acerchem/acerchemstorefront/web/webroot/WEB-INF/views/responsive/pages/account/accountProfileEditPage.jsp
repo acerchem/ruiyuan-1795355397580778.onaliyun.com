@@ -100,13 +100,20 @@
 		</label>
 		
 		<label>
-			<span class='label-title'></span>
 			<input type="text" id="register.contactAddressDetail" name='contactAddress.townCity' value="${customRegisterForm.contactAddress.townCity}" class="lab-row" placeholder="Detailed address" alt='Please Enter Contact Detailed Address'/>
 			<div style="color:#F00"><form:errors path="contactAddress.townCity"/></div>
-		</label>	
-		
-		
-		
+		</label>
+
+		<label>
+			<span class='label-title'>Zip code</span>
+			<input type="text" id="register.postcode" name='contactAddress.postcode' value="${customRegisterForm.contactAddress.postcode}" placeholder="Zip code" alt='Please Enter Zip code'/>
+			<div style="color:#F00"><form:errors path="contactAddress.townCity"/></div>
+		</label>
+
+		<label>
+			<div style="height: 100px;"></div>
+		</label>
+
 		<label>
 			<span class='label-title' style="font-size:large;">Company Information</span>	
 		</label>

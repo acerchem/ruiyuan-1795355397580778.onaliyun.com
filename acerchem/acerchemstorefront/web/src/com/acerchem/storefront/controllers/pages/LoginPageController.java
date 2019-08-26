@@ -359,6 +359,7 @@ public class LoginPageController extends AbstractLoginPageController
 			am.setRegion(commonI18NService.getRegion(shipCountry,shipRegionIso));
 		}
 		am.setTown(form.getShipAddress().getTownCity());
+		am.setPostalcode(form.getShipAddress().getPostcode());
 		am.setOwner(user);
 		
 		String contactCountryIso=form.getContactAddress().getCountryIso();
@@ -381,6 +382,7 @@ public class LoginPageController extends AbstractLoginPageController
 			am2.setRegion(commonI18NService.getRegion(contactCountry,contactRegionIso));
 		}
 		am2.setTown(form.getContactAddress().getTownCity());
+		am2.setPostalcode(form.getShipAddress().getPostcode());
 		am2.setOwner(user);
 		
 		List<AddressModel> amlist=new ArrayList<AddressModel>();
@@ -411,6 +413,7 @@ public class LoginPageController extends AbstractLoginPageController
 		user.setSessionLanguage(commonI18NService.getLanguage(form.getLanguage()));
 		user.setSessionCurrency(commonI18NService.getCurrency(form.getCurrency()));
 		user.setAddresses(amlist);
+		user.setDefaultShipmentAddress(am);
 		user.setPhoneNumbers(phoneNumbers);
 		user.setPassword(form.getPwd());
 		user.setCreditAccount(ca);

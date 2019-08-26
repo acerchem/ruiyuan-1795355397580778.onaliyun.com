@@ -170,6 +170,11 @@
 		</label>
 
 		<label>
+			<span class='label-title'>Zip Code</span>
+			<input id="postcode" type="text" name='shipAddress.postcode' value=""  alt='Please Enter Your Zipcode'/>
+		</label>
+
+		<label>
 			<span class='label-title'>Vat No</span>
 			<input id="vatNo" type="text" name='vatNo' value=""  alt='Please Enter Your vatNo'/>
 			<div style="color:#F00"><form:errors path="vatNo"/></div>

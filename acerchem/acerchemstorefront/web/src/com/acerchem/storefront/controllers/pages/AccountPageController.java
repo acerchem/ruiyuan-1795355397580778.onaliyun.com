@@ -895,6 +895,7 @@ public class AccountPageController extends AbstractSearchPageController {
 					}
 					address.setAddressId(am.getPk().toString());
 					address.setTownCity(am.getTown());
+					address.setPostcode(am.getPostalcode());
 					CustomRegisterForm.setContactAddress(address);
 					// CustomRegisterForm.setContacts(am.getLastname());
 					if (am.getCountry()!=null && StringUtils.isNotBlank(am.getCountry().getIsocode())){
@@ -979,6 +980,7 @@ public class AccountPageController extends AbstractSearchPageController {
 //				am2.setRegion(null);
 //			}
 			am2.setTown(form.getContactAddress().getTownCity());
+			am2.setPostalcode(form.getContactAddress().getPostcode());
 
 			user.setSessionLanguage(commonI18NService.getLanguage(form.getLanguage()));
 			user.setSessionCurrency(commonI18NService.getCurrency(form.getCurrency()));
