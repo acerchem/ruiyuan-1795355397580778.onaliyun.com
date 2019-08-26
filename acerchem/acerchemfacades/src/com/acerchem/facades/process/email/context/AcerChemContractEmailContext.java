@@ -51,6 +51,7 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 	private String deliveryMode;
 
 	private String toShip;
+	private String customerCountry;
 
 	@Override
 	public void init(final OrderProcessModel orderProcessModel, final EmailPageModel emailPageModel) {
@@ -133,7 +134,8 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 		if (customer != null) {
 			final Collection<AddressModel> addrs = customer.getAddresses();
 			address = AcerChemEmailContextUtils.getCustomerContactAddress(addrs);
-
+			CustomerContactAddressOfEmailData addressData = AcerChemEmailContextUtils.getCustomerContactAddressData(addrs);
+			this.customerCountry = addressData.getCountry();
 			// 增加contact 电话
 			final CustomerContactAddressOfEmailData objCustomAddress = AcerChemEmailContextUtils
 					.getCustomerContactAddressData(addrs);
@@ -345,6 +347,9 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 		if (orderData.getDeliveryAddress() != null && orderData.getDeliveryAddress().getCountry() != null) {
 			name = orderData.getDeliveryAddress().getCountry().getName();
 		}
+		if (StringUtils.isEmpty(name)) {
+			name = StringUtils.isEmpty(customerCountry) ? "" : customerCountry;
+		}
 		return name;
 	}
 
@@ -352,4 +357,11 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 		this.toShip = toShip;
 	}
 
+	public final String getCustomerCountry() {
+		return customerCountry;
+	}
+
+	public final void setCustomerCountry(String customerCountry) {
+		this.customerCountry=customerCountry;
+	}
 }
