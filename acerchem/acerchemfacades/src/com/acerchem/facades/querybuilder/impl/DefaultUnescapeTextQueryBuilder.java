@@ -3,6 +3,7 @@ package com.acerchem.facades.querybuilder.impl;
 import de.hybris.platform.commerceservices.search.solrfacetsearch.querybuilder.impl.AbstractFreeTextQueryBuilder;
 import de.hybris.platform.solrfacetsearch.config.IndexedProperty;
 import de.hybris.platform.solrfacetsearch.config.IndexedType;
+import de.hybris.platform.solrfacetsearch.search.RawQuery;
 import de.hybris.platform.solrfacetsearch.search.SearchQuery;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
@@ -13,9 +14,9 @@ import org.springframework.beans.factory.annotation.Required;
  * @contact abel0130@163.com
  * @date 2019-08-21
  */
-public class DefaultEscapeTextQueryBuilder extends AbstractFreeTextQueryBuilder {
+public class DefaultUnescapeTextQueryBuilder extends AbstractFreeTextQueryBuilder {
 
-    private static final Logger LOG = Logger.getLogger(DefaultEscapeTextQueryBuilder.class);
+    private static final Logger LOG = Logger.getLogger(DefaultUnescapeTextQueryBuilder.class);
     private String propertyName;
     private int boost;
 
@@ -76,6 +77,14 @@ public class DefaultEscapeTextQueryBuilder extends AbstractFreeTextQueryBuilder 
     {
         final String field = indexedProperty.getName();
         addFreeTextQuery(searchQuery, field, "\"" + value.toLowerCase() + "\"", "～0", boost / 2.0d);
+    }
+
+    @Override
+    protected void addFreeTextQuery(final SearchQuery searchQuery, final String field, final String value, final String suffixOp,
+                                    final double boost)
+    {
+        final RawQuery rawQuery = new RawQuery(field, value + suffixOp + "^" + boost, SearchQuery.Operator.OR);
+        searchQuery.addRawQuery(rawQuery);
     }
 
 }

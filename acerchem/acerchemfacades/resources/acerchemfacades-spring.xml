@@ -594,8 +594,12 @@
 					<property name="propertyName" value="code" />
 					<property name="boost" value="1000" />
 				</bean>
-				<bean class="com.acerchem.facades.querybuilder.impl.DefaultEscapeTextQueryBuilder">
+				<bean class="com.acerchem.facades.querybuilder.impl.DefaultUnescapeTextQueryBuilder">
 					<property name="propertyName" value="name" />
+					<property name="boost" value="50" />
+				</bean>
+				<bean class="com.acerchem.facades.querybuilder.impl.DefaultUnescapeTextQueryBuilder">
+					<property name="propertyName" value="otherName" />
 					<property name="boost" value="50" />
 				</bean>
 				<bean class="com.acerchem.facades.querybuilder.impl.DefaultTermTextQueryBuilder">
