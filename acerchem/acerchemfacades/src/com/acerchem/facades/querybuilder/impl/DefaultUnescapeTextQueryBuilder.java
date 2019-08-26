@@ -5,6 +5,7 @@ import de.hybris.platform.solrfacetsearch.config.IndexedProperty;
 import de.hybris.platform.solrfacetsearch.config.IndexedType;
 import de.hybris.platform.solrfacetsearch.search.RawQuery;
 import de.hybris.platform.solrfacetsearch.search.SearchQuery;
+import de.hybris.platform.util.Config;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Required;
 
@@ -76,7 +77,7 @@ public class DefaultUnescapeTextQueryBuilder extends AbstractFreeTextQueryBuilde
                                     final double boost)
     {
         final String field = indexedProperty.getName();
-        addFreeTextQuery(searchQuery, field, "\"" + value.toLowerCase() + "\"", "～0", boost / 2.0d);
+        addFreeTextQuery(searchQuery, field, "\"" + value.toLowerCase() + "\"", Config.getString("solr.search.name.key.word","~1"), boost / 2.0d);
     }
 
     @Override
