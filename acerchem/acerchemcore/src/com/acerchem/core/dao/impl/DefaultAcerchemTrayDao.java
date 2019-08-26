@@ -30,6 +30,8 @@ public class DefaultAcerchemTrayDao extends AbstractItemDao implements AcerchemT
 			final Map<String, Object> params = new HashMap<String, Object>();
 
 			final StringBuilder builderMax = new StringBuilder(GET_COUNTRY_MAX);
+			postcode = postcode.substring(0,2);
+			postcode = postcode.toUpperCase();
 			params.put("postcode", postcode);
 			params.put("country", country);
 			params.put("trayAmount", trayAmount);
