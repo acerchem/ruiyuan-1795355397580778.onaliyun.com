@@ -925,7 +925,7 @@
 						<persistence type="property" />
 						<modifiers />
 					</attribute>
-					<attribute qualifier="postCode" type="java.lang.Integer">
+					<attribute qualifier="postCode" type="java.lang.String">
 						<persistence type="property" />
 						<modifiers />
 					</attribute>
