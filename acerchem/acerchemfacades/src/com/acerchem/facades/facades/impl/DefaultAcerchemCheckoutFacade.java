@@ -798,11 +798,9 @@ public class DefaultAcerchemCheckoutFacade extends DefaultCheckoutFacade impleme
 				totalTrayAmount =totalTrayAmount.add(entryTrayAmount);
 			}
 		}
-		if(regionData != null){
-			 countryModel =cartModel.getDeliveryAddress().getCountry();
-          postCode = cartModel.getDeliveryAddress().getPostalcode();
-			 countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(countryModel, postCode, (int) Math.ceil(totalTrayAmount.doubleValue()));
-		}
+       countryModel =cartModel.getDeliveryAddress().getCountry();
+       postCode = cartModel.getDeliveryAddress().getPostalcode();
+       countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(countryModel, postCode, (int) Math.ceil(totalTrayAmount.doubleValue()));
 		if(countryTrayFareConf != null){
 			return countryTrayFareConf.getDeliveriedDay();
 		}

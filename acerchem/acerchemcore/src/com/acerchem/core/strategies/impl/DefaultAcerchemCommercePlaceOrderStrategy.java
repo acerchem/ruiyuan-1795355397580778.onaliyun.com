@@ -223,7 +223,7 @@ public class DefaultAcerchemCommercePlaceOrderStrategy extends DefaultCommercePl
 					totalTrayAmount =totalTrayAmount.add(entryTrayAmount);
 				}
 			}
-			if(regionModel != null){
+			if(countryModel != null){
 				countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(countryModel, postCode, (int) Math.ceil(totalTrayAmount.doubleValue()));
 			}
 			if(countryTrayFareConf != null){
