@@ -85,9 +85,7 @@ public class DefaultAcerchemCustomerFacade extends DefaultCustomerFacade impleme
 					List<CountryData> addressCountryDataList = new ArrayList<>();
 					addressCountryDataList.add(addressCountryData);
 					storeOfProductData.setCountryDataList(addressCountryDataList);
-					for (CountryModel countryModel : pos.getDeliveryZone().getCountries()){
-						country = country + countryModel.getName()+"  ";
-					}
+					country = country + addressCountryModel.getName()+"  ";
 					storeOfProductData.setCountryListString(country);
 				}
 				
