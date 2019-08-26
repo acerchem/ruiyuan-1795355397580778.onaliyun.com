@@ -14,9 +14,9 @@ import org.springframework.beans.factory.annotation.Required;
  * @contact abel0130@163.com
  * @date 2019-08-21
  */
-public class DefaultEscapeTextQueryBuilder extends AbstractFreeTextQueryBuilder {
+public class DefaultUnescapeTextQueryBuilder extends AbstractFreeTextQueryBuilder {
 
-    private static final Logger LOG = Logger.getLogger(DefaultEscapeTextQueryBuilder.class);
+    private static final Logger LOG = Logger.getLogger(DefaultUnescapeTextQueryBuilder.class);
     private String propertyName;
     private int boost;
 
