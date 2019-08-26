@@ -59,12 +59,13 @@ INSERT_UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[
 ;$solrIndexedType; code                   ;string ;            ;    ;    ;    ;false;false;springELValueProvider                  ;code          ;    ;   ;false;90 ;    ;  ;false;POSTFIX;45;3
 ;$solrIndexedType; approvalStatus         ;string ;            ;    ;    ;    ;false;false;springELValueProvider                  ;approvalStatus;    ;   ;false;90 ;    ;  ;false;POSTFIX;45;3
 ;$solrIndexedType; name                   ;text   ;sortabletext;    ;true;    ;false;false;springELValueProvider                  ;getName(#lang);false;100;true;50 ;false;25;    ;   ;  ;
+;$solrIndexedType; otherName              ;text   ;sortabletext;    ;true;    ;false;false;springELValueProvider                  ;otherName;false;100;true;50 ;false;25;    ;   ;  ;
 ;$solrIndexedType; description            ;text   ;            ;    ;true;    ;    ;    ;                                       ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; summary                ;text   ;            ;    ;true;    ;    ;    ;                                       ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
-;$solrIndexedType; manufacturerName       ;string   ;            ;    ;    ;    ;false;false;                                       ;              ;false;80 ;false;40 ;false;20;    ;   ;  ;
+;$solrIndexedType; manufacturerName       ;string ;            ;    ;    ;    ;false;false;                                       ;              ;false;80 ;false;40 ;false;20;    ;   ;  ;
 ;$solrIndexedType; manufacturerAID        ;string ;            ;    ;    ;    ;    ;    ;                                       ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; ean                    ;string ;            ;    ;    ;    ;false;false;                                       ;              ;    ;   ;false;100;    ;  ;false;POSTFIX;50;3
-;$solrIndexedType; priceValue             ;double ;           ;true;    ;    ;    ;    ;productPriceValueProvider              ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
+;$solrIndexedType; priceValue             ;double ;            ;true;    ;    ;    ;    ;productPriceValueProvider              ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; keywords               ;text   ;            ;    ;true;    ;false;false;productKeywordsValueProvider           ;              ;false;40 ;false;20 ;false;10;    ;   ;  ;
 ;$solrIndexedType; reviewAvgRating        ;double ;            ;    ;true;    ;    ;    ;productReviewAverageRatingValueProvider;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
 ;$solrIndexedType; img-515Wx515H          ;string ;            ;    ;    ;    ;    ;    ;image515ValueProvider                  ;              ;    ;   ;    ;   ;    ;  ;    ;   ;  ;
@@ -158,6 +159,7 @@ INSERT_UPDATE SolrSearchQueryProperty;indexedProperty(name, solrIndexedType(iden
 ;code:$solrIndexedType                   ;    ;   ;FALSE;90 ;FALSE;  ;TRUE;30	 ;  ;POSTFIX;45;3;
 ;approvalStatus:$solrIndexedType         ;    ;   ;FALSE;90 ;    ;  ;FALSE;    ;  ;POSTFIX;45;3;
 ;name:$solrIndexedType                   ;	 ;	  ;FALSE;100;FALSE;50;TRUE;25 ;  ;   	   ;  ;
+;otherName:$solrIndexedType              ;	 ;	  ;FALSE;100;FALSE;50;TRUE;25 ;  ;   	   ;  ;
 ;description:$solrIndexedType            ;	 ;	  ;FALSE;50 ;FALSE;25;FALSE;10 ;  ;       ;  ;
 ;summary:$solrIndexedType                ;	 ;	  ;    ;   ;    ;  ;    ;   ;  ;       ;  ;
 ;manufacturerName:$solrIndexedType       ;	 ;	  ;FALSE;80 ;FALSE;40;TRUE;20 ;  ;       ;  ;
