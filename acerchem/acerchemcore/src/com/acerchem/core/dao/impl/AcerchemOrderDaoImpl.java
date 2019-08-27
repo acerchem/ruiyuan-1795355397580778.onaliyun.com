@@ -878,7 +878,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
             params.put("orderCode", "%" + orderCode + "%");
         }
 		if(StringUtils.isNotBlank(customerName)){
-		    SQL += " AND {u:name} like ?customerName ";
+		    SQL += " AND {u:companyName} like ?customerName ";
             params.put("customerName", "%" + customerName + "%");
         }
         if(StringUtils.isNotBlank(employeeName)){
@@ -908,7 +908,7 @@ public class AcerchemOrderDaoImpl implements AcerchemOrderDao {
 				if (o.getUser() != null) {
 					if (o.getUser() instanceof CustomerModel) {
 						data.setOrderCode(o.getCode());
-						data.setCustomerName(o.getUser().getName());
+						data.setCustomerName(o.getUser().getCompanyName());
 
 						final CustomerModel customer = (CustomerModel) o.getUser();
 //						if (customer.getEmployee() != null) {
