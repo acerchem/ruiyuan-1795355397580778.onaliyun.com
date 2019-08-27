@@ -507,6 +507,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 					ca.setTime(sdf1.parse(waitDelivereyDate));
 					ca.add(Calendar.DATE, acerchemCheckoutFacade.getTotalPriceForCart(cartData));//
 					waitDelivereyDate = sdf1.format(ca.getTime());
+					cartData.setDeliveryDays(acerchemCheckoutFacade.getTotalPriceForCart(cartData));
 					cartData.setWaitDeliveiedDate(waitDelivereyDate);
 					//Date endDate = sdf.parse(waitDelivereyDate);
 					//orderModel.setWaitDeliveiedDate(endDate);

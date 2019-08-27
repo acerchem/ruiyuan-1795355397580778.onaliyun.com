@@ -985,7 +985,7 @@ $("#textdate").val("${cartData.pickUpdate}");
 }
 }
 if($("#etadatev")){
-var ETADate = dateChange(${delivereyDays},$("#textdate").val());
+var ETADate = dateChange(0,$("#etadatev").val());
 $("#etadatev").val(ETADate);
 }
 
