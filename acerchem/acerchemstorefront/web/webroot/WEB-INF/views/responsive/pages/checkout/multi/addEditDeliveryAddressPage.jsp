@@ -119,9 +119,7 @@
 						  <c:if test="${id.index==0}">
 							<div class="nowadd">
 							      <span>
-				                    <b>${fn:escapeXml(deliveryAddress.title)}&nbsp;${fn:escapeXml(deliveryAddress.firstName)}&nbsp;${fn:escapeXml(deliveryAddress.lastName)}<c:if test="${ not empty deliveryAddress.email }">
-										&nbsp;&nbsp;&nbsp; ${fn:escapeXml(deliveryAddress.email)}
-									</c:if></b>
+				                    <b>${fn:escapeXml(deliveryAddress.title)}&nbsp;${fn:escapeXml(deliveryAddress.firstName)}&nbsp;${fn:escapeXml(deliveryAddress.lastName)}</b>
 				                    <br/>
 				                    <c:if test="${ not empty deliveryAddress.line1 }">
 				                        ${fn:escapeXml(deliveryAddress.line1)},&nbsp;
@@ -145,6 +143,10 @@
 				                    <c:if test="${ not empty deliveryAddress.phone }">
 				                        ${fn:escapeXml(deliveryAddress.phone)}
 				                    </c:if>
+								  <br/>
+								  <c:if test="${ not empty deliveryAddress.email }">
+									  &nbsp;&nbsp;&nbsp; ${fn:escapeXml(deliveryAddress.email)}
+								  </c:if>
 
 				                </span>
 							</div>
