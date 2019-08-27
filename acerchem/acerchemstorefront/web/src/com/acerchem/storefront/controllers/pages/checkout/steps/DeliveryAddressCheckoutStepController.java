@@ -111,6 +111,7 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 				Calendar ca = Calendar.getInstance();
 				try {
 					ca.setTime(new Date());
+					ca.add(Calendar.DATE, Config.getInt("cart.delivereyDays.min", 2));
 					ca.add(Calendar.DATE, acerchemCheckoutFacade.getTotalPriceForCart(cartData));//
 					waitDelivereyDate = sdf1.format(ca.getTime());
 					cartData.setWaitDeliveiedDate(waitDelivereyDate);
