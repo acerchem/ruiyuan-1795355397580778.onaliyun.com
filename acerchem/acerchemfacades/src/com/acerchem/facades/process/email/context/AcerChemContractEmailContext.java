@@ -134,12 +134,11 @@ public class AcerChemContractEmailContext extends AbstractEmailContext<OrderProc
 		if (customer != null) {
 			final Collection<AddressModel> addrs = customer.getAddresses();
 			address = AcerChemEmailContextUtils.getCustomerContactAddress(addrs);
-			CustomerContactAddressOfEmailData addressData = AcerChemEmailContextUtils.getCustomerContactAddressData(addrs);
-			this.customerCountry = addressData.getCountry();
 			// 增加contact 电话
 			final CustomerContactAddressOfEmailData objCustomAddress = AcerChemEmailContextUtils
 					.getCustomerContactAddressData(addrs);
 
+			this.customerCountry = objCustomAddress.getCountry();
 			setContactMobile(objCustomAddress.getContactPhone());
 			setContactUser(objCustomAddress.getContactUser());
 		}
