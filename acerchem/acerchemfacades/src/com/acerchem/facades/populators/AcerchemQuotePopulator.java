@@ -27,7 +27,7 @@ public class AcerchemQuotePopulator extends QuotePopulator implements Populator<
 		addPrincipalInformation(source,target);
 		if(source.getWaitDeliveriedDate()!=null)
 		{
-			SimpleDateFormat dateFormat = new SimpleDateFormat("MMM dd'th',YYYY");
+			SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 			target.setWaitDeliveiedDate(dateFormat.format(source.getWaitDeliveriedDate()));
 		}else{
 			target.setWaitDeliveiedDate("");

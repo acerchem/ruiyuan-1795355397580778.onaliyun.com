@@ -88,9 +88,7 @@ public class DefaultAcerchemTrayFacade implements AcerchemTrayFacade {
             }
             if(addressData.getCountry() != null) {
                 countryModel = commonI18NService.getCountry(addressData.getCountry().getIsocode());
-                if (addressData.getRegion() != null) {
-                    postCode = addressData.getPostalCode();
-                }
+                postCode = addressData.getPostalCode();
             }
         }
         LOG.debug("totalTrayAmount:"+totalTrayAmount);
@@ -120,9 +118,7 @@ public class DefaultAcerchemTrayFacade implements AcerchemTrayFacade {
         }
         if(addressModel != null && cartModel.getDeliveryAddress() != null && cartModel.getDeliveryAddress().getCountry() != null){
             countryModel = commonI18NService.getCountry(cartModel.getDeliveryAddress().getCountry().getIsocode());
-            if(addressModel.getRegion() != null){
-                postCode =  addressModel.getPostalcode();
-            }
+            postCode =  addressModel.getPostalcode();
         }
         if(postCode != null){
             countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(countryModel, postCode, -1);

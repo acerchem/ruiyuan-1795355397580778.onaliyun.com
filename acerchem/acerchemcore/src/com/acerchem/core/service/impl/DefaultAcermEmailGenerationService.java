@@ -865,6 +865,7 @@ public class DefaultAcermEmailGenerationService extends DefaultEmailGenerationSe
 					LOG.info("cc employee emailAddress is null , cc send error");
 				}
 			}else {
+				toEmailAdd = customerModel.getUid();
 				LOG.info("cc employee is null , cc send error");
 			}
 		}

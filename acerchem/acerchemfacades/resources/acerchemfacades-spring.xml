@@ -600,7 +600,7 @@
 				</bean>
 				<bean class="com.acerchem.facades.querybuilder.impl.DefaultUnescapeTextQueryBuilder">
 					<property name="propertyName" value="otherName" />
-					<property name="boost" value="50" />
+					<property name="boost" value="40" />
 				</bean>
 				<bean class="com.acerchem.facades.querybuilder.impl.DefaultTermTextQueryBuilder">
 					<property name="propertyName" value="manufacturerName" />

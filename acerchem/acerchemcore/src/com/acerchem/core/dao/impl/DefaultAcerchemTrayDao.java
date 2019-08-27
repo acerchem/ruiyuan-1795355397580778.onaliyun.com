@@ -8,6 +8,8 @@ import de.hybris.platform.servicelayer.internal.dao.AbstractItemDao;
 import de.hybris.platform.servicelayer.search.SearchResult;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
@@ -17,6 +19,8 @@ import java.util.Map;
  * Created by Jacob.Ji on 2018/3/21.
  */
 public class DefaultAcerchemTrayDao extends AbstractItemDao implements AcerchemTrayDao {
+
+	private static final Logger LOG = LoggerFactory.getLogger(DefaultAcerchemTrayDao.class);
 
     private final String GET_COUNTRY_TRAY_FARE_CONF = "select {PK} from {CountryTrayFareConf} where {country}=?country and {postCode}=?postcode order by {trayAmount} desc";
     
@@ -30,11 +34,17 @@ public class DefaultAcerchemTrayDao extends AbstractItemDao implements AcerchemT
 			final Map<String, Object> params = new HashMap<String, Object>();
 
 			final StringBuilder builderMax = new StringBuilder(GET_COUNTRY_MAX);
-			postcode = postcode.substring(0,2);
+			if(postcode.length()>2)
+			{
+				postcode = postcode.substring(0, 2);
+			}
 			postcode = postcode.toUpperCase();
 			params.put("postcode", postcode);
 			params.put("country", country);
 			params.put("trayAmount", trayAmount);
+			LOG.info("sql : "+GET_COUNTRY_TRAY_FARE_CONF);
+			LOG.info("postcode : "+postcode);
+			LOG.info("country : "+country.getPk());
 			final SearchResult<CountryTrayFareConfModel> resultMax = getFlexibleSearchService().search(builderMax.toString(), params);
 
 			final StringBuilder builder = new StringBuilder(GET_COUNTRY_TRAY_FARE_CONF);

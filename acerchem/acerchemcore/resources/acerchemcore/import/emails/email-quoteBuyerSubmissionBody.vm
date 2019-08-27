@@ -56,11 +56,11 @@
             <div>
                 <ul>
                     <li><span>DATE</span>:${ctx.quote.creationTime}</li>
-                    <li><span>CUSTOMER</span>:${ctx.quote.userCompanyName} ${ctx.quote.user.name}</li>
+                    <li><span>CUSTOMER</span>:${ctx.quote.userCompanyName}</li>
                     <li></li>
-                    <li><span>EXPIRATION DATE</span>:Offer only valid in 24 hours, and exact order price depends on Ingredients4u contract price</li>
+                    <li><span>EXPIRATION DATE</span>:Offer only valid in 24 hours</li>
                     <li></li>
-                    <li><span>Account Manager</span>:${ctx.quote.userCompanyName} ${ctx.quote.user.name}</li>
+                    <li><span>Account Manager</span>:${ctx.quote.user.name}</li>
                     <li><span>Incoterm</span>:
                         #if (${ctx.quote.deliveryMode.code} == 'DELIVERY_GROSS')
                             DDP
@@ -77,31 +77,52 @@
                             T/T ${ctx.quote.billingInterval} days atter invoice date
                         #end
                         </li>
-                    <li><span>Shipping Date</span>:${ctx.quote.waitDeliveiedDate}</li>
+                    <li><span>Shipping Date</span>:${ctx.quote.waitDeliveiedDate}</li>email-quoteBuyerSubmissionBody.vm
                 </ul>
             </div>
         </td>
     </tr>
     <tr>
         <td colspan="2" align="left" valign="top" style="background-color: #ffffff;padding-top:20px;padding-bottom:20px;padding-left:20px;padding-right:20px;">
-            <table cellspacing="0" border="0" class="content">
+            <table class="font2" width="620" border="1" cellpadding="0" cellspacing="0" align="center" style="text-align: center; border-collapse: collapse" bordercolor="#000000">
                 <tr>
-                    <td style="width: 15%;background-color: #CDFECE;">QTY</td>
-                    <td style="width: 15%;background-color: #CDFECE;">ITEM</td>
-                    <td style="width: 40%;background-color: #CDFECE;">DESCRIPTION</td>
-                    <td style="width: 15%;background-color: #CDFECE;">PKG TYPE</td>
-                    <td style="width: 15%;background-color: #CDFECE;">UNIT PRICE</td>
+                    <td width="100" height="7">AC Code</td>
+                    <td width="160" >Name</td>
+                    <td width="30" >Unit</td>
+                    <td width="60" >Quantity</td>
+                    <td width="60" >Price</td>
+                    <td width="100">Amount</td>
+                    <td >Package</td>
                 </tr>
-#foreach( $entry in ${ctx.quote.entries} )
-                <tr>
-                    <td style="text-align: center;">$entry.quantity</td>
-                    <td style="text-align: center;">$entry.product.code</td>
-                    <td style="text-align: center;">$entry.product.name</td>
-                    <td style="text-align: center;">$entry.product.netWeight/$entry.product.unitName</td>
-                    <td style="text-align: center;">$entry.basePrice.formattedValue</td>
-                </tr>
-#end
+                #foreach( $item in ${ctx.quote.entries} )
+                    <tr>
+                        <td > ${item.product.code} </td>
+                        <td > ${item.product.name} </td>
+                        <td > $!{item.product.unitName} </td>
+                        <td > $!{item.totalWeight} </td>
+                        <td > ${item.basePrice.value}</td>
+                        <td > ${item.quantity} </td>
+                        <td > $!{item.product.packageWeight} </td>
+                    </tr>
+                #end
+                #if(${ctx.append.totalData})
+                    <tr>
+                        <td > Total </td>
+                        <td >&nbsp;  </td>
+                        <td >&nbsp;  </td>
+                        <td >&nbsp; </td>
+                        <td >&nbsp; </td>
+                        <td > ${ctx.quote.totalPrice} </td>
+                        <td >&nbsp;  </td>
+                    </tr>
+                #end
+
             </table>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" style="background-color: #ffffff;padding-top:20px;padding-bottom:20px;padding-left:20px;padding-right:20px;">
+            REMARK:Exact order price and stock depends on Ingredients4U website.
         </td>
     </tr>
     <tr>

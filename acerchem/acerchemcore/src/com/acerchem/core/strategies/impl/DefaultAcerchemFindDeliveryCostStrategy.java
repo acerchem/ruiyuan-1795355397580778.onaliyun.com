@@ -161,7 +161,7 @@ public class DefaultAcerchemFindDeliveryCostStrategy extends DefaultFindDelivery
 		{
 			String postalcode = order.getDeliveryAddress().getPostalcode();
 			CountryModel countryModel = order.getDeliveryAddress().getCountry();
-			if(regionModel != null){
+			if(countryModel != null){
 				countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(countryModel, postalcode, (int) Math.ceil(totalTrayAmount.doubleValue()));
 				if (countryTrayFareConf!=null){
 					totalTrayPrice = countryTrayFareConf.getPrice();
