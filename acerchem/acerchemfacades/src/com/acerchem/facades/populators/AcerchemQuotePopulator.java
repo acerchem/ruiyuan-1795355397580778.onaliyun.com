@@ -10,6 +10,8 @@ import de.hybris.platform.commercefacades.quote.data.QuoteData;
 import de.hybris.platform.converters.Populator;
 import de.hybris.platform.core.model.order.QuoteModel;
 import de.hybris.platform.core.model.user.CustomerModel;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
@@ -20,6 +22,8 @@ import java.text.SimpleDateFormat;
 
 public class AcerchemQuotePopulator extends QuotePopulator implements Populator<QuoteModel, QuoteData>
 {
+	private static final Logger LOG = LoggerFactory.getLogger(AcerchemQuotePopulator.class);
+
 	@Resource
 	private PriceDataFactory priceDataFactory;
 
@@ -51,15 +55,29 @@ public class AcerchemQuotePopulator extends QuotePopulator implements Populator<
 			}
 		}
 		super.populate(source, target);
+
 		for(OrderEntryData entryData : target.getEntries()){
 			Long totalWeight = (entryData.getQuantity())*(Long.parseLong(entryData.getProduct().getNetWeight()));
 			entryData.setTotalWeight(totalWeight.intValue());
-			PriceData priceData = entryData.getBasePrice();
-			BigDecimal bigDecimal = priceData.getValue();
+			PriceData entryTotalPrice = entryData.getTotalPrice();
+			BigDecimal totalPriceValue = entryTotalPrice.getValue();
+			PriceData subtotal = target.getSubTotal();
+			BigDecimal subtotalPriceValue = subtotal.getValue();
+			BigDecimal bilv = totalPriceValue.divide(subtotalPriceValue);
+			LOG.info(" entry info bilv"+bilv);
+
+			PriceData totalPrice = target.getTotalPrice();
+			BigDecimal orderTotalPrice = totalPrice.getValue();
+			BigDecimal newEntryTotalPrice = orderTotalPrice.multiply(bilv).setScale(2, BigDecimal.ROUND_HALF_UP);
+			LOG.info(" entry info new Total price"+newEntryTotalPrice);
+			PriceData newEntryTotalPriceData = priceDataFactory.create(PriceDataType.BUY, newEntryTotalPrice, source.getCurrency().getIsocode());
+			entryData.setTotalPrice(newEntryTotalPriceData);
+
 			BigDecimal totalWeightBig = new BigDecimal(totalWeight.doubleValue());
-			bigDecimal = bigDecimal.divide(totalWeightBig, RoundingMode.HALF_UP);
-			PriceData priceData1 = priceDataFactory.create(PriceDataType.BUY, bigDecimal, source.getCurrency().getIsocode());
-			entryData.setBasePrice(priceData1);
+			BigDecimal newBasePrice = newEntryTotalPrice.divide(totalWeightBig, RoundingMode.HALF_UP);
+			PriceData newBasePriceData = priceDataFactory.create(PriceDataType.BUY, newBasePrice, source.getCurrency().getIsocode());
+			LOG.info(" entry info new base price"+newBasePrice);
+			entryData.setBasePrice(newBasePriceData);
 		}
 	}
 }

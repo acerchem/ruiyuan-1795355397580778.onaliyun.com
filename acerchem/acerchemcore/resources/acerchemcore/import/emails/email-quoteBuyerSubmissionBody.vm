@@ -105,6 +105,8 @@
                         <td > $!{item.product.packageWeight} $!{item.product.unitName}/$!{item.product.packageType} </td>
                     </tr>
                 #end
+            #if(${ctx.quote})
+                #if(${ctx.quote.totalPrice})
                 <tr>
                     <td > Total </td>
                     <td ></td>
@@ -114,6 +116,8 @@
                     <td >${ctx.quote.totalPrice.formattedValue} </td>
                     <td ></td>
                 </tr>
+                #end
+            #end
 
             </table>
         </td>
