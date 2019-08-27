@@ -124,6 +124,7 @@ public class DefaultAcerchemTrayFacade implements AcerchemTrayFacade {
             countryTrayFareConf = acerchemTrayService.getPriceByCountryAndTray(countryModel, postCode, -1);
         }
         if (countryTrayFareConf!=null){
+            LOG.info("devlier days"+countryTrayFareConf.getPk());
             return countryTrayFareConf.getDeliveriedDay();
         }
         return 0;

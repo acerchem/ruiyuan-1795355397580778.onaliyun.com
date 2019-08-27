@@ -22,9 +22,9 @@ public class DefaultAcerchemTrayDao extends AbstractItemDao implements AcerchemT
 
 	private static final Logger LOG = LoggerFactory.getLogger(DefaultAcerchemTrayDao.class);
 
-    private final String GET_COUNTRY_TRAY_FARE_CONF = "select {PK} from {CountryTrayFareConf} where {country}=?country and {postCode}=?postcode order by {trayAmount} desc";
+    private final String GET_COUNTRY_TRAY_FARE_CONF = "select {PK} from {CountryTrayFareConf} where {country}=?country and {postCode}=?postcode and {trayAmount}=?trayAmount";
     
-    private final String GET_COUNTRY_MAX = "select {PK} from {CountryTrayFareConf} where {postCode}=?postcode and {trayAmount}=?trayAmount";
+    private final String GET_COUNTRY_MAX = "select {PK} from {CountryTrayFareConf} where {country}=?country and {postCode}=?postcode order by {trayAmount} desc";
 
     @Override
     public CountryTrayFareConfModel getCouTrayFareConf(CountryModel country, String postcode, int trayAmount) {

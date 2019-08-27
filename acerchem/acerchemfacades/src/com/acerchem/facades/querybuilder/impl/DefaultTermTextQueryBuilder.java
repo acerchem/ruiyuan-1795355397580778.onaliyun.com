@@ -75,7 +75,7 @@ public class DefaultTermTextQueryBuilder extends AbstractFreeTextQueryBuilder {
                                     final double boost)
     {
         final String field = indexedProperty.getName();
-        addFreeTextQuery(searchQuery, field, value.toLowerCase(), "*", boost / 2.0d);
+        addFreeTextQuery(searchQuery, field, value.toLowerCase(), "", boost);
     }
 
 }

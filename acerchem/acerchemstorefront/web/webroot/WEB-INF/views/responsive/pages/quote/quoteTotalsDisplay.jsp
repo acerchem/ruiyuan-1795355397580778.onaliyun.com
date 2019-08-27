@@ -36,7 +36,7 @@
                     </i>
                 </span>
                 <span>
-                    <em>Delivery</em>
+                    <em>Delivery Cost</em>
                     <i><format:price priceData="${quoteData.deliveryCost}"/></i>
                 </span>
 

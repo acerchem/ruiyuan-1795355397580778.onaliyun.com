@@ -49,7 +49,7 @@ public class ProductThePriceStatisticalJob extends AbstractJobPerformable<CronJo
                 ProductThePriceModel model = new ProductThePriceModel();
                 if (null != e.getProduct()){
                     model.setProductCode(e.getProduct().getCode());
-                    model.setProductName(StringUtils.isNotBlank(e.getProduct().getOtherName())?e.getProduct().getOtherName():"");
+                    model.setProductName(StringUtils.isNotBlank(e.getProduct().getName())?e.getProduct().getName():e.getProduct().getName(Locale.ENGLISH));
                 }else {
                     model.setProductCode(StringUtils.isNotBlank(e.getProductId())?e.getProductId():"");
                     model.setProductName("");
