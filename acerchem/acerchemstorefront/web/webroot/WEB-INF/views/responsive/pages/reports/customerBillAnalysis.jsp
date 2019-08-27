@@ -68,7 +68,7 @@
 							</td>
 							<td>
 								<div>
-									<span>Customer Name</span>
+									<span>Customer Company</span>
 									<input name="customerName" size="12" type="text" value="${customerName}">
 								</div>
 							</td>
