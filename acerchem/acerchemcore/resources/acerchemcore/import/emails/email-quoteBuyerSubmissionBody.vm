@@ -99,23 +99,21 @@
                         <td > ${item.product.code} </td>
                         <td > ${item.product.name} </td>
                         <td > $!{item.product.unitName} </td>
-                        <ttd > $!{item.totalWeight} </ttd>
+                        <td > $!{item.totalWeight} </td>
                         <td > ${item.basePrice.formattedValue}</td>
-                        <td > ${item.totalRealPrice.formattedValue} </td>
+                        <td > ${item.totalPrice.formattedValue} </td>
                         <td > $!{item.product.packageWeight} $!{item.product.unitName}/$!{item.product.packageType} </td>
                     </tr>
                 #end
-                #if(${ctx.append.totalData})
-                    <tr>
-                        <td > Total </td>
-                        <td >&nbsp;  </td>
-                        <td >&nbsp;  </td>
-                        <td >&nbsp; </td>
-                        <td >&nbsp; </td>
-                        <td > ${ctx.quote.totalPrice} </td>
-                        <td >&nbsp;  </td>
-                    </tr>
-                #end
+                <tr>
+                    <td > Total </td>
+                    <td >&nbsp;  </td>
+                    <td >&nbsp;  </td>
+                    <td >&nbsp; </td>
+                    <td >&nbsp; </td>
+                    <td > ${ctx.quote.totalPrice} </td>
+                    <td >&nbsp;  </td>
+                </tr>
 
             </table>
         </td>
