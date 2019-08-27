@@ -772,6 +772,10 @@
 		<property name="productWarehouseService" ref="productWarehouseService"/>
 	</bean>
 
+	<bean id="factoryValueProvider" class="com.acerchem.core.search.solrfacetsearch.provider.impl.FactoryValueProvider"  parent="abstractPropertyFieldValueProvider">
+		<property name="fieldNameProvider" ref="solrFieldNameProvider"/>
+	</bean>
+
 	<bean id="warehouseFacetDisplayNameProvider" class="com.acerchem.core.search.solrfacetsearch.provider.impl.WarehouseFacetDisplayNameProvider">
 		<property name="warehouseService" ref="warehouseService"/>
 	</bean>

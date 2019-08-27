@@ -563,8 +563,6 @@
         <field name="catalogVersion" type="string" indexed="true" stored="true" multiValued="false" />
         <field name="text" type="textgen" indexed="true" stored="true" />
         <field name="_version_" type="long" indexed="true" stored="true" multiValued="false" />
-        <field name="code_string" type="string2" indexed="true" stored="true" multiValued="false" />
-        <field name="manufacturerName_string_mv" type="string2" indexed="true" stored="true" multiValued="true" />
 
         <field name="autosuggest" type="text_spell" indexed="true" stored="true" multiValued="true" />
         <field name="autosuggest_de" type="text_spell_de" indexed="true" stored="true" multiValued="true" />
