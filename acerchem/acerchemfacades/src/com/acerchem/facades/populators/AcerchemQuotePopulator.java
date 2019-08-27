@@ -2,6 +2,7 @@ package com.acerchem.facades.populators;
 
 import com.acerchem.facades.product.data.PaymentModeData;
 import de.hybris.platform.commercefacades.order.converters.populator.QuotePopulator;
+import de.hybris.platform.commercefacades.order.data.OrderEntryData;
 import de.hybris.platform.commercefacades.quote.data.QuoteData;
 import de.hybris.platform.converters.Populator;
 import de.hybris.platform.core.model.order.QuoteModel;
@@ -41,5 +42,9 @@ public class AcerchemQuotePopulator extends QuotePopulator implements Populator<
 			}
 		}
 		super.populate(source, target);
+		for(OrderEntryData entryData : target.getEntries()){
+			Long totalWeight = (entryData.getQuantity())*(Long.parseLong(entryData.getProduct().getNetWeight()));
+			entryData.setTotalWeight(totalWeight.intValue());
+		}
 	}
 }

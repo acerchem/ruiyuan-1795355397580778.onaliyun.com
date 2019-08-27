@@ -99,9 +99,9 @@
                         <td > ${item.product.code} </td>
                         <td > ${item.product.name} </td>
                         <td > $!{item.product.unitName} </td>
-                        <td > $!{item.quantity} </td>
+                        <ttd > $!{item.totalWeight} </ttd>
                         <td > ${item.basePrice.formattedValue}</td>
-                        <td > ${item.totalPrice.formattedValue} </td>
+                        <td > ${item.totalRealPrice.formattedValue} </td>
                         <td > $!{item.product.packageWeight} $!{item.product.unitName}/$!{item.product.packageType} </td>
                     </tr>
                 #end
