@@ -105,17 +105,15 @@
                         <td > $!{item.product.packageWeight} $!{item.product.unitName}/$!{item.product.packageType} </td>
                     </tr>
                 #end
-                #if(${ctx.append.totalData})
-                    <tr>
-                        <td > Total </td>
-                        <td >&nbsp;  </td>
-                        <td >&nbsp;  </td>
-                        <td >&nbsp; </td>
-                        <td >&nbsp; </td>
-                        <td > ${ctx.quote.totalPrice} </td>
-                        <td >&nbsp;  </td>
-                    </tr>
-                #end
+                <tr>
+                    <td > Total </td>
+                    <td >&nbsp;  </td>
+                    <td >&nbsp;  </td>
+                    <td >&nbsp; </td>
+                    <td >&nbsp; </td>
+                    <td > ${ctx.quote.totalPrice} </td>
+                    <td >&nbsp;  </td>
+                </tr>
 
             </table>
         </td>
