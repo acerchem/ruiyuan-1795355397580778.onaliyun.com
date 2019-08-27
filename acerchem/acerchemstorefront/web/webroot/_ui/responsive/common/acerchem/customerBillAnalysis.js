@@ -55,7 +55,7 @@ $(document).ready(
 							halign: 'center'
 						}, {
 							field : 'c2',
-							title : 'Customer Conpany',
+							title : 'Customer Company',
 							halign: 'center'
 						}, {
 							field : 'c3',
