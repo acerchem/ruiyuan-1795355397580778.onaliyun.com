@@ -55,10 +55,10 @@
         <td align="left" style="background-color: #ffffff;padding-top:20px;padding-bottom:20px;padding-left:0px;padding-right:20px;">
             <div>
                 <ul>
-                    <li><span>DATE</span>:${ctx.quote.creationTime}</li>
-                    <li><span>CUSTOMER</span>:${ctx.quote.userCompanyName}</li>
+                    <li><span>Date</span>:${ctx.quote.creationTime}</li>
+                    <li><span>Customer</span>:${ctx.quote.userCompanyName}</li>
                     <li></li>
-                    <li><span>EXPIRATION DATE</span>:Offer only valid in 24 hours</li>
+                    <li><span>Expiration Date</span>:Offer only valid in 24 hours</li>
                     <li></li>
                     <li><span>Account Manager</span>:${ctx.quote.user.name}</li>
                     <li><span>Incoterm</span>:
@@ -100,9 +100,9 @@
                         <td > ${item.product.name} </td>
                         <td > $!{item.product.unitName} </td>
                         <td > $!{item.quantity} </td>
-                        <td > ${item.basePrice.value}</td>
-                        <td > ${item.totalPrice.value} </td>
-                        <td > $!{item.product.packageWeight} </td>
+                        <td > ${item.basePrice.formattedValue}</td>
+                        <td > ${item.totalPrice.formattedValue} </td>
+                        <td > $!{item.product.packageWeight} $!{item.product.unitName}/$!{item.product.packageType} </td>
                     </tr>
                 #end
                 #if(${ctx.append.totalData})
@@ -121,7 +121,7 @@
         </td>
     </tr>
     <tr>
-        <td colspan="2" style="background-color: #ffffff;padding-top:20px;padding-bottom:20px;padding-left:20px;padding-right:20px;">
+        <td colspan="2" style="background-color: #ffffff;padding-top:10px;padding-bottom:20px;padding-left:20px;padding-right:20px;">
             REMARK:Exact order price and stock depends on Ingredients4U website.
         </td>
     </tr>
