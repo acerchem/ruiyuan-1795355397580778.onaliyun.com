@@ -590,7 +590,7 @@
 	<bean id="acerchemCommerceSearchTextPopulator" class="com.acerchem.facades.populators.AcerchemSearchTextPopulator" parent="defaultCommerceSearchTextPopulator">
 		<property name="freeTextQueryBuilders">
 			<list>
-				<bean class="com.acerchem.facades.querybuilder.impl.DefaultTermTextQueryBuilder">
+				<bean class="com.acerchem.facades.querybuilder.impl.DefaultFullTextQueryBuilder">
 					<property name="propertyName" value="code" />
 					<property name="boost" value="1000" />
 				</bean>
@@ -602,7 +602,7 @@
 					<property name="propertyName" value="otherName" />
 					<property name="boost" value="40" />
 				</bean>
-				<bean class="com.acerchem.facades.querybuilder.impl.DefaultTermTextQueryBuilder">
+				<bean class="com.acerchem.facades.querybuilder.impl.DefaultFullTextQueryBuilder">
 					<property name="propertyName" value="manufacturerName" />
 					<property name="boost" value="40" />
 				</bean>
