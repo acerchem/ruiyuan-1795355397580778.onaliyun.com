@@ -20,7 +20,7 @@
 	 <div class="m-term-bor">
 		<div class="m-term">
 					<!-- shaun:Selected conditions -->
-					<nav:facetNavAppliedFilters pageData="${searchPageData}"/>
+					<%--<nav:facetNavAppliedFilters pageData="${searchPageData}"/>--%>
 				
 				<div class="m-term-ri" >
 					
