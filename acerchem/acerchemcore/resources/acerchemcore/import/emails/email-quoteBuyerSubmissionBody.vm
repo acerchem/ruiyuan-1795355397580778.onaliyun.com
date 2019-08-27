@@ -77,7 +77,7 @@
                             T/T ${ctx.quote.billingInterval} days atter invoice date
                         #end
                         </li>
-                    <li><span>Shipping Date</span>:${ctx.quote.waitDeliveiedDate}</li>email-quoteBuyerSubmissionBody.vm
+                    <li><span>Shipping Date</span>:${ctx.quote.waitDeliveiedDate}</li>
                 </ul>
             </div>
         </td>
@@ -99,9 +99,9 @@
                         <td > ${item.product.code} </td>
                         <td > ${item.product.name} </td>
                         <td > $!{item.product.unitName} </td>
-                        <td > $!{item.totalWeight} </td>
+                        <td > $!{item.quantity} </td>
                         <td > ${item.basePrice.value}</td>
-                        <td > ${item.quantity} </td>
+                        <td > ${item.totalPrice.value} </td>
                         <td > $!{item.product.packageWeight} </td>
                     </tr>
                 #end
