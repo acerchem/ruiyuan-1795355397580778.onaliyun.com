@@ -492,17 +492,17 @@
             </analyzer>
         </fieldType>
 
-        <fieldType name="string2" class="solr.TextField" sortMissingLast="true" omitNorms="true">
-            <!-- Disable TF/IDF scoring for string fields so we can use them for boosting -->
-            <analyzer type="index">
-                <tokenizer class="solr.WhitespaceTokenizerFactory"/>
-                <!--<filter class="solr.LowerCaseFilterFactory"/>-->
-            </analyzer>
-            <analyzer type="query">
-                <tokenizer class="solr.WhitespaceTokenizerFactory"/>
-                <!--<filter class="solr.LowerCaseFilterFactory"/>-->
-            </analyzer>
-        </fieldType>
+        <!--<fieldType name="string2" class="solr.TextField" sortMissingLast="true" omitNorms="true">-->
+            <!--&lt;!&ndash; Disable TF/IDF scoring for string fields so we can use them for boosting &ndash;&gt;-->
+            <!--<analyzer type="index">-->
+                <!--<tokenizer class="solr.WhitespaceTokenizerFactory"/>-->
+                <!--&lt;!&ndash;<filter class="solr.LowerCaseFilterFactory"/>&ndash;&gt;-->
+            <!--</analyzer>-->
+            <!--<analyzer type="query">-->
+                <!--<tokenizer class="solr.WhitespaceTokenizerFactory"/>-->
+                <!--&lt;!&ndash;<filter class="solr.LowerCaseFilterFactory"/>&ndash;&gt;-->
+            <!--</analyzer>-->
+        <!--</fieldType>-->
 
     </types>
 
@@ -563,6 +563,8 @@
         <field name="catalogVersion" type="string" indexed="true" stored="true" multiValued="false" />
         <field name="text" type="textgen" indexed="true" stored="true" />
         <field name="_version_" type="long" indexed="true" stored="true" multiValued="false" />
+        <!--<field name="code_string" type="string2" indexed="true" stored="true" multiValued="false" />-->
+        <!--<field name="manufacturerName_string_mv" type="string2" indexed="true" stored="true" multiValued="true" />-->
 
         <field name="autosuggest" type="text_spell" indexed="true" stored="true" multiValued="true" />
         <field name="autosuggest_de" type="text_spell_de" indexed="true" stored="true" multiValued="true" />
