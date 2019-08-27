@@ -89,6 +89,35 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 
 		//cartData.setDeliveryAddress(null);
 		try {
+			if (cartData.getPickUpdate() != null){
+				SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+				String waitDelivereyDate = cartData.getPickUpdate();
+				Calendar ca = Calendar.getInstance();
+				try {
+					ca.setTime(sdf1.parse(waitDelivereyDate));
+					ca.add(Calendar.DATE, acerchemCheckoutFacade.getTotalPriceForCart(cartData));//
+					waitDelivereyDate = sdf1.format(ca.getTime());
+					cartData.setWaitDeliveiedDate(waitDelivereyDate);
+					//Date endDate = sdf.parse(waitDelivereyDate);
+					//orderModel.setWaitDeliveiedDate(endDate);
+				} catch (ParseException e1) {
+					// TODO Auto-generated catch block
+					//						e1.printStackTrace();
+					LOG.error(e1.getMessage(),e1);
+				}
+			}else{
+				SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+				String waitDelivereyDate = cartData.getPickUpdate();
+				Calendar ca = Calendar.getInstance();
+				try {
+					ca.setTime(new Date());
+					ca.add(Calendar.DATE, acerchemCheckoutFacade.getTotalPriceForCart(cartData));//
+					waitDelivereyDate = sdf1.format(ca.getTime());
+					cartData.setWaitDeliveiedDate(waitDelivereyDate);
+				} catch (Exception e1) {
+					LOG.error(e1.getMessage(),e1);
+				}
+			}
 			populateCommonModelAttributes(model, cartData, new AddressForm());
 		} catch (AcerchemOrderException e) {
 			// TODO Auto-generated catch block
@@ -130,6 +159,8 @@ public class DeliveryAddressCheckoutStepController extends AbstractCheckoutStepC
 		model.addAttribute("maxDelivereyDays",Config.getInt("cart.delivereyDays.max",9));
 		CartModel cartmodel = acerchemCheckoutFacade.getCartModel();
 		model.addAttribute("delivereyDays",acerchemTrayFacade.getDeliveryDaysForCart(cartmodel));//根据地址算出运送时间
+
+
 
 		if (addressRequiresReview)
 		{
