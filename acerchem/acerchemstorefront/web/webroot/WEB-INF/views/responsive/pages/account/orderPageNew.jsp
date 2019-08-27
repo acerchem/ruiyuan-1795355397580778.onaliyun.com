@@ -274,7 +274,7 @@
 								</span>
 		
 		                        <span>
-									<em>Delivery</em>
+									<em>Delivery Cost</em>
 									<i><format:price priceData="${orderData.deliveryCost}"/></i>
 								</span>
 								

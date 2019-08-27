@@ -76,7 +76,7 @@
 <c:if test="${not empty cartData.deliveryMode}">
 <c:if test="${not empty cartData.deliveryCost}">
 		<div class="item-row">
-			<span>Delivery</span>
+			<span>Delivery Cost</span>
 			<span ><format:price priceData="${cartData.deliveryCost}"/></span>
 		</div>
 		</c:if>
