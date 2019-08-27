@@ -107,12 +107,12 @@
                 #end
                 <tr>
                     <td > Total </td>
-                    <td >&nbsp;  </td>
-                    <td >&nbsp;  </td>
-                    <td >&nbsp; </td>
-                    <td >&nbsp; </td>
-                    <td > ${ctx.quote.totalPrice} </td>
-                    <td >&nbsp;  </td>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                    <td ></td>
+                    <td >${ctx.quote.totalPrice.formattedValue} </td>
+                    <td ></td>
                 </tr>
 
             </table>
