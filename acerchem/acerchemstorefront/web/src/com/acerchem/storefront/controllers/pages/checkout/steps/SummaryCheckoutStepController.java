@@ -35,10 +35,7 @@ import de.hybris.platform.payment.AdapterException;
 import com.acerchem.core.service.AcerchemStockService;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -151,8 +148,7 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 		     }
 		     
 		     if (cartData.getPickUpdate() != null){
-			     
-			     SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+			      SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
 					String waitDelivereyDate = cartData.getPickUpdate();
 					Calendar ca = Calendar.getInstance();
 					try {
@@ -167,8 +163,19 @@ public class SummaryCheckoutStepController extends AbstractCheckoutStepControlle
 //						e1.printStackTrace();
 						LOGGER.error(e1.getMessage(),e1);
 					}
-					
-			     }
+			  }else{
+				  SimpleDateFormat sdf1 = new SimpleDateFormat("yyyy-MM-dd");
+				  String waitDelivereyDate = cartData.getPickUpdate();
+				  Calendar ca = Calendar.getInstance();
+				  try {
+					  ca.setTime(new Date());
+					  ca.add(Calendar.DATE, acerchemCheckoutFacade.getTotalPriceForCart(cartData));//
+					  waitDelivereyDate = sdf1.format(ca.getTime());
+					  cartData.setWaitDeliveiedDate(waitDelivereyDate);
+				  } catch (Exception e1) {
+					  LOGGER.error(e1.getMessage(),e1);
+				  }
+			  }
 		}
 		
 
