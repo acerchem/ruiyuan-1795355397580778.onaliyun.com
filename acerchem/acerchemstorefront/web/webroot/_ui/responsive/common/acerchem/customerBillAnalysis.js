@@ -55,7 +55,7 @@ $(document).ready(
 							halign: 'center'
 						}, {
 							field : 'c2',
-							title : 'Customer',
+							title : 'Customer Conpany',
 							halign: 'center'
 						}, {
 							field : 'c3',
@@ -142,7 +142,7 @@ $(document).ready(
 
 						columns : [ {
 							field : 'c1',
-							title : 'Customer',
+							title : 'Customer Company',
 							halign: 'center'
 						}, {
 							field : 'c2',
