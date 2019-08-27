@@ -26,7 +26,7 @@ UPDATE SolrIndexedProperty;solrIndexedType(identifier)[unique=true];name[unique=
  ;$solrIndexedType;category;"Application"
  ;$solrIndexedType;code;"Code"
  ;$solrIndexedType;description;"Description"
- ;$solrIndexedType;manufacturerName;"Factory"
+ ;$solrIndexedType;factory;"Factory"
  ;$solrIndexedType;name;"Name"
  #;$solrIndexedType;price;"Price"
  ;$solrIndexedType;summary;"Summary"
