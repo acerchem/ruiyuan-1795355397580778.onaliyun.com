@@ -63,7 +63,7 @@
 			<div class="gotop"></div>
 			<div class="footerbot maxleft">
 				<div class="container">
-				 1996-2019, Acerchem.com, Inc. or its affiliates   <a href="http://www.beian.miit.gov.cn">沪 ICP备18000965号</a>
+					1996-2019 Ingredients4U 公司或其子  <a href="http://www.beian.miit.gov.cn">沪 ICP备18000965号</a>
 				</div>
 			</div>
 		</div>
