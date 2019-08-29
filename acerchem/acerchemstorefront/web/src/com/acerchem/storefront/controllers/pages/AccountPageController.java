@@ -309,7 +309,12 @@ public class AccountPageController extends AbstractSearchPageController {
 	}
 
 	protected void populateModelRegionAndCountry(final Model model, final String countryIsoCode) {
-		model.addAttribute(REGIONS_ATTR, getI18NFacade().getRegionsForCountryIso(countryIsoCode));
+		if(StringUtils.isNotBlank(countryIsoCode))
+		{
+			model.addAttribute(REGIONS_ATTR, getI18NFacade().getRegionsForCountryIso(countryIsoCode));
+		}else{
+			model.addAttribute(REGIONS_ATTR, new ArrayList<>());
+		}
 		model.addAttribute(COUNTRY_ATTR, countryIsoCode);
 	}
 
