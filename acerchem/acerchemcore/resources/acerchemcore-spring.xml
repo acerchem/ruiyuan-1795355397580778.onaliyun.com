@@ -390,7 +390,7 @@
 		<property name="cmsSiteService" ref="cmsSiteService"/>
 		<property name="siteMappings">
 			<map>
-				<entry key="acerchem" value-ref="newCustomerCheckoutFlowStrategy"/>			
+				<entry key="ingredients4u" value-ref="newCustomerCheckoutFlowStrategy"/>
 			</map>
 		</property>
 		<!-- Default to SINGLE step checkout -->

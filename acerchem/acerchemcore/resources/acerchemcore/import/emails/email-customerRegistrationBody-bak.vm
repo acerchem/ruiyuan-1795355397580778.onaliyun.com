@@ -50,7 +50,7 @@
 									#set ($secureAccountUrl = "${ctx.secureBaseUrl}/my-account")
 									#set ($securePswdResetUrl = "${ctx.secureBaseUrl}/login/pw/request/external")
 									#set ($mailToUrl = "mailto:${ctx.messages.contactUsEmailAddress}")
-									#if(${ctx.baseSite.Uid} == "acerchem")
+									#if(${ctx.baseSite.Uid} == "ingredients4u")
 									#set ( $instructionsContactUs = ${ctx.messages.getMessage('instructionsContactUs_acerchem', "#genHtmlLinkStartTag(${ctx.messages.contactUsPage})", "#genHtmlLinkEndTag()", "#genHtmlLink($mailToUrl '#666666' ${ctx.messages.contactUsEmailAddress})")} )
 									#else
 									#set ($faqPage = "${ctx.baseUrl}/faq")

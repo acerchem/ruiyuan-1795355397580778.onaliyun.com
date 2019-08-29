@@ -24,7 +24,7 @@
 	<div class="gen-content maxsucce">
 		<div class="g-cont">
 			<div class="maxstatu">
-				<img src="${themeResourcePath}/css/succ1.png" alt="acerchem"/>
+				<img src="${themeResourcePath}/css/succ1.png" alt="ingredients4u"/>
 				<h3>Successful send email!</h3>
 			</div>
 		</div>

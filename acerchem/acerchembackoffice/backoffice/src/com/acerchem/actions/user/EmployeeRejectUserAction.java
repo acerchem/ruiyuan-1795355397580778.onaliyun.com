@@ -117,10 +117,10 @@ public class EmployeeRejectUserAction extends AbstractComponentWidgetAdapterAwar
 	
 	protected AbstractCommerceUserEvent initializeEvent(final AbstractCommerceUserEvent event, final CustomerModel customerModel)
 	{
-		LOG.info("===========getBaseStoreForUid start=========="+getBaseStoreService().getBaseStoreForUid("acerchem"));
-		LOG.info("===========getBaseSiteForUID start=========="+getBaseSiteService().getBaseSiteForUID("acerchem"));
-		event.setBaseStore(getBaseStoreService().getBaseStoreForUid("acerchem"));
-		event.setSite(getBaseSiteService().getBaseSiteForUID("acerchem"));
+		LOG.info("===========getBaseStoreForUid start=========="+getBaseStoreService().getBaseStoreForUid("ingredients4u"));
+		LOG.info("===========getBaseSiteForUID start=========="+getBaseSiteService().getBaseSiteForUID("ingredients4u"));
+		event.setBaseStore(getBaseStoreService().getBaseStoreForUid("ingredients4u"));
+		event.setSite(getBaseSiteService().getBaseSiteForUID("ingredients4u"));
 		event.setCustomer(customerModel);
 		event.setLanguage(getCommonI18NService().getCurrentLanguage());
 		event.setCurrency(getCommonI18NService().getCurrentCurrency());

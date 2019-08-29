@@ -119,7 +119,7 @@
 										<!--products end-->
 										<br/>
 										#set ($mailToUrl = "mailto:${ctx.messages.contactUsEmailAddress}")
-										#if(${ctx.baseSite.Uid} == "acerchem")
+										#if(${ctx.baseSite.Uid} == "ingredients4u")
 										#set ( $paragraphContactUs = ${ctx.messages.getMessage('paragraphContactUs_acerchem', "#genHtmlLinkStartTag(${ctx.messages.contactUsPage})", "#genHtmlLinkEndTag()", "#genHtmlLink($mailToUrl '#666666' ${ctx.messages.contactUsEmailAddress})")} )
 										#else
 										#set ($faqPage = "${ctx.baseUrl}/faq")

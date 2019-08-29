@@ -17,7 +17,7 @@ $facetSearchConfigName=acerchemIndex
 $facetSearchConfigDescription=acerchem Solr Index
 $searchIndexNamePrefix=acerchem
 $solrIndexedType=acerchemProductType
-$indexBaseSite=acerchem
+$indexBaseSite=ingredients4u
 $indexLanguages=en,zh
 $indexCurrencies=USD
 
