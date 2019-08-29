@@ -40,11 +40,13 @@ public class CustomAddressValidator implements Validator
 		validateStringField(addressForm.getLastName(), AddressField.LASTNAME, MAX_FIELD_LENGTH, errors);
 		validateStringField(addressForm.getTownCity(), AddressField.TOWN, MAX_FIELD_LENGTH, errors);
 		validateStringField(addressForm.getPostcode(), AddressField.POSTCODE, MAX_POSTCODE_LENGTH, errors);
-		
-		List<RegionData> regions=i18NFacade.getRegionsForCountryIso(addressForm.getCountryIso());
-		if(regions.size()>0)
+		if(StringUtils.isNotBlank(addressForm.getCountryIso()))
 		{
-			validateFieldNotNull(addressForm.getRegionIso(), AddressField.REGION, errors);
+			List<RegionData> regions = i18NFacade.getRegionsForCountryIso(addressForm.getCountryIso());
+			if (regions.size() > 0)
+			{
+				validateFieldNotNull(addressForm.getRegionIso(), AddressField.REGION, errors);
+			}
 		}
 		validateStringField(addressForm.getPhone(), AddressField.PHONE, 15, errors);
 	}

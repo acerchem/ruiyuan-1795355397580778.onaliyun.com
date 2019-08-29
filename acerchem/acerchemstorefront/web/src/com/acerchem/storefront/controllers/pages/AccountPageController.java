@@ -706,7 +706,12 @@ public class AccountPageController extends AbstractSearchPageController {
 	public String getAddressRegions(@RequestParam("addressCode") final String addressCode,
 			@RequestParam("countryIsoCode") final String countryIsoCode, final Model model) {
 		model.addAttribute("supportedCountries", getCountries());
-		model.addAttribute("regions", i18NFacade.getRegionsForCountryIso(countryIsoCode));
+		if(StringUtils.isNotBlank(countryIsoCode))
+		{
+			model.addAttribute("regions", i18NFacade.getRegionsForCountryIso(countryIsoCode));
+		}else{
+			model.addAttribute("regions", new ArrayList<>());
+		}
 		model.addAttribute("country", countryIsoCode);
 		final AddressForm AddressForm = new AddressForm();
 		model.addAttribute(AddressForm);
