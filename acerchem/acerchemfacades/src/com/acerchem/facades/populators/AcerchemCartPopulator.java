@@ -15,6 +15,8 @@ import de.hybris.platform.core.model.order.CartModel;
 import de.hybris.platform.core.model.order.OrderModel;
 import de.hybris.platform.ordersplitting.model.StockLevelModel;
 import de.hybris.platform.stock.StockService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.annotation.Resource;
 import java.math.BigDecimal;
@@ -28,6 +30,7 @@ import java.util.List;
  */
 public class AcerchemCartPopulator extends CartPopulator {
 
+	private static final Logger LOG = LoggerFactory.getLogger(AcerchemCartPopulator.class);
     @Resource
     private PriceDataFactory priceDataFactory;
     @Resource
@@ -83,7 +86,19 @@ public class AcerchemCartPopulator extends CartPopulator {
         }
         if (source.getAllPromotionResults()!=null) {
             for (OrderEntryData orderEntryData : target.getEntries()) {
-                BigDecimal basePrice = orderEntryData.getTotalPrice().getValue().divide(BigDecimal.valueOf(orderEntryData.getQuantity()));
+            	 Long quantity = orderEntryData.getQuantity();
+            	 String code = orderEntryData.getProduct()!=null?orderEntryData.getProduct().getCode():"";
+					 LOG.info("entry code:"+code+" quantity:"+quantity);
+					 BigDecimal basePrice = BigDecimal.valueOf(0d);
+            	 if(quantity!=null&&quantity>0){
+						PriceData totalPriceData = orderEntryData.getTotalPrice();
+            	 	if(totalPriceData!=null&&totalPriceData.getValue()!=null && totalPriceData.getValue().doubleValue()>0)
+						{
+							LOG.info("entry code:"+code+" tprice value:"+totalPriceData.getValue());
+							basePrice = totalPriceData.getValue().divide(BigDecimal.valueOf(orderEntryData.getQuantity()));
+						}
+					 }
+
                 PriceData promotionBasePrice = priceDataFactory.create(PriceDataType.BUY,
                         BigDecimal.valueOf(basePrice.doubleValue()), source.getCurrency().getIsocode());
                 orderEntryData.setPromotionBasePrice(promotionBasePrice);

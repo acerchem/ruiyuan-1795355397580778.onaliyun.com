@@ -84,7 +84,7 @@
 								<button type="button" onclick="minusQuantity('minusCartForm', '${entry.product.code}', '${entry.deliveryPointOfService.name}')">-</button>
 							</form:form>
 						</span>
-						<input type="text" id="pdnum${entry.product.code}${entry.deliveryPointOfService.name}" name="pdnum${entry.product.code}${entry.deliveryPointOfService.name}" class="set" value="${entry.quantity}" onblur="updateQuantity('minusCartForm', '${entry.product.code}', '${entry.deliveryPointOfService.name}')">
+						<input type="text" id="pdnum${entry.product.code}${entry.deliveryPointOfService.name}" name="pdnum${entry.product.code}${entry.deliveryPointOfService.name}" class="set" value="${entry.quantity}" onblur="updateQuantity('minusCartForm', '${entry.product.code}', '${entry.deliveryPointOfService.name}',this)">
 						<span class="set add">
                             <c:url value="/cart/addOne" var="cartAddOneUrl"/>
                             <form:form id="addCartForm${entry.product.code}${entry.deliveryPointOfService.name}" action="${cartAddOneUrl}" method="post" >
@@ -93,7 +93,7 @@
 								<input type="hidden" name="qty" value="${entry.quantity}"/>
 								<input type="hidden" name="stockLevelCode" value="${entry.product.stock.stockLevel}"/>
 								<input type="hidden" name="stockThreshold" value="${entry.product.minOrderQuantity}"/>
-								<button type="button" onclick="updateQuantity('addCartForm', '${entry.product.code}', '${entry.deliveryPointOfService.name}')">+</button>
+								<button type="button" onclick="updateQuantity('addCartForm', '${entry.product.code}', '${entry.deliveryPointOfService.name}',this)">+</button>
                             </form:form>
                         </span>
 					</div>
@@ -154,7 +154,7 @@
 		cartForm.qty.value = avl;
 		cartForm.submit();
 	}
-	function updateQuantity(formName, productCode, storeId)
+	function updateQuantity(formName, productCode, storeId, _this)
 	{
 		let cartForm = document.getElementById(formName + productCode + storeId);
 		let avl = document.getElementById("pdnum" + productCode + storeId).value ? document.getElementById("pdnum" + productCode + storeId).value : '0';
@@ -173,6 +173,7 @@
 		// 	return;
 		// }
 		cartForm.qty.value = avl;
+        $(_this).attr("disabled","disabled");
 		cartForm.submit();
 	}
 
