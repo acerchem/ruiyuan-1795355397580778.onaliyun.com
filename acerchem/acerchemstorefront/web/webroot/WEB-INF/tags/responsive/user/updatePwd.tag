@@ -25,7 +25,7 @@
                         </div>
                         <div class="row login-form-action">
                             <div class="col-sm-6">
-                                <button type="submit" class="btn btn-primary btn-block" style="background-color:#0d4170;border:1px solid #0d4170">
+                                <button type="submit" onclick="validate()" class="btn btn-primary btn-block" style="background-color:#0d4170;border:1px solid #0d4170">
                                     <spring:theme code="updatePwd.submit"/>
                                 </button>
                             </div>
@@ -38,4 +38,18 @@
                 </form:form>
             </div>
         </div>
+<script type="text/javascript">
+    $(".help-block").attr("display","none");
+    function validate(){
+        var pwd = /^(?=.*?[0-9])(?=.*?[a-z])(?=.*?[A-Z])[0-9a-zA-Z]{6,16}$/;
+        var aval = $("password").val();
+        if(aval.length<6 || aval.length>16 ||!pwd.test(aval))
+        {
+            //$("#pwdError").text('Password should be a combination of 6-16 lower case letters,uppercase letter and numbers!');
+            maxalert('Password should be a combination of 6-16 lower case letters,uppercase letter and numbers!')
+            return false;
+        }
+        return true;
+    }
+</script>
 

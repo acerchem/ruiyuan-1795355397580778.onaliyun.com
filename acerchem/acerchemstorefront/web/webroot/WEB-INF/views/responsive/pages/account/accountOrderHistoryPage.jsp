@@ -43,7 +43,7 @@
     	</c:if>
         <script>
         function search() {
-            window.location.href="${contextPath}/acerchem/en/my-account/orders?sort="+$("#sortOptions1").val()+"&key="+$("[name='key']").val();
+            window.location.href="${contextPath}/my-account/orders?sort="+$("#sortOptions1").val()+"&key="+$("[name='key']").val();
         }
         </script>
 		<table>

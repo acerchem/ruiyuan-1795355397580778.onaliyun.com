@@ -48,7 +48,7 @@
 <body class="index-body">
 	<header>
 		<div class="logo">
-			<a href="${contextPath}/acerchem/en/">
+			<a href="${contextPath}/">
 				<img src="${commonResourcePath}/acerchem/images/logo.png" alt="logo">
 			</a>
 		</div>
