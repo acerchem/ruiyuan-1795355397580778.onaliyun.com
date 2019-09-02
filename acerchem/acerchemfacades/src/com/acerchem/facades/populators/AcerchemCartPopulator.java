@@ -94,8 +94,10 @@ public class AcerchemCartPopulator extends CartPopulator {
 						PriceData totalPriceData = orderEntryData.getTotalPrice();
             	 	if(totalPriceData!=null&&totalPriceData.getValue()!=null && totalPriceData.getValue().doubleValue()>0)
 						{
-							LOG.info("entry code:"+code+" tprice value:"+totalPriceData.getValue());
-							basePrice = totalPriceData.getValue().divide(BigDecimal.valueOf(orderEntryData.getQuantity()));
+							BigDecimal totalValue = totalPriceData.getValue();
+							totalValue = totalValue.setScale(4, BigDecimal.ROUND_HALF_UP);
+							LOG.info("entry code:"+code+" tprice value:"+totalValue);
+							basePrice = totalValue.divide(BigDecimal.valueOf(quantity)).setScale(2, BigDecimal.ROUND_HALF_UP);
 						}
 					 }
 

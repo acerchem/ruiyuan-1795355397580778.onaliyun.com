@@ -42,10 +42,10 @@
     $(".help-block").attr("display","none");
     function validate(){
         var pwd = /^(?=.*?[0-9])(?=.*?[a-z])(?=.*?[A-Z])[0-9a-zA-Z]{6,16}$/;
-        var aval = $("password").val();
+        var aval = $("#password").val();
+        console.log(aval);
         if(aval.length<6 || aval.length>16 ||!pwd.test(aval))
         {
-            //$("#pwdError").text('Password should be a combination of 6-16 lower case letters,uppercase letter and numbers!');
             maxalert('Password should be a combination of 6-16 lower case letters,uppercase letter and numbers!')
             return false;
         }
