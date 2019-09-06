@@ -24,7 +24,13 @@ public class AcerchemQuoteEntryBasePriceRenderer extends AbstractWidgetComponent
 			{
 				BigDecimal netweightBig = new BigDecimal(netweight);
 				BigDecimal basePriceBig = new BigDecimal(basePrice);
-				basePriceBig = basePriceBig.divide(netweightBig);
+				basePriceBig = basePriceBig.setScale(2, BigDecimal.ROUND_HALF_UP);
+				if(basePriceBig.compareTo(new BigDecimal(0d))>0
+					&& netweightBig.compareTo(new BigDecimal(0d))>0){
+					basePriceBig = basePriceBig.divide(netweightBig);
+				}else{
+					basePriceBig = new BigDecimal(0d);
+				}
 				basePriceBig = basePriceBig.setScale(2, BigDecimal.ROUND_HALF_UP);
 				basePrice = basePriceBig.doubleValue();
 			}
