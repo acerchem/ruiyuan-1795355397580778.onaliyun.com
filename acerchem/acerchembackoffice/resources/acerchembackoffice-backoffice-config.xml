@@ -979,11 +979,12 @@
 		<list-view:list-view>
 			<list-view:column qualifier="order.code"/>
 			<list-view:column qualifier="modifiedtime"/>
-			<list-view:column qualifier="order.user"/>
-			<list-view:column qualifier="product"/>
-			<list-view:column qualifier="quantity"/>
+			<list-view:column qualifier="order.user.name"/>
+			<list-view:column qualifier="product.code"/>
+            <list-view:column qualifier="product.name"/>
+            <list-view:column qualifier="" spring-bean="acerchemQuoteEntryQuantityRenderer" label="quote.entry.quantity.model.column.label"/>
 			<list-view:column qualifier="" spring-bean="acerchemQuoteEntryRenderer" label="quote.entry.delivery.model.column.label"/>
-			<list-view:column qualifier="basePrice"/>
+			<list-view:column qualifier="" spring-bean="acerchemQuoteEntryBasePriceRenderer" label="quote.entry.base.price.model.column.label"/>
 			<list-view:column qualifier="salesman"/>
 			<list-view:column qualifier="order.description"/>
 		</list-view:list-view>
