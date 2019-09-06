@@ -45,7 +45,7 @@ public class AcerchemQuoteFacadeImpl extends DefaultQuoteFacade implements Acerc
 
 
 	@Override
-	public void directSendQuote()
+	public void directSendQuote(String message)
 	{
 		final CartModel cartModel = getCartService().getSessionCart();
 		final QuoteModel quoteModel = getCommerceQuoteService().createQuoteFromCart(cartModel,
@@ -57,6 +57,7 @@ public class AcerchemQuoteFacadeImpl extends DefaultQuoteFacade implements Acerc
 		quoteMetadataValidationStrategy.validate(QuoteAction.SUBMIT, quoteModel, userModel);
 		quoteUpdateStateStrategy.updateQuoteState(QuoteAction.SUBMIT, quoteModel, userModel);
 		assignQuoteToentrys(quoteModel);
+		quoteModel.setDescription(message);
 		if(cartModel.getPickUpDate()!=null) quoteModel.setWaitDeliveriedDate(cartModel.getPickUpDate());
 		getModelService().save(quoteModel);
 

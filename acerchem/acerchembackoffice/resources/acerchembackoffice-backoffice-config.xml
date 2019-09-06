@@ -985,6 +985,7 @@
 			<list-view:column qualifier="" spring-bean="acerchemQuoteEntryRenderer" label="quote.entry.delivery.model.column.label"/>
 			<list-view:column qualifier="basePrice"/>
 			<list-view:column qualifier="salesman"/>
+			<list-view:column qualifier="order.description"/>
 		</list-view:list-view>
 	</context>
 </config>

@@ -139,6 +139,10 @@
 			<spring:theme code="checkout.summary.placeQuote" />
 		</button>
 	</div>
+	<div style="margin-top: 18px;">
+		<lable>Remark:</lable>
+		<textarea id="quote-message" name="quote-message" alt="Please Enter message" rows="3" style="height: 100px;padding: 0;margin: 0;min-height: 100px;line-height: 20px;"> </textarea>
+	</div>
 </form:form>
 </div>
 

@@ -136,10 +136,10 @@ public class QuoteController extends AbstractCartPageController
 	 * @param redirectModel
 	 * @return Mapping to quote page.
 	 */
-	@RequestMapping(value = "/create", method = RequestMethod.GET, produces = "application/json")
+	@RequestMapping(value = "/create", method = RequestMethod.POST, produces = "application/json")
 	@RequireHardLogIn
 	@ResponseBody
-	public Map<String, String> createQuote(final RedirectAttributes redirectModel)
+	public Map<String, String> createQuote(final RedirectAttributes redirectModel, final String message)
 	{
 		Map<String, String> returnMap = new HashMap<>();
 		returnMap.put("success","true");
@@ -163,7 +163,7 @@ public class QuoteController extends AbstractCartPageController
 
 			removeCoupons(redirectModel);
 
-			acerchemQuoteFacade.directSendQuote();
+			acerchemQuoteFacade.directSendQuote(message);
 			returnMap.put("success","false");
 			returnMap.put("message","Thanks for your inquiry. The quotation will be sent to your email in a few minutes. Please check");
 			return returnMap;
