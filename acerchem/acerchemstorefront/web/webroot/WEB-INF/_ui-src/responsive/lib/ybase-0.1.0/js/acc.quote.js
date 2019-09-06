@@ -24,9 +24,10 @@ ACC.quote = {
     bindSendQuoteClick: function(){
         $("#quoteForm1 #placeQuote").click(function(){
         	if(!ACC.quote._lock) {
-        		var messages = $("#quote-message");
+        		var messages = $("#quote-message").val();
         		if(messages.length>220){
-                    maxalert('Please confirm the Remark is 0-200 numbers!')
+                    maxalert('Please confirm the Remark is 0-200 numbers!');
+                    return false;
 				}
                 ACC.quote._lock = true;
                 $.ajax({
