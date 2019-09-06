@@ -14,9 +14,9 @@ import org.zkoss.zul.Label;
 import java.math.BigDecimal;
 
 
-public class acerchemQuoteEntryQuantityRenderer extends AbstractWidgetComponentRenderer<Component, Object, QuoteEntryModel>
+public class AcerchemQuoteEntryQuantityRenderer extends AbstractWidgetComponentRenderer<Component, Object, QuoteEntryModel>
 {
-	private static final Logger LOG = LoggerFactory.getLogger(acerchemQuoteEntryQuantityRenderer.class);
+	private static final Logger LOG = LoggerFactory.getLogger(AcerchemQuoteEntryQuantityRenderer.class);
 
 	public void render(Component parent, Object configuration, QuoteEntryModel data, DataType dataType, WidgetInstanceManager widgetInstanceManager) {
 		Div contactTypePanel = new Div();

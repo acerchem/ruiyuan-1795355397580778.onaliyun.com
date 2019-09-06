@@ -35,6 +35,12 @@
 	<bean id="acerchemQuoteEntryRenderer" class="com.acerchem.services.AcerchemQuoteEntryRenderer">
 	</bean>
 
+	<bean id="acerchemQuoteEntryQuantityRenderer" class="com.acerchem.services.AcerchemQuoteEntryQuantityRenderer">
+	</bean>
+
+	<bean id="acerchemQuoteEntryBasePriceRenderer" class="com.acerchem.services.AcerchemQuoteEntryBasePriceRenderer">
+	</bean>
+
 	<bean id="stockLevelService" class="com.acerchem.services.impl.DefaultAcerchemStockLevelService">
 	</bean>
 </beans>

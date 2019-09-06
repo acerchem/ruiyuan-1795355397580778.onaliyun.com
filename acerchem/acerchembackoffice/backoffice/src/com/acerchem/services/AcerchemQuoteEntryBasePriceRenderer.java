@@ -12,7 +12,7 @@ import org.zkoss.zul.Label;
 import java.math.BigDecimal;
 
 
-public class acerchemQuoteEntryBasePriceRenderer extends AbstractWidgetComponentRenderer<Component, Object, QuoteEntryModel>
+public class AcerchemQuoteEntryBasePriceRenderer extends AbstractWidgetComponentRenderer<Component, Object, QuoteEntryModel>
 {
 	public void render(Component parent, Object configuration, QuoteEntryModel data, DataType dataType, WidgetInstanceManager widgetInstanceManager) {
 		Div contactTypePanel = new Div();
