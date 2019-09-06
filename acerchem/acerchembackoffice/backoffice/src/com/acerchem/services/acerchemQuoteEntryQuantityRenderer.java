@@ -17,15 +17,21 @@ public class acerchemQuoteEntryQuantityRenderer extends AbstractWidgetComponentR
 	public void render(Component parent, Object configuration, QuoteEntryModel data, DataType dataType, WidgetInstanceManager widgetInstanceManager) {
 		Div contactTypePanel = new Div();
 		Long quantity = data.getQuantity();
+		String quantityS = "";
 		ProductModel product = data.getProduct();
 		if(product!=null && quantity!=null){
 			String netweight = product.getNetWeight();
-			BigDecimal netweightBig = new BigDecimal(netweight);
-			BigDecimal quantityBig = new BigDecimal(quantity);
-			quantityBig = quantityBig.multiply(netweightBig);
-			quantity = quantityBig.longValue();
+			if(netweight!=null)
+			{
+				BigDecimal netweightBig = new BigDecimal(netweight);
+				BigDecimal quantityBig = new BigDecimal(quantity);
+				quantityBig = quantityBig.multiply(netweightBig).setScale(2, BigDecimal.ROUND_HALF_UP);
+				quantityS = quantityBig.toString();
+			}else{
+				quantityS = quantity.toString();
+			}
 		}
-		Label contactTypeLabel = new Label(quantity.toString());
+		Label contactTypeLabel = new Label(quantityS);
 		contactTypePanel.appendChild(contactTypeLabel);
 		parent.appendChild(contactTypePanel);
 		this.fireComponentRendered(parent, configuration, data);

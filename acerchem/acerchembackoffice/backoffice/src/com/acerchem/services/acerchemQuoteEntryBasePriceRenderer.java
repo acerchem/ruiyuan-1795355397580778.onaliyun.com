@@ -20,13 +20,16 @@ public class acerchemQuoteEntryBasePriceRenderer extends AbstractWidgetComponent
 		ProductModel product = data.getProduct();
 		if(product!=null && basePrice!=null){
 			String netweight = product.getNetWeight();
-			BigDecimal netweightBig = new BigDecimal(netweight);
-			BigDecimal basePriceBig = new BigDecimal(basePrice);
-			basePriceBig = basePriceBig.divide(netweightBig);
-			basePriceBig = basePriceBig.setScale(2, BigDecimal.ROUND_HALF_UP);
-			basePrice=basePriceBig.doubleValue();
+			if(netweight!=null)
+			{
+				BigDecimal netweightBig = new BigDecimal(netweight);
+				BigDecimal basePriceBig = new BigDecimal(basePrice);
+				basePriceBig = basePriceBig.divide(netweightBig);
+				basePriceBig = basePriceBig.setScale(2, BigDecimal.ROUND_HALF_UP);
+				basePrice = basePriceBig.doubleValue();
+			}
 		}
-		Label contactTypeLabel = new Label(basePrice.toString());
+		Label contactTypeLabel = new Label(basePrice!=null?basePrice.toString():"0");
 		contactTypePanel.appendChild(contactTypeLabel);
 		parent.appendChild(contactTypePanel);
 		this.fireComponentRendered(parent, configuration, data);
