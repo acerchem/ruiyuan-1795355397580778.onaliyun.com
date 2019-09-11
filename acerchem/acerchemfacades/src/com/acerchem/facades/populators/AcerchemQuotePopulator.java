@@ -63,21 +63,32 @@ public class AcerchemQuotePopulator extends QuotePopulator implements Populator<
 			BigDecimal totalPriceValue = entryTotalPrice.getValue();
 			PriceData subtotal = target.getSubTotal();
 			BigDecimal subtotalPriceValue = subtotal.getValue();
-			BigDecimal bilv = totalPriceValue.divide(subtotalPriceValue);
-			LOG.info(" entry info bilv"+bilv);
+			try
+			{
+				BigDecimal bilv = new BigDecimal(0d);
+				if (subtotalPriceValue.compareTo(new BigDecimal(0d)) > 0)
+				{
+					totalPriceValue = totalPriceValue.setScale(2, BigDecimal.ROUND_HALF_UP);
+					bilv = totalPriceValue.divide(subtotalPriceValue);
+					LOG.info(" entry info bilv" + bilv);
+				}
 
-			PriceData totalPrice = target.getTotalPrice();
-			BigDecimal orderTotalPrice = totalPrice.getValue();
-			BigDecimal newEntryTotalPrice = orderTotalPrice.multiply(bilv).setScale(2, BigDecimal.ROUND_HALF_UP);
-			LOG.info(" entry info new Total price"+newEntryTotalPrice);
-			PriceData newEntryTotalPriceData = priceDataFactory.create(PriceDataType.BUY, newEntryTotalPrice, source.getCurrency().getIsocode());
-			entryData.setTotalPrice(newEntryTotalPriceData);
-
-			BigDecimal totalWeightBig = new BigDecimal(totalWeight.doubleValue());
-			BigDecimal newBasePrice = newEntryTotalPrice.divide(totalWeightBig, RoundingMode.HALF_UP);
-			PriceData newBasePriceData = priceDataFactory.create(PriceDataType.BUY, newBasePrice, source.getCurrency().getIsocode());
-			LOG.info(" entry info new base price"+newBasePrice);
-			entryData.setBasePrice(newBasePriceData);
+				PriceData totalPrice = target.getTotalPrice();
+				BigDecimal orderTotalPrice = totalPrice.getValue();
+				orderTotalPrice = orderTotalPrice.setScale(2, BigDecimal.ROUND_HALF_UP);
+				BigDecimal newEntryTotalPrice = orderTotalPrice.multiply(bilv).setScale(2, BigDecimal.ROUND_HALF_UP);
+				LOG.info(" entry info new Total price" + newEntryTotalPrice);
+				PriceData newEntryTotalPriceData = priceDataFactory
+						.create(PriceDataType.BUY, newEntryTotalPrice, source.getCurrency().getIsocode());
+				entryData.setTotalPrice(newEntryTotalPriceData);
+				BigDecimal totalWeightBig = new BigDecimal(totalWeight.doubleValue());
+				BigDecimal newBasePrice = newEntryTotalPrice.divide(totalWeightBig, RoundingMode.HALF_UP);
+				PriceData newBasePriceData = priceDataFactory.create(PriceDataType.BUY, newBasePrice, source.getCurrency().getIsocode());
+				LOG.info(" entry info new base price"+newBasePrice);
+				entryData.setBasePrice(newBasePriceData);
+			}catch (Exception e){
+				LOG.error("error",e);
+			}
 		}
 	}
 }
