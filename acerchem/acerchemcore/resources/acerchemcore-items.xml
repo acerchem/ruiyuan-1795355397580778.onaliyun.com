@@ -1169,83 +1169,83 @@
 					  autocreate="false"
 					  generate="false">
 				<attributes>
-					<attribute qualifier="UKMidgroundCostRate" type="String" autocreate="true">
+					<attribute qualifier="UKMidgroundCostRate" type="java.lang.String" autocreate="true">
 						<persistence type="property"/>
 						<modifiers read="true" write="true" search="true" />
 					</attribute>
-					<attribute qualifier="UkCapitalCostRate" type="String" autocreate="true">
+					<attribute qualifier="UkCapitalCostRate" type="java.lang.String" autocreate="true">
 						<persistence type="property"/>
 						<modifiers read="true" write="true" search="true" />
 					</attribute>
-					<attribute qualifier="UkMidgroundMarginRate" type="String" autocreate="true">
+					<attribute qualifier="UkMidgroundMarginRate" type="java.lang.String" autocreate="true">
 						<persistence type="property"/>
 						<modifiers read="true" write="true" search="true" />
 					</attribute>
-					<attribute qualifier="UkCustomCost" type="String" autocreate="true">
+					<attribute qualifier="UkCustomCost" type="java.lang.String" autocreate="true">
 						<persistence type="property"/>
 						<modifiers read="true" write="true" search="true" />
 					</attribute>
-					<attribute qualifier="UkCustomDuty" type="String" autocreate="true">
+					<attribute qualifier="UkCustomDuty" type="java.lang.String" autocreate="true">
 						<persistence type="property"/>
 						<modifiers read="true" write="true" search="true" />
 					</attribute>
-					<attribute qualifier="EuMidgrondCostRate" type="String" autocreate="true">
+					<attribute qualifier="EuMidgrondCostRate" type="java.lang.String" autocreate="true">
 						<persistence type="property"/>
 						<modifiers read="true" write="true" search="true" />
 					</attribute>
-					<attribute qualifier="EuCapitalCostRate" type="String" autocreate="true">
+					<attribute qualifier="EuCapitalCostRate" type="java.lang.String" autocreate="true">
 						<persistence type="property"/>
 						<modifiers read="true" write="true" search="true" />
 					</attribute>
-					<attribute qualifier="EuMidgroundMarginRate" type="String" autocreate="true">
+					<attribute qualifier="EuMidgroundMarginRate" type="java.lang.String" autocreate="true">
 						<persistence type="property"/>
 						<modifiers read="true" write="true" search="true" />
 					</attribute>
-					<attribute qualifier="EuCustomCost" type="String" autocreate="true">
+					<attribute qualifier="EuCustomCost" type="java.lang.String" autocreate="true">
 						<persistence type="property"/>
 						<modifiers read="true" write="true" search="true" />
 					</attribute>
-					<attribute qualifier="EuCustomDuty" type="String" autocreate="true">
+					<attribute qualifier="EuCustomDuty" type="java.lang.String" autocreate="true">
 						<persistence type="property"/>
 						<modifiers read="true" write="true" search="true" />
 					</attribute>
-					<attribute qualifier="UsMidgroundCostRate" type="String" autocreate="true">
+					<attribute qualifier="UsMidgroundCostRate" type="java.lang.String" autocreate="true">
 						<persistence type="property"/>
 						<modifiers read="true" write="true" search="true" />
 					</attribute>
-					<attribute qualifier="UsCapitalCostRate" type="String" autocreate="true">
+					<attribute qualifier="UsCapitalCostRate" type="java.lang.String" autocreate="true">
 						<persistence type="property"/>
 						<modifiers read="true" write="true" search="true" />
 					</attribute>
-					<attribute qualifier="UsMidgroundMarginRate" type="String" autocreate="true">
+					<attribute qualifier="UsMidgroundMarginRate" type="java.lang.String" autocreate="true">
 						<persistence type="property"/>
 						<modifiers read="true" write="true" search="true" />
 					</attribute>
-					<attribute qualifier="UsCustomCost" type="String" autocreate="true">
+					<attribute qualifier="UsCustomCost" type="java.lang.String" autocreate="true">
 						<persistence type="property"/>
 						<modifiers read="true" write="true" search="true" />
 					</attribute>
-					<attribute qualifier="UsCustomDuty" type="String" autocreate="true">
+					<attribute qualifier="UsCustomDuty" type="java.lang.String" autocreate="true">
 						<persistence type="property"/>
 						<modifiers read="true" write="true" search="true" />
 					</attribute>
-					<attribute qualifier="ApMidgroudCostRate" type="String" autocreate="true">
+					<attribute qualifier="ApMidgroudCostRate" type="java.lang.String" autocreate="true">
 						<persistence type="property"/>
 						<modifiers read="true" write="true" search="true" />
 					</attribute>
-					<attribute qualifier="ApCapitalCostRate" type="String" autocreate="true">
+					<attribute qualifier="ApCapitalCostRate" type="java.lang.String" autocreate="true">
 						<persistence type="property"/>
 						<modifiers read="true" write="true" search="true" />
 					</attribute>
-					<attribute qualifier="ApMidgroundMarginRate" type="String" autocreate="true">
+					<attribute qualifier="ApMidgroundMarginRate" type="java.lang.String" autocreate="true">
 						<persistence type="property"/>
 						<modifiers read="true" write="true" search="true" />
 					</attribute>
-					<attribute qualifier="ApCustomCost" type="String" autocreate="true">
+					<attribute qualifier="ApCustomCost" type="java.lang.String" autocreate="true">
 						<persistence type="property"/>
 						<modifiers read="true" write="true" search="true" />
 					</attribute>
-					<attribute qualifier="ApCustomDuty" type="String" autocreate="true">
+					<attribute qualifier="ApCustomDuty" type="java.lang.String" autocreate="true">
 						<persistence type="property"/>
 						<modifiers read="true" write="true" search="true" />
 					</attribute>
