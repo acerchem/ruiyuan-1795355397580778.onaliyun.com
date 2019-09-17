@@ -133,6 +133,13 @@
 			<value code="OFFICE" />
 			<value code="HOME" />
 		</enumtype>
+		<enumtype code="BUType" autocreate="true"
+				  generate="true" dynamic="true">
+			<value code="UK" />
+			<value code="EU" />
+			<value code="US" />
+			<value code="AP" />
+		</enumtype>
 	</enumtypes>
 	
 		
@@ -1138,6 +1145,12 @@
 						<modifiers read="true" write="true" search="true"/>
 						<persistence type="property" />
 					</attribute>
+
+					<attribute qualifier="buType" type="BUType">
+						<description>bu type</description>
+						<modifiers read="true" write="true" search="true"/>
+						<persistence type="property" />
+					</attribute>
 				</attributes>
 			</itemtype>
 
@@ -1147,6 +1160,94 @@
 						<description>提货点配送范围</description>
 						<modifiers />
 						<persistence type="property" />
+					</attribute>
+				</attributes>
+			</itemtype>
+
+			<itemtype code="PriceRow"
+					  jaloclass="de.hybris.platform.europe1.jalo.PriceRow"
+					  autocreate="false"
+					  generate="false">
+				<attributes>
+					<attribute qualifier="UKMidgroundCostRate" type="String" autocreate="true">
+						<persistence type="property"/>
+						<modifiers read="true" write="true" search="true" />
+					</attribute>
+					<attribute qualifier="UkCapitalCostRate" type="String" autocreate="true">
+						<persistence type="property"/>
+						<modifiers read="true" write="true" search="true" />
+					</attribute>
+					<attribute qualifier="UkMidgroundMarginRate" type="String" autocreate="true">
+						<persistence type="property"/>
+						<modifiers read="true" write="true" search="true" />
+					</attribute>
+					<attribute qualifier="UkCustomCost" type="String" autocreate="true">
+						<persistence type="property"/>
+						<modifiers read="true" write="true" search="true" />
+					</attribute>
+					<attribute qualifier="UkCustomDuty" type="String" autocreate="true">
+						<persistence type="property"/>
+						<modifiers read="true" write="true" search="true" />
+					</attribute>
+					<attribute qualifier="EuMidgrondCostRate" type="String" autocreate="true">
+						<persistence type="property"/>
+						<modifiers read="true" write="true" search="true" />
+					</attribute>
+					<attribute qualifier="EuCapitalCostRate" type="String" autocreate="true">
+						<persistence type="property"/>
+						<modifiers read="true" write="true" search="true" />
+					</attribute>
+					<attribute qualifier="EuMidgroundMarginRate" type="String" autocreate="true">
+						<persistence type="property"/>
+						<modifiers read="true" write="true" search="true" />
+					</attribute>
+					<attribute qualifier="EuCustomCost" type="String" autocreate="true">
+						<persistence type="property"/>
+						<modifiers read="true" write="true" search="true" />
+					</attribute>
+					<attribute qualifier="EuCustomDuty" type="String" autocreate="true">
+						<persistence type="property"/>
+						<modifiers read="true" write="true" search="true" />
+					</attribute>
+					<attribute qualifier="UsMidgroundCostRate" type="String" autocreate="true">
+						<persistence type="property"/>
+						<modifiers read="true" write="true" search="true" />
+					</attribute>
+					<attribute qualifier="UsCapitalCostRate" type="String" autocreate="true">
+						<persistence type="property"/>
+						<modifiers read="true" write="true" search="true" />
+					</attribute>
+					<attribute qualifier="UsMidgroundMarginRate" type="String" autocreate="true">
+						<persistence type="property"/>
+						<modifiers read="true" write="true" search="true" />
+					</attribute>
+					<attribute qualifier="UsCustomCost" type="String" autocreate="true">
+						<persistence type="property"/>
+						<modifiers read="true" write="true" search="true" />
+					</attribute>
+					<attribute qualifier="UsCustomDuty" type="String" autocreate="true">
+						<persistence type="property"/>
+						<modifiers read="true" write="true" search="true" />
+					</attribute>
+					<attribute qualifier="ApMidgroudCostRate" type="String" autocreate="true">
+						<persistence type="property"/>
+						<modifiers read="true" write="true" search="true" />
+					</attribute>
+					<attribute qualifier="ApCapitalCostRate" type="String" autocreate="true">
+						<persistence type="property"/>
+						<modifiers read="true" write="true" search="true" />
+					</attribute>
+					<attribute qualifier="ApMidgroundMarginRate" type="String" autocreate="true">
+						<persistence type="property"/>
+						<modifiers read="true" write="true" search="true" />
+					</attribute>
+					<attribute qualifier="ApCustomCost" type="String" autocreate="true">
+						<persistence type="property"/>
+						<modifiers read="true" write="true" search="true" />
+					</attribute>
+					<attribute qualifier="ApCustomDuty" type="String" autocreate="true">
+						<persistence type="property"/>
+						<modifiers read="true" write="true" search="true" />
 					</attribute>
 				</attributes>
 			</itemtype>

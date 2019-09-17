@@ -941,6 +941,84 @@
 		</editorArea:editorArea>
 	</context>
 
+	<context merge-by="type" parent="PDTRow" type="PriceRow" component="editor-area">
+		<editorArea:editorArea name="">
+			<editorArea:essentials>
+				<editorArea:essentialSection name="hmc.essential">
+					<editorArea:attribute qualifier="catalogVersion"/>
+					<editorArea:attribute qualifier="product"/>
+					<editorArea:attribute qualifier="pg"/>
+					<editorArea:attribute qualifier="user"/>
+					<editorArea:attribute qualifier="ug"/>
+				</editorArea:essentialSection>
+			</editorArea:essentials>
+			<editorArea:tab name="hmc.properties">
+				<editorArea:section name="hmc.properties">
+					<editorArea:attribute qualifier="minqtd"/>
+					<editorArea:attribute qualifier="unit"/>
+					<editorArea:attribute qualifier="price"/>
+					<editorArea:attribute qualifier="currency"/>
+					<editorArea:attribute qualifier="unitFactor"/>
+					<editorArea:attribute qualifier="net">
+						<editorArea:editor-parameter>
+							<editorArea:name>trueLabel</editorArea:name>
+							<editorArea:value>netTrue</editorArea:value>
+						</editorArea:editor-parameter>
+						<editorArea:editor-parameter>
+							<editorArea:name>falseLabel</editorArea:name>
+							<editorArea:value>netFalse</editorArea:value>
+						</editorArea:editor-parameter>
+					</editorArea:attribute>
+					<editorArea:attribute qualifier="channel"/>
+					<editorArea:attribute qualifier="dateRange"/>
+				</editorArea:section>
+				<editorArea:section name="hmc.section.giveaway">
+					<editorArea:attribute qualifier="giveAwayPrice" description="hmc.text.pricerow.giveaway"/>
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.properties">
+				<editorArea:section name="hmc.properties">
+					<editorArea:attribute qualifier="UKMidgroundCostRate"/>
+					<editorArea:attribute qualifier="EuMidgrondCostRate"/>
+					<editorArea:attribute qualifier="UsMidgroundCostRate"/>
+					<editorArea:attribute qualifier="ApMidgroudCostRate"/>
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.properties">
+				<editorArea:section name="hmc.properties">
+					<editorArea:attribute qualifier="UkCapitalCostRate"/>
+					<editorArea:attribute qualifier="EuCapitalCostRate"/>
+					<editorArea:attribute qualifier="UsCapitalCostRate"/>
+					<editorArea:attribute qualifier="ApCapitalCostRate"/>
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.properties">
+				<editorArea:section name="hmc.properties">
+					<editorArea:attribute qualifier="UkMidgroundMarginRate"/>
+					<editorArea:attribute qualifier="EuMidgroundMarginRate"/>
+					<editorArea:attribute qualifier="UsMidgroundMarginRate"/>
+					<editorArea:attribute qualifier="ApMidgroundMarginRate"/>
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.properties">
+				<editorArea:section name="hmc.properties">
+					<editorArea:attribute qualifier="UkCustomCost"/>
+					<editorArea:attribute qualifier="EuCustomCost"/>
+					<editorArea:attribute qualifier="UsCustomCost"/>
+					<editorArea:attribute qualifier="ApCustomCost"/>
+				</editorArea:section>
+			</editorArea:tab>
+			<editorArea:tab name="hmc.properties">
+				<editorArea:section name="hmc.properties">
+					<editorArea:attribute qualifier="UkCustomDuty"/>
+					<editorArea:attribute qualifier="EuCustomDuty"/>
+					<editorArea:attribute qualifier="UsCustomDuty"/>
+					<editorArea:attribute qualifier="ApCustomDuty"/>
+				</editorArea:section>
+			</editorArea:tab>
+		</editorArea:editorArea>
+	</context>
+
 	<context type="Customer" component="editorAreaDynamicForms" merge-by="module">
 		<df:dynamicForms>
 			<df:attribute id="snapshot-dsAddress" qualifier="defaultShipmentAddress" triggeredOn="defaultShipmentAddress" visibleIf="true" />
