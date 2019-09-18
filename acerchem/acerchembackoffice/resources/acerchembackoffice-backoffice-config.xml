@@ -976,40 +976,40 @@
 					<editorArea:attribute qualifier="giveAwayPrice" description="hmc.text.pricerow.giveaway"/>
 				</editorArea:section>
 			</editorArea:tab>
-			<editorArea:tab name="hmc.properties">
-				<editorArea:section name="hmc.properties">
+			<editorArea:tab name="hmc.bu1.properties">
+				<editorArea:section name="hmc.bu1.properties">
 					<editorArea:attribute qualifier="UKMidgroundCostRate"/>
 					<editorArea:attribute qualifier="EuMidgrondCostRate"/>
 					<editorArea:attribute qualifier="UsMidgroundCostRate"/>
 					<editorArea:attribute qualifier="ApMidgroudCostRate"/>
 				</editorArea:section>
 			</editorArea:tab>
-			<editorArea:tab name="hmc.properties">
-				<editorArea:section name="hmc.properties">
+			<editorArea:tab name="hmc.bu2.properties">
+				<editorArea:section name="hmc.bu2.properties">
 					<editorArea:attribute qualifier="UkCapitalCostRate"/>
 					<editorArea:attribute qualifier="EuCapitalCostRate"/>
 					<editorArea:attribute qualifier="UsCapitalCostRate"/>
 					<editorArea:attribute qualifier="ApCapitalCostRate"/>
 				</editorArea:section>
 			</editorArea:tab>
-			<editorArea:tab name="hmc.properties">
-				<editorArea:section name="hmc.properties">
+			<editorArea:tab name="hmc.bu3.properties">
+				<editorArea:section name="hmc.bu3.properties">
 					<editorArea:attribute qualifier="UkMidgroundMarginRate"/>
 					<editorArea:attribute qualifier="EuMidgroundMarginRate"/>
 					<editorArea:attribute qualifier="UsMidgroundMarginRate"/>
 					<editorArea:attribute qualifier="ApMidgroundMarginRate"/>
 				</editorArea:section>
 			</editorArea:tab>
-			<editorArea:tab name="hmc.properties">
-				<editorArea:section name="hmc.properties">
+			<editorArea:tab name="hmc.bu4.properties">
+				<editorArea:section name="hmc.bu4.properties">
 					<editorArea:attribute qualifier="UkCustomCost"/>
 					<editorArea:attribute qualifier="EuCustomCost"/>
 					<editorArea:attribute qualifier="UsCustomCost"/>
 					<editorArea:attribute qualifier="ApCustomCost"/>
 				</editorArea:section>
 			</editorArea:tab>
-			<editorArea:tab name="hmc.properties">
-				<editorArea:section name="hmc.properties">
+			<editorArea:tab name="hmc.bu5.properties">
+				<editorArea:section name="hmc.bu5.properties">
 					<editorArea:attribute qualifier="UkCustomDuty"/>
 					<editorArea:attribute qualifier="EuCustomDuty"/>
 					<editorArea:attribute qualifier="UsCustomDuty"/>
