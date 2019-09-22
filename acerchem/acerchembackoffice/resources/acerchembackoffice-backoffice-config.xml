@@ -930,7 +930,7 @@
 			</wz:step>
 		</wz:flow>
 	</context>
-	
+
 	<context merge-by="type" component="editorareaactions" parent="Principal" type="Customer">
 		<y:actions xmlns:y="http://www.hybris.com/cockpit/config/hybris">
 				<y:group qualifier="common">
@@ -956,6 +956,19 @@
 				</editorArea:section>
 			</editorArea:tab>
 		</editorArea:editorArea>
+	</context>
+
+	<context merge-by="type" parent="PDTRow" type="PriceRow" component="listview">
+		<list-view:list-view>
+			<list-view:column qualifier="product.code"/>
+			<list-view:column qualifier="product.name"/>
+			<list-view:column qualifier="price"/>
+			<list-view:column qualifier="currency"/>
+			<list-view:column qualifier="UKCostPrice"/>
+			<list-view:column qualifier="EUCostPrice"/>
+			<list-view:column qualifier="USCostPrice"/>
+			<list-view:column qualifier="APCostPrice"/>
+		</list-view:list-view>
 	</context>
 
 	<context merge-by="type" parent="PDTRow" type="PriceRow" component="editor-area">
