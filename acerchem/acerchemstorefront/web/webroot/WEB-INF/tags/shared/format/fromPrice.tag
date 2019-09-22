@@ -21,7 +21,6 @@
 		<spring:theme code="product.price.from" arguments="${priceData.formattedValue}" argumentSeparator="#~/@!£$%^"/>
 	</c:when>
 	<c:otherwise>
-	 ${fn:escapeXml(priceData.formattedValue)}
-		
+	 <sapn class="show-min-pricedata">${fn:escapeXml(priceData.formattedValue)}</sapn> - <sapn class="show-max-pricedata">${fn:escapeXml(priceData.formattedValue)}</sapn>
 	</c:otherwise>
 </c:choose>

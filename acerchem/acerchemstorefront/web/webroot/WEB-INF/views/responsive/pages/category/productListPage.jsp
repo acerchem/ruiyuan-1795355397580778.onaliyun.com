@@ -24,5 +24,28 @@
 			</cms:pageSlot>
 		</div>
 	</div>
+	<script>
+        if($(".show-min-pricedata").length>0 && $(".show-max-pricedata").length>0) {
+            $(".show-min-pricedata").each(function(e){
+                var minPriceData = $(this).text();
+
+                var prefix = minPriceData.substring(0,1);
+                var minPriceData = minPriceData.substring(1,minPriceData.length);
+                minPriceData = minPriceData*0.9;
+                minPriceData = Math.floor(minPriceData * 100) / 100
+                $(this).text(prefix+minPriceData);
+            })
+
+            $(".show-max-pricedata").each(function(e){
+                var maxPriceData = $(this).text();
+                var prefix = maxPriceData.substring(0,1);
+                var maxPriceData = maxPriceData.substring(1,maxPriceData.length);
+
+                maxPriceData = maxPriceData*1.1;
+                maxPriceData = Math.floor(maxPriceData * 100) / 100
+                $(this).text(prefix+maxPriceData);
+            })
+        }
+	</script>
 
 </template:page>

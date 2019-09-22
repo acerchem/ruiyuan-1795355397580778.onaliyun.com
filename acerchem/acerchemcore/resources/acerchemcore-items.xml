@@ -961,6 +961,22 @@
 				</attributes>
 			</itemtype>
 
+			<itemtype code="BUPriceAdditionalConf" autocreate="true"
+					  generate="true" jaloclass="com.acerchem.core.jalo.BUPriceAdditionalConf">
+				<description>BU Price Additional Configuration</description>
+				<deployment table="BUPriceAdditionalConf" typecode="20301" />
+				<attributes>
+					<attribute qualifier="buKey" type="java.lang.String">
+						<persistence type="property" />
+						<modifiers />
+					</attribute>
+					<attribute qualifier="price" type="java.lang.String">
+						<persistence type="property" />
+						<modifiers />
+					</attribute>
+				</attributes>
+			</itemtype>
+
 			<itemtype code="CustomerCreditAccount" autocreate="true"
 				generate="true">
 				<description>信用账户</description>
@@ -1248,6 +1264,22 @@
 					<attribute qualifier="ApCustomDuty" type="java.lang.String" autocreate="true">
 						<persistence type="property"/>
 						<modifiers read="true" write="true" search="true" />
+					</attribute>
+					<attribute autocreate="true" qualifier="UKCostPrice" type="java.lang.String">
+						<persistence type="dynamic" attributeHandler="uKCostPriceAttributeHandler"/>
+						<modifiers read="true" write="false" search="false" optional="true"/>
+					</attribute>
+					<attribute autocreate="true" qualifier="EUCostPrice" type="java.lang.String">
+						<persistence type="dynamic" attributeHandler="euCostPriceAttributeHandler"/>
+						<modifiers read="true" write="false" search="false" optional="true"/>
+					</attribute>
+					<attribute autocreate="true" qualifier="USCostPrice" type="java.lang.String">
+						<persistence type="dynamic" attributeHandler="usCostPriceAttributeHandler"/>
+						<modifiers read="true" write="false" search="false" optional="true"/>
+					</attribute>
+					<attribute autocreate="true" qualifier="APCostPrice" type="java.lang.String">
+						<persistence type="dynamic" attributeHandler="apCostPriceAttributeHandler"/>
+						<modifiers read="true" write="false" search="false" optional="true"/>
 					</attribute>
 				</attributes>
 			</itemtype>
